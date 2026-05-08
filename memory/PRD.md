@@ -106,12 +106,12 @@ Full production-grade upgrade of the Lernio AI repo (https://github.com/GYASH28/
    - Paste each one (production + preview). Site loads even if some missing.
 
 3. **Google Drive**
-   - Share notes folder with `lernio-drive-reader@lernio-b4c65.iam.gserviceaccount.com` as Viewer.
-   - Folder ID `1pMa0PCKA3-nuALX8L7sEThqa_AvCitAW` is already known to the user.
+   - Share the notes folder with the Drive service-account `client_email` as Viewer.
+   - Folder ID is the segment after `/folders/` in the Drive URL — paste into `GOOGLE_DRIVE_FOLDER_ID`.
 
 4. **n8n Cloud**
    - Activate both webhooks (chat & quiz-hint).
-   - Verify production URLs: `https://brace28.app.n8n.cloud/webhook/137b3445-…/chat` and `…/webhook/quiz-hint`.
+   - Confirm each Webhook node's Production URL matches the env vars.
 
 ## Next Action Items
 1. User adds the 12 env vars in Vercel and triggers a redeploy.

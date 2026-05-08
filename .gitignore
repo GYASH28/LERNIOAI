@@ -111,3 +111,7 @@ serviceAccountKey.json
 .zencoder/
 skills/
 skills-lock.json
+
+# Emergent platform internals — don't push these to the public repo
+memory/
+test_reports/

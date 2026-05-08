@@ -12,6 +12,17 @@ const App = {
         if (window.Auth) Auth.init();
 
         this.applySubjectTheme();
+
+        // Reactively follow OS theme when user picks 'system'.
+        if (window.matchMedia) {
+            const mq = window.matchMedia('(prefers-color-scheme: light)');
+            const handler = () => {
+                if ((Store.getSettings().theme || 'dark') === 'system') this.applySubjectTheme();
+            };
+            if (mq.addEventListener) mq.addEventListener('change', handler);
+            else if (mq.addListener) mq.addListener(handler);  // Safari < 14
+        }
+
         window.addEventListener('hashchange', () => this.handleRoute());
         this.handleRoute();
         this.setupEvents();
