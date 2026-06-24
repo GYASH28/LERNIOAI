@@ -9,6 +9,7 @@ import {
 import { parseBody, updateProfileSchema } from '@/lib/schemas'
 import { levelFromXp } from '@/lib/xp'
 import { DEMO_USER, isDemoMode } from '@/lib/demo-fixtures'
+import { publicUserSelect, toPublicUserDTO } from '@/lib/user-dto'
 
 /**
  * GET /api/user
@@ -17,10 +18,13 @@ import { DEMO_USER, isDemoMode } from '@/lib/demo-fixtures'
  */
 export async function GET() {
   return withApi(async () => {
-    if (isDemoMode()) return okResponse(DEMO_USER)
+    if (isDemoMode()) return okResponse(toPublicUserDTO(DEMO_USER))
 
     const user = await requireUser()
-    const fresh = await db.user.findUnique({ where: { id: user.id } })
+    const fresh = await db.user.findUnique({
+      where: { id: user.id },
+      select: publicUserSelect,
+    })
     if (!fresh) {
       throw new ApiError('NOT_FOUND', 'Account not found.', 404, false)
     }
@@ -29,7 +33,7 @@ export async function GET() {
     if (derivedLevel !== fresh.level) {
       await db.user.update({ where: { id: fresh.id }, data: { level: derivedLevel } })
     }
-    return okResponse({ ...fresh, level: derivedLevel })
+    return okResponse(toPublicUserDTO({ ...fresh, level: derivedLevel }))
   })
 }
 
@@ -42,7 +46,7 @@ export async function PATCH(req: NextRequest) {
   return withApi(async () => {
     if (isDemoMode()) {
       const body = await parseBody(req, updateProfileSchema)
-      return okResponse({ ...DEMO_USER, ...body, level: levelFromXp(DEMO_USER.xp) })
+      return okResponse(toPublicUserDTO({ ...DEMO_USER, ...body, level: levelFromXp(DEMO_USER.xp) }))
     }
 
     const user = await requireUser()
@@ -61,8 +65,12 @@ export async function PATCH(req: NextRequest) {
     if (body.avatar !== undefined) data.avatar = body.avatar
     if (body.onboarded !== undefined) data.onboarded = body.onboarded
 
-    const updated = await db.user.update({ where: { id: user.id }, data })
-    return okResponse(updated)
+    const updated = await db.user.update({
+      where: { id: user.id },
+      data,
+      select: publicUserSelect,
+    })
+    return okResponse(toPublicUserDTO(updated))
   })
 }
 

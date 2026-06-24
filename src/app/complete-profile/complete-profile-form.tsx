@@ -62,8 +62,8 @@ export function CompleteProfileForm({ user }: { user: CompleteProfileUser }) {
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    if (['student', 'cr'].includes(role) && !/^[0-9]{6}$/.test(form.rollNumber.trim())) {
-      setError('Roll number must be exactly 6 digits.')
+    if (form.rollNumber.trim() && !/^[A-Za-z0-9/-]{1,32}$/.test(form.rollNumber.trim())) {
+      setError('Roll number format is not valid.')
       return
     }
 
@@ -142,10 +142,9 @@ export function CompleteProfileForm({ user }: { user: CompleteProfileUser }) {
                 value={form.rollNumber}
                 onChange={handleChange}
                 placeholder="254101"
-                inputMode="numeric"
-                pattern="[0-9]{6}"
+                inputMode="text"
+                pattern="[A-Za-z0-9/-]{1,32}"
                 className="h-auto rounded-2xl border-white/10 bg-slate-950/55 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus-visible:border-cyan-300/70 focus-visible:ring-cyan-300/10"
-                required
               />
             </Field>
           ) : null}
@@ -186,7 +185,7 @@ export function CompleteProfileForm({ user }: { user: CompleteProfileUser }) {
             >
               {CAMPUS_DIVISIONS.map((division) => (
                 <option key={division} value={division}>
-                  Division {division}
+                  {division === 'NOT_SURE' ? 'Not sure' : `Division ${division}`}
                 </option>
               ))}
             </select>
@@ -205,6 +204,15 @@ export function CompleteProfileForm({ user }: { user: CompleteProfileUser }) {
           >
             <Save className="h-4 w-4" />
             {saving ? 'Saving profile...' : 'Save and continue'}
+          </Button>
+          <Button
+            type="button"
+            variant="secondary"
+            className="min-h-11 rounded-2xl border border-white/10 bg-white/10 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-white/15 sm:col-span-2"
+            disabled={saving}
+            onClick={() => router.push('/dashboard')}
+          >
+            Complete later
           </Button>
         </form>
       </section>

@@ -15,7 +15,7 @@ CREATE TABLE "Institution" (
 -- CreateTable
 CREATE TABLE "Department" (
     "id" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
+    "name" TEXT NOT NULL DEFAULT '',
     "code" TEXT NOT NULL,
     "institutionId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -175,10 +175,22 @@ CREATE TABLE "User" (
     "name" TEXT NOT NULL,
     "passwordHash" TEXT,
     "role" TEXT NOT NULL DEFAULT 'student',
+    "status" TEXT NOT NULL DEFAULT 'active',
     "avatar" TEXT,
     "institutionId" TEXT,
     "schemeId" TEXT,
     "semesterNumber" INTEGER,
+    "branch" TEXT,
+    "departmentCode" TEXT,
+    "departmentName" TEXT,
+    "division" TEXT,
+    "rollNumber" TEXT,
+    "provider" TEXT NOT NULL DEFAULT 'password',
+    "profileComplete" BOOLEAN NOT NULL DEFAULT false,
+    "assignedSubjects" TEXT,
+    "isCR" BOOLEAN NOT NULL DEFAULT false,
+    "assignedBy" TEXT,
+    "assignedAt" TIMESTAMP(3),
     "preferredLang" TEXT NOT NULL DEFAULT 'en',
     "examDate" TEXT,
     "dailyMins" INTEGER NOT NULL DEFAULT 120,
@@ -193,6 +205,80 @@ CREATE TABLE "User" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "InviteCode" (
+    "id" TEXT NOT NULL,
+    "code" TEXT NOT NULL,
+    "tokenHash" TEXT,
+    "role" TEXT NOT NULL,
+    "used" BOOLEAN NOT NULL DEFAULT false,
+    "usedBy" TEXT,
+    "usedAt" TIMESTAMP(3),
+    "createdBy" TEXT,
+    "name" TEXT,
+    "email" TEXT,
+    "branch" TEXT,
+    "departmentCode" TEXT,
+    "departmentName" TEXT,
+    "semesterNumber" INTEGER,
+    "division" TEXT,
+    "rollNumber" TEXT,
+    "assignedSubjects" TEXT,
+    "status" TEXT NOT NULL DEFAULT 'active',
+    "expiresAt" TIMESTAMP(3),
+    "revokedAt" TIMESTAMP(3),
+    "revokedBy" TEXT,
+    "maxUses" INTEGER NOT NULL DEFAULT 1,
+    "useCount" INTEGER NOT NULL DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "InviteCode_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "RoleRequest" (
+    "id" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "requestedRole" TEXT NOT NULL,
+    "reason" TEXT,
+    "departmentCode" TEXT,
+    "subjectIds" TEXT,
+    "status" TEXT NOT NULL DEFAULT 'pending',
+    "reviewedBy" TEXT,
+    "reviewedAt" TIMESTAMP(3),
+    "reviewNote" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "RoleRequest_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "RoleAuditLog" (
+    "id" TEXT NOT NULL,
+    "actorUserId" TEXT,
+    "targetUserId" TEXT,
+    "action" TEXT NOT NULL,
+    "role" TEXT,
+    "scope" TEXT,
+    "note" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "RoleAuditLog_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "RateLimitBucket" (
+    "key" TEXT NOT NULL,
+    "count" INTEGER NOT NULL DEFAULT 0,
+    "resetAt" TIMESTAMP(3) NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "RateLimitBucket_pkey" PRIMARY KEY ("key")
 );
 
 -- CreateTable
@@ -573,6 +659,33 @@ CREATE INDEX "Question_difficulty_idx" ON "Question"("difficulty");
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "InviteCode_code_key" ON "InviteCode"("code");
+
+-- CreateIndex
+CREATE INDEX "InviteCode_role_used_idx" ON "InviteCode"("role", "used");
+
+-- CreateIndex
+CREATE INDEX "InviteCode_email_idx" ON "InviteCode"("email");
+
+-- CreateIndex
+CREATE INDEX "InviteCode_status_expiresAt_idx" ON "InviteCode"("status", "expiresAt");
+
+-- CreateIndex
+CREATE INDEX "RoleRequest_userId_status_idx" ON "RoleRequest"("userId", "status");
+
+-- CreateIndex
+CREATE INDEX "RoleRequest_requestedRole_status_idx" ON "RoleRequest"("requestedRole", "status");
+
+-- CreateIndex
+CREATE INDEX "RoleAuditLog_targetUserId_createdAt_idx" ON "RoleAuditLog"("targetUserId", "createdAt");
+
+-- CreateIndex
+CREATE INDEX "RoleAuditLog_actorUserId_createdAt_idx" ON "RoleAuditLog"("actorUserId", "createdAt");
+
+-- CreateIndex
+CREATE INDEX "RateLimitBucket_resetAt_idx" ON "RateLimitBucket"("resetAt");
+
+-- CreateIndex
 CREATE INDEX "Account_userId_idx" ON "Account"("userId");
 
 -- CreateIndex
@@ -700,6 +813,9 @@ ALTER TABLE "Question" ADD CONSTRAINT "Question_topicId_fkey" FOREIGN KEY ("topi
 
 -- AddForeignKey
 ALTER TABLE "Question" ADD CONSTRAINT "Question_subjectId_fkey" FOREIGN KEY ("subjectId") REFERENCES "Subject"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "RoleRequest" ADD CONSTRAINT "RoleRequest_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;

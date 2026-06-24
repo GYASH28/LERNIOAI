@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { requireUser, withApi, ApiError } from '@/lib/auth'
-import ZAI from 'z-ai-web-dev-sdk'
+import { getAiProvider } from '@/lib/ai/provider'
+import { checkRateLimit } from '@/lib/rate-limit'
 
 /**
  * POST /api/tutor/voice
@@ -19,14 +20,22 @@ import ZAI from 'z-ai-web-dev-sdk'
  *   { ok: true, data: { text: string } }
  *
  * Notes:
- *   - z-ai-web-dev-sdk is server-only by contract; this route is the single
- *     boundary between the browser mic and the ASR model.
+ *   - AI provider access is routed through src/lib/ai/provider.ts.
  *   - We strip a leading `data:audio/...;base64,` prefix if the client sent it.
  *   - Audio size is capped at 8 MB to keep requests bounded.
  */
 export async function POST(req: Request) {
   return withApi(async () => {
     const user = await requireUser()
+    const limiter = await checkRateLimit({
+      action: 'ai_tutor_asr',
+      identifier: user.id,
+      limit: 40,
+      windowMs: 60 * 60 * 1000,
+    })
+    if (!limiter.allowed) {
+      throw new ApiError('RATE_LIMITED', `Too many voice requests. Try again in ${limiter.retryAfterSec} seconds.`, 429, true)
+    }
 
     let json: { audio?: string; mimeType?: string }
     try {
@@ -56,9 +65,10 @@ export async function POST(req: Request) {
     }
 
     try {
-      const zai = await ZAI.create()
-      const response = await zai.audio.asr.create({ file_base64: base64 })
-      const text = (response?.text ?? '').trim()
+      const text = await getAiProvider().transcribeSpeech({
+        fileBase64: base64,
+        signal: req.signal,
+      })
       if (!text) {
         throw new ApiError(
           'ASR_EMPTY',

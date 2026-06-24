@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { requireUser, withApi, ApiError } from '@/lib/auth'
-import ZAI from 'z-ai-web-dev-sdk'
+import { getAiProvider } from '@/lib/ai/provider'
+import { checkRateLimit } from '@/lib/rate-limit'
 
 /**
  * POST /api/tutor/speak
@@ -31,7 +32,16 @@ const ALLOWED_VOICES = new Set([
 
 export async function POST(req: Request) {
   return withApi(async () => {
-    await requireUser()
+    const user = await requireUser()
+    const limiter = await checkRateLimit({
+      action: 'ai_tutor_tts',
+      identifier: user.id,
+      limit: 60,
+      windowMs: 60 * 60 * 1000,
+    })
+    if (!limiter.allowed) {
+      throw new ApiError('RATE_LIMITED', `Too many voice requests. Try again in ${limiter.retryAfterSec} seconds.`, 429, true)
+    }
 
     let json: { text?: string; voice?: string; speed?: number }
     try {
@@ -65,15 +75,12 @@ export async function POST(req: Request) {
     if (speed > 2.0) speed = 2.0
 
     try {
-      const zai = await ZAI.create()
-      const response = await zai.audio.tts.create({
-        input: cleaned,
+      const arrayBuffer = await getAiProvider().synthesizeSpeech({
+        text: cleaned,
         voice,
         speed,
-        response_format: 'wav',
-        stream: false,
+        signal: req.signal,
       })
-      const arrayBuffer = await response.arrayBuffer()
       const buffer = Buffer.from(new Uint8Array(arrayBuffer))
 
       return new NextResponse(buffer, {

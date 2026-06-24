@@ -9,6 +9,7 @@ import { ArrowLeft, LogIn, Mail, Shield } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { safeCallbackPath } from '@/lib/auth-policy'
 
 const pageBackground =
   'radial-gradient(circle at top left, rgba(14, 165, 233, 0.2), transparent 30%), radial-gradient(circle at top right, rgba(124, 58, 237, 0.16), transparent 28%), linear-gradient(135deg, #050816 0%, #0a1020 48%, #101827 100%)'
@@ -39,7 +40,7 @@ function GoogleMark() {
 function SignInForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const callbackUrl = searchParams.get('callbackUrl') ?? '/dashboard'
+  const callbackUrl = safeCallbackPath(searchParams.get('callbackUrl'))
   const authError = searchParams.get('error')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')

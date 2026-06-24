@@ -283,6 +283,17 @@ export const messageFeedbackSchema = z.object({
 })
 
 // ============================================================
+// ROLE REQUESTS
+// ============================================================
+
+export const createRoleRequestSchema = z.object({
+  requestedRole: z.enum(['cr', 'teacher', 'coordinator', 'moderator', 'reviewer']),
+  reason: z.string().trim().min(10).max(2000).optional(),
+  departmentCode: z.string().trim().max(32).optional(),
+  subjectIds: z.array(z.string().min(1)).max(20).optional(),
+})
+
+// ============================================================
 // HELPER
 // ============================================================
 

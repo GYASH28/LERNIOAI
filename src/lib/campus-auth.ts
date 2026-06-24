@@ -1,23 +1,19 @@
 import { CWIT_DEPARTMENTS } from '@/lib/cwit-departments'
+import {
+  ROLE_LABELS,
+  ROLE_PERMISSIONS,
+  canAssignRole,
+  isElevatedRole,
+  normalizeRole,
+  type Role,
+} from '@/lib/roles'
 
-export const CAMPUS_ROLES = ['student', 'cr', 'teacher', 'coordinator', 'admin'] as const
+export const CAMPUS_ROLES = ['student', 'cr', 'teacher', 'coordinator', 'moderator', 'reviewer', 'admin'] as const
 
-export type CampusRole = (typeof CAMPUS_ROLES)[number]
+export type CampusRole = Role
 
 export const CAMPUS_ROLE_LABELS: Record<CampusRole, string> = {
-  student: 'Student',
-  cr: 'Class Representative',
-  teacher: 'Teacher',
-  coordinator: 'Coordinator / HOD',
-  admin: 'Admin',
-}
-
-export const CAMPUS_ROLE_LEVELS: Record<CampusRole, number> = {
-  student: 1,
-  cr: 2,
-  teacher: 3,
-  coordinator: 4,
-  admin: 5,
+  ...ROLE_LABELS,
 }
 
 export const CAMPUS_ROLE_DESCRIPTIONS: Record<CampusRole, string> = {
@@ -25,11 +21,13 @@ export const CAMPUS_ROLE_DESCRIPTIONS: Record<CampusRole, string> = {
   cr: 'Supports a class with attendance, class updates, and student coordination.',
   teacher: 'Owns subjects, learning material, assignments, and student progress reviews.',
   coordinator: 'Oversees department activity, teachers, students, attendance, and reports.',
+  moderator: 'Reviews student contributions and handles content safety queues.',
+  reviewer: 'Reviews and publishes verified academic content.',
   admin: 'Manages users, departments, role invites, and institute-wide configuration.',
 }
 
 export const CAMPUS_SEMESTERS = ['1', '2', '3', '4', '5', '6'] as const
-export const CAMPUS_DIVISIONS = ['A', 'B', 'C'] as const
+export const CAMPUS_DIVISIONS = ['A', 'B', 'C', 'NOT_SURE'] as const
 
 export const CWIT_PROGRAMMES = CWIT_DEPARTMENTS
   .filter((department) => department.programme)
@@ -78,8 +76,7 @@ export const CAMPUS_WORKFLOW = [
 ] as const
 
 export function normalizeCampusRole(role: unknown): CampusRole {
-  const normalized = String(role || 'student').trim().toLowerCase()
-  return CAMPUS_ROLES.includes(normalized as CampusRole) ? (normalized as CampusRole) : 'student'
+  return normalizeRole(role)
 }
 
 export function getCampusRoleLabel(role: unknown): string {
@@ -87,22 +84,11 @@ export function getCampusRoleLabel(role: unknown): string {
 }
 
 export function isElevatedCampusRole(role: unknown): boolean {
-  return ['cr', 'teacher', 'coordinator', 'admin'].includes(normalizeCampusRole(role))
+  return isElevatedRole(role)
 }
 
 export function canAssignCampusRole(assignerRole: unknown, targetRole: unknown): boolean {
-  const assigner = normalizeCampusRole(assignerRole)
-  const target = normalizeCampusRole(targetRole)
-
-  if (assigner === 'admin') {
-    return target !== 'admin'
-  }
-
-  if (assigner === 'coordinator') {
-    return ['student', 'cr', 'teacher'].includes(target)
-  }
-
-  return false
+  return canAssignRole(assignerRole, targetRole)
 }
 
 export function getCampusDashboardPath(_role: unknown): string {
@@ -119,12 +105,15 @@ export function validateCampusEmail(email: unknown): boolean {
 }
 
 export function validateRollNumber(rollNumber: unknown): boolean {
-  return /^[0-9]{6}$/.test(String(rollNumber || '').trim())
+  const value = String(rollNumber || '').trim()
+  if (!value) return true
+  const pattern = process.env.NEXT_PUBLIC_LERNIO_ROLL_NUMBER_PATTERN || '^[A-Za-z0-9/-]{1,32}$'
+  return new RegExp(pattern).test(value)
 }
 
 export function getProgrammeByDepartmentCode(code: unknown) {
   const normalized = String(code || '').trim().toUpperCase()
-  return CWIT_PROGRAMMES.find((programme) => programme.departmentCode === normalized) ?? CWIT_PROGRAMMES[0]
+  return CWIT_PROGRAMMES.find((programme) => programme.departmentCode === normalized) ?? null
 }
 
 export function inviteCodePrefix(role: unknown): string {
@@ -133,7 +122,13 @@ export function inviteCodePrefix(role: unknown): string {
     cr: 'CR',
     teacher: 'TEA',
     coordinator: 'HOD',
+    moderator: 'MOD',
+    reviewer: 'REV',
     admin: 'ADM',
   }
   return prefix[normalizeCampusRole(role)]
+}
+
+export function getCampusRolePermissions(role: unknown) {
+  return ROLE_PERMISSIONS[normalizeCampusRole(role)]
 }
