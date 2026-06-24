@@ -1,0 +1,322 @@
+/* ============================================================
+   Lernio AI 2.0 — Motion System
+   ------------------------------------------------------------
+   Centralised keyframes, animation utility classes, and the
+   reduced-motion / motion-level overrides. The data-motion
+   attribute on <html> can be:
+     • "full"     — all animations play
+     • "reduced"  — durations shortened to ~0.01ms (effectively
+                    static), but transitions still complete
+     • "none"     — nonessential animations fully disabled
+   The legacy .reduce-motion class (toggled by the old theme
+   provider) is preserved so older components keep working.
+   Low-power mode (data-low-power="true") additionally
+   disables blur / parallax for battery saving.
+   ============================================================ */
+
+/* ---------- Mascot animations ---------- */
+@keyframes leo-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+.mascot-float { animation: leo-float 4s ease-in-out infinite; }
+
+@keyframes leo-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.9; }
+}
+.mascot-pulse { animation: leo-pulse 2s ease-in-out infinite; }
+
+@keyframes leo-thinking {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+.mascot-thinking { animation: leo-thinking 1.4s ease-in-out infinite; }
+
+/* ---------- Shimmer (skeletons / loading bars) ---------- */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    color-mix(in oklch, var(--muted) 80%, transparent) 0%,
+    color-mix(in oklch, var(--muted) 40%, transparent) 50%,
+    color-mix(in oklch, var(--muted) 80%, transparent) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+/* Premium skeleton with shimmer */
+@keyframes skeleton-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.skeleton-premium {
+  background: linear-gradient(
+    90deg,
+    color-mix(in oklch, var(--muted) 70%, transparent) 0%,
+    color-mix(in oklch, var(--muted) 40%, transparent) 50%,
+    color-mix(in oklch, var(--muted) 70%, transparent) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.8s ease-in-out infinite;
+}
+
+/* ---------- Entrance animations ---------- */
+@keyframes pop-in {
+  0% { opacity: 0; transform: translateY(8px) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-pop-in { animation: pop-in 0.32s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+@keyframes slide-in-left {
+  0% { opacity: 0; transform: translateX(-12px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.animate-slide-in-left { animation: slide-in-left 0.32s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+@keyframes card-rise {
+  0% { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.card-rise { animation: card-rise 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+@keyframes bounce-in {
+  0% { transform: scale(0.6); opacity: 0; }
+  50% { transform: scale(1.12); opacity: 1; }
+  70% { transform: scale(0.96); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.bounce-in { animation: bounce-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+
+/* ---------- Streak flame pulse ---------- */
+@keyframes flame-flicker {
+  0%, 100% { transform: scale(1) rotate(-1deg); filter: brightness(1); }
+  50% { transform: scale(1.08) rotate(1deg); filter: brightness(1.15); }
+}
+.flame-flicker { animation: flame-flicker 1.8s ease-in-out infinite; }
+
+/* ---------- Pulse glow ---------- */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklch, var(--brand) 35%, transparent); }
+  50% { box-shadow: 0 0 0 8px color-mix(in oklch, var(--brand) 0%, transparent); }
+}
+.pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+
+/* ---------- Animated progress shimmer ---------- */
+@keyframes progress-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.progress-shimmer {
+  background-image: linear-gradient(
+    90deg,
+    var(--brand) 0%,
+    color-mix(in oklch, var(--brand) 70%, oklch(0.85 0.15 320)) 50%,
+    var(--brand) 100%
+  );
+  background-size: 200% 100%;
+  animation: progress-shimmer 2.4s linear infinite;
+}
+
+/* ---------- Voice / audio animations ---------- */
+@keyframes rec-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+    box-shadow: 0 0 0 0 color-mix(in oklch, oklch(0.65 0.22 25) 60%, transparent);
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.85;
+    box-shadow: 0 0 0 8px color-mix(in oklch, oklch(0.65 0.22 25) 0%, transparent);
+  }
+}
+.rec-pulse { animation: rec-pulse 1.4s ease-out infinite; }
+
+@keyframes wave-bar {
+  0%, 100% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+}
+.wave-bar {
+  display: inline-block;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--brand);
+  transform-origin: center bottom;
+  animation: wave-bar 0.9s ease-in-out infinite;
+}
+
+@keyframes eq-bounce {
+  0%, 100% { transform: scaleY(0.4); }
+  50% { transform: scaleY(1); }
+}
+.eq-bar {
+  display: inline-block;
+  width: 2.5px;
+  border-radius: 1px;
+  background: currentColor;
+  transform-origin: center bottom;
+  animation: eq-bounce 0.7s ease-in-out infinite;
+}
+
+/* ---------- Celebration / focus ---------- */
+@keyframes sparkle-fall {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+  100% { transform: translate(var(--dx, 0), 60px) rotate(360deg); opacity: 0; }
+}
+.sparkle-particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: sparkle-fall 1.2s ease-in forwards;
+}
+
+@keyframes focus-ring-glow {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklch, var(--brand) 50%, transparent); }
+  50% { box-shadow: 0 0 0 6px color-mix(in oklch, var(--brand) 0%, transparent); }
+}
+.focus-ring-glow { animation: focus-ring-glow 2s ease-out infinite; }
+
+@keyframes achievement-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 0 0 rgba(245, 158, 11, 0.6),
+      0 0 18px 2px rgba(217, 70, 239, 0.35);
+  }
+  50% {
+    box-shadow:
+      0 0 0 8px rgba(245, 158, 11, 0),
+      0 0 28px 6px rgba(217, 70, 239, 0.55);
+  }
+}
+.achievement-glow { animation: achievement-glow 1.8s ease-in-out infinite; }
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: inline-flex;
+  animation: marquee 24s linear infinite;
+}
+.marquee-track:hover { animation-play-state: paused; }
+
+/* ---------- Reduced motion (legacy class) ---------- */
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+.reduce-motion .pulse-glow,
+.reduce-motion .progress-shimmer,
+.reduce-motion .marquee-track,
+.reduce-motion .card-rise,
+.reduce-motion .rec-pulse,
+.reduce-motion .wave-bar,
+.reduce-motion .bounce-in,
+.reduce-motion .focus-ring-glow,
+.reduce-motion .skeleton-premium,
+.reduce-motion .eq-bar,
+.reduce-motion .sparkle-particle,
+.reduce-motion .achievement-glow,
+.reduce-motion .mascot-float,
+.reduce-motion .mascot-pulse,
+.reduce-motion .mascot-thinking,
+.reduce-motion .shimmer,
+.reduce-motion .animate-pop-in,
+.reduce-motion .animate-slide-in-left,
+.reduce-motion .flame-flicker {
+  animation: none !important;
+}
+.reduce-motion .stat-tile:hover { transform: none; }
+.reduce-motion .glass-panel { backdrop-filter: none; -webkit-backdrop-filter: none; }
+.reduce-motion .flip-card-inner { transition: none !important; }
+.reduce-motion .flip-card-tilt { transform: none !important; transition: none !important; }
+
+/* ---------- data-motion="reduced" (same as .reduce-motion) ---------- */
+[data-motion="reduced"] *,
+[data-motion="reduced"] *::before,
+[data-motion="reduced"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+[data-motion="reduced"] .pulse-glow,
+[data-motion="reduced"] .progress-shimmer,
+[data-motion="reduced"] .marquee-track,
+[data-motion="reduced"] .card-rise,
+[data-motion="reduced"] .rec-pulse,
+[data-motion="reduced"] .wave-bar,
+[data-motion="reduced"] .bounce-in,
+[data-motion="reduced"] .focus-ring-glow,
+[data-motion="reduced"] .skeleton-premium,
+[data-motion="reduced"] .eq-bar,
+[data-motion="reduced"] .sparkle-particle,
+[data-motion="reduced"] .achievement-glow,
+[data-motion="reduced"] .mascot-float,
+[data-motion="reduced"] .mascot-pulse,
+[data-motion="reduced"] .mascot-thinking,
+[data-motion="reduced"] .shimmer,
+[data-motion="reduced"] .animate-pop-in,
+[data-motion="reduced"] .animate-slide-in-left,
+[data-motion="reduced"] .flame-flicker {
+  animation: none !important;
+}
+[data-motion="reduced"] .glass-panel { backdrop-filter: none; -webkit-backdrop-filter: none; }
+[data-motion="reduced"] .flip-card-inner { transition: none !important; }
+[data-motion="reduced"] .flip-card-tilt { transform: none !important; transition: none !important; }
+
+/* ---------- data-motion="none" — disable nonessential animation ---------- */
+[data-motion="none"] *,
+[data-motion="none"] *::before,
+[data-motion="none"] *::after {
+  animation: none !important;
+  transition: none !important;
+}
+[data-motion="none"] .flip-card-inner { transform: none !important; }
+[data-motion="none"] .flip-card-tilt { transform: none !important; }
+
+/* ---------- Low-power mode: disable blur & parallax ---------- */
+[data-low-power="true"] .flip-card-tilt { transform: none !important; }
+[data-low-power="true"] .glass-panel { backdrop-filter: none; -webkit-backdrop-filter: none; }
+[data-low-power="true"] .glass-card { backdrop-filter: none; -webkit-backdrop-filter: none; }
+
+/* ---------- 3D flip-card (Phase 13 — preserved) ---------- */
+.flip-card-perspective {
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+}
+.flip-card-inner {
+  position: relative;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.flip-card-inner.is-flipped { transform: rotateY(180deg); }
+.flip-card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flip-card-face--back { transform: rotateY(180deg); }
+.flip-card-tilt {
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transition: transform 0.15s ease-out;
+}
+.flip-card-inner.is-flipped,
+.flip-card-tilt:hover,
+.flip-card-tilt:focus-within {
+  will-change: transform;
+}
+.flip-hint { transition: opacity 0.3s ease; }
+.flip-hint.is-hidden { opacity: 0; pointer-events: none; }

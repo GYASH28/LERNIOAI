@@ -1,0 +1,545 @@
+/* ============================================================
+   Lernio AI 2.0 — Premium Theme Palettes
+   ------------------------------------------------------------
+   Six theme families, each with light + dark variants. Each
+   palette overrides the semantic tokens defined in tokens.css.
+   The shadcn legacy tokens are mapped onto the semantic tokens
+   in tokens.css, so overriding --canvas / --brand / --surface-1
+   / --text-default / --border-default / --focus-ring here
+   automatically cascades into every shadcn/ui component.
+
+   Selector strategy:
+   • `:root[data-palette="X"]`         — light variant of palette X
+   • `:root[data-palette="X"].dark`    — dark variant of palette X
+   The pre-hydration script in layout.tsx sets data-palette and
+   toggles `.dark` before React hydrates, so there is no flash.
+
+   Subject tokens (--subject-*) are kept stable across palettes
+   for mascot identity consistency; only minor lightness tweaks
+   per appearance keep them readable.
+   ============================================================ */
+
+/* ============================================================
+   1. Aurora Scholar — default violet
+   Intelligent, optimistic, modern identity. The platform default.
+   ============================================================ */
+:root[data-palette="aurora"] {
+  --canvas:            oklch(0.985 0.006 285);
+  --canvas-subtle:     oklch(0.965 0.010 285);
+  --surface-1:         oklch(1 0 0);
+  --surface-2:         oklch(0.985 0.006 285);
+  --surface-3:         oklch(0.97 0.010 285);
+  --surface-elevated:  oklch(1 0 0);
+  --surface-overlay:   oklch(0.995 0.004 285);
+  --surface-inset:     oklch(0.96 0.012 285);
+
+  --text-strong:     oklch(0.18 0.02 285);
+  --text-default:    oklch(0.22 0.018 285);
+  --text-secondary:  oklch(0.46 0.018 285);
+  --text-muted:      oklch(0.60 0.014 285);
+  --text-disabled:   oklch(0.72 0.010 285);
+  --text-inverse:    oklch(0.99 0 0);
+  --text-link:       oklch(0.55 0.20 292);
+
+  --border-subtle:   oklch(0.93 0.006 285);
+  --border-default:  oklch(0.90 0.010 285);
+  --border-strong:   oklch(0.82 0.014 285);
+
+  --focus-ring:      oklch(0.53 0.22 292);
+  --selection-bg:    oklch(0.85 0.10 292);
+
+  --brand:           oklch(0.53 0.22 292);
+  --brand-hover:     oklch(0.48 0.22 292);
+  --brand-active:    oklch(0.43 0.20 292);
+  --brand-soft:      oklch(0.94 0.04 292);
+  --brand-contrast:  oklch(0.99 0 0);
+  --secondary-action: oklch(0.62 0.15 225);
+
+  --chart-1:        oklch(0.53 0.22 292);
+  --chart-2:        oklch(0.62 0.17 195);
+  --chart-3:        oklch(0.68 0.18 145);
+  --chart-4:        oklch(0.75 0.18 70);
+  --chart-5:        oklch(0.65 0.22 340);
+  --chart-grid:     oklch(0.88 0.008 285);
+  --chart-axis:     oklch(0.46 0.018 285);
+}
+
+:root[data-palette="aurora"].dark {
+  --canvas:            oklch(0.125 0.018 270);
+  --canvas-subtle:     oklch(0.155 0.020 270);
+  --surface-1:         oklch(0.180 0.024 274);
+  --surface-2:         oklch(0.205 0.026 276);
+  --surface-3:         oklch(0.235 0.030 278);
+  --surface-elevated:  oklch(0.220 0.028 276);
+  --surface-overlay:   oklch(0.165 0.022 272);
+  --surface-inset:     oklch(0.110 0.016 270);
+
+  --text-strong:     oklch(0.99 0.005 280);
+  --text-default:    oklch(0.96 0.005 280);
+  --text-secondary:  oklch(0.72 0.014 280);
+  --text-muted:      oklch(0.58 0.014 280);
+  --text-disabled:   oklch(0.42 0.010 280);
+  --text-inverse:    oklch(0.14 0.015 280);
+  --text-link:       oklch(0.78 0.16 292);
+
+  --border-subtle:   oklch(1 0 0 / 6%);
+  --border-default:  oklch(1 0 0 / 10%);
+  --border-strong:   oklch(1 0 0 / 18%);
+
+  --focus-ring:      oklch(0.76 0.18 292);
+  --selection-bg:    oklch(0.40 0.18 292);
+
+  --brand:           oklch(0.70 0.19 292);
+  --brand-hover:     oklch(0.76 0.19 292);
+  --brand-active:    oklch(0.82 0.16 292);
+  --brand-soft:      oklch(0.30 0.10 292);
+  --brand-contrast:  oklch(0.13 0.02 280);
+  --secondary-action: oklch(0.72 0.13 210);
+
+  --chart-1:        oklch(0.70 0.19 292);
+  --chart-2:        oklch(0.72 0.17 195);
+  --chart-3:        oklch(0.74 0.18 145);
+  --chart-4:        oklch(0.80 0.18 70);
+  --chart-5:        oklch(0.72 0.22 340);
+  --chart-grid:     oklch(1 0 0 / 8%);
+  --chart-axis:     oklch(0.72 0.014 280);
+  --chart-tooltip:  oklch(0.99 0.005 280);
+}
+
+/* ============================================================
+   2. Midnight Nexus — dark-first tech / cinematic night study
+   ============================================================ */
+:root[data-palette="nexus"] {
+  --canvas:            oklch(0.97 0.008 270);
+  --canvas-subtle:     oklch(0.94 0.010 270);
+  --surface-1:         oklch(0.99 0.004 270);
+  --surface-2:         oklch(0.975 0.008 270);
+  --surface-3:         oklch(0.96 0.012 270);
+  --surface-elevated:  oklch(1 0 0);
+  --surface-overlay:   oklch(0.99 0.004 270);
+  --surface-inset:     oklch(0.95 0.014 270);
+
+  --text-strong:     oklch(0.16 0.02 270);
+  --text-default:    oklch(0.20 0.018 270);
+  --text-secondary:  oklch(0.44 0.018 270);
+  --text-muted:      oklch(0.58 0.014 270);
+  --text-disabled:   oklch(0.70 0.010 270);
+  --text-inverse:    oklch(0.99 0 0);
+  --text-link:       oklch(0.55 0.20 292);
+
+  --border-subtle:   oklch(0.92 0.006 270);
+  --border-default:  oklch(0.88 0.010 270);
+  --border-strong:   oklch(0.80 0.014 270);
+
+  --focus-ring:      oklch(0.55 0.20 292);
+  --selection-bg:    oklch(0.85 0.10 292);
+
+  --brand:           oklch(0.55 0.20 292);
+  --brand-hover:     oklch(0.50 0.20 292);
+  --brand-active:    oklch(0.45 0.18 292);
+  --brand-soft:      oklch(0.94 0.04 292);
+  --brand-contrast:  oklch(0.99 0 0);
+  --secondary-action: oklch(0.60 0.14 210);
+
+  --chart-1:        oklch(0.55 0.20 292);
+  --chart-2:        oklch(0.62 0.16 210);
+  --chart-3:        oklch(0.68 0.18 195);
+  --chart-4:        oklch(0.72 0.18 70);
+  --chart-5:        oklch(0.62 0.22 340);
+  --chart-grid:     oklch(0.86 0.008 270);
+  --chart-axis:     oklch(0.44 0.018 270);
+}
+
+:root[data-palette="nexus"].dark {
+  --canvas:            oklch(0.125 0.018 270);
+  --canvas-subtle:     oklch(0.150 0.020 270);
+  --surface-1:         oklch(0.180 0.024 274);
+  --surface-2:         oklch(0.205 0.026 276);
+  --surface-3:         oklch(0.235 0.030 278);
+  --surface-elevated:  oklch(0.220 0.028 276);
+  --surface-overlay:   oklch(0.165 0.022 272);
+  --surface-inset:     oklch(0.108 0.016 270);
+
+  --text-strong:     oklch(0.96 0.006 270);
+  --text-default:    oklch(0.94 0.006 270);
+  --text-secondary:  oklch(0.70 0.014 270);
+  --text-muted:      oklch(0.56 0.014 270);
+  --text-disabled:   oklch(0.40 0.010 270);
+  --text-inverse:    oklch(0.13 0.015 280);
+  --text-link:       oklch(0.78 0.16 292);
+
+  --border-subtle:   oklch(1 0 0 / 6%);
+  --border-default:  oklch(1 0 0 / 10%);
+  --border-strong:   oklch(1 0 0 / 20%);
+
+  --focus-ring:      oklch(0.76 0.18 292);
+  --selection-bg:    oklch(0.40 0.18 292);
+
+  --brand:           oklch(0.70 0.19 292);
+  --brand-hover:     oklch(0.76 0.19 292);
+  --brand-active:    oklch(0.82 0.16 292);
+  --brand-soft:      oklch(0.30 0.10 292);
+  --brand-contrast:  oklch(0.13 0.02 280);
+  --secondary-action: oklch(0.72 0.13 210);
+
+  --shadow-1: 0 1px 2px oklch(0 0 0 / 0.40), 0 1px 3px oklch(0 0 0 / 0.40);
+  --shadow-2: 0 1px 2px oklch(0 0 0 / 0.40), 0 6px 18px oklch(0 0 0 / 0.50), 0 2px 4px oklch(0 0 0 / 0.40);
+  --shadow-3: 0 2px 6px oklch(0 0 0 / 0.45), 0 14px 36px oklch(0 0 0 / 0.55), 0 4px 8px oklch(0 0 0 / 0.40);
+
+  --chart-1:        oklch(0.70 0.19 292);
+  --chart-2:        oklch(0.74 0.16 210);
+  --chart-3:        oklch(0.74 0.18 195);
+  --chart-4:        oklch(0.80 0.18 70);
+  --chart-5:        oklch(0.74 0.22 340);
+  --chart-grid:     oklch(1 0 0 / 8%);
+  --chart-axis:     oklch(0.72 0.014 270);
+  --chart-tooltip:  oklch(0.99 0.005 280);
+}
+
+/* ============================================================
+   3. Paper Focus — warm, book-like, quiet for long reading
+   ============================================================ */
+:root[data-palette="paper"] {
+  --canvas:            oklch(0.975 0.018 86);
+  --canvas-subtle:     oklch(0.955 0.020 84);
+  --surface-1:         oklch(0.992 0.010 90);
+  --surface-2:         oklch(0.985 0.012 88);
+  --surface-3:         oklch(0.97 0.016 86);
+  --surface-elevated:  oklch(1 0.006 90);
+  --surface-overlay:   oklch(0.99 0.008 90);
+  --surface-inset:     oklch(0.96 0.020 84);
+
+  --text-strong:     oklch(0.22 0.035 55);
+  --text-default:    oklch(0.27 0.030 60);
+  --text-secondary:  oklch(0.48 0.025 65);
+  --text-muted:      oklch(0.60 0.020 70);
+  --text-disabled:   oklch(0.72 0.014 75);
+  --text-inverse:    oklch(0.98 0.012 86);
+  --text-link:       oklch(0.50 0.14 42);
+
+  --border-subtle:   oklch(0.92 0.014 80);
+  --border-default:  oklch(0.88 0.018 78);
+  --border-strong:   oklch(0.78 0.022 75);
+
+  --focus-ring:      oklch(0.48 0.13 42);
+  --selection-bg:    oklch(0.88 0.06 42);
+
+  --brand:           oklch(0.48 0.13 42);
+  --brand-hover:     oklch(0.43 0.13 42);
+  --brand-active:    oklch(0.38 0.11 42);
+  --brand-soft:      oklch(0.94 0.04 42);
+  --brand-contrast:  oklch(0.99 0.008 86);
+  --secondary-action: oklch(0.50 0.10 150);
+
+  --shadow-1: 0 1px 2px oklch(0.30 0.04 60 / 0.05), 0 1px 3px oklch(0.30 0.04 60 / 0.04);
+  --shadow-2: 0 1px 2px oklch(0.30 0.04 60 / 0.05), 0 4px 12px oklch(0.30 0.04 60 / 0.07), 0 1px 3px oklch(0.30 0.04 60 / 0.04);
+  --shadow-3: 0 2px 4px oklch(0.30 0.04 60 / 0.06), 0 8px 24px oklch(0.30 0.04 60 / 0.09), 0 2px 6px oklch(0.30 0.04 60 / 0.05);
+
+  --chart-1:        oklch(0.48 0.13 42);
+  --chart-2:        oklch(0.55 0.12 150);
+  --chart-3:        oklch(0.62 0.14 75);
+  --chart-4:        oklch(0.58 0.13 290);
+  --chart-5:        oklch(0.50 0.12 195);
+  --chart-grid:     oklch(0.88 0.014 80);
+  --chart-axis:     oklch(0.46 0.022 65);
+}
+
+:root[data-palette="paper"].dark {
+  --canvas:            oklch(0.18 0.012 80);
+  --canvas-subtle:     oklch(0.205 0.014 80);
+  --surface-1:         oklch(0.22 0.015 80);
+  --surface-2:         oklch(0.245 0.018 80);
+  --surface-3:         oklch(0.275 0.020 80);
+  --surface-elevated:  oklch(0.26 0.018 80);
+  --surface-overlay:   oklch(0.21 0.015 80);
+  --surface-inset:     oklch(0.16 0.012 80);
+
+  --text-strong:     oklch(0.94 0.012 80);
+  --text-default:    oklch(0.91 0.012 80);
+  --text-secondary:  oklch(0.72 0.018 80);
+  --text-muted:      oklch(0.58 0.016 80);
+  --text-disabled:   oklch(0.42 0.012 80);
+  --text-inverse:    oklch(0.18 0.012 80);
+  --text-link:       oklch(0.76 0.13 42);
+
+  --border-subtle:   oklch(0.50 0.018 80 / 35%);
+  --border-default:  oklch(0.55 0.020 80 / 50%);
+  --border-strong:   oklch(0.65 0.022 80 / 70%);
+
+  --focus-ring:      oklch(0.76 0.14 42);
+  --selection-bg:    oklch(0.38 0.10 42);
+
+  --brand:           oklch(0.70 0.15 42);
+  --brand-hover:     oklch(0.76 0.15 42);
+  --brand-active:    oklch(0.82 0.12 42);
+  --brand-soft:      oklch(0.32 0.08 42);
+  --brand-contrast:  oklch(0.16 0.012 80);
+  --secondary-action: oklch(0.70 0.12 150);
+
+  --chart-1:        oklch(0.70 0.15 42);
+  --chart-2:        oklch(0.72 0.13 150);
+  --chart-3:        oklch(0.78 0.15 75);
+  --chart-4:        oklch(0.74 0.13 290);
+  --chart-5:        oklch(0.72 0.13 195);
+  --chart-grid:     oklch(0.55 0.018 80 / 30%);
+  --chart-axis:     oklch(0.72 0.018 80);
+  --chart-tooltip:  oklch(0.94 0.012 80);
+}
+
+/* ============================================================
+   4. Ocean Circuit — cool cobalt-teal, precise technical
+   ============================================================ */
+:root[data-palette="ocean"] {
+  --canvas:            oklch(0.975 0.014 220);
+  --canvas-subtle:     oklch(0.955 0.016 220);
+  --surface-1:         oklch(0.995 0.006 220);
+  --surface-2:         oklch(0.985 0.010 220);
+  --surface-3:         oklch(0.97 0.014 220);
+  --surface-elevated:  oklch(1 0.002 220);
+  --surface-overlay:   oklch(0.99 0.006 220);
+  --surface-inset:     oklch(0.96 0.018 220);
+
+  --text-strong:     oklch(0.19 0.030 230);
+  --text-default:    oklch(0.23 0.028 230);
+  --text-secondary:  oklch(0.46 0.024 230);
+  --text-muted:      oklch(0.60 0.020 230);
+  --text-disabled:   oklch(0.72 0.014 230);
+  --text-inverse:    oklch(0.99 0.004 220);
+  --text-link:       oklch(0.52 0.16 235);
+
+  --border-subtle:   oklch(0.92 0.012 220);
+  --border-default:  oklch(0.88 0.016 220);
+  --border-strong:   oklch(0.80 0.020 220);
+
+  --focus-ring:      oklch(0.52 0.16 235);
+  --selection-bg:    oklch(0.85 0.08 235);
+
+  --brand:           oklch(0.52 0.16 235);
+  --brand-hover:     oklch(0.47 0.16 235);
+  --brand-active:    oklch(0.42 0.14 235);
+  --brand-soft:      oklch(0.94 0.04 235);
+  --brand-contrast:  oklch(0.99 0.004 220);
+  --secondary-action: oklch(0.62 0.14 190);
+
+  --chart-1:        oklch(0.52 0.16 235);
+  --chart-2:        oklch(0.62 0.14 190);
+  --chart-3:        oklch(0.60 0.16 200);
+  --chart-4:        oklch(0.68 0.16 250);
+  --chart-5:        oklch(0.62 0.18 290);
+  --chart-grid:     oklch(0.88 0.014 220);
+  --chart-axis:     oklch(0.46 0.024 230);
+}
+
+:root[data-palette="ocean"].dark {
+  --canvas:            oklch(0.14 0.018 230);
+  --canvas-subtle:     oklch(0.17 0.020 230);
+  --surface-1:         oklch(0.19 0.022 232);
+  --surface-2:         oklch(0.215 0.024 234);
+  --surface-3:         oklch(0.245 0.026 236);
+  --surface-elevated:  oklch(0.23 0.024 234);
+  --surface-overlay:   oklch(0.175 0.020 232);
+  --surface-inset:     oklch(0.12 0.016 230);
+
+  --text-strong:     oklch(0.97 0.006 230);
+  --text-default:    oklch(0.94 0.006 230);
+  --text-secondary:  oklch(0.72 0.018 230);
+  --text-muted:      oklch(0.58 0.016 230);
+  --text-disabled:   oklch(0.42 0.012 230);
+  --text-inverse:    oklch(0.14 0.018 230);
+  --text-link:       oklch(0.76 0.15 235);
+
+  --border-subtle:   oklch(1 0 0 / 6%);
+  --border-default:  oklch(1 0 0 / 10%);
+  --border-strong:   oklch(1 0 0 / 18%);
+
+  --focus-ring:      oklch(0.74 0.16 235);
+  --selection-bg:    oklch(0.40 0.12 235);
+
+  --brand:           oklch(0.68 0.16 235);
+  --brand-hover:     oklch(0.74 0.16 235);
+  --brand-active:    oklch(0.80 0.14 235);
+  --brand-soft:      oklch(0.30 0.08 235);
+  --brand-contrast:  oklch(0.13 0.018 230);
+  --secondary-action: oklch(0.70 0.14 190);
+
+  --chart-1:        oklch(0.68 0.16 235);
+  --chart-2:        oklch(0.72 0.14 190);
+  --chart-3:        oklch(0.72 0.16 200);
+  --chart-4:        oklch(0.76 0.16 250);
+  --chart-5:        oklch(0.72 0.18 290);
+  --chart-grid:     oklch(1 0 0 / 8%);
+  --chart-axis:     oklch(0.72 0.018 230);
+  --chart-tooltip:  oklch(0.97 0.006 230);
+}
+
+/* ============================================================
+   5. Forest Academy — grounded sage-green, restful stable
+   ============================================================ */
+:root[data-palette="forest"] {
+  --canvas:            oklch(0.975 0.015 145);
+  --canvas-subtle:     oklch(0.955 0.018 145);
+  --surface-1:         oklch(0.995 0.005 145);
+  --surface-2:         oklch(0.985 0.008 145);
+  --surface-3:         oklch(0.97 0.012 145);
+  --surface-elevated:  oklch(1 0.002 145);
+  --surface-overlay:   oklch(0.99 0.006 145);
+  --surface-inset:     oklch(0.96 0.016 145);
+
+  --text-strong:     oklch(0.19 0.030 145);
+  --text-default:    oklch(0.23 0.028 145);
+  --text-secondary:  oklch(0.46 0.024 145);
+  --text-muted:      oklch(0.60 0.020 145);
+  --text-disabled:   oklch(0.72 0.014 145);
+  --text-inverse:    oklch(0.99 0.004 145);
+  --text-link:       oklch(0.45 0.13 150);
+
+  --border-subtle:   oklch(0.92 0.012 145);
+  --border-default:  oklch(0.88 0.016 145);
+  --border-strong:   oklch(0.80 0.020 145);
+
+  --focus-ring:      oklch(0.45 0.13 150);
+  --selection-bg:    oklch(0.85 0.07 150);
+
+  --brand:           oklch(0.45 0.13 150);
+  --brand-hover:     oklch(0.40 0.13 150);
+  --brand-active:    oklch(0.35 0.11 150);
+  --brand-soft:      oklch(0.94 0.04 150);
+  --brand-contrast:  oklch(0.99 0.004 145);
+  --secondary-action: oklch(0.57 0.12 105);
+
+  --chart-1:        oklch(0.45 0.13 150);
+  --chart-2:        oklch(0.57 0.12 105);
+  --chart-3:        oklch(0.60 0.14 175);
+  --chart-4:        oklch(0.62 0.16 75);
+  --chart-5:        oklch(0.50 0.13 290);
+  --chart-grid:     oklch(0.88 0.012 145);
+  --chart-axis:     oklch(0.46 0.024 145);
+}
+
+:root[data-palette="forest"].dark {
+  --canvas:            oklch(0.14 0.015 145);
+  --canvas-subtle:     oklch(0.17 0.018 145);
+  --surface-1:         oklch(0.19 0.020 145);
+  --surface-2:         oklch(0.215 0.022 145);
+  --surface-3:         oklch(0.245 0.024 145);
+  --surface-elevated:  oklch(0.23 0.022 145);
+  --surface-overlay:   oklch(0.175 0.018 145);
+  --surface-inset:     oklch(0.12 0.014 145);
+
+  --text-strong:     oklch(0.97 0.006 145);
+  --text-default:    oklch(0.94 0.006 145);
+  --text-secondary:  oklch(0.72 0.018 145);
+  --text-muted:      oklch(0.58 0.016 145);
+  --text-disabled:   oklch(0.42 0.012 145);
+  --text-inverse:    oklch(0.14 0.015 145);
+  --text-link:       oklch(0.76 0.13 150);
+
+  --border-subtle:   oklch(1 0 0 / 6%);
+  --border-default:  oklch(1 0 0 / 10%);
+  --border-strong:   oklch(1 0 0 / 18%);
+
+  --focus-ring:      oklch(0.74 0.13 150);
+  --selection-bg:    oklch(0.40 0.10 150);
+
+  --brand:           oklch(0.62 0.13 150);
+  --brand-hover:     oklch(0.68 0.13 150);
+  --brand-active:    oklch(0.74 0.11 150);
+  --brand-soft:      oklch(0.30 0.07 150);
+  --brand-contrast:  oklch(0.13 0.015 145);
+  --secondary-action: oklch(0.70 0.12 105);
+
+  --chart-1:        oklch(0.62 0.13 150);
+  --chart-2:        oklch(0.70 0.12 105);
+  --chart-3:        oklch(0.72 0.14 175);
+  --chart-4:        oklch(0.78 0.16 75);
+  --chart-5:        oklch(0.70 0.13 290);
+  --chart-grid:     oklch(1 0 0 / 8%);
+  --chart-axis:     oklch(0.72 0.018 145);
+  --chart-tooltip:  oklch(0.97 0.006 145);
+}
+
+/* ============================================================
+   6. Sakura Calm — soft plum-rose, calm elegant
+   ============================================================ */
+:root[data-palette="sakura"] {
+  --canvas:            oklch(0.985 0.012 350);
+  --canvas-subtle:     oklch(0.965 0.016 350);
+  --surface-1:         oklch(0.998 0.004 350);
+  --surface-2:         oklch(0.99 0.008 350);
+  --surface-3:         oklch(0.978 0.012 350);
+  --surface-elevated:  oklch(1 0 0);
+  --surface-overlay:   oklch(0.995 0.006 350);
+  --surface-inset:     oklch(0.97 0.016 350);
+
+  --text-strong:     oklch(0.21 0.030 330);
+  --text-default:    oklch(0.25 0.028 330);
+  --text-secondary:  oklch(0.48 0.024 330);
+  --text-muted:      oklch(0.60 0.020 330);
+  --text-disabled:   oklch(0.72 0.014 330);
+  --text-inverse:    oklch(0.99 0.006 350);
+  --text-link:       oklch(0.55 0.18 340);
+
+  --border-subtle:   oklch(0.93 0.012 350);
+  --border-default:  oklch(0.89 0.016 350);
+  --border-strong:   oklch(0.82 0.020 350);
+
+  --focus-ring:      oklch(0.55 0.18 340);
+  --selection-bg:    oklch(0.86 0.08 340);
+
+  --brand:           oklch(0.55 0.18 340);
+  --brand-hover:     oklch(0.50 0.18 340);
+  --brand-active:    oklch(0.45 0.16 340);
+  --brand-soft:      oklch(0.95 0.05 340);
+  --brand-contrast:  oklch(0.99 0.006 350);
+  --secondary-action: oklch(0.60 0.12 290);
+
+  --chart-1:        oklch(0.55 0.18 340);
+  --chart-2:        oklch(0.60 0.12 290);
+  --chart-3:        oklch(0.65 0.16 25);
+  --chart-4:        oklch(0.60 0.16 195);
+  --chart-5:        oklch(0.55 0.18 340);
+  --chart-grid:     oklch(0.88 0.014 350);
+  --chart-axis:     oklch(0.48 0.024 330);
+}
+
+:root[data-palette="sakura"].dark {
+  --canvas:            oklch(0.14 0.012 350);
+  --canvas-subtle:     oklch(0.17 0.014 350);
+  --surface-1:         oklch(0.19 0.018 350);
+  --surface-2:         oklch(0.215 0.020 350);
+  --surface-3:         oklch(0.245 0.022 350);
+  --surface-elevated:  oklch(0.23 0.020 350);
+  --surface-overlay:   oklch(0.175 0.016 350);
+  --surface-inset:     oklch(0.12 0.012 350);
+
+  --text-strong:     oklch(0.97 0.006 350);
+  --text-default:    oklch(0.94 0.006 350);
+  --text-secondary:  oklch(0.72 0.018 350);
+  --text-muted:      oklch(0.58 0.016 350);
+  --text-disabled:   oklch(0.42 0.012 350);
+  --text-inverse:    oklch(0.14 0.012 350);
+  --text-link:       oklch(0.76 0.17 340);
+
+  --border-subtle:   oklch(1 0 0 / 6%);
+  --border-default:  oklch(1 0 0 / 10%);
+  --border-strong:   oklch(1 0 0 / 18%);
+
+  --focus-ring:      oklch(0.76 0.18 340);
+  --selection-bg:    oklch(0.40 0.14 340);
+
+  --brand:           oklch(0.70 0.18 340);
+  --brand-hover:     oklch(0.76 0.18 340);
+  --brand-active:    oklch(0.82 0.15 340);
+  --brand-soft:      oklch(0.32 0.10 340);
+  --brand-contrast:  oklch(0.13 0.012 350);
+  --secondary-action: oklch(0.72 0.12 290);
+
+  --chart-1:        oklch(0.70 0.18 340);
+  --chart-2:        oklch(0.74 0.13 290);
+  --chart-3:        oklch(0.74 0.16 25);
+  --chart-4:        oklch(0.72 0.16 195);
+  --chart-5:        oklch(0.72 0.18 320);
+  --chart-grid:     oklch(1 0 0 / 8%);
+  --chart-axis:     oklch(0.72 0.018 350);
+  --chart-tooltip:  oklch(0.97 0.006 350);
+}

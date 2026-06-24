@@ -1,0 +1,47 @@
+:root[data-palette="aurora"] {
+  --ambient-1: color-mix(in oklch, var(--brand) 18%, transparent);
+  --ambient-2: color-mix(in oklch, var(--secondary-action) 16%, transparent);
+  --accent-1: var(--brand);
+  --accent-2: var(--secondary-action);
+  --accent-3: var(--chart-3);
+}
+
+:root[data-palette="nexus"] {
+  --ambient-1: color-mix(in oklch, var(--brand) 12%, transparent);
+  --ambient-2: color-mix(in oklch, var(--chart-2) 12%, transparent);
+  --accent-1: var(--brand);
+  --accent-2: var(--chart-2);
+  --accent-3: var(--chart-3);
+}
+
+:root[data-palette="paper"] {
+  --ambient-1: color-mix(in oklch, var(--brand) 10%, transparent);
+  --ambient-2: color-mix(in oklch, var(--secondary-action) 8%, transparent);
+  --accent-1: var(--brand);
+  --accent-2: var(--secondary-action);
+  --accent-3: var(--chart-3);
+}
+
+:root[data-palette="ocean"] {
+  --ambient-1: color-mix(in oklch, var(--brand) 14%, transparent);
+  --ambient-2: color-mix(in oklch, var(--secondary-action) 14%, transparent);
+  --accent-1: var(--brand);
+  --accent-2: var(--secondary-action);
+  --accent-3: var(--chart-4);
+}
+
+:root[data-palette="forest"] {
+  --ambient-1: color-mix(in oklch, var(--brand) 12%, transparent);
+  --ambient-2: color-mix(in oklch, var(--secondary-action) 12%, transparent);
+  --accent-1: var(--brand);
+  --accent-2: var(--secondary-action);
+  --accent-3: var(--chart-4);
+}
+
+:root[data-palette="sakura"] {
+  --ambient-1: color-mix(in oklch, var(--brand) 12%, transparent);
+  --ambient-2: color-mix(in oklch, var(--secondary-action) 12%, transparent);
+  --accent-1: var(--brand);
+  --accent-2: var(--secondary-action);
+  --accent-3: var(--chart-3);
+}

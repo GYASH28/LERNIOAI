@@ -1,0 +1,137 @@
+/* ============================================================
+   Lernio AI 2.0 — Lesson Prose & Callouts
+   ------------------------------------------------------------
+   Lesson prose styles for long-form learning content (the
+   `.lesson-prose` wrapper used by Learn / Tutor / Revision
+   views) plus structured callout blocks for concept, example,
+   exam tip, warning and definition.
+   ============================================================ */
+
+/* ---------- Lesson prose ---------- */
+.lesson-prose {
+  line-height: 1.75;
+  color: var(--text-default);
+}
+.lesson-prose h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-strong);
+}
+.lesson-prose h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+  color: var(--text-strong);
+}
+.lesson-prose p { margin-bottom: 0.75rem; }
+.lesson-prose ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+.lesson-prose ol {
+  list-style: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+.lesson-prose li { margin-bottom: 0.25rem; }
+.lesson-prose code {
+  font-family: var(--font-mono);
+  background: var(--surface-inset);
+  padding: 0.1rem 0.3rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  color: var(--text-strong);
+}
+.lesson-prose pre {
+  background: var(--surface-inset);
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin-bottom: 0.75rem;
+  border: 1px solid var(--border-subtle);
+}
+.lesson-prose pre code { background: transparent; padding: 0; }
+.lesson-prose a {
+  color: var(--text-link);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+.lesson-prose blockquote {
+  border-left: 3px solid var(--brand);
+  padding-left: 1rem;
+  margin: 0.75rem 0;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* ---------- Callout blocks ---------- */
+.callout-concept,
+.callout-example,
+.callout-exam-tip,
+.callout-warning,
+.callout-definition {
+  position: relative;
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem 0.875rem 1.125rem;
+  margin: 0.75rem 0;
+  border-radius: var(--radius-control);
+  border-left: 3px solid;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.callout-concept {
+  background: var(--info-soft);
+  border-left-color: var(--info);
+  color: var(--text-default);
+}
+.callout-example {
+  background: var(--brand-soft);
+  border-left-color: var(--brand);
+  color: var(--text-default);
+}
+.callout-exam-tip {
+  background: var(--success-soft);
+  border-left-color: var(--success);
+  color: var(--text-default);
+}
+.callout-warning {
+  background: var(--warning-soft);
+  border-left-color: var(--warning);
+  color: var(--text-default);
+}
+.callout-definition {
+  background: var(--surface-inset);
+  border-left-color: var(--secondary-action);
+  color: var(--text-default);
+}
+
+/* Icon space — render an icon as the first child inside the
+   callout. We reserve a fixed-width column so the body text
+   aligns cleanly. */
+.callout-concept > :first-child,
+.callout-example > :first-child,
+.callout-exam-tip > :first-child,
+.callout-warning > :first-child,
+.callout-definition > :first-child {
+  flex: 0 0 auto;
+  margin-top: 0.125rem;
+}
+
+/* ---------- High-contrast callouts ---------- */
+[data-contrast="high"] .callout-concept,
+[data-contrast="high"] .callout-example,
+[data-contrast="high"] .callout-exam-tip,
+[data-contrast="high"] .callout-warning,
+[data-contrast="high"] .callout-definition {
+  background: var(--surface-1);
+  border-left-width: 4px;
+  border-top: 1px solid var(--border-strong);
+  border-right: 1px solid var(--border-strong);
+  border-bottom: 1px solid var(--border-strong);
+}

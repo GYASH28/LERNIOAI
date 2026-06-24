@@ -1,0 +1,84 @@
+/* ============================================================
+   Lernio AI 2.0 — Typography System
+   ------------------------------------------------------------
+   Maps the --text-*-size / --text-*-lh tokens (defined in
+   tokens.css) to actual font-size / line-height / weight /
+   letter-spacing for each named size. Lesson prose, reading
+   column constraint, tabular numerals and high-contrast
+   typography overrides live here too.
+   ============================================================ */
+
+/* ---------- Token-driven font sizing ---------- */
+.text-display {
+  font-size: var(--text-display-size);
+  line-height: var(--text-display-lh);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.text-h1 {
+  font-size: var(--text-h1-size);
+  line-height: var(--text-h1-lh);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+.text-h2 {
+  font-size: var(--text-h2-size);
+  line-height: var(--text-h2-lh);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.text-h3 {
+  font-size: var(--text-h3-size);
+  line-height: var(--text-h3-lh);
+  font-weight: 600;
+}
+.text-body-lg {
+  font-size: var(--text-body-lg-size);
+  line-height: var(--text-body-lg-lh);
+  font-weight: 400;
+}
+.text-body {
+  font-size: var(--text-body-size);
+  line-height: var(--text-body-lh);
+  font-weight: 400;
+}
+.text-body-sm {
+  font-size: var(--text-body-sm-size);
+  line-height: var(--text-body-sm-lh);
+  font-weight: 400;
+}
+.text-meta {
+  font-size: var(--text-meta-size);
+  line-height: var(--text-meta-lh);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* ---------- Tabular numerals (for stat tiles, counters, timers) ---------- */
+.tabular-nums { font-variant-numeric: tabular-nums; }
+
+/* ---------- Reading column constraint (long-form lesson text) ---------- */
+.reading-column { max-width: 70ch; }
+
+/* ---------- High-contrast typography overrides ---------- */
+[data-contrast="high"] .text-gradient,
+[data-contrast="high"] .text-gradient-warm {
+  /* Disable gradient text — gradients can drop below the 4.5:1
+     contrast threshold. Force a solid high-contrast colour. */
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+  color: var(--text-strong) !important;
+}
+
+[data-contrast="high"] .text-muted-foreground,
+[data-contrast="high"] [class*="text-muted"] {
+  /* Opacity-driven muted text can drop below 4.5:1 in small sizes. */
+  color: var(--text-default) !important;
+}
+
+[data-contrast="high"] a,
+[data-contrast="high"] [role="link"] {
+  /* Underline links so they're never colour-only. */
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}

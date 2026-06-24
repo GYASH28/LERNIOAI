@@ -1,0 +1,253 @@
+/* ============================================================
+   Lernio AI 2.0 — Semantic Design Tokens
+   ------------------------------------------------------------
+   This file defines the single source of truth for the visual
+   language of the app: surfaces, text, borders, brand, status,
+   subject, chart, shadow, radius, motion, typography, density.
+
+   The default :root block carries the Aurora Scholar palette so
+   the UI renders correctly even before `data-palette` is applied
+   by the pre-hydration script. themes.css overrides these per
+   palette (and per appearance) using `:root[data-palette="X"]`
+   and `.dark` selectors.
+
+   At the bottom, the legacy shadcn token set is mapped onto the
+   semantic tokens so every existing component (button, card,
+   dialog, etc.) keeps working unchanged.
+   ============================================================ */
+
+:root {
+  /* ---------- Canvas & Surfaces ---------- */
+  --canvas:            oklch(0.985 0.006 285);
+  --canvas-subtle:     oklch(0.965 0.010 285);
+  --surface-1:         oklch(1 0 0);
+  --surface-2:         oklch(0.985 0.006 285);
+  --surface-3:         oklch(0.97 0.010 285);
+  --surface-elevated:  oklch(1 0 0);
+  --surface-overlay:   oklch(0.995 0.004 285);
+  --surface-inset:     oklch(0.96 0.012 285);
+
+  /* ---------- Text ---------- */
+  --text-strong:     oklch(0.18 0.02 285);
+  --text-default:    oklch(0.22 0.018 285);
+  --text-secondary:  oklch(0.46 0.018 285);
+  --text-muted:      oklch(0.60 0.014 285);
+  --text-disabled:   oklch(0.72 0.010 285);
+  --text-inverse:    oklch(0.99 0 0);
+  --text-link:       oklch(0.55 0.20 290);
+
+  /* ---------- Borders ---------- */
+  --border-subtle:   oklch(0.93 0.006 285);
+  --border-default:  oklch(0.90 0.010 285);
+  --border-strong:   oklch(0.82 0.014 285);
+
+  /* ---------- Focus & Selection ---------- */
+  --focus-ring:      oklch(0.53 0.22 292);
+  --selection-bg:    oklch(0.85 0.10 292);
+
+  /* ---------- Brand ---------- */
+  --brand:           oklch(0.53 0.22 292);
+  --brand-hover:     oklch(0.48 0.22 292);
+  --brand-active:    oklch(0.43 0.20 292);
+  --brand-soft:      oklch(0.94 0.04 292);
+  --brand-contrast:  oklch(0.99 0 0);
+  --secondary-action: oklch(0.62 0.15 225);
+
+  /* ---------- Status colours ---------- */
+  --success:        oklch(0.60 0.16 155);
+  --success-soft:   oklch(0.94 0.05 155);
+  --warning:        oklch(0.72 0.17 75);
+  --warning-soft:   oklch(0.95 0.06 75);
+  --danger:         oklch(0.58 0.24 25);
+  --danger-soft:    oklch(0.94 0.06 25);
+  --info:           oklch(0.62 0.15 225);
+  --info-soft:      oklch(0.94 0.05 225);
+
+  /* ---------- Subject accents (stable across palettes) ---------- */
+  --subject-data-structures:  oklch(0.62 0.17 195);  /* Byte — cyan-blue */
+  --subject-cpp:              oklch(0.72 0.17 70);   /* Coda — amber-orange */
+  --subject-microprocessor:   oklch(0.62 0.22 340);  /* Pico — magenta-rose */
+  --subject-communication:    oklch(0.62 0.16 155);  /* Nova — green-teal */
+  --subject-general:          var(--brand);          /* Leo — theme brand */
+
+  /* ---------- Chart palette ---------- */
+  --chart-1:        oklch(0.53 0.22 292);
+  --chart-2:        oklch(0.62 0.17 195);
+  --chart-3:        oklch(0.68 0.18 145);
+  --chart-4:        oklch(0.75 0.18 70);
+  --chart-5:        oklch(0.65 0.22 340);
+  --chart-grid:     oklch(0.88 0.008 285);
+  --chart-axis:     oklch(0.46 0.018 285);
+  --chart-tooltip:  oklch(0.22 0.018 285);
+
+  /* ---------- Shadows ---------- */
+  --shadow-1: 0 1px 2px oklch(0.2 0.02 280 / 0.04), 0 1px 3px oklch(0.2 0.02 280 / 0.04);
+  --shadow-2: 0 1px 2px oklch(0.2 0.02 280 / 0.04), 0 4px 12px oklch(0.2 0.02 280 / 0.06), 0 1px 3px oklch(0.2 0.02 280 / 0.04);
+  --shadow-3: 0 2px 4px oklch(0.2 0.02 280 / 0.05), 0 8px 24px oklch(0.2 0.02 280 / 0.08), 0 2px 6px oklch(0.2 0.02 280 / 0.05);
+  --shadow-focus: 0 0 0 3px color-mix(in oklch, var(--focus-ring) 35%, transparent);
+
+  /* ---------- Radius scale ---------- */
+  --radius-control: 0.5rem;
+  --radius-card:    0.75rem;
+  --radius-panel:   1rem;
+  --radius-pill:    9999px;
+
+  /* ---------- Motion ---------- */
+  --motion-fast:     120ms;
+  --motion-standard: 200ms;
+  --motion-slow:     320ms;
+  --ease-standard:   cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-emphasised: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring:     cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ---------- Typography scale (size + line-height as separate tokens
+                  so they can be applied to font-size / line-height
+                  without needing the `font:` shorthand) ---------- */
+  --text-display-size: 3rem;
+  --text-display-lh:   1.1;
+  --text-h1-size:      2.25rem;
+  --text-h1-lh:        1.15;
+  --text-h2-size:      1.5rem;
+  --text-h2-lh:        1.25;
+  --text-h3-size:      1.25rem;
+  --text-h3-lh:        1.35;
+  --text-body-lg-size: 1.125rem;
+  --text-body-lg-lh:   1.6;
+  --text-body-size:    1rem;
+  --text-body-lh:      1.55;
+  --text-body-sm-size: 0.875rem;
+  --text-body-sm-lh:   1.5;
+  --text-meta-size:    0.75rem;
+  --text-meta-lh:      1.4;
+
+  /* ---------- Density spacing ---------- */
+  --space-compact:     0.5rem;
+  --space-comfortable: 1rem;
+
+  /* ============================================================
+     Legacy shadcn token mappings
+     ------------------------------------------------------------
+     Every existing shadcn/ui component (button, card, dialog,
+     select, etc.) reads these --background / --foreground / --primary
+     / --border / --ring / --card / --muted-foreground / --chart-*
+     tokens. By mapping them onto the semantic tokens above, every
+     palette override cascades into the shadcn components
+     automatically — no component changes required.
+     ============================================================ */
+  --background:           var(--canvas);
+  --foreground:           var(--text-default);
+  --card:                 var(--surface-1);
+  --card-foreground:      var(--text-default);
+  --popover:              var(--surface-overlay);
+  --popover-foreground:   var(--text-default);
+  --primary:              var(--brand);
+  --primary-foreground:   var(--brand-contrast);
+  --secondary:            var(--surface-2);
+  --secondary-foreground: var(--text-strong);
+  --muted:                var(--surface-inset);
+  --muted-foreground:     var(--text-secondary);
+  --accent:               var(--brand-soft);
+  --accent-foreground:    var(--brand-active);
+  --destructive:          var(--danger);
+  --success-foreground:   var(--text-inverse);
+  --warning-foreground:   var(--text-strong);
+  --border:               var(--border-default);
+  --input:                var(--surface-inset);
+  --ring:                 var(--focus-ring);
+
+  /* Sidebar (kept distinct so the dashboard sidebar can carry
+     slightly different surfaces from the main canvas). */
+  --sidebar:                    var(--surface-2);
+  --sidebar-foreground:         var(--text-default);
+  --sidebar-primary:            var(--brand);
+  --sidebar-primary-foreground: var(--brand-contrast);
+  --sidebar-accent:             var(--brand-soft);
+  --sidebar-accent-foreground:  var(--brand-active);
+  --sidebar-border:             var(--border-subtle);
+  --sidebar-ring:               var(--focus-ring);
+
+  /* Legacy radius aliases used by shadcn primitives. */
+  --radius: var(--radius-card);
+}
+
+/* ============================================================
+   Dark-appearance fallback
+   ------------------------------------------------------------
+   When `.dark` is present on the root element but no specific
+   palette block has applied (e.g. the inline pre-hydration
+   script set `.dark` before data-palette was applied), we still
+   need sensible dark values. themes.css overrides these per
+   palette. This block also doubles as the Aurora dark variant.
+   ============================================================ */
+.dark {
+  --canvas:            oklch(0.125 0.018 270);
+  --canvas-subtle:     oklch(0.155 0.020 270);
+  --surface-1:         oklch(0.180 0.024 274);
+  --surface-2:         oklch(0.205 0.026 276);
+  --surface-3:         oklch(0.235 0.030 278);
+  --surface-elevated:  oklch(0.220 0.028 276);
+  --surface-overlay:   oklch(0.165 0.022 272);
+  --surface-inset:     oklch(0.110 0.016 270);
+
+  --text-strong:     oklch(0.99 0.005 280);
+  --text-default:    oklch(0.96 0.005 280);
+  --text-secondary:  oklch(0.72 0.014 280);
+  --text-muted:      oklch(0.58 0.014 280);
+  --text-disabled:   oklch(0.42 0.010 280);
+  --text-inverse:    oklch(0.14 0.015 280);
+  --text-link:       oklch(0.78 0.16 290);
+
+  --border-subtle:   oklch(1 0 0 / 6%);
+  --border-default:  oklch(1 0 0 / 10%);
+  --border-strong:   oklch(1 0 0 / 18%);
+
+  --focus-ring:      oklch(0.76 0.18 292);
+  --selection-bg:    oklch(0.40 0.18 292);
+
+  --brand:           oklch(0.70 0.19 292);
+  --brand-hover:     oklch(0.76 0.19 292);
+  --brand-active:    oklch(0.82 0.16 292);
+  --brand-soft:      oklch(0.30 0.10 292);
+  --brand-contrast:  oklch(0.13 0.02 280);
+  --secondary-action: oklch(0.72 0.13 210);
+
+  --success:        oklch(0.70 0.16 155);
+  --success-soft:   oklch(0.28 0.06 155);
+  --warning:        oklch(0.80 0.16 75);
+  --warning-soft:   oklch(0.30 0.08 75);
+  --danger:         oklch(0.68 0.22 25);
+  --danger-soft:    oklch(0.30 0.10 25);
+  --info:           oklch(0.72 0.13 210);
+  --info-soft:      oklch(0.28 0.08 210);
+
+  --chart-1:        oklch(0.70 0.19 292);
+  --chart-2:        oklch(0.72 0.17 195);
+  --chart-3:        oklch(0.74 0.18 145);
+  --chart-4:        oklch(0.80 0.18 70);
+  --chart-5:        oklch(0.72 0.22 340);
+  --chart-grid:     oklch(1 0 0 / 8%);
+  --chart-axis:     oklch(0.72 0.014 280);
+  --chart-tooltip:  oklch(0.99 0.005 280);
+
+  --shadow-1: 0 1px 2px oklch(0 0 0 / 0.30);
+  --shadow-2: 0 1px 2px oklch(0 0 0 / 0.30), 0 6px 16px oklch(0 0 0 / 0.40);
+  --shadow-3: 0 2px 4px oklch(0 0 0 / 0.30), 0 12px 32px oklch(0 0 0 / 0.45), 0 2px 6px oklch(0 0 0 / 0.30);
+  --shadow-focus: 0 0 0 3px color-mix(in oklch, var(--focus-ring) 45%, transparent);
+
+  /* Subject accents stay stable across appearances — only their
+     perceived lightness changes a touch so they pop against dark
+     surfaces. */
+  --subject-data-structures:  oklch(0.70 0.17 195);
+  --subject-cpp:              oklch(0.78 0.17 70);
+  --subject-microprocessor:   oklch(0.72 0.22 340);
+  --subject-communication:    oklch(0.72 0.16 155);
+
+  --sidebar:                    var(--surface-2);
+  --sidebar-foreground:         var(--text-default);
+  --sidebar-primary:            var(--brand);
+  --sidebar-primary-foreground: var(--brand-contrast);
+  --sidebar-accent:             var(--brand-soft);
+  --sidebar-accent-foreground:  var(--brand-hover);
+  --sidebar-border:             var(--border-subtle);
+  --sidebar-ring:               var(--focus-ring);
+}

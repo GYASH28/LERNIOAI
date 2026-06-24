@@ -1,0 +1,116 @@
+import type { Palette } from '@/lib/theme-types'
+import type { ThemeMotionSignature } from './types'
+
+const softEase = 'cubic-bezier(0.16, 1, 0.3, 1)'
+const preciseEase = 'cubic-bezier(0.2, 0.8, 0.2, 1)'
+const paperEase = 'cubic-bezier(0.22, 1, 0.36, 1)'
+const organicEase = 'cubic-bezier(0.18, 0.78, 0.24, 1)'
+
+export const THEME_MOTION_SIGNATURES: Record<Palette, ThemeMotionSignature> = {
+  aurora: {
+    palette: 'aurora',
+    pageEnter: { duration: 0.38, distance: 14, y: 14, ease: softEase },
+    pageExit: { duration: 0.18, distance: 6, y: -6, ease: softEase },
+    sectionEnter: { duration: 0.34, distance: 10, y: 10, ease: softEase },
+    cardHover: { duration: 0.2, distance: 3, y: -3, scale: 1.01, ease: softEase },
+    buttonPress: { duration: 0.12, distance: 0, scale: 0.98, ease: softEase },
+    tabChange: { duration: 0.26, distance: 8, ease: softEase },
+    dialogEnter: { duration: 0.26, distance: 10, y: 10, scale: 0.98, ease: softEase },
+    atmosphere: { kind: 'aurora', opacity: 0.16, speedSeconds: 32, maxNodes: 4 },
+    mascotIdle: {
+      idle: { duration: 4.2, distance: 5, y: -5, ease: softEase },
+      thinking: { duration: 1.2, distance: 0, scale: 1.02, ease: softEase },
+    },
+    celebration: { kind: 'prism', particles: 8, duration: 0.9 },
+    themeSwitch: { kind: 'wash', duration: 0.44, ease: softEase },
+  },
+  nexus: {
+    palette: 'nexus',
+    pageEnter: { duration: 0.28, distance: 12, x: 12, ease: preciseEase },
+    pageExit: { duration: 0.16, distance: 8, x: -8, ease: preciseEase },
+    sectionEnter: { duration: 0.24, distance: 8, x: 8, ease: preciseEase },
+    cardHover: { duration: 0.16, distance: 0, scale: 1.005, ease: preciseEase },
+    buttonPress: { duration: 0.08, distance: 0, scale: 0.985, ease: preciseEase },
+    tabChange: { duration: 0.18, distance: 10, ease: preciseEase },
+    dialogEnter: { duration: 0.2, distance: 8, x: 8, ease: preciseEase },
+    atmosphere: { kind: 'circuit', opacity: 0.08, speedSeconds: 26, maxNodes: 6 },
+    mascotIdle: {
+      idle: { duration: 3.4, distance: 2, x: 2, ease: preciseEase },
+      thinking: { duration: 0.9, distance: 0, scale: 1.01, ease: preciseEase },
+    },
+    celebration: { kind: 'circuit', particles: 6, duration: 0.75 },
+    themeSwitch: { kind: 'scan', duration: 0.34, ease: preciseEase },
+  },
+  paper: {
+    palette: 'paper',
+    pageEnter: { duration: 0.42, distance: 8, y: 8, ease: paperEase },
+    pageExit: { duration: 0.18, distance: 4, y: -4, ease: paperEase },
+    sectionEnter: { duration: 0.36, distance: 6, y: 6, ease: paperEase },
+    cardHover: { duration: 0.18, distance: 1, y: -1, ease: paperEase },
+    buttonPress: { duration: 0.1, distance: 0, scale: 0.995, ease: paperEase },
+    tabChange: { duration: 0.26, distance: 4, ease: paperEase },
+    dialogEnter: { duration: 0.28, distance: 6, y: 6, ease: paperEase },
+    atmosphere: { kind: 'paper', opacity: 0.1, speedSeconds: 40, maxNodes: 3 },
+    mascotIdle: {
+      idle: { duration: 5.2, distance: 0, scale: 1.006, ease: paperEase },
+      thinking: { duration: 1.6, distance: 0, scale: 1.01, ease: paperEase },
+    },
+    celebration: { kind: 'ink', particles: 6, duration: 0.8 },
+    themeSwitch: { kind: 'page', duration: 0.4, ease: paperEase },
+  },
+  ocean: {
+    palette: 'ocean',
+    pageEnter: { duration: 0.36, distance: 12, y: 12, ease: 'cubic-bezier(0.2, 0.9, 0.25, 1)' },
+    pageExit: { duration: 0.18, distance: 6, y: -6, ease: softEase },
+    sectionEnter: { duration: 0.32, distance: 10, y: 10, ease: softEase },
+    cardHover: { duration: 0.18, distance: 2, y: -2, scale: 1.008, ease: softEase },
+    buttonPress: { duration: 0.1, distance: 0, scale: 0.98, ease: softEase },
+    tabChange: { duration: 0.24, distance: 6, ease: softEase },
+    dialogEnter: { duration: 0.25, distance: 8, y: 8, scale: 0.99, ease: softEase },
+    atmosphere: { kind: 'caustic', opacity: 0.12, speedSeconds: 30, maxNodes: 4 },
+    mascotIdle: {
+      idle: { duration: 4.8, distance: 4, y: -4, ease: softEase },
+      thinking: { duration: 1.1, distance: 0, scale: 1.012, ease: softEase },
+    },
+    celebration: { kind: 'bubble', particles: 8, duration: 0.9 },
+    themeSwitch: { kind: 'ripple', duration: 0.42, ease: softEase },
+  },
+  forest: {
+    palette: 'forest',
+    pageEnter: { duration: 0.4, distance: 8, y: 8, scale: 0.99, ease: organicEase },
+    pageExit: { duration: 0.2, distance: 4, y: -4, ease: organicEase },
+    sectionEnter: { duration: 0.34, distance: 8, y: 8, scale: 0.995, ease: organicEase },
+    cardHover: { duration: 0.22, distance: 2, y: -2, scale: 1.004, ease: organicEase },
+    buttonPress: { duration: 0.12, distance: 0, scale: 0.99, ease: organicEase },
+    tabChange: { duration: 0.3, distance: 5, ease: organicEase },
+    dialogEnter: { duration: 0.28, distance: 8, y: 8, scale: 0.99, ease: organicEase },
+    atmosphere: { kind: 'dapple', opacity: 0.12, speedSeconds: 36, maxNodes: 5 },
+    mascotIdle: {
+      idle: { duration: 5, distance: 3, rotate: 1.5, ease: organicEase },
+      thinking: { duration: 1.5, distance: 0, rotate: 2, ease: organicEase },
+    },
+    celebration: { kind: 'spore', particles: 8, duration: 0.9 },
+    themeSwitch: { kind: 'dapple', duration: 0.46, ease: organicEase },
+  },
+  sakura: {
+    palette: 'sakura',
+    pageEnter: { duration: 0.42, distance: 10, y: 10, ease: softEase },
+    pageExit: { duration: 0.18, distance: 5, y: -5, ease: softEase },
+    sectionEnter: { duration: 0.34, distance: 8, y: 8, ease: softEase },
+    cardHover: { duration: 0.2, distance: 1, y: -1, scale: 1.006, ease: softEase },
+    buttonPress: { duration: 0.12, distance: 0, scale: 0.985, ease: softEase },
+    tabChange: { duration: 0.28, distance: 5, ease: softEase },
+    dialogEnter: { duration: 0.28, distance: 8, y: 8, scale: 0.99, ease: softEase },
+    atmosphere: { kind: 'petal', opacity: 0.1, speedSeconds: 38, maxNodes: 8 },
+    mascotIdle: {
+      idle: { duration: 5.4, distance: 2, y: -2, ease: softEase },
+      thinking: { duration: 1.4, distance: 0, scale: 1.01, ease: softEase },
+    },
+    celebration: { kind: 'petal', particles: 7, duration: 1 },
+    themeSwitch: { kind: 'bloom', duration: 0.5, ease: softEase },
+  },
+}
+
+export function getThemeMotion(palette: Palette): ThemeMotionSignature {
+  return THEME_MOTION_SIGNATURES[palette] ?? THEME_MOTION_SIGNATURES.aurora
+}

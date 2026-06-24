@@ -1,0 +1,696 @@
+// Lernio AI 2.0 — Prisma Schema
+// Comprehensive academic learning platform data model
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================
+// ACADEMIC HIERARCHY
+// ============================================================
+
+model Institution {
+  id        String   @id @default(cuid())
+  name      String
+  code      String   @unique
+  city      String?
+  createdAt DateTime @default(now())
+  departments Department[]
+  schemes    AcademicScheme[]
+}
+
+model Department {
+  id            String   @id @default(cuid())
+  name          String
+  code          String
+  institutionId String
+  institution   Institution @relation(fields: [institutionId], references: [id])
+  programmes    Programme[]
+  createdAt     DateTime   @default(now())
+
+  @@unique([institutionId, code])
+}
+
+model Programme {
+  id           String   @id @default(cuid())
+  name         String
+  code         String
+  departmentId String
+  department   Department @relation(fields: [departmentId], references: [id])
+  schemes      AcademicScheme[]
+  createdAt    DateTime  @default(now())
+
+  @@unique([departmentId, code])
+}
+
+model AcademicScheme {
+  id             String   @id @default(cuid())
+  name           String   // e.g. "G Scheme 2023"
+  code           String
+  institutionId  String
+  institution    Institution @relation(fields: [institutionId], references: [id])
+  programmeId    String?
+  programme      Programme?  @relation(fields: [programmeId], references: [id])
+  startYear      Int
+  endYear        Int?
+  semesters      Semester[]
+  subjects       Subject[]
+  createdAt      DateTime   @default(now())
+}
+
+model Semester {
+  id          String   @id @default(cuid())
+  number      Int
+  name        String   // "Semester 3"
+  subtitle    String?
+  color       String   @default("#7c3aed")
+  schemeId    String
+  scheme      AcademicScheme @relation(fields: [schemeId], references: [id])
+  subjects    Subject[]
+  createdAt   DateTime  @default(now())
+
+  @@unique([schemeId, number])
+}
+
+// ============================================================
+// SUBJECTS, UNITS, TOPICS
+// ============================================================
+
+model Subject {
+  id            String   @id @default(cuid())
+  code          String   // e.g. "CS201"
+  name          String   // e.g. "Data Structures"
+  shortName     String?
+  credits       Int      @default(4)
+  icon          String?
+  accentColor   String   @default("#7c3aed")
+  mascotKey     String?  // leo | byte | coda | pico | nova
+  description   String?
+  semesterId    String
+  semester      Semester     @relation(fields: [semesterId], references: [id])
+  schemeId      String
+  scheme        AcademicScheme @relation(fields: [schemeId], references: [id])
+  units         Unit[]
+  questions     Question[]
+  resources     Resource[]
+  createdAt     DateTime     @default(now())
+
+  @@unique([schemeId, code])
+}
+
+model Unit {
+  id          String   @id @default(cuid())
+  number      Int
+  title       String
+  description String?
+  weightage   Int      @default(0) // exam weightage %
+  subjectId   String
+  subject     Subject  @relation(fields: [subjectId], references: [id])
+  topics      Topic[]
+  lessons     Lesson[]
+  createdAt   DateTime @default(now())
+
+  @@unique([subjectId, number])
+}
+
+model Topic {
+  id            String   @id @default(cuid())
+  slug          String
+  title         String
+  description   String?
+  difficulty    String   @default("medium") // easy | medium | hard
+  examWeightage Int      @default(0)
+  prerequisites String?  // JSON array of topic IDs
+  unitId        String
+  unit          Unit     @relation(fields: [unitId], references: [id])
+  lessons       Lesson[]
+  questions     Question[]
+  mastery       UserTopicMastery[]
+  revision      RevisionSchedule[]
+  createdAt     DateTime @default(now())
+
+  @@unique([unitId, slug])
+}
+
+// ============================================================
+// LESSONS & LEARNING CONTENT
+// ============================================================
+
+model Lesson {
+  id          String   @id @default(cuid())
+  title       String
+  order       Int      @default(0)
+  durationMin Int      @default(10)
+  topicId     String?
+  topic       Topic?   @relation(fields: [topicId], references: [id])
+  unitId      String?
+  unit        Unit?    @relation(fields: [unitId], references: [id])
+
+  // Five learning modes content (JSON strings)
+  learnContent    String?  // structured lesson: definition, purpose, concepts, examples, etc.
+  simplifyContent String?  // simple English, Hinglish, Marathi, analogy
+  visualiseContent String? // interactive animation config / diagram description
+  practiseContent String?  // guided examples + questions
+  reviseContent   String?  // short notes, flashcards, formulas
+
+  citations   String?  // JSON array of source citations
+  status      String   @default("published") // draft | under_review | verified | published | archived
+  version     Int      @default(1)
+
+  completions LessonCompletion[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ============================================================
+// QUESTIONS & EXAMS
+// ============================================================
+
+model Question {
+  id          String   @id @default(cuid())
+  type        String   @default("mcq") // mcq | true_false | short_answer | long_answer | viva | code
+  difficulty  String   @default("medium") // easy | medium | hard
+  question    String
+  options     String?  // JSON array for MCQ
+  correctAnswer String? // for MCQ: index; for others: text
+  explanation String?
+  hint        String?
+  marks       Int      @default(1)
+  negativeMark Float   @default(0)
+  topicId     String?
+  topic       Topic?   @relation(fields: [topicId], references: [id])
+  subjectId   String
+  subject     Subject  @relation(fields: [subjectId], references: [id])
+  unitNumber  Int?
+  tags        String?  // JSON array
+  source      String?  // previous_paper | generated | teacher
+  year        Int?
+  attempts    QuestionAttempt[]
+  createdAt   DateTime @default(now())
+
+  @@index([subjectId, unitNumber])
+  @@index([topicId, difficulty])
+  @@index([difficulty])
+}
+
+model QuestionPaper {
+  id          String   @id @default(cuid())
+  title       String
+  subjectId   String
+  year        Int?
+  duration    Int      @default(180) // minutes
+  totalMarks  Int      @default(80)
+  sections    String?  // JSON
+  analysis    String?  // JSON: repeated topics, weightage, trends
+  createdAt   DateTime @default(now())
+}
+
+// ============================================================
+// USERS, ROLES, PROGRESS
+// ============================================================
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  emailVerified DateTime?
+  name          String
+  passwordHash  String?
+  role          String   @default("student") // student | cr | teacher | coordinator | moderator | reviewer | admin
+  status        String   @default("active") // active | disabled
+  avatar        String?
+  institutionId String?
+  schemeId      String?
+  semesterNumber Int?
+  branch        String?
+  departmentCode String?
+  departmentName String?
+  division      String?
+  rollNumber    String?
+  provider      String   @default("password")
+  profileComplete Boolean @default(false)
+  assignedSubjects String? // JSON array of subject IDs for teachers/coordinators
+  isCR          Boolean  @default(false)
+  assignedBy    String?
+  assignedAt    DateTime?
+  preferredLang String   @default("en") // en | hi | mr
+  examDate      String?  // ISO date
+  dailyMins     Int      @default(120)
+  xp            Int      @default(0)
+  level         Int      @default(1)
+  streak        Int      @default(0)
+  streakFreezes Int      @default(0) // earn 1 by completing all daily quests; max 5
+  lastFreezeUsedDate String? // YYYY-MM-DD of last freeze applied
+  lastActiveDate String? // YYYY-MM-DD
+  onboarded     Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  mastery         UserTopicMastery[]
+  lessonCompletions LessonCompletion[]
+  questionAttempts QuestionAttempt[]
+  quizAttempts    QuizAttempt[]
+  revisionSchedules RevisionSchedule[]
+  revisionAttempts RevisionAttempt[]
+  studyTasks      StudyTask[]
+  studySessions   StudySession[]
+  tutorSessions   TutorSession[]
+  codingSubmissions CodingSubmission[]
+  labProgress     LabProgress[]
+  achievements    UserAchievement[]
+  contributions   Contribution[]
+  bookmarks       Bookmark[]
+  xpEvents        XpEvent[]
+  accounts        Account[]
+  sessions        Session[]
+}
+
+model InviteCode {
+  id            String   @id @default(cuid())
+  code          String   @unique
+  role          String
+  used          Boolean  @default(false)
+  usedBy        String?
+  usedAt        DateTime?
+  createdBy     String?
+  name          String?
+  email         String?
+  branch        String?
+  departmentCode String?
+  departmentName String?
+  semesterNumber Int?
+  division      String?
+  rollNumber    String?
+  assignedSubjects String? // JSON array of subject IDs
+  status        String   @default("active")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([role, used])
+  @@index([email])
+}
+
+// ============================================================
+// AUTH.JS / NEXTAUTH
+// ============================================================
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// Idempotent XP ledger — server-authoritative, never client-writable.
+// Total XP = sum of all XpEvent.amount for a user (cached on User.xp).
+model XpEvent {
+  id             String   @id @default(cuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id])
+  eventType      String   // lesson_complete | question_correct | question_attempt | quiz_submit | revision | coding_pass | achievement | contribution | streak
+  sourceId       String?  // id of the originating resource (lessonId, questionId, attemptId, achievementId, etc.)
+  amount         Int      // can be negative for corrections
+  idempotencyKey String   @unique // prevents double-awarding for the same event
+  createdAt      DateTime @default(now())
+
+  @@index([userId, createdAt])
+  @@index([userId, eventType])
+}
+
+model UserTopicMastery {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+  topicId       String
+  topic         Topic    @relation(fields: [topicId], references: [id])
+  score         Float    @default(0) // 0-100
+  state         String   @default("new") // new | learning | weak | revising | proficient | mastered
+  evidenceCount Int      @default(0)
+  confidence    Float    @default(0)
+  lastPractised DateTime?
+  nextRevision  DateTime?
+  algoVersion   Int      @default(1)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@unique([userId, topicId])
+}
+
+model LessonCompletion {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  lessonId    String
+  lesson      Lesson   @relation(fields: [lessonId], references: [id])
+  mode        String   @default("learn") // learn | simplify | visualise | practise | revise
+  progress    Float    @default(0) // 0-100
+  scrollPos   Float    @default(0)
+  completedAt DateTime?
+  createdAt   DateTime @default(now())
+
+  @@unique([userId, lessonId, mode])
+}
+
+model QuestionAttempt {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+  questionId    String
+  question      Question @relation(fields: [questionId], references: [id])
+  userAnswer    String?
+  isCorrect     Boolean?
+  timeTakenMs   Int      @default(0)
+  hintUsed      Boolean  @default(false)
+  confidence    Float    @default(0)
+  attemptNumber Int      @default(1)
+  context       String?  // practice | chapter_test | mock_exam | diagnostic
+  createdAt     DateTime @default(now())
+
+  @@index([userId, createdAt])
+  @@index([questionId])
+}
+
+model QuizAttempt {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  subjectId   String?
+  mode        String   // practice | chapter_test | mock_exam
+  unitNumbers String?  // JSON array
+  // Lifecycle: 'in_progress' | 'submitted' | 'locked'. Prevents double-submit
+  // and locks the attempt once scored. Audit fix DEBUG-3.
+  status      String   @default("in_progress")
+  // Server-held question set + safe ExamQuestionDTOs (so the client never
+  // needs to re-fetch and we can re-score against the exact set on submit).
+  questionsJson String?
+  totalQuestions Int   @default(0)
+  correctCount Int     @default(0)
+  score       Float    @default(0)
+  maxScore    Float    @default(0)
+  durationMs  Int      @default(0)
+  negativeMarks Float  @default(0)
+  startedAt   DateTime @default(now())
+  completedAt DateTime?
+  answersJson String?  // JSON of answers (in_progress) or scored review (submitted)
+
+  @@index([userId, startedAt])
+  @@index([userId, status])
+  @@index([subjectId])
+}
+
+// ============================================================
+// REVISION (SPACED REPETITION)
+// ============================================================
+
+model RevisionSchedule {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
+  topicId      String
+  topic        Topic    @relation(fields: [topicId], references: [id])
+  intervalDays Int      @default(1)
+  nextDueDate  DateTime
+  easeFactor   Float    @default(2.5)
+  state        String   @default("new") // new | learning | weak | revising | proficient | mastered
+  activityType String   @default("flashcard") // flashcard | recall | mistake_review | short_notes | formula_recall | mini_quiz
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@unique([userId, topicId])
+  @@index([userId, nextDueDate])
+}
+
+model RevisionAttempt {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  scheduleId  String
+  activityType String
+  correct     Boolean
+  quality     Int      @default(3) // SM-2 quality 0-5
+  createdAt   DateTime @default(now())
+}
+
+// ============================================================
+// STUDY PLANNER
+// ============================================================
+
+model StudyTask {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  title       String
+  description String?
+  type        String   @default("learn") // learn | practice | revision | lab | coding | mock_exam | buffer
+  subjectId   String?
+  topicId     String?
+  durationMins Int     @default(30)
+  scheduledDate String? // YYYY-MM-DD
+  scheduledTime String? // HH:mm
+  priority    Int      @default(2) // 0-4
+  completed   Boolean  @default(false)
+  completedAt DateTime?
+  createdAt   DateTime @default(now())
+
+  @@index([userId, scheduledDate])
+  @@index([userId, completed])
+}
+
+model StudySession {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  subjectId   String?
+  activity    String   // learn | practice | tutor | lab | coding | exam
+  durationMins Int     @default(0)
+  xpEarned    Int      @default(0)
+  startedAt   DateTime @default(now())
+  endedAt     DateTime?
+}
+
+// ============================================================
+// AI TUTOR
+// ============================================================
+
+model TutorSession {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  title       String   @default("New session")
+  subjectId   String?
+  unitNumber  Int?
+  topicId     String?
+  mode        String   @default("explain_simple")
+  language    String   @default("en")
+  archived    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  messages    TutorMessage[]
+
+  @@index([userId, updatedAt])
+  @@index([userId, archived])
+}
+
+model TutorMessage {
+  id          String   @id @default(cuid())
+  sessionId   String
+  session     TutorSession @relation(fields: [sessionId], references: [id])
+  role        String   // user | assistant
+  content     String
+  mode        String?
+  groundingStatus String? // grounded | partially_grounded | general
+  citations   String?  // JSON array
+  followUps   String?  // JSON array
+  feedback    String?  // up | down | null
+  createdAt   DateTime @default(now())
+}
+
+// ============================================================
+// CODING LAB
+// ============================================================
+
+model CodingChallenge {
+  id          String   @id @default(cuid())
+  title       String
+  category    String   // basic_syntax | classes | constructors | inheritance | polymorphism | templates | etc.
+  difficulty  String   @default("easy")
+  description String
+  starterCode String?
+  solutionCode String?
+  testCases   String?  // JSON array of {input, expected}
+  timeLimitMs Int      @default(5000)
+  memoryLimitKB Int    @default(256000)
+  createdAt   DateTime @default(now())
+}
+
+model CodingSubmission {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  challengeId String?
+  code        String
+  language    String   @default("cpp")
+  status      String   @default("draft") // draft | submitted | passed | failed | error
+  output      String?
+  compileError String?
+  testResults String?  // JSON
+  createdAt   DateTime @default(now())
+}
+
+// ============================================================
+// LAB PROGRESS
+// ============================================================
+
+model LabProgress {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  labType     String   // ds_visualizer | cpp_lab | mp8086_sim | dc_lab
+  experimentId String?
+  status      String   @default("not_started") // not_started | in_progress | completed
+  progress    Float    @default(0)
+  lastVisited DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([userId, labType, experimentId])
+}
+
+// ============================================================
+// MATERIALS & CONTRIBUTIONS
+// ============================================================
+
+model Resource {
+  id          String   @id @default(cuid())
+  title       String
+  type        String   // pdf | docx | image | text | video_link | web_link | code | lab_manual | question_paper | model_answer
+  url         String?
+  content     String?
+  subjectId   String
+  subject     Subject  @relation(fields: [subjectId], references: [id])
+  unitNumber  Int?
+  topicId     String?
+  source      String   @default("platform") // platform | drive | teacher | student
+  visibility  String   @default("public") // public | private | submitted | published
+  verified    Boolean  @default(false)
+  contributorId String?
+  year        Int?
+  language    String   @default("en")
+  downloads   Int      @default(0)
+  rating      Float    @default(0)
+  createdAt   DateTime @default(now())
+
+  @@index([subjectId, visibility])
+  @@index([contributorId])
+}
+
+model Contribution {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  title       String
+  type        String
+  subjectId   String?
+  unitNumber  Int?
+  topicId     String?
+  content     String?
+  fileUrl     String?
+  status      String   @default("draft") // draft | submitted | under_review | requires_changes | approved | rejected | archived
+  moderatorNote String?
+  reviewerId  String?
+  rating      Float    @default(0)
+  reports     Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId, status])
+  @@index([status])
+}
+
+model Bookmark {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  resourceType String // resource | lesson | question | topic
+  resourceId  String
+  label       String?
+  createdAt   DateTime @default(now())
+
+  @@unique([userId, resourceType, resourceId])
+}
+
+// ============================================================
+// GAMIFICATION
+// ============================================================
+
+model Achievement {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  name        String
+  description String
+  icon        String
+  category    String   // learning | practice | revision | coding | contribution | consistency
+  xpReward    Int      @default(50)
+  criteria    String?  // JSON criteria
+  userAchievements UserAchievement[]
+}
+
+model UserAchievement {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  achievementId String
+  achievement Achievement @relation(fields: [achievementId], references: [id])
+  earnedAt    DateTime @default(now())
+
+  @@unique([userId, achievementId])
+}
+
+// ============================================================
+// INDEXES (added for common query patterns — audit finding 8.2)
+// ============================================================
+
+// Note: SQLite indexes added via @@index directives on models above.
+// Key query patterns indexed:
+//   - XpEvent: [userId, createdAt], [userId, eventType]
+//   - RevisionSchedule: [userId, nextDueDate] via @@unique([userId, topicId]) + query filter
+//   - QuestionAttempt: [userId, createdAt] for history
+//   - QuizAttempt: [userId, startedAt] for history
+//   - TutorSession: [userId, updatedAt] for session list
+//   - Resource: [subjectId, visibility] for public browsing
+//   - StudyTask: [userId, scheduledDate] for planner

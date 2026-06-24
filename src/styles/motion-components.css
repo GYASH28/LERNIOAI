@@ -1,0 +1,169 @@
+.theme-atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: var(--motion-ambient-opacity);
+  contain: strict;
+}
+
+.theme-atmosphere__node {
+  position: absolute;
+  display: block;
+  width: 26rem;
+  height: 26rem;
+  border-radius: 999px;
+  opacity: 0.75;
+  background: radial-gradient(circle, var(--ambient-1), transparent 68%);
+  transform: translate3d(0, 0, 0);
+  animation: atmosphere-drift var(--motion-ambient-speed) ease-in-out infinite alternate;
+}
+
+.theme-atmosphere__node:nth-child(1) { left: -8rem; top: 5rem; }
+.theme-atmosphere__node:nth-child(2) { right: -10rem; top: 14rem; background: radial-gradient(circle, var(--ambient-2), transparent 68%); animation-delay: -8s; }
+.theme-atmosphere__node:nth-child(3) { left: 25%; bottom: -12rem; animation-delay: -14s; }
+.theme-atmosphere__node:nth-child(4) { right: 18%; top: -14rem; background: linear-gradient(120deg, transparent, var(--ambient-2), transparent); animation-delay: -20s; }
+.theme-atmosphere__node:nth-child(5),
+.theme-atmosphere__node:nth-child(6),
+.theme-atmosphere__node:nth-child(7),
+.theme-atmosphere__node:nth-child(8) {
+  width: 7rem;
+  height: 7rem;
+  background: var(--ambient-2);
+  opacity: 0.5;
+}
+
+.theme-atmosphere[data-atmosphere="circuit"] {
+  background-image:
+    linear-gradient(to right, var(--ambient-1) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--ambient-2) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.theme-atmosphere[data-atmosphere="paper"] .theme-atmosphere__node {
+  width: 10rem;
+  height: 10rem;
+  filter: blur(1px);
+}
+
+.theme-atmosphere[data-atmosphere="petal"] .theme-atmosphere__node {
+  width: 2.25rem;
+  height: 0.9rem;
+  border-radius: 999px 0 999px 0;
+  transform: rotate(-18deg);
+}
+
+.theme-card-signature,
+.theme-motion-preview {
+  position: relative;
+  min-height: 4rem;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-default);
+  background:
+    radial-gradient(circle at 20% 20%, var(--ambient-1), transparent 55%),
+    radial-gradient(circle at 80% 40%, var(--ambient-2), transparent 55%),
+    var(--surface-2);
+}
+
+.theme-card-signature::before,
+.theme-card-signature::after,
+.theme-motion-preview span {
+  content: '';
+  position: absolute;
+  display: block;
+  border-radius: 999px;
+  background: var(--accent-2, var(--secondary-action));
+  opacity: 0.55;
+  animation: atmosphere-drift 7s ease-in-out infinite alternate;
+}
+
+.theme-card-signature::before {
+  inset: 0.8rem auto auto 0.8rem;
+  width: 3rem;
+  height: 0.35rem;
+}
+
+.theme-card-signature::after {
+  right: 0.8rem;
+  bottom: 0.8rem;
+  width: 2rem;
+  height: 2rem;
+  background: var(--accent-1, var(--brand));
+  animation-delay: -2s;
+}
+
+.theme-motion-preview {
+  min-height: 8rem;
+}
+
+.theme-motion-preview span {
+  left: 20%;
+  top: 35%;
+  width: 4rem;
+  height: 4rem;
+}
+
+.theme-motion-preview span:nth-child(2) {
+  left: 50%;
+  top: 18%;
+  width: 5rem;
+  height: 0.5rem;
+  animation-delay: -1.5s;
+}
+
+.theme-motion-preview span:nth-child(3) {
+  left: 70%;
+  top: 55%;
+  width: 2rem;
+  height: 2rem;
+  background: var(--accent-3, var(--chart-3));
+  animation-delay: -3s;
+}
+
+.theme-studio-preview {
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-default);
+  background:
+    linear-gradient(135deg, color-mix(in oklch, var(--accent-1, var(--brand)) 5%, transparent), transparent 50%),
+    var(--surface-1);
+  padding: 1rem;
+}
+
+@keyframes atmosphere-drift {
+  from { transform: translate3d(-1rem, 0, 0) rotate(0deg); }
+  to { transform: translate3d(1.5rem, 1rem, 0) rotate(8deg); }
+}
+
+.celebration-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.celebration-layer__particle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: var(--accent-2);
+  animation: theme-celebration var(--celebration-duration, 0.9s) ease-out forwards;
+}
+
+.celebration-layer__particle:nth-child(2n) { background: var(--accent-1); }
+.celebration-layer__particle:nth-child(3n) { background: var(--accent-3); }
+
+@keyframes theme-celebration {
+  from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  to { opacity: 0; transform: translate(calc(-50% + 2rem), calc(-50% - 3rem)) scale(0.6); }
+}
+
+[data-motion="reduced"] .theme-atmosphere__node,
+[data-motion="none"] .theme-atmosphere__node,
+[data-low-power="true"] .theme-atmosphere__node {
+  animation: none !important;
+}

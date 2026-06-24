@@ -1,0 +1,29 @@
+:root {
+  --motion-page-duration: 0.38s;
+  --motion-section-duration: 0.34s;
+  --motion-stagger: 0.035s;
+  --motion-distance: 12px;
+  --motion-hover-y: -2px;
+  --motion-hover-scale: 1.006;
+  --motion-ambient-opacity: 0.12;
+  --motion-ambient-speed: 32s;
+  --motion-blur: 12px;
+}
+
+:root[data-motion="reduced"],
+:root[data-low-power="true"] {
+  --motion-page-duration: 0.14s;
+  --motion-section-duration: 0.12s;
+  --motion-stagger: 0s;
+  --motion-distance: 0px;
+  --motion-hover-y: 0px;
+  --motion-hover-scale: 1;
+  --motion-ambient-opacity: 0;
+  --motion-blur: 0px;
+}
+
+:root[data-motion="none"] {
+  --motion-page-duration: 0s;
+  --motion-section-duration: 0s;
+  --motion-stagger: 0s;
+}

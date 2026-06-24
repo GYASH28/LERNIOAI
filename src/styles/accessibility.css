@@ -1,0 +1,166 @@
+/* ============================================================
+   Lernio AI 2.0 — Accessibility
+   ------------------------------------------------------------
+   High-contrast overrides that work across ALL palettes,
+   forced-colors support, focus-visible polish and sr-only.
+   The high-contrast block is triggered by data-contrast="high"
+   on the <html> element (set by the ThemeProvider from user
+   preference OR by an OS high-contrast / forced-colors query).
+   ============================================================ */
+
+/* ---------- Screen-reader only ---------- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ---------- Focus-visible polish ---------- */
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-control);
+}
+/* Don't override native form-control focus rings (they have
+   their own shadcn ring tokens). */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[role="textbox"]:focus-visible {
+  outline: none;
+}
+
+/* ---------- High-contrast mode (data-contrast="high") ---------- */
+[data-contrast="high"] {
+  /* Force solid backgrounds on cards — no transparency. */
+  --surface-1: color-mix(in oklch, var(--surface-1) 100%, transparent);
+  --surface-2: color-mix(in oklch, var(--surface-2) 100%, transparent);
+  --surface-3: color-mix(in oklch, var(--surface-3) 100%, transparent);
+  --surface-overlay: color-mix(in oklch, var(--surface-overlay) 100%, transparent);
+}
+
+[data-contrast="high"] .glass-card,
+[data-contrast="high"] .glass-panel {
+  background: var(--surface-1);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+[data-contrast="high"] .surface-panel,
+[data-contrast="high"] .surface-elevated,
+[data-contrast="high"] .surface-overlay {
+  background: var(--surface-1) !important;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* Strengthen borders. */
+[data-contrast="high"] .surface-panel,
+[data-contrast="high"] .surface-elevated,
+[data-contrast="high"] .surface-overlay,
+[data-contrast="high"] .glass-card,
+[data-contrast="high"] .glass-panel,
+[data-contrast="high"] [data-slot="card"],
+[data-contrast="high"] [data-slot="dialog-content"],
+[data-contrast="high"] [data-slot="popover-content"],
+[data-contrast="high"] [data-slot="sheet-content"] {
+  border-width: 2px !important;
+  border-color: var(--border-strong) !important;
+}
+
+/* Disable gradient text — gradients can drop below 4.5:1. */
+[data-contrast="high"] .text-gradient,
+[data-contrast="high"] .text-gradient-warm {
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+  color: var(--text-strong) !important;
+}
+
+/* Underline links so they're never colour-only. */
+[data-contrast="high"] a,
+[data-contrast="high"] [role="link"] {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  color: var(--text-link);
+}
+
+/* Remove opacity-driven muted text — keep readable. */
+[data-contrast="high"] .text-muted-foreground,
+[data-contrast="high"] [class*="text-muted"] {
+  color: var(--text-default) !important;
+}
+
+/* Chart axis labels must be readable. */
+[data-contrast="high"] .recharts-cartesian-axis-tick text,
+[data-contrast="high"] [class*="chart-axis"] {
+  fill: var(--text-default) !important;
+  color: var(--text-default) !important;
+  font-weight: 600 !important;
+}
+
+/* Chart grid lines must be visible. */
+[data-contrast="high"] .recharts-cartesian-grid line,
+[data-contrast="high"] [class*="chart-grid"] line {
+  stroke: var(--border-strong) !important;
+  stroke-width: 1.5 !important;
+}
+
+/* Add patterns / labels for color-only states — disabled
+   elements get a dotted underline so they aren't only grey. */
+[data-contrast="high"] [disabled],
+[data-contrast="high"] [aria-disabled="true"],
+[data-contrast="high"] .disabled {
+  opacity: 1 !important;
+  color: var(--text-muted) !important;
+  text-decoration: line-through;
+}
+
+/* Status colours get a stronger pill background so they aren't
+   only hue-coded. */
+[data-contrast="high"] .badge-premium,
+[data-contrast="high"] .tag-soft {
+  border-width: 2px !important;
+  font-weight: 700 !important;
+}
+
+/* Ensure focus rings are extra-thick for keyboard users in
+   high-contrast mode. */
+[data-contrast="high"] :focus-visible {
+  outline-width: 3px;
+  outline-offset: 3px;
+}
+
+/* ---------- Forced-colors support (Windows High Contrast) ---------- */
+@media (forced-colors: active) {
+  /* When the OS is in forced-colors mode, hand colours back
+     to the system palette but preserve semantic borders so
+     component boundaries remain visible. */
+  .glass-card,
+  .glass-panel,
+  .surface-panel,
+  .surface-elevated,
+  .surface-overlay {
+    background: Canvas !important;
+    border: 1px solid ButtonBorder !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .text-gradient,
+  .text-gradient-warm {
+    background: none !important;
+    -webkit-text-fill-color: currentColor !important;
+    color: ButtonText !important;
+  }
+  .shimmer,
+  .skeleton-premium,
+  .pulse-glow,
+  .progress-shimmer {
+    animation: none !important;
+  }
+}

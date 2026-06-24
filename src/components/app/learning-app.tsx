@@ -1,0 +1,287 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+import type { ReactNode } from 'react'
+import dynamic from 'next/dynamic'
+import Link from 'next/link'
+import { useAppStore } from '@/store/app-store'
+import { Sidebar, MobileNav } from '@/components/layout/sidebar'
+import { MascotToastContainer } from '@/components/mascots/mascot-toast'
+import { Footer } from '@/components/layout/footer'
+import { Button } from '@/components/ui/button'
+import { Lock, LogIn, User as UserIcon } from 'lucide-react'
+// Dashboard stays eagerly loaded — it's the default landing view and drives LCP.
+import { DashboardView } from '@/components/views/dashboard'
+import { CommandPalette } from '@/components/ui/command-palette'
+import { FocusTimerWidget } from '@/components/ui/focus-timer'
+import { MotionPage } from '@/components/motion'
+import type { Subject, User, ViewKey } from '@/lib/types'
+import type { DashboardSnapshot } from '@/lib/app-bootstrap-types'
+
+// Lazy-load every non-dashboard view so Recharts, the 3 lab simulators, the
+// coding editor, react-markdown, etc. are split into per-view chunks and
+// excluded from the initial dashboard bundle. Each shows a calm skeleton
+// while its chunk streams in.
+const ViewSkeleton = () => (
+  <div className="flex items-center justify-center py-24" aria-busy="true" aria-live="polite">
+    <div className="flex flex-col items-center gap-3">
+      <div className="h-10 w-10 rounded-full border-2 border-primary/20 border-t-primary animate-spin" />
+      <p className="text-sm text-muted-foreground">Loading…</p>
+    </div>
+  </div>
+)
+const lazy = <T extends { default: React.ComponentType }>(loader: () => Promise<T>) =>
+  dynamic(loader, { ssr: false, loading: () => <ViewSkeleton /> })
+
+const LearnView = lazy(() => import('@/components/views/learn').then(m => ({ default: m.LearnView })))
+const PracticeView = lazy(() => import('@/components/views/practice').then(m => ({ default: m.PracticeView })))
+const TutorView = lazy(() => import('@/components/views/tutor').then(m => ({ default: m.TutorView })))
+const LabsView = lazy(() => import('@/components/views/labs').then(m => ({ default: m.LabsView })))
+const CodingView = lazy(() => import('@/components/views/coding').then(m => ({ default: m.CodingView })))
+const ExamsView = lazy(() => import('@/components/views/exams').then(m => ({ default: m.ExamsView })))
+const RevisionView = lazy(() => import('@/components/views/revision').then(m => ({ default: m.RevisionView })))
+const MaterialsView = lazy(() => import('@/components/views/materials').then(m => ({ default: m.MaterialsView })))
+const PlannerView = lazy(() => import('@/components/views/planner').then(m => ({ default: m.PlannerView })))
+const AnalyticsView = lazy(() => import('@/components/views/analytics').then(m => ({ default: m.AnalyticsView })))
+const ProfileView = lazy(() => import('@/components/views/profile').then(m => ({ default: m.ProfileView })))
+
+interface LearningAppProps {
+  initialView?: ViewKey
+  initialUser?: User | null
+  initialSubjects?: Subject[]
+  initialDashboard?: DashboardSnapshot | null
+}
+
+export function LearningApp({
+  initialView = 'dashboard',
+  initialUser = null,
+  initialSubjects = [],
+  initialDashboard = null,
+}: LearningAppProps) {
+  const [_bootstrapped] = useState(() => {
+    useAppStore.setState({
+      view: initialView,
+      user: initialUser,
+      subjects: initialSubjects,
+      xp: initialUser?.xp ?? 0,
+      streak: initialUser?.streak ?? 0,
+    })
+    return true
+  })
+  const { view, user, setUser, setSubjects, setMascot } = useAppStore()
+
+  const [loading, setLoading] = useState(!initialUser && initialSubjects.length === 0)
+  const [menuOpen, setMenuOpen] = useMenuState()
+
+  useEffect(() => {
+    useAppStore.setState({ view: initialView })
+  }, [initialView])
+
+  useEffect(() => {
+    if (initialUser || initialSubjects.length > 0) return
+
+    let mounted = true
+    async function load() {
+      try {
+        const [userRes, subjRes] = await Promise.all([
+          fetch('/api/user'),
+          fetch('/api/academics'),
+        ])
+        const [userData, subjData] = await Promise.all([userRes.json(), subjRes.json()])
+        if (mounted) {
+          if (userData.ok) {
+            setUser(userData.data)
+            useAppStore.setState({ xp: userData.data.xp, streak: userData.data.streak })
+          } else {
+            setUser(null)
+          }
+          if (subjData.ok) setSubjects(subjData.data)
+          setLoading(false)
+        }
+      } catch {
+        if (mounted) {
+          setUser(null)
+          setLoading(false)
+        }
+      }
+    }
+    load()
+    return () => { mounted = false }
+  }, [initialSubjects.length, initialUser, setUser, setSubjects])
+
+  // Greet with LEO on first load
+  useEffect(() => {
+    if (!loading && user) {
+      const greeted = sessionStorage.getItem('lernio-greeted')
+      if (!greeted) {
+        setMascot('leo', 'greeting', `Hi ${user.name.split(' ')[0]}! I'm LEO, your learning companion. Ready to continue where you left off?`)
+        sessionStorage.setItem('lernio-greeted', '1')
+      }
+    }
+  }, [loading, user, setMascot])
+
+  if (loading) {
+    return <LoadingScreen />
+  }
+
+  return (
+    <div className="min-h-screen flex flex-col bg-background">
+      <div className="flex flex-1">
+        <Sidebar />
+        <main className="flex-1 min-w-0 flex flex-col pb-16 md:pb-0">
+          <TopBar onMenuClick={() => setMenuOpen(!menuOpen)} />
+          <div className="flex-1 px-4 md:px-6 lg:px-8 py-4 md:py-6 max-w-7xl mx-auto w-full">
+            <ViewRouter view={view} initialDashboard={initialDashboard} />
+          </div>
+        </main>
+      </div>
+      <Footer />
+      <MobileNav />
+      <MascotToastContainer />
+      <CommandPalette />
+      <FocusTimerWidget />
+    </div>
+  )
+}
+
+function LockedFeatureView({ featureName }: { featureName: string }) {
+  return (
+    <div className="flex flex-col items-center justify-center py-20 px-4 text-center">
+      <div className="relative mb-6">
+        <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-primary to-violet-500 opacity-20 blur-lg animate-pulse" />
+        <div className="relative h-16 w-16 rounded-full bg-card border border-primary/20 flex items-center justify-center text-primary shadow-soft">
+          <Lock className="h-7 w-7" />
+        </div>
+      </div>
+      <h3 className="text-xl font-bold bg-gradient-to-r from-primary to-violet-500 bg-clip-text text-transparent mb-2">
+        {featureName} is Locked
+      </h3>
+      <p className="text-sm text-muted-foreground max-w-sm mb-6 leading-relaxed">
+        This is a premium feature of Lernio AI. Sign in to access interactive study materials, coding challenges, your custom study planner, and LEO (your adaptive AI tutor).
+      </p>
+      <Link href="/sign-in">
+        <Button className="gap-2 shadow-md hover:scale-105 transition-transform duration-200">
+          <LogIn className="h-4 w-4" />
+          Continue to Sign In
+        </Button>
+      </Link>
+    </div>
+  )
+}
+
+function ViewRouter({
+  view,
+  initialDashboard,
+}: {
+  view: ViewKey
+  initialDashboard?: DashboardSnapshot | null
+}) {
+  const { user } = useAppStore()
+
+  if (!user && view !== 'dashboard') {
+    const titles: Record<ViewKey, string> = {
+      dashboard: 'Dashboard', learn: 'Learn', practice: 'Practice', tutor: 'AI Tutor',
+      labs: 'Interactive Labs', coding: 'Coding Lab', exams: 'Exams', revision: 'Smart Revision',
+      materials: 'Materials', planner: 'Study Planner', analytics: 'Analytics', profile: 'Profile',
+    }
+    return <MotionPage viewKey="locked"><LockedFeatureView featureName={titles[view] || 'This feature'} /></MotionPage>
+  }
+
+  let content: ReactNode
+  switch (view) {
+    case 'dashboard': content = <DashboardView initialData={initialDashboard} />; break
+    case 'learn': content = <LearnView />; break
+    case 'practice': content = <PracticeView />; break
+    case 'tutor': content = <TutorView />; break
+    case 'labs': content = <LabsView />; break
+    case 'coding': content = <CodingView />; break
+    case 'exams': content = <ExamsView />; break
+    case 'revision': content = <RevisionView />; break
+    case 'materials': content = <MaterialsView />; break
+    case 'planner': content = <PlannerView />; break
+    case 'analytics': content = <AnalyticsView />; break
+    case 'profile': content = <ProfileView />; break
+    default: content = <DashboardView />
+  }
+  return <MotionPage viewKey={view}>{content}</MotionPage>
+}
+
+function TopBar({ onMenuClick }: { onMenuClick: () => void }) {
+  const { view, xp, streak, user } = useAppStore()
+  const titles: Record<ViewKey, string> = {
+    dashboard: 'Dashboard', learn: 'Learn', practice: 'Practice', tutor: 'AI Tutor',
+    labs: 'Interactive Labs', coding: 'Coding Lab', exams: 'Exams', revision: 'Smart Revision',
+    materials: 'Materials', planner: 'Study Planner', analytics: 'Analytics', profile: 'Profile',
+  }
+  const level = Math.floor((xp || user?.xp || 0) / 200) + 1
+  const xpInLevel = (xp || user?.xp || 0) % 200
+  const xpPct = (xpInLevel / 200) * 100
+  return (
+    <header className="sticky top-0 z-30 border-b border-border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="flex items-center justify-between px-4 md:px-6 lg:px-8 h-14 max-w-7xl mx-auto">
+        <div className="flex items-center gap-3">
+          <button onClick={onMenuClick} className="md:hidden p-1.5 rounded-md hover:bg-muted focus-ring" aria-label="Open menu">
+            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
+          </button>
+          <h2 className="text-base font-semibold">{titles[view]}</h2>
+        </div>
+        <div className="flex items-center gap-2">
+          {/* Streak flame pill */}
+          <div className="hidden sm:flex items-center gap-1.5 rounded-full bg-amber-500/10 px-3 py-1 text-xs font-semibold text-amber-600 dark:text-amber-400 border border-amber-500/20">
+            <svg className="h-3.5 w-3.5 flame-flicker" fill="currentColor" viewBox="0 0 20 20"><path d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 2.286 1 3 .25.857.37 1.5.37 2.12z"/></svg>
+            <span className="tabular-nums">{streak || user?.streak || 0}</span>
+          </div>
+          {/* XP pill with mini progress bar */}
+          <div className="relative hidden sm:flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary overflow-hidden border border-primary/20">
+            <div
+              className="absolute inset-y-0 left-0 bg-primary/10"
+              style={{ width: `${xpPct}%` }}
+              aria-hidden
+            />
+            <svg className="h-3.5 w-3.5 relative" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd"/></svg>
+            <span className="relative tabular-nums">{xp || user?.xp || 0} XP</span>
+            <span className="relative text-meta text-primary/70 ml-0.5 hidden md:inline">L{level}</span>
+          </div>
+          {/* Avatar with primary ring (theme-token based) */}
+          {user ? (
+            <div className="relative ring-2 ring-primary/40 rounded-full">
+              <div className="relative h-8 w-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-xs font-bold border-2 border-background">
+                {user.name.charAt(0)}
+              </div>
+            </div>
+          ) : (
+            <Link href="/sign-in">
+              <Button size="sm" variant="outline" className="gap-1.5 h-8">
+                <UserIcon className="h-3.5 w-3.5" />
+                Sign In
+              </Button>
+            </Link>
+          )}
+        </div>
+      </div>
+    </header>
+  )
+}
+
+function useMenuState(): [boolean, (v: boolean) => void] {
+  const open = useAppStore((s) => s.sidebarOpen)
+  const setOpen = useAppStore((s) => s.setSidebarOpen)
+  return [open, setOpen]
+}
+
+function LoadingScreen() {
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center gap-6 bg-background">
+      <div className="relative">
+        <div className="h-20 w-20 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-2xl font-bold animate-pulse">
+          L
+        </div>
+        <div className="absolute -inset-4 rounded-full border-2 border-primary/20 border-t-primary animate-spin" />
+      </div>
+      <div className="text-center">
+        <h1 className="text-xl font-bold text-primary">Lernio AI 2.0</h1>
+        <p className="text-sm text-muted-foreground mt-1">Loading your learning platform…</p>
+      </div>
+    </div>
+  )
+}
