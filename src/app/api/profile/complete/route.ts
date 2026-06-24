@@ -1,5 +1,6 @@
 import { ApiError, okResponse, requireUser, withApi } from '@/lib/auth'
 import { completeCampusProfile } from '@/lib/campus-registration'
+import { toPublicUserDTO } from '@/lib/user-dto'
 
 export async function PATCH(request: Request) {
   return withApi(async () => {
@@ -12,17 +13,11 @@ export async function PATCH(request: Request) {
     try {
       const user = await completeCampusProfile(authUser.id, body)
       return okResponse({
-        user: {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          role: user.role,
-          profileComplete: user.profileComplete,
-        },
+        user: toPublicUserDTO(user),
       })
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Could not complete this profile.'
-      throw new ApiError('PROFILE_UPDATE_FAILED', message, 400, false)
+      if (error instanceof ApiError) throw error
+      throw new ApiError('PROFILE_UPDATE_FAILED', 'Could not complete this profile. Check the fields and try again.', 400, false)
     }
   })
 }

@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: lernio
+          POSTGRES_PASSWORD: lernio_password
+          POSTGRES_DB: lernio
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U lernio -d lernio"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      DATABASE_URL: postgresql://lernio:lernio_password@localhost:5432/lernio?schema=public
+      DIRECT_URL: postgresql://lernio:lernio_password@localhost:5432/lernio?schema=public
+      NEXTAUTH_URL: http://localhost:3000
+      NEXTAUTH_SECRET: ci-secret-replace-in-production
+      LERNIO_DEMO_MODE: "false"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run db:generate
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run test
+      - run: npm run build
+      - run: npm audit --audit-level=high

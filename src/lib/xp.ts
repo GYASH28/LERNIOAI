@@ -21,6 +21,7 @@ export type XpEventType =
   | 'streak'
   | 'focus_session'
   | 'daily_quest_bonus'
+  | 'tutor_interaction'
 
 export interface AwardXpInput {
   userId: string

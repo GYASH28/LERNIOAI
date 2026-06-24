@@ -9,7 +9,7 @@ import { ArrowLeft, Chrome, Mail, UserPlus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { CAMPUS_DIVISIONS, CAMPUS_SEMESTERS, CWIT_PROGRAMMES, DEFAULT_CAMPUS_PROFILE } from '@/lib/campus-auth'
+import { CAMPUS_DIVISIONS, CAMPUS_SEMESTERS, CWIT_PROGRAMMES } from '@/lib/campus-auth'
 
 const initialForm = {
   name: '',
@@ -17,9 +17,9 @@ const initialForm = {
   password: '',
   confirmPassword: '',
   rollNumber: '',
-  departmentCode: DEFAULT_CAMPUS_PROFILE.departmentCode,
-  semesterNumber: String(DEFAULT_CAMPUS_PROFILE.semesterNumber),
-  division: DEFAULT_CAMPUS_PROFILE.division,
+  departmentCode: '',
+  semesterNumber: '',
+  division: 'NOT_SURE',
   inviteCode: '',
 }
 
@@ -43,6 +43,7 @@ function Field({
 function SignUpForm() {
   const router = useRouter()
   const [form, setForm] = useState(initialForm)
+  const [showAcademic, setShowAcademic] = useState(false)
   const [showInvite, setShowInvite] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [statusMessage, setStatusMessage] = useState('')
@@ -67,9 +68,7 @@ function SignUpForm() {
     if (!form.name.trim()) return 'Enter your full name.'
     if (!form.email.trim()) return 'Enter your email address.'
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) return 'Enter a valid email address.'
-    if (!showInvite && !/^[0-9]{6}$/.test(form.rollNumber.trim())) {
-      return 'Roll number must be exactly 6 digits.'
-    }
+    if (form.rollNumber.trim() && !/^[A-Za-z0-9/-]{1,32}$/.test(form.rollNumber.trim())) return 'Roll number format is not valid.'
     if (form.password.length < 8) return 'Password must be at least 8 characters.'
     if (form.password !== form.confirmPassword) return 'Passwords do not match.'
     return ''
@@ -96,8 +95,8 @@ function SignUpForm() {
           email: form.email.trim(),
           password: form.password,
           rollNumber: form.rollNumber.trim(),
-          departmentCode: form.departmentCode,
-          semesterNumber: Number(form.semesterNumber),
+          departmentCode: form.departmentCode || undefined,
+          semesterNumber: form.semesterNumber ? Number(form.semesterNumber) : undefined,
           division: form.division,
           inviteCode: showInvite ? form.inviteCode.trim() : '',
         }),
@@ -163,7 +162,7 @@ function SignUpForm() {
               Create your Lernio profile
             </h1>
             <p className="mt-2 text-sm leading-6 text-slate-400">
-              Student accounts can be created directly. CR, teacher, coordinator, and admin access needs an approved invite code.
+              Create your own Lernio account. No college-issued username is required. CR, teacher, coordinator, reviewer, moderator, and admin access needs an approved invite code.
             </p>
           </div>
 
@@ -218,61 +217,75 @@ function SignUpForm() {
                 required
               />
             </Field>
-            <Field label="Roll number">
-              <Input
-                name="rollNumber"
-                value={form.rollNumber}
-                onChange={handleChange}
-                placeholder="254101"
-                inputMode="numeric"
-                pattern="[0-9]{6}"
-                className="h-auto rounded-2xl border-white/10 bg-slate-950/55 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus-visible:border-cyan-300/70 focus-visible:ring-cyan-300/10"
-                required={!showInvite}
-              />
-              <p className="mt-2 text-xs text-slate-500">Student and CR roll numbers must be exactly 6 digits.</p>
-            </Field>
-            <Field label="Department / programme">
-              <select
-                name="departmentCode"
-                value={form.departmentCode}
-                onChange={handleChange}
-                className="w-full rounded-2xl border border-white/10 bg-slate-950/55 px-4 py-3 text-sm text-white outline-none transition hover:border-white/20 focus:border-cyan-300/70 focus:ring-4 focus:ring-cyan-300/10"
+            <div className="sm:col-span-2">
+              <button
+                type="button"
+                className="text-sm font-semibold text-cyan-200 transition hover:text-white"
+                onClick={() => setShowAcademic((value) => !value)}
               >
-                {CWIT_PROGRAMMES.map((programme) => (
-                  <option key={programme.programmeCode} value={programme.departmentCode}>
-                    {programme.programmeName}
-                  </option>
-                ))}
-              </select>
-            </Field>
-            <Field label="Semester">
-              <select
-                name="semesterNumber"
-                value={form.semesterNumber}
-                onChange={handleChange}
-                className="w-full rounded-2xl border border-white/10 bg-slate-950/55 px-4 py-3 text-sm text-white outline-none transition hover:border-white/20 focus:border-cyan-300/70 focus:ring-4 focus:ring-cyan-300/10"
-              >
-                {CAMPUS_SEMESTERS.map((semester) => (
-                  <option key={semester} value={semester}>
-                    Semester {semester}
-                  </option>
-                ))}
-              </select>
-            </Field>
-            <Field label="Division">
-              <select
-                name="division"
-                value={form.division}
-                onChange={handleChange}
-                className="w-full rounded-2xl border border-white/10 bg-slate-950/55 px-4 py-3 text-sm text-white outline-none transition hover:border-white/20 focus:border-cyan-300/70 focus:ring-4 focus:ring-cyan-300/10"
-              >
-                {CAMPUS_DIVISIONS.map((division) => (
-                  <option key={division} value={division}>
-                    Division {division}
-                  </option>
-                ))}
-              </select>
-            </Field>
+                {showAcademic ? 'Hide academic details' : 'Add academic details now'}
+              </button>
+            </div>
+            {showAcademic ? (
+              <>
+                <Field label="Roll number">
+                  <Input
+                    name="rollNumber"
+                    value={form.rollNumber}
+                    onChange={handleChange}
+                    placeholder="Optional"
+                    inputMode="text"
+                    pattern="[A-Za-z0-9/-]{1,32}"
+                    className="h-auto rounded-2xl border-white/10 bg-slate-950/55 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus-visible:border-cyan-300/70 focus-visible:ring-cyan-300/10"
+                  />
+                  <p className="mt-2 text-xs text-slate-500">Optional at signup. You can add it later from profile completion.</p>
+                </Field>
+                <Field label="Department / programme">
+                  <select
+                    name="departmentCode"
+                    value={form.departmentCode}
+                    onChange={handleChange}
+                    className="w-full rounded-2xl border border-white/10 bg-slate-950/55 px-4 py-3 text-sm text-white outline-none transition hover:border-white/20 focus:border-cyan-300/70 focus:ring-4 focus:ring-cyan-300/10"
+                  >
+                    <option value="">Choose later</option>
+                    {CWIT_PROGRAMMES.map((programme) => (
+                      <option key={programme.programmeCode} value={programme.departmentCode}>
+                        {programme.programmeName}
+                      </option>
+                    ))}
+                  </select>
+                </Field>
+                <Field label="Semester">
+                  <select
+                    name="semesterNumber"
+                    value={form.semesterNumber}
+                    onChange={handleChange}
+                    className="w-full rounded-2xl border border-white/10 bg-slate-950/55 px-4 py-3 text-sm text-white outline-none transition hover:border-white/20 focus:border-cyan-300/70 focus:ring-4 focus:ring-cyan-300/10"
+                  >
+                    <option value="">Choose later</option>
+                    {CAMPUS_SEMESTERS.map((semester) => (
+                      <option key={semester} value={semester}>
+                        Semester {semester}
+                      </option>
+                    ))}
+                  </select>
+                </Field>
+                <Field label="Division">
+                  <select
+                    name="division"
+                    value={form.division}
+                    onChange={handleChange}
+                    className="w-full rounded-2xl border border-white/10 bg-slate-950/55 px-4 py-3 text-sm text-white outline-none transition hover:border-white/20 focus:border-cyan-300/70 focus:ring-4 focus:ring-cyan-300/10"
+                  >
+                    {CAMPUS_DIVISIONS.map((division) => (
+                      <option key={division} value={division}>
+                        {division === 'NOT_SURE' ? 'Not sure' : `Division ${division}`}
+                      </option>
+                    ))}
+                  </select>
+                </Field>
+              </>
+            ) : null}
             <div className="sm:col-span-2">
               {showInvite ? (
                 <Field label="Invite code">

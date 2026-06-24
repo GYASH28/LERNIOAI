@@ -98,6 +98,18 @@ export interface HintRequest {
   signal?: AbortSignal
 }
 
+export interface SpeechRequest {
+  text: string
+  voice: string
+  speed: number
+  signal?: AbortSignal
+}
+
+export interface TranscriptionRequest {
+  fileBase64: string
+  signal?: AbortSignal
+}
+
 // ============================================================
 // Provider interface
 // ============================================================
@@ -106,6 +118,8 @@ export interface AiProvider {
   chat(input: TutorRequest): Promise<TutorResponse>
   evaluate(input: EvaluationRequest): Promise<EvaluationResponse>
   generateHint(input: HintRequest): Promise<string>
+  synthesizeSpeech(input: SpeechRequest): Promise<ArrayBuffer>
+  transcribeSpeech(input: TranscriptionRequest): Promise<string>
 }
 
 // ============================================================
@@ -226,6 +240,30 @@ export class ZaiProvider implements AiProvider {
       console.error('[ai:provider] hint failed:', safeErrorSummary(err))
       return 'Hint: review the key definition for this topic and try again.'
     }
+  }
+
+  async synthesizeSpeech(input: SpeechRequest): Promise<ArrayBuffer> {
+    const zai = await ZAI.create()
+    const response = await this.withTimeout(
+      zai.audio.tts.create({
+        input: input.text,
+        voice: input.voice,
+        speed: input.speed,
+        response_format: 'wav',
+        stream: false,
+      }),
+      input.signal,
+    )
+    return response.arrayBuffer()
+  }
+
+  async transcribeSpeech(input: TranscriptionRequest): Promise<string> {
+    const zai = await ZAI.create()
+    const response = await this.withTimeout(
+      zai.audio.asr.create({ file_base64: input.fileBase64 }),
+      input.signal,
+    )
+    return (response?.text ?? '').trim()
   }
 
   // ----------------------------------------------------------

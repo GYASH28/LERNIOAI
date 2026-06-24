@@ -10,7 +10,7 @@ The app covers four Semester-3 subjects — Data Structures (CS201), OOP with C+
 
 ### Prerequisites
 - [Node.js](https://nodejs.org/) 18+ (or [Bun](https://bun.sh/) 1.3+)
-- A SQLite-capable filesystem (default) **or** a PostgreSQL instance for production
+- PostgreSQL 14+ for local and production data
 
 ### Install & run
 ```bash
@@ -21,8 +21,8 @@ bun install            # or: npm install / pnpm install
 cp .env.example .env   # then edit .env if needed (DATABASE_URL, LERNIO_DEMO_MODE)
 
 # 3. Set up the database
-bun run db:push        # creates the SQLite file + applies the schema
 bun run db:generate    # generates the Prisma Client
+bun run db:deploy      # applies committed PostgreSQL migrations
 # (optional) seed demo content:
 bunx tsx scripts/seed.ts
 bunx tsx scripts/seed-coding.ts
@@ -41,7 +41,7 @@ bun run dev            # http://localhost:3000
 | `bun run lint` | ESLint (strict rules restored) |
 | `bun run typecheck` | `tsc --noEmit` (TypeScript strict) |
 | `bun run check` | lint + typecheck |
-| `bun run db:push` | Apply `prisma/schema.prisma` to the database |
+| `bun run db:push` | Local-only schema sync; do not use as production migration strategy |
 | `bun run db:generate` | Regenerate the Prisma Client |
 | `bun run db:migrate` | Create + apply a migration |
 | `bun run db:reset` | Reset the database (destroys all data) |
@@ -54,7 +54,7 @@ bun run dev            # http://localhost:3000
 - **Framework**: Next.js 16 (App Router) + React 19
 - **Language**: TypeScript 5 (strict, `noImplicitAny`)
 - **Styling**: Tailwind CSS 4 + shadcn/ui (New York) + Radix UI
-- **Database**: Prisma 6 ORM (SQLite for dev; PostgreSQL for production)
+- **Database**: Prisma 6 ORM with PostgreSQL migrations
 - **State**: Zustand (client) — server state is fetched per-view
 - **Animation**: Framer Motion (respects `prefers-reduced-motion`)
 - **Charts**: Recharts (lazy-loaded on Analytics/Exams)
@@ -63,14 +63,14 @@ bun run dev            # http://localhost:3000
 - **Toasts**: Sonner (single system)
 
 ### Security model
-- **Authentication**: a single `requireUser()` / `requireRole()` helper in `src/lib/auth.ts` is the only entry point for resolving the current user. Every API route calls it. The hardcoded demo student (`student@lernio.ai`) lives behind `LERNIO_DEMO_MODE` in **one** place — never scattered across routes.
+- **Authentication**: students can self-register with email/password, and Google OAuth works when configured. Ordinary students never need invite codes; elevated roles require invite/admin approval. `requireUser()` / `requireRole()` are the server trust boundary.
 - **Server-authoritative integrity**: correctness, scores, XP, streaks, and achievements are all computed server-side. The browser cannot set `xp`, `level`, `streak`, `role`, or `isCorrect`. XP flows through a central idempotent ledger (`XpEvent` with `idempotencyKey @unique`).
 - **Safe question DTOs**: `toPracticeDTO` / `toExamDTO` strip `correctAnswer`, `explanation`, and `hint` before sending questions to the browser. The review DTO (with answers) is only returned after a valid scored submission.
 - **Ownership**: every user-owned resource (tasks, revision schedules, tutor sessions, attempts, contributions) is queried by `id AND userId` — no cross-user access.
 - **Exam attempt lifecycle**: `create → autosave → submit → lock` with a `status` field prevents double-submission.
 
 ### Routing
-The app runs under a single `/` route (Zustand view-switch) per the sandbox constraint. All twelve views are **lazy-loaded** via `next/dynamic` so the initial dashboard bundle excludes Recharts, the three lab simulators, the coding editor, and react-markdown. Each non-dashboard view streams in its own chunk with a skeleton fallback.
+The app exposes real App Router pages for dashboard, learn, practice, tutor, labs, coding, exams, revision, materials, planner, analytics, and profile. Shared route pages wrap the existing view components so direct refresh and browser URLs stay meaningful.
 
 ### AI grounding
 The AI Tutor (`/api/tutor/chat`) retrieves **real** `Lesson` rows from the database via `src/lib/ai/retrieval.ts`, expands them into citable chunks, and injects them into the LLM prompt. `groundingStatus` is evidence-based (`'grounded'` only when chunks were retrieved; never inferred from a subject name). Citations reference genuine `Lesson.id`s with snippets.
@@ -86,8 +86,8 @@ Honestly labelled as a **syntax-learning playground**: the sandbox has no isolat
 30 Prisma models cover the academic hierarchy (Institution → Department → Programme → AcademicScheme → Semester → Subject → Unit → Topic → Lesson) plus all learning-state tables (User, XpEvent, UserTopicMastery, LessonCompletion, QuestionAttempt, QuizAttempt, RevisionSchedule, RevisionAttempt, StudyTask, StudySession, TutorSession, TutorMessage, CodingChallenge, CodingSubmission, LabProgress, Resource, Contribution, Bookmark, Achievement, UserAchievement, QuestionPaper). See `prisma/schema.prisma`.
 
 ### Production deployment
-- **Do not** ship the mutable `db/custom.db` SQLite file as the production database. Use PostgreSQL (set `DATABASE_URL` to a `postgresql://` URL — the schema is provider-agnostic).
-- Run `bun run db:push` (or `db:migrate`) on deploy.
+- **Do not** ship mutable SQLite files as production state. Use PostgreSQL (`DATABASE_URL` and `DIRECT_URL` must be `postgresql://` URLs).
+- Run `bun run db:deploy` on deploy.
 - Back up the database regularly; test restore procedures.
 
 ---
@@ -101,7 +101,7 @@ src/
   app/
     api/                  # 30+ route handlers (all use requireUser + Zod + withApi)
     layout.tsx            # ThemeProvider + SonnerToaster + AchievementUnlockToaster
-    page.tsx              # single-route shell + lazy-loaded ViewRouter
+    page.tsx              # landing page and route-specific App Router pages
   components/
     ui/                   # shadcn/ui primitives + custom widgets
     views/                # 12 view components + labs/
@@ -126,12 +126,12 @@ src/
 - **Lesson coverage**: 11 of 64 topics have full 5-mode lessons; the remaining 53 show an honest "No lesson yet" empty-state. Expanding content is an ongoing effort.
 - **Coding Lab**: no real C++ execution in the sandbox (honestly labelled). A production runner is required for real grading.
 - **Tests**: not yet present. The recommended next step is Vitest for unit tests (mastery, SM-2, scoring, XP idempotency) + Playwright for critical student journeys.
-- **Single-route constraint**: deep links and browser history are limited by the single `/` route (sandbox constraint). Real App Router routes are the documented production path.
+- **Onboarding**: ordinary students can enter Lernio immediately; missing academic details can be completed later.
 
 ---
 
 ## Troubleshooting
-- **`prisma generate` errors**: ensure `DATABASE_URL` in `.env` points to a writable path. For SQLite, the directory must exist.
+- **`prisma generate` errors**: ensure `DATABASE_URL` and `DIRECT_URL` are valid PostgreSQL URLs.
 - **Blank page after schema changes**: restart the dev server (`pkill -f 'next dev'` then `bun run dev`) so the Prisma Client cache is refreshed.
 - **Port 3000 in use**: `bun run dev` uses port 3000 exclusively in this environment.
 - **Demo user not found**: run `bunx tsx scripts/seed.ts` to seed the demo student + academic content.

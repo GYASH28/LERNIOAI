@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { resolveAuthMode } from './auth-policy'
+import { resolveAuthMode, safeCallbackPath } from './auth-policy'
 
 describe('resolveAuthMode', () => {
   it('uses demo mode only when explicitly enabled', () => {
@@ -13,5 +13,17 @@ describe('resolveAuthMode', () => {
       mode: 'session',
       email: 'student@example.com',
     })
+  })
+})
+
+describe('safeCallbackPath', () => {
+  it('allows relative in-app paths', () => {
+    expect(safeCallbackPath('/dashboard')).toBe('/dashboard')
+    expect(safeCallbackPath('/learn?subject=1')).toBe('/learn?subject=1')
+  })
+
+  it('rejects protocol-relative and external callback URLs', () => {
+    expect(safeCallbackPath('//evil.example')).toBe('/dashboard')
+    expect(safeCallbackPath('https://evil.example/phish')).toBe('/dashboard')
   })
 })

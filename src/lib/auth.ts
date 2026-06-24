@@ -22,8 +22,10 @@ import { db } from '@/lib/db'
 import { isDatabaseUnavailableError } from '@/lib/api-error-policy'
 import { resolveAuthMode } from '@/lib/auth-policy'
 import { DEMO_AUTH_USER } from '@/lib/demo-fixtures'
+import { checkRateLimit } from '@/lib/rate-limit'
+import { normalizeRole, type Role } from '@/lib/roles'
 
-export type Role = 'student' | 'cr' | 'teacher' | 'coordinator' | 'moderator' | 'reviewer' | 'admin'
+export type { Role } from '@/lib/roles'
 
 export interface AuthUser {
   id: string
@@ -37,39 +39,11 @@ export interface AuthUser {
 const DEMO_PASSWORD = process.env.LERNIO_DEMO_PASSWORD || 'student123'
 const MAX_LOGIN_ATTEMPTS = 8
 const LOGIN_WINDOW_MS = 15 * 60 * 1000
-const loginAttempts = new Map<string, { count: number; resetAt: number }>()
 
 function normalizeEmail(email: string | undefined): string | null {
   const normalized = email?.trim().toLowerCase()
   if (!normalized || normalized.length > 254) return null
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalized) ? normalized : null
-}
-
-function normalizeRole(role: unknown): Role {
-  const normalized = String(role || 'student').trim().toLowerCase()
-  return ['student', 'cr', 'teacher', 'coordinator', 'moderator', 'reviewer', 'admin'].includes(normalized)
-    ? (normalized as Role)
-    : 'student'
-}
-
-function isLoginBlocked(key: string): boolean {
-  const attempt = loginAttempts.get(key)
-  if (!attempt) return false
-  if (Date.now() > attempt.resetAt) {
-    loginAttempts.delete(key)
-    return false
-  }
-  return attempt.count >= MAX_LOGIN_ATTEMPTS
-}
-
-function recordFailedLogin(key: string) {
-  const now = Date.now()
-  const current = loginAttempts.get(key)
-  if (!current || now > current.resetAt) {
-    loginAttempts.set(key, { count: 1, resetAt: now + LOGIN_WINDOW_MS })
-    return
-  }
-  loginAttempts.set(key, { count: current.count + 1, resetAt: current.resetAt })
 }
 
 const providers: NextAuthOptions['providers'] = [
@@ -84,31 +58,43 @@ const providers: NextAuthOptions['providers'] = [
       const password = credentials?.password
       if (!email || !password || password.length > 256) return null
 
-      const attemptKey = `credentials:${email}`
-      if (isLoginBlocked(attemptKey)) return null
+      const limiter = await checkRateLimit({
+        action: 'credential_login',
+        identifier: email,
+        limit: MAX_LOGIN_ATTEMPTS,
+        windowMs: LOGIN_WINDOW_MS,
+      })
+      if (!limiter.allowed) return null
 
       if (
         process.env.LERNIO_DEMO_MODE === 'true' &&
         email === DEMO_AUTH_USER.email &&
         password === DEMO_PASSWORD
       ) {
-        loginAttempts.delete(attemptKey)
         return DEMO_AUTH_USER
       }
 
-      const user = await db.user.findUnique({ where: { email } })
+      const user = await db.user.findUnique({
+        where: { email },
+        select: {
+          id: true,
+          email: true,
+          name: true,
+          passwordHash: true,
+          role: true,
+          status: true,
+          profileComplete: true,
+        },
+      })
       if (!user?.passwordHash || user.status === 'disabled') {
-        recordFailedLogin(attemptKey)
         return null
       }
 
       const valid = await compare(password, user.passwordHash)
       if (!valid) {
-        recordFailedLogin(attemptKey)
         return null
       }
 
-      loginAttempts.delete(attemptKey)
       return {
         id: user.id,
         email: user.email,
@@ -141,6 +127,16 @@ export const authOptions: NextAuthOptions = {
   },
   providers,
   callbacks: {
+    async redirect({ url, baseUrl }) {
+      if (url.startsWith('/') && !url.startsWith('//')) return `${baseUrl}${url}`
+      try {
+        const parsed = new URL(url)
+        if (parsed.origin === baseUrl) return url
+      } catch {
+        return `${baseUrl}/dashboard`
+      }
+      return `${baseUrl}/dashboard`
+    },
     async signIn({ user }) {
       if (!user.email) return true
       const existing = await db.user.findUnique({

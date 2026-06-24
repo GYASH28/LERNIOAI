@@ -65,7 +65,25 @@ export const useAppStore = create<AppState>()(
       view: 'dashboard',
       setView: (v) => set({ view: v }),
       user: null,
-      setUser: (u) => set({ user: u }),
+      setUser: (u) =>
+        set((state) => {
+          const changedUser = state.user?.id !== u?.id
+          return {
+            user: u,
+            xp: u?.xp ?? 0,
+            streak: u?.streak ?? 0,
+            ...(changedUser
+              ? {
+                  continueLearning: null,
+                  currentSubjectId: null,
+                  currentUnitNumber: null,
+                  currentTopicId: null,
+                  currentLessonId: null,
+                  currentMode: 'learn' as LearningMode,
+                }
+              : {}),
+          }
+        }),
       subjects: [],
       setSubjects: (s) => set({ subjects: s }),
       currentSubjectId: null,
@@ -106,14 +124,6 @@ export const useAppStore = create<AppState>()(
       name: 'lernio-app-store',
       partialize: (s) => ({
         view: s.view,
-        continueLearning: s.continueLearning,
-        currentSubjectId: s.currentSubjectId,
-        currentUnitNumber: s.currentUnitNumber,
-        currentTopicId: s.currentTopicId,
-        currentLessonId: s.currentLessonId,
-        currentMode: s.currentMode,
-        xp: s.xp,
-        streak: s.streak,
       }),
     }
   )

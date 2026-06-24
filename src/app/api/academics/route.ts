@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server'
 import { db } from '@/lib/db'
-import { requireUser, withApi, okResponse } from '@/lib/auth'
+import { withApi, okResponse } from '@/lib/auth'
 import { DEMO_SUBJECTS, isDemoMode } from '@/lib/demo-fixtures'
 
 /**
@@ -20,21 +20,55 @@ export async function GET(req: NextRequest) {
     // Publicly accessible read-only syllabus
     const subjects = await db.subject.findMany({
       where: subjectId ? { id: subjectId } : {},
-      include: {
+      select: {
+        id: true,
+        code: true,
+        name: true,
+        shortName: true,
+        credits: true,
+        icon: true,
+        accentColor: true,
+        mascotKey: true,
+        description: true,
         units: {
           orderBy: { number: 'asc' },
-          include: {
-            topics: { orderBy: { title: 'asc' } },
-            lessons: { orderBy: { order: 'asc' } },
+          select: {
+            id: true,
+            number: true,
+            title: true,
+            description: true,
+            weightage: true,
+            topics: {
+              orderBy: { title: 'asc' },
+              select: {
+                id: true,
+                slug: true,
+                title: true,
+                description: true,
+                difficulty: true,
+                examWeightage: true,
+              },
+            },
+            lessons: {
+              where: { status: 'published' },
+              orderBy: { order: 'asc' },
+              select: {
+                id: true,
+                title: true,
+                order: true,
+                durationMin: true,
+              },
+            },
           },
         },
       },
       orderBy: { code: 'asc' },
     })
 
+    const headers = { 'Cache-Control': 'public, max-age=300, stale-while-revalidate=3600' }
     if (subjectId) {
-      return okResponse(subjects[0] ?? null)
+      return Response.json({ ok: true, data: subjects[0] ?? null, requestId: crypto.randomUUID() }, { headers })
     }
-    return okResponse(subjects)
+    return Response.json({ ok: true, data: subjects, requestId: crypto.randomUUID() }, { headers })
   })
 }

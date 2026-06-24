@@ -15,6 +15,7 @@ import {
 } from '@/lib/demo-fixtures'
 import type { AppBootstrapData, DashboardSnapshot } from '@/lib/app-bootstrap-types'
 import type { ViewKey } from '@/lib/types'
+import { publicUserSelect, toPublicUserDTO } from '@/lib/user-dto'
 
 function toClient<T>(value: T): T {
   return JSON.parse(JSON.stringify(value)) as T
@@ -22,12 +23,44 @@ function toClient<T>(value: T): T {
 
 async function getSubjects() {
   return db.subject.findMany({
-    include: {
+    select: {
+      id: true,
+      code: true,
+      name: true,
+      shortName: true,
+      credits: true,
+      icon: true,
+      accentColor: true,
+      mascotKey: true,
+      description: true,
       units: {
         orderBy: { number: 'asc' },
-        include: {
-          topics: { orderBy: { title: 'asc' } },
-          lessons: { orderBy: { order: 'asc' } },
+        select: {
+          id: true,
+          number: true,
+          title: true,
+          description: true,
+          weightage: true,
+          topics: {
+            orderBy: { title: 'asc' },
+            select: {
+              id: true,
+              slug: true,
+              title: true,
+              description: true,
+              difficulty: true,
+              examWeightage: true,
+            },
+          },
+          lessons: {
+            orderBy: { order: 'asc' },
+            select: {
+              id: true,
+              title: true,
+              order: true,
+              durationMin: true,
+            },
+          },
         },
       },
     },
@@ -135,7 +168,21 @@ async function getDashboardSnapshot(userId: string, dailyMins: number): Promise<
       where: { userId },
       include: { topic: { include: { unit: { include: { subject: true } } } } },
     }),
-    db.lessonCompletion.findMany({ where: { userId }, include: { lesson: true } }),
+    db.lessonCompletion.findMany({
+      where: { userId },
+      include: {
+        lesson: {
+          select: {
+            id: true,
+            title: true,
+            order: true,
+            durationMin: true,
+            topicId: true,
+            unitId: true,
+          },
+        },
+      },
+    }),
     db.questionAttempt.findMany({
       where: { userId },
       orderBy: { createdAt: 'desc' },
@@ -180,7 +227,7 @@ async function getDashboardSnapshot(userId: string, dailyMins: number): Promise<
 export async function getAppBootstrap(initialView: ViewKey): Promise<AppBootstrapData> {
   if (isDemoMode()) {
     return toClient({
-      user: DEMO_USER,
+      user: toPublicUserDTO(DEMO_USER),
       subjects: DEMO_SUBJECTS,
       dashboard:
         initialView === 'dashboard'
@@ -197,11 +244,11 @@ export async function getAppBootstrap(initialView: ViewKey): Promise<AppBootstra
 
   const authUser = await getCurrentUser()
   const [freshUser, subjects] = await Promise.all([
-    authUser ? db.user.findUnique({ where: { id: authUser.id } }) : null,
+    authUser ? db.user.findUnique({ where: { id: authUser.id }, select: publicUserSelect }) : null,
     getSubjects(),
   ])
 
-  const user = freshUser ? { ...freshUser, level: levelFromXp(freshUser.xp) } : null
+  const user = freshUser ? toPublicUserDTO({ ...freshUser, level: levelFromXp(freshUser.xp) }) : null
   const dashboard =
     initialView === 'dashboard' && user
       ? await getDashboardSnapshot(user.id, user.dailyMins)

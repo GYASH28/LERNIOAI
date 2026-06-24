@@ -6,8 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 // ============================================================
@@ -26,7 +27,7 @@ model Institution {
 
 model Department {
   id            String   @id @default(cuid())
-  name          String
+  name          String   @default("")
   code          String
   institutionId String
   institution   Institution @relation(fields: [institutionId], references: [id])
@@ -267,11 +268,13 @@ model User {
   xpEvents        XpEvent[]
   accounts        Account[]
   sessions        Session[]
+  roleRequests    RoleRequest[]
 }
 
 model InviteCode {
   id            String   @id @default(cuid())
   code          String   @unique
+  tokenHash     String?
   role          String
   used          Boolean  @default(false)
   usedBy        String?
@@ -287,11 +290,60 @@ model InviteCode {
   rollNumber    String?
   assignedSubjects String? // JSON array of subject IDs
   status        String   @default("active")
+  expiresAt     DateTime?
+  revokedAt     DateTime?
+  revokedBy     String?
+  maxUses       Int      @default(1)
+  useCount      Int      @default(0)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
   @@index([role, used])
   @@index([email])
+  @@index([status, expiresAt])
+}
+
+model RoleRequest {
+  id             String   @id @default(cuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id])
+  requestedRole  String
+  reason         String?
+  departmentCode String?
+  subjectIds     String?
+  status         String   @default("pending") // pending | approved | rejected | withdrawn
+  reviewedBy     String?
+  reviewedAt     DateTime?
+  reviewNote     String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([userId, status])
+  @@index([requestedRole, status])
+}
+
+model RoleAuditLog {
+  id           String   @id @default(cuid())
+  actorUserId  String?
+  targetUserId String?
+  action       String
+  role         String?
+  scope        String?
+  note         String?
+  createdAt    DateTime @default(now())
+
+  @@index([targetUserId, createdAt])
+  @@index([actorUserId, createdAt])
+}
+
+model RateLimitBucket {
+  key       String   @id
+  count     Int      @default(0)
+  resetAt   DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([resetAt])
 }
 
 // ============================================================
