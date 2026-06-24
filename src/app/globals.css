@@ -88,3 +88,12 @@
     letter-spacing: -0.005em;
   }
 }
+
+/* Custom Cursor support */
+@media (pointer: fine) {
+  .custom-cursor-active,
+  .custom-cursor-active *:not(input):not(textarea):not([contenteditable="true"]) {
+    cursor: none !important;
+  }
+}
+

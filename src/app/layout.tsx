@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { AchievementUnlockToaster } from "@/components/ui/achievement-unlock-toaster";
 import { LernioMotionProvider, ThemeAtmosphere } from "@/components/motion";
 import { DevOverlayCleanup } from "@/components/dev-overlay-cleanup";
+import { CustomCursor } from "@/components/ui/custom-cursor";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -67,6 +68,7 @@ export default function RootLayout({
         <ThemeProvider>
           <LernioMotionProvider>
             <ThemeAtmosphere />
+            <CustomCursor />
             {children}
             <DevOverlayCleanup />
             <AchievementUnlockToaster />

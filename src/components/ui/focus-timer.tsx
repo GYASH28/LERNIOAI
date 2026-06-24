@@ -275,6 +275,7 @@ export function FocusTimerWidget() {
           isRunning && 'pulse-glow',
         )}
         aria-label="Open focus timer"
+        data-cursor="clock"
       >
         <Timer className="h-5 w-5 md:h-6 md:w-6" />
         {isRunning && (

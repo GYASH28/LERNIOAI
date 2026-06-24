@@ -368,6 +368,7 @@ function StatusSection({
           disabled={using}
           className="w-full gap-2"
           size="sm"
+          data-cursor={using ? "hourglass" : undefined}
         >
           <Snowflake className="h-4 w-4" />
           {using ? 'Using…' : 'Use Freeze Now'}
