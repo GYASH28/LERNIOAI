@@ -36,8 +36,8 @@ bun run dev            # http://localhost:3000
 | Script | Description |
 |---|---|
 | `bun run dev` | Start the Next.js dev server on port 3000 |
-| `bun run build` | Production build (standalone output) |
-| `bun run start` | Run the production standalone server |
+| `bun run build` | Production build |
+| `bun run start` | Run the production Next.js server |
 | `bun run lint` | ESLint (strict rules restored) |
 | `bun run typecheck` | `tsc --noEmit` (TypeScript strict) |
 | `bun run check` | lint + typecheck |

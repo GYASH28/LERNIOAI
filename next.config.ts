@@ -1,7 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "standalone",
   // Build must fail on TypeScript errors — never ignore them.
   reactStrictMode: true,
   allowedDevOrigins: ['127.0.0.1'],
