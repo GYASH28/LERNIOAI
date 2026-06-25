@@ -23,6 +23,7 @@ model Institution {
   createdAt DateTime @default(now())
   departments Department[]
   schemes    AcademicScheme[]
+  memberships InstitutionMembership[]
 }
 
 model Department {
@@ -269,6 +270,7 @@ model User {
   accounts        Account[]
   sessions        Session[]
   roleRequests    RoleRequest[]
+  memberships     InstitutionMembership[]
 }
 
 model InviteCode {
@@ -306,7 +308,7 @@ model InviteCode {
 model RoleRequest {
   id             String   @id @default(cuid())
   userId         String
-  user           User     @relation(fields: [userId], references: [id])
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   requestedRole  String
   reason         String?
   departmentCode String?
@@ -746,3 +748,52 @@ model UserAchievement {
 //   - TutorSession: [userId, updatedAt] for session list
 //   - Resource: [subjectId, visibility] for public browsing
 //   - StudyTask: [userId, scheduledDate] for planner
+
+model InstitutionMembership {
+  id                 String   @id @default(cuid())
+  userId             String
+  institutionId      String
+  status             String   @default("unverified") // unverified | pending | verified | suspended | revoked
+  programmeId        String?
+  schemeId           String?
+  semesterId         String?
+  division           String?
+  rollNumber         String?
+  verificationMethod String? // admin_approval | roster_import | verified_roll_match
+  verifiedBy         String?
+  verifiedAt         DateTime?
+  suspendedAt        DateTime?
+  revokedAt          DateTime?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  institution Institution @relation(fields: [institutionId], references: [id])
+
+  @@unique([userId, institutionId])
+  @@index([institutionId, status])
+  @@index([institutionId, rollNumber])
+}
+
+model EmailVerificationToken {
+  id        String   @id @default(cuid())
+  email     String
+  tokenHash String   @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+
+  @@index([email])
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  email     String
+  tokenHash String   @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+
+  @@index([email])
+}
+

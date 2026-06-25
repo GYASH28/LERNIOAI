@@ -16,6 +16,7 @@ import {
 import type { AppBootstrapData, DashboardSnapshot } from '@/lib/app-bootstrap-types'
 import type { ViewKey } from '@/lib/types'
 import { publicUserSelect, toPublicUserDTO } from '@/lib/user-dto'
+import { getLocalDateStringInKolkata, getLocalDayStartInKolkata } from '@/lib/timezone'
 
 function toClient<T>(value: T): T {
   return JSON.parse(JSON.stringify(value)) as T
@@ -70,15 +71,10 @@ async function getSubjects() {
 
 async function getActivitySnapshot(userId: string, dailyMins: number) {
   const now = new Date()
-  const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+  const todayStart = getLocalDayStartInKolkata(now)
 
-  const sevenDaysAgo = new Date(now)
-  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 6)
-  sevenDaysAgo.setHours(0, 0, 0, 0)
-
-  const heatStart = new Date(now)
-  heatStart.setDate(heatStart.getDate() - 90)
-  heatStart.setHours(0, 0, 0, 0)
+  const sevenDaysAgo = new Date(todayStart.getTime() - 6 * 24 * 60 * 60 * 1000)
+  const heatStart = new Date(todayStart.getTime() - 90 * 24 * 60 * 60 * 1000)
 
   const [xpEvents, sessions, heatXp, heatSessions, lessonDays, qaDays] = await Promise.all([
     db.xpEvent.findMany({
@@ -109,12 +105,10 @@ async function getActivitySnapshot(userId: string, dailyMins: number) {
 
   const xpByDay = Array.from({ length: 7 }, () => 0)
   const dayBuckets = Array.from({ length: 7 }, (_, index) => {
-    const d = new Date(now)
-    d.setDate(d.getDate() - (6 - index))
-    d.setHours(0, 0, 0, 0)
-    return d.toDateString()
+    const d = new Date(todayStart.getTime() - (6 - index) * 24 * 60 * 60 * 1000)
+    return getLocalDateStringInKolkata(d)
   })
-  const bucketIndex = (date: Date) => dayBuckets.findIndex((bucket) => bucket === date.toDateString())
+  const bucketIndex = (date: Date) => dayBuckets.findIndex((bucket) => bucket === getLocalDateStringInKolkata(date))
 
   if (xpEvents.length > 0) {
     for (const event of xpEvents) {
@@ -129,16 +123,16 @@ async function getActivitySnapshot(userId: string, dailyMins: number) {
   }
 
   const minutesToday = sessions
-    .filter((session) => session.startedAt.toDateString() === todayStart.toDateString())
+    .filter((session) => getLocalDateStringInKolkata(session.startedAt) === getLocalDateStringInKolkata(todayStart))
     .reduce((sum, session) => sum + (session.durationMins || 0), 0)
 
   const activeDaySet = new Set<string>()
-  for (const event of heatXp) activeDaySet.add(event.createdAt.toISOString().slice(0, 10))
-  for (const session of heatSessions) activeDaySet.add(session.startedAt.toISOString().slice(0, 10))
+  for (const event of heatXp) activeDaySet.add(getLocalDateStringInKolkata(event.createdAt))
+  for (const session of heatSessions) activeDaySet.add(getLocalDateStringInKolkata(session.startedAt))
   for (const lesson of lessonDays) {
-    if (lesson.completedAt) activeDaySet.add(lesson.completedAt.toISOString().slice(0, 10))
+    if (lesson.completedAt) activeDaySet.add(getLocalDateStringInKolkata(lesson.completedAt))
   }
-  for (const attempt of qaDays) activeDaySet.add(attempt.createdAt.toISOString().slice(0, 10))
+  for (const attempt of qaDays) activeDaySet.add(getLocalDateStringInKolkata(attempt.createdAt))
 
   return {
     xpByDay,
@@ -150,8 +144,8 @@ async function getActivitySnapshot(userId: string, dailyMins: number) {
 
 async function getDashboardSnapshot(userId: string, dailyMins: number): Promise<DashboardSnapshot> {
   const now = new Date()
-  const endOfDay = new Date(now)
-  endOfDay.setHours(23, 59, 59, 999)
+  const todayStart = getLocalDayStartInKolkata(now)
+  const endOfDay = new Date(todayStart.getTime() + 24 * 60 * 60 * 1000 - 1)
 
   const [
     mastery,

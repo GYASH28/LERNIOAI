@@ -41,6 +41,8 @@ npm run build
 - Install command: `npm ci`
 - Build command: `npm run build`
 - Output directory: default Next.js output
+- Install command: `npm ci`
+- Build command: `npm run build`
 - Root directory: repository root
 - Runtime: Node.js 20 or newer
 - Production branch: `main`

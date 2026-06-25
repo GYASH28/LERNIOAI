@@ -31,40 +31,66 @@ export async function checkRateLimit(input: RateLimitInput): Promise<RateLimitRe
   const key = rateLimitKey(input.action, input.identifier)
 
   try {
-    const existing = await db.rateLimitBucket.findUnique({ where: { key } })
-    if (!existing || existing.resetAt <= now) {
-      await db.rateLimitBucket.upsert({
-        where: { key },
-        update: { count: 1, resetAt },
-        create: { key, count: 1, resetAt },
-      })
-      return { allowed: true, remaining: input.limit - 1, resetAt, retryAfterSec: 0, backend: 'database' }
+    const result = await db.$queryRaw<Array<{ count: number; resetAt: Date }>>`
+      INSERT INTO "RateLimitBucket" ("key", "count", "resetAt", "createdAt", "updatedAt")
+      VALUES (${key}, 1, ${resetAt}, NOW(), NOW())
+      ON CONFLICT ("key") DO UPDATE
+      SET
+        "count" = CASE
+          WHEN "RateLimitBucket"."resetAt" <= NOW() THEN 1
+          ELSE "RateLimitBucket"."count" + 1
+        END,
+        "resetAt" = CASE
+          WHEN "RateLimitBucket"."resetAt" <= NOW() THEN ${resetAt}::timestamp
+          ELSE "RateLimitBucket"."resetAt"
+        END,
+        "updatedAt" = NOW()
+      RETURNING "count", "resetAt";
+    `
+
+    const updated = result[0]
+    if (!updated) {
+      throw new Error('Database insert/update returned no row')
     }
 
-    if (existing.count >= input.limit) {
+    // Convert PostgreSQL date/timestamp to Date object if it's returned as string/other
+    const bucketResetAt = new Date(updated.resetAt)
+
+    if (updated.count > input.limit) {
       return {
         allowed: false,
         remaining: 0,
-        resetAt: existing.resetAt,
-        retryAfterSec: Math.max(1, Math.ceil((existing.resetAt.getTime() - now.getTime()) / 1000)),
+        resetAt: bucketResetAt,
+        retryAfterSec: Math.max(1, Math.ceil((bucketResetAt.getTime() - now.getTime()) / 1000)),
         backend: 'database',
       }
     }
 
-    const updated = await db.rateLimitBucket.update({
-      where: { key },
-      data: { count: { increment: 1 } },
-      select: { count: true, resetAt: true },
-    })
     return {
       allowed: true,
       remaining: Math.max(0, input.limit - updated.count),
-      resetAt: updated.resetAt,
+      resetAt: bucketResetAt,
       retryAfterSec: 0,
       backend: 'database',
     }
-  } catch {
-    console.warn('[rate-limit] database limiter unavailable; using local development fallback')
+  } catch (error) {
+    const isProduction = process.env.NODE_ENV === 'production'
+    const isSensitive = ['register', 'signup', 'login', 'signin', 'forgot-password', 'reset-password', 'verify-email', 'ai-chat', 'chat', 'tutor'].some(keyword => 
+      input.action.toLowerCase().includes(keyword)
+    )
+
+    if (isProduction && isSensitive) {
+      console.error('[rate-limit] Database rate limiter failed. Failing closed in production for sensitive action:', input.action, error)
+      return {
+        allowed: false,
+        remaining: 0,
+        resetAt: new Date(now.getTime() + 60 * 1000), // Block for 60 seconds
+        retryAfterSec: 60,
+        backend: 'database',
+      }
+    }
+
+    console.warn('[rate-limit] database limiter unavailable; using local development fallback', error)
     return checkMemoryRateLimit(key, input.limit, input.windowMs)
   }
 }

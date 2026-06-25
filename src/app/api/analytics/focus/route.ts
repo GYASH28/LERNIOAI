@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { requireUser, errorResponse } from '@/lib/auth'
 import { db } from '@/lib/db'
+import { getLocalDateStringInKolkata, getLocalDayStartInKolkata } from '@/lib/timezone'
 
 /**
  * GET /api/analytics/focus
@@ -29,13 +30,10 @@ export async function GET() {
     const authUser = await requireUser()
 
     const now = new Date()
-    const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate())
-    const weekStart = new Date(todayStart)
-    weekStart.setDate(weekStart.getDate() - 6) // last 7 days inclusive
-    const seriesStart = new Date(todayStart)
-    seriesStart.setDate(seriesStart.getDate() - 13) // 14-day trend
-    const monthStart = new Date(todayStart)
-    monthStart.setDate(monthStart.getDate() - 29) // 30-day window for best-day & streak
+    const todayStart = getLocalDayStartInKolkata(now)
+    const weekStart = new Date(todayStart.getTime() - 6 * 24 * 60 * 60 * 1000) // last 7 days inclusive
+    const seriesStart = new Date(todayStart.getTime() - 13 * 24 * 60 * 60 * 1000) // 14-day trend
+    const monthStart = new Date(todayStart.getTime() - 29 * 24 * 60 * 60 * 1000) // 30-day window for best-day & streak
 
     const [todayAgg, weekAgg, allAgg, recentSessions, subjectAgg, activityAgg] =
       await Promise.all([
@@ -96,13 +94,12 @@ export async function GET() {
     // ──────────────────────────────────────────────────────────────
     const dailyMap = new Map<string, { minutes: number; count: number }>()
     for (let i = 13; i >= 0; i--) {
-      const d = new Date(seriesStart)
-      d.setDate(d.getDate() + i)
-      const key = d.toISOString().slice(0, 10)
+      const d = new Date(seriesStart.getTime() + i * 24 * 60 * 60 * 1000)
+      const key = getLocalDateStringInKolkata(d)
       dailyMap.set(key, { minutes: 0, count: 0 })
     }
     for (const s of recentSessions) {
-      const key = s.startedAt.toISOString().slice(0, 10)
+      const key = getLocalDateStringInKolkata(s.startedAt)
       const entry = dailyMap.get(key)
       if (entry) {
         entry.minutes += s.durationMins || 0
@@ -122,24 +119,24 @@ export async function GET() {
     // ──────────────────────────────────────────────────────────────
     const dayHasSession = new Set<string>()
     for (const s of recentSessions) {
-      dayHasSession.add(s.startedAt.toISOString().slice(0, 10))
+      dayHasSession.add(getLocalDateStringInKolkata(s.startedAt))
     }
     let currentStreak = 0
     const cursor = new Date(todayStart)
     // If no session today, start the streak check from yesterday so we
     // don't reset to 0 just because the student hasn't started studying yet.
-    if (!dayHasSession.has(cursor.toISOString().slice(0, 10))) {
-      cursor.setDate(cursor.getDate() - 1)
+    if (!dayHasSession.has(getLocalDateStringInKolkata(cursor))) {
+      cursor.setTime(cursor.getTime() - 24 * 60 * 60 * 1000)
     }
-    while (dayHasSession.has(cursor.toISOString().slice(0, 10))) {
+    while (dayHasSession.has(getLocalDateStringInKolkata(cursor))) {
       currentStreak += 1
-      cursor.setDate(cursor.getDate() - 1)
+      cursor.setTime(cursor.getTime() - 24 * 60 * 60 * 1000)
     }
 
     // Best day in last 30 days
     const perDayMins = new Map<string, number>()
     for (const s of recentSessions) {
-      const k = s.startedAt.toISOString().slice(0, 10)
+      const k = getLocalDateStringInKolkata(s.startedAt)
       perDayMins.set(k, (perDayMins.get(k) ?? 0) + (s.durationMins || 0))
     }
     const bestDayMins = perDayMins.size ? Math.max(...perDayMins.values()) : 0

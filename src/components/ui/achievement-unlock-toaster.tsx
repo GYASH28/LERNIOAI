@@ -26,6 +26,7 @@
 
 import { useEffect, useRef } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
+import { usePathname } from 'next/navigation'
 import { toast } from 'sonner'
 import {
   Sparkles,
@@ -259,22 +260,26 @@ const POLL_INTERVAL_MS = 15_000
 const INITIAL_LOOKBACK_MS = 30_000
 const TOAST_DURATION_MS = 6_000
 const SHOWN_TTL_MS = 60_000 // safety-net cleanup for the dedup Set
+const PUBLIC_TOASTER_EXCLUDED_PATHS = new Set([
+  '/',
+  '/sign-in',
+  '/sign-up',
+  '/forgot-password',
+  '/reset-password',
+])
 
 export function AchievementUnlockToaster() {
+  const pathname = usePathname()
   const reduced = useReducedMotion()
   // Keep the latest `reduced` value in a ref so the polling effect never
   // needs to re-subscribe when the preference changes.
   const reducedRef = useRef(reduced)
-  reducedRef.current = reduced
 
   // Latest `since` timestamp — kept in a ref so the poller always uses the
   // most recent serverTime without re-subscribing the interval on every
   // render. Lazy-initialised on first read (now − 30s) to catch unlocks
   // that happened just before mount.
-  const sinceRef = useRef<string>('')
-  if (sinceRef.current === '') {
-    sinceRef.current = new Date(Date.now() - INITIAL_LOOKBACK_MS).toISOString()
-  }
+  const sinceRef = useRef<string>(new Date(Date.now() - INITIAL_LOOKBACK_MS).toISOString())
 
   // Dedup set of shown UserAchievement IDs — prevents double-toasting when
   // two polls arrive while a toast is still on screen.
@@ -286,6 +291,12 @@ export function AchievementUnlockToaster() {
   )
 
   useEffect(() => {
+    reducedRef.current = reduced
+  }, [reduced])
+
+  useEffect(() => {
+    if (PUBLIC_TOASTER_EXCLUDED_PATHS.has(pathname)) return
+
     let cancelled = false
     let interval: ReturnType<typeof setInterval> | null = null
 
@@ -391,7 +402,7 @@ export function AchievementUnlockToaster() {
       shownTimers.forEach((t) => clearTimeout(t))
       shownTimers.clear()
     }
-  }, [])
+  }, [pathname])
 
   // The component renders nothing visible — it is just a polling listener.
   return null

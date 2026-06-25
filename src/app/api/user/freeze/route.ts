@@ -5,6 +5,7 @@ import { awardXp } from '@/lib/xp'
 import { evaluateAchievements } from '@/lib/achievements'
 import { z } from 'zod'
 import { DEMO_FREEZE_STATUS, isDemoMode } from '@/lib/demo-fixtures'
+import { getLocalDateStringInKolkata } from '@/lib/timezone'
 
 /**
  * Streak Freeze system — earn a freeze by completing all 5 daily quests,
@@ -47,13 +48,14 @@ export async function GET() {
     })
     if (!user) throw new ApiError('NOT_FOUND', 'User not found.', 404, false)
 
-    const today = new Date().toISOString().slice(0, 10)
+    const now = new Date()
+    const today = getLocalDateStringInKolkata(now)
     // Streak is considered "broken" if lastActiveDate is older than yesterday
     // AND today has no activity yet — i.e. the streak counter will reset to 0
     // on the next activity. We let the client show a "Use Freeze" button then.
     let streakBroken = false
     if (user.lastActiveDate) {
-      const last = new Date(user.lastActiveDate)
+      const last = new Date(user.lastActiveDate + 'T00:00:00Z')
       const todayDate = new Date(today + 'T00:00:00Z')
       const diffDays = Math.round(
         (todayDate.getTime() - last.getTime()) / (1000 * 60 * 60 * 24),
@@ -105,7 +107,8 @@ export async function POST(req: Request) {
     })
     if (!user) throw new ApiError('NOT_FOUND', 'User not found.', 404, false)
 
-    const today = new Date().toISOString().slice(0, 10)
+    const now = new Date()
+    const today = getLocalDateStringInKolkata(now)
 
     // Idempotent: if already used today, return current state.
     if (user.lastFreezeUsedDate === today) {
@@ -129,7 +132,7 @@ export async function POST(req: Request) {
     // Compute whether streak is actually broken.
     let streakBroken = false
     if (user.lastActiveDate) {
-      const last = new Date(user.lastActiveDate)
+      const last = new Date(user.lastActiveDate + 'T00:00:00Z')
       const todayDate = new Date(today + 'T00:00:00Z')
       const diffDays = Math.round(
         (todayDate.getTime() - last.getTime()) / (1000 * 60 * 60 * 24),
@@ -148,15 +151,15 @@ export async function POST(req: Request) {
     // Apply the freeze: consume 1 freeze, mark today as used, and bridge
     // lastActiveDate forward to "yesterday" so the next activity continues
     // the streak naturally.
-    const yesterday = new Date()
-    yesterday.setDate(yesterday.getDate() - 1)
+    const yesterdayDate = new Date(now.getTime() - 24 * 60 * 60 * 1000)
+    const yesterday = getLocalDateStringInKolkata(yesterdayDate)
 
     await db.user.update({
       where: { id: authUser.id },
       data: {
         streakFreezes: { decrement: 1 },
         lastFreezeUsedDate: today,
-        lastActiveDate: yesterday.toISOString().slice(0, 10),
+        lastActiveDate: yesterday,
       },
     })
 

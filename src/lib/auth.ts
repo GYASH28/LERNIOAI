@@ -23,7 +23,7 @@ import { isDatabaseUnavailableError } from '@/lib/api-error-policy'
 import { resolveAuthMode } from '@/lib/auth-policy'
 import { DEMO_AUTH_USER } from '@/lib/demo-fixtures'
 import { checkRateLimit } from '@/lib/rate-limit'
-import { normalizeRole, type Role } from '@/lib/roles'
+import { normalizeRole, type Role, type Permission, hasPermission } from '@/lib/roles'
 
 export type { Role } from '@/lib/roles'
 
@@ -58,19 +58,22 @@ const providers: NextAuthOptions['providers'] = [
       const password = credentials?.password
       if (!email || !password || password.length > 256) return null
 
-      const limiter = await checkRateLimit({
-        action: 'credential_login',
-        identifier: email,
-        limit: MAX_LOGIN_ATTEMPTS,
-        windowMs: LOGIN_WINDOW_MS,
+      // Check failed login attempts from RateLimitBucket before verifying
+      const failKey = `credential_login_fail:${email}`
+      const existingFail = await db.rateLimitBucket.findUnique({
+        where: { key: failKey },
       })
-      if (!limiter.allowed) return null
+      if (existingFail && existingFail.resetAt > new Date() && existingFail.count >= MAX_LOGIN_ATTEMPTS) {
+        return null // Rate limited
+      }
 
       if (
         process.env.LERNIO_DEMO_MODE === 'true' &&
         email === DEMO_AUTH_USER.email &&
         password === DEMO_PASSWORD
       ) {
+        // Successful login: reset failed login attempts
+        await db.rateLimitBucket.delete({ where: { key: failKey } }).catch(() => {})
         return DEMO_AUTH_USER
       }
 
@@ -86,14 +89,32 @@ const providers: NextAuthOptions['providers'] = [
           profileComplete: true,
         },
       })
+
       if (!user?.passwordHash || user.status === 'disabled') {
+        // Increment failed attempts
+        await checkRateLimit({
+          action: 'credential_login_fail',
+          identifier: email,
+          limit: MAX_LOGIN_ATTEMPTS,
+          windowMs: LOGIN_WINDOW_MS,
+        })
         return null
       }
 
       const valid = await compare(password, user.passwordHash)
       if (!valid) {
+        // Increment failed attempts
+        await checkRateLimit({
+          action: 'credential_login_fail',
+          identifier: email,
+          limit: MAX_LOGIN_ATTEMPTS,
+          windowMs: LOGIN_WINDOW_MS,
+        })
         return null
       }
+
+      // Successful login: reset failed login attempts
+      await db.rateLimitBucket.delete({ where: { key: failKey } }).catch(() => {})
 
       return {
         id: user.id,
@@ -263,6 +284,59 @@ export const requireTeacher = () => requireRole('teacher', 'coordinator', 'admin
 export const requireModerator = () => requireRole('moderator', 'reviewer', 'coordinator', 'admin')
 export const requireReviewer = () => requireRole('reviewer', 'admin')
 export const requireAdmin = () => requireRole('admin')
+
+/**
+ * Require a user with a specific permission and optional scope checks.
+ * Scope check verifies that if the user's role is restricted (e.g. teacher/coordinator),
+ * they have access to the requested subjectId or departmentCode.
+ */
+export async function requirePermission(
+  permission: Permission,
+  scope?: { subjectId?: string; departmentCode?: string }
+): Promise<AuthUser> {
+  const authUser = await requireUser()
+
+  if (!hasPermission(authUser.role, permission)) {
+    throw new ApiError('FORBIDDEN', 'You do not have permission to do that.', 403, false)
+  }
+
+  if (scope) {
+    const user = await db.user.findUnique({
+      where: { id: authUser.id },
+      select: { assignedSubjects: true, departmentCode: true, role: true },
+    })
+
+    if (!user) {
+      throw new ApiError('NOT_FOUND', 'User not found.', 404, false)
+    }
+
+    // Admins bypass scope checks
+    if (user.role === 'admin') {
+      return authUser
+    }
+
+    if (scope.subjectId) {
+      if (user.assignedSubjects) {
+        try {
+          const subjects = JSON.parse(user.assignedSubjects) as string[]
+          if (Array.isArray(subjects) && !subjects.includes(scope.subjectId)) {
+            throw new ApiError('FORBIDDEN', 'You do not have access to this subject.', 403, false)
+          }
+        } catch {
+          throw new ApiError('FORBIDDEN', 'You do not have access to this subject.', 403, false)
+        }
+      }
+    }
+
+    if (scope.departmentCode) {
+      if (user.departmentCode && user.departmentCode !== scope.departmentCode) {
+        throw new ApiError('FORBIDDEN', 'You do not have access to this department.', 403, false)
+      }
+    }
+  }
+
+  return authUser
+}
 
 /**
  * Standardised API error with safe user message + code + retryability.
