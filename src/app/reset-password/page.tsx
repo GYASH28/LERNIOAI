@@ -13,7 +13,7 @@ import { Label } from '@/components/ui/label'
 function Rule({ passed, children }: { passed: boolean; children: React.ReactNode }) {
   return (
     <li className="flex items-center gap-2">
-      {passed ? <Check className="h-3.5 w-3.5 text-[#255f51]" /> : <X className="h-3.5 w-3.5 text-[#9aa8a0]" />}
+      {passed ? <Check className="h-3.5 w-3.5 text-success" /> : <X className="h-3.5 w-3.5 text-muted-foreground" />}
       <span>{children}</span>
     </li>
   )
@@ -96,7 +96,7 @@ function ResetPasswordForm() {
     >
       {!token ? (
         <div className="space-y-4">
-          <p className="rounded-lg border border-[#e7b7b7] bg-[#fff1f1] px-3 py-2 text-sm font-semibold text-[#8a2d2d]">
+          <p className="rounded-lg border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm font-semibold text-destructive">
             This reset link is invalid or missing a token. Request a new link to continue.
           </p>
           <Button asChild className={`w-full ${authPrimaryButtonClass}`}>
@@ -106,11 +106,11 @@ function ResetPasswordForm() {
       ) : (
         <form onSubmit={submit} className="space-y-4">
           <div>
-            <Label htmlFor="password" className="text-sm font-semibold text-[#405249]">
+            <Label htmlFor="password" className="text-sm font-semibold text-foreground">
               New password
             </Label>
             <div className="relative mt-2">
-              <KeyRound className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#718176]" />
+              <KeyRound className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
                 id="password"
                 type={showPassword ? 'text' : 'password'}
@@ -125,7 +125,7 @@ function ResetPasswordForm() {
                 type="button"
                 aria-label={showPassword ? 'Hide password' : 'Show password'}
                 onClick={() => setShowPassword((value) => !value)}
-                className="absolute right-3.5 top-1/2 grid h-6 w-6 -translate-y-1/2 place-items-center rounded-md text-[#718176] transition hover:bg-[#eef3ef] hover:text-[#17211c]"
+                className="absolute right-3.5 top-1/2 grid h-6 w-6 -translate-y-1/2 place-items-center rounded-md text-muted-foreground transition hover:bg-muted hover:text-foreground"
               >
                 {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>
@@ -133,11 +133,11 @@ function ResetPasswordForm() {
           </div>
 
           <div>
-            <Label htmlFor="confirmPassword" className="text-sm font-semibold text-[#405249]">
+            <Label htmlFor="confirmPassword" className="text-sm font-semibold text-foreground">
               Confirm password
             </Label>
             <div className="relative mt-2">
-              <KeyRound className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#718176]" />
+              <KeyRound className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
                 id="confirmPassword"
                 type={showPassword ? 'text' : 'password'}
@@ -152,15 +152,15 @@ function ResetPasswordForm() {
           </div>
 
           {password.length > 0 ? (
-            <div className="rounded-lg border border-[#d7e1da] bg-[#f7faf8] p-3">
+            <div className="rounded-lg border border-border bg-muted/60 p-3">
               <div className="flex items-center justify-between text-xs font-semibold">
-                <span className="text-[#405249]">Strength: {strengthLabel}</span>
-                <span className="text-[#718176]">{strengthCount}/5 rules met</span>
+                <span className="text-foreground">Strength: {strengthLabel}</span>
+                <span className="text-muted-foreground">{strengthCount}/5 rules met</span>
               </div>
-              <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-[#d7e1da]">
-                <div className="h-full rounded-full bg-[#255f51] transition-all duration-300" style={{ width: `${(strengthCount / 5) * 100}%` }} />
+              <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-border">
+                <div className="h-full rounded-full bg-primary transition-all duration-300" style={{ width: `${(strengthCount / 5) * 100}%` }} />
               </div>
-              <ul className="mt-3 grid gap-1.5 text-xs font-semibold text-[#66776d]">
+              <ul className="mt-3 grid gap-1.5 text-xs font-semibold text-muted-foreground">
                 <Rule passed={hasLength}>At least 8 characters</Rule>
                 <Rule passed={hasUpper}>One uppercase letter</Rule>
                 <Rule passed={hasLower}>One lowercase letter</Rule>
@@ -172,13 +172,13 @@ function ResetPasswordForm() {
           ) : null}
 
           {error ? (
-            <p className="rounded-lg border border-[#e7b7b7] bg-[#fff1f1] px-3 py-2 text-sm font-semibold text-[#8a2d2d]">
+            <p className="rounded-lg border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm font-semibold text-destructive">
               {error}
             </p>
           ) : null}
 
           {statusMessage ? (
-            <p className="rounded-lg border border-[#bad8cb] bg-[#eef8f2] px-3 py-2 text-sm font-semibold text-[#255f51]">
+            <p className="rounded-lg border border-primary/30 bg-primary/10 px-3 py-2 text-sm font-semibold text-primary">
               {statusMessage}
             </p>
           ) : null}
@@ -203,7 +203,7 @@ export default function ResetPasswordPage() {
           backHref="/sign-in"
           backLabel="Sign in"
         >
-          <div className="h-72 animate-pulse rounded-lg bg-[#eef3ef]" />
+          <div className="h-72 animate-pulse rounded-lg bg-muted" />
         </AuthShell>
       }
     >

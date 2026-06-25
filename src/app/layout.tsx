@@ -17,19 +17,65 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const SITE_URL =
+  process.env.NEXTAUTH_URL?.replace(/\/$/, "") || "https://lernioai.vercel.app";
+
 export const metadata: Metadata = {
-  title: "Lernio AI 2.0 - Adaptive Learning Platform",
-  description: "Campus-ready adaptive learning workspace for diploma students. Learn, practise, prepare, and track your progress with Lernio.",
-  keywords: ["Lernio AI", "learning platform", "diploma", "Cusrow Wadia Institute of Technology", "CWIT Pune", "data structures", "C++", "microprocessors", "data communication"],
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Lernio AI — Adaptive learning for diploma students",
+    template: "%s · Lernio AI",
+  },
+  description:
+    "Lernio helps diploma students understand difficult topics, practise intelligently, revise weak areas and prepare for exams — from one personalised learning workspace.",
+  keywords: [
+    "Lernio AI",
+    "learning platform",
+    "diploma",
+    "CWIT Pune",
+    "data structures",
+    "C++",
+    "microprocessors",
+    "data communication",
+    "adaptive learning",
+    "exam preparation",
+  ],
   authors: [{ name: "Lernio AI" }],
+  creator: "Lernio AI",
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: "/brand/lernio-logo-mark.png",
+    apple: "/brand/lernio-logo-mark.png",
   },
+  manifest: "/manifest.webmanifest",
   openGraph: {
-    title: "Lernio AI 2.0",
-    description: "Adaptive learning operating system for diploma students",
+    title: "Lernio AI — Adaptive learning for diploma students",
+    description:
+      "Understand faster. Practise smarter. Walk into exams prepared. One personalised learning workspace for diploma engineering students.",
     siteName: "Lernio AI",
     type: "website",
+    url: SITE_URL,
+    images: [
+      {
+        url: "/brand/lernio-logo-mark.png",
+        width: 512,
+        height: 512,
+        alt: "Lernio AI logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: "Lernio AI — Adaptive learning for diploma students",
+    description:
+      "Understand faster. Practise smarter. Walk into exams prepared. One personalised learning workspace for diploma engineering students.",
+    images: ["/brand/lernio-logo-mark.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 

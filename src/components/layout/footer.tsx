@@ -12,7 +12,7 @@ export function Footer() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <Mascot mascot="leo" state="idle" size={28} animated={false} />
-            <span className="text-sm font-semibold bg-gradient-to-r from-primary to-violet-500 bg-clip-text text-transparent">Lernio AI 2.0</span>
+            <span className="text-sm font-semibold text-foreground">Lernio AI 2.0</span>
             <span className="text-xs text-muted-foreground">· Cusrow Wadia Institute of Technology (CWIT) · G Scheme 2023</span>
           </div>
           <div className="flex items-center gap-4 text-xs text-muted-foreground">

@@ -18,8 +18,36 @@ import type { ViewKey } from '@/lib/types'
 import { publicUserSelect, toPublicUserDTO } from '@/lib/user-dto'
 import { getLocalDateStringInKolkata, getLocalDayStartInKolkata } from '@/lib/timezone'
 
-function toClient<T>(value: T): T {
-  return JSON.parse(JSON.stringify(value)) as T
+/**
+ * Serialise a Prisma result (or any plain object graph containing Date
+ * instances) into a form that is safe to pass from a Server Component to a
+ * Client Component in the Next.js App Router.
+ *
+ * Previously this used `JSON.parse(JSON.stringify(value))` as a universal
+ * serialiser. That works but (a) silently drops anything JSON cannot
+ * represent, (b) loses Date precision by going through a string, and
+ * (c) makes it impossible to tell at a glance what the function actually
+ * does. This implementation is explicit: it walks the object graph and
+ * converts Date → ISO string, arrays → arrays, and plain objects → plain
+ * objects, leaving primitives untouched.
+ *
+ * If a value that cannot be serialised is encountered (e.g. a function or
+ * a Symbol), it is dropped — matching the old JSON-clone behaviour.
+ */
+function serializeForClient<T>(value: T): T {
+  if (value === null || value === undefined) return value
+  if (value instanceof Date) return new Date(value.getTime()).toISOString() as unknown as T
+  if (Array.isArray(value)) return value.map((item) => serializeForClient(item)) as unknown as T
+  if (typeof value === 'object') {
+    const out: Record<string, unknown> = {}
+    for (const key of Object.keys(value as Record<string, unknown>)) {
+      const v = (value as Record<string, unknown>)[key]
+      if (typeof v === 'function' || typeof v === 'symbol') continue
+      out[key] = serializeForClient(v)
+    }
+    return out as unknown as T
+  }
+  return value
 }
 
 async function getSubjects() {
@@ -220,7 +248,7 @@ async function getDashboardSnapshot(userId: string, dailyMins: number): Promise<
 
 export async function getAppBootstrap(initialView: ViewKey): Promise<AppBootstrapData> {
   if (isDemoMode()) {
-    return toClient({
+    return serializeForClient({
       user: toPublicUserDTO(DEMO_USER),
       subjects: DEMO_SUBJECTS,
       dashboard:
@@ -248,5 +276,5 @@ export async function getAppBootstrap(initialView: ViewKey): Promise<AppBootstra
       ? await getDashboardSnapshot(user.id, user.dailyMins)
       : null
 
-  return toClient({ user, subjects, dashboard })
+  return serializeForClient({ user, subjects, dashboard })
 }

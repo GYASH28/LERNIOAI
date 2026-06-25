@@ -58,7 +58,7 @@ export function Sidebar() {
             <Mascot mascot="leo" state="idle" size={40} animated={!pref.reducedMotion} />
           </div>
           <div className="flex-1 min-w-0 relative">
-            <h1 className="font-bold text-lg leading-tight bg-gradient-to-r from-primary via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
+            <h1 className="font-bold text-lg leading-tight text-foreground">
               Lernio AI
             </h1>
             <p className="text-meta text-muted-foreground uppercase tracking-wider">Learning OS 2.0</p>
@@ -78,7 +78,7 @@ export function Sidebar() {
         {user ? (
           <div className="p-3 border-b border-sidebar-border">
             <div className="flex items-center gap-2 rounded-lg bg-sidebar-accent/50 p-2">
-              <div className="h-9 w-9 rounded-full bg-gradient-to-br from-primary to-violet-600 flex items-center justify-center text-primary-foreground text-sm font-bold">
+              <div className="h-9 w-9 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-sm font-bold">
                 {user.name.charAt(0)}
               </div>
               <div className="flex-1 min-w-0">

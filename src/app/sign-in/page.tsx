@@ -120,11 +120,11 @@ function SignInForm() {
     >
       <form onSubmit={submit} className="space-y-4">
         <label className="block">
-          <Label htmlFor="email" className="text-sm font-semibold text-[#405249]">
+          <Label htmlFor="email" className="text-sm font-semibold text-foreground">
             Email
           </Label>
           <span className="relative mt-2 block">
-            <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#718176]" />
+            <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               id="email"
               type="email"
@@ -141,15 +141,15 @@ function SignInForm() {
 
         <div>
           <div className="flex items-center justify-between gap-3">
-            <Label htmlFor="password" className="text-sm font-semibold text-[#405249]">
+            <Label htmlFor="password" className="text-sm font-semibold text-foreground">
               Password
             </Label>
-            <Link href="/forgot-password" className="text-xs font-bold text-[#255f51] transition hover:text-[#17211c]">
+            <Link href="/forgot-password" className="text-xs font-bold text-primary transition hover:text-foreground">
               Forgot password?
             </Link>
           </div>
           <span className="relative mt-2 block">
-            <LockKeyhole className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#718176]" />
+            <LockKeyhole className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               id="password"
               type="password"
@@ -165,13 +165,13 @@ function SignInForm() {
         </div>
 
         {visibleError ? (
-          <p className="rounded-lg border border-[#e7b7b7] bg-[#fff1f1] px-3 py-2 text-sm font-semibold text-[#8a2d2d]">
+          <p className="rounded-lg border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm font-semibold text-destructive">
             {visibleError}
           </p>
         ) : null}
 
         {visibleStatus ? (
-          <p className="rounded-lg border border-[#bad8cb] bg-[#eef8f2] px-3 py-2 text-sm font-semibold text-[#255f51]">
+          <p className="rounded-lg border border-primary/30 bg-primary/10 px-3 py-2 text-sm font-semibold text-primary">
             {visibleStatus}
           </p>
         ) : null}
@@ -184,10 +184,10 @@ function SignInForm() {
 
       {providers?.google ? (
         <div>
-          <div className="my-5 flex items-center gap-3 text-xs font-semibold text-[#718176]">
-            <span className="h-px flex-1 bg-[#d7e1da]" />
+          <div className="my-5 flex items-center gap-3 text-xs font-semibold text-muted-foreground">
+            <span className="h-px flex-1 bg-border" />
             or
-            <span className="h-px flex-1 bg-[#d7e1da]" />
+            <span className="h-px flex-1 bg-border" />
           </div>
           <Button
             type="button"
@@ -197,7 +197,7 @@ function SignInForm() {
             onClick={() => handleOAuthSignIn('google')}
           >
             {oauthLoading === 'google' ? (
-              <span className="h-4 w-4 animate-spin rounded-full border-2 border-[#9db2a6] border-t-[#255f51]" />
+              <span className="h-4 w-4 animate-spin rounded-full border-2 border-muted-foreground/30 border-t-primary" />
             ) : (
               <GoogleMark />
             )}
@@ -206,9 +206,9 @@ function SignInForm() {
         </div>
       ) : null}
 
-      <p className="mt-6 text-center text-sm text-[#66776d]">
+      <p className="mt-6 text-center text-sm text-muted-foreground">
         New to Lernio?{' '}
-        <Link href="/sign-up" className="font-bold text-[#255f51] hover:text-[#17211c]">
+        <Link href="/sign-up" className="font-bold text-primary hover:text-foreground">
           Create a profile
         </Link>
       </p>
@@ -227,7 +227,7 @@ export default function SignInPage() {
           backHref="/"
           backLabel="Intro"
         >
-          <div className="h-72 animate-pulse rounded-lg bg-[#eef3ef]" />
+          <div className="h-72 animate-pulse rounded-lg bg-muted" />
         </AuthShell>
       }
     >

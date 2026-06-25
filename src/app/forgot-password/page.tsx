@@ -53,11 +53,11 @@ export default function ForgotPasswordPage() {
     >
       <form onSubmit={submit} className="space-y-4">
         <label className="block">
-          <Label htmlFor="email" className="text-sm font-semibold text-[#405249]">
+          <Label htmlFor="email" className="text-sm font-semibold text-foreground">
             Email
           </Label>
           <span className="relative mt-2 block">
-            <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#718176]" />
+            <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               id="email"
               type="email"
@@ -73,13 +73,13 @@ export default function ForgotPasswordPage() {
         </label>
 
         {error ? (
-          <p className="rounded-lg border border-[#e7b7b7] bg-[#fff1f1] px-3 py-2 text-sm font-semibold text-[#8a2d2d]">
+          <p className="rounded-lg border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm font-semibold text-destructive">
             {error}
           </p>
         ) : null}
 
         {statusMessage ? (
-          <p className="rounded-lg border border-[#bad8cb] bg-[#eef8f2] px-3 py-2 text-sm font-semibold text-[#255f51]">
+          <p className="rounded-lg border border-primary/30 bg-primary/10 px-3 py-2 text-sm font-semibold text-primary">
             {statusMessage}
           </p>
         ) : null}
@@ -89,9 +89,9 @@ export default function ForgotPasswordPage() {
         </Button>
       </form>
 
-      <p className="mt-6 text-center text-sm text-[#66776d]">
+      <p className="mt-6 text-center text-sm text-muted-foreground">
         Remembered it?{' '}
-        <Link href="/sign-in" className="font-bold text-[#255f51] hover:text-[#17211c]">
+        <Link href="/sign-in" className="font-bold text-primary hover:text-foreground">
           Sign in
         </Link>
       </p>

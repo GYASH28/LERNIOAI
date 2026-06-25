@@ -124,9 +124,19 @@ src/
 
 ## Known limitations
 - **Lesson coverage**: 11 of 64 topics have full 5-mode lessons; the remaining 53 show an honest "No lesson yet" empty-state. Expanding content is an ongoing effort.
-- **Coding Lab**: no real C++ execution in the sandbox (honestly labelled). A production runner is required for real grading.
-- **Tests**: not yet present. The recommended next step is Vitest for unit tests (mastery, SM-2, scoring, XP idempotency) + Playwright for critical student journeys.
-- **Onboarding**: ordinary students can enter Lernio immediately; missing academic details can be completed later.
+- **Coding Lab**: no real C++ execution in the sandbox (honestly labelled as a syntax-learning playground). A production isolated runner is required for real grading.
+- **Tests**: Vitest unit tests exist for auth policy, rate limiting, roles, user DTOs, motion, and the card component. Playwright is configured for E2E, accessibility and visual tests. Coverage is expanding — see `tests/` and `*.test.ts` files across `src/`.
+- **Onboarding**: ordinary students can enter Lernio immediately; missing academic details can be completed later through the complete-profile flow.
+- **Production deployment**: the public URL `lernioai.vercel.app` must be linked to this repository's `main` branch with PostgreSQL, `NEXTAUTH_SECRET`, and the required environment variables configured in Vercel. See `.env.example` for the full list.
+
+---
+
+## Operations
+- **Health probe**: `GET /api/health` — returns 200 if the process is alive (no DB check).
+- **Readiness probe**: `GET /api/ready` — verifies the database is reachable and reports provider configuration. Returns 503 if the database is unavailable.
+- **SEO**: `sitemap.xml` is generated at `/sitemap.xml`, robots at `/robots.txt`, and a PWA manifest at `/manifest.webmanifest`. The landing page includes `SoftwareApplication` JSON-LD structured data.
+- **Public pages**: `/privacy`, `/terms`, `/support` share the public chrome (header + footer) with the landing page.
+- **Security headers**: `next.config.ts` sets `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy`, and HSTS in production.
 
 ---
 

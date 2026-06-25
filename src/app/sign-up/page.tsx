@@ -42,7 +42,7 @@ function Field({
 }) {
   return (
     <label className={`block ${className}`}>
-      <Label className="text-sm font-semibold text-[#405249]">{label}</Label>
+      <Label className="text-sm font-semibold text-foreground">{label}</Label>
       <span className="mt-2 block">{children}</span>
     </label>
   )
@@ -60,7 +60,7 @@ function ToggleSection({
   return (
     <button
       type="button"
-      className="inline-flex items-center gap-2 rounded-lg border border-[#d7e1da] bg-[#f7faf8] px-3 py-2 text-sm font-bold text-[#255f51] transition hover:border-[#9db2a6] hover:bg-white"
+      className="inline-flex items-center gap-2 rounded-lg border border-border bg-muted px-3 py-2 text-sm font-bold text-primary transition hover:border-strong hover:bg-background"
       onClick={onClick}
       aria-expanded={open}
     >
@@ -194,7 +194,7 @@ function SignUpForm() {
 
         <Field label="Email" className="sm:col-span-2">
           <span className="relative block">
-            <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#718176]" />
+            <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               type="email"
               name="email"
@@ -244,7 +244,7 @@ function SignUpForm() {
         </div>
 
         {showAcademic ? (
-          <div className="grid gap-4 rounded-lg border border-[#d7e1da] bg-[#f7faf8] p-4 sm:col-span-2 sm:grid-cols-2">
+          <div className="grid gap-4 rounded-lg border border-border bg-muted/60 p-4 sm:col-span-2 sm:grid-cols-2">
             <Field label="Roll number">
               <Input
                 name="rollNumber"
@@ -301,13 +301,13 @@ function SignUpForm() {
         ) : null}
 
         {error ? (
-          <p className="rounded-lg border border-[#e7b7b7] bg-[#fff1f1] px-3 py-2 text-sm font-semibold text-[#8a2d2d] sm:col-span-2">
+          <p className="rounded-lg border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm font-semibold text-destructive sm:col-span-2">
             {error}
           </p>
         ) : null}
 
         {statusMessage ? (
-          <p className="rounded-lg border border-[#bad8cb] bg-[#eef8f2] px-3 py-2 text-sm font-semibold text-[#255f51] sm:col-span-2">
+          <p className="rounded-lg border border-primary/30 bg-primary/10 px-3 py-2 text-sm font-semibold text-primary sm:col-span-2">
             {statusMessage}
           </p>
         ) : null}
@@ -320,10 +320,10 @@ function SignUpForm() {
 
       {providers?.google ? (
         <>
-          <div className="my-5 flex items-center gap-3 text-xs font-semibold text-[#718176]">
-            <span className="h-px flex-1 bg-[#d7e1da]" />
+          <div className="my-5 flex items-center gap-3 text-xs font-semibold text-muted-foreground">
+            <span className="h-px flex-1 bg-border" />
             or
-            <span className="h-px flex-1 bg-[#d7e1da]" />
+            <span className="h-px flex-1 bg-border" />
           </div>
           <Button type="button" variant="secondary" className={`w-full ${authSecondaryButtonClass}`} disabled={submitting} onClick={handleGoogle}>
             <GoogleMark />
@@ -332,9 +332,9 @@ function SignUpForm() {
         </>
       ) : null}
 
-      <p className="mt-6 text-center text-sm text-[#66776d]">
+      <p className="mt-6 text-center text-sm text-muted-foreground">
         Already have an account?{' '}
-        <Link href="/sign-in" className="font-bold text-[#255f51] hover:text-[#17211c]">
+        <Link href="/sign-in" className="font-bold text-primary hover:text-foreground">
           Sign in
         </Link>
       </p>
@@ -354,7 +354,7 @@ export default function SignUpPage() {
           backLabel="Intro"
           className="max-w-2xl"
         >
-          <div className="h-96 animate-pulse rounded-lg bg-[#eef3ef]" />
+          <div className="h-96 animate-pulse rounded-lg bg-muted" />
         </AuthShell>
       }
     >

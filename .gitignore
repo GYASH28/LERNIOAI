@@ -57,3 +57,10 @@ playwright-report/
 test-results/
 # Skills directory
 /skills/
+# Local SQLite dev database (preview only)
+db/*.db
+db/lernio-dev.db
+/db/
+# Work tracking file (not part of the repo)
+worklog.md
+*.bak

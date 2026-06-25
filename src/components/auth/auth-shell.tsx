@@ -5,17 +5,28 @@ import type { ReactNode } from 'react'
 import { ArrowLeft, BookOpenCheck, Building2, GraduationCap, ShieldCheck } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
+/**
+ * Shared auth surface classes.
+ *
+ * These use the global semantic tokens (var(--border), var(--background),
+ * var(--primary), var(--ring), var(--muted-foreground) etc.) so the auth
+ * pages share one brand system with the marketing site and the
+ * authenticated app — instead of the old hardcoded green/gold palette.
+ *
+ * Exported class strings (not components) so the existing sign-in / sign-up
+ * / reset-password / forgot-password pages keep working unchanged.
+ */
 export const authInputClass =
-  'h-11 rounded-lg border-[#cbd8cf] bg-white px-3 text-sm text-[#17211c] shadow-none outline-none transition placeholder:text-[#718176] hover:border-[#9db2a6] focus-visible:border-[#2f6f5e] focus-visible:ring-4 focus-visible:ring-[#2f6f5e]/12'
+  'h-11 rounded-lg border border-input bg-background px-3 text-sm text-foreground shadow-none outline-none transition placeholder:text-muted-foreground hover:border-strong focus-visible:border-primary focus-visible:ring-4 focus-visible:ring-primary/15'
 
 export const authSelectClass =
-  'h-11 w-full rounded-lg border border-[#cbd8cf] bg-white px-3 text-sm text-[#17211c] outline-none transition hover:border-[#9db2a6] focus:border-[#2f6f5e] focus:ring-4 focus:ring-[#2f6f5e]/12'
+  'h-11 w-full rounded-lg border border-input bg-background px-3 text-sm text-foreground outline-none transition hover:border-strong focus:border-primary focus:ring-4 focus:ring-primary/15'
 
 export const authPrimaryButtonClass =
-  'min-h-11 rounded-lg bg-[#255f51] px-4 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(37,95,81,0.22)] transition hover:bg-[#1f5145] focus-visible:ring-[#2f6f5e]/25'
+  'min-h-11 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90 focus-visible:ring-primary/25'
 
 export const authSecondaryButtonClass =
-  'min-h-11 rounded-lg border border-[#cbd8cf] bg-white px-4 text-sm font-semibold text-[#17211c] shadow-none transition hover:border-[#9db2a6] hover:bg-[#f4f8f5] focus-visible:ring-[#2f6f5e]/15'
+  'min-h-11 rounded-lg border border-input bg-background px-4 text-sm font-semibold text-foreground shadow-none transition hover:bg-muted focus-visible:ring-primary/15'
 
 const authHighlights = [
   [BookOpenCheck, 'Structured subject workspace'],
@@ -46,15 +57,41 @@ export function GoogleMark() {
   )
 }
 
+function BrandMark() {
+  return (
+    <span
+      aria-hidden="true"
+      className="grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-xl bg-primary/10 ring-1 ring-border"
+    >
+      <svg viewBox="0 0 32 32" className="h-6 w-6" fill="none" aria-hidden="true">
+        <path
+          d="M8 6h12a4 4 0 0 1 4 4v16H12a4 4 0 0 1-4-4V6Z"
+          stroke="currentColor"
+          strokeWidth="2.2"
+          strokeLinejoin="round"
+          className="text-primary"
+        />
+        <path
+          d="M12 12h8M12 16h8M12 20h5"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          className="text-primary"
+        />
+      </svg>
+    </span>
+  )
+}
+
 function BrandLockup() {
   return (
-    <Link href="/" className="inline-flex min-w-0 items-center gap-3 text-[#17211c]">
-      <span className="grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-xl bg-[#171820] shadow-[0_10px_26px_rgba(120,56,214,0.18)]">
-        <img src="/brand/lernio-logo-mark.webp" alt="" className="block h-full w-full object-cover" />
-      </span>
+    <Link href="/" className="inline-flex min-w-0 items-center gap-3 text-foreground">
+      <BrandMark />
       <span className="min-w-0">
-        <span className="block text-base font-black leading-none">Lernio</span>
-        <span className="mt-1 block text-xs font-semibold text-[#66776d]">CWIT academic workspace</span>
+        <span className="block text-base font-extrabold leading-none">Lernio</span>
+        <span className="mt-1 block text-xs font-semibold text-muted-foreground">
+          Diploma learning OS
+        </span>
       </span>
     </Link>
   )
@@ -65,31 +102,41 @@ function WorkspacePreview() {
     ['Readiness', '74%', 'exam signal'],
     ['Revision', '12', 'cards due'],
     ['Focus', '86m', 'today'],
-  ]
+  ] as const
 
   return (
     <div className="mt-auto w-full max-w-md">
-      <div className="rounded-lg border border-white/12 bg-white/8 p-4 text-white shadow-[0_22px_54px_rgba(0,0,0,0.24)] backdrop-blur">
+      <div className="rounded-lg border border-border bg-card p-4 text-card-foreground shadow-sm">
         <div className="mb-4 flex items-center justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#b9d8cc]">Today</p>
-            <p className="mt-1 text-lg font-black">Student command center</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+              Today
+            </p>
+            <p className="mt-1 text-lg font-bold">Student command center</p>
           </div>
-          <span className="grid h-10 w-10 place-items-center rounded-lg bg-white/12 text-[#b9d8cc]">
+          <span className="grid h-10 w-10 place-items-center rounded-lg bg-primary/10 text-primary ring-1 ring-border">
             <GraduationCap className="h-5 w-5" />
           </span>
         </div>
         <div className="grid gap-2">
           {rows.map(([label, value, hint]) => (
-            <div key={label} className="grid grid-cols-[1fr_auto] items-center gap-3 rounded-lg bg-white/10 px-3 py-2">
+            <div
+              key={label}
+              className="grid grid-cols-[1fr_auto] items-center gap-3 rounded-lg border border-border bg-muted/40 px-3 py-2"
+            >
               <div>
-                <p className="text-sm font-semibold">{label}</p>
-                <p className="text-xs text-white/58">{hint}</p>
+                <p className="text-sm font-semibold text-foreground">{label}</p>
+                <p className="text-xs text-muted-foreground">{hint}</p>
               </div>
-              <p className="font-mono text-lg font-black tabular-nums">{value}</p>
+              <p className="font-mono text-lg font-bold tabular-nums text-foreground">
+                {value}
+              </p>
             </div>
           ))}
         </div>
+        <p className="mt-3 text-[0.6875rem] text-muted-foreground">
+          Demo preview — not your account
+        </p>
       </div>
     </div>
   )
@@ -113,48 +160,53 @@ export function AuthShell({
   className?: string
 }) {
   return (
-    <main className="min-h-screen bg-[#f3f7f4] text-[#17211c]">
+    <main className="min-h-screen bg-background text-foreground">
       <div className="grid min-h-screen lg:grid-cols-[minmax(0,0.92fr)_minmax(380px,560px)]">
-        <aside className="relative hidden overflow-hidden bg-[#17211c] p-8 text-white lg:flex lg:flex-col">
+        {/* Left brand panel — uses semantic tokens, no hardcoded green/gold */}
+        <aside className="relative hidden overflow-hidden border-r border-border bg-muted/40 p-8 lg:flex lg:flex-col">
           <div
             aria-hidden="true"
-            className="absolute inset-0 opacity-80"
+            className="absolute inset-0 opacity-90"
             style={{
               background:
-                'radial-gradient(circle at 20% 15%, rgba(215, 167, 69, 0.22), transparent 26%), radial-gradient(circle at 84% 20%, rgba(47, 111, 94, 0.35), transparent 30%), linear-gradient(145deg, #17211c 0%, #24362e 55%, #111816 100%)',
+                'radial-gradient(circle at 20% 15%, color-mix(in oklch, var(--brand) 18%, transparent), transparent 28%), radial-gradient(circle at 84% 20%, color-mix(in oklch, var(--secondary-action) 16%, transparent), transparent 30%), linear-gradient(145deg, var(--surface-2) 0%, var(--surface-3) 55%, var(--surface-2) 100%)',
             }}
           />
           <div
             aria-hidden="true"
-            className="absolute inset-0 opacity-[0.08]"
+            className="absolute inset-0 opacity-[0.06]"
             style={{
               backgroundImage:
-                'linear-gradient(rgba(255,255,255,.75) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.75) 1px, transparent 1px)',
+                'linear-gradient(to right, var(--text-default) 1px, transparent 1px), linear-gradient(to bottom, var(--text-default) 1px, transparent 1px)',
               backgroundSize: '44px 44px',
             }}
           />
           <div className="relative z-10 flex items-center gap-3">
-            <span className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-xl bg-[#171820] shadow-[0_12px_32px_rgba(226,52,151,0.25)]">
-              <img src="/brand/lernio-logo-mark.webp" alt="" className="block h-full w-full object-cover" />
-            </span>
+            <BrandMark />
             <div>
-              <p className="text-lg font-black leading-none">Lernio</p>
-              <p className="mt-1 text-xs font-semibold text-white/58">Campus learning OS</p>
+              <p className="text-lg font-extrabold leading-none text-foreground">
+                Lernio
+              </p>
+              <p className="mt-1 text-xs font-semibold text-muted-foreground">
+                Diploma learning OS
+              </p>
             </div>
           </div>
 
           <div className="relative z-10 my-16 max-w-xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#d7a745]">CWIT ready</p>
-            <h2 className="mt-4 text-5xl font-black leading-[1.04] tracking-normal">
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-primary">
+              CWIT ready
+            </p>
+            <h2 className="mt-4 text-4xl font-extrabold leading-[1.08] tracking-tight text-foreground sm:text-5xl">
               One account for study, revision, exams, and role access.
             </h2>
-            <div className="mt-8 grid gap-3 text-sm text-white/78">
+            <div className="mt-8 grid gap-3 text-sm text-muted-foreground">
               {authHighlights.map(([Icon, text]) => (
                 <div key={text} className="flex items-center gap-3">
-                  <span className="grid h-9 w-9 place-items-center rounded-lg bg-white/10 text-[#b9d8cc]">
+                  <span className="grid h-9 w-9 place-items-center rounded-lg bg-primary/10 text-primary ring-1 ring-border">
                     <Icon className="h-4 w-4" />
                   </span>
-                  <span className="font-semibold">{text}</span>
+                  <span className="font-semibold text-foreground">{text}</span>
                 </div>
               ))}
             </div>
@@ -163,12 +215,13 @@ export function AuthShell({
           <WorkspacePreview />
         </aside>
 
+        {/* Right form panel */}
         <section className="flex min-h-screen flex-col px-4 py-6 sm:px-6 lg:px-10">
           <div className="flex items-center justify-between">
             <BrandLockup />
             <Link
               href={backHref}
-              className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-[#66776d] transition hover:bg-white hover:text-[#17211c] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#2f6f5e]/15"
+              className="inline-flex min-h-9 items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-muted-foreground transition hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <ArrowLeft className="h-4 w-4" />
               {backLabel}
@@ -178,11 +231,15 @@ export function AuthShell({
           <div className="flex flex-1 items-center justify-center py-8">
             <div className={cn('w-full max-w-md', className)}>
               <div className="mb-6">
-                <p className="text-sm font-bold text-[#2f6f5e]">{eyebrow}</p>
-                <h1 className="mt-2 text-3xl font-black leading-tight tracking-normal sm:text-4xl">{title}</h1>
-                <p className="mt-3 text-sm leading-6 text-[#66776d]">{description}</p>
+                <p className="text-sm font-bold text-primary">{eyebrow}</p>
+                <h1 className="mt-2 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
+                  {title}
+                </h1>
+                <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                  {description}
+                </p>
               </div>
-              <div className="rounded-lg border border-[#d7e1da] bg-white p-5 shadow-[0_18px_55px_rgba(23,33,28,0.08)] sm:p-6">
+              <div className="rounded-lg border border-border bg-card p-5 shadow-sm sm:p-6">
                 {children}
               </div>
             </div>
