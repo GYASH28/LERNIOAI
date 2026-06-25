@@ -4,6 +4,7 @@ import Link from 'next/link'
 import type { ReactNode } from 'react'
 import { ArrowLeft, BookOpenCheck, Building2, GraduationCap, ShieldCheck } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { LernioBrandLockup, LernioLogoTile } from '@/components/brand/lernio-logo'
 
 /**
  * Shared auth surface classes.
@@ -58,43 +59,11 @@ export function GoogleMark() {
 }
 
 function BrandMark() {
-  return (
-    <span
-      aria-hidden="true"
-      className="grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-xl bg-primary/10 ring-1 ring-border"
-    >
-      <svg viewBox="0 0 32 32" className="h-6 w-6" fill="none" aria-hidden="true">
-        <path
-          d="M8 6h12a4 4 0 0 1 4 4v16H12a4 4 0 0 1-4-4V6Z"
-          stroke="currentColor"
-          strokeWidth="2.2"
-          strokeLinejoin="round"
-          className="text-primary"
-        />
-        <path
-          d="M12 12h8M12 16h8M12 20h5"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          className="text-primary"
-        />
-      </svg>
-    </span>
-  )
+  return <LernioLogoTile size="md" />
 }
 
 function BrandLockup() {
-  return (
-    <Link href="/" className="inline-flex min-w-0 items-center gap-3 text-foreground">
-      <BrandMark />
-      <span className="min-w-0">
-        <span className="block text-base font-extrabold leading-none">Lernio</span>
-        <span className="mt-1 block text-xs font-semibold text-muted-foreground">
-          Diploma learning OS
-        </span>
-      </span>
-    </Link>
-  )
+  return <LernioBrandLockup href="/" size="md" />
 }
 
 function WorkspacePreview() {

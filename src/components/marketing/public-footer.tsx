@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Github } from 'lucide-react'
+import { LernioLogoTile } from '@/components/brand/lernio-logo'
 
 const PRODUCT_LINKS = [
   { label: 'Learn', href: '/learn' },
@@ -25,32 +26,6 @@ const LEGAL_LINKS = [
   { label: 'Terms', href: '/terms' },
 ] as const
 
-function BrandMark() {
-  return (
-    <span
-      aria-hidden="true"
-      className="grid h-8 w-8 shrink-0 place-items-center overflow-hidden rounded-md bg-primary/10 ring-1 ring-border"
-    >
-      <svg viewBox="0 0 32 32" className="h-5 w-5" fill="none" aria-hidden="true">
-        <path
-          d="M8 6h12a4 4 0 0 1 4 4v16H12a4 4 0 0 1-4-4V6Z"
-          stroke="currentColor"
-          strokeWidth="2.2"
-          strokeLinejoin="round"
-          className="text-primary"
-        />
-        <path
-          d="M12 12h8M12 16h8M12 20h5"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          className="text-primary"
-        />
-      </svg>
-    </span>
-  )
-}
-
 export function PublicFooter() {
   const year = new Date().getFullYear()
 
@@ -61,14 +36,13 @@ export function PublicFooter() {
     >
       <div className="marketing-container py-12">
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
-          {/* Brand */}
           <div>
             <Link
               href="/"
               className="flex items-center gap-2.5"
               aria-label="Lernio home"
             >
-              <BrandMark />
+              <LernioLogoTile size="sm" />
               <span className="text-base font-extrabold tracking-tight text-foreground">
                 Lernio
               </span>
@@ -88,7 +62,6 @@ export function PublicFooter() {
             </a>
           </div>
 
-          {/* Product */}
           <nav aria-label="Product">
             <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
               Product
@@ -107,7 +80,6 @@ export function PublicFooter() {
             </ul>
           </nav>
 
-          {/* Company */}
           <nav aria-label="Company">
             <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
               Account
@@ -126,7 +98,6 @@ export function PublicFooter() {
             </ul>
           </nav>
 
-          {/* Legal */}
           <nav aria-label="Legal">
             <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
               Legal

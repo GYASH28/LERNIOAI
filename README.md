@@ -9,7 +9,7 @@ The app covers four Semester-3 subjects — Data Structures (CS201), OOP with C+
 ## Quick start
 
 ### Prerequisites
-- [Node.js](https://nodejs.org/) 18+ (or [Bun](https://bun.sh/) 1.3+)
+- [Node.js](https://nodejs.org/) 20.9+ (or [Bun](https://bun.sh/) 1.3+)
 - PostgreSQL 14+ for local and production data
 
 ### Install & run
@@ -86,8 +86,8 @@ Honestly labelled as a **syntax-learning playground**: the sandbox has no isolat
 30 Prisma models cover the academic hierarchy (Institution → Department → Programme → AcademicScheme → Semester → Subject → Unit → Topic → Lesson) plus all learning-state tables (User, XpEvent, UserTopicMastery, LessonCompletion, QuestionAttempt, QuizAttempt, RevisionSchedule, RevisionAttempt, StudyTask, StudySession, TutorSession, TutorMessage, CodingChallenge, CodingSubmission, LabProgress, Resource, Contribution, Bookmark, Achievement, UserAchievement, QuestionPaper). See `prisma/schema.prisma`.
 
 ### Production deployment
-- **Do not** ship mutable SQLite files as production state. Use PostgreSQL (`DATABASE_URL` and `DIRECT_URL` must be `postgresql://` URLs).
-- Run `bun run db:deploy` on deploy.
+- **Do not** ship mutable SQLite files as production state. Use PostgreSQL (`DATABASE_URL` must be a `postgresql://` URL).
+- Vercel runs `npm run vercel-build`, which generates Prisma, applies committed migrations, and then builds Next.js.
 - Back up the database regularly; test restore procedures.
 
 ---
@@ -127,7 +127,7 @@ src/
 - **Coding Lab**: no real C++ execution in the sandbox (honestly labelled as a syntax-learning playground). A production isolated runner is required for real grading.
 - **Tests**: Vitest unit tests exist for auth policy, rate limiting, roles, user DTOs, motion, and the card component. Playwright is configured for E2E, accessibility and visual tests. Coverage is expanding — see `tests/` and `*.test.ts` files across `src/`.
 - **Onboarding**: ordinary students can enter Lernio immediately; missing academic details can be completed later through the complete-profile flow.
-- **Production deployment**: the public URL `lernioai.vercel.app` must be linked to this repository's `main` branch with PostgreSQL, `NEXTAUTH_SECRET`, and the required environment variables configured in Vercel. See `.env.example` for the full list.
+- **Production deployment**: the public URL `lernioai.vercel.app` must be linked to this repository's `main` branch with PostgreSQL `DATABASE_URL`, `NEXTAUTH_SECRET`, and the required environment variables configured in Vercel. See `.env.example` for the full list.
 
 ---
 
@@ -141,7 +141,7 @@ src/
 ---
 
 ## Troubleshooting
-- **`prisma generate` errors**: ensure `DATABASE_URL` and `DIRECT_URL` are valid PostgreSQL URLs.
+- **`prisma generate` errors**: ensure `DATABASE_URL` is a valid PostgreSQL URL.
 - **Blank page after schema changes**: restart the dev server (`pkill -f 'next dev'` then `bun run dev`) so the Prisma Client cache is refreshed.
 - **Port 3000 in use**: `bun run dev` uses port 3000 exclusively in this environment.
 - **Demo user not found**: run `bunx tsx scripts/seed.ts` to seed the demo student + academic content.

@@ -46,8 +46,11 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   icons: {
-    icon: "/brand/lernio-logo-mark.png",
-    apple: "/brand/lernio-logo-mark.png",
+    icon: [
+      { url: "/brand/lernio-logo-transparent.svg", type: "image/svg+xml" },
+      { url: "/brand/lernio-logo-symbol.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: "/brand/lernio-logo-symbol.png",
   },
   manifest: "/manifest.webmanifest",
   openGraph: {
@@ -59,9 +62,9 @@ export const metadata: Metadata = {
     url: SITE_URL,
     images: [
       {
-        url: "/brand/lernio-logo-mark.png",
-        width: 512,
-        height: 512,
+        url: "/brand/lernio-logo-transparent.png",
+        width: 1200,
+        height: 1541,
         alt: "Lernio AI logo",
       },
     ],
@@ -71,7 +74,7 @@ export const metadata: Metadata = {
     title: "Lernio AI — Adaptive learning for diploma students",
     description:
       "Understand faster. Practise smarter. Walk into exams prepared. One personalised learning workspace for diploma engineering students.",
-    images: ["/brand/lernio-logo-mark.png"],
+    images: ["/brand/lernio-logo-transparent.png"],
   },
   robots: {
     index: true,

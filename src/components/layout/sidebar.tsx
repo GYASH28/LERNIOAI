@@ -4,14 +4,13 @@ import Link from 'next/link'
 import { signOut } from 'next-auth/react'
 import { useAppStore } from '@/store/app-store'
 import { cn } from '@/lib/utils'
-import { Mascot } from '@/components/mascots/mascot'
+import { LernioLogoTile } from '@/components/brand/lernio-logo'
 import {
   LayoutDashboard, BookOpen, PenTool, Bot, FlaskConical, Code2,
   FileText, RotateCw, Library, CalendarCheck, BarChart3, User,
   Menu, X, Flame, Zap, Settings, Search, LogOut
 } from 'lucide-react'
 import type { ViewKey } from '@/lib/types'
-import { usePrefs } from '@/components/theme-provider'
 import { Button } from '@/components/ui/button'
 import { routeForView } from '@/lib/routes'
 
@@ -34,7 +33,6 @@ const MOBILE_PRIMARY: ViewKey[] = ['dashboard', 'learn', 'practice', 'tutor']
 
 export function Sidebar() {
   const { view, setView, sidebarOpen, setSidebarOpen, user, xp, streak } = useAppStore()
-  const { pref } = usePrefs()
 
   return (
     <>
@@ -54,9 +52,7 @@ export function Sidebar() {
         {/* Brand */}
         <div className="flex items-center gap-3 p-4 border-b border-sidebar-border relative overflow-hidden">
           <div aria-hidden className="absolute -top-6 -right-6 h-24 w-24 rounded-full bg-primary/10 blur-2xl pointer-events-none" />
-          <div className="relative">
-            <Mascot mascot="leo" state="idle" size={40} animated={!pref.reducedMotion} />
-          </div>
+          <LernioLogoTile size="md" className="relative" />
           <div className="flex-1 min-w-0 relative">
             <h1 className="font-bold text-lg leading-tight text-foreground">
               Lernio AI

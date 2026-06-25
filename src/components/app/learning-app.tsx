@@ -9,6 +9,7 @@ import { Sidebar, MobileNav } from '@/components/layout/sidebar'
 import { MascotToastContainer } from '@/components/mascots/mascot-toast'
 import { Footer } from '@/components/layout/footer'
 import { Button } from '@/components/ui/button'
+import { LernioLogoTile } from '@/components/brand/lernio-logo'
 import { Lock, LogIn, User as UserIcon } from 'lucide-react'
 // Dashboard stays eagerly loaded — it's the default landing view and drives LCP.
 import { DashboardView } from '@/components/views/dashboard'
@@ -223,6 +224,7 @@ function TopBar({ onMenuClick }: { onMenuClick: () => void }) {
           <button onClick={onMenuClick} className="md:hidden p-1.5 rounded-md hover:bg-muted focus-ring" aria-label="Open menu">
             <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
           </button>
+          <LernioLogoTile size="sm" className="md:hidden" />
           <h2 className="text-base font-semibold">{titles[view]}</h2>
         </div>
         <div className="flex items-center gap-2">
@@ -273,9 +275,7 @@ function LoadingScreen() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center gap-6 bg-background">
       <div className="relative">
-        <div className="h-20 w-20 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-2xl font-bold animate-pulse">
-          L
-        </div>
+        <LernioLogoTile size="lg" className="animate-pulse" />
         <div className="absolute -inset-4 rounded-full border-2 border-primary/20 border-t-primary animate-spin" />
       </div>
       <div className="text-center">
