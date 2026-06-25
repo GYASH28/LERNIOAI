@@ -27,6 +27,83 @@
     }
   }
 
+  .app-utility-bar {
+    border-bottom: 1px solid var(--border);
+    background:
+      linear-gradient(
+        90deg,
+        color-mix(in oklch, var(--primary) 7%, transparent),
+        transparent 38%,
+        color-mix(in oklch, var(--info) 6%, transparent)
+      ),
+      color-mix(in oklch, var(--background) 86%, transparent);
+    backdrop-filter: blur(14px);
+  }
+
+  .app-utility-bar__inner {
+    display: flex;
+    width: min(100%, var(--content-max-dashboard));
+    gap: 0.5rem;
+    margin-inline: auto;
+    overflow-x: auto;
+    padding: 0.55rem var(--page-gutter-mobile);
+    scrollbar-width: none;
+  }
+
+  .app-utility-bar__inner::-webkit-scrollbar {
+    display: none;
+  }
+
+  .app-utility-chip {
+    display: inline-flex;
+    min-width: max-content;
+    align-items: center;
+    gap: 0.55rem;
+    border: 1px solid color-mix(in oklch, var(--border) 86%, transparent);
+    border-radius: 999px;
+    background: color-mix(in oklch, var(--card) 82%, transparent);
+    padding: 0.38rem 0.72rem 0.38rem 0.42rem;
+    text-align: left;
+    box-shadow: 0 8px 18px -16px rgb(15 23 42 / 0.35);
+    transition:
+      border-color 160ms ease,
+      background-color 160ms ease,
+      box-shadow 160ms ease,
+      transform 160ms ease;
+  }
+
+  .app-utility-chip:hover,
+  .app-utility-chip[data-active="true"] {
+    border-color: color-mix(in oklch, var(--primary) 34%, var(--border));
+    background: color-mix(in oklch, var(--primary) 9%, var(--card));
+    box-shadow: 0 14px 28px -20px color-mix(in oklch, var(--primary) 40%, black);
+    transform: translateY(-1px);
+  }
+
+  .app-utility-chip__icon {
+    display: inline-flex;
+    width: 1.85rem;
+    height: 1.85rem;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: color-mix(in oklch, var(--primary) 12%, transparent);
+    color: var(--primary);
+  }
+
+  @media (min-width: 768px) {
+    .app-utility-bar__inner {
+      padding-inline: var(--page-gutter-tablet);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .app-utility-bar__inner {
+      padding-inline: var(--page-gutter-desktop);
+    }
+  }
+
   @media (min-width: 1280px) {
     .app-main-scroll {
       padding-inline: var(--page-gutter-desktop);

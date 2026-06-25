@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useAppStore } from '@/store/app-store'
 import { Sidebar, MobileNav } from '@/components/layout/sidebar'
 import { MascotToastContainer } from '@/components/mascots/mascot-toast'
@@ -11,12 +12,11 @@ import { Footer } from '@/components/layout/footer'
 import { Button } from '@/components/ui/button'
 import { LernioLogoTile } from '@/components/brand/lernio-logo'
 import { AppPageShell, shellVariantForView } from '@/components/app/app-page-shell'
-import { Lock, LogIn, User as UserIcon } from 'lucide-react'
-// Dashboard stays eagerly loaded — it's the default landing view and drives LCP.
+import { Bot, BookOpen, CalendarCheck, Lock, LogIn, PenTool, PlayCircle, Search, User as UserIcon } from 'lucide-react'
+// Dashboard stays eagerly loaded because it is the default landing view and drives LCP.
 import { DashboardView } from '@/components/views/dashboard'
-import { CommandPalette } from '@/components/ui/command-palette'
-import { FocusTimerWidget } from '@/components/ui/focus-timer'
 import { MotionPage } from '@/components/motion'
+import { routeForView } from '@/lib/routes'
 import type { Subject, User, ViewKey } from '@/lib/types'
 import type { DashboardSnapshot } from '@/lib/app-bootstrap-types'
 
@@ -28,24 +28,70 @@ const ViewSkeleton = () => (
   <div className="flex items-center justify-center py-24" aria-busy="true" aria-live="polite">
     <div className="flex flex-col items-center gap-3">
       <div className="h-10 w-10 rounded-full border-2 border-primary/20 border-t-primary animate-spin" />
-      <p className="text-sm text-muted-foreground">Loading…</p>
+      <p className="text-sm text-muted-foreground">Loading...</p>
     </div>
   </div>
 )
 const lazy = <T extends { default: React.ComponentType }>(loader: () => Promise<T>) =>
   dynamic(loader, { ssr: false, loading: () => <ViewSkeleton /> })
 
-const LearnView = lazy(() => import('@/components/views/learn').then(m => ({ default: m.LearnView })))
-const PracticeView = lazy(() => import('@/components/views/practice').then(m => ({ default: m.PracticeView })))
-const TutorView = lazy(() => import('@/components/views/tutor').then(m => ({ default: m.TutorView })))
-const LabsView = lazy(() => import('@/components/views/labs').then(m => ({ default: m.LabsView })))
-const CodingView = lazy(() => import('@/components/views/coding').then(m => ({ default: m.CodingView })))
-const ExamsView = lazy(() => import('@/components/views/exams').then(m => ({ default: m.ExamsView })))
-const RevisionView = lazy(() => import('@/components/views/revision').then(m => ({ default: m.RevisionView })))
-const MaterialsView = lazy(() => import('@/components/views/materials').then(m => ({ default: m.MaterialsView })))
-const PlannerView = lazy(() => import('@/components/views/planner').then(m => ({ default: m.PlannerView })))
-const AnalyticsView = lazy(() => import('@/components/views/analytics').then(m => ({ default: m.AnalyticsView })))
-const ProfileView = lazy(() => import('@/components/views/profile').then(m => ({ default: m.ProfileView })))
+const loadLearnView = () => import('@/components/views/learn').then(m => ({ default: m.LearnView }))
+const loadPracticeView = () => import('@/components/views/practice').then(m => ({ default: m.PracticeView }))
+const loadTutorView = () => import('@/components/views/tutor').then(m => ({ default: m.TutorView }))
+const loadLabsView = () => import('@/components/views/labs').then(m => ({ default: m.LabsView }))
+const loadCodingView = () => import('@/components/views/coding').then(m => ({ default: m.CodingView }))
+const loadExamsView = () => import('@/components/views/exams').then(m => ({ default: m.ExamsView }))
+const loadRevisionView = () => import('@/components/views/revision').then(m => ({ default: m.RevisionView }))
+const loadMaterialsView = () => import('@/components/views/materials').then(m => ({ default: m.MaterialsView }))
+const loadPlannerView = () => import('@/components/views/planner').then(m => ({ default: m.PlannerView }))
+const loadAnalyticsView = () => import('@/components/views/analytics').then(m => ({ default: m.AnalyticsView }))
+const loadProfileView = () => import('@/components/views/profile').then(m => ({ default: m.ProfileView }))
+const loadCommandPalette = () => import('@/components/ui/command-palette').then(m => ({ default: m.CommandPalette }))
+const loadFocusTimerWidget = () => import('@/components/ui/focus-timer').then(m => ({ default: m.FocusTimerWidget }))
+
+const LearnView = lazy(loadLearnView)
+const PracticeView = lazy(loadPracticeView)
+const TutorView = lazy(loadTutorView)
+const LabsView = lazy(loadLabsView)
+const CodingView = lazy(loadCodingView)
+const ExamsView = lazy(loadExamsView)
+const RevisionView = lazy(loadRevisionView)
+const MaterialsView = lazy(loadMaterialsView)
+const PlannerView = lazy(loadPlannerView)
+const AnalyticsView = lazy(loadAnalyticsView)
+const ProfileView = lazy(loadProfileView)
+const CommandPalette = dynamic(loadCommandPalette, { ssr: false })
+const FocusTimerWidget = dynamic(loadFocusTimerWidget, { ssr: false })
+
+const VIEW_CHUNK_LOADERS = [
+  loadLearnView,
+  loadPracticeView,
+  loadTutorView,
+  loadRevisionView,
+  loadPlannerView,
+  loadMaterialsView,
+  loadCodingView,
+  loadExamsView,
+  loadLabsView,
+  loadAnalyticsView,
+  loadProfileView,
+]
+
+async function fetchJsonWithTimeout(url: string, timeoutMs = 1500) {
+  const controller = new AbortController()
+  const timer = window.setTimeout(() => controller.abort(), timeoutMs)
+  try {
+    const response = await fetch(url, {
+      signal: controller.signal,
+      cache: 'no-store',
+    })
+    return await response.json()
+  } catch {
+    return { ok: false }
+  } finally {
+    window.clearTimeout(timer)
+  }
+}
 
 interface LearningAppProps {
   initialView?: ViewKey
@@ -72,7 +118,7 @@ export function LearningApp({
   })
   const { view, user, setUser, setSubjects, setMascot } = useAppStore()
 
-  const [loading, setLoading] = useState(!initialUser && initialSubjects.length === 0)
+  const [loading, setLoading] = useState(false)
   const [menuOpen, setMenuOpen] = useMenuState()
 
   useEffect(() => {
@@ -84,32 +130,48 @@ export function LearningApp({
 
     let mounted = true
     async function load() {
-      try {
-        const [userRes, subjRes] = await Promise.all([
-          fetch('/api/user'),
-          fetch('/api/academics'),
-        ])
-        const [userData, subjData] = await Promise.all([userRes.json(), subjRes.json()])
-        if (mounted) {
-          if (userData.ok) {
-            setUser(userData.data)
-            useAppStore.setState({ xp: userData.data.xp, streak: userData.data.streak })
-          } else {
-            setUser(null)
-          }
-          if (subjData.ok) setSubjects(subjData.data)
-          setLoading(false)
-        }
-      } catch {
-        if (mounted) {
-          setUser(null)
-          setLoading(false)
-        }
+      const [userResult, subjectResult] = await Promise.allSettled([
+        fetchJsonWithTimeout('/api/user'),
+        fetchJsonWithTimeout('/api/academics'),
+      ])
+      if (!mounted) return
+
+      if (userResult.status === 'fulfilled' && userResult.value.ok) {
+        setUser(userResult.value.data)
+        useAppStore.setState({ xp: userResult.value.data.xp, streak: userResult.value.data.streak })
+      } else {
+        setUser(null)
       }
+
+      if (subjectResult.status === 'fulfilled' && subjectResult.value.ok) {
+        setSubjects(subjectResult.value.data)
+      }
+      setLoading(false)
     }
-    load()
+    void load()
     return () => { mounted = false }
   }, [initialSubjects.length, initialUser, setUser, setSubjects])
+
+  useEffect(() => {
+    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection
+    if (connection?.saveData) return
+
+    const handles: number[] = []
+    const start = window.setTimeout(() => {
+      VIEW_CHUNK_LOADERS.forEach((loader, index) => {
+        const delay = index < 6 ? index * 180 : 1600 + (index - 6) * 350
+        const handle = window.setTimeout(() => {
+          void loader().catch(() => {})
+        }, delay)
+        handles.push(handle)
+      })
+    }, 900)
+
+    return () => {
+      window.clearTimeout(start)
+      handles.forEach((handle) => window.clearTimeout(handle))
+    }
+  }, [])
 
   // Greet with LEO on first load
   useEffect(() => {
@@ -132,6 +194,7 @@ export function LearningApp({
         <Sidebar />
         <main className="app-main-container flex-1 min-w-0 flex flex-col">
           <TopBar onMenuClick={() => setMenuOpen(!menuOpen)} />
+          <StudentUtilityBar />
           <div className="app-main-scroll">
             <ViewRouter view={view} initialDashboard={initialDashboard} />
           </div>
@@ -142,6 +205,99 @@ export function LearningApp({
       <MascotToastContainer />
       <CommandPalette />
       <FocusTimerWidget />
+    </div>
+  )
+}
+
+function StudentUtilityBar() {
+  const router = useRouter()
+  const {
+    user,
+    view,
+    continueLearning,
+    setLearnContext,
+    setView,
+  } = useAppStore()
+
+  if (!user) return null
+
+  const navigate = (nextView: ViewKey) => {
+    setView(nextView)
+    router.push(routeForView(nextView))
+  }
+
+  const resume = () => {
+    if (continueLearning) {
+      setLearnContext({
+        subjectId: continueLearning.subjectId,
+        unitNumber: continueLearning.unitNumber,
+        topicId: continueLearning.topicId,
+        lessonId: continueLearning.lessonId,
+        mode: continueLearning.mode,
+      })
+    }
+    navigate('learn')
+  }
+
+  const openSearch = () => {
+    window.dispatchEvent(
+      new KeyboardEvent('keydown', {
+        key: 'k',
+        metaKey: navigator.platform.includes('Mac'),
+        ctrlKey: !navigator.platform.includes('Mac'),
+      }),
+    )
+  }
+
+  const items: Array<{
+    label: string
+    helper: string
+    icon: typeof BookOpen
+    view?: ViewKey
+    action?: () => void
+    cursor?: string
+  }> = [
+    {
+      label: continueLearning ? 'Resume' : 'Start',
+      helper: continueLearning?.topicTitle ?? 'Pick a lesson',
+      icon: PlayCircle,
+      action: resume,
+    },
+    { label: 'Practice', helper: '5 smart questions', icon: PenTool, view: 'practice' },
+    { label: 'Ask LEO', helper: 'Explain a doubt', icon: Bot, view: 'tutor' },
+    { label: 'Planner', helper: "Today's tasks", icon: CalendarCheck, view: 'planner' },
+    { label: 'Search', helper: 'Quick command', icon: Search, action: openSearch, cursor: 'spark' },
+  ]
+
+  return (
+    <div className="app-utility-bar" aria-label="Student quick actions">
+      <div className="app-utility-bar__inner">
+        {items.map((item) => {
+          const Icon = item.icon
+          const active = item.view === view
+          return (
+            <button
+              key={item.label}
+              type="button"
+              onClick={item.action ?? (() => item.view && navigate(item.view))}
+              className="app-utility-chip focus-ring"
+              aria-current={active ? 'page' : undefined}
+              data-active={active ? 'true' : undefined}
+              data-cursor={item.cursor}
+            >
+              <span className="app-utility-chip__icon" aria-hidden="true">
+                <Icon className="h-4 w-4" />
+              </span>
+              <span className="min-w-0">
+                <span className="block truncate text-xs font-semibold leading-tight">{item.label}</span>
+                <span className="block max-w-28 truncate text-[10px] leading-tight text-muted-foreground">
+                  {item.helper}
+                </span>
+              </span>
+            </button>
+          )
+        })}
+      </div>
     </div>
   )
 }
@@ -285,7 +441,7 @@ function LoadingScreen() {
       </div>
       <div className="text-center">
         <h1 className="text-xl font-bold text-primary">Lernio AI 2.0</h1>
-        <p className="text-sm text-muted-foreground mt-1">Loading your learning platform…</p>
+        <p className="text-sm text-muted-foreground mt-1">Loading your learning platform...</p>
       </div>
     </div>
   )

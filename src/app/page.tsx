@@ -1,5 +1,7 @@
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
+import { isDatabaseUnavailableError } from '@/lib/api-error-policy'
+import { canAttemptDatabase } from '@/lib/db-health'
 import { PublicHeader } from '@/components/marketing/public-header'
 import { Hero } from '@/components/marketing/hero'
 import { LearningPath } from '@/components/marketing/learning-path'
@@ -41,8 +43,15 @@ const softwareApplicationLd = {
 }
 
 export default async function LandingPage() {
-  const session = await getServerSession(authOptions)
-  const isAuthenticated = Boolean(session?.user)
+  let isAuthenticated = false
+  if (await canAttemptDatabase()) {
+    try {
+      const session = await getServerSession(authOptions)
+      isAuthenticated = Boolean(session?.user)
+    } catch (error) {
+      if (!isDatabaseUnavailableError(error)) throw error
+    }
+  }
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">

@@ -224,10 +224,15 @@ function NavItem({
   onNavigate: () => void
 }) {
   const Icon = item.icon
+  const setView = useAppStore((s) => s.setView)
   return (
     <Link
       href={routeForView(item.key)}
-      onClick={onNavigate}
+      prefetch={false}
+      onClick={() => {
+        setView(item.key)
+        onNavigate()
+      }}
       title={item.label}
       className={cn(
         'focus-ring group relative flex w-full items-center justify-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all xl:justify-start',
@@ -273,6 +278,8 @@ export function MobileNav() {
             <Link
               key={item.key}
               href={routeForView(item.key)}
+              prefetch={false}
+              onClick={() => useAppStore.getState().setView(item.key)}
               className={cn(
                 'flex min-w-[56px] flex-col items-center gap-0.5 rounded-lg px-3 py-1.5 transition-colors',
                 active ? 'text-primary' : 'text-muted-foreground',

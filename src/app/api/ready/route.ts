@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { db } from '@/lib/db'
+import { canAttemptDatabase } from '@/lib/db-health'
 import { isDatabaseUnavailableError } from '@/lib/api-error-policy'
 
 /**
@@ -11,7 +12,7 @@ import { isDatabaseUnavailableError } from '@/lib/api-error-policy'
  * but never block readiness, because their absence is a degraded
  * but valid state.
  *
- * No secrets are leaked — we only report booleans and short labels.
+ * No secrets are leaked; we only report booleans and short labels.
  * Cheap enough for Vercel's deployment smoke test, but heavier than
  * `/api/health`, so don't poll at sub-second intervals.
  */
@@ -52,11 +53,15 @@ export async function GET() {
   let database: 'ok' | 'unavailable' = 'ok'
 
   try {
-    // A trivial scalar query is the cheapest reachability check that
-    // still proves the connection pool, credentials and schema are
-    // all in working order. `findUnique` on a non-existent id returns
-    // null without raising, so this doubles as a Prisma Client check.
-    await db.user.findUnique({ where: { id: '__lernio_ready_probe__' }, select: { id: true } })
+    if (!(await canAttemptDatabase())) {
+      database = 'unavailable'
+    } else {
+      // A trivial scalar query is the cheapest reachability check that
+      // still proves the connection pool, credentials and schema are
+      // all in working order. `findUnique` on a non-existent id returns
+      // null without raising, so this doubles as a Prisma Client check.
+      await db.user.findUnique({ where: { id: '__lernio_ready_probe__' }, select: { id: true } })
+    }
   } catch (err) {
     if (isDatabaseUnavailableError(err)) {
       database = 'unavailable'

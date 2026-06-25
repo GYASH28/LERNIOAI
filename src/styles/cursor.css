@@ -1,0 +1,220 @@
+/* ============================================================
+   Lernio custom cursor
+   ------------------------------------------------------------
+   Desktop-only pointer layer inspired by the Lernio arrow mark:
+   a dark folded pointer with blue study-state accents. Native
+   cursors remain available for inputs, textareas, selects and
+   reduced-motion / touch users.
+   ============================================================ */
+
+@media (pointer: fine) {
+  html.lernio-custom-cursor,
+  html.lernio-custom-cursor body {
+    cursor: none;
+  }
+
+  html.lernio-custom-cursor a,
+  html.lernio-custom-cursor button,
+  html.lernio-custom-cursor [role="button"],
+  html.lernio-custom-cursor summary,
+  html.lernio-custom-cursor [data-cursor],
+  html.lernio-custom-cursor label,
+  html.lernio-custom-cursor input[type="checkbox"],
+  html.lernio-custom-cursor input[type="radio"] {
+    cursor: none;
+  }
+
+  html.lernio-custom-cursor input:not([type="checkbox"]):not([type="radio"]),
+  html.lernio-custom-cursor textarea {
+    cursor: text;
+  }
+
+  html.lernio-custom-cursor select,
+  html.lernio-custom-cursor [data-native-cursor="true"] {
+    cursor: auto;
+  }
+}
+
+.lernio-cursor {
+  --cursor-x: -120px;
+  --cursor-y: -120px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 2147483600;
+  width: 58px;
+  height: 58px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(calc(var(--cursor-x) - 8px), calc(var(--cursor-y) - 5px), 0);
+  transition: opacity 160ms ease;
+  will-change: transform, opacity;
+}
+
+.lernio-cursor.is-visible {
+  opacity: 1;
+}
+
+.lernio-cursor__glyph {
+  position: absolute;
+  left: 0;
+  top: 0;
+  filter:
+    drop-shadow(0 10px 18px rgb(15 23 42 / 0.22))
+    drop-shadow(0 1px 0 rgb(255 255 255 / 0.18));
+  transform-origin: 12px 9px;
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), filter 180ms ease;
+}
+
+.lernio-cursor__ping {
+  position: absolute;
+  left: 8px;
+  top: 3px;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  border: 2px solid color-mix(in oklch, var(--info) 80%, white 10%);
+  opacity: 0;
+  transform: scale(0.55);
+}
+
+.lernio-cursor__ping--two {
+  width: 34px;
+  height: 34px;
+  left: 3px;
+  top: -2px;
+  border-style: dashed;
+  animation-delay: 160ms;
+}
+
+.lernio-cursor__spark {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: color-mix(in oklch, var(--info) 82%, white 12%);
+  opacity: 0;
+  transform: rotate(45deg) scale(0.4);
+}
+
+.lernio-cursor__spark--a {
+  left: 18px;
+  top: 2px;
+}
+
+.lernio-cursor__spark--b {
+  left: 4px;
+  top: 17px;
+  width: 5px;
+  height: 5px;
+}
+
+.lernio-cursor__clock {
+  position: absolute;
+  left: 7px;
+  top: 0;
+  width: 26px;
+  height: 26px;
+  border: 2px solid color-mix(in oklch, var(--info) 72%, white 12%);
+  border-radius: 999px;
+  opacity: 0;
+  transform: scale(0.7);
+}
+
+.lernio-cursor__clock::before,
+.lernio-cursor__clock::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 2px;
+  border-radius: 99px;
+  background: color-mix(in oklch, var(--info) 82%, white 10%);
+  transform-origin: 50% 100%;
+}
+
+.lernio-cursor__clock::before {
+  height: 7px;
+  transform: translate(-50%, -100%) rotate(0deg);
+}
+
+.lernio-cursor__clock::after {
+  height: 5px;
+  transform: translate(-50%, -100%) rotate(90deg);
+}
+
+.lernio-cursor[data-mode="default"] .lernio-cursor__ping--one {
+  animation: lernio-cursor-ring 1.75s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+.lernio-cursor[data-mode="hover"] .lernio-cursor__glyph,
+.lernio-cursor[data-mode="clock"] .lernio-cursor__glyph {
+  transform: scale(0.9) rotate(-3deg);
+  filter:
+    drop-shadow(0 12px 22px rgb(37 99 235 / 0.24))
+    drop-shadow(0 1px 0 rgb(255 255 255 / 0.2));
+}
+
+.lernio-cursor[data-mode="hover"] .lernio-cursor__ping,
+.lernio-cursor[data-mode="clock"] .lernio-cursor__ping {
+  animation: lernio-cursor-ring 1.05s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+.lernio-cursor[data-mode="hover"] .lernio-cursor__spark {
+  animation: lernio-cursor-spark 980ms cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+.lernio-cursor[data-mode="press"] .lernio-cursor__glyph {
+  transform: scale(0.82) rotate(-7deg);
+}
+
+.lernio-cursor[data-mode="press"] .lernio-cursor__ping--one {
+  opacity: 0.75;
+  transform: scale(0.8);
+}
+
+.lernio-cursor[data-mode="clock"] .lernio-cursor__clock {
+  opacity: 1;
+  transform: scale(1);
+  animation: lernio-cursor-clock 1.2s linear infinite;
+}
+
+.lernio-cursor-ripple {
+  position: fixed;
+  z-index: 2147483599;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+  border: 2px solid color-mix(in oklch, var(--info) 80%, transparent);
+  border-radius: 999px;
+  opacity: 0.5;
+  transform: translate(-50%, -50%) scale(0.4);
+  animation: lernio-cursor-ripple 620ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes lernio-cursor-ring {
+  0% { opacity: 0.68; transform: scale(0.48); }
+  70% { opacity: 0.1; transform: scale(1.18); }
+  100% { opacity: 0; transform: scale(1.36); }
+}
+
+@keyframes lernio-cursor-spark {
+  0%, 100% { opacity: 0; transform: rotate(45deg) scale(0.4); }
+  40% { opacity: 0.86; transform: rotate(45deg) scale(1); }
+}
+
+@keyframes lernio-cursor-clock {
+  0% { rotate: 0deg; }
+  100% { rotate: 360deg; }
+}
+
+@keyframes lernio-cursor-ripple {
+  0% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.4); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(4.4); }
+}
+
+[data-motion="reduced"] .lernio-cursor,
+[data-motion="none"] .lernio-cursor,
+[data-low-power="true"] .lernio-cursor {
+  display: none;
+}
