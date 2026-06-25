@@ -119,6 +119,8 @@ export async function DELETE() {
       await tx.xpEvent.deleteMany({ where: { userId: user.id } })
       await tx.contribution.deleteMany({ where: { userId: user.id } })
       await tx.bookmark.deleteMany({ where: { userId: user.id } })
+      await tx.roleRequest.deleteMany({ where: { userId: user.id } })
+      await tx.institutionMembership.deleteMany({ where: { userId: user.id } })
 
       // Finally, the user row.
       const deleted = await tx.user.deleteMany({ where: { id: user.id } })

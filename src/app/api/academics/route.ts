@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server'
 import { db } from '@/lib/db'
-import { withApi, okResponse } from '@/lib/auth'
+import { withApi, okResponse, getCurrentUser } from '@/lib/auth'
 import { DEMO_SUBJECTS, isDemoMode } from '@/lib/demo-fixtures'
 
 /**
@@ -17,9 +17,36 @@ export async function GET(req: NextRequest) {
       return okResponse(subjectId ? DEMO_SUBJECTS.find((s) => s.id === subjectId) ?? null : DEMO_SUBJECTS)
     }
 
+    const authUser = await getCurrentUser()
+    const allowedInstitutionCodes = ['PUBLIC']
+
+    if (authUser) {
+      const membership = await db.institutionMembership.findFirst({
+        where: {
+          userId: authUser.id,
+          status: 'verified',
+        },
+        include: { institution: true },
+      })
+      if (membership) {
+        allowedInstitutionCodes.push(membership.institution.code)
+      }
+    }
+
     // Publicly accessible read-only syllabus
     const subjects = await db.subject.findMany({
-      where: subjectId ? { id: subjectId } : {},
+      where: {
+        AND: [
+          subjectId ? { id: subjectId } : {},
+          {
+            scheme: {
+              institution: {
+                code: { in: allowedInstitutionCodes },
+              },
+            },
+          },
+        ],
+      },
       select: {
         id: true,
         code: true,
@@ -65,7 +92,11 @@ export async function GET(req: NextRequest) {
       orderBy: { code: 'asc' },
     })
 
-    const headers = { 'Cache-Control': 'public, max-age=300, stale-while-revalidate=3600' }
+    const isPublic = !authUser || !allowedInstitutionCodes.includes('CWIT')
+    const headers = isPublic
+      ? { 'Cache-Control': 'public, max-age=300, stale-while-revalidate=3600' }
+      : { 'Cache-Control': 'private, no-store' }
+
     if (subjectId) {
       return Response.json({ ok: true, data: subjects[0] ?? null, requestId: crypto.randomUUID() }, { headers })
     }

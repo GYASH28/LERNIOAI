@@ -89,11 +89,111 @@
   }
 }
 
-/* Custom Cursor support */
-@media (pointer: fine) {
-  .custom-cursor-active,
-  .custom-cursor-active *:not(input):not(textarea):not([contenteditable="true"]) {
-    cursor: none !important;
+@layer utilities {
+  .intro-reveal {
+    animation: intro-reveal 720ms var(--ease-emphasised) both;
+  }
+
+  .intro-reveal-delay-1 {
+    animation-delay: 110ms;
+  }
+
+  .intro-reveal-delay-2 {
+    animation-delay: 210ms;
+  }
+
+  .intro-reveal-delay-3 {
+    animation-delay: 320ms;
+  }
+
+  .intro-float {
+    animation: intro-float 7s ease-in-out infinite;
+  }
+
+  .intro-pulse-glow {
+    animation: intro-pulse-glow 4.8s ease-in-out infinite;
+  }
+
+  .intro-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .intro-shimmer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-120%);
+    background: linear-gradient(110deg, transparent 0%, rgba(255, 255, 255, 0.22) 45%, transparent 72%);
+    animation: intro-shimmer 5.6s ease-in-out infinite;
+  }
+
+  .intro-card-lift {
+    transition: transform 220ms var(--ease-standard), border-color 220ms var(--ease-standard), background 220ms var(--ease-standard), box-shadow 220ms var(--ease-standard);
+  }
+
+  .intro-card-lift:hover {
+    transform: translateY(-4px);
+    border-color: rgba(233, 83, 173, 0.38);
+    box-shadow: 0 20px 60px rgba(13, 14, 25, 0.24);
   }
 }
 
+@keyframes intro-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes intro-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-1deg);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0) rotate(1deg);
+  }
+}
+
+@keyframes intro-pulse-glow {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes intro-shimmer {
+  0%,
+  46% {
+    transform: translateX(-120%);
+  }
+  62%,
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-reveal,
+  .intro-float,
+  .intro-pulse-glow,
+  .intro-shimmer::after {
+    animation: none !important;
+  }
+
+  .intro-card-lift:hover {
+    transform: none;
+  }
+}

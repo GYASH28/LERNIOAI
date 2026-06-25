@@ -2,10 +2,18 @@
 
 import Link from 'next/link'
 import { Suspense, useEffect, useState } from 'react'
-import type { FormEvent, ReactNode } from 'react'
+import type { ChangeEvent, FormEvent, ReactNode } from 'react'
 import { getProviders, signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { ArrowLeft, Chrome, Mail, UserPlus } from 'lucide-react'
+import { ChevronDown, Mail, UserPlus } from 'lucide-react'
+import {
+  AuthShell,
+  GoogleMark,
+  authInputClass,
+  authPrimaryButtonClass,
+  authSecondaryButtonClass,
+  authSelectClass,
+} from '@/components/auth/auth-shell'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -34,9 +42,31 @@ function Field({
 }) {
   return (
     <label className={`block ${className}`}>
-      <Label className="text-sm font-semibold text-slate-300">{label}</Label>
+      <Label className="text-sm font-semibold text-[#405249]">{label}</Label>
       <span className="mt-2 block">{children}</span>
     </label>
+  )
+}
+
+function ToggleSection({
+  open,
+  onClick,
+  children,
+}: {
+  open: boolean
+  onClick: () => void
+  children: ReactNode
+}) {
+  return (
+    <button
+      type="button"
+      className="inline-flex items-center gap-2 rounded-lg border border-[#d7e1da] bg-[#f7faf8] px-3 py-2 text-sm font-bold text-[#255f51] transition hover:border-[#9db2a6] hover:bg-white"
+      onClick={onClick}
+      aria-expanded={open}
+    >
+      {children}
+      <ChevronDown className={`h-4 w-4 transition ${open ? 'rotate-180' : ''}`} />
+    </button>
   )
 }
 
@@ -60,7 +90,7 @@ function SignUpForm() {
     }
   }, [])
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
+  function handleChange(event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     setForm((current) => ({ ...current, [event.target.name]: event.target.value }))
   }
 
@@ -84,7 +114,7 @@ function SignUpForm() {
 
     setSubmitting(true)
     setError('')
-    setStatusMessage(showInvite && form.inviteCode.trim() ? 'Checking invite code...' : 'Creating your student profile...')
+    setStatusMessage(showInvite && form.inviteCode.trim() ? 'Checking invite code...' : 'Creating your profile...')
 
     try {
       const response = await fetch('/api/auth/register', {
@@ -114,7 +144,7 @@ function SignUpForm() {
         callbackUrl: '/dashboard',
       })
       if (result?.error) {
-        throw new Error('Account created, but automatic login failed. Please use the login page.')
+        throw new Error('Account created, but automatic sign-in failed. Use the sign-in page.')
       }
 
       router.push(result?.url ?? '/dashboard')
@@ -141,225 +171,174 @@ function SignUpForm() {
   }
 
   return (
-    <main className="grid min-h-screen place-items-center overflow-hidden bg-[#050816] px-4 py-10 text-white">
-      <div className="pointer-events-none fixed inset-x-0 top-0 h-[34rem] bg-[linear-gradient(90deg,rgba(34,211,238,0.16),transparent_34%),linear-gradient(120deg,transparent_32%,rgba(124,58,237,0.2),transparent_72%)] opacity-70 blur-3xl" />
-      <div className="relative z-10 w-full max-w-2xl animate-in fade-in slide-in-from-bottom-5 duration-500">
-        <Link
-          href="/"
-          className="mb-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-300 transition hover:text-white"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Back to introduction
-        </Link>
+    <AuthShell
+      eyebrow="Create profile"
+      title="Start with a student account"
+      description="Students can sign up directly. CR, teacher, coordinator, reviewer, moderator, and admin access need an invite code."
+      backHref="/"
+      backLabel="Intro"
+      className="max-w-2xl"
+    >
+      <form onSubmit={submit} className="grid gap-4 sm:grid-cols-2">
+        <Field label="Full name" className="sm:col-span-2">
+          <Input
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+            placeholder="Your name"
+            autoComplete="name"
+            className={authInputClass}
+            required
+          />
+        </Field>
 
-        <section className="rounded-3xl border border-white/10 bg-white/[0.075] p-5 shadow-[0_24px_70px_rgba(0,0,0,0.38)] backdrop-blur-xl">
-          <div className="mb-6">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-300/25 bg-cyan-300/10 px-3 py-1 text-xs font-bold text-cyan-100">
-              <UserPlus className="h-3.5 w-3.5" />
-              Get started
-            </span>
-            <h1 className="mt-4 text-3xl font-black tracking-normal text-white">
-              Create your Lernio profile
-            </h1>
-            <p className="mt-2 text-sm leading-6 text-slate-400">
-              Create your own Lernio account. No college-issued username is required. CR, teacher, coordinator, reviewer, moderator, and admin access needs an approved invite code.
-            </p>
+        <Field label="Email" className="sm:col-span-2">
+          <span className="relative block">
+            <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#718176]" />
+            <Input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              placeholder="you@example.com"
+              autoComplete="email"
+              className={`${authInputClass} pl-10`}
+              required
+            />
+          </span>
+        </Field>
+
+        <Field label="Password">
+          <Input
+            type="password"
+            name="password"
+            value={form.password}
+            onChange={handleChange}
+            placeholder="At least 8 characters"
+            autoComplete="new-password"
+            className={authInputClass}
+            required
+          />
+        </Field>
+
+        <Field label="Confirm password">
+          <Input
+            type="password"
+            name="confirmPassword"
+            value={form.confirmPassword}
+            onChange={handleChange}
+            placeholder="Repeat password"
+            autoComplete="new-password"
+            className={authInputClass}
+            required
+          />
+        </Field>
+
+        <div className="flex flex-wrap gap-2 sm:col-span-2">
+          <ToggleSection open={showAcademic} onClick={() => setShowAcademic((value) => !value)}>
+            {showAcademic ? 'Hide academic details' : 'Add academic details'}
+          </ToggleSection>
+          <ToggleSection open={showInvite} onClick={() => setShowInvite((value) => !value)}>
+            {showInvite ? 'Hide invite code' : 'Have an invite code'}
+          </ToggleSection>
+        </div>
+
+        {showAcademic ? (
+          <div className="grid gap-4 rounded-lg border border-[#d7e1da] bg-[#f7faf8] p-4 sm:col-span-2 sm:grid-cols-2">
+            <Field label="Roll number">
+              <Input
+                name="rollNumber"
+                value={form.rollNumber}
+                onChange={handleChange}
+                placeholder="Optional"
+                inputMode="text"
+                pattern="[A-Za-z0-9/-]{1,32}"
+                className={authInputClass}
+              />
+            </Field>
+            <Field label="Department / programme">
+              <select name="departmentCode" value={form.departmentCode} onChange={handleChange} className={authSelectClass}>
+                <option value="">Choose later</option>
+                {CWIT_PROGRAMMES.map((programme) => (
+                  <option key={programme.programmeCode} value={programme.departmentCode}>
+                    {programme.programmeName}
+                  </option>
+                ))}
+              </select>
+            </Field>
+            <Field label="Semester">
+              <select name="semesterNumber" value={form.semesterNumber} onChange={handleChange} className={authSelectClass}>
+                <option value="">Choose later</option>
+                {CAMPUS_SEMESTERS.map((semester) => (
+                  <option key={semester} value={semester}>
+                    Semester {semester}
+                  </option>
+                ))}
+              </select>
+            </Field>
+            <Field label="Division">
+              <select name="division" value={form.division} onChange={handleChange} className={authSelectClass}>
+                {CAMPUS_DIVISIONS.map((division) => (
+                  <option key={division} value={division}>
+                    {division === 'NOT_SURE' ? 'Not sure' : `Division ${division}`}
+                  </option>
+                ))}
+              </select>
+            </Field>
           </div>
+        ) : null}
 
-          <form onSubmit={submit} className="grid gap-4 sm:grid-cols-2">
-            <Field label="Full name" className="sm:col-span-2">
-              <Input
-                name="name"
-                value={form.name}
-                onChange={handleChange}
-                placeholder="Your name"
-                autoComplete="name"
-                className="h-auto rounded-2xl border-white/10 bg-slate-950/55 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus-visible:border-cyan-300/70 focus-visible:ring-cyan-300/10"
-                required
-              />
-            </Field>
-            <Field label="Email" className="sm:col-span-2">
-              <div className="relative">
-                <Mail className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
-                <Input
-                  type="email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  placeholder="you@example.com"
-                  autoComplete="email"
-                  className="h-auto rounded-2xl border-white/10 bg-slate-950/55 px-4 py-3 pl-11 text-sm text-white placeholder:text-slate-500 focus-visible:border-cyan-300/70 focus-visible:ring-cyan-300/10"
-                  required
-                />
-              </div>
-            </Field>
-            <Field label="Password">
-              <Input
-                type="password"
-                name="password"
-                value={form.password}
-                onChange={handleChange}
-                placeholder="At least 8 characters"
-                autoComplete="new-password"
-                className="h-auto rounded-2xl border-white/10 bg-slate-950/55 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus-visible:border-cyan-300/70 focus-visible:ring-cyan-300/10"
-                required
-              />
-            </Field>
-            <Field label="Confirm password">
-              <Input
-                type="password"
-                name="confirmPassword"
-                value={form.confirmPassword}
-                onChange={handleChange}
-                placeholder="Repeat password"
-                autoComplete="new-password"
-                className="h-auto rounded-2xl border-white/10 bg-slate-950/55 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus-visible:border-cyan-300/70 focus-visible:ring-cyan-300/10"
-                required
-              />
-            </Field>
-            <div className="sm:col-span-2">
-              <button
-                type="button"
-                className="text-sm font-semibold text-cyan-200 transition hover:text-white"
-                onClick={() => setShowAcademic((value) => !value)}
-              >
-                {showAcademic ? 'Hide academic details' : 'Add academic details now'}
-              </button>
-            </div>
-            {showAcademic ? (
-              <>
-                <Field label="Roll number">
-                  <Input
-                    name="rollNumber"
-                    value={form.rollNumber}
-                    onChange={handleChange}
-                    placeholder="Optional"
-                    inputMode="text"
-                    pattern="[A-Za-z0-9/-]{1,32}"
-                    className="h-auto rounded-2xl border-white/10 bg-slate-950/55 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus-visible:border-cyan-300/70 focus-visible:ring-cyan-300/10"
-                  />
-                  <p className="mt-2 text-xs text-slate-500">Optional at signup. You can add it later from profile completion.</p>
-                </Field>
-                <Field label="Department / programme">
-                  <select
-                    name="departmentCode"
-                    value={form.departmentCode}
-                    onChange={handleChange}
-                    className="w-full rounded-2xl border border-white/10 bg-slate-950/55 px-4 py-3 text-sm text-white outline-none transition hover:border-white/20 focus:border-cyan-300/70 focus:ring-4 focus:ring-cyan-300/10"
-                  >
-                    <option value="">Choose later</option>
-                    {CWIT_PROGRAMMES.map((programme) => (
-                      <option key={programme.programmeCode} value={programme.departmentCode}>
-                        {programme.programmeName}
-                      </option>
-                    ))}
-                  </select>
-                </Field>
-                <Field label="Semester">
-                  <select
-                    name="semesterNumber"
-                    value={form.semesterNumber}
-                    onChange={handleChange}
-                    className="w-full rounded-2xl border border-white/10 bg-slate-950/55 px-4 py-3 text-sm text-white outline-none transition hover:border-white/20 focus:border-cyan-300/70 focus:ring-4 focus:ring-cyan-300/10"
-                  >
-                    <option value="">Choose later</option>
-                    {CAMPUS_SEMESTERS.map((semester) => (
-                      <option key={semester} value={semester}>
-                        Semester {semester}
-                      </option>
-                    ))}
-                  </select>
-                </Field>
-                <Field label="Division">
-                  <select
-                    name="division"
-                    value={form.division}
-                    onChange={handleChange}
-                    className="w-full rounded-2xl border border-white/10 bg-slate-950/55 px-4 py-3 text-sm text-white outline-none transition hover:border-white/20 focus:border-cyan-300/70 focus:ring-4 focus:ring-cyan-300/10"
-                  >
-                    {CAMPUS_DIVISIONS.map((division) => (
-                      <option key={division} value={division}>
-                        {division === 'NOT_SURE' ? 'Not sure' : `Division ${division}`}
-                      </option>
-                    ))}
-                  </select>
-                </Field>
-              </>
-            ) : null}
-            <div className="sm:col-span-2">
-              {showInvite ? (
-                <Field label="Invite code">
-                  <Input
-                    name="inviteCode"
-                    value={form.inviteCode}
-                    onChange={(event) => setForm((current) => ({ ...current, inviteCode: event.target.value.toUpperCase() }))}
-                    placeholder="LM-TEA-123456"
-                    className="h-auto rounded-2xl border-white/10 bg-slate-950/55 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus-visible:border-cyan-300/70 focus-visible:ring-cyan-300/10"
-                  />
-                  <p className="mt-2 text-xs text-slate-500">Only approved CR, teacher, coordinator, or admin invite codes unlock elevated access.</p>
-                </Field>
-              ) : (
-                <button
-                  type="button"
-                  className="text-sm font-semibold text-cyan-200 transition hover:text-white"
-                  onClick={() => setShowInvite(true)}
-                >
-                  Have an invite code?
-                </button>
-              )}
-            </div>
+        {showInvite ? (
+          <Field label="Invite code" className="sm:col-span-2">
+            <Input
+              name="inviteCode"
+              value={form.inviteCode}
+              onChange={(event) => setForm((current) => ({ ...current, inviteCode: event.target.value.toUpperCase() }))}
+              placeholder="LM-TEA-123456"
+              className={authInputClass}
+            />
+          </Field>
+        ) : null}
 
-            {error ? (
-              <p className="rounded-2xl border border-rose-300/25 bg-rose-500/10 px-4 py-3 text-sm font-semibold text-rose-100 sm:col-span-2">
-                {error}
-              </p>
-            ) : null}
-
-            <Button
-              type="submit"
-              className="min-h-11 rounded-2xl bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_0_45px_rgba(34,211,238,0.24)] transition hover:brightness-110 sm:col-span-2"
-              disabled={submitting}
-            >
-              <UserPlus className="h-4 w-4" />
-              {submitting ? 'Creating account...' : 'Create account'}
-            </Button>
-          </form>
-
-          {statusMessage ? (
-            <p className="mt-3 rounded-2xl border border-cyan-300/20 bg-cyan-300/10 px-4 py-3 text-sm font-semibold text-cyan-100">
-              {statusMessage}
-            </p>
-          ) : null}
-
-          {providers?.google ? (
-            <>
-              <div className="my-5 flex items-center gap-3 text-xs text-slate-500">
-                <span className="h-px flex-1 bg-white/10" />
-                or
-                <span className="h-px flex-1 bg-white/10" />
-              </div>
-              <Button
-                type="button"
-                variant="secondary"
-                className="min-h-11 w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-2.5 text-sm font-semibold text-white transition hover:border-cyan-300/40 hover:bg-white/15 hover:text-white"
-                disabled={submitting}
-                onClick={handleGoogle}
-              >
-                <Chrome className="h-4 w-4" />
-                Continue with Google
-              </Button>
-            </>
-          ) : null}
-
-          <p className="mt-6 text-center text-sm text-slate-400">
-            Already have an account?{' '}
-            <Link href="/sign-in" className="font-semibold text-cyan-200 hover:text-white">
-              Login
-            </Link>
+        {error ? (
+          <p className="rounded-lg border border-[#e7b7b7] bg-[#fff1f1] px-3 py-2 text-sm font-semibold text-[#8a2d2d] sm:col-span-2">
+            {error}
           </p>
-        </section>
-      </div>
-    </main>
+        ) : null}
+
+        {statusMessage ? (
+          <p className="rounded-lg border border-[#bad8cb] bg-[#eef8f2] px-3 py-2 text-sm font-semibold text-[#255f51] sm:col-span-2">
+            {statusMessage}
+          </p>
+        ) : null}
+
+        <Button type="submit" className={`w-full sm:col-span-2 ${authPrimaryButtonClass}`} disabled={submitting}>
+          <UserPlus className="h-4 w-4" />
+          {submitting ? 'Creating profile...' : 'Create profile'}
+        </Button>
+      </form>
+
+      {providers?.google ? (
+        <>
+          <div className="my-5 flex items-center gap-3 text-xs font-semibold text-[#718176]">
+            <span className="h-px flex-1 bg-[#d7e1da]" />
+            or
+            <span className="h-px flex-1 bg-[#d7e1da]" />
+          </div>
+          <Button type="button" variant="secondary" className={`w-full ${authSecondaryButtonClass}`} disabled={submitting} onClick={handleGoogle}>
+            <GoogleMark />
+            Continue with Google
+          </Button>
+        </>
+      ) : null}
+
+      <p className="mt-6 text-center text-sm text-[#66776d]">
+        Already have an account?{' '}
+        <Link href="/sign-in" className="font-bold text-[#255f51] hover:text-[#17211c]">
+          Sign in
+        </Link>
+      </p>
+    </AuthShell>
   )
 }
 
@@ -367,9 +346,16 @@ export default function SignUpPage() {
   return (
     <Suspense
       fallback={
-        <main className="grid min-h-screen place-items-center bg-[#050816] px-4 py-10 text-white">
-          <div className="h-96 w-full max-w-2xl animate-pulse rounded-3xl bg-white/10" />
-        </main>
+        <AuthShell
+          eyebrow="Create profile"
+          title="Start with a student account"
+          description="Loading signup."
+          backHref="/"
+          backLabel="Intro"
+          className="max-w-2xl"
+        >
+          <div className="h-96 animate-pulse rounded-lg bg-[#eef3ef]" />
+        </AuthShell>
       }
     >
       <SignUpForm />

@@ -1,7 +1,13 @@
 import { withAuth } from 'next-auth/middleware'
 import { NextResponse } from 'next/server'
 
-const publicPaths = new Set(['/', '/sign-in', '/sign-up'])
+const publicPaths = new Set([
+  '/',
+  '/sign-in',
+  '/sign-up',
+  '/forgot-password',
+  '/reset-password',
+])
 
 export default withAuth(
   function proxy(req) {
@@ -35,6 +41,6 @@ export default withAuth(
 
 export const config = {
   matcher: [
-    '/((?!api/auth|_next/static|_next/image|favicon.ico|logo.svg|robots.txt).*)',
+    '/((?!api/auth|_next/static|_next/image|favicon.ico|brand/|robots.txt).*)',
   ],
 }
