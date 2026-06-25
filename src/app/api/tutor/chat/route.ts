@@ -115,8 +115,6 @@ export async function POST(req: NextRequest) {
       subjectName ? `Subject: ${subjectName}` : '',
       unitTitle ? `Unit: ${unitTitle}` : '',
       topicTitle ? `Topic: ${topicTitle}` : '',
-      user.semesterNumber ? `Student semester: ${user.semesterNumber}` : '',
-      user.preferredLang ? `Preferred language: ${user.preferredLang}` : '',
     ]
       .filter(Boolean)
       .join('\n')
