@@ -26,6 +26,23 @@ export const updateProfileSchema = z.object({
 })
 
 // ============================================================
+// AUTH
+// ============================================================
+
+export const forgotPasswordSchema = z.object({
+  email: z.string().trim().email('Enter a valid email address.').max(320),
+})
+
+export const resetPasswordSchema = z.object({
+  token: z.string().min(32, 'Reset token is missing or invalid.').max(256),
+  password: z.string().min(8, 'Password must be at least 8 characters.').max(128),
+})
+
+export const verifyEmailRequestSchema = z.object({
+  email: z.string().trim().email('Enter a valid email address.').max(320),
+})
+
+// ============================================================
 // PROGRESS — practice question attempt
 // ============================================================
 

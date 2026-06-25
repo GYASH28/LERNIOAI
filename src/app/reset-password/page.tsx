@@ -10,6 +10,17 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
+function getApiErrorMessage(data: unknown, fallback: string) {
+  if (!data || typeof data !== 'object') return fallback
+  const error = (data as { error?: unknown }).error
+  if (typeof error === 'string') return error
+  if (error && typeof error === 'object') {
+    const message = (error as { message?: unknown }).message
+    if (typeof message === 'string') return message
+  }
+  return fallback
+}
+
 function Rule({ passed, children }: { passed: boolean; children: React.ReactNode }) {
   return (
     <li className="flex items-center gap-2">
@@ -72,7 +83,7 @@ function ResetPasswordForm() {
       setStatusMessage('')
 
       if (!res.ok || !data.ok) {
-        setError(data.error || 'Could not reset the password.')
+        setError(getApiErrorMessage(data, 'Could not reset the password.'))
       } else {
         setStatusMessage('Password updated. Redirecting to sign in...')
         setTimeout(() => {

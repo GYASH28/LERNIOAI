@@ -2,8 +2,9 @@
   "name": "lernio-ai",
   "version": "0.2.0",
   "private": true,
+  "packageManager": "npm@10.9.2",
   "engines": {
-    "node": ">=20.9.0"
+    "node": ">=20.19.0"
   },
   "scripts": {
     "dev": "next dev -p 3000",
@@ -21,6 +22,7 @@
     "test:motion": "vitest run src/lib/motion src/components/motion tests/motion",
     "analyze": "next build --profile",
     "check": "npm run lint && npm run typecheck && npm run test",
+    "ci:migrate": "prisma migrate deploy",
     "db:push": "prisma db push",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",

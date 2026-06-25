@@ -44,5 +44,5 @@ Branch: `codex/safe-brand-vercel`
 
 - Verify the canonical Vercel project and domain ownership in Vercel.
 - Ensure production `DATABASE_URL`, `NEXTAUTH_SECRET`, `NEXTAUTH_URL`, and optional AI/OAuth keys are set on the canonical Vercel project.
-- Run `prisma migrate deploy` against the production database during deployment.
+- Run `npm run ci:migrate` against the production database as a controlled release step before promoting the deployment.
 - Confirm `https://lernioai.vercel.app` serves the current branch after Vercel alias/project cleanup.

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import { isDatabaseUnavailableError } from '@/lib/api-error-policy'
+import { getEmailProviderState } from '@/lib/email'
 
 /**
  * Readiness probe.
@@ -27,6 +28,7 @@ interface ReadinessReport {
   checks: {
     database: 'ok' | 'unavailable'
     auth: ProviderState
+    email: ProviderState
     ai: ProviderState
   }
   deployment: {
@@ -59,10 +61,18 @@ export async function GET() {
   }
 
   const auth: ProviderState = providerState(process.env.NEXTAUTH_SECRET)
+  const email = getEmailProviderState()
   const ai: ProviderState = providerState(process.env.ZAI_API_KEY)
+  const requiredProviderMissing =
+    process.env.NODE_ENV === 'production' &&
+    (auth === 'unconfigured' || email === 'unconfigured')
 
   const overall: ReadinessReport['status'] =
-    database === 'unavailable' ? 'unavailable' : 'ready'
+    database === 'unavailable'
+      ? 'unavailable'
+      : requiredProviderMissing
+        ? 'degraded'
+        : 'ready'
 
   const report: ReadinessReport = {
     status: overall,
@@ -71,6 +81,7 @@ export async function GET() {
     checks: {
       database,
       auth,
+      email,
       ai,
     },
     deployment: {
@@ -80,6 +91,6 @@ export async function GET() {
   }
 
   return NextResponse.json(report, {
-    status: overall === 'ready' ? 200 : 503,
+    status: overall === 'unavailable' ? 503 : 200,
   })
 }

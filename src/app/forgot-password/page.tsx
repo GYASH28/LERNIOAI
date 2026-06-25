@@ -9,6 +9,17 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
+function getApiErrorMessage(data: unknown, fallback: string) {
+  if (!data || typeof data !== 'object') return fallback
+  const error = (data as { error?: unknown }).error
+  if (typeof error === 'string') return error
+  if (error && typeof error === 'object') {
+    const message = (error as { message?: unknown }).message
+    if (typeof message === 'string') return message
+  }
+  return fallback
+}
+
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('')
   const [error, setError] = useState<string | null>(null)
@@ -32,9 +43,9 @@ export default function ForgotPasswordPage() {
       setStatusMessage('')
 
       if (!res.ok || !data.ok) {
-        setError(data.error || 'Could not request a reset link.')
+        setError(getApiErrorMessage(data, 'Could not request a reset link.'))
       } else {
-        setStatusMessage('If an account exists, a reset link has been sent or logged for this environment.')
+        setStatusMessage('If an account exists, a reset link has been sent.')
       }
     } catch {
       setSubmitting(false)

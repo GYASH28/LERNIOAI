@@ -9,42 +9,45 @@ The app covers four Semester-3 subjects — Data Structures (CS201), OOP with C+
 ## Quick start
 
 ### Prerequisites
-- [Node.js](https://nodejs.org/) 20.9+ (or [Bun](https://bun.sh/) 1.3+)
+- [Node.js](https://nodejs.org/) 22.x recommended, or 20.19+
+- npm 10+
 - PostgreSQL 14+ for local and production data
 
 ### Install & run
 ```bash
 # 1. Install dependencies
-bun install            # or: npm install / pnpm install
+npm ci
 
 # 2. Configure environment
-cp .env.example .env   # then edit .env if needed (DATABASE_URL, LERNIO_DEMO_MODE)
+cp .env.example .env   # then edit .env if needed (DATABASE_URL, auth, email)
 
 # 3. Set up the database
-bun run db:generate    # generates the Prisma Client
-bun run db:deploy      # applies committed PostgreSQL migrations
+npm run db:generate    # generates the Prisma Client
+npm run db:deploy      # applies committed PostgreSQL migrations
 # (optional) seed demo content:
-bunx tsx scripts/seed.ts
-bunx tsx scripts/seed-coding.ts
-bunx tsx scripts/upsert-achievements.ts
+npm run db:seed
+npx tsx scripts/seed-coding.ts
+npx tsx scripts/upsert-achievements.ts
 
 # 4. Start the dev server
-bun run dev            # http://localhost:3000
+npm run dev            # http://localhost:3000
 ```
 
 ### Useful scripts
 | Script | Description |
 |---|---|
-| `bun run dev` | Start the Next.js dev server on port 3000 |
-| `bun run build` | Production build |
-| `bun run start` | Run the production Next.js server |
-| `bun run lint` | ESLint (strict rules restored) |
-| `bun run typecheck` | `tsc --noEmit` (TypeScript strict) |
-| `bun run check` | lint + typecheck |
-| `bun run db:push` | Local-only schema sync; do not use as production migration strategy |
-| `bun run db:generate` | Regenerate the Prisma Client |
-| `bun run db:migrate` | Create + apply a migration |
-| `bun run db:reset` | Reset the database (destroys all data) |
+| `npm run dev` | Start the Next.js dev server on port 3000 |
+| `npm run build` | Production build |
+| `npm run start` | Run the production Next.js server |
+| `npm run lint` | ESLint |
+| `npm run typecheck` | `tsc --noEmit` (TypeScript strict) |
+| `npm run check` | lint + typecheck + unit tests |
+| `npm run vercel-build` | Vercel-safe build: Prisma generate + Next build |
+| `npm run ci:migrate` | Apply committed Prisma migrations in a controlled production step |
+| `npm run db:push` | Local-only schema sync; do not use as production migration strategy |
+| `npm run db:generate` | Regenerate the Prisma Client |
+| `npm run db:migrate` | Create + apply a migration |
+| `npm run db:reset` | Reset the database (destroys all data) |
 
 ---
 
@@ -59,7 +62,7 @@ bun run dev            # http://localhost:3000
 - **Animation**: Framer Motion (respects `prefers-reduced-motion`)
 - **Charts**: Recharts (lazy-loaded on Analytics/Exams)
 - **AI**: `z-ai-web-dev-sdk` (LLM chat, VLM, TTS, ASR, image gen) — server-only
-- **Validation**: Zod on every API request body
+- **Validation**: Zod on API request bodies, with shared schemas for auth and learning workflows
 - **Toasts**: Sonner (single system)
 
 ### Security model
@@ -87,7 +90,7 @@ Honestly labelled as a **syntax-learning playground**: the sandbox has no isolat
 
 ### Production deployment
 - **Do not** ship mutable SQLite files as production state. Use PostgreSQL (`DATABASE_URL` must be a `postgresql://` URL).
-- Vercel runs `npm run vercel-build`, which generates Prisma, applies committed migrations, and then builds Next.js.
+- Vercel runs `npm run vercel-build`, which generates Prisma and builds Next.js. Apply committed migrations separately with `npm run ci:migrate` against the intended production database.
 - Back up the database regularly; test restore procedures.
 
 ---
@@ -99,7 +102,7 @@ prisma/
   seed scripts in scripts/
 src/
   app/
-    api/                  # 30+ route handlers (all use requireUser + Zod + withApi)
+    api/                  # 30+ route handlers using shared auth, validation, and API helpers
     layout.tsx            # ThemeProvider + SonnerToaster + AchievementUnlockToaster
     page.tsx              # landing page and route-specific App Router pages
   components/
@@ -142,6 +145,7 @@ src/
 
 ## Troubleshooting
 - **`prisma generate` errors**: ensure `DATABASE_URL` is a valid PostgreSQL URL.
-- **Blank page after schema changes**: restart the dev server (`pkill -f 'next dev'` then `bun run dev`) so the Prisma Client cache is refreshed.
-- **Port 3000 in use**: `bun run dev` uses port 3000 exclusively in this environment.
-- **Demo user not found**: run `bunx tsx scripts/seed.ts` to seed the demo student + academic content.
+- **Blank page after schema changes**: restart the dev server, then run `npm run dev` so the Prisma Client cache is refreshed.
+- **Port 3000 in use**: `npm run dev` uses port 3000 in this environment.
+- **Demo user not found**: run `npm run db:seed` to seed the demo student + academic content.
+- **`/api/ready` returns 503 locally**: start a PostgreSQL server that matches `DATABASE_URL`, then run `npm run db:deploy`. `/api/health` can still be 200 when the process is alive but the database is unavailable.

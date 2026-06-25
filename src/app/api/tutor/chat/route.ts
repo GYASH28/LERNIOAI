@@ -11,6 +11,9 @@ import {
 } from '@/lib/ai/retrieval'
 import { getAiProvider, type Citation, type TutorMessage } from '@/lib/ai/provider'
 
+export const runtime = 'nodejs'
+export const maxDuration = 60
+
 interface ChatBody {
   sessionId: string
   message: string
@@ -78,7 +81,7 @@ export async function POST(req: NextRequest) {
     }
 
     const { sessionId, message, mode, subjectName, unitTitle, topicTitle } = body
-    const session = await db.tutorSession.findUnique({
+    const session = await db.tutorSession.findFirst({
       where: { id: sessionId, userId: user.id },
       include: { messages: { orderBy: { createdAt: 'asc' }, take: 20 } },
     })
