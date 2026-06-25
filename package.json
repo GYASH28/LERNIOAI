@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",
-    "vercel-build": "prisma generate && prisma migrate deploy && next build",
+    "vercel-build": "prisma generate && next build",
     "start": "next start -p 3000",
     "postinstall": "prisma generate",
     "lint": "eslint .",
@@ -17,7 +17,7 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "test:a11y": "playwright test tests/e2e/a11y.spec.ts",
-    "test:visual": "playwright test tests/e2e/visual.spec.ts",
+    "test:visual": "playwright test tests/e2e/visual.spec.ts tests/e2e/marketing-reference-visual.spec.ts",
     "test:motion": "vitest run src/lib/motion src/components/motion tests/motion",
     "analyze": "next build --profile",
     "check": "npm run lint && npm run typecheck && npm run test",

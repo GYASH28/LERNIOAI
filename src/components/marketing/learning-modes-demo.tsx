@@ -68,9 +68,9 @@ export function LearningModesDemo() {
           <div className="rounded-2xl border border-border bg-card p-5 sm:p-6">
             {MODES.map((mode) => (
               <TabsContent key={mode.id} value={mode.id} className="mt-0">
-                <div className="grid gap-5 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
+                <div className="marketing-mode-panel">
                   <div>
-                    <h3 className="text-xl font-bold tracking-tight text-foreground">
+                    <h3 className="text-xl font-bold text-foreground">
                       {mode.name}
                     </h3>
                     <p className="mt-2 text-sm leading-6 text-muted-foreground">

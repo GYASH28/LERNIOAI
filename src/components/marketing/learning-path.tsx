@@ -43,13 +43,16 @@ export function LearningPath() {
           description="No more jumping between notes apps, question banks, and random videos. Lernio follows the natural flow of studying for a diploma exam."
         />
 
-        <ol className="mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+        <ol
+          className="marketing-card-grid marketing-card-grid--four mt-12"
+          data-marketing-grid="how"
+        >
           {STEPS.map((step, i) => (
             <li key={step.n} className="relative min-w-0">
               {i < STEPS.length - 1 && (
                 <span
                   aria-hidden="true"
-                  className="absolute left-[4.75rem] top-7 hidden h-px w-[calc(100%-4.75rem)] bg-gradient-to-r from-border to-transparent xl:block"
+                  className="marketing-desktop-connector absolute left-[4.75rem] top-7 h-px w-[calc(100%-4.75rem)] bg-gradient-to-r from-border to-transparent"
                 />
               )}
               <div className="relative flex h-full flex-col rounded-2xl border border-border bg-card p-5">

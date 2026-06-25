@@ -61,7 +61,7 @@ export function PublicFooter() {
       role="contentinfo"
     >
       <div className="marketing-container py-12">
-        <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-[1.35fr_1fr_1fr_1fr]">
+        <div className="marketing-footer-grid" data-marketing-footer-grid>
           <div>
             <Link
               href="/"
@@ -69,7 +69,7 @@ export function PublicFooter() {
               aria-label="Lernio home"
             >
               <LernioLogoTile size="sm" />
-              <span className="text-base font-extrabold tracking-tight text-foreground">
+              <span className="text-base font-extrabold text-foreground">
                 Lernio
               </span>
             </Link>
@@ -94,7 +94,7 @@ export function PublicFooter() {
         </div>
 
         <div className="mt-10 border-t border-border pt-6">
-          <p className="text-xs leading-5 text-muted-foreground">
+            <p className="text-xs leading-5 text-muted-foreground">
             (c) {year} Lernio AI - Cusrow Wadia Institute of Technology
             (CWIT), Pune - G Scheme 2023
           </p>

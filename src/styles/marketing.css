@@ -6,32 +6,42 @@
    ============================================================ */
 
 @layer components {
-  .marketing-container {
-    width: 100%;
-    max-width: 80rem; /* 1280px */
-    margin-inline: auto;
-    padding-inline: 1rem;
+  :root {
+    --marketing-max-width: 72rem; /* 1152px */
+    --marketing-gutter: 1rem;
   }
 
   @media (min-width: 640px) {
-    .marketing-container {
-      padding-inline: 1.5rem;
+    :root {
+      --marketing-gutter: 1.5rem;
     }
   }
 
   @media (min-width: 1024px) {
-    .marketing-container {
-      padding-inline: 2rem;
+    :root {
+      --marketing-gutter: 2rem;
     }
   }
 
+  .marketing-container {
+    box-sizing: border-box;
+    width: min(
+      calc(100% - (2 * var(--marketing-gutter))),
+      var(--marketing-max-width)
+    );
+    max-width: var(--marketing-max-width);
+    margin-inline: auto;
+    padding-inline: 0;
+    container: marketing / inline-size;
+  }
+
   .marketing-section {
-    padding-block: 4rem;
+    padding-block: 3.75rem;
   }
 
   @media (min-width: 768px) {
     .marketing-section {
-      padding-block: 6rem;
+      padding-block: 5.75rem;
     }
   }
 
@@ -41,7 +51,7 @@
     gap: 0.5rem;
     font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0;
     text-transform: uppercase;
     color: var(--brand);
   }
@@ -50,7 +60,7 @@
     font-size: clamp(1.75rem, 1.2rem + 2.2vw, 2.75rem);
     font-weight: 800;
     line-height: 1.1;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
     color: var(--text-strong);
   }
 
@@ -59,6 +69,93 @@
     line-height: 1.65;
     color: var(--text-secondary);
     max-width: 42rem;
+  }
+
+  .marketing-hero-grid,
+  .marketing-two-column,
+  .marketing-mode-panel,
+  .marketing-footer-grid {
+    display: grid;
+    min-width: 0;
+  }
+
+  .marketing-hero-grid {
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .marketing-two-column {
+    gap: 2.75rem;
+  }
+
+  .marketing-mode-panel {
+    gap: 1.25rem;
+  }
+
+  .marketing-card-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .marketing-card-grid > * {
+    min-width: 0;
+  }
+
+  .marketing-footer-grid {
+    gap: 2.5rem;
+  }
+
+  .marketing-desktop-connector {
+    display: none;
+  }
+
+  @container marketing (min-width: 44rem) {
+    .marketing-card-grid--four,
+    .marketing-card-grid--three {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .marketing-footer-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @container marketing (min-width: 54rem) {
+    .marketing-mode-panel {
+      grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+      align-items: start;
+    }
+  }
+
+  @container marketing (min-width: 64rem) {
+    .marketing-hero-grid {
+      grid-template-columns: minmax(0, 0.95fr) minmax(24rem, 1.05fr);
+      gap: clamp(2.5rem, 4cqi, 3.5rem);
+    }
+
+    .marketing-two-column {
+      grid-template-columns: minmax(0, 0.95fr) minmax(22rem, 1.05fr);
+      align-items: center;
+      gap: clamp(2.5rem, 4cqi, 3.5rem);
+    }
+
+    .marketing-card-grid--four {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .marketing-card-grid--three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .marketing-footer-grid {
+      grid-template-columns: minmax(0, 1.35fr) repeat(3, minmax(0, 1fr));
+      align-items: start;
+    }
+
+    .marketing-desktop-connector {
+      display: block;
+    }
   }
 
   /* Subtle aurora backdrop for the hero only — uses brand tokens,

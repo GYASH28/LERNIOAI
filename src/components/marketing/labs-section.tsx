@@ -44,7 +44,10 @@ export function LabsSection() {
           </p>
         </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div
+          className="marketing-card-grid marketing-card-grid--four mt-10"
+          data-marketing-grid="labs"
+        >
           {LABS.map((lab) => (
             <article
               key={lab.title}

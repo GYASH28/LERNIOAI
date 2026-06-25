@@ -40,13 +40,16 @@ export function ExamRevisionDemo() {
           description="Lernio closes the loop between practice and revision. Missed topics enter your revision queue, and readiness updates when you clear them."
         />
 
-        <ol className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+        <ol
+          className="marketing-card-grid marketing-card-grid--four mt-10"
+          data-marketing-grid="exam"
+        >
           {FLOW.map((step, i) => (
             <li key={step.label} className="relative min-w-0">
               {i < FLOW.length - 1 && (
                 <span
                   aria-hidden="true"
-                  className="absolute left-[calc(50%+1rem)] top-8 hidden h-px w-[calc(100%-2rem)] bg-gradient-to-r from-border to-transparent xl:block"
+                  className="marketing-desktop-connector absolute left-[calc(50%+1rem)] top-8 h-px w-[calc(100%-2rem)] bg-gradient-to-r from-border to-transparent"
                 />
               )}
               <div className="relative flex h-full flex-col rounded-2xl border border-border bg-card p-5">

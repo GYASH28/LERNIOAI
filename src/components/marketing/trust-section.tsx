@@ -52,11 +52,14 @@ export function TrustSection() {
           </p>
         </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div
+          className="marketing-card-grid marketing-card-grid--three mt-10"
+          data-marketing-grid="trust"
+        >
           {PILLARS.map((p) => (
             <article
               key={p.title}
-              className="rounded-2xl border border-border bg-card p-5"
+              className="flex h-full flex-col rounded-2xl border border-border bg-card p-5"
             >
               <span className="grid h-10 w-10 place-items-center rounded-lg bg-primary/10 text-primary ring-1 ring-border">
                 <p.Icon className="h-5 w-5" aria-hidden="true" />

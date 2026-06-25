@@ -32,7 +32,7 @@ function LearnPreview() {
           Data Structures - Unit 2
         </span>
       </div>
-      <h3 className="text-lg font-bold tracking-tight text-foreground">
+      <h3 className="text-lg font-bold text-foreground">
         Stacks vs queues
       </h3>
       <p className="text-sm leading-6 text-muted-foreground">
@@ -185,7 +185,7 @@ export function ProductPreview() {
   const [tab, setTab] = React.useState<PreviewTab>('learn')
 
   return (
-    <div className="relative w-full min-w-0">
+    <div className="relative w-full min-w-0" data-marketing-product-preview>
       <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
         <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 border-b border-border bg-muted/40 px-3 py-3 sm:px-4">
           <div className="hidden items-center gap-1.5 sm:flex" aria-hidden="true">

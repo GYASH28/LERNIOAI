@@ -47,24 +47,26 @@ export function FAQ() {
       className="marketing-section border-b border-border"
       aria-labelledby="faq-heading"
     >
-      <div className="marketing-container max-w-3xl">
-        <p className="marketing-eyebrow">FAQ</p>
-        <h2 id="faq-heading" className="marketing-h2 mt-3">
-          Questions, answered honestly.
-        </h2>
+      <div className="marketing-container">
+        <div className="mx-auto max-w-3xl">
+          <p className="marketing-eyebrow">FAQ</p>
+          <h2 id="faq-heading" className="marketing-h2 mt-3">
+            Questions, answered honestly.
+          </h2>
 
-        <Accordion type="single" collapsible className="mt-8">
-          {FAQS.map((item, i) => (
-            <AccordionItem key={item.q} value={`item-${i}`}>
-              <AccordionTrigger className="text-left text-base font-semibold text-foreground">
-                {item.q}
-              </AccordionTrigger>
-              <AccordionContent className="text-sm leading-6 text-muted-foreground">
-                {item.a}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+          <Accordion type="single" collapsible className="mt-8">
+            {FAQS.map((item, i) => (
+              <AccordionItem key={item.q} value={`item-${i}`}>
+                <AccordionTrigger className="text-left text-base font-semibold text-foreground">
+                  {item.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-sm leading-6 text-muted-foreground">
+                  {item.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
       </div>
     </section>
   )
