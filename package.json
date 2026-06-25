@@ -3,12 +3,12 @@
   "version": "0.2.0",
   "private": true,
   "engines": {
-    "node": ">=20.9.0"
+    "node": "20.x"
   },
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",
-    "vercel-build": "prisma generate && prisma migrate deploy && next build",
+    "vercel-build": "prisma generate && next build",
     "start": "next start -p 3000",
     "postinstall": "prisma generate",
     "lint": "eslint .",
