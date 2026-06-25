@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { useAppStore } from '@/store/app-store'
 import { Mascot } from '@/components/mascots/mascot'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -20,6 +21,7 @@ import {
   Target, Award, Sparkles, ChevronRight,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { routeForView } from '@/lib/routes'
 import {
   RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
@@ -32,8 +34,10 @@ const STATE_COLORS: Record<string, string> = {
 }
 
 export function AnalyticsView() {
-  const { user, subjects, setView, setLearnContext } = useAppStore()
+  const router = useRouter()
+  const { user, subjects, setLearnContext } = useAppStore()
   const [data, setData] = useState<any>(null)
+  const goToPractice = () => router.push(routeForView('practice'))
 
   useEffect(() => {
     fetch('/api/progress').then((r) => r.json()).then((prog) => {
@@ -217,7 +221,7 @@ export function AnalyticsView() {
         lessons={lessons}
         onPractice={(subjectId) => {
           setLearnContext({ subjectId })
-          setView('practice')
+          goToPractice()
         }}
       />
 
@@ -243,7 +247,7 @@ export function AnalyticsView() {
               {weakTopics.map((m: any) => (
                 <button
                   key={m.id}
-                  onClick={() => { setLearnContext({ subjectId: m.topic.unit.subject.id }); setView('practice') }}
+                  onClick={() => { setLearnContext({ subjectId: m.topic.unit.subject.id }); goToPractice() }}
                   className="w-full flex items-center gap-3 p-2.5 rounded-lg border border-border hover-soft text-left focus-ring"
                 >
                   <div className="h-9 w-9 rounded-lg bg-rose-500/10 flex items-center justify-center shrink-0">

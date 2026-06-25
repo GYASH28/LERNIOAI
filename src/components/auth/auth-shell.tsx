@@ -103,7 +103,7 @@ function WorkspacePreview() {
             </div>
           ))}
         </div>
-        <p className="mt-3 text-[0.6875rem] text-muted-foreground">
+        <p className="mt-3 text-xs text-muted-foreground">
           Demo preview — not your account
         </p>
       </div>
@@ -129,10 +129,10 @@ export function AuthShell({
   className?: string
 }) {
   return (
-    <main className="min-h-screen bg-background text-foreground">
-      <div className="grid min-h-screen lg:grid-cols-[minmax(0,0.92fr)_minmax(380px,560px)]">
+    <main className="min-h-dvh bg-background text-foreground">
+      <div className="grid min-h-dvh xl:grid-cols-[minmax(0,0.92fr)_minmax(380px,560px)]">
         {/* Left brand panel — uses semantic tokens, no hardcoded green/gold */}
-        <aside className="relative hidden overflow-hidden border-r border-border bg-muted/40 p-8 lg:flex lg:flex-col">
+        <aside className="relative hidden overflow-hidden border-r border-border bg-muted/40 p-6 xl:flex xl:flex-col 2xl:p-8">
           <div
             aria-hidden="true"
             className="absolute inset-0 opacity-90"
@@ -162,14 +162,14 @@ export function AuthShell({
             </div>
           </div>
 
-          <div className="relative z-10 my-16 max-w-xl">
+          <div className="relative z-10 my-10 max-w-xl 2xl:my-14">
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-primary">
               CWIT ready
             </p>
-            <h2 className="mt-4 text-4xl font-extrabold leading-[1.08] tracking-tight text-foreground sm:text-5xl">
+            <h2 className="mt-4 text-3xl font-extrabold leading-[1.08] tracking-tight text-foreground 2xl:text-5xl">
               One account for study, revision, exams, and role access.
             </h2>
-            <div className="mt-8 grid gap-3 text-sm text-muted-foreground">
+            <div className="mt-6 grid gap-3 text-sm text-muted-foreground 2xl:mt-8">
               {authHighlights.map(([Icon, text]) => (
                 <div key={text} className="flex items-center gap-3">
                   <span className="grid h-9 w-9 place-items-center rounded-lg bg-primary/10 text-primary ring-1 ring-border">
@@ -185,19 +185,19 @@ export function AuthShell({
         </aside>
 
         {/* Right form panel */}
-        <section className="flex min-h-screen flex-col px-4 py-6 sm:px-6 lg:px-10">
+        <section className="flex min-h-dvh flex-col px-4 py-5 sm:px-6 lg:px-10">
           <div className="flex items-center justify-between">
             <BrandLockup />
             <Link
               href={backHref}
-              className="inline-flex min-h-9 items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-muted-foreground transition hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="inline-flex min-h-10 shrink-0 items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-muted-foreground transition hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <ArrowLeft className="h-4 w-4" />
               {backLabel}
             </Link>
           </div>
 
-          <div className="flex flex-1 items-center justify-center py-8">
+          <div className="flex flex-1 items-center justify-center py-6 sm:py-8">
             <div className={cn('w-full max-w-md', className)}>
               <div className="mb-6">
                 <p className="text-sm font-bold text-primary">{eyebrow}</p>

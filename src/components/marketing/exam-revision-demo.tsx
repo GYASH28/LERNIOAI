@@ -1,5 +1,6 @@
 import { Badge } from '@/components/ui/badge'
 import { CheckCircle2, ArrowRight } from 'lucide-react'
+import { MarketingSectionHeader } from './marketing-section'
 
 const FLOW = [
   {
@@ -9,7 +10,7 @@ const FLOW = [
   },
   {
     label: 'Weak topic detected',
-    detail: 'Infix-to-postfix conversion missed twice.',
+    detail: 'Infix-to-postfix conversion was missed twice.',
     value: 'Flagged',
   },
   {
@@ -32,39 +33,45 @@ export function ExamRevisionDemo() {
       aria-labelledby="exam-heading"
     >
       <div className="marketing-container">
-        <div className="max-w-2xl">
-          <p className="marketing-eyebrow">Exam &amp; revision engine</p>
-          <h2 id="exam-heading" className="marketing-h2 mt-3">
-            From a missed question to a cleared exam.
-          </h2>
-          <p className="marketing-lede mt-4">
-            Lernio closes the loop between practice and revision. When you miss
-            a question, the topic enters your revision queue — and your exam
-            readiness updates the moment you clear it.
-          </p>
-        </div>
+        <MarketingSectionHeader
+          id="exam-heading"
+          eyebrow="Exam and revision engine"
+          title="From a missed question to a cleared exam."
+          description="Lernio closes the loop between practice and revision. Missed topics enter your revision queue, and readiness updates when you clear them."
+        />
 
-        <ol className="mt-10 grid gap-4 md:grid-cols-4">
+        <ol className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
           {FLOW.map((step, i) => (
-            <li key={step.label}>
-              <div className="flex h-full flex-col rounded-2xl border border-border bg-card p-5">
-                <div className="flex items-center gap-2">
-                  <span className="font-mono text-xs font-bold text-muted-foreground/50">
+            <li key={step.label} className="relative min-w-0">
+              {i < FLOW.length - 1 && (
+                <span
+                  aria-hidden="true"
+                  className="absolute left-[calc(50%+1rem)] top-8 hidden h-px w-[calc(100%-2rem)] bg-gradient-to-r from-border to-transparent xl:block"
+                />
+              )}
+              <div className="relative flex h-full flex-col rounded-2xl border border-border bg-card p-5">
+                <div className="flex min-h-8 items-center justify-between gap-3">
+                  <span className="font-mono text-xs font-bold text-muted-foreground">
                     STEP {i + 1}
                   </span>
                   {i === FLOW.length - 1 && (
-                    <CheckCircle2 className="h-4 w-4 text-success" aria-hidden="true" />
+                    <CheckCircle2
+                      className="h-4 w-4 text-success"
+                      aria-hidden="true"
+                    />
                   )}
                 </div>
-                <h3 className="mt-2 text-sm font-bold text-foreground">
+                <h3 className="mt-3 min-h-10 text-base font-bold leading-snug text-foreground">
                   {step.label}
                 </h3>
-                <p className="mt-2 flex-1 text-xs leading-5 text-muted-foreground">
+                <p className="mt-2 flex-1 text-sm leading-6 text-muted-foreground">
                   {step.detail}
                 </p>
                 <Badge
-                  variant={i === 1 ? 'destructive' : i === 3 ? 'secondary' : 'outline'}
-                  className="mt-3 w-fit text-[0.625rem]"
+                  variant={
+                    i === 1 ? 'destructive' : i === 3 ? 'secondary' : 'outline'
+                  }
+                  className="mt-4 w-fit text-xs"
                 >
                   {step.value}
                 </Badge>
@@ -73,9 +80,10 @@ export function ExamRevisionDemo() {
           ))}
         </ol>
 
-        <p className="mt-6 flex items-center gap-2 text-xs text-muted-foreground">
-          <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-          Values shown are demo data — your real numbers update live as you practise.
+        <p className="mt-6 flex items-start gap-2 text-sm text-muted-foreground">
+          <ArrowRight className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
+          Values shown are demo data. Your real numbers update live as you
+          practise.
         </p>
       </div>
     </section>

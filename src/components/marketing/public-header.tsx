@@ -2,7 +2,6 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { LernioBrandLockup } from '@/components/brand/lernio-logo'
 import {
@@ -30,13 +29,12 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'FAQ', href: '/#faq' },
 ]
 
-export function PublicHeader({ isAuthenticated = false }: { isAuthenticated?: boolean }) {
-  const pathname = usePathname()
-  const [mobileOpen, setMobileOpen] = React.useState(false)
+const TABLET_NAV_ITEMS = NAV_ITEMS.filter((item) =>
+  ['Product', 'How it works', 'AI Tutor'].includes(item.label),
+)
 
-  React.useEffect(() => {
-    setMobileOpen(false)
-  }, [pathname])
+export function PublicHeader({ isAuthenticated = false }: { isAuthenticated?: boolean }) {
+  const [mobileOpen, setMobileOpen] = React.useState(false)
 
   React.useEffect(() => {
     if (typeof document === 'undefined') return
@@ -54,34 +52,49 @@ export function PublicHeader({ isAuthenticated = false }: { isAuthenticated?: bo
       className="sticky top-0 z-40 w-full border-b border-border bg-background/80 backdrop-blur-md"
       role="banner"
     >
-      <div className="marketing-container flex h-16 items-center justify-between gap-4">
+      <div className="marketing-container grid h-16 grid-cols-[minmax(0,auto)_1fr_auto] items-center gap-3">
         <LernioBrandLockup href="/" size="sm" />
 
         <nav
-          className="hidden items-center gap-1 lg:flex"
-          aria-label="Public navigation"
+          className="hidden min-w-0 items-center justify-center gap-1 lg:flex xl:hidden"
+          aria-label="Primary public navigation"
         >
-          {NAV_ITEMS.map((item) => (
+          {TABLET_NAV_ITEMS.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="inline-flex h-9 items-center rounded-md px-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="inline-flex h-10 items-center rounded-md px-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               {item.label}
             </Link>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-2 lg:flex">
+        <nav
+          className="hidden min-w-0 items-center justify-center gap-1 xl:flex"
+          aria-label="Public navigation"
+        >
+          {NAV_ITEMS.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="inline-flex h-10 items-center rounded-md px-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="hidden items-center justify-end gap-2 lg:flex">
           <Button
             variant="ghost"
             size="sm"
             asChild
-            className="h-9 min-h-9"
+            className="h-10 min-h-10"
           >
             <Link href="/sign-in">Sign in</Link>
           </Button>
-          <Button size="sm" asChild className="h-9 min-h-9 gap-1.5">
+          <Button size="sm" asChild className="h-10 min-h-10 gap-1.5">
             <Link href={primaryHref}>
               {primaryLabel}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -89,8 +102,8 @@ export function PublicHeader({ isAuthenticated = false }: { isAuthenticated?: bo
           </Button>
         </div>
 
-        <div className="flex items-center gap-2 lg:hidden">
-          <Button size="sm" asChild className="h-9 min-h-9 gap-1.5">
+        <div className="flex items-center justify-end gap-2 lg:hidden">
+          <Button size="sm" asChild className="h-10 min-h-10 gap-1.5 px-3">
             <Link href={primaryHref}>
               {isAuthenticated ? 'Dashboard' : 'Start'}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -101,7 +114,7 @@ export function PublicHeader({ isAuthenticated = false }: { isAuthenticated?: bo
               <Button
                 variant="outline"
                 size="icon"
-                className="h-9 w-9"
+                className="h-11 w-11"
                 aria-label="Open navigation menu"
                 aria-expanded={mobileOpen}
               >
@@ -110,7 +123,7 @@ export function PublicHeader({ isAuthenticated = false }: { isAuthenticated?: bo
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="w-[min(20rem,100vw)] border-border bg-background p-0"
+              className="w-[min(22rem,100vw)] border-border bg-background p-0"
             >
               <SheetHeader className="border-b border-border p-4 text-left">
                 <SheetTitle className="text-left">
