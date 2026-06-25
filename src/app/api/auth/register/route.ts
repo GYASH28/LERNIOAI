@@ -43,7 +43,11 @@ export async function POST(request: Request) {
           false,
         )
       }
-      throw new ApiError('SIGNUP_FAILED', 'Could not create this account. Please check the details and try again.', 400, false)
+
+      // Do not convert infrastructure and Prisma errors into a misleading 400
+      // response. The shared API boundary records the server error and returns
+      // the correct retryable 5xx response without exposing private details.
+      throw error
     }
   })
 }
