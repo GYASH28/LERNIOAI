@@ -591,6 +591,8 @@ model TutorMessage {
   followUps   String?  // JSON array
   feedback    String?  // up | down | null
   createdAt   DateTime @default(now())
+
+  @@index([sessionId, createdAt])
 }
 
 // ============================================================
@@ -623,6 +625,9 @@ model CodingSubmission {
   compileError String?
   testResults String?  // JSON
   createdAt   DateTime @default(now())
+
+  @@index([userId, createdAt])
+  @@index([challengeId, createdAt])
 }
 
 // ============================================================

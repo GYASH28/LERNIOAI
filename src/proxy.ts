@@ -7,6 +7,9 @@ const publicPaths = new Set([
   '/sign-up',
   '/forgot-password',
   '/reset-password',
+  '/privacy',
+  '/terms',
+  '/support',
 ])
 
 export default withAuth(
@@ -41,6 +44,6 @@ export default withAuth(
 
 export const config = {
   matcher: [
-    '/((?!api/auth|api/health|api/ready|_next/static|_next/image|favicon.ico|brand/|robots.txt).*)',
+    '/((?!api/auth|api/health|api/ready|_next/static|_next/image|favicon.ico|brand/|robots.txt|sitemap.xml|manifest.webmanifest).*)',
   ],
 }

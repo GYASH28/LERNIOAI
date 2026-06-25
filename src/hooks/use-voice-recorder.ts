@@ -4,7 +4,7 @@
  *
  * Uses MediaRecorder API. Records in the browser's preferred audio format
  * (usually audio/webm; opus), then converts the Blob to base64 for POSTing
- * to /api/tutor/voice which calls the z-ai-web-dev-sdk ASR service.
+ * to /api/tutor/voice which calls the configured AI provider ASR service.
  *
  * Public API:
  *   const { recording, elapsedMs, error, start, stop, cancel } = useVoiceRecorder({

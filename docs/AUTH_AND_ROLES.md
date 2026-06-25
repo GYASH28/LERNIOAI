@@ -36,6 +36,6 @@ Students can create a pending role request through `POST /api/roles/request`. Ad
 
 The canonical permission matrix lives in `src/lib/roles.ts`. Server routes should check roles or permissions server-side and never trust role fields from the browser.
 
-## Unsafe Defaults Removed
+## Administrator Bootstrap
 
-No personal email address is promoted to administrator by source-code fallback. Production administrator bootstrap should be an explicit one-time operational process.
+No personal email address is promoted to administrator by runtime source-code fallback. The seed/bootstrap script can create an initial admin account for `LERNIO_ADMIN_EMAIL` (default `ultimatebracegaming@gmail.com`) only when an explicit `LERNIO_ADMIN_PASSWORD` is available. Treat `npm run db:seed` as destructive: it deletes and recreates demo academic data.

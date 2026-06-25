@@ -2423,6 +2423,13 @@ const DEMO_USER = {
   lastActiveDate: new Date().toISOString().slice(0, 10),
 };
 
+const ADMIN_EMAIL = (process.env.LERNIO_ADMIN_EMAIL || "ultimatebracegaming@gmail.com")
+  .trim()
+  .toLowerCase();
+const ADMIN_PASSWORD =
+  process.env.LERNIO_ADMIN_PASSWORD ||
+  (process.env.NODE_ENV === "production" ? "" : "admin12345");
+
 // ---------------------------------------------------------------------------
 // RESOURCES (6-8)
 // ---------------------------------------------------------------------------
@@ -2688,6 +2695,33 @@ async function main() {
     },
   });
   console.log(`   ✓ ${user.email} (role: ${user.role}, level ${user.level}, xp ${user.xp})`);
+
+  if (ADMIN_EMAIL && ADMIN_PASSWORD) {
+    const admin = await db.user.create({
+      data: {
+        email: ADMIN_EMAIL,
+        name: "Lernio Admin",
+        role: "admin",
+        status: "active",
+        preferredLang: "en",
+        xp: 0,
+        level: 1,
+        streak: 0,
+        onboarded: true,
+        profileComplete: true,
+        emailVerified: new Date(),
+        semesterNumber: SEMESTER.number,
+        dailyMins: 120,
+        lastActiveDate: new Date().toISOString().slice(0, 10),
+        passwordHash: hashSync(ADMIN_PASSWORD, 12),
+        institutionId: institution.id,
+        schemeId: scheme.id,
+      },
+    });
+    console.log(`   Admin: ${admin.email} (role: ${admin.role})`);
+  } else {
+    console.log("   - Admin bootstrap skipped: set LERNIO_ADMIN_PASSWORD to create the admin account.");
+  }
 
   // ---- 7) RESOURCES ------------------------------------------------------
   console.log(`\n📎 Creating ${RESOURCES.length} resources...`);

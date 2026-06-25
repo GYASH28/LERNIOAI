@@ -9,6 +9,23 @@ import { z } from 'zod'
 import { ApiError } from '@/lib/auth'
 
 // ============================================================
+// AUTH
+// ============================================================
+
+export const forgotPasswordSchema = z.object({
+  email: z.string().trim().email().max(254).transform((value) => value.toLowerCase()),
+})
+
+export const resetPasswordSchema = z.object({
+  token: z.string().trim().min(32).max(256),
+  password: z.string().min(8).max(256),
+})
+
+export const verifyEmailRequestSchema = z.object({
+  email: z.string().trim().email().max(254).transform((value) => value.toLowerCase()),
+})
+
+// ============================================================
 // USER / PROFILE
 // ============================================================
 

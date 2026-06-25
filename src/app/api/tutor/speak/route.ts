@@ -12,7 +12,7 @@ import { checkRateLimit } from '@/lib/rate-limit'
  * Request body:
  *   {
  *     text: string,                 // 1..1024 chars (API limit)
- *     voice?: string,               // tongtong | chuichui | xiaochen | jam | kazi | douji | luodo
+ *     voice?: string,               // hannah | autumn | diana | austin | daniel | troy
  *     speed?: number,               // 0.5..2.0 (default 1.0)
  *   }
  *
@@ -23,12 +23,9 @@ import { checkRateLimit } from '@/lib/rate-limit'
  *   - TTS input is capped at 1024 chars per request (API constraint). The
  *     client is expected to chunk longer assistant messages itself; we still
  *     defend server-side by truncating to 1000 chars.
- *   - Voices list: tongtong (warm), chuichui (lively), xiaochen (calm/pro),
- *     jam (British English), kazi (clear/standard), douji (natural), luodo (expressive).
+ *   - Voices list mirrors the active Groq TTS provider.
  */
-const ALLOWED_VOICES = new Set([
-  'tongtong', 'chuichui', 'xiaochen', 'jam', 'kazi', 'douji', 'luodo',
-])
+const ALLOWED_VOICES = new Set(['hannah', 'autumn', 'diana', 'austin', 'daniel', 'troy'])
 
 export async function POST(req: Request) {
   return withApi(async () => {
@@ -69,7 +66,7 @@ export async function POST(req: Request) {
       throw new ApiError('BAD_REQUEST', 'Nothing to speak after cleaning.', 400, false)
     }
 
-    const voice = json.voice && ALLOWED_VOICES.has(json.voice) ? json.voice : 'tongtong'
+    const voice = json.voice && ALLOWED_VOICES.has(json.voice) ? json.voice : 'hannah'
     let speed = typeof json.speed === 'number' ? json.speed : 1.0
     if (speed < 0.5) speed = 0.5
     if (speed > 2.0) speed = 2.0
