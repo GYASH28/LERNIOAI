@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",
-    "vercel-build": "prisma generate && next build",
+    "vercel-build": "node scripts/vercel-build.mjs",
     "start": "next start -p 3000",
     "postinstall": "prisma generate",
     "lint": "eslint .",
