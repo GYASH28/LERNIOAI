@@ -1,9 +1,10 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { useAppStore } from '@/store/app-store'
-import { Mascot, MascotWithBubble } from '@/components/mascots/mascot'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card'
+import { Mascot } from '@/components/mascots/mascot'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
@@ -16,12 +17,13 @@ import { StreakFreezeWidget } from '@/components/ui/streak-freeze-widget'
 import { AchievementWall } from '@/components/ui/achievement-wall'
 import {
   BookOpen, RotateCw, CalendarCheck, Clock, TrendingDown, Trophy,
-  Flame, Zap, ArrowRight, Play, CheckCircle2, AlertCircle, Sparkles,
+  Flame, Zap, ArrowRight, Play, CheckCircle2, AlertCircle,
   PenTool, Bot, Code2, FlaskConical, FileText, Library, Target
 } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
-import type { Subject } from '@/lib/types'
+import { routeForView } from '@/lib/routes'
+import type { Subject, ViewKey } from '@/lib/types'
 import type { DashboardSnapshot } from '@/lib/app-bootstrap-types'
 
 interface DashboardData {
@@ -33,7 +35,8 @@ interface DashboardData {
 }
 
 export function DashboardView({ initialData = null }: { initialData?: DashboardSnapshot | null }) {
-  const { user, subjects, setView, setLearnContext, saveContinueLearning, continueLearning, setMascot, pushMascotToast } = useAppStore()
+  const router = useRouter()
+  const { user, subjects, setLearnContext, continueLearning } = useAppStore()
   const [data, setData] = useState<DashboardData | null>(initialData?.progress as DashboardData | null)
   const [revisionDue, setRevisionDue] = useState<any[]>(initialData?.revisionDue ?? [])
   const [tasks, setTasks] = useState<any[]>(initialData?.tasks ?? [])
@@ -61,10 +64,12 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
   const completedLessons = data?.lessonCompletions?.filter((l) => l.completedAt) || []
   const masteryRecords = data?.mastery || []
   const weakTopics = masteryRecords.filter((m: any) => m.state === 'weak' || m.state === 'learning').slice(0, 3)
-  const masteredCount = masteryRecords.filter((m: any) => m.state === 'mastered').length
   const todayTasks = tasks.filter((t) => t.scheduledDate === new Date().toISOString().slice(0, 10) || !t.scheduledDate).slice(0, 4)
   const examDate = user?.examDate ? new Date(user.examDate) : null
   const daysToExam = examDate ? Math.ceil((examDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24)) : null
+  const goToView = (nextView: ViewKey) => {
+    router.push(routeForView(nextView))
+  }
 
   const handleContinue = () => {
     if (continueLearning) {
@@ -75,7 +80,7 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
         lessonId: continueLearning.lessonId,
         mode: continueLearning.mode,
       })
-      setView('learn')
+      goToView('learn')
     } else if (subjects.length > 0) {
       const firstSubject = subjects[0]
       if (firstSubject.units[0]?.topics[0]) {
@@ -84,7 +89,7 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
           unitNumber: firstSubject.units[0].number,
           topicId: firstSubject.units[0].topics[0].id,
         })
-        setView('learn')
+        goToView('learn')
       }
     }
   }
@@ -98,7 +103,7 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
     : 0
 
   return (
-    <div className="space-y-6">
+    <div className="dashboard-shell space-y-6">
       {/* Hero greeting */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
@@ -135,7 +140,7 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
                 <Play className="h-4 w-4" />
                 {continueLearning ? 'Continue Learning' : 'Start Learning'}
               </Button>
-              <Button onClick={() => setView('tutor')} variant="outline" size="sm" className="gap-2 bg-card/60 backdrop-blur">
+              <Button onClick={() => goToView('tutor')} variant="outline" size="sm" className="gap-2 bg-card/60 backdrop-blur">
                 <Bot className="h-4 w-4" />
                 Ask LEO
               </Button>
@@ -151,7 +156,7 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
       </motion.div>
 
       {/* Insights row: Weekly XP + Daily Goal Ring + Streak Heatmap */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+      <div className="dashboard-grid dashboard-grid--insights">
         <Card className="card-lift">
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
@@ -182,7 +187,7 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col items-start gap-4 min-[420px]:flex-row min-[420px]:items-center">
               {activity ? (
                 <DailyGoalRing
                   value={activity.minutesToday}
@@ -211,7 +216,7 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
           </CardContent>
         </Card>
 
-        <Card className="card-lift lg:col-span-1">
+        <Card className="card-lift">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm flex items-center gap-2">
               <div className="h-7 w-7 rounded-md bg-amber-500/10 flex items-center justify-center">
@@ -222,7 +227,9 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
           </CardHeader>
           <CardContent>
             {activity ? (
-              <StreakHeatmap activityDays={activity.activeDays} weeks={13} />
+              <div className="dashboard-scroll-region">
+                <StreakHeatmap activityDays={activity.activeDays} weeks={13} />
+              </div>
             ) : (
               <div className="h-24 rounded-md shimmer" />
             )}
@@ -231,9 +238,9 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
       </div>
 
       {/* Priority row 1: Continue Learning + Revision Due + Daily Quests */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+      <div className="dashboard-grid dashboard-grid--priority">
         {/* Continue Learning - dominant */}
-        <Card className="lg:col-span-2 border-primary/20 bg-gradient-to-br from-card to-primary/5 card-lift">
+        <Card className="dashboard-span-wide border-primary/20 bg-gradient-to-br from-card to-primary/5 card-lift">
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -274,7 +281,7 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
       </div>
 
       {/* Row 1.5: Revision Due + Today's Plan + Exam Countdown */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="dashboard-grid dashboard-grid--compact">
         {/* Revision Due */}
         <Card className={cn('card-lift', revisionDue.length > 0 && 'border-amber-500/30')}>
           <CardHeader className="pb-3">
@@ -307,7 +314,7 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
                 All caught up!
               </div>
             )}
-            <Button onClick={() => setView('revision')} variant="outline" size="sm" className="mt-2 w-full text-xs">
+            <Button onClick={() => goToView('revision')} variant="outline" size="sm" className="mt-2 w-full text-xs">
               {revisionDue.length > 0 ? 'Start Revision' : 'View Schedule'}
             </Button>
           </CardContent>
@@ -336,7 +343,7 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
             ) : (
               <p className="text-xs text-muted-foreground py-3">No tasks scheduled. Add one in the planner.</p>
             )}
-            <Button onClick={() => setView('planner')} variant="ghost" size="sm" className="mt-2 w-full text-xs">View Planner</Button>
+            <Button onClick={() => goToView('planner')} variant="ghost" size="sm" className="mt-2 w-full text-xs">View Planner</Button>
           </CardContent>
         </Card>
 
@@ -360,7 +367,7 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
             ) : (
               <p className="text-xs text-muted-foreground py-3 text-center">Set your exam date in Profile</p>
             )}
-            <Button onClick={() => setView('exams')} variant="ghost" size="sm" className="mt-1 w-full text-xs">Prepare for Exams</Button>
+            <Button onClick={() => goToView('exams')} variant="ghost" size="sm" className="mt-1 w-full text-xs">Prepare for Exams</Button>
           </CardContent>
         </Card>
       </div>
@@ -380,11 +387,11 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
         </CardHeader>
         <CardContent>
           {weakTopics.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+            <div className="dashboard-grid dashboard-grid--focus gap-2">
               {weakTopics.map((m: any) => (
                 <button
                   key={m.id}
-                  onClick={() => { setLearnContext({ subjectId: m.topic.unit.subject.id }); setView('practice') }}
+                  onClick={() => { setLearnContext({ subjectId: m.topic.unit.subject.id }); goToView('practice') }}
                   className="text-left flex items-center gap-2 p-2.5 rounded-lg border border-border hover-soft focus-ring"
                 >
                   <AlertCircle className="h-4 w-4 text-orange-500 shrink-0" />
@@ -399,7 +406,7 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
           ) : (
             <p className="text-xs text-muted-foreground py-3">Practice more to identify focus areas.</p>
           )}
-          <Button onClick={() => setView('practice')} variant="ghost" size="sm" className="mt-3 text-xs">Start Practicing <ArrowRight className="h-3 w-3 ml-1" /></Button>
+          <Button onClick={() => goToView('practice')} variant="ghost" size="sm" className="mt-3 text-xs">Start Practicing <ArrowRight className="h-3 w-3 ml-1" /></Button>
         </CardContent>
       </Card>
 
@@ -407,11 +414,11 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
       <div>
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-sm font-semibold">Subject Progress</h3>
-          <Button onClick={() => setView('learn')} variant="ghost" size="sm" className="text-xs gap-1">
+          <Button onClick={() => goToView('learn')} variant="ghost" size="sm" className="text-xs gap-1">
             All Subjects <ArrowRight className="h-3 w-3" />
           </Button>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="dashboard-grid dashboard-grid--subjects gap-3">
           {subjects.map((subject) => {
             const subjectLessons = subject.units.flatMap((u) => u.lessons ?? [])
             const completed = subjectLessons.filter((l) => completedLessons.some((cl) => cl.lessonId === l.id && cl.completedAt)).length
@@ -421,7 +428,7 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
             return (
               <SubjectCard key={subject.id} subject={subject} lessonPct={pct} masteryPct={avgMastery} onClick={() => {
                 setLearnContext({ subjectId: subject.id })
-                setView('learn')
+                goToView('learn')
               }} />
             )
           })}
@@ -431,18 +438,18 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
       {/* Row 4: Quick Actions */}
       <div>
         <h3 className="text-sm font-semibold mb-3">Quick Actions</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
-          <QuickAction icon={Bot} label="AI Tutor" color="text-violet-500" onClick={() => setView('tutor')} />
-          <QuickAction icon={PenTool} label="Practice" color="text-cyan-500" onClick={() => setView('practice')} />
-          <QuickAction icon={FlaskConical} label="Labs" color="text-emerald-500" onClick={() => setView('labs')} />
-          <QuickAction icon={Code2} label="Coding" color="text-amber-500" onClick={() => setView('coding')} />
-          <QuickAction icon={FileText} label="Mock Exam" color="text-rose-500" onClick={() => setView('exams')} />
-          <QuickAction icon={Library} label="Materials" color="text-indigo-500" onClick={() => setView('materials')} />
+        <div className="dashboard-grid dashboard-grid--actions gap-3">
+          <QuickAction icon={Bot} label="AI Tutor" color="text-primary" onClick={() => goToView('tutor')} />
+          <QuickAction icon={PenTool} label="Practice" color="text-info" onClick={() => goToView('practice')} />
+          <QuickAction icon={FlaskConical} label="Labs" color="text-success" onClick={() => goToView('labs')} />
+          <QuickAction icon={Code2} label="Coding" color="text-warning" onClick={() => goToView('coding')} />
+          <QuickAction icon={FileText} label="Mock Exam" color="text-destructive" onClick={() => goToView('exams')} />
+          <QuickAction icon={Library} label="Materials" color="text-primary" onClick={() => goToView('materials')} />
         </div>
       </div>
 
       {/* Row 5: Achievements + Recent Activity */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="dashboard-grid dashboard-grid--split">
         <AchievementWall variant="compact" />
 
         <Card>

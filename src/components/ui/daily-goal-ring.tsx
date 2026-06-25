@@ -79,11 +79,11 @@ export function DailyGoalRing({
           <span className="text-base font-bold text-success">Done!</span>
         ) : (
           <>
-            <span className="text-base font-bold tabular-nums leading-none">
+            <span className="text-sm font-bold tabular-nums leading-none">
               {Math.round(value)}
-              <span className="text-[9px] text-muted-foreground ml-0.5 font-normal">/{goal}</span>
+              <span className="ml-0.5 text-xs font-normal text-muted-foreground">/{goal}</span>
             </span>
-            <span className="text-[9px] text-muted-foreground mt-0.5">{unit} today</span>
+            <span className="mt-0.5 text-xs leading-none text-muted-foreground">{unit} today</span>
           </>
         )}
       </div>

@@ -8,7 +8,6 @@ Required environment variables:
 
 ```bash
 DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=public"
-DIRECT_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=public"
 NEXTAUTH_URL="https://your-domain.example"
 NEXTAUTH_SECRET="a-random-32-byte-secret"
 LERNIO_DEMO_MODE="false"
@@ -27,8 +26,12 @@ NEXT_PUBLIC_LERNIO_ROLL_NUMBER_PATTERN="^[A-Za-z0-9/-]{1,32}$"
 
 ```bash
 npm ci
-npm run db:generate
-npm run db:deploy
+npm run vercel-build
+```
+
+For local checks before deployment, run:
+
+```bash
 npm run lint
 npm run typecheck
 npm run test
@@ -39,14 +42,12 @@ npm run build
 
 - Framework preset: Next.js
 - Install command: `npm ci`
-- Build command: `npm run build`
+- Build command: `npm run vercel-build`
 - Output directory: default Next.js output
-- Install command: `npm ci`
-- Build command: `npm run build`
 - Root directory: repository root
-- Runtime: Node.js 20 or newer
+- Runtime: Node.js 20.9 or newer
 - Production branch: `main`
-- Run migrations before production release with `npm run db:deploy`
+- `DATABASE_URL` must point at the production PostgreSQL database; migrations run during `npm run vercel-build`
 
 ## Smoke Tests
 

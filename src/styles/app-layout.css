@@ -1,0 +1,140 @@
+/* ============================================================
+   Lernio AI - app layout and responsive container contracts
+   ------------------------------------------------------------
+   These classes make page grids respond to the actual content
+   pane width, not only the viewport width. This matters because
+   the authenticated shell can reserve sidebar space.
+   ============================================================ */
+
+@layer components {
+  .app-main-container {
+    container-name: app-main;
+    container-type: inline-size;
+    min-width: 0;
+  }
+
+  .app-main-scroll {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: var(--page-gutter-mobile);
+    padding-bottom: calc(var(--mobile-nav-height) + var(--page-gutter-mobile));
+  }
+
+  @media (min-width: 768px) {
+    .app-main-scroll {
+      padding-inline: var(--page-gutter-tablet);
+      padding-block: var(--page-gutter-tablet);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .app-main-scroll {
+      padding-inline: var(--page-gutter-desktop);
+      padding-block: var(--page-gutter-desktop);
+    }
+  }
+
+  .app-page-shell {
+    width: min(100%, var(--content-max-dashboard));
+    margin-inline: auto;
+  }
+
+  .app-page-shell--reading,
+  .app-page-shell--profile,
+  .app-page-shell--focus {
+    width: min(100%, var(--content-max-reading));
+  }
+
+  .app-page-shell--workspace,
+  .app-page-shell--fullWidth {
+    width: min(100%, var(--content-max-workspace));
+  }
+
+  .app-page-shell--dashboard,
+  .app-page-shell--analytics {
+    width: min(100%, var(--content-max-dashboard));
+  }
+
+  .app-footer-inner {
+    width: min(100%, var(--content-max-dashboard));
+    margin-inline: auto;
+    padding-inline: var(--page-gutter-mobile);
+  }
+
+  @media (min-width: 768px) {
+    .app-footer-inner {
+      padding-inline: var(--page-gutter-tablet);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .app-footer-inner {
+      padding-inline: var(--page-gutter-desktop);
+    }
+  }
+
+  .dashboard-shell {
+    container-name: dashboard;
+    container-type: inline-size;
+  }
+
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--card-gap);
+  }
+
+  .dashboard-scroll-region {
+    min-width: 0;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+  }
+
+  .dashboard-span-wide {
+    grid-column: auto;
+  }
+
+  @container dashboard (min-width: 44rem) {
+    .dashboard-grid--insights,
+    .dashboard-grid--priority,
+    .dashboard-grid--compact,
+    .dashboard-grid--focus,
+    .dashboard-grid--subjects,
+    .dashboard-grid--split {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .dashboard-grid--actions {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .dashboard-span-wide {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @container dashboard (min-width: 64rem) {
+    .dashboard-grid--insights,
+    .dashboard-grid--priority,
+    .dashboard-grid--compact,
+    .dashboard-grid--focus {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .dashboard-grid--subjects {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .dashboard-grid--actions {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .dashboard-grid--split {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .dashboard-span-wide {
+      grid-column: span 2;
+    }
+  }
+}

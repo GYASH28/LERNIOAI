@@ -122,9 +122,7 @@ export const useAppStore = create<AppState>()(
     }),
     {
       name: 'lernio-app-store',
-      partialize: (s) => ({
-        view: s.view,
-      }),
+      partialize: () => ({}),
     }
   )
 )

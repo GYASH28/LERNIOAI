@@ -58,7 +58,7 @@ export function StreakHeatmap({ activityDays, weeks = 13, className }: StreakHea
           <span className="text-sm font-semibold">{totalActive}</span>
           <span className="text-[11px] text-muted-foreground">active days</span>
         </div>
-        <div className="flex items-center gap-1 text-[10px] text-muted-foreground">
+        <div className="flex items-center gap-1 text-xs text-muted-foreground">
           <span>Less</span>
           <div className="h-2.5 w-2.5 rounded-sm bg-muted" />
           <div className="h-2.5 w-2.5 rounded-sm bg-primary/30" />
@@ -84,7 +84,7 @@ export function StreakHeatmap({ activityDays, weeks = 13, className }: StreakHea
                     )}
                   />
                 </TooltipTrigger>
-                <TooltipContent side="top" className="text-[10px] py-1">
+                <TooltipContent side="top" className="py-1 text-xs">
                   <span className="font-medium">
                     {cell.date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}
                   </span>
@@ -97,7 +97,7 @@ export function StreakHeatmap({ activityDays, weeks = 13, className }: StreakHea
           </div>
         ))}
       </div>
-      <div className="flex justify-between text-[9px] text-muted-foreground">
+      <div className="flex justify-between text-xs text-muted-foreground">
         <span>{grid[0]?.[0]?.date.toLocaleDateString('en-IN', { month: 'short' })}</span>
         <span>Today</span>
       </div>

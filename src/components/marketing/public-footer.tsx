@@ -1,53 +1,54 @@
 import Link from 'next/link'
 import { Github } from 'lucide-react'
+import { LernioLogoTile } from '@/components/brand/lernio-logo'
 
-const PRODUCT_LINKS = [
+const STUDY_LINKS = [
   { label: 'Learn', href: '/learn' },
   { label: 'Practice', href: '/practice' },
   { label: 'AI Tutor', href: '/tutor' },
+  { label: 'Revision', href: '/revision' },
+] as const
+
+const WORKSPACE_LINKS = [
   { label: 'Labs', href: '/labs' },
   { label: 'Coding Lab', href: '/coding' },
   { label: 'Exams', href: '/exams' },
-  { label: 'Revision', href: '/revision' },
-  { label: 'Materials', href: '/materials' },
-  { label: 'Planner', href: '/planner' },
   { label: 'Analytics', href: '/analytics' },
 ] as const
 
-const COMPANY_LINKS = [
+const ACCOUNT_LINKS = [
   { label: 'Support', href: '/support' },
   { label: 'Sign in', href: '/sign-in' },
   { label: 'Sign up', href: '/sign-up' },
-] as const
-
-const LEGAL_LINKS = [
   { label: 'Privacy', href: '/privacy' },
   { label: 'Terms', href: '/terms' },
 ] as const
 
-function BrandMark() {
+function FooterNav({
+  label,
+  links,
+}: {
+  label: string
+  links: ReadonlyArray<{ label: string; href: string }>
+}) {
   return (
-    <span
-      aria-hidden="true"
-      className="grid h-8 w-8 shrink-0 place-items-center overflow-hidden rounded-md bg-primary/10 ring-1 ring-border"
-    >
-      <svg viewBox="0 0 32 32" className="h-5 w-5" fill="none" aria-hidden="true">
-        <path
-          d="M8 6h12a4 4 0 0 1 4 4v16H12a4 4 0 0 1-4-4V6Z"
-          stroke="currentColor"
-          strokeWidth="2.2"
-          strokeLinejoin="round"
-          className="text-primary"
-        />
-        <path
-          d="M12 12h8M12 16h8M12 20h5"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          className="text-primary"
-        />
-      </svg>
-    </span>
+    <nav aria-label={label}>
+      <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+        {label}
+      </h3>
+      <ul className="mt-4 grid gap-2">
+        {links.map((l) => (
+          <li key={l.href}>
+            <Link
+              href={l.href}
+              className="inline-flex min-h-9 items-center text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              {l.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
   )
 }
 
@@ -60,15 +61,14 @@ export function PublicFooter() {
       role="contentinfo"
     >
       <div className="marketing-container py-12">
-        <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
-          {/* Brand */}
+        <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-[1.35fr_1fr_1fr_1fr]">
           <div>
             <Link
               href="/"
               className="flex items-center gap-2.5"
               aria-label="Lernio home"
             >
-              <BrandMark />
+              <LernioLogoTile size="sm" />
               <span className="text-base font-extrabold tracking-tight text-foreground">
                 Lernio
               </span>
@@ -88,68 +88,15 @@ export function PublicFooter() {
             </a>
           </div>
 
-          {/* Product */}
-          <nav aria-label="Product">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              Product
-            </h3>
-            <ul className="mt-4 space-y-2">
-              {PRODUCT_LINKS.map((l) => (
-                <li key={l.href}>
-                  <Link
-                    href={l.href}
-                    className="inline-flex min-h-9 items-center text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                  >
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          {/* Company */}
-          <nav aria-label="Company">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              Account
-            </h3>
-            <ul className="mt-4 space-y-2">
-              {COMPANY_LINKS.map((l) => (
-                <li key={l.href}>
-                  <Link
-                    href={l.href}
-                    className="inline-flex min-h-9 items-center text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                  >
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          {/* Legal */}
-          <nav aria-label="Legal">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              Legal
-            </h3>
-            <ul className="mt-4 space-y-2">
-              {LEGAL_LINKS.map((l) => (
-                <li key={l.href}>
-                  <Link
-                    href={l.href}
-                    className="inline-flex min-h-9 items-center text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                  >
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          <FooterNav label="Study" links={STUDY_LINKS} />
+          <FooterNav label="Workspace" links={WORKSPACE_LINKS} />
+          <FooterNav label="Account" links={ACCOUNT_LINKS} />
         </div>
 
         <div className="mt-10 border-t border-border pt-6">
-          <p className="text-xs text-muted-foreground">
-            © {year} Lernio AI · Cusrow Wadia Institute of Technology (CWIT),
-            Pune · G Scheme 2023
+          <p className="text-xs leading-5 text-muted-foreground">
+            (c) {year} Lernio AI - Cusrow Wadia Institute of Technology
+            (CWIT), Pune - G Scheme 2023
           </p>
         </div>
       </div>

@@ -124,6 +124,21 @@
   --space-compact:     0.5rem;
   --space-comfortable: 1rem;
 
+  /* ---------- Layout system ---------- */
+  --page-gutter-mobile: 1rem;
+  --page-gutter-tablet: 1.5rem;
+  --page-gutter-desktop: 2rem;
+  --content-max-reading: 48rem;
+  --content-max-form: 34rem;
+  --content-max-dashboard: 82rem;
+  --content-max-workspace: 96rem;
+  --sidebar-collapsed: 4.75rem;
+  --sidebar-expanded: 18rem;
+  --topbar-height: 3.5rem;
+  --mobile-nav-height: 4rem;
+  --section-gap: 4rem;
+  --card-gap: 1rem;
+
   /* ============================================================
      Legacy shadcn token mappings
      ------------------------------------------------------------

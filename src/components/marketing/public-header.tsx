@@ -2,9 +2,8 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
+import { LernioBrandLockup } from '@/components/brand/lernio-logo'
 import {
   Sheet,
   SheetContent,
@@ -30,57 +29,13 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'FAQ', href: '/#faq' },
 ]
 
-function BrandLockup({ className }: { className?: string }) {
-  return (
-    <Link
-      href="/"
-      className={cn('flex min-w-0 items-center gap-2.5 rounded-md', className)}
-      aria-label="Lernio home"
-    >
-      <span
-        aria-hidden="true"
-        className="grid h-9 w-9 shrink-0 place-items-center overflow-hidden rounded-lg bg-primary/10 ring-1 ring-border"
-      >
-        {/* Inline SVG brand mark — crisp at any size, theme-aware via currentColor */}
-        <svg viewBox="0 0 32 32" className="h-5 w-5" fill="none" aria-hidden="true">
-          <path
-            d="M8 6h12a4 4 0 0 1 4 4v16H12a4 4 0 0 1-4-4V6Z"
-            stroke="currentColor"
-            strokeWidth="2.2"
-            strokeLinejoin="round"
-            className="text-primary"
-          />
-          <path
-            d="M12 12h8M12 16h8M12 20h5"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            className="text-primary"
-          />
-        </svg>
-      </span>
-      <span className="min-w-0">
-        <span className="block text-base font-extrabold leading-none tracking-tight text-foreground">
-          Lernio
-        </span>
-        <span className="mt-1 block text-[0.6875rem] font-semibold uppercase tracking-wider text-muted-foreground">
-          Diploma learning OS
-        </span>
-      </span>
-    </Link>
-  )
-}
+const TABLET_NAV_ITEMS = NAV_ITEMS.filter((item) =>
+  ['Product', 'How it works', 'AI Tutor'].includes(item.label),
+)
 
 export function PublicHeader({ isAuthenticated = false }: { isAuthenticated?: boolean }) {
-  const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = React.useState(false)
 
-  // Close the mobile sheet on route change
-  React.useEffect(() => {
-    setMobileOpen(false)
-  }, [pathname])
-
-  // Lock body scroll while the mobile sheet is open
   React.useEffect(() => {
     if (typeof document === 'undefined') return
     document.body.style.overflow = mobileOpen ? 'hidden' : ''
@@ -97,36 +52,49 @@ export function PublicHeader({ isAuthenticated = false }: { isAuthenticated?: bo
       className="sticky top-0 z-40 w-full border-b border-border bg-background/80 backdrop-blur-md"
       role="banner"
     >
-      <div className="marketing-container flex h-16 items-center justify-between gap-4">
-        <BrandLockup />
+      <div className="marketing-container grid h-16 grid-cols-[minmax(0,auto)_1fr_auto] items-center gap-3">
+        <LernioBrandLockup href="/" size="sm" />
 
-        {/* Desktop nav */}
         <nav
-          className="hidden items-center gap-1 lg:flex"
-          aria-label="Public navigation"
+          className="hidden min-w-0 items-center justify-center gap-1 lg:flex xl:hidden"
+          aria-label="Primary public navigation"
         >
-          {NAV_ITEMS.map((item) => (
+          {TABLET_NAV_ITEMS.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="inline-flex h-9 items-center rounded-md px-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="inline-flex h-10 items-center rounded-md px-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               {item.label}
             </Link>
           ))}
         </nav>
 
-        {/* Desktop actions */}
-        <div className="hidden items-center gap-2 lg:flex">
+        <nav
+          className="hidden min-w-0 items-center justify-center gap-1 xl:flex"
+          aria-label="Public navigation"
+        >
+          {NAV_ITEMS.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="inline-flex h-10 items-center rounded-md px-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="hidden items-center justify-end gap-2 lg:flex">
           <Button
             variant="ghost"
             size="sm"
             asChild
-            className="h-9 min-h-9"
+            className="h-10 min-h-10"
           >
             <Link href="/sign-in">Sign in</Link>
           </Button>
-          <Button size="sm" asChild className="h-9 min-h-9 gap-1.5">
+          <Button size="sm" asChild className="h-10 min-h-10 gap-1.5">
             <Link href={primaryHref}>
               {primaryLabel}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -134,9 +102,8 @@ export function PublicHeader({ isAuthenticated = false }: { isAuthenticated?: bo
           </Button>
         </div>
 
-        {/* Mobile: hamburger + primary CTA */}
-        <div className="flex items-center gap-2 lg:hidden">
-          <Button size="sm" asChild className="h-9 min-h-9 gap-1.5">
+        <div className="flex items-center justify-end gap-2 lg:hidden">
+          <Button size="sm" asChild className="h-10 min-h-10 gap-1.5 px-3">
             <Link href={primaryHref}>
               {isAuthenticated ? 'Dashboard' : 'Start'}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -147,7 +114,7 @@ export function PublicHeader({ isAuthenticated = false }: { isAuthenticated?: bo
               <Button
                 variant="outline"
                 size="icon"
-                className="h-9 w-9"
+                className="h-11 w-11"
                 aria-label="Open navigation menu"
                 aria-expanded={mobileOpen}
               >
@@ -156,11 +123,11 @@ export function PublicHeader({ isAuthenticated = false }: { isAuthenticated?: bo
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="w-[min(20rem,100vw)] border-border bg-background p-0"
+              className="w-[min(22rem,100vw)] border-border bg-background p-0"
             >
               <SheetHeader className="border-b border-border p-4 text-left">
                 <SheetTitle className="text-left">
-                  <BrandLockup />
+                  <LernioBrandLockup href="/" size="sm" />
                 </SheetTitle>
               </SheetHeader>
               <nav

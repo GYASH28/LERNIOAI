@@ -6,7 +6,7 @@ This pass focused on the mandatory high-priority audit findings from the impleme
 
 ## Fixed Findings
 
-- Prisma now targets PostgreSQL instead of SQLite, with `DIRECT_URL` support and a regenerated initial migration.
+- Prisma now targets PostgreSQL instead of SQLite, using `DATABASE_URL` for Vercel-compatible generation, migrations, and runtime access.
 - Browser-facing user responses now use explicit public DTO mapping in bootstrap, `/api/user`, registration, and profile completion.
 - Ordinary student signup no longer requires an invite code or roll number.
 - Source-level personal administrator email promotion was removed.

@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect, useMemo, useState, useRef, useReducer } from 'react'
+import { useCallback, useEffect, useMemo, useState, useRef, useReducer } from 'react'
+import { useRouter } from 'next/navigation'
 import {
   Dialog,
   DialogContent,
@@ -12,10 +13,10 @@ import {
   FileText, RotateCw, Library, CalendarCheck, BarChart3, User,
   Search, CornerDownLeft, ArrowUp, ArrowDown, Sun, Moon, Sparkles,
 } from 'lucide-react'
-import { useAppStore } from '@/store/app-store'
 import { usePrefs } from '@/components/theme-provider'
 import type { ViewKey } from '@/lib/types'
 import { cn } from '@/lib/utils'
+import { routeForView } from '@/lib/routes'
 
 interface CommandItem {
   id: string
@@ -73,8 +74,12 @@ export function CommandPalette() {
   const [state, dispatch] = useReducer(paletteReducer, { query: '', activeIdx: 0 })
   const { query, activeIdx } = state
   const inputRef = useRef<HTMLInputElement>(null)
-  const { setView } = useAppStore()
+  const router = useRouter()
   const { setPref } = usePrefs()
+  const navigateToView = useCallback((view: ViewKey) => {
+    router.push(routeForView(view))
+    setOpen(false)
+  }, [router])
 
   // Global Cmd/Ctrl+K shortcut
   useEffect(() => {
@@ -111,10 +116,7 @@ export function CommandPalette() {
       icon: n.icon,
       group: 'Navigate',
       keywords: `${n.label} ${n.hint} ${n.key}`,
-      action: () => {
-        setView(n.key)
-        setOpen(false)
-      },
+      action: () => navigateToView(n.key),
     }))
 
     const actionItems: CommandItem[] = [
@@ -125,7 +127,7 @@ export function CommandPalette() {
         icon: Sparkles,
         group: 'Actions',
         keywords: 'ai tutor chat ask leo help',
-        action: () => { setView('tutor'); setOpen(false) },
+        action: () => navigateToView('tutor'),
       },
       {
         id: 'action-start-practice',
@@ -134,7 +136,7 @@ export function CommandPalette() {
         icon: PenTool,
         group: 'Actions',
         keywords: 'practice quiz questions adaptive',
-        action: () => { setView('practice'); setOpen(false) },
+        action: () => navigateToView('practice'),
       },
       {
         id: 'action-mock-exam',
@@ -143,7 +145,7 @@ export function CommandPalette() {
         icon: FileText,
         group: 'Actions',
         keywords: 'exam mock test chapter',
-        action: () => { setView('exams'); setOpen(false) },
+        action: () => navigateToView('exams'),
       },
       {
         id: 'action-revision',
@@ -152,7 +154,7 @@ export function CommandPalette() {
         icon: RotateCw,
         group: 'Actions',
         keywords: 'revision flashcards review sm2',
-        action: () => { setView('revision'); setOpen(false) },
+        action: () => navigateToView('revision'),
       },
     ]
 
@@ -184,7 +186,7 @@ export function CommandPalette() {
     ]
 
     return [...navItems, ...actionItems, ...appearanceItems]
-  }, [setView, setPref])
+  }, [navigateToView, setPref])
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
