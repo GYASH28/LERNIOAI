@@ -97,7 +97,7 @@ const DEFAULT_FAST_MODEL = 'llama-3.1-8b-instant'
 const DEFAULT_TRANSCRIPTION_MODEL = 'whisper-large-v3-turbo'
 const DEFAULT_TTS_MODEL = 'canopylabs/orpheus-v1-english'
 const SAFE_FALLBACK_MESSAGE =
-  'LEO could not reach the learning engine right now. Your message is safe—please try again in a moment.'
+  'LEO could not reach the learning engine right now. Your message is safe - please try again in a moment.'
 
 const VALID_TTS_VOICES = new Set(['autumn', 'diana', 'hannah', 'austin', 'daniel', 'troy'])
 
@@ -140,7 +140,7 @@ export class GroqProvider implements AiProvider {
         input.signal,
       )
 
-      const content = response.choices?.[0]?.message?.content?.trim() || ''
+      const content = polishTutorContent(response.choices?.[0]?.message?.content || '')
       if (!content) return fallbackTutorResponse(groundingStatus, citations)
 
       return {
@@ -366,6 +366,46 @@ function fallbackTutorResponse(
     followUps: ['Try again', 'Ask in simpler words'],
     usedFallback: true,
   }
+}
+
+export function polishTutorContent(value: string): string {
+  const withoutAiPhrases = value
+    .replace(/\bAs an AI(?: language model)?[,]?\s*/gi, '')
+    .replace(/\bI am an AI(?: language model)?[,]?\s*/gi, '')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim()
+
+  return stripThinkingPreface(withoutAiPhrases).trim()
+}
+
+function stripThinkingPreface(value: string): string {
+  const lines = value.split(/\r?\n/)
+  const firstMeaningfulLine = lines.findIndex((line) => line.trim().length > 0)
+  if (firstMeaningfulLine === -1) return ''
+
+  const first = lines[firstMeaningfulLine].trim()
+  if (!/^(thinking|reasoning|chain of thought)\s*:/i.test(first)) return value
+
+  const nextAnswerLine = lines.findIndex((line, index) => {
+    if (index <= firstMeaningfulLine) return false
+    const trimmed = line.trim()
+    if (!trimmed) return false
+    return (
+      /^#{1,4}\s+\S/.test(trimmed) ||
+      /^\*\*[^*]+:\*\*/.test(trimmed) ||
+      /^(meaning|answer|how it works|example|exam tip|quick recap|the key idea)\b/i.test(trimmed)
+    )
+  })
+
+  if (nextAnswerLine === -1) {
+    return lines
+      .slice(firstMeaningfulLine)
+      .join('\n')
+      .replace(/^(thinking|reasoning|chain of thought)\s*:\s*/i, '')
+      .trim()
+  }
+
+  return lines.slice(nextAnswerLine).join('\n').trim()
 }
 
 function buildFollowUps(content: string): string[] {

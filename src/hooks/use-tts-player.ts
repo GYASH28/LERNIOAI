@@ -3,14 +3,14 @@
  * useTtsPlayer — text-to-speech playback hook for the AI Tutor.
  *
  * POSTs the assistant message text to /api/tutor/speak, which calls the
- * z-ai-web-dev-sdk TTS service and returns a WAV audio buffer. Plays it
+ * configured AI provider TTS service and returns a WAV audio buffer. Plays it
  * through an in-memory <audio> element.
  *
  * Public API:
  *   const { playing, loading, play, stop, error } = useTtsPlayer()
  *
  * Voice/speed are read from localStorage keys 'lernio.tts.voice' (default
- * 'tongtong') and 'lernio.tts.speed' (default 1.0) so the user's prefs
+ * 'hannah') and 'lernio.tts.speed' (default 1.0) so the user's prefs
  * persist across sessions.
  */
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -19,8 +19,8 @@ const VOICE_KEY = 'lernio.tts.voice'
 const SPEED_KEY = 'lernio.tts.speed'
 
 export function getTtsPrefs() {
-  if (typeof window === 'undefined') return { voice: 'tongtong', speed: 1.0 }
-  const voice = localStorage.getItem(VOICE_KEY) || 'tongtong'
+  if (typeof window === 'undefined') return { voice: 'hannah', speed: 1.0 }
+  const voice = localStorage.getItem(VOICE_KEY) || 'hannah'
   const speedRaw = parseFloat(localStorage.getItem(SPEED_KEY) || '1.0')
   const speed = Number.isFinite(speedRaw) ? Math.min(2, Math.max(0.5, speedRaw)) : 1.0
   return { voice, speed }
@@ -39,13 +39,12 @@ export interface TtsVoiceOption {
 }
 
 export const TTS_VOICES: TtsVoiceOption[] = [
-  { value: 'tongtong', label: 'Tongtong', description: 'Warm & friendly' },
-  { value: 'chuichui', label: 'Chuichui', description: 'Lively & playful' },
-  { value: 'xiaochen', label: 'Xiaochen', description: 'Calm & professional' },
-  { value: 'jam', label: 'Jam', description: 'British English' },
-  { value: 'kazi', label: 'Kazi', description: 'Clear & standard' },
-  { value: 'douji', label: 'Douji', description: 'Natural flow' },
-  { value: 'luodo', label: 'Luodo', description: 'Expressive' },
+  { value: 'hannah', label: 'Hannah', description: 'Warm and clear' },
+  { value: 'autumn', label: 'Autumn', description: 'Calm and friendly' },
+  { value: 'diana', label: 'Diana', description: 'Bright and focused' },
+  { value: 'austin', label: 'Austin', description: 'Confident and crisp' },
+  { value: 'daniel', label: 'Daniel', description: 'Steady and direct' },
+  { value: 'troy', label: 'Troy', description: 'Energetic and natural' },
 ]
 
 export function useTtsPlayer() {

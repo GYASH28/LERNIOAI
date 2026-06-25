@@ -1,64 +1,55 @@
-import { NextResponse } from 'next/server';
-import { db } from '@/lib/db';
-import { sendPasswordResetEmail } from '@/lib/email';
-import { checkRateLimit } from '@/lib/rate-limit';
-import crypto from 'crypto';
+import crypto from 'crypto'
+import { db } from '@/lib/db'
+import { sendPasswordResetEmail } from '@/lib/email'
+import { checkRateLimit } from '@/lib/rate-limit'
+import { ApiError, okResponse, withApi } from '@/lib/auth'
+import { forgotPasswordSchema, parseBody } from '@/lib/schemas'
+
+export const runtime = 'nodejs'
 
 export async function POST(req: Request) {
-  try {
-    const { email } = await req.json();
-    if (!email || typeof email !== 'string') {
-      return NextResponse.json({ ok: false, error: 'Invalid email' }, { status: 400 });
-    }
+  return withApi(async () => {
+    const { email } = await parseBody(req, forgotPasswordSchema)
 
-    const normalizedEmail = email.trim().toLowerCase();
-
-    // Rate limit forgot password requests
     const limiter = await checkRateLimit({
       action: 'forgot_password_request',
-      identifier: normalizedEmail,
-      limit: 3, // Max 3 requests per 15 minutes
+      identifier: email,
+      limit: 3,
       windowMs: 15 * 60 * 1000,
-    });
+    })
     if (!limiter.allowed) {
-      return NextResponse.json(
-        { ok: false, error: 'Too many requests. Please try again later.' },
-        { status: 429 }
-      );
+      throw new ApiError(
+        'RATE_LIMITED',
+        'Too many requests. Please try again later.',
+        429,
+        true,
+      )
     }
 
     const user = await db.user.findUnique({
-      where: { email: normalizedEmail },
+      where: { email },
       select: { id: true, status: true },
-    });
+    })
 
     if (!user || user.status === 'disabled') {
-      // Don't reveal if user exists or not for security reasons
-      return NextResponse.json({ ok: true });
+      return okResponse({ sent: true })
     }
 
-    const token = crypto.randomBytes(32).toString('hex');
-    const tokenHash = crypto.createHash('sha256').update(token).digest('hex');
-    const expiresAt = new Date(Date.now() + 60 * 60 * 1000); // 1 hour expiry
+    const token = crypto.randomBytes(32).toString('hex')
+    const tokenHash = crypto.createHash('sha256').update(token).digest('hex')
+    const expiresAt = new Date(Date.now() + 60 * 60 * 1000)
 
-    // Delete any old unused tokens for this email
-    await db.passwordResetToken.deleteMany({
-      where: { email: normalizedEmail },
-    });
-
+    await db.passwordResetToken.deleteMany({ where: { email } })
     await db.passwordResetToken.create({
       data: {
-        email: normalizedEmail,
+        email,
         tokenHash,
         expiresAt,
       },
-    });
+    })
 
-    await sendPasswordResetEmail(normalizedEmail, token);
+    await sendPasswordResetEmail(email, token)
 
-    return NextResponse.json({ ok: true });
-  } catch (error) {
-    console.error('[forgot-password] error:', error);
-    return NextResponse.json({ ok: false, error: 'Internal server error' }, { status: 500 });
-  }
+    return okResponse({ sent: true })
+  })
 }

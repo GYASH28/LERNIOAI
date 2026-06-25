@@ -7,7 +7,7 @@ import { isDatabaseUnavailableError } from '@/lib/api-error-policy'
  *
  * Verifies that the process can actually serve real traffic by
  * checking the critical dependency: the database. Other optional
- * providers (AI, OAuth) are reported as `configured`/`unconfigured`
+ * providers (auth, AI, email) are reported as `configured`/`unconfigured`
  * but never block readiness, because their absence is a degraded
  * but valid state.
  *
@@ -28,6 +28,7 @@ interface ReadinessReport {
     database: 'ok' | 'unavailable'
     auth: ProviderState
     ai: ProviderState
+    email: ProviderState
   }
   deployment: {
     demoMode: boolean
@@ -37,6 +38,14 @@ interface ReadinessReport {
 
 function providerState(value: string | undefined): ProviderState {
   return value && value.trim().length > 0 ? 'configured' : 'unconfigured'
+}
+
+function emailProviderState(): ProviderState {
+  return providerState(
+    process.env.RESEND_API_KEY && process.env.EMAIL_FROM
+      ? 'configured'
+      : undefined,
+  )
 }
 
 export async function GET() {
@@ -59,10 +68,15 @@ export async function GET() {
   }
 
   const auth: ProviderState = providerState(process.env.NEXTAUTH_SECRET)
-  const ai: ProviderState = providerState(process.env.ZAI_API_KEY)
+  const ai: ProviderState = providerState(process.env.GROQ_API_KEY)
+  const email = emailProviderState()
 
   const overall: ReadinessReport['status'] =
-    database === 'unavailable' ? 'unavailable' : 'ready'
+    database === 'unavailable'
+      ? 'unavailable'
+      : auth === 'unconfigured' || ai === 'unconfigured' || email === 'unconfigured'
+        ? 'degraded'
+        : 'ready'
 
   const report: ReadinessReport = {
     status: overall,
@@ -72,6 +86,7 @@ export async function GET() {
       database,
       auth,
       ai,
+      email,
     },
     deployment: {
       demoMode: process.env.LERNIO_DEMO_MODE === 'true',
@@ -80,6 +95,6 @@ export async function GET() {
   }
 
   return NextResponse.json(report, {
-    status: overall === 'ready' ? 200 : 503,
+    status: overall === 'unavailable' ? 503 : 200,
   })
 }

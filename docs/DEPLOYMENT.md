@@ -18,7 +18,13 @@ Optional:
 ```bash
 GOOGLE_CLIENT_ID=""
 GOOGLE_CLIENT_SECRET=""
-ZAI_API_KEY=""
+GROQ_API_KEY=""
+GROQ_MODEL="llama-3.3-70b-versatile"
+GROQ_FAST_MODEL="llama-3.1-8b-instant"
+RESEND_API_KEY=""
+EMAIL_FROM="Lernio <no-reply@your-domain.example>"
+LERNIO_ADMIN_EMAIL="ultimatebracegaming@gmail.com"
+LERNIO_ADMIN_PASSWORD="" # required only when running the destructive seed bootstrap
 NEXT_PUBLIC_LERNIO_ROLL_NUMBER_PATTERN="^[A-Za-z0-9/-]{1,32}$"
 ```
 
@@ -45,9 +51,10 @@ npm run build
 - Build command: `npm run vercel-build`
 - Output directory: default Next.js output
 - Root directory: repository root
-- Runtime: Node.js 20.9 or newer
+- Runtime: Node.js 24.x
 - Production branch: `main`
 - `DATABASE_URL` must point at the production PostgreSQL database; migrations run during `npm run vercel-build`
+- If your production database uses pooling, set `DATABASE_URL_UNPOOLED` or `POSTGRES_URL_NON_POOLING` for migration deploys.
 
 ## Smoke Tests
 
@@ -60,6 +67,8 @@ After deployment verify:
 - profile completion and complete-later path
 - dashboard
 - curriculum route refresh
-- `/api/route`
-- AI tutor fallback when provider credentials are missing
+- `/api/ready`
+- `/api/ready` reports `ready` or `degraded` with database, auth, AI, and email configuration
+- AI tutor fallback when Groq credentials are missing
+- password reset email delivery when Resend is configured
 - logout/login state isolation

@@ -1,76 +1,62 @@
-import { NextResponse } from 'next/server';
-import { db } from '@/lib/db';
-import { getCurrentUser } from '@/lib/auth';
-import { sendVerificationEmail } from '@/lib/email';
-import { checkRateLimit } from '@/lib/rate-limit';
-import crypto from 'crypto';
+import crypto from 'crypto'
+import { db } from '@/lib/db'
+import { ApiError, getCurrentUser, okResponse, withApi } from '@/lib/auth'
+import { sendVerificationEmail } from '@/lib/email'
+import { checkRateLimit } from '@/lib/rate-limit'
+import { parseBody, verifyEmailRequestSchema } from '@/lib/schemas'
+
+export const runtime = 'nodejs'
 
 export async function POST(req: Request) {
-  try {
-    const authUser = await getCurrentUser();
-    let email: string;
+  return withApi(async () => {
+    const authUser = await getCurrentUser()
+    const email = authUser
+      ? authUser.email.trim().toLowerCase()
+      : (await parseBody(req, verifyEmailRequestSchema)).email
 
-    if (authUser) {
-      email = authUser.email;
-    } else {
-      const body = await req.json().catch(() => ({}));
-      email = body.email;
-    }
-
-    if (!email || typeof email !== 'string') {
-      return NextResponse.json({ ok: false, error: 'Invalid email address.' }, { status: 400 });
-    }
-
-    const normalizedEmail = email.trim().toLowerCase();
-
-    // Rate limit resend requests
     const limiter = await checkRateLimit({
       action: 'verify_email_request',
-      identifier: normalizedEmail,
-      limit: 3, // Max 3 requests per 15 minutes
+      identifier: email,
+      limit: 3,
       windowMs: 15 * 60 * 1000,
-    });
+    })
     if (!limiter.allowed) {
-      return NextResponse.json(
-        { ok: false, error: 'Too many requests. Please try again later.' },
-        { status: 429 }
-      );
+      throw new ApiError(
+        'RATE_LIMITED',
+        'Too many requests. Please try again later.',
+        429,
+        true,
+      )
     }
 
     const user = await db.user.findUnique({
-      where: { email: normalizedEmail },
+      where: { email },
       select: { id: true, emailVerified: true },
-    });
+    })
 
     if (!user) {
-      return NextResponse.json({ ok: true });
+      return okResponse({ sent: true })
     }
 
     if (user.emailVerified) {
-      return NextResponse.json({ ok: true, message: 'Email is already verified.' });
+      return okResponse({ sent: false, message: 'Email is already verified.' })
     }
 
-    const token = crypto.randomBytes(32).toString('hex');
-    const tokenHash = crypto.createHash('sha256').update(token).digest('hex');
-    const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours expiry
+    const token = crypto.randomBytes(32).toString('hex')
+    const tokenHash = crypto.createHash('sha256').update(token).digest('hex')
+    const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000)
 
-    await db.emailVerificationToken.deleteMany({
-      where: { email: normalizedEmail },
-    });
-
+    await db.emailVerificationToken.deleteMany({ where: { email } })
     await db.emailVerificationToken.create({
       data: {
-        email: normalizedEmail,
+        email,
         tokenHash,
         expiresAt,
       },
-    });
+    })
 
-    await sendVerificationEmail(normalizedEmail, token);
+    await sendVerificationEmail(email, token)
 
-    return NextResponse.json({ ok: true });
-  } catch (error) {
-    console.error('[verify-email/request] error:', error);
-    return NextResponse.json({ ok: false, error: 'Internal server error' }, { status: 500 });
-  }
+    return okResponse({ sent: true })
+  })
 }
