@@ -266,6 +266,9 @@ const PUBLIC_TOASTER_EXCLUDED_PATHS = new Set([
   '/sign-up',
   '/forgot-password',
   '/reset-password',
+  '/privacy',
+  '/terms',
+  '/support',
 ])
 
 export function AchievementUnlockToaster() {
