@@ -26,6 +26,7 @@
     "db:migrate": "prisma migrate dev",
     "db:deploy": "prisma migrate deploy",
     "db:reset": "prisma migrate reset",
+    "db:admin": "tsx scripts/upsert-admin.ts",
     "db:seed": "tsx scripts/seed.ts",
     "db:departments": "tsx scripts/upsert-cwit-departments.ts"
   },

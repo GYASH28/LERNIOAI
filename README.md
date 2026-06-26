@@ -58,6 +58,7 @@ See `.env.example` for the full list.
 | `npm run db:generate` | Regenerate Prisma Client |
 | `npm run db:migrate` | Create and apply a migration locally |
 | `npm run db:deploy` | Apply committed migrations |
+| `npm run db:admin` | Non-destructively create/update the admin user from `LERNIO_ADMIN_EMAIL` and `LERNIO_ADMIN_PASSWORD` |
 | `npm run db:seed` | Destructive demo/admin seed |
 
 ## Architecture
@@ -99,4 +100,5 @@ Vercel should use:
 - Local database unavailable: start PostgreSQL, apply migrations with `npm run db:deploy`, then restart `npm run dev`.
 - Password reset emails not sent in production: set `RESEND_API_KEY` and `EMAIL_FROM`.
 - LEO tutor fallback responses: set `GROQ_API_KEY`.
-- Demo/admin user missing: run `npm run db:seed`; set `LERNIO_ADMIN_PASSWORD` before seeding when you need the admin account.
+- Admin user missing: set `LERNIO_ADMIN_EMAIL` and `LERNIO_ADMIN_PASSWORD`, then run `npm run db:admin`.
+- Demo data missing: run `npm run db:seed`; this is destructive and recreates the demo academic dataset.
