@@ -1,7 +1,9 @@
 import 'server-only'
 
 import { db } from '@/lib/db'
+import { canAttemptDatabase } from '@/lib/db-health'
 import { getCurrentUser } from '@/lib/auth'
+import { isDatabaseUnavailableError } from '@/lib/api-error-policy'
 import { levelFromXp } from '@/lib/xp'
 import {
   DEMO_ACHIEVEMENTS,
@@ -28,11 +30,11 @@ import { getLocalDateStringInKolkata, getLocalDayStartInKolkata } from '@/lib/ti
  * represent, (b) loses Date precision by going through a string, and
  * (c) makes it impossible to tell at a glance what the function actually
  * does. This implementation is explicit: it walks the object graph and
- * converts Date → ISO string, arrays → arrays, and plain objects → plain
+ * converts Date to ISO string, arrays to arrays, and plain objects to plain
  * objects, leaving primitives untouched.
  *
  * If a value that cannot be serialised is encountered (e.g. a function or
- * a Symbol), it is dropped — matching the old JSON-clone behaviour.
+ * a Symbol), it is dropped, matching the old JSON-clone behaviour.
  */
 function serializeForClient<T>(value: T): T {
   if (value === null || value === undefined) return value
@@ -264,17 +266,41 @@ export async function getAppBootstrap(initialView: ViewKey): Promise<AppBootstra
     })
   }
 
-  const authUser = await getCurrentUser()
-  const [freshUser, subjects] = await Promise.all([
-    authUser ? db.user.findUnique({ where: { id: authUser.id }, select: publicUserSelect }) : null,
-    getSubjects(),
-  ])
+  if (!(await canAttemptDatabase())) {
+    return serializeForClient({ user: null, subjects: [], dashboard: null })
+  }
 
-  const user = freshUser ? toPublicUserDTO({ ...freshUser, level: levelFromXp(freshUser.xp) }) : null
-  const dashboard =
-    initialView === 'dashboard' && user
-      ? await getDashboardSnapshot(user.id, user.dailyMins)
-      : null
+  let authUser: Awaited<ReturnType<typeof getCurrentUser>> = null
+  try {
+    authUser = await getCurrentUser()
+  } catch (error) {
+    if (isDatabaseUnavailableError(error)) {
+      return serializeForClient({ user: null, subjects: [], dashboard: null })
+    }
+    throw error
+  }
 
-  return serializeForClient({ user, subjects, dashboard })
+  if (!authUser) {
+    return serializeForClient({ user: null, subjects: [], dashboard: null })
+  }
+
+  try {
+    const [freshUser, subjects] = await Promise.all([
+      db.user.findUnique({ where: { id: authUser.id }, select: publicUserSelect }),
+      getSubjects(),
+    ])
+
+    const user = freshUser ? toPublicUserDTO({ ...freshUser, level: levelFromXp(freshUser.xp) }) : null
+    const dashboard =
+      initialView === 'dashboard' && user
+        ? await getDashboardSnapshot(user.id, user.dailyMins)
+        : null
+
+    return serializeForClient({ user, subjects, dashboard })
+  } catch (error) {
+    if (isDatabaseUnavailableError(error)) {
+      return serializeForClient({ user: null, subjects: [], dashboard: null })
+    }
+    throw error
+  }
 }

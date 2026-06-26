@@ -36,7 +36,7 @@ interface DashboardData {
 
 export function DashboardView({ initialData = null }: { initialData?: DashboardSnapshot | null }) {
   const router = useRouter()
-  const { user, subjects, setLearnContext, continueLearning } = useAppStore()
+  const { user, subjects, setLearnContext, setView, continueLearning } = useAppStore()
   const [data, setData] = useState<DashboardData | null>(initialData?.progress as DashboardData | null)
   const [revisionDue, setRevisionDue] = useState<any[]>(initialData?.revisionDue ?? [])
   const [tasks, setTasks] = useState<any[]>(initialData?.tasks ?? [])
@@ -45,6 +45,7 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
 
   useEffect(() => {
     if (initialData) return
+    if (!user) return
 
     Promise.all([
       fetch('/api/progress').then((r) => r.json()),
@@ -59,7 +60,7 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
       if (ach.ok) setAchievements(ach.data.earned || [])
       if (act.ok) setActivity(act.data)
     })
-  }, [initialData])
+  }, [initialData, user])
 
   const completedLessons = data?.lessonCompletions?.filter((l) => l.completedAt) || []
   const masteryRecords = data?.mastery || []
@@ -68,6 +69,7 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
   const examDate = user?.examDate ? new Date(user.examDate) : null
   const daysToExam = examDate ? Math.ceil((examDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24)) : null
   const goToView = (nextView: ViewKey) => {
+    setView(nextView)
     router.push(routeForView(nextView))
   }
 
