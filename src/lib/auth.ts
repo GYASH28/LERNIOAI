@@ -3,10 +3,8 @@
  *
  * ENVIRONMENT NOTE:
  * This sandbox has no real OAuth provider, so we implement a single audited
- * `requireUser()` helper that resolves the active user. In demo mode (default),
- * it resolves the seeded demo student through ONE central place — eliminating
- * the scattered hardcoded `student@lernio.ai` queries. In production, swap the
- * body of `resolveUserFromSession()` for a verified NextAuth/credentials session.
+ * `requireUser()` helper that resolves the active user. In demo mode, it uses
+ * the seeded demo student only when there is no verified authenticated session.
  *
  * Trust boundary: every API route MUST call requireUser() / requireRole().
  * Never accept a userId from the browser.
@@ -60,13 +58,12 @@ const providers: NextAuthOptions['providers'] = [
       const password = credentials?.password
       if (!email || !password || password.length > 256) return null
 
-      // Check failed login attempts from RateLimitBucket before verifying
       const failKey = `credential_login_fail:${email}`
       const existingFail = await db.rateLimitBucket.findUnique({
         where: { key: failKey },
       })
       if (existingFail && existingFail.resetAt > new Date() && existingFail.count >= MAX_LOGIN_ATTEMPTS) {
-        return null // Rate limited
+        return null
       }
 
       if (
@@ -74,7 +71,6 @@ const providers: NextAuthOptions['providers'] = [
         email === DEMO_AUTH_USER.email &&
         password === DEMO_PASSWORD
       ) {
-        // Successful login: reset failed login attempts
         await db.rateLimitBucket.delete({ where: { key: failKey } }).catch(() => {})
         return DEMO_AUTH_USER
       }
@@ -94,7 +90,6 @@ const providers: NextAuthOptions['providers'] = [
       })
 
       if (!user?.passwordHash || user.status === 'disabled') {
-        // Increment failed attempts
         await checkRateLimit({
           action: 'credential_login_fail',
           identifier: email,
@@ -106,7 +101,6 @@ const providers: NextAuthOptions['providers'] = [
 
       const valid = await compare(password, user.passwordHash)
       if (!valid) {
-        // Increment failed attempts
         await checkRateLimit({
           action: 'credential_login_fail',
           identifier: email,
@@ -116,7 +110,6 @@ const providers: NextAuthOptions['providers'] = [
         return null
       }
 
-      // Successful login: reset failed login attempts
       await db.rateLimitBucket.delete({ where: { key: failKey } }).catch(() => {})
 
       return {
@@ -234,19 +227,11 @@ export const authOptions: NextAuthOptions = {
 /**
  * Resolve the authenticated user from a verified server session.
  *
- * Production implementation (documented):
- *   const session = await getServerSession(authOptions)
- *   if (!session?.user?.email) return null
- *   return db.user.findUnique({ where: { email: session.user.email } })
- *
- * Sandbox/demo implementation: resolves the demo user when LERNIO_DEMO_MODE === 'true'.
- * When LERNIO_DEMO_MODE=false and no session exists, returns null (unauthenticated).
+ * A verified NextAuth session always takes precedence over demo mode. This is
+ * important for preview deployments where demo mode may be enabled while an
+ * administrator signs in with a real database account.
  */
 async function resolveUserFromSession(): Promise<AuthUser | null> {
-  if (process.env.LERNIO_DEMO_MODE === 'true') {
-    return DEMO_AUTH_USER
-  }
-
   const session = await getServerSession(authOptions)
   const authMode = resolveAuthMode({
     demoModeEnv: process.env.LERNIO_DEMO_MODE,
@@ -322,8 +307,6 @@ export async function requireActiveRole(...allowed: Role[]): Promise<AuthorityCo
 
 /**
  * Require a user with a specific permission and optional scope checks.
- * Scope check verifies that if the user's role is restricted (e.g. teacher/coordinator),
- * they have access to the requested subjectId or departmentCode.
  */
 export async function requirePermission(
   permission: PermissionInput,
@@ -370,7 +353,6 @@ export class ApiError extends Error {
 
 /**
  * Wrap an async API handler with standard error handling.
- * Catches ApiError and unexpected errors, always returning a safe JSON Response.
  */
 export async function withApi(
   handler: () => Promise<Response>,

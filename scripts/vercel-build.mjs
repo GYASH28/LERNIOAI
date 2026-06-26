@@ -45,17 +45,38 @@ const migrationDatabaseUrl =
   pooledDatabaseUrl
 
 if (pooledDatabaseUrl && migrationDatabaseUrl) {
+  const databaseEnv = {
+    ...process.env,
+    DATABASE_URL: migrationDatabaseUrl,
+  }
+
   console.log('[vercel-build] Database configured; applying committed Prisma migrations...')
   runCli(
     'node_modules/prisma/build/index.js',
     ['migrate', 'deploy'],
-    {
-      ...process.env,
-      DATABASE_URL: migrationDatabaseUrl,
-    },
+    databaseEnv,
   )
+
+  const adminEmail = process.env.LERNIO_ADMIN_EMAIL?.trim()
+  const adminPassword = process.env.LERNIO_ADMIN_PASSWORD?.trim()
+  const isProductionDeployment = process.env.VERCEL_ENV === 'production'
+  const allowExplicitLocalBootstrap =
+    !process.env.VERCEL_ENV && process.env.LERNIO_BOOTSTRAP_ADMIN_ON_BUILD === 'true'
+
+  if ((isProductionDeployment || allowExplicitLocalBootstrap) && adminEmail && adminPassword) {
+    console.log('[vercel-build] Production Admin bootstrap configured; creating or repairing the Admin account...')
+    runCli(
+      'node_modules/tsx/dist/cli.mjs',
+      ['scripts/upsert-admin.ts'],
+      databaseEnv,
+    )
+  } else if (!isProductionDeployment && !allowExplicitLocalBootstrap) {
+    console.log('[vercel-build] Skipping Admin bootstrap outside a production deployment.')
+  } else {
+    console.warn('[vercel-build] Admin bootstrap skipped because LERNIO_ADMIN_EMAIL or LERNIO_ADMIN_PASSWORD is missing.')
+  }
 } else {
-  console.warn('[vercel-build] DATABASE_URL is not configured; skipping migrations.')
+  console.warn('[vercel-build] DATABASE_URL is not configured; skipping migrations and Admin bootstrap.')
 }
 
 console.log('[vercel-build] Building Next.js...')
