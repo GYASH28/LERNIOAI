@@ -1,13 +1,15 @@
 'use client'
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { RefreshCw, Search, ShieldCheck, UserCheck, UserX } from 'lucide-react'
+import type { FormEvent } from 'react'
+import { Plus, RefreshCw, Search, ShieldCheck, Trash2, UserCheck, UserX } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 
-const ROLE_OPTIONS = ['student', 'cr', 'teacher', 'coordinator', 'moderator', 'reviewer', 'admin'] as const
+const PRIMARY_ROLE_OPTIONS = ['student', 'cr', 'teacher', 'coordinator', 'moderator', 'reviewer', 'admin'] as const
+const ASSIGNABLE_ROLE_OPTIONS = ['cr', 'teacher', 'coordinator', 'moderator', 'reviewer'] as const
 
 type AdminUser = {
   id: string
@@ -33,10 +35,44 @@ type RoleRequest = {
   user: { id: string; name: string; email: string; role: string }
 }
 
+type RoleAssignment = {
+  id: string
+  role: string
+  status: string
+  institutionId: string | null
+  departmentCode: string | null
+  classGroupId: string | null
+  subjectId: string | null
+  startsAt: string
+  expiresAt: string | null
+  revokedAt: string | null
+  user: { id: string; name: string; email: string }
+}
+
+type AssignmentDraft = {
+  userId: string
+  role: string
+  institutionId: string
+  departmentCode: string
+  classGroupId: string
+  subjectId: string
+  reason: string
+}
+
 type ApiEnvelope<T> = {
   ok: boolean
   data?: T
   error?: { message?: string }
+}
+
+const EMPTY_ASSIGNMENT: AssignmentDraft = {
+  userId: '',
+  role: 'teacher',
+  institutionId: '',
+  departmentCode: '',
+  classGroupId: '',
+  subjectId: '',
+  reason: '',
 }
 
 async function readJson<T>(response: Response): Promise<T> {
@@ -47,9 +83,19 @@ async function readJson<T>(response: Response): Promise<T> {
   return payload.data
 }
 
+function assignmentScope(assignment: RoleAssignment) {
+  if (assignment.subjectId) return `Subject ${assignment.subjectId}`
+  if (assignment.classGroupId) return `Class ${assignment.classGroupId}`
+  if (assignment.departmentCode) return `Department ${assignment.departmentCode}`
+  if (assignment.institutionId) return `Institution ${assignment.institutionId}`
+  return 'Invalid empty scope'
+}
+
 export function AdminAccessConsole() {
   const [users, setUsers] = useState<AdminUser[]>([])
   const [requests, setRequests] = useState<RoleRequest[]>([])
+  const [assignments, setAssignments] = useState<RoleAssignment[]>([])
+  const [assignmentDraft, setAssignmentDraft] = useState<AssignmentDraft>(EMPTY_ASSIGNMENT)
   const [query, setQuery] = useState('')
   const [scopeDrafts, setScopeDrafts] = useState<Record<string, string>>({})
   const [loading, setLoading] = useState(true)
@@ -61,18 +107,22 @@ export function AdminAccessConsole() {
     setLoading(true)
     setError(null)
     try {
-      const [userData, requestData] = await Promise.all([
+      const [userData, requestData, assignmentData] = await Promise.all([
         fetch('/api/admin/users?page=1&pageSize=50', { cache: 'no-store' }).then((response) =>
           readJson<{ users: AdminUser[] }>(response),
         ),
         fetch('/api/admin/role-requests', { cache: 'no-store' }).then((response) =>
           readJson<{ requests: RoleRequest[] }>(response),
         ),
+        fetch('/api/admin/role-assignments', { cache: 'no-store' }).then((response) =>
+          readJson<{ assignments: RoleAssignment[] }>(response),
+        ),
       ])
       setUsers(userData.users)
       setRequests(requestData.requests)
+      setAssignments(assignmentData.assignments)
     } catch (loadError) {
-      setError(loadError instanceof Error ? loadError.message : 'Could not load admin access data.')
+      setError(loadError instanceof Error ? loadError.message : 'Could not load Admin access data.')
     } finally {
       setLoading(false)
     }
@@ -89,6 +139,9 @@ export function AdminAccessConsole() {
       `${user.name} ${user.email} ${user.role} ${user.departmentCode ?? ''}`.toLowerCase().includes(term),
     )
   }, [query, users])
+
+  const pendingRequests = requests.filter((request) => request.status === 'pending')
+  const activeAssignments = assignments.filter((assignment) => assignment.status === 'active' && !assignment.revokedAt)
 
   async function patchUser(userId: string, updates: Record<string, unknown>, successMessage: string) {
     setBusyId(userId)
@@ -119,7 +172,9 @@ export function AdminAccessConsole() {
       const departmentCode = (scopeDrafts[request.id] ?? request.departmentCode ?? '').trim()
       const body: Record<string, unknown> = {
         status,
-        reviewNote: status === 'approved' ? 'Approved from the Lernio Admin access console.' : 'Rejected from the Lernio Admin access console.',
+        reviewNote: status === 'approved'
+          ? 'Approved from the Lernio Admin access console.'
+          : 'Rejected from the Lernio Admin access console.',
       }
       if (departmentCode) body.departmentCode = departmentCode
 
@@ -139,6 +194,55 @@ export function AdminAccessConsole() {
     }
   }
 
+  async function createAssignment(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    setBusyId('create-assignment')
+    setError(null)
+    setNotice(null)
+    try {
+      const payload = {
+        userId: assignmentDraft.userId,
+        role: assignmentDraft.role,
+        institutionId: assignmentDraft.institutionId.trim() || null,
+        departmentCode: assignmentDraft.departmentCode.trim().toUpperCase() || null,
+        classGroupId: assignmentDraft.classGroupId.trim() || null,
+        subjectId: assignmentDraft.subjectId.trim() || null,
+        reason: assignmentDraft.reason.trim() || undefined,
+      }
+      await readJson<{ assignment: { id: string } }>(
+        await fetch('/api/admin/role-assignments', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        }),
+      )
+      setNotice('Scoped role assignment created.')
+      setAssignmentDraft(EMPTY_ASSIGNMENT)
+      await load()
+    } catch (assignmentError) {
+      setError(assignmentError instanceof Error ? assignmentError.message : 'Role assignment failed.')
+    } finally {
+      setBusyId(null)
+    }
+  }
+
+  async function revokeAssignment(assignment: RoleAssignment) {
+    setBusyId(assignment.id)
+    setError(null)
+    setNotice(null)
+    try {
+      await readJson<{ assignment: RoleAssignment }>(
+        await fetch(`/api/admin/role-assignments/${assignment.id}`, { method: 'DELETE' }),
+      )
+      setNotice(`${assignment.role} assignment revoked for ${assignment.user.name}.`)
+      await load()
+    } catch (assignmentError) {
+      setError(assignmentError instanceof Error ? assignmentError.message : 'Could not revoke assignment.')
+    } finally {
+      setBusyId(null)
+    }
+  }
+
   return (
     <main className="min-h-screen bg-background">
       <section className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8">
@@ -150,7 +254,7 @@ export function AdminAccessConsole() {
             </div>
             <h1 className="text-3xl font-black tracking-normal">Access control</h1>
             <p className="mt-2 max-w-3xl text-muted-foreground">
-              Manage account status and roles, and review pending authority requests. All changes are enforced server-side and audited.
+              Manage account status, scoped assignments, and pending authority requests. Server authorization and audit logging remain the source of truth.
             </p>
           </div>
           <Button variant="outline" onClick={() => void load()} disabled={loading}>
@@ -174,54 +278,151 @@ export function AdminAccessConsole() {
           <CardHeader>
             <CardTitle>Pending role requests</CardTitle>
             <CardDescription>
-              Approvals require a valid department, subject, class, or institution scope. Enter a department code when the request does not already contain one.
+              Approvals require a department, subject, class, or institution scope. Enter a department code when the request does not already contain one.
             </CardDescription>
           </CardHeader>
           <CardContent className="grid gap-3">
             {loading ? <p className="text-sm text-muted-foreground">Loading requests…</p> : null}
-            {!loading && requests.filter((request) => request.status === 'pending').length === 0 ? (
+            {!loading && pendingRequests.length === 0 ? (
               <p className="text-sm text-muted-foreground">No pending role requests.</p>
             ) : null}
-            {requests
-              .filter((request) => request.status === 'pending')
-              .map((request) => (
-                <div key={request.id} className="grid gap-4 rounded-xl border border-border p-4 lg:grid-cols-[minmax(0,1fr)_220px_auto] lg:items-center">
+            {pendingRequests.map((request) => (
+              <div key={request.id} className="grid gap-4 rounded-xl border border-border p-4 lg:grid-cols-[minmax(0,1fr)_220px_auto] lg:items-center">
+                <div className="min-w-0">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <p className="font-semibold">{request.user.name}</p>
+                    <Badge variant="secondary" className="capitalize">{request.requestedRole}</Badge>
+                  </div>
+                  <p className="truncate text-sm text-muted-foreground">{request.user.email}</p>
+                  <p className="mt-2 text-sm">{request.reason || 'No reason supplied.'}</p>
+                </div>
+                <Input
+                  aria-label={`Department scope for ${request.user.name}`}
+                  placeholder="Department code, e.g. CIOT"
+                  value={scopeDrafts[request.id] ?? request.departmentCode ?? ''}
+                  onChange={(event) => setScopeDrafts((current) => ({
+                    ...current,
+                    [request.id]: event.target.value.toUpperCase(),
+                  }))}
+                />
+                <div className="flex flex-wrap gap-2">
+                  <Button size="sm" onClick={() => void reviewRequest(request, 'approved')} disabled={busyId === request.id}>
+                    <UserCheck className="h-4 w-4" /> Approve
+                  </Button>
+                  <Button size="sm" variant="outline" onClick={() => void reviewRequest(request, 'rejected')} disabled={busyId === request.id}>
+                    <UserX className="h-4 w-4" /> Reject
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+
+        <Card surface="elevated">
+          <CardHeader>
+            <CardTitle>Scoped role assignments</CardTitle>
+            <CardDescription>
+              Create normalized authority with at least one real scope. Use a department code for HOD-level access, a subject ID for Teacher/Reviewer access, a class-group ID for CR access, or an institution ID for Moderator access.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="grid gap-5">
+            <form onSubmit={createAssignment} className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+              <select
+                aria-label="Assignment user"
+                required
+                className="h-10 rounded-md border border-input bg-background px-3 text-sm"
+                value={assignmentDraft.userId}
+                onChange={(event) => setAssignmentDraft((current) => ({ ...current, userId: event.target.value }))}
+              >
+                <option value="">Select user</option>
+                {users.filter((user) => user.status === 'active').map((user) => (
+                  <option key={user.id} value={user.id}>{user.name} — {user.email}</option>
+                ))}
+              </select>
+              <select
+                aria-label="Assignment role"
+                className="h-10 rounded-md border border-input bg-background px-3 text-sm"
+                value={assignmentDraft.role}
+                onChange={(event) => setAssignmentDraft((current) => ({ ...current, role: event.target.value }))}
+              >
+                {ASSIGNABLE_ROLE_OPTIONS.map((role) => <option key={role} value={role}>{role}</option>)}
+              </select>
+              <Input
+                placeholder="Department code"
+                aria-label="Department code"
+                value={assignmentDraft.departmentCode}
+                onChange={(event) => setAssignmentDraft((current) => ({ ...current, departmentCode: event.target.value.toUpperCase() }))}
+              />
+              <Input
+                placeholder="Subject ID"
+                aria-label="Subject ID"
+                value={assignmentDraft.subjectId}
+                onChange={(event) => setAssignmentDraft((current) => ({ ...current, subjectId: event.target.value }))}
+              />
+              <Input
+                placeholder="Class-group ID"
+                aria-label="Class-group ID"
+                value={assignmentDraft.classGroupId}
+                onChange={(event) => setAssignmentDraft((current) => ({ ...current, classGroupId: event.target.value }))}
+              />
+              <Input
+                placeholder="Institution ID"
+                aria-label="Institution ID"
+                value={assignmentDraft.institutionId}
+                onChange={(event) => setAssignmentDraft((current) => ({ ...current, institutionId: event.target.value }))}
+              />
+              <Input
+                placeholder="Reason or internal note"
+                aria-label="Assignment reason"
+                value={assignmentDraft.reason}
+                onChange={(event) => setAssignmentDraft((current) => ({ ...current, reason: event.target.value }))}
+                className="xl:col-span-2"
+              />
+              <Button type="submit" disabled={busyId === 'create-assignment'} className="md:col-span-2 xl:col-span-4">
+                <Plus className="h-4 w-4" />
+                {busyId === 'create-assignment' ? 'Creating assignment…' : 'Create scoped assignment'}
+              </Button>
+            </form>
+
+            <div className="grid gap-3">
+              {!loading && activeAssignments.length === 0 ? (
+                <p className="text-sm text-muted-foreground">No active normalized role assignments.</p>
+              ) : null}
+              {activeAssignments.map((assignment) => (
+                <div key={assignment.id} className="grid gap-3 rounded-xl border border-border p-4 lg:grid-cols-[minmax(0,1fr)_220px_auto] lg:items-center">
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
-                      <p className="font-semibold">{request.user.name}</p>
-                      <Badge variant="secondary" className="capitalize">{request.requestedRole}</Badge>
+                      <p className="truncate font-semibold">{assignment.user.name}</p>
+                      <Badge variant="secondary" className="capitalize">{assignment.role}</Badge>
                     </div>
-                    <p className="truncate text-sm text-muted-foreground">{request.user.email}</p>
-                    <p className="mt-2 text-sm">{request.reason || 'No reason supplied.'}</p>
+                    <p className="truncate text-sm text-muted-foreground">{assignment.user.email}</p>
                   </div>
-                  <Input
-                    aria-label={`Department scope for ${request.user.name}`}
-                    placeholder="Department code, e.g. CIOT"
-                    value={scopeDrafts[request.id] ?? request.departmentCode ?? ''}
-                    onChange={(event) => setScopeDrafts((current) => ({ ...current, [request.id]: event.target.value.toUpperCase() }))}
-                  />
-                  <div className="flex flex-wrap gap-2">
-                    <Button size="sm" onClick={() => void reviewRequest(request, 'approved')} disabled={busyId === request.id}>
-                      <UserCheck className="h-4 w-4" /> Approve
-                    </Button>
-                    <Button size="sm" variant="outline" onClick={() => void reviewRequest(request, 'rejected')} disabled={busyId === request.id}>
-                      <UserX className="h-4 w-4" /> Reject
-                    </Button>
-                  </div>
+                  <p className="text-sm font-medium text-primary">{assignmentScope(assignment)}</p>
+                  <Button variant="outline" size="sm" disabled={busyId === assignment.id} onClick={() => void revokeAssignment(assignment)}>
+                    <Trash2 className="h-4 w-4" /> Revoke
+                  </Button>
                 </div>
               ))}
+            </div>
           </CardContent>
         </Card>
 
         <Card surface="elevated">
           <CardHeader>
             <CardTitle>Users</CardTitle>
-            <CardDescription>Change a user’s primary role or disable/restore their account. The final active Admin is protected.</CardDescription>
+            <CardDescription>
+              Change an account’s primary role or disable/restore it. Use scoped assignments above for operational authority. The final active Admin is protected.
+            </CardDescription>
           </CardHeader>
           <CardContent className="grid gap-4">
             <label className="relative block">
               <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-              <Input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search users, email, role, or department" className="pl-9" />
+              <Input
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="Search users, email, role, or department"
+                className="pl-9"
+              />
             </label>
 
             <div className="grid gap-3">
@@ -239,13 +440,17 @@ export function AdminAccessConsole() {
                   </div>
 
                   <select
-                    aria-label={`Role for ${user.name}`}
+                    aria-label={`Primary role for ${user.name}`}
                     className="h-10 rounded-md border border-input bg-background px-3 text-sm"
                     value={user.role}
                     disabled={busyId === user.id}
-                    onChange={(event) => void patchUser(user.id, { role: event.target.value }, `${user.name}'s role was updated.`)}
+                    onChange={(event) => void patchUser(
+                      user.id,
+                      { role: event.target.value },
+                      `${user.name}'s primary role was updated.`,
+                    )}
                   >
-                    {ROLE_OPTIONS.map((role) => <option key={role} value={role}>{role}</option>)}
+                    {PRIMARY_ROLE_OPTIONS.map((role) => <option key={role} value={role}>{role}</option>)}
                   </select>
 
                   <Button
