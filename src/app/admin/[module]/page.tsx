@@ -3,7 +3,7 @@ import { requireActiveRole } from '@/lib/auth'
 import { getAdminModuleData } from '@/lib/admin/campusmate-data'
 import { CampusmateAdminShell } from '@/components/admin/campusmate-admin-shell'
 import { CampusmateModuleView } from '@/components/admin/campusmate-module-view'
-import { AdminAccessConsole } from '@/components/authority/admin-access-console'
+import { CampusmateUsersPanel } from '@/components/admin/campusmate-users-panel'
 
 export default async function AdminModulePage({ params }: { params: Promise<{ module: string }> }) {
   const { module } = await params
@@ -14,7 +14,7 @@ export default async function AdminModulePage({ params }: { params: Promise<{ mo
   if (module === 'users') {
     return (
       <CampusmateAdminShell user={user}>
-        <AdminAccessConsole />
+        <CampusmateUsersPanel />
       </CampusmateAdminShell>
     )
   }
