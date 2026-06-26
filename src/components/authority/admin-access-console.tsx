@@ -91,6 +91,22 @@ function assignmentScope(assignment: RoleAssignment) {
   return 'Invalid empty scope'
 }
 
+function storedSubjectText(subjectIds: string | null) {
+  if (!subjectIds) return ''
+  try {
+    const parsed = JSON.parse(subjectIds) as unknown
+    return Array.isArray(parsed)
+      ? parsed.filter((item): item is string => typeof item === 'string').join(', ')
+      : ''
+  } catch {
+    return ''
+  }
+}
+
+function commaSeparatedIds(value: string) {
+  return Array.from(new Set(value.split(',').map((item) => item.trim()).filter(Boolean)))
+}
+
 export function AdminAccessConsole() {
   const [users, setUsers] = useState<AdminUser[]>([])
   const [requests, setRequests] = useState<RoleRequest[]>([])
@@ -98,6 +114,8 @@ export function AdminAccessConsole() {
   const [assignmentDraft, setAssignmentDraft] = useState<AssignmentDraft>(EMPTY_ASSIGNMENT)
   const [query, setQuery] = useState('')
   const [scopeDrafts, setScopeDrafts] = useState<Record<string, string>>({})
+  const [subjectDrafts, setSubjectDrafts] = useState<Record<string, string>>({})
+  const [classGroupDrafts, setClassGroupDrafts] = useState<Record<string, string>>({})
   const [loading, setLoading] = useState(true)
   const [busyId, setBusyId] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -170,6 +188,9 @@ export function AdminAccessConsole() {
     setNotice(null)
     try {
       const departmentCode = (scopeDrafts[request.id] ?? request.departmentCode ?? '').trim()
+      const subjectText = subjectDrafts[request.id] ?? storedSubjectText(request.subjectIds)
+      const assignedSubjects = commaSeparatedIds(subjectText)
+      const classGroupId = (classGroupDrafts[request.id] ?? '').trim()
       const body: Record<string, unknown> = {
         status,
         reviewNote: status === 'approved'
@@ -177,6 +198,8 @@ export function AdminAccessConsole() {
           : 'Rejected from the Lernio Admin access console.',
       }
       if (departmentCode) body.departmentCode = departmentCode
+      if (assignedSubjects.length) body.assignedSubjects = assignedSubjects
+      if (classGroupId) body.classGroupId = classGroupId
 
       await readJson<{ status: string }>(
         await fetch(`/api/roles/request/${request.id}`, {
@@ -278,7 +301,7 @@ export function AdminAccessConsole() {
           <CardHeader>
             <CardTitle>Pending role requests</CardTitle>
             <CardDescription>
-              Approvals require a department, subject, class, or institution scope. Enter a department code when the request does not already contain one.
+              Approvals are role-aware: CR needs a class group, Teacher needs subjects, Coordinator needs a department, and Reviewer/Moderator need an appropriate academic or institution scope.
             </CardDescription>
           </CardHeader>
           <CardContent className="grid gap-3">
@@ -286,35 +309,63 @@ export function AdminAccessConsole() {
             {!loading && pendingRequests.length === 0 ? (
               <p className="text-sm text-muted-foreground">No pending role requests.</p>
             ) : null}
-            {pendingRequests.map((request) => (
-              <div key={request.id} className="grid gap-4 rounded-xl border border-border p-4 lg:grid-cols-[minmax(0,1fr)_220px_auto] lg:items-center">
-                <div className="min-w-0">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <p className="font-semibold">{request.user.name}</p>
-                    <Badge variant="secondary" className="capitalize">{request.requestedRole}</Badge>
+            {pendingRequests.map((request) => {
+              const needsSubjects = request.requestedRole === 'teacher' || request.requestedRole === 'reviewer'
+              const needsClassGroup = request.requestedRole === 'cr'
+              return (
+                <div key={request.id} className="grid gap-4 rounded-xl border border-border p-4">
+                  <div className="min-w-0">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <p className="font-semibold">{request.user.name}</p>
+                      <Badge variant="secondary" className="capitalize">{request.requestedRole}</Badge>
+                    </div>
+                    <p className="truncate text-sm text-muted-foreground">{request.user.email}</p>
+                    <p className="mt-2 text-sm">{request.reason || 'No reason supplied.'}</p>
                   </div>
-                  <p className="truncate text-sm text-muted-foreground">{request.user.email}</p>
-                  <p className="mt-2 text-sm">{request.reason || 'No reason supplied.'}</p>
+                  <div className="grid gap-3 md:grid-cols-3">
+                    <Input
+                      aria-label={`Department scope for ${request.user.name}`}
+                      placeholder="Department code, e.g. CIOT"
+                      value={scopeDrafts[request.id] ?? request.departmentCode ?? ''}
+                      onChange={(event) => setScopeDrafts((current) => ({
+                        ...current,
+                        [request.id]: event.target.value.toUpperCase(),
+                      }))}
+                    />
+                    {needsSubjects ? (
+                      <Input
+                        aria-label={`Subject scopes for ${request.user.name}`}
+                        placeholder="Subject IDs, comma separated"
+                        value={subjectDrafts[request.id] ?? storedSubjectText(request.subjectIds)}
+                        onChange={(event) => setSubjectDrafts((current) => ({
+                          ...current,
+                          [request.id]: event.target.value,
+                        }))}
+                      />
+                    ) : <div />}
+                    {needsClassGroup ? (
+                      <Input
+                        aria-label={`Class group for ${request.user.name}`}
+                        placeholder="Class-group ID"
+                        value={classGroupDrafts[request.id] ?? ''}
+                        onChange={(event) => setClassGroupDrafts((current) => ({
+                          ...current,
+                          [request.id]: event.target.value,
+                        }))}
+                      />
+                    ) : <div />}
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <Button size="sm" onClick={() => void reviewRequest(request, 'approved')} disabled={busyId === request.id}>
+                      <UserCheck className="h-4 w-4" /> Approve
+                    </Button>
+                    <Button size="sm" variant="outline" onClick={() => void reviewRequest(request, 'rejected')} disabled={busyId === request.id}>
+                      <UserX className="h-4 w-4" /> Reject
+                    </Button>
+                  </div>
                 </div>
-                <Input
-                  aria-label={`Department scope for ${request.user.name}`}
-                  placeholder="Department code, e.g. CIOT"
-                  value={scopeDrafts[request.id] ?? request.departmentCode ?? ''}
-                  onChange={(event) => setScopeDrafts((current) => ({
-                    ...current,
-                    [request.id]: event.target.value.toUpperCase(),
-                  }))}
-                />
-                <div className="flex flex-wrap gap-2">
-                  <Button size="sm" onClick={() => void reviewRequest(request, 'approved')} disabled={busyId === request.id}>
-                    <UserCheck className="h-4 w-4" /> Approve
-                  </Button>
-                  <Button size="sm" variant="outline" onClick={() => void reviewRequest(request, 'rejected')} disabled={busyId === request.id}>
-                    <UserX className="h-4 w-4" /> Reject
-                  </Button>
-                </div>
-              </div>
-            ))}
+              )
+            })}
           </CardContent>
         </Card>
 
