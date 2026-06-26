@@ -18,6 +18,18 @@ const PatchSchema = z.object({
   classGroupId: z.string().trim().min(1).optional(),
 })
 
+type ScopedAssignmentInput = {
+  userId: string
+  role: Role
+  status: 'active'
+  institutionId: string | null
+  departmentCode?: string | null
+  classGroupId?: string | null
+  subjectId?: string | null
+  assignedById: string
+  reason: string
+}
+
 function resolveSubjectScope(input: {
   assignedSubjects?: string[]
   storedSubjectIds?: string | null
@@ -227,33 +239,33 @@ export async function PATCH(
         },
       })
 
-      const assignmentInputs = [
+      const assignmentInputs: ScopedAssignmentInput[] = [
         ...(effectiveDepartmentCode && ['coordinator', 'reviewer', 'moderator'].includes(requestedRole)
           ? [{
               userId: roleRequest.userId,
               role: requestedRole,
-              status: 'active',
+              status: 'active' as const,
               institutionId: effectiveInstitutionId,
               departmentCode: effectiveDepartmentCode,
               assignedById: adminUser.id,
               reason: `Approved role request ${roleRequest.id}`,
             }]
           : []),
-        ...(finalSubjects.map((subjectId) => ({
+        ...finalSubjects.map((subjectId) => ({
           userId: roleRequest.userId,
           role: requestedRole,
-          status: 'active',
+          status: 'active' as const,
           institutionId: effectiveInstitutionId,
           departmentCode: effectiveDepartmentCode,
           subjectId,
           assignedById: adminUser.id,
           reason: `Approved role request ${roleRequest.id}`,
-        }))),
+        })),
         ...(finalClassGroupId
           ? [{
               userId: roleRequest.userId,
               role: requestedRole,
-              status: 'active',
+              status: 'active' as const,
               institutionId: effectiveInstitutionId,
               departmentCode: effectiveDepartmentCode,
               classGroupId: finalClassGroupId,
@@ -265,7 +277,7 @@ export async function PATCH(
           ? [{
               userId: roleRequest.userId,
               role: requestedRole,
-              status: 'active',
+              status: 'active' as const,
               institutionId: effectiveInstitutionId,
               assignedById: adminUser.id,
               reason: `Approved role request ${roleRequest.id}`,
@@ -279,10 +291,10 @@ export async function PATCH(
             userId: assignment.userId,
             role: assignment.role,
             status: 'active',
-            institutionId: assignment.institutionId ?? null,
+            institutionId: assignment.institutionId,
             departmentCode: assignment.departmentCode ?? null,
-            classGroupId: 'classGroupId' in assignment ? assignment.classGroupId ?? null : null,
-            subjectId: 'subjectId' in assignment ? assignment.subjectId ?? null : null,
+            classGroupId: assignment.classGroupId ?? null,
+            subjectId: assignment.subjectId ?? null,
             revokedAt: null,
           },
           select: { id: true },
