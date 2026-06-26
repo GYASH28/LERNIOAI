@@ -1,8 +1,45 @@
 import { z } from 'zod'
 import { registerCampusUser } from '@/lib/campus-registration'
 import { ApiError, okResponse, withApi } from '@/lib/auth'
+import { CAMPUS_DIVISIONS, CAMPUS_SEMESTERS, CWIT_PROGRAMMES } from '@/lib/campus-auth'
+import { db } from '@/lib/db'
 import { checkRateLimit } from '@/lib/rate-limit'
 import { toPublicUserDTO } from '@/lib/user-dto'
+
+export async function GET() {
+  return withApi(async () => {
+    const programmes = await db.programme.findMany({
+      where: {
+        status: 'active',
+        archivedAt: null,
+        department: { status: 'active', archivedAt: null },
+      },
+      orderBy: [
+        { department: { code: 'asc' } },
+        { code: 'asc' },
+      ],
+      take: 300,
+      select: {
+        code: true,
+        name: true,
+        department: { select: { code: true, name: true } },
+      },
+    })
+
+    const liveProgrammes = programmes.map((programme) => ({
+      departmentCode: programme.department.code,
+      departmentName: programme.department.name,
+      programmeCode: programme.code,
+      programmeName: programme.name,
+    }))
+
+    return okResponse({
+      programmes: liveProgrammes.length ? liveProgrammes : CWIT_PROGRAMMES,
+      semesters: CAMPUS_SEMESTERS,
+      divisions: CAMPUS_DIVISIONS,
+    })
+  })
+}
 
 export async function POST(request: Request) {
   return withApi(async () => {
@@ -43,10 +80,6 @@ export async function POST(request: Request) {
           false,
         )
       }
-
-      // Do not convert infrastructure and Prisma errors into a misleading 400
-      // response. The shared API boundary records the server error and returns
-      // the correct retryable 5xx response without exposing private details.
       throw error
     }
   })
