@@ -8,19 +8,24 @@ import {
 } from '@/lib/auth'
 import { parseBody, updateProfileSchema } from '@/lib/schemas'
 import { levelFromXp } from '@/lib/xp'
-import { DEMO_USER, isDemoMode } from '@/lib/demo-fixtures'
+import { DEMO_AUTH_USER, DEMO_USER, isDemoMode } from '@/lib/demo-fixtures'
 import { publicUserSelect, toPublicUserDTO } from '@/lib/user-dto'
+
+function isDemoFallbackUser(user: { id: string }) {
+  return isDemoMode() && user.id === DEMO_AUTH_USER.id
+}
 
 /**
  * GET /api/user
- * Returns the authenticated user's profile. XP/level/streak are server-authoritative
- * (level is derived from XP — never trusted from the client).
+ * Returns the authenticated user's profile. A real authenticated session always
+ * takes precedence over demo fixtures, even when demo mode is enabled for a
+ * preview deployment.
  */
 export async function GET() {
   return withApi(async () => {
-    if (isDemoMode()) return okResponse(toPublicUserDTO(DEMO_USER))
-
     const user = await requireUser()
+    if (isDemoFallbackUser(user)) return okResponse(toPublicUserDTO(DEMO_USER))
+
     const fresh = await db.user.findUnique({
       where: { id: user.id },
       select: publicUserSelect,
@@ -28,7 +33,6 @@ export async function GET() {
     if (!fresh) {
       throw new ApiError('NOT_FOUND', 'Account not found.', 404, false)
     }
-    // Derive level from authoritative XP ledger-cached total.
     const derivedLevel = levelFromXp(fresh.xp)
     if (derivedLevel !== fresh.level) {
       await db.user.update({ where: { id: fresh.id }, data: { level: derivedLevel } })
@@ -44,16 +48,13 @@ export async function GET() {
  */
 export async function PATCH(req: NextRequest) {
   return withApi(async () => {
-    if (isDemoMode()) {
-      const body = await parseBody(req, updateProfileSchema)
-      return okResponse(toPublicUserDTO({ ...DEMO_USER, ...body, level: levelFromXp(DEMO_USER.xp) }))
-    }
-
     const user = await requireUser()
     const body = await parseBody(req, updateProfileSchema)
 
-    // Build the Prisma data object from EXPLICIT validated fields only.
-    // Never spread body — schema already excludes xp/level/streak/role.
+    if (isDemoFallbackUser(user)) {
+      return okResponse(toPublicUserDTO({ ...DEMO_USER, ...body, level: levelFromXp(DEMO_USER.xp) }))
+    }
+
     const data: Record<string, unknown> = {}
     if (body.name !== undefined) data.name = body.name
     if (body.preferredLang !== undefined) data.preferredLang = body.preferredLang
@@ -76,31 +77,16 @@ export async function PATCH(req: NextRequest) {
 
 /**
  * DELETE /api/user
- *
- * Permanently deletes the authenticated user and ALL their data. Used by the
- * Profile view's "Delete Account" flow (with a typed-DELETE confirmation).
- *
- * Trust model:
- *  - requireUser() enforces auth — a stranger cannot delete someone else.
- *  - No `userId` is accepted from the body. The caller is always the deleted.
- *  - The full cascade runs inside a transaction so a partial failure rolls
- *    back; the user row itself is deleted LAST so the account only disappears
- *    if every dependent row was removed cleanly.
- *
- * NOTE: in demo mode the demo student will be deleted — re-seed to restore.
+ * Permanently deletes the authenticated user and their owned learning data.
  */
 export async function DELETE() {
   return withApi(async () => {
-    if (isDemoMode()) {
+    const user = await requireUser()
+    if (isDemoFallbackUser(user)) {
       throw new ApiError('DEMO_MODE', 'Demo accounts cannot be deleted.', 400, false)
     }
 
-    const user = await requireUser()
-
     await db.$transaction(async (tx) => {
-      // Tutor messages are linked through TutorSession, which is owned by the
-      // user — delete them first to avoid a cascading delete from the session
-      // FK failing on some SQLite configurations.
       await tx.tutorMessage.deleteMany({
         where: { session: { userId: user.id } },
       })
@@ -122,7 +108,6 @@ export async function DELETE() {
       await tx.roleRequest.deleteMany({ where: { userId: user.id } })
       await tx.institutionMembership.deleteMany({ where: { userId: user.id } })
 
-      // Finally, the user row.
       const deleted = await tx.user.deleteMany({ where: { id: user.id } })
       if (deleted.count === 0) {
         throw new ApiError(
