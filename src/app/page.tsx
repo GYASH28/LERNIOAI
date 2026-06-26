@@ -1,5 +1,6 @@
 import { PublicHeader } from '@/components/marketing/public-header'
 import { Hero } from '@/components/marketing/hero'
+import { AcademicIntelligenceOS } from '@/components/marketing/academic-intelligence-os'
 import { LearningPath } from '@/components/marketing/learning-path'
 import { LearningModesDemo } from '@/components/marketing/learning-modes-demo'
 import { TutorDemo } from '@/components/marketing/tutor-demo'
@@ -54,6 +55,7 @@ export default function LandingPage() {
 
       <main className="flex-1">
         <Hero isAuthenticated={isAuthenticated} />
+        <AcademicIntelligenceOS />
         <LearningPath />
         <LearningModesDemo />
         <TutorDemo />

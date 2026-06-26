@@ -24,29 +24,29 @@ export interface WorkspaceModule {
 
 const moduleConfig: Partial<Record<Role, Record<string, readonly [string, string]>>> = {
   admin: {
-    access: ['Access control', 'Review requests, assignments, and user authority changes.'],
-    curriculum: ['Curriculum control', 'Inspect academic hierarchy and content operations.'],
+    access: ['Scoped access', 'Review staff, CR, and capability assignments with real academic scope.'],
+    curriculum: ['CWIT catalogue health', 'Inspect departments, programmes, subjects, classes, and content coverage.'],
     audit: ['Audit trail', 'Read immutable authority and security events.'],
   },
   coordinator: {
-    assignments: ['Department assignments', 'Coordinate teachers, subjects, and class responsibility.'],
-    reviews: ['Department reviews', 'Track content that needs academic verification.'],
-    analytics: ['Department analytics', 'Read scoped learning health and curriculum progress.'],
+    assignments: ['Faculty coverage', 'Coordinate teachers, subjects, and class responsibility.'],
+    reviews: ['Department review queue', 'Track provisional mappings and content that need academic verification.'],
+    analytics: ['Department analytics', 'Read syllabus pace, resource coverage, and learning health.'],
   },
   teacher: {
-    content: ['Content studio', 'Draft and manage lessons for assigned subjects.'],
+    content: ['Lesson planner', 'Draft and manage topic objectives, resources, practical work, and homework.'],
     questions: ['Question builder', 'Create and refine question banks inside subject scope.'],
-    analytics: ['Teaching analytics', 'Understand subject and class learning progress.'],
+    analytics: ['Class insights', 'Understand subject, engagement, and class learning progress.'],
   },
   reviewer: {
-    queue: ['Review queue', 'Compare revisions and record academic decisions.'],
+    queue: ['Review capability queue', 'Compare revisions and record academic decisions.'],
     citations: ['Citation checks', 'Inspect grounding and source quality.'],
     policy: ['Publishing policy', 'Follow safe content state transitions.'],
   },
   moderator: {
-    reports: ['Reports', 'Resolve reports and content safety issues.'],
-    uploads: ['Upload review', 'Detect unsafe, duplicate, or malformed materials.'],
-    audit: ['Moderation audit', 'Trace moderation actions.'],
+    reports: ['Content safety reports', 'Resolve reports and content safety issues.'],
+    uploads: ['Upload safety review', 'Detect unsafe, duplicate, or malformed materials.'],
+    audit: ['Safety audit', 'Trace content safety actions.'],
   },
   cr: {
     resources: ['Class resources', 'Curate helpful material for assigned classmates.'],

@@ -21,6 +21,7 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
   { label: 'Product', href: '/#product' },
+  { label: 'Academic OS', href: '/#academic-os' },
   { label: 'How it works', href: '/#how-it-works' },
   { label: 'Subjects', href: '/#subjects' },
   { label: 'AI Tutor', href: '/#ai-tutor' },
@@ -30,7 +31,7 @@ const NAV_ITEMS: NavItem[] = [
 ]
 
 const TABLET_NAV_ITEMS = NAV_ITEMS.filter((item) =>
-  ['Product', 'How it works', 'AI Tutor'].includes(item.label),
+  ['Product', 'Academic OS', 'AI Tutor'].includes(item.label),
 )
 
 export function PublicHeader({ isAuthenticated = false }: { isAuthenticated?: boolean }) {

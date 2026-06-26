@@ -12,31 +12,31 @@ const FAQS = [
   },
   {
     q: 'Who can create an account?',
-    a: 'Any diploma student with an email address can create an account directly. You do not need an invite code. Academic details (programme, semester, division, roll number) are optional at signup and can be completed later.',
+    a: 'Any diploma student with an email address can create an account directly. You do not need an invite code. Academic details such as programme, semester, division and roll number are optional at signup and can be completed later.',
   },
   {
-    q: 'Do teachers need an invite?',
-    a: 'Yes. Elevated roles — CR, teacher, coordinator, reviewer, moderator and admin — are only granted through a cryptographically-strong invite code issued by an existing admin. Students can never self-escalate to a staff role.',
+    q: 'Do teachers and staff need approval?',
+    a: 'Yes. CR, teacher, HOD and admin access is guarded by server-side authority assignments. Review and moderation are scoped capabilities granted to the right staff member rather than normal public signup roles.',
   },
   {
-    q: 'Which subjects are available?',
-    a: 'Lernio currently covers four Semester-3 subjects: Data Structures (CS201), OOP with C++ (CS202), Microprocessors & Programming (CS203), and Data Communication (CS204). More semesters and subjects are on the roadmap.',
+    q: 'Which subjects are available today?',
+    a: 'The production seed currently covers the Computer Engineering Semester 3 pilot: Data Structures, OOP with C++, Microprocessors and Programming, and Data Communication. The CWIT Academic Intelligence OS blueprint expands this into a verified branch-semester catalogue as sources are approved.',
   },
   {
     q: 'Does the AI Tutor use Lernio material?',
-    a: 'Yes. The AI Tutor retrieves approved Lernio lessons from the database, expands them into citable chunks, and injects them into the prompt. Every answer that is marked "grounded" has retrieved evidence — citations reference real Lesson rows you can open.',
+    a: 'Yes. The AI Tutor retrieves approved Lernio lessons from the database, expands them into citable chunks, and injects them into the prompt. Grounded answers reference real lesson rows instead of guessing.',
   },
   {
     q: 'Does the Coding Lab execute code?',
-    a: 'Not yet. The Coding Lab is honestly labelled as a syntax-learning playground: it performs local syntax checks (brace matching, int main(), return 0;) and never claims to compile or execute your code. A real isolated C++ runner is on the roadmap.',
+    a: 'Not yet. The Coding Lab is honestly labelled as a syntax-learning playground: it performs local syntax checks and never claims to compile or execute your code. A real isolated runner is on the roadmap.',
   },
   {
     q: 'Can I delete my data?',
-    a: 'Yes. You can export a full JSON of your account data at any time, and you can permanently delete your account from the Profile page. Deletion removes your attempts, tutor sessions, revision cards and XP — no hidden retention.',
+    a: 'Yes. You can export a full JSON of your account data at any time, and you can permanently delete your account from the Profile page. Deletion removes your attempts, tutor sessions, revision cards and XP.',
   },
   {
     q: 'Is every topic complete?',
-    a: 'No, and we are honest about it. Today, 11 of 64 Semester-3 topics have full five-mode lessons. The remaining topics show an honest "No lesson yet" state with links to related resources, so you never land on an empty page pretending to be content.',
+    a: 'No, and Lernio is explicit about that. Incomplete topics show an honest empty state and related resources instead of pretending a full lesson exists.',
   },
 ] as const
 

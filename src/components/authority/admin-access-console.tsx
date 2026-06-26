@@ -10,6 +10,15 @@ import { Input } from '@/components/ui/input'
 
 const PRIMARY_ROLE_OPTIONS = ['student', 'cr', 'teacher', 'coordinator', 'moderator', 'reviewer', 'admin'] as const
 const ASSIGNABLE_ROLE_OPTIONS = ['cr', 'teacher', 'coordinator', 'moderator', 'reviewer'] as const
+const ROLE_OPTION_LABELS: Record<(typeof PRIMARY_ROLE_OPTIONS)[number], string> = {
+  student: 'Student',
+  cr: 'Class Representative',
+  teacher: 'Teacher',
+  coordinator: 'HOD / Coordinator',
+  moderator: 'Content safety capability',
+  reviewer: 'Review capability',
+  admin: 'Academic Admin',
+}
 
 type AdminUser = {
   id: string
@@ -260,7 +269,9 @@ export function AdminAccessConsole() {
           body: JSON.stringify(body),
         }),
       )
-      setNotice(`${request.user.name}'s ${request.requestedRole} request was ${status}.`)
+      const requestedLabel =
+        ROLE_OPTION_LABELS[request.requestedRole as keyof typeof ROLE_OPTION_LABELS] ?? request.requestedRole
+      setNotice(`${request.user.name}'s ${requestedLabel} request was ${status}.`)
       await load()
     } catch (reviewError) {
       setError(reviewError instanceof Error ? reviewError.message : 'Role request update failed.')
@@ -309,7 +320,8 @@ export function AdminAccessConsole() {
       await readJson<{ assignment: RoleAssignment }>(
         await fetch(`/api/admin/role-assignments/${assignment.id}`, { method: 'DELETE' }),
       )
-      setNotice(`${assignment.role} assignment revoked for ${assignment.user.name}.`)
+      const assignmentLabel = ROLE_OPTION_LABELS[assignment.role as keyof typeof ROLE_OPTION_LABELS] ?? assignment.role
+      setNotice(`${assignmentLabel} assignment revoked for ${assignment.user.name}.`)
       await load()
     } catch (assignmentError) {
       setError(assignmentError instanceof Error ? assignmentError.message : 'Could not revoke assignment.')
@@ -353,7 +365,7 @@ export function AdminAccessConsole() {
           <CardHeader>
             <CardTitle>Pending role requests</CardTitle>
             <CardDescription>
-              Approvals are role-aware: CR needs a class group, Teacher needs subjects, Coordinator needs a department, and Reviewer/Moderator need an appropriate academic or institution scope.
+              Approvals are scope-aware: CR needs a class group, Teacher needs subjects, HOD needs a department, and review or safety capabilities need a real academic or institution scope.
             </CardDescription>
           </CardHeader>
           <CardContent className="grid gap-3">
@@ -375,7 +387,9 @@ export function AdminAccessConsole() {
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
                       <p className="font-semibold">{request.user.name}</p>
-                      <Badge variant="secondary" className="capitalize">{request.requestedRole}</Badge>
+                      <Badge variant="secondary">
+                        {ROLE_OPTION_LABELS[request.requestedRole as keyof typeof ROLE_OPTION_LABELS] ?? request.requestedRole}
+                      </Badge>
                     </div>
                     <p className="truncate text-sm text-muted-foreground">{request.user.email}</p>
                     <p className="mt-2 text-sm">{request.reason || 'No reason supplied.'}</p>
@@ -446,7 +460,7 @@ export function AdminAccessConsole() {
           <CardHeader>
             <CardTitle>Scoped role assignments</CardTitle>
             <CardDescription>
-              Create normalized authority with at least one real scope. Select a department for HOD-level access, a subject for Teacher/Reviewer access, a class group for CR access, or an institution for Moderator access.
+              Create normalized authority with at least one real scope. Select a department for HOD access, a subject for Teacher or review capability, a class group for CR access, or an institution for content safety capability.
             </CardDescription>
           </CardHeader>
           <CardContent className="grid gap-5">
@@ -469,7 +483,11 @@ export function AdminAccessConsole() {
                 value={assignmentDraft.role}
                 onChange={(event) => setAssignmentDraft((current) => ({ ...current, role: event.target.value }))}
               >
-                {ASSIGNABLE_ROLE_OPTIONS.map((role) => <option key={role} value={role}>{role}</option>)}
+                {ASSIGNABLE_ROLE_OPTIONS.map((role) => (
+                  <option key={role} value={role}>
+                    {ROLE_OPTION_LABELS[role]}
+                  </option>
+                ))}
               </select>
               <select
                 aria-label="Department scope"
@@ -541,7 +559,7 @@ export function AdminAccessConsole() {
               />
               <Button type="submit" disabled={busyId === 'create-assignment'} className="md:col-span-2 xl:col-span-4">
                 <Plus className="h-4 w-4" />
-                {busyId === 'create-assignment' ? 'Creating assignment…' : 'Create scoped assignment'}
+                {busyId === 'create-assignment' ? 'Creating assignment...' : 'Create scoped assignment'}
               </Button>
             </form>
 
@@ -554,7 +572,9 @@ export function AdminAccessConsole() {
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
                       <p className="truncate font-semibold">{assignment.user.name}</p>
-                      <Badge variant="secondary" className="capitalize">{assignment.role}</Badge>
+                      <Badge variant="secondary">
+                        {ROLE_OPTION_LABELS[assignment.role as keyof typeof ROLE_OPTION_LABELS] ?? assignment.role}
+                      </Badge>
                     </div>
                     <p className="truncate text-sm text-muted-foreground">{assignment.user.email}</p>
                   </div>
@@ -572,7 +592,7 @@ export function AdminAccessConsole() {
           <CardHeader>
             <CardTitle>Users</CardTitle>
             <CardDescription>
-              Change an account’s primary role or disable/restore it. Use scoped assignments above for operational authority. The final active Admin is protected.
+              Change account status or baseline role. Use scoped assignments above for academic operations and capability grants. The final active Admin is protected.
             </CardDescription>
           </CardHeader>
           <CardContent className="grid gap-4">
@@ -596,7 +616,7 @@ export function AdminAccessConsole() {
                     </div>
                     <p className="truncate text-sm text-muted-foreground">{user.email}</p>
                     <p className="mt-1 text-xs text-muted-foreground">
-                      {user.departmentCode || 'No department'} · authority v{user.authorityVersion}
+                      {user.departmentCode || 'No department'} - {user.profileComplete ? 'profile complete' : 'profile pending'}
                     </p>
                   </div>
 
@@ -611,7 +631,11 @@ export function AdminAccessConsole() {
                       `${user.name}'s primary role was updated.`,
                     )}
                   >
-                    {PRIMARY_ROLE_OPTIONS.map((role) => <option key={role} value={role}>{role}</option>)}
+                    {PRIMARY_ROLE_OPTIONS.map((role) => (
+                      <option key={role} value={role}>
+                        {ROLE_OPTION_LABELS[role]}
+                      </option>
+                    ))}
                   </select>
 
                   <Button

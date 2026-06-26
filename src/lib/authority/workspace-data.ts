@@ -47,31 +47,41 @@ export async function getWorkspaceOverview(role: Role, authority: AuthorityConte
 }
 
 async function getAdminOverview(): Promise<WorkspaceOverview> {
-  const [users, activeUsers, pendingRoleRequests, roleAssignments, subjects, auditEvents] = await Promise.all([
+  const [
+    users,
+    activeUsers,
+    pendingRoleRequests,
+    departments,
+    programmes,
+    classGroups,
+    openImportFindings,
+  ] = await Promise.all([
     db.user.count(),
     db.user.count({ where: { status: 'active' } }),
     db.roleRequest.count({ where: { status: 'pending' } }),
-    db.roleAssignment.count({ where: { status: 'active', revokedAt: null } }),
-    db.subject.count(),
-    db.auditEvent.count(),
+    db.department.count({ where: { status: 'active' } }),
+    db.programme.count({ where: { status: 'active' } }),
+    db.classGroup.count({ where: { status: 'active' } }),
+    db.importFinding.count({ where: { resolutionStatus: 'open' } }),
   ])
 
   return {
     role: 'admin',
-    title: 'Admin Command Center',
-    eyebrow: 'Institution-wide authority',
-    description: 'Manage access, academic structure, content operations, and audit visibility from one guarded workspace.',
-    scopeNote: 'Admin actions are broad but still audited and constrained by service-level safety rules.',
+    title: 'Academic Admin Operations',
+    eyebrow: 'CWIT launch control',
+    description: 'Start from the seeded CWIT catalogue, import people and timetable data, then resolve only the exceptions before dashboards go live.',
+    scopeNote: 'Admin access is campus-wide, audited, and focused on academic-year setup rather than raw database editing.',
     metrics: [
-      { label: 'Users', value: format(users), detail: `${format(activeUsers)} active` },
-      { label: 'Pending role requests', value: format(pendingRoleRequests), detail: 'Needs review' },
-      { label: 'Active role assignments', value: format(roleAssignments), detail: 'Normalized authority rows' },
-      { label: 'Subjects', value: format(subjects), detail: 'Curriculum surface' },
-      { label: 'Audit events', value: format(auditEvents), detail: 'Immutable event trail' },
+      { label: 'Active users', value: format(activeUsers), detail: `${format(users)} total accounts` },
+      { label: 'CWIT departments', value: format(departments), detail: 'Seeded catalogue surface' },
+      { label: 'Programmes', value: format(programmes), detail: 'Branch-aligned academic routes' },
+      { label: 'Active cohorts', value: format(classGroups), detail: 'Class dashboards generated from scope' },
+      { label: 'Open exceptions', value: format(openImportFindings + pendingRoleRequests), detail: 'Imports and access items needing review' },
     ],
     actions: [
-      { label: 'Register syllabus sources', href: '/admin/syllabus/sources', detail: 'Add official CWIT PDFs and source evidence.' },
-      { label: 'Run syllabus imports', href: '/admin/syllabus/imports', detail: 'Queue source documents for extraction review.' },
+      { label: 'Review scoped access', href: '/admin/access', detail: 'Approve staff and CR access with real academic scope.' },
+      { label: 'Register CWIT sources', href: '/admin/syllabus/sources', detail: 'Add official PDFs, curriculum pages, and source evidence.' },
+      { label: 'Run syllabus imports', href: '/admin/syllabus/imports', detail: 'Queue extraction jobs and resolve uncertain mappings.' },
       { label: 'Review resources', href: '/admin/resources/queue', detail: 'Approve, hold, or request changes on mapped resources.' },
     ],
   }
@@ -89,11 +99,11 @@ async function getCoordinatorOverview(authority: AuthorityContext): Promise<Work
 
   return {
     role: 'coordinator',
-    title: 'Coordinator Operations',
+    title: 'HOD / Coordinator Workspace',
     eyebrow: departmentScope.departmentCodes.length
       ? `Department scope: ${departmentScope.departmentCodes.join(', ')}`
       : 'No department scope assigned',
-    description: 'Run department learning operations, faculty assignment, curriculum quality, and scoped analytics.',
+    description: 'Monitor department coverage, faculty mapping, provisional subject data, resource quality, and semester health.',
     scopeNote: departmentScope.departmentCodes.length || departmentScope.departmentIds.length
       ? 'Only users, subjects, and requests inside your department scope are counted here.'
       : 'You have the coordinator role but no active department assignment yet.',
@@ -103,9 +113,9 @@ async function getCoordinatorOverview(authority: AuthorityContext): Promise<Work
       { label: 'Subjects', value: format(subjects), detail: 'Department curriculum' },
     ],
     actions: [
-      { label: 'Assign teachers', href: '/coordinator/assignments', detail: 'Map faculty to subjects and classes.' },
-      { label: 'Review department content', href: '/coordinator/reviews', detail: 'Move drafts through review safely.' },
-      { label: 'Open analytics', href: '/coordinator/analytics', detail: 'Read department-wide learning health.' },
+      { label: 'Review assignments', href: '/coordinator/assignments', detail: 'Confirm teachers, subjects, and class responsibility.' },
+      { label: 'Review department content', href: '/coordinator/reviews', detail: 'Approve provisional mappings and resource packs.' },
+      { label: 'Open department analytics', href: '/coordinator/analytics', detail: 'Read syllabus pace, coverage, and weak-topic signals.' },
     ],
   }
 }
@@ -130,9 +140,9 @@ async function getTeacherOverview(authority: AuthorityContext): Promise<Workspac
 
   return {
     role: 'teacher',
-    title: 'Teacher Studio',
+    title: 'Teacher Workspace',
     eyebrow: subjectIds.length ? `${subjectIds.length} subject scope${subjectIds.length === 1 ? '' : 's'}` : 'No subject scope assigned',
-    description: 'Create lessons, questions, resources, and assessments only for assigned subjects and classes.',
+    description: 'See today classes, assigned subjects, lesson planning, resource coverage, and class insight tasks for your scope.',
     scopeNote: subjectIds.length
       ? 'Teacher tools are locked to your active subject assignments.'
       : 'You have teacher access but no active subject assignment yet.',
@@ -143,9 +153,9 @@ async function getTeacherOverview(authority: AuthorityContext): Promise<Workspac
       { label: 'Resources', value: format(resources), detail: 'Study material' },
     ],
     actions: [
-      { label: 'Create lesson draft', href: '/teacher/content', detail: 'Draft first; publish only after review.' },
-      { label: 'Build question set', href: '/teacher/questions', detail: 'Generate and edit scoped questions.' },
-      { label: 'View class analytics', href: '/teacher/analytics', detail: 'Understand class and subject progress.' },
+      { label: 'Prepare lesson plan', href: '/teacher/content', detail: 'Draft topic objectives, resources, practical activity, and homework.' },
+      { label: 'Build question set', href: '/teacher/questions', detail: 'Create and refine scoped practice and exam questions.' },
+      { label: 'View class insights', href: '/teacher/analytics', detail: 'Understand engagement, weak topics, and subject progress.' },
     ],
   }
 }
@@ -164,15 +174,15 @@ async function getReviewerOverview(authority: AuthorityContext): Promise<Workspa
 
   return {
     role: 'reviewer',
-    title: 'Review Queue',
+    title: 'Review Capability Queue',
     eyebrow:
       subjectIds === null
         ? 'Admin review scope'
         : subjectIds.length
           ? `${subjectIds.length} subject scope${subjectIds.length === 1 ? '' : 's'}`
           : 'Scope pending',
-    description: 'Verify academic quality, citations, questions, and content transitions before publishing.',
-    scopeNote: 'Reviewer access does not grant user management or moderation authority by default.',
+    description: 'A scoped capability queue for syllabus, resource, question, and citation review.',
+    scopeNote: 'Review capability does not grant user management or general moderation authority.',
     metrics: [
       { label: 'Lessons waiting', value: format(underReview), detail: 'Under review' },
       { label: 'Verified lessons', value: format(verified), detail: 'Ready for publish policy' },
@@ -198,10 +208,10 @@ async function getModeratorOverview(authority: AuthorityContext): Promise<Worksp
 
   return {
     role: 'moderator',
-    title: 'Moderation Desk',
+    title: 'Content Safety Capability',
     eyebrow: authority.scopeIndex.institutionIds.length ? 'Institution safety scope' : 'Safety scope pending',
-    description: 'Handle reports, unsafe resources, duplicates, malformed uploads, and policy violations.',
-    scopeNote: 'Moderators can hold or restore content, but cannot publish academic truth unless also assigned reviewer authority.',
+    description: 'A scoped safety capability for reports, unsafe resources, duplicates, malformed uploads, and policy violations.',
+    scopeNote: 'Content safety can hold or restore content, but cannot publish academic truth unless review capability is also granted.',
     metrics: [
       { label: 'Flagged contributions', value: format(flaggedContributions), detail: 'Has reports' },
       { label: 'Held resources', value: format(heldResources), detail: 'Private visibility' },
@@ -228,7 +238,7 @@ async function getCrOverview(authority: AuthorityContext): Promise<WorkspaceOver
     role: 'cr',
     title: 'Class Representative Hub',
     eyebrow: classGroupIds.length ? `${classGroupIds.length} class scope${classGroupIds.length === 1 ? '' : 's'}` : 'No class scope assigned',
-    description: 'Support classmates with safe resources, feedback collection, and content issue escalation.',
+    description: 'Support classmates with timetable notices, resource requests, feedback collection, and issue escalation.',
     scopeNote: 'CR access keeps all student pages and adds only privacy-safe class tools.',
     metrics: [
       { label: 'Classmates', value: format(classmates), detail: 'Active class members' },

@@ -1,4 +1,4 @@
-import { CAMPUS_ROLES, CAMPUS_ROLE_LABELS } from '@/lib/campus-auth'
+import { CAPABILITY_REPLACEMENTS, CORE_ROLE_WORKSPACES } from '@/lib/cwit-academic-os'
 import { Badge } from '@/components/ui/badge'
 import { ShieldCheck } from 'lucide-react'
 
@@ -8,29 +8,38 @@ export function RolesSection() {
       className="marketing-section border-b border-border"
       aria-labelledby="roles-heading"
     >
-      <div className="marketing-container max-w-4xl">
+      <div className="marketing-container max-w-5xl">
         <p className="marketing-eyebrow">
           <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
           Staff &amp; campus roles
         </p>
         <h2 id="roles-heading" className="marketing-h2 mt-3">
-          Invite-based access for staff.
+          Core roles stay simple. Extra powers become scoped capabilities.
         </h2>
         <p className="marketing-lede mt-4">
-          Students never need an invite. CRs, teachers, coordinators,
-          reviewers, moderators and admins get elevated access only through a
-          cryptographically-strong invite code — issued by an existing admin,
-          capped by usage count, and redeemable atomically.
+          Students never need an invite. CRs, teachers, HODs and academic
+          admins receive guarded access through the authority system. Review
+          and moderation are treated as capability grants inside the right
+          academic scope, not as permanent primary workspaces.
         </p>
 
+        <div className="mt-8 grid gap-3 sm:grid-cols-2">
+          {CORE_ROLE_WORKSPACES.map((item) => (
+            <div key={item.role} className="rounded-xl border border-border bg-card p-4">
+              <h3 className="text-sm font-bold text-foreground">{item.role}</h3>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.work}</p>
+            </div>
+          ))}
+        </div>
+
         <div className="mt-6 flex flex-wrap gap-2">
-          {CAMPUS_ROLES.map((role) => (
+          {CAPABILITY_REPLACEMENTS.map((capability) => (
             <Badge
-              key={role}
+              key={capability}
               variant="secondary"
-              className="gap-1.5 px-3 py-1.5 text-xs"
+              className="gap-1.5 px-3 py-1.5 text-xs capitalize"
             >
-              {CAMPUS_ROLE_LABELS[role]}
+              {capability}
             </Badge>
           ))}
         </div>

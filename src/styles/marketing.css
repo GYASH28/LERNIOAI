@@ -27,6 +27,7 @@
 
   .marketing-section {
     padding-block: 4rem;
+    scroll-margin-top: 5rem;
   }
 
   @media (min-width: 768px) {
@@ -291,6 +292,208 @@
       rotate(calc(var(--node-angle) * -1));
   }
 
+  .knowledge-core-console {
+    position: absolute;
+    left: 1.1rem;
+    right: 1.1rem;
+    bottom: 1.1rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.55rem;
+    z-index: 2;
+  }
+
+  .knowledge-core-console span {
+    display: inline-flex;
+    min-width: 0;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    border: 1px solid color-mix(in oklch, var(--border) 72%, var(--brand) 28%);
+    border-radius: 0.75rem;
+    padding: 0.55rem 0.5rem;
+    background: color-mix(in oklch, var(--card) 82%, transparent);
+    color: var(--text-strong);
+    font-size: 0.75rem;
+    font-weight: 800;
+    line-height: 1.1;
+    text-align: center;
+    box-shadow: 0 0.75rem 1.5rem rgb(15 23 42 / 0.12);
+    backdrop-filter: blur(10px);
+  }
+
+  .academic-os-section {
+    position: relative;
+    overflow: hidden;
+    background:
+      linear-gradient(180deg, color-mix(in oklch, var(--muted) 36%, transparent), transparent 44%),
+      var(--background);
+  }
+
+  .academic-os-stat {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 0.85rem;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 0.95rem;
+    background: color-mix(in oklch, var(--card) 82%, transparent);
+    box-shadow: 0 0.75rem 1.4rem rgb(15 23 42 / 0.06);
+  }
+
+  .academic-os-stat__value {
+    display: grid;
+    width: 3rem;
+    height: 3rem;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 0.75rem;
+    background: linear-gradient(135deg, var(--brand), var(--secondary-action));
+    color: white;
+    font-size: 1.35rem;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .academic-os-board {
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    background:
+      radial-gradient(28rem 18rem at 80% 0%, color-mix(in oklch, var(--brand) 12%, transparent), transparent 65%),
+      var(--card);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .academic-os-board__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid var(--border);
+    padding: 1rem;
+  }
+
+  .academic-os-board__header > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--text-strong);
+  }
+
+  .academic-os-grid {
+    display: grid;
+    grid-template-columns: minmax(5.5rem, 1.05fr) repeat(6, minmax(3rem, 0.7fr));
+    gap: 1px;
+    background: var(--border);
+    overflow-x: auto;
+  }
+
+  .academic-os-cell {
+    min-width: 0;
+    background: color-mix(in oklch, var(--card) 92%, var(--muted) 8%);
+    color: var(--text-secondary);
+  }
+
+  .academic-os-cell--empty,
+  .academic-os-cell--head {
+    min-height: 2.8rem;
+  }
+
+  .academic-os-cell--head {
+    display: grid;
+    place-items: center;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    color: var(--text-strong);
+  }
+
+  .academic-os-cell--branch {
+    display: flex;
+    min-height: 4.1rem;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.2rem;
+    border-left: 0.25rem solid var(--branch-accent);
+    padding: 0.75rem;
+  }
+
+  .academic-os-cell--branch span {
+    font-size: 0.88rem;
+    font-weight: 900;
+    color: var(--text-strong);
+  }
+
+  .academic-os-cell--branch small,
+  .academic-os-cell--semester small {
+    overflow-wrap: anywhere;
+    font-size: 0.68rem;
+    color: var(--text-secondary);
+  }
+
+  .academic-os-cell--semester {
+    display: grid;
+    min-height: 4.1rem;
+    place-items: center;
+    gap: 0.12rem;
+    padding: 0.45rem;
+    background:
+      linear-gradient(180deg, color-mix(in oklch, var(--branch-accent) 10%, transparent), transparent),
+      color-mix(in oklch, var(--card) 94%, var(--muted) 6%);
+  }
+
+  .academic-os-cell--semester span {
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    border: 1px solid color-mix(in oklch, var(--branch-accent) 44%, var(--border));
+    border-radius: 0.6rem;
+    background: color-mix(in oklch, var(--branch-accent) 13%, transparent);
+    color: var(--text-strong);
+    font-size: 0.7rem;
+    font-weight: 900;
+  }
+
+  .academic-os-layer {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.85rem;
+    align-items: start;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 0.9rem;
+    background: color-mix(in oklch, var(--muted) 28%, transparent);
+  }
+
+  .academic-os-layer__key {
+    display: grid;
+    width: 2.1rem;
+    height: 2.1rem;
+    place-items: center;
+    border-radius: 0.55rem;
+    background: var(--primary);
+    color: var(--primary-foreground);
+    font-size: 0.78rem;
+    font-weight: 900;
+  }
+
+  .academic-os-role {
+    display: grid;
+    gap: 0.25rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.8rem;
+  }
+
+  .academic-os-role:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
   .knowledge-core-enhancement {
     position: absolute;
     inset: 0;
@@ -387,6 +590,19 @@
 
     .knowledge-core-symbol {
       scale: 0.86;
+    }
+
+    .knowledge-core-console {
+      grid-template-columns: 1fr;
+    }
+
+    .academic-os-grid {
+      grid-template-columns: minmax(6.15rem, 1fr) repeat(6, minmax(2.42rem, 0.62fr));
+    }
+
+    .academic-os-cell--branch,
+    .academic-os-cell--semester {
+      min-height: 3.65rem;
     }
   }
 

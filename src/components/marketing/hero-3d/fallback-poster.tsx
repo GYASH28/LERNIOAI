@@ -1,10 +1,16 @@
 import type { CSSProperties } from 'react'
-import { BookOpen, Brain, GraduationCap, Sparkles } from 'lucide-react'
+import { BookOpen, Brain, CalendarDays, GraduationCap, Sparkles, UsersRound } from 'lucide-react'
 
 const RING_ITEMS = [
   { label: 'Learn', icon: BookOpen },
   { label: 'Practice', icon: Brain },
   { label: 'Exams', icon: GraduationCap },
+] as const
+
+const CORE_SIGNALS = [
+  { label: '6 branches', icon: UsersRound },
+  { label: '36 semesters', icon: CalendarDays },
+  { label: 'AI tutor', icon: Sparkles },
 ] as const
 
 export function KnowledgeCorePoster() {
@@ -41,6 +47,15 @@ export function KnowledgeCorePoster() {
             >
               <Icon className="h-4 w-4" aria-hidden="true" />
               <span>{label}</span>
+            </span>
+          ))}
+        </div>
+
+        <div className="knowledge-core-console" aria-hidden="true">
+          {CORE_SIGNALS.map(({ label, icon: Icon }) => (
+            <span key={label}>
+              <Icon className="h-3.5 w-3.5" />
+              {label}
             </span>
           ))}
         </div>
