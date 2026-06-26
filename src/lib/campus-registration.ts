@@ -6,7 +6,6 @@ import { db } from '@/lib/db'
 import { ApiError } from '@/lib/auth'
 import {
   CAMPUS_DIVISIONS,
-  CAMPUS_SEMESTERS,
   DEFAULT_CAMPUS_PROFILE,
   getProgrammeByDepartmentCode,
   isElevatedCampusRole,
