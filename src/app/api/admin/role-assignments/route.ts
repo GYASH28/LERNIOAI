@@ -91,7 +91,7 @@ export async function POST(request: Request) {
     }
 
     const role = normalizeRole(parsed.data.role)
-    if (!canAssignRole(authority.primaryRole, role)) {
+    if (!canAssignRole('admin', role)) {
       throw new ApiError('FORBIDDEN', 'This role cannot be assigned by this account.', 403, false)
     }
 
