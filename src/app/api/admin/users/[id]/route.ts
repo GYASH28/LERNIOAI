@@ -18,7 +18,7 @@ function activeWindow(now: Date) {
     revokedAt: null,
     startsAt: { lte: now },
     OR: [{ expiresAt: null }, { expiresAt: { gt: now } }],
-  } as const
+  }
 }
 
 async function assertPrimaryRoleIsBackedByAuthority(userId: string, nextRole: Role) {
