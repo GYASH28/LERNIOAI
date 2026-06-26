@@ -23,7 +23,7 @@ export const campusSignUpSchema = z.object({
   password: z.string().min(8, 'Password must be at least 8 characters.').max(128),
   rollNumber: z.string().trim().optional(),
   departmentCode: z.string().trim().optional(),
-  semesterNumber: z.coerce.number().int().min(1).max(8).optional(),
+  semesterNumber: z.coerce.number().int().min(1).max(16).optional(),
   division: z.string().trim().optional(),
   inviteCode: z.string().trim().optional(),
 })
@@ -32,24 +32,77 @@ export const campusProfileSchema = z.object({
   name: z.string().trim().min(2, 'Enter your full name.').max(120),
   rollNumber: z.string().trim().optional(),
   departmentCode: z.string().trim().min(1),
-  semesterNumber: z.coerce.number().int().min(1).max(8),
+  semesterNumber: z.coerce.number().int().min(1).max(16),
   division: z.string().trim().min(1),
 })
 
 export type CampusSignUpInput = z.infer<typeof campusSignUpSchema>
 export type CampusProfileInput = z.infer<typeof campusProfileSchema>
 
+type ResolvedProgramme = {
+  departmentCode: string
+  departmentName: string
+  programmeCode: string
+  programmeName: string
+}
+
 function normalizeInviteCode(code: unknown): string {
   return String(code || '').trim().toUpperCase()
 }
 
 function isPrismaUniqueConstraintError(error: unknown): boolean {
-  return Boolean(
-    error &&
-      typeof error === 'object' &&
-      'code' in error &&
-      (error as { code?: string }).code === 'P2002',
-  )
+  return Boolean(error && typeof error === 'object' && 'code' in error && (error as { code?: string }).code === 'P2002')
+}
+
+export async function resolveProgrammeFromDatabase(code: unknown): Promise<ResolvedProgramme | null> {
+  const normalized = String(code || '').trim().toUpperCase()
+  if (!normalized) return null
+
+  const programme = await db.programme.findFirst({
+    where: {
+      status: 'active',
+      archivedAt: null,
+      OR: [
+        { code: normalized },
+        { department: { code: normalized, status: 'active', archivedAt: null } },
+      ],
+    },
+    orderBy: { createdAt: 'asc' },
+    select: {
+      code: true,
+      name: true,
+      department: { select: { code: true, name: true } },
+    },
+  })
+  if (programme) {
+    return {
+      departmentCode: programme.department.code,
+      departmentName: programme.department.name,
+      programmeCode: programme.code,
+      programmeName: programme.name,
+    }
+  }
+
+  const department = await db.department.findFirst({
+    where: { code: normalized, status: 'active', archivedAt: null },
+    select: { code: true, name: true },
+  })
+  if (department) {
+    return {
+      departmentCode: department.code,
+      departmentName: department.name,
+      programmeCode: department.code,
+      programmeName: department.name,
+    }
+  }
+
+  const fallback = getProgrammeByDepartmentCode(normalized)
+  return fallback ? {
+    departmentCode: fallback.departmentCode,
+    departmentName: fallback.departmentName,
+    programmeCode: fallback.programmeCode,
+    programmeName: fallback.programmeName,
+  } : null
 }
 
 function validateProfileSelection(input: {
@@ -58,28 +111,14 @@ function validateProfileSelection(input: {
   semesterNumber?: number | null
   division?: string | null
 }) {
-  if (
-    input.semesterNumber !== null &&
-    input.semesterNumber !== undefined &&
-    !CAMPUS_SEMESTERS.includes(String(input.semesterNumber) as (typeof CAMPUS_SEMESTERS)[number])
-  ) {
+  if (input.semesterNumber !== null && input.semesterNumber !== undefined && (input.semesterNumber < 1 || input.semesterNumber > 16)) {
     throw new ApiError('INVALID_SEMESTER', 'Select a valid semester.', 400, false)
   }
-
-  if (
-    input.division &&
-    !CAMPUS_DIVISIONS.includes(input.division as (typeof CAMPUS_DIVISIONS)[number])
-  ) {
+  if (input.division && !CAMPUS_DIVISIONS.includes(input.division as (typeof CAMPUS_DIVISIONS)[number])) {
     throw new ApiError('INVALID_DIVISION', 'Select a valid division.', 400, false)
   }
-
   if (input.rollNumber && !validateRollNumber(input.rollNumber)) {
-    throw new ApiError(
-      'INVALID_ROLL_NUMBER',
-      'Roll number format is not valid for this institution.',
-      400,
-      false,
-    )
+    throw new ApiError('INVALID_ROLL_NUMBER', 'Roll number format is not valid for this institution.', 400, false)
   }
 }
 
@@ -87,81 +126,31 @@ export async function registerCampusUser(input: CampusSignUpInput) {
   const parsed = campusSignUpSchema.parse(input)
   const email = normalizeEmail(parsed.email)
   const inviteCode = normalizeInviteCode(parsed.inviteCode)
-  const requestedProgramme = getProgrammeByDepartmentCode(parsed.departmentCode)
+  const requestedProgramme = await resolveProgrammeFromDatabase(parsed.departmentCode)
 
-  // Fetch only the field required for this check. Selecting the complete User
-  // record makes registration unnecessarily sensitive to unrelated schema drift.
-  const existing = await db.user.findUnique({
-    where: { email },
-    select: { id: true },
-  })
+  const existing = await db.user.findUnique({ where: { email }, select: { id: true } })
   if (existing) {
-    throw new ApiError(
-      'ACCOUNT_EXISTS',
-      'An account may already exist for this email. Try logging in or resetting your password.',
-      409,
-      false,
-    )
+    throw new ApiError('ACCOUNT_EXISTS', 'An account may already exist for this email. Try logging in or resetting your password.', 409, false)
   }
 
-  const invite = inviteCode
-    ? await db.inviteCode.findUnique({ where: { code: inviteCode } })
-    : null
+  const invite = inviteCode ? await db.inviteCode.findUnique({ where: { code: inviteCode } }) : null
+  if (inviteCode && !invite) throw new ApiError('INVALID_INVITE', 'This invite code is invalid or expired.', 400, false)
+  if (invite?.revokedAt || invite?.status === 'revoked') throw new ApiError('INVALID_INVITE', 'This invite code has been revoked.', 400, false)
+  if (invite?.expiresAt && invite.expiresAt <= new Date()) throw new ApiError('INVALID_INVITE', 'This invite code has expired.', 400, false)
+  if (invite && (invite.used || invite.useCount >= invite.maxUses)) throw new ApiError('INVALID_INVITE', 'This invite code has already been used.', 400, false)
+  if (invite?.email && normalizeEmail(invite.email) !== email) throw new ApiError('INVALID_INVITE', 'This invite code is assigned to a different email address.', 400, false)
 
-  if (inviteCode && !invite) {
-    throw new ApiError('INVALID_INVITE', 'This invite code is invalid or expired.', 400, false)
-  }
+  const role: CampusRole = invite ? normalizeCampusRole(invite.role) : normalizeCampusRole(DEFAULT_CAMPUS_PROFILE.role)
+  if (invite && !isElevatedCampusRole(role)) throw new ApiError('INVALID_INVITE', 'This invite code is not valid for elevated access.', 400, false)
 
-  if (invite?.revokedAt || invite?.status === 'revoked') {
-    throw new ApiError('INVALID_INVITE', 'This invite code has been revoked.', 400, false)
-  }
-
-  if (invite?.expiresAt && invite.expiresAt <= new Date()) {
-    throw new ApiError('INVALID_INVITE', 'This invite code has expired.', 400, false)
-  }
-
-  if (invite && (invite.used || invite.useCount >= invite.maxUses)) {
-    throw new ApiError('INVALID_INVITE', 'This invite code has already been used.', 400, false)
-  }
-
-  if (invite?.email && normalizeEmail(invite.email) !== email) {
-    throw new ApiError(
-      'INVALID_INVITE',
-      'This invite code is assigned to a different email address.',
-      400,
-      false,
-    )
-  }
-
-  const role: CampusRole = invite
-    ? normalizeCampusRole(invite.role)
-    : normalizeCampusRole(DEFAULT_CAMPUS_PROFILE.role)
-
-  if (invite && !isElevatedCampusRole(role)) {
-    throw new ApiError(
-      'INVALID_INVITE',
-      'This invite code is not valid for elevated access.',
-      400,
-      false,
-    )
-  }
-
-  const programme = invite?.departmentCode
-    ? getProgrammeByDepartmentCode(invite.departmentCode)
-    : requestedProgramme
+  const programme = invite?.departmentCode ? await resolveProgrammeFromDatabase(invite.departmentCode) : requestedProgramme
   if ((parsed.departmentCode || invite?.departmentCode) && !programme) {
-    throw new ApiError(
-      'INVALID_DEPARTMENT',
-      'Select a valid department or programme.',
-      400,
-      false,
-    )
+    throw new ApiError('INVALID_DEPARTMENT', 'Select a valid department or programme.', 400, false)
   }
 
   const semesterNumber = Number(invite?.semesterNumber || parsed.semesterNumber || 0) || null
   const division = invite?.division || parsed.division || 'NOT_SURE'
   const rollNumber = invite?.rollNumber || parsed.rollNumber || ''
-
   validateProfileSelection({ role, rollNumber, semesterNumber, division })
 
   const passwordHash = await hash(parsed.password, 12)
@@ -185,66 +174,24 @@ export async function registerCampusUser(input: CampusSignUpInput) {
   }
 
   try {
-    // Ordinary student registration needs only one INSERT. Avoiding an
-    // interactive transaction here makes signup compatible with pooled and
-    // serverless PostgreSQL connections commonly used by Vercel deployments.
-    if (!invite) {
-      return await db.user.create({ data: userData })
-    }
+    if (!invite) return await db.user.create({ data: userData })
 
-    // Invite redemption must remain atomic so the role cannot be granted if
-    // another request consumes the invite at the same time.
     return await db.$transaction(async (tx) => {
       const user = await tx.user.create({ data: userData })
-
       const marked = await tx.inviteCode.updateMany({
-        where: {
-          id: invite.id,
-          used: false,
-          revokedAt: null,
-          status: 'active',
-          useCount: { lt: invite.maxUses },
-        },
-        data: {
-          used: invite.useCount + 1 >= invite.maxUses,
-          useCount: { increment: 1 },
-          usedBy: user.id,
-          usedAt: new Date(),
-        },
+        where: { id: invite.id, used: false, revokedAt: null, status: 'active', useCount: { lt: invite.maxUses } },
+        data: { used: invite.useCount + 1 >= invite.maxUses, useCount: { increment: 1 }, usedBy: user.id, usedAt: new Date() },
       })
-
-      if (marked.count !== 1) {
-        throw new ApiError(
-          'INVALID_INVITE',
-          'This invite code was already used. Request a new invite and try again.',
-          409,
-          false,
-        )
-      }
+      if (marked.count !== 1) throw new ApiError('INVALID_INVITE', 'This invite code was already used. Request a new invite and try again.', 409, false)
 
       await tx.roleAuditLog.create({
-        data: {
-          actorUserId: invite.createdBy,
-          targetUserId: user.id,
-          action: 'invite_redeemed',
-          role,
-          scope: invite.departmentCode || null,
-          note: `Invite ${invite.id} redeemed during signup.`,
-        },
+        data: { actorUserId: invite.createdBy, targetUserId: user.id, action: 'invite_redeemed', role, scope: invite.departmentCode || null, note: `Invite ${invite.id} redeemed during signup.` },
       })
-
       return user
     })
   } catch (error) {
-    // The pre-check improves UX, but a database unique constraint is the real
-    // protection against two simultaneous requests using the same email.
     if (isPrismaUniqueConstraintError(error)) {
-      throw new ApiError(
-        'ACCOUNT_EXISTS',
-        'An account may already exist for this email. Try logging in or resetting your password.',
-        409,
-        false,
-      )
+      throw new ApiError('ACCOUNT_EXISTS', 'An account may already exist for this email. Try logging in or resetting your password.', 409, false)
     }
     throw error
   }
@@ -253,21 +200,12 @@ export async function registerCampusUser(input: CampusSignUpInput) {
 export async function completeCampusProfile(userId: string, input: CampusProfileInput) {
   const parsed = campusProfileSchema.parse(input)
   const current = await db.user.findUnique({ where: { id: userId } })
-  if (!current) {
-    throw new Error('Missing authenticated user.')
-  }
+  if (!current) throw new Error('Missing authenticated user.')
 
   const role = normalizeCampusRole(current.role)
-  const programme = getProgrammeByDepartmentCode(parsed.departmentCode)
-  if (!programme) {
-    throw new Error('Select a valid department or programme.')
-  }
-  validateProfileSelection({
-    role,
-    rollNumber: parsed.rollNumber || '',
-    semesterNumber: parsed.semesterNumber,
-    division: parsed.division,
-  })
+  const programme = await resolveProgrammeFromDatabase(parsed.departmentCode)
+  if (!programme) throw new Error('Select a valid department or programme.')
+  validateProfileSelection({ role, rollNumber: parsed.rollNumber || '', semesterNumber: parsed.semesterNumber, division: parsed.division })
 
   return db.user.update({
     where: { id: userId },
