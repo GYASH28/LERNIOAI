@@ -70,9 +70,9 @@ async function getAdminOverview(): Promise<WorkspaceOverview> {
       { label: 'Audit events', value: format(auditEvents), detail: 'Immutable event trail' },
     ],
     actions: [
-      { label: 'Review role requests', href: '/admin/access', detail: 'Approve, reject, and scope elevated access.' },
-      { label: 'Manage curriculum', href: '/admin/curriculum', detail: 'Departments, classes, subjects, units, and lessons.' },
-      { label: 'Inspect audit trail', href: '/admin/audit', detail: 'Trace privileged changes and security events.' },
+      { label: 'Register syllabus sources', href: '/admin/syllabus/sources', detail: 'Add official CWIT PDFs and source evidence.' },
+      { label: 'Run syllabus imports', href: '/admin/syllabus/imports', detail: 'Queue source documents for extraction review.' },
+      { label: 'Review resources', href: '/admin/resources/queue', detail: 'Approve, hold, or request changes on mapped resources.' },
     ],
   }
 }

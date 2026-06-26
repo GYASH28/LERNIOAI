@@ -2483,12 +2483,21 @@ async function main() {
   console.log("🧹 Cleaning existing data (dependency order)...");
   const cleanupOrder = [
     "account", "session", "verificationToken",
-    "auditEvent", "classMembership", "teachingAssignment", "roleAssignment", "classGroup",
-    "userAchievement", "achievement", "bookmark", "contribution", "resource",
+    "auditEvent",
+    "audienceTarget", "notice",
+    "assessmentAssignment", "formalAssessment", "assessmentBlueprint",
+    "resourceReview", "reviewDecision", "resourceTopicMapping",
+    "classMembership", "teachingAssignment", "roleAssignment", "classGroup",
+    "importFinding", "syllabusImportJob", "sourceSnapshot", "syllabusDocument",
+    "curriculumVersion", "recommendedReference", "practicalExperiment",
+    "outcomeMapping", "programmeOutcome", "courseOutcome",
+    "subjectApplicability", "electiveOption", "electiveGroup",
+    "jobRun", "integrationHealth", "savedView", "exportJob", "featureFlag",
+    "userAchievement", "achievement", "bookmark", "contribution", "resource", "resourceProvider",
     "labProgress", "codingSubmission", "codingChallenge", "tutorMessage", "tutorSession",
     "studySession", "studyTask", "revisionAttempt", "revisionSchedule",
     "quizAttempt", "questionAttempt", "lessonCompletion", "userTopicMastery",
-    "questionPaper", "question", "lesson", "topic", "unit", "subject",
+    "questionPaper", "question", "lesson", "topic", "unit", "subject", "courseCatalog",
     "semester", "academicScheme", "programme", "department", "institution",
     "xpEvent", "user",
   ];
@@ -2510,7 +2519,23 @@ async function main() {
 
   for (const item of CWIT_DEPARTMENTS) {
     const department = await db.department.create({
-      data: { name: item.name, code: item.code, institutionId: institution.id },
+      data: {
+        name: item.name,
+        code: item.code,
+        institutionId: institution.id,
+        officialUrl: item.officialUrl,
+        category: item.category,
+        status: "active",
+        sourceVerifiedAt: new Date(),
+        metadata: JSON.stringify({
+          shortName: item.shortName,
+          established: item.established ?? null,
+          headTitle: item.headTitle,
+          headName: item.headName,
+          summary: item.summary,
+          highlights: item.highlights,
+        }),
+      },
     });
     departments[item.code] = department;
 
@@ -2520,6 +2545,10 @@ async function main() {
           name: item.programme.name,
           code: item.programme.code,
           departmentId: department.id,
+          durationSemesters: item.code === "SH" ? 2 : 6,
+          intake: item.programme.intake,
+          intakeNote: item.programme.intakeNote,
+          status: item.programme.status ?? "active",
         },
       });
       programmes[item.programme.code] = programme;

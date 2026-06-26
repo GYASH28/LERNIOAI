@@ -50,7 +50,7 @@ export const CWIT_DEPARTMENTS: CwitDepartment[] = [
     summary: 'Covers software development, algorithms, hardware systems, networking, and applied computing.',
     highlights: ['Data structures', 'Object oriented programming', 'Microprocessors', 'Data communication'],
     accentColor: '#06b6d4',
-    officialUrl: 'https://cwit.mespune.org/department/department-of-computer-engineering-iot/',
+    officialUrl: 'https://cwit.mespune.org/department/computer-engineering/',
     programme: {
       code: 'DCOMP',
       name: 'Diploma in Computer Engineering',

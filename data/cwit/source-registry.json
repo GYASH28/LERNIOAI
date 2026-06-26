@@ -1,0 +1,66 @@
+[
+  {
+    "title": "CWIT Diploma Programmes Offered",
+    "sourceType": "internal_verified_document",
+    "sourceUrl": "https://cwit.mespune.org/department/",
+    "revisionLabel": "Official department registry",
+    "departmentCode": null,
+    "notes": "Official CWIT department/programme discovery page, including Science and Humanities foundation context."
+  },
+  {
+    "title": "Computer Engineering Department Curriculum Page",
+    "sourceType": "structure_sheet",
+    "sourceUrl": "https://cwit.mespune.org/department/computer-engineering/",
+    "revisionLabel": "R23/R18/R14 source index",
+    "departmentCode": "COMP",
+    "notes": "Official department page listing NEP 2020 MPECS R23 curriculum and historical curriculum downloads."
+  },
+  {
+    "title": "Computer Engineering and IoT Department Page",
+    "sourceType": "structure_sheet",
+    "sourceUrl": "https://cwit.mespune.org/department/department-of-computer-engineering-iot/",
+    "revisionLabel": "R23 source index",
+    "departmentCode": "CIOT",
+    "notes": "Official department page for Diploma Programme in Computer Engineering and IoT."
+  },
+  {
+    "title": "Civil Engineering R18 Curriculum",
+    "sourceType": "official_pdf",
+    "sourceUrl": "https://cwit.mespune.org/wp-content/uploads/2022/03/Curriculum-of-Civil-Dept-MPECS-18-1.pdf",
+    "revisionLabel": "MPECS 2018",
+    "departmentCode": "CIVIL",
+    "notes": "Official Civil Engineering R18 curriculum PDF."
+  },
+  {
+    "title": "Electrical Engineering R18 Curriculum",
+    "sourceType": "official_pdf",
+    "sourceUrl": "https://cwit.mespune.org/wp-content/uploads/2022/03/Electrical_MPECS-R2018_Curriculum.pdf",
+    "revisionLabel": "MPECS 2018",
+    "departmentCode": "ELEC",
+    "notes": "Official Electrical Engineering R18 curriculum PDF."
+  },
+  {
+    "title": "E&TC Engineering R18 Curriculum",
+    "sourceType": "official_pdf",
+    "sourceUrl": "https://cwit.mespune.org/wp-content/uploads/2022/06/E-TC_MPES_2018-_-curriculum-all-courses_November-2019.pdf",
+    "revisionLabel": "MPECS 2018",
+    "departmentCode": "ENTC",
+    "notes": "Official Electronics and Telecommunication Engineering R18 curriculum PDF."
+  },
+  {
+    "title": "Mechanical Engineering Department Curriculum Page",
+    "sourceType": "structure_sheet",
+    "sourceUrl": "https://cwit.mespune.org/department/mechanical-engineering/",
+    "revisionLabel": "R23/R18/R14 source index",
+    "departmentCode": "MECH",
+    "notes": "Official Mechanical Engineering department page listing R23 and historical curriculum downloads."
+  },
+  {
+    "title": "Computer Engineering R18 Curriculum",
+    "sourceType": "official_pdf",
+    "sourceUrl": "https://cwit.mespune.org/wp-content/uploads/2022/04/COMPUTER-MPECS-18-CURRICULUM.pdf",
+    "revisionLabel": "MPECS 2018",
+    "departmentCode": "COMP",
+    "notes": "Official Computer Engineering R18 curriculum PDF retained as legacy source evidence."
+  }
+]

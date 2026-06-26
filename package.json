@@ -29,7 +29,8 @@
     "db:admin": "tsx scripts/upsert-admin.ts",
     "db:seed": "tsx scripts/seed.ts",
     "db:departments": "tsx scripts/upsert-cwit-departments.ts",
-    "db:authority:backfill": "tsx scripts/backfill-authority.ts"
+    "db:authority:backfill": "tsx scripts/backfill-authority.ts",
+    "db:cwit:sources": "tsx scripts/import-cwit-source-registry.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",

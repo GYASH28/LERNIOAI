@@ -55,6 +55,7 @@ server.log
 tool-results/
 playwright-report/
 test-results/
+tmp/
 # Skills directory
 /skills/
 # Local SQLite dev database (preview only)

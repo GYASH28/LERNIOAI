@@ -22,6 +22,7 @@ model Institution {
   createdAt           DateTime                @default(now())
   departments         Department[]
   schemes             AcademicScheme[]
+  courseCatalog       CourseCatalog[]
   memberships         InstitutionMembership[]
   classGroups         ClassGroup[]
   roleAssignments     RoleAssignment[]
@@ -35,6 +36,12 @@ model Department {
   code                String
   institutionId       String
   institution         Institution          @relation(fields: [institutionId], references: [id])
+  officialUrl         String?
+  category            String?
+  status              String               @default("active")
+  metadata            String?
+  sourceVerifiedAt    DateTime?
+  archivedAt          DateTime?
   programmes          Programme[]
   classGroups         ClassGroup[]
   roleAssignments     RoleAssignment[]
@@ -46,34 +53,47 @@ model Department {
 }
 
 model Programme {
-  id              String           @id @default(cuid())
-  name            String
-  code            String
-  departmentId    String
-  department      Department       @relation(fields: [departmentId], references: [id])
-  schemes         AcademicScheme[]
-  classGroups     ClassGroup[]
-  roleAssignments RoleAssignment[]
-  createdAt       DateTime         @default(now())
+  id                String           @id @default(cuid())
+  name              String
+  code              String
+  departmentId      String
+  department        Department       @relation(fields: [departmentId], references: [id])
+  durationSemesters Int?
+  status            String           @default("active")
+  intake            Int?
+  intakeNote        String?
+  metadata          String?
+  archivedAt        DateTime?
+  schemes           AcademicScheme[]
+  classGroups       ClassGroup[]
+  roleAssignments   RoleAssignment[]
+  createdAt         DateTime         @default(now())
 
   @@unique([departmentId, code])
 }
 
 model AcademicScheme {
-  id              String           @id @default(cuid())
-  name            String // e.g. "G Scheme 2023"
-  code            String
-  institutionId   String
-  institution     Institution      @relation(fields: [institutionId], references: [id])
-  programmeId     String?
-  programme       Programme?       @relation(fields: [programmeId], references: [id])
-  startYear       Int
-  endYear         Int?
-  semesters       Semester[]
-  subjects        Subject[]
-  classGroups     ClassGroup[]
-  roleAssignments RoleAssignment[]
-  createdAt       DateTime         @default(now())
+  id                 String           @id @default(cuid())
+  name               String // e.g. "G Scheme 2023"
+  code               String
+  institutionId      String
+  institution        Institution      @relation(fields: [institutionId], references: [id])
+  programmeId        String?
+  programme          Programme?       @relation(fields: [programmeId], references: [id])
+  startYear          Int
+  endYear            Int?
+  revisionLabel      String?
+  status             String           @default("draft")
+  effectiveFrom      DateTime?
+  effectiveTo        DateTime?
+  publishedVersionId String?
+  sourceCoverage     String?
+  archivedAt         DateTime?
+  semesters          Semester[]
+  subjects           Subject[]
+  classGroups        ClassGroup[]
+  roleAssignments    RoleAssignment[]
+  createdAt          DateTime         @default(now())
 }
 
 model Semester {
@@ -97,61 +117,637 @@ model Semester {
 // ============================================================
 
 model Subject {
-  id                  String               @id @default(cuid())
-  code                String // e.g. "CS201"
-  name                String // e.g. "Data Structures"
-  shortName           String?
-  credits             Int                  @default(4)
-  icon                String?
-  accentColor         String               @default("#7c3aed")
-  mascotKey           String? // leo | byte | coda | pico | nova
-  description         String?
-  semesterId          String
-  semester            Semester             @relation(fields: [semesterId], references: [id])
-  schemeId            String
-  scheme              AcademicScheme       @relation(fields: [schemeId], references: [id])
-  units               Unit[]
-  questions           Question[]
-  resources           Resource[]
-  roleAssignments     RoleAssignment[]
-  teachingAssignments TeachingAssignment[]
-  createdAt           DateTime             @default(now())
+  id                    String                 @id @default(cuid())
+  code                  String // e.g. "CS201"
+  name                  String // e.g. "Data Structures"
+  shortName             String?
+  courseCatalogId       String?
+  courseCatalog         CourseCatalog?         @relation(fields: [courseCatalogId], references: [id], onDelete: SetNull)
+  credits               Int                    @default(4)
+  category              String?
+  lectureHours          Int?
+  tutorialHours         Int?
+  practicalHours        Int?
+  totalHours            Int?
+  assessmentMetadata    String?
+  electiveGroupId       String?
+  electiveGroup         ElectiveGroup?         @relation(fields: [electiveGroupId], references: [id], onDelete: SetNull)
+  sourceEvidence        String?
+  status                String                 @default("active")
+  reviewStatus          String                 @default("draft")
+  publishedAt           DateTime?
+  archivedAt            DateTime?
+  icon                  String?
+  accentColor           String                 @default("#7c3aed")
+  mascotKey             String? // leo | byte | coda | pico | nova
+  description           String?
+  semesterId            String
+  semester              Semester               @relation(fields: [semesterId], references: [id])
+  schemeId              String
+  scheme                AcademicScheme         @relation(fields: [schemeId], references: [id])
+  units                 Unit[]
+  questions             Question[]
+  resources             Resource[]
+  electiveOptions       ElectiveOption[]
+  courseOutcomes        CourseOutcome[]
+  practicalExperiments  PracticalExperiment[]
+  recommendedReferences RecommendedReference[]
+  roleAssignments       RoleAssignment[]
+  teachingAssignments   TeachingAssignment[]
+  createdAt             DateTime               @default(now())
 
   @@unique([schemeId, code])
+  @@index([courseCatalogId])
+  @@index([electiveGroupId])
+  @@index([schemeId, status])
 }
 
 model Unit {
-  id          String   @id @default(cuid())
-  number      Int
-  title       String
-  description String?
-  weightage   Int      @default(0) // exam weightage %
-  subjectId   String
-  subject     Subject  @relation(fields: [subjectId], references: [id])
-  topics      Topic[]
-  lessons     Lesson[]
-  createdAt   DateTime @default(now())
+  id                    String                 @id @default(cuid())
+  number                Int
+  title                 String
+  description           String?
+  weightage             Int                    @default(0) // exam weightage %
+  outcomes              String?
+  sourceEvidence        String?
+  status                String                 @default("active")
+  version               Int                    @default(1)
+  archivedAt            DateTime?
+  subjectId             String
+  subject               Subject                @relation(fields: [subjectId], references: [id])
+  topics                Topic[]
+  lessons               Lesson[]
+  practicalExperiments  PracticalExperiment[]
+  recommendedReferences RecommendedReference[]
+  createdAt             DateTime               @default(now())
 
   @@unique([subjectId, number])
 }
 
 model Topic {
-  id            String             @id @default(cuid())
-  slug          String
-  title         String
-  description   String?
-  difficulty    String             @default("medium") // easy | medium | hard
-  examWeightage Int                @default(0)
-  prerequisites String? // JSON array of topic IDs
-  unitId        String
-  unit          Unit               @relation(fields: [unitId], references: [id])
-  lessons       Lesson[]
-  questions     Question[]
-  mastery       UserTopicMastery[]
-  revision      RevisionSchedule[]
-  createdAt     DateTime           @default(now())
+  id                    String                 @id @default(cuid())
+  slug                  String
+  title                 String
+  description           String?
+  difficulty            String                 @default("medium") // easy | medium | hard
+  examWeightage         Int                    @default(0)
+  prerequisites         String? // JSON array of topic IDs
+  outcomes              String?
+  sourceEvidence        String?
+  status                String                 @default("active")
+  version               Int                    @default(1)
+  archivedAt            DateTime?
+  unitId                String
+  unit                  Unit                   @relation(fields: [unitId], references: [id])
+  lessons               Lesson[]
+  questions             Question[]
+  resourceMappings      ResourceTopicMapping[]
+  recommendedReferences RecommendedReference[]
+  mastery               UserTopicMastery[]
+  revision              RevisionSchedule[]
+  createdAt             DateTime               @default(now())
 
   @@unique([unitId, slug])
+}
+
+// ============================================================
+// CWIT LEARNING OS DATA FOUNDATION
+// ============================================================
+
+model CourseCatalog {
+  id             String       @id @default(cuid())
+  institutionId  String?
+  institution    Institution? @relation(fields: [institutionId], references: [id], onDelete: SetNull)
+  canonicalTitle String
+  discipline     String?
+  description    String?
+  keywords       String?
+  aliases        String?
+  active         Boolean      @default(true)
+  sourceEvidence String?
+  subjects       Subject[]
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@unique([institutionId, canonicalTitle])
+  @@index([discipline, active])
+}
+
+model ElectiveGroup {
+  id             String           @id @default(cuid())
+  institutionId  String?
+  departmentId   String?
+  programmeId    String?
+  schemeId       String?
+  semesterId     String?
+  name           String
+  code           String?
+  minSelect      Int              @default(1)
+  maxSelect      Int              @default(1)
+  status         String           @default("draft")
+  sourceEvidence String?
+  subjects       Subject[]
+  options        ElectiveOption[]
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  @@index([schemeId, semesterId, status])
+  @@index([programmeId, status])
+}
+
+model ElectiveOption {
+  id              String        @id @default(cuid())
+  electiveGroupId String
+  electiveGroup   ElectiveGroup @relation(fields: [electiveGroupId], references: [id], onDelete: Cascade)
+  subjectId       String?
+  subject         Subject?      @relation(fields: [subjectId], references: [id], onDelete: SetNull)
+  label           String
+  code            String?
+  order           Int           @default(0)
+  status          String        @default("active")
+  sourceEvidence  String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@unique([electiveGroupId, code])
+  @@index([subjectId])
+}
+
+model SubjectApplicability {
+  id                String   @id @default(cuid())
+  subjectId         String
+  institutionId     String?
+  departmentId      String?
+  programmeId       String?
+  schemeId          String?
+  semesterId        String?
+  classGroupId      String?
+  applicabilityType String   @default("offering") // offering | foundation | shared | elective
+  status            String   @default("active")
+  sourceEvidence    String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@index([subjectId, status])
+  @@index([programmeId, schemeId, semesterId])
+}
+
+model CourseOutcome {
+  id             String   @id @default(cuid())
+  subjectId      String
+  subject        Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  code           String
+  text           String
+  order          Int      @default(0)
+  bloomLevel     String?
+  sourceEvidence String?
+  status         String   @default("draft")
+  version        Int      @default(1)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@unique([subjectId, code])
+  @@index([subjectId, status])
+}
+
+model ProgrammeOutcome {
+  id             String   @id @default(cuid())
+  programmeId    String
+  code           String
+  text           String
+  order          Int      @default(0)
+  sourceEvidence String?
+  status         String   @default("active")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@unique([programmeId, code])
+  @@index([programmeId, status])
+}
+
+model OutcomeMapping {
+  id                 String   @id @default(cuid())
+  courseOutcomeId    String?
+  programmeOutcomeId String?
+  subjectId          String?
+  strength           String   @default("introduced") // introduced | reinforced | mastered
+  sourceEvidence     String?
+  status             String   @default("draft")
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@index([courseOutcomeId])
+  @@index([programmeOutcomeId])
+  @@index([subjectId, status])
+}
+
+model PracticalExperiment {
+  id             String   @id @default(cuid())
+  subjectId      String
+  subject        Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  unitId         String?
+  unit           Unit?    @relation(fields: [unitId], references: [id], onDelete: SetNull)
+  title          String
+  objective      String?
+  apparatus      String?
+  software       String?
+  procedure      String?
+  resultRubric   String?
+  safety         String?
+  order          Int      @default(0)
+  sourceEvidence String?
+  status         String   @default("draft")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([subjectId, status])
+  @@index([unitId])
+}
+
+model RecommendedReference {
+  id             String   @id @default(cuid())
+  subjectId      String
+  subject        Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  unitId         String?
+  unit           Unit?    @relation(fields: [unitId], references: [id], onDelete: SetNull)
+  topicId        String?
+  topic          Topic?   @relation(fields: [topicId], references: [id], onDelete: SetNull)
+  title          String
+  author         String?
+  publisher      String?
+  edition        String?
+  isbn           String?
+  url            String?
+  referenceType  String   @default("book")
+  sourceEvidence String?
+  status         String   @default("active")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([subjectId, status])
+  @@index([topicId])
+}
+
+model SyllabusDocument {
+  id            String              @id @default(cuid())
+  institutionId String
+  departmentId  String?
+  programmeId   String?
+  schemeId      String?
+  title         String
+  sourceType    String
+  sourceUrl     String?
+  objectKey     String?
+  revisionLabel String?
+  effectiveFrom DateTime?
+  effectiveTo   DateTime?
+  checksum      String?
+  mimeType      String?
+  pageCount     Int?
+  trustLevel    String              @default("official")
+  status        String              @default("registered")
+  uploadedById  String?
+  approvedById  String?
+  approvedAt    DateTime?
+  notes         String?
+  snapshots     SourceSnapshot[]
+  importJobs    SyllabusImportJob[]
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+
+  @@index([institutionId, status])
+  @@index([departmentId, status])
+  @@index([programmeId, schemeId])
+  @@index([checksum])
+}
+
+model SourceSnapshot {
+  id                 String           @id @default(cuid())
+  syllabusDocumentId String
+  syllabusDocument   SyllabusDocument @relation(fields: [syllabusDocumentId], references: [id], onDelete: Cascade)
+  sourceUrl          String?
+  objectKey          String?
+  checksum           String
+  mimeType           String?
+  byteSize           Int?
+  pageCount          Int?
+  fetchStatus        String           @default("stored")
+  fetchMetadata      String?
+  fetchedAt          DateTime         @default(now())
+  createdById        String?
+
+  @@unique([syllabusDocumentId, checksum])
+  @@index([checksum])
+  @@index([fetchStatus, fetchedAt])
+}
+
+model SyllabusImportJob {
+  id                  String           @id @default(cuid())
+  syllabusDocumentId  String
+  syllabusDocument    SyllabusDocument @relation(fields: [syllabusDocumentId], references: [id], onDelete: Cascade)
+  sourceSnapshotId    String?
+  state               String           @default("queued")
+  parserVersion       String
+  attemptCount        Int              @default(0)
+  leaseOwner          String?
+  leaseUntil          DateTime?
+  logs                String?
+  warnings            String?
+  errorCode           String?
+  extractedJson       String?
+  normalizedDraftJson String?
+  resultSummary       String?
+  requestedById       String?
+  reviewedById        String?
+  reviewedAt          DateTime?
+  findings            ImportFinding[]
+  createdAt           DateTime         @default(now())
+  updatedAt           DateTime         @updatedAt
+
+  @@index([state, updatedAt])
+  @@index([syllabusDocumentId, createdAt])
+}
+
+model ImportFinding {
+  id               String            @id @default(cuid())
+  importJobId      String
+  importJob        SyllabusImportJob @relation(fields: [importJobId], references: [id], onDelete: Cascade)
+  severity         String            @default("warning")
+  code             String
+  message          String
+  pageNumber       Int?
+  rowKey           String?
+  fieldPath        String?
+  confidence       Float?
+  resolutionStatus String            @default("open")
+  resolvedById     String?
+  resolvedAt       DateTime?
+  createdAt        DateTime          @default(now())
+
+  @@index([importJobId, severity])
+  @@index([resolutionStatus])
+}
+
+model CurriculumVersion {
+  id               String    @id @default(cuid())
+  institutionId    String
+  departmentId     String?
+  programmeId      String?
+  schemeId         String?
+  subjectId        String?
+  version          Int       @default(1)
+  status           String    @default("draft")
+  parentVersionId  String?
+  sourceSnapshotId String?
+  semanticDiffJson String?
+  changeSummary    String?
+  createdById      String?
+  submittedById    String?
+  reviewedById     String?
+  publishedById    String?
+  submittedAt      DateTime?
+  reviewedAt       DateTime?
+  publishedAt      DateTime?
+  archivedAt       DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  @@unique([schemeId, subjectId, version])
+  @@index([schemeId, status])
+  @@index([subjectId, status])
+}
+
+model ResourceTopicMapping {
+  id                 String    @id @default(cuid())
+  resourceId         String
+  resource           Resource  @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  topicId            String
+  topic              Topic     @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  coverageType       String    @default("explains")
+  coveragePercent    Int?
+  priority           Int       @default(0)
+  startOffsetSeconds Int?
+  endOffsetSeconds   Int?
+  mappingNote        String?
+  status             String    @default("pending")
+  reviewerEvidence   String?
+  reviewedById       String?
+  reviewedAt         DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  @@unique([resourceId, topicId, coverageType])
+  @@index([topicId, status])
+  @@index([resourceId, status])
+}
+
+model ResourceProvider {
+  id                String    @id @default(cuid())
+  institutionId     String?
+  key               String
+  name              String
+  providerType      String
+  baseUrl           String?
+  policyJson        String?
+  status            String    @default("active")
+  lastHealthCheckAt DateTime?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@unique([institutionId, key])
+  @@index([status])
+}
+
+model ResourceReview {
+  id         String   @id @default(cuid())
+  resourceId String
+  resource   Resource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  reviewerId String?
+  decision   String   @default("pending")
+  rubricJson String?
+  note       String?
+  evidence   String?
+  createdAt  DateTime @default(now())
+
+  @@index([resourceId, createdAt])
+  @@index([decision, createdAt])
+}
+
+model ReviewDecision {
+  id          String   @id @default(cuid())
+  entityType  String
+  entityId    String
+  reviewerId  String?
+  decision    String
+  note        String?
+  rubricJson  String?
+  priorStatus String?
+  nextStatus  String?
+  createdAt   DateTime @default(now())
+
+  @@index([entityType, entityId])
+  @@index([decision, createdAt])
+}
+
+model AssessmentBlueprint {
+  id                       String   @id @default(cuid())
+  subjectId                String
+  title                    String
+  unitScopeJson            String?
+  difficultyDistribution   String?
+  marksDistribution        String?
+  questionTypeDistribution String?
+  outcomeScopeJson         String?
+  validationSummary        String?
+  status                   String   @default("draft")
+  createdById              String?
+  createdAt                DateTime @default(now())
+  updatedAt                DateTime @updatedAt
+
+  @@index([subjectId, status])
+}
+
+model FormalAssessment {
+  id            String    @id @default(cuid())
+  blueprintId   String?
+  subjectId     String
+  title         String
+  status        String    @default("draft")
+  opensAt       DateTime?
+  closesAt      DateTime?
+  snapshotJson  String?
+  createdById   String?
+  publishedById String?
+  publishedAt   DateTime?
+  archivedAt    DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([subjectId, status])
+  @@index([opensAt, closesAt])
+}
+
+model AssessmentAssignment {
+  id           String    @id @default(cuid())
+  assessmentId String
+  classGroupId String?
+  userId       String?
+  status       String    @default("assigned")
+  assignedById String?
+  assignedAt   DateTime  @default(now())
+  dueAt        DateTime?
+
+  @@index([assessmentId, status])
+  @@index([classGroupId, status])
+  @@index([userId, status])
+}
+
+model Notice {
+  id              String           @id @default(cuid())
+  title           String
+  body            String
+  authorId        String?
+  status          String           @default("draft")
+  startsAt        DateTime?
+  expiresAt       DateTime?
+  audienceTargets AudienceTarget[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  @@index([status, startsAt])
+}
+
+model AudienceTarget {
+  id            String  @id @default(cuid())
+  noticeId      String
+  notice        Notice  @relation(fields: [noticeId], references: [id], onDelete: Cascade)
+  institutionId String?
+  departmentId  String?
+  programmeId   String?
+  schemeId      String?
+  semesterId    String?
+  classGroupId  String?
+  subjectId     String?
+  role          String?
+
+  @@index([noticeId])
+  @@index([institutionId, role])
+}
+
+model JobRun {
+  id           String    @id @default(cuid())
+  key          String
+  jobType      String
+  state        String    @default("queued")
+  attemptCount Int       @default(0)
+  leaseOwner   String?
+  leaseUntil   DateTime?
+  inputJson    String?
+  outputJson   String?
+  errorCode    String?
+  logs         String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@index([jobType, state])
+  @@index([state, updatedAt])
+}
+
+model IntegrationHealth {
+  id          String   @id @default(cuid())
+  providerKey String
+  status      String   @default("unknown")
+  checkedAt   DateTime @default(now())
+  latencyMs   Int?
+  message     String?
+  metadata    String?
+
+  @@index([providerKey, checkedAt])
+}
+
+model SavedView {
+  id         String   @id @default(cuid())
+  userId     String
+  name       String
+  area       String
+  filterJson String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([userId, area])
+}
+
+model ExportJob {
+  id         String    @id @default(cuid())
+  userId     String
+  area       String
+  state      String    @default("queued")
+  filterJson String?
+  objectKey  String?
+  expiresAt  DateTime?
+  errorCode  String?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  @@index([userId, state])
+  @@index([expiresAt])
+}
+
+model FeatureFlag {
+  id             String   @id @default(cuid())
+  key            String
+  institutionId  String?
+  environment    String   @default("all")
+  enabled        Boolean  @default(false)
+  rolloutPercent Int?
+  cohortJson     String?
+  description    String?
+  updatedById    String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@unique([key, institutionId, environment])
+  @@index([enabled])
 }
 
 // ============================================================
@@ -175,13 +771,29 @@ model Lesson {
   practiseContent  String? // guided examples + questions
   reviseContent    String? // short notes, flashcards, formulas
 
-  citations String? // JSON array of source citations
-  status    String  @default("published") // draft | under_review | verified | published | archived
-  version   Int     @default(1)
+  citations          String? // JSON array of source citations
+  status             String    @default("published") // draft | under_review | verified | published | archived
+  version            Int       @default(1)
+  createdById        String?
+  submittedById      String?
+  reviewedById       String?
+  publishedById      String?
+  submittedAt        DateTime?
+  reviewedAt         DateTime?
+  publishedAt        DateTime?
+  parentVersionId    String?
+  aiGenerated        Boolean   @default(false)
+  contentHash        String?
+  sourceCompleteness String?
+  changeSummary      String?
+  archivedAt         DateTime?
 
   completions LessonCompletion[]
   createdAt   DateTime           @default(now())
   updatedAt   DateTime           @updatedAt
+
+  @@index([status, updatedAt])
+  @@index([createdById])
 }
 
 // ============================================================
@@ -189,30 +801,42 @@ model Lesson {
 // ============================================================
 
 model Question {
-  id            String            @id @default(cuid())
-  type          String            @default("mcq") // mcq | true_false | short_answer | long_answer | viva | code
-  difficulty    String            @default("medium") // easy | medium | hard
-  question      String
-  options       String? // JSON array for MCQ
-  correctAnswer String? // for MCQ: index; for others: text
-  explanation   String?
-  hint          String?
-  marks         Int               @default(1)
-  negativeMark  Float             @default(0)
-  topicId       String?
-  topic         Topic?            @relation(fields: [topicId], references: [id])
-  subjectId     String
-  subject       Subject           @relation(fields: [subjectId], references: [id])
-  unitNumber    Int?
-  tags          String? // JSON array
-  source        String? // previous_paper | generated | teacher
-  year          Int?
-  attempts      QuestionAttempt[]
-  createdAt     DateTime          @default(now())
+  id                 String            @id @default(cuid())
+  type               String            @default("mcq") // mcq | true_false | short_answer | long_answer | viva | code
+  difficulty         String            @default("medium") // easy | medium | hard
+  question           String
+  options            String? // JSON array for MCQ
+  correctAnswer      String? // for MCQ: index; for others: text
+  explanation        String?
+  hint               String?
+  marks              Int               @default(1)
+  negativeMark       Float             @default(0)
+  topicId            String?
+  topic              Topic?            @relation(fields: [topicId], references: [id])
+  subjectId          String
+  subject            Subject           @relation(fields: [subjectId], references: [id])
+  unitNumber         Int?
+  tags               String? // JSON array
+  source             String? // previous_paper | generated | teacher
+  year               Int?
+  status             String            @default("draft")
+  reviewStatus       String            @default("unreviewed")
+  version            Int               @default(1)
+  createdById        String?
+  reviewedById       String?
+  publishedById      String?
+  learningOutcomeIds String?
+  sourceEvidence     String?
+  fingerprint        String?
+  archivedAt         DateTime?
+  attempts           QuestionAttempt[]
+  createdAt          DateTime          @default(now())
 
   @@index([subjectId, unitNumber])
   @@index([topicId, difficulty])
   @@index([difficulty])
+  @@index([subjectId, status])
+  @@index([reviewStatus])
 }
 
 model QuestionPaper {
@@ -312,6 +936,11 @@ model InviteCode {
   name             String?
   email            String?
   branch           String?
+  institutionId    String?
+  programmeId      String?
+  schemeId         String?
+  classGroupId     String?
+  subjectId        String?
   departmentCode   String?
   departmentName   String?
   semesterNumber   Int?
@@ -324,31 +953,50 @@ model InviteCode {
   revokedBy        String?
   maxUses          Int       @default(1)
   useCount         Int       @default(0)
+  deliveryStatus   String?
+  lastSentAt       DateTime?
+  lastUsedIpHash   String?
+  useEvents        String?
   createdAt        DateTime  @default(now())
   updatedAt        DateTime  @updatedAt
 
   @@index([role, used])
   @@index([email])
   @@index([status, expiresAt])
+  @@index([institutionId, role])
+  @@index([departmentCode, role])
 }
 
 model RoleRequest {
-  id             String    @id @default(cuid())
-  userId         String
-  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  requestedRole  String
-  reason         String?
-  departmentCode String?
-  subjectIds     String?
-  status         String    @default("pending") // pending | approved | rejected | withdrawn
-  reviewedBy     String?
-  reviewedAt     DateTime?
-  reviewNote     String?
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
+  id                  String    @id @default(cuid())
+  userId              String
+  user                User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  requestedRole       String
+  reason              String?
+  institutionId       String?
+  departmentId        String?
+  departmentCode      String?
+  programmeId         String?
+  schemeId            String?
+  semesterId          String?
+  subjectId           String?
+  classGroupId        String?
+  subjectIds          String?
+  evidenceAttachments String?
+  requestedExpiresAt  DateTime?
+  decisionRubric      String?
+  status              String    @default("pending") // pending | approved | rejected | withdrawn
+  reviewedBy          String?
+  reviewedAt          DateTime?
+  reviewNote          String?
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
 
   @@index([userId, status])
   @@index([requestedRole, status])
+  @@index([institutionId, status])
+  @@index([departmentId, status])
+  @@index([subjectId, status])
 }
 
 model RoleAuditLog {
@@ -394,6 +1042,12 @@ model RoleAssignment {
   expiresAt      DateTime?
   revokedAt      DateTime?
   reason         String?
+  suspendedAt    DateTime?
+  suspendedById  String?
+  restoredAt     DateTime?
+  restoredById   String?
+  source         String?
+  metadata       String?
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
 
@@ -455,6 +1109,11 @@ model TeachingAssignment {
   startsAt      DateTime     @default(now())
   expiresAt     DateTime?
   revokedAt     DateTime?
+  revokedById   String?
+  suspendedAt   DateTime?
+  reason        String?
+  source        String?
+  metadata      String?
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
 
@@ -477,6 +1136,10 @@ model ClassMembership {
   leftAt       DateTime?
   verifiedById String?
   verifiedBy   User?      @relation("ClassMembershipVerifiedBy", fields: [verifiedById], references: [id], onDelete: SetNull)
+  reason       String?
+  source       String?
+  suspendedAt  DateTime?
+  metadata     String?
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
 
@@ -486,23 +1149,29 @@ model ClassMembership {
 }
 
 model AuditEvent {
-  id            String       @id @default(cuid())
-  actorUserId   String?
-  actorUser     User?        @relation("AuditEventActor", fields: [actorUserId], references: [id], onDelete: SetNull)
-  targetUserId  String?
-  targetUser    User?        @relation("AuditEventTargetUser", fields: [targetUserId], references: [id], onDelete: SetNull)
-  institutionId String?
-  institution   Institution? @relation(fields: [institutionId], references: [id])
-  departmentId  String?
-  department    Department?  @relation(fields: [departmentId], references: [id])
-  action        String
-  entityType    String
-  entityId      String?
-  summary       String?
-  metadata      String?
-  ipHash        String?
-  userAgentHash String?
-  createdAt     DateTime     @default(now())
+  id             String       @id @default(cuid())
+  actorUserId    String?
+  actorUser      User?        @relation("AuditEventActor", fields: [actorUserId], references: [id], onDelete: SetNull)
+  targetUserId   String?
+  targetUser     User?        @relation("AuditEventTargetUser", fields: [targetUserId], references: [id], onDelete: SetNull)
+  institutionId  String?
+  institution    Institution? @relation(fields: [institutionId], references: [id])
+  departmentId   String?
+  department     Department?  @relation(fields: [departmentId], references: [id])
+  action         String
+  entityType     String
+  entityId       String?
+  summary        String?
+  requestId      String?
+  correlationId  String?
+  beforeSummary  String?
+  afterSummary   String?
+  riskLevel      String?
+  retentionUntil DateTime?
+  metadata       String?
+  ipHash         String?
+  userAgentHash  String?
+  createdAt      DateTime     @default(now())
 
   @@index([actorUserId, createdAt])
   @@index([targetUserId, createdAt])
@@ -510,6 +1179,8 @@ model AuditEvent {
   @@index([departmentId, createdAt])
   @@index([entityType, entityId])
   @@index([action, createdAt])
+  @@index([requestId])
+  @@index([correlationId])
 }
 
 model RateLimitBucket {
@@ -829,27 +1500,52 @@ model LabProgress {
 // ============================================================
 
 model Resource {
-  id            String   @id @default(cuid())
-  title         String
-  type          String // pdf | docx | image | text | video_link | web_link | code | lab_manual | question_paper | model_answer
-  url           String?
-  content       String?
-  subjectId     String
-  subject       Subject  @relation(fields: [subjectId], references: [id])
-  unitNumber    Int?
-  topicId       String?
-  source        String   @default("platform") // platform | drive | teacher | student
-  visibility    String   @default("public") // public | private | submitted | published
-  verified      Boolean  @default(false)
-  contributorId String?
-  year          Int?
-  language      String   @default("en")
-  downloads     Int      @default(0)
-  rating        Float    @default(0)
-  createdAt     DateTime @default(now())
+  id                  String                 @id @default(cuid())
+  title               String
+  type                String // pdf | docx | image | text | video_link | web_link | code | lab_manual | question_paper | model_answer
+  url                 String?
+  provider            String?
+  canonicalUrl        String?
+  externalId          String?
+  thumbnailUrl        String?
+  durationSeconds     Int?
+  content             String?
+  subjectId           String
+  subject             Subject                @relation(fields: [subjectId], references: [id])
+  unitNumber          Int?
+  topicId             String?
+  source              String                 @default("platform") // platform | drive | teacher | student
+  visibility          String                 @default("public") // public | private | submitted | published
+  verified            Boolean                @default(false)
+  contributorId       String?
+  year                Int?
+  language            String                 @default("en")
+  difficulty          String?
+  license             String?
+  creator             String?
+  publishedAt         DateTime?
+  lastMetadataCheckAt DateTime?
+  linkHealth          String                 @default("unknown")
+  redirectUrl         String?
+  reviewStatus        String                 @default("pending")
+  reviewedById        String?
+  reviewedAt          DateTime?
+  qualityScore        Int?
+  qualityRubricJson   String?
+  sourceTrust         String?
+  moderationStatus    String                 @default("clear")
+  archivedAt          DateTime?
+  downloads           Int                    @default(0)
+  rating              Float                  @default(0)
+  topicMappings       ResourceTopicMapping[]
+  reviews             ResourceReview[]
+  createdAt           DateTime               @default(now())
 
   @@index([subjectId, visibility])
   @@index([contributorId])
+  @@index([provider, externalId])
+  @@index([canonicalUrl])
+  @@index([reviewStatus, linkHealth])
 }
 
 model Contribution {

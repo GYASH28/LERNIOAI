@@ -30,8 +30,34 @@ The page is server-rendered and requires active admin authority. It shows live c
 - `POST /api/admin/role-assignments`
 - `DELETE /api/admin/role-assignments/[id]`
 - `GET /api/admin/audit`
+- `GET /api/syllabus/sources`
+- `POST /api/syllabus/sources`
+- `GET /api/syllabus/imports`
+- `POST /api/syllabus/imports`
+- `GET /api/resources/providers`
+- `POST /api/resources/providers`
+- `POST /api/resources/review`
 
 All routes require active admin authority server-side.
+
+## CWIT Learning OS Operations
+
+Routes:
+
+- `/admin/syllabus/sources`
+- `/admin/syllabus/imports`
+- `/admin/resources/queue`
+
+Scripts:
+
+```powershell
+npm run db:departments
+npm run db:cwit:sources
+```
+
+`db:departments` refreshes the verified CWIT hierarchy metadata. `db:cwit:sources` registers the public official source manifest from `data/cwit/source-registry.json`.
+
+See `docs/CWIT_LEARNING_OS_RUNBOOK.md` for the full source/import/resource workflow.
 
 ## Safety Controls
 
@@ -49,7 +75,7 @@ Pending:
 - recent reauthentication for high-risk self-actions
 - session revocation using `sessionsRevokedAt`
 - full restore flows for soft-deleted managed entities
-- full institution, hierarchy, curriculum, question bank, review, and resource CRUD modules
+- full institution, hierarchy, curriculum, question bank, and scoped non-admin CRUD modules
 
 ## Role Assignment Notes
 

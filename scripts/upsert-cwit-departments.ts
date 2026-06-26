@@ -26,11 +26,39 @@ async function main() {
           code: item.code,
         },
       },
-      update: { name: item.name },
+      update: {
+        name: item.name,
+        officialUrl: item.officialUrl,
+        category: item.category,
+        status: 'active',
+        metadata: JSON.stringify({
+          shortName: item.shortName,
+          established: item.established ?? null,
+          headTitle: item.headTitle,
+          headName: item.headName,
+          summary: item.summary,
+          highlights: item.highlights,
+          accentColor: item.accentColor,
+        }),
+        sourceVerifiedAt: new Date(),
+      },
       create: {
         name: item.name,
         code: item.code,
         institutionId: institution.id,
+        officialUrl: item.officialUrl,
+        category: item.category,
+        status: 'active',
+        metadata: JSON.stringify({
+          shortName: item.shortName,
+          established: item.established ?? null,
+          headTitle: item.headTitle,
+          headName: item.headName,
+          summary: item.summary,
+          highlights: item.highlights,
+          accentColor: item.accentColor,
+        }),
+        sourceVerifiedAt: new Date(),
       },
     })
     departmentCount += 1
@@ -43,18 +71,28 @@ async function main() {
             code: item.programme.code,
           },
         },
-        update: { name: item.programme.name },
+        update: {
+          name: item.programme.name,
+          durationSemesters: 6,
+          intake: item.programme.intake ?? null,
+          intakeNote: item.programme.intakeNote ?? null,
+          status: item.programme.status ?? 'active',
+        },
         create: {
           name: item.programme.name,
           code: item.programme.code,
           departmentId: department.id,
+          durationSemesters: 6,
+          intake: item.programme.intake ?? null,
+          intakeNote: item.programme.intakeNote ?? null,
+          status: item.programme.status ?? 'active',
         },
       })
       programmeCount += 1
     }
   }
 
-  console.log(
+  console.warn(
     JSON.stringify({
       institution: institution.name,
       departmentCount,

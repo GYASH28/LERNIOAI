@@ -63,6 +63,8 @@ See `.env.example` for the full list.
 | `npm run db:deploy` | Apply committed migrations |
 | `npm run db:admin` | Non-destructively create/update the admin user from `LERNIO_ADMIN_EMAIL` and `LERNIO_ADMIN_PASSWORD` |
 | `npm run db:authority:backfill` | Dry-run legacy role/profile migration into normalized authority tables |
+| `npm run db:departments` | Upsert the verified CWIT department and programme hierarchy |
+| `npm run db:cwit:sources` | Register official CWIT syllabus/resource source evidence |
 | `npm run db:seed` | Destructive demo/admin seed |
 
 ## Architecture
@@ -76,6 +78,7 @@ See `.env.example` for the full list.
 - Validation: Zod schemas in `src/lib/schemas.ts`
 - Server trust boundary: `requireUser`, `requireRole`, and `requirePermission`
 - Authority kernel: `src/lib/authority`, backed by `RoleAssignment`, `TeachingAssignment`, `ClassGroup`, `ClassMembership`, and `AuditEvent`
+- CWIT Learning OS foundation: source registry, syllabus import queue, resource governance, curriculum metadata, and assessment-ready schema extensions
 
 ## Authority Workspaces
 
@@ -84,6 +87,9 @@ Public signup remains student-only. Elevated access comes from server-side admin
 Current workspace routes:
 
 - `/admin`
+- `/admin/syllabus/sources`
+- `/admin/syllabus/imports`
+- `/admin/resources/queue`
 - `/coordinator`
 - `/teacher`
 - `/reviewer`
