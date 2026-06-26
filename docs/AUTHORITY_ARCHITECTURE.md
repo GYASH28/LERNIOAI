@@ -1,75 +1,103 @@
 # Authority Architecture
 
-Lernio now has a typed authority kernel under `src/lib/authority`.
+Lernio's authority system is server-first and fail-closed. It is built around typed capabilities, normalized role assignments, explicit scope, and audit records.
 
-## Current Phase
+## Current State
 
-This is Phase 1 of the role-authority transformation:
+Implemented foundations:
 
 - typed capability registry in `src/lib/roles.ts`
 - scoped authority context in `src/lib/authority/scope.ts`
-- database-backed authority resolver in `src/lib/authority/resolver.ts`
-- `requirePermission()` wired through the new kernel
-- fail-closed handling for missing or malformed legacy scope fields
+- database-backed resolver in `src/lib/authority/resolver.ts`
+- server role helper `requireActiveRole()`
+- permission helper `requirePermission(permission, scope)`
+- normalized Prisma models: `RoleAssignment`, `TeachingAssignment`, `ClassGroup`, `ClassMembership`, and `AuditEvent`
+- authority session freshness through `User.authorityVersion`
+- admin APIs for users, role requests, role assignments, and audit
+- server-rendered workspaces for Admin, Coordinator, Teacher, Reviewer, Moderator, and CR
+- conservative dry-run/write backfill script at `scripts/backfill-authority.ts`
 
-The student product remains unchanged. Existing student routes, LEO, Groq provider behavior, progress, XP, study tools, and learning views are preserved.
+The student product remains additive and unchanged: Dashboard, Learn, Practice, AI Tutor, Labs, Coding Lab, Exams, Revision, Materials, Planner, Analytics, and Profile remain first-class routes.
+
+## Authority Sources
+
+The resolver reads normalized sources first:
+
+- active `RoleAssignment` rows
+- active `TeachingAssignment` rows
+- active `ClassMembership` rows
+- verified `InstitutionMembership` rows
+
+Client-editable profile fields such as `departmentCode`, `semesterNumber`, `division`, `institutionId`, and `schemeId` are not elevated authority sources. Legacy `assignedSubjects` can still be parsed by migration helpers, but it is not a trusted long-term authorization source.
 
 ## Authority Context
 
-The resolver builds an `AuthorityContext` containing:
+`resolveAuthorityContext()` returns:
 
 - authenticated user identity
 - primary role
 - active role list
-- capability list
+- capability union
 - scoped assignments
 - scope index
 - authority version
 
-Until normalized assignment tables are added, the resolver uses existing data conservatively:
+Missing, expired, revoked, suspended, future-dated, or malformed assignments grant no capability.
 
-- `User.assignedSubjects` is parsed only when it is a valid JSON string array
-- malformed `assignedSubjects` grants no subject scope
-- `User.departmentCode` grants only that department scope
-- CR class scope is derived only when department, semester, and division are complete
-- verified `InstitutionMembership` rows contribute institution/programme/scheme/semester scope
+## Scope Dimensions
 
-## Fail-Closed Rules
+Supported scope dimensions:
 
-The authority kernel denies by default:
+- `institutionId`
+- `departmentId`
+- `departmentCode`
+- `programmeId`
+- `schemeId`
+- `semesterId`
+- `classGroupId`
+- `classGroupKey`
+- `subjectId`
+- `subjectIds`
+- `resourceOwnerUserId`
+- `ownOnly`
 
-- teacher content mutation without a matching subject
-- coordinator authority without a matching department
-- CR class tools without a complete class scope
-- reviewer/moderator actions outside their capability family
-- disabled users
-- malformed legacy scope data
-
-Admins currently retain broad authority through the primary role. Final-admin protection and destructive-action invariants must live in service-layer mutations before admin write APIs are expanded.
+Admin authority is broad, but destructive and high-risk actions still belong in service-level invariants such as final-admin protection.
 
 ## Enforcement Points
 
-Use `requirePermission(permission, scope)` for route handlers and server actions.
-
-Examples:
+Use:
 
 ```ts
+await requireActiveRole('admin')
 await requirePermission('roles.assign', { departmentCode: 'CIOT' })
 await requirePermission('lessons.update', { subjectId: 'subject_123' })
 await requirePermission('reports.resolve', { institutionId: 'inst_123' })
 ```
 
-Hidden navigation is not a security boundary. Menus can use the same registry for UX, but every read and mutation must enforce authority on the server.
+Navigation hiding is not a security boundary. Every privileged route handler, server action, or server component must enforce role/capability/scope on the server.
 
-## Next Migration Phase
+## Fail-Closed Rules
 
-The next schema phase should add:
+- Teacher content operations require active subject scope.
+- Coordinator operations require active department scope.
+- CR tools require active class group scope.
+- Reviewer queues are scoped to assigned subject/department content.
+- Moderator queues return no records without institution or admin scope.
+- Legacy malformed subject data grants nothing.
+- Profile edits do not grant elevated scope.
 
-- `RoleAssignment`
-- `TeachingAssignment`
-- `ClassGroup`
-- `ClassMembership`
-- general `AuditEvent`
-- session/authority version fields
+## Rollout Notes
 
-Backfill must be dry-run capable and conservative. Ambiguous legacy rows should be reported, not upgraded to broad authority.
+Run the backfill in dry-run mode first:
+
+```bash
+npm run db:authority:backfill
+```
+
+After reviewing the output:
+
+```bash
+npm run db:authority:backfill -- --write
+```
+
+The backfill is conservative and idempotent. Ambiguous rows are reported rather than upgraded to broad authority.

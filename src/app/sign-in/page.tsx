@@ -17,6 +17,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { safeCallbackPath } from '@/lib/auth-policy'
+import { getCampusDashboardPath } from '@/lib/campus-auth'
 
 function routeNotice(verified: string | null, error: string | null) {
   if (verified === 'true') {
@@ -90,7 +91,21 @@ function SignInForm() {
       return
     }
 
-    router.push(result?.url ?? callbackUrl)
+    let destination = result?.url ?? callbackUrl
+    try {
+      const path = destination.startsWith('http') ? new URL(destination).pathname : destination
+      if (path === '/dashboard') {
+        const response = await fetch('/api/user', { cache: 'no-store' })
+        const payload = await response.json().catch(() => null)
+        if (payload?.ok && payload.data?.role) {
+          destination = getCampusDashboardPath(payload.data.role)
+        }
+      }
+    } catch {
+      destination = callbackUrl
+    }
+
+    router.push(destination)
     router.refresh()
   }
 

@@ -2,16 +2,16 @@
 
 ## Student Access
 
-Students can create their own Lernio account with name, email, and password. No college-generated username, password, administrator approval, or invite code is required for the ordinary `student` role.
+Students can create their own Lernio account with name, email, and password. Public signup never accepts an elevated role.
 
-Academic details are optional at signup:
+Academic profile details are optional at signup:
 
 - department/programme
 - semester
 - division
 - roll number
 
-Missing fields can be completed later from onboarding/profile completion.
+These fields describe the student experience. They are not trusted as elevated authority.
 
 ## Google OAuth
 
@@ -19,7 +19,7 @@ Google sign-in is available when `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` a
 
 ## Elevated Roles
 
-Elevated roles are protected:
+Elevated roles:
 
 - `cr`
 - `teacher`
@@ -28,27 +28,46 @@ Elevated roles are protected:
 - `reviewer`
 - `admin`
 
-Self-service signup cannot assign these roles. Elevated access requires an invite or admin approval workflow. Invite records support active/revoked state, expiry, email binding, max-use/use-count fields, and audit logging.
+Elevated access comes from server-controlled flows:
 
-Students can create a pending role request through `POST /api/roles/request`. Admin/coordinator review UI and approval routes are still pending.
+- `npm run db:admin` for the first admin or admin repair
+- approved role requests
+- `RoleAssignment` rows created by authorized admin APIs
+- `TeachingAssignment` rows for teacher subject scope
+- `ClassMembership` rows for CR/class scope
+
+No hardcoded email grants admin authority. `ultimatebracegaming@gmail.com` can be the bootstrap email only when `LERNIO_ADMIN_EMAIL` is set and `npm run db:admin` is run with an explicit password.
+
+## Session Freshness
+
+NextAuth uses JWT sessions. The JWT stores `authorityVersion` and refreshes database-backed user authority on a bounded interval. Role/assignment changes increment `User.authorityVersion`; server routes still resolve fresh authority before privileged work.
 
 ## Permissions
 
-The canonical permission matrix lives in `src/lib/roles.ts`. Server routes should check roles or permissions server-side and never trust role fields from the browser.
+The canonical permission matrix lives in `src/lib/roles.ts`. The scoped authority kernel lives in `src/lib/authority`.
 
-The scoped authority kernel lives in `src/lib/authority`. It resolves an `AuthorityContext` and requires matching scope for elevated non-admin actions. Missing or malformed legacy assignment data fails closed.
+Use:
+
+- `requireUser()` for ordinary authenticated routes
+- `requireActiveRole()` for workspace access
+- `requirePermission(permission, scope)` for privileged operations
 
 More detail:
 
 - `docs/AUTHORITY_ARCHITECTURE.md`
 - `docs/ROLE_PERMISSION_MATRIX.md`
+- `docs/SECURITY_MODEL.md`
 
-## Administrator Bootstrap
+## Admin Bootstrap
 
-No personal email address is promoted to administrator by runtime source-code fallback. The safe bootstrap script can create or update an initial admin account for `LERNIO_ADMIN_EMAIL` only when an explicit `LERNIO_ADMIN_PASSWORD` is available:
+PowerShell:
 
-```bash
+```powershell
+$env:DATABASE_URL="postgresql://..."
+$env:LERNIO_ADMIN_EMAIL="ultimatebracegaming@gmail.com"
+$env:LERNIO_ADMIN_PASSWORD="use-a-long-temporary-password"
 npm run db:admin
+Remove-Item Env:\LERNIO_ADMIN_PASSWORD
 ```
 
-Treat `npm run db:seed` as destructive: it deletes and recreates demo academic data.
+Use a temporary password, sign in, then rotate it. Do not commit real credentials.

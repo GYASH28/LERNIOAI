@@ -84,6 +84,7 @@ export async function PATCH(
       storedSubjectIds: roleRequest.subjectIds,
     });
     const finalDept = departmentCode || roleRequest.departmentCode || roleRequest.user.departmentCode || null;
+    const hasApprovalScope = Boolean(finalDept || finalSubjects?.length || roleRequest.user.institutionId);
 
     // For approval or rejection, require permissions. Non-admin roles must be
     // scoped; missing or malformed legacy subject data grants no broad access.
@@ -122,6 +123,10 @@ export async function PATCH(
     }
 
     // Approved status
+    if (!hasApprovalScope) {
+      throw new ApiError('MISSING_SCOPE', 'Approving this role requires a department, subject, class, or institution scope.', 400, false);
+    }
+
     await db.$transaction(async (tx) => {
       // 1. Update the user role, department, and assigned subjects
       await tx.user.update({
@@ -130,8 +135,73 @@ export async function PATCH(
           role: roleRequest.requestedRole,
           departmentCode: finalDept || null,
           assignedSubjects: finalSubjects ? JSON.stringify(finalSubjects) : null,
+          authorityVersion: { increment: 1 },
         },
       });
+
+      const normalizedAssignments = [
+        ...(finalDept
+          ? [{
+              userId: roleRequest.userId,
+              role: roleRequest.requestedRole,
+              status: 'active',
+              institutionId: roleRequest.user.institutionId,
+              departmentCode: finalDept,
+              assignedById: adminUser.id,
+              reason: `Approved role request ${roleRequest.id}`,
+            }]
+          : []),
+        ...(finalSubjects ?? []).map((subjectId) => ({
+          userId: roleRequest.userId,
+          role: roleRequest.requestedRole,
+          status: 'active',
+          institutionId: roleRequest.user.institutionId,
+          departmentCode: finalDept,
+          subjectId,
+          assignedById: adminUser.id,
+          reason: `Approved role request ${roleRequest.id}`,
+        })),
+        ...(!finalDept && !finalSubjects?.length && roleRequest.user.institutionId
+          ? [{
+              userId: roleRequest.userId,
+              role: roleRequest.requestedRole,
+              status: 'active',
+              institutionId: roleRequest.user.institutionId,
+              assignedById: adminUser.id,
+              reason: `Approved role request ${roleRequest.id}`,
+            }]
+          : []),
+      ];
+
+      for (const assignment of normalizedAssignments) {
+        await tx.roleAssignment.create({ data: assignment });
+      }
+
+      if (roleRequest.requestedRole === 'teacher') {
+        for (const subjectId of finalSubjects ?? []) {
+          const existing = await tx.teachingAssignment.findFirst({
+            where: {
+              teacherId: roleRequest.userId,
+              subjectId,
+              classGroupId: null,
+              status: 'active',
+              revokedAt: null,
+            },
+            select: { id: true },
+          });
+          if (!existing) {
+            await tx.teachingAssignment.create({
+              data: {
+                teacherId: roleRequest.userId,
+                subjectId,
+                institutionId: roleRequest.user.institutionId,
+                assignedById: adminUser.id,
+                status: 'active',
+              },
+            });
+          }
+        }
+      }
 
       // 2. Update the role request status
       await tx.roleRequest.update({
@@ -157,6 +227,23 @@ export async function PATCH(
           role: roleRequest.requestedRole,
           scope: scopeDesc || null,
           note: reviewNote || null,
+        },
+      });
+
+      await tx.auditEvent.create({
+        data: {
+          actorUserId: adminUser.id,
+          targetUserId: roleRequest.userId,
+          institutionId: roleRequest.user.institutionId,
+          action: 'role_request.approved',
+          entityType: 'RoleRequest',
+          entityId: roleRequest.id,
+          summary: `Approved ${roleRequest.requestedRole} request.`,
+          metadata: JSON.stringify({
+            role: roleRequest.requestedRole,
+            departmentCode: finalDept,
+            subjectIds: finalSubjects ?? [],
+          }),
         },
       });
     });

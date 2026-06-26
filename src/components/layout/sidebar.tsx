@@ -26,6 +26,7 @@ import {
   Settings,
   Search,
   LogOut,
+  ShieldCheck,
 } from 'lucide-react'
 import type { ViewKey } from '@/lib/types'
 import { Button } from '@/components/ui/button'
@@ -47,6 +48,15 @@ const NAV_ITEMS: { key: ViewKey; label: string; icon: typeof BookOpen }[] = [
 ]
 
 const MOBILE_PRIMARY: ViewKey[] = ['dashboard', 'learn', 'practice', 'tutor']
+
+const AUTHORITY_ROUTES: Record<string, { href: string; label: string }> = {
+  admin: { href: '/admin', label: 'Admin workspace' },
+  coordinator: { href: '/coordinator', label: 'Coordinator workspace' },
+  teacher: { href: '/teacher', label: 'Teacher workspace' },
+  reviewer: { href: '/reviewer', label: 'Reviewer workspace' },
+  moderator: { href: '/moderator', label: 'Moderator workspace' },
+  cr: { href: '/cr', label: 'CR workspace' },
+}
 
 function isActivePath(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`)
@@ -162,6 +172,27 @@ export function Sidebar() {
               onNavigate={() => setSidebarOpen(false)}
             />
           ))}
+          {user?.role && AUTHORITY_ROUTES[user.role] ? (
+            <>
+              <p className="mt-2 px-2 py-1.5 text-meta font-semibold uppercase tracking-wider text-muted-foreground md:sr-only xl:not-sr-only">
+                Authority
+              </p>
+              <Link
+                href={AUTHORITY_ROUTES[user.role].href}
+                onClick={() => setSidebarOpen(false)}
+                title={AUTHORITY_ROUTES[user.role].label}
+                className={cn(
+                  'focus-ring group relative flex w-full items-center justify-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all xl:justify-start',
+                  isActivePath(pathname, AUTHORITY_ROUTES[user.role].href)
+                    ? 'bg-sidebar-primary text-sidebar-primary-foreground shadow-soft'
+                    : 'text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',
+                )}
+              >
+                <ShieldCheck className="h-4 w-4 shrink-0" />
+                <span className="hidden flex-1 text-left xl:block">{AUTHORITY_ROUTES[user.role].label}</span>
+              </Link>
+            </>
+          ) : null}
         </nav>
 
         <div className="space-y-1 border-t border-sidebar-border p-3">

@@ -2,9 +2,9 @@
 
 ## Database
 
-Lernio now expects PostgreSQL.
+Lernio expects PostgreSQL.
 
-Required environment variables:
+Required:
 
 ```bash
 DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=public"
@@ -16,6 +16,9 @@ LERNIO_DEMO_MODE="false"
 Optional:
 
 ```bash
+DATABASE_URL_UNPOOLED=""
+POSTGRES_URL_NON_POOLING=""
+DIRECT_URL=""
 GOOGLE_CLIENT_ID=""
 GOOGLE_CLIENT_SECRET=""
 GROQ_API_KEY=""
@@ -24,9 +27,10 @@ GROQ_FAST_MODEL="llama-3.1-8b-instant"
 RESEND_API_KEY=""
 EMAIL_FROM="Lernio <no-reply@your-domain.example>"
 LERNIO_ADMIN_EMAIL="ultimatebracegaming@gmail.com"
-LERNIO_ADMIN_PASSWORD="" # required only when running npm run db:admin or destructive seed bootstrap
-NEXT_PUBLIC_LERNIO_ROLL_NUMBER_PATTERN="^[A-Za-z0-9/-]{1,32}$"
+LERNIO_ADMIN_PASSWORD=""
 ```
+
+`LERNIO_ADMIN_PASSWORD` is required only when running `npm run db:admin`.
 
 ## Build
 
@@ -35,7 +39,7 @@ npm ci
 npm run vercel-build
 ```
 
-For local checks before deployment, run:
+Local release checks:
 
 ```bash
 npm run lint
@@ -53,42 +57,64 @@ npm run build
 - Root directory: repository root
 - Runtime: Node.js 24.x
 - Production branch: `main`
-- `DATABASE_URL` must point at the production PostgreSQL database; migrations run during `npm run vercel-build`
-- If your production database uses pooling, set `DATABASE_URL_UNPOOLED` or `POSTGRES_URL_NON_POOLING` for migration deploys.
+- `DATABASE_URL` points at production PostgreSQL
+- For pooled production URLs, set `DATABASE_URL_UNPOOLED`, `POSTGRES_URL_NON_POOLING`, or `DIRECT_URL`
+
+`npm run vercel-build` runs Prisma generate, deploys committed migrations when database env vars are available, then runs the Next.js build.
+
+## Authority Migration
+
+Apply committed migrations:
+
+```bash
+npm run db:deploy
+```
+
+Run a dry-run authority backfill:
+
+```bash
+npm run db:authority:backfill
+```
+
+After reviewing the report:
+
+```bash
+npm run db:authority:backfill -- --write
+```
+
+The backfill creates missing institution memberships, class groups, class memberships, role assignments, teaching assignments, and audit events when the source data is unambiguous. Ambiguous legacy rows are reported and skipped.
+
+## Admin Bootstrap
+
+PowerShell:
+
+```powershell
+$env:DATABASE_URL="postgresql://..."
+$env:LERNIO_ADMIN_EMAIL="admin@example.com"
+$env:LERNIO_ADMIN_PASSWORD="use-a-long-temporary-password"
+npm run db:admin
+Remove-Item Env:\LERNIO_ADMIN_PASSWORD
+```
+
+The script creates or repairs the admin user without seeding demo data. Rotate any credential exposed in screenshots, shell history, or chat.
 
 ## Smoke Tests
 
 After deployment verify:
 
-- landing page
-- signup without invite
-- login
-- Google button behavior when configured/unconfigured
-- profile completion and complete-later path
-- dashboard
-- curriculum route refresh
+- `/`
+- `/sign-up`
+- `/sign-in`
+- `/dashboard`
+- `/admin` after admin login
 - `/api/ready`
-- `/api/ready` reports `ready` or `degraded` with database, auth, AI, and email configuration
-- AI tutor fallback when Groq credentials are missing
-- password reset email delivery when Resend is configured
-- logout/login state isolation
+- AI tutor fallback when Groq is not configured
+- password reset email when Resend is configured
+- role revocation updates after re-login or JWT refresh
 
-## Admin Bootstrap
+## Rollback Notes
 
-To create or repair the first admin without seeding demo data:
-
-```bash
-LERNIO_ADMIN_EMAIL="admin@example.com"
-LERNIO_ADMIN_PASSWORD="use-a-long-temporary-password"
-npm run db:admin
-```
-
-On PowerShell:
-
-```powershell
-$env:LERNIO_ADMIN_EMAIL="admin@example.com"
-$env:LERNIO_ADMIN_PASSWORD="use-a-long-temporary-password"
-npm run db:admin
-```
-
-Run this against the intended production `DATABASE_URL`. Clear the temporary password from the shell after use and rotate any credential that was exposed in screenshots, logs, or chat.
+- Take a database backup before applying migrations.
+- The authority migration is additive and does not drop legacy fields.
+- If a workspace needs to be hidden temporarily, remove links or gate route access, but do not drop the authority tables.
+- Recover first admin with `npm run db:admin`.

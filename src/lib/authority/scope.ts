@@ -17,12 +17,20 @@ export interface AuthorityScope {
 
 export interface ScopedAuthorityAssignment {
   role: Role
-  source: 'primary-role' | 'legacy-user-field' | 'institution-membership'
+  source:
+    | 'primary-role'
+    | 'role-assignment'
+    | 'teaching-assignment'
+    | 'class-membership'
+    | 'legacy-user-field'
+    | 'institution-membership'
   institutionId?: string | null
+  departmentId?: string | null
   departmentCode?: string | null
   programmeId?: string | null
   schemeId?: string | null
   semesterId?: string | null
+  classGroupId?: string | null
   classGroupKey?: string | null
   subjectId?: string | null
   status: 'active' | 'verified'
@@ -177,10 +185,10 @@ export function canUseCapability(
   const normalized = normalizePermission(permission)
   if (!normalized) return false
 
-  const role = normalizeRole(authority.primaryRole)
+  const activeRoles = authority.activeRoles.map(normalizeRole)
   if (authority.user.status === 'disabled') return false
   if (!authority.capabilities.includes(normalized)) return false
-  if (role === 'admin') return true
+  if (activeRoles.includes('admin')) return true
 
   const scope = normalizeRequestedScope(requestedScope)
   if (SELF_SCOPED_PERMISSIONS.has(normalized)) {
@@ -241,7 +249,7 @@ export function canUseCapability(
   if (
     scope.institutionId &&
     authority.scopeIndex.institutionIds.includes(scope.institutionId) &&
-    canUseInstitutionScopedCapability(role, normalized)
+    canUseInstitutionScopedCapability(activeRoles, normalized)
   ) {
     return true
   }
@@ -321,8 +329,8 @@ function isPublicReadCapability(permission: Permission) {
   ].includes(permission)
 }
 
-function canUseInstitutionScopedCapability(role: Role, permission: Permission) {
-  if (role === 'moderator') {
+function canUseInstitutionScopedCapability(activeRoles: readonly Role[], permission: Permission) {
+  if (activeRoles.includes('moderator')) {
     return [
       'reports.read',
       'reports.resolve',

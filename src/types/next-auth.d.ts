@@ -8,6 +8,7 @@ declare module 'next-auth' {
       role: Role
       status: string
       profileComplete: boolean
+      authorityVersion: number
     } & DefaultSession['user']
   }
 
@@ -15,6 +16,7 @@ declare module 'next-auth' {
     role: Role
     status?: string
     profileComplete?: boolean
+    authorityVersion?: number
   }
 }
 
@@ -24,5 +26,7 @@ declare module 'next-auth/jwt' {
     role?: Role
     status?: string
     profileComplete?: boolean
+    authorityVersion?: number
+    authorityCheckedAt?: number
   }
 }

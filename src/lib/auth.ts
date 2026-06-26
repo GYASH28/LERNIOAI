@@ -23,7 +23,7 @@ import { isDatabaseUnavailableError } from '@/lib/api-error-policy'
 import { resolveAuthMode } from '@/lib/auth-policy'
 import { DEMO_AUTH_USER } from '@/lib/demo-fixtures'
 import { checkRateLimit } from '@/lib/rate-limit'
-import { canUseCapability, resolveAuthorityContext, type AuthorityScope } from '@/lib/authority'
+import { canUseCapability, resolveAuthorityContext, type AuthorityContext, type AuthorityScope } from '@/lib/authority'
 import { normalizeRole, type Role, type PermissionInput } from '@/lib/roles'
 
 export type { Role } from '@/lib/roles'
@@ -35,6 +35,7 @@ export interface AuthUser {
   role: Role
   status?: string
   profileComplete?: boolean
+  authorityVersion?: number
 }
 
 const DEMO_PASSWORD = process.env.LERNIO_DEMO_PASSWORD || 'student123'
@@ -88,6 +89,7 @@ const providers: NextAuthOptions['providers'] = [
           role: true,
           status: true,
           profileComplete: true,
+          authorityVersion: true,
         },
       })
 
@@ -124,6 +126,7 @@ const providers: NextAuthOptions['providers'] = [
         role: normalizeRole(user.role),
         status: user.status,
         profileComplete: user.profileComplete,
+        authorityVersion: user.authorityVersion,
       }
     },
   }),
@@ -173,16 +176,31 @@ export const authOptions: NextAuthOptions = {
         token.role = normalizeRole((user as AuthUser).role)
         token.status = (user as AuthUser).status ?? 'active'
         token.profileComplete = (user as AuthUser).profileComplete ?? true
-      } else if (token.email && (!token.id || !token.role || !token.status || token.profileComplete === undefined)) {
+        token.authorityVersion = (user as AuthUser).authorityVersion ?? 0
+        token.authorityCheckedAt = Date.now()
+      } else if (
+        token.email &&
+        (
+          !token.id ||
+          !token.role ||
+          !token.status ||
+          token.profileComplete === undefined ||
+          token.authorityVersion === undefined ||
+          !token.authorityCheckedAt ||
+          Date.now() - Number(token.authorityCheckedAt) > 60_000
+        )
+      ) {
         const fresh = await db.user.findUnique({
           where: { email: token.email },
-          select: { id: true, role: true, status: true, profileComplete: true },
+          select: { id: true, role: true, status: true, profileComplete: true, authorityVersion: true },
         })
         if (fresh) {
           token.id = fresh.id
           token.role = normalizeRole(fresh.role)
           token.status = fresh.status
           token.profileComplete = fresh.profileComplete
+          token.authorityVersion = fresh.authorityVersion
+          token.authorityCheckedAt = Date.now()
         }
       }
       return token
@@ -193,6 +211,7 @@ export const authOptions: NextAuthOptions = {
         session.user.role = normalizeRole(token.role)
         session.user.status = String(token.status ?? 'active')
         session.user.profileComplete = token.profileComplete !== false
+        session.user.authorityVersion = Number(token.authorityVersion ?? 0)
       }
       return session
     },
@@ -244,6 +263,7 @@ async function resolveUserFromSession(): Promise<AuthUser | null> {
       role: normalizeRole(u.role),
       status: u.status,
       profileComplete: u.profileComplete,
+      authorityVersion: u.authorityVersion,
     }
   }
 
@@ -285,6 +305,20 @@ export const requireTeacher = () => requireRole('teacher', 'coordinator', 'admin
 export const requireModerator = () => requireRole('moderator', 'reviewer', 'coordinator', 'admin')
 export const requireReviewer = () => requireRole('reviewer', 'admin')
 export const requireAdmin = () => requireRole('admin')
+
+export async function getAuthorityContext(): Promise<AuthorityContext | null> {
+  const user = await resolveUserFromSession()
+  return user ? resolveAuthorityContext(user) : null
+}
+
+export async function requireActiveRole(...allowed: Role[]): Promise<AuthorityContext> {
+  const user = await requireUser()
+  const authority = await resolveAuthorityContext(user)
+  if (!allowed.some((role) => authority.activeRoles.includes(role))) {
+    throw new ApiError('FORBIDDEN', 'You do not have permission to do that.', 403, false)
+  }
+  return authority
+}
 
 /**
  * Require a user with a specific permission and optional scope checks.

@@ -91,8 +91,18 @@ export function canAssignCampusRole(assignerRole: unknown, targetRole: unknown):
   return canAssignRole(assignerRole, targetRole)
 }
 
-export function getCampusDashboardPath(_role: unknown): string {
-  return '/dashboard'
+export function getCampusDashboardPath(role: unknown): string {
+  const normalized = normalizeCampusRole(role)
+  const paths: Record<CampusRole, string> = {
+    student: '/dashboard',
+    cr: '/cr',
+    teacher: '/teacher',
+    coordinator: '/coordinator',
+    moderator: '/moderator',
+    reviewer: '/reviewer',
+    admin: '/admin',
+  }
+  return paths[normalized]
 }
 
 export function normalizeEmail(email: unknown): string {

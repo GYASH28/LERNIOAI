@@ -69,6 +69,24 @@ describe('authority scope policy', () => {
     expect(canUseCapability(admin, 'system.settings.update')).toBe(true)
   })
 
+  it('honors active admin role assignments even when the primary role is not admin', () => {
+    const delegatedAdmin = createAuthorityContext({
+      user: {
+        id: 'student-admin-1',
+        email: 'student-admin@lernio.test',
+        name: 'Delegated Admin',
+        role: 'student',
+        status: 'active',
+        profileComplete: true,
+      },
+      primaryRole: 'student',
+      activeRoles: ['student', 'admin'],
+      capabilities: [...permissionsForRole('student'), ...permissionsForRole('admin')],
+    })
+
+    expect(canUseCapability(delegatedAdmin, 'roles.assign')).toBe(true)
+  })
+
   it('builds class group keys only from complete legacy class scope', () => {
     expect(buildClassGroupKey({ departmentCode: 'ciot', semesterNumber: 2, division: 'a' })).toBe('CIOT:S2:A')
     expect(buildClassGroupKey({ departmentCode: 'ciot', semesterNumber: 2 })).toBeNull()

@@ -2483,6 +2483,7 @@ async function main() {
   console.log("🧹 Cleaning existing data (dependency order)...");
   const cleanupOrder = [
     "account", "session", "verificationToken",
+    "auditEvent", "classMembership", "teachingAssignment", "roleAssignment", "classGroup",
     "userAchievement", "achievement", "bookmark", "contribution", "resource",
     "labProgress", "codingSubmission", "codingChallenge", "tutorMessage", "tutorSession",
     "studySession", "studyTask", "revisionAttempt", "revisionSchedule",

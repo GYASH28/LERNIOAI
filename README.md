@@ -4,6 +4,8 @@ An adaptive, mascot-led learning platform for diploma engineering students at CW
 
 The app covers the student learning flow across dashboard, lessons, practice, AI tutor, labs, coding, exams, revision, materials, planner, analytics, and profile.
 
+Lernio also has the first production authority layer for a Learning OS: normalized role assignments, class groups, teaching assignments, class memberships, audited admin APIs, and role workspaces for Admin, Coordinator, Teacher, Reviewer, Moderator, and CR.
+
 ## Quick Start
 
 ### Prerequisites
@@ -19,6 +21,7 @@ cp .env.example .env
 
 npm run db:generate
 npm run db:deploy
+npm run db:authority:backfill
 
 # Optional demo/bootstrap data. This is destructive.
 npm run db:seed
@@ -59,6 +62,7 @@ See `.env.example` for the full list.
 | `npm run db:migrate` | Create and apply a migration locally |
 | `npm run db:deploy` | Apply committed migrations |
 | `npm run db:admin` | Non-destructively create/update the admin user from `LERNIO_ADMIN_EMAIL` and `LERNIO_ADMIN_PASSWORD` |
+| `npm run db:authority:backfill` | Dry-run legacy role/profile migration into normalized authority tables |
 | `npm run db:seed` | Destructive demo/admin seed |
 
 ## Architecture
@@ -71,6 +75,22 @@ See `.env.example` for the full list.
 - Email: Resend HTTP API through `src/lib/email.ts`
 - Validation: Zod schemas in `src/lib/schemas.ts`
 - Server trust boundary: `requireUser`, `requireRole`, and `requirePermission`
+- Authority kernel: `src/lib/authority`, backed by `RoleAssignment`, `TeachingAssignment`, `ClassGroup`, `ClassMembership`, and `AuditEvent`
+
+## Authority Workspaces
+
+Public signup remains student-only. Elevated access comes from server-side admin bootstrap, approved role requests, or normalized role assignments.
+
+Current workspace routes:
+
+- `/admin`
+- `/coordinator`
+- `/teacher`
+- `/reviewer`
+- `/moderator`
+- `/cr`
+
+Every workspace is server-rendered and protected by `requireActiveRole()`. Navigation visibility is only UX; APIs still enforce server-side authority and scope.
 
 ## AI Tutor
 
@@ -101,4 +121,5 @@ Vercel should use:
 - Password reset emails not sent in production: set `RESEND_API_KEY` and `EMAIL_FROM`.
 - LEO tutor fallback responses: set `GROQ_API_KEY`.
 - Admin user missing: set `LERNIO_ADMIN_EMAIL` and `LERNIO_ADMIN_PASSWORD`, then run `npm run db:admin`.
+- Authority pages show empty scope: run `npm run db:authority:backfill -- --write` after reviewing the dry-run report, or create scoped role assignments from the admin API.
 - Demo data missing: run `npm run db:seed`; this is destructive and recreates the demo academic dataset.
