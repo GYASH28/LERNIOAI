@@ -42,11 +42,11 @@
   left: 0;
   top: 0;
   z-index: 2147483600;
-  width: 58px;
-  height: 58px;
+  width: 46px;
+  height: 46px;
   pointer-events: none;
   opacity: 0;
-  transform: translate3d(calc(var(--cursor-x) - 8px), calc(var(--cursor-y) - 5px), 0);
+  transform: translate3d(calc(var(--cursor-x) - 7px), calc(var(--cursor-y) - 4px), 0);
   transition: opacity 160ms ease;
   will-change: transform, opacity;
 }
@@ -60,7 +60,7 @@
   left: 0;
   top: 0;
   filter:
-    drop-shadow(0 10px 18px rgb(15 23 42 / 0.22))
+    drop-shadow(0 8px 14px rgb(15 23 42 / 0.22))
     drop-shadow(0 1px 0 rgb(255 255 255 / 0.18));
   transform-origin: 12px 9px;
   transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), filter 180ms ease;
@@ -68,10 +68,10 @@
 
 .lernio-cursor__ping {
   position: absolute;
-  left: 8px;
-  top: 3px;
-  width: 24px;
-  height: 24px;
+  left: 6px;
+  top: 2px;
+  width: 19px;
+  height: 19px;
   border-radius: 999px;
   border: 2px solid color-mix(in oklch, var(--info) 80%, white 10%);
   opacity: 0;
@@ -79,9 +79,9 @@
 }
 
 .lernio-cursor__ping--two {
-  width: 34px;
-  height: 34px;
-  left: 3px;
+  width: 27px;
+  height: 27px;
+  left: 2px;
   top: -2px;
   border-style: dashed;
   animation-delay: 160ms;
@@ -89,8 +89,8 @@
 
 .lernio-cursor__spark {
   position: absolute;
-  width: 7px;
-  height: 7px;
+  width: 5px;
+  height: 5px;
   border-radius: 2px;
   background: color-mix(in oklch, var(--info) 82%, white 12%);
   opacity: 0;
@@ -98,23 +98,23 @@
 }
 
 .lernio-cursor__spark--a {
-  left: 18px;
-  top: 2px;
+  left: 14px;
+  top: 1px;
 }
 
 .lernio-cursor__spark--b {
-  left: 4px;
-  top: 17px;
-  width: 5px;
-  height: 5px;
+  left: 3px;
+  top: 13px;
+  width: 4px;
+  height: 4px;
 }
 
 .lernio-cursor__clock {
   position: absolute;
-  left: 7px;
+  left: 5px;
   top: 0;
-  width: 26px;
-  height: 26px;
+  width: 21px;
+  height: 21px;
   border: 2px solid color-mix(in oklch, var(--info) 72%, white 12%);
   border-radius: 999px;
   opacity: 0;
@@ -134,12 +134,12 @@
 }
 
 .lernio-cursor__clock::before {
-  height: 7px;
+  height: 6px;
   transform: translate(-50%, -100%) rotate(0deg);
 }
 
 .lernio-cursor__clock::after {
-  height: 5px;
+  height: 4px;
   transform: translate(-50%, -100%) rotate(90deg);
 }
 
@@ -151,7 +151,7 @@
 .lernio-cursor[data-mode="clock"] .lernio-cursor__glyph {
   transform: scale(0.9) rotate(-3deg);
   filter:
-    drop-shadow(0 12px 22px rgb(37 99 235 / 0.24))
+    drop-shadow(0 10px 18px rgb(37 99 235 / 0.24))
     drop-shadow(0 1px 0 rgb(255 255 255 / 0.2));
 }
 
