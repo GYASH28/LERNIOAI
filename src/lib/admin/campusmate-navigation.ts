@@ -16,6 +16,7 @@ export const CAMPUSMATE_ADMIN_NAV: AdminNavGroup[] = [
     label: 'Operations',
     items: [
       { label: 'Command Center', href: '/admin', description: 'Live institution overview and operational priorities.', icon: 'command' },
+      { label: 'Site Control', href: '/admin/site-control', description: 'Create, update, archive, restore, export, and govern site data.', icon: 'settings' },
       { label: 'Analytics & Coverage', href: '/admin/analytics', description: 'Learning, curriculum, and coverage intelligence.', icon: 'analytics' },
     ],
   },
