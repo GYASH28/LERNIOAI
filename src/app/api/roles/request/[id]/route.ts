@@ -13,9 +13,26 @@ import { z } from 'zod';
 const PatchSchema = z.object({
   status: z.enum(['approved', 'rejected', 'withdrawn']),
   reviewNote: z.string().optional(),
-  assignedSubjects: z.array(z.string()).optional(),
+  assignedSubjects: z.array(z.string()).max(20).optional(),
   departmentCode: z.string().optional(),
 });
+
+function resolveSubjectScope(input: {
+  assignedSubjects?: string[];
+  storedSubjectIds?: string | null;
+}) {
+  if (input.assignedSubjects) return input.assignedSubjects;
+  if (!input.storedSubjectIds) return null;
+
+  try {
+    const parsed = JSON.parse(input.storedSubjectIds) as unknown;
+    return Array.isArray(parsed)
+      ? parsed.filter((item): item is string => typeof item === 'string' && item.trim().length > 0)
+      : null;
+  } catch {
+    return null;
+  }
+}
 
 export async function PATCH(
   req: NextRequest,
@@ -62,8 +79,18 @@ export async function PATCH(
       return okResponse({ status: 'withdrawn' });
     }
 
-    // For approval or rejection, require permissions
-    const adminUser = await requirePermission('role.assign');
+    const finalSubjects = resolveSubjectScope({
+      assignedSubjects,
+      storedSubjectIds: roleRequest.subjectIds,
+    });
+    const finalDept = departmentCode || roleRequest.departmentCode || roleRequest.user.departmentCode || null;
+
+    // For approval or rejection, require permissions. Non-admin roles must be
+    // scoped; missing or malformed legacy subject data grants no broad access.
+    const adminUser = await requirePermission('roles.assign', {
+      departmentCode: finalDept,
+      subjectIds: finalSubjects,
+    });
     if (!canAssignRole(adminUser.role, roleRequest.requestedRole)) {
       throw new ApiError('FORBIDDEN', 'Insufficient permissions to assign this role.', 403, false);
     }
@@ -96,18 +123,6 @@ export async function PATCH(
 
     // Approved status
     await db.$transaction(async (tx) => {
-      let finalSubjects: string[] | null = null;
-      if (assignedSubjects) {
-        finalSubjects = assignedSubjects;
-      } else if (roleRequest.subjectIds) {
-        try {
-          finalSubjects = JSON.parse(roleRequest.subjectIds) as string[];
-        } catch {
-          finalSubjects = roleRequest.subjectIds.split(',').map((s) => s.trim());
-        }
-      }
-      const finalDept = departmentCode || roleRequest.departmentCode;
-
       // 1. Update the user role, department, and assigned subjects
       await tx.user.update({
         where: { id: roleRequest.userId },

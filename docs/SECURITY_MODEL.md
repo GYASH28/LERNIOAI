@@ -4,8 +4,19 @@
 
 - The browser never supplies authoritative `userId`, role, XP, score, correctness, streak, or permission state.
 - API routes resolve the caller through `requireUser()` or role helpers.
+- Privileged routes should use `requirePermission()` with an explicit scope.
 - User-owned data queries are scoped by authenticated user ID.
 - Browser-facing user objects must use `toPublicUserDTO()` or an explicit safe `select`.
+
+## Role Authority
+
+The authority kernel in `src/lib/authority` is server-only and fail-closed.
+
+- Missing teacher subject scope denies subject mutation.
+- Missing coordinator department scope denies department authority.
+- Malformed legacy `assignedSubjects` JSON grants no authority.
+- Moderator and reviewer capabilities are separated.
+- Admin broad authority still requires service-level invariants for destructive actions.
 
 ## Sensitive Data
 
@@ -31,7 +42,7 @@ Tutor chat, text-to-speech, and speech-to-text calls go through `getAiProvider()
 
 ## Remaining Work
 
-- Password reset tokens and email verification tables/flows.
-- Admin UI and server routes for role request approval/rejection.
+- Normalized role assignment, teaching assignment, class group, and audit event migrations.
+- Admin UI and server routes for full user/access/curriculum management.
 - Stronger per-action quotas for all expensive AI/material endpoints.
 - CSP/header hardening beyond the current Next.js defaults.

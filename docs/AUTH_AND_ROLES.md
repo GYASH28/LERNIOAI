@@ -36,6 +36,19 @@ Students can create a pending role request through `POST /api/roles/request`. Ad
 
 The canonical permission matrix lives in `src/lib/roles.ts`. Server routes should check roles or permissions server-side and never trust role fields from the browser.
 
+The scoped authority kernel lives in `src/lib/authority`. It resolves an `AuthorityContext` and requires matching scope for elevated non-admin actions. Missing or malformed legacy assignment data fails closed.
+
+More detail:
+
+- `docs/AUTHORITY_ARCHITECTURE.md`
+- `docs/ROLE_PERMISSION_MATRIX.md`
+
 ## Administrator Bootstrap
 
-No personal email address is promoted to administrator by runtime source-code fallback. The seed/bootstrap script can create an initial admin account for `LERNIO_ADMIN_EMAIL` (default `ultimatebracegaming@gmail.com`) only when an explicit `LERNIO_ADMIN_PASSWORD` is available. Treat `npm run db:seed` as destructive: it deletes and recreates demo academic data.
+No personal email address is promoted to administrator by runtime source-code fallback. The safe bootstrap script can create or update an initial admin account for `LERNIO_ADMIN_EMAIL` only when an explicit `LERNIO_ADMIN_PASSWORD` is available:
+
+```bash
+npm run db:admin
+```
+
+Treat `npm run db:seed` as destructive: it deletes and recreates demo academic data.

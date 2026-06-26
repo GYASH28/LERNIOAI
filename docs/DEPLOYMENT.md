@@ -24,7 +24,7 @@ GROQ_FAST_MODEL="llama-3.1-8b-instant"
 RESEND_API_KEY=""
 EMAIL_FROM="Lernio <no-reply@your-domain.example>"
 LERNIO_ADMIN_EMAIL="ultimatebracegaming@gmail.com"
-LERNIO_ADMIN_PASSWORD="" # required only when running the destructive seed bootstrap
+LERNIO_ADMIN_PASSWORD="" # required only when running npm run db:admin or destructive seed bootstrap
 NEXT_PUBLIC_LERNIO_ROLL_NUMBER_PATTERN="^[A-Za-z0-9/-]{1,32}$"
 ```
 
@@ -72,3 +72,23 @@ After deployment verify:
 - AI tutor fallback when Groq credentials are missing
 - password reset email delivery when Resend is configured
 - logout/login state isolation
+
+## Admin Bootstrap
+
+To create or repair the first admin without seeding demo data:
+
+```bash
+LERNIO_ADMIN_EMAIL="admin@example.com"
+LERNIO_ADMIN_PASSWORD="use-a-long-temporary-password"
+npm run db:admin
+```
+
+On PowerShell:
+
+```powershell
+$env:LERNIO_ADMIN_EMAIL="admin@example.com"
+$env:LERNIO_ADMIN_PASSWORD="use-a-long-temporary-password"
+npm run db:admin
+```
+
+Run this against the intended production `DATABASE_URL`. Clear the temporary password from the shell after use and rotate any credential that was exposed in screenshots, logs, or chat.

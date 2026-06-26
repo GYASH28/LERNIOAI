@@ -23,7 +23,8 @@ import { isDatabaseUnavailableError } from '@/lib/api-error-policy'
 import { resolveAuthMode } from '@/lib/auth-policy'
 import { DEMO_AUTH_USER } from '@/lib/demo-fixtures'
 import { checkRateLimit } from '@/lib/rate-limit'
-import { normalizeRole, type Role, type Permission, hasPermission } from '@/lib/roles'
+import { canUseCapability, resolveAuthorityContext, type AuthorityScope } from '@/lib/authority'
+import { normalizeRole, type Role, type PermissionInput } from '@/lib/roles'
 
 export type { Role } from '@/lib/roles'
 
@@ -291,48 +292,14 @@ export const requireAdmin = () => requireRole('admin')
  * they have access to the requested subjectId or departmentCode.
  */
 export async function requirePermission(
-  permission: Permission,
-  scope?: { subjectId?: string; departmentCode?: string }
+  permission: PermissionInput,
+  scope?: AuthorityScope,
 ): Promise<AuthUser> {
   const authUser = await requireUser()
+  const authority = await resolveAuthorityContext(authUser)
 
-  if (!hasPermission(authUser.role, permission)) {
+  if (!canUseCapability(authority, permission, scope)) {
     throw new ApiError('FORBIDDEN', 'You do not have permission to do that.', 403, false)
-  }
-
-  if (scope) {
-    const user = await db.user.findUnique({
-      where: { id: authUser.id },
-      select: { assignedSubjects: true, departmentCode: true, role: true },
-    })
-
-    if (!user) {
-      throw new ApiError('NOT_FOUND', 'User not found.', 404, false)
-    }
-
-    // Admins bypass scope checks
-    if (user.role === 'admin') {
-      return authUser
-    }
-
-    if (scope.subjectId) {
-      if (user.assignedSubjects) {
-        try {
-          const subjects = JSON.parse(user.assignedSubjects) as string[]
-          if (Array.isArray(subjects) && !subjects.includes(scope.subjectId)) {
-            throw new ApiError('FORBIDDEN', 'You do not have access to this subject.', 403, false)
-          }
-        } catch {
-          throw new ApiError('FORBIDDEN', 'You do not have access to this subject.', 403, false)
-        }
-      }
-    }
-
-    if (scope.departmentCode) {
-      if (user.departmentCode && user.departmentCode !== scope.departmentCode) {
-        throw new ApiError('FORBIDDEN', 'You do not have access to this department.', 403, false)
-      }
-    }
   }
 
   return authUser

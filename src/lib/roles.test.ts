@@ -10,8 +10,9 @@ describe('canonical roles and permissions', () => {
   it('keeps elevated roles distinct from ordinary students', () => {
     expect(isElevatedRole('student')).toBe(false)
     expect(isElevatedRole('teacher')).toBe(true)
+    expect(hasPermission('admin', 'roles.assign')).toBe(true)
     expect(hasPermission('admin', 'role.assign')).toBe(true)
-    expect(hasPermission('student', 'role.assign')).toBe(false)
+    expect(hasPermission('student', 'roles.assign')).toBe(false)
   })
 
   it('prevents non-admins from assigning administrator access', () => {
