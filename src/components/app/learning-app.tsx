@@ -63,20 +63,6 @@ const ProfileView = lazy(loadProfileView)
 const CommandPalette = dynamic(loadCommandPalette, { ssr: false })
 const FocusTimerWidget = dynamic(loadFocusTimerWidget, { ssr: false })
 
-const VIEW_CHUNK_LOADERS = [
-  loadLearnView,
-  loadPracticeView,
-  loadTutorView,
-  loadRevisionView,
-  loadPlannerView,
-  loadMaterialsView,
-  loadCodingView,
-  loadExamsView,
-  loadLabsView,
-  loadAnalyticsView,
-  loadProfileView,
-]
-
 async function fetchJsonWithTimeout(url: string, timeoutMs = 1500) {
   const controller = new AbortController()
   const timer = window.setTimeout(() => controller.abort(), timeoutMs)
@@ -151,27 +137,6 @@ export function LearningApp({
     void load()
     return () => { mounted = false }
   }, [initialSubjects.length, initialUser, setUser, setSubjects])
-
-  useEffect(() => {
-    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection
-    if (connection?.saveData) return
-
-    const handles: number[] = []
-    const start = window.setTimeout(() => {
-      VIEW_CHUNK_LOADERS.forEach((loader, index) => {
-        const delay = index < 6 ? index * 180 : 1600 + (index - 6) * 350
-        const handle = window.setTimeout(() => {
-          void loader().catch(() => {})
-        }, delay)
-        handles.push(handle)
-      })
-    }, 900)
-
-    return () => {
-      window.clearTimeout(start)
-      handles.forEach((handle) => window.clearTimeout(handle))
-    }
-  }, [])
 
   // Greet with LEO on first load
   useEffect(() => {

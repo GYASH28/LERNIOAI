@@ -1,7 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import type { FormEvent } from 'react'
+import type { ChangeEvent, FormEvent } from 'react'
 import { Plus, RefreshCw, Search, ShieldCheck, Trash2, UserCheck, UserX } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -28,7 +28,10 @@ type RoleRequest = {
   id: string
   requestedRole: string
   reason: string | null
+  institutionId: string | null
+  departmentId: string | null
   departmentCode: string | null
+  classGroupId: string | null
   subjectIds: string | null
   status: string
   createdAt: string
@@ -37,6 +40,7 @@ type RoleRequest = {
 
 type RoleAssignment = {
   id: string
+  authorityGrantId: string | null
   role: string
   status: string
   institutionId: string | null
@@ -53,10 +57,36 @@ type AssignmentDraft = {
   userId: string
   role: string
   institutionId: string
+  departmentId: string
   departmentCode: string
   classGroupId: string
   subjectId: string
   reason: string
+}
+
+type BasicOption = { id: string; label: string }
+
+type DepartmentOption = BasicOption & {
+  code: string
+  institutionId: string
+}
+
+type SubjectOption = BasicOption & {
+  code: string
+  schemeId: string
+}
+
+type ClassGroupOption = BasicOption & {
+  institutionId: string
+  departmentId: string | null
+  departmentCode: string | null
+}
+
+type AccessOptions = {
+  institutions: BasicOption[]
+  departments: DepartmentOption[]
+  subjects: SubjectOption[]
+  classGroups: ClassGroupOption[]
 }
 
 type ApiEnvelope<T> = {
@@ -69,10 +99,18 @@ const EMPTY_ASSIGNMENT: AssignmentDraft = {
   userId: '',
   role: 'teacher',
   institutionId: '',
+  departmentId: '',
   departmentCode: '',
   classGroupId: '',
   subjectId: '',
   reason: '',
+}
+
+const EMPTY_OPTIONS: AccessOptions = {
+  institutions: [],
+  departments: [],
+  subjects: [],
+  classGroups: [],
 }
 
 async function readJson<T>(response: Response): Promise<T> {
@@ -83,38 +121,47 @@ async function readJson<T>(response: Response): Promise<T> {
   return payload.data
 }
 
-function assignmentScope(assignment: RoleAssignment) {
-  if (assignment.subjectId) return `Subject ${assignment.subjectId}`
-  if (assignment.classGroupId) return `Class ${assignment.classGroupId}`
+function assignmentScope(assignment: RoleAssignment, options: AccessOptions) {
+  const subject = options.subjects.find((item) => item.id === assignment.subjectId)
+  const classGroup = options.classGroups.find((item) => item.id === assignment.classGroupId)
+  const department = options.departments.find((item) => item.code === assignment.departmentCode)
+  const institution = options.institutions.find((item) => item.id === assignment.institutionId)
+  if (subject) return subject.label
+  if (classGroup) return classGroup.label
+  if (department) return department.label
+  if (institution) return institution.label
+  if (assignment.subjectId) return 'Unknown subject'
+  if (assignment.classGroupId) return 'Unknown class group'
   if (assignment.departmentCode) return `Department ${assignment.departmentCode}`
-  if (assignment.institutionId) return `Institution ${assignment.institutionId}`
+  if (assignment.institutionId) return 'Unknown institution'
   return 'Invalid empty scope'
 }
 
-function storedSubjectText(subjectIds: string | null) {
-  if (!subjectIds) return ''
+function storedSubjectIds(subjectIds: string | null) {
+  if (!subjectIds) return []
   try {
     const parsed = JSON.parse(subjectIds) as unknown
     return Array.isArray(parsed)
-      ? parsed.filter((item): item is string => typeof item === 'string').join(', ')
-      : ''
+      ? parsed.filter((item): item is string => typeof item === 'string')
+      : []
   } catch {
-    return ''
+    return []
   }
 }
 
-function commaSeparatedIds(value: string) {
-  return Array.from(new Set(value.split(',').map((item) => item.trim()).filter(Boolean)))
+function selectedValues(event: ChangeEvent<HTMLSelectElement>) {
+  return Array.from(event.currentTarget.selectedOptions, (option) => option.value).filter(Boolean)
 }
 
 export function AdminAccessConsole() {
   const [users, setUsers] = useState<AdminUser[]>([])
   const [requests, setRequests] = useState<RoleRequest[]>([])
   const [assignments, setAssignments] = useState<RoleAssignment[]>([])
+  const [options, setOptions] = useState<AccessOptions>(EMPTY_OPTIONS)
   const [assignmentDraft, setAssignmentDraft] = useState<AssignmentDraft>(EMPTY_ASSIGNMENT)
   const [query, setQuery] = useState('')
   const [scopeDrafts, setScopeDrafts] = useState<Record<string, string>>({})
-  const [subjectDrafts, setSubjectDrafts] = useState<Record<string, string>>({})
+  const [subjectDrafts, setSubjectDrafts] = useState<Record<string, string[]>>({})
   const [classGroupDrafts, setClassGroupDrafts] = useState<Record<string, string>>({})
   const [loading, setLoading] = useState(true)
   const [busyId, setBusyId] = useState<string | null>(null)
@@ -125,7 +172,7 @@ export function AdminAccessConsole() {
     setLoading(true)
     setError(null)
     try {
-      const [userData, requestData, assignmentData] = await Promise.all([
+      const [userData, requestData, assignmentData, optionData] = await Promise.all([
         fetch('/api/admin/users?page=1&pageSize=50', { cache: 'no-store' }).then((response) =>
           readJson<{ users: AdminUser[] }>(response),
         ),
@@ -135,10 +182,14 @@ export function AdminAccessConsole() {
         fetch('/api/admin/role-assignments', { cache: 'no-store' }).then((response) =>
           readJson<{ assignments: RoleAssignment[] }>(response),
         ),
+        fetch('/api/admin/access/options', { cache: 'no-store' }).then((response) =>
+          readJson<AccessOptions>(response),
+        ),
       ])
       setUsers(userData.users)
       setRequests(requestData.requests)
       setAssignments(assignmentData.assignments)
+      setOptions(optionData)
     } catch (loadError) {
       setError(loadError instanceof Error ? loadError.message : 'Could not load Admin access data.')
     } finally {
@@ -147,7 +198,8 @@ export function AdminAccessConsole() {
   }, [])
 
   useEffect(() => {
-    void load()
+    const timer = window.setTimeout(() => void load(), 0)
+    return () => window.clearTimeout(timer)
   }, [load])
 
   const filteredUsers = useMemo(() => {
@@ -187,17 +239,17 @@ export function AdminAccessConsole() {
     setError(null)
     setNotice(null)
     try {
-      const departmentCode = (scopeDrafts[request.id] ?? request.departmentCode ?? '').trim()
-      const subjectText = subjectDrafts[request.id] ?? storedSubjectText(request.subjectIds)
-      const assignedSubjects = commaSeparatedIds(subjectText)
-      const classGroupId = (classGroupDrafts[request.id] ?? '').trim()
+      const departmentId = (scopeDrafts[request.id] ?? request.departmentId ?? '').trim()
+      const department = options.departments.find((item) => item.id === departmentId)
+      const assignedSubjects = subjectDrafts[request.id] ?? storedSubjectIds(request.subjectIds)
+      const classGroupId = (classGroupDrafts[request.id] ?? request.classGroupId ?? '').trim()
       const body: Record<string, unknown> = {
         status,
         reviewNote: status === 'approved'
           ? 'Approved from the Lernio Admin access console.'
           : 'Rejected from the Lernio Admin access console.',
       }
-      if (departmentCode) body.departmentCode = departmentCode
+      if (department) body.departmentCode = department.code
       if (assignedSubjects.length) body.assignedSubjects = assignedSubjects
       if (classGroupId) body.classGroupId = classGroupId
 
@@ -287,12 +339,12 @@ export function AdminAccessConsole() {
         </div>
 
         {error ? (
-          <div className="rounded-lg border border-destructive/40 bg-destructive/10 px-4 py-3 text-sm font-semibold text-destructive">
+          <div role="alert" className="rounded-lg border border-destructive/40 bg-destructive/10 px-4 py-3 text-sm font-semibold text-destructive">
             {error}
           </div>
         ) : null}
         {notice ? (
-          <div className="rounded-lg border border-primary/30 bg-primary/10 px-4 py-3 text-sm font-semibold text-primary">
+          <div role="status" className="rounded-lg border border-primary/30 bg-primary/10 px-4 py-3 text-sm font-semibold text-primary">
             {notice}
           </div>
         ) : null}
@@ -312,6 +364,12 @@ export function AdminAccessConsole() {
             {pendingRequests.map((request) => {
               const needsSubjects = request.requestedRole === 'teacher' || request.requestedRole === 'reviewer'
               const needsClassGroup = request.requestedRole === 'cr'
+              const requestDepartmentId =
+                request.departmentId ??
+                options.departments.find((item) => item.code === request.departmentCode)?.id ??
+                ''
+              const selectedSubjectIds = subjectDrafts[request.id] ?? storedSubjectIds(request.subjectIds)
+              const selectedClassGroupId = classGroupDrafts[request.id] ?? request.classGroupId ?? ''
               return (
                 <div key={request.id} className="grid gap-4 rounded-xl border border-border p-4">
                   <div className="min-w-0">
@@ -323,36 +381,51 @@ export function AdminAccessConsole() {
                     <p className="mt-2 text-sm">{request.reason || 'No reason supplied.'}</p>
                   </div>
                   <div className="grid gap-3 md:grid-cols-3">
-                    <Input
+                    <select
                       aria-label={`Department scope for ${request.user.name}`}
-                      placeholder="Department code, e.g. CIOT"
-                      value={scopeDrafts[request.id] ?? request.departmentCode ?? ''}
+                      className="h-10 rounded-md border border-input bg-background px-3 text-sm"
+                      value={scopeDrafts[request.id] ?? requestDepartmentId}
                       onChange={(event) => setScopeDrafts((current) => ({
                         ...current,
-                        [request.id]: event.target.value.toUpperCase(),
+                        [request.id]: event.target.value,
                       }))}
-                    />
+                    >
+                      <option value="">No department scope</option>
+                      {options.departments.map((department) => (
+                        <option key={department.id} value={department.id}>{department.label}</option>
+                      ))}
+                    </select>
                     {needsSubjects ? (
-                      <Input
+                      <select
+                        multiple
                         aria-label={`Subject scopes for ${request.user.name}`}
-                        placeholder="Subject IDs, comma separated"
-                        value={subjectDrafts[request.id] ?? storedSubjectText(request.subjectIds)}
+                        className="min-h-24 rounded-md border border-input bg-background px-3 py-2 text-sm"
+                        value={selectedSubjectIds}
                         onChange={(event) => setSubjectDrafts((current) => ({
                           ...current,
-                          [request.id]: event.target.value,
+                          [request.id]: selectedValues(event),
                         }))}
-                      />
+                      >
+                        {options.subjects.map((subject) => (
+                          <option key={subject.id} value={subject.id}>{subject.label}</option>
+                        ))}
+                      </select>
                     ) : <div />}
                     {needsClassGroup ? (
-                      <Input
+                      <select
                         aria-label={`Class group for ${request.user.name}`}
-                        placeholder="Class-group ID"
-                        value={classGroupDrafts[request.id] ?? ''}
+                        className="h-10 rounded-md border border-input bg-background px-3 text-sm"
+                        value={selectedClassGroupId}
                         onChange={(event) => setClassGroupDrafts((current) => ({
                           ...current,
                           [request.id]: event.target.value,
                         }))}
-                      />
+                      >
+                        <option value="">Select class group</option>
+                        {options.classGroups.map((classGroup) => (
+                          <option key={classGroup.id} value={classGroup.id}>{classGroup.label}</option>
+                        ))}
+                      </select>
                     ) : <div />}
                   </div>
                   <div className="flex flex-wrap gap-2">
@@ -373,7 +446,7 @@ export function AdminAccessConsole() {
           <CardHeader>
             <CardTitle>Scoped role assignments</CardTitle>
             <CardDescription>
-              Create normalized authority with at least one real scope. Use a department code for HOD-level access, a subject ID for Teacher/Reviewer access, a class-group ID for CR access, or an institution ID for Moderator access.
+              Create normalized authority with at least one real scope. Select a department for HOD-level access, a subject for Teacher/Reviewer access, a class group for CR access, or an institution for Moderator access.
             </CardDescription>
           </CardHeader>
           <CardContent className="grid gap-5">
@@ -398,30 +471,67 @@ export function AdminAccessConsole() {
               >
                 {ASSIGNABLE_ROLE_OPTIONS.map((role) => <option key={role} value={role}>{role}</option>)}
               </select>
-              <Input
-                placeholder="Department code"
-                aria-label="Department code"
-                value={assignmentDraft.departmentCode}
-                onChange={(event) => setAssignmentDraft((current) => ({ ...current, departmentCode: event.target.value.toUpperCase() }))}
-              />
-              <Input
-                placeholder="Subject ID"
-                aria-label="Subject ID"
+              <select
+                aria-label="Department scope"
+                className="h-10 rounded-md border border-input bg-background px-3 text-sm"
+                value={assignmentDraft.departmentId}
+                onChange={(event) => {
+                  const department = options.departments.find((item) => item.id === event.target.value)
+                  setAssignmentDraft((current) => ({
+                    ...current,
+                    departmentId: event.target.value,
+                    departmentCode: department?.code ?? '',
+                    institutionId: department?.institutionId ?? current.institutionId,
+                  }))
+                }}
+              >
+                <option value="">Select department</option>
+                {options.departments.map((department) => (
+                  <option key={department.id} value={department.id}>{department.label}</option>
+                ))}
+              </select>
+              <select
+                aria-label="Subject scope"
+                className="h-10 rounded-md border border-input bg-background px-3 text-sm"
                 value={assignmentDraft.subjectId}
                 onChange={(event) => setAssignmentDraft((current) => ({ ...current, subjectId: event.target.value }))}
-              />
-              <Input
-                placeholder="Class-group ID"
-                aria-label="Class-group ID"
+              >
+                <option value="">Select subject</option>
+                {options.subjects.map((subject) => (
+                  <option key={subject.id} value={subject.id}>{subject.label}</option>
+                ))}
+              </select>
+              <select
+                aria-label="Class group scope"
+                className="h-10 rounded-md border border-input bg-background px-3 text-sm"
                 value={assignmentDraft.classGroupId}
-                onChange={(event) => setAssignmentDraft((current) => ({ ...current, classGroupId: event.target.value }))}
-              />
-              <Input
-                placeholder="Institution ID"
-                aria-label="Institution ID"
+                onChange={(event) => {
+                  const classGroup = options.classGroups.find((item) => item.id === event.target.value)
+                  setAssignmentDraft((current) => ({
+                    ...current,
+                    classGroupId: event.target.value,
+                    institutionId: classGroup?.institutionId ?? current.institutionId,
+                    departmentId: classGroup?.departmentId ?? current.departmentId,
+                    departmentCode: classGroup?.departmentCode ?? current.departmentCode,
+                  }))
+                }}
+              >
+                <option value="">Select class group</option>
+                {options.classGroups.map((classGroup) => (
+                  <option key={classGroup.id} value={classGroup.id}>{classGroup.label}</option>
+                ))}
+              </select>
+              <select
+                aria-label="Institution scope"
+                className="h-10 rounded-md border border-input bg-background px-3 text-sm"
                 value={assignmentDraft.institutionId}
                 onChange={(event) => setAssignmentDraft((current) => ({ ...current, institutionId: event.target.value }))}
-              />
+              >
+                <option value="">Select institution</option>
+                {options.institutions.map((institution) => (
+                  <option key={institution.id} value={institution.id}>{institution.label}</option>
+                ))}
+              </select>
               <Input
                 placeholder="Reason or internal note"
                 aria-label="Assignment reason"
@@ -448,7 +558,7 @@ export function AdminAccessConsole() {
                     </div>
                     <p className="truncate text-sm text-muted-foreground">{assignment.user.email}</p>
                   </div>
-                  <p className="text-sm font-medium text-primary">{assignmentScope(assignment)}</p>
+                  <p className="text-sm font-medium text-primary">{assignmentScope(assignment, options)}</p>
                   <Button variant="outline" size="sm" disabled={busyId === assignment.id} onClick={() => void revokeAssignment(assignment)}>
                     <Trash2 className="h-4 w-4" /> Revoke
                   </Button>

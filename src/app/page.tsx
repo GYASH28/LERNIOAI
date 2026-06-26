@@ -1,7 +1,3 @@
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
-import { isDatabaseUnavailableError } from '@/lib/api-error-policy'
-import { canAttemptDatabase } from '@/lib/db-health'
 import { PublicHeader } from '@/components/marketing/public-header'
 import { Hero } from '@/components/marketing/hero'
 import { LearningPath } from '@/components/marketing/learning-path'
@@ -17,6 +13,8 @@ import { FinalCTA } from '@/components/marketing/final-cta'
 import { PublicFooter } from '@/components/marketing/public-footer'
 
 const SITE_URL = process.env.NEXTAUTH_URL?.replace(/\/$/, '') || 'https://lernioai.vercel.app'
+
+export const dynamic = 'force-static'
 
 /**
  * JSON-LD structured data describing Lernio as an EducationalApplication.
@@ -42,16 +40,8 @@ const softwareApplicationLd = {
   },
 }
 
-export default async function LandingPage() {
-  let isAuthenticated = false
-  if (await canAttemptDatabase()) {
-    try {
-      const session = await getServerSession(authOptions)
-      isAuthenticated = Boolean(session?.user)
-    } catch (error) {
-      if (!isDatabaseUnavailableError(error)) throw error
-    }
-  }
+export default function LandingPage() {
+  const isAuthenticated = false
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">

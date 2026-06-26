@@ -146,7 +146,7 @@ export function LernioCursor() {
       >
         <span className="lernio-cursor__ping lernio-cursor__ping--one" />
         <span className="lernio-cursor__ping lernio-cursor__ping--two" />
-        <svg className="lernio-cursor__glyph" width="34" height="34" viewBox="0 0 54 54" role="img">
+        <svg className="lernio-cursor__glyph" width="30" height="30" viewBox="0 0 54 54" aria-hidden="true">
           <path d="M8 5L47 36.5L26.8 38.3L17.5 52L8 5Z" fill="oklch(0.17 0.01 260)" />
           <path d="M8 5L26.8 38.3L17.5 52L8 5Z" fill="oklch(0.11 0.01 260)" />
           <path d="M8 5L47 36.5L29.8 35.4L8 5Z" fill="oklch(0.24 0.01 260)" />

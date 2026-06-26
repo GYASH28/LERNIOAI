@@ -1,7 +1,7 @@
-import { db } from '@/lib/db'
 import { ApiError, okResponse, requireActiveRole, withApi } from '@/lib/auth'
 import { assertNotFinalActiveAdmin } from '@/lib/authority/admin-guards'
-import { writeAuditEvent } from '@/lib/authority/audit'
+import { revokeAuthorityGrantByAssignment } from '@/lib/authority/grants'
+import { db } from '@/lib/db'
 
 export async function DELETE(_request: Request, ctx: { params: Promise<{ id: string }> }) {
   return withApi(async () => {
@@ -16,32 +16,11 @@ export async function DELETE(_request: Request, ctx: { params: Promise<{ id: str
       await assertNotFinalActiveAdmin(assignment.userId)
     }
 
-    const revoked = await db.$transaction(async (tx) => {
-      const row = await tx.roleAssignment.update({
-        where: { id },
-        data: {
-          status: 'revoked',
-          revokedAt: new Date(),
-          revokedById: authority.user.id,
-        },
-        select: { id: true, role: true, status: true, revokedAt: true },
-      })
-      await tx.user.update({
-        where: { id: assignment.userId },
-        data: { authorityVersion: { increment: 1 } },
-      })
-      return row
-    })
-
-    await writeAuditEvent({
+    const revoked = await revokeAuthorityGrantByAssignment({
+      assignmentId: assignment.id,
       actorUserId: authority.user.id,
-      targetUserId: assignment.userId,
-      action: 'role_assignment.revoked',
-      entityType: 'RoleAssignment',
-      entityId: assignment.id,
-      summary: `Revoked ${assignment.role} from ${assignment.user.email}`,
     })
 
-    return okResponse({ assignment: revoked })
+    return okResponse({ assignment: revoked.assignment, revokedAssignmentIds: revoked.revokedAssignmentIds })
   })
 }

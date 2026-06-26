@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { ArrowRight, Sparkles } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { ProductPreview } from './product-preview'
+import { Hero3DLoader, KnowledgeCorePoster } from './hero-3d'
 
 export function Hero({ isAuthenticated = false }: { isAuthenticated?: boolean }) {
   const primaryHref = isAuthenticated ? '/dashboard' : '/sign-up'
@@ -60,10 +60,11 @@ export function Hero({ isAuthenticated = false }: { isAuthenticated?: boolean })
         <div className="relative min-w-0 xl:min-w-[30rem]">
           <div className="mb-3 flex items-center justify-between">
             <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Interactive product preview
+              Lernio knowledge core
             </span>
           </div>
-          <ProductPreview />
+          <KnowledgeCorePoster />
+          <Hero3DLoader />
         </div>
       </div>
     </section>

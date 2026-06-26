@@ -2487,7 +2487,7 @@ async function main() {
     "audienceTarget", "notice",
     "assessmentAssignment", "formalAssessment", "assessmentBlueprint",
     "resourceReview", "reviewDecision", "resourceTopicMapping",
-    "classMembership", "teachingAssignment", "roleAssignment", "classGroup",
+    "classMembership", "teachingAssignment", "roleAssignment", "roleRequest", "inviteCode", "authorityGrant", "classGroup",
     "importFinding", "syllabusImportJob", "sourceSnapshot", "syllabusDocument",
     "curriculumVersion", "recommendedReference", "practicalExperiment",
     "outcomeMapping", "programmeOutcome", "courseOutcome",

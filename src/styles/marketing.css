@@ -92,4 +92,319 @@
   :root[data-contrast="high"] .marketing-grid-bg {
     display: none;
   }
+
+  @supports (content-visibility: auto) {
+    main > .marketing-section {
+      content-visibility: auto;
+      contain-intrinsic-size: 1px 760px;
+    }
+  }
+
+  .knowledge-core-shell {
+    position: relative;
+    min-height: 24rem;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 1.25rem;
+    background:
+      linear-gradient(135deg, color-mix(in oklch, var(--card) 88%, var(--brand) 12%), var(--card)),
+      radial-gradient(circle at 50% 45%, color-mix(in oklch, var(--brand) 14%, transparent), transparent 50%);
+    box-shadow: var(--shadow-soft);
+    isolation: isolate;
+    perspective: 900px;
+  }
+
+  .knowledge-core-scene {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    transform-style: preserve-3d;
+  }
+
+  .knowledge-core-grid {
+    position: absolute;
+    inset: -12%;
+    background-image:
+      linear-gradient(to right, color-mix(in oklch, var(--brand) 10%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklch, var(--brand) 8%, transparent) 1px, transparent 1px);
+    background-size: 2.6rem 2.6rem;
+    mask-image: radial-gradient(circle at center, black 0 42%, transparent 72%);
+    transform: rotateX(64deg) translateY(4rem);
+    opacity: 0.55;
+  }
+
+  .knowledge-core-glow {
+    position: absolute;
+    width: 18rem;
+    aspect-ratio: 1;
+    border-radius: 999px;
+    filter: blur(36px);
+    opacity: 0.28;
+    transform: translateZ(-5rem);
+  }
+
+  .knowledge-core-glow--one {
+    background: color-mix(in oklch, var(--brand) 70%, transparent);
+    transform: translate3d(-5.5rem, -3rem, -5rem);
+  }
+
+  .knowledge-core-glow--two {
+    background: color-mix(in oklch, var(--secondary-action) 62%, transparent);
+    transform: translate3d(5rem, 4rem, -5rem);
+  }
+
+  .knowledge-core-symbol {
+    position: relative;
+    width: min(16.5rem, 70vw);
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    transform: rotateX(8deg) rotateY(-10deg) translateZ(2rem);
+    transform-style: preserve-3d;
+    animation: knowledge-core-float 6s ease-in-out infinite;
+  }
+
+  .knowledge-core-symbol__page {
+    position: absolute;
+    bottom: 3.25rem;
+    width: 5.8rem;
+    height: 6.2rem;
+    border: 0.52rem solid color-mix(in oklch, var(--brand) 72%, var(--foreground) 10%);
+    border-top: 0;
+    transform-origin: bottom center;
+    filter: drop-shadow(0 1.1rem 1.4rem rgb(15 23 42 / 0.18));
+  }
+
+  .knowledge-core-symbol__page--left {
+    left: 2.2rem;
+    border-right: 0;
+    border-radius: 0.25rem 0 0.7rem 1.1rem;
+    transform: skewY(8deg) rotateZ(6deg);
+  }
+
+  .knowledge-core-symbol__page--right {
+    right: 2.2rem;
+    border-left: 0;
+    border-radius: 0 0.25rem 1.1rem 0.7rem;
+    transform: skewY(-8deg) rotateZ(-6deg);
+  }
+
+  .knowledge-core-symbol__flame {
+    position: absolute;
+    border-radius: 56% 44% 62% 38% / 62% 44% 56% 38%;
+    background: linear-gradient(
+      145deg,
+      color-mix(in oklch, var(--secondary-action) 78%, white 8%),
+      color-mix(in oklch, var(--brand) 78%, white 10%)
+    );
+    transform-origin: 50% 88%;
+    filter: drop-shadow(0 0.75rem 1.25rem color-mix(in oklch, var(--brand) 28%, transparent));
+  }
+
+  .knowledge-core-symbol__flame--outer {
+    width: 8rem;
+    height: 12rem;
+    top: 1rem;
+    transform: rotate(28deg) skewY(-8deg);
+  }
+
+  .knowledge-core-symbol__flame--inner {
+    width: 4.6rem;
+    height: 7.6rem;
+    top: 4rem;
+    background: linear-gradient(
+      145deg,
+      color-mix(in oklch, var(--brand) 68%, white 16%),
+      color-mix(in oklch, var(--secondary-action) 64%, white 14%)
+    );
+    transform: rotate(30deg) skewY(-10deg) translateX(0.7rem);
+  }
+
+  .knowledge-core-symbol__orb {
+    position: absolute;
+    bottom: 6.1rem;
+    display: grid;
+    place-items: center;
+    width: 4.45rem;
+    height: 4.45rem;
+    border: 1px solid color-mix(in oklch, white 48%, transparent);
+    border-radius: 999px;
+    color: white;
+    background:
+      radial-gradient(circle at 35% 25%, rgb(255 255 255 / 0.95), transparent 30%),
+      linear-gradient(145deg, var(--brand), var(--secondary-action));
+    box-shadow:
+      0 0 0 0.65rem color-mix(in oklch, var(--brand) 12%, transparent),
+      0 1.1rem 2.5rem color-mix(in oklch, var(--brand) 30%, transparent);
+    z-index: 2;
+  }
+
+  .knowledge-core-ring {
+    position: absolute;
+    border-radius: 999px;
+    border: 1px solid color-mix(in oklch, var(--brand) 32%, transparent);
+    transform: rotateX(72deg) rotateZ(-12deg);
+  }
+
+  .knowledge-core-ring--outer {
+    width: 19rem;
+    height: 19rem;
+    animation: knowledge-core-spin 18s linear infinite;
+  }
+
+  .knowledge-core-ring--inner {
+    width: 12rem;
+    height: 12rem;
+    border-color: color-mix(in oklch, var(--secondary-action) 36%, transparent);
+    animation: knowledge-core-spin 13s linear infinite reverse;
+  }
+
+  .knowledge-core-orbit {
+    position: absolute;
+    width: 20rem;
+    height: 20rem;
+    animation: knowledge-core-spin 26s linear infinite;
+  }
+
+  .knowledge-core-node {
+    --node-angle: calc(var(--node-index) * 120deg);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-width: 6.8rem;
+    justify-content: center;
+    border: 1px solid color-mix(in oklch, var(--border) 70%, var(--brand) 30%);
+    border-radius: 999px;
+    padding: 0.42rem 0.7rem;
+    background: color-mix(in oklch, var(--card) 88%, transparent);
+    color: var(--text-strong);
+    font-size: 0.75rem;
+    font-weight: 700;
+    box-shadow: 0 0.75rem 1.4rem rgb(15 23 42 / 0.12);
+    transform:
+      rotate(var(--node-angle))
+      translateX(9.6rem)
+      rotate(calc(var(--node-angle) * -1));
+  }
+
+  .knowledge-core-enhancement {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    border-radius: 1.25rem;
+  }
+
+  .knowledge-core-trace,
+  .knowledge-core-spark {
+    position: absolute;
+    border-radius: 999px;
+    opacity: 0;
+  }
+
+  .knowledge-core-trace {
+    width: 10rem;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, color-mix(in oklch, var(--brand) 62%, white 10%), transparent);
+    animation: knowledge-core-trace 4.4s ease-in-out infinite;
+  }
+
+  .knowledge-core-trace--a {
+    left: 12%;
+    top: 22%;
+  }
+
+  .knowledge-core-trace--b {
+    right: 9%;
+    top: 63%;
+    animation-delay: 1.3s;
+  }
+
+  .knowledge-core-trace--c {
+    left: 18%;
+    bottom: 14%;
+    animation-delay: 2.4s;
+  }
+
+  .knowledge-core-spark {
+    width: 0.42rem;
+    height: 0.42rem;
+    background: color-mix(in oklch, var(--brand) 72%, white 12%);
+    box-shadow: 0 0 1.1rem color-mix(in oklch, var(--brand) 62%, transparent);
+    animation: knowledge-core-spark 3.8s ease-in-out infinite;
+  }
+
+  .knowledge-core-spark--a {
+    left: 24%;
+    top: 20%;
+  }
+
+  .knowledge-core-spark--b {
+    right: 22%;
+    top: 34%;
+    animation-delay: 1.1s;
+  }
+
+  .knowledge-core-spark--c {
+    left: 34%;
+    bottom: 22%;
+    animation-delay: 2s;
+  }
+
+  @keyframes knowledge-core-float {
+    0%, 100% { transform: rotateX(8deg) rotateY(-10deg) translate3d(0, 0, 2rem); }
+    50% { transform: rotateX(11deg) rotateY(-4deg) translate3d(0, -0.8rem, 2.35rem); }
+  }
+
+  @keyframes knowledge-core-spin {
+    to { rotate: 360deg; }
+  }
+
+  @keyframes knowledge-core-trace {
+    0%, 100% { opacity: 0; transform: translateX(-1.4rem) rotate(-12deg); }
+    40% { opacity: 0.62; }
+    70% { opacity: 0; transform: translateX(2.6rem) rotate(-12deg); }
+  }
+
+  @keyframes knowledge-core-spark {
+    0%, 100% { opacity: 0; transform: translate3d(0, 0, 0) scale(0.7); }
+    40% { opacity: 0.88; transform: translate3d(0.7rem, -0.6rem, 0) scale(1); }
+  }
+
+  @media (max-width: 640px) {
+    .knowledge-core-shell {
+      min-height: 20.5rem;
+    }
+
+    .knowledge-core-orbit,
+    .knowledge-core-ring--outer {
+      scale: 0.86;
+    }
+
+    .knowledge-core-symbol {
+      scale: 0.86;
+    }
+  }
+
+  [data-motion="reduced"] .knowledge-core-symbol,
+  [data-motion="reduced"] .knowledge-core-ring,
+  [data-motion="reduced"] .knowledge-core-orbit,
+  [data-motion="none"] .knowledge-core-symbol,
+  [data-motion="none"] .knowledge-core-ring,
+  [data-motion="none"] .knowledge-core-orbit,
+  [data-low-power="true"] .knowledge-core-symbol,
+  [data-low-power="true"] .knowledge-core-ring,
+  [data-low-power="true"] .knowledge-core-orbit {
+    animation: none;
+  }
+
+  [data-motion="reduced"] .knowledge-core-enhancement,
+  [data-motion="none"] .knowledge-core-enhancement,
+  [data-low-power="true"] .knowledge-core-enhancement {
+    display: none;
+  }
 }

@@ -8,6 +8,7 @@ import {
   okResponse,
 } from '@/lib/auth'
 import { canAssignRole, normalizeRole, type Role } from '@/lib/roles'
+import { createAuthorityGrantInTransaction } from '@/lib/authority/grants'
 import { z } from 'zod'
 
 const PatchSchema = z.object({
@@ -17,18 +18,6 @@ const PatchSchema = z.object({
   departmentCode: z.string().trim().max(32).optional(),
   classGroupId: z.string().trim().min(1).optional(),
 })
-
-type ScopedAssignmentInput = {
-  userId: string
-  role: Role
-  status: 'active'
-  institutionId: string | null
-  departmentCode?: string | null
-  classGroupId?: string | null
-  subjectId?: string | null
-  assignedById: string
-  reason: string
-}
 
 function resolveSubjectScope(input: {
   assignedSubjects?: string[]
@@ -227,159 +216,33 @@ export async function PATCH(
     const effectiveInstitutionId = roleRequest.user.institutionId || classGroup?.institutionId || null
     const effectiveDepartmentCode = finalDept || classGroup?.department?.code || null
 
+    let grantId: string | null = null
+
     await db.$transaction(async (tx) => {
-      await tx.user.update({
-        where: { id: roleRequest.userId },
-        data: {
-          role: requestedRole,
-          departmentCode: effectiveDepartmentCode,
-          assignedSubjects: finalSubjects.length ? JSON.stringify(finalSubjects) : null,
-          isCR: requestedRole === 'cr',
-          authorityVersion: { increment: 1 },
-        },
+      const grantResult = await createAuthorityGrantInTransaction(tx, {
+        userId: roleRequest.userId,
+        role: requestedRole,
+        actorUserId: adminUser.id,
+        institutionId: effectiveInstitutionId,
+        departmentCode: effectiveDepartmentCode,
+        classGroupId: finalClassGroupId,
+        subjectIds: finalSubjects,
+        expiresAt: roleRequest.requestedExpiresAt,
+        reason: reviewNote || `Approved role request ${roleRequest.id}`,
+        source: 'role_request',
+        roleRequestId: roleRequest.id,
+        updatePrimaryRole: true,
       })
-
-      const assignmentInputs: ScopedAssignmentInput[] = [
-        ...(effectiveDepartmentCode && ['coordinator', 'reviewer', 'moderator'].includes(requestedRole)
-          ? [{
-              userId: roleRequest.userId,
-              role: requestedRole,
-              status: 'active' as const,
-              institutionId: effectiveInstitutionId,
-              departmentCode: effectiveDepartmentCode,
-              assignedById: adminUser.id,
-              reason: `Approved role request ${roleRequest.id}`,
-            }]
-          : []),
-        ...finalSubjects.map((subjectId) => ({
-          userId: roleRequest.userId,
-          role: requestedRole,
-          status: 'active' as const,
-          institutionId: effectiveInstitutionId,
-          departmentCode: effectiveDepartmentCode,
-          subjectId,
-          assignedById: adminUser.id,
-          reason: `Approved role request ${roleRequest.id}`,
-        })),
-        ...(finalClassGroupId
-          ? [{
-              userId: roleRequest.userId,
-              role: requestedRole,
-              status: 'active' as const,
-              institutionId: effectiveInstitutionId,
-              departmentCode: effectiveDepartmentCode,
-              classGroupId: finalClassGroupId,
-              assignedById: adminUser.id,
-              reason: `Approved role request ${roleRequest.id}`,
-            }]
-          : []),
-        ...(!effectiveDepartmentCode && !finalSubjects.length && !finalClassGroupId && effectiveInstitutionId
-          ? [{
-              userId: roleRequest.userId,
-              role: requestedRole,
-              status: 'active' as const,
-              institutionId: effectiveInstitutionId,
-              assignedById: adminUser.id,
-              reason: `Approved role request ${roleRequest.id}`,
-            }]
-          : []),
-      ]
-
-      for (const assignment of assignmentInputs) {
-        const existing = await tx.roleAssignment.findFirst({
-          where: {
-            userId: assignment.userId,
-            role: assignment.role,
-            status: 'active',
-            institutionId: assignment.institutionId,
-            departmentCode: assignment.departmentCode ?? null,
-            classGroupId: assignment.classGroupId ?? null,
-            subjectId: assignment.subjectId ?? null,
-            revokedAt: null,
-          },
-          select: { id: true },
-        })
-        if (!existing) {
-          await tx.roleAssignment.create({ data: assignment })
-        }
-      }
-
-      if (requestedRole === 'teacher') {
-        for (const subjectId of finalSubjects) {
-          const existing = await tx.teachingAssignment.findFirst({
-            where: {
-              teacherId: roleRequest.userId,
-              subjectId,
-              classGroupId: finalClassGroupId,
-              status: 'active',
-              revokedAt: null,
-            },
-            select: { id: true },
-          })
-          if (!existing) {
-            await tx.teachingAssignment.create({
-              data: {
-                teacherId: roleRequest.userId,
-                subjectId,
-                classGroupId: finalClassGroupId,
-                institutionId: effectiveInstitutionId,
-                assignedById: adminUser.id,
-                status: 'active',
-              },
-            })
-          }
-        }
-      }
-
-      if (requestedRole === 'cr' && finalClassGroupId) {
-        await tx.classMembership.upsert({
-          where: {
-            userId_classGroupId: {
-              userId: roleRequest.userId,
-              classGroupId: finalClassGroupId,
-            },
-          },
-          update: {
-            role: 'cr',
-            status: 'active',
-            leftAt: null,
-            verifiedById: adminUser.id,
-          },
-          create: {
-            userId: roleRequest.userId,
-            classGroupId: finalClassGroupId,
-            role: 'cr',
-            status: 'active',
-            verifiedById: adminUser.id,
-          },
-        })
-      }
+      grantId = grantResult.grant.id
 
       await tx.roleRequest.update({
         where: { id },
         data: {
           status: 'approved',
+          authorityGrantId: grantResult.grant.id,
           reviewedBy: adminUser.id,
           reviewedAt: new Date(),
           reviewNote: reviewNote || null,
-        },
-      })
-
-      const scopeDesc = [
-        effectiveDepartmentCode ? `Dept: ${effectiveDepartmentCode}` : null,
-        finalSubjects.length ? `Subjects: ${finalSubjects.join(', ')}` : null,
-        finalClassGroupId ? `Class: ${finalClassGroupId}` : null,
-        effectiveInstitutionId ? `Institution: ${effectiveInstitutionId}` : null,
-      ].filter(Boolean).join(' | ')
-
-      await tx.roleAuditLog.create({
-        data: {
-          actorUserId: adminUser.id,
-          targetUserId: roleRequest.userId,
-          action: 'approve',
-          role: requestedRole,
-          scope: scopeDesc || null,
-          note: reviewNote || null,
         },
       })
 
@@ -397,11 +260,12 @@ export async function PATCH(
             departmentCode: effectiveDepartmentCode,
             subjectIds: finalSubjects,
             classGroupId: finalClassGroupId,
+            authorityGrantId: grantResult.grant.id,
           }),
         },
       })
     })
 
-    return okResponse({ status: 'approved' })
+    return okResponse({ status: 'approved', authorityGrantId: grantId })
   })
 }

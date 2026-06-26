@@ -10,42 +10,35 @@
 @media (pointer: fine) {
   html.lernio-custom-cursor,
   html.lernio-custom-cursor body {
-    cursor: none;
+    cursor: none !important;
   }
 
-  html.lernio-custom-cursor a,
-  html.lernio-custom-cursor button,
-  html.lernio-custom-cursor [role="button"],
-  html.lernio-custom-cursor summary,
-  html.lernio-custom-cursor [data-cursor],
-  html.lernio-custom-cursor label,
-  html.lernio-custom-cursor input[type="checkbox"],
-  html.lernio-custom-cursor input[type="radio"] {
-    cursor: none;
+  html.lernio-custom-cursor * {
+    cursor: none !important;
   }
 
   html.lernio-custom-cursor input:not([type="checkbox"]):not([type="radio"]),
   html.lernio-custom-cursor textarea {
-    cursor: text;
+    cursor: text !important;
   }
 
   html.lernio-custom-cursor select,
   html.lernio-custom-cursor [data-native-cursor="true"] {
-    cursor: auto;
+    cursor: auto !important;
   }
 }
 
 .lernio-cursor {
   --cursor-x: -120px;
   --cursor-y: -120px;
-  --cursor-hotspot-x: 5px;
-  --cursor-hotspot-y: 3px;
+  --cursor-hotspot-x: 4px;
+  --cursor-hotspot-y: 4px;
   position: fixed;
   left: 0;
   top: 0;
   z-index: 2147483600;
-  width: 38px;
-  height: 38px;
+  width: 31px;
+  height: 31px;
   pointer-events: none;
   opacity: 0;
   transform: translate3d(calc(var(--cursor-x) - var(--cursor-hotspot-x)), calc(var(--cursor-y) - var(--cursor-hotspot-y)), 0);
@@ -61,8 +54,10 @@
   position: absolute;
   left: 0;
   top: 0;
+  width: 30px;
+  height: 30px;
   filter:
-    drop-shadow(0 7px 12px rgb(15 23 42 / 0.22))
+    drop-shadow(0 6px 10px rgb(15 23 42 / 0.22))
     drop-shadow(0 1px 0 rgb(255 255 255 / 0.18));
   transform-origin: var(--cursor-hotspot-x) var(--cursor-hotspot-y);
   transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), filter 180ms ease;
@@ -70,10 +65,10 @@
 
 .lernio-cursor__ping {
   position: absolute;
-  left: calc(var(--cursor-hotspot-x) - 8px);
-  top: calc(var(--cursor-hotspot-y) - 8px);
-  width: 16px;
-  height: 16px;
+  left: calc(var(--cursor-hotspot-x) - 7px);
+  top: calc(var(--cursor-hotspot-y) - 7px);
+  width: 14px;
+  height: 14px;
   border-radius: 999px;
   border: 1.5px solid color-mix(in oklch, var(--info) 80%, white 10%);
   opacity: 0;
@@ -81,10 +76,10 @@
 }
 
 .lernio-cursor__ping--two {
-  width: 23px;
-  height: 23px;
-  left: calc(var(--cursor-hotspot-x) - 11.5px);
-  top: calc(var(--cursor-hotspot-y) - 11.5px);
+  width: 20px;
+  height: 20px;
+  left: calc(var(--cursor-hotspot-x) - 10px);
+  top: calc(var(--cursor-hotspot-y) - 10px);
   border-style: dashed;
   animation-delay: 160ms;
 }
@@ -100,23 +95,23 @@
 }
 
 .lernio-cursor__spark--a {
-  left: calc(var(--cursor-hotspot-x) + 8px);
+  left: calc(var(--cursor-hotspot-x) + 6px);
   top: calc(var(--cursor-hotspot-y) - 3px);
 }
 
 .lernio-cursor__spark--b {
   left: calc(var(--cursor-hotspot-x) - 4px);
-  top: calc(var(--cursor-hotspot-y) + 8px);
+  top: calc(var(--cursor-hotspot-y) + 6px);
   width: 3px;
   height: 3px;
 }
 
 .lernio-cursor__clock {
   position: absolute;
-  left: calc(var(--cursor-hotspot-x) - 8.5px);
-  top: calc(var(--cursor-hotspot-y) - 8.5px);
-  width: 17px;
-  height: 17px;
+  left: calc(var(--cursor-hotspot-x) - 7.5px);
+  top: calc(var(--cursor-hotspot-y) - 7.5px);
+  width: 15px;
+  height: 15px;
   border: 1.5px solid color-mix(in oklch, var(--info) 72%, white 12%);
   border-radius: 999px;
   opacity: 0;

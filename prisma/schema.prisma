@@ -25,6 +25,7 @@ model Institution {
   courseCatalog       CourseCatalog[]
   memberships         InstitutionMembership[]
   classGroups         ClassGroup[]
+  authorityGrants     AuthorityGrant[]
   roleAssignments     RoleAssignment[]
   teachingAssignments TeachingAssignment[]
   auditEvents         AuditEvent[]
@@ -44,6 +45,7 @@ model Department {
   archivedAt          DateTime?
   programmes          Programme[]
   classGroups         ClassGroup[]
+  authorityGrants     AuthorityGrant[]
   roleAssignments     RoleAssignment[]
   teachingAssignments TeachingAssignment[]
   auditEvents         AuditEvent[]
@@ -66,6 +68,7 @@ model Programme {
   archivedAt        DateTime?
   schemes           AcademicScheme[]
   classGroups       ClassGroup[]
+  authorityGrants   AuthorityGrant[]
   roleAssignments   RoleAssignment[]
   createdAt         DateTime         @default(now())
 
@@ -92,6 +95,7 @@ model AcademicScheme {
   semesters          Semester[]
   subjects           Subject[]
   classGroups        ClassGroup[]
+  authorityGrants    AuthorityGrant[]
   roleAssignments    RoleAssignment[]
   createdAt          DateTime         @default(now())
 }
@@ -106,6 +110,7 @@ model Semester {
   scheme          AcademicScheme   @relation(fields: [schemeId], references: [id])
   subjects        Subject[]
   classGroups     ClassGroup[]
+  authorityGrants AuthorityGrant[]
   roleAssignments RoleAssignment[]
   createdAt       DateTime         @default(now())
 
@@ -153,6 +158,7 @@ model Subject {
   practicalExperiments  PracticalExperiment[]
   recommendedReferences RecommendedReference[]
   roleAssignments       RoleAssignment[]
+  authorityGrants       AuthorityGrant[]
   teachingAssignments   TeachingAssignment[]
   createdAt             DateTime               @default(now())
 
@@ -912,6 +918,9 @@ model User {
   accounts                    Account[]
   sessions                    Session[]
   roleRequests                RoleRequest[]
+  authorityGrants             AuthorityGrant[]        @relation("AuthorityGrantUser")
+  createdAuthorityGrants      AuthorityGrant[]        @relation("AuthorityGrantCreatedBy")
+  revokedAuthorityGrants      AuthorityGrant[]        @relation("AuthorityGrantRevokedBy")
   memberships                 InstitutionMembership[]
   roleAssignments             RoleAssignment[]        @relation("RoleAssignmentUser")
   assignedRoleAssignments     RoleAssignment[]        @relation("RoleAssignmentAssignedBy")
@@ -925,11 +934,11 @@ model User {
 }
 
 model InviteCode {
-  id               String    @id @default(cuid())
-  code             String    @unique
+  id               String          @id @default(cuid())
+  code             String          @unique
   tokenHash        String?
   role             String
-  used             Boolean   @default(false)
+  used             Boolean         @default(false)
   usedBy           String?
   usedAt           DateTime?
   createdBy        String?
@@ -947,30 +956,33 @@ model InviteCode {
   division         String?
   rollNumber       String?
   assignedSubjects String? // JSON array of subject IDs
-  status           String    @default("active")
+  status           String          @default("active")
   expiresAt        DateTime?
   revokedAt        DateTime?
   revokedBy        String?
-  maxUses          Int       @default(1)
-  useCount         Int       @default(0)
+  maxUses          Int             @default(1)
+  useCount         Int             @default(0)
   deliveryStatus   String?
   lastSentAt       DateTime?
   lastUsedIpHash   String?
   useEvents        String?
-  createdAt        DateTime  @default(now())
-  updatedAt        DateTime  @updatedAt
+  authorityGrantId String?
+  authorityGrant   AuthorityGrant? @relation(fields: [authorityGrantId], references: [id], onDelete: SetNull)
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
 
   @@index([role, used])
   @@index([email])
   @@index([status, expiresAt])
   @@index([institutionId, role])
   @@index([departmentCode, role])
+  @@index([authorityGrantId])
 }
 
 model RoleRequest {
-  id                  String    @id @default(cuid())
+  id                  String          @id @default(cuid())
   userId              String
-  user                User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user                User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   requestedRole       String
   reason              String?
   institutionId       String?
@@ -985,18 +997,21 @@ model RoleRequest {
   evidenceAttachments String?
   requestedExpiresAt  DateTime?
   decisionRubric      String?
-  status              String    @default("pending") // pending | approved | rejected | withdrawn
+  status              String          @default("pending") // pending | approved | rejected | withdrawn
+  authorityGrantId    String?
+  authorityGrant      AuthorityGrant? @relation(fields: [authorityGrantId], references: [id], onDelete: SetNull)
   reviewedBy          String?
   reviewedAt          DateTime?
   reviewNote          String?
-  createdAt           DateTime  @default(now())
-  updatedAt           DateTime  @updatedAt
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
 
   @@index([userId, status])
   @@index([requestedRole, status])
   @@index([institutionId, status])
   @@index([departmentId, status])
   @@index([subjectId, status])
+  @@index([authorityGrantId])
 }
 
 model RoleAuditLog {
@@ -1013,45 +1028,99 @@ model RoleAuditLog {
   @@index([actorUserId, createdAt])
 }
 
-model RoleAssignment {
-  id             String          @id @default(cuid())
-  userId         String
-  user           User            @relation("RoleAssignmentUser", fields: [userId], references: [id], onDelete: Cascade)
-  role           String
-  status         String          @default("active") // active | expired | revoked | suspended
-  institutionId  String?
-  institution    Institution?    @relation(fields: [institutionId], references: [id])
-  departmentId   String?
-  department     Department?     @relation(fields: [departmentId], references: [id])
-  departmentCode String?
-  programmeId    String?
-  programme      Programme?      @relation(fields: [programmeId], references: [id])
-  schemeId       String?
-  scheme         AcademicScheme? @relation(fields: [schemeId], references: [id])
-  semesterId     String?
-  semester       Semester?       @relation(fields: [semesterId], references: [id])
-  classGroupId   String?
-  classGroup     ClassGroup?     @relation(fields: [classGroupId], references: [id])
-  subjectId      String?
-  subject        Subject?        @relation(fields: [subjectId], references: [id])
-  assignedById   String?
-  assignedBy     User?           @relation("RoleAssignmentAssignedBy", fields: [assignedById], references: [id], onDelete: SetNull)
-  revokedById    String?
-  revokedBy      User?           @relation("RoleAssignmentRevokedBy", fields: [revokedById], references: [id], onDelete: SetNull)
-  startsAt       DateTime        @default(now())
-  expiresAt      DateTime?
-  revokedAt      DateTime?
-  reason         String?
-  suspendedAt    DateTime?
-  suspendedById  String?
-  restoredAt     DateTime?
-  restoredById   String?
-  source         String?
-  metadata       String?
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
+model AuthorityGrant {
+  id                  String               @id @default(cuid())
+  userId              String
+  user                User                 @relation("AuthorityGrantUser", fields: [userId], references: [id], onDelete: Cascade)
+  role                String
+  status              String               @default("active") // active | suspended | revoked | expired
+  institutionId       String?
+  institution         Institution?         @relation(fields: [institutionId], references: [id])
+  departmentId        String?
+  department          Department?          @relation(fields: [departmentId], references: [id])
+  departmentCode      String?
+  programmeId         String?
+  programme           Programme?           @relation(fields: [programmeId], references: [id])
+  schemeId            String?
+  scheme              AcademicScheme?      @relation(fields: [schemeId], references: [id])
+  semesterId          String?
+  semester            Semester?            @relation(fields: [semesterId], references: [id])
+  classGroupId        String?
+  classGroup          ClassGroup?          @relation(fields: [classGroupId], references: [id])
+  subjectId           String?
+  subject             Subject?             @relation(fields: [subjectId], references: [id])
+  createdById         String?
+  createdBy           User?                @relation("AuthorityGrantCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  revokedById         String?
+  revokedBy           User?                @relation("AuthorityGrantRevokedBy", fields: [revokedById], references: [id], onDelete: SetNull)
+  startsAt            DateTime             @default(now())
+  expiresAt           DateTime?
+  suspendedAt         DateTime?
+  revokedAt           DateTime?
+  reason              String?
+  source              String?
+  scopeSummary        String?
+  metadata            String?
+  roleAssignments     RoleAssignment[]
+  teachingAssignments TeachingAssignment[]
+  classMemberships    ClassMembership[]
+  roleRequests        RoleRequest[]
+  inviteCodes         InviteCode[]
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
 
   @@index([userId, status, role])
+  @@index([role, status])
+  @@index([institutionId, status])
+  @@index([departmentId, status])
+  @@index([departmentCode, status])
+  @@index([classGroupId, status])
+  @@index([subjectId, status])
+  @@index([expiresAt])
+}
+
+model RoleAssignment {
+  id               String          @id @default(cuid())
+  authorityGrantId String?
+  authorityGrant   AuthorityGrant? @relation(fields: [authorityGrantId], references: [id], onDelete: SetNull)
+  userId           String
+  user             User            @relation("RoleAssignmentUser", fields: [userId], references: [id], onDelete: Cascade)
+  role             String
+  status           String          @default("active") // active | expired | revoked | suspended
+  institutionId    String?
+  institution      Institution?    @relation(fields: [institutionId], references: [id])
+  departmentId     String?
+  department       Department?     @relation(fields: [departmentId], references: [id])
+  departmentCode   String?
+  programmeId      String?
+  programme        Programme?      @relation(fields: [programmeId], references: [id])
+  schemeId         String?
+  scheme           AcademicScheme? @relation(fields: [schemeId], references: [id])
+  semesterId       String?
+  semester         Semester?       @relation(fields: [semesterId], references: [id])
+  classGroupId     String?
+  classGroup       ClassGroup?     @relation(fields: [classGroupId], references: [id])
+  subjectId        String?
+  subject          Subject?        @relation(fields: [subjectId], references: [id])
+  assignedById     String?
+  assignedBy       User?           @relation("RoleAssignmentAssignedBy", fields: [assignedById], references: [id], onDelete: SetNull)
+  revokedById      String?
+  revokedBy        User?           @relation("RoleAssignmentRevokedBy", fields: [revokedById], references: [id], onDelete: SetNull)
+  startsAt         DateTime        @default(now())
+  expiresAt        DateTime?
+  revokedAt        DateTime?
+  reason           String?
+  suspendedAt      DateTime?
+  suspendedById    String?
+  restoredAt       DateTime?
+  restoredById     String?
+  source           String?
+  metadata         String?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+
+  @@index([userId, status, role])
+  @@index([authorityGrantId])
   @@index([role, status])
   @@index([institutionId, status])
   @@index([departmentId, status])
@@ -1080,6 +1149,7 @@ model ClassGroup {
   academicYear        String?
   status              String               @default("active") // active | archived
   roleAssignments     RoleAssignment[]
+  authorityGrants     AuthorityGrant[]
   teachingAssignments TeachingAssignment[]
   memberships         ClassMembership[]
   createdAt           DateTime             @default(now())
@@ -1092,32 +1162,35 @@ model ClassGroup {
 }
 
 model TeachingAssignment {
-  id            String       @id @default(cuid())
-  teacherId     String
-  teacher       User         @relation("TeachingAssignmentTeacher", fields: [teacherId], references: [id], onDelete: Cascade)
-  subjectId     String
-  subject       Subject      @relation(fields: [subjectId], references: [id])
-  classGroupId  String?
-  classGroup    ClassGroup?  @relation(fields: [classGroupId], references: [id])
-  institutionId String?
-  institution   Institution? @relation(fields: [institutionId], references: [id])
-  departmentId  String?
-  department    Department?  @relation(fields: [departmentId], references: [id])
-  assignedById  String?
-  assignedBy    User?        @relation("TeachingAssignmentAssignedBy", fields: [assignedById], references: [id], onDelete: SetNull)
-  status        String       @default("active") // active | expired | revoked | suspended
-  startsAt      DateTime     @default(now())
-  expiresAt     DateTime?
-  revokedAt     DateTime?
-  revokedById   String?
-  suspendedAt   DateTime?
-  reason        String?
-  source        String?
-  metadata      String?
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
+  id               String          @id @default(cuid())
+  authorityGrantId String?
+  authorityGrant   AuthorityGrant? @relation(fields: [authorityGrantId], references: [id], onDelete: SetNull)
+  teacherId        String
+  teacher          User            @relation("TeachingAssignmentTeacher", fields: [teacherId], references: [id], onDelete: Cascade)
+  subjectId        String
+  subject          Subject         @relation(fields: [subjectId], references: [id])
+  classGroupId     String?
+  classGroup       ClassGroup?     @relation(fields: [classGroupId], references: [id])
+  institutionId    String?
+  institution      Institution?    @relation(fields: [institutionId], references: [id])
+  departmentId     String?
+  department       Department?     @relation(fields: [departmentId], references: [id])
+  assignedById     String?
+  assignedBy       User?           @relation("TeachingAssignmentAssignedBy", fields: [assignedById], references: [id], onDelete: SetNull)
+  status           String          @default("active") // active | expired | revoked | suspended
+  startsAt         DateTime        @default(now())
+  expiresAt        DateTime?
+  revokedAt        DateTime?
+  revokedById      String?
+  suspendedAt      DateTime?
+  reason           String?
+  source           String?
+  metadata         String?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
 
   @@unique([teacherId, subjectId, classGroupId])
+  @@index([authorityGrantId])
   @@index([teacherId, status])
   @@index([subjectId, status])
   @@index([classGroupId, status])
@@ -1125,25 +1198,28 @@ model TeachingAssignment {
 }
 
 model ClassMembership {
-  id           String     @id @default(cuid())
-  userId       String
-  user         User       @relation("ClassMembershipUser", fields: [userId], references: [id], onDelete: Cascade)
-  classGroupId String
-  classGroup   ClassGroup @relation(fields: [classGroupId], references: [id], onDelete: Cascade)
-  role         String     @default("student") // student | cr
-  status       String     @default("active") // active | pending | suspended | left
-  joinedAt     DateTime   @default(now())
-  leftAt       DateTime?
-  verifiedById String?
-  verifiedBy   User?      @relation("ClassMembershipVerifiedBy", fields: [verifiedById], references: [id], onDelete: SetNull)
-  reason       String?
-  source       String?
-  suspendedAt  DateTime?
-  metadata     String?
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
+  id               String          @id @default(cuid())
+  authorityGrantId String?
+  authorityGrant   AuthorityGrant? @relation(fields: [authorityGrantId], references: [id], onDelete: SetNull)
+  userId           String
+  user             User            @relation("ClassMembershipUser", fields: [userId], references: [id], onDelete: Cascade)
+  classGroupId     String
+  classGroup       ClassGroup      @relation(fields: [classGroupId], references: [id], onDelete: Cascade)
+  role             String          @default("student") // student | cr
+  status           String          @default("active") // active | pending | suspended | left
+  joinedAt         DateTime        @default(now())
+  leftAt           DateTime?
+  verifiedById     String?
+  verifiedBy       User?           @relation("ClassMembershipVerifiedBy", fields: [verifiedById], references: [id], onDelete: SetNull)
+  reason           String?
+  source           String?
+  suspendedAt      DateTime?
+  metadata         String?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
 
   @@unique([userId, classGroupId])
+  @@index([authorityGrantId])
   @@index([classGroupId, status])
   @@index([userId, status])
 }

@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/theme-provider";
-import { AchievementUnlockToaster } from "@/components/ui/achievement-unlock-toaster";
-import { LernioMotionProvider, ThemeAtmosphere } from "@/components/motion";
-import { DevOverlayCleanup } from "@/components/dev-overlay-cleanup";
-import { LernioCursor } from "@/components/ui/lernio-cursor";
+import { LernioMotionProvider } from "@/components/motion";
+import { GlobalExperienceRuntime } from "@/components/app/global-experience-runtime";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -176,12 +173,8 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <LernioMotionProvider>
-            <ThemeAtmosphere />
             {children}
-            <LernioCursor />
-            <DevOverlayCleanup />
-            <AchievementUnlockToaster />
-            <SonnerToaster position="top-right" richColors />
+            <GlobalExperienceRuntime />
           </LernioMotionProvider>
         </ThemeProvider>
       </body>
