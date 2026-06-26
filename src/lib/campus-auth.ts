@@ -64,7 +64,7 @@ export const CAMPUS_MODULE_AREAS = [
   },
   {
     label: 'Campus operations',
-    title: 'Role-based workflows',
+    title: 'Clear campus hierarchy',
     text: 'Student, CR, teacher, coordinator, and admin profiles tied to CWIT departments and programmes.',
   },
 ] as const
