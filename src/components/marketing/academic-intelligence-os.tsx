@@ -72,12 +72,14 @@ export function AcademicIntelligenceOS() {
               <Badge variant="secondary">dynamic engine</Badge>
             </div>
             <div className="academic-os-grid" role="table" aria-label="CWIT branch semester matrix">
-              <div className="academic-os-cell academic-os-cell--empty" role="columnheader" aria-label="Branch" />
-              {CWIT_SEMESTERS.map((semester) => (
-                <div key={semester} className="academic-os-cell academic-os-cell--head" role="columnheader">
-                  S{semester}
-                </div>
-              ))}
+              <div className="academic-os-row" role="row">
+                <div className="academic-os-cell academic-os-cell--empty" role="columnheader" aria-label="Branch" />
+                {CWIT_SEMESTERS.map((semester) => (
+                  <div key={semester} className="academic-os-cell academic-os-cell--head" role="columnheader">
+                    S{semester}
+                  </div>
+                ))}
+              </div>
               {CWIT_BRANCH_MATRIX.map((branch) => (
                 <Row key={branch.code} branch={branch} />
               ))}
@@ -142,7 +144,7 @@ function Row({
   }
 }) {
   return (
-    <>
+    <div className="academic-os-row" role="row">
       <div
         className="academic-os-cell academic-os-cell--branch"
         role="rowheader"
@@ -163,6 +165,6 @@ function Row({
           <small>S{semester}</small>
         </div>
       ))}
-    </>
+    </div>
   )
 }

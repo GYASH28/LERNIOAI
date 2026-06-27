@@ -46,11 +46,17 @@ export async function POST(req: Request) {
     }
 
     const passwordHash = await hash(password, 12)
+    const sessionsRevokedAt = new Date()
 
     await db.$transaction(async (tx) => {
       await tx.user.update({
         where: { id: user.id },
-        data: { passwordHash },
+        data: {
+          passwordHash,
+          sessionsRevokedAt,
+          authorityVersion: { increment: 1 },
+          lastReauthenticatedAt: null,
+        },
       })
 
       await tx.passwordResetToken.update({

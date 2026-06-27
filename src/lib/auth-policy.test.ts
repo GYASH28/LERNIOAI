@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { resolveAuthMode, safeCallbackPath } from './auth-policy'
+import { assertSafeRuntimeConfig, resolveAuthMode, safeCallbackPath } from './auth-policy'
 
 describe('resolveAuthMode', () => {
   it('uses demo mode only when explicitly enabled', () => {
@@ -25,5 +25,27 @@ describe('safeCallbackPath', () => {
   it('rejects protocol-relative and external callback URLs', () => {
     expect(safeCallbackPath('//evil.example')).toBe('/dashboard')
     expect(safeCallbackPath('https://evil.example/phish')).toBe('/dashboard')
+  })
+})
+
+describe('assertSafeRuntimeConfig', () => {
+  it('rejects demo mode in production', () => {
+    expect(() =>
+      assertSafeRuntimeConfig({
+        demoModeEnv: 'true',
+        nodeEnv: 'production',
+        vercelEnv: undefined,
+      }),
+    ).toThrow(/LERNIO_DEMO_MODE/)
+  })
+
+  it('allows demo mode outside production', () => {
+    expect(() =>
+      assertSafeRuntimeConfig({
+        demoModeEnv: 'true',
+        nodeEnv: 'development',
+        vercelEnv: 'preview',
+      }),
+    ).not.toThrow()
   })
 })

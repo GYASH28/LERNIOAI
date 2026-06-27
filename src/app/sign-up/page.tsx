@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { Suspense, useEffect, useState } from 'react'
 import type { ChangeEvent, FormEvent, ReactNode } from 'react'
 import { getProviders, signIn } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
 import { ChevronDown, Mail, UserPlus } from 'lucide-react'
 import {
   AuthShell,
@@ -71,7 +70,6 @@ function ToggleSection({
 }
 
 function SignUpForm() {
-  const router = useRouter()
   const [form, setForm] = useState(initialForm)
   const [showAcademic, setShowAcademic] = useState(false)
   const [showInvite, setShowInvite] = useState(false)
@@ -99,7 +97,11 @@ function SignUpForm() {
     if (!form.email.trim()) return 'Enter your email address.'
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) return 'Enter a valid email address.'
     if (form.rollNumber.trim() && !/^[A-Za-z0-9/-]{1,32}$/.test(form.rollNumber.trim())) return 'Roll number format is not valid.'
-    if (form.password.length < 8) return 'Password must be at least 8 characters.'
+    const longPassphrase = form.password.trim().length >= 16
+    const mixedShortPassword = form.password.length >= 12 && /[A-Za-z]/.test(form.password) && /\d/.test(form.password)
+    if (!longPassphrase && !mixedShortPassword) {
+      return 'Use at least 12 characters with a letter and number, or a longer passphrase.'
+    }
     if (form.password !== form.confirmPassword) return 'Passwords do not match.'
     return ''
   }
@@ -136,19 +138,8 @@ function SignUpForm() {
         throw new Error(json.error?.message || 'Could not create this account.')
       }
 
-      setStatusMessage('Signing you in...')
-      const result = await signIn('credentials', {
-        email: form.email.trim(),
-        password: form.password,
-        redirect: false,
-        callbackUrl: '/dashboard',
-      })
-      if (result?.error) {
-        throw new Error('Account created, but automatic sign-in failed. Use the sign-in page.')
-      }
-
-      router.push(result?.url ?? '/dashboard')
-      router.refresh()
+      setForm(initialForm)
+      setStatusMessage('Profile created. Check your email to verify the account before signing in.')
     } catch (signupError) {
       setError(signupError instanceof Error ? signupError.message : 'Could not create this account.')
       setStatusMessage('')
@@ -214,7 +205,7 @@ function SignUpForm() {
             name="password"
             value={form.password}
             onChange={handleChange}
-            placeholder="At least 8 characters"
+            placeholder="12+ characters or a long passphrase"
             autoComplete="new-password"
             className={authInputClass}
             required

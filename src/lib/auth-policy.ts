@@ -8,6 +8,22 @@ export interface AuthModeInput {
   sessionEmail: string | null | undefined
 }
 
+export interface RuntimeSafetyInput {
+  demoModeEnv?: string
+  nodeEnv?: string
+  vercelEnv?: string
+}
+
+export function isProductionRuntime(input: RuntimeSafetyInput): boolean {
+  return input.nodeEnv === 'production' || input.vercelEnv === 'production'
+}
+
+export function assertSafeRuntimeConfig(input: RuntimeSafetyInput): void {
+  if (input.demoModeEnv === 'true' && isProductionRuntime(input)) {
+    throw new Error('LERNIO_DEMO_MODE must never be enabled in production.')
+  }
+}
+
 export function resolveAuthMode(input: AuthModeInput): AuthMode {
   if (input.sessionEmail) {
     return { mode: 'session', email: input.sessionEmail }

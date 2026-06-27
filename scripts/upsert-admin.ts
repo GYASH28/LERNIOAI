@@ -64,7 +64,7 @@ function canReachDatabase(databaseUrl: string | undefined): Promise<boolean> {
 async function main() {
   loadEnvFileIfNeeded()
 
-  const email = (process.env.LERNIO_ADMIN_EMAIL || 'ultimatebracegaming@gmail.com')
+  const email = (process.env.LERNIO_ADMIN_EMAIL || '')
     .trim()
     .toLowerCase()
   const password = process.env.LERNIO_ADMIN_PASSWORD

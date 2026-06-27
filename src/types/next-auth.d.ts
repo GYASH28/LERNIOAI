@@ -9,6 +9,7 @@ declare module 'next-auth' {
       status: string
       profileComplete: boolean
       authorityVersion: number
+      sessionRevoked?: boolean
     } & DefaultSession['user']
   }
 
@@ -28,5 +29,7 @@ declare module 'next-auth/jwt' {
     profileComplete?: boolean
     authorityVersion?: number
     authorityCheckedAt?: number
+    authIssuedAt?: number
+    sessionRevoked?: boolean
   }
 }

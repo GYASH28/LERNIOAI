@@ -26,7 +26,11 @@ export async function GET(req: Request) {
     await db.$transaction(async (tx) => {
       await tx.user.update({
         where: { email: dbToken.email },
-        data: { emailVerified: new Date() },
+        data: {
+          emailVerified: new Date(),
+          status: 'active',
+          authorityVersion: { increment: 1 },
+        },
       });
 
       await tx.emailVerificationToken.update({

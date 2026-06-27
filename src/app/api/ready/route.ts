@@ -7,10 +7,9 @@ import { isDatabaseUnavailableError } from '@/lib/api-error-policy'
  * Readiness probe.
  *
  * Verifies that the process can actually serve real traffic by
- * checking the critical dependency: the database. Other optional
- * providers (auth, AI, email) are reported as `configured`/`unconfigured`
- * but never block readiness, because their absence is a degraded
- * but valid state.
+ * checking critical dependencies. In production, database and auth
+ * configuration are hard requirements. AI/email can remain degraded
+ * only because the product has explicit retry/error states for them.
  *
  * No secrets are leaked; we only report booleans and short labels.
  * Cheap enough for Vercel's deployment smoke test, but heavier than
@@ -30,10 +29,6 @@ interface ReadinessReport {
     auth: ProviderState
     ai: ProviderState
     email: ProviderState
-  }
-  deployment: {
-    demoMode: boolean
-    nodeEnv: string
   }
 }
 
@@ -75,9 +70,12 @@ export async function GET() {
   const auth: ProviderState = providerState(process.env.NEXTAUTH_SECRET)
   const ai: ProviderState = providerState(process.env.GROQ_API_KEY)
   const email = emailProviderState()
+  const production = process.env.NODE_ENV === 'production' || process.env.VERCEL_ENV === 'production'
+  const productionAuthBroken = production && auth === 'unconfigured'
+  const productionDemoBroken = production && process.env.LERNIO_DEMO_MODE === 'true'
 
   const overall: ReadinessReport['status'] =
-    database === 'unavailable'
+    database === 'unavailable' || productionAuthBroken || productionDemoBroken
       ? 'unavailable'
       : auth === 'unconfigured' || ai === 'unconfigured' || email === 'unconfigured'
         ? 'degraded'
@@ -92,10 +90,6 @@ export async function GET() {
       auth,
       ai,
       email,
-    },
-    deployment: {
-      demoMode: process.env.LERNIO_DEMO_MODE === 'true',
-      nodeEnv: process.env.NODE_ENV ?? 'development',
     },
   }
 

@@ -1,9 +1,12 @@
 import 'server-only'
 
+import crypto from 'crypto'
 import { hash } from 'bcryptjs'
 import { z } from 'zod'
 import { db } from '@/lib/db'
 import { ApiError } from '@/lib/auth'
+import { sendVerificationEmail } from '@/lib/email'
+import { passwordPolicySchema } from '@/lib/schemas'
 import {
   CAMPUS_DIVISIONS,
   DEFAULT_CAMPUS_PROFILE,
@@ -19,7 +22,7 @@ import {
 export const campusSignUpSchema = z.object({
   name: z.string().trim().min(2, 'Enter your full name.').max(120),
   email: z.string().trim().refine(validateCampusEmail, 'Enter a valid email address.'),
-  password: z.string().min(8, 'Password must be at least 8 characters.').max(128),
+  password: passwordPolicySchema,
   rollNumber: z.string().trim().optional(),
   departmentCode: z.string().trim().optional(),
   semesterNumber: z.coerce.number().int().min(1).max(16).optional(),
@@ -158,7 +161,7 @@ export async function registerCampusUser(input: CampusSignUpInput) {
     email,
     passwordHash,
     role,
-    status: invite?.status || 'active',
+    status: 'pending_verification',
     provider: 'password',
     profileComplete: Boolean(programme && semesterNumber && division !== 'NOT_SURE'),
     onboarded: false,
@@ -173,10 +176,25 @@ export async function registerCampusUser(input: CampusSignUpInput) {
   }
 
   try {
-    if (!invite) return await db.user.create({ data: userData })
+    const verificationToken = crypto.randomBytes(32).toString('hex')
+    const verificationTokenHash = crypto.createHash('sha256').update(verificationToken).digest('hex')
+    const verificationExpiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000)
 
-    return await db.$transaction(async (tx) => {
+    const user = await db.$transaction(async (tx) => {
+      await tx.emailVerificationToken.deleteMany({ where: { email } })
+
       const user = await tx.user.create({ data: userData })
+
+      await tx.emailVerificationToken.create({
+        data: {
+          email,
+          tokenHash: verificationTokenHash,
+          expiresAt: verificationExpiresAt,
+        },
+      })
+
+      if (!invite) return user
+
       const marked = await tx.inviteCode.updateMany({
         where: { id: invite.id, used: false, revokedAt: null, status: 'active', useCount: { lt: invite.maxUses } },
         data: { used: invite.useCount + 1 >= invite.maxUses, useCount: { increment: 1 }, usedBy: user.id, usedAt: new Date() },
@@ -188,6 +206,9 @@ export async function registerCampusUser(input: CampusSignUpInput) {
       })
       return user
     })
+
+    await sendVerificationEmail(email, verificationToken)
+    return user
   } catch (error) {
     if (isPrismaUniqueConstraintError(error)) {
       throw new ApiError('ACCOUNT_EXISTS', 'An account may already exist for this email. Try logging in or resetting your password.', 409, false)

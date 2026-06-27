@@ -18,7 +18,7 @@ import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { compare } from 'bcryptjs'
 import { db } from '@/lib/db'
 import { isDatabaseUnavailableError } from '@/lib/api-error-policy'
-import { resolveAuthMode } from '@/lib/auth-policy'
+import { assertSafeRuntimeConfig, resolveAuthMode } from '@/lib/auth-policy'
 import { DEMO_AUTH_USER } from '@/lib/demo-fixtures'
 import { checkRateLimit } from '@/lib/rate-limit'
 import { canUseCapability, resolveAuthorityContext, type AuthorityContext, type AuthorityScope } from '@/lib/authority'
@@ -36,7 +36,13 @@ export interface AuthUser {
   authorityVersion?: number
 }
 
-const DEMO_PASSWORD = process.env.LERNIO_DEMO_PASSWORD || 'student123'
+assertSafeRuntimeConfig({
+  demoModeEnv: process.env.LERNIO_DEMO_MODE,
+  nodeEnv: process.env.NODE_ENV,
+  vercelEnv: process.env.VERCEL_ENV,
+})
+
+const DEMO_PASSWORD = process.env.LERNIO_DEMO_PASSWORD?.trim() || null
 const MAX_LOGIN_ATTEMPTS = 8
 const LOGIN_WINDOW_MS = 15 * 60 * 1000
 
@@ -68,6 +74,7 @@ const providers: NextAuthOptions['providers'] = [
 
       if (
         process.env.LERNIO_DEMO_MODE === 'true' &&
+        DEMO_PASSWORD &&
         email === DEMO_AUTH_USER.email &&
         password === DEMO_PASSWORD
       ) {
@@ -86,10 +93,11 @@ const providers: NextAuthOptions['providers'] = [
           status: true,
           profileComplete: true,
           authorityVersion: true,
+          sessionsRevokedAt: true,
         },
       })
 
-      if (!user?.passwordHash || user.status === 'disabled') {
+      if (!user?.passwordHash || user.status === 'disabled' || user.status === 'pending_verification') {
         await checkRateLimit({
           action: 'credential_login_fail',
           identifier: email,
@@ -161,7 +169,7 @@ export const authOptions: NextAuthOptions = {
         where: { email: user.email },
         select: { status: true },
       })
-      return existing?.status !== 'disabled'
+      return existing?.status !== 'disabled' && existing?.status !== 'pending_verification'
     },
     async jwt({ token, user }) {
       if (user) {
@@ -170,6 +178,8 @@ export const authOptions: NextAuthOptions = {
         token.status = (user as AuthUser).status ?? 'active'
         token.profileComplete = (user as AuthUser).profileComplete ?? true
         token.authorityVersion = (user as AuthUser).authorityVersion ?? 0
+        token.authIssuedAt = Date.now()
+        token.sessionRevoked = false
         token.authorityCheckedAt = Date.now()
       } else if (
         token.email &&
@@ -185,14 +195,43 @@ export const authOptions: NextAuthOptions = {
       ) {
         const fresh = await db.user.findUnique({
           where: { email: token.email },
-          select: { id: true, role: true, status: true, profileComplete: true, authorityVersion: true },
+          select: {
+            id: true,
+            role: true,
+            status: true,
+            profileComplete: true,
+            authorityVersion: true,
+            sessionsRevokedAt: true,
+          },
         })
         if (fresh) {
+          const authIssuedAt =
+            Number(token.authIssuedAt) ||
+            (typeof token.iat === 'number' ? token.iat * 1000 : 0)
+          const tokenAuthorityVersion = Number(token.authorityVersion ?? fresh.authorityVersion)
+          const revokedByTimestamp =
+            Boolean(fresh.sessionsRevokedAt) &&
+            authIssuedAt > 0 &&
+            authIssuedAt <= fresh.sessionsRevokedAt!.getTime()
+          const revokedByAuthorityVersion = tokenAuthorityVersion !== fresh.authorityVersion
+          const inactive =
+            fresh.status === 'disabled' ||
+            fresh.status === 'pending_verification'
+
+          if (inactive || revokedByTimestamp || revokedByAuthorityVersion) {
+            token.id = fresh.id
+            token.status = 'revoked'
+            token.sessionRevoked = true
+            token.authorityCheckedAt = Date.now()
+            return token
+          }
+
           token.id = fresh.id
           token.role = normalizeRole(fresh.role)
           token.status = fresh.status
           token.profileComplete = fresh.profileComplete
           token.authorityVersion = fresh.authorityVersion
+          token.sessionRevoked = false
           token.authorityCheckedAt = Date.now()
         }
       }
@@ -205,6 +244,7 @@ export const authOptions: NextAuthOptions = {
         session.user.status = String(token.status ?? 'active')
         session.user.profileComplete = token.profileComplete !== false
         session.user.authorityVersion = Number(token.authorityVersion ?? 0)
+        session.user.sessionRevoked = token.sessionRevoked === true
       }
       return session
     },
@@ -239,8 +279,9 @@ async function resolveUserFromSession(): Promise<AuthUser | null> {
   })
 
   if (authMode.mode === 'session') {
+    if (session?.user?.sessionRevoked) return null
     const u = await db.user.findUnique({ where: { email: authMode.email } })
-    if (!u || u.status === 'disabled') return null
+    if (!u || u.status === 'disabled' || u.status === 'pending_verification') return null
     return {
       id: u.id,
       email: u.email,
@@ -375,7 +416,7 @@ export function errorResponse(err: unknown, status = 500) {
     console.warn('[api] database unavailable')
     const apiError = new ApiError(
       'DATABASE_UNAVAILABLE',
-      'The database is unavailable. Please check the PostgreSQL connection and try again.',
+      'The service is temporarily unavailable. Please try again soon.',
       503,
       true,
     )

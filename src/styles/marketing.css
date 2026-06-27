@@ -392,6 +392,10 @@
     overflow-x: auto;
   }
 
+  .academic-os-row {
+    display: contents;
+  }
+
   .academic-os-cell {
     min-width: 0;
     background: color-mix(in oklch, var(--card) 92%, var(--muted) 8%);

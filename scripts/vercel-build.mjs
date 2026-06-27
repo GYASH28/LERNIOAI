@@ -1,6 +1,13 @@
 import { spawnSync } from 'node:child_process'
-import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
-import { join, resolve } from 'node:path'
+import { resolve } from 'node:path'
+
+if (
+  process.env.LERNIO_DEMO_MODE === 'true' &&
+  (process.env.NODE_ENV === 'production' || process.env.VERCEL_ENV === 'production')
+) {
+  console.error('[vercel-build] Refusing production build with LERNIO_DEMO_MODE=true.')
+  process.exit(1)
+}
 
 function runCli(relativeCliPath, args, env = process.env) {
   const cliPath = resolve(process.cwd(), relativeCliPath)
@@ -14,70 +21,8 @@ function runCli(relativeCliPath, args, env = process.env) {
   if (result.status !== 0) process.exit(result.status ?? 1)
 }
 
-function stripUtf8BomFromMigrations() {
-  const migrationsDirectory = resolve(process.cwd(), 'prisma/migrations')
-  if (!existsSync(migrationsDirectory)) return
-
-  for (const entry of readdirSync(migrationsDirectory, { withFileTypes: true })) {
-    if (!entry.isDirectory()) continue
-
-    const migrationPath = join(migrationsDirectory, entry.name, 'migration.sql')
-    if (!existsSync(migrationPath)) continue
-
-    const sql = readFileSync(migrationPath, 'utf8')
-    if (sql.charCodeAt(0) === 0xfeff) {
-      writeFileSync(migrationPath, sql.slice(1), 'utf8')
-      console.log(`[vercel-build] Removed UTF-8 BOM from ${entry.name}/migration.sql`)
-    }
-  }
-}
-
-stripUtf8BomFromMigrations()
-
 console.log('[vercel-build] Generating Prisma Client...')
 runCli('node_modules/prisma/build/index.js', ['generate'])
-
-const pooledDatabaseUrl = process.env.DATABASE_URL?.trim()
-const migrationDatabaseUrl =
-  process.env.DATABASE_URL_UNPOOLED?.trim() ||
-  process.env.POSTGRES_URL_NON_POOLING?.trim() ||
-  process.env.DIRECT_URL?.trim() ||
-  pooledDatabaseUrl
-
-if (pooledDatabaseUrl && migrationDatabaseUrl) {
-  const databaseEnv = {
-    ...process.env,
-    DATABASE_URL: migrationDatabaseUrl,
-  }
-
-  console.log('[vercel-build] Database configured; applying committed Prisma migrations...')
-  runCli(
-    'node_modules/prisma/build/index.js',
-    ['migrate', 'deploy'],
-    databaseEnv,
-  )
-
-  const adminEmail = process.env.LERNIO_ADMIN_EMAIL?.trim()
-  const adminPassword = process.env.LERNIO_ADMIN_PASSWORD?.trim()
-  const isProductionDeployment = process.env.VERCEL_ENV === 'production'
-  const allowExplicitLocalBootstrap =
-    !process.env.VERCEL_ENV && process.env.LERNIO_BOOTSTRAP_ADMIN_ON_BUILD === 'true'
-
-  if ((isProductionDeployment || allowExplicitLocalBootstrap) && adminEmail && adminPassword) {
-    console.log('[vercel-build] Production Admin bootstrap configured; creating or repairing the Admin account...')
-    runCli(
-      'node_modules/tsx/dist/cli.mjs',
-      ['scripts/upsert-admin.ts'],
-      databaseEnv,
-    )
-  } else if (!isProductionDeployment && !allowExplicitLocalBootstrap) {
-    console.log('[vercel-build] Skipping Admin bootstrap outside a production deployment.')
-  } else {
-    console.warn('[vercel-build] Admin bootstrap skipped because LERNIO_ADMIN_EMAIL or LERNIO_ADMIN_PASSWORD is missing.')
-  }
-} else {
-  console.warn('[vercel-build] DATABASE_URL is not configured; skipping migrations and Admin bootstrap.')
-}
 
 console.log('[vercel-build] Building Next.js...')
 runCli('node_modules/next/dist/bin/next', ['build'])

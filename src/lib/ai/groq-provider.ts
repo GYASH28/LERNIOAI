@@ -121,7 +121,6 @@ export class GroqProvider implements AiProvider {
 
   async chat(input: TutorRequest): Promise<TutorResponse> {
     const citations = input.citations ?? []
-    const groundingStatus: GroundingStatus = citations.length > 0 ? 'grounded' : 'general'
 
     try {
       this.assertConfigured()
@@ -141,18 +140,20 @@ export class GroqProvider implements AiProvider {
       )
 
       const content = polishTutorContent(response.choices?.[0]?.message?.content || '')
-      if (!content) return fallbackTutorResponse(groundingStatus, citations)
+      if (!content) return fallbackTutorResponse()
+
+      const grounded = mapCitationsToAnswer(content, citations)
 
       return {
-        content,
-        groundingStatus,
-        citations,
+        content: grounded.content,
+        groundingStatus: grounded.groundingStatus,
+        citations: grounded.citations,
         followUps: buildFollowUps(content),
         usedFallback: false,
       }
     } catch (error) {
       console.error('[ai:groq] chat failed:', safeErrorSummary(error))
-      return fallbackTutorResponse(groundingStatus, citations)
+      return fallbackTutorResponse()
     }
   }
 
@@ -221,7 +222,7 @@ export class GroqProvider implements AiProvider {
   async synthesizeSpeech(input: SpeechRequest): Promise<ArrayBuffer> {
     this.assertConfigured()
     const voice = VALID_TTS_VOICES.has(input.voice) ? input.voice : 'hannah'
-    const spokenText = cleanSpeechText(input.text).slice(0, 200)
+    const spokenText = cleanSpeechText(input.text).slice(0, 1000)
     if (!spokenText) throw new Error('EMPTY_TTS_INPUT')
 
     const response = await this.requestRaw(
@@ -230,6 +231,7 @@ export class GroqProvider implements AiProvider {
         model: this.ttsModel,
         input: spokenText,
         voice,
+        speed: clamp(input.speed || 1, 0.5, 2),
         response_format: 'wav',
       },
       input.signal,
@@ -292,7 +294,7 @@ export class GroqProvider implements AiProvider {
         if (response.ok) return response
 
         const error = await this.httpError(response)
-        if (attempt === 0 && (response.status === 429 || response.status >= 500)) {
+        if (attempt === 0 && (response.status === 408 || response.status === 409 || response.status === 429 || response.status >= 500)) {
           await sleep(650)
           lastError = error
           continue
@@ -300,10 +302,11 @@ export class GroqProvider implements AiProvider {
         throw error
       } catch (error) {
         lastError = error
-        if (attempt === 0 && !signal?.aborted) {
+        if (attempt === 0 && !signal?.aborted && isRetryableNetworkError(error)) {
           await sleep(350)
           continue
         }
+        throw error
       }
     }
     throw lastError instanceof Error ? lastError : new Error('GROQ_REQUEST_FAILED')
@@ -355,16 +358,42 @@ function normaliseMessages(messages: TutorMessage[]): Array<{ role: 'user' | 'as
   return output
 }
 
-function fallbackTutorResponse(
-  groundingStatus: GroundingStatus,
-  citations: Citation[],
-): TutorResponse {
+function fallbackTutorResponse(): TutorResponse {
   return {
     content: SAFE_FALLBACK_MESSAGE,
-    groundingStatus,
-    citations,
+    groundingStatus: 'general',
+    citations: [],
     followUps: ['Try again', 'Ask in simpler words'],
     usedFallback: true,
+  }
+}
+
+export function mapCitationsToAnswer(
+  content: string,
+  citations: Citation[],
+): { content: string; groundingStatus: GroundingStatus; citations: Citation[] } {
+  if (!citations.length) {
+    return { content, groundingStatus: 'general', citations: [] }
+  }
+
+  const validNumbers = new Set(citations.map((_, index) => index + 1))
+  const usedNumbers: number[] = []
+  const cleaned = content.replace(/\[(\d{1,3})\]/g, (match, value: string) => {
+    const citationNumber = Number(value)
+    if (!validNumbers.has(citationNumber)) return ''
+    if (!usedNumbers.includes(citationNumber)) usedNumbers.push(citationNumber)
+    return match
+  })
+
+  if (!usedNumbers.length) {
+    return { content: cleaned, groundingStatus: 'general', citations: [] }
+  }
+
+  const usedCitations = usedNumbers.map((citationNumber) => citations[citationNumber - 1]!).filter(Boolean)
+  return {
+    content: cleaned,
+    groundingStatus: usedNumbers.length === citations.length ? 'grounded' : 'partially_grounded',
+    citations: usedCitations,
   }
 }
 
@@ -513,6 +542,16 @@ function cleanSpeechText(value: string): string {
 function safeErrorSummary(error: unknown): string {
   if (error instanceof Error) return `${error.name}: ${error.message.slice(0, 240)}`
   return String(error).slice(0, 240)
+}
+
+function isRetryableNetworkError(error: unknown): boolean {
+  if (!(error instanceof Error)) return false
+  return (
+    error.name === 'AbortError' ||
+    error.message.includes('fetch failed') ||
+    error.message.includes('ECONNRESET') ||
+    error.message.includes('ETIMEDOUT')
+  )
 }
 
 function toNumber(value: unknown, fallback: number): number {

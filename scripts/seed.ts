@@ -2423,7 +2423,7 @@ const DEMO_USER = {
   lastActiveDate: new Date().toISOString().slice(0, 10),
 };
 
-const ADMIN_EMAIL = (process.env.LERNIO_ADMIN_EMAIL || "ultimatebracegaming@gmail.com")
+const ADMIN_EMAIL = (process.env.LERNIO_ADMIN_EMAIL || (process.env.NODE_ENV === "production" ? "" : "admin@lernio.local"))
   .trim()
   .toLowerCase();
 const ADMIN_PASSWORD =
