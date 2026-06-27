@@ -1,5 +1,12 @@
 import type { NextConfig } from "next";
 
+if (
+  process.env.LERNIO_DEMO_MODE === 'true' &&
+  (process.env.NODE_ENV === 'production' || process.env.VERCEL_ENV === 'production')
+) {
+  throw new Error('LERNIO_DEMO_MODE must never be enabled for a production build.')
+}
+
 const nextConfig: NextConfig = {
   // Build must fail on TypeScript errors — never ignore them.
   reactStrictMode: true,
@@ -26,7 +33,25 @@ const nextConfig: NextConfig = {
         headers: securityHeaders,
       },
       {
-        source: '/:path*.:ext',
+        source: '/:path(sign-in|sign-up|forgot-password|reset-password|complete-profile)',
+        headers: [
+          {
+            key: 'X-Robots-Tag',
+            value: 'noindex, nofollow',
+          },
+        ],
+      },
+      {
+        source: '/_next/static/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/brand/:path*',
         headers: [
           {
             key: 'Cache-Control',

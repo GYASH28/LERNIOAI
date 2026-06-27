@@ -1,10 +1,11 @@
 import { z } from 'zod'
-import { registerCampusUser } from '@/lib/campus-registration'
+import { campusSignUpSchema, registerCampusUser } from '@/lib/campus-registration'
 import { ApiError, okResponse, withApi } from '@/lib/auth'
 import { CAMPUS_DIVISIONS, CAMPUS_SEMESTERS, CWIT_PROGRAMMES } from '@/lib/campus-auth'
 import { db } from '@/lib/db'
 import { checkRateLimit } from '@/lib/rate-limit'
 import { toPublicUserDTO } from '@/lib/user-dto'
+import { assertRequestBodySize } from '@/lib/schemas'
 
 export async function GET() {
   return withApi(async () => {
@@ -43,32 +44,56 @@ export async function GET() {
 
 export async function POST(request: Request) {
   return withApi(async () => {
+    assertRequestBodySize(request, 32 * 1024)
+
     const body = await request.json().catch(() => null)
     if (!body) {
       throw new ApiError('INVALID_REQUEST', 'Enter the required signup details.', 400, false)
     }
 
-    const email = typeof body.email === 'string' ? body.email : 'unknown'
-    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown-ip'
-    const limiter = await checkRateLimit({
+    const parsed = campusSignUpSchema.safeParse(body)
+    if (!parsed.success) {
+      throw new ApiError(
+        'VALIDATION_ERROR',
+        parsed.error.issues[0]?.message ?? 'Check the signup details and try again.',
+        400,
+        false,
+      )
+    }
+
+    const email = parsed.data.email.trim().toLowerCase()
+    const ip =
+      request.headers.get('x-vercel-forwarded-for')?.split(',')[0]?.trim() ||
+      request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+      request.headers.get('x-real-ip')?.trim() ||
+      'unknown-ip'
+
+    const emailLimiter = await checkRateLimit({
       action: 'student_registration',
       identifier: `${email}:${ip}`,
       limit: 5,
       windowMs: 15 * 60 * 1000,
     })
-    if (!limiter.allowed) {
+    const ipLimiter = await checkRateLimit({
+      action: 'student_registration_ip',
+      identifier: ip,
+      limit: 25,
+      windowMs: 15 * 60 * 1000,
+    })
+    if (!emailLimiter.allowed || !ipLimiter.allowed) {
       throw new ApiError(
         'RATE_LIMITED',
-        `Too many signup attempts. Try again in ${limiter.retryAfterSec} seconds.`,
+        `Too many signup attempts. Try again in ${emailLimiter.retryAfterSec || ipLimiter.retryAfterSec} seconds.`,
         429,
         true,
       )
     }
 
     try {
-      const user = await registerCampusUser(body)
+      const user = await registerCampusUser(parsed.data)
       return okResponse({
         user: toPublicUserDTO(user),
+        verificationRequired: true,
       })
     } catch (error) {
       if (error instanceof ApiError) throw error

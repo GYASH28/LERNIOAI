@@ -38,11 +38,11 @@ Local app URL: `http://localhost:3000`
 - `DATABASE_URL`: PostgreSQL connection URL.
 - `DATABASE_URL_UNPOOLED`: optional direct URL for Prisma migrations on Vercel.
 - `NEXTAUTH_URL` and `NEXTAUTH_SECRET`: required for auth.
-- `LERNIO_DEMO_MODE`: use `false` in production.
+- `LERNIO_DEMO_MODE`: use `false` in production. Production builds fail if this is `true`.
+- `LERNIO_DEMO_PASSWORD`: required only for local/demo mode; no default password is provided.
 - `GROQ_API_KEY`: enables LEO tutor chat, ASR, and TTS.
 - `RESEND_API_KEY` and `EMAIL_FROM`: enable password reset and verification emails.
-- `LERNIO_ADMIN_EMAIL`: defaults to `ultimatebracegaming@gmail.com`.
-- `LERNIO_ADMIN_PASSWORD`: required when running the seed bootstrap in production.
+- `LERNIO_ADMIN_EMAIL` and `LERNIO_ADMIN_PASSWORD`: required only when explicitly running `npm run db:admin`.
 
 See `.env.example` for the full list.
 
@@ -52,12 +52,12 @@ See `.env.example` for the full list.
 |---|---|
 | `npm run dev` | Start Next.js on port 3000 |
 | `npm run build` | Production build |
-| `npm run vercel-build` | Generate Prisma, deploy migrations when DB env exists, then build Next.js |
+| `npm run vercel-build` | Generate Prisma Client, enforce production safety guards, then build Next.js |
 | `npm run start` | Run the production server |
 | `npm run lint` | ESLint |
 | `npm run typecheck` | TypeScript check |
 | `npm run test` | Vitest suite |
-| `npm run check` | lint + typecheck + tests |
+| `npm run check` | migration encoding check + lint + typecheck + tests |
 | `npm run db:generate` | Regenerate Prisma Client |
 | `npm run db:migrate` | Create and apply a migration locally |
 | `npm run db:deploy` | Apply committed migrations |
@@ -111,7 +111,7 @@ Vercel should use:
 - Framework preset: Next.js
 - Node runtime: 24.x
 
-`npm run vercel-build` generates Prisma, deploys committed migrations when database env vars are present, and then runs the Next.js build. If your production Postgres uses pooling, provide `DATABASE_URL_UNPOOLED`, `POSTGRES_URL_NON_POOLING`, or `DIRECT_URL` for migrations.
+`npm run vercel-build` only generates Prisma Client and builds the Next.js artifact. Run `npm run db:deploy` as a separate serialized release step before promotion. Admin bootstrap is an explicit operation through `npm run db:admin`, not part of routine frontend builds.
 
 ## Operations
 

@@ -42,14 +42,14 @@ function ResetPasswordForm() {
   const [statusMessage, setStatusMessage] = useState('')
   const [submitting, setSubmitting] = useState(false)
 
-  const hasLength = password.length >= 8
-  const hasUpper = /[A-Z]/.test(password)
-  const hasLower = /[a-z]/.test(password)
+  const hasLength = password.length >= 12
+  const hasLongPassphrase = password.trim().length >= 16
+  const hasLetter = /[A-Za-z]/.test(password)
   const hasNumber = /[0-9]/.test(password)
-  const hasSpecial = /[^A-Za-z0-9]/.test(password)
   const isMatch = password === confirmPassword && password.length > 0
-  const strengthCount = [hasLength, hasUpper, hasLower, hasNumber, hasSpecial].filter(Boolean).length
-  const strengthLabel = strengthCount >= 5 ? 'Strongest' : strengthCount >= 4 ? 'Strong' : strengthCount >= 3 ? 'Good' : strengthCount >= 2 ? 'Weak' : 'Very weak'
+  const passesPolicy = hasLongPassphrase || (hasLength && hasLetter && hasNumber)
+  const strengthCount = [hasLength, hasLongPassphrase, hasLetter, hasNumber].filter(Boolean).length
+  const strengthLabel = hasLongPassphrase && isMatch ? 'Strong passphrase' : passesPolicy ? 'Good' : 'Too weak'
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -58,8 +58,8 @@ function ResetPasswordForm() {
       return
     }
 
-    if (strengthCount < 3) {
-      setError('Use at least 3 password rules.')
+    if (!passesPolicy) {
+      setError('Use at least 12 characters with a letter and number, or a longer passphrase.')
       return
     }
 
@@ -128,7 +128,7 @@ function ResetPasswordForm() {
                 name="password"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
-                placeholder="Minimum 8 characters"
+                placeholder="12+ characters or a long passphrase"
                 required
                 className={`${authInputClass} pl-10 pr-11`}
               />
@@ -166,17 +166,16 @@ function ResetPasswordForm() {
             <div className="rounded-lg border border-border bg-muted/60 p-3">
               <div className="flex items-center justify-between text-xs font-semibold">
                 <span className="text-foreground">Strength: {strengthLabel}</span>
-                <span className="text-muted-foreground">{strengthCount}/5 rules met</span>
+                <span className="text-muted-foreground">{passesPolicy ? 'Meets policy' : 'Needs more strength'}</span>
               </div>
               <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-border">
-                <div className="h-full rounded-full bg-primary transition-all duration-300" style={{ width: `${(strengthCount / 5) * 100}%` }} />
+                <div className="h-full rounded-full bg-primary transition-all duration-300" style={{ width: `${Math.max(15, (strengthCount / 4) * 100)}%` }} />
               </div>
               <ul className="mt-3 grid gap-1.5 text-xs font-semibold text-muted-foreground">
-                <Rule passed={hasLength}>At least 8 characters</Rule>
-                <Rule passed={hasUpper}>One uppercase letter</Rule>
-                <Rule passed={hasLower}>One lowercase letter</Rule>
-                <Rule passed={hasNumber}>One number</Rule>
-                <Rule passed={hasSpecial}>One special character</Rule>
+                <Rule passed={hasLength}>At least 12 characters</Rule>
+                <Rule passed={hasLetter}>Contains a letter</Rule>
+                <Rule passed={hasNumber}>Contains a number</Rule>
+                <Rule passed={hasLongPassphrase}>Or use a 16+ character passphrase</Rule>
                 <Rule passed={isMatch}>Passwords match</Rule>
               </ul>
             </div>
@@ -194,7 +193,7 @@ function ResetPasswordForm() {
             </p>
           ) : null}
 
-          <Button type="submit" className={`w-full ${authPrimaryButtonClass}`} disabled={submitting || !isMatch || strengthCount < 3}>
+          <Button type="submit" className={`w-full ${authPrimaryButtonClass}`} disabled={submitting || !isMatch || !passesPolicy}>
             {submitting ? 'Resetting...' : 'Reset password'}
           </Button>
         </form>

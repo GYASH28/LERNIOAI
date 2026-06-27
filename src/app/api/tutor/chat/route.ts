@@ -16,6 +16,7 @@ export const maxDuration = 60
 
 interface ChatBody {
   sessionId: string
+  clientMessageId: string
   message: string
   mode?: string
   subjectName?: string
@@ -84,22 +85,7 @@ export async function POST(req: NextRequest) {
     const user = await requireUser()
     const body = (await parseBody(req, tutorChatSchema)) as ChatBody
 
-    const limiter = await checkRateLimit({
-      action: 'ai_tutor_chat',
-      identifier: user.id,
-      limit: 45,
-      windowMs: 60 * 60 * 1000,
-    })
-    if (!limiter.allowed) {
-      throw new ApiError(
-        'RATE_LIMITED',
-        `LEO has reached the hourly learning limit. Try again in ${limiter.retryAfterSec} seconds.`,
-        429,
-        true,
-      )
-    }
-
-    const { sessionId, message, subjectName, unitTitle, topicTitle } = body
+    const { sessionId, clientMessageId, message, subjectName, unitTitle, topicTitle } = body
     const mode = body.mode || 'explain_simple'
 
     const session = await db.tutorSession.findUnique({
@@ -116,18 +102,66 @@ export async function POST(req: NextRequest) {
       throw new ApiError('NOT_FOUND', 'Tutor session not found.', 404, false)
     }
 
+    const existingAssistant = await db.tutorMessage.findFirst({
+      where: { sessionId, role: 'assistant', clientMessageId },
+      orderBy: { createdAt: 'desc' },
+    })
+    if (existingAssistant) {
+      return okResponse({
+        message: existingAssistant,
+        sessionTitle: session.title,
+        fallback: false,
+        deduplicated: true,
+      })
+    }
+
+    const existingUserMessage = await db.tutorMessage.findFirst({
+      where: { sessionId, role: 'user', clientMessageId },
+    })
+    if (existingUserMessage) {
+      throw new ApiError(
+        'REQUEST_IN_PROGRESS',
+        'This tutor request is already being processed. Please wait a moment.',
+        409,
+        true,
+      )
+    }
+
+    const limiter = await checkRateLimit({
+      action: 'ai_tutor_chat',
+      identifier: user.id,
+      limit: 45,
+      windowMs: 60 * 60 * 1000,
+    })
+    if (!limiter.allowed) {
+      throw new ApiError(
+        'RATE_LIMITED',
+        `LEO has reached the hourly learning limit. Try again in ${limiter.retryAfterSec} seconds.`,
+        429,
+        true,
+      )
+    }
+
     await db.tutorMessage.create({
-      data: { sessionId, role: 'user', content: message.trim(), mode },
+      data: { sessionId, clientMessageId, role: 'user', content: message.trim(), mode },
     })
 
-    const chunks = await retrieveLessonContext({ subjectName, unitTitle, topicTitle })
+    const chunks = await retrieveLessonContext({
+      subjectId: session.subjectId ?? undefined,
+      unitNumber: session.unitNumber ?? undefined,
+      topicId: session.topicId ?? undefined,
+      subjectName: session.subjectId ? undefined : subjectName,
+      unitTitle: session.unitNumber ? undefined : unitTitle,
+      topicTitle: session.topicId ? undefined : topicTitle,
+    })
     const contextBlock = chunksToContextBlock(chunks)
     const citations: Citation[] = chunksToCitations(chunks)
 
+    const primaryCitation = citations[0]
     const academicContext = [
-      subjectName ? `Subject: ${subjectName}` : '',
-      unitTitle ? `Unit: ${unitTitle}` : '',
-      topicTitle ? `Topic: ${topicTitle}` : '',
+      primaryCitation?.subject || subjectName ? `Subject: ${primaryCitation?.subject || subjectName}` : '',
+      primaryCitation?.unit || unitTitle ? `Unit: ${primaryCitation?.unit || unitTitle}` : '',
+      primaryCitation?.topic || topicTitle ? `Topic: ${primaryCitation?.topic || topicTitle}` : '',
     ]
       .filter(Boolean)
       .join('\n')
@@ -179,9 +213,28 @@ Answer the student's latest message now.`
       signal: req.signal,
     })
 
+    const shouldRename = !session.title || session.title === 'New session'
+    if (providerResponse.usedFallback) {
+      await db.tutorSession.update({
+        where: { id: sessionId },
+        data: {
+          mode,
+          ...(shouldRename ? { title: createSessionTitle(message) } : {}),
+          updatedAt: new Date(),
+        },
+      })
+      throw new ApiError(
+        'AI_PROVIDER_UNAVAILABLE',
+        providerResponse.content,
+        503,
+        true,
+      )
+    }
+
     const saved = await db.tutorMessage.create({
       data: {
         sessionId,
+        clientMessageId,
         role: 'assistant',
         content: providerResponse.content,
         mode,
@@ -194,7 +247,6 @@ Answer the student's latest message now.`
       },
     })
 
-    const shouldRename = !session.title || session.title === 'New session'
     await db.tutorSession.update({
       where: { id: sessionId },
       data: {
@@ -208,7 +260,7 @@ Answer the student's latest message now.`
       userId: user.id,
       eventType: 'tutor_interaction',
       amount: 5,
-      idempotencyKey: `tutor_message:${saved.id}`,
+      idempotencyKey: `tutor_message:${sessionId}:${clientMessageId}`,
       sourceId: saved.id,
     })
 

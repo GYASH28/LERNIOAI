@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { PublicHeader } from '@/components/marketing/public-header'
 import { Hero } from '@/components/marketing/hero'
 import { AcademicIntelligenceOS } from '@/components/marketing/academic-intelligence-os'
@@ -16,6 +17,12 @@ import { PublicFooter } from '@/components/marketing/public-footer'
 const SITE_URL = process.env.NEXTAUTH_URL?.replace(/\/$/, '') || 'https://lernioai.vercel.app'
 
 export const dynamic = 'force-static'
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: '/',
+  },
+}
 
 /**
  * JSON-LD structured data describing Lernio as an EducationalApplication.

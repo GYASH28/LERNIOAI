@@ -8,6 +8,41 @@ import 'server-only'
 import { z } from 'zod'
 import { ApiError } from '@/lib/auth'
 
+const DEFAULT_BODY_LIMIT_BYTES = 256 * 1024
+const COMMON_WEAK_PASSWORDS = new Set([
+  'password',
+  'password123',
+  'student123',
+  'student1234',
+  'qwerty123',
+  'qwerty12345',
+  'letmein123',
+  'welcome123',
+  'admin123',
+  'lernio123',
+])
+
+export const passwordPolicySchema = z
+  .string()
+  .min(12, 'Password must be at least 12 characters.')
+  .max(128, 'Password must be 128 characters or fewer.')
+  .refine((value) => !COMMON_WEAK_PASSWORDS.has(value.trim().toLowerCase()), {
+    message: 'Choose a less common password or use a longer passphrase.',
+  })
+  .refine((value) => value.trim().length >= 16 || (/[A-Za-z]/.test(value) && /\d/.test(value)), {
+    message: 'Use at least one letter and one number, or choose a longer passphrase.',
+  })
+
+export function assertRequestBodySize(req: Request, maxBytes = DEFAULT_BODY_LIMIT_BYTES) {
+  const length = req.headers.get('content-length')
+  if (!length) return
+
+  const bytes = Number(length)
+  if (Number.isFinite(bytes) && bytes > maxBytes) {
+    throw new ApiError('PAYLOAD_TOO_LARGE', 'Request body is too large.', 413, false)
+  }
+}
+
 // ============================================================
 // AUTH
 // ============================================================
@@ -18,7 +53,7 @@ export const forgotPasswordSchema = z.object({
 
 export const resetPasswordSchema = z.object({
   token: z.string().trim().min(32).max(256),
-  password: z.string().min(8).max(256),
+  password: passwordPolicySchema,
 })
 
 export const verifyEmailRequestSchema = z.object({
@@ -155,6 +190,7 @@ export const updateTutorSessionSchema = z.object({
 
 export const tutorChatSchema = z.object({
   sessionId: z.string().min(1),
+  clientMessageId: z.string().uuid(),
   message: z.string().min(1).max(8000),
   mode: z.string().optional(),
   subjectName: z.string().optional(),
@@ -315,7 +351,13 @@ export const createRoleRequestSchema = z.object({
 // ============================================================
 
 /** Parse a JSON request body against a schema; throws ApiError on failure. */
-export async function parseBody<T>(req: Request, schema: z.ZodSchema<T>): Promise<T> {
+export async function parseBody<T>(
+  req: Request,
+  schema: z.ZodSchema<T>,
+  options: { maxBytes?: number } = {},
+): Promise<T> {
+  assertRequestBodySize(req, options.maxBytes)
+
   let json: unknown
   try {
     json = await req.json()

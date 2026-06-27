@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { requireUser, withApi, ApiError } from '@/lib/auth'
 import { getAiProvider } from '@/lib/ai/provider'
 import { checkRateLimit } from '@/lib/rate-limit'
+import { assertRequestBodySize } from '@/lib/schemas'
 
 /**
  * POST /api/tutor/speak
@@ -29,6 +30,8 @@ const ALLOWED_VOICES = new Set(['hannah', 'autumn', 'diana', 'austin', 'daniel',
 
 export async function POST(req: Request) {
   return withApi(async () => {
+    assertRequestBodySize(req, 16 * 1024)
+
     const user = await requireUser()
     const limiter = await checkRateLimit({
       action: 'ai_tutor_tts',

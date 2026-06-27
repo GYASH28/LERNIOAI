@@ -149,6 +149,7 @@ export interface TutorSession {
 
 export interface TutorMessage {
   id: string
+  clientMessageId?: string | null
   role: string
   content: string
   mode?: string | null

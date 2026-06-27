@@ -18,6 +18,7 @@
  *  5. Cap at top 5 lessons (by specificity), expanding each into ≤5 chunks.
  */
 import 'server-only'
+import type { Prisma } from '@prisma/client'
 import { db } from '@/lib/db'
 import type { Citation } from '@/lib/ai/provider'
 
@@ -36,6 +37,9 @@ export interface RetrievedChunk {
 }
 
 export interface RetrieveParams {
+  subjectId?: string
+  unitNumber?: number
+  topicId?: string
   subjectName?: string
   unitTitle?: string
   topicTitle?: string
@@ -106,8 +110,8 @@ interface ReviseContent {
 export async function retrieveLessonContext(
   params: RetrieveParams,
 ): Promise<RetrievedChunk[]> {
-  const { subjectName, unitTitle, topicTitle } = params
-  if (!subjectName && !unitTitle && !topicTitle) return []
+  const { subjectId, unitNumber, topicId, subjectName, unitTitle, topicTitle } = params
+  if (!subjectId && !unitNumber && !topicId && !subjectName && !unitTitle && !topicTitle) return []
 
   const lessons = await fetchLessons({ subjectName, unitTitle, topicTitle })
   if (lessons.length === 0) return []
@@ -168,57 +172,75 @@ export function chunksToContextBlock(chunks: RetrievedChunk[]): string {
 type LessonWithRelations = Awaited<ReturnType<typeof fetchLessons>>[number]
 
 async function fetchLessons(params: {
+  subjectId?: string
+  unitNumber?: number
+  topicId?: string
   subjectName?: string
   unitTitle?: string
   topicTitle?: string
 }) {
-  // Build a Prisma where clause that joins Topic -> Unit -> Subject.
-  // We use case-insensitive `contains` for fuzzy title matching.
-  const where = {
+  const idScoped: Prisma.LessonWhereInput[] = [
+    params.topicId ? { topicId: params.topicId } : null,
+    params.unitNumber && params.subjectId
+      ? {
+          OR: [
+            { unit: { number: params.unitNumber, subjectId: params.subjectId } },
+            { topic: { unit: { number: params.unitNumber, subjectId: params.subjectId } } },
+          ],
+        }
+      : null,
+    params.subjectId
+      ? {
+          OR: [
+            { unit: { subjectId: params.subjectId } },
+            { topic: { unit: { subjectId: params.subjectId } } },
+          ],
+        }
+      : null,
+  ].filter(Boolean) as Prisma.LessonWhereInput[]
+
+  const textScoped: Prisma.LessonWhereInput[] = [
+    params.topicTitle
+      ? {
+          topic: {
+            title: containsInsensitive(params.topicTitle),
+          },
+        }
+      : null,
+    params.unitTitle
+      ? {
+          unit: {
+            title: containsInsensitive(params.unitTitle),
+          },
+        }
+      : null,
+    params.subjectName
+      ? {
+          topic: {
+            unit: {
+              subject: {
+                name: containsInsensitive(params.subjectName),
+              },
+            },
+          },
+        }
+      : null,
+    params.subjectName
+      ? {
+          unit: {
+            subject: {
+              name: containsInsensitive(params.subjectName),
+            },
+          },
+        }
+      : null,
+  ].filter(Boolean) as Prisma.LessonWhereInput[]
+
+  // Prefer exact IDs owned by TutorSession. Text matching is a legacy fallback
+  // for older sessions and deliberately remains case-insensitive.
+  const where: Prisma.LessonWhereInput = {
     status: { in: ['published', 'verified'] },
-    OR: [
-      // Topic-level match (highest specificity)
-      ...(params.topicTitle
-        ? [
-            {
-              topic: {
-                title: { contains: params.topicTitle },
-              },
-            },
-          ]
-        : []),
-      // Unit-level match
-      ...(params.unitTitle
-        ? [
-            {
-              unit: {
-                title: { contains: params.unitTitle },
-              },
-            },
-          ]
-        : []),
-      // Subject-level match (widest)
-      ...(params.subjectName
-        ? [
-            {
-              topic: {
-                unit: {
-                  subject: {
-                    name: { contains: params.subjectName },
-                  },
-                },
-              },
-            },
-            {
-              unit: {
-                subject: {
-                  name: { contains: params.subjectName },
-                },
-              },
-            },
-          ]
-        : []),
-    ].filter(Boolean),
+    OR: idScoped.length ? idScoped : textScoped,
   }
 
   const lessons = await db.lesson.findMany({
@@ -234,6 +256,9 @@ async function fetchLessons(params: {
   // Rank by specificity: topic match > unit match > subject match.
   const score = (l: (typeof lessons)[number]): number => {
     let s = 0
+    if (params.topicId && l.topicId === params.topicId) s += 200
+    if (params.unitNumber && (l.unit?.number === params.unitNumber || l.topic?.unit?.number === params.unitNumber)) s += 120
+    if (params.subjectId && (l.unit?.subjectId === params.subjectId || l.topic?.unit?.subjectId === params.subjectId)) s += 80
     if (params.topicTitle && l.topic?.title?.toLowerCase().includes(params.topicTitle.toLowerCase())) s += 100
     if (params.unitTitle && l.unit?.title?.toLowerCase().includes(params.unitTitle.toLowerCase())) s += 50
     if (params.subjectName) {
@@ -247,6 +272,10 @@ async function fetchLessons(params: {
     .map((l) => ({ lesson: l, score: score(l) }))
     .sort((a, b) => b.score - a.score)
     .map((x) => x.lesson)
+}
+
+function containsInsensitive(value: string): Prisma.StringFilter {
+  return { contains: value, mode: 'insensitive' }
 }
 
 // ============================================================

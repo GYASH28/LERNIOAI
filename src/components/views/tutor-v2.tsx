@@ -56,6 +56,12 @@ function visibleSlice(content: string, count: number) {
   return content.slice(0, count)
 }
 
+function createClientMessageId() {
+  return typeof crypto !== 'undefined' && 'randomUUID' in crypto
+    ? crypto.randomUUID()
+    : `msg-${Date.now()}-${Math.random().toString(36).slice(2)}`
+}
+
 export function TutorView() {
   const { subjects } = useAppStore()
   const [sessions, setSessions] = useState<TutorSession[]>([])
@@ -213,8 +219,9 @@ export function TutorView() {
     if (!id) return
 
     const startedAt = Date.now()
+    const clientMessageId = createClientMessageId()
     const pending: TutorMessage = {
-      id: `pending-${Date.now()}`,
+      id: clientMessageId,
       role: 'user',
       content: clean,
       mode,
@@ -234,7 +241,13 @@ export function TutorView() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         signal: controller.signal,
-        body: JSON.stringify({ sessionId: id, message: clean, mode, subjectName: subject?.name }),
+        body: JSON.stringify({
+          sessionId: id,
+          clientMessageId,
+          message: clean,
+          mode,
+          subjectName: subject?.name,
+        }),
       })
       const payload = await response.json()
       if (!payload.ok) throw new Error(getApiErrorMessage(payload))
