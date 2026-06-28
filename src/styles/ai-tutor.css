@@ -27,6 +27,18 @@
     text-wrap: pretty;
   }
 
+  /* The focus timer owns the far-right floating slot. LEO sits one slot to
+     its left, keeping both controls fully clickable at every breakpoint. */
+  button[aria-label="Open LEO copilot"] {
+    right: 5rem !important;
+  }
+
+  @media (min-width: 768px) {
+    button[aria-label="Open LEO copilot"] {
+      right: 6rem !important;
+    }
+  }
+
   @keyframes ai-message-enter {
     from {
       opacity: 0;
