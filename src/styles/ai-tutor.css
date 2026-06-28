@@ -1,0 +1,62 @@
+@layer components {
+  .ai-message-enter {
+    animation: ai-message-enter 320ms var(--ease-emphasised, cubic-bezier(.2,.8,.2,1)) both;
+  }
+
+  .ai-thinking-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-thinking-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    transform: translateX(-120%);
+    background: linear-gradient(
+      110deg,
+      transparent 18%,
+      color-mix(in oklch, var(--brand) 10%, transparent) 48%,
+      transparent 78%
+    );
+    animation: ai-thinking-scan 2.2s ease-in-out infinite;
+  }
+
+  .ai-stream-text {
+    text-wrap: pretty;
+  }
+
+  @keyframes ai-message-enter {
+    from {
+      opacity: 0;
+      transform: translateY(10px) scale(0.992);
+      filter: blur(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+  }
+
+  @keyframes ai-thinking-scan {
+    0%, 24% { transform: translateX(-120%); }
+    70%, 100% { transform: translateX(120%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ai-message-enter,
+    .ai-thinking-card::after {
+      animation: none !important;
+    }
+  }
+
+  :root[data-motion="reduced"] .ai-message-enter,
+  :root[data-motion="reduced"] .ai-thinking-card::after,
+  :root[data-motion="none"] .ai-message-enter,
+  :root[data-motion="none"] .ai-thinking-card::after,
+  :root[data-low-power="true"] .ai-thinking-card::after {
+    animation: none !important;
+  }
+}
