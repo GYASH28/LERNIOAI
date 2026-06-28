@@ -47,7 +47,13 @@ jobs:
       - run: npm run check:migrations
       - run: npm run db:deploy
       - run: npm run lint
-      - run: npm run typecheck
+      - name: TypeScript diagnostics
+        shell: bash
+        run: |
+          set +e
+          npm run typecheck 2>&1 | tee typecheck.log
+          status=${PIPESTATUS[0]}
+          exit "$status"
       - run: npm run test
       - run: npm run build
       - run: npx playwright install --with-deps chromium
@@ -55,8 +61,9 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: playwright-results
+          name: verification-results
           path: |
+            typecheck.log
             test-results/
             playwright-report/
           if-no-files-found: ignore
