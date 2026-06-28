@@ -9,7 +9,11 @@ import {
   chunksToCitations,
   chunksToContextBlock,
 } from '@/lib/ai/retrieval'
-import { mapCitationsToAnswer, type Citation, type TutorMessage as ProviderMessage } from '@/lib/ai/provider'
+import {
+  mapCitationsToAnswer,
+  type Citation,
+  type TutorMessage as ProviderMessage,
+} from '@/lib/ai/provider'
 import { GroqStreamError, streamGroqChat } from '@/lib/ai/groq-stream'
 import {
   buildTutorSystemPrompt,
@@ -19,7 +23,7 @@ import {
 } from '@/lib/ai/tutor-runtime'
 import { encodeTutorStreamEvent, type TutorStreamEvent } from '@/lib/ai/stream-protocol'
 import { DEMO_TUTOR_SESSIONS, isDemoMode } from '@/lib/demo-fixtures'
-import type { TutorMessage, TutorSession } from '@/lib/types'
+import type { TutorMessage } from '@/lib/types'
 
 export const runtime = 'nodejs'
 export const maxDuration = 60
@@ -34,28 +38,31 @@ interface ChatBody {
   topicTitle?: string
 }
 
+interface ResolvedTutorSession {
+  id: string
+  userId?: string
+  title: string
+  subjectId?: string | null
+  unitNumber?: number | null
+  topicId?: string | null
+  messages: Array<{ role: string; content: string }>
+}
+
 const encoder = new TextEncoder()
 
 export async function POST(req: NextRequest) {
   return withApi(async () => {
     const user = await requireUser()
-    const body = (await parseBody(req, tutorChatSchema, { maxBytes: 32 * 1024 })) as ChatBody
+    const body = (await parseBody(req, tutorChatSchema, {
+      maxBytes: 32 * 1024,
+    })) as ChatBody
     const cleanMessage = body.message.trim()
     const mode = body.mode || 'explain_simple'
     const demo = isDemoMode()
 
     const session = demo
-      ? resolveDemoSession(body.sessionId, mode)
-      : await db.tutorSession.findUnique({
-          where: { id: body.sessionId },
-          include: {
-            messages: {
-              where: { role: { in: ['user', 'assistant'] } },
-              orderBy: { createdAt: 'desc' },
-              take: 16,
-            },
-          },
-        })
+      ? resolveDemoSession(body.sessionId)
+      : await resolvePersistedSession(body.sessionId)
 
     if (!session || (!demo && session.userId !== user.id)) {
       throw new ApiError('NOT_FOUND', 'Tutor session not found.', 404, false)
@@ -163,7 +170,7 @@ export async function POST(req: NextRequest) {
       contextBlock,
       citations,
     })
-    const history: ProviderMessage[] = (session.messages || [])
+    const history: ProviderMessage[] = session.messages
       .slice()
       .reverse()
       .map((stored) => ({
@@ -225,7 +232,9 @@ export async function POST(req: NextRequest) {
               content: grounded.content,
               mode,
               groundingStatus: grounded.groundingStatus,
-              citations: grounded.citations.length ? JSON.stringify(grounded.citations) : null,
+              citations: grounded.citations.length
+                ? JSON.stringify(grounded.citations)
+                : null,
               followUps: JSON.stringify(followUps),
             }
           } else {
@@ -277,9 +286,7 @@ export async function POST(req: NextRequest) {
           if (!demo && userMessageId && !completed) {
             await db.tutorMessage.delete({ where: { id: userMessageId } }).catch(() => {})
           }
-
-          const streamError = normaliseStreamError(error, requestId)
-          push(streamError)
+          push(normaliseStreamError(error, requestId))
         } finally {
           controller.close()
         }
@@ -298,33 +305,72 @@ export async function POST(req: NextRequest) {
   })
 }
 
-function resolveDemoSession(sessionId: string, mode: string) {
+async function resolvePersistedSession(sessionId: string): Promise<ResolvedTutorSession | null> {
+  const session = await db.tutorSession.findUnique({
+    where: { id: sessionId },
+    include: {
+      messages: {
+        where: { role: { in: ['user', 'assistant'] } },
+        orderBy: { createdAt: 'desc' },
+        take: 16,
+      },
+    },
+  })
+  if (!session) return null
+  return {
+    id: session.id,
+    userId: session.userId,
+    title: session.title,
+    subjectId: session.subjectId,
+    unitNumber: session.unitNumber,
+    topicId: session.topicId,
+    messages: session.messages.map((message) => ({
+      role: message.role,
+      content: message.content,
+    })),
+  }
+}
+
+function resolveDemoSession(sessionId: string): ResolvedTutorSession | null {
   const fixture = DEMO_TUTOR_SESSIONS.find((item) => item.id === sessionId)
-  if (fixture) return fixture as TutorSession & { userId?: string }
+  if (fixture) {
+    return {
+      id: fixture.id,
+      title: fixture.title,
+      subjectId: fixture.subjectId,
+      unitNumber: fixture.unitNumber,
+      topicId: fixture.topicId,
+      messages: (fixture.messages || []).map((message) => ({
+        role: message.role,
+        content: message.content,
+      })),
+    }
+  }
   if (!sessionId.startsWith('demo-session-')) return null
-  const now = new Date().toISOString()
   return {
     id: sessionId,
     title: 'New session',
-    mode,
-    language: 'en',
-    archived: false,
-    createdAt: now,
-    updatedAt: now,
     messages: [],
-  } as TutorSession & { userId?: string }
+  }
 }
 
 function buildFollowUps(mode: string, topic?: string) {
   const subject = topic ? ` about ${topic}` : ''
   if (mode === 'hint_only') return ['Give me one more hint', 'Now show the full solution']
-  if (mode === 'ask_me' || mode === 'conduct_viva') return ['Ask the next question', 'Explain the previous answer']
+  if (mode === 'ask_me' || mode === 'conduct_viva') {
+    return ['Ask the next question', 'Explain the previous answer']
+  }
   if (mode === 'debug_code') return ['Show the corrected code', 'Explain the time complexity']
-  if (mode === 'exam_answer') return ['Convert this into 3-mark notes', 'Give me a diagram description']
+  if (mode === 'exam_answer') {
+    return ['Convert this into 3-mark notes', 'Give me a diagram description']
+  }
   return [`Quiz me${subject}`, 'Create short revision notes', 'Explain with another example']
 }
 
-function normaliseStreamError(error: unknown, requestId: string): Extract<TutorStreamEvent, { type: 'error' }> {
+function normaliseStreamError(
+  error: unknown,
+  requestId: string,
+): Extract<TutorStreamEvent, { type: 'error' }> {
   if (error instanceof GroqStreamError) {
     return {
       type: 'error',
