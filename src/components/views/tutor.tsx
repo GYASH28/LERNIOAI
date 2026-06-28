@@ -1,1 +1,1 @@
-export { TutorView } from './tutor-v2'
+export { TutorView } from './tutor-v3'
