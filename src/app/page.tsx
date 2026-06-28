@@ -1,4 +1,7 @@
 import type { Metadata } from 'next'
+import { getCurrentUser } from '@/lib/auth'
+import { CinematicIntro } from '@/components/marketing/cinematic-intro'
+import { LandingMotionController } from '@/components/marketing/landing-motion-controller'
 import { PublicHeader } from '@/components/marketing/public-header'
 import { Hero } from '@/components/marketing/hero'
 import { AcademicIntelligenceOS } from '@/components/marketing/academic-intelligence-os'
@@ -16,7 +19,8 @@ import { PublicFooter } from '@/components/marketing/public-footer'
 
 const SITE_URL = process.env.NEXTAUTH_URL?.replace(/\/$/, '') || 'https://lernioai.vercel.app'
 
-export const dynamic = 'force-static'
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 export const metadata: Metadata = {
   alternates: {
@@ -24,10 +28,6 @@ export const metadata: Metadata = {
   },
 }
 
-/**
- * JSON-LD structured data describing Lernio as an EducationalApplication.
- * Only includes properties that are actually true — no fabricated stats.
- */
 const softwareApplicationLd = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
@@ -48,8 +48,9 @@ const softwareApplicationLd = {
   },
 }
 
-export default function LandingPage() {
-  const isAuthenticated = false
+export default async function LandingPage() {
+  const currentUser = await getCurrentUser().catch(() => null)
+  const isAuthenticated = Boolean(currentUser)
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
@@ -58,6 +59,8 @@ export default function LandingPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationLd) }}
       />
 
+      <CinematicIntro />
+      <LandingMotionController />
       <PublicHeader isAuthenticated={isAuthenticated} />
 
       <main className="flex-1">
