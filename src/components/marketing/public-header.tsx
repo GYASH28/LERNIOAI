@@ -87,14 +87,16 @@ export function PublicHeader({ isAuthenticated = false }: { isAuthenticated?: bo
         </nav>
 
         <div className="hidden items-center justify-end gap-2 lg:flex">
-          <Button
-            variant="ghost"
-            size="sm"
-            asChild
-            className="h-10 min-h-10"
-          >
-            <Link href="/sign-in">Sign in</Link>
-          </Button>
+          {!isAuthenticated ? (
+            <Button
+              variant="ghost"
+              size="sm"
+              asChild
+              className="h-10 min-h-10"
+            >
+              <Link href="/sign-in">Sign in</Link>
+            </Button>
+          ) : null}
           <Button size="sm" asChild className="h-10 min-h-10 gap-1.5">
             <Link href={primaryHref}>
               {primaryLabel}
@@ -146,14 +148,16 @@ export function PublicHeader({ isAuthenticated = false }: { isAuthenticated?: bo
                   </SheetClose>
                 ))}
                 <div className="my-2 h-px bg-border" />
-                <SheetClose asChild>
-                  <Link
-                    href="/sign-in"
-                    className="inline-flex min-h-11 items-center rounded-md px-3 text-sm font-medium text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                  >
-                    Sign in
-                  </Link>
-                </SheetClose>
+                {!isAuthenticated ? (
+                  <SheetClose asChild>
+                    <Link
+                      href="/sign-in"
+                      className="inline-flex min-h-11 items-center rounded-md px-3 text-sm font-medium text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    >
+                      Sign in
+                    </Link>
+                  </SheetClose>
+                ) : null}
                 <SheetClose asChild>
                   <Link
                     href={primaryHref}
