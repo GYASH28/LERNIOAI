@@ -23,7 +23,7 @@ import {
 } from '@/lib/ai/tutor-runtime'
 import { encodeTutorStreamEvent, type TutorStreamEvent } from '@/lib/ai/stream-protocol'
 import { DEMO_TUTOR_SESSIONS, isDemoMode } from '@/lib/demo-fixtures'
-import type { TutorMessage } from '@/lib/types'
+import type { TutorMessage, TutorSession } from '@/lib/types'
 
 export const runtime = 'nodejs'
 export const maxDuration = 60
@@ -332,7 +332,9 @@ async function resolvePersistedSession(sessionId: string): Promise<ResolvedTutor
 }
 
 function resolveDemoSession(sessionId: string): ResolvedTutorSession | null {
-  const fixture = DEMO_TUTOR_SESSIONS.find((item) => item.id === sessionId)
+  const fixture = (DEMO_TUTOR_SESSIONS as TutorSession[]).find(
+    (item) => item.id === sessionId,
+  )
   if (fixture) {
     return {
       id: fixture.id,
