@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { LernioLogoTile } from '@/components/brand/lernio-logo'
@@ -11,6 +12,13 @@ const AiCopilot = dynamic(
 )
 
 export function Footer() {
+  const [copilotReady, setCopilotReady] = useState(false)
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setCopilotReady(true), 900)
+    return () => window.clearTimeout(timer)
+  }, [])
+
   return (
     <>
       <footer className="mt-auto border-t border-border bg-card/50">
@@ -49,7 +57,7 @@ export function Footer() {
           </div>
         </div>
       </footer>
-      <AiCopilot />
+      {copilotReady ? <AiCopilot /> : null}
     </>
   )
 }
