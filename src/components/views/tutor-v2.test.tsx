@@ -36,7 +36,7 @@ function tutorStream(content = 'Arrays store elements in contiguous memory.') {
     encodeTutorStreamEvent({
       type: 'done',
       message: {
-        id: 'assistant-1',
+        id: `assistant-${Math.random()}`,
         clientMessageId: 'client-1',
         role: 'assistant',
         content,
@@ -164,16 +164,15 @@ describe('TutorView', () => {
 
     await user.click(screen.getByRole('button', { name: 'Quiz me' }))
     await waitFor(() => {
-      expect(fetch).toHaveBeenCalledWith(
-        '/api/tutor/chat/stream',
-        expect.objectContaining({ method: 'POST' }),
-      )
+      expect(screen.getAllByText(/Arrays store elements in contiguous memory/)).toHaveLength(2)
     })
 
     await user.click(screen.getByRole('button', { name: 'New conversation' }))
-    expect(await screen.findByText('Your conversations will appear here.')).not.toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getAllByRole('button', { name: /Delete New session/i }).length).toBeGreaterThan(1)
+    })
 
-    const deleteButton = screen.getByRole('button', { name: /Delete New session/i })
+    const deleteButton = screen.getAllByRole('button', { name: /Delete New session/i })[0]
     await user.click(deleteButton)
     await waitFor(() => {
       expect(fetch).toHaveBeenCalledWith(
