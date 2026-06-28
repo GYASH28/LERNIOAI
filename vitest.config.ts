@@ -8,8 +8,9 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./vitest.setup.ts'],
-    // Clipboard ownership is replaced internally by user-event in jsdom, so
-    // the Copilot's full interaction flow is validated by Playwright instead.
+    // user-event replaces clipboard ownership inside jsdom with a non-spy
+    // implementation. Streaming parsing and Copilot runtime policy are covered
+    // separately without weakening the production copy control.
     exclude: [
       '**/node_modules/**',
       '**/.next/**',
