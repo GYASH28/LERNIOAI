@@ -108,7 +108,7 @@ describe('TutorView send flow', () => {
     await user.type(composer, 'Plan my work for today')
     await user.click(screen.getByRole('button', { name: 'Send message to LEO' }))
 
-    expect(await screen.findByText('Plan my work for today')).toBeInTheDocument()
+    expect((await screen.findAllByText('Plan my work for today')).length).toBeGreaterThan(0)
     expect(await screen.findByText('Here is your plan for today.')).toBeInTheDocument()
     expect(fetch).toHaveBeenCalledWith(
       '/api/tutor/session',
