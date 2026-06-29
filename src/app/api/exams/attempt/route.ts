@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
           select: {
             id: true,
             unit: { select: { subjectId: true, number: true } },
-            topic: { select: { unit: { select: { subjectId: true, number: true } } } },
+            topic: { select: { id: true, unit: { select: { subjectId: true, number: true } } } },
           },
         })
       : null
@@ -74,8 +74,19 @@ export async function POST(req: NextRequest) {
       throw new ApiError('NOT_FOUND', 'Lesson not found.', 404, false)
     }
     const lessonSubjectId = lesson?.topic?.unit.subjectId ?? lesson?.unit?.subjectId ?? null
+    const lessonTopicId = lesson?.topic?.id ?? null
+    const lessonUnitNumber = lesson?.topic?.unit.number ?? lesson?.unit?.number ?? null
     if (lessonSubjectId && lessonSubjectId !== paperSubjectId) {
       throw new ApiError('BAD_REQUEST', 'lessonId must belong to the selected subject.', 400, false)
+    }
+    if (
+      lesson &&
+      body.unitNumbers &&
+      body.unitNumbers.length > 0 &&
+      lessonUnitNumber &&
+      !body.unitNumbers.includes(lessonUnitNumber)
+    ) {
+      throw new ApiError('BAD_REQUEST', 'unitNumbers must include the selected lesson unit.', 400, false)
     }
 
     // ------------------------------------------------------------------
@@ -85,7 +96,11 @@ export async function POST(req: NextRequest) {
     // ------------------------------------------------------------------
     const where: Prisma.QuestionWhereInput = { ...scopedQuestionWhere(scope), subjectId: paperSubjectId }
     if (body.difficulty) where.difficulty = body.difficulty
-    if (body.unitNumbers && body.unitNumbers.length > 0) {
+    if (lessonTopicId) {
+      where.topicId = lessonTopicId
+    } else if (lessonUnitNumber) {
+      where.unitNumber = lessonUnitNumber
+    } else if (body.unitNumbers && body.unitNumbers.length > 0) {
       where.unitNumber = { in: body.unitNumbers }
     }
 
@@ -143,6 +158,15 @@ export async function POST(req: NextRequest) {
           durationMins,
           paperId: body.questionPaperId ?? null,
           paperTitle,
+          lessonScope: lesson
+            ? {
+                lessonId: lesson.id,
+                subjectId: paperSubjectId,
+                topicId: lessonTopicId,
+                unitNumber: lessonUnitNumber,
+                selection: lessonTopicId ? 'topic' : lessonUnitNumber ? 'unit' : 'lesson',
+              }
+            : null,
         }),
         totalQuestions: safeDTOs.length,
         correctCount: 0,

@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import {
   evaluateLessonCompletionCriteria,
   getLessonCompletionPolicyState,
+  quizAttemptHasMatchingLessonScope,
 } from './lesson-completion-policy'
 
 const dbMock = vi.hoisted(() => ({
@@ -15,7 +16,7 @@ const dbMock = vi.hoisted(() => ({
     count: vi.fn(),
   },
   quizAttempt: {
-    count: vi.fn(),
+    findMany: vi.fn(),
   },
 }))
 
@@ -113,13 +114,26 @@ describe('evaluateLessonCompletionCriteria', () => {
       _max: { watchPercent: 0 },
     })
     dbMock.questionAttempt.count.mockResolvedValue(0)
-    dbMock.quizAttempt.count.mockResolvedValue(1)
+    dbMock.quizAttempt.findMany.mockResolvedValue([
+      {
+        questionsJson: JSON.stringify({
+          questionIds: ['question_1'],
+          lessonScope: {
+            lessonId: 'lesson_1',
+            subjectId: 'subject_1',
+            topicId: 'topic_1',
+            unitNumber: 1,
+            selection: 'topic',
+          },
+        }),
+      },
+    ])
 
     await expect(getLessonCompletionPolicyState('user_1', 'lesson_1', true)).resolves.toEqual({
       canComplete: true,
       blockers: [],
     })
-    expect(dbMock.quizAttempt.count).toHaveBeenCalledWith({
+    expect(dbMock.quizAttempt.findMany).toHaveBeenCalledWith({
       where: {
         userId: 'user_1',
         lessonId: 'lesson_1',
@@ -127,6 +141,59 @@ describe('evaluateLessonCompletionCriteria', () => {
         completedAt: { not: null },
         score: { gte: 70 },
       },
+      select: { questionsJson: true },
     })
+  })
+
+  it('rejects quiz-pass evidence when the stored question set is not lesson-scoped', async () => {
+    dbMock.lessonCompletionCriteria.findFirst.mockResolvedValue({
+      minimumVideoPercent: 0,
+      requirePractice: false,
+      requireQuizPass: true,
+      minimumQuizScore: 70,
+      requireExplicitDone: true,
+    })
+    dbMock.videoWatchProgress.aggregate.mockResolvedValue({
+      _max: { watchPercent: 0 },
+    })
+    dbMock.questionAttempt.count.mockResolvedValue(0)
+    dbMock.quizAttempt.findMany.mockResolvedValue([
+      {
+        questionsJson: JSON.stringify({
+          questionIds: ['question_1'],
+          lessonScope: null,
+        }),
+      },
+    ])
+
+    await expect(getLessonCompletionPolicyState('user_1', 'lesson_1', true)).resolves.toEqual({
+      canComplete: false,
+      blockers: ['Pass the required lesson quiz.'],
+    })
+  })
+})
+
+describe('quizAttemptHasMatchingLessonScope', () => {
+  it('accepts only question sets generated for the same lesson scope', () => {
+    expect(
+      quizAttemptHasMatchingLessonScope(
+        JSON.stringify({
+          questionIds: ['question_1'],
+          lessonScope: { lessonId: 'lesson_1', selection: 'topic' },
+        }),
+        'lesson_1',
+      ),
+    ).toBe(true)
+    expect(
+      quizAttemptHasMatchingLessonScope(
+        JSON.stringify({
+          questionIds: ['question_1'],
+          lessonScope: { lessonId: 'lesson_2', selection: 'topic' },
+        }),
+        'lesson_1',
+      ),
+    ).toBe(false)
+    expect(quizAttemptHasMatchingLessonScope(JSON.stringify({ questionIds: ['question_1'] }), 'lesson_1')).toBe(false)
+    expect(quizAttemptHasMatchingLessonScope('not-json', 'lesson_1')).toBe(false)
   })
 })

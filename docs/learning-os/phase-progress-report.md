@@ -572,6 +572,22 @@ Date: 2026-06-28
 - `npm run check`: passed, 43 files and 149 tests with 129 existing warnings and 0 errors.
 - `npm run build`: passed with 90 static pages generated.
 
+## Phase 22 Progress: Revision Source Lesson Handoff
+
+### Changed
+
+- Added `firstLessonReferenceForTopic()` to derive the first scoped lesson for a revision topic.
+- Enriched `/api/revision/due` schedule responses with `sourceLesson` metadata for canonical lesson return links.
+- Enriched `/api/revision/flashcards` cards with source lesson id, title, canonical URL and duration.
+- Updated classic revision rows, active revision sessions and 3D flashcards to link back to source lessons when available.
+
+### Additional Verification
+
+- `npx vitest run src/features/learning/server/get-student-learning-scope.test.ts`: passed, 1 file and 5 tests.
+- `npm run typecheck`: passed.
+- `npm run check`: passed, 43 files and 149 tests with 129 existing warnings and 0 errors.
+- `npm run build`: passed with 90 static pages generated.
+
 ## Phase 23 Progress: Authority-Scoped Learning Ops Preview
 
 ### Changed
@@ -589,24 +605,22 @@ Date: 2026-06-28
 - `npm run typecheck`: passed.
 - `npm run check`: passed, 44 files and 153 tests with 129 existing warnings and 0 errors.
 - `npm run build`: passed with 90 static pages generated.
-- `npm run check`: passed, 43 files and 149 tests with 129 existing warnings and 0 errors.
-- `npm run build`: passed with 90 static pages generated.
-- `npm run check`: passed, 43 files and 149 tests with 129 existing warnings and 0 errors.
-- `npm run build`: passed with 90 static pages generated.
 
-## Phase 22 Progress: Revision Source Lesson Handoff
+## Phase 24 Progress: Lesson-Scoped Quiz Evidence
 
 ### Changed
 
-- Added `firstLessonReferenceForTopic()` to derive the first scoped lesson for a revision topic.
-- Enriched `/api/revision/due` schedule responses with `sourceLesson` metadata for canonical lesson return links.
-- Enriched `/api/revision/flashcards` cards with source lesson id, title, canonical URL and duration.
-- Updated classic revision rows, active revision sessions and 3D flashcards to link back to source lessons when available.
+- Constrained lesson-linked quiz attempt creation to the lesson's topic when available, otherwise the lesson's unit.
+- Rejected conflicting `unitNumbers` when a lesson-linked attempt is requested.
+- Stored server-derived `lessonScope` provenance in `QuizAttempt.questionsJson`.
+- Updated lesson completion policy so quiz-pass evidence counts only when the stored question set was generated for the same lesson scope.
 
 ### Additional Verification
 
-- `npx vitest run src/features/learning/server/get-student-learning-scope.test.ts`: passed, 1 file and 5 tests.
+- `npx vitest run src/features/learning/server/lesson-completion-policy.test.ts`: passed, 1 file and 7 tests.
 - `npm run typecheck`: passed.
+- `npm run check`: passed, 44 files and 155 tests with 129 existing warnings and 0 errors.
+- `npm run build`: passed with 90 static pages generated.
 
 ## Remaining Manual Verification
 
@@ -622,7 +636,7 @@ Date: 2026-06-28
 - Coding now supports optional curriculum links and scoped API filtering, but reviewed challenge mappings/imports and the production runner are still pending.
 - Materials now filter by scoped subject/unit/topic/type/language and optional lesson-level `LessonResource` mappings, but production coverage still needs published mappings.
 - XP ledger totals remain user-global where historical XP events do not contain reliable curriculum subject ownership.
-- Completion criteria can now consume lesson-scoped practice attempts; quiz pass evidence still needs exact lesson-level linkage.
+- Completion criteria now consume lesson-scoped practice attempts and lesson-scoped quiz-pass evidence; production usefulness still depends on reviewed lesson question coverage.
 - Lesson notes now have scoped reviewer/admin previews and a local validated PDF render worker, but no AI generation worker, object-storage writer or approved note documents yet.
 - The learning coverage report is manifest/candidate-file backed; database-backed published lesson/resource coverage still needs a reachable PostgreSQL connection.
 

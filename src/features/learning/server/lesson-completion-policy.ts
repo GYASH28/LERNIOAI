@@ -22,6 +22,17 @@ export interface LessonCompletionPolicyResult {
   blockers: string[]
 }
 
+interface StoredLessonQuizQuestionSet {
+  questionIds?: unknown
+  lessonScope?: {
+    lessonId?: unknown
+    subjectId?: unknown
+    topicId?: unknown
+    unitNumber?: unknown
+    selection?: unknown
+  } | null
+}
+
 export function evaluateLessonCompletionCriteria(
   criteria: LessonCompletionCriteriaInput | null,
   evidence: LessonCompletionEvidence,
@@ -69,8 +80,8 @@ export async function getLessonCompletionPolicyState(
   const practiceAttemptCount = await db.questionAttempt.count({
     where: { userId, lessonId },
   })
-  const quizPassCount = criteria.requireQuizPass
-    ? await db.quizAttempt.count({
+  const quizPassAttempts = criteria.requireQuizPass
+    ? await db.quizAttempt.findMany({
         where: {
           userId,
           lessonId,
@@ -78,13 +89,39 @@ export async function getLessonCompletionPolicyState(
           completedAt: { not: null },
           score: { gte: criteria.minimumQuizScore ?? 0 },
         },
+        select: { questionsJson: true },
       })
-    : 0
+    : []
 
   return evaluateLessonCompletionCriteria(criteria, {
     explicitDone,
     maxVideoPercent: video._max.watchPercent ?? 0,
     hasPracticeAttempt: practiceAttemptCount > 0,
-    hasQuizPass: quizPassCount > 0,
+    hasQuizPass: quizPassAttempts.some((attempt) =>
+      quizAttemptHasMatchingLessonScope(attempt.questionsJson, lessonId),
+    ),
   })
+}
+
+export function quizAttemptHasMatchingLessonScope(
+  questionsJson: string | null | undefined,
+  lessonId: string,
+): boolean {
+  if (!questionsJson) return false
+
+  let parsed: StoredLessonQuizQuestionSet
+  try {
+    parsed = JSON.parse(questionsJson) as StoredLessonQuizQuestionSet
+  } catch {
+    return false
+  }
+
+  const lessonScope = parsed.lessonScope
+  const questionIds = parsed.questionIds
+  return (
+    lessonScope?.lessonId === lessonId &&
+    Array.isArray(questionIds) &&
+    questionIds.length > 0 &&
+    (lessonScope.selection === 'topic' || lessonScope.selection === 'unit')
+  )
 }
