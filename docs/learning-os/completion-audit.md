@@ -30,6 +30,9 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - Added durable `LessonCompletion.lastVisited` resume tracking and a scoped semester Continue Learning card.
 - Extended the curriculum importer to import optional reviewed units, topics and lessons when source-backed manifests contain them.
 - Switched Playwright to the webpack dev server and kept `/theme-no-flash.js` public so E2E/a11y routes load reliably.
+- Added Vercel-preview-safe demo-mode guards while keeping production demo mode blocked.
+- Switched the Vercel build path to `next build --webpack`.
+- Excluded `tmp/` from Vercel source uploads.
 
 ## Verification Completed Locally
 
@@ -48,6 +51,11 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - `npm run test:e2e` passed with 146 Playwright tests.
 - `npm run test:a11y` passed.
 - `npm run test:visual` passed.
+- `npx vitest run src/lib/auth-policy.test.ts` passed after the Vercel preview demo-mode policy change.
+- `LERNIO_DEMO_MODE=true VERCEL_ENV=preview npm run vercel-build` passed locally.
+- Vercel preview `https://lernio-krnvukdhs-gyash28s-projects.vercel.app` deployed with status Ready.
+- Vercel preview `/` returned 200.
+- Vercel preview `/api/ready` returned 503 because database is unavailable and AI/email providers are unconfigured.
 
 ## Evidence Still Required Before Completion
 
@@ -61,6 +69,7 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - Published `LessonResource` video mappings and approved note artifacts.
 - Authenticated learning E2E and accessibility tests.
 - Production deployment with post-deploy smoke checks.
+- Production Vercel promotion after `/api/ready` returns 200 and demo mode is disabled for production.
 
 ## External Blockers
 
