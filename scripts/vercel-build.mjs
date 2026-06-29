@@ -25,4 +25,4 @@ console.log('[vercel-build] Generating Prisma Client...')
 runCli('node_modules/prisma/build/index.js', ['generate'])
 
 console.log('[vercel-build] Building Next.js...')
-runCli('node_modules/next/dist/bin/next', ['build'])
+runCli('node_modules/next/dist/bin/next', ['build', '--webpack'])
