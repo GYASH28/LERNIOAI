@@ -175,3 +175,20 @@ Rules:
 - `notes:render-pdf` must validate each JSON document before rendering.
 - Output is written to `output/pdf/lesson-notes` and is not imported or published automatically.
 - Generated documents still require reviewer approval and a future object-storage writer before they can become student-facing resources.
+
+## Coding Lab Curriculum Scope
+
+Migration:
+
+```text
+prisma/migrations/20260629142000_add_coding_curriculum_scope/migration.sql
+```
+
+Rules:
+
+- `CodingChallenge` can now link directly to a subject, unit, topic or lesson.
+- `CodingSubmission` stores the resolved challenge curriculum context at save time for reporting and review.
+- Existing unlinked coding challenges remain valid as global published practice.
+- Student-facing `/api/coding` returns only global published practice plus curriculum-linked challenges inside the student's resolved learning scope.
+- Draft challenge preview is limited to preview-capable roles through `getStudentLearningScope()`.
+- Do not publish curriculum-linked coding content until the challenge mapping source, lesson fit and production runner expectations are reviewed.

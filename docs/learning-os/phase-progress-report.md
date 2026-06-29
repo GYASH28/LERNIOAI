@@ -88,7 +88,7 @@ Date: 2026-06-28
 - Auto-planner generation now uses scoped weak topics and scoped revision schedules.
 - Analytics activity, calendar, focus, readiness, readiness radar, daily quests and quest-claim checks now aggregate only scoped learning activity where the underlying rows carry subject/topic links.
 - Command palette inspection found static navigation/actions only; no curriculum search API is exposed there.
-- Coding challenges currently have no subject/programme fields in Prisma and remain generic until the curriculum manifest can attach them explicitly.
+- Coding challenges now have optional subject/unit/topic/lesson fields and `/api/coding` filters linked challenges through the student's learning scope; imported reviewed mappings and the production runner remain pending.
 
 ### Additional Verification
 
@@ -470,6 +470,32 @@ Date: 2026-06-28
 - `npm run test -- src/lib/curriculum/official-course-extraction.test.ts src/lib/curriculum/coverage-report.test.ts`: passed, 2 files and 8 tests.
 - `npm run coverage:learning`: passed and included official catalog totals in `content/reports/cwit-r23-learning-coverage.json`.
 
+## Phase 17 Progress: Coding Curriculum Scope
+
+### Changed
+
+- Added optional `subjectId`, `unitId`, `topicId`, `lessonId`, `sourceEvidence`, `status` and `updatedAt` fields to `CodingChallenge`.
+- Added optional `subjectId`, `unitId`, `topicId` and `lessonId` fields to `CodingSubmission`.
+- Added relation fields from Subject, Unit, Topic and Lesson to coding challenges/submissions.
+- Added migration `prisma/migrations/20260629142000_add_coding_curriculum_scope/migration.sql`.
+- Added `src/lib/coding/coding-scope.ts` for student learning-scope challenge filters and submission context derivation.
+- Scoped `GET /api/coding` to global published challenges plus in-scope subject/unit/topic/lesson-linked challenges.
+- Scoped coding draft saves so out-of-scope challenge IDs are rejected and saved submissions inherit the challenge curriculum context.
+- Extended the Coding Lab UI with subject, unit and lesson badges when the API returns linked challenge metadata.
+
+### Evidence Boundary
+
+- Existing unlinked coding challenges remain visible as global published practice.
+- This adds the schema/API/UI scope foundation only. Curriculum-linked challenge imports, reviewer-approved mappings and the production C++ runner are still required before coding is complete.
+
+### Additional Verification
+
+- `npx prisma validate`: passed.
+- `npx prisma generate`: passed.
+- `npm run check:migrations`: passed.
+- `npx vitest run src/lib/coding/coding-scope.test.ts src/features/learning/server/get-student-learning-scope.test.ts`: passed, 2 files and 8 tests.
+- `npm run typecheck`: passed.
+
 ## Remaining Manual Verification
 
 - Database dry-run/write needs a reachable PostgreSQL connection.
@@ -481,7 +507,7 @@ Date: 2026-06-28
 - Link-health checks prove current URL reachability only, not lesson fit, playlist membership, captions, duration or embeddability.
 - Poppler `pdftoppm` is not installed, but the Winter 2025 timetable was rendered with `pypdfium2` to `tmp/pdfs/rendered/Winter-Examination-2025-page-1.png` and visually inspected as legible/nonblank.
 - Labs need explicit curriculum mapping before they can be fully programme/semester scoped.
-- Coding needs subject/programme fields or LessonResource/lab mappings before it can be fully programme/semester scoped.
+- Coding now supports optional curriculum links and scoped API filtering, but reviewed challenge mappings/imports and the production runner are still pending.
 - Materials now filter by scoped subject/unit/topic/type/language, but lesson-level material filtering needs published LessonResource mappings rather than bare Resource rows.
 - XP ledger totals remain user-global where historical XP events do not contain reliable curriculum subject ownership.
 - Teacher/reviewer/admin preview scope still needs authority-aware broadening beyond the normal student scope.
@@ -502,19 +528,21 @@ Date: 2026-06-28
 - `npx tsx scripts/promote-curriculum-official-structure.ts --write --overwrite`: passed, 51 official subject outcome set(s) written.
 - `npm run notes:validate`: passed, 0 document(s) present/valid.
 - `npm run notes:render-pdf`: passed, 0 document(s) rendered.
-- `npm run check`: passed, including migration encoding, lint, typecheck and 37 Vitest files / 118 tests. Lint still reports 132 existing warnings and 0 errors.
+- `npm run check`: passed, including migration encoding, lint, typecheck and 41 Vitest files / 142 tests. Lint still reports 132 existing warnings and 0 errors.
 - `npm run lint`: passed with 0 errors and 132 existing warnings.
 - `npm run typecheck`: passed.
 - `npx prisma validate`: passed.
+- `npx prisma generate`: passed.
 - `npx prisma migrate status`: failed because the configured PostgreSQL database at `localhost:5432` is unreachable in the local environment.
 - `npm run check:migrations`: passed.
+- `npx vitest run src/lib/coding/coding-scope.test.ts src/features/learning/server/get-student-learning-scope.test.ts`: passed, 2 files and 8 tests.
 - `npm run coverage:learning`: passed and wrote `content/reports/cwit-r23-learning-coverage.json` with 8/12 manifests present, 59 subject structures, 51 outcome-backed subject structures, 0 subject structures with promoted units, 27 unit candidate review rows needing manual review, 252 YouTube review-queue subject mappings, 65 unplaced official-subject blockers, 18 missing manifest-subject blockers, 34 unique timetable evidence codes, 81 official catalog course entries and 194 pending verification items.
 - `npm run content:import:youtube-guides -- --sem12 content-import/CWIT_Semester_1_2_YouTube_Lecture_Links.pdf --sem36 content-import/CWIT_Semester_3_to_6_YouTube_Lecture_Links.pdf --dry-run`: passed, extracting 103 deduplicated source URL rows, 102 unique URLs, 100 draft candidates and 3 skipped non-YouTube URLs from the supplied PDFs.
 - `npm run resources:youtube:candidates`: passed, 100 candidate(s) written.
 - `npx tsx scripts/verify-youtube-candidates.ts --write`: passed, 100 metadata check(s), 6 found and 94 unavailable/unverified by public oEmbed.
 - `npm run resources:youtube:review-queue`: passed, 100 candidate(s), 252 subject mapping(s), 0 ready for lesson mapping, 65 unplaced official-subject blockers, 18 missing manifest-subject blockers and 169 lesson-structure blockers.
 - `npx tsx scripts/check-resource-link-health.ts --write`: passed and wrote 100 checked rows; 100 healthy, 0 stale/unhealthy/unknown.
-- `npm run build`: passed with 90 static pages generated and the new learning/admin routes included.
+- `npm run build`: passed with 90 static pages generated and `/api/coding` included.
 - `npm run test:e2e`: passed against `next start` production server, 146 Playwright tests.
 - Smoke checks against `next start`: `/api/health` returned 200 and `/api/ready` returned 503 because PostgreSQL is unavailable.
 - Production server was started with `npm run start` on `http://localhost:3000` for smoke/e2e validation, then stopped.

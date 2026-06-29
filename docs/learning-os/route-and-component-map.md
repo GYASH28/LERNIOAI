@@ -14,7 +14,7 @@
 | `/revision` | `src/app/revision/page.tsx` -> `RouteViewPage` | Client view backed by scoped revision APIs; not yet curriculum-route linked. |
 | `/exams` | `src/app/exams/page.tsx` -> `RouteViewPage` | Client view backed by scoped paper/question/attempt APIs. |
 | `/labs` | `src/app/labs/page.tsx` -> `RouteViewPage` | Client lab views, not yet attached to official lesson/practical mapping. |
-| `/coding` | `src/app/coding/page.tsx` -> `RouteViewPage` | Coding view, needs lesson linkage for programming courses. |
+| `/coding` | `src/app/coding/page.tsx` -> `RouteViewPage` | Coding view backed by scoped `/api/coding`; global published practice remains visible and optional subject/unit/topic/lesson-linked challenges are filtered to the student's learning scope. Challenge imports/mappings and the production runner remain pending. |
 | `/materials` | `src/app/materials/page.tsx` -> `RouteViewPage` | Materials library backed by scoped material APIs. |
 | `/planner` | `src/app/planner/page.tsx` -> `RouteViewPage` | Planner view backed by scoped task and auto-plan APIs. |
 | `/tutor` | `src/app/tutor/page.tsx` -> `RouteViewPage` | LEO context and retrieval are constrained by current learning scope. |

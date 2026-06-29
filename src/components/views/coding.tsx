@@ -25,6 +25,20 @@ import type { MascotState } from '@/lib/types'
 
 interface TestCase { input: string; expected: string }
 
+interface ChallengeCurriculum {
+  subjectId: string | null
+  unitId: string | null
+  topicId: string | null
+  lessonId: string | null
+  subjectCode: string | null
+  subjectName: string | null
+  unitNumber: number | null
+  unitTitle: string | null
+  topicSlug: string | null
+  topicTitle: string | null
+  lessonTitle: string | null
+}
+
 interface Challenge {
   id: string
   title: string
@@ -38,6 +52,9 @@ interface Challenge {
   testCases?: TestCase[]
   hint?: string
   ioExample?: { input: string; output: string }
+  status?: string
+  sourceEvidence?: string | null
+  curriculum?: ChallengeCurriculum
   /** True for the client-side demo fallback set (when the API is empty). */
   isBuiltin?: boolean
 }
@@ -333,6 +350,9 @@ export function CodingView() {
             starterCode: c.starterCode || '',
             timeLimitMs: c.timeLimitMs,
             memoryLimitKB: c.memoryLimitKB,
+            status: c.status,
+            sourceEvidence: c.sourceEvidence,
+            curriculum: c.curriculum,
             isBuiltin: false,
           }))
           setChallenges(mapped)
@@ -719,6 +739,21 @@ export function CodingView() {
                           demo
                         </Badge>
                       )}
+                      {selectedChallenge.curriculum?.subjectCode && (
+                        <Badge variant="outline" className="text-meta border-sky-500/40 text-sky-600 dark:text-sky-400">
+                          {selectedChallenge.curriculum.subjectCode}
+                        </Badge>
+                      )}
+                      {selectedChallenge.curriculum?.unitNumber != null && (
+                        <Badge variant="outline" className="text-meta border-violet-500/40 text-violet-600 dark:text-violet-400">
+                          Unit {selectedChallenge.curriculum.unitNumber}
+                        </Badge>
+                      )}
+                      {selectedChallenge.curriculum?.lessonTitle && (
+                        <Badge variant="outline" className="text-meta border-emerald-500/40 text-emerald-600 dark:text-emerald-400">
+                          lesson-linked
+                        </Badge>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -727,6 +762,16 @@ export function CodingView() {
                 <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
                   {selectedChallenge.description}
                 </p>
+
+                {selectedChallenge.curriculum?.lessonTitle ? (
+                  <p className="text-xs text-muted-foreground">
+                    Lesson: <span className="font-medium text-foreground">{selectedChallenge.curriculum.lessonTitle}</span>
+                  </p>
+                ) : selectedChallenge.curriculum?.subjectName ? (
+                  <p className="text-xs text-muted-foreground">
+                    Subject: <span className="font-medium text-foreground">{selectedChallenge.curriculum.subjectName}</span>
+                  </p>
+                ) : null}
 
                 {selectedChallenge.ioExample && (
                   <div className="rounded-lg border border-border bg-muted/30 p-3 space-y-2">
@@ -1200,6 +1245,9 @@ interface ApiChallengeRow {
   starterCode: string
   timeLimitMs: number
   memoryLimitKB: number
+  status?: string
+  sourceEvidence?: string | null
+  curriculum?: ChallengeCurriculum
 }
 
 interface ApiRunResponse {
@@ -1259,10 +1307,25 @@ function ChallengeCard({
             demo
           </Badge>
         )}
+        {challenge.curriculum?.subjectCode && (
+          <Badge variant="outline" className="text-meta border-sky-500/40 text-sky-600 dark:text-sky-400">
+            {challenge.curriculum.subjectCode}
+          </Badge>
+        )}
+        {challenge.curriculum?.unitNumber != null && (
+          <Badge variant="outline" className="text-meta border-violet-500/40 text-violet-600 dark:text-violet-400">
+            Unit {challenge.curriculum.unitNumber}
+          </Badge>
+        )}
       </div>
       <p className="text-meta text-muted-foreground line-clamp-2 leading-relaxed">
         {challenge.description}
       </p>
+      {challenge.curriculum?.lessonTitle && (
+        <p className="mt-1 text-meta text-muted-foreground truncate">
+          Lesson: {challenge.curriculum.lessonTitle}
+        </p>
+      )}
       <div className="mt-2 flex items-center gap-1.5">
         <span
           className={cn(

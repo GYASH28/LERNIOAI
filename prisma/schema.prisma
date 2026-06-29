@@ -154,6 +154,8 @@ model Subject {
   units                 Unit[]
   questions             Question[]
   resources             Resource[]
+  codingChallenges      CodingChallenge[]
+  codingSubmissions     CodingSubmission[]
   electiveOptions       ElectiveOption[]
   electiveSelections    StudentElectiveSelection[]
   classElectiveAllocations ClassElectiveAllocation[]
@@ -193,6 +195,8 @@ model Unit {
   lessons               Lesson[]
   practicalExperiments  PracticalExperiment[]
   recommendedReferences RecommendedReference[]
+  codingChallenges      CodingChallenge[]
+  codingSubmissions     CodingSubmission[]
   createdAt             DateTime               @default(now())
 
   @@unique([subjectId, number])
@@ -222,6 +226,8 @@ model Topic {
   questions             Question[]
   resourceMappings      ResourceTopicMapping[]
   recommendedReferences RecommendedReference[]
+  codingChallenges      CodingChallenge[]
+  codingSubmissions     CodingSubmission[]
   mastery               UserTopicMastery[]
   revision              RevisionSchedule[]
   createdAt             DateTime               @default(now())
@@ -859,6 +865,8 @@ model Lesson {
   generatedDocuments GeneratedLessonDocument[]
   contentJobs        ContentGenerationJob[]
   completionCriteria LessonCompletionCriteria?
+  codingChallenges   CodingChallenge[]
+  codingSubmissions  CodingSubmission[]
   createdAt          DateTime                  @default(now())
   updatedAt          DateTime                  @updatedAt
 
@@ -1747,34 +1755,63 @@ model TutorMessage {
 // ============================================================
 
 model CodingChallenge {
-  id            String   @id @default(cuid())
-  title         String
-  category      String // basic_syntax | classes | constructors | inheritance | polymorphism | templates | etc.
-  difficulty    String   @default("easy")
-  description   String
-  starterCode   String?
-  solutionCode  String?
-  testCases     String? // JSON array of {input, expected}
-  timeLimitMs   Int      @default(5000)
-  memoryLimitKB Int      @default(256000)
-  createdAt     DateTime @default(now())
+  id             String   @id @default(cuid())
+  title          String
+  category       String // basic_syntax | classes | constructors | inheritance | polymorphism | templates | etc.
+  difficulty     String   @default("easy")
+  description    String
+  starterCode    String?
+  solutionCode   String?
+  testCases      String? // JSON array of {input, expected}
+  timeLimitMs    Int      @default(5000)
+  memoryLimitKB  Int      @default(256000)
+  subjectId      String?
+  subject        Subject? @relation(fields: [subjectId], references: [id], onDelete: SetNull)
+  unitId         String?
+  unit           Unit?    @relation(fields: [unitId], references: [id], onDelete: SetNull)
+  topicId        String?
+  topic          Topic?   @relation(fields: [topicId], references: [id], onDelete: SetNull)
+  lessonId       String?
+  lesson         Lesson?  @relation(fields: [lessonId], references: [id], onDelete: SetNull)
+  sourceEvidence String?
+  status         String   @default("published") // draft | under_review | published | archived
+  submissions    CodingSubmission[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([status, category])
+  @@index([subjectId, status])
+  @@index([unitId, status])
+  @@index([topicId, status])
+  @@index([lessonId, status])
 }
 
 model CodingSubmission {
-  id           String   @id @default(cuid())
+  id           String           @id @default(cuid())
   userId       String
-  user         User     @relation(fields: [userId], references: [id])
+  user         User             @relation(fields: [userId], references: [id])
   challengeId  String?
+  challenge    CodingChallenge? @relation(fields: [challengeId], references: [id], onDelete: SetNull)
+  subjectId    String?
+  subject      Subject?         @relation(fields: [subjectId], references: [id], onDelete: SetNull)
+  unitId       String?
+  unit         Unit?            @relation(fields: [unitId], references: [id], onDelete: SetNull)
+  topicId      String?
+  topic        Topic?           @relation(fields: [topicId], references: [id], onDelete: SetNull)
+  lessonId     String?
+  lesson       Lesson?          @relation(fields: [lessonId], references: [id], onDelete: SetNull)
   code         String
-  language     String   @default("cpp")
-  status       String   @default("draft") // draft | submitted | passed | failed | error
+  language     String           @default("cpp")
+  status       String           @default("draft") // draft | submitted | passed | failed | error
   output       String?
   compileError String?
   testResults  String? // JSON
-  createdAt    DateTime @default(now())
+  createdAt    DateTime         @default(now())
 
   @@index([userId, createdAt])
   @@index([challengeId, createdAt])
+  @@index([subjectId, createdAt])
+  @@index([lessonId, createdAt])
 }
 
 // ============================================================

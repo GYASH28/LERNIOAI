@@ -35,6 +35,7 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - Excluded `tmp/` from Vercel source uploads.
 - Added explicit empty CIOT Semester 3-6 blocker manifests instead of leaving those semester slots absent.
 - Updated curriculum validation so empty subject lists are valid only for draft `needs_official_source` manifests.
+- Added optional subject/unit/topic/lesson scope fields for coding challenges/submissions and scoped `/api/coding` to the student's learning scope.
 
 ## Verification Completed Locally
 
@@ -69,6 +70,7 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - `/api/ready` returning 200.
 - Published subject structures with official units/topics/lessons.
 - Published `LessonResource` video mappings and approved note artifacts.
+- Imported and reviewed curriculum-linked coding challenge mappings plus a production code runner.
 - Authenticated learning E2E and accessibility tests.
 - Production deployment with post-deploy smoke checks.
 - Production Vercel promotion after `/api/ready` returns 200 and demo mode is disabled for production.

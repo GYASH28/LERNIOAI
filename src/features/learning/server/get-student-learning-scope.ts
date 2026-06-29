@@ -132,6 +132,21 @@ export function topicIdsForLearningScope(scope: StudentLearningScope | null | un
   )
 }
 
+export function unitIdsForLearningScope(scope: StudentLearningScope | null | undefined): string[] {
+  if (!hasResolvedLearningScope(scope)) return []
+  return scope.subjects.flatMap((subject) => subject.units.map((unit) => unit.id))
+}
+
+export function lessonIdsForLearningScope(scope: StudentLearningScope | null | undefined): string[] {
+  if (!hasResolvedLearningScope(scope)) return []
+  return scope.subjects.flatMap((subject) =>
+    subject.units.flatMap((unit) => [
+      ...unit.lessons.map((lesson) => lesson.id),
+      ...unit.topics.flatMap((topic) => topic.lessons.map((lesson) => lesson.id)),
+    ]),
+  )
+}
+
 export function isTopicIdInLearningScope(
   scope: StudentLearningScope | null | undefined,
   topicId: string | null | undefined,

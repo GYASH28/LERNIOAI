@@ -40,12 +40,14 @@ npm run test:visual
 - LEO retrieval scope.
 - Scoped learning search ranking and canonical route generation.
 - Machine-readable curriculum/resource coverage report.
+- Coding challenge learning-scope filters and submission curriculum context derivation.
 
 ## Integration Test Additions
 
 - Department scope dry-run and write idempotency.
 - `/api/academics` exact programme/semester filtering.
 - Materials/resource APIs reject out-of-scope subject IDs.
+- `/api/coding` returns only global practice plus in-scope linked challenges and rejects out-of-scope draft saves.
 - Lesson progress rejects inaccessible lesson IDs.
 - Semester, subject, unit and lesson loaders.
 - Reviewer publication flow.
@@ -88,5 +90,6 @@ npm run test:visual
 - Units, topics and practical experiments still need official parsing/review before publication. Official course outcomes are promoted for 51 of 59 current subject structures.
 - Current official extraction has 27 subjects with unit candidates, but the unit review queue reports 0 ready for promotion, 27 needing manual review and 32 blocked.
 - The YouTube candidate review queue has 252 draft subject mappings, 0 ready for lesson-level mapping, 65 unplaced official-subject blockers, 18 missing-manifest blockers and 169 missing-lesson-structure blockers.
+- Coding challenges now support optional curriculum links and scoped API filtering, but imported reviewed mappings and the production C++ runner are still pending.
 - The local app starts and `/api/health` returns 200, but `/api/ready` returns 503 until PostgreSQL is reachable at the configured `localhost:5432` database URL.
 - The latest local post-Phase 8 run on 2026-06-28 passed `npm run build`, `npm run test:e2e` (146 tests), `npm run test:a11y` (2 tests) and `npm run test:visual` (2 tests).

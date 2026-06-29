@@ -2,6 +2,18 @@ import { NextRequest } from 'next/server'
 import { db } from '@/lib/db'
 import { requireUser, withApi, okResponse, ApiError } from '@/lib/auth'
 import { parseBody, codingRunSchema, codingSubmitSchema } from '@/lib/schemas'
+import {
+  getStudentLearningScope,
+  hasResolvedLearningScope,
+  lessonIdsForLearningScope,
+  subjectIdsForLearningScope,
+  topicIdsForLearningScope,
+  unitIdsForLearningScope,
+} from '@/features/learning/server/get-student-learning-scope'
+import {
+  codingChallengeContextFromRecord,
+  codingChallengeWhereForLearningScope,
+} from '@/lib/coding/coding-scope'
 
 /**
  * GET /api/coding
@@ -10,8 +22,18 @@ import { parseBody, codingRunSchema, codingSubmitSchema } from '@/lib/schemas'
  */
 export async function GET() {
   return withApi(async () => {
-    await requireUser()
+    const user = await requireUser()
+    const learningScope = await getStudentLearningScope(user.id)
+    if (!hasResolvedLearningScope(learningScope)) return okResponse([])
+
     const challenges = await db.codingChallenge.findMany({
+      where: codingChallengeWhereForLearningScope({
+        subjectIds: subjectIdsForLearningScope(learningScope),
+        unitIds: unitIdsForLearningScope(learningScope),
+        topicIds: topicIdsForLearningScope(learningScope),
+        lessonIds: lessonIdsForLearningScope(learningScope),
+        canPreviewDrafts: learningScope.canPreviewDrafts,
+      }),
       orderBy: [{ category: 'asc' }, { difficulty: 'asc' }],
       select: {
         id: true,
@@ -22,10 +44,77 @@ export async function GET() {
         starterCode: true,
         timeLimitMs: true,
         memoryLimitKB: true,
+        status: true,
+        subjectId: true,
+        unitId: true,
+        topicId: true,
+        lessonId: true,
+        sourceEvidence: true,
         createdAt: true,
+        subject: { select: { id: true, code: true, name: true } },
+        unit: {
+          select: {
+            id: true,
+            number: true,
+            title: true,
+            subjectId: true,
+            subject: { select: { id: true, code: true, name: true } },
+          },
+        },
+        topic: {
+          select: {
+            id: true,
+            slug: true,
+            title: true,
+            unitId: true,
+            unit: {
+              select: {
+                id: true,
+                number: true,
+                title: true,
+                subjectId: true,
+                subject: { select: { id: true, code: true, name: true } },
+              },
+            },
+          },
+        },
+        lesson: {
+          select: {
+            id: true,
+            title: true,
+            unitId: true,
+            topicId: true,
+            unit: {
+              select: {
+                id: true,
+                number: true,
+                title: true,
+                subjectId: true,
+                subject: { select: { id: true, code: true, name: true } },
+              },
+            },
+            topic: {
+              select: {
+                id: true,
+                slug: true,
+                title: true,
+                unitId: true,
+                unit: {
+                  select: {
+                    id: true,
+                    number: true,
+                    title: true,
+                    subjectId: true,
+                    subject: { select: { id: true, code: true, name: true } },
+                  },
+                },
+              },
+            },
+          },
+        },
       },
     })
-    return okResponse(challenges)
+    return okResponse(challenges.map(toCodingChallengeDto))
   })
 }
 
@@ -67,20 +156,38 @@ export async function POST(req: NextRequest) {
 
     if (isSubmitAttempt) {
       const body = await parseBody(cloned, codingSubmitSchema)
-      // Verify the challenge exists.
-      const challenge = await db.codingChallenge.findUnique({
-        where: { id: body.challengeId },
-        select: { id: true, title: true },
+      const learningScope = await getStudentLearningScope(user.id)
+      if (!hasResolvedLearningScope(learningScope)) {
+        throw new ApiError('NOT_FOUND', 'Coding challenge not found.', 404, false)
+      }
+
+      const challenge = await db.codingChallenge.findFirst({
+        where: {
+          id: body.challengeId,
+          ...codingChallengeWhereForLearningScope({
+            subjectIds: subjectIdsForLearningScope(learningScope),
+            unitIds: unitIdsForLearningScope(learningScope),
+            topicIds: topicIdsForLearningScope(learningScope),
+            lessonIds: lessonIdsForLearningScope(learningScope),
+            canPreviewDrafts: learningScope.canPreviewDrafts,
+          }),
+        },
+        select: codingChallengeContextSelect,
       })
       if (!challenge) {
         throw new ApiError('NOT_FOUND', 'Coding challenge not found.', 404, false)
       }
+      const context = codingChallengeContextFromRecord(challenge)
 
       // Persist as a draft — never mark as passed/failed since we cannot run it.
       const submission = await db.codingSubmission.create({
         data: {
           userId: user.id,
           challengeId: body.challengeId,
+          subjectId: context.subjectId,
+          unitId: context.unitId,
+          topicId: context.topicId,
+          lessonId: context.lessonId,
           code: body.code,
           language: body.language,
           status: 'submitted',
@@ -146,4 +253,131 @@ export async function POST(req: NextRequest) {
           : `Local syntax preview found ${issues.length} issue(s):\n${issues.map((i) => '• ' + i).join('\n')}`,
     })
   })
+}
+
+interface CodingSubjectMeta {
+  id: string
+  code: string
+  name: string
+}
+
+interface CodingUnitMeta {
+  id: string
+  number: number
+  title: string
+  subjectId: string
+  subject: CodingSubjectMeta
+}
+
+interface CodingTopicMeta {
+  id: string
+  slug: string
+  title: string
+  unitId: string
+  unit: CodingUnitMeta
+}
+
+interface CodingLessonMeta {
+  id: string
+  title: string
+  unitId: string | null
+  topicId: string | null
+  unit: CodingUnitMeta | null
+  topic: CodingTopicMeta | null
+}
+
+interface CodingChallengeListRow {
+  id: string
+  title: string
+  category: string
+  difficulty: string
+  description: string
+  starterCode: string | null
+  timeLimitMs: number
+  memoryLimitKB: number
+  status: string
+  subjectId: string | null
+  unitId: string | null
+  topicId: string | null
+  lessonId: string | null
+  sourceEvidence: string | null
+  createdAt: Date
+  subject: CodingSubjectMeta | null
+  unit: CodingUnitMeta | null
+  topic: CodingTopicMeta | null
+  lesson: CodingLessonMeta | null
+}
+
+const codingChallengeContextSelect = {
+  id: true,
+  title: true,
+  subjectId: true,
+  unitId: true,
+  topicId: true,
+  lessonId: true,
+  unit: { select: { id: true, subjectId: true } },
+  topic: {
+    select: {
+      id: true,
+      unitId: true,
+      unit: { select: { id: true, subjectId: true } },
+    },
+  },
+  lesson: {
+    select: {
+      id: true,
+      unitId: true,
+      topicId: true,
+      unit: { select: { id: true, subjectId: true } },
+      topic: {
+        select: {
+          id: true,
+          unitId: true,
+          unit: { select: { id: true, subjectId: true } },
+        },
+      },
+    },
+  },
+} as const
+
+function toCodingChallengeDto(challenge: CodingChallengeListRow) {
+  const context = codingChallengeContextFromRecord(challenge)
+  const subject =
+    challenge.subject ??
+    challenge.unit?.subject ??
+    challenge.topic?.unit.subject ??
+    challenge.lesson?.unit?.subject ??
+    challenge.lesson?.topic?.unit.subject ??
+    null
+  const unit =
+    challenge.unit ??
+    challenge.topic?.unit ??
+    challenge.lesson?.unit ??
+    challenge.lesson?.topic?.unit ??
+    null
+  const topic = challenge.topic ?? challenge.lesson?.topic ?? null
+
+  return {
+    id: challenge.id,
+    title: challenge.title,
+    category: challenge.category,
+    difficulty: challenge.difficulty,
+    description: challenge.description,
+    starterCode: challenge.starterCode,
+    timeLimitMs: challenge.timeLimitMs,
+    memoryLimitKB: challenge.memoryLimitKB,
+    status: challenge.status,
+    sourceEvidence: challenge.sourceEvidence,
+    createdAt: challenge.createdAt,
+    curriculum: {
+      ...context,
+      subjectCode: subject?.code ?? null,
+      subjectName: subject?.name ?? null,
+      unitNumber: unit?.number ?? null,
+      unitTitle: unit?.title ?? null,
+      topicSlug: topic?.slug ?? null,
+      topicTitle: topic?.title ?? null,
+      lessonTitle: challenge.lesson?.title ?? null,
+    },
+  }
 }
