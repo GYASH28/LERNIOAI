@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 if (
   process.env.LERNIO_DEMO_MODE === 'true' &&
-  (process.env.NODE_ENV === 'production' || process.env.VERCEL_ENV === 'production')
+  process.env.VERCEL_ENV === 'production'
 ) {
   throw new Error('LERNIO_DEMO_MODE must never be enabled for a production build.')
 }
