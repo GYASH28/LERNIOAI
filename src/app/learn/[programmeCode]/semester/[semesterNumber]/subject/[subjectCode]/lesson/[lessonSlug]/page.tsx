@@ -72,6 +72,9 @@ export default async function LessonStudioPage({
     lessonId: studio.lesson.id,
     ...(studio.topic ? { topicId: studio.topic.id } : {}),
   }).toString()}`
+  const lessonMaterialsHref = `/materials?${new URLSearchParams({
+    lessonId: studio.lesson.id,
+  }).toString()}`
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -350,7 +353,16 @@ export default async function LessonStudioPage({
           </section>
 
           <section className="rounded-lg border border-border bg-card p-4">
-            <h2 className="text-base font-semibold tracking-normal">Resources</h2>
+            <div className="flex items-center justify-between gap-3">
+              <h2 className="text-base font-semibold tracking-normal">Resources</h2>
+              <Link
+                href={lessonMaterialsHref}
+                className="inline-flex h-9 items-center justify-center gap-2 rounded-md border border-border px-3 text-sm font-medium hover:bg-muted"
+              >
+                <FileText className="h-4 w-4" />
+                All materials
+              </Link>
+            </div>
             <div className="mt-3 grid gap-2">
               {studio.resources.alternateVideos.map((resource) => (
                 <ResourceLink key={resource.lessonResourceId} resource={resource} />

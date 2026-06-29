@@ -526,6 +526,7 @@ Date: 2026-06-28
 - Returned only student-visible approved/verified `LessonResource` rows for lesson-scoped material requests.
 - Preserved existing subject, unit, topic, type, language and search filters when `lessonId` is present.
 - Updated the Materials UI to read `lessonId` from the URL, show a lesson-scoped filter banner and display the `LessonResource` role badge on linked materials.
+- Added a Lesson Studio resources action that opens `/materials?lessonId=...` for the current lesson.
 
 ### Evidence Boundary
 
