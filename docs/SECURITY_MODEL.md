@@ -71,6 +71,15 @@ Currently protected:
 
 Tutor chat, text-to-speech, and speech-to-text calls go through `getAiProvider()`. Provider keys stay server-side. Tutor chat retrieves course citations from database lesson chunks and falls back safely when provider configuration is missing.
 
+## Content Security Policy
+
+App pages receive a nonce-backed CSP from `src/proxy.ts`; fallback/static headers use the same policy builder in `src/lib/security/content-security-policy.ts`.
+
+- Default source is `self`.
+- Script execution allows self, the per-request nonce and the YouTube iframe API origin; development adds `unsafe-eval` only for local tooling.
+- Frames are limited to `youtube-nocookie.com`, `youtube.com` and the configured public storage origin when present.
+- Image, media and connect sources allow self, required data/blob cases, YouTube thumbnails and the configured storage origin. Broad `https:` and `wss:` source allowances are not used in production.
+
 ## Database Safety
 
 Production uses Prisma migrations, not `prisma db push`. The authority migration adds new tables without deleting legacy fields. Backfill is dry-run by default and conservative.

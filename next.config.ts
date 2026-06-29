@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { buildContentSecurityPolicy } from "./src/lib/security/content-security-policy";
 
 if (
   process.env.LERNIO_DEMO_MODE === 'true' &&
@@ -7,43 +8,14 @@ if (
   throw new Error('LERNIO_DEMO_MODE must never be enabled for a production build.')
 }
 
-const storageOrigin = safeOrigin(process.env.STORAGE_PUBLIC_BASE_URL)
 const isProduction = process.env.NODE_ENV === 'production'
 
-function safeOrigin(value: string | undefined) {
-  if (!value) return null
-  try {
-    return new URL(value).origin
-  } catch {
-    return null
-  }
-}
-
 function contentSecurityPolicy() {
-  const imageSources = ["'self'", 'data:', 'blob:', 'https://i.ytimg.com']
-  const connectSources = ["'self'"]
-  const mediaSources = ["'self'"]
-  if (storageOrigin) {
-    imageSources.push(storageOrigin)
-    connectSources.push(storageOrigin)
-    mediaSources.push(storageOrigin)
-  }
-
-  return [
-    "default-src 'self'",
-    `script-src 'self' 'unsafe-inline'${isProduction ? '' : " 'unsafe-eval'"} https://www.youtube.com`,
-    "style-src 'self' 'unsafe-inline'",
-    `img-src ${imageSources.join(' ')}`,
-    "font-src 'self' data:",
-    `connect-src ${connectSources.join(' ')}`,
-    `media-src ${mediaSources.join(' ')}`,
-    "frame-src https://www.youtube-nocookie.com https://www.youtube.com",
-    "object-src 'none'",
-    "base-uri 'self'",
-    "form-action 'self'",
-    "frame-ancestors 'none'",
-    ...(isProduction ? ['upgrade-insecure-requests'] : []),
-  ].join('; ')
+  return buildContentSecurityPolicy({
+    allowUnsafeInlineScript: true,
+    nodeEnv: process.env.NODE_ENV,
+    storagePublicBaseUrl: process.env.STORAGE_PUBLIC_BASE_URL,
+  })
 }
 
 const nextConfig: NextConfig = {

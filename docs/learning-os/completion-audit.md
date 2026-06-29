@@ -38,6 +38,7 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - Added optional subject/unit/topic/lesson scope fields for coding challenges/submissions and scoped `/api/coding` to the student's learning scope.
 - Extended LEO retrieval to include student-visible approved lesson resources, video chapter snippets and approved generated note/document artifacts.
 - Added lesson-level Materials filtering through scoped, approved `LessonResource` mappings.
+- Aligned proxy and Next fallback CSP through a shared restrictive policy helper with nonce support and explicit YouTube/storage allowlists.
 
 ## Verification Completed Locally
 
@@ -55,6 +56,7 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - `npm run check` passed.
 - `npm run build` passed.
 - `npx vitest run src/lib/ai/retrieval.test.ts src/lib/ai/groq-provider.test.ts` passed.
+- `npx vitest run src/lib/security/content-security-policy.test.ts` passed.
 - `npm run test:e2e` passed with 146 Playwright tests.
 - `npm run test:a11y` passed.
 - `npm run test:visual` passed.

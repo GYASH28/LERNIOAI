@@ -2,34 +2,12 @@ import { withAuth } from 'next-auth/middleware'
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 import { isProductionRuntime } from '@/lib/auth-policy'
+import { buildContentSecurityPolicy } from '@/lib/security/content-security-policy'
 
 function createNonce() {
   const bytes = new Uint8Array(16)
   crypto.getRandomValues(bytes)
   return btoa(String.fromCharCode(...bytes))
-}
-
-function buildContentSecurityPolicy(nonce: string) {
-  const scriptSrc =
-    process.env.NODE_ENV === 'production'
-      ? `'self' 'nonce-${nonce}'`
-      : `'self' 'nonce-${nonce}' 'unsafe-eval'`
-
-  return [
-    `default-src 'self'`,
-    `base-uri 'self'`,
-    `object-src 'none'`,
-    `frame-ancestors 'none'`,
-    `form-action 'self'`,
-    `script-src ${scriptSrc}`,
-    `style-src 'self' 'unsafe-inline'`,
-    `img-src 'self' data: blob: https:`,
-    `font-src 'self' data:`,
-    `connect-src 'self' https: wss:`,
-    `media-src 'self' blob: data:`,
-    `worker-src 'self' blob:`,
-    `manifest-src 'self'`,
-  ].join('; ')
 }
 
 function securedNext(req: NextRequest) {
@@ -41,7 +19,7 @@ function securedNext(req: NextRequest) {
       headers: requestHeaders,
     },
   })
-  response.headers.set('Content-Security-Policy', buildContentSecurityPolicy(nonce))
+  response.headers.set('Content-Security-Policy', buildProxyContentSecurityPolicy(nonce))
   response.headers.set('x-nonce', nonce)
   return response
 }
@@ -49,8 +27,16 @@ function securedNext(req: NextRequest) {
 function securedRedirect(url: URL) {
   const nonce = createNonce()
   const response = NextResponse.redirect(url)
-  response.headers.set('Content-Security-Policy', buildContentSecurityPolicy(nonce))
+  response.headers.set('Content-Security-Policy', buildProxyContentSecurityPolicy(nonce))
   return response
+}
+
+function buildProxyContentSecurityPolicy(nonce: string) {
+  return buildContentSecurityPolicy({
+    nonce,
+    nodeEnv: process.env.NODE_ENV,
+    storagePublicBaseUrl: process.env.STORAGE_PUBLIC_BASE_URL,
+  })
 }
 
 const publicPaths = new Set([

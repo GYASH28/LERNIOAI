@@ -537,6 +537,21 @@ Date: 2026-06-28
 
 - `npm run typecheck`: passed.
 
+## Phase 20 Progress: Restrictive CSP Alignment
+
+### Changed
+
+- Added a shared `buildContentSecurityPolicy()` helper for proxy and static Next headers.
+- Kept proxy CSP nonce support for app pages and removed broad `https:`/`wss:` proxy source allowances.
+- Allowed only the required YouTube script/embed origins plus the configured storage origin for images, media, frames and client connections.
+- Preserved local development websocket allowances without carrying them into production CSP.
+
+### Additional Verification
+
+- `npx vitest run src/lib/security/content-security-policy.test.ts`: passed, 1 file and 4 tests.
+- `npm run typecheck`: passed.
+- `npm run build`: passed with 90 static pages generated.
+
 ## Remaining Manual Verification
 
 - Database dry-run/write needs a reachable PostgreSQL connection.
