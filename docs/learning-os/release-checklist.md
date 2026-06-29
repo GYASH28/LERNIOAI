@@ -69,4 +69,4 @@ Vercel preview deployment is live, but not production-promotable:
 - `/` smoke check: 200
 - `/api/ready`: 503 with `database: unavailable`, `auth: configured`, `ai: unconfigured`, and `email: unconfigured`
 
-The non-database gates passed locally on 2026-06-29: `npx prisma validate`, `npx prisma generate`, `npm run check:migrations`, `npm run curriculum:validate` with 12 manifests, `npm run coverage:learning` with 12/12 manifests present and 194 pending verification items, `npm run check`, `npm run build`, `npm run test:e2e`, `npm run test:a11y`, and `npm run test:visual`.
+The non-database gates passed locally on 2026-06-29: `npx prisma validate`, `npx prisma generate`, `npm run check:migrations`, `npm run curriculum:validate` with 12 manifests, `npm run coverage:learning` with 12/12 manifests present and 194 pending verification items, `npm run check` (45 test files / 158 tests passed), `npm run build` (91 static pages), `npm run test:e2e` (146 Playwright tests passed), `npm run test:a11y`, and `npm run test:visual`. Including newly added labs route unit tests.
