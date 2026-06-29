@@ -13,7 +13,7 @@
 | `/practice` | `src/app/practice/page.tsx` -> `RouteViewPage` | Client view backed by scoped question/progress APIs. |
 | `/revision` | `src/app/revision/page.tsx` -> `RouteViewPage` | Client view backed by scoped revision APIs, with source lesson links on due items and flashcards when a scoped lesson exists. |
 | `/exams` | `src/app/exams/page.tsx` -> `RouteViewPage` | Client view backed by scoped paper/question/attempt APIs. |
-| `/labs` | `src/app/labs/page.tsx` -> `RouteViewPage` | Client lab views, not yet attached to official lesson/practical mapping. |
+| `/labs` | `src/app/labs/page.tsx` -> `RouteViewPage` | Client lab views, integrating `/api/labs` to list official practical experiments or display blocker messages. |
 | `/coding` | `src/app/coding/page.tsx` -> `RouteViewPage` | Coding view backed by scoped `/api/coding`; global published practice remains visible and optional subject/unit/topic/lesson-linked challenges are filtered to the student's learning scope. Challenge imports/mappings and the production runner remain pending. |
 | `/materials` | `src/app/materials/page.tsx` -> `RouteViewPage` | Materials library backed by scoped material APIs, including optional `lessonId` filtering through approved `LessonResource` mappings. |
 | `/planner` | `src/app/planner/page.tsx` -> `RouteViewPage` | Planner view backed by scoped task and auto-plan APIs, including lesson-backed tasks with canonical Learn links and source reasons. |
@@ -25,6 +25,7 @@
 | Route | Current behavior |
 |---|---|
 | `/api/search/learning?q=...` | Authenticated, private/no-store scoped search across the student's current semester, subjects, units, topics, published lessons and approved resources. Results return canonical Learn/materials hrefs and never include draft resources. |
+| `/api/labs` | Scoped API returning current student scope, published/verified PracticalExperiment rows, and blocker states. |
 
 ## Admin/Reviewer Routes
 

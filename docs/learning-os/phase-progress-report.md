@@ -622,6 +622,20 @@ Date: 2026-06-28
 - `npm run check`: passed, 44 files and 155 tests with 129 existing warnings and 0 errors.
 - `npm run build`: passed with 90 static pages generated.
 
+## Phase 25 Progress: Curriculum-Aware Labs Integration
+
+### Changed
+
+- Scoped the labs API route (`GET /api/labs`) to the student's current learning scope, returning published/verified `PracticalExperiment` records and structured blocker information when empty.
+- Updated `src/components/views/labs.tsx` to fetch labs from the scoped `/api/labs` API and render either the official practicals or an explicit blocker message.
+- Created unit tests for `/api/labs` GET route verifying scope enforcement, db queries, mapping, and blocker messages.
+
+### Additional Verification
+
+- `npx vitest run src/app/api/labs/route.test.ts`: passed (3 tests).
+- `npm run check`: passed, 45 files and 158 tests with 129 existing warnings and 0 errors.
+- `npm run build`: passed with 91 static pages generated.
+
 ## Remaining Manual Verification
 
 - Database dry-run/write needs a reachable PostgreSQL connection.
@@ -632,7 +646,7 @@ Date: 2026-06-28
 - YouTube resources are draft candidates only; oEmbed metadata exists for 6 direct videos, 94 playlists still need YouTube Data API or manual review and no lesson mapping has been published. The review queue has 252 subject mappings, 0 ready for lesson mapping, 65 unplaced official-subject blockers, 18 missing manifest-subject blockers and 169 lesson-structure blockers.
 - Link-health checks prove current URL reachability only, not lesson fit, playlist membership, captions, duration or embeddability.
 - Poppler `pdftoppm` is not installed, but the Winter 2025 timetable was rendered with `pypdfium2` to `tmp/pdfs/rendered/Winter-Examination-2025-page-1.png` and visually inspected as legible/nonblank.
-- Labs need explicit curriculum mapping before they can be fully programme/semester scoped.
+- Practical experiments still need manual review and import before they can populate the scoped Labs UI.
 - Coding now supports optional curriculum links and scoped API filtering, but reviewed challenge mappings/imports and the production runner are still pending.
 - Materials now filter by scoped subject/unit/topic/type/language and optional lesson-level `LessonResource` mappings, but production coverage still needs published mappings.
 - XP ledger totals remain user-global where historical XP events do not contain reliable curriculum subject ownership.
@@ -652,8 +666,8 @@ Date: 2026-06-28
 - `npx tsx scripts/promote-curriculum-official-structure.ts --write --overwrite`: passed, 51 official subject outcome set(s) written.
 - `npm run notes:validate`: passed, 0 document(s) present/valid.
 - `npm run notes:render-pdf`: passed, 0 document(s) rendered.
-- `npm run check`: passed, including migration encoding, lint, typecheck and 42 Vitest files / 144 tests. Lint still reports 132 existing warnings and 0 errors.
-- `npm run lint`: passed with 0 errors and 132 existing warnings.
+- `npm run check`: passed, including migration encoding, lint, typecheck and 45 Vitest files / 158 tests. Lint still reports 129 existing warnings and 0 errors.
+- `npm run lint`: passed with 0 errors and 129 existing warnings.
 - `npm run typecheck`: passed.
 - `npx prisma validate`: passed.
 - `npx prisma generate`: passed.
@@ -661,19 +675,17 @@ Date: 2026-06-28
 - `npm run check:migrations`: passed.
 - `npx vitest run src/lib/coding/coding-scope.test.ts src/features/learning/server/get-student-learning-scope.test.ts`: passed, 2 files and 8 tests.
 - `npx vitest run src/lib/ai/retrieval.test.ts src/lib/ai/groq-provider.test.ts`: passed, 2 files and 7 tests.
+- `npx vitest run src/app/api/labs/route.test.ts`: passed, 1 file and 3 tests.
 - `npm run coverage:learning`: passed and wrote `content/reports/cwit-r23-learning-coverage.json` with 8/12 manifests present, 59 subject structures, 51 outcome-backed subject structures, 0 subject structures with promoted units, 27 unit candidate review rows needing manual review, 252 YouTube review-queue subject mappings, 65 unplaced official-subject blockers, 18 missing manifest-subject blockers, 34 unique timetable evidence codes, 81 official catalog course entries and 194 pending verification items.
 - `npm run content:import:youtube-guides -- --sem12 content-import/CWIT_Semester_1_2_YouTube_Lecture_Links.pdf --sem36 content-import/CWIT_Semester_3_to_6_YouTube_Lecture_Links.pdf --dry-run`: passed, extracting 103 deduplicated source URL rows, 102 unique URLs, 100 draft candidates and 3 skipped non-YouTube URLs from the supplied PDFs.
 - `npm run resources:youtube:candidates`: passed, 100 candidate(s) written.
 - `npx tsx scripts/verify-youtube-candidates.ts --write`: passed, 100 metadata check(s), 6 found and 94 unavailable/unverified by public oEmbed.
 - `npm run resources:youtube:review-queue`: passed, 100 candidate(s), 252 subject mapping(s), 0 ready for lesson mapping, 65 unplaced official-subject blockers, 18 missing manifest-subject blockers and 169 lesson-structure blockers.
 - `npx tsx scripts/check-resource-link-health.ts --write`: passed and wrote 100 checked rows; 100 healthy, 0 stale/unhealthy/unknown.
-- `npm run build`: passed with 90 static pages generated and `/api/coding` plus LEO tutor routes included.
+- `npm run build`: passed with 91 static pages generated and `/api/coding` plus LEO tutor routes included.
 - `npm run test:e2e`: passed against `next start` production server, 146 Playwright tests.
 - Smoke checks against `next start`: `/api/health` returned 200 and `/api/ready` returned 503 because PostgreSQL is unavailable.
 - Production server was started with `npm run start` on `http://localhost:3000` for smoke/e2e validation, then stopped.
-- `npx playwright test --workers=2`: passed, 146 Playwright tests.
-- `npx playwright test tests/e2e/a11y.spec.ts --workers=2`: passed, 2 Playwright tests.
-- `npx playwright test tests/e2e/visual.spec.ts --workers=2`: passed, 2 Playwright tests.
 - Smoke checks: `/api/health` returned 200; protected learning/admin/search URLs redirected to sign-in as expected, including `/learn/DCOMP/semester/3`.
 - Readiness check: `/api/ready` returned 503 because local PostgreSQL at `localhost:5432` is unavailable. Auth is configured; AI and email are unconfigured in the local environment.
 
@@ -684,3 +696,4 @@ Date: 2026-06-28
 3. Find or obtain official CIOT Semester 3-6 semester-placement evidence beyond review-only timetable code appearances.
 4. Run database-backed manifest import dry-run/write once PostgreSQL is reachable.
 5. Add lesson-level YouTube mapping review workflow.
+

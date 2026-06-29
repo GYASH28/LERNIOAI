@@ -1,11 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { ArrowLeft, FlaskConical, Cpu, Waves, ChevronRight, Clock, BookOpen } from 'lucide-react'
+import { AlertTriangle, ArrowLeft, BookOpen, ChevronRight, Clock, Cpu, ExternalLink, FlaskConical, Loader2, Waves } from 'lucide-react'
 import { Mascot } from '@/components/mascots/mascot'
 import { DataStructuresLab } from '@/components/views/labs/data-structures-lab'
 import { MicroprocessorLab } from '@/components/views/labs/microprocessor-lab'
@@ -23,6 +23,34 @@ interface LabMeta {
   topics: string[]
   duration: string
   icon: typeof FlaskConical
+}
+
+interface OfficialLabExperiment {
+  id: string
+  title: string
+  objective: string | null
+  apparatus: string | null
+  software: string | null
+  safety: string | null
+  order: number
+  sourceEvidence: string | null
+  subjectCode: string
+  subjectName: string
+  unitNumber: number | null
+  unitTitle: string | null
+  subjectHref: string
+  unitHref: string | null
+}
+
+interface OfficialLabsState {
+  status: 'loading' | 'ready' | 'blocked'
+  experiments: OfficialLabExperiment[]
+  blockers: string[]
+  scope: {
+    programmeCode: string
+    semesterNumber: number
+    subjectCount: number
+  } | null
 }
 
 const LABS: LabMeta[] = [
@@ -63,6 +91,49 @@ const LABS: LabMeta[] = [
 
 export function LabsView() {
   const [activeLab, setActiveLab] = useState<LabKey>(null)
+  const [officialLabs, setOfficialLabs] = useState<OfficialLabsState>({
+    status: 'loading',
+    experiments: [],
+    blockers: [],
+    scope: null,
+  })
+
+  useEffect(() => {
+    let mounted = true
+    async function loadOfficialLabs() {
+      try {
+        const response = await fetch('/api/labs', { cache: 'no-store' })
+        const payload = await response.json()
+        if (!mounted) return
+        if (!response.ok || !payload.ok) {
+          setOfficialLabs({
+            status: 'blocked',
+            experiments: [],
+            blockers: [payload?.error?.message ?? 'Official practical experiments are unavailable.'],
+            scope: null,
+          })
+          return
+        }
+        const data = payload.data as Omit<OfficialLabsState, 'status'>
+        setOfficialLabs({
+          ...data,
+          status: data.experiments.length > 0 ? 'ready' : 'blocked',
+        })
+      } catch {
+        if (!mounted) return
+        setOfficialLabs({
+          status: 'blocked',
+          experiments: [],
+          blockers: ['Official practical experiments are unavailable.'],
+          scope: null,
+        })
+      }
+    }
+    void loadOfficialLabs()
+    return () => {
+      mounted = false
+    }
+  }, [])
 
   if (activeLab) {
     const meta = LABS.find((l) => l.key === activeLab)!
@@ -129,10 +200,16 @@ export function LabsView() {
     )
   }
 
-  return <LabsHub onOpen={(k) => setActiveLab(k)} />
+  return <LabsHub officialLabs={officialLabs} onOpen={(k) => setActiveLab(k)} />
 }
 
-function LabsHub({ onOpen }: { onOpen: (k: Exclude<LabKey, null>) => void }) {
+function LabsHub({
+  officialLabs,
+  onOpen,
+}: {
+  officialLabs: OfficialLabsState
+  onOpen: (k: Exclude<LabKey, null>) => void
+}) {
   return (
     <div className="space-y-6">
       <motion.div
@@ -151,6 +228,8 @@ function LabsHub({ onOpen }: { onOpen: (k: Exclude<LabKey, null>) => void }) {
           </div>
         </div>
       </motion.div>
+
+      <OfficialPracticalsPanel state={officialLabs} />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {LABS.map((lab, idx) => {
@@ -253,5 +332,70 @@ function LabsHub({ onOpen }: { onOpen: (k: Exclude<LabKey, null>) => void }) {
         </div>
       </motion.div>
     </div>
+  )
+}
+
+function OfficialPracticalsPanel({ state }: { state: OfficialLabsState }) {
+  const scopeLabel = state.scope
+    ? `${state.scope.programmeCode} Semester ${state.scope.semesterNumber}`
+    : 'Current learning scope'
+
+  return (
+    <section className="rounded-xl border border-border bg-card p-4">
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <div className="flex items-center gap-2 text-sm font-semibold">
+            <FlaskConical className="h-4 w-4 text-emerald-500" />
+            Official practicals
+          </div>
+          <p className="mt-1 text-xs text-muted-foreground">{scopeLabel}</p>
+        </div>
+        {state.status === 'loading' ? (
+          <Badge variant="outline" className="gap-1">
+            <Loader2 className="h-3 w-3 animate-spin" />
+            Loading
+          </Badge>
+        ) : (
+          <Badge variant={state.status === 'ready' ? 'default' : 'secondary'}>
+            {state.experiments.length} published
+          </Badge>
+        )}
+      </div>
+
+      {state.status === 'ready' ? (
+        <div className="mt-4 grid gap-3 md:grid-cols-2">
+          {state.experiments.map((experiment) => (
+            <article key={experiment.id} className="rounded-lg border border-border/70 p-3">
+              <div className="flex flex-wrap items-center gap-2">
+                <Badge variant="outline">{experiment.subjectCode}</Badge>
+                {experiment.unitNumber ? <Badge variant="secondary">Unit {experiment.unitNumber}</Badge> : null}
+              </div>
+              <h3 className="mt-2 text-sm font-semibold">{experiment.title}</h3>
+              {experiment.objective ? (
+                <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{experiment.objective}</p>
+              ) : null}
+              <div className="mt-3 flex flex-wrap gap-2">
+                <Button asChild size="sm" variant="outline">
+                  <a href={experiment.unitHref ?? experiment.subjectHref}>
+                    Open curriculum
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+                </Button>
+              </div>
+            </article>
+          ))}
+        </div>
+      ) : state.status === 'blocked' ? (
+        <div className="mt-4 flex gap-2 rounded-lg border border-amber-500/30 bg-amber-500/10 p-3 text-sm text-amber-900 dark:text-amber-200">
+          <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
+          <div>
+            <p className="font-semibold">Official practical mapping is not published yet.</p>
+            <p className="mt-1 text-xs">
+              {state.blockers[0] ?? 'Reviewed lab manual data is required before these labs can be marked curriculum-complete.'}
+            </p>
+          </div>
+        </div>
+      ) : null}
+    </section>
   )
 }

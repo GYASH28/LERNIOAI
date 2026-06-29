@@ -43,6 +43,7 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - Added source lesson return links to revision due items and flashcards.
 - Added authority-scoped Learning OS preview access for teacher/coordinator/reviewer/admin coverage, catalog, unit, YouTube candidate, notes and resource-review surfaces.
 - Added lesson-scoped quiz-attempt selection and stored lesson-scope provenance so quiz completion evidence cannot be satisfied by a broad subject quiz.
+- Added curriculum-aware Labs integration, scoping labs to the student's active subjects, checking publication safety, and listing official experiments or structured blocker information.
 
 ## Verification Completed Locally
 
@@ -64,6 +65,7 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - `npx vitest run src/features/learning/server/get-student-learning-scope.test.ts` passed.
 - `npx vitest run src/lib/learning/learning-ops-authority.test.ts src/lib/resources/resource-governance.test.ts` passed.
 - `npx vitest run src/features/learning/server/lesson-completion-policy.test.ts` passed.
+- `npx vitest run src/app/api/labs/route.test.ts` passed.
 - `npm run test:e2e` passed with 146 Playwright tests.
 - `npm run test:a11y` passed.
 - `npm run test:visual` passed.
