@@ -517,6 +517,25 @@ Date: 2026-06-28
 - `npx vitest run src/lib/ai/retrieval.test.ts src/lib/ai/groq-provider.test.ts`: passed, 2 files and 7 tests.
 - `npm run typecheck`: passed.
 
+## Phase 19 Progress: Lesson-Level Materials Filtering
+
+### Changed
+
+- Extended `GET /api/materials` with an optional `lessonId` query parameter.
+- Validated `lessonId` against the student's current learning scope through `scopedLessonWhere()`.
+- Returned only student-visible approved/verified `LessonResource` rows for lesson-scoped material requests.
+- Preserved existing subject, unit, topic, type, language and search filters when `lessonId` is present.
+- Updated the Materials UI to read `lessonId` from the URL, show a lesson-scoped filter banner and display the `LessonResource` role badge on linked materials.
+
+### Evidence Boundary
+
+- The API/UI can now consume published lesson-resource mappings.
+- Production usefulness still depends on reviewer-approved `LessonResource` rows being imported/published.
+
+### Additional Verification
+
+- `npm run typecheck`: passed.
+
 ## Remaining Manual Verification
 
 - Database dry-run/write needs a reachable PostgreSQL connection.
@@ -529,7 +548,7 @@ Date: 2026-06-28
 - Poppler `pdftoppm` is not installed, but the Winter 2025 timetable was rendered with `pypdfium2` to `tmp/pdfs/rendered/Winter-Examination-2025-page-1.png` and visually inspected as legible/nonblank.
 - Labs need explicit curriculum mapping before they can be fully programme/semester scoped.
 - Coding now supports optional curriculum links and scoped API filtering, but reviewed challenge mappings/imports and the production runner are still pending.
-- Materials now filter by scoped subject/unit/topic/type/language, but lesson-level material filtering needs published LessonResource mappings rather than bare Resource rows.
+- Materials now filter by scoped subject/unit/topic/type/language and optional lesson-level `LessonResource` mappings, but production coverage still needs published mappings.
 - XP ledger totals remain user-global where historical XP events do not contain reliable curriculum subject ownership.
 - Teacher/reviewer/admin preview scope still needs authority-aware broadening beyond the normal student scope.
 - Completion criteria can now consume lesson-scoped practice attempts; quiz pass evidence still needs exact lesson-level linkage.

@@ -22,14 +22,16 @@ import {
   getStudentLearningScope,
   hasResolvedLearningScope,
   isSubjectIdInLearningScope,
+  scopedLessonWhere,
   scopedResourceWhere,
 } from '@/features/learning/server/get-student-learning-scope'
+import { studentLessonResourceWhere } from '@/lib/resources/student-publication-policy'
 
 /**
  * GET /api/materials
  * Public (authenticated) browse of approved/published resources.
  *
- * Query: ?subjectId, ?unitNumber, ?topicId, ?type, ?language, ?q (title search), ?mine=true
+ * Query: ?subjectId, ?unitNumber, ?topicId, ?lessonId, ?type, ?language, ?q (title search), ?mine=true
  *
  * When ?mine=true, returns the current user's contributions (any status) so
  * they can manage their drafts/submissions.
@@ -41,6 +43,7 @@ export async function GET(req: NextRequest) {
     const subjectId = sp.get('subjectId')
     const unitNumber = sp.get('unitNumber')
     const topicId = sp.get('topicId')
+    const lessonId = sp.get('lessonId')
     const type = sp.get('type')
     const language = sp.get('language')
     const search = sp.get('q')
@@ -95,6 +98,63 @@ export async function GET(req: NextRequest) {
     if (type && type !== 'all') where.type = type
     if (language && language !== 'all') where.language = language
     if (search) where.title = { contains: search, mode: 'insensitive' }
+
+    if (lessonId) {
+      const lesson = await db.lesson.findFirst({
+        where: {
+          id: lessonId,
+          AND: [
+            scopedLessonWhere(learningScope),
+            subjectId
+              ? {
+                  OR: [
+                    { unit: { subjectId } },
+                    { topic: { unit: { subjectId } } },
+                  ],
+                }
+              : {},
+            parsedUnitNumber !== null
+              ? {
+                  OR: [
+                    { unit: { number: parsedUnitNumber } },
+                    { topic: { unit: { number: parsedUnitNumber } } },
+                  ],
+                }
+              : {},
+            topicId ? { topicId } : {},
+          ],
+        },
+        select: { id: true },
+      })
+      if (!lesson) {
+        throw new ApiError('NOT_FOUND', 'Lesson not found.', 404, false)
+      }
+
+      const lessonResources = await db.lessonResource.findMany({
+        where: {
+          lessonId,
+          ...studentLessonResourceWhere(),
+          resource: where,
+        },
+        orderBy: [{ role: 'asc' }, { isPrimary: 'desc' }, { sortOrder: 'asc' }, { createdAt: 'asc' }],
+        take: 50,
+        select: {
+          id: true,
+          role: true,
+          isPrimary: true,
+          isRequired: true,
+          startSeconds: true,
+          endSeconds: true,
+          coveragePercentage: true,
+          resource: true,
+        },
+      })
+
+      return okResponse(lessonResources.map(({ resource, ...lessonResource }) => ({
+        ...resource,
+        lessonResource,
+      })))
+    }
 
     const resources = await db.resource.findMany({
       where,

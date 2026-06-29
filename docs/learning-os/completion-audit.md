@@ -37,6 +37,7 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - Updated curriculum validation so empty subject lists are valid only for draft `needs_official_source` manifests.
 - Added optional subject/unit/topic/lesson scope fields for coding challenges/submissions and scoped `/api/coding` to the student's learning scope.
 - Extended LEO retrieval to include student-visible approved lesson resources, video chapter snippets and approved generated note/document artifacts.
+- Added lesson-level Materials filtering through scoped, approved `LessonResource` mappings.
 
 ## Verification Completed Locally
 

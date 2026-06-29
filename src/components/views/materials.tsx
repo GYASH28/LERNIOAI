@@ -47,6 +47,15 @@ interface Resource {
   downloads: number
   rating: number
   createdAt: string
+  lessonResource?: {
+    id: string
+    role: string
+    isPrimary: boolean
+    isRequired: boolean
+    startSeconds?: number | null
+    endSeconds?: number | null
+    coveragePercentage?: number | null
+  }
 }
 
 interface Contribution {
@@ -89,6 +98,10 @@ export function MaterialsView() {
   const [subjectFilter, setSubjectFilter] = useState('all')
   const [unitFilter, setUnitFilter] = useState('all')
   const [topicFilter, setTopicFilter] = useState('all')
+  const [lessonFilter, setLessonFilter] = useState(() => {
+    if (typeof window === 'undefined') return ''
+    return new URLSearchParams(window.location.search).get('lessonId') ?? ''
+  })
   const [typeFilter, setTypeFilter] = useState('all')
   const [languageFilter, setLanguageFilter] = useState('all')
   const [verifiedOnly, setVerifiedOnly] = useState(false)
@@ -113,6 +126,7 @@ export function MaterialsView() {
     if (subjectFilter !== 'all') params.set('subjectId', subjectFilter)
     if (unitFilter !== 'all') params.set('unitNumber', unitFilter)
     if (topicFilter !== 'all') params.set('topicId', topicFilter)
+    if (lessonFilter) params.set('lessonId', lessonFilter)
     if (typeFilter !== 'all') params.set('type', typeFilter)
     if (languageFilter !== 'all') params.set('language', languageFilter)
     if (search) params.set('q', search)
@@ -120,7 +134,7 @@ export function MaterialsView() {
       .then((r) => r.json())
       .then((d) => { setMaterials(d.data || []); setLoading(false) })
       .catch(() => { setMaterials([]); setLoading(false) })
-  }, [subjectFilter, unitFilter, topicFilter, typeFilter, languageFilter, search])
+  }, [subjectFilter, unitFilter, topicFilter, lessonFilter, typeFilter, languageFilter, search])
 
   useEffect(() => {
     const t = setTimeout(load, 300)
@@ -181,6 +195,19 @@ export function MaterialsView() {
           {/* Search & Filters */}
           <Card>
             <CardContent className="p-4 space-y-3">
+              {lessonFilter && (
+                <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-primary/20 bg-primary/5 px-3 py-2">
+                  <div>
+                    <p className="text-xs font-medium">Lesson-scoped materials</p>
+                    <p className="text-meta text-muted-foreground">
+                      Showing approved resources mapped to the selected lesson.
+                    </p>
+                  </div>
+                  <Button variant="ghost" size="sm" onClick={() => setLessonFilter('')}>
+                    Clear
+                  </Button>
+                </div>
+              )}
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search materials..." className="pl-9" />
@@ -353,6 +380,11 @@ function MaterialCard({ material, subjects, onPreview }: {
             <div className="flex flex-wrap items-center gap-1.5 mt-1.5">
               {subject && <Badge variant="outline" className="text-meta">{subject.code}</Badge>}
               {material.unitNumber && <Badge variant="outline" className="text-meta">Unit {material.unitNumber}</Badge>}
+              {material.lessonResource && (
+                <Badge variant="outline" className="text-meta">
+                  {material.lessonResource.role.replace('_', ' ')}
+                </Badge>
+              )}
               <Badge variant="secondary" className="text-meta capitalize">{material.type.replace('_', ' ')}</Badge>
               <Badge variant="outline" className="text-meta capitalize">{material.source}</Badge>
             </div>
