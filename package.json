@@ -48,7 +48,8 @@
     "resources:youtube:review-queue": "tsx scripts/build-youtube-candidate-review-queue.ts",
     "resources:link-health": "tsx scripts/check-resource-link-health.ts",
     "notes:validate": "tsx scripts/validate-lesson-note-documents.ts",
-    "notes:render-pdf": "tsx scripts/render-lesson-note-pdfs.ts"
+    "notes:render-pdf": "tsx scripts/render-lesson-note-pdfs.ts",
+    "notes:generate:work": "tsx scripts/process-content-generation-jobs.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",

@@ -46,6 +46,7 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - Added curriculum-aware Labs integration, scoping labs to the student's active subjects, checking publication safety, and listing official experiments or structured blocker information.
 - Added trusted Coding Lab runner integration: submissions execute only through a configured remote runner, runner responses are validated before any pass/XP, expected test values stay server-side, and unconfigured runner paths save submissions for manual review without XP.
 - Added an authority-scoped lesson-resource mapping workflow in the resource review queue with governed roles, same-subject validation, reviewer evidence requirements, audited draft/approve actions and primary-video demotion.
+- Added a lesson-note generation worker boundary and audited queue API: scoped reviewers/admins can queue jobs for published/verified lessons, workers claim/lease/retry jobs, generated documents are validated against lesson identity and approved source IDs, HTML artifacts are written through configured storage, and AI output stops at `ready_for_review` until reviewer publication.
 
 ## Verification Completed Locally
 
@@ -70,8 +71,9 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - `npx vitest run src/app/api/labs/route.test.ts` passed.
 - `npx vitest run src/lib/coding/code-runner.test.ts` passed.
 - `npx vitest run src/lib/resources/resource-governance.test.ts` passed.
-- `npm run check` passed with 46 test files / 166 tests.
-- `npm run build` passed with 91 static pages.
+- `npx vitest run src/lib/lesson-notes/generation-worker.test.ts src/app/api/admin/learning/notes/jobs/route.test.ts` passed.
+- `npm run check` passed with 48 test files / 175 tests.
+- `npm run build` passed with 92 static pages.
 - `npm run test:e2e` passed with 146 Playwright tests.
 - `npm run test:a11y` passed.
 - `npm run test:visual` passed.
@@ -90,6 +92,7 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - `/api/ready` returning 200.
 - Published subject structures with official units/topics/lessons.
 - Published `LessonResource` video mappings and approved note artifacts.
+- Configured lesson-note generator and artifact-storage services plus reviewer approval/publication of generated notes.
 - Imported and reviewed curriculum-linked coding challenge mappings plus configured production code-runner service credentials.
 - Authenticated learning E2E and accessibility tests.
 - Production deployment with post-deploy smoke checks.

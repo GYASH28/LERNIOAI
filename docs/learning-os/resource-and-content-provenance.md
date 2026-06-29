@@ -7,7 +7,8 @@
 - Admin resource queue can approve, request changes or hold resources and writes review/audit records.
 - `LessonResource`, `VideoChapter`, `VideoWatchProgress`, `GeneratedLessonDocument`, `ContentGenerationJob` and `LessonCompletionCriteria` now exist in the Phase 3 schema migration.
 - Generated notes/PDF provenance has first-class storage fields, generation metadata and reviewer/publisher fields.
-- `src/lib/lesson-notes/lesson-note-document.ts` now defines the required note JSON contract and deterministic escaped HTML renderer; no generation worker or PDF renderer is wired yet.
+- `src/lib/lesson-notes/lesson-note-document.ts` now defines the required note JSON contract and deterministic escaped HTML renderer.
+- `src/lib/lesson-notes/generation-worker.ts` claims queued `ContentGenerationJob` rows, builds source-scoped lesson-note inputs from approved lesson resources and curriculum evidence, validates generated documents, writes review-ready HTML through a configured artifact-store adapter and never publishes AI output automatically.
 
 ## Supplied YouTube Inputs
 
@@ -111,8 +112,11 @@ Link-health report:
 - `/admin/learning/notes/[noteSlug]` renders validated notes in an iframe from escaped print-safe HTML and returns 404 for out-of-scope slugs.
 - `/admin/learning/notes/[noteSlug]/print` returns private no-store raw HTML suitable for a future Playwright PDF rendering worker and uses the same authority scope check.
 - `npm run notes:render-pdf` renders validated note JSON files to PDFs under `output/pdf/lesson-notes` using Playwright/Chromium and the same escaped HTML renderer.
-- `src/lib/lesson-notes/generation-workflow.ts` defines the future generation worker state policy: validation must pass before reviewer handoff, reviewer approval is required before completion, and generation jobs cannot jump directly from running to completed.
-- Actual AI generation and object storage upload remain future workflow steps.
+- `src/lib/lesson-notes/generation-workflow.ts` defines the generation worker state policy: validation must pass before reviewer handoff, reviewer approval is required before completion, transient failures can requeue with backoff, and generation jobs cannot jump directly from running to completed.
+- `src/lib/lesson-notes/generation-worker.ts` implements the provider/storage boundary for `ContentGenerationJob` processing. It accepts only generated documents whose programme, semester, subject, unit, lesson slug, deep link, document type, template version, target version and source IDs match the queued lesson input.
+- `npm run notes:generate:work -- --limit 1` processes queued jobs when `LESSON_NOTE_GENERATOR_URL` and `LESSON_NOTE_ARTIFACT_STORE_URL` are configured.
+- `/api/admin/learning/notes/jobs` lets scoped learning-ops reviewers/admins list and queue generation jobs with audit events.
+- Actual approved note documents still require configured provider/storage services plus reviewer approval/publication; generated worker output stops at `ready_for_review`.
 
 ## Coverage Report
 

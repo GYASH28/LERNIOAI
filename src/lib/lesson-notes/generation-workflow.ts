@@ -38,7 +38,7 @@ export interface GenerationWorkflowDecision {
 
 const ALLOWED_TRANSITIONS: Record<ContentGenerationJobState, ContentGenerationJobState[]> = {
   queued: ['queued', 'running', 'cancelled'],
-  running: ['running', 'validation_failed', 'awaiting_review', 'failed', 'cancelled'],
+  running: ['queued', 'running', 'validation_failed', 'awaiting_review', 'failed', 'cancelled'],
   validation_failed: ['validation_failed', 'queued', 'running', 'failed', 'cancelled'],
   awaiting_review: ['awaiting_review', 'completed', 'validation_failed', 'failed', 'cancelled'],
   completed: ['completed'],

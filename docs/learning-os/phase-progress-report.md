@@ -674,6 +674,24 @@ Date: 2026-06-28
 - `npm run check`: passed, 46 files and 166 tests with 129 existing warnings and 0 errors.
 - `npm run build`: passed with 91 static pages generated.
 
+## Phase 28 Progress: Lesson Note Generation Worker Boundary
+
+### Changed
+
+- Added `src/lib/lesson-notes/generation-worker.ts` to claim queued `ContentGenerationJob` rows, lease/retry them, build approved-source lesson-note inputs, call a configured generation provider, validate the generated `LessonNoteDocument`, write review-ready HTML through a configured artifact store and persist `GeneratedLessonDocument` rows as `ready_for_review`.
+- Added HTTP provider and artifact-store adapters behind `LESSON_NOTE_GENERATOR_*` and `LESSON_NOTE_ARTIFACT_STORE_*` environment variables. Production requires tokens when those services are configured.
+- Added `npm run notes:generate:work` as the out-of-band worker command. Generation jobs are not run during builds or normal page rendering.
+- Added `/api/admin/learning/notes/jobs` so scoped learning-ops reviewers/admins can list and queue generation jobs for in-scope published/verified lessons. Job creation is audited and active jobs are reused unless `forceNew` is requested.
+- Extended generation workflow transitions so transient provider/storage errors can requeue with backoff while validation failures remain review-blocking.
+- Added focused worker and queue-route tests for leasing, review-ready handoff, self-publish rejection, metadata mismatch validation, retry backoff, scoped queue creation and scoped queue listing.
+
+### Additional Verification
+
+- `npx vitest run src/lib/lesson-notes/generation-worker.test.ts src/app/api/admin/learning/notes/jobs/route.test.ts`: passed (9 tests).
+- `npm run typecheck`: passed.
+- `npm run check`: passed, 48 files and 175 tests with 129 existing warnings and 0 errors.
+- `npm run build`: passed with 92 static pages generated.
+
 ## Remaining Manual Verification
 
 - Database dry-run/write needs a reachable PostgreSQL connection.
@@ -689,7 +707,7 @@ Date: 2026-06-28
 - Materials now filter by scoped subject/unit/topic/type/language and optional lesson-level `LessonResource` mappings; admins/reviewers can now draft or approve lesson-resource mappings from the resource queue, but production coverage still needs reviewed content imports and published mappings.
 - XP ledger totals remain user-global where historical XP events do not contain reliable curriculum subject ownership.
 - Completion criteria now consume lesson-scoped practice attempts and lesson-scoped quiz-pass evidence; production usefulness still depends on reviewed lesson question coverage.
-- Lesson notes now have scoped reviewer/admin previews and a local validated PDF render worker, but no AI generation worker, object-storage writer or approved note documents yet.
+- Lesson notes now have scoped reviewer/admin previews, a local validated PDF render worker, an audited generation queue API and a provider/storage-backed worker boundary, but production provider/storage credentials, reviewer approval/publication and approved note documents are still pending.
 - The learning coverage report is manifest/candidate-file backed; database-backed published lesson/resource coverage still needs a reachable PostgreSQL connection.
 
 ## Latest Local Validation on 2026-06-29
@@ -704,7 +722,8 @@ Date: 2026-06-28
 - `npx tsx scripts/promote-curriculum-official-structure.ts --write --overwrite`: passed, 51 official subject outcome set(s) written.
 - `npm run notes:validate`: passed, 0 document(s) present/valid.
 - `npm run notes:render-pdf`: passed, 0 document(s) rendered.
-- `npm run check`: passed, including migration encoding, lint, typecheck and 45 Vitest files / 158 tests. Lint still reports 129 existing warnings and 0 errors.
+- `npx vitest run src/lib/lesson-notes/generation-worker.test.ts src/app/api/admin/learning/notes/jobs/route.test.ts`: passed, 2 files and 9 tests.
+- `npm run check`: passed, including migration encoding, lint, typecheck and 48 Vitest files / 175 tests. Lint still reports 129 existing warnings and 0 errors.
 - `npm run lint`: passed with 0 errors and 129 existing warnings.
 - `npm run typecheck`: passed.
 - `npx prisma validate`: passed.
@@ -720,7 +739,7 @@ Date: 2026-06-28
 - `npx tsx scripts/verify-youtube-candidates.ts --write`: passed, 100 metadata check(s), 6 found and 94 unavailable/unverified by public oEmbed.
 - `npm run resources:youtube:review-queue`: passed, 100 candidate(s), 252 subject mapping(s), 0 ready for lesson mapping, 65 unplaced official-subject blockers, 18 missing manifest-subject blockers and 169 lesson-structure blockers.
 - `npx tsx scripts/check-resource-link-health.ts --write`: passed and wrote 100 checked rows; 100 healthy, 0 stale/unhealthy/unknown.
-- `npm run build`: passed with 91 static pages generated and `/api/coding` plus LEO tutor routes included.
+- `npm run build`: passed with 92 static pages generated and `/api/coding`, `/api/admin/learning/notes/jobs` plus LEO tutor routes included.
 - `npm run test:e2e`: passed against `next start` production server, 146 Playwright tests.
 - Smoke checks against `next start`: `/api/health` returned 200 and `/api/ready` returned 503 because PostgreSQL is unavailable.
 - Production server was started with `npm run start` on `http://localhost:3000` for smoke/e2e validation, then stopped.

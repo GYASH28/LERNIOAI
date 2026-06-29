@@ -40,6 +40,7 @@
 | `/admin/learning/notes` | Authority-scoped list of valid generated note JSON files under `content/lesson-notes`. |
 | `/admin/learning/notes/[noteSlug]` | Scoped reviewer/admin preview for validated note JSON rendered through `renderLessonNoteHtml()`; out-of-scope slugs return 404. |
 | `/admin/learning/notes/[noteSlug]/print` | Scoped private no-store raw print HTML endpoint for Playwright/PDF rendering. |
+| `/api/admin/learning/notes/jobs` | Authority-scoped API for listing and queueing lesson-note generation jobs. Queue writes require `ai.content_draft`, `ai.content_review` or admin authority, validate lesson subject scope, reuse active jobs unless `forceNew` is requested and audit `lesson_note.generation_queued`. |
 | `/admin`, `/coordinator`, `/teacher`, `/reviewer`, `/moderator`, `/cr` | Protected workspaces through authority layer; teacher/coordinator/reviewer dashboards link into scoped Learning OS previews where applicable. |
 
 ## Target Learning Components
