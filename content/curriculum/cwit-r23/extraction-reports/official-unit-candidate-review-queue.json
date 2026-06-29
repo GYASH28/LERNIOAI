@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "status": "draft",
   "verificationStatus": "official_unit_candidate_review_required",
-  "generatedAt": "2026-06-29T07:41:40.904Z",
+  "generatedAt": "2026-06-29T17:09:38.218Z",
   "sourceExtractionReport": "content/curriculum/cwit-r23/extraction-reports/official-structure-candidates.json",
   "safetyNote": "These unit candidates are official-PDF extraction review rows only. They must not be imported into manifests or shown to students until a reviewer verifies order, title text and source pages.",
   "totals": {

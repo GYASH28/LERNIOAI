@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "status": "draft",
   "verificationStatus": "candidate_mapping_review_required",
-  "generatedAt": "2026-06-29T12:49:13.729Z",
+  "generatedAt": "2026-06-29T17:09:43.114Z",
   "sourceCandidateManifest": "content/resources/youtube-candidates/cwit-r23-youtube-candidates.metadata.json",
   "curriculumManifestCount": 12,
   "safetyNote": "These rows are reviewer candidates only. They must not be shown to students until metadata, lesson mapping and publication review are complete.",
