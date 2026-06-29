@@ -3,7 +3,7 @@ import { resolve } from 'node:path'
 
 if (
   process.env.LERNIO_DEMO_MODE === 'true' &&
-  (process.env.NODE_ENV === 'production' || process.env.VERCEL_ENV === 'production')
+  process.env.VERCEL_ENV === 'production'
 ) {
   console.error('[vercel-build] Refusing production build with LERNIO_DEMO_MODE=true.')
   process.exit(1)
