@@ -107,9 +107,9 @@ Link-health report:
 - `LessonNoteDocumentSchema` validates note type, template version, programme/semester/subject/unit/lesson identity, learning outcomes, sections, worked examples, practice items, glossary, sources and citation resolution.
 - `renderLessonNoteHtml()` produces print-safe escaped HTML from validated note JSON.
 - `npm run notes:validate` validates JSON files under `content/lesson-notes/` when present.
-- `/admin/learning/notes` lists valid note JSON files for reviewer/admin preview.
-- `/admin/learning/notes/[noteSlug]` renders validated notes in an iframe from escaped print-safe HTML.
-- `/admin/learning/notes/[noteSlug]/print` returns private no-store raw HTML suitable for a future Playwright PDF rendering worker.
+- `/admin/learning/notes` lists valid note JSON files through authority-scoped teacher/coordinator/reviewer/admin preview access.
+- `/admin/learning/notes/[noteSlug]` renders validated notes in an iframe from escaped print-safe HTML and returns 404 for out-of-scope slugs.
+- `/admin/learning/notes/[noteSlug]/print` returns private no-store raw HTML suitable for a future Playwright PDF rendering worker and uses the same authority scope check.
 - `npm run notes:render-pdf` renders validated note JSON files to PDFs under `output/pdf/lesson-notes` using Playwright/Chromium and the same escaped HTML renderer.
 - `src/lib/lesson-notes/generation-workflow.ts` defines the future generation worker state policy: validation must pass before reviewer handoff, reviewer approval is required before completion, and generation jobs cannot jump directly from running to completed.
 - Actual AI generation and object storage upload remain future workflow steps.
@@ -129,7 +129,8 @@ Link-health report:
 - The report consumes the official course catalog report when present and rolls up source-backed course identity separately from semester placement.
 - The report consumes the official unit candidate review queue when present and rolls up unit-promotion readiness separately from promoted unit coverage.
 - Lesson/resource coverage remains zero until lessons, approved PDFs and published `LessonResource` mappings exist in reviewed data.
-- Admin view: `/admin/learning/coverage`.
+- Authority-scoped view: `/admin/learning/coverage`.
+- Authority-scoped review queues: `/admin/learning/unit-candidates`, `/admin/learning/course-catalog`, `/admin/resources/youtube-candidates` and `/admin/resources/queue`.
 
 ## Candidate Import Requirements
 

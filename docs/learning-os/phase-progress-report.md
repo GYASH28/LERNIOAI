@@ -571,6 +571,26 @@ Date: 2026-06-28
 - `npm run typecheck`: passed.
 - `npm run check`: passed, 43 files and 149 tests with 129 existing warnings and 0 errors.
 - `npm run build`: passed with 90 static pages generated.
+
+## Phase 23 Progress: Authority-Scoped Learning Ops Preview
+
+### Changed
+
+- Added `requireLearningOpsPreviewAccess()` and report-code matching for scoped teacher, coordinator, reviewer and admin Learning OS previews.
+- Scoped `/admin/learning/coverage`, `/admin/learning/course-catalog`, `/admin/learning/unit-candidates`, `/admin/resources/youtube-candidates` and `/admin/learning/notes` by authorised subject/programme/department codes.
+- Scoped note detail and print routes so direct note slugs return 404 outside the caller's academic authority.
+- Scoped the live resource review queue by subject ids and kept provider-policy management admin-only.
+- Added resource-review write protection so only admin or users with resource review/publish capability can approve or request changes.
+- Added teacher, coordinator and reviewer workspace links into the scoped learning-ops surfaces.
+
+### Additional Verification
+
+- `npx vitest run src/lib/learning/learning-ops-authority.test.ts src/lib/resources/resource-governance.test.ts`: passed, 2 files and 8 tests.
+- `npm run typecheck`: passed.
+- `npm run check`: passed, 44 files and 153 tests with 129 existing warnings and 0 errors.
+- `npm run build`: passed with 90 static pages generated.
+- `npm run check`: passed, 43 files and 149 tests with 129 existing warnings and 0 errors.
+- `npm run build`: passed with 90 static pages generated.
 - `npm run check`: passed, 43 files and 149 tests with 129 existing warnings and 0 errors.
 - `npm run build`: passed with 90 static pages generated.
 
@@ -602,10 +622,8 @@ Date: 2026-06-28
 - Coding now supports optional curriculum links and scoped API filtering, but reviewed challenge mappings/imports and the production runner are still pending.
 - Materials now filter by scoped subject/unit/topic/type/language and optional lesson-level `LessonResource` mappings, but production coverage still needs published mappings.
 - XP ledger totals remain user-global where historical XP events do not contain reliable curriculum subject ownership.
-- Teacher/reviewer/admin preview scope still needs authority-aware broadening beyond the normal student scope.
 - Completion criteria can now consume lesson-scoped practice attempts; quiz pass evidence still needs exact lesson-level linkage.
-- Lesson notes have a validation/rendering contract but no AI generation worker, reviewer preview UI, object storage writer or PDF renderer yet.
-- Lesson notes now have a local validated PDF render worker, but no AI generation worker, object-storage writer or approved note documents yet.
+- Lesson notes now have scoped reviewer/admin previews and a local validated PDF render worker, but no AI generation worker, object-storage writer or approved note documents yet.
 - The learning coverage report is manifest/candidate-file backed; database-backed published lesson/resource coverage still needs a reachable PostgreSQL connection.
 
 ## Latest Local Validation on 2026-06-29

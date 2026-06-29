@@ -32,14 +32,14 @@
 |---|---|
 | `/admin/syllabus/sources` | Registers official/internal syllabus sources. |
 | `/admin/syllabus/imports` | Import queue shell exists. |
-| `/admin/resources/queue` | Resource provider and review queue shell exists. |
-| `/admin/learning/coverage` | Read-only Learning OS coverage dashboard backed by `content/reports/cwit-r23-learning-coverage.json`. |
-| `/admin/learning/course-catalog` | Read-only official course catalog review backed by `content/curriculum/cwit-r23/extraction-reports/official-course-catalog.json`; highlights unplaced official courses without assigning semesters. |
-| `/admin/learning/unit-candidates` | Read-only official unit candidate review queue backed by `content/curriculum/cwit-r23/extraction-reports/official-unit-candidate-review-queue.json`. |
-| `/admin/learning/notes` | Lists valid generated note JSON files under `content/lesson-notes`. |
-| `/admin/learning/notes/[noteSlug]` | Reviewer/admin preview for validated note JSON rendered through `renderLessonNoteHtml()`. |
-| `/admin/learning/notes/[noteSlug]/print` | Private no-store raw print HTML endpoint for Playwright/PDF rendering. |
-| `/admin`, `/coordinator`, `/teacher`, `/reviewer`, `/moderator`, `/cr` | Protected workspaces through authority layer. |
+| `/admin/resources/queue` | Authority-scoped resource review queue; provider policy writes remain admin-only and resource decisions require resource review/publish capability. |
+| `/admin/learning/coverage` | Authority-scoped Learning OS coverage dashboard backed by `content/reports/cwit-r23-learning-coverage.json`. |
+| `/admin/learning/course-catalog` | Authority-scoped official course catalog review backed by `content/curriculum/cwit-r23/extraction-reports/official-course-catalog.json`; highlights unplaced official courses without assigning semesters. |
+| `/admin/learning/unit-candidates` | Authority-scoped official unit candidate review queue backed by `content/curriculum/cwit-r23/extraction-reports/official-unit-candidate-review-queue.json`. |
+| `/admin/learning/notes` | Authority-scoped list of valid generated note JSON files under `content/lesson-notes`. |
+| `/admin/learning/notes/[noteSlug]` | Scoped reviewer/admin preview for validated note JSON rendered through `renderLessonNoteHtml()`; out-of-scope slugs return 404. |
+| `/admin/learning/notes/[noteSlug]/print` | Scoped private no-store raw print HTML endpoint for Playwright/PDF rendering. |
+| `/admin`, `/coordinator`, `/teacher`, `/reviewer`, `/moderator`, `/cr` | Protected workspaces through authority layer; teacher/coordinator/reviewer dashboards link into scoped Learning OS previews where applicable. |
 
 ## Target Learning Components
 

@@ -3,8 +3,12 @@ import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import type { LucideIcon } from 'lucide-react'
 import { AlertTriangle, BookOpenCheck, FileJson2, LibraryBig, ShieldCheck } from 'lucide-react'
-import { requireActiveRole } from '@/lib/auth'
 import { CampusmateAdminShell } from '@/components/admin/campusmate-admin-shell'
+import {
+  matchesLearningOpsReportScope,
+  requireLearningOpsPreviewAccess,
+  type LearningOpsReportScope,
+} from '@/lib/learning/learning-ops-authority'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
@@ -48,11 +52,11 @@ const catalogPath = join(
 )
 
 export default async function AdminCourseCatalogPage() {
-  const authority = await requireActiveRole('admin')
-  const catalog = loadCatalog()
+  const access = await requireLearningOpsPreviewAccess()
+  const catalog = filterCatalogForScope(loadCatalog(), access.reportScope)
 
   return (
-    <CampusmateAdminShell user={{ name: authority.user.name, email: authority.user.email }}>
+    <CampusmateAdminShell user={{ name: access.authority.user.name, email: access.authority.user.email }}>
       <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-6 px-4 py-6 sm:px-6 lg:px-8">
         <section className="rounded-3xl border border-border/70 bg-card p-6 shadow-sm lg:p-8">
           <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-primary">
@@ -64,6 +68,7 @@ export default async function AdminCourseCatalogPage() {
             Review official course codes and names extracted from CWIT R23 curriculum PDFs. Catalog entries prove
             source-backed course identity only; they do not assign semester placement.
           </p>
+          <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">{access.summary}</p>
         </section>
 
         {catalog ? <CatalogView catalog={catalog} /> : <MissingCatalog />}
@@ -187,4 +192,37 @@ function MissingCatalog() {
 function loadCatalog(): OfficialCourseCatalogReport | null {
   if (!existsSync(catalogPath)) return null
   return JSON.parse(readFileSync(catalogPath, 'utf8')) as OfficialCourseCatalogReport
+}
+
+function filterCatalogForScope(
+  catalog: OfficialCourseCatalogReport | null,
+  scope: LearningOpsReportScope,
+): OfficialCourseCatalogReport | null {
+  if (!catalog || scope.all) return catalog
+
+  const catalogEntries = catalog.catalogEntries.filter((entry) =>
+    matchesLearningOpsReportScope(scope, {
+      departmentCode: entry.departmentCode,
+      officialSubjectCode: entry.courseCode,
+    }),
+  )
+  const unplacedOfficialCourses = catalog.unplacedOfficialCourses.filter((entry) =>
+    matchesLearningOpsReportScope(scope, {
+      departmentCode: entry.departmentCode,
+      officialSubjectCode: entry.courseCode,
+    }),
+  )
+
+  return {
+    ...catalog,
+    catalogEntries,
+    unplacedOfficialCourses,
+    totals: {
+      officialCourses: catalogEntries.length,
+      manifestSubjectCodes: Math.max(0, catalogEntries.length - unplacedOfficialCourses.length),
+      unplacedOfficialCourses: unplacedOfficialCourses.length,
+      compUnplacedOfficialCourses: unplacedOfficialCourses.filter((entry) => entry.departmentCode === 'COMP').length,
+      ciotUnplacedOfficialCourses: unplacedOfficialCourses.filter((entry) => entry.departmentCode === 'CIOT').length,
+    },
+  }
 }

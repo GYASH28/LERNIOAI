@@ -3,12 +3,17 @@ import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import type { LucideIcon } from 'lucide-react'
 import { AlertTriangle, FileJson2, Link2, ShieldCheck, Video } from 'lucide-react'
-import { requireActiveRole } from '@/lib/auth'
 import type {
   CandidateMappingStatus,
+  YouTubeCandidateReviewItem,
   YouTubeCandidateReviewQueue,
 } from '@/lib/resources/youtube-candidate-review'
 import { CampusmateAdminShell } from '@/components/admin/campusmate-admin-shell'
+import {
+  matchesLearningOpsReportScope,
+  requireLearningOpsPreviewAccess,
+  type LearningOpsReportScope,
+} from '@/lib/learning/learning-ops-authority'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
@@ -24,11 +29,11 @@ const reviewQueuePath = join(
 )
 
 export default async function AdminYouTubeCandidatesPage() {
-  const authority = await requireActiveRole('admin')
-  const queue = loadReviewQueue()
+  const access = await requireLearningOpsPreviewAccess()
+  const queue = filterReviewQueueForScope(loadReviewQueue(), access.reportScope)
 
   return (
-    <CampusmateAdminShell user={{ name: authority.user.name, email: authority.user.email }}>
+    <CampusmateAdminShell user={{ name: access.authority.user.name, email: access.authority.user.email }}>
       <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-6 px-4 py-6 sm:px-6 lg:px-8">
         <section className="rounded-3xl border border-border/70 bg-card p-6 shadow-sm lg:p-8">
           <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-primary">
@@ -40,6 +45,7 @@ export default async function AdminYouTubeCandidatesPage() {
             Inspect curated PDF lecture links before they become Resource or LessonResource rows. Draft rows stay
             blocked until metadata, syllabus fit, lesson mapping and reviewer approval are complete.
           </p>
+          <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">{access.summary}</p>
         </section>
 
         {queue ? <ReviewQueueView queue={queue} /> : <MissingQueue />}
@@ -210,4 +216,52 @@ function MissingQueue() {
 function loadReviewQueue(): YouTubeCandidateReviewQueue | null {
   if (!existsSync(reviewQueuePath)) return null
   return JSON.parse(readFileSync(reviewQueuePath, 'utf8')) as YouTubeCandidateReviewQueue
+}
+
+function filterReviewQueueForScope(
+  queue: YouTubeCandidateReviewQueue | null,
+  scope: LearningOpsReportScope,
+): YouTubeCandidateReviewQueue | null {
+  if (!queue || scope.all) return queue
+
+  const items = queue.items.flatMap((item) => {
+    const subjectMappings = item.subjectMappings.filter((mapping) =>
+      matchesLearningOpsReportScope(scope, {
+        departmentCode: mapping.departmentCode,
+        programmeCode: mapping.programmeCode,
+        subjectCode: mapping.subjectCode,
+      }),
+    )
+    const candidateMatches = matchesLearningOpsReportScope(scope, {
+      officialSubjectCodes: item.officialSubjectCodes,
+      programmeCodes: item.programmeCodes,
+    })
+
+    if (!candidateMatches && subjectMappings.length === 0) return []
+    return [{ ...item, subjectMappings }]
+  })
+
+  return {
+    ...queue,
+    totals: totalsForItems(items),
+    items,
+  }
+}
+
+function totalsForItems(items: readonly YouTubeCandidateReviewItem[]): YouTubeCandidateReviewQueue['totals'] {
+  const subjectMappings = items.flatMap((item) => item.subjectMappings)
+  return {
+    candidates: items.length,
+    videos: items.filter((item) => item.resourceKind === 'video').length,
+    playlists: items.filter((item) => item.resourceKind === 'playlist').length,
+    subjectMappings: subjectMappings.length,
+    readyForLessonMappingReview: subjectMappings.filter((mapping) => mapping.mappingStatus === 'ready_for_lesson_mapping_review').length,
+    blockedMissingManifestSubject: subjectMappings.filter((mapping) => mapping.mappingStatus === 'blocked_missing_manifest_subject').length,
+    blockedUnplacedOfficialSubject: subjectMappings.filter((mapping) => mapping.mappingStatus === 'blocked_unplaced_official_subject').length,
+    blockedMissingLessonStructure: subjectMappings.filter((mapping) => mapping.mappingStatus === 'blocked_missing_lesson_structure').length,
+    oembedFound: items.filter((item) => item.metadataStatus === 'found').length,
+    playlistRequiresManualOrApiReview: items.filter((item) => item.resourceKind === 'playlist').length,
+    embeddableCandidates: items.filter((item) => item.embeddable === true).length,
+    draftOnly: items.length,
+  }
 }

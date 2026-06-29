@@ -1,8 +1,12 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { FileText, ShieldCheck } from 'lucide-react'
-import { requireActiveRole } from '@/lib/auth'
-import { listLessonNotePreviews } from '@/lib/lesson-notes/lesson-note-files'
+import { listLessonNotePreviews, type LessonNotePreview } from '@/lib/lesson-notes/lesson-note-files'
+import {
+  matchesLearningOpsReportScope,
+  requireLearningOpsPreviewAccess,
+  type LearningOpsReportScope,
+} from '@/lib/learning/learning-ops-authority'
 import { CampusmateAdminShell } from '@/components/admin/campusmate-admin-shell'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -12,11 +16,11 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 export const metadata: Metadata = { title: 'Lesson Note Previews' }
 
 export default async function AdminLessonNotesPage() {
-  const authority = await requireActiveRole('admin')
-  const previews = listLessonNotePreviews()
+  const access = await requireLearningOpsPreviewAccess()
+  const previews = filterPreviewsForScope(listLessonNotePreviews(), access.reportScope)
 
   return (
-    <CampusmateAdminShell user={{ name: authority.user.name, email: authority.user.email }}>
+    <CampusmateAdminShell user={{ name: access.authority.user.name, email: access.authority.user.email }}>
       <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-6 px-4 py-6 sm:px-6 lg:px-8">
         <section className="rounded-3xl border border-border/70 bg-card p-6 shadow-sm lg:p-8">
           <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-primary">
@@ -27,6 +31,7 @@ export default async function AdminLessonNotesPage() {
           <p className="mt-3 max-w-3xl text-sm leading-6 text-muted-foreground">
             Validate and preview generated note JSON before reviewer approval, PDF rendering or student publication.
           </p>
+          <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">{access.summary}</p>
         </section>
 
         <Card surface="panel">
@@ -83,5 +88,18 @@ export default async function AdminLessonNotesPage() {
         </Card>
       </div>
     </CampusmateAdminShell>
+  )
+}
+
+function filterPreviewsForScope(
+  previews: readonly LessonNotePreview[],
+  scope: LearningOpsReportScope,
+): LessonNotePreview[] {
+  if (scope.all) return [...previews]
+  return previews.filter((preview) =>
+    matchesLearningOpsReportScope(scope, {
+      programmeCode: preview.document.programmeCode,
+      subjectCode: preview.document.subjectCode,
+    }),
   )
 }

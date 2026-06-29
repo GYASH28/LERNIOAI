@@ -3,12 +3,17 @@ import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import type { LucideIcon } from 'lucide-react'
 import { AlertTriangle, BookOpenCheck, FileJson2, ListChecks, ShieldCheck } from 'lucide-react'
-import { requireActiveRole } from '@/lib/auth'
 import type {
   OfficialUnitCandidateReviewQueue,
+  UnitCandidateReviewItem,
   UnitCandidateReviewStatus,
 } from '@/lib/curriculum/unit-candidate-review'
 import { CampusmateAdminShell } from '@/components/admin/campusmate-admin-shell'
+import {
+  matchesLearningOpsReportScope,
+  requireLearningOpsPreviewAccess,
+  type LearningOpsReportScope,
+} from '@/lib/learning/learning-ops-authority'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
@@ -25,11 +30,11 @@ const queuePath = join(
 )
 
 export default async function AdminUnitCandidatesPage() {
-  const authority = await requireActiveRole('admin')
-  const queue = loadQueue()
+  const access = await requireLearningOpsPreviewAccess()
+  const queue = filterQueueForScope(loadQueue(), access.reportScope)
 
   return (
-    <CampusmateAdminShell user={{ name: authority.user.name, email: authority.user.email }}>
+    <CampusmateAdminShell user={{ name: access.authority.user.name, email: access.authority.user.email }}>
       <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-6 px-4 py-6 sm:px-6 lg:px-8">
         <section className="rounded-3xl border border-border/70 bg-card p-6 shadow-sm lg:p-8">
           <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-primary">
@@ -41,6 +46,7 @@ export default async function AdminUnitCandidatesPage() {
             Inspect official PDF unit-title extraction blockers before any unit, topic or lesson structure is promoted
             into curriculum manifests.
           </p>
+          <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">{access.summary}</p>
         </section>
 
         {queue ? <UnitQueueView queue={queue} /> : <MissingQueue />}
@@ -188,4 +194,37 @@ function MissingQueue() {
 function loadQueue(): OfficialUnitCandidateReviewQueue | null {
   if (!existsSync(queuePath)) return null
   return JSON.parse(readFileSync(queuePath, 'utf8')) as OfficialUnitCandidateReviewQueue
+}
+
+function filterQueueForScope(
+  queue: OfficialUnitCandidateReviewQueue | null,
+  scope: LearningOpsReportScope,
+): OfficialUnitCandidateReviewQueue | null {
+  if (!queue || scope.all) return queue
+
+  const items = queue.items.filter((item) =>
+    matchesLearningOpsReportScope(scope, {
+      departmentCode: item.departmentCode,
+      programmeCode: item.programmeCode,
+      officialSubjectCode: item.officialSubjectCode,
+    }),
+  )
+
+  return {
+    ...queue,
+    totals: totalsForItems(items),
+    items,
+  }
+}
+
+function totalsForItems(items: readonly UnitCandidateReviewItem[]): OfficialUnitCandidateReviewQueue['totals'] {
+  return {
+    subjects: items.length,
+    subjectsWithUnitCandidates: items.filter((item) => item.candidateUnitCount > 0).length,
+    readyForUnitPromotionReview: items.filter((item) => item.reviewStatus === 'ready_for_unit_promotion_review').length,
+    needsManualUnitReview: items.filter((item) => item.reviewStatus === 'needs_manual_unit_review').length,
+    blockedMissingCourseBlock: items.filter((item) => item.reviewStatus === 'blocked_missing_course_block').length,
+    blockedNoUnitCandidates: items.filter((item) => item.reviewStatus === 'blocked_no_unit_candidates').length,
+    draftOnly: items.filter((item) => item.publicationStatus === 'draft').length,
+  }
 }

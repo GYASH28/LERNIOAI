@@ -2,9 +2,12 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, FileText, Printer, ShieldCheck } from 'lucide-react'
-import { requireActiveRole } from '@/lib/auth'
 import { loadLessonNotePreview } from '@/lib/lesson-notes/lesson-note-files'
 import { renderLessonNoteHtml } from '@/lib/lesson-notes/lesson-note-document'
+import {
+  matchesLearningOpsReportScope,
+  requireLearningOpsPreviewAccess,
+} from '@/lib/learning/learning-ops-authority'
 import { CampusmateAdminShell } from '@/components/admin/campusmate-admin-shell'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -17,15 +20,21 @@ export default async function AdminLessonNotePreviewPage({
 }: {
   params: Promise<{ noteSlug: string }>
 }) {
-  const authority = await requireActiveRole('admin')
+  const access = await requireLearningOpsPreviewAccess()
   const { noteSlug } = await params
   const preview = loadLessonNotePreview(noteSlug)
   if (!preview) notFound()
+  if (!matchesLearningOpsReportScope(access.reportScope, {
+    programmeCode: preview.document.programmeCode,
+    subjectCode: preview.document.subjectCode,
+  })) {
+    notFound()
+  }
 
   const html = renderLessonNoteHtml(preview.document)
 
   return (
-    <CampusmateAdminShell user={{ name: authority.user.name, email: authority.user.email }}>
+    <CampusmateAdminShell user={{ name: access.authority.user.name, email: access.authority.user.email }}>
       <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-6 px-4 py-6 sm:px-6 lg:px-8">
         <section className="rounded-3xl border border-border/70 bg-card p-6 shadow-sm lg:p-8">
           <Link href="/admin/learning/coverage" className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground">
@@ -42,6 +51,7 @@ export default async function AdminLessonNotePreviewPage({
               <p className="mt-2 text-sm text-muted-foreground">
                 {preview.document.programmeCode} / Semester {preview.document.semesterNumber} / {preview.document.subjectCode} / Unit {preview.document.unitNumber}
               </p>
+              <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">{access.summary}</p>
             </div>
             <Button asChild>
               <Link href={`/admin/learning/notes/${preview.slug}/print`} target="_blank">

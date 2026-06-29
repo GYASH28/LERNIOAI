@@ -1,5 +1,6 @@
 import 'server-only'
 
+import type { Prisma } from '@prisma/client'
 import { z } from 'zod'
 import { db } from '@/lib/db'
 import { ApiError } from '@/lib/auth'
@@ -22,12 +23,24 @@ export const ReviewResourceSchema = z.object({
   rubricJson: z.string().trim().max(5000).nullable().optional(),
 })
 
-export async function listResourceReviewQueue(input: { page?: number; pageSize?: number; status?: string } = {}) {
+export async function listResourceReviewQueue(input: {
+  page?: number
+  pageSize?: number
+  status?: string
+  subjectIds?: readonly string[] | null
+} = {}) {
   const page = Math.max(1, input.page ?? 1)
   const pageSize = Math.min(50, Math.max(1, input.pageSize ?? 20))
-  const where = input.status
+  const statusWhere: Prisma.ResourceWhereInput = input.status
     ? { reviewStatus: input.status }
     : { reviewStatus: { in: ['pending', 'changes_requested'] } }
+  const scopeWhere: Prisma.ResourceWhereInput =
+    input.subjectIds === undefined || input.subjectIds === null
+      ? {}
+      : input.subjectIds.length
+        ? { subjectId: { in: [...input.subjectIds] } }
+        : { id: { in: [] } }
+  const where: Prisma.ResourceWhereInput = { AND: [statusWhere, scopeWhere] }
 
   const [total, resources] = await Promise.all([
     db.resource.count({ where }),
@@ -130,15 +143,26 @@ export async function upsertResourceProvider(input: z.infer<typeof UpsertResourc
   return provider
 }
 
-export async function reviewResource(input: z.infer<typeof ReviewResourceSchema>, actorUserId: string) {
+export async function reviewResource(
+  input: z.infer<typeof ReviewResourceSchema>,
+  actorUserId: string,
+  options: { allowedSubjectIds?: readonly string[] | null } = {},
+) {
   const parsed = ReviewResourceSchema.parse(input)
   const resource = await db.resource.findUnique({
     where: { id: parsed.resourceId },
-    select: { id: true, title: true, reviewStatus: true },
+    select: { id: true, title: true, reviewStatus: true, subjectId: true },
   })
 
   if (!resource) {
     throw new ApiError('NOT_FOUND', 'Resource not found.', 404, false)
+  }
+  if (
+    options.allowedSubjectIds !== undefined &&
+    options.allowedSubjectIds !== null &&
+    !options.allowedSubjectIds.includes(resource.subjectId)
+  ) {
+    throw new ApiError('FORBIDDEN', 'This resource is outside your review scope.', 403, false)
   }
 
   const nextStatus = parsed.decision === 'approved' ? 'approved' : parsed.decision

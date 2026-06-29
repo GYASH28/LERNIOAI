@@ -115,6 +115,7 @@ async function getCoordinatorOverview(authority: AuthorityContext): Promise<Work
     actions: [
       { label: 'Review assignments', href: '/coordinator/assignments', detail: 'Confirm teachers, subjects, and class responsibility.' },
       { label: 'Review department content', href: '/coordinator/reviews', detail: 'Approve provisional mappings and resource packs.' },
+      { label: 'Inspect learning coverage', href: '/admin/learning/coverage', detail: 'Preview curriculum and resource blockers for your department scope.' },
       { label: 'Open department analytics', href: '/coordinator/analytics', detail: 'Read syllabus pace, coverage, and weak-topic signals.' },
     ],
   }
@@ -155,6 +156,7 @@ async function getTeacherOverview(authority: AuthorityContext): Promise<Workspac
     actions: [
       { label: 'Prepare lesson plan', href: '/teacher/content', detail: 'Draft topic objectives, resources, practical activity, and homework.' },
       { label: 'Build question set', href: '/teacher/questions', detail: 'Create and refine scoped practice and exam questions.' },
+      { label: 'Preview learning coverage', href: '/admin/learning/coverage', detail: 'Inspect coverage and blockers inside your assigned subject scope.' },
       { label: 'View class insights', href: '/teacher/analytics', detail: 'Understand engagement, weak topics, and subject progress.' },
     ],
   }
@@ -190,6 +192,8 @@ async function getReviewerOverview(authority: AuthorityContext): Promise<Workspa
     ],
     actions: [
       { label: 'Open review queue', href: '/reviewer/queue', detail: 'Compare revisions and request changes.' },
+      { label: 'Inspect learning coverage', href: '/admin/learning/coverage', detail: 'Preview curriculum, unit, note, and resource blockers in your review scope.' },
+      { label: 'Review resources', href: '/admin/resources/queue', detail: 'Approve or request changes for scoped learning resources.' },
       { label: 'Inspect citations', href: '/reviewer/citations', detail: 'Check grounding and source quality.' },
       { label: 'Publish policy', href: '/reviewer/policy', detail: 'Follow safe content state transitions.' },
     ],

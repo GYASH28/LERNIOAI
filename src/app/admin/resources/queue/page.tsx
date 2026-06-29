@@ -5,6 +5,10 @@ import { revalidatePath } from 'next/cache'
 import { Link2, ShieldCheck } from 'lucide-react'
 import { requireActiveRole } from '@/lib/auth'
 import {
+  requireLearningOpsPreviewAccess,
+  requireLearningOpsResourceReviewAccess,
+} from '@/lib/learning/learning-ops-authority'
+import {
   listResourceProviders,
   listResourceReviewQueue,
   reviewResource,
@@ -39,10 +43,11 @@ async function saveProvider(formData: FormData) {
 
 async function review(formData: FormData) {
   'use server'
-  const authority = await requireActiveRole('admin')
+  const resourceId = String(formData.get('resourceId') || '')
+  const access = await requireLearningOpsResourceReviewAccess(resourceId)
   await reviewResource(
     {
-      resourceId: String(formData.get('resourceId') || ''),
+      resourceId,
       decision: String(formData.get('decision') || 'changes_requested') as
         | 'approved'
         | 'rejected'
@@ -50,15 +55,16 @@ async function review(formData: FormData) {
         | 'held',
       note: clean(formData.get('note')),
     },
-    authority.user.id,
+    access.authority.user.id,
+    { allowedSubjectIds: access.subjectIds },
   )
   revalidatePath('/admin/resources/queue')
 }
 
 export default async function AdminResourceQueuePage() {
-  await requireActiveRole('admin')
+  const access = await requireLearningOpsPreviewAccess()
   const [{ resources }, providers] = await Promise.all([
-    listResourceReviewQueue({ pageSize: 50 }),
+    listResourceReviewQueue({ pageSize: 50, subjectIds: access.subjectIds }),
     listResourceProviders(),
   ])
 
@@ -74,6 +80,7 @@ export default async function AdminResourceQueuePage() {
           <p className="max-w-3xl text-sm leading-6 text-muted-foreground">
             Review resource quality, link health, and syllabus fit separately from moderation holds.
           </p>
+          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{access.summary}</p>
           <div>
             <Button asChild variant="outline" size="sm">
               <Link href="/admin/resources/youtube-candidates">Open YouTube candidate queue</Link>
@@ -84,41 +91,53 @@ export default async function AdminResourceQueuePage() {
 
       <section className="mx-auto grid w-full max-w-7xl gap-6 px-4 py-8 lg:grid-cols-[360px_minmax(0,1fr)] sm:px-6 lg:px-8">
         <div className="grid content-start gap-6">
-          <Card surface="elevated">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-base">
-                <Link2 className="h-4 w-4 text-primary" />
-                Provider Policy
-              </CardTitle>
-              <CardDescription>Register official and curated resource providers.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form action={saveProvider} className="grid gap-4">
-                <Field label="Provider key">
-                  <Input name="key" placeholder="nptel" required />
-                </Field>
-                <Field label="Name">
-                  <Input name="name" placeholder="NPTEL" required />
-                </Field>
-                <Field label="Type">
-                  <select name="providerType" className="h-9 rounded-md border border-input bg-background px-3 text-sm">
-                    <option value="official_course">Official course</option>
-                    <option value="video_platform">Video platform</option>
-                    <option value="institutional">Institutional</option>
-                    <option value="external">External</option>
-                  </select>
-                </Field>
-                <Field label="Base URL">
-                  <Input name="baseUrl" type="url" placeholder="https://nptel.ac.in" />
-                </Field>
-                <Field label="Policy JSON">
-                  <Textarea name="policyJson" placeholder='{"manualSubmission":true,"copyright":"link-only"}' />
-                </Field>
-                <input type="hidden" name="status" value="active" />
-                <Button type="submit">Save provider</Button>
-              </form>
-            </CardContent>
-          </Card>
+          {access.canManageProviders ? (
+            <Card surface="elevated">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-base">
+                  <Link2 className="h-4 w-4 text-primary" />
+                  Provider Policy
+                </CardTitle>
+                <CardDescription>Register official and curated resource providers.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <form action={saveProvider} className="grid gap-4">
+                  <Field label="Provider key">
+                    <Input name="key" placeholder="nptel" required />
+                  </Field>
+                  <Field label="Name">
+                    <Input name="name" placeholder="NPTEL" required />
+                  </Field>
+                  <Field label="Type">
+                    <select name="providerType" className="h-9 rounded-md border border-input bg-background px-3 text-sm">
+                      <option value="official_course">Official course</option>
+                      <option value="video_platform">Video platform</option>
+                      <option value="institutional">Institutional</option>
+                      <option value="external">External</option>
+                    </select>
+                  </Field>
+                  <Field label="Base URL">
+                    <Input name="baseUrl" type="url" placeholder="https://nptel.ac.in" />
+                  </Field>
+                  <Field label="Policy JSON">
+                    <Textarea name="policyJson" placeholder='{"manualSubmission":true,"copyright":"link-only"}' />
+                  </Field>
+                  <input type="hidden" name="status" value="active" />
+                  <Button type="submit">Save provider</Button>
+                </form>
+              </CardContent>
+            </Card>
+          ) : (
+            <Card surface="elevated">
+              <CardHeader>
+                <CardTitle>Scoped Review Mode</CardTitle>
+                <CardDescription>{access.summary}</CardDescription>
+              </CardHeader>
+              <CardContent className="text-sm text-muted-foreground">
+                Provider policy changes remain admin-only; resource decisions below are limited to your active academic scope.
+              </CardContent>
+            </Card>
+          )}
 
           <Card surface="panel">
             <CardHeader>
