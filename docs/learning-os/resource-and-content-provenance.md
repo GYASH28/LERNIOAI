@@ -131,6 +131,7 @@ Link-health report:
 - Lesson/resource coverage remains zero until lessons, approved PDFs and published `LessonResource` mappings exist in reviewed data.
 - Authority-scoped view: `/admin/learning/coverage`.
 - Authority-scoped review queues: `/admin/learning/unit-candidates`, `/admin/learning/course-catalog`, `/admin/resources/youtube-candidates` and `/admin/resources/queue`.
+- `/admin/resources/queue` now includes governed lesson-resource mapping controls. A reviewer can save a draft mapping or approve a `LessonResource` only when the resource and lesson share the same authorized subject; approval requires reviewer evidence and an approved/verified/clear resource.
 
 ## Candidate Import Requirements
 

@@ -9,11 +9,14 @@ import {
   requireLearningOpsResourceReviewAccess,
 } from '@/lib/learning/learning-ops-authority'
 import {
+  listLessonResourceMappingOptions,
   listResourceProviders,
   listResourceReviewQueue,
   reviewResource,
+  upsertLessonResourceMapping,
   upsertResourceProvider,
 } from '@/lib/resources/resource-governance'
+import type { LessonResourceRole } from '@/lib/resources/lesson-resource-policy'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -61,12 +64,37 @@ async function review(formData: FormData) {
   revalidatePath('/admin/resources/queue')
 }
 
+async function mapLessonResource(formData: FormData) {
+  'use server'
+  const resourceId = String(formData.get('resourceId') || '')
+  const access = await requireLearningOpsResourceReviewAccess(resourceId)
+  await upsertLessonResourceMapping(
+    {
+      resourceId,
+      lessonId: String(formData.get('lessonId') || ''),
+      role: String(formData.get('role') || 'reference') as LessonResourceRole,
+      decision: String(formData.get('decision') || 'draft') as 'draft' | 'approve',
+      sortOrder: Number(formData.get('sortOrder') || 0),
+      isRequired: formData.get('isRequired') === 'on',
+      startSeconds: numericOrNull(formData.get('startSeconds')),
+      endSeconds: numericOrNull(formData.get('endSeconds')),
+      coveragePercentage: numericOrNull(formData.get('coveragePercentage')),
+      sourceEvidence: clean(formData.get('sourceEvidence')),
+    },
+    access.authority.user.id,
+    { allowedSubjectIds: access.subjectIds },
+  )
+  revalidatePath('/admin/resources/queue')
+}
+
 export default async function AdminResourceQueuePage() {
   const access = await requireLearningOpsPreviewAccess()
-  const [{ resources }, providers] = await Promise.all([
+  const [{ resources }, providers, lessonOptions] = await Promise.all([
     listResourceReviewQueue({ pageSize: 50, subjectIds: access.subjectIds }),
     listResourceProviders(),
+    listLessonResourceMappingOptions({ subjectIds: access.subjectIds }),
   ])
+  const lessonOptionsBySubject = groupLessonOptionsBySubject(lessonOptions)
 
   return (
     <main className="min-h-screen bg-background">
@@ -169,42 +197,82 @@ export default async function AdminResourceQueuePage() {
                   <TableHead>Subject</TableHead>
                   <TableHead>Health</TableHead>
                   <TableHead>Mappings</TableHead>
+                  <TableHead>Lesson mapping</TableHead>
                   <TableHead>Decision</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {resources.map((resource) => (
-                  <TableRow key={resource.id}>
-                    <TableCell className="max-w-md whitespace-normal">
-                      <div className="font-medium">{resource.title}</div>
-                      <div className="text-xs text-muted-foreground">{resource.canonicalUrl ?? resource.url ?? resource.provider ?? 'Manual resource'}</div>
-                    </TableCell>
-                    <TableCell className="whitespace-normal">
-                      {resource.subject.code}
-                      <div className="text-xs text-muted-foreground">{resource.subject.name}</div>
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant="secondary">{resource.linkHealth}</Badge>
-                    </TableCell>
-                    <TableCell>{resource._count.topicMappings}</TableCell>
-                    <TableCell>
-                      <form action={review} className="flex flex-wrap gap-2">
-                        <input type="hidden" name="resourceId" value={resource.id} />
-                        <input type="hidden" name="note" value="Reviewed from admin resource queue." />
-                        <Button size="sm" name="decision" value="approved" type="submit">Approve</Button>
-                        <Button size="sm" variant="outline" name="decision" value="changes_requested" type="submit">
-                          Changes
-                        </Button>
-                        <Button size="sm" variant="outline" name="decision" value="held" type="submit">
-                          Hold
-                        </Button>
-                      </form>
-                    </TableCell>
-                  </TableRow>
-                ))}
+                {resources.map((resource) => {
+                  const scopedLessons = lessonOptionsBySubject.get(resource.subject.id) ?? []
+                  return (
+                    <TableRow key={resource.id}>
+                      <TableCell className="max-w-md whitespace-normal">
+                        <div className="font-medium">{resource.title}</div>
+                        <div className="text-xs text-muted-foreground">{resource.canonicalUrl ?? resource.url ?? resource.provider ?? 'Manual resource'}</div>
+                      </TableCell>
+                      <TableCell className="whitespace-normal">
+                        {resource.subject.code}
+                        <div className="text-xs text-muted-foreground">{resource.subject.name}</div>
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant="secondary">{resource.linkHealth}</Badge>
+                      </TableCell>
+                      <TableCell>
+                        <div>{resource._count.topicMappings} topic</div>
+                        <div className="text-xs text-muted-foreground">{resource._count.lessonResources} lesson</div>
+                      </TableCell>
+                      <TableCell className="min-w-[280px] whitespace-normal">
+                        {scopedLessons.length ? (
+                          <form action={mapLessonResource} className="grid gap-2">
+                            <input type="hidden" name="resourceId" value={resource.id} />
+                            <input type="hidden" name="sortOrder" value="0" />
+                            <select name="lessonId" className="h-9 rounded-md border border-input bg-background px-3 text-sm" required>
+                              {scopedLessons.map((lesson) => (
+                                <option key={lesson.id} value={lesson.id}>{lessonOptionLabel(lesson)}</option>
+                              ))}
+                            </select>
+                            <select name="role" className="h-9 rounded-md border border-input bg-background px-3 text-sm" defaultValue={defaultLessonResourceRole(resource.type)}>
+                              <option value="primary_video">Primary video</option>
+                              <option value="alternate_video">Alternate video</option>
+                              <option value="lesson_notes">Lesson notes</option>
+                              <option value="transcript">Transcript</option>
+                              <option value="infographic">Infographic</option>
+                              <option value="worksheet">Worksheet</option>
+                              <option value="formula_sheet">Formula sheet</option>
+                              <option value="lab_demo">Lab demo</option>
+                              <option value="reference">Reference</option>
+                            </select>
+                            <Input name="sourceEvidence" placeholder="Reviewer evidence or source page" />
+                            <div className="flex flex-wrap gap-2">
+                              <Button size="sm" variant="outline" name="decision" value="draft" type="submit">Save draft map</Button>
+                              <Button size="sm" name="decision" value="approve" type="submit">Approve map</Button>
+                            </div>
+                          </form>
+                        ) : (
+                          <p className="text-xs text-muted-foreground">
+                            No lessons are available in this subject scope yet.
+                          </p>
+                        )}
+                      </TableCell>
+                      <TableCell>
+                        <form action={review} className="flex flex-wrap gap-2">
+                          <input type="hidden" name="resourceId" value={resource.id} />
+                          <input type="hidden" name="note" value="Reviewed from admin resource queue." />
+                          <Button size="sm" name="decision" value="approved" type="submit">Approve</Button>
+                          <Button size="sm" variant="outline" name="decision" value="changes_requested" type="submit">
+                            Changes
+                          </Button>
+                          <Button size="sm" variant="outline" name="decision" value="held" type="submit">
+                            Hold
+                          </Button>
+                        </form>
+                      </TableCell>
+                    </TableRow>
+                  )
+                })}
                 {resources.length === 0 && (
                   <TableRow>
-                    <TableCell colSpan={5} className="py-8 text-center text-muted-foreground">
+                    <TableCell colSpan={6} className="py-8 text-center text-muted-foreground">
                       No resources are waiting for review.
                     </TableCell>
                   </TableRow>
@@ -225,6 +293,46 @@ function Field({ label, children }: { label: string; children: ReactNode }) {
       {children}
     </Label>
   )
+}
+
+type LessonMappingOption = Awaited<ReturnType<typeof listLessonResourceMappingOptions>>[number]
+
+function groupLessonOptionsBySubject(lessons: LessonMappingOption[]) {
+  const grouped = new Map<string, LessonMappingOption[]>()
+  for (const lesson of lessons) {
+    const subjectId = lessonOptionSubjectId(lesson)
+    if (!subjectId) continue
+    const current = grouped.get(subjectId) ?? []
+    current.push(lesson)
+    grouped.set(subjectId, current)
+  }
+  return grouped
+}
+
+function lessonOptionSubjectId(lesson: LessonMappingOption) {
+  return lesson.unit?.subjectId ?? lesson.topic?.unit.subjectId ?? null
+}
+
+function lessonOptionLabel(lesson: LessonMappingOption) {
+  const unit = lesson.unit ?? lesson.topic?.unit ?? null
+  const subject = unit?.subject.code ?? 'Subject'
+  const unitLabel = unit ? `Unit ${unit.number}` : 'No unit'
+  const topic = lesson.topic?.title ? ` / ${lesson.topic.title}` : ''
+  return `${subject} / ${unitLabel}${topic} / ${lesson.title}`
+}
+
+function defaultLessonResourceRole(type: string): LessonResourceRole {
+  if (type === 'video_link') return 'primary_video'
+  if (type === 'lab_manual') return 'lab_demo'
+  if (type === 'pdf' || type === 'docx' || type === 'text') return 'lesson_notes'
+  return 'reference'
+}
+
+function numericOrNull(value: FormDataEntryValue | null) {
+  const text = String(value ?? '').trim()
+  if (!text) return null
+  const number = Number(text)
+  return Number.isFinite(number) ? number : null
 }
 
 function clean(value: FormDataEntryValue | null) {

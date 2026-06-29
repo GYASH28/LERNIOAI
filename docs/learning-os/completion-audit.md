@@ -45,6 +45,7 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - Added lesson-scoped quiz-attempt selection and stored lesson-scope provenance so quiz completion evidence cannot be satisfied by a broad subject quiz.
 - Added curriculum-aware Labs integration, scoping labs to the student's active subjects, checking publication safety, and listing official experiments or structured blocker information.
 - Added trusted Coding Lab runner integration: submissions execute only through a configured remote runner, runner responses are validated before any pass/XP, expected test values stay server-side, and unconfigured runner paths save submissions for manual review without XP.
+- Added an authority-scoped lesson-resource mapping workflow in the resource review queue with governed roles, same-subject validation, reviewer evidence requirements, audited draft/approve actions and primary-video demotion.
 
 ## Verification Completed Locally
 
@@ -68,7 +69,8 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - `npx vitest run src/features/learning/server/lesson-completion-policy.test.ts` passed.
 - `npx vitest run src/app/api/labs/route.test.ts` passed.
 - `npx vitest run src/lib/coding/code-runner.test.ts` passed.
-- `npm run check` passed with 46 test files / 164 tests.
+- `npx vitest run src/lib/resources/resource-governance.test.ts` passed.
+- `npm run check` passed with 46 test files / 166 tests.
 - `npm run build` passed with 91 static pages.
 - `npm run test:e2e` passed with 146 Playwright tests.
 - `npm run test:a11y` passed.

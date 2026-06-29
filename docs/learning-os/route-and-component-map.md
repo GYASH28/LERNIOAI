@@ -33,7 +33,7 @@
 |---|---|
 | `/admin/syllabus/sources` | Registers official/internal syllabus sources. |
 | `/admin/syllabus/imports` | Import queue shell exists. |
-| `/admin/resources/queue` | Authority-scoped resource review queue; provider policy writes remain admin-only and resource decisions require resource review/publish capability. |
+| `/admin/resources/queue` | Authority-scoped resource review queue; provider policy writes remain admin-only and resource decisions require resource review/publish capability. Reviewers can also draft or approve scoped `LessonResource` mappings with governed roles and reviewer evidence. |
 | `/admin/learning/coverage` | Authority-scoped Learning OS coverage dashboard backed by `content/reports/cwit-r23-learning-coverage.json`. |
 | `/admin/learning/course-catalog` | Authority-scoped official course catalog review backed by `content/curriculum/cwit-r23/extraction-reports/official-course-catalog.json`; highlights unplaced official courses without assigning semesters. |
 | `/admin/learning/unit-candidates` | Authority-scoped official unit candidate review queue backed by `content/curriculum/cwit-r23/extraction-reports/official-unit-candidate-review-queue.json`. |

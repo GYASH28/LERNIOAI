@@ -656,6 +656,24 @@ Date: 2026-06-28
 - `npm run check`: passed, 46 files and 164 tests with 129 existing warnings and 0 errors.
 - `npm run build`: passed with 91 static pages generated.
 
+## Phase 27 Progress: Lesson Resource Mapping Review Workflow
+
+### Changed
+
+- Added `UpsertLessonResourceMappingSchema`, scoped lesson mapping option loading and `upsertLessonResourceMapping()` to resource governance.
+- The mapping workflow validates reviewer scope, same-subject lesson/resource ownership, start/end offsets, reviewer evidence for approval, and approved/verified/clear resource status before publishing a lesson mapping.
+- Approved primary-video mappings mark the selected resource primary and clear primary flags from other primary-video mappings for the same lesson.
+- The admin resource review queue now includes lesson mapping controls with a lesson selector, governed `LessonResource` role selector, reviewer evidence field, draft-map action and approve-map action.
+- Mapping writes are audited as `lesson_resource.drafted` or `lesson_resource.approved`.
+- Added schema tests for governed lesson resource mapping payloads.
+
+### Additional Verification
+
+- `npx vitest run src/lib/resources/resource-governance.test.ts`: passed (6 tests).
+- `npm run typecheck`: passed.
+- `npm run check`: passed, 46 files and 166 tests with 129 existing warnings and 0 errors.
+- `npm run build`: passed with 91 static pages generated.
+
 ## Remaining Manual Verification
 
 - Database dry-run/write needs a reachable PostgreSQL connection.
@@ -668,7 +686,7 @@ Date: 2026-06-28
 - Poppler `pdftoppm` is not installed, but the Winter 2025 timetable was rendered with `pypdfium2` to `tmp/pdfs/rendered/Winter-Examination-2025-page-1.png` and visually inspected as legible/nonblank.
 - Practical experiments still need manual review and import before they can populate the scoped Labs UI.
 - Coding now supports optional curriculum links, scoped API filtering and trusted runner integration; reviewed challenge mappings/imports and deployed runner service credentials are still pending.
-- Materials now filter by scoped subject/unit/topic/type/language and optional lesson-level `LessonResource` mappings, but production coverage still needs published mappings.
+- Materials now filter by scoped subject/unit/topic/type/language and optional lesson-level `LessonResource` mappings; admins/reviewers can now draft or approve lesson-resource mappings from the resource queue, but production coverage still needs reviewed content imports and published mappings.
 - XP ledger totals remain user-global where historical XP events do not contain reliable curriculum subject ownership.
 - Completion criteria now consume lesson-scoped practice attempts and lesson-scoped quiz-pass evidence; production usefulness still depends on reviewed lesson question coverage.
 - Lesson notes now have scoped reviewer/admin previews and a local validated PDF render worker, but no AI generation worker, object-storage writer or approved note documents yet.
