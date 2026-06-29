@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-29T17:09:48.484Z",
+  "generatedAt": "2026-06-29T19:01:46.975Z",
   "schemeCode": "R23",
-  "sourceNote": "Coverage is calculated from local curriculum manifests and draft YouTube metadata. Database-backed published lesson/resource counts remain zero until manifests and candidates are imported, reviewed, and published.",
+  "sourceNote": "Coverage is calculated from local curriculum manifests and draft YouTube metadata. Run coverage:learning with --with-db to attach database-backed published lesson/resource counts when PostgreSQL is reachable.",
   "totals": {
     "programmes": 2,
     "semesters": 12,

@@ -12,6 +12,11 @@ import {
   ShieldCheck,
 } from 'lucide-react'
 import type { CoverageTotals, CurriculumCoverageReport, ProgrammeCoverage, SemesterCoverage } from '@/lib/curriculum/coverage-report'
+import type {
+  DatabaseCoverageTotals,
+  DatabaseLearningCoverageSnapshot,
+  DatabaseProgrammeCoverage,
+} from '@/lib/curriculum/database-coverage-report'
 import {
   matchesLearningOpsReportScope,
   requireLearningOpsPreviewAccess,
@@ -106,6 +111,8 @@ function CoverageReportView({ report }: { report: CurriculumCoverageReport }) {
         />
       </section>
 
+      <DatabaseCoverageStatus report={report} />
+
       <section className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
         <Card surface="panel">
           <CardHeader>
@@ -194,6 +201,59 @@ function CoverageReportView({ report }: { report: CurriculumCoverageReport }) {
         </div>
       </section>
     </>
+  )
+}
+
+function DatabaseCoverageStatus({ report }: { report: CurriculumCoverageReport }) {
+  if (report.databaseCoverage) {
+    const snapshot = report.databaseCoverage
+    return (
+      <Card surface="panel">
+        <CardHeader>
+          <CardTitle>Published Database Coverage</CardTitle>
+          <CardDescription>
+            Generated {new Date(snapshot.generatedAt).toLocaleString()} from student-visible database rows.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="grid gap-3 text-sm md:grid-cols-2 xl:grid-cols-4">
+          <ReadinessRow label="Published lessons" value={String(snapshot.totals.lessons)} />
+          <ReadinessRow label="Primary videos" value={`${snapshot.totals.lessonsWithPrimaryVideo}/${snapshot.totals.lessons}`} />
+          <ReadinessRow label="HTML notes" value={`${snapshot.totals.lessonsWithApprovedHtmlNotes}/${snapshot.totals.lessons}`} />
+          <ReadinessRow label="PDF notes" value={`${snapshot.totals.lessonsWithApprovedPdf}/${snapshot.totals.lessons}`} />
+          <ReadinessRow label="Practice coverage" value={`${snapshot.totals.lessonsWithPractice}/${snapshot.totals.lessons}`} />
+          <ReadinessRow label="Approved resources" value={String(snapshot.totals.approvedLessonResources)} />
+          <ReadinessRow label="Broken resources" value={String(snapshot.totals.brokenResources)} />
+          <ReadinessRow label="Pending DB review" value={String(snapshot.totals.pendingReviewItems)} />
+        </CardContent>
+      </Card>
+    )
+  }
+
+  if (report.databaseCoverageUnavailable) {
+    return (
+      <Card surface="panel">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <AlertTriangle className="h-5 w-5 text-amber-600" />
+            Database Coverage Unavailable
+          </CardTitle>
+          <CardDescription>
+            Checked {new Date(report.databaseCoverageUnavailable.checkedAt).toLocaleString()}: {report.databaseCoverageUnavailable.message}
+          </CardDescription>
+        </CardHeader>
+      </Card>
+    )
+  }
+
+  return (
+    <Card surface="panel">
+      <CardHeader>
+        <CardTitle>Published Database Coverage</CardTitle>
+        <CardDescription>
+          This static report does not include a live database snapshot. Generate coverage with --with-db when PostgreSQL is reachable.
+        </CardDescription>
+      </CardHeader>
+    </Card>
   )
 }
 
@@ -293,6 +353,9 @@ function filterCoverageReportForScope(
   return {
     ...report,
     totals: totalsForProgrammes(programmes),
+    databaseCoverage: report.databaseCoverage
+      ? filterDatabaseCoverageForScope(report.databaseCoverage, scope)
+      : undefined,
     programmes,
   }
 }
@@ -363,6 +426,82 @@ function addSemester(totals: CoverageTotals, semester: SemesterCoverage): Covera
     linkHealthChecked: totals.linkHealthChecked + semester.linkHealthChecked,
     linkHealthHealthy: totals.linkHealthHealthy + semester.linkHealthHealthy,
     linkHealthUnknown: totals.linkHealthUnknown + semester.linkHealthUnknown,
+  }
+}
+
+function filterDatabaseCoverageForScope(
+  snapshot: DatabaseLearningCoverageSnapshot,
+  scope: LearningOpsReportScope,
+): DatabaseLearningCoverageSnapshot {
+  if (scope.all) return snapshot
+
+  const programmes = snapshot.programmes
+    .map((programme) => ({
+      ...programme,
+      semesters: programme.semesters.filter((semester) =>
+        matchesLearningOpsReportScope(scope, {
+          departmentCode: semester.department,
+          programmeCode: semester.programme,
+          subjectCodes: semester.subjectCodes,
+        }),
+      ),
+    }))
+    .filter((programme) => programme.semesters.length > 0)
+
+  return {
+    ...snapshot,
+    totals: totalsForDatabaseProgrammes(programmes),
+    programmes,
+  }
+}
+
+function totalsForDatabaseProgrammes(programmes: readonly DatabaseProgrammeCoverage[]): DatabaseCoverageTotals {
+  return programmes.flatMap((programme) => programme.semesters).reduce(addDatabaseSemester, {
+    programmes: programmes.length,
+    semesters: 0,
+    publishedSchemes: programmes.filter((programme) => programme.schemeStatus === 'published').length,
+    subjects: 0,
+    units: 0,
+    topics: 0,
+    lessons: 0,
+    lessonsWithPrimaryVideo: 0,
+    lessonsWithApprovedHtmlNotes: 0,
+    lessonsWithApprovedPdf: 0,
+    lessonsWithPractice: 0,
+    approvedLessonResources: 0,
+    approvedGeneratedDocuments: 0,
+    publishedResources: 0,
+    brokenResources: 0,
+    publishedQuestions: 0,
+    publishedPracticalExperiments: 0,
+    publishedCodingChallenges: 0,
+    pendingReviewItems: 0,
+  })
+}
+
+function addDatabaseSemester(
+  totals: DatabaseCoverageTotals,
+  semester: DatabaseProgrammeCoverage['semesters'][number],
+): DatabaseCoverageTotals {
+  return {
+    ...totals,
+    semesters: totals.semesters + 1,
+    subjects: totals.subjects + semester.subjects,
+    units: totals.units + semester.units,
+    topics: totals.topics + semester.topics,
+    lessons: totals.lessons + semester.lessons,
+    lessonsWithPrimaryVideo: totals.lessonsWithPrimaryVideo + semester.lessonsWithPrimaryVideo,
+    lessonsWithApprovedHtmlNotes: totals.lessonsWithApprovedHtmlNotes + semester.lessonsWithApprovedHtmlNotes,
+    lessonsWithApprovedPdf: totals.lessonsWithApprovedPdf + semester.lessonsWithApprovedPdf,
+    lessonsWithPractice: totals.lessonsWithPractice + semester.lessonsWithPractice,
+    approvedLessonResources: totals.approvedLessonResources + semester.approvedLessonResources,
+    approvedGeneratedDocuments: totals.approvedGeneratedDocuments + semester.approvedGeneratedDocuments,
+    publishedResources: totals.publishedResources + semester.publishedResources,
+    brokenResources: totals.brokenResources + semester.brokenResources,
+    publishedQuestions: totals.publishedQuestions + semester.publishedQuestions,
+    publishedPracticalExperiments: totals.publishedPracticalExperiments + semester.publishedPracticalExperiments,
+    publishedCodingChallenges: totals.publishedCodingChallenges + semester.publishedCodingChallenges,
+    pendingReviewItems: totals.pendingReviewItems + semester.pendingReviewItems,
   }
 }
 

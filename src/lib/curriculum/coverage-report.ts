@@ -1,9 +1,20 @@
+import type { DatabaseLearningCoverageSnapshot } from './database-coverage-report'
+
 export interface CurriculumCoverageReport {
   generatedAt: string
   schemeCode: string
   sourceNote: string
   totals: CoverageTotals
   programmes: ProgrammeCoverage[]
+  databaseCoverage?: DatabaseLearningCoverageSnapshot
+  databaseCoverageUnavailable?: DatabaseCoverageUnavailable
+}
+
+export interface DatabaseCoverageUnavailable {
+  status: 'unavailable'
+  checkedAt: string
+  errorName: string
+  message: string
 }
 
 export interface CoverageTotals {
@@ -187,6 +198,8 @@ export function buildCwitR23CoverageReport(input: {
   officialTimetableEvidence?: unknown
   officialCourseCatalog?: unknown
   officialUnitReviewQueue?: unknown
+  databaseCoverage?: DatabaseLearningCoverageSnapshot
+  databaseCoverageUnavailable?: DatabaseCoverageUnavailable
   generatedAt: string
 }): CurriculumCoverageReport {
   const manifests = input.manifests.filter(isRecord) as RawManifest[]
@@ -218,7 +231,9 @@ export function buildCwitR23CoverageReport(input: {
   return {
     generatedAt: input.generatedAt,
     schemeCode: 'R23',
-    sourceNote: 'Coverage is calculated from local curriculum manifests and draft YouTube metadata. Database-backed published lesson/resource counts remain zero until manifests and candidates are imported, reviewed, and published.',
+    sourceNote: input.databaseCoverage
+      ? 'Coverage is calculated from local curriculum manifests, draft YouTube metadata, and an attached database-backed publication snapshot.'
+      : 'Coverage is calculated from local curriculum manifests and draft YouTube metadata. Run coverage:learning with --with-db to attach database-backed published lesson/resource counts when PostgreSQL is reachable.',
     totals: {
       ...programmes.flatMap((programme) => programme.semesters).reduce(addSemesterToTotals, emptyTotals()),
       ...youtubeReviewQueueTotals,
@@ -227,6 +242,8 @@ export function buildCwitR23CoverageReport(input: {
       ...officialUnitReviewTotals,
     },
     programmes,
+    ...(input.databaseCoverage ? { databaseCoverage: input.databaseCoverage } : {}),
+    ...(input.databaseCoverageUnavailable ? { databaseCoverageUnavailable: input.databaseCoverageUnavailable } : {}),
   }
 }
 

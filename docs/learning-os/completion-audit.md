@@ -48,6 +48,7 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - Added an authority-scoped lesson-resource mapping workflow in the resource review queue with governed roles, same-subject validation, reviewer evidence requirements, audited draft/approve actions and primary-video demotion.
 - Added a lesson-note generation worker boundary and audited queue API: scoped reviewers/admins can queue jobs for published/verified lessons, workers claim/lease/retry jobs, generated documents are validated against lesson identity and approved source IDs, HTML artifacts are written through configured storage, and AI output stops at `ready_for_review` until reviewer publication.
 - Added controlled generated-note delivery: lesson studio now links to `/api/learning/notes/[documentId]`, which checks the student's learning scope and generated-document publication policy before redirecting to signed HTML/PDF artifacts; raw storage object keys are not rendered into lesson pages.
+- Added database-backed published coverage reporting: `coverage:learning` can attach a live `--with-db` snapshot of student-visible subjects, units, topics, lessons, primary videos, approved HTML/PDF notes, practice coverage, resources, questions, labs, coding challenges and pending review items; `--require-db` turns that into a hard release gate, and the admin coverage page scope-filters the attached database snapshot.
 
 ## Verification Completed Locally
 
@@ -74,8 +75,10 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - `npx vitest run src/lib/resources/resource-governance.test.ts` passed.
 - `npx vitest run src/lib/lesson-notes/generation-worker.test.ts src/app/api/admin/learning/notes/jobs/route.test.ts` passed.
 - `npx vitest run src/lib/storage/signed-object-url.test.ts src/app/api/learning/notes/[documentId]/route.test.ts` passed.
-- `npm run check` passed with 50 test files / 182 tests.
+- `npx vitest run src/lib/curriculum/coverage-report.test.ts src/lib/curriculum/database-coverage-report.test.ts` passed.
+- `npm run check` passed with 51 test files / 183 tests.
 - `npm run build` passed with 92 static pages.
+- `npx tsx scripts/build-learning-coverage-report.ts --with-db` exercised the database-backed coverage path and reported database coverage unavailable because local PostgreSQL is unreachable.
 - `npm run test:e2e` passed with 146 Playwright tests.
 - `npm run test:a11y` passed.
 - `npm run test:visual` passed.
@@ -96,6 +99,7 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - Published `LessonResource` video mappings and approved note artifacts.
 - Configured lesson-note generator and artifact-storage services plus reviewer approval/publication of generated notes.
 - Imported and reviewed curriculum-linked coding challenge mappings plus configured production code-runner service credentials.
+- `npx tsx scripts/build-learning-coverage-report.ts --require-db` against a reachable PostgreSQL database.
 - Authenticated learning E2E and accessibility tests.
 - Production deployment with post-deploy smoke checks.
 - Production Vercel promotion after `/api/ready` returns 200 and demo mode is disabled for production.
@@ -103,6 +107,6 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 ## External Blockers
 
 - Docker is not installed in this Windows environment.
-- PostgreSQL at `localhost:5432` is unreachable.
+- PostgreSQL at `localhost:5432` is unreachable, so live database-backed coverage cannot be produced locally.
 - GitHub CLI `gh` is not installed.
 - Official CIOT Semester 3-6 semester-placement evidence has not been found in the available sources.

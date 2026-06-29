@@ -709,6 +709,31 @@ Date: 2026-06-28
 - `npm run check`: passed, 50 files and 182 tests with 129 existing warnings and 0 errors.
 - `npm run build`: passed with 92 static pages generated.
 
+## Phase 30 Progress: Database-Backed Published Coverage Snapshot
+
+### Changed
+
+- Added `src/lib/curriculum/database-coverage-report.ts` to calculate live coverage from student-visible database rows instead of manifest/candidate files only.
+- The database snapshot counts published schemes, subjects, units, topics, lessons, approved primary videos, approved HTML/PDF generated notes, lesson-scoped practice coverage, approved lesson resources, generated documents, published resources, broken resources, questions, practical experiments, coding challenges and pending review items.
+- Extended `scripts/build-learning-coverage-report.ts` with `--with-db` and `--require-db`.
+- `--with-db` attaches a live database snapshot when PostgreSQL is reachable and records an unavailable marker when it is not.
+- `--require-db` is a hard release gate for production checks that must fail if database coverage cannot be calculated.
+- Updated `/admin/learning/coverage` to render the attached published database coverage summary and scope-filter it for teacher, coordinator and reviewer authority.
+- Updated the static coverage report source note so operators know when to run the DB-backed mode.
+
+### Evidence Boundary
+
+- The live database coverage implementation is present and unit-tested.
+- The local environment still cannot produce a real live snapshot because PostgreSQL at `localhost:5432` is unreachable.
+- The committed report was regenerated in the default offline mode; `--with-db` was exercised locally and correctly reported database coverage unavailable.
+
+### Additional Verification
+
+- `npx vitest run src/lib/curriculum/coverage-report.test.ts src/lib/curriculum/database-coverage-report.test.ts`: passed, 2 files and 3 tests.
+- `npm run typecheck`: passed.
+- `npm run coverage:learning`: passed and regenerated `content/reports/cwit-r23-learning-coverage.json`.
+- `npx tsx scripts/build-learning-coverage-report.ts --with-db`: passed and reported database coverage unavailable because local PostgreSQL is unreachable.
+
 ## Remaining Manual Verification
 
 - Database dry-run/write needs a reachable PostgreSQL connection.
@@ -725,7 +750,7 @@ Date: 2026-06-28
 - XP ledger totals remain user-global where historical XP events do not contain reliable curriculum subject ownership.
 - Completion criteria now consume lesson-scoped practice attempts and lesson-scoped quiz-pass evidence; production usefulness still depends on reviewed lesson question coverage.
 - Lesson notes now have scoped reviewer/admin previews, a local validated PDF render worker, an audited generation queue API and a provider/storage-backed worker boundary, but production provider/storage credentials, reviewer approval/publication and approved note documents are still pending.
-- The learning coverage report is manifest/candidate-file backed; database-backed published lesson/resource coverage still needs a reachable PostgreSQL connection.
+- Database-backed published lesson/resource coverage is implemented, but live production numbers still need `npx tsx scripts/build-learning-coverage-report.ts --require-db` against a reachable PostgreSQL database.
 
 ## Latest Local Validation on 2026-06-29
 
@@ -740,7 +765,7 @@ Date: 2026-06-28
 - `npm run notes:validate`: passed, 0 document(s) present/valid.
 - `npm run notes:render-pdf`: passed, 0 document(s) rendered.
 - `npx vitest run src/lib/lesson-notes/generation-worker.test.ts src/app/api/admin/learning/notes/jobs/route.test.ts`: passed, 2 files and 9 tests.
-- `npm run check`: passed, including migration encoding, lint, typecheck and 50 Vitest files / 182 tests. Lint still reports 129 existing warnings and 0 errors.
+- `npm run check`: passed, including migration encoding, lint, typecheck and 51 Vitest files / 183 tests. Lint still reports 129 existing warnings and 0 errors.
 - `npm run lint`: passed with 0 errors and 129 existing warnings.
 - `npm run typecheck`: passed.
 - `npx prisma validate`: passed.
@@ -750,7 +775,9 @@ Date: 2026-06-28
 - `npx vitest run src/lib/coding/coding-scope.test.ts src/features/learning/server/get-student-learning-scope.test.ts`: passed, 2 files and 8 tests.
 - `npx vitest run src/lib/ai/retrieval.test.ts src/lib/ai/groq-provider.test.ts`: passed, 2 files and 7 tests.
 - `npx vitest run src/app/api/labs/route.test.ts`: passed, 1 file and 3 tests.
-- `npm run coverage:learning`: passed and wrote `content/reports/cwit-r23-learning-coverage.json` with 8/12 manifests present, 59 subject structures, 51 outcome-backed subject structures, 0 subject structures with promoted units, 27 unit candidate review rows needing manual review, 252 YouTube review-queue subject mappings, 65 unplaced official-subject blockers, 18 missing manifest-subject blockers, 34 unique timetable evidence codes, 81 official catalog course entries and 194 pending verification items.
+- `npm run coverage:learning`: passed and wrote `content/reports/cwit-r23-learning-coverage.json` with 12/12 manifests present, 59 subject structures, 51 outcome-backed subject structures, 0 subject structures with promoted units, 27 unit candidate review rows needing manual review, 252 YouTube review-queue subject mappings, 65 unplaced official-subject blockers, 18 missing manifest-subject blockers, 34 unique timetable evidence codes, 81 official catalog course entries and 194 pending verification items.
+- `npx vitest run src/lib/curriculum/coverage-report.test.ts src/lib/curriculum/database-coverage-report.test.ts`: passed, 2 files and 3 tests.
+- `npx tsx scripts/build-learning-coverage-report.ts --with-db`: passed and reported database coverage unavailable because local PostgreSQL is unreachable.
 - `npm run content:import:youtube-guides -- --sem12 content-import/CWIT_Semester_1_2_YouTube_Lecture_Links.pdf --sem36 content-import/CWIT_Semester_3_to_6_YouTube_Lecture_Links.pdf --dry-run`: passed, extracting 103 deduplicated source URL rows, 102 unique URLs, 100 draft candidates and 3 skipped non-YouTube URLs from the supplied PDFs.
 - `npm run resources:youtube:candidates`: passed, 100 candidate(s) written.
 - `npx tsx scripts/verify-youtube-candidates.ts --write`: passed, 100 metadata check(s), 6 found and 94 unavailable/unverified by public oEmbed.
@@ -768,5 +795,5 @@ Date: 2026-06-28
 1. Add integration tests for `getStudentLearningScope()` using database fixtures when the local DB is reachable.
 2. Manually review and repair official unit/topic/practical structures from `official-unit-candidate-review-queue.json`; no unit set is currently ready for promotion.
 3. Find or obtain official CIOT Semester 3-6 semester-placement evidence beyond review-only timetable code appearances.
-4. Run database-backed manifest import dry-run/write once PostgreSQL is reachable.
+4. Run database-backed manifest import dry-run/write and `coverage:learning --require-db` once PostgreSQL is reachable.
 5. Add lesson-level YouTube mapping review workflow.

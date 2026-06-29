@@ -70,6 +70,7 @@ Advanced-semester candidates:
 - The manifest schema lives at `content/curriculum/cwit-r23/schemas/curriculum.schema.json`.
 - `npm run curriculum:validate` validates required evidence, duplicate codes, governed statuses and semester bounds.
 - `npm run coverage:learning` writes the machine-readable coverage report at `content/reports/cwit-r23-learning-coverage.json`.
+- `npm run coverage:learning` remains offline/manifests-first by default; `npx tsx scripts/build-learning-coverage-report.ts --with-db` attaches live published database coverage when PostgreSQL is reachable, and `--require-db` makes that snapshot mandatory for release checks.
 - Review-only official structure extraction report:
   - `content/curriculum/cwit-r23/extraction-reports/official-structure-candidates.json`
   - `npm run curriculum:extract-units`
