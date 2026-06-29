@@ -53,7 +53,7 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - `npm run test:visual` passed.
 - `npx vitest run src/lib/auth-policy.test.ts` passed after the Vercel preview demo-mode policy change.
 - `LERNIO_DEMO_MODE=true VERCEL_ENV=preview npm run vercel-build` passed locally.
-- Vercel preview `https://lernio-krnvukdhs-gyash28s-projects.vercel.app` deployed with status Ready.
+- Vercel preview branch alias `https://lernio-ai-gyash28-gyash28s-projects.vercel.app` deployed with status Ready.
 - Vercel preview `/` returned 200.
 - Vercel preview `/api/ready` returned 503 because database is unavailable and AI/email providers are unconfigured.
 

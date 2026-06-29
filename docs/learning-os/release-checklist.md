@@ -63,8 +63,7 @@ Blocked. Local PostgreSQL is unavailable, `/api/ready` is unhealthy, `npx prisma
 
 Vercel preview deployment is live, but not production-promotable:
 
-- Preview: `https://lernio-krnvukdhs-gyash28s-projects.vercel.app`
-- Deployment id: `dpl_JCHZunXvUXAc8A6YmDoHnJ22aH1c`
+- Preview branch alias: `https://lernio-ai-gyash28-gyash28s-projects.vercel.app`
 - Status: Ready
 - `/` smoke check: 200
 - `/api/ready`: 503 with `database: unavailable`, `auth: configured`, `ai: unconfigured`, and `email: unconfigured`
