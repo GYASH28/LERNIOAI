@@ -46,6 +46,7 @@
     "resources:youtube:candidates": "tsx scripts/import-youtube-guides.ts --write",
     "resources:youtube:verify": "tsx scripts/verify-youtube-candidates.ts",
     "resources:youtube:review-queue": "tsx scripts/build-youtube-candidate-review-queue.ts",
+    "resources:youtube:promote": "tsx scripts/promote-youtube-candidate-mappings.ts",
     "resources:link-health": "tsx scripts/check-resource-link-health.ts",
     "notes:validate": "tsx scripts/validate-lesson-note-documents.ts",
     "notes:render-pdf": "tsx scripts/render-lesson-note-pdfs.ts",

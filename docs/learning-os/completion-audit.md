@@ -49,6 +49,7 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - Added a lesson-note generation worker boundary and audited queue API: scoped reviewers/admins can queue jobs for published/verified lessons, workers claim/lease/retry jobs, generated documents are validated against lesson identity and approved source IDs, HTML artifacts are written through configured storage, and AI output stops at `ready_for_review` until reviewer publication.
 - Added controlled generated-note delivery: lesson studio now links to `/api/learning/notes/[documentId]`, which checks the student's learning scope and generated-document publication policy before redirecting to signed HTML/PDF artifacts; raw storage object keys are not rendered into lesson pages.
 - Added database-backed published coverage reporting: `coverage:learning` can attach a live `--with-db` snapshot of student-visible subjects, units, topics, lessons, primary videos, approved HTML/PDF notes, practice coverage, resources, questions, labs, coding challenges and pending review items; `--require-db` turns that into a hard release gate, and the admin coverage page scope-filters the attached database snapshot.
+- Added guarded YouTube candidate promotion: reviewed candidate decisions can be dry-run or written through `scripts/promote-youtube-candidate-mappings.ts` or `POST /api/admin/resources/youtube-candidates/promote`, creating governed `Resource` and `LessonResource` rows only when the candidate is ready for lesson mapping, the lesson belongs to the reviewed subject, and approvals have verified direct-video metadata plus reviewer evidence.
 
 ## Verification Completed Locally
 
@@ -76,8 +77,9 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - `npx vitest run src/lib/lesson-notes/generation-worker.test.ts src/app/api/admin/learning/notes/jobs/route.test.ts` passed.
 - `npx vitest run src/lib/storage/signed-object-url.test.ts src/app/api/learning/notes/[documentId]/route.test.ts` passed.
 - `npx vitest run src/lib/curriculum/coverage-report.test.ts src/lib/curriculum/database-coverage-report.test.ts` passed.
-- `npm run check` passed with 51 test files / 183 tests.
-- `npm run build` passed with 92 static pages.
+- `npx vitest run src/lib/resources/youtube-candidate-promotion.test.ts src/lib/resources/youtube-candidate-review.test.ts src/lib/resources/resource-governance.test.ts` passed.
+- `npm run check` passed with 52 test files / 187 tests.
+- `npm run build` passed with 93 static pages.
 - `npx tsx scripts/build-learning-coverage-report.ts --with-db` exercised the database-backed coverage path and reported database coverage unavailable because local PostgreSQL is unreachable.
 - `npm run test:e2e` passed with 146 Playwright tests.
 - `npm run test:a11y` passed.
@@ -99,6 +101,7 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - Published `LessonResource` video mappings and approved note artifacts.
 - Configured lesson-note generator and artifact-storage services plus reviewer approval/publication of generated notes.
 - Imported and reviewed curriculum-linked coding challenge mappings plus configured production code-runner service credentials.
+- Reviewed YouTube candidate lesson-mapping decision files, followed by a live dry-run/write against PostgreSQL.
 - `npx tsx scripts/build-learning-coverage-report.ts --require-db` against a reachable PostgreSQL database.
 - Authenticated learning E2E and accessibility tests.
 - Production deployment with post-deploy smoke checks.

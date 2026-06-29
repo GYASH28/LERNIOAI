@@ -31,8 +31,38 @@ npm run resources:link-health
 
 2. Use YouTube Data API only when `YOUTUBE_API_KEY` is configured.
 3. Do not publish playlist-level candidates until individual videos, embeddability, duration, language, captions and lesson fit are reviewed.
-4. Approved lesson mappings must create governed `Resource` and `LessonResource` rows.
-5. Broken primary videos must be replaced or ranked below approved alternates.
+4. Prepare reviewed lesson-mapping decisions only after verified lessons exist. The decision file can be either `{ "decisions": [...] }` or a raw array:
+
+```json
+{
+  "decisions": [
+    {
+      "candidateId": "ytcand_ready",
+      "subjectCode": "R23CP1401",
+      "lessonId": "lesson_database_id",
+      "decision": "draft",
+      "role": "primary_video",
+      "sourceEvidence": "Reviewer playback and CWIT PDF page evidence."
+    }
+  ]
+}
+```
+
+5. Dry-run the promotion against the database:
+
+```bash
+npx tsx scripts/promote-youtube-candidate-mappings.ts --decisions path/to/reviewed-youtube-mappings.json
+```
+
+6. Write only after reviewer approval and with a real reviewer/admin user id:
+
+```bash
+npx tsx scripts/promote-youtube-candidate-mappings.ts --decisions path/to/reviewed-youtube-mappings.json --write --actor-user-id <reviewer_user_id>
+```
+
+7. The admin API mirrors the same guardrails at `POST /api/admin/resources/youtube-candidates/promote`; it dry-runs by default and writes only with `?write=1`.
+8. Approved lesson mappings must create governed `Resource` and `LessonResource` rows.
+9. Broken primary videos must be replaced or ranked below approved alternates.
 
 ## Lesson Notes
 

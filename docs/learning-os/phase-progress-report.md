@@ -734,6 +734,30 @@ Date: 2026-06-28
 - `npm run coverage:learning`: passed and regenerated `content/reports/cwit-r23-learning-coverage.json`.
 - `npx tsx scripts/build-learning-coverage-report.ts --with-db`: passed and reported database coverage unavailable because local PostgreSQL is unreachable.
 
+## Phase 31 Progress: Guarded YouTube Candidate Promotion
+
+### Changed
+
+- Added `src/lib/resources/youtube-candidate-promotion.ts` as the guarded promotion boundary from static YouTube candidate-review decisions into database `Resource` and `LessonResource` rows.
+- Added `PromoteYouTubeCandidateMappingsSchema` for reviewed decision files containing candidate id, subject code, lesson id, role, draft/approve decision, timing, coverage and reviewer evidence.
+- Promotion refuses blocked review-queue subject mappings, refuses cross-subject lesson/resource mappings, refuses out-of-scope reviewer subjects and refuses approved mappings unless the lesson is published/verified.
+- Approval requires a direct YouTube video with public metadata found, embeddability confirmed, no outstanding review blockers and reviewer source evidence; playlist candidates can only be drafted until individual videos are reviewed.
+- Draft writes create or update pending resource/mapping rows without student publication.
+- Approved writes create or update published/verified resources, approved/verified lesson mappings, review-decision rows and audit events, including primary-video demotion for competing primary mappings.
+- Added `scripts/promote-youtube-candidate-mappings.ts` and `npm run resources:youtube:promote` for dry-run-by-default operator promotion.
+- Added `POST /api/admin/resources/youtube-candidates/promote`, which requires scoped learning-ops resource permissions, dry-runs by default and writes only with `?write=1`.
+- Updated the content operations runbook with the reviewed decision-file shape and dry-run/write commands.
+
+### Evidence Boundary
+
+- The promotion workflow is implemented and unit-tested.
+- No YouTube candidate was promoted locally because the current review queue has 0 ready lesson mappings and PostgreSQL is unavailable.
+
+### Additional Verification
+
+- `npx vitest run src/lib/resources/youtube-candidate-promotion.test.ts src/lib/resources/youtube-candidate-review.test.ts src/lib/resources/resource-governance.test.ts`: passed, 3 files and 14 tests.
+- `npm run typecheck`: passed.
+
 ## Remaining Manual Verification
 
 - Database dry-run/write needs a reachable PostgreSQL connection.
@@ -741,7 +765,7 @@ Date: 2026-06-28
 - The official course catalog proves 26 additional CIOT course identities, but those entries remain unplaced until an official semester-placement source is obtained.
 - Units, topics and practical experiments still need official curriculum parsing and review before publication. The unit review queue reports 27 subjects with candidate units, 4 missing course blocks, 28 subjects with no unit candidates and 0 subjects ready for promotion.
 - Eight current subject structures still lack promoted official outcomes because their extracted source blocks are missing or need manual review.
-- YouTube resources are draft candidates only; oEmbed metadata exists for 6 direct videos, 94 playlists still need YouTube Data API or manual review and no lesson mapping has been published. The review queue has 252 subject mappings, 0 ready for lesson mapping, 65 unplaced official-subject blockers, 18 missing manifest-subject blockers and 169 lesson-structure blockers.
+- YouTube resources are draft candidates only; oEmbed metadata exists for 6 direct videos, 94 playlists still need YouTube Data API or manual review and no lesson mapping has been published. The promotion workflow exists, but the current review queue has 252 subject mappings, 0 ready for lesson mapping, 65 unplaced official-subject blockers, 18 missing manifest-subject blockers and 169 lesson-structure blockers.
 - Link-health checks prove current URL reachability only, not lesson fit, playlist membership, captions, duration or embeddability.
 - Poppler `pdftoppm` is not installed, but the Winter 2025 timetable was rendered with `pypdfium2` to `tmp/pdfs/rendered/Winter-Examination-2025-page-1.png` and visually inspected as legible/nonblank.
 - Practical experiments still need manual review and import before they can populate the scoped Labs UI.
@@ -765,7 +789,7 @@ Date: 2026-06-28
 - `npm run notes:validate`: passed, 0 document(s) present/valid.
 - `npm run notes:render-pdf`: passed, 0 document(s) rendered.
 - `npx vitest run src/lib/lesson-notes/generation-worker.test.ts src/app/api/admin/learning/notes/jobs/route.test.ts`: passed, 2 files and 9 tests.
-- `npm run check`: passed, including migration encoding, lint, typecheck and 51 Vitest files / 183 tests. Lint still reports 129 existing warnings and 0 errors.
+- `npm run check`: passed, including migration encoding, lint, typecheck and 52 Vitest files / 187 tests. Lint still reports 129 existing warnings and 0 errors.
 - `npm run lint`: passed with 0 errors and 129 existing warnings.
 - `npm run typecheck`: passed.
 - `npx prisma validate`: passed.
@@ -778,12 +802,13 @@ Date: 2026-06-28
 - `npm run coverage:learning`: passed and wrote `content/reports/cwit-r23-learning-coverage.json` with 12/12 manifests present, 59 subject structures, 51 outcome-backed subject structures, 0 subject structures with promoted units, 27 unit candidate review rows needing manual review, 252 YouTube review-queue subject mappings, 65 unplaced official-subject blockers, 18 missing manifest-subject blockers, 34 unique timetable evidence codes, 81 official catalog course entries and 194 pending verification items.
 - `npx vitest run src/lib/curriculum/coverage-report.test.ts src/lib/curriculum/database-coverage-report.test.ts`: passed, 2 files and 3 tests.
 - `npx tsx scripts/build-learning-coverage-report.ts --with-db`: passed and reported database coverage unavailable because local PostgreSQL is unreachable.
+- `npx vitest run src/lib/resources/youtube-candidate-promotion.test.ts src/lib/resources/youtube-candidate-review.test.ts src/lib/resources/resource-governance.test.ts`: passed, 3 files and 14 tests.
 - `npm run content:import:youtube-guides -- --sem12 content-import/CWIT_Semester_1_2_YouTube_Lecture_Links.pdf --sem36 content-import/CWIT_Semester_3_to_6_YouTube_Lecture_Links.pdf --dry-run`: passed, extracting 103 deduplicated source URL rows, 102 unique URLs, 100 draft candidates and 3 skipped non-YouTube URLs from the supplied PDFs.
 - `npm run resources:youtube:candidates`: passed, 100 candidate(s) written.
 - `npx tsx scripts/verify-youtube-candidates.ts --write`: passed, 100 metadata check(s), 6 found and 94 unavailable/unverified by public oEmbed.
 - `npm run resources:youtube:review-queue`: passed, 100 candidate(s), 252 subject mapping(s), 0 ready for lesson mapping, 65 unplaced official-subject blockers, 18 missing manifest-subject blockers and 169 lesson-structure blockers.
 - `npx tsx scripts/check-resource-link-health.ts --write`: passed and wrote 100 checked rows; 100 healthy, 0 stale/unhealthy/unknown.
-- `npm run build`: passed with 92 static pages generated and `/api/coding`, `/api/admin/learning/notes/jobs` plus LEO tutor routes included.
+- `npm run build`: passed with 93 static pages generated and `/api/coding`, `/api/admin/learning/notes/jobs`, `/api/admin/resources/youtube-candidates/promote` plus LEO tutor routes included.
 - `npm run test:e2e`: passed against `next start` production server, 146 Playwright tests.
 - Smoke checks against `next start`: `/api/health` returned 200 and `/api/ready` returned 503 because PostgreSQL is unavailable.
 - Production server was started with `npm run start` on `http://localhost:3000` for smoke/e2e validation, then stopped.
@@ -796,4 +821,4 @@ Date: 2026-06-28
 2. Manually review and repair official unit/topic/practical structures from `official-unit-candidate-review-queue.json`; no unit set is currently ready for promotion.
 3. Find or obtain official CIOT Semester 3-6 semester-placement evidence beyond review-only timetable code appearances.
 4. Run database-backed manifest import dry-run/write and `coverage:learning --require-db` once PostgreSQL is reachable.
-5. Add lesson-level YouTube mapping review workflow.
+5. Use the guarded YouTube promotion workflow once verified lesson structures and reviewed decision files exist.
