@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import {
   hasResolvedLearningScope,
+  firstLessonReferenceForTopic,
   findLessonReferenceInLearningScope,
   isLessonIdInLearningScope,
   isSubjectIdInLearningScope,
@@ -111,6 +112,12 @@ describe('learning scope predicates', () => {
     expect(isLessonIdInLearningScope(current, 'missing')).toBe(false)
     expect(subjectIdForScopedLesson(current, 'lesson_topic')).toBe('subject_a')
     expect(topicIdForScopedLesson(current, 'lesson_topic')).toBe('topic_a')
+
+    expect(firstLessonReferenceForTopic(current, 'topic_a')).toMatchObject({
+      id: 'lesson_topic',
+      canonicalUrl:
+        '/learn/DCOMP/semester/2/subject/R23CP1201/lesson/2-structure-of-a-c-program--lesson_topic',
+    })
 
     expect(findLessonReferenceInLearningScope(current, 'lesson_topic')).toMatchObject({
       id: 'lesson_topic',

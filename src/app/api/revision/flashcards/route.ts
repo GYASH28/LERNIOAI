@@ -4,6 +4,7 @@ import { awardXp } from '@/lib/xp'
 import { evaluateAchievements } from '@/lib/achievements'
 import { z } from 'zod'
 import {
+  firstLessonReferenceForTopic,
   getStudentLearningScope,
   isSubjectIdInLearningScope,
   scopedTopicWhere,
@@ -106,6 +107,7 @@ export async function GET(req: Request) {
     const cards = schedules.map((s) => {
       const t = s.topic
       const subject = t.unit?.subject
+      const sourceLesson = firstLessonReferenceForTopic(scope, t.id)
       const lessonSnippet = t.lessons?.[0]?.reviseContent
       const todayMidnight = new Date(now)
       todayMidnight.setHours(0, 0, 0, 0)
@@ -128,6 +130,10 @@ export async function GET(req: Request) {
         topicTitle: t.title,
         topicSlug: t.slug,
         topicDifficulty: t.difficulty,
+        lessonId: sourceLesson?.id ?? null,
+        lessonTitle: sourceLesson?.title ?? null,
+        lessonCanonicalUrl: sourceLesson?.canonicalUrl ?? null,
+        lessonDurationMin: sourceLesson?.durationMin ?? null,
         front: t.title,
         back: back || 'No additional notes available for this topic yet.',
         dueAt: s.nextDueDate.toISOString(),

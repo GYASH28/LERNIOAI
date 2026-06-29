@@ -6,6 +6,7 @@ import { awardXp } from '@/lib/xp'
 import { evaluateAchievements } from '@/lib/achievements'
 import { DEMO_REVISION_DUE, isDemoMode } from '@/lib/demo-fixtures'
 import {
+  firstLessonReferenceForTopic,
   getStudentLearningScope,
   scopedTopicWhere,
 } from '@/features/learning/server/get-student-learning-scope'
@@ -26,11 +27,15 @@ export async function GET() {
     const endOfDay = new Date(now)
     endOfDay.setHours(23, 59, 59, 999)
 
-    const all = await db.revisionSchedule.findMany({
+    const schedules = await db.revisionSchedule.findMany({
       where: { userId: user.id, topic: scopedTopicWhere(scope) },
       include: { topic: { include: { unit: { include: { subject: true } } } } },
       orderBy: { nextDueDate: 'asc' },
     })
+    const all = schedules.map((schedule) => ({
+      ...schedule,
+      sourceLesson: firstLessonReferenceForTopic(scope, schedule.topicId),
+    }))
 
     const dueToday = all.filter((r) => r.nextDueDate <= endOfDay)
     const overdue = all.filter(

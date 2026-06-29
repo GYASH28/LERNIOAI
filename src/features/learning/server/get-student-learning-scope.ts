@@ -202,6 +202,22 @@ export function findLessonReferenceInLearningScope(
   return null
 }
 
+export function firstLessonReferenceForTopic(
+  scope: StudentLearningScope | null | undefined,
+  topicId: string | null | undefined,
+): ScopedLessonReference | null {
+  if (!topicId || !hasResolvedLearningScope(scope)) return null
+
+  for (const subject of scope.subjects) {
+    for (const unit of subject.units) {
+      const topic = unit.topics.find((item) => item.id === topicId)
+      const lesson = topic?.lessons[0]
+      if (lesson) return lessonReference(scope, subject, unit, topic, lesson)
+    }
+  }
+  return null
+}
+
 function lessonReference(
   scope: StudentLearningScope & {
     programme: NonNullable<StudentLearningScope['programme']>

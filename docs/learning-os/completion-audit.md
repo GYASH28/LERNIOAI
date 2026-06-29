@@ -40,6 +40,7 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - Added lesson-level Materials filtering through scoped, approved `LessonResource` mappings.
 - Aligned proxy and Next fallback CSP through a shared restrictive policy helper with nonce support and explicit YouTube/storage allowlists.
 - Added lesson-backed planner tasks with server-derived canonical Learn links and source recommendation reasons.
+- Added source lesson return links to revision due items and flashcards.
 
 ## Verification Completed Locally
 

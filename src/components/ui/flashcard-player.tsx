@@ -28,6 +28,7 @@
  * from the "Back to Revision" button.
  */
 
+import Link from 'next/link'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -70,6 +71,10 @@ interface FlashcardDTO {
   topicTitle: string
   topicSlug: string
   topicDifficulty: Difficulty
+  lessonId: string | null
+  lessonTitle: string | null
+  lessonCanonicalUrl: string | null
+  lessonDurationMin: number | null
   front: string
   back: string
   dueAt: string
@@ -503,6 +508,18 @@ function CardFace({
                   : `${card.attemptCount} prior ${card.attemptCount === 1 ? 'review' : 'reviews'}`}
               </span>
             </div>
+            {card.lessonCanonicalUrl ? (
+              <Link
+                href={card.lessonCanonicalUrl}
+                onClick={(event) => event.stopPropagation()}
+                onKeyDown={(event) => event.stopPropagation()}
+                className="mt-3 inline-flex w-fit items-center gap-1 rounded-md border border-border px-2 py-1 text-xs font-medium text-primary hover:bg-muted"
+              >
+                {card.lessonTitle ?? 'Return to lesson'}
+                {card.lessonDurationMin ? <span className="text-muted-foreground">/ {card.lessonDurationMin}m</span> : null}
+                <ChevronsRight className="h-3.5 w-3.5" />
+              </Link>
+            ) : null}
 
             {/* Spacer pushing the hint to the bottom */}
             <div className="flex-1" />
@@ -526,6 +543,17 @@ function CardFace({
                 {card.back}
               </p>
             </div>
+            {card.lessonCanonicalUrl ? (
+              <Link
+                href={card.lessonCanonicalUrl}
+                onClick={(event) => event.stopPropagation()}
+                onKeyDown={(event) => event.stopPropagation()}
+                className="mt-3 inline-flex w-fit items-center gap-1 rounded-md border border-border px-2 py-1 text-xs font-medium text-primary hover:bg-muted"
+              >
+                Return to lesson
+                <ChevronsRight className="h-3.5 w-3.5" />
+              </Link>
+            ) : null}
             <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground/80 pt-4 pb-1">
               <span>Rate your recall below</span>
               <ChevronsRight className="h-3.5 w-3.5" />

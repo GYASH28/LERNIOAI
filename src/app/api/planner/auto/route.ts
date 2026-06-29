@@ -3,12 +3,11 @@ import { db } from '@/lib/db'
 import { requireUser, withApi, okResponse, ApiError } from '@/lib/auth'
 import { parseBody, autoPlanSchema } from '@/lib/schemas'
 import {
-  findLessonReferenceInLearningScope,
+  firstLessonReferenceForTopic,
   getStudentLearningScope,
   subjectIdsForLearningScope,
   topicIdsForLearningScope,
   type ScopedLessonReference,
-  type StudentLearningScope,
 } from '@/features/learning/server/get-student-learning-scope'
 
 /**
@@ -159,7 +158,7 @@ export async function POST(req: NextRequest) {
     for (const rev of dueRevisions) {
       const dStr = localDateStr(rev.nextDueDate)
       const bucket = revisionByDate.get(dStr) ?? []
-      const lesson = firstLessonForTopic(scope, rev.topicId)
+      const lesson = firstLessonReferenceForTopic(scope, rev.topicId)
       bucket.push({
         topicId: rev.topicId,
         topicTitle: rev.topic.title,
@@ -263,7 +262,7 @@ export async function POST(req: NextRequest) {
           if (usedMins + 30 > dailyMins) break
           const wm = weakMastery[weakCursor % weakMastery.length]
           weakCursor++
-          const lesson = firstLessonForTopic(scope, wm.topicId)
+          const lesson = firstLessonReferenceForTopic(scope, wm.topicId)
           const durationMins = Math.max(10, Math.min(lesson?.durationMin ?? 30, 45))
           if (usedMins + durationMins > dailyMins) break
           dayDrafts.push({
@@ -389,19 +388,4 @@ function localDateStr(d: Date): string {
   const m = String(d.getMonth() + 1).padStart(2, '0')
   const day = String(d.getDate()).padStart(2, '0')
   return `${y}-${m}-${day}`
-}
-
-function firstLessonForTopic(
-  scope: StudentLearningScope | null | undefined,
-  topicId: string | null | undefined,
-): ScopedLessonReference | null {
-  if (!scope || !topicId) return null
-  for (const subject of scope.subjects) {
-    for (const unit of subject.units) {
-      const topic = unit.topics.find((item) => item.id === topicId)
-      const lesson = topic?.lessons[0]
-      if (lesson) return findLessonReferenceInLearningScope(scope, lesson.id)
-    }
-  }
-  return null
 }

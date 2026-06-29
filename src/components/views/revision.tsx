@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useAppStore } from '@/store/app-store'
 import { Mascot } from '@/components/mascots/mascot'
@@ -12,7 +13,7 @@ import { Separator } from '@/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import {
   RotateCw, Clock, Brain, Zap, CheckCircle2, AlertCircle, Calendar,
-  Layers, BookOpen, Star, ChevronRight, RefreshCw, Sparkles
+  Layers, BookOpen, Star, ChevronRight, RefreshCw, Sparkles, ArrowUpRight
 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
@@ -73,6 +74,7 @@ export function RevisionView() {
     const item = session.items[session.idx]
     const topic = item.topic
     const subject = topic?.unit?.subject
+    const sourceLesson = item.sourceLesson
     return (
       <div className="max-w-2xl mx-auto space-y-4">
         <div className="flex items-center justify-between">
@@ -88,6 +90,15 @@ export function RevisionView() {
               <div>
                 <p className="text-xs text-muted-foreground">{subject?.name} · Unit {topic?.unit?.number}</p>
                 <p className="font-medium">{topic?.title}</p>
+                {sourceLesson?.canonicalUrl ? (
+                  <Link
+                    href={sourceLesson.canonicalUrl}
+                    className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-primary"
+                  >
+                    Return to lesson
+                    <ArrowUpRight className="h-3 w-3" />
+                  </Link>
+                ) : null}
               </div>
             </div>
 
@@ -278,6 +289,7 @@ function RevisionItem({ item }: { item: any }) {
   const [snoozed, setSnoozed] = useState(false)
   const topic = item.topic
   const subject = topic?.unit?.subject
+  const sourceLesson = item.sourceLesson
   const snooze = async () => {
     await fetch('/api/revision/due', {
       method: 'POST',
@@ -294,6 +306,15 @@ function RevisionItem({ item }: { item: any }) {
       </div>
       <div className="flex-1 min-w-0">
         <p className="text-sm font-medium truncate">{topic?.title}</p>
+        {sourceLesson?.canonicalUrl ? (
+          <Link
+            href={sourceLesson.canonicalUrl}
+            className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-primary"
+          >
+            {sourceLesson.title}
+            <ArrowUpRight className="h-3 w-3" />
+          </Link>
+        ) : null}
         <p className="text-meta text-muted-foreground font-mono">{subject?.code} · Unit {topic?.unit?.number}</p>
       </div>
       <Badge variant="outline" className={cn('text-meta capitalize', STATE_COLORS[item.state])}>{item.state}</Badge>

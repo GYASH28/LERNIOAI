@@ -571,6 +571,22 @@ Date: 2026-06-28
 - `npm run typecheck`: passed.
 - `npm run check`: passed, 43 files and 149 tests with 129 existing warnings and 0 errors.
 - `npm run build`: passed with 90 static pages generated.
+- `npm run check`: passed, 43 files and 149 tests with 129 existing warnings and 0 errors.
+- `npm run build`: passed with 90 static pages generated.
+
+## Phase 22 Progress: Revision Source Lesson Handoff
+
+### Changed
+
+- Added `firstLessonReferenceForTopic()` to derive the first scoped lesson for a revision topic.
+- Enriched `/api/revision/due` schedule responses with `sourceLesson` metadata for canonical lesson return links.
+- Enriched `/api/revision/flashcards` cards with source lesson id, title, canonical URL and duration.
+- Updated classic revision rows, active revision sessions and 3D flashcards to link back to source lessons when available.
+
+### Additional Verification
+
+- `npx vitest run src/features/learning/server/get-student-learning-scope.test.ts`: passed, 1 file and 5 tests.
+- `npm run typecheck`: passed.
 
 ## Remaining Manual Verification
 
