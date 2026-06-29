@@ -112,7 +112,7 @@ Link-health report:
 - `npm run coverage:learning`
 - Output: `content/reports/cwit-r23-learning-coverage.json`
 - The report covers both target programmes and all six semesters per programme.
-- Missing CIOT Semester 3-6 manifests are explicit `missing_manifest` entries.
+- CIOT Semester 3-6 manifests are explicit empty draft blockers with `verificationStatus: needs_official_source`; they do not publish or imply subject placement.
 - COMP Semester 1-6 and CIOT Semester 1-2 currently have structure-verified manifests.
 - 51 current subject structures have official course outcomes promoted from official PDF text, but this does not create lessons or publishable notes/resources by itself.
 - The admin coverage dashboard shows top-level official outcome coverage, unit coverage and YouTube review-queue readiness from the report.

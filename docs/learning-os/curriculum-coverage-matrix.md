@@ -66,7 +66,7 @@ Advanced-semester candidates:
   - `content/curriculum/cwit-r23/comp/semester-4.json`
   - `content/curriculum/cwit-r23/comp/semester-5.json`
   - `content/curriculum/cwit-r23/comp/semester-6.json`
-- CIOT Semester 3-6 manifests remain intentionally absent until semester placement is verified from an official semester structure/source rather than inferred from a category-ordered curriculum index.
+- CIOT Semester 3-6 manifests are present as explicit empty blockers with `verificationStatus: needs_official_source` until semester placement is verified from an official semester structure/source rather than inferred from a category-ordered curriculum index.
 - The manifest schema lives at `content/curriculum/cwit-r23/schemas/curriculum.schema.json`.
 - `npm run curriculum:validate` validates required evidence, duplicate codes, governed statuses and semester bounds.
 - `npm run coverage:learning` writes the machine-readable coverage report at `content/reports/cwit-r23-learning-coverage.json`.
@@ -101,7 +101,8 @@ Advanced-semester candidates:
 Latest local coverage report:
 
 - 2 target programmes and 12 semester slots are reported.
-- 8 of 12 semester manifests are present.
+- 12 of 12 semester manifests are present.
+- CIOT Semester 3-6 are explicit draft-only blocker manifests with 0 subjects until official semester-placement evidence is obtained.
 - 59 subject structures are present.
 - 51 subject structures have official course outcomes promoted into the manifests.
 - 27 subject structures have review-only unit-title candidates in the extraction report.
@@ -113,13 +114,14 @@ Latest local coverage report:
 - 131 YouTube candidate rows match current manifest subject codes in the coverage report, all draft/unpublished.
 - 100 metadata-checked YouTube candidates are represented in the reviewer queue as 252 subject mappings.
 - 0 YouTube subject mappings are ready for lesson-level mapping because verified lessons are absent.
-- 83 YouTube subject mappings are blocked by missing local manifest subjects.
+- 18 YouTube subject mappings are blocked by missing manifest subjects absent from the current official catalog report.
+- 65 YouTube subject mappings are blocked by official CIOT course identities that remain unplaced until official semester-placement evidence is obtained.
 - 169 YouTube subject mappings are blocked by missing verified lesson structure.
 - 131 of those matching candidate rows have current link-health checks and all 131 are reachable.
 - 41 CP/CI R23 code appearances are recorded from the official Winter 2025 timetable: 7 whole-page text matches and 34 fixed-column crop matches.
 - These appearances resolve to 34 unique timetable evidence codes: 17 COMP and 17 CIOT.
 - 0 timetable code appearances are publication-ready for semester manifest promotion.
-- 194 verification items remain pending across missing CIOT advanced manifests, structure-only curriculum rows and draft resource candidates.
+- 194 verification items remain pending across explicit CIOT advanced-semester blocker manifests, structure-only curriculum rows and draft resource candidates.
 
 ## Required Manifest Gates
 

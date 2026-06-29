@@ -1,0 +1,35 @@
+{
+  "$schema": "../schemas/curriculum.schema.json",
+  "manifestVersion": 1,
+  "institutionCode": "CWIT",
+  "departmentCode": "CIOT",
+  "programmeCode": "DCIOT",
+  "officialProgrammeCode": "CI",
+  "schemeCode": "R23",
+  "schemeRevision": "MPECS 2023",
+  "semesterNumber": 6,
+  "status": "draft",
+  "verificationStatus": "needs_official_source",
+  "sourceReferences": [
+    {
+      "sourceId": "ciot-r23-curriculum-catalog",
+      "title": "Computer Engineering and IoT R23 Curriculum Course Catalog Extraction",
+      "localPath": "content/curriculum/cwit-r23/extraction-reports/official-course-catalog.json",
+      "evidence": "Official CIOT course codes exist in the extracted catalog, but this report does not prove semester placement."
+    },
+    {
+      "sourceId": "cwit-r23-winter-2025-timetable",
+      "title": "CWIT Winter Examination 2025 Time Table Evidence",
+      "localPath": "content/curriculum/cwit-r23/extraction-reports/official-timetable-evidence.json",
+      "pages": [1],
+      "evidence": "The timetable contains CIOT R23 code appearances only; the extraction report explicitly does not infer semester placement."
+    }
+  ],
+  "manifestNotes": [
+    "This manifest is intentionally empty and draft-only.",
+    "Official CIOT Semester 6 placement evidence has not been found in the available source set.",
+    "Do not add subjects, units, topics, lessons, or resources here until an official semester structure source is registered and reviewed."
+  ],
+  "blockedReason": "missing_official_semester_placement_evidence",
+  "subjects": []
+}

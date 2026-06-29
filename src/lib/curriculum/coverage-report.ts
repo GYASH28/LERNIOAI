@@ -285,9 +285,12 @@ function buildSemesterCoverage(input: {
   const unitCounts = subjects.map(countSubjectUnits)
   const topicCounts = subjects.map(countSubjectTopics)
   const lessonCounts = subjects.map(countSubjectLessons)
-  const pendingCurriculumVerification = subjects.filter((subject) =>
-    !COMPLETE_CURRICULUM_STATUSES.has(stringValue(subject.verificationStatus) ?? ''),
-  ).length
+  const emptyBlockedManifest = subjects.length === 0 && stringValue(input.manifest.verificationStatus) === 'needs_official_source'
+  const pendingCurriculumVerification = emptyBlockedManifest
+    ? 1
+    : subjects.filter((subject) =>
+        !COMPLETE_CURRICULUM_STATUSES.has(stringValue(subject.verificationStatus) ?? ''),
+      ).length
   const pendingResourceVerification = matchingCandidates.filter((candidate) =>
     stringValue(candidate.publicationStatus) !== 'published',
   ).length
@@ -329,6 +332,7 @@ function buildSemesterCoverage(input: {
       matchingCandidates,
       pendingCurriculumVerification,
       pendingResourceVerification,
+      emptyBlockedManifest,
     }),
   }
 }
@@ -338,8 +342,12 @@ function notesForSemester(input: {
   matchingCandidates: RawYouTubeCandidate[]
   pendingCurriculumVerification: number
   pendingResourceVerification: number
+  emptyBlockedManifest: boolean
 }) {
   const notes: string[] = []
+  if (input.emptyBlockedManifest) {
+    notes.push('Manifest is present only as an explicit blocker; official semester-placement evidence is still required before subjects can be added.')
+  }
   if (input.subjects.length > 0 && input.subjects.every((subject) => countSubjectUnits(subject) === 0)) {
     notes.push('Subject structure is present, but units/topics/lessons are not promoted into the manifest yet.')
   }

@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-06-29T07:41:49.777Z",
+  "generatedAt": "2026-06-29T12:24:08.045Z",
   "schemeCode": "R23",
   "sourceNote": "Coverage is calculated from local curriculum manifests and draft YouTube metadata. Database-backed published lesson/resource counts remain zero until manifests and candidates are imported, reviewed, and published.",
   "totals": {
     "programmes": 2,
     "semesters": 12,
-    "manifestsPresent": 8,
+    "manifestsPresent": 12,
     "subjects": 59,
     "subjectsWithUnits": 0,
     "subjectsWithOutcomes": 51,
@@ -381,8 +381,8 @@
           "programme": "DCIOT",
           "department": "CIOT",
           "semester": 3,
-          "manifestStatus": "missing_manifest",
-          "verificationStatus": "missing_manifest",
+          "manifestStatus": "present",
+          "verificationStatus": "needs_official_source",
           "subjects": 0,
           "units": 0,
           "topics": 0,
@@ -404,15 +404,17 @@
           "subjectsWithOutcomes": 0,
           "subjectCodes": [],
           "notes": [
-            "Official R23 manifest has not been added for this semester."
+            "Manifest is present only as an explicit blocker; official semester-placement evidence is still required before subjects can be added.",
+            "Curriculum rows still require content-level official verification before publication.",
+            "No candidate YouTube resources are currently associated with these subject codes."
           ]
         },
         {
           "programme": "DCIOT",
           "department": "CIOT",
           "semester": 4,
-          "manifestStatus": "missing_manifest",
-          "verificationStatus": "missing_manifest",
+          "manifestStatus": "present",
+          "verificationStatus": "needs_official_source",
           "subjects": 0,
           "units": 0,
           "topics": 0,
@@ -434,15 +436,17 @@
           "subjectsWithOutcomes": 0,
           "subjectCodes": [],
           "notes": [
-            "Official R23 manifest has not been added for this semester."
+            "Manifest is present only as an explicit blocker; official semester-placement evidence is still required before subjects can be added.",
+            "Curriculum rows still require content-level official verification before publication.",
+            "No candidate YouTube resources are currently associated with these subject codes."
           ]
         },
         {
           "programme": "DCIOT",
           "department": "CIOT",
           "semester": 5,
-          "manifestStatus": "missing_manifest",
-          "verificationStatus": "missing_manifest",
+          "manifestStatus": "present",
+          "verificationStatus": "needs_official_source",
           "subjects": 0,
           "units": 0,
           "topics": 0,
@@ -464,15 +468,17 @@
           "subjectsWithOutcomes": 0,
           "subjectCodes": [],
           "notes": [
-            "Official R23 manifest has not been added for this semester."
+            "Manifest is present only as an explicit blocker; official semester-placement evidence is still required before subjects can be added.",
+            "Curriculum rows still require content-level official verification before publication.",
+            "No candidate YouTube resources are currently associated with these subject codes."
           ]
         },
         {
           "programme": "DCIOT",
           "department": "CIOT",
           "semester": 6,
-          "manifestStatus": "missing_manifest",
-          "verificationStatus": "missing_manifest",
+          "manifestStatus": "present",
+          "verificationStatus": "needs_official_source",
           "subjects": 0,
           "units": 0,
           "topics": 0,
@@ -494,7 +500,9 @@
           "subjectsWithOutcomes": 0,
           "subjectCodes": [],
           "notes": [
-            "Official R23 manifest has not been added for this semester."
+            "Manifest is present only as an explicit blocker; official semester-placement evidence is still required before subjects can be added.",
+            "Curriculum rows still require content-level official verification before publication.",
+            "No candidate YouTube resources are currently associated with these subject codes."
           ]
         }
       ]

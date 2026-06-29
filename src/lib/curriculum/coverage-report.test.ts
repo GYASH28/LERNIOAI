@@ -116,4 +116,32 @@ describe('CWIT R23 coverage report', () => {
     expect(report.totals.officialUnitReviewReadyForPromotion).toBe(0)
     expect(report.totals.officialUnitReviewBlocked).toBe(32)
   })
+
+  it('counts explicit empty blocker manifests as present but unresolved', () => {
+    const report = buildCwitR23CoverageReport({
+      generatedAt: '2026-06-28T00:00:00.000Z',
+      manifests: [
+        {
+          programmeCode: 'DCIOT',
+          departmentCode: 'CIOT',
+          schemeCode: 'R23',
+          semesterNumber: 3,
+          verificationStatus: 'needs_official_source',
+          subjects: [],
+        },
+      ],
+    })
+
+    const ciot = report.programmes.find((programme) => programme.programme === 'DCIOT')
+    expect(ciot?.semesters[2]).toMatchObject({
+      semester: 3,
+      manifestStatus: 'present',
+      verificationStatus: 'needs_official_source',
+      subjects: 0,
+      pendingVerification: 1,
+      pendingCurriculumVerification: 1,
+    })
+    expect(ciot?.semesters[2].notes.join('\n')).toContain('explicit blocker')
+    expect(report.totals.manifestsPresent).toBe(1)
+  })
 })

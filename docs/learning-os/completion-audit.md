@@ -33,17 +33,20 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - Added Vercel-preview-safe demo-mode guards while keeping production demo mode blocked.
 - Switched the Vercel build path to `next build --webpack`.
 - Excluded `tmp/` from Vercel source uploads.
+- Added explicit empty CIOT Semester 3-6 blocker manifests instead of leaving those semester slots absent.
+- Updated curriculum validation so empty subject lists are valid only for draft `needs_official_source` manifests.
 
 ## Verification Completed Locally
 
 - `npx prisma validate` passed.
 - `npx prisma generate` passed.
 - `npm run check:migrations` passed.
-- `npm run curriculum:validate` passed with 8 valid manifests.
+- `npm run curriculum:validate` passed with 12 valid manifests.
 - `npm run curriculum:extract-catalog` regenerated 81 official courses and 26 unplaced CIOT courses.
 - `npm run curriculum:unit-review-queue` regenerated 59 subjects, 0 ready for promotion and 27 needing manual review.
 - `npm run resources:youtube:review-queue` regenerated 100 candidates and 252 draft subject mappings.
 - `npm run coverage:learning` regenerated `content/reports/cwit-r23-learning-coverage.json`.
+- `npm run coverage:learning` now reports 12/12 manifests present and 194 pending verification items; CIOT Semester 3-6 remain unresolved blockers, not verified curriculum.
 - `npm run notes:validate` passed with 0 available note documents.
 - `npm run resources:link-health -- 10` dry-run checked 10 URLs, all healthy.
 - `npm run check` passed.
@@ -64,7 +67,6 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - `npm run curriculum:import` against a live database.
 - `npm run db:departments:scope -- --dry-run` against a live database.
 - `/api/ready` returning 200.
-- 12/12 verified or explicitly blocked semester manifests with no guessed CIOT placement.
 - Published subject structures with official units/topics/lessons.
 - Published `LessonResource` video mappings and approved note artifacts.
 - Authenticated learning E2E and accessibility tests.

@@ -45,4 +45,30 @@ describe('curriculum manifest validation', () => {
     expect(result.valid).toBe(false)
     expect(result.errors.join('\n')).toContain('duplicates R23CP1701')
   })
+
+  it('allows an explicit draft blocker manifest with no subjects', () => {
+    const result = validateCurriculumManifest({
+      ...validManifest,
+      status: 'draft',
+      verificationStatus: 'needs_official_source',
+      subjects: [],
+      manifestNotes: [
+        'Official semester-placement evidence is missing; this manifest is intentionally empty and blocked.',
+      ],
+    })
+
+    expect(result.valid).toBe(true)
+  })
+
+  it('rejects empty subjects for importable manifests', () => {
+    const result = validateCurriculumManifest({
+      ...validManifest,
+      status: 'ready_for_import',
+      verificationStatus: 'structure_verified',
+      subjects: [],
+    })
+
+    expect(result.valid).toBe(false)
+    expect(result.errors.join('\n')).toContain('may be empty only')
+  })
 })

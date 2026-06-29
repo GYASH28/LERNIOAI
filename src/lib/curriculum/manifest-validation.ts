@@ -82,7 +82,9 @@ export function validateCurriculumManifest(
   }
 
   if (!Array.isArray(manifest.subjects) || manifest.subjects.length === 0) {
-    errors.push(`${label}.subjects must contain at least one subject.`)
+    if (manifest.verificationStatus !== 'needs_official_source' || manifest.status !== 'draft') {
+      errors.push(`${label}.subjects may be empty only for draft manifests with verificationStatus needs_official_source.`)
+    }
   } else {
     validateSubjects(manifest.subjects as ManifestSubject[], label, errors)
   }

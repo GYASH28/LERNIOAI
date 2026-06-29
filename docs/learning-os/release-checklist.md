@@ -59,7 +59,7 @@ npm run test:visual
 
 ## Current Release Status
 
-Blocked. Local PostgreSQL is unavailable, `/api/ready` is unhealthy, `npx prisma migrate status`, `npm run curriculum:import`, and `npm run db:departments:scope` cannot run against `localhost:5432`. Curriculum coverage still has zero published units/topics/lessons/resources, 0 unit candidates ready for promotion, and CIOT Semester 3-6 placement remains unverified.
+Blocked. Local PostgreSQL is unavailable, `/api/ready` is unhealthy, `npx prisma migrate status`, `npm run curriculum:import`, and `npm run db:departments:scope` cannot run against `localhost:5432`. Curriculum coverage still has zero published units/topics/lessons/resources and 0 unit candidates ready for promotion. CIOT Semester 3-6 now have explicit empty draft blocker manifests, but placement remains unverified and no subjects may be added until official semester-placement evidence is obtained.
 
 Vercel preview deployment is live, but not production-promotable:
 
@@ -68,4 +68,4 @@ Vercel preview deployment is live, but not production-promotable:
 - `/` smoke check: 200
 - `/api/ready`: 503 with `database: unavailable`, `auth: configured`, `ai: unconfigured`, and `email: unconfigured`
 
-The non-database gates passed locally on 2026-06-29: `npx prisma validate`, `npx prisma generate`, `npm run check:migrations`, `npm run curriculum:validate`, `npm run coverage:learning`, `npm run check`, `npm run build`, `npm run test:e2e`, `npm run test:a11y`, and `npm run test:visual`.
+The non-database gates passed locally on 2026-06-29: `npx prisma validate`, `npx prisma generate`, `npm run check:migrations`, `npm run curriculum:validate` with 12 manifests, `npm run coverage:learning` with 12/12 manifests present and 194 pending verification items, `npm run check`, `npm run build`, `npm run test:e2e`, `npm run test:a11y`, and `npm run test:visual`.

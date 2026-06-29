@@ -83,7 +83,7 @@ npm run test:visual
 ## Current Verification Gaps
 
 - `pdftoppm` is not installed. The Winter 2025 timetable was rendered and visually checked with `pypdfium2`; broader PDF visual checks should use the same fallback or install Poppler.
-- Official R23 PDFs are structure-parsed for COMP Semester 1-6 and CIOT Semester 1-2; CIOT Semester 3-6 still need official semester-placement verification before manifest promotion. The Winter 2025 timetable now provides 41 review-only CP/CI code appearances, 34 unique codes and 0 publication-ready semester manifests.
+- Official R23 PDFs are structure-parsed for COMP Semester 1-6 and CIOT Semester 1-2; CIOT Semester 3-6 are represented by explicit empty blocker manifests and still need official semester-placement verification before subjects can be added. The Winter 2025 timetable now provides 41 review-only CP/CI code appearances, 34 unique codes and 0 publication-ready semester manifests.
 - The official course catalog extractor reports 81 source-backed course identities, but 26 CIOT course entries remain unplaced and blocked until official semester-placement evidence is obtained.
 - Units, topics and practical experiments still need official parsing/review before publication. Official course outcomes are promoted for 51 of 59 current subject structures.
 - Current official extraction has 27 subjects with unit candidates, but the unit review queue reports 0 ready for promotion, 27 needing manual review and 32 blocked.
