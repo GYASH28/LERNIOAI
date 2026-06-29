@@ -26,6 +26,7 @@ npm run db:departments:scope -- --dry-run
 npm run curriculum:validate
 npm run curriculum:import
 npm run coverage:learning
+npm run content:import:youtube-guides -- --sem12 content-import/CWIT_Semester_1_2_YouTube_Lecture_Links.pdf --sem36 content-import/CWIT_Semester_3_to_6_YouTube_Lecture_Links.pdf --dry-run
 npm run resources:youtube:candidates
 npm run resources:youtube:verify
 npm run resources:youtube:review-queue

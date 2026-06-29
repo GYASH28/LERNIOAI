@@ -16,7 +16,13 @@
 | `CWIT_Semester_1_2_YouTube_Lecture_Links.pdf` | 16 | 38 | candidate only |
 | `CWIT_Semester_3_to_6_YouTube_Lecture_Links.pdf` | 26 | 65 | candidate only |
 
-Extraction outputs:
+Extraction command:
+
+```bash
+npm run content:import:youtube-guides -- --sem12 content-import/CWIT_Semester_1_2_YouTube_Lecture_Links.pdf --sem36 content-import/CWIT_Semester_3_to_6_YouTube_Lecture_Links.pdf --dry-run
+```
+
+Write mode also emits ignored extraction outputs:
 
 - `tmp/pdfs/CWIT_Semester_1_2_YouTube_Lecture_Links.txt`
 - `tmp/pdfs/CWIT_Semester_1_2_YouTube_Lecture_Links.urls.json`
@@ -27,6 +33,7 @@ Candidate manifest:
 
 - `content/resources/youtube-candidates/cwit-r23-youtube-candidates.json`
 - `npm run resources:youtube:candidates`
+- This writes the manifest from the source PDFs and deduplicates repeated raw URLs per supplied PDF before candidate IDs are assigned.
 
 Metadata check report:
 

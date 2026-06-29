@@ -135,6 +135,7 @@ Current manifest status:
 Generate candidate resources:
 
 ```bash
+npm run content:import:youtube-guides -- --sem12 content-import/CWIT_Semester_1_2_YouTube_Lecture_Links.pdf --sem36 content-import/CWIT_Semester_3_to_6_YouTube_Lecture_Links.pdf --dry-run
 npm run resources:youtube:candidates
 ```
 

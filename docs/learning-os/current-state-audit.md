@@ -83,7 +83,8 @@ Date: 2026-06-28
 
 - `CWIT_Semester_1_2_YouTube_Lecture_Links.pdf`: 16 pages, 38 unique YouTube URLs extracted.
 - `CWIT_Semester_3_to_6_YouTube_Lecture_Links.pdf`: 26 pages, 65 unique YouTube URLs extracted.
-- Extracted text and URL manifests are in ignored `tmp/pdfs/`.
+- `npm run content:import:youtube-guides -- --sem12 content-import/CWIT_Semester_1_2_YouTube_Lecture_Links.pdf --sem36 content-import/CWIT_Semester_3_to_6_YouTube_Lecture_Links.pdf --dry-run` extracts directly from the source PDFs.
+- Write mode stores extracted text and URL manifests in ignored `tmp/pdfs/`.
 - The PDFs are subject/page oriented. They provide source page and subject labels, but most mappings still need official lesson/unit alignment before student publication.
 
 ## File-by-File Implementation Map
