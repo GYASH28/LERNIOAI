@@ -3,9 +3,12 @@ import { db } from '@/lib/db'
 import { requireUser, withApi, okResponse, ApiError } from '@/lib/auth'
 import { parseBody, autoPlanSchema } from '@/lib/schemas'
 import {
+  findLessonReferenceInLearningScope,
   getStudentLearningScope,
   subjectIdsForLearningScope,
   topicIdsForLearningScope,
+  type ScopedLessonReference,
+  type StudentLearningScope,
 } from '@/features/learning/server/get-student-learning-scope'
 
 /**
@@ -146,15 +149,22 @@ export async function POST(req: NextRequest) {
     // Group revision schedules by their due-date YYYY-MM-DD.
     const revisionByDate = new Map<
       string,
-      Array<{ topicId: string; topicTitle: string; subjectId: string | null }>
+      Array<{
+        topicId: string
+        topicTitle: string
+        subjectId: string | null
+        lesson: ScopedLessonReference | null
+      }>
     >()
     for (const rev of dueRevisions) {
       const dStr = localDateStr(rev.nextDueDate)
       const bucket = revisionByDate.get(dStr) ?? []
+      const lesson = firstLessonForTopic(scope, rev.topicId)
       bucket.push({
         topicId: rev.topicId,
         topicTitle: rev.topic.title,
-        subjectId: rev.topic.unit?.subjectId ?? null,
+        subjectId: lesson?.subjectId ?? rev.topic.unit?.subjectId ?? null,
+        lesson,
       })
       revisionByDate.set(dStr, bucket)
     }
@@ -192,6 +202,9 @@ export async function POST(req: NextRequest) {
       priority: number
       subjectId: string | null
       topicId: string | null
+      lessonId: string | null
+      canonicalUrl: string | null
+      sourceReason: string | null
     }
 
     const drafts: TaskDraft[] = []
@@ -213,6 +226,9 @@ export async function POST(req: NextRequest) {
           priority: 1,
           subjectId: null,
           topicId: null,
+          lessonId: null,
+          canonicalUrl: null,
+          sourceReason: 'Inserted after six consecutive planned study days.',
         })
         consecutiveStudyDays = 0
         continue
@@ -226,13 +242,16 @@ export async function POST(req: NextRequest) {
       for (const rev of todaysRev.slice(0, 3)) {
         if (usedMins + 20 > dailyMins) break
         dayDrafts.push({
-          title: `Revise: ${rev.topicTitle}`,
+          title: `Revise: ${rev.lesson?.title ?? rev.topicTitle}`,
           type: 'revision',
           scheduledDate: dateStr,
           durationMins: 20,
           priority: 1,
           subjectId: rev.subjectId,
-          topicId: rev.topicId,
+          topicId: rev.lesson?.topicId ?? rev.topicId,
+          lessonId: rev.lesson?.id ?? null,
+          canonicalUrl: rev.lesson?.canonicalUrl ?? null,
+          sourceReason: `Due revision schedule for ${rev.topicTitle}.`,
         })
         usedMins += 20
       }
@@ -244,16 +263,22 @@ export async function POST(req: NextRequest) {
           if (usedMins + 30 > dailyMins) break
           const wm = weakMastery[weakCursor % weakMastery.length]
           weakCursor++
+          const lesson = firstLessonForTopic(scope, wm.topicId)
+          const durationMins = Math.max(10, Math.min(lesson?.durationMin ?? 30, 45))
+          if (usedMins + durationMins > dailyMins) break
           dayDrafts.push({
-            title: `Study: ${wm.topic.title}`,
+            title: `Study: ${lesson?.title ?? wm.topic.title}`,
             type: 'study',
             scheduledDate: dateStr,
-            durationMins: 30,
+            durationMins,
             priority: 2,
-            subjectId: wm.topic.unit?.subjectId ?? null,
-            topicId: wm.topicId,
+            subjectId: lesson?.subjectId ?? wm.topic.unit?.subjectId ?? null,
+            topicId: lesson?.topicId ?? wm.topicId,
+            lessonId: lesson?.id ?? null,
+            canonicalUrl: lesson?.canonicalUrl ?? null,
+            sourceReason: `Weak topic recovery for ${wm.topic.title} (mastery ${Math.round(wm.score)}%).`,
           })
-          usedMins += 30
+          usedMins += durationMins
         }
       }
 
@@ -273,6 +298,11 @@ export async function POST(req: NextRequest) {
             priority: isMock ? 3 : 2,
             subjectId: null,
             topicId: null,
+            lessonId: null,
+            canonicalUrl: null,
+            sourceReason: isMock
+              ? 'Scheduled as the every-sixth-day exam readiness checkpoint.'
+              : 'Scheduled as the every-third-day practice checkpoint.',
           })
           usedMins += blockMins
         }
@@ -315,6 +345,9 @@ export async function POST(req: NextRequest) {
             type: d.type,
             subjectId: d.subjectId,
             topicId: d.topicId,
+            lessonId: d.lessonId,
+            canonicalUrl: d.canonicalUrl,
+            sourceReason: d.sourceReason,
             durationMins: d.durationMins,
             scheduledDate: d.scheduledDate,
             priority: d.priority,
@@ -336,6 +369,9 @@ export async function POST(req: NextRequest) {
         priority: d.priority,
         subjectId: d.subjectId,
         topicId: d.topicId,
+        lessonId: d.lessonId,
+        canonicalUrl: d.canonicalUrl,
+        sourceReason: d.sourceReason,
       })),
     })
   })
@@ -353,4 +389,19 @@ function localDateStr(d: Date): string {
   const m = String(d.getMonth() + 1).padStart(2, '0')
   const day = String(d.getDate()).padStart(2, '0')
   return `${y}-${m}-${day}`
+}
+
+function firstLessonForTopic(
+  scope: StudentLearningScope | null | undefined,
+  topicId: string | null | undefined,
+): ScopedLessonReference | null {
+  if (!scope || !topicId) return null
+  for (const subject of scope.subjects) {
+    for (const unit of subject.units) {
+      const topic = unit.topics.find((item) => item.id === topicId)
+      const lesson = topic?.lessons[0]
+      if (lesson) return findLessonReferenceInLearningScope(scope, lesson.id)
+    }
+  }
+  return null
 }

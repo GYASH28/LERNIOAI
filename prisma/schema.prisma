@@ -865,6 +865,7 @@ model Lesson {
   generatedDocuments GeneratedLessonDocument[]
   contentJobs        ContentGenerationJob[]
   completionCriteria LessonCompletionCriteria?
+  studyTasks         StudyTask[]
   codingChallenges   CodingChallenge[]
   codingSubmissions  CodingSubmission[]
   createdAt          DateTime                  @default(now())
@@ -1682,9 +1683,13 @@ model StudyTask {
   user          User      @relation(fields: [userId], references: [id])
   title         String
   description   String?
-  type          String    @default("learn") // learn | practice | revision | lab | coding | mock_exam | buffer
+  type          String    @default("learn") // learn | study | practice | revision | lab | coding | mock_exam | buffer | rest
   subjectId     String?
   topicId       String?
+  lessonId      String?
+  lesson        Lesson?   @relation(fields: [lessonId], references: [id], onDelete: SetNull)
+  canonicalUrl  String?
+  sourceReason  String?
   durationMins  Int       @default(30)
   scheduledDate String? // YYYY-MM-DD
   scheduledTime String? // HH:mm
@@ -1695,6 +1700,7 @@ model StudyTask {
 
   @@index([userId, scheduledDate])
   @@index([userId, completed])
+  @@index([lessonId])
 }
 
 model StudySession {

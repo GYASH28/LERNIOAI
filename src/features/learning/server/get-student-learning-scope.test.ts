@@ -1,9 +1,14 @@
 import { describe, expect, it } from 'vitest'
 import {
   hasResolvedLearningScope,
+  findLessonReferenceInLearningScope,
+  isLessonIdInLearningScope,
   isSubjectIdInLearningScope,
   isTopicIdInLearningScope,
+  lessonIdsForLearningScope,
+  subjectIdForScopedLesson,
   subjectIdForScopedTopic,
+  topicIdForScopedLesson,
   subjectIdsForLearningScope,
   topicIdsForLearningScope,
   type StudentLearningScope,
@@ -59,13 +64,74 @@ describe('learning scope predicates', () => {
     expect(subjectIdForScopedTopic(current, 'topic_missing')).toBeNull()
   })
 
+  it('maps scoped lessons to their canonical route and curriculum references', () => {
+    const current = {
+      ...scope(['subject_a']),
+      subjects: [
+        {
+          id: 'subject_a',
+          code: 'R23CP1201',
+          units: [
+            {
+              id: 'unit_1',
+              number: 2,
+              lessons: [
+                {
+                  id: 'lesson_unit',
+                  title: 'Introduction to C',
+                  order: 1,
+                  durationMin: 15,
+                  topicId: null,
+                  unitId: 'unit_1',
+                },
+              ],
+              topics: [
+                {
+                  id: 'topic_a',
+                  lessons: [
+                    {
+                      id: 'lesson_topic',
+                      title: 'Structure of a C Program',
+                      order: 2,
+                      durationMin: 20,
+                      topicId: 'topic_a',
+                      unitId: 'unit_1',
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ] as StudentLearningScope['subjects'],
+    }
+
+    expect(lessonIdsForLearningScope(current)).toEqual(['lesson_unit', 'lesson_topic'])
+    expect(isLessonIdInLearningScope(current, 'lesson_topic')).toBe(true)
+    expect(isLessonIdInLearningScope(current, 'missing')).toBe(false)
+    expect(subjectIdForScopedLesson(current, 'lesson_topic')).toBe('subject_a')
+    expect(topicIdForScopedLesson(current, 'lesson_topic')).toBe('topic_a')
+
+    expect(findLessonReferenceInLearningScope(current, 'lesson_topic')).toMatchObject({
+      id: 'lesson_topic',
+      subjectCode: 'R23CP1201',
+      unitNumber: 2,
+      topicId: 'topic_a',
+      durationMin: 20,
+      canonicalUrl:
+        '/learn/DCOMP/semester/2/subject/R23CP1201/lesson/2-structure-of-a-c-program--lesson_topic',
+    })
+  })
+
   it('treats unresolved scopes as closed', () => {
     const unresolved = { ...scope([]), semester: null, unresolvedReason: 'current_semester_not_found' }
 
     expect(hasResolvedLearningScope(unresolved)).toBe(false)
     expect(subjectIdsForLearningScope(unresolved)).toEqual([])
     expect(topicIdsForLearningScope(unresolved)).toEqual([])
+    expect(lessonIdsForLearningScope(unresolved)).toEqual([])
     expect(isSubjectIdInLearningScope(unresolved, 'subject_a')).toBe(false)
     expect(isTopicIdInLearningScope(unresolved, 'topic_subject_a')).toBe(false)
+    expect(isLessonIdInLearningScope(unresolved, 'lesson_topic')).toBe(false)
   })
 })

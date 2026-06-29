@@ -5,8 +5,10 @@ import { parseBody, createTaskSchema, updateTaskSchema } from '@/lib/schemas'
 import { awardXp } from '@/lib/xp'
 import { DEMO_TASKS, isDemoMode } from '@/lib/demo-fixtures'
 import {
+  findLessonReferenceInLearningScope,
   getStudentLearningScope,
   isSubjectIdInLearningScope,
+  isLessonIdInLearningScope,
   isTopicIdInLearningScope,
   subjectIdForScopedTopic,
   subjectIdsForLearningScope,
@@ -57,7 +59,9 @@ export async function POST(req: NextRequest) {
     const body = await parseBody(req, createTaskSchema)
     const scope = await getStudentLearningScope(user.id)
     assertTaskReferencesInLearningScope(scope, body, 'Task references unavailable curriculum.')
-    const subjectId = body.subjectId ?? subjectIdForScopedTopic(scope, body.topicId) ?? undefined
+    const lesson = findLessonReferenceInLearningScope(scope, body.lessonId)
+    const subjectId = body.subjectId ?? lesson?.subjectId ?? subjectIdForScopedTopic(scope, body.topicId) ?? undefined
+    const topicId = body.topicId ?? lesson?.topicId ?? undefined
 
     const task = await db.studyTask.create({
       data: {
@@ -66,8 +70,11 @@ export async function POST(req: NextRequest) {
         description: body.description,
         type: body.type ?? 'learn',
         subjectId,
-        topicId: body.topicId,
-        durationMins: body.durationMins ?? 30,
+        topicId,
+        lessonId: lesson?.id,
+        canonicalUrl: lesson?.canonicalUrl,
+        sourceReason: lesson ? lessonSourceReason(lesson.title, lesson.unitNumber) : undefined,
+        durationMins: body.durationMins ?? lesson?.durationMin ?? 30,
         scheduledDate: body.scheduledDate,
         scheduledTime: body.scheduledTime,
         priority: body.priority ?? 2,
@@ -112,7 +119,15 @@ export async function PATCH(req: NextRequest) {
     // Verify ownership before applying any update — never trust the body's id.
     const existing = await db.studyTask.findUnique({
       where: { id: taskId },
-      select: { id: true, userId: true, completed: true, completedAt: true, subjectId: true, topicId: true },
+      select: {
+        id: true,
+        userId: true,
+        completed: true,
+        completedAt: true,
+        subjectId: true,
+        topicId: true,
+        lessonId: true,
+      },
     })
     if (!existing || existing.userId !== user.id) {
       throw new ApiError('NOT_FOUND', 'Task not found.', 404, false)
@@ -124,8 +139,10 @@ export async function PATCH(req: NextRequest) {
     const nextReferences = {
       subjectId: body.subjectId !== undefined ? body.subjectId : existing.subjectId,
       topicId: body.topicId !== undefined ? body.topicId : existing.topicId,
+      lessonId: body.lessonId !== undefined ? body.lessonId : existing.lessonId,
     }
     assertTaskReferencesInLearningScope(scope, nextReferences, 'Task references unavailable curriculum.')
+    const nextLesson = findLessonReferenceInLearningScope(scope, nextReferences.lessonId)
 
     const wasCompleted = existing.completed
     const nowCompleted = body.completed === true
@@ -136,6 +153,17 @@ export async function PATCH(req: NextRequest) {
     if (body.type !== undefined) data.type = body.type
     if (body.subjectId !== undefined) data.subjectId = body.subjectId
     if (body.topicId !== undefined) data.topicId = body.topicId
+    if (body.lessonId !== undefined) {
+      data.lessonId = nextLesson?.id ?? null
+      data.canonicalUrl = nextLesson?.canonicalUrl ?? null
+      data.sourceReason = nextLesson ? lessonSourceReason(nextLesson.title, nextLesson.unitNumber) : null
+    }
+    if (body.subjectId === undefined && body.lessonId !== undefined && nextLesson) {
+      data.subjectId = nextLesson.subjectId
+    }
+    if (body.topicId === undefined && body.lessonId !== undefined && nextLesson) {
+      data.topicId = nextLesson.topicId
+    }
     if (body.subjectId === undefined && body.topicId !== undefined && body.topicId) {
       data.subjectId = subjectIdForScopedTopic(scope, body.topicId)
     }
@@ -189,7 +217,7 @@ export async function DELETE(req: NextRequest) {
     const scope = await getStudentLearningScope(user.id)
     const existing = await db.studyTask.findFirst({
       where: { id: taskId, userId: user.id },
-      select: { id: true, subjectId: true, topicId: true },
+      select: { id: true, subjectId: true, topicId: true, lessonId: true },
     })
     if (!existing || !isTaskInLearningScope(scope, existing)) {
       throw new ApiError('NOT_FOUND', 'Task not found.', 404, false)
@@ -201,25 +229,37 @@ export async function DELETE(req: NextRequest) {
 
 function isTaskInLearningScope(
   scope: StudentLearningScope | null | undefined,
-  task: { subjectId: string | null; topicId: string | null },
+  task: { subjectId: string | null; topicId: string | null; lessonId?: string | null },
 ): boolean {
   if (!scope) return false
-  if (!task.subjectId && !task.topicId) return true
+  if (!task.subjectId && !task.topicId && !task.lessonId) return true
+  if (task.lessonId) {
+    const lesson = findLessonReferenceInLearningScope(scope, task.lessonId)
+    if (!lesson) return false
+    if (task.subjectId && task.subjectId !== lesson.subjectId) return false
+    if (task.topicId && task.topicId !== lesson.topicId) return false
+  }
   if (task.subjectId && !isSubjectIdInLearningScope(scope, task.subjectId)) return false
   if (task.topicId && !isTopicIdInLearningScope(scope, task.topicId)) return false
+  if (task.lessonId && !isLessonIdInLearningScope(scope, task.lessonId)) return false
   const topicSubjectId = subjectIdForScopedTopic(scope, task.topicId)
   return !task.subjectId || !topicSubjectId || task.subjectId === topicSubjectId
 }
 
 function assertTaskReferencesInLearningScope(
   scope: StudentLearningScope | null | undefined,
-  task: { subjectId?: string | null; topicId?: string | null },
+  task: { subjectId?: string | null; topicId?: string | null; lessonId?: string | null },
   message: string,
 ) {
   if (!scope || !isTaskInLearningScope(scope, {
     subjectId: task.subjectId ?? null,
     topicId: task.topicId ?? null,
+    lessonId: task.lessonId ?? null,
   })) {
     throw new ApiError('BAD_REQUEST', message, 400, false)
   }
+}
+
+function lessonSourceReason(title: string, unitNumber: number): string {
+  return `Linked to lesson "${title}" from Unit ${unitNumber}.`
 }

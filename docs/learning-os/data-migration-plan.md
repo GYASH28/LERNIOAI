@@ -192,3 +192,18 @@ Rules:
 - Student-facing `/api/coding` returns only global published practice plus curriculum-linked challenges inside the student's resolved learning scope.
 - Draft challenge preview is limited to preview-capable roles through `getStudentLearningScope()`.
 - Do not publish curriculum-linked coding content until the challenge mapping source, lesson fit and production runner expectations are reviewed.
+
+## Planner lesson context
+
+Migration:
+
+```text
+prisma/migrations/20260629195000_add_planner_lesson_context/migration.sql
+```
+
+Rules:
+
+- Existing planner tasks remain valid with `lessonId = null`.
+- New manual or generated tasks may store `lessonId`, `canonicalUrl` and `sourceReason`.
+- The server derives canonical lesson URLs from `getStudentLearningScope()`; clients do not provide trusted planner links.
+- Auto-plan weak-topic and due-revision tasks attach the first scoped lesson for the topic when reviewed lessons are available.

@@ -16,7 +16,7 @@
 | `/labs` | `src/app/labs/page.tsx` -> `RouteViewPage` | Client lab views, not yet attached to official lesson/practical mapping. |
 | `/coding` | `src/app/coding/page.tsx` -> `RouteViewPage` | Coding view backed by scoped `/api/coding`; global published practice remains visible and optional subject/unit/topic/lesson-linked challenges are filtered to the student's learning scope. Challenge imports/mappings and the production runner remain pending. |
 | `/materials` | `src/app/materials/page.tsx` -> `RouteViewPage` | Materials library backed by scoped material APIs, including optional `lessonId` filtering through approved `LessonResource` mappings. |
-| `/planner` | `src/app/planner/page.tsx` -> `RouteViewPage` | Planner view backed by scoped task and auto-plan APIs. |
+| `/planner` | `src/app/planner/page.tsx` -> `RouteViewPage` | Planner view backed by scoped task and auto-plan APIs, including lesson-backed tasks with canonical Learn links and source reasons. |
 | `/tutor` | `src/app/tutor/page.tsx` -> `RouteViewPage` | LEO context and retrieval are constrained by current learning scope. |
 | `/profile` | `src/app/profile/page.tsx` -> `RouteViewPage` | Shows department cards from static registry. |
 

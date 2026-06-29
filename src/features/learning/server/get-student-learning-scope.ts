@@ -17,6 +17,7 @@ import {
   studentVisibleTopicWhere,
   studentVisibleUnitWhere,
 } from '@/lib/resources/student-publication-policy'
+import { lessonRouteSlug } from '../utils/lesson-slugs'
 
 export { PUBLISHED_LESSON_STATUSES, STUDENT_RESOURCE_VISIBILITIES }
 
@@ -101,6 +102,18 @@ export interface StudentLearningScope {
   unresolvedReason: string | null
 }
 
+export interface ScopedLessonReference {
+  id: string
+  title: string
+  durationMin: number
+  subjectId: string
+  subjectCode: string
+  unitId: string
+  unitNumber: number
+  topicId: string | null
+  canonicalUrl: string
+}
+
 export function hasResolvedLearningScope(
   scope: StudentLearningScope | null | undefined,
 ): scope is StudentLearningScope & {
@@ -145,6 +158,71 @@ export function lessonIdsForLearningScope(scope: StudentLearningScope | null | u
       ...unit.topics.flatMap((topic) => topic.lessons.map((lesson) => lesson.id)),
     ]),
   )
+}
+
+export function isLessonIdInLearningScope(
+  scope: StudentLearningScope | null | undefined,
+  lessonId: string | null | undefined,
+): boolean {
+  return Boolean(findLessonReferenceInLearningScope(scope, lessonId))
+}
+
+export function subjectIdForScopedLesson(
+  scope: StudentLearningScope | null | undefined,
+  lessonId: string | null | undefined,
+): string | null {
+  return findLessonReferenceInLearningScope(scope, lessonId)?.subjectId ?? null
+}
+
+export function topicIdForScopedLesson(
+  scope: StudentLearningScope | null | undefined,
+  lessonId: string | null | undefined,
+): string | null {
+  return findLessonReferenceInLearningScope(scope, lessonId)?.topicId ?? null
+}
+
+export function findLessonReferenceInLearningScope(
+  scope: StudentLearningScope | null | undefined,
+  lessonId: string | null | undefined,
+): ScopedLessonReference | null {
+  if (!lessonId || !hasResolvedLearningScope(scope)) return null
+
+  for (const subject of scope.subjects) {
+    for (const unit of subject.units) {
+      for (const lesson of unit.lessons) {
+        if (lesson.id === lessonId) return lessonReference(scope, subject, unit, null, lesson)
+      }
+      for (const topic of unit.topics) {
+        for (const lesson of topic.lessons) {
+          if (lesson.id === lessonId) return lessonReference(scope, subject, unit, topic, lesson)
+        }
+      }
+    }
+  }
+  return null
+}
+
+function lessonReference(
+  scope: StudentLearningScope & {
+    programme: NonNullable<StudentLearningScope['programme']>
+    semester: NonNullable<StudentLearningScope['semester']>
+  },
+  subject: LearningSubject,
+  unit: LearningSubject['units'][number],
+  topic: LearningSubject['units'][number]['topics'][number] | null,
+  lesson: LearningSubject['units'][number]['lessons'][number],
+): ScopedLessonReference {
+  return {
+    id: lesson.id,
+    title: lesson.title,
+    durationMin: lesson.durationMin,
+    subjectId: subject.id,
+    subjectCode: subject.code,
+    unitId: lesson.unitId ?? unit.id,
+    unitNumber: unit.number,
+    topicId: lesson.topicId ?? topic?.id ?? null,
+    canonicalUrl: `/learn/${scope.programme.code}/semester/${scope.semester.number}/subject/${subject.code}/lesson/${lessonRouteSlug(lesson)}`,
+  }
 }
 
 export function isTopicIdInLearningScope(

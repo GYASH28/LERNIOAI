@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useAppStore } from '@/store/app-store'
 import { Mascot } from '@/components/mascots/mascot'
@@ -27,7 +28,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import {
   Plus, Clock, CheckCircle2, Circle, Trash2,
-  Zap, BookOpen, PenTool, RotateCw, FlaskConical, Code2, FileText, Coffee, Loader2,
+  Zap, BookOpen, PenTool, RotateCw, FlaskConical, Code2, FileText, Coffee, Loader2, ArrowUpRight,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { motion } from 'framer-motion'
@@ -35,6 +36,18 @@ import { toast } from 'sonner'
 
 type TaskTypeIcon = typeof BookOpen
 interface TypeConfigEntry { icon: TaskTypeIcon; color: string; label: string }
+
+interface PlannerTask {
+  id: string
+  title: string
+  type: string
+  durationMins: number
+  scheduledDate?: string | null
+  priority: number
+  completed: boolean
+  canonicalUrl?: string | null
+  sourceReason?: string | null
+}
 
 const TYPE_CONFIG: Record<string, TypeConfigEntry> = {
   learn: { icon: BookOpen, color: 'text-violet-500 bg-violet-500/10', label: 'Learn' },
@@ -50,7 +63,7 @@ const TYPE_CONFIG: Record<string, TypeConfigEntry> = {
 
 export function PlannerView() {
   const { user, subjects, pushMascotToast } = useAppStore()
-  const [tasks, setTasks] = useState<any[]>([])
+  const [tasks, setTasks] = useState<PlannerTask[]>([])
   const [loading, setLoading] = useState(true)
   const [dialogOpen, setDialogOpen] = useState(false)
   const [generating, setGenerating] = useState(false)
@@ -113,7 +126,7 @@ export function PlannerView() {
     }
   }
 
-  const toggleTask = async (task: any) => {
+  const toggleTask = async (task: PlannerTask) => {
     await fetch('/api/planner/task', {
       method: 'PATCH', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ taskId: task.id, completed: !task.completed }),
@@ -304,7 +317,7 @@ export function PlannerView() {
   )
 }
 
-function TaskItem({ task, onToggle, onDelete }: { task: any; onToggle: () => void; onDelete: () => void }) {
+function TaskItem({ task, onToggle, onDelete }: { task: PlannerTask; onToggle: () => void; onDelete: () => void }) {
   const cfg = TYPE_CONFIG[task.type] || TYPE_CONFIG.learn
   const Icon = cfg.icon
   return (
@@ -324,7 +337,19 @@ function TaskItem({ task, onToggle, onDelete }: { task: any; onToggle: () => voi
               {task.scheduledDate && <span className="text-meta text-muted-foreground">{new Date(task.scheduledDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}</span>}
               {task.priority >= 3 && <Badge variant="secondary" className="text-meta">Urgent</Badge>}
             </div>
+            {task.sourceReason ? (
+              <p className="mt-1 text-xs text-muted-foreground">{task.sourceReason}</p>
+            ) : null}
           </div>
+          {task.canonicalUrl ? (
+            <Link
+              href={task.canonicalUrl}
+              className="inline-flex h-8 shrink-0 items-center justify-center gap-1 rounded-md border border-border px-2 text-xs font-medium hover:bg-muted"
+            >
+              Open
+              <ArrowUpRight className="h-3 w-3" />
+            </Link>
+          ) : null}
           <Button variant="ghost" size="sm" onClick={onDelete} className="shrink-0 text-muted-foreground hover:text-destructive">
             <Trash2 className="h-3.5 w-3.5" />
           </Button>

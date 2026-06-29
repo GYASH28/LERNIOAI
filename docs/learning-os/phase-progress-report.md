@@ -552,6 +552,26 @@ Date: 2026-06-28
 - `npm run typecheck`: passed.
 - `npm run build`: passed with 90 static pages generated.
 
+## Phase 21 Progress: Planner Lesson Context
+
+### Changed
+
+- Added nullable `lessonId`, `canonicalUrl` and `sourceReason` fields to `StudyTask`.
+- Added scoped lesson-reference helpers that derive subject, topic, duration and canonical lesson routes from the current learning scope.
+- Updated planner task create/update/delete scope checks to validate direct lesson references and derive lesson URLs server-side.
+- Updated auto-plan generation so weak-topic and due-revision tasks attach the first scoped lesson for the topic when available.
+- Updated the Planner UI to show source reasons and direct canonical lesson links for lesson-backed tasks.
+- Fixed manual planner task validation so UI-offered `study` and `rest` task types are accepted by the API.
+
+### Additional Verification
+
+- `npx prisma validate`: passed.
+- `npx prisma generate`: passed.
+- `npx vitest run src/features/learning/server/get-student-learning-scope.test.ts`: passed, 1 file and 5 tests.
+- `npm run typecheck`: passed.
+- `npm run check`: passed, 43 files and 149 tests with 129 existing warnings and 0 errors.
+- `npm run build`: passed with 90 static pages generated.
+
 ## Remaining Manual Verification
 
 - Database dry-run/write needs a reachable PostgreSQL connection.

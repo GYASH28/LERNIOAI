@@ -213,12 +213,15 @@ export const tutorChatSchema = z.object({
 // PLANNER
 // ============================================================
 
+const studyTaskTypeSchema = z.enum(['learn', 'study', 'practice', 'revision', 'lab', 'coding', 'mock_exam', 'buffer', 'rest'])
+
 export const createTaskSchema = z.object({
   title: z.string().min(1).max(200),
   description: z.string().max(2000).optional(),
-  type: z.enum(['learn', 'practice', 'revision', 'lab', 'coding', 'mock_exam', 'buffer']).optional(),
+  type: studyTaskTypeSchema.optional(),
   subjectId: z.string().optional(),
   topicId: z.string().optional(),
+  lessonId: z.string().optional(),
   durationMins: z.number().int().min(5).max(480).optional(),
   scheduledDate: z.string().optional(), // YYYY-MM-DD
   scheduledTime: z.string().optional(), // HH:mm
@@ -228,9 +231,10 @@ export const createTaskSchema = z.object({
 export const updateTaskSchema = z.object({
   title: z.string().min(1).max(200).optional(),
   description: z.string().max(2000).optional(),
-  type: z.enum(['learn', 'practice', 'revision', 'lab', 'coding', 'mock_exam', 'buffer']).optional(),
+  type: studyTaskTypeSchema.optional(),
   subjectId: z.string().nullable().optional(),
   topicId: z.string().nullable().optional(),
+  lessonId: z.string().nullable().optional(),
   durationMins: z.number().int().min(5).max(480).optional(),
   scheduledDate: z.string().nullable().optional(),
   scheduledTime: z.string().nullable().optional(),
