@@ -1,0 +1,2433 @@
+{
+  "manifestVersion": 1,
+  "status": "draft",
+  "verificationStatus": "official_unit_candidate_review_required",
+  "generatedAt": "2026-06-29T07:41:40.904Z",
+  "sourceExtractionReport": "content/curriculum/cwit-r23/extraction-reports/official-structure-candidates.json",
+  "safetyNote": "These unit candidates are official-PDF extraction review rows only. They must not be imported into manifests or shown to students until a reviewer verifies order, title text and source pages.",
+  "totals": {
+    "subjects": 59,
+    "subjectsWithUnitCandidates": 27,
+    "readyForUnitPromotionReview": 0,
+    "needsManualUnitReview": 27,
+    "blockedMissingCourseBlock": 4,
+    "blockedNoUnitCandidates": 28,
+    "draftOnly": 59
+  },
+  "items": [
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-1.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CI1701",
+      "subjectName": "Basic Mathematics",
+      "sourcePages": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 6,
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Algebra",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Trigonometry",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "Straight Line",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Differential Calculus",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Differential Calculus",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "Statistics",
+          "source": "summary_table"
+        }
+      ],
+      "reviewStatus": "needs_manual_unit_review",
+      "blockers": [
+        "Duplicate unit titles were extracted."
+      ],
+      "reviewRequired": [
+        "Duplicate unit titles were extracted."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-1.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CI1702",
+      "subjectName": "Communication Skills (English)",
+      "sourcePages": [],
+      "extractionStatus": "course_block_not_found",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_missing_course_block",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "Official course block was not extracted for this subject; locate the source pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-1.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CI2201",
+      "subjectName": "Engineering Graphics",
+      "sourcePages": [],
+      "extractionStatus": "course_block_not_found",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_missing_course_block",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "Official course block was not extracted for this subject; locate the source pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-1.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CI2701",
+      "subjectName": "Basic Science",
+      "sourcePages": [
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 2,
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Units and Measurements",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Chemistry of Electronic Waste",
+          "source": "course_content"
+        }
+      ],
+      "reviewStatus": "needs_manual_unit_review",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order is not consecutive from 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order is not consecutive from 1."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-1.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CI4701",
+      "subjectName": "Yoga and Meditation",
+      "sourcePages": [],
+      "extractionStatus": "course_block_not_found",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_missing_course_block",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "Official course block was not extracted for this subject; locate the source pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-1.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CI6601",
+      "subjectName": "Engineering Workshop Practice",
+      "sourcePages": [
+        71,
+        72,
+        73,
+        74,
+        75,
+        76
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_no_unit_candidates",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "No unit titles were extracted; reviewer must inspect the official PDF pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-1.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CI6602",
+      "subjectName": "Fundamentals of ICT",
+      "sourcePages": [
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 4,
+      "candidateUnits": [
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Operating Systems",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "Word Processing",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Spreadsheets",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Presentation Tool",
+          "source": "summary_table"
+        }
+      ],
+      "reviewStatus": "needs_manual_unit_review",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "Unit order is not consecutive from 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "Unit order is not consecutive from 1."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-2.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CI1301",
+      "subjectName": "Basic Electrical and Electronics Engineering",
+      "sourcePages": [],
+      "extractionStatus": "course_block_not_found",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_missing_course_block",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "Official course block was not extracted for this subject; locate the source pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-2.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CI1601",
+      "subjectName": "Programming in C",
+      "sourcePages": [
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 5,
+      "candidateUnits": [
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Control structures",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "Arrays and structure",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Functions",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Pointers",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "File Handling",
+          "source": "summary_table"
+        }
+      ],
+      "reviewStatus": "needs_manual_unit_review",
+      "blockers": [
+        "Unit order does not start at 1.",
+        "Unit order is not consecutive from 1."
+      ],
+      "reviewRequired": [
+        "Unit order does not start at 1.",
+        "Unit order is not consecutive from 1."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-2.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CI1703",
+      "subjectName": "Applied Mathematics",
+      "sourcePages": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 6,
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Indefinite Integration",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Definite Integration",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "Numerical Methods",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Probability Distribution",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Differential",
+          "source": "course_content"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "Numerical Methods",
+          "source": "summary_table"
+        }
+      ],
+      "reviewStatus": "needs_manual_unit_review",
+      "blockers": [
+        "Duplicate unit titles were extracted."
+      ],
+      "reviewRequired": [
+        "Duplicate unit titles were extracted."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-2.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CI2601",
+      "subjectName": "Linux Basics",
+      "sourcePages": [
+        124,
+        125,
+        126,
+        127,
+        128
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 4,
+      "candidateUnits": [
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "General Purpose Utilities",
+          "source": "course_content"
+        },
+        {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "File Management in Linux",
+          "source": "course_content"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "The vi Editor",
+          "source": "course_content"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "Shell & Shell Programming",
+          "source": "course_content"
+        }
+      ],
+      "reviewStatus": "needs_manual_unit_review",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "Unit order is not consecutive from 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "Unit order is not consecutive from 1."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-2.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CI4601",
+      "subjectName": "Social and Life Skills",
+      "sourcePages": [
+        219,
+        220,
+        221,
+        222,
+        223,
+        224
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_no_unit_candidates",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "No unit titles were extracted; reviewer must inspect the official PDF pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-2.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CI6603",
+      "subjectName": "Web Page Designing",
+      "sourcePages": [
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 4,
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Introduction to HTML",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Lists and Links",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Cascading Style sheets",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "Website Hosting",
+          "source": "summary_table"
+        }
+      ],
+      "reviewStatus": "needs_manual_unit_review",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order is not consecutive from 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order is not consecutive from 1."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-2.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CI6701",
+      "subjectName": "Professional Communication",
+      "sourcePages": [
+        96,
+        97,
+        98,
+        99,
+        100
+      ],
+      "extractionStatus": "needs_review",
+      "candidateUnitCount": 4,
+      "candidateUnits": [
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Interview",
+          "source": "course_content"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Writing Skills-1",
+          "source": "course_content"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Writing Skills-2",
+          "source": "course_content"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Writing Skills-3",
+          "source": "course_content"
+        }
+      ],
+      "reviewStatus": "needs_manual_unit_review",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "Unit order is not consecutive from 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "Unit order is not consecutive from 1."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-1.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CP1701",
+      "subjectName": "Basic Mathematics",
+      "sourcePages": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 6,
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Algebra",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Trigonometry",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "Straight Line",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Differential Calculus",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Differential Calculus",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "Statistics",
+          "source": "summary_table"
+        }
+      ],
+      "reviewStatus": "needs_manual_unit_review",
+      "blockers": [
+        "Duplicate unit titles were extracted."
+      ],
+      "reviewRequired": [
+        "Duplicate unit titles were extracted."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-1.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CP1702",
+      "subjectName": "Communication Skills (English)",
+      "sourcePages": [
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_no_unit_candidates",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "No unit titles were extracted; reviewer must inspect the official PDF pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-1.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CP2201",
+      "subjectName": "Engineering Graphics",
+      "sourcePages": [
+        45,
+        46,
+        47,
+        48,
+        49,
+        50
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 1,
+      "candidateUnits": [
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Scale and Natural Scale. scale and isometric",
+          "source": "course_content"
+        }
+      ],
+      "reviewStatus": "needs_manual_unit_review",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "Unit order is not consecutive from 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "Unit order is not consecutive from 1."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-1.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CP2701",
+      "subjectName": "Basic Science",
+      "sourcePages": [
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 3,
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Units and Measurements",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Chemistry of Electronic Waste",
+          "source": "course_content"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "Environmental Regulations",
+          "source": "course_content"
+        }
+      ],
+      "reviewStatus": "needs_manual_unit_review",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order is not consecutive from 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order is not consecutive from 1."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-1.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CP4701",
+      "subjectName": "Yoga and Meditation",
+      "sourcePages": [
+        66,
+        67,
+        68,
+        69,
+        70
+      ],
+      "extractionStatus": "needs_review",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_no_unit_candidates",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "No unit titles were extracted; reviewer must inspect the official PDF pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-1.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CP6401",
+      "subjectName": "Engineering Workshop Practice",
+      "sourcePages": [
+        51,
+        52,
+        53,
+        54,
+        55
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_no_unit_candidates",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "No unit titles were extracted; reviewer must inspect the official PDF pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-1.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CP6402",
+      "subjectName": "Fundamentals of ICT",
+      "sourcePages": [
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 4,
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Introduction to Computer",
+          "source": "course_content"
+        },
+        {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "Word Processing",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Spreadsheets",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Presentation Tool",
+          "source": "summary_table"
+        }
+      ],
+      "reviewStatus": "needs_manual_unit_review",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order is not consecutive from 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order is not consecutive from 1."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-2.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CP1301",
+      "subjectName": "Basic Electrical and Electronics Engineering",
+      "sourcePages": [
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 4,
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Basic Electrical Fundamentals",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Electrical Machines",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Transistors",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "Sensors and Transducers",
+          "source": "summary_table"
+        }
+      ],
+      "reviewStatus": "needs_manual_unit_review",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order is not consecutive from 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order is not consecutive from 1."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-2.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CP1401",
+      "subjectName": "Programming in C",
+      "sourcePages": [
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 5,
+      "candidateUnits": [
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Control structures",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "Arrays and structure",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Functions",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Pointers",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "File Handling",
+          "source": "summary_table"
+        }
+      ],
+      "reviewStatus": "needs_manual_unit_review",
+      "blockers": [
+        "Unit order does not start at 1.",
+        "Unit order is not consecutive from 1."
+      ],
+      "reviewRequired": [
+        "Unit order does not start at 1.",
+        "Unit order is not consecutive from 1."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-2.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CP1703",
+      "subjectName": "Applied Mathematics",
+      "sourcePages": [
+        71,
+        72,
+        73,
+        74,
+        75
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 6,
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Indefinite Integration",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Definite Integration",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "Numerical Methods",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Probability Distribution",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Differential Equation",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "Numerical Methods",
+          "source": "summary_table"
+        }
+      ],
+      "reviewStatus": "needs_manual_unit_review",
+      "blockers": [
+        "Duplicate unit titles were extracted."
+      ],
+      "reviewRequired": [
+        "Duplicate unit titles were extracted."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-2.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CP2401",
+      "subjectName": "Linux Basics",
+      "sourcePages": [
+        93,
+        94,
+        95,
+        96,
+        97,
+        98
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 4,
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Introduction to Linux Operating System",
+          "source": "course_content"
+        },
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "General Purpose Utilities",
+          "source": "course_content"
+        },
+        {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "File Management in Linux",
+          "source": "course_content"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "The vi Editor",
+          "source": "summary_table"
+        }
+      ],
+      "reviewStatus": "needs_manual_unit_review",
+      "blockers": [
+        "Fewer than five unit titles were extracted."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-2.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CP4401",
+      "subjectName": "Social and Life Skills",
+      "sourcePages": [
+        111,
+        112,
+        113,
+        114,
+        115,
+        116
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_no_unit_candidates",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "No unit titles were extracted; reviewer must inspect the official PDF pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-2.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CP6403",
+      "subjectName": "Web Page Designing",
+      "sourcePages": [
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 4,
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Introduction to HTML",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Lists and Links",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Cascading Style sheets",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "Website Hosting",
+          "source": "summary_table"
+        }
+      ],
+      "reviewStatus": "needs_manual_unit_review",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order is not consecutive from 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order is not consecutive from 1."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-2.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CP6701",
+      "subjectName": "Professional Communication",
+      "sourcePages": [
+        106,
+        107,
+        108,
+        109,
+        110
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_no_unit_candidates",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "No unit titles were extracted; reviewer must inspect the official PDF pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-3.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 3,
+      "officialSubjectCode": "R23CP1402",
+      "subjectName": "Animation Techniques",
+      "sourcePages": [
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_no_unit_candidates",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "No unit titles were extracted; reviewer must inspect the official PDF pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-3.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 3,
+      "officialSubjectCode": "R23CP2402",
+      "subjectName": "Data Structure Using C",
+      "sourcePages": [
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_no_unit_candidates",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "No unit titles were extracted; reviewer must inspect the official PDF pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-3.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 3,
+      "officialSubjectCode": "R23CP2403",
+      "subjectName": "Microprocessors & Its Programming",
+      "sourcePages": [
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_no_unit_candidates",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "No unit titles were extracted; reviewer must inspect the official PDF pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-3.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 3,
+      "officialSubjectCode": "R23CP2404",
+      "subjectName": "Data Communication",
+      "sourcePages": [
+        141,
+        142,
+        143,
+        144,
+        145,
+        146
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 3,
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Introduction to Communication",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Transmission Media",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Multiplexing & Switching",
+          "source": "summary_table"
+        }
+      ],
+      "reviewStatus": "needs_manual_unit_review",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order is not consecutive from 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order is not consecutive from 1."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-3.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 3,
+      "officialSubjectCode": "R23CP2405",
+      "subjectName": "User Interface Programming",
+      "sourcePages": [
+        147,
+        148,
+        149,
+        150,
+        151
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_no_unit_candidates",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "No unit titles were extracted; reviewer must inspect the official PDF pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-3.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 3,
+      "officialSubjectCode": "R23CP4402",
+      "subjectName": "Indian Constitution",
+      "sourcePages": [
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_no_unit_candidates",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "No unit titles were extracted; reviewer must inspect the official PDF pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-3.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 3,
+      "officialSubjectCode": "R23CP6404",
+      "subjectName": "Object Oriented Programming Using C++",
+      "sourcePages": [
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 1,
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Principles of Object",
+          "source": "course_content"
+        }
+      ],
+      "reviewStatus": "needs_manual_unit_review",
+      "blockers": [
+        "Fewer than five unit titles were extracted."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-4.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 4,
+      "officialSubjectCode": "R23CP1403",
+      "subjectName": "Python Programming",
+      "sourcePages": [
+        194,
+        195,
+        196,
+        197,
+        198,
+        199,
+        200,
+        201
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_no_unit_candidates",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "No unit titles were extracted; reviewer must inspect the official PDF pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-4.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 4,
+      "officialSubjectCode": "R23CP1404",
+      "subjectName": "Java Programming",
+      "sourcePages": [
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_no_unit_candidates",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "No unit titles were extracted; reviewer must inspect the official PDF pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-4.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 4,
+      "officialSubjectCode": "R23CP2406",
+      "subjectName": "Operating System",
+      "sourcePages": [
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_no_unit_candidates",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "No unit titles were extracted; reviewer must inspect the official PDF pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-4.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 4,
+      "officialSubjectCode": "R23CP2407",
+      "subjectName": "Database Management System",
+      "sourcePages": [
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_no_unit_candidates",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "No unit titles were extracted; reviewer must inspect the official PDF pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-4.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 4,
+      "officialSubjectCode": "R23CP2408",
+      "subjectName": "Computer Networks",
+      "sourcePages": [
+        186,
+        187,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 4,
+      "candidateUnits": [
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Local Area Network",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "IP Addressing and Routing",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Transport and Application",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "Network Security",
+          "source": "summary_table"
+        }
+      ],
+      "reviewStatus": "needs_manual_unit_review",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "Unit order is not consecutive from 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "Unit order is not consecutive from 1."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-4.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 4,
+      "officialSubjectCode": "R23CP4403",
+      "subjectName": "Ethics in Engineering Practice",
+      "sourcePages": [
+        217,
+        218,
+        219,
+        220,
+        221,
+        222,
+        223
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 1,
+      "candidateUnits": [
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Professional Practice in Engineering",
+          "source": "summary_table"
+        }
+      ],
+      "reviewStatus": "needs_manual_unit_review",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "Unit order is not consecutive from 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "Unit order is not consecutive from 1."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-4.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 4,
+      "officialSubjectCode": "R23CP6405",
+      "subjectName": "Entrepreneurship Development & Marketing Management",
+      "sourcePages": [
+        210,
+        211,
+        212,
+        213,
+        214,
+        215,
+        216
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_no_unit_candidates",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "No unit titles were extracted; reviewer must inspect the official PDF pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-5.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CP1405",
+      "subjectName": "Advance Java Programming",
+      "sourcePages": [
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_no_unit_candidates",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "No unit titles were extracted; reviewer must inspect the official PDF pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-5.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CP1406",
+      "subjectName": "PHP Programming",
+      "sourcePages": [
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_no_unit_candidates",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "No unit titles were extracted; reviewer must inspect the official PDF pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-5.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CP1407",
+      "subjectName": "Seminar And Capstone Initiation",
+      "sourcePages": [
+        245,
+        246,
+        247,
+        248,
+        249
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_no_unit_candidates",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "No unit titles were extracted; reviewer must inspect the official PDF pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-5.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CP2409",
+      "subjectName": "Software Engineering",
+      "sourcePages": [
+        224,
+        225,
+        226,
+        227,
+        228,
+        229
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_no_unit_candidates",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "No unit titles were extracted; reviewer must inspect the official PDF pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-5.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CP3401",
+      "subjectName": "Recent Trends in Computer Networks",
+      "sourcePages": [
+        257,
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 3,
+      "candidateUnits": [
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Routing Protocols",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "Protocols",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "and Emerging Trends",
+          "source": "summary_table"
+        }
+      ],
+      "reviewStatus": "needs_manual_unit_review",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "Unit order is not consecutive from 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "Unit order is not consecutive from 1."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-5.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CP3402",
+      "subjectName": "Database Architecture and Emerging Technologies",
+      "sourcePages": [
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_no_unit_candidates",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "No unit titles were extracted; reviewer must inspect the official PDF pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-5.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CP3403",
+      "subjectName": "Fundamentals of Data Science",
+      "sourcePages": [
+        277,
+        278,
+        279,
+        280,
+        281,
+        282
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 5,
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Introduction to Data Science",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "Relational and Non-Relational Databases",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Analytics c) Predictive Analytics d)",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Education and Agriculture",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "Emerging Trends in Data Science",
+          "source": "summary_table"
+        }
+      ],
+      "reviewStatus": "needs_manual_unit_review",
+      "blockers": [
+        "Unit order is not consecutive from 1."
+      ],
+      "reviewRequired": [
+        "Unit order is not consecutive from 1."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-5.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CP5401",
+      "subjectName": "Internship",
+      "sourcePages": [
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        256
+      ],
+      "extractionStatus": "needs_review",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_no_unit_candidates",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "No unit titles were extracted; reviewer must inspect the official PDF pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-6.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CP1408",
+      "subjectName": "Industrial Management For IT Industry",
+      "sourcePages": [
+        283,
+        284,
+        285,
+        286,
+        287,
+        288
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 2,
+      "candidateUnits": [
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Financial Management &",
+          "source": "course_content"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Digital Resource & Asset",
+          "source": "course_content"
+        }
+      ],
+      "reviewStatus": "needs_manual_unit_review",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "Unit order is not consecutive from 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "Unit order is not consecutive from 1."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-6.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CP2410",
+      "subjectName": "Emerging Trends In Computer Engineering",
+      "sourcePages": [
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        295,
+        296
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 2,
+      "candidateUnits": [
+        {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "Internet of Things",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Sustainable Computing",
+          "source": "summary_table"
+        }
+      ],
+      "reviewStatus": "needs_manual_unit_review",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "Unit order is not consecutive from 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "Unit order is not consecutive from 1."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-6.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CP2411",
+      "subjectName": "Machine Learning",
+      "sourcePages": [
+        297,
+        298,
+        299,
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_no_unit_candidates",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "No unit titles were extracted; reviewer must inspect the official PDF pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-6.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CP3404",
+      "subjectName": "Network and Information Security",
+      "sourcePages": [
+        328,
+        329,
+        330,
+        331,
+        332,
+        333,
+        334
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 4,
+      "candidateUnits": [
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "User Authentication and Access Control",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Modern Encryption and Digital Security",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Network and E-mail Security",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "Database and Cloud Security",
+          "source": "summary_table"
+        }
+      ],
+      "reviewStatus": "needs_manual_unit_review",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "Unit order is not consecutive from 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "Unit order is not consecutive from 1."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-6.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CP3405",
+      "subjectName": "Cloud Computing",
+      "sourcePages": [
+        335,
+        336,
+        337,
+        338,
+        339,
+        340
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 2,
+      "candidateUnits": [
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Virtualization in Cloud",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Cloud Service Management",
+          "source": "summary_table"
+        }
+      ],
+      "reviewStatus": "needs_manual_unit_review",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "Unit order is not consecutive from 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "Unit order is not consecutive from 1."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-6.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CP3406",
+      "subjectName": "Data Analytics and Visualization Using R Programming",
+      "sourcePages": [
+        341,
+        342,
+        343,
+        344,
+        345,
+        346,
+        347
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_no_unit_candidates",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "No unit titles were extracted; reviewer must inspect the official PDF pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-6.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CP5402",
+      "subjectName": "Capstone Project",
+      "sourcePages": [
+        322,
+        323,
+        324,
+        325,
+        326,
+        327
+      ],
+      "extractionStatus": "needs_review",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_no_unit_candidates",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "No unit titles were extracted; reviewer must inspect the official PDF pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-6.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CP6406",
+      "subjectName": "AI Tools and Techniques",
+      "sourcePages": [
+        308,
+        309,
+        310,
+        311,
+        312,
+        313,
+        314,
+        315
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_no_unit_candidates",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "No unit titles were extracted; reviewer must inspect the official PDF pages manually."
+      ],
+      "publicationStatus": "draft"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-6.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CP6407",
+      "subjectName": "Software Testing Tools and Automation",
+      "sourcePages": [
+        316,
+        317,
+        318,
+        319,
+        320,
+        321
+      ],
+      "extractionStatus": "structure_promotable",
+      "candidateUnitCount": 0,
+      "candidateUnits": [],
+      "reviewStatus": "blocked_no_unit_candidates",
+      "blockers": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1."
+      ],
+      "reviewRequired": [
+        "Fewer than five unit titles were extracted.",
+        "Unit order does not start at 1.",
+        "No unit titles were extracted; reviewer must inspect the official PDF pages manually."
+      ],
+      "publicationStatus": "draft"
+    }
+  ]
+}

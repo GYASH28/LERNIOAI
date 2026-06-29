@@ -1,7 +1,15 @@
 import { NextRequest } from 'next/server'
+import type { Prisma } from '@prisma/client'
 import { db } from '@/lib/db'
 import { requireUser, withApi, okResponse } from '@/lib/auth'
 import { toPracticeDTO } from '@/lib/questions'
+import {
+  getStudentLearningScope,
+  isSubjectIdInLearningScope,
+  isTopicIdInLearningScope,
+  scopedQuestionWhere,
+  subjectIdsForLearningScope,
+} from '@/features/learning/server/get-student-learning-scope'
 
 /**
  * GET /api/questions
@@ -15,7 +23,11 @@ import { toPracticeDTO } from '@/lib/questions'
  */
 export async function GET(req: NextRequest) {
   return withApi(async () => {
-    await requireUser()
+    const user = await requireUser()
+    const scope = await getStudentLearningScope(user.id)
+    const scopedSubjectIds = subjectIdsForLearningScope(scope)
+    if (!scope || scopedSubjectIds.length === 0) return okResponse([])
+
     const sp = req.nextUrl.searchParams
     const subjectId = sp.get('subjectId')
     const unitNumber = sp.get('unitNumber')
@@ -24,9 +36,17 @@ export async function GET(req: NextRequest) {
     const mode = sp.get('mode') || 'practice'
     const limit = Math.min(parseInt(sp.get('limit') || '50', 10) || 50, 100)
 
-    const where: Record<string, unknown> = {}
-    if (subjectId) where.subjectId = subjectId
-    if (unitNumber) where.unitNumber = parseInt(unitNumber, 10)
+    if (subjectId && !isSubjectIdInLearningScope(scope, subjectId)) return okResponse([])
+    if (topicId && !isTopicIdInLearningScope(scope, topicId)) return okResponse([])
+
+    const where: Prisma.QuestionWhereInput = {
+      ...scopedQuestionWhere(scope),
+      subjectId: subjectId ?? { in: scopedSubjectIds },
+    }
+    if (unitNumber) {
+      const parsedUnitNumber = parseInt(unitNumber, 10)
+      if (!Number.isNaN(parsedUnitNumber)) where.unitNumber = parsedUnitNumber
+    }
     if (difficulty && difficulty !== 'all') where.difficulty = difficulty
     if (topicId) where.topicId = topicId
 

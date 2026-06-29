@@ -1,0 +1,764 @@
+{
+  "$schema": "../schemas/curriculum.schema.json",
+  "manifestVersion": 1,
+  "institutionCode": "CWIT",
+  "departmentCode": "CIOT",
+  "programmeCode": "DCIOT",
+  "officialProgrammeCode": "CI",
+  "schemeCode": "R23",
+  "schemeRevision": "MPECS 2023",
+  "semesterNumber": 2,
+  "status": "draft",
+  "verificationStatus": "structure_verified",
+  "sourceReferences": [
+    {
+      "sourceId": "ciot-r23-structure",
+      "title": "Computer Engineering and IoT R23 Learning and Assessment Structure",
+      "sourceUrl": "https://cwit.mespune.org/wp-content/uploads/2023/07/DCI_SEM-1_R23.pdf",
+      "localPath": "content-import/official/CIOT_R23_structure.pdf",
+      "pages": [
+        2
+      ],
+      "evidence": "Official Semester SECOND structure table for Diploma in Computer Engineering and IoT."
+    },
+    {
+      "sourceId": "ciot-r23-curriculum",
+      "title": "Computer Engineering and IoT R23 Curriculum",
+      "sourceUrl": "https://cwit.mespune.org/wp-content/uploads/2023/07/IOTR23_ALL_Curriculam-FINALV.pdf",
+      "localPath": "content-import/official/CIOT_R23_curriculum.pdf"
+    }
+  ],
+  "manifestNotes": [
+    "Subject rows are structure verified from the official R23 learning and assessment structure PDF.",
+    "Units, topics, outcomes and practical experiments are intentionally empty until parsed from the official curriculum PDF."
+  ],
+  "subjects": [
+    {
+      "order": 1,
+      "officialSubjectCode": "R23CI1703",
+      "name": "Applied Mathematics",
+      "category": "AEC",
+      "credits": 2,
+      "assessment": {
+        "totalMarks": 100
+      },
+      "units": [],
+      "outcomes": [
+        {
+          "order": 1,
+          "code": "CO1",
+          "text": "Solve the broad-based engineering problems of integration using suitable methods.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 2,
+          "code": "CO2",
+          "text": "Use definite integration to solve given engineering related problems.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 3,
+          "code": "CO3",
+          "text": "Use probability distributions to solve elementary engineering problems.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 4,
+          "code": "CO4",
+          "text": "Apply the concept of differential equation to find the solutions of given engineering problems.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 5,
+          "code": "CO5",
+          "text": "Employ numerical methods to solve programme specific problems.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        }
+      ],
+      "practicalExperiments": [],
+      "sourceReferences": [
+        {
+          "sourceId": "ciot-r23-structure",
+          "pages": [
+            2
+          ]
+        }
+      ],
+      "verificationStatus": "structure_verified"
+    },
+    {
+      "order": 2,
+      "officialSubjectCode": "R23CI1301",
+      "name": "Basic Electrical and Electronics Engineering",
+      "category": "AEC",
+      "credits": 5,
+      "assessment": {
+        "totalMarks": 250
+      },
+      "units": [],
+      "outcomes": [],
+      "practicalExperiments": [],
+      "sourceReferences": [
+        {
+          "sourceId": "ciot-r23-structure",
+          "pages": [
+            2
+          ]
+        }
+      ],
+      "verificationStatus": "structure_verified"
+    },
+    {
+      "order": 3,
+      "officialSubjectCode": "R23CI1601",
+      "name": "Programming in C",
+      "category": "AEC",
+      "credits": 5,
+      "assessment": {
+        "totalMarks": 225
+      },
+      "units": [],
+      "outcomes": [
+        {
+          "order": 1,
+          "code": "CO1",
+          "text": "Develop C program using input - output functions and arithmetic expressions",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 2,
+          "code": "CO2",
+          "text": "Develop C program involving branching and looping statements",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 3,
+          "code": "CO3",
+          "text": "Implement Arrays and structures using C programs",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 4,
+          "code": "CO4",
+          "text": "Develop C program using user-defined functions",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 5,
+          "code": "CO5",
+          "text": "Write C program using pointer",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 6,
+          "code": "CO6",
+          "text": "Explain the basic concept of file handling, testing, debugging and simple IoT applications using C programs.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        }
+      ],
+      "practicalExperiments": [],
+      "sourceReferences": [
+        {
+          "sourceId": "ciot-r23-structure",
+          "pages": [
+            2
+          ]
+        }
+      ],
+      "verificationStatus": "structure_verified"
+    },
+    {
+      "order": 4,
+      "officialSubjectCode": "R23CI2601",
+      "name": "Linux Basics",
+      "category": "DSC",
+      "credits": 2,
+      "assessment": {
+        "totalMarks": 50
+      },
+      "units": [],
+      "outcomes": [
+        {
+          "order": 1,
+          "code": "CO1",
+          "text": "Install Linux operating system.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                124,
+                125,
+                126,
+                127,
+                128
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 2,
+          "code": "CO2",
+          "text": "Execute general purpose commands of the Linux operating system.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                124,
+                125,
+                126,
+                127,
+                128
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 3,
+          "code": "CO3",
+          "text": "Manage files and directories in Linux operating system.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                124,
+                125,
+                126,
+                127,
+                128
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 4,
+          "code": "CO4",
+          "text": "Use vi editor in Linux operating system.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                124,
+                125,
+                126,
+                127,
+                128
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 5,
+          "code": "CO5",
+          "text": "Execute Linux filters and commands using regular expressions.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                124,
+                125,
+                126,
+                127,
+                128
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 6,
+          "code": "CO6",
+          "text": "Write programs using shell script.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                124,
+                125,
+                126,
+                127,
+                128
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        }
+      ],
+      "practicalExperiments": [],
+      "sourceReferences": [
+        {
+          "sourceId": "ciot-r23-structure",
+          "pages": [
+            2
+          ]
+        }
+      ],
+      "verificationStatus": "structure_verified"
+    },
+    {
+      "order": 5,
+      "officialSubjectCode": "R23CI6603",
+      "name": "Web Page Designing",
+      "category": "SEC",
+      "credits": 4,
+      "assessment": {
+        "totalMarks": 125
+      },
+      "units": [],
+      "outcomes": [
+        {
+          "order": 1,
+          "code": "CO1",
+          "text": "Design simple web pages-using HTML.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                89,
+                90,
+                91,
+                92,
+                93,
+                94,
+                95
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 2,
+          "code": "CO2",
+          "text": "Link HTML pages and insert different lists.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                89,
+                90,
+                91,
+                92,
+                93,
+                94,
+                95
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 3,
+          "code": "CO3",
+          "text": "Integrate html pages, multimedia elements to develop Websites.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                89,
+                90,
+                91,
+                92,
+                93,
+                94,
+                95
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 4,
+          "code": "CO4",
+          "text": "Organize information using Tables, Forms & Frames.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                89,
+                90,
+                91,
+                92,
+                93,
+                94,
+                95
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 5,
+          "code": "CO5",
+          "text": "Format web pages Using CSS",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                89,
+                90,
+                91,
+                92,
+                93,
+                94,
+                95
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 6,
+          "code": "CO6",
+          "text": "Use website designing tools effectively.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                89,
+                90,
+                91,
+                92,
+                93,
+                94,
+                95
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        }
+      ],
+      "practicalExperiments": [],
+      "sourceReferences": [
+        {
+          "sourceId": "ciot-r23-structure",
+          "pages": [
+            2
+          ]
+        }
+      ],
+      "verificationStatus": "structure_verified"
+    },
+    {
+      "order": 6,
+      "officialSubjectCode": "R23CI6701",
+      "name": "Professional Communication",
+      "category": "SEC",
+      "credits": 1,
+      "assessment": {
+        "totalMarks": 50
+      },
+      "units": [],
+      "outcomes": [],
+      "practicalExperiments": [],
+      "sourceReferences": [
+        {
+          "sourceId": "ciot-r23-structure",
+          "pages": [
+            2
+          ]
+        }
+      ],
+      "verificationStatus": "structure_verified"
+    },
+    {
+      "order": 7,
+      "officialSubjectCode": "R23CI4601",
+      "name": "Social and Life Skills",
+      "category": "VEC",
+      "credits": 1,
+      "assessment": {
+        "totalMarks": 50
+      },
+      "units": [],
+      "outcomes": [
+        {
+          "order": 1,
+          "code": "CO1",
+          "text": "Develop self awareness and self confidence...",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                219,
+                220,
+                221,
+                222,
+                223,
+                224
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 2,
+          "code": "CO2",
+          "text": "Demonstrate social and moral values in personnel and professional life",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                219,
+                220,
+                221,
+                222,
+                223,
+                224
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 3,
+          "code": "CO3",
+          "text": "Demonstrate awareness about environment and take steps to preserve it .",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                219,
+                220,
+                221,
+                222,
+                223,
+                224
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 4,
+          "code": "CO4",
+          "text": "Apply emotional intelligence in everyday situation.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                219,
+                220,
+                221,
+                222,
+                223,
+                224
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 5,
+          "code": "CO5",
+          "text": "Set appropriate life goals by managing stress and time effectively.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                219,
+                220,
+                221,
+                222,
+                223,
+                224
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 6,
+          "code": "CO6",
+          "text": "Apply basic financial knowledge in daily life.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                219,
+                220,
+                221,
+                222,
+                223,
+                224
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        }
+      ],
+      "practicalExperiments": [],
+      "sourceReferences": [
+        {
+          "sourceId": "ciot-r23-structure",
+          "pages": [
+            2
+          ]
+        }
+      ],
+      "verificationStatus": "structure_verified"
+    }
+  ]
+}

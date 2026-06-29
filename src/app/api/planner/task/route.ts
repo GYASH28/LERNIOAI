@@ -4,6 +4,15 @@ import { requireUser, withApi, okResponse, ApiError } from '@/lib/auth'
 import { parseBody, createTaskSchema, updateTaskSchema } from '@/lib/schemas'
 import { awardXp } from '@/lib/xp'
 import { DEMO_TASKS, isDemoMode } from '@/lib/demo-fixtures'
+import {
+  getStudentLearningScope,
+  isSubjectIdInLearningScope,
+  isTopicIdInLearningScope,
+  subjectIdForScopedTopic,
+  subjectIdsForLearningScope,
+  topicIdsForLearningScope,
+  type StudentLearningScope,
+} from '@/features/learning/server/get-student-learning-scope'
 
 /**
  * GET /api/planner/task
@@ -14,11 +23,23 @@ export async function GET() {
     if (isDemoMode()) return okResponse(DEMO_TASKS)
 
     const user = await requireUser()
+    const scope = await getStudentLearningScope(user.id)
+    const scopedSubjectIds = subjectIdsForLearningScope(scope)
+    const scopedTopicIds = topicIdsForLearningScope(scope)
+    if (!scope || scopedSubjectIds.length === 0) return okResponse([])
+
     const tasks = await db.studyTask.findMany({
-      where: { userId: user.id },
+      where: {
+        userId: user.id,
+        OR: [
+          { subjectId: null },
+          { subjectId: { in: scopedSubjectIds } },
+          { topicId: { in: scopedTopicIds } },
+        ],
+      },
       orderBy: [{ scheduledDate: 'asc' }, { priority: 'desc' }],
     })
-    return okResponse(tasks)
+    return okResponse(tasks.filter((task) => isTaskInLearningScope(scope, task)))
   })
 }
 
@@ -34,6 +55,9 @@ export async function POST(req: NextRequest) {
   return withApi(async () => {
     const user = await requireUser()
     const body = await parseBody(req, createTaskSchema)
+    const scope = await getStudentLearningScope(user.id)
+    assertTaskReferencesInLearningScope(scope, body, 'Task references unavailable curriculum.')
+    const subjectId = body.subjectId ?? subjectIdForScopedTopic(scope, body.topicId) ?? undefined
 
     const task = await db.studyTask.create({
       data: {
@@ -41,7 +65,7 @@ export async function POST(req: NextRequest) {
         title: body.title,
         description: body.description,
         type: body.type ?? 'learn',
-        subjectId: body.subjectId,
+        subjectId,
         topicId: body.topicId,
         durationMins: body.durationMins ?? 30,
         scheduledDate: body.scheduledDate,
@@ -88,11 +112,20 @@ export async function PATCH(req: NextRequest) {
     // Verify ownership before applying any update — never trust the body's id.
     const existing = await db.studyTask.findUnique({
       where: { id: taskId },
-      select: { id: true, userId: true, completed: true, completedAt: true },
+      select: { id: true, userId: true, completed: true, completedAt: true, subjectId: true, topicId: true },
     })
     if (!existing || existing.userId !== user.id) {
       throw new ApiError('NOT_FOUND', 'Task not found.', 404, false)
     }
+    const scope = await getStudentLearningScope(user.id)
+    if (!isTaskInLearningScope(scope, existing)) {
+      throw new ApiError('NOT_FOUND', 'Task not found.', 404, false)
+    }
+    const nextReferences = {
+      subjectId: body.subjectId !== undefined ? body.subjectId : existing.subjectId,
+      topicId: body.topicId !== undefined ? body.topicId : existing.topicId,
+    }
+    assertTaskReferencesInLearningScope(scope, nextReferences, 'Task references unavailable curriculum.')
 
     const wasCompleted = existing.completed
     const nowCompleted = body.completed === true
@@ -103,6 +136,9 @@ export async function PATCH(req: NextRequest) {
     if (body.type !== undefined) data.type = body.type
     if (body.subjectId !== undefined) data.subjectId = body.subjectId
     if (body.topicId !== undefined) data.topicId = body.topicId
+    if (body.subjectId === undefined && body.topicId !== undefined && body.topicId) {
+      data.subjectId = subjectIdForScopedTopic(scope, body.topicId)
+    }
     if (body.durationMins !== undefined) data.durationMins = body.durationMins
     if (body.scheduledDate !== undefined) data.scheduledDate = body.scheduledDate
     if (body.scheduledTime !== undefined) data.scheduledTime = body.scheduledTime
@@ -150,14 +186,40 @@ export async function DELETE(req: NextRequest) {
     if (!taskId) {
       throw new ApiError('BAD_REQUEST', 'taskId is required.', 400, false)
     }
-    // Use deleteMany with the ownership filter so we don't leak existence
-    // (returns count=0 if the task belongs to another user or doesn't exist).
-    const result = await db.studyTask.deleteMany({
+    const scope = await getStudentLearningScope(user.id)
+    const existing = await db.studyTask.findFirst({
       where: { id: taskId, userId: user.id },
+      select: { id: true, subjectId: true, topicId: true },
     })
-    if (result.count === 0) {
+    if (!existing || !isTaskInLearningScope(scope, existing)) {
       throw new ApiError('NOT_FOUND', 'Task not found.', 404, false)
     }
+    await db.studyTask.delete({ where: { id: taskId } })
     return okResponse({ deleted: true })
   })
+}
+
+function isTaskInLearningScope(
+  scope: StudentLearningScope | null | undefined,
+  task: { subjectId: string | null; topicId: string | null },
+): boolean {
+  if (!scope) return false
+  if (!task.subjectId && !task.topicId) return true
+  if (task.subjectId && !isSubjectIdInLearningScope(scope, task.subjectId)) return false
+  if (task.topicId && !isTopicIdInLearningScope(scope, task.topicId)) return false
+  const topicSubjectId = subjectIdForScopedTopic(scope, task.topicId)
+  return !task.subjectId || !topicSubjectId || task.subjectId === topicSubjectId
+}
+
+function assertTaskReferencesInLearningScope(
+  scope: StudentLearningScope | null | undefined,
+  task: { subjectId?: string | null; topicId?: string | null },
+  message: string,
+) {
+  if (!scope || !isTaskInLearningScope(scope, {
+    subjectId: task.subjectId ?? null,
+    topicId: task.topicId ?? null,
+  })) {
+    throw new ApiError('BAD_REQUEST', message, 400, false)
+  }
 }

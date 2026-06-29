@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
+import Link from 'next/link'
 import { revalidatePath } from 'next/cache'
 import { Link2, ShieldCheck } from 'lucide-react'
 import { requireActiveRole } from '@/lib/auth'
@@ -73,6 +74,11 @@ export default async function AdminResourceQueuePage() {
           <p className="max-w-3xl text-sm leading-6 text-muted-foreground">
             Review resource quality, link health, and syllabus fit separately from moderation holds.
           </p>
+          <div>
+            <Button asChild variant="outline" size="sm">
+              <Link href="/admin/resources/youtube-candidates">Open YouTube candidate queue</Link>
+            </Button>
+          </div>
         </div>
       </section>
 

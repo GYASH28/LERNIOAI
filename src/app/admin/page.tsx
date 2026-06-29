@@ -1,6 +1,17 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowRight, Building2, History, MailPlus, Megaphone, Users } from 'lucide-react'
+import {
+  ArrowRight,
+  BookOpenCheck,
+  Building2,
+  Database,
+  FileText,
+  History,
+  ListChecks,
+  MailPlus,
+  Megaphone,
+  Users,
+} from 'lucide-react'
 import { requireActiveRole } from '@/lib/auth'
 import { getAdminCommandCenterData } from '@/lib/admin/campusmate-data'
 import { CampusmateAdminShell } from '@/components/admin/campusmate-admin-shell'
@@ -11,6 +22,10 @@ export const metadata: Metadata = { title: 'Admin Dashboard' }
 const ACTIONS = [
   { label: 'People & Roles', detail: 'Manage users and assign campus roles.', href: '/admin/users', icon: Users },
   { label: 'Academic Setup', detail: 'Add departments, programmes, and classes.', href: '/admin/departments', icon: Building2 },
+  { label: 'Learning Coverage', detail: 'Review R23 curriculum and resource publication gaps.', href: '/admin/learning/coverage', icon: BookOpenCheck },
+  { label: 'Course Catalog', detail: 'Inspect source-backed course identity and unplaced CIOT blockers.', href: '/admin/learning/course-catalog', icon: Database },
+  { label: 'Unit Review', detail: 'Inspect official unit extraction blockers before promotion.', href: '/admin/learning/unit-candidates', icon: ListChecks },
+  { label: 'Lesson Notes', detail: 'Preview validated generated notes before PDF rendering.', href: '/admin/learning/notes', icon: FileText },
   { label: 'Invite Codes', detail: 'Create a code for teachers and other roles.', href: '/admin/invitations', icon: MailPlus },
   { label: 'Announcements', detail: 'Send a notice to students or staff.', href: '/admin/announcements', icon: Megaphone },
   { label: 'Activity Log', detail: 'Review recent management changes.', href: '/admin/audit', icon: History },

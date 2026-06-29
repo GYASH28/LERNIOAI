@@ -5,6 +5,11 @@ import { parseBody, submitAttemptSchema } from '@/lib/schemas'
 import { evaluateAnswer, toReviewDTO, type ExamQuestionDTO } from '@/lib/questions'
 import { awardXp } from '@/lib/xp'
 import { evaluateAchievements, type UnlockedAchievement } from '@/lib/achievements'
+import {
+  getStudentLearningScope,
+  isSubjectIdInLearningScope,
+  scopedQuestionWhere,
+} from '@/features/learning/server/get-student-learning-scope'
 
 /**
  * POST /api/exams/attempt/[id]/submit
@@ -80,6 +85,10 @@ export async function POST(
         true,
       )
     }
+    const scope = await getStudentLearningScope(user.id)
+    if (!scope || (attempt.subjectId && !isSubjectIdInLearningScope(scope, attempt.subjectId))) {
+      throw new ApiError('NOT_FOUND', 'Attempt not found.', 404, false)
+    }
 
     const qblob = JSON.parse(attempt.questionsJson) as StoredQuestionSet
     const questionIds = qblob.questionIds
@@ -87,8 +96,11 @@ export async function POST(
     // 2. Re-fetch the full Question rows by the stored IDs — never trust
     //    the client's view of the questions or its score.
     const questions = await db.question.findMany({
-      where: { id: { in: questionIds } },
+      where: { ...scopedQuestionWhere(scope), id: { in: questionIds } },
     })
+    if (questions.length !== questionIds.length) {
+      throw new ApiError('NOT_FOUND', 'Attempt not found.', 404, false)
+    }
     const questionMap = new Map(questions.map((q) => [q.id, q]))
 
     // Preserve original question order (matches the order the student saw).

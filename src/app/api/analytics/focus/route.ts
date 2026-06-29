@@ -2,6 +2,10 @@ import { NextResponse } from 'next/server'
 import { requireUser, errorResponse } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { getLocalDateStringInKolkata, getLocalDayStartInKolkata } from '@/lib/timezone'
+import {
+  getStudentLearningScope,
+  subjectIdsForLearningScope,
+} from '@/features/learning/server/get-student-learning-scope'
 
 /**
  * GET /api/analytics/focus
@@ -28,6 +32,11 @@ import { getLocalDateStringInKolkata, getLocalDayStartInKolkata } from '@/lib/ti
 export async function GET() {
   try {
     const authUser = await requireUser()
+    const scope = await getStudentLearningScope(authUser.id)
+    const scopedSubjectIds = subjectIdsForLearningScope(scope)
+    const scopedSessionWhere = scopedSubjectIds.length > 0
+      ? { OR: [{ subjectId: null }, { subjectId: { in: scopedSubjectIds } }] }
+      : { subjectId: null }
 
     const now = new Date()
     const todayStart = getLocalDayStartInKolkata(now)
@@ -41,6 +50,7 @@ export async function GET() {
           where: {
             userId: authUser.id,
             startedAt: { gte: todayStart },
+            ...scopedSessionWhere,
           },
           _sum: { durationMins: true },
           _count: true,
@@ -49,12 +59,13 @@ export async function GET() {
           where: {
             userId: authUser.id,
             startedAt: { gte: weekStart },
+            ...scopedSessionWhere,
           },
           _sum: { durationMins: true },
           _count: true,
         }),
         db.studySession.aggregate({
-          where: { userId: authUser.id },
+          where: { userId: authUser.id, ...scopedSessionWhere },
           _sum: { durationMins: true },
           _count: true,
         }),
@@ -63,6 +74,7 @@ export async function GET() {
           where: {
             userId: authUser.id,
             startedAt: { gte: monthStart },
+            ...scopedSessionWhere,
           },
           select: { durationMins: true, startedAt: true, activity: true, subjectId: true },
         }),
@@ -72,7 +84,7 @@ export async function GET() {
           where: {
             userId: authUser.id,
             startedAt: { gte: monthStart },
-            subjectId: { not: null },
+            subjectId: { in: scopedSubjectIds },
           },
           select: {
             durationMins: true,
@@ -84,6 +96,7 @@ export async function GET() {
           where: {
             userId: authUser.id,
             startedAt: { gte: monthStart },
+            ...scopedSessionWhere,
           },
           select: { durationMins: true, activity: true },
         }),

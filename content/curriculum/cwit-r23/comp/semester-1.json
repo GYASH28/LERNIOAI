@@ -1,0 +1,916 @@
+{
+  "$schema": "../schemas/curriculum.schema.json",
+  "manifestVersion": 1,
+  "institutionCode": "CWIT",
+  "departmentCode": "COMP",
+  "programmeCode": "DCOMP",
+  "officialProgrammeCode": "CP",
+  "schemeCode": "R23",
+  "schemeRevision": "MPECS 2023",
+  "semesterNumber": 1,
+  "status": "draft",
+  "verificationStatus": "structure_verified",
+  "sourceReferences": [
+    {
+      "sourceId": "comp-r23-structure",
+      "title": "Computer Engineering R23 Learning and Assessment Structure",
+      "sourceUrl": "https://cwit.mespune.org/wp-content/uploads/2021/07/DCP_SEM-1_R23.pdf",
+      "localPath": "content-import/official/COMP_R23_structure.pdf",
+      "pages": [
+        1
+      ],
+      "evidence": "Official Semester FIRST structure table for Diploma in Computer Engineering."
+    },
+    {
+      "sourceId": "comp-r23-curriculum",
+      "title": "Computer Engineering R23 Curriculum",
+      "sourceUrl": "https://cwit.mespune.org/wp-content/uploads/2021/07/COMPUTER-MPECS-23-CURRICULUM.pdf",
+      "localPath": "content-import/official/COMP_R23_curriculum.pdf"
+    }
+  ],
+  "manifestNotes": [
+    "Subject rows are structure verified from the official R23 learning and assessment structure PDF.",
+    "Units, topics, outcomes and practical experiments are intentionally empty until parsed from the official curriculum PDF."
+  ],
+  "subjects": [
+    {
+      "order": 1,
+      "officialSubjectCode": "R23CP1701",
+      "name": "Basic Mathematics",
+      "category": "AEC",
+      "credits": 4,
+      "assessment": {
+        "totalMarks": 125
+      },
+      "units": [],
+      "outcomes": [
+        {
+          "order": 1,
+          "code": "CO1",
+          "text": "Apply the concepts of algebra to solve engineering (discipline) related problems.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 2,
+          "code": "CO2",
+          "text": "Utilize trigonometry to solve branch specific engineering problems.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 3,
+          "code": "CO3",
+          "text": "Solve area specific engineering problems under given conditions of straight lines.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 4,
+          "code": "CO4",
+          "text": "Apply differential calculus to solve discipline specific problems.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 5,
+          "code": "CO5",
+          "text": "Use techniques and methods of statistics to crack discipline specific problems.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        }
+      ],
+      "practicalExperiments": [],
+      "sourceReferences": [
+        {
+          "sourceId": "comp-r23-structure",
+          "pages": [
+            1
+          ]
+        }
+      ],
+      "verificationStatus": "structure_verified"
+    },
+    {
+      "order": 2,
+      "officialSubjectCode": "R23CP2701",
+      "name": "Basic Science",
+      "category": "DSC",
+      "credits": 5,
+      "assessment": {
+        "totalMarks": 250
+      },
+      "units": [],
+      "outcomes": [
+        {
+          "order": 1,
+          "code": "CO1",
+          "text": "Estimate errors in measurements of a physical quantity measured with appropriate measuring instruments.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 2,
+          "code": "CO2",
+          "text": "Analyze the physical properties of materials for selecting appropriate material for appropriate applications.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 3,
+          "code": "CO3",
+          "text": "Use equipments based on principles of LASER and Optical fibre in industrial application.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 4,
+          "code": "CO4",
+          "text": "Analyze core environmental chemistry principles (air, water, soil) and their impact on electronics manufacturing",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 5,
+          "code": "CO5",
+          "text": "Design e-waste management strategies, evaluate energy source impacts, and propose sustainable energy and storage solutions.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 6,
+          "code": "CO6",
+          "text": "Apply environmental regulations and compliance, and evaluate emerging green technologies for sustainable electronics engineering. C)",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        }
+      ],
+      "practicalExperiments": [],
+      "sourceReferences": [
+        {
+          "sourceId": "comp-r23-structure",
+          "pages": [
+            1
+          ]
+        }
+      ],
+      "verificationStatus": "structure_verified",
+      "notes": "The structure table presents Basic Physics and Environmental Chemistry under the Basic Science course."
+    },
+    {
+      "order": 3,
+      "officialSubjectCode": "R23CP1702",
+      "name": "Communication Skills (English)",
+      "category": "AEC",
+      "credits": 3,
+      "assessment": {
+        "totalMarks": 150
+      },
+      "units": [],
+      "outcomes": [
+        {
+          "order": 1,
+          "code": "CO1",
+          "text": "Distinguish between various types of communication",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 2,
+          "code": "CO2",
+          "text": "Communicate effectively by avoiding barriers in various formal and informal situations",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 3,
+          "code": "CO3",
+          "text": "Comprehend given passages and dialogues.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 4,
+          "code": "CO4",
+          "text": "Use relevant words as per context.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 5,
+          "code": "CO5",
+          "text": "Deliver effective presentations in English using appropriate body language.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 6,
+          "code": "CO6",
+          "text": "Compose and deliver speeches in given formal situations 19",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        }
+      ],
+      "practicalExperiments": [],
+      "sourceReferences": [
+        {
+          "sourceId": "comp-r23-structure",
+          "pages": [
+            1
+          ]
+        }
+      ],
+      "verificationStatus": "structure_verified"
+    },
+    {
+      "order": 4,
+      "officialSubjectCode": "R23CP2201",
+      "name": "Engineering Graphics",
+      "category": "DSC",
+      "credits": 2,
+      "assessment": {
+        "totalMarks": 75
+      },
+      "units": [],
+      "outcomes": [
+        {
+          "order": 1,
+          "code": "CO1",
+          "text": "Understand the use of various drawing instruments and redraw the given figures.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                45,
+                46,
+                47,
+                48,
+                49,
+                50
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 2,
+          "code": "CO2",
+          "text": "Draw engineering curves with different methods.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                45,
+                46,
+                47,
+                48,
+                49,
+                50
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 3,
+          "code": "CO3",
+          "text": "Draw orthographic projections of the given object.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                45,
+                46,
+                47,
+                48,
+                49,
+                50
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 4,
+          "code": "CO4",
+          "text": "Construct an isometric view from the given views.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                45,
+                46,
+                47,
+                48,
+                49,
+                50
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 5,
+          "code": "CO5",
+          "text": "Draw the sectional views for given object.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                45,
+                46,
+                47,
+                48,
+                49,
+                50
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 6,
+          "code": "CO6",
+          "text": "Distinguish mechanical components for various applications/products through freehand sketches.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                45,
+                46,
+                47,
+                48,
+                49,
+                50
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        }
+      ],
+      "practicalExperiments": [],
+      "sourceReferences": [
+        {
+          "sourceId": "comp-r23-structure",
+          "pages": [
+            1
+          ]
+        }
+      ],
+      "verificationStatus": "structure_verified"
+    },
+    {
+      "order": 5,
+      "officialSubjectCode": "R23CP6401",
+      "name": "Engineering Workshop Practice",
+      "category": "SEC",
+      "credits": 2,
+      "assessment": {
+        "totalMarks": 100
+      },
+      "units": [],
+      "outcomes": [
+        {
+          "order": 1,
+          "code": "CO1",
+          "text": "Carry-out elementary level maintenance of a PC.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                51,
+                52,
+                53,
+                54,
+                55
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 2,
+          "code": "CO2",
+          "text": "Create partitions and format hard disk drive.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                51,
+                52,
+                53,
+                54,
+                55
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 3,
+          "code": "CO3",
+          "text": "Install and configure Operating system.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                51,
+                52,
+                53,
+                54,
+                55
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 4,
+          "code": "CO4",
+          "text": "Configure different types of peripheral devices.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                51,
+                52,
+                53,
+                54,
+                55
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 5,
+          "code": "CO5",
+          "text": "Setup a small Local Area Network.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                51,
+                52,
+                53,
+                54,
+                55
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 6,
+          "code": "CO6",
+          "text": "Use diagnostic software for fault finding in Computer system. H)",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                51,
+                52,
+                53,
+                54,
+                55
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        }
+      ],
+      "practicalExperiments": [],
+      "sourceReferences": [
+        {
+          "sourceId": "comp-r23-structure",
+          "pages": [
+            1
+          ]
+        }
+      ],
+      "verificationStatus": "structure_verified"
+    },
+    {
+      "order": 6,
+      "officialSubjectCode": "R23CP6402",
+      "name": "Fundamentals of ICT",
+      "category": "SEC",
+      "credits": 3,
+      "assessment": {
+        "totalMarks": 100
+      },
+      "units": [],
+      "outcomes": [
+        {
+          "order": 1,
+          "code": "CO1",
+          "text": "Understand the working of a computer system, storage devices, and their peripherals.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 2,
+          "code": "CO2",
+          "text": "Explain the concepts and types of operating systems and use application software.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 3,
+          "code": "CO3",
+          "text": "Use word processing tools to prepare and format documents.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 4,
+          "code": "CO4",
+          "text": "Use spreadsheets to analyze data and represent it graphically.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 5,
+          "code": "CO5",
+          "text": "Create effective presentations using PowerPoint.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 6,
+          "code": "CO6",
+          "text": "Use DOS commands, web browsers, and Internet services, and understand the concepts and applications of emerging technologies.",
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        }
+      ],
+      "practicalExperiments": [],
+      "sourceReferences": [
+        {
+          "sourceId": "comp-r23-structure",
+          "pages": [
+            1
+          ]
+        }
+      ],
+      "verificationStatus": "structure_verified"
+    },
+    {
+      "order": 7,
+      "officialSubjectCode": "R23CP4701",
+      "name": "Yoga and Meditation",
+      "category": "VEC",
+      "credits": 1,
+      "assessment": {
+        "totalMarks": 50
+      },
+      "units": [],
+      "outcomes": [],
+      "practicalExperiments": [],
+      "sourceReferences": [
+        {
+          "sourceId": "comp-r23-structure",
+          "pages": [
+            1
+          ]
+        }
+      ],
+      "verificationStatus": "structure_verified"
+    }
+  ]
+}

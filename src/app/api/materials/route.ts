@@ -1,4 +1,5 @@
 import { NextRequest } from 'next/server'
+import type { Prisma } from '@prisma/client'
 import { db } from '@/lib/db'
 import {
   requireUser,
@@ -15,12 +16,20 @@ import {
 } from '@/lib/schemas'
 import { awardXp } from '@/lib/xp'
 import { evaluateAchievements } from '@/lib/achievements'
+import {
+  findScopedTopic,
+  findScopedUnit,
+  getStudentLearningScope,
+  hasResolvedLearningScope,
+  isSubjectIdInLearningScope,
+  scopedResourceWhere,
+} from '@/features/learning/server/get-student-learning-scope'
 
 /**
  * GET /api/materials
  * Public (authenticated) browse of approved/published resources.
  *
- * Query: ?subjectId, ?unitNumber, ?type, ?q (title search), ?mine=true
+ * Query: ?subjectId, ?unitNumber, ?topicId, ?type, ?language, ?q (title search), ?mine=true
  *
  * When ?mine=true, returns the current user's contributions (any status) so
  * they can manage their drafts/submissions.
@@ -31,9 +40,12 @@ export async function GET(req: NextRequest) {
     const sp = req.nextUrl.searchParams
     const subjectId = sp.get('subjectId')
     const unitNumber = sp.get('unitNumber')
+    const topicId = sp.get('topicId')
     const type = sp.get('type')
+    const language = sp.get('language')
     const search = sp.get('q')
     const mine = sp.get('mine') === 'true'
+    const parsedUnitNumber = unitNumber ? Number.parseInt(unitNumber, 10) : null
 
     if (mine) {
       // "My Contributions" = the user's draft/submitted/under_review/etc
@@ -53,11 +65,36 @@ export async function GET(req: NextRequest) {
       return okResponse({ contributions, promotedResources })
     }
 
-    const where: Record<string, unknown> = { visibility: 'public' }
-    if (subjectId) where.subjectId = subjectId
-    if (unitNumber) where.unitNumber = parseInt(unitNumber, 10)
+    const learningScope = await getStudentLearningScope(user.id)
+    if (!hasResolvedLearningScope(learningScope)) {
+      return okResponse([])
+    }
+
+    const where: Prisma.ResourceWhereInput = scopedResourceWhere(learningScope)
+    if (unitNumber && (parsedUnitNumber === null || !Number.isInteger(parsedUnitNumber) || parsedUnitNumber <= 0)) {
+      throw new ApiError('BAD_REQUEST', 'unitNumber must be a positive integer.', 400, false)
+    }
+    if (subjectId) {
+      if (!isSubjectIdInLearningScope(learningScope, subjectId)) {
+        throw new ApiError('NOT_FOUND', 'Subject not found.', 404, false)
+      }
+      where.subjectId = subjectId
+    }
+    if (parsedUnitNumber !== null) where.unitNumber = parsedUnitNumber
+    if (topicId) {
+      const topic = await findScopedTopic(learningScope, {
+        topicId,
+        subjectId,
+        unitNumber: parsedUnitNumber,
+      })
+      if (!topic) {
+        throw new ApiError('NOT_FOUND', 'Topic not found.', 404, false)
+      }
+      where.topicId = topicId
+    }
     if (type && type !== 'all') where.type = type
-    if (search) where.title = { contains: search }
+    if (language && language !== 'all') where.language = language
+    if (search) where.title = { contains: search, mode: 'insensitive' }
 
     const resources = await db.resource.findMany({
       where,
@@ -78,11 +115,29 @@ export async function POST(req: NextRequest) {
   return withApi(async () => {
     const user = await requireUser()
     const body = await parseBody(req, createContributionSchema)
+    const learningScope = await getStudentLearningScope(user.id)
 
-    // Validate subject exists (don't trust the FK error path).
-    const subject = await db.subject.findUnique({ where: { id: body.subjectId } })
-    if (!subject) {
+    if (!isSubjectIdInLearningScope(learningScope, body.subjectId)) {
       throw new ApiError('NOT_FOUND', 'Subject not found.', 404, false)
+    }
+    if (body.unitNumber) {
+      const unit = await findScopedUnit(learningScope!, {
+        subjectId: body.subjectId,
+        unitNumber: body.unitNumber,
+      })
+      if (!unit) {
+        throw new ApiError('NOT_FOUND', 'Unit not found.', 404, false)
+      }
+    }
+    if (body.topicId) {
+      const topic = await findScopedTopic(learningScope!, {
+        topicId: body.topicId,
+        subjectId: body.subjectId,
+        unitNumber: body.unitNumber ?? null,
+      })
+      if (!topic) {
+        throw new ApiError('NOT_FOUND', 'Topic not found.', 404, false)
+      }
     }
 
     // For URL-based types, require fileUrl; for content-based types, require content.

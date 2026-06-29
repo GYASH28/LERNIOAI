@@ -1,5 +1,9 @@
 import { db } from '@/lib/db'
 import { requireUser, withApi, okResponse } from '@/lib/auth'
+import {
+  getStudentLearningScope,
+  subjectIdsForLearningScope,
+} from '@/features/learning/server/get-student-learning-scope'
 
 /**
  * GET /api/analytics/calendar?year=2026
@@ -20,6 +24,8 @@ import { requireUser, withApi, okResponse } from '@/lib/auth'
 export async function GET(req: Request) {
   return withApi(async () => {
     const user = await requireUser()
+    const scope = await getStudentLearningScope(user.id)
+    const scopedSubjectIds = subjectIdsForLearningScope(scope)
 
     // Parse ?year= — default to current year, clamp to [2020, currentYear+1]
     const url = new URL(req.url)
@@ -42,7 +48,13 @@ export async function GET(req: Request) {
         select: { amount: true, createdAt: true },
       }),
       db.studySession.findMany({
-        where: { userId: user.id, startedAt: { gte: start, lt: end } },
+        where: {
+          userId: user.id,
+          startedAt: { gte: start, lt: end },
+          OR: scopedSubjectIds.length > 0
+            ? [{ subjectId: null }, { subjectId: { in: scopedSubjectIds } }]
+            : [{ subjectId: null }],
+        },
         select: { durationMins: true, startedAt: true },
       }),
     ])

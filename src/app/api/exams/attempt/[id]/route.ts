@@ -3,6 +3,10 @@ import { db } from '@/lib/db'
 import { requireUser, withApi, okResponse, ApiError } from '@/lib/auth'
 import { parseBody, autosaveAttemptSchema } from '@/lib/schemas'
 import type { ExamQuestionDTO, ReviewQuestionDTO } from '@/lib/questions'
+import {
+  getStudentLearningScope,
+  isSubjectIdInLearningScope,
+} from '@/features/learning/server/get-student-learning-scope'
 
 /**
  * GET /api/exams/attempt/[id]
@@ -29,6 +33,7 @@ export async function GET(
     if (!attempt) {
       throw new ApiError('NOT_FOUND', 'Attempt not found.', 404, false)
     }
+    await assertAttemptInLearningScope(user.id, attempt.subjectId)
 
     // ------------------------------------------------------------------
     // In-progress: hydrate from questionsJson + answersJson.
@@ -161,11 +166,12 @@ export async function PATCH(
 
     const attempt = await db.quizAttempt.findFirst({
       where: { id, userId: user.id },
-      select: { id: true, status: true, questionsJson: true },
+      select: { id: true, status: true, questionsJson: true, subjectId: true },
     })
     if (!attempt) {
       throw new ApiError('NOT_FOUND', 'Attempt not found.', 404, false)
     }
+    await assertAttemptInLearningScope(user.id, attempt.subjectId)
     if (attempt.status !== 'in_progress') {
       throw new ApiError(
         'CONFLICT',
@@ -195,4 +201,12 @@ export async function PATCH(
 
     return okResponse({ saved: true })
   })
+}
+
+async function assertAttemptInLearningScope(userId: string, subjectId: string | null) {
+  if (!subjectId) return
+  const scope = await getStudentLearningScope(userId)
+  if (!scope || !isSubjectIdInLearningScope(scope, subjectId)) {
+    throw new ApiError('NOT_FOUND', 'Attempt not found.', 404, false)
+  }
 }

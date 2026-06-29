@@ -1,5 +1,5 @@
 import { db } from '../src/lib/db'
-import { CWIT_DEPARTMENTS } from '../src/lib/cwit-departments'
+import { CWIT_ALL_DEPARTMENTS, isTargetCwitDepartmentCode } from '../src/lib/cwit-departments'
 
 async function main() {
   const institution = await db.institution.upsert({
@@ -18,7 +18,9 @@ async function main() {
   let departmentCount = 0
   let programmeCount = 0
 
-  for (const item of CWIT_DEPARTMENTS) {
+  for (const item of CWIT_ALL_DEPARTMENTS) {
+    const targetDepartment = isTargetCwitDepartmentCode(item.code)
+    const departmentStatus = targetDepartment ? 'active' : 'archived'
     const department = await db.department.upsert({
       where: {
         institutionId_code: {
@@ -30,7 +32,8 @@ async function main() {
         name: item.name,
         officialUrl: item.officialUrl,
         category: item.category,
-        status: 'active',
+        status: departmentStatus,
+        archivedAt: targetDepartment ? null : undefined,
         metadata: JSON.stringify({
           shortName: item.shortName,
           established: item.established ?? null,
@@ -48,7 +51,8 @@ async function main() {
         institutionId: institution.id,
         officialUrl: item.officialUrl,
         category: item.category,
-        status: 'active',
+        status: departmentStatus,
+        archivedAt: targetDepartment ? null : new Date(),
         metadata: JSON.stringify({
           shortName: item.shortName,
           established: item.established ?? null,
@@ -64,6 +68,8 @@ async function main() {
     departmentCount += 1
 
     if (item.programme) {
+      const targetProgramme = targetDepartment
+      const programmeStatus = targetProgramme ? 'active' : 'archived'
       await db.programme.upsert({
         where: {
           departmentId_code: {
@@ -76,7 +82,8 @@ async function main() {
           durationSemesters: 6,
           intake: item.programme.intake ?? null,
           intakeNote: item.programme.intakeNote ?? null,
-          status: item.programme.status ?? 'active',
+          status: programmeStatus,
+          archivedAt: targetProgramme ? null : undefined,
         },
         create: {
           name: item.programme.name,
@@ -85,7 +92,8 @@ async function main() {
           durationSemesters: 6,
           intake: item.programme.intake ?? null,
           intakeNote: item.programme.intakeNote ?? null,
-          status: item.programme.status ?? 'active',
+          status: programmeStatus,
+          archivedAt: targetProgramme ? null : new Date(),
         },
       })
       programmeCount += 1

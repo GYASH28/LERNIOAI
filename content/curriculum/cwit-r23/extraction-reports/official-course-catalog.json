@@ -1,0 +1,1398 @@
+{
+  "generatedAt": "2026-06-29T07:41:40.288Z",
+  "status": "review_only",
+  "note": "Official course catalog entries are extracted from official curriculum PDF course blocks. They identify source-backed course codes/names but do not assign semester placement.",
+  "totals": {
+    "officialCourses": 81,
+    "manifestSubjectCodes": 59,
+    "unplacedOfficialCourses": 26,
+    "compUnplacedOfficialCourses": 0,
+    "ciotUnplacedOfficialCourses": 26
+  },
+  "catalogEntries": [
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP1301",
+      "courseName": "Basic electrical and electronics engineering",
+      "sourcePages": [
+        76
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP1401",
+      "courseName": "Programming in c",
+      "sourcePages": [
+        85
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP1402",
+      "courseName": "Animation Techniques",
+      "sourcePages": [
+        152
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP1403",
+      "courseName": "PYTHON PROGRAMMING",
+      "sourcePages": [
+        194
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP1404",
+      "courseName": "Java Programming",
+      "sourcePages": [
+        202
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP1405",
+      "courseName": "Advanced Java Programming",
+      "sourcePages": [
+        230
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP1406",
+      "courseName": "PHP PROGRAMMING",
+      "sourcePages": [
+        237
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP1407",
+      "courseName": "Seminar and Project Initiation",
+      "sourcePages": [
+        245
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP1408",
+      "courseName": "Industrial Management for IT Industry",
+      "sourcePages": [
+        283
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP1701",
+      "courseName": "Basic Mathematics",
+      "sourcePages": [
+        21
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP1702",
+      "courseName": "Communication Skills (English)",
+      "sourcePages": [
+        38
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP1703",
+      "courseName": "Applied Mathematics",
+      "sourcePages": [
+        71
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP2201",
+      "courseName": "Engineering Graphics’ Skills",
+      "sourcePages": [
+        45
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP2401",
+      "courseName": "Linux basics",
+      "sourcePages": [
+        93
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP2402",
+      "courseName": "Data structure",
+      "sourcePages": [
+        117
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP2403",
+      "courseName": "Microprocessors and It’s Programming",
+      "sourcePages": [
+        134
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP2404",
+      "courseName": "Data Communication",
+      "sourcePages": [
+        141
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP2405",
+      "courseName": "User Interface Programming",
+      "sourcePages": [
+        147
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP2406",
+      "courseName": "Operating System",
+      "sourcePages": [
+        168
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP2407",
+      "courseName": "Database Management Systems",
+      "sourcePages": [
+        177
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP2408",
+      "courseName": "Computer Networks",
+      "sourcePages": [
+        186
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP2409",
+      "courseName": "Software Engineering",
+      "sourcePages": [
+        224
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP2410",
+      "courseName": "Emerging Trends in Computer Engineering",
+      "sourcePages": [
+        289
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP2411",
+      "courseName": "Machine Learning",
+      "sourcePages": [
+        297
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP2701",
+      "courseName": "Basic Science",
+      "sourcePages": [
+        28
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP3401",
+      "courseName": "Recent Trends in Computer Networks",
+      "sourcePages": [
+        257
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP3402",
+      "courseName": "Database Architecture and Emerging Technologies(DA&ET)",
+      "sourcePages": [
+        267
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP3403",
+      "courseName": "Fundamentals of Data Science",
+      "sourcePages": [
+        277
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP3404",
+      "courseName": "Network and Information Security",
+      "sourcePages": [
+        328
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP3405",
+      "courseName": "Cloud Computing",
+      "sourcePages": [
+        335
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP3406",
+      "courseName": "Data Analytics And Visualisation Using R/Python",
+      "sourcePages": [
+        341
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP4401",
+      "courseName": "Social and Life Skills",
+      "sourcePages": [
+        111
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP4402",
+      "courseName": "Indian Constitution",
+      "sourcePages": [
+        159
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP4403",
+      "courseName": "Ethics in Engineering Practice",
+      "sourcePages": [
+        217
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP4701",
+      "courseName": "Yoga And Meditation",
+      "sourcePages": [
+        66
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP5401",
+      "courseName": "INTERNSHIP(12WEEKS)",
+      "sourcePages": [
+        250
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP5402",
+      "courseName": "Capstone Project",
+      "sourcePages": [
+        322
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP6401",
+      "courseName": "ENGINEERING WORKSHOP PRACTICE",
+      "sourcePages": [
+        51
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP6402",
+      "courseName": "Fundamentals of ICT",
+      "sourcePages": [
+        56
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP6403",
+      "courseName": "Web Page Designing",
+      "sourcePages": [
+        99
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP6404",
+      "courseName": "Object Oriented Programming With C++",
+      "sourcePages": [
+        125
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP6405",
+      "courseName": "Entrepreneurship Development & Marketing Management",
+      "sourcePages": [
+        210
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP6406",
+      "courseName": "AI Tools and Techniques",
+      "sourcePages": [
+        308
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP6407",
+      "courseName": "Software Testing Tools and Automation",
+      "sourcePages": [
+        316
+      ]
+    },
+    {
+      "departmentCode": "COMP",
+      "courseCode": "R23CP6701",
+      "courseName": "Professional Communication",
+      "sourcePages": [
+        106
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI1601",
+      "courseName": "Programming In C",
+      "sourcePages": [
+        17
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI1602",
+      "courseName": "Animation Techniques",
+      "sourcePages": [
+        25
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI1603",
+      "courseName": "Python Programming",
+      "sourcePages": [
+        31
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI1604",
+      "courseName": "Java Programming",
+      "sourcePages": [
+        38
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI1605",
+      "courseName": "Seminar and Capstone Initiation",
+      "sourcePages": [
+        53
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI1606",
+      "courseName": "Industrial Management for IT Industry",
+      "sourcePages": [
+        46
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI1701",
+      "courseName": "Basic Mathematics",
+      "sourcePages": [
+        2
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI1703",
+      "courseName": "Applied Mathematics",
+      "sourcePages": [
+        10
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI2601",
+      "courseName": "Linux Basics",
+      "sourcePages": [
+        124
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI2602",
+      "courseName": "Data Structures",
+      "sourcePages": [
+        129
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23ci2603",
+      "courseName": "Embedded Operating System",
+      "sourcePages": [
+        153
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI2603",
+      "courseName": "Digital Techniques & Microcontroller",
+      "sourcePages": [
+        135
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI2604",
+      "courseName": "Internet of Things and Applications (IoTA)",
+      "sourcePages": [
+        142
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI2605",
+      "courseName": "User Interface Programming",
+      "sourcePages": [
+        148
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI2607",
+      "courseName": "Database Management Systems",
+      "sourcePages": [
+        161
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI2608",
+      "courseName": "Computer Networks And Security",
+      "sourcePages": [
+        169
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI2609",
+      "courseName": "Internet of Things Architecture and Protocols (IoTAP)",
+      "sourcePages": [
+        175
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI2610",
+      "courseName": "Software Engineering",
+      "sourcePages": [
+        208
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI2611",
+      "courseName": "Wireless Ad-Hoc Network",
+      "sourcePages": [
+        181
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI2612",
+      "courseName": "Iot In Robotics",
+      "sourcePages": [
+        192
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI2613",
+      "courseName": "Advanced Java Programming",
+      "sourcePages": [
+        200
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI2701",
+      "courseName": "Basic Science",
+      "sourcePages": [
+        115
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI3601",
+      "courseName": "Cyber Security",
+      "sourcePages": [
+        257
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI3602",
+      "courseName": "Cloud Computing",
+      "sourcePages": [
+        241
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI3603",
+      "courseName": "Data Analytics",
+      "sourcePages": [
+        249
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI4601",
+      "courseName": "Social and Life Skills",
+      "sourcePages": [
+        219
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI4602",
+      "courseName": "Indian Constitution",
+      "sourcePages": [
+        225
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI4603",
+      "courseName": "Problem-Solving and Ethics",
+      "sourcePages": [
+        235
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI6405",
+      "courseName": "Entrepreneurship Development & Marketing Management",
+      "sourcePages": [
+        108
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI6601",
+      "courseName": "Engineering Workshop Practice",
+      "sourcePages": [
+        71
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI6602",
+      "courseName": "Fundamentals of ICT",
+      "sourcePages": [
+        77
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI6603",
+      "courseName": "Web Page Design",
+      "sourcePages": [
+        89
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI6604",
+      "courseName": "Object Oriented Programming With C++",
+      "sourcePages": [
+        101
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI6607",
+      "courseName": "Software Testing tools and Automation",
+      "sourcePages": [
+        65
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI6701",
+      "courseName": "Professional Communication",
+      "sourcePages": [
+        96
+      ]
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23EX4701",
+      "courseName": "YOGA AND MEDITATION",
+      "sourcePages": [
+        215
+      ]
+    }
+  ],
+  "manifestSubjects": [
+    {
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CI1701",
+      "subjectName": "Basic Mathematics",
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-1.json"
+    },
+    {
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CI2701",
+      "subjectName": "Basic Science",
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-1.json"
+    },
+    {
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CI1702",
+      "subjectName": "Communication Skills (English)",
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-1.json"
+    },
+    {
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CI2201",
+      "subjectName": "Engineering Graphics",
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-1.json"
+    },
+    {
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CI6601",
+      "subjectName": "Engineering Workshop Practice",
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-1.json"
+    },
+    {
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CI6602",
+      "subjectName": "Fundamentals of ICT",
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-1.json"
+    },
+    {
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CI4701",
+      "subjectName": "Yoga and Meditation",
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-1.json"
+    },
+    {
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CI1703",
+      "subjectName": "Applied Mathematics",
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-2.json"
+    },
+    {
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CI1301",
+      "subjectName": "Basic Electrical and Electronics Engineering",
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-2.json"
+    },
+    {
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CI1601",
+      "subjectName": "Programming in C",
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-2.json"
+    },
+    {
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CI2601",
+      "subjectName": "Linux Basics",
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-2.json"
+    },
+    {
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CI6603",
+      "subjectName": "Web Page Designing",
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-2.json"
+    },
+    {
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CI6701",
+      "subjectName": "Professional Communication",
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-2.json"
+    },
+    {
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CI4601",
+      "subjectName": "Social and Life Skills",
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-2.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CP1701",
+      "subjectName": "Basic Mathematics",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-1.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CP2701",
+      "subjectName": "Basic Science",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-1.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CP1702",
+      "subjectName": "Communication Skills (English)",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-1.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CP2201",
+      "subjectName": "Engineering Graphics",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-1.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CP6401",
+      "subjectName": "Engineering Workshop Practice",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-1.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CP6402",
+      "subjectName": "Fundamentals of ICT",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-1.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CP4701",
+      "subjectName": "Yoga and Meditation",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-1.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CP1703",
+      "subjectName": "Applied Mathematics",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-2.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CP1301",
+      "subjectName": "Basic Electrical and Electronics Engineering",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-2.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CP1401",
+      "subjectName": "Programming in C",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-2.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CP2401",
+      "subjectName": "Linux Basics",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-2.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CP6403",
+      "subjectName": "Web Page Designing",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-2.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CP6701",
+      "subjectName": "Professional Communication",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-2.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CP4401",
+      "subjectName": "Social and Life Skills",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-2.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 3,
+      "officialSubjectCode": "R23CP2402",
+      "subjectName": "Data Structure Using C",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-3.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 3,
+      "officialSubjectCode": "R23CP6404",
+      "subjectName": "Object Oriented Programming Using C++",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-3.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 3,
+      "officialSubjectCode": "R23CP2403",
+      "subjectName": "Microprocessors & Its Programming",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-3.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 3,
+      "officialSubjectCode": "R23CP2404",
+      "subjectName": "Data Communication",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-3.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 3,
+      "officialSubjectCode": "R23CP2405",
+      "subjectName": "User Interface Programming",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-3.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 3,
+      "officialSubjectCode": "R23CP1402",
+      "subjectName": "Animation Techniques",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-3.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 3,
+      "officialSubjectCode": "R23CP4402",
+      "subjectName": "Indian Constitution",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-3.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 4,
+      "officialSubjectCode": "R23CP2406",
+      "subjectName": "Operating System",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-4.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 4,
+      "officialSubjectCode": "R23CP2407",
+      "subjectName": "Database Management System",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-4.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 4,
+      "officialSubjectCode": "R23CP2408",
+      "subjectName": "Computer Networks",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-4.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 4,
+      "officialSubjectCode": "R23CP1403",
+      "subjectName": "Python Programming",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-4.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 4,
+      "officialSubjectCode": "R23CP1404",
+      "subjectName": "Java Programming",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-4.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 4,
+      "officialSubjectCode": "R23CP6405",
+      "subjectName": "Entrepreneurship Development & Marketing Management",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-4.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 4,
+      "officialSubjectCode": "R23CP4403",
+      "subjectName": "Ethics in Engineering Practice",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-4.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CP2409",
+      "subjectName": "Software Engineering",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-5.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CP1405",
+      "subjectName": "Advance Java Programming",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-5.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CP1406",
+      "subjectName": "PHP Programming",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-5.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CP1407",
+      "subjectName": "Seminar And Capstone Initiation",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-5.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CP5401",
+      "subjectName": "Internship",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-5.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CP3401",
+      "subjectName": "Recent Trends in Computer Networks",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-5.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CP3402",
+      "subjectName": "Database Architecture and Emerging Technologies",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-5.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CP3403",
+      "subjectName": "Fundamentals of Data Science",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-5.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CP1408",
+      "subjectName": "Industrial Management For IT Industry",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-6.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CP2410",
+      "subjectName": "Emerging Trends In Computer Engineering",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-6.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CP2411",
+      "subjectName": "Machine Learning",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-6.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CP6406",
+      "subjectName": "AI Tools and Techniques",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-6.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CP6407",
+      "subjectName": "Software Testing Tools and Automation",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-6.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CP5402",
+      "subjectName": "Capstone Project",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-6.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CP3404",
+      "subjectName": "Network and Information Security",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-6.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CP3405",
+      "subjectName": "Cloud Computing",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-6.json"
+    },
+    {
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CP3406",
+      "subjectName": "Data Analytics and Visualization Using R Programming",
+      "manifest": "content/curriculum/cwit-r23/comp/semester-6.json"
+    }
+  ],
+  "unplacedOfficialCourses": [
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI1602",
+      "courseName": "Animation Techniques",
+      "sourcePages": [
+        25
+      ],
+      "placementStatus": "official_course_unplaced_in_local_manifest",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI1603",
+      "courseName": "Python Programming",
+      "sourcePages": [
+        31
+      ],
+      "placementStatus": "official_course_unplaced_in_local_manifest",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI1604",
+      "courseName": "Java Programming",
+      "sourcePages": [
+        38
+      ],
+      "placementStatus": "official_course_unplaced_in_local_manifest",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI1605",
+      "courseName": "Seminar and Capstone Initiation",
+      "sourcePages": [
+        53
+      ],
+      "placementStatus": "official_course_unplaced_in_local_manifest",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI1606",
+      "courseName": "Industrial Management for IT Industry",
+      "sourcePages": [
+        46
+      ],
+      "placementStatus": "official_course_unplaced_in_local_manifest",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI2602",
+      "courseName": "Data Structures",
+      "sourcePages": [
+        129
+      ],
+      "placementStatus": "official_course_unplaced_in_local_manifest",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23ci2603",
+      "courseName": "Embedded Operating System",
+      "sourcePages": [
+        153
+      ],
+      "placementStatus": "official_course_unplaced_in_local_manifest",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI2603",
+      "courseName": "Digital Techniques & Microcontroller",
+      "sourcePages": [
+        135
+      ],
+      "placementStatus": "official_course_unplaced_in_local_manifest",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI2604",
+      "courseName": "Internet of Things and Applications (IoTA)",
+      "sourcePages": [
+        142
+      ],
+      "placementStatus": "official_course_unplaced_in_local_manifest",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI2605",
+      "courseName": "User Interface Programming",
+      "sourcePages": [
+        148
+      ],
+      "placementStatus": "official_course_unplaced_in_local_manifest",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI2607",
+      "courseName": "Database Management Systems",
+      "sourcePages": [
+        161
+      ],
+      "placementStatus": "official_course_unplaced_in_local_manifest",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI2608",
+      "courseName": "Computer Networks And Security",
+      "sourcePages": [
+        169
+      ],
+      "placementStatus": "official_course_unplaced_in_local_manifest",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI2609",
+      "courseName": "Internet of Things Architecture and Protocols (IoTAP)",
+      "sourcePages": [
+        175
+      ],
+      "placementStatus": "official_course_unplaced_in_local_manifest",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI2610",
+      "courseName": "Software Engineering",
+      "sourcePages": [
+        208
+      ],
+      "placementStatus": "official_course_unplaced_in_local_manifest",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI2611",
+      "courseName": "Wireless Ad-Hoc Network",
+      "sourcePages": [
+        181
+      ],
+      "placementStatus": "official_course_unplaced_in_local_manifest",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI2612",
+      "courseName": "Iot In Robotics",
+      "sourcePages": [
+        192
+      ],
+      "placementStatus": "official_course_unplaced_in_local_manifest",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI2613",
+      "courseName": "Advanced Java Programming",
+      "sourcePages": [
+        200
+      ],
+      "placementStatus": "official_course_unplaced_in_local_manifest",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI3601",
+      "courseName": "Cyber Security",
+      "sourcePages": [
+        257
+      ],
+      "placementStatus": "official_course_unplaced_in_local_manifest",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI3602",
+      "courseName": "Cloud Computing",
+      "sourcePages": [
+        241
+      ],
+      "placementStatus": "official_course_unplaced_in_local_manifest",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI3603",
+      "courseName": "Data Analytics",
+      "sourcePages": [
+        249
+      ],
+      "placementStatus": "official_course_unplaced_in_local_manifest",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI4602",
+      "courseName": "Indian Constitution",
+      "sourcePages": [
+        225
+      ],
+      "placementStatus": "official_course_unplaced_in_local_manifest",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI4603",
+      "courseName": "Problem-Solving and Ethics",
+      "sourcePages": [
+        235
+      ],
+      "placementStatus": "official_course_unplaced_in_local_manifest",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI6405",
+      "courseName": "Entrepreneurship Development & Marketing Management",
+      "sourcePages": [
+        108
+      ],
+      "placementStatus": "official_course_unplaced_in_local_manifest",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI6604",
+      "courseName": "Object Oriented Programming With C++",
+      "sourcePages": [
+        101
+      ],
+      "placementStatus": "official_course_unplaced_in_local_manifest",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23CI6607",
+      "courseName": "Software Testing tools and Automation",
+      "sourcePages": [
+        65
+      ],
+      "placementStatus": "official_course_unplaced_in_local_manifest",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "departmentCode": "CIOT",
+      "courseCode": "R23EX4701",
+      "courseName": "YOGA AND MEDITATION",
+      "sourcePages": [
+        215
+      ],
+      "placementStatus": "official_course_unplaced_in_local_manifest",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    }
+  ]
+}

@@ -22,6 +22,11 @@ import { db } from '@/lib/db'
 import { requireUser, withApi, okResponse, ApiError } from '@/lib/auth'
 import { parseBody } from '@/lib/schemas'
 import { evaluateAnswer } from '@/lib/ai/evaluator'
+import {
+  getStudentLearningScope,
+  isSubjectIdInLearningScope,
+  isTopicIdInLearningScope,
+} from '@/features/learning/server/get-student-learning-scope'
 
 const evaluateAnswerSchema = z.object({
   questionId: z.string().min(1),
@@ -43,6 +48,13 @@ export const POST = (req: NextRequest) =>
       },
     })
     if (!question) {
+      throw new ApiError('NOT_FOUND', 'Question not found.', 404, false)
+    }
+    const scope = await getStudentLearningScope(user.id)
+    if (!scope || !isSubjectIdInLearningScope(scope, question.subjectId)) {
+      throw new ApiError('NOT_FOUND', 'Question not found.', 404, false)
+    }
+    if (question.topicId && !isTopicIdInLearningScope(scope, question.topicId)) {
       throw new ApiError('NOT_FOUND', 'Question not found.', 404, false)
     }
 

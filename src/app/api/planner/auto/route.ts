@@ -2,6 +2,11 @@ import { NextRequest } from 'next/server'
 import { db } from '@/lib/db'
 import { requireUser, withApi, okResponse, ApiError } from '@/lib/auth'
 import { parseBody, autoPlanSchema } from '@/lib/schemas'
+import {
+  getStudentLearningScope,
+  subjectIdsForLearningScope,
+  topicIdsForLearningScope,
+} from '@/features/learning/server/get-student-learning-scope'
 
 /**
  * POST /api/planner/auto
@@ -42,6 +47,12 @@ export async function POST(req: NextRequest) {
     if (!user) {
       throw new ApiError('NOT_FOUND', 'User profile not found.', 404, false)
     }
+    const scope = await getStudentLearningScope(user.id)
+    const scopedSubjectIds = subjectIdsForLearningScope(scope)
+    const scopedTopicIds = topicIdsForLearningScope(scope)
+    if (!scope || scopedSubjectIds.length === 0) {
+      throw new ApiError('BAD_REQUEST', 'Learning scope is not available for planning.', 400, false)
+    }
 
     const dailyMins = user.dailyMins && user.dailyMins > 0 ? user.dailyMins : 60
 
@@ -81,6 +92,15 @@ export async function POST(req: NextRequest) {
       where: {
         userId: user.id,
         OR: [{ state: { in: ['weak', 'learning'] } }, { score: { lt: 60 } }],
+        topic: {
+          status: 'active',
+          archivedAt: null,
+          unit: {
+            status: 'active',
+            archivedAt: null,
+            subjectId: { in: scopedSubjectIds },
+          },
+        },
       },
       include: {
         topic: {
@@ -101,6 +121,15 @@ export async function POST(req: NextRequest) {
       where: {
         userId: user.id,
         nextDueDate: { lte: sevenDaysAhead },
+        topic: {
+          status: 'active',
+          archivedAt: null,
+          unit: {
+            status: 'active',
+            archivedAt: null,
+            subjectId: { in: scopedSubjectIds },
+          },
+        },
       },
       include: {
         topic: {
@@ -132,7 +161,15 @@ export async function POST(req: NextRequest) {
 
     // ---- Existing tasks for dedup (next 14 days) -----------------------------
     const existingTasks = await db.studyTask.findMany({
-      where: { userId: user.id, scheduledDate: { gte: todayStr } },
+      where: {
+        userId: user.id,
+        scheduledDate: { gte: todayStr },
+        OR: [
+          { subjectId: { in: scopedSubjectIds } },
+          { topicId: { in: scopedTopicIds } },
+          { AND: [{ subjectId: null }, { topicId: null }] },
+        ],
+      },
       select: { scheduledDate: true, title: true, completedAt: true },
     })
 
@@ -262,6 +299,11 @@ export async function POST(req: NextRequest) {
             userId: user.id,
             completedAt: null,
             scheduledDate: { gte: todayStr },
+            OR: [
+              { subjectId: { in: scopedSubjectIds } },
+              { topicId: { in: scopedTopicIds } },
+              { AND: [{ subjectId: null }, { topicId: null }] },
+            ],
           },
         })
       }

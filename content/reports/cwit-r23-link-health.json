@@ -1,0 +1,2054 @@
+{
+  "manifestVersion": 1,
+  "generatedAt": "2026-06-28T16:26:46.176Z",
+  "source": "content\\resources\\youtube-candidates\\cwit-r23-youtube-candidates.metadata.json",
+  "status": "report_only",
+  "note": "This report checks URL reachability only. YouTube playlists still require YouTube Data API or manual review for membership, duration, captions and embeddability.",
+  "limitApplied": null,
+  "timeoutMs": 8000,
+  "summary": {
+    "checked": 100,
+    "healthy": 100,
+    "redirected": 0,
+    "stale": 0,
+    "unhealthy": 0,
+    "unknown": 0
+  },
+  "resources": [
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PL5ZIcm-hgbJM1xRu_2OUf0qRXBNf9Z3n-",
+      "finalUrl": "https://www.youtube.com/playlist?list=PL5ZIcm-hgbJM1xRu_2OUf0qRXBNf9Z3n-",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_2d0c5d1f9322",
+      "resourceKind": "playlist",
+      "subjectTitle": "Basic Mathematics",
+      "officialSubjectCodes": [
+        "R23CI1701",
+        "R23CP1701"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLI8OA8TUlOBlddBz37DpVJfqmR4yC28ai",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLI8OA8TUlOBlddBz37DpVJfqmR4yC28ai",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_d525bb1db2c0",
+      "resourceKind": "playlist",
+      "subjectTitle": "Basic Mathematics",
+      "officialSubjectCodes": [
+        "R23CI1701",
+        "R23CP1701"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLoh2jNeWbsgZoYQYB0GxZoNFVoDn8vKZM",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLoh2jNeWbsgZoYQYB0GxZoNFVoDn8vKZM",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_ac3c0109a9ee",
+      "resourceKind": "playlist",
+      "subjectTitle": "Basic Mathematics",
+      "officialSubjectCodes": [
+        "R23CI1701",
+        "R23CP1701"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLm_MSClsnwm8p9NuVzdMZUiP5Djm8DVaV",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLm_MSClsnwm8p9NuVzdMZUiP5Djm8DVaV",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_9eb83534f888",
+      "resourceKind": "playlist",
+      "subjectTitle": "Basic Science - Physics and Chemistry",
+      "officialSubjectCodes": [
+        "R23CI2701",
+        "R23CP2701"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLnuii5I0tFh7TEeLYoZ4b-S_abStOp5mW",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLnuii5I0tFh7TEeLYoZ4b-S_abStOp5mW",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_8de02f42db07",
+      "resourceKind": "playlist",
+      "subjectTitle": "Basic Science - Physics and Chemistry",
+      "officialSubjectCodes": [
+        "R23CI2701",
+        "R23CP2701"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLWb9C8G05qzt7u0HDraRSS3lQ8jLJx1G6",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLWb9C8G05qzt7u0HDraRSS3lQ8jLJx1G6",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_9c43edda7ee4",
+      "resourceKind": "playlist",
+      "subjectTitle": "Basic Science - Physics and Chemistry",
+      "officialSubjectCodes": [
+        "R23CI2701",
+        "R23CP2701"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PL1s7mOle6KPbVCFZ871mzdvvPTEkAK3Us",
+      "finalUrl": "https://www.youtube.com/playlist?list=PL1s7mOle6KPbVCFZ871mzdvvPTEkAK3Us",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_5dd7d204b9b1",
+      "resourceKind": "playlist",
+      "subjectTitle": "Communication Skills - English",
+      "officialSubjectCodes": [
+        "R23CI1702",
+        "R23CP1702"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PL9vL8QnJ37pIEbyEcFDSwwu8eo1UtCtsm",
+      "finalUrl": "https://www.youtube.com/playlist?list=PL9vL8QnJ37pIEbyEcFDSwwu8eo1UtCtsm",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_99f96c4d711b",
+      "resourceKind": "playlist",
+      "subjectTitle": "Communication Skills - English",
+      "officialSubjectCodes": [
+        "R23CI1702",
+        "R23CP1702"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLygzxZFYe8Z3mH7Sr9SaHHwQWrUql8yga",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLygzxZFYe8Z3mH7Sr9SaHHwQWrUql8yga",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_eaaba3c5f5e1",
+      "resourceKind": "playlist",
+      "subjectTitle": "Engineering Graphics",
+      "officialSubjectCodes": [
+        "R23CI2201",
+        "R23CP2201"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLZKrqjMKcJMkC5o3Urv98fdJpbD8RO1al",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLZKrqjMKcJMkC5o3Urv98fdJpbD8RO1al",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_203d7cc59337",
+      "resourceKind": "playlist",
+      "subjectTitle": "Engineering Graphics",
+      "officialSubjectCodes": [
+        "R23CI2201",
+        "R23CP2201"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLZZO-6oaoZNUPPcmHkZMe99_5JxW1ed2p",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLZZO-6oaoZNUPPcmHkZMe99_5JxW1ed2p",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_e579cdd9163f",
+      "resourceKind": "playlist",
+      "subjectTitle": "Engineering Graphics",
+      "officialSubjectCodes": [
+        "R23CI2201",
+        "R23CP2201"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PL8Lrb8MsHQ7HKxnMWDRHWe7bcgBAd5vJw",
+      "finalUrl": "https://www.youtube.com/playlist?list=PL8Lrb8MsHQ7HKxnMWDRHWe7bcgBAd5vJw",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_f970cb2967a9",
+      "resourceKind": "playlist",
+      "subjectTitle": "Engineering Workshop Practice - Computer Group",
+      "officialSubjectCodes": [
+        "R23CI6601",
+        "R23CP6401"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLFe9iOZ1HkC5U8C8w5hDSTS0rZZQiU364",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLFe9iOZ1HkC5U8C8w5hDSTS0rZZQiU364",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_02310979c2cc",
+      "resourceKind": "playlist",
+      "subjectTitle": "Engineering Workshop Practice - Computer Group",
+      "officialSubjectCodes": [
+        "R23CI6601",
+        "R23CP6401"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLioynBxm_xWuqdt4bq8jyl8FuqVhyoO7q",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLioynBxm_xWuqdt4bq8jyl8FuqVhyoO7q",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_8620a680d7d1",
+      "resourceKind": "playlist",
+      "subjectTitle": "Engineering Workshop Practice - Computer Group",
+      "officialSubjectCodes": [
+        "R23CI6601",
+        "R23CP6401"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLS0spxc8nUsAt5iBvXjRlzr4fsep5Ov-o",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLS0spxc8nUsAt5iBvXjRlzr4fsep5Ov-o",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_076c175c3519",
+      "resourceKind": "playlist",
+      "subjectTitle": "Engineering Workshop Practice - Computer Group",
+      "officialSubjectCodes": [
+        "R23CI6601",
+        "R23CP6401"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PL2fcFLN5f1xNVUhSP_MsLynZX2eShi36z",
+      "finalUrl": "https://www.youtube.com/playlist?list=PL2fcFLN5f1xNVUhSP_MsLynZX2eShi36z",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_be0c62d6a17e",
+      "resourceKind": "playlist",
+      "subjectTitle": "Fundamentals of ICT",
+      "officialSubjectCodes": [
+        "R23CI6602",
+        "R23CP6402"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLxCxO_FWPIhtWs0utLrv-qWIKB_KbC2tS",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLxCxO_FWPIhtWs0utLrv-qWIKB_KbC2tS",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_cd58e294aed4",
+      "resourceKind": "playlist",
+      "subjectTitle": "Fundamentals of ICT",
+      "officialSubjectCodes": [
+        "R23CI6602",
+        "R23CP6402"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLYsKWjcnp5DJS9zW6UsjSahmd-mPUh-Js",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLYsKWjcnp5DJS9zW6UsjSahmd-mPUh-Js",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_b82418703b37",
+      "resourceKind": "playlist",
+      "subjectTitle": "Fundamentals of ICT",
+      "officialSubjectCodes": [
+        "R23CI6602",
+        "R23CP6402"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PL508C30656B253DBF",
+      "finalUrl": "https://www.youtube.com/playlist?list=PL508C30656B253DBF",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_a09c73a2e6ee",
+      "resourceKind": "playlist",
+      "subjectTitle": "OPTIONAL VIDEO SUPPORT",
+      "officialSubjectCodes": [
+        "R23CI4701",
+        "R23CP4701"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLWn8QRqY8ySxoL2FZNzZ6XeaoBwhCm6Hw",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLWn8QRqY8ySxoL2FZNzZ6XeaoBwhCm6Hw",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_34005dbdbd01",
+      "resourceKind": "playlist",
+      "subjectTitle": "OPTIONAL VIDEO SUPPORT",
+      "officialSubjectCodes": [
+        "R23CI4701",
+        "R23CP4701"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PL5ZIcm-hgbJPc0UXeviNFMKwWUoaqavb0",
+      "finalUrl": "https://www.youtube.com/playlist?list=PL5ZIcm-hgbJPc0UXeviNFMKwWUoaqavb0",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_c81bb727a78b",
+      "resourceKind": "playlist",
+      "subjectTitle": "Applied Mathematics",
+      "officialSubjectCodes": [
+        "R23CI1703",
+        "R23CP1703"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLI8OA8TUlOBk171Ca4pAwUIp9CmtKwocs",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLI8OA8TUlOBk171Ca4pAwUIp9CmtKwocs",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_6e2705acd9fb",
+      "resourceKind": "playlist",
+      "subjectTitle": "Applied Mathematics",
+      "officialSubjectCodes": [
+        "R23CI1703",
+        "R23CP1703"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLzwxHFTohkSpLLEib3e0I5IYNECGphzgL",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLzwxHFTohkSpLLEib3e0I5IYNECGphzgL",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_b2796a06217c",
+      "resourceKind": "playlist",
+      "subjectTitle": "Applied Mathematics",
+      "officialSubjectCodes": [
+        "R23CI1703",
+        "R23CP1703"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PL-iXAqgUNsnbtO_IFKziLrqRavXeu5Ben",
+      "finalUrl": "https://www.youtube.com/playlist?list=PL-iXAqgUNsnbtO_IFKziLrqRavXeu5Ben",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_87b12e37031c",
+      "resourceKind": "playlist",
+      "subjectTitle": "CRITICAL",
+      "officialSubjectCodes": [
+        "R23CI1601",
+        "R23CP1401"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PL3sp5tnO0dkOS1XP3Y2TiY7MbvQxns9X4",
+      "finalUrl": "https://www.youtube.com/playlist?list=PL3sp5tnO0dkOS1XP3Y2TiY7MbvQxns9X4",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_bc9427e6f959",
+      "resourceKind": "playlist",
+      "subjectTitle": "CRITICAL",
+      "officialSubjectCodes": [
+        "R23CI1601",
+        "R23CP1401"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLBlnK6fEyqRggZZgYpPMUxdY1CYkZtARR",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLBlnK6fEyqRggZZgYpPMUxdY1CYkZtARR",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_ec2a623bfe05",
+      "resourceKind": "playlist",
+      "subjectTitle": "CRITICAL",
+      "officialSubjectCodes": [
+        "R23CI1601",
+        "R23CP1401"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PL_OdF9Z6GmVYOINTG45tGE3wNG-KvRMJa",
+      "finalUrl": "https://www.youtube.com/playlist?list=PL_OdF9Z6GmVYOINTG45tGE3wNG-KvRMJa",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_e9f6bf272e8c",
+      "resourceKind": "playlist",
+      "subjectTitle": "Linux Basics",
+      "officialSubjectCodes": [
+        "R23CI2601",
+        "R23CP2401"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLA3GkZPtsafbK3YyxdRzF5yh1TuwGn_Lu",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafbK3YyxdRzF5yh1TuwGn_Lu",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_e92eaebf5209",
+      "resourceKind": "playlist",
+      "subjectTitle": "Linux Basics",
+      "officialSubjectCodes": [
+        "R23CI2601",
+        "R23CP2401"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLLWdCRHpILQaxDGbblmbHL_sM0qV_kcw-",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLLWdCRHpILQaxDGbblmbHL_sM0qV_kcw-",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_9ea415d469d4",
+      "resourceKind": "playlist",
+      "subjectTitle": "Linux Basics",
+      "officialSubjectCodes": [
+        "R23CI2601",
+        "R23CP2401"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLmUFXlqL3HKRCdGyjuP87Iaht1_Tshp39",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLmUFXlqL3HKRCdGyjuP87Iaht1_Tshp39",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_044e55e36af3",
+      "resourceKind": "playlist",
+      "subjectTitle": "Web Page Designing",
+      "officialSubjectCodes": [
+        "R23CI6603",
+        "R23CP6403"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLu0W_9lII9agiCUZYRsvtGTXdxkzPyItg",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLu0W_9lII9agiCUZYRsvtGTXdxkzPyItg",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_35903e5760b9",
+      "resourceKind": "playlist",
+      "subjectTitle": "Web Page Designing",
+      "officialSubjectCodes": [
+        "R23CI6603",
+        "R23CP6403"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLZ8-rdXtysy5zLdQ6uX7VDQFF5koiGLe7",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLZ8-rdXtysy5zLdQ6uX7VDQFF5koiGLe7",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_16d5ba9bb645",
+      "resourceKind": "playlist",
+      "subjectTitle": "Web Page Designing",
+      "officialSubjectCodes": [
+        "R23CI6603",
+        "R23CP6403"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PL43PaEDPkuyG-fRxdVnD1ro8J29Xtojhb",
+      "finalUrl": "https://www.youtube.com/playlist?list=PL43PaEDPkuyG-fRxdVnD1ro8J29Xtojhb",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_277f9d11a2d4",
+      "resourceKind": "playlist",
+      "subjectTitle": "Professional Communication",
+      "officialSubjectCodes": [
+        "R23CI4601",
+        "R23CI6701",
+        "R23CP4401",
+        "R23CP6701"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLbRMhDVUMngd7TO4neo4G1gMSQCHCQ9rE",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLbRMhDVUMngd7TO4neo4G1gMSQCHCQ9rE",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_45f15073969d",
+      "resourceKind": "playlist",
+      "subjectTitle": "Professional Communication",
+      "officialSubjectCodes": [
+        "R23CI4601",
+        "R23CI6701",
+        "R23CP4401",
+        "R23CP6701"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLyqSpQzTE6M85-7YIdoH3OyvDEghd5JLu",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLyqSpQzTE6M85-7YIdoH3OyvDEghd5JLu",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_b69a318a50cc",
+      "resourceKind": "playlist",
+      "subjectTitle": "Professional Communication",
+      "officialSubjectCodes": [
+        "R23CI4601",
+        "R23CI6701",
+        "R23CP4401",
+        "R23CP6701"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PL6yu2hI-rPKA1URkLQ7__EdadsPLXSqUZ",
+      "finalUrl": "https://www.youtube.com/playlist?list=PL6yu2hI-rPKA1URkLQ7__EdadsPLXSqUZ",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_36415213d787",
+      "resourceKind": "playlist",
+      "subjectTitle": "CRITICAL FOR IOT",
+      "officialSubjectCodes": [
+        "R23CI1301"
+      ],
+      "programmeCodes": [
+        "DCIOT"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PL7987F30C41A9ADCB",
+      "finalUrl": "https://www.youtube.com/playlist?list=PL7987F30C41A9ADCB",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_9d8585f1b6a4",
+      "resourceKind": "playlist",
+      "subjectTitle": "CRITICAL FOR IOT",
+      "officialSubjectCodes": [
+        "R23CI1301"
+      ],
+      "programmeCodes": [
+        "DCIOT"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLXOYj6DUOGrqjdqkWSZi4we3Q3oWCvmsW",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLXOYj6DUOGrqjdqkWSZi4we3Q3oWCvmsW",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_3c9a3e54b28f",
+      "resourceKind": "playlist",
+      "subjectTitle": "CRITICAL FOR IOT",
+      "officialSubjectCodes": [
+        "R23CI1301"
+      ],
+      "programmeCodes": [
+        "DCIOT"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLhXQeMKeH2-KpEXsbYzFFAeN6acs5ifAG",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLhXQeMKeH2-KpEXsbYzFFAeN6acs5ifAG",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_81d8a5fd497c",
+      "resourceKind": "playlist",
+      "subjectTitle": "CRITICAL",
+      "officialSubjectCodes": [
+        "R23CI2602",
+        "R23CP2402"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLxCzCOWd7aiEwaANNt3OqJPVIxwp2ebiT",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLxCzCOWd7aiEwaANNt3OqJPVIxwp2ebiT",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_2631ca79538a",
+      "resourceKind": "playlist",
+      "subjectTitle": "CRITICAL",
+      "officialSubjectCodes": [
+        "R23CI2602",
+        "R23CP2402"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLBlnK6fEyqRh6isJ01MBnbNpV3ZsktSyS",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLBlnK6fEyqRh6isJ01MBnbNpV3ZsktSyS",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_cad32c43529c",
+      "resourceKind": "playlist",
+      "subjectTitle": "CRITICAL",
+      "officialSubjectCodes": [
+        "R23CI2605",
+        "R23CI6604",
+        "R23CP2405",
+        "R23CP6404"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLdo5W4Nhv31YU5Wx1dopka58teWP9aCee",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLdo5W4Nhv31YU5Wx1dopka58teWP9aCee",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_e196e069af18",
+      "resourceKind": "playlist",
+      "subjectTitle": "CRITICAL",
+      "officialSubjectCodes": [
+        "R23CI2605",
+        "R23CI6604",
+        "R23CP2405",
+        "R23CP6404"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/watch?v=0tM-l_ZsxjU",
+      "finalUrl": "https://www.youtube.com/watch?v=0tM-l_ZsxjU",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_84562c8f0abe",
+      "resourceKind": "video",
+      "subjectTitle": "CRITICAL",
+      "officialSubjectCodes": [
+        "R23CI2605",
+        "R23CI6604",
+        "R23CP2405",
+        "R23CP6404"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/watch?v=Kmgo00avvEw",
+      "finalUrl": "https://www.youtube.com/watch?v=Kmgo00avvEw",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_241368c73df2",
+      "resourceKind": "video",
+      "subjectTitle": "CRITICAL",
+      "officialSubjectCodes": [
+        "R23CI2605",
+        "R23CI6604",
+        "R23CP2405",
+        "R23CP6404"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLBIfK3DghyO6SVpIKk3QnToRTawKj6LaF",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLBIfK3DghyO6SVpIKk3QnToRTawKj6LaF",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_78497b7a0e3a",
+      "resourceKind": "playlist",
+      "subjectTitle": "Animation Techniques",
+      "officialSubjectCodes": [
+        "R23CI1602",
+        "R23CP1402",
+        "R23CP2403"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLBlnK6fEyqRgyFCCgqdcBowmSp_BTKs4F",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLBlnK6fEyqRgyFCCgqdcBowmSp_BTKs4F",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_e2aafa72c46a",
+      "resourceKind": "playlist",
+      "subjectTitle": "Animation Techniques",
+      "officialSubjectCodes": [
+        "R23CI1602",
+        "R23CP1402",
+        "R23CP2403"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLeaNmybb7X-vUsE24RyEBGqhfAlx4LxXz",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLeaNmybb7X-vUsE24RyEBGqhfAlx4LxXz",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_5ccca171b2d5",
+      "resourceKind": "playlist",
+      "subjectTitle": "Animation Techniques",
+      "officialSubjectCodes": [
+        "R23CI1602",
+        "R23CP1402",
+        "R23CP2403"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLgGbWId6zgaWNZu4bG-DvAWsN1G1GYUiw",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLgGbWId6zgaWNZu4bG-DvAWsN1G1GYUiw",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_f60363a5a063",
+      "resourceKind": "playlist",
+      "subjectTitle": "Animation Techniques",
+      "officialSubjectCodes": [
+        "R23CI1602",
+        "R23CP1402",
+        "R23CP2403"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PL-6c20OcmteA3xDpzoHqOHOIVT01UFrFI",
+      "finalUrl": "https://www.youtube.com/playlist?list=PL-6c20OcmteA3xDpzoHqOHOIVT01UFrFI",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_89a8882463c4",
+      "resourceKind": "playlist",
+      "subjectTitle": "Data Communication - CP Only",
+      "officialSubjectCodes": [
+        "R23CI2603",
+        "R23CP2404"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLBlnK6fEyqRgMCUAG0XRw78UA8qnv6jEx",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLBlnK6fEyqRgMCUAG0XRw78UA8qnv6jEx",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_330546df0f08",
+      "resourceKind": "playlist",
+      "subjectTitle": "Data Communication - CP Only",
+      "officialSubjectCodes": [
+        "R23CI2603",
+        "R23CP2404"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLBlnK6fEyqRjYKHIzipvvuuZMTlJKsvQK",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLBlnK6fEyqRjYKHIzipvvuuZMTlJKsvQK",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_ba14ec80d3f6",
+      "resourceKind": "playlist",
+      "subjectTitle": "Data Communication - CP Only",
+      "officialSubjectCodes": [
+        "R23CI2603",
+        "R23CP2404"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLdguAlzSoZprsOmvd_ZeuUM-5HeVFZIke",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLdguAlzSoZprsOmvd_ZeuUM-5HeVFZIke",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_495f06e290e1",
+      "resourceKind": "playlist",
+      "subjectTitle": "CRITICAL FOR IOT",
+      "officialSubjectCodes": [
+        "R23CI2604"
+      ],
+      "programmeCodes": [
+        "DCIOT"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLYxfF2qa9dis7Db06-a2RNFhOaUTBScWn",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLYxfF2qa9dis7Db06-a2RNFhOaUTBScWn",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_fff7c850c8ee",
+      "resourceKind": "playlist",
+      "subjectTitle": "CRITICAL FOR IOT",
+      "officialSubjectCodes": [
+        "R23CI2604"
+      ],
+      "programmeCodes": [
+        "DCIOT"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLxCzCOWd7aiGz9donHRrE9I3Mwn6XdP8p",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLxCzCOWd7aiGz9donHRrE9I3Mwn6XdP8p",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_a2f37e431cbd",
+      "resourceKind": "playlist",
+      "subjectTitle": "CRITICAL",
+      "officialSubjectCodes": [
+        "R23CP2406"
+      ],
+      "programmeCodes": [
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/watch?v=yK1uBHPdp30",
+      "finalUrl": "https://www.youtube.com/watch?v=yK1uBHPdp30",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_4c84ff42da79",
+      "resourceKind": "video",
+      "subjectTitle": "CRITICAL",
+      "officialSubjectCodes": [
+        "R23CP2406"
+      ],
+      "programmeCodes": [
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PL8lID45FIDTQz6Du4nUfaqJvxOwz86xik",
+      "finalUrl": "https://www.youtube.com/playlist?list=PL8lID45FIDTQz6Du4nUfaqJvxOwz86xik",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_c657c876e174",
+      "resourceKind": "playlist",
+      "subjectTitle": "CRITICAL FOR IOT",
+      "officialSubjectCodes": [
+        "R23CI2606",
+        "R23CI2607",
+        "R23CP2407"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLBlnK6fEyqRiyryTrbKHX1Sh9luYI0dhX",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLBlnK6fEyqRiyryTrbKHX1Sh9luYI0dhX",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_5e46d79700e0",
+      "resourceKind": "playlist",
+      "subjectTitle": "CRITICAL FOR IOT",
+      "officialSubjectCodes": [
+        "R23CI2606",
+        "R23CI2607",
+        "R23CP2407"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLmdxycs9ZImdo9VA_Cg7rbJpWLtNCYcZ2",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLmdxycs9ZImdo9VA_Cg7rbJpWLtNCYcZ2",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_9331d585c5f6",
+      "resourceKind": "playlist",
+      "subjectTitle": "CRITICAL FOR IOT",
+      "officialSubjectCodes": [
+        "R23CI2606",
+        "R23CI2607",
+        "R23CP2407"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLxCzCOWd7aiFAN6I8CuViBuCdJgiOkT2Y",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLxCzCOWd7aiFAN6I8CuViBuCdJgiOkT2Y",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_065b3fe3477e",
+      "resourceKind": "playlist",
+      "subjectTitle": "CRITICAL FOR IOT",
+      "officialSubjectCodes": [
+        "R23CI2606",
+        "R23CI2607",
+        "R23CP2407"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLu0W_9lII9agICnT8t4iYVSZ3eykIAOME",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLu0W_9lII9agICnT8t4iYVSZ3eykIAOME",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_946f980a61dd",
+      "resourceKind": "playlist",
+      "subjectTitle": "CRITICAL",
+      "officialSubjectCodes": [
+        "R23CI1603",
+        "R23CI2608",
+        "R23CP1403",
+        "R23CP2408"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLWKjhJtqVAblQe2CCWqV4Zy3LY01Z8aF1",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLWKjhJtqVAblQe2CCWqV4Zy3LY01Z8aF1",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_039f60996707",
+      "resourceKind": "playlist",
+      "subjectTitle": "CRITICAL",
+      "officialSubjectCodes": [
+        "R23CI1603",
+        "R23CI2608",
+        "R23CP1403",
+        "R23CP2408"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLxCzCOWd7aiFjkQbGj_yHeTEVPn422_z5",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLxCzCOWd7aiFjkQbGj_yHeTEVPn422_z5",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_a097579c6f17",
+      "resourceKind": "playlist",
+      "subjectTitle": "CRITICAL",
+      "officialSubjectCodes": [
+        "R23CI1603",
+        "R23CI2608",
+        "R23CP1403",
+        "R23CP2408"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLCCWsGv21PgVDS3S1lnRbmWCqudrtZIbU",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLCCWsGv21PgVDS3S1lnRbmWCqudrtZIbU",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_ffe78b55028e",
+      "resourceKind": "playlist",
+      "subjectTitle": "Java Programming",
+      "officialSubjectCodes": [
+        "R23CI1604",
+        "R23CI2609",
+        "R23CP1404"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLsyeobzWxl7pe_IiTfNyr55kwJPWbgxB5",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLsyeobzWxl7pe_IiTfNyr55kwJPWbgxB5",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_49ac8f2f103e",
+      "resourceKind": "playlist",
+      "subjectTitle": "Java Programming",
+      "officialSubjectCodes": [
+        "R23CI1604",
+        "R23CI2609",
+        "R23CP1404"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLsyeobzWxl7pFZoGT1NbZJpywedeyzyaf",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLsyeobzWxl7pFZoGT1NbZJpywedeyzyaf",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_294f5794fbf5",
+      "resourceKind": "playlist",
+      "subjectTitle": "Java Programming",
+      "officialSubjectCodes": [
+        "R23CI1604",
+        "R23CI2609",
+        "R23CP1404"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PL4S7L6ygAUXfdVSkyR5gMT5jC8o9VTx49",
+      "finalUrl": "https://www.youtube.com/playlist?list=PL4S7L6ygAUXfdVSkyR5gMT5jC8o9VTx49",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_db72827db009",
+      "resourceKind": "playlist",
+      "subjectTitle": "Management",
+      "officialSubjectCodes": [
+        "R23CI6605",
+        "R23CP6405"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLXPm4k-8ERi046Ltkll1hcbaeCeBTNbdF",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLXPm4k-8ERi046Ltkll1hcbaeCeBTNbdF",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_c93175d62348",
+      "resourceKind": "playlist",
+      "subjectTitle": "Management",
+      "officialSubjectCodes": [
+        "R23CI6605",
+        "R23CP6405"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLxCzCOWd7aiEed7SKZBnC6ypFDWYLRvB2",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLxCzCOWd7aiEed7SKZBnC6ypFDWYLRvB2",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_03869e9f71d1",
+      "resourceKind": "playlist",
+      "subjectTitle": "CRITICAL",
+      "officialSubjectCodes": [
+        "R23CI2610",
+        "R23CP2409"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLYwpaL_SFmcCB7zUM0YSDR-1mM4KoiyLM",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLYwpaL_SFmcCB7zUM0YSDR-1mM4KoiyLM",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_27e7d84d45ab",
+      "resourceKind": "playlist",
+      "subjectTitle": "CRITICAL",
+      "officialSubjectCodes": [
+        "R23CI2610",
+        "R23CP2409"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLR77UJiTj7USmpKgzSSGwc7WljLZfm5xN",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLR77UJiTj7USmpKgzSSGwc7WljLZfm5xN",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_f18f127c2519",
+      "resourceKind": "playlist",
+      "subjectTitle": "Advanced Java Programming",
+      "officialSubjectCodes": [
+        "R23CI2613",
+        "R23CP1405",
+        "R23CP1406"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLrW5vJdpAaLr8RANkMTjwayB7dc4pO46H",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLrW5vJdpAaLr8RANkMTjwayB7dc4pO46H",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_d0544ddad411",
+      "resourceKind": "playlist",
+      "subjectTitle": "Advanced Java Programming",
+      "officialSubjectCodes": [
+        "R23CI2613",
+        "R23CP1405",
+        "R23CP1406"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLu0W_9lII9ahKZ42vg2w9ERPmShYbYAB7",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLu0W_9lII9ahKZ42vg2w9ERPmShYbYAB7",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_9b8ab81ea4b4",
+      "resourceKind": "playlist",
+      "subjectTitle": "Advanced Java Programming",
+      "officialSubjectCodes": [
+        "R23CI2613",
+        "R23CP1405",
+        "R23CP1406"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLZ8-rdXtysy5zLdQ6uX7VDQFF5koiGLe7",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLZ8-rdXtysy5zLdQ6uX7VDQFF5koiGLe7",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_1b77026e4767",
+      "resourceKind": "playlist",
+      "subjectTitle": "Advanced Java Programming",
+      "officialSubjectCodes": [
+        "R23CI2613",
+        "R23CP1405",
+        "R23CP1406"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PL2PkZdv6p7ZnPIMuAVv3QckkrpgECa6d3",
+      "finalUrl": "https://www.youtube.com/playlist?list=PL2PkZdv6p7ZnPIMuAVv3QckkrpgECa6d3",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_5d5ec5350d23",
+      "resourceKind": "playlist",
+      "subjectTitle": "ELECTIVE",
+      "officialSubjectCodes": [
+        "R23CP3401",
+        "R23CP3402"
+      ],
+      "programmeCodes": [
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLjGG94etKypLHyBN8mOgwJLHD2FFIMGq5",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLjGG94etKypLHyBN8mOgwJLHD2FFIMGq5",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_deed05e23f53",
+      "resourceKind": "playlist",
+      "subjectTitle": "ELECTIVE",
+      "officialSubjectCodes": [
+        "R23CP3401",
+        "R23CP3402"
+      ],
+      "programmeCodes": [
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLLAZ4kZ9dFpOFJ9JcVW9u4PlSWO-VFoao",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLLAZ4kZ9dFpOFJ9JcVW9u4PlSWO-VFoao",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_62dbe4ff56a0",
+      "resourceKind": "playlist",
+      "subjectTitle": "ELECTIVE",
+      "officialSubjectCodes": [
+        "R23CP3401",
+        "R23CP3402"
+      ],
+      "programmeCodes": [
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLpherdrLyny8YN4M24iRJBMCXkLcGbmhY",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLpherdrLyny8YN4M24iRJBMCXkLcGbmhY",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_07c4b39150a1",
+      "resourceKind": "playlist",
+      "subjectTitle": "ELECTIVE",
+      "officialSubjectCodes": [
+        "R23CP3401",
+        "R23CP3402"
+      ],
+      "programmeCodes": [
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLu0W_9lII9agK8pojo23OHiNz3Jm6VQCH",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLu0W_9lII9agK8pojo23OHiNz3Jm6VQCH",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_c56497425e7a",
+      "resourceKind": "playlist",
+      "subjectTitle": "ELECTIVE",
+      "officialSubjectCodes": [
+        "R23CI2611",
+        "R23CP3403"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLX6MKaDw0naZILVYjo8_quA4JI8Jz-idL",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLX6MKaDw0naZILVYjo8_quA4JI8Jz-idL",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_8deb58a334f7",
+      "resourceKind": "playlist",
+      "subjectTitle": "ELECTIVE",
+      "officialSubjectCodes": [
+        "R23CI2611",
+        "R23CP3403"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLY3TW4ACyv_YqRF54UuACh4h0o98p8Ljd",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLY3TW4ACyv_YqRF54UuACh4h0o98p8Ljd",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_4eccf2a87026",
+      "resourceKind": "playlist",
+      "subjectTitle": "ELECTIVE",
+      "officialSubjectCodes": [
+        "R23CI2611",
+        "R23CP3403"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PL2zqvGhQWd_NFuos0C0E0ILhvuT6u13lC",
+      "finalUrl": "https://www.youtube.com/playlist?list=PL2zqvGhQWd_NFuos0C0E0ILhvuT6u13lC",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_cec6c9f2a7c1",
+      "resourceKind": "playlist",
+      "subjectTitle": "IoT in Robotics - CI",
+      "officialSubjectCodes": [
+        "R23CI1605",
+        "R23CI2612",
+        "R23CP1407",
+        "R23CP5401"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PL4g1oAdmuCfrl88GPnJHCJNi0vr416XmZ",
+      "finalUrl": "https://www.youtube.com/playlist?list=PL4g1oAdmuCfrl88GPnJHCJNi0vr416XmZ",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_605645e900a5",
+      "resourceKind": "playlist",
+      "subjectTitle": "IoT in Robotics - CI",
+      "officialSubjectCodes": [
+        "R23CI1605",
+        "R23CI2612",
+        "R23CP1407",
+        "R23CP5401"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PL7T88QvMOZMhxnHI5KJuw3uUakiXrvgiJ",
+      "finalUrl": "https://www.youtube.com/playlist?list=PL7T88QvMOZMhxnHI5KJuw3uUakiXrvgiJ",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_3a729a3125a4",
+      "resourceKind": "playlist",
+      "subjectTitle": "IoT in Robotics - CI",
+      "officialSubjectCodes": [
+        "R23CI1605",
+        "R23CI2612",
+        "R23CP1407",
+        "R23CP5401"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLOyJV-YxkLaUNxdPCtPE_IcEcNz5DLDxw",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLOyJV-YxkLaUNxdPCtPE_IcEcNz5DLDxw",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_4d6d98a37551",
+      "resourceKind": "playlist",
+      "subjectTitle": "IoT in Robotics - CI",
+      "officialSubjectCodes": [
+        "R23CI1605",
+        "R23CI2612",
+        "R23CP1407",
+        "R23CP5401"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLEiEAq2VkUUJfPOj5nRounXvf3n17PCft",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLEiEAq2VkUUJfPOj5nRounXvf3n17PCft",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_c02bc31abe96",
+      "resourceKind": "playlist",
+      "subjectTitle": "/ Data Analytics",
+      "officialSubjectCodes": [
+        "R23CI3601",
+        "R23CI3602",
+        "R23CI3603"
+      ],
+      "programmeCodes": [
+        "DCIOT"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLxzTa0VPR9rw4QEQ49PdsFd3SmVXDR3-i",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLxzTa0VPR9rw4QEQ49PdsFd3SmVXDR3-i",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_7b4dae690d9f",
+      "resourceKind": "playlist",
+      "subjectTitle": "/ Data Analytics",
+      "officialSubjectCodes": [
+        "R23CI3601",
+        "R23CI3602",
+        "R23CI3603"
+      ],
+      "programmeCodes": [
+        "DCIOT"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLptLP7KjDoqVRWHPQIIstwlbKbr-OCG3l",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLptLP7KjDoqVRWHPQIIstwlbKbr-OCG3l",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_e7d30f28d9f3",
+      "resourceKind": "playlist",
+      "subjectTitle": "Industrial Management for IT Industry",
+      "officialSubjectCodes": [
+        "R23CI1606",
+        "R23CP1408"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLnxlbeknIQabSODsSrViSCRYdNzlI3S7G",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLnxlbeknIQabSODsSrViSCRYdNzlI3S7G",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_23cdd2760613",
+      "resourceKind": "playlist",
+      "subjectTitle": "Emerging Trends in Computer Engineering - CP",
+      "officialSubjectCodes": [
+        "R23CP2410",
+        "R23CP2411"
+      ],
+      "programmeCodes": [
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLxK1FVS_3IoL3TL_IZI6mFs4kjJENqdtg",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLxK1FVS_3IoL3TL_IZI6mFs4kjJENqdtg",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_8117ef3602e3",
+      "resourceKind": "playlist",
+      "subjectTitle": "Emerging Trends in Computer Engineering - CP",
+      "officialSubjectCodes": [
+        "R23CP2410",
+        "R23CP2411"
+      ],
+      "programmeCodes": [
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/watch?v=LcWFedjaR4Q",
+      "finalUrl": "https://www.youtube.com/watch?v=LcWFedjaR4Q",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_b2c318722364",
+      "resourceKind": "video",
+      "subjectTitle": "Emerging Trends in Computer Engineering - CP",
+      "officialSubjectCodes": [
+        "R23CP2410",
+        "R23CP2411"
+      ],
+      "programmeCodes": [
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PL9ooVrP1hQOHYamtWSSlt5jF52WvP0cHl",
+      "finalUrl": "https://www.youtube.com/playlist?list=PL9ooVrP1hQOHYamtWSSlt5jF52WvP0cHl",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_513bb7fc28ce",
+      "resourceKind": "playlist",
+      "subjectTitle": "AI Tools and Techniques",
+      "officialSubjectCodes": [
+        "R23CI6606",
+        "R23CI6607",
+        "R23CP6406",
+        "R23CP6407"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLuAoMvvRllpSlX-RmzvABaB-ct1lq75Br",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLuAoMvvRllpSlX-RmzvABaB-ct1lq75Br",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_8c4e80a02989",
+      "resourceKind": "playlist",
+      "subjectTitle": "AI Tools and Techniques",
+      "officialSubjectCodes": [
+        "R23CI6606",
+        "R23CI6607",
+        "R23CP6406",
+        "R23CP6407"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLxCzCOWd7aiHQ9Qyo70JCTkTxczPnVC6s",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLxCzCOWd7aiHQ9Qyo70JCTkTxczPnVC6s",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_2e20d958347c",
+      "resourceKind": "playlist",
+      "subjectTitle": "AI Tools and Techniques",
+      "officialSubjectCodes": [
+        "R23CI6606",
+        "R23CI6607",
+        "R23CP6406",
+        "R23CP6407"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLiineyru3vMCz3AExYPOFmR_DrZpIoOOE",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLiineyru3vMCz3AExYPOFmR_DrZpIoOOE",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_284507c83e15",
+      "resourceKind": "playlist",
+      "subjectTitle": "ELECTIVE",
+      "officialSubjectCodes": [
+        "R23CI3602",
+        "R23CP3404",
+        "R23CP3405"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/watch?v=aaL61HouKLs",
+      "finalUrl": "https://www.youtube.com/watch?v=aaL61HouKLs",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_994054d8eb02",
+      "resourceKind": "video",
+      "subjectTitle": "ELECTIVE",
+      "officialSubjectCodes": [
+        "R23CI3602",
+        "R23CP3404",
+        "R23CP3405"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/watch?v=q3m1AB9ECXo",
+      "finalUrl": "https://www.youtube.com/watch?v=q3m1AB9ECXo",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_d55e5c909300",
+      "resourceKind": "video",
+      "subjectTitle": "ELECTIVE",
+      "officialSubjectCodes": [
+        "R23CI3602",
+        "R23CP3404",
+        "R23CP3405"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PL6UwySlcwEYJ2hFuGIvr4VEHUAfl-GCNT",
+      "finalUrl": "https://www.youtube.com/playlist?list=PL6UwySlcwEYJ2hFuGIvr4VEHUAfl-GCNT",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_d5b0fc44fa5e",
+      "resourceKind": "playlist",
+      "subjectTitle": "ELECTIVE",
+      "officialSubjectCodes": [
+        "R23CI3604",
+        "R23CI3605",
+        "R23CI3606",
+        "R23CP3406"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLnGaO7jfHOvalh3Jt48Ni4IsRcHBGbHHn",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLnGaO7jfHOvalh3Jt48Ni4IsRcHBGbHHn",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_85d7dfa3dc67",
+      "resourceKind": "playlist",
+      "subjectTitle": "ELECTIVE",
+      "officialSubjectCodes": [
+        "R23CI3604",
+        "R23CI3605",
+        "R23CI3606",
+        "R23CP3406"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLOWdy-NBQHJsGVJJ0OpBpxTbPW1v99Y2a",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLOWdy-NBQHJsGVJJ0OpBpxTbPW1v99Y2a",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_cf27884f88c2",
+      "resourceKind": "playlist",
+      "subjectTitle": "ELECTIVE",
+      "officialSubjectCodes": [
+        "R23CI3604",
+        "R23CI3605",
+        "R23CI3606",
+        "R23CP3406"
+      ],
+      "programmeCodes": [
+        "DCIOT",
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    },
+    {
+      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "url": "https://www.youtube.com/playlist?list=PLm_MSClsnwm8jU0kPRug2n7Yv4oSk7HLk",
+      "finalUrl": "https://www.youtube.com/playlist?list=PLm_MSClsnwm8jU0kPRug2n7Yv4oSk7HLk",
+      "status": "healthy",
+      "httpStatus": 200,
+      "id": "ytcand_622c8fc07efa",
+      "resourceKind": "playlist",
+      "subjectTitle": "PROJECT SUPPORT",
+      "officialSubjectCodes": [
+        "R23CP5402"
+      ],
+      "programmeCodes": [
+        "DCOMP"
+      ],
+      "publicationStatus": "draft",
+      "verificationStatus": "metadata_checked_unreviewed"
+    }
+  ]
+}

@@ -2,6 +2,11 @@ import { NextResponse } from 'next/server'
 import { requireUser, errorResponse } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { DEMO_ACTIVITY, isDemoMode } from '@/lib/demo-fixtures'
+import {
+  getStudentLearningScope,
+  scopedLessonWhere,
+  subjectIdsForLearningScope,
+} from '@/features/learning/server/get-student-learning-scope'
 
 /**
  * GET /api/analytics/activity
@@ -23,6 +28,12 @@ export async function GET() {
       select: { id: true, dailyMins: true },
     })
     if (!user) return errorResponse({ status: 404, message: 'User not found' })
+    const scope = await getStudentLearningScope(user.id)
+    const scopedSubjectIds = subjectIdsForLearningScope(scope)
+    const scopedSessionWhere = scopedSubjectIds.length > 0
+      ? { OR: [{ subjectId: null }, { subjectId: { in: scopedSubjectIds } }] }
+      : { subjectId: null }
+
     const now = new Date()
     const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate())
 
@@ -37,7 +48,7 @@ export async function GET() {
         select: { amount: true, createdAt: true },
       }),
       db.studySession.findMany({
-        where: { userId: user.id, startedAt: { gte: sevenDaysAgo } },
+        where: { userId: user.id, startedAt: { gte: sevenDaysAgo }, ...scopedSessionWhere },
         select: { xpEarned: true, durationMins: true, startedAt: true },
       }),
     ])
@@ -82,17 +93,25 @@ export async function GET() {
         select: { createdAt: true },
       }),
       db.studySession.findMany({
-        where: { userId: user.id, startedAt: { gte: heatStart } },
+        where: { userId: user.id, startedAt: { gte: heatStart }, ...scopedSessionWhere },
         select: { startedAt: true },
       }),
-      db.lessonCompletion.findMany({
-        where: { userId: user.id, completedAt: { gte: heatStart } },
-        select: { completedAt: true },
-      }),
-      db.questionAttempt.findMany({
-        where: { userId: user.id, createdAt: { gte: heatStart } },
-        select: { createdAt: true },
-      }),
+      scope && scopedSubjectIds.length > 0
+        ? db.lessonCompletion.findMany({
+            where: { userId: user.id, completedAt: { gte: heatStart }, lesson: scopedLessonWhere(scope) },
+            select: { completedAt: true },
+          })
+        : [],
+      scopedSubjectIds.length > 0
+        ? db.questionAttempt.findMany({
+            where: {
+              userId: user.id,
+              createdAt: { gte: heatStart },
+              question: { subjectId: { in: scopedSubjectIds } },
+            },
+            select: { createdAt: true },
+          })
+        : [],
     ])
 
     const activeDaySet = new Set<string>()

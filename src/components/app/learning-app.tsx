@@ -19,6 +19,10 @@ import { MotionPage } from '@/components/motion'
 import { routeForView } from '@/lib/routes'
 import type { Subject, User, ViewKey } from '@/lib/types'
 import type { DashboardSnapshot } from '@/lib/app-bootstrap-types'
+import {
+  canonicalContinueLearningRoute,
+  canonicalSemesterRouteForUser,
+} from '@/features/learning/utils/canonical-learning-routes'
 
 // Lazy-load every non-dashboard view so Recharts, the 3 lab simulators, the
 // coding editor, react-markdown, etc. are split into per-view chunks and
@@ -179,6 +183,7 @@ function StudentUtilityBar() {
   const {
     user,
     view,
+    subjects,
     continueLearning,
     setLearnContext,
     setView,
@@ -192,6 +197,13 @@ function StudentUtilityBar() {
   }
 
   const resume = () => {
+    const canonicalRoute = canonicalContinueLearningRoute(user, subjects, continueLearning)
+      ?? canonicalSemesterRouteForUser(user)
+    if (canonicalRoute) {
+      router.push(canonicalRoute)
+      return
+    }
+
     if (continueLearning) {
       setLearnContext({
         subjectId: continueLearning.subjectId,

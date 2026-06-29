@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useCallback, useRef } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { useAppStore } from '@/store/app-store'
 import { Mascot } from '@/components/mascots/mascot'
 import { Card, CardContent } from '@/components/ui/card'
@@ -78,12 +79,15 @@ interface AnswerRecord {
 const CONFIDENCE_LABELS = ['Just guessing', 'Unsure', 'Fairly sure', 'Confident', 'Certain']
 
 export function PracticeView() {
+  const searchParams = useSearchParams()
   const { subjects, addXp, pushMascotToast } = useAppStore()
   const { pref } = usePrefs()
   const [mode, setMode] = useState<Mode>('quick')
   const [phase, setPhase] = useState<Phase>('setup')
-  const [subjectId, setSubjectId] = useState<string>('')
-  const [unitNumber, setUnitNumber] = useState<string>('all')
+  const [subjectId, setSubjectId] = useState<string>(searchParams.get('subjectId') || '')
+  const [unitNumber, setUnitNumber] = useState<string>(searchParams.get('unitNumber') || 'all')
+  const [topicId, setTopicId] = useState<string>(searchParams.get('topicId') || 'all')
+  const lessonId = searchParams.get('lessonId') || ''
   const [difficulty, setDifficulty] = useState<string>('all')
   const [count, setCount] = useState(10)
 
@@ -103,6 +107,7 @@ export function PracticeView() {
   const seenIdsRef = useRef<Set<string>>(new Set())
 
   const currentSubject = subjects.find((s) => s.id === subjectId)
+  const currentUnit = currentSubject?.units.find((unit) => String(unit.number) === unitNumber)
   const currentQuestion = questions[currentIdx]
 
   // -------------------------------------------------------------------------
@@ -123,6 +128,7 @@ export function PracticeView() {
     if (!subjectId) return
     const params: Record<string, string> = { subjectId }
     if (unitNumber !== 'all') params.unitNumber = unitNumber
+    if (topicId !== 'all') params.topicId = topicId
     if (mode === 'quick' && difficulty !== 'all') params.difficulty = difficulty
     if (mode === 'adaptive') params.difficulty = adaptiveDifficulty
 
@@ -209,6 +215,7 @@ export function PracticeView() {
           confidence: confidence / 5,
           context: 'practice',
           topicId: currentQuestion.topicId,
+          lessonId: lessonId || undefined,
         }),
       })
       const data = await res.json()
@@ -280,6 +287,7 @@ export function PracticeView() {
           difficulty: adaptiveDifficulty,
         }
         if (unitNumber !== 'all') params.unitNumber = unitNumber
+        if (topicId !== 'all') params.topicId = topicId
         const candidates = await fetchQuestions(params)
         const fresh = candidates.filter((q) => !seenIdsRef.current.has(q.id))
         const next = fresh[0] ?? candidates[0]
@@ -352,7 +360,14 @@ export function PracticeView() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                       <Label className="text-xs">Subject</Label>
-                      <Select value={subjectId} onValueChange={setSubjectId}>
+                      <Select
+                        value={subjectId}
+                        onValueChange={(value) => {
+                          setSubjectId(value)
+                          setUnitNumber('all')
+                          setTopicId('all')
+                        }}
+                      >
                         <SelectTrigger className="mt-1"><SelectValue placeholder="Select subject" /></SelectTrigger>
                         <SelectContent>
                           {subjects.map((s) => <SelectItem key={s.id} value={s.id}>{s.name}</SelectItem>)}
@@ -361,11 +376,29 @@ export function PracticeView() {
                     </div>
                     <div>
                       <Label className="text-xs">Unit</Label>
-                      <Select value={unitNumber} onValueChange={setUnitNumber}>
+                      <Select
+                        value={unitNumber}
+                        onValueChange={(value) => {
+                          setUnitNumber(value)
+                          setTopicId('all')
+                        }}
+                      >
                         <SelectTrigger className="mt-1"><SelectValue /></SelectTrigger>
                         <SelectContent>
                           <SelectItem value="all">All Units</SelectItem>
                           {currentSubject?.units.map((u) => <SelectItem key={u.id} value={String(u.number)}>{u.title}</SelectItem>)}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label className="text-xs">Topic</Label>
+                      <Select value={topicId} onValueChange={setTopicId} disabled={!currentUnit}>
+                        <SelectTrigger className="mt-1"><SelectValue /></SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">All Topics</SelectItem>
+                          {currentUnit?.topics.map((topic) => (
+                            <SelectItem key={topic.id} value={topic.id}>{topic.title}</SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                     </div>

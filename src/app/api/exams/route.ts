@@ -1,10 +1,16 @@
 import { NextRequest } from 'next/server'
 import { db } from '@/lib/db'
-import { requireUser, withApi, okResponse } from '@/lib/auth'
+import { requireUser, withApi, okResponse, ApiError } from '@/lib/auth'
 import { parseBody, quizAttemptSchema } from '@/lib/schemas'
 import { evaluateAnswer } from '@/lib/questions'
 import { awardXp } from '@/lib/xp'
 import { evaluateAchievements } from '@/lib/achievements'
+import {
+  getStudentLearningScope,
+  isSubjectIdInLearningScope,
+  scopedQuestionWhere,
+  subjectIdsForLearningScope,
+} from '@/features/learning/server/get-student-learning-scope'
 
 /**
  * GET /api/exams
@@ -12,10 +18,15 @@ import { evaluateAchievements } from '@/lib/achievements'
  */
 export async function GET(req: NextRequest) {
   return withApi(async () => {
-    await requireUser()
+    const user = await requireUser()
+    const scope = await getStudentLearningScope(user.id)
+    const scopedSubjectIds = subjectIdsForLearningScope(scope)
+    if (!scope || scopedSubjectIds.length === 0) return okResponse([])
+
     const sp = req.nextUrl.searchParams
     const subjectId = sp.get('subjectId')
-    const where = subjectId ? { subjectId } : {}
+    if (subjectId && !isSubjectIdInLearningScope(scope, subjectId)) return okResponse([])
+    const where = { subjectId: subjectId ?? { in: scopedSubjectIds } }
     const papers = await db.questionPaper.findMany({
       where,
       orderBy: { year: 'desc' },
@@ -37,10 +48,23 @@ export async function POST(req: NextRequest) {
   return withApi(async () => {
     const user = await requireUser()
     const body = await parseBody(req, quizAttemptSchema)
+    const scope = await getStudentLearningScope(user.id)
+    if (!scope || !isSubjectIdInLearningScope(scope, body.subjectId)) {
+      throw new ApiError('NOT_FOUND', 'Subject not found.', 404, false)
+    }
 
     // Resolve the questions server-side; never trust the client's view of them.
-    const questionIds = body.answersJson.map((a) => a.questionId)
-    const questions = await db.question.findMany({ where: { id: { in: questionIds } } })
+    const questionIds = [...new Set(body.answersJson.map((a) => a.questionId))]
+    const questions = await db.question.findMany({
+      where: {
+        ...scopedQuestionWhere(scope),
+        id: { in: questionIds },
+        subjectId: body.subjectId,
+      },
+    })
+    if (questions.length !== questionIds.length) {
+      throw new ApiError('BAD_REQUEST', 'One or more questions are unavailable.', 400, false)
+    }
     const questionMap = new Map(questions.map((q) => [q.id, q]))
 
     let correctCount = 0

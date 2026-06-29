@@ -18,6 +18,7 @@ import {
   validateRollNumber,
   type CampusRole,
 } from '@/lib/campus-auth'
+import { TARGET_CWIT_DEPARTMENT_CODES, TARGET_CWIT_PROGRAMME_CODES } from '@/lib/cwit-departments'
 
 export const campusSignUpSchema = z.object({
   name: z.string().trim().min(2, 'Enter your full name.').max(120),
@@ -62,11 +63,21 @@ export async function resolveProgrammeFromDatabase(code: unknown): Promise<Resol
 
   const programme = await db.programme.findFirst({
     where: {
+      code: { in: [...TARGET_CWIT_PROGRAMME_CODES] },
       status: 'active',
       archivedAt: null,
       OR: [
         { code: normalized },
-        { department: { code: normalized, status: 'active', archivedAt: null } },
+        {
+          department: {
+            status: 'active',
+            archivedAt: null,
+            AND: [
+              { code: normalized },
+              { code: { in: [...TARGET_CWIT_DEPARTMENT_CODES] } },
+            ],
+          },
+        },
       ],
     },
     orderBy: { createdAt: 'asc' },
@@ -86,7 +97,14 @@ export async function resolveProgrammeFromDatabase(code: unknown): Promise<Resol
   }
 
   const department = await db.department.findFirst({
-    where: { code: normalized, status: 'active', archivedAt: null },
+    where: {
+      status: 'active',
+      archivedAt: null,
+      AND: [
+        { code: normalized },
+        { code: { in: [...TARGET_CWIT_DEPARTMENT_CODES] } },
+      ],
+    },
     select: { code: true, name: true },
   })
   if (department) {

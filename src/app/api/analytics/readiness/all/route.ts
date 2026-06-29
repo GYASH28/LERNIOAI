@@ -1,5 +1,10 @@
 import { db } from '@/lib/db'
 import { requireUser, withApi, okResponse } from '@/lib/auth'
+import {
+  getStudentLearningScope,
+  scopedLessonWhere,
+  scopedQuestionWhere,
+} from '@/features/learning/server/get-student-learning-scope'
 
 /**
  * GET /api/analytics/readiness/all
@@ -33,18 +38,18 @@ export async function GET() {
     })
     if (!user) return okResponse({ subjects: [], overall: 0, generatedAt: new Date().toISOString() })
 
-    // Load all subjects (the user is scoped to a single scheme+semester in this
-    // sandbox; if the user has no scheme yet, just return all subjects).
-    const subjects = await db.subject.findMany({
-      select: {
-        id: true,
-        name: true,
-        code: true,
-        accentColor: true,
-        credits: true,
-      },
-      orderBy: { code: 'asc' },
-    })
+    const scope = await getStudentLearningScope(authUser.id)
+    if (!scope) {
+      return okResponse({ subjects: [], overall: 0, generatedAt: new Date().toISOString() })
+    }
+
+    const subjects = scope.subjects.map((subject) => ({
+      id: subject.id,
+      name: subject.name,
+      code: subject.code,
+      accentColor: subject.accentColor,
+      credits: subject.credits,
+    }))
 
     if (subjects.length === 0) {
       return okResponse({ subjects: [], overall: 0, generatedAt: new Date().toISOString() })
@@ -68,15 +73,40 @@ export async function GET() {
             where: {
               userId: authUser.id,
               completedAt: { not: null },
-              lesson: { topic: { unit: { subjectId: subject.id } } },
+              lesson: {
+                AND: [
+                  scopedLessonWhere(scope),
+                  scopedLessonSubjectWhere(subject.id),
+                ],
+              },
             },
           }),
-          db.lesson.count({ where: { topic: { unit: { subjectId: subject.id } } } }),
-          db.questionAttempt.count({
-            where: { userId: authUser.id, question: { subjectId: subject.id } },
+          db.lesson.count({
+            where: {
+              AND: [
+                scopedLessonWhere(scope),
+                scopedLessonSubjectWhere(subject.id),
+              ],
+            },
           }),
           db.questionAttempt.count({
-            where: { userId: authUser.id, isCorrect: true, question: { subjectId: subject.id } },
+            where: {
+              userId: authUser.id,
+              question: {
+                ...scopedQuestionWhere(scope),
+                subjectId: subject.id,
+              },
+            },
+          }),
+          db.questionAttempt.count({
+            where: {
+              userId: authUser.id,
+              isCorrect: true,
+              question: {
+                ...scopedQuestionWhere(scope),
+                subjectId: subject.id,
+              },
+            },
           }),
           db.quizAttempt.aggregate({
             _count: true,
@@ -87,10 +117,21 @@ export async function GET() {
             _sum: { durationMins: true },
             where: { userId: authUser.id, subjectId: subject.id },
           }),
-          db.revisionAttempt.count({ where: { userId: authUser.id } }),
+          countScopedRevisionAttempts(authUser.id, subject.id),
           db.userTopicMastery.groupBy({
             by: ['state'],
-            where: { userId: authUser.id, topic: { unit: { subjectId: subject.id } } },
+            where: {
+              userId: authUser.id,
+              topic: {
+                status: 'active',
+                archivedAt: null,
+                unit: {
+                  status: 'active',
+                  archivedAt: null,
+                  subjectId: subject.id,
+                },
+              },
+            },
             _count: true,
           }),
         ])
@@ -156,6 +197,37 @@ export async function GET() {
 // ============================================================
 // Helpers — mirror the heuristic in /api/analytics/readiness
 // ============================================================
+
+function scopedLessonSubjectWhere(subjectId: string) {
+  return {
+    OR: [
+      { topic: { unit: { subjectId } } },
+      { unit: { subjectId } },
+    ],
+  }
+}
+
+async function countScopedRevisionAttempts(userId: string, subjectId: string): Promise<number> {
+  const schedules = await db.revisionSchedule.findMany({
+    where: {
+      userId,
+      topic: {
+        status: 'active',
+        archivedAt: null,
+        unit: {
+          status: 'active',
+          archivedAt: null,
+          subjectId,
+        },
+      },
+    },
+    select: { id: true },
+  })
+  if (schedules.length === 0) return 0
+  return db.revisionAttempt.count({
+    where: { userId, scheduleId: { in: schedules.map((schedule) => schedule.id) } },
+  })
+}
 
 interface HeuristicInputs {
   lessonsCompleted: number

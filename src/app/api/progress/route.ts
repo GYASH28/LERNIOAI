@@ -6,6 +6,15 @@ import { evaluateAnswer } from '@/lib/questions'
 import { awardXp } from '@/lib/xp'
 import { evaluateAchievements } from '@/lib/achievements'
 import { DEMO_PROGRESS, isDemoMode } from '@/lib/demo-fixtures'
+import {
+  getStudentLearningScope,
+  isSubjectIdInLearningScope,
+  isTopicIdInLearningScope,
+  scopedLessonWhere,
+  scopedQuestionWhere,
+  subjectIdsForLearningScope,
+  topicIdsForLearningScope,
+} from '@/features/learning/server/get-student-learning-scope'
 
 /**
  * GET /api/progress
@@ -31,26 +40,42 @@ export async function GET(req: NextRequest) {
     }
 
     const user = await requireUser()
+    const scope = await getStudentLearningScope(user.id)
+    const scopedSubjectIds = subjectIdsForLearningScope(scope)
+    const scopedTopicIds = topicIdsForLearningScope(scope)
+    if (!scope || scopedSubjectIds.length === 0) {
+      if (type === 'mastery') return okResponse([])
+      if (type === 'lessons') return okResponse([])
+      if (type === 'attempts') return okResponse({ questionAttempts: [], quizAttempts: [] })
+      if (type === 'sessions') return okResponse([])
+      return okResponse({ mastery: [], lessonCompletions: [], questionAttempts: [], quizAttempts: [], studySessions: [] })
+    }
 
     const [mastery, lessonCompletions, questionAttempts, quizAttempts, studySessions] =
       await Promise.all([
         db.userTopicMastery.findMany({
-          where: { userId: user.id },
+          where: { userId: user.id, topicId: { in: scopedTopicIds } },
           include: { topic: { include: { unit: { include: { subject: true } } } } },
         }),
-        db.lessonCompletion.findMany({ where: { userId: user.id }, include: { lesson: true } }),
+        db.lessonCompletion.findMany({
+          where: { userId: user.id, lesson: scopedLessonWhere(scope) },
+          include: { lesson: true },
+        }),
         db.questionAttempt.findMany({
-          where: { userId: user.id },
+          where: { userId: user.id, question: { subjectId: { in: scopedSubjectIds } } },
           orderBy: { createdAt: 'desc' },
           take: 50,
         }),
         db.quizAttempt.findMany({
-          where: { userId: user.id },
+          where: { userId: user.id, subjectId: { in: scopedSubjectIds } },
           orderBy: { startedAt: 'desc' },
           take: 20,
         }),
         db.studySession.findMany({
-          where: { userId: user.id },
+          where: {
+            userId: user.id,
+            OR: [{ subjectId: null }, { subjectId: { in: scopedSubjectIds } }],
+          },
           orderBy: { startedAt: 'desc' },
           take: 30,
         }),
@@ -81,11 +106,37 @@ export async function POST(req: NextRequest) {
   return withApi(async () => {
     const user = await requireUser()
     const body = await parseBody(req, questionAttemptSchema)
+    const scope = await getStudentLearningScope(user.id)
+    if (!scope || subjectIdsForLearningScope(scope).length === 0) {
+      throw new ApiError('NOT_FOUND', 'Question not found.', 404, false)
+    }
 
     // Fetch the question — needed for server-side correctness evaluation.
-    const question = await db.question.findUnique({ where: { id: body.questionId } })
+    const question = await db.question.findFirst({
+      where: { id: body.questionId, ...scopedQuestionWhere(scope) },
+    })
     if (!question) {
       throw new ApiError('NOT_FOUND', 'Question not found.', 404, false)
+    }
+
+    if (!scope || !isSubjectIdInLearningScope(scope, question.subjectId)) {
+      throw new ApiError('NOT_FOUND', 'Question not found.', 404, false)
+    }
+    if (body.topicId && body.topicId !== question.topicId) {
+      throw new ApiError('BAD_REQUEST', 'topicId must match the submitted question.', 400, false)
+    }
+    if (question.topicId && !isTopicIdInLearningScope(scope, question.topicId)) {
+      throw new ApiError('NOT_FOUND', 'Question not found.', 404, false)
+    }
+    const lesson = body.lessonId
+      ? await findPracticeLessonForQuestion(scope, body.lessonId, {
+          subjectId: question.subjectId,
+          topicId: question.topicId,
+          unitNumber: question.unitNumber,
+        })
+      : null
+    if (body.lessonId && !lesson) {
+      throw new ApiError('NOT_FOUND', 'Lesson not found.', 404, false)
     }
 
     // SERVER-SIDE correctness evaluation. Never trust the client.
@@ -107,11 +158,12 @@ export async function POST(req: NextRequest) {
         confidence: body.confidence ?? 0,
         attemptNumber: priorCount + 1,
         context: body.context ?? 'practice',
+        lessonId: lesson?.id,
       },
     })
 
     // Update topic mastery if topicId provided (or derive from question).
-    const topicId = body.topicId ?? question.topicId
+    const topicId = question.topicId
     if (topicId) {
       const existing = await db.userTopicMastery.findUnique({
         where: { userId_topicId: { userId: user.id, topicId } },
@@ -218,4 +270,43 @@ export async function POST(req: NextRequest) {
       questionType: question.type,
     })
   })
+}
+
+async function findPracticeLessonForQuestion(
+  scope: NonNullable<Awaited<ReturnType<typeof getStudentLearningScope>>>,
+  lessonId: string,
+  question: { subjectId: string; topicId: string | null; unitNumber: number | null },
+) {
+  const lesson = await db.lesson.findFirst({
+    where: { id: lessonId, ...scopedLessonWhere(scope) },
+    select: {
+      id: true,
+      unit: {
+        select: {
+          number: true,
+          subjectId: true,
+        },
+      },
+      topic: {
+        select: {
+          id: true,
+          unit: {
+            select: {
+              number: true,
+              subjectId: true,
+            },
+          },
+        },
+      },
+    },
+  })
+  if (!lesson) return null
+
+  const lessonSubjectId = lesson.topic?.unit.subjectId ?? lesson.unit?.subjectId ?? null
+  const lessonUnitNumber = lesson.topic?.unit.number ?? lesson.unit?.number ?? null
+  if (lessonSubjectId !== question.subjectId) return null
+  if (question.topicId && lesson.topic?.id === question.topicId) return { id: lesson.id }
+  if (question.unitNumber && lessonUnitNumber === question.unitNumber) return { id: lesson.id }
+  if (!question.topicId && !question.unitNumber) return { id: lesson.id }
+  return null
 }

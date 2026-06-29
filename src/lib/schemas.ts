@@ -90,6 +90,7 @@ export const questionAttemptSchema = z.object({
   confidence: z.number().min(0).max(1).optional(),
   context: z.enum(['practice', 'chapter_test', 'mock_exam', 'diagnostic']).optional(),
   topicId: z.string().optional(),
+  lessonId: z.string().min(1).optional(),
 })
 
 // ============================================================
@@ -102,6 +103,14 @@ export const lessonCompletionSchema = z.object({
   progress: z.number().min(0).max(100).optional(),
   scrollPos: z.number().min(0).optional(),
   completed: z.boolean().optional(),
+})
+
+export const videoWatchProgressSchema = z.object({
+  lessonId: z.string().min(1),
+  resourceId: z.string().min(1),
+  lastSecond: z.number().int().min(0),
+  playerState: z.enum(['playing', 'paused', 'ended', 'buffering', 'unknown']).optional(),
+  clientEventId: z.string().uuid().optional(),
 })
 
 // ============================================================
@@ -137,6 +146,7 @@ export const quizAttemptSchema = z.object({
  */
 export const createAttemptSchema = z.object({
   subjectId: z.string().min(1),
+  lessonId: z.string().min(1).optional(),
   questionPaperId: z.string().min(1).optional(),
   mode: z.enum(['mock', 'chapter']),
   // For chapter mode: optional filters the server applies when picking
@@ -193,6 +203,7 @@ export const tutorChatSchema = z.object({
   clientMessageId: z.string().uuid(),
   message: z.string().min(1).max(8000),
   mode: z.string().optional(),
+  lessonId: z.string().min(1).optional(),
   subjectName: z.string().optional(),
   unitTitle: z.string().optional(),
   topicTitle: z.string().optional(),

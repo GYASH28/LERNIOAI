@@ -1,0 +1,3491 @@
+{
+  "generatedAt": "2026-06-28T17:33:16.033Z",
+  "status": "review_only",
+  "note": "Course outcome and unit-title candidates are extracted from official PDF text. Promotable rows are still draft manifest data until reviewed/imported; no generated content is published.",
+  "totals": {
+    "subjects": 59,
+    "courseBlocksFound": 55,
+    "subjectsWithOutcomes": 51,
+    "subjectsWithUnitCandidates": 27,
+    "subjectsWithPromotableUnitCandidates": 0,
+    "structurePromotable": 51
+  },
+  "subjects": [
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-1.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CI1701",
+      "subjectName": "Basic Mathematics",
+      "sourcePages": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Apply the concepts of algebra to solve engineering (discipline) related problems."
+        },
+        {
+          "code": "CO2",
+          "text": "Utilize trigonometry to solve branch specific engineering problems."
+        },
+        {
+          "code": "CO3",
+          "text": "Solve area specific engineering problems under given conditions of straight lines."
+        },
+        {
+          "code": "CO4",
+          "text": "Apply differential calculus to solve discipline specific problems."
+        },
+        {
+          "code": "CO5",
+          "text": "Use techniques and methods of statistics to crack discipline specific problems."
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Algebra",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Trigonometry",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "Straight Line",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Differential Calculus",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Differential Calculus",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "Statistics",
+          "source": "summary_table"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Duplicate unit titles were extracted."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-1.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CI2701",
+      "subjectName": "Basic Science",
+      "sourcePages": [
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Estimate errors in measurements of a physical quantity measured with appropriate measuring instruments."
+        },
+        {
+          "code": "CO2",
+          "text": "Analyze the physical properties of materials for selecting appropriate material for appropriate applications."
+        },
+        {
+          "code": "CO3",
+          "text": "Use equipments based on principles of LASER and Optical fibre in industrial application."
+        },
+        {
+          "code": "CO4",
+          "text": "Analyze core environmental chemistry principles (air, water, soil) and their impact on electronics manufacturing"
+        },
+        {
+          "code": "CO5",
+          "text": "Design e-waste management strategies, evaluate energy source impacts, and propose sustainable energy and storage solutions."
+        },
+        {
+          "code": "CO6",
+          "text": "Apply environmental regulations and compliance, and evaluate emerging green technologies for sustainable electronics engineering. C)"
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Units and Measurements",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Chemistry of Electronic Waste",
+          "source": "course_content"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order is not consecutive from 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-1.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CI1702",
+      "subjectName": "Communication Skills (English)",
+      "sourcePages": [],
+      "candidateOutcomes": [],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "course_block_not_found"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-1.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CI2201",
+      "subjectName": "Engineering Graphics",
+      "sourcePages": [],
+      "candidateOutcomes": [],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "course_block_not_found"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-1.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CI6601",
+      "subjectName": "Engineering Workshop Practice",
+      "sourcePages": [
+        71,
+        72,
+        73,
+        74,
+        75,
+        76
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Carry-out elementary level maintenance of a PC."
+        },
+        {
+          "code": "CO2",
+          "text": "Create partitions and format hard disk drive."
+        },
+        {
+          "code": "CO3",
+          "text": "Install and configure Operating system."
+        },
+        {
+          "code": "CO4",
+          "text": "Configure different types of peripheral devices."
+        },
+        {
+          "code": "CO5",
+          "text": "Setup a small Local Area Network."
+        },
+        {
+          "code": "CO6",
+          "text": "Use diagnostic software for fault finding in Computer system."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-1.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CI6602",
+      "subjectName": "Fundamentals of ICT",
+      "sourcePages": [
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Understand the working and use of computer system, storage devices and its peripherals."
+        },
+        {
+          "code": "CO2",
+          "text": "Know the concepts, types of operating systems and use of application softwares."
+        },
+        {
+          "code": "CO3",
+          "text": "Use Word Processing Tool for preparing documents."
+        },
+        {
+          "code": "CO4",
+          "text": "Use Spreadsheet for Analyzing Data and representing it graphically."
+        },
+        {
+          "code": "CO5",
+          "text": "Prepare presentations using Power point"
+        },
+        {
+          "code": "CO6",
+          "text": "Use various DOS commands, different Web Browsers, browsing of Internet, concept and applications of Emerging Technologies"
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Operating Systems",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "Word Processing",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Spreadsheets",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Presentation Tool",
+          "source": "summary_table"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1.",
+          "Unit order is not consecutive from 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-1.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CI4701",
+      "subjectName": "Yoga and Meditation",
+      "sourcePages": [],
+      "candidateOutcomes": [],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "course_block_not_found"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-2.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CI1703",
+      "subjectName": "Applied Mathematics",
+      "sourcePages": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Solve the broad-based engineering problems of integration using suitable methods."
+        },
+        {
+          "code": "CO2",
+          "text": "Use definite integration to solve given engineering related problems."
+        },
+        {
+          "code": "CO3",
+          "text": "Use probability distributions to solve elementary engineering problems."
+        },
+        {
+          "code": "CO4",
+          "text": "Apply the concept of differential equation to find the solutions of given engineering problems."
+        },
+        {
+          "code": "CO5",
+          "text": "Employ numerical methods to solve programme specific problems."
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Indefinite Integration",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Definite Integration",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "Numerical Methods",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Probability Distribution",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Differential",
+          "source": "course_content"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "Numerical Methods",
+          "source": "summary_table"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Duplicate unit titles were extracted."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-2.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CI1301",
+      "subjectName": "Basic Electrical and Electronics Engineering",
+      "sourcePages": [],
+      "candidateOutcomes": [],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "course_block_not_found"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-2.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CI1601",
+      "subjectName": "Programming in C",
+      "sourcePages": [
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Develop C program using input - output functions and arithmetic expressions"
+        },
+        {
+          "code": "CO2",
+          "text": "Develop C program involving branching and looping statements"
+        },
+        {
+          "code": "CO3",
+          "text": "Implement Arrays and structures using C programs"
+        },
+        {
+          "code": "CO4",
+          "text": "Develop C program using user-defined functions"
+        },
+        {
+          "code": "CO5",
+          "text": "Write C program using pointer"
+        },
+        {
+          "code": "CO6",
+          "text": "Explain the basic concept of file handling, testing, debugging and simple IoT applications using C programs."
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Control structures",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "Arrays and structure",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Functions",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Pointers",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "File Handling",
+          "source": "summary_table"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Unit order does not start at 1.",
+          "Unit order is not consecutive from 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-2.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CI2601",
+      "subjectName": "Linux Basics",
+      "sourcePages": [
+        124,
+        125,
+        126,
+        127,
+        128
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Install Linux operating system."
+        },
+        {
+          "code": "CO2",
+          "text": "Execute general purpose commands of the Linux operating system."
+        },
+        {
+          "code": "CO3",
+          "text": "Manage files and directories in Linux operating system."
+        },
+        {
+          "code": "CO4",
+          "text": "Use vi editor in Linux operating system."
+        },
+        {
+          "code": "CO5",
+          "text": "Execute Linux filters and commands using regular expressions."
+        },
+        {
+          "code": "CO6",
+          "text": "Write programs using shell script."
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "General Purpose Utilities",
+          "source": "course_content"
+        },
+        {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "File Management in Linux",
+          "source": "course_content"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "The vi Editor",
+          "source": "course_content"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "Shell & Shell Programming",
+          "source": "course_content"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1.",
+          "Unit order is not consecutive from 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-2.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CI6603",
+      "subjectName": "Web Page Designing",
+      "sourcePages": [
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Design simple web pages-using HTML."
+        },
+        {
+          "code": "CO2",
+          "text": "Link HTML pages and insert different lists."
+        },
+        {
+          "code": "CO3",
+          "text": "Integrate html pages, multimedia elements to develop Websites."
+        },
+        {
+          "code": "CO4",
+          "text": "Organize information using Tables, Forms & Frames."
+        },
+        {
+          "code": "CO5",
+          "text": "Format web pages Using CSS"
+        },
+        {
+          "code": "CO6",
+          "text": "Use website designing tools effectively."
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Introduction to HTML",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Lists and Links",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Cascading Style sheets",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "Website Hosting",
+          "source": "summary_table"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order is not consecutive from 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-2.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CI6701",
+      "subjectName": "Professional Communication",
+      "sourcePages": [
+        96,
+        97,
+        98,
+        99,
+        100
+      ],
+      "candidateOutcomes": [],
+      "candidateUnits": [
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Interview",
+          "source": "course_content"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Writing Skills-1",
+          "source": "course_content"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Writing Skills-2",
+          "source": "course_content"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Writing Skills-3",
+          "source": "course_content"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1.",
+          "Unit order is not consecutive from 1."
+        ]
+      },
+      "extractionStatus": "needs_review"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-2.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CI4601",
+      "subjectName": "Social and Life Skills",
+      "sourcePages": [
+        219,
+        220,
+        221,
+        222,
+        223,
+        224
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Develop self awareness and self confidence..."
+        },
+        {
+          "code": "CO2",
+          "text": "Demonstrate social and moral values in personnel and professional life"
+        },
+        {
+          "code": "CO3",
+          "text": "Demonstrate awareness about environment and take steps to preserve it ."
+        },
+        {
+          "code": "CO4",
+          "text": "Apply emotional intelligence in everyday situation."
+        },
+        {
+          "code": "CO5",
+          "text": "Set appropriate life goals by managing stress and time effectively."
+        },
+        {
+          "code": "CO6",
+          "text": "Apply basic financial knowledge in daily life."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-1.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CP1701",
+      "subjectName": "Basic Mathematics",
+      "sourcePages": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Apply the concepts of algebra to solve engineering (discipline) related problems."
+        },
+        {
+          "code": "CO2",
+          "text": "Utilize trigonometry to solve branch specific engineering problems."
+        },
+        {
+          "code": "CO3",
+          "text": "Solve area specific engineering problems under given conditions of straight lines."
+        },
+        {
+          "code": "CO4",
+          "text": "Apply differential calculus to solve discipline specific problems."
+        },
+        {
+          "code": "CO5",
+          "text": "Use techniques and methods of statistics to crack discipline specific problems."
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Algebra",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Trigonometry",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "Straight Line",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Differential Calculus",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Differential Calculus",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "Statistics",
+          "source": "summary_table"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Duplicate unit titles were extracted."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-1.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CP2701",
+      "subjectName": "Basic Science",
+      "sourcePages": [
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Estimate errors in measurements of a physical quantity measured with appropriate measuring instruments."
+        },
+        {
+          "code": "CO2",
+          "text": "Analyze the physical properties of materials for selecting appropriate material for appropriate applications."
+        },
+        {
+          "code": "CO3",
+          "text": "Use equipments based on principles of LASER and Optical fibre in industrial application."
+        },
+        {
+          "code": "CO4",
+          "text": "Analyze core environmental chemistry principles (air, water, soil) and their impact on electronics manufacturing"
+        },
+        {
+          "code": "CO5",
+          "text": "Design e-waste management strategies, evaluate energy source impacts, and propose sustainable energy and storage solutions."
+        },
+        {
+          "code": "CO6",
+          "text": "Apply environmental regulations and compliance, and evaluate emerging green technologies for sustainable electronics engineering. C)"
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Units and Measurements",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Chemistry of Electronic Waste",
+          "source": "course_content"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "Environmental Regulations",
+          "source": "course_content"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order is not consecutive from 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-1.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CP1702",
+      "subjectName": "Communication Skills (English)",
+      "sourcePages": [
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Distinguish between various types of communication"
+        },
+        {
+          "code": "CO2",
+          "text": "Communicate effectively by avoiding barriers in various formal and informal situations"
+        },
+        {
+          "code": "CO3",
+          "text": "Comprehend given passages and dialogues."
+        },
+        {
+          "code": "CO4",
+          "text": "Use relevant words as per context."
+        },
+        {
+          "code": "CO5",
+          "text": "Deliver effective presentations in English using appropriate body language."
+        },
+        {
+          "code": "CO6",
+          "text": "Compose and deliver speeches in given formal situations 19"
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-1.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CP2201",
+      "subjectName": "Engineering Graphics",
+      "sourcePages": [
+        45,
+        46,
+        47,
+        48,
+        49,
+        50
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Understand the use of various drawing instruments and redraw the given figures."
+        },
+        {
+          "code": "CO2",
+          "text": "Draw engineering curves with different methods."
+        },
+        {
+          "code": "CO3",
+          "text": "Draw orthographic projections of the given object."
+        },
+        {
+          "code": "CO4",
+          "text": "Construct an isometric view from the given views."
+        },
+        {
+          "code": "CO5",
+          "text": "Draw the sectional views for given object."
+        },
+        {
+          "code": "CO6",
+          "text": "Distinguish mechanical components for various applications/products through freehand sketches."
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Scale and Natural Scale. scale and isometric",
+          "source": "course_content"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1.",
+          "Unit order is not consecutive from 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-1.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CP6401",
+      "subjectName": "Engineering Workshop Practice",
+      "sourcePages": [
+        51,
+        52,
+        53,
+        54,
+        55
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Carry-out elementary level maintenance of a PC."
+        },
+        {
+          "code": "CO2",
+          "text": "Create partitions and format hard disk drive."
+        },
+        {
+          "code": "CO3",
+          "text": "Install and configure Operating system."
+        },
+        {
+          "code": "CO4",
+          "text": "Configure different types of peripheral devices."
+        },
+        {
+          "code": "CO5",
+          "text": "Setup a small Local Area Network."
+        },
+        {
+          "code": "CO6",
+          "text": "Use diagnostic software for fault finding in Computer system. H)"
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-1.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CP6402",
+      "subjectName": "Fundamentals of ICT",
+      "sourcePages": [
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Understand the working of a computer system, storage devices, and their peripherals."
+        },
+        {
+          "code": "CO2",
+          "text": "Explain the concepts and types of operating systems and use application software."
+        },
+        {
+          "code": "CO3",
+          "text": "Use word processing tools to prepare and format documents."
+        },
+        {
+          "code": "CO4",
+          "text": "Use spreadsheets to analyze data and represent it graphically."
+        },
+        {
+          "code": "CO5",
+          "text": "Create effective presentations using PowerPoint."
+        },
+        {
+          "code": "CO6",
+          "text": "Use DOS commands, web browsers, and Internet services, and understand the concepts and applications of emerging technologies."
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Introduction to Computer",
+          "source": "course_content"
+        },
+        {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "Word Processing",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Spreadsheets",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Presentation Tool",
+          "source": "summary_table"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order is not consecutive from 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-1.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 1,
+      "officialSubjectCode": "R23CP4701",
+      "subjectName": "Yoga and Meditation",
+      "sourcePages": [
+        66,
+        67,
+        68,
+        69,
+        70
+      ],
+      "candidateOutcomes": [],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "needs_review"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-2.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CP1703",
+      "subjectName": "Applied Mathematics",
+      "sourcePages": [
+        71,
+        72,
+        73,
+        74,
+        75
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Solve the broad-based engineering problems of integration using suitable methods."
+        },
+        {
+          "code": "CO2",
+          "text": "Use definite integration to solve given engineering related problems."
+        },
+        {
+          "code": "CO3",
+          "text": "Use probability distributions to solve elementary engineering problems."
+        },
+        {
+          "code": "CO4",
+          "text": "Apply the concept of differential equation to find the solutions of given engineering problems."
+        },
+        {
+          "code": "CO5",
+          "text": "Employ numerical methods to solve programmed specific problems."
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Indefinite Integration",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Definite Integration",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "Numerical Methods",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Probability Distribution",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Differential Equation",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "Numerical Methods",
+          "source": "summary_table"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Duplicate unit titles were extracted."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-2.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CP1301",
+      "subjectName": "Basic Electrical and Electronics Engineering",
+      "sourcePages": [
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Calculate and measure basic electrical quantities and parameters."
+        },
+        {
+          "code": "CO2",
+          "text": "Use different electrical machines by making connections."
+        },
+        {
+          "code": "CO3",
+          "text": "Use electrical safety devices in electrical circuit"
+        },
+        {
+          "code": "CO4",
+          "text": "Use relevant diode in different electronic circuits."
+        },
+        {
+          "code": "CO5",
+          "text": "Use BJT and FET in various electronic circuits."
+        },
+        {
+          "code": "CO6",
+          "text": "Use various types of sensors and transducers."
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Basic Electrical Fundamentals",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Electrical Machines",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Transistors",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "Sensors and Transducers",
+          "source": "summary_table"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order is not consecutive from 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-2.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CP1401",
+      "subjectName": "Programming in C",
+      "sourcePages": [
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Develop C program using input - output functions and arithmetic expressions"
+        },
+        {
+          "code": "CO2",
+          "text": "Develop C program involving branching and looping statements"
+        },
+        {
+          "code": "CO3",
+          "text": "Implement Arrays and structures using C programs"
+        },
+        {
+          "code": "CO4",
+          "text": "Develop C program using user-defined functions"
+        },
+        {
+          "code": "CO5",
+          "text": "Write C program using pointer 6-Explain the basic concept of file handling, testing, debugging and simple IoT applications using C programs."
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Control structures",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "Arrays and structure",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Functions",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Pointers",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "File Handling",
+          "source": "summary_table"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Unit order does not start at 1.",
+          "Unit order is not consecutive from 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-2.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CP2401",
+      "subjectName": "Linux Basics",
+      "sourcePages": [
+        93,
+        94,
+        95,
+        96,
+        97,
+        98
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Install Linux operating system."
+        },
+        {
+          "code": "CO2",
+          "text": "Execute general-purpose commands of the Linux operating system."
+        },
+        {
+          "code": "CO3",
+          "text": "Manage files and directories in Linux operating system."
+        },
+        {
+          "code": "CO4",
+          "text": "Use vi editor in Linux operating system."
+        },
+        {
+          "code": "CO5",
+          "text": "Execute Linux filters and commands using regular expressions."
+        },
+        {
+          "code": "CO6",
+          "text": "Write programs using shell script."
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Introduction to Linux Operating System",
+          "source": "course_content"
+        },
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "General Purpose Utilities",
+          "source": "course_content"
+        },
+        {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "File Management in Linux",
+          "source": "course_content"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "The vi Editor",
+          "source": "summary_table"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-2.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CP6403",
+      "subjectName": "Web Page Designing",
+      "sourcePages": [
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Design simple web pages-using HTML"
+        },
+        {
+          "code": "CO2",
+          "text": "Link HTML pages and insert different lists"
+        },
+        {
+          "code": "CO3",
+          "text": "Integrate html pages, multimedia elements to develop websites"
+        },
+        {
+          "code": "CO4",
+          "text": "Organize information using Tables, Forms & Frames"
+        },
+        {
+          "code": "CO5",
+          "text": "Format web pages using CSS"
+        },
+        {
+          "code": "CO6",
+          "text": "Use website designing tools effectively. ."
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Introduction to HTML",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Lists and Links",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Cascading Style sheets",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "Website Hosting",
+          "source": "summary_table"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order is not consecutive from 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-2.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CP6701",
+      "subjectName": "Professional Communication",
+      "sourcePages": [
+        106,
+        107,
+        108,
+        109,
+        110
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Communicate effectively in various formal and informal situations minimizing the barriers."
+        },
+        {
+          "code": "CO2",
+          "text": "Develop listening skills through active listening and note taking."
+        },
+        {
+          "code": "CO3",
+          "text": "Face a mock interview."
+        },
+        {
+          "code": "CO4",
+          "text": "Draft enquiry letter, complaint letter, Job application with resume / CV"
+        },
+        {
+          "code": "CO5",
+          "text": "Write a leave application, request and apology letter."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-2.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 2,
+      "officialSubjectCode": "R23CP4401",
+      "subjectName": "Social and Life Skills",
+      "sourcePages": [
+        111,
+        112,
+        113,
+        114,
+        115,
+        116
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Develop self awareness and self confidence..."
+        },
+        {
+          "code": "CO2",
+          "text": "Demonstrate social and moral values in personnel and professional life"
+        },
+        {
+          "code": "CO3",
+          "text": "Demonstrate awareness about environment and take steps to preserve it ."
+        },
+        {
+          "code": "CO4",
+          "text": "Apply emotional intelligence in everyday situation."
+        },
+        {
+          "code": "CO5",
+          "text": "Set appropriate life goals by managing stress and time effectively."
+        },
+        {
+          "code": "CO6",
+          "text": "Apply basic financial knowledge in daily life."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-3.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 3,
+      "officialSubjectCode": "R23CP2402",
+      "subjectName": "Data Structure Using C",
+      "sourcePages": [
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Perform basic operations on Arrays."
+        },
+        {
+          "code": "CO2",
+          "text": "Apply different Searching and sorting methods."
+        },
+        {
+          "code": "CO3",
+          "text": "Implement basic operations on Linked List."
+        },
+        {
+          "code": "CO4",
+          "text": "Perform operations on Stack using Array and Linked List Implementations."
+        },
+        {
+          "code": "CO5",
+          "text": "Perform operations on Queue using Array and Linked List Implementations."
+        },
+        {
+          "code": "CO6",
+          "text": "Create and Traverse Tree to solve problems."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-3.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 3,
+      "officialSubjectCode": "R23CP6404",
+      "subjectName": "Object Oriented Programming Using C++",
+      "sourcePages": [
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Understand basic concepts of OOP languages - tokens, Operators, Expressions and Control Structures in C++."
+        },
+        {
+          "code": "CO2",
+          "text": "Define class, objects, use of static variables, friend functions."
+        },
+        {
+          "code": "CO3",
+          "text": "Develop C++ programs using constructors and destructors."
+        },
+        {
+          "code": "CO4",
+          "text": "Implement different types of inheritances and use of exception handling"
+        },
+        {
+          "code": "CO5",
+          "text": "Use of pointers, Implement polymorphism concept, its types."
+        },
+        {
+          "code": "CO6",
+          "text": "Use console I/O and perform file operations using streams."
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Principles of Object",
+          "source": "course_content"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-3.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 3,
+      "officialSubjectCode": "R23CP2403",
+      "subjectName": "Microprocessors & Its Programming",
+      "sourcePages": [
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Understand functional block diagram of 8086 and operating modes of 8086."
+        },
+        {
+          "code": "CO2",
+          "text": "Use instructions in different addressing modes."
+        },
+        {
+          "code": "CO3",
+          "text": "Use assembly language programming tools to develop an assembly language program."
+        },
+        {
+          "code": "CO4",
+          "text": "Analyze the functional block diagram of 80386 and Pentium."
+        },
+        {
+          "code": "CO5",
+          "text": "Define various interrupts and understand their need."
+        },
+        {
+          "code": "CO6",
+          "text": "Understand use of support chips."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-3.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 3,
+      "officialSubjectCode": "R23CP2404",
+      "subjectName": "Data Communication",
+      "sourcePages": [
+        141,
+        142,
+        143,
+        144,
+        145,
+        146
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Select type of signal and data conversion techniques for different applications"
+        },
+        {
+          "code": "CO2",
+          "text": "Identify type of transmission media for given application."
+        },
+        {
+          "code": "CO3",
+          "text": "Analyze various encoding techniques."
+        },
+        {
+          "code": "CO4",
+          "text": "Predict multiplexing and switching technique for given task."
+        },
+        {
+          "code": "CO5",
+          "text": "Identify role of each layer in OSI and TCP/IP model"
+        },
+        {
+          "code": "CO6",
+          "text": "Recognize data communication technology for various applications."
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Introduction to Communication",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Transmission Media",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Multiplexing & Switching",
+          "source": "summary_table"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order is not consecutive from 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-3.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 3,
+      "officialSubjectCode": "R23CP2405",
+      "subjectName": "User Interface Programming",
+      "sourcePages": [
+        147,
+        148,
+        149,
+        150,
+        151
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Understand the .Net framework and VB. Net features"
+        },
+        {
+          "code": "CO2",
+          "text": "Write and compile a Console based programs using data types, operators, conditional and iterative statements etc."
+        },
+        {
+          "code": "CO3",
+          "text": "Write the programs using arrays, functions and apply the concept of exception handling."
+        },
+        {
+          "code": "CO4",
+          "text": "Design the forms and use the different basic controls."
+        },
+        {
+          "code": "CO5",
+          "text": "Use different Dialog Box and handle the events."
+        },
+        {
+          "code": "CO6",
+          "text": "Write the graphics program and perform different operations on database."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-3.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 3,
+      "officialSubjectCode": "R23CP1402",
+      "subjectName": "Animation Techniques",
+      "sourcePages": [
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Understand coordinate system and use different graphics functions and standards."
+        },
+        {
+          "code": "CO2",
+          "text": "Understand OpenGL, apply 2D and 3D transformations (translation, rotation, scaling) and implement different projection techniques."
+        },
+        {
+          "code": "CO3",
+          "text": "Create and manipulate 2D textures and 3D shapes, implement basic lighting and shading techniques."
+        },
+        {
+          "code": "CO4",
+          "text": "Use of Blender, apply Lighting and Texturing effects and create animations."
+        },
+        {
+          "code": "CO5",
+          "text": "Create simple animations using key frames, principles of animation, and apply basic textures to 3D models."
+        },
+        {
+          "code": "CO6",
+          "text": "Use editing tools for both video and audio, apply color correction techniques."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-3.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 3,
+      "officialSubjectCode": "R23CP4402",
+      "subjectName": "Indian Constitution",
+      "sourcePages": [
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Identify and explore the basic features and modalities about Indian constitution."
+        },
+        {
+          "code": "CO2",
+          "text": "Understand the basic principles governing the system of government and its organization under the Constitution of India."
+        },
+        {
+          "code": "CO3",
+          "text": "Interpret the meaning of the constitution's authorship within the context of law, rights and government."
+        },
+        {
+          "code": "CO4",
+          "text": "Understand the administrative structure of various branches of government."
+        },
+        {
+          "code": "CO5",
+          "text": "Examine different aspects of Indian Legal System and its related bodies."
+        },
+        {
+          "code": "CO6",
+          "text": "Follow procedure to cast vote using voter-id."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-4.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 4,
+      "officialSubjectCode": "R23CP2406",
+      "subjectName": "Operating System",
+      "sourcePages": [
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Explain the services, structure, and types of Operating Systems."
+        },
+        {
+          "code": "CO2",
+          "text": "Describe and apply concepts of process management, inter-process communication, and threads."
+        },
+        {
+          "code": "CO3",
+          "text": "Analyze CPU scheduling algorithms and synchronization problems."
+        },
+        {
+          "code": "CO4",
+          "text": "Explain deadlock handling techniques and memory management concepts."
+        },
+        {
+          "code": "CO5",
+          "text": "Apply memory allocation methods and solve problems related to page replacement algorithms."
+        },
+        {
+          "code": "CO6",
+          "text": "Compare and analyze different file systems and directory structures."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-4.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 4,
+      "officialSubjectCode": "R23CP2407",
+      "subjectName": "Database Management System",
+      "sourcePages": [
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Understand the concept of database systems and draw ER diagram."
+        },
+        {
+          "code": "CO2",
+          "text": "Create database, modify, and append data in database."
+        },
+        {
+          "code": "CO3",
+          "text": "Apply integrity constraints and normalize database to normal forms."
+        },
+        {
+          "code": "CO4",
+          "text": "Write PL/SQL programs and handle the errors in PL/SQL."
+        },
+        {
+          "code": "CO5",
+          "text": "Write cursor programs and apply the concept of transaction and concurrency control."
+        },
+        {
+          "code": "CO6",
+          "text": "Write function programs and know the concept of distributed database."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-4.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 4,
+      "officialSubjectCode": "R23CP2408",
+      "subjectName": "Computer Networks",
+      "sourcePages": [
+        186,
+        187,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Identify type of network, topology, components and its role in different applications."
+        },
+        {
+          "code": "CO2",
+          "text": "Select specific Ethernet type from given criteria."
+        },
+        {
+          "code": "CO3",
+          "text": "Describe principles, design issues of layers and relate protocols with OSI and TCP/IP model layers."
+        },
+        {
+          "code": "CO4",
+          "text": "Relate protocols of transport and application layer"
+        },
+        {
+          "code": "CO5",
+          "text": "Design networks with IPv4 addressing."
+        },
+        {
+          "code": "CO6",
+          "text": "Identify role of cryptography in various Network applications."
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Local Area Network",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "IP Addressing and Routing",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Transport and Application",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "Network Security",
+          "source": "summary_table"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1.",
+          "Unit order is not consecutive from 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-4.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 4,
+      "officialSubjectCode": "R23CP1403",
+      "subjectName": "Python Programming",
+      "sourcePages": [
+        194,
+        195,
+        196,
+        197,
+        198,
+        199,
+        200,
+        201
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Install the Python and understand various concepts related to Python."
+        },
+        {
+          "code": "CO2",
+          "text": "Select proper operators for desired task."
+        },
+        {
+          "code": "CO3",
+          "text": "Develop python programs using control flow statements."
+        },
+        {
+          "code": "CO4",
+          "text": "Develop packages to solve given problem using Python."
+        },
+        {
+          "code": "CO5",
+          "text": "Perform operations on various data structures in Python."
+        },
+        {
+          "code": "CO6",
+          "text": "Perform file operations using Python"
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-4.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 4,
+      "officialSubjectCode": "R23CP1404",
+      "subjectName": "Java Programming",
+      "sourcePages": [
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Understand features of OOPs, Language constructs, JDK toolkit."
+        },
+        {
+          "code": "CO2",
+          "text": "Write programs using class, objects, methods and constructors."
+        },
+        {
+          "code": "CO3",
+          "text": "Implement the interfaces: Multiple inheritance in programs, create and use packages."
+        },
+        {
+          "code": "CO4",
+          "text": "Handle exceptions and Create multithreaded programs."
+        },
+        {
+          "code": "CO5",
+          "text": "Implementing Collection Framework, use stream I/O, and perform file operations."
+        },
+        {
+          "code": "CO6",
+          "text": "Design applet and graphics programs."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-4.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 4,
+      "officialSubjectCode": "R23CP6405",
+      "subjectName": "Entrepreneurship Development & Marketing Management",
+      "sourcePages": [
+        210,
+        211,
+        212,
+        213,
+        214,
+        215,
+        216
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Explain the basic concepts of entrepreneurship, motivation, creativity, and innovation."
+        },
+        {
+          "code": "CO2",
+          "text": "Identify business opportunities and perform basic SWOT analysis."
+        },
+        {
+          "code": "CO3",
+          "text": "Describe government support schemes and prepare a simple business plan."
+        },
+        {
+          "code": "CO4",
+          "text": "Explain basic marketing concepts and understand consumer behaviour."
+        },
+        {
+          "code": "CO5",
+          "text": "Apply basic marketing techniques such as pricing, branding, and promotion."
+        },
+        {
+          "code": "CO6",
+          "text": "Use basic digital marketing methods like social media, SEO, and online advertising."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-4.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 4,
+      "officialSubjectCode": "R23CP4403",
+      "subjectName": "Ethics in Engineering Practice",
+      "sourcePages": [
+        217,
+        218,
+        219,
+        220,
+        221,
+        222,
+        223
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Apply ethical reasoning and distinguish between ethics, morals, and laws in engineering practice."
+        },
+        {
+          "code": "CO2",
+          "text": "Analyze professional codes of conduct and evaluate ethical responsibilities towards society, employer, and clients."
+        },
+        {
+          "code": "CO3",
+          "text": "Explain ethical issues in engineering design, including risk, safety, and decision-making under uncer tainty."
+        },
+        {
+          "code": "CO4",
+          "text": "Elaborate professional responsibilities such as accountability, whistleblowing, and conflict of interest in workplace scenarios."
+        },
+        {
+          "code": "CO5",
+          "text": "Interpret ethical concerns in computing, including data privacy, cyber security, and intellectual property rights."
+        },
+        {
+          "code": "CO6",
+          "text": "Identify environmental, workplace, and sustainability issues and demonstrate ethical responsibility in real-world engineering situations."
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Professional Practice in Engineering",
+          "source": "summary_table"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1.",
+          "Unit order is not consecutive from 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-5.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CP2409",
+      "subjectName": "Software Engineering",
+      "sourcePages": [
+        224,
+        225,
+        226,
+        227,
+        228,
+        229
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Select suitable software development process model."
+        },
+        {
+          "code": "CO2",
+          "text": "Prepare software requirement specification."
+        },
+        {
+          "code": "CO3",
+          "text": "Construct different Software design models."
+        },
+        {
+          "code": "CO4",
+          "text": "Apply different planning and cost estimation techniques for a software product."
+        },
+        {
+          "code": "CO5",
+          "text": "Apply project management techniques in software development."
+        },
+        {
+          "code": "CO6",
+          "text": "Use quality assurance principles in software development."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-5.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CP1405",
+      "subjectName": "Advance Java Programming",
+      "sourcePages": [
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Design and develop Java Swing-based GUI applications using various controls and components."
+        },
+        {
+          "code": "CO2",
+          "text": "Implement event-driven programming and database connectivity using JDBC."
+        },
+        {
+          "code": "CO3",
+          "text": "Apply networking concepts and develop distributed applications using Java RMI."
+        },
+        {
+          "code": "CO4",
+          "text": "Develop dynamic web applications using JSP, Servlets, and MVC architecture."
+        },
+        {
+          "code": "CO5",
+          "text": "Build web applications using Spring Framework, Spring Boot, and RESTful services."
+        },
+        {
+          "code": "CO6",
+          "text": "Develop and integrate applications using Hibernate ORM and web services (SOAP & REST)."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-5.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CP1406",
+      "subjectName": "PHP Programming",
+      "sourcePages": [
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Understand PHP syntax, variables and control statements."
+        },
+        {
+          "code": "CO2",
+          "text": "Use functions, arrays, and loops in PHP programs."
+        },
+        {
+          "code": "CO3",
+          "text": "Apply OOP concepts in PHP."
+        },
+        {
+          "code": "CO4",
+          "text": "Handle forms, sessions, cookies, and exceptions."
+        },
+        {
+          "code": "CO5",
+          "text": "Perform file handling operations."
+        },
+        {
+          "code": "CO6",
+          "text": "Develop database-driven applications using MySQLi and PDO."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-5.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CP1407",
+      "subjectName": "Seminar And Capstone Initiation",
+      "sourcePages": [
+        245,
+        246,
+        247,
+        248,
+        249
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Select and analyze a suitable topic by collecting and organizing relevant data for a seminar."
+        },
+        {
+          "code": "CO2",
+          "text": "Prepare and deliver an effective seminar presentation using appropriate communication and presentation tools."
+        },
+        {
+          "code": "CO3",
+          "text": "Demonstrate critical thinking and engagement by encouraging discussion, interaction, and knowledge sharing during the seminar."
+        },
+        {
+          "code": "CO4",
+          "text": "Identify a real-world problem and formulate a project plan including objectives, methodology, and expected outcomes for capstone implementation. IV. General Guidelines for Seminar and Project Initiation  The seminar must be related to emerging trends in the engineering/technology programme or may be inter/multi-disciplinary, based on industry expectations and programme outcomes.  Individual students have different aptitudes and strengths. Therefore, the seminar should match the strengths of the students. For this purpose, students shall be asked to select the title(theme) of the seminar they would like to prepare and present.  Seminar titles are to be finalized in consultation with the faculty mentor.  The seminar must involve logical development and application of various technologies/processes applicable in the industry.  The seminar must be assigned to an individual student. However, support from other students may be taken during presentation, if required.  Students are required to prepare their seminar using relevant software tools and written content for presentation.  Students shall submit one hard copy and one soft copy of the presentation and may be encouraged to keep a recorded copy of the seminar presentation.  A batch of 3-4 students shall be formed for project initiation.  Projects provide a platform for students to demonstrate an attitude of inquiry and identify problem statements related to their programme.  Students shall identify information suggesting the cause of the problem and possible solutions.  Students shall study and assess the feasibility of different solutions along with financial implications.  Students should collect relevant data from various sources such as books, the internet, market, suppliers, and experts (through surveys/interviews).  Students shall prepare the required drawings/designs and a detailed plan for successful execution of the project.  Students may visit relevant organizations related to the problem statement as part of the initial study. V. Guidelines for Seminar Preparation and Presentation Once the seminar title/topic is finalized and allotted, the teacher’s role becomes important as a guide, mentor, and motivator to promote learning and sustain student interest. The following should be kept in mind while preparing and presenting the seminar:  Seminar Orientation and Briefing: Topics/themes should be innovative, novel, and relevant to the programme curriculum, and aligned with industry expectations.  Seminar Literature Survey (Information Search and Data Collection): The information and data collected should be authentic, realistic, and relevant to the curriculum."
+        },
+        {
+          "code": "CO1",
+          "text": "Topic Selection and Relevance 5"
+        },
+        {
+          "code": "CO2",
+          "text": "Literature Review and Data Presentation 5"
+        },
+        {
+          "code": "CO3",
+          "text": "Quality of Preparation and Innovativeness 5"
+        },
+        {
+          "code": "CO4",
+          "text": "Presentation Skills and Q&A Handling 5"
+        },
+        {
+          "code": "CO5",
+          "text": "Time Management and Seminar Report 5 Rubrics for assessment of Project Initiation Sr. No. Criteria Marks"
+        },
+        {
+          "code": "CO1",
+          "text": "Selection of Problem Statement/Theme 5"
+        },
+        {
+          "code": "CO2",
+          "text": "Innovativeness of the Idea and Creativity 5"
+        },
+        {
+          "code": "CO3",
+          "text": "Development Stages of Action Plan | 5"
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-5.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CP5401",
+      "subjectName": "Internship",
+      "sourcePages": [
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        256
+      ],
+      "candidateOutcomes": [],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "needs_review"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-5.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CP3401",
+      "subjectName": "Recent Trends in Computer Networks",
+      "sourcePages": [
+        257,
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Apply subnetting, address masking techniques, ARP/RARP mechanisms."
+        },
+        {
+          "code": "CO2",
+          "text": "Analyze routing protocols and interpret router architecture and routing tables."
+        },
+        {
+          "code": "CO3",
+          "text": "Explain the role and purpose of transport protocols (UDP, TCP, SCTP) in Internet applications."
+        },
+        {
+          "code": "CO4",
+          "text": "Elaborate the role of wireless network technologies and modern networking trends."
+        },
+        {
+          "code": "CO5",
+          "text": "Interpret network management frameworks, performance parameters, and evaluation tools."
+        },
+        {
+          "code": "CO6",
+          "text": "Identify various types of network attacks and vulnerabilities in modern systems."
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Routing Protocols",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "Protocols",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "and Emerging Trends",
+          "source": "summary_table"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1.",
+          "Unit order is not consecutive from 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-5.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CP3402",
+      "subjectName": "Database Architecture and Emerging Technologies",
+      "sourcePages": [
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Analyze advanced database architectures and optimization techniques."
+        },
+        {
+          "code": "CO2",
+          "text": "Apply concepts of parallel and distributed database systems."
+        },
+        {
+          "code": "CO3",
+          "text": "Design and use object-oriented and XML databases."
+        },
+        {
+          "code": "CO4",
+          "text": "Implement NoSQL databases and MongoDB applications."
+        },
+        {
+          "code": "CO5",
+          "text": "Design data warehouse solutions and apply data mining techniques."
+        },
+        {
+          "code": "CO6",
+          "text": "Evaluate cloud database platforms and emerging database technologies."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-5.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CP3403",
+      "subjectName": "Fundamentals of Data Science",
+      "sourcePages": [
+        277,
+        278,
+        279,
+        280,
+        281,
+        282
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Explain fundamental concepts of Data Science."
+        },
+        {
+          "code": "CO2",
+          "text": "Acquire, pre process and manage datasets."
+        },
+        {
+          "code": "CO3",
+          "text": "Perform exploratory data analysis and statistics."
+        },
+        {
+          "code": "CO4",
+          "text": "Visualize data using appropriate tools."
+        },
+        {
+          "code": "CO5",
+          "text": "Apply basic machine learning concepts."
+        },
+        {
+          "code": "CO6",
+          "text": "Develop simple data science solutions using Python."
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Introduction to Data Science",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "Relational and Non-Relational Databases",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Analytics c) Predictive Analytics d)",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Education and Agriculture",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "Emerging Trends in Data Science",
+          "source": "summary_table"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Unit order is not consecutive from 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-6.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CP1408",
+      "subjectName": "Industrial Management For IT Industry",
+      "sourcePages": [
+        283,
+        284,
+        285,
+        286,
+        287,
+        288
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Apply fundamental management principles and functions to IT, SDLC, and Agile project environments."
+        },
+        {
+          "code": "CO2",
+          "text": "Analyse organizational structures, authority systems, and communication practices in IT and software organizations."
+        },
+        {
+          "code": "CO3",
+          "text": "Explain and apply HRM practices for recruitment, skill development, motivation, and performance management in IT teams."
+        },
+        {
+          "code": "CO4",
+          "text": "Interpret financial statements, budgeting methods, and taxation basics relevant to IT projects and services."
+        },
+        {
+          "code": "CO5",
+          "text": "Apply digital resource, IT asset, inventory control, and sustainable computing practices in IT organizations."
+        },
+        {
+          "code": "CO6",
+          "text": "Explain marketing, product life cycle, project management, and ethical practices in the IT industry."
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Financial Management &",
+          "source": "course_content"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Digital Resource & Asset",
+          "source": "course_content"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1.",
+          "Unit order is not consecutive from 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-6.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CP2410",
+      "subjectName": "Emerging Trends In Computer Engineering",
+      "sourcePages": [
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        295,
+        296
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Apply Technology Readiness Levels (TRLs) to assess the maturity and deployment feasibility of emerging technologies."
+        },
+        {
+          "code": "CO2",
+          "text": "Elaborate the role of Artificial Intelligence, Machine Learning and Deep Learning in various domains."
+        },
+        {
+          "code": "CO3",
+          "text": "Identify appropriate IoT communication types, protocols, and technologies for real-world scenarios."
+        },
+        {
+          "code": "CO4",
+          "text": "Analyze immersive, quantum, and green computing technologies in terms of their applications and challenges."
+        },
+        {
+          "code": "CO5",
+          "text": "Implement cyber security tools to identify and mitigate potential threats."
+        },
+        {
+          "code": "CO6",
+          "text": "Explain digital forensics, cyber laws, and security practices for cybercrime investigation and data protection."
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "Internet of Things",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Sustainable Computing",
+          "source": "summary_table"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1.",
+          "Unit order is not consecutive from 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-6.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CP2411",
+      "subjectName": "Machine Learning",
+      "sourcePages": [
+        297,
+        298,
+        299,
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Explain fundamental concepts, types, and real-world applications of Machine Learning."
+        },
+        {
+          "code": "CO2",
+          "text": "Apply Python programming and standard libraries (NumPy, Pandas, Matplotlib, Scikit- learn)."
+        },
+        {
+          "code": "CO3",
+          "text": "Apply data preprocessing techniques."
+        },
+        {
+          "code": "CO4",
+          "text": "Analyze feature engineering techniques."
+        },
+        {
+          "code": "CO5",
+          "text": "Implement and evaluate supervised learning algorithms."
+        },
+        {
+          "code": "CO6",
+          "text": "Apply and analyze unsupervised learning techniques."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-6.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CP6406",
+      "subjectName": "AI Tools and Techniques",
+      "sourcePages": [
+        308,
+        309,
+        310,
+        311,
+        312,
+        313,
+        314,
+        315
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Explain AI concepts, history, types, applications, and the role of AI tools."
+        },
+        {
+          "code": "CO2",
+          "text": "Apply prompting techniques using ChatGPT, Gemini, and other language AI tools responsibly."
+        },
+        {
+          "code": "CO3",
+          "text": "Use AI tools for research, writing, documentation, and multimedia content creation."
+        },
+        {
+          "code": "CO4",
+          "text": "Demonstrate how AI agents work with goals, memory, tools, and reasoning loops."
+        },
+        {
+          "code": "CO5",
+          "text": "Build interactive dashboards by applying data ingestion, preprocessing, modeling, and visualization in Power BI."
+        },
+        {
+          "code": "CO6",
+          "text": "Design AI workflows with no-code automation tools while addressing ethical and responsible AI practices."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-6.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CP6407",
+      "subjectName": "Software Testing Tools and Automation",
+      "sourcePages": [
+        316,
+        317,
+        318,
+        319,
+        320,
+        321
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Demonstrate understanding of software testing fundamentals and configure Selenium automation environment."
+        },
+        {
+          "code": "CO2",
+          "text": "Apply Selenium Web-Driver basics to automate browser actions and interact with web elements using locators."
+        },
+        {
+          "code": "CO3",
+          "text": "Implement advanced Selenium features including synchronization, alerts, frames, navigation, and TestNG framework."
+        },
+        {
+          "code": "CO4",
+          "text": "Design and execute automation framework using POM, data-driven testing, reporting, and cross- browser testing."
+        },
+        {
+          "code": "CO5",
+          "text": "Understand Tosca architecture and design reusable, maintainable test cases using TCD concepts."
+        },
+        {
+          "code": "CO6",
+          "text": "Execute Tosca test cases with test data management, recovery scenarios, configuration, and reporting for result analysis."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-6.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CP5402",
+      "subjectName": "Capstone Project",
+      "sourcePages": [
+        322,
+        323,
+        324,
+        325,
+        326,
+        327
+      ],
+      "candidateOutcomes": [],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "needs_review"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-6.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CP3404",
+      "subjectName": "Network and Information Security",
+      "sourcePages": [
+        328,
+        329,
+        330,
+        331,
+        332,
+        333,
+        334
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Explain basic information security concepts."
+        },
+        {
+          "code": "CO2",
+          "text": "Apply user authentication and access control."
+        },
+        {
+          "code": "CO3",
+          "text": "Use classical cryptography techniques."
+        },
+        {
+          "code": "CO4",
+          "text": "Apply modern encryption and digital security methods."
+        },
+        {
+          "code": "CO5",
+          "text": "Implement network and e-mail security measures."
+        },
+        {
+          "code": "CO6",
+          "text": "Apply database and cloud security techniques."
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "User Authentication and Access Control",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Modern Encryption and Digital Security",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Network and E-mail Security",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "Database and Cloud Security",
+          "source": "summary_table"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1.",
+          "Unit order is not consecutive from 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-6.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CP3405",
+      "subjectName": "Cloud Computing",
+      "sourcePages": [
+        335,
+        336,
+        337,
+        338,
+        339,
+        340
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Explain basic cloud computing concepts."
+        },
+        {
+          "code": "CO2",
+          "text": "Use virtualization in cloud environments."
+        },
+        {
+          "code": "CO3",
+          "text": "Manage cloud storage and data center services."
+        },
+        {
+          "code": "CO4",
+          "text": "Apply cloud service management and SLA concepts."
+        },
+        {
+          "code": "CO5",
+          "text": "Implement security features in cloud computing."
+        },
+        {
+          "code": "CO6",
+          "text": "Use cloud platforms for modern applications."
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Virtualization in Cloud",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Cloud Service Management",
+          "source": "summary_table"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1.",
+          "Unit order is not consecutive from 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/comp/semester-6.json",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CP3406",
+      "subjectName": "Data Analytics and Visualization Using R Programming",
+      "sourcePages": [
+        341,
+        342,
+        343,
+        344,
+        345,
+        346,
+        347
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Elaborate the fundamental concepts of Data Analytics."
+        },
+        {
+          "code": "CO2",
+          "text": "Apply appropriate statistical techniques to analyze and interpret complex Datasets."
+        },
+        {
+          "code": "CO3",
+          "text": "Analyze numerical data by creating pivot table."
+        },
+        {
+          "code": "CO4",
+          "text": "Represent data in terms of various types of charts."
+        },
+        {
+          "code": "CO5",
+          "text": "Perform data manipulation using R"
+        },
+        {
+          "code": "CO6",
+          "text": "Visualize the data using a R/Python."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    }
+  ]
+}

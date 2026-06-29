@@ -19,7 +19,23 @@ export interface CwitDepartment {
   }
 }
 
-export const CWIT_DEPARTMENTS: CwitDepartment[] = [
+export const TARGET_CWIT_DEPARTMENT_CODES = ['COMP', 'CIOT'] as const
+export const TARGET_CWIT_PROGRAMME_CODES = ['DCOMP', 'DCIOT'] as const
+
+export type TargetCwitDepartmentCode = (typeof TARGET_CWIT_DEPARTMENT_CODES)[number]
+export type TargetCwitProgrammeCode = (typeof TARGET_CWIT_PROGRAMME_CODES)[number]
+
+export function isTargetCwitDepartmentCode(code: unknown): code is TargetCwitDepartmentCode {
+  const normalized = String(code || '').trim().toUpperCase()
+  return TARGET_CWIT_DEPARTMENT_CODES.includes(normalized as TargetCwitDepartmentCode)
+}
+
+export function isTargetCwitProgrammeCode(code: unknown): code is TargetCwitProgrammeCode {
+  const normalized = String(code || '').trim().toUpperCase()
+  return TARGET_CWIT_PROGRAMME_CODES.includes(normalized as TargetCwitProgrammeCode)
+}
+
+export const CWIT_ALL_DEPARTMENTS: CwitDepartment[] = [
   {
     code: 'CIVIL',
     name: 'Civil Engineering',
@@ -154,3 +170,11 @@ export const CWIT_DEPARTMENTS: CwitDepartment[] = [
     },
   },
 ]
+
+export const CWIT_DEPARTMENTS: CwitDepartment[] = CWIT_ALL_DEPARTMENTS.filter((department) =>
+  isTargetCwitDepartmentCode(department.code),
+)
+
+export const CWIT_ARCHIVED_DEPARTMENTS: CwitDepartment[] = CWIT_ALL_DEPARTMENTS.filter(
+  (department) => !isTargetCwitDepartmentCode(department.code),
+)

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 import ReactMarkdown from 'react-markdown'
 import { Loader2, Plus, Send, Sparkles, Square } from 'lucide-react'
 import { useAppStore } from '@/store/app-store'
@@ -63,12 +64,31 @@ function createClientMessageId() {
 }
 
 export function TutorView() {
+  const searchParams = useSearchParams()
+  const initialContext = useMemo(() => {
+    const nextUnitNumber = Number.parseInt(searchParams.get('unitNumber') || '', 10)
+    return {
+      subjectId: searchParams.get('subjectId') || '',
+      unitNumber: Number.isInteger(nextUnitNumber) ? nextUnitNumber : null,
+      topicId: searchParams.get('topicId') || '',
+      lessonId: searchParams.get('lessonId') || '',
+      hasContext: Boolean(
+        searchParams.get('subjectId') ||
+        Number.isInteger(nextUnitNumber) ||
+        searchParams.get('topicId') ||
+        searchParams.get('lessonId'),
+      ),
+    }
+  }, [searchParams])
   const { subjects } = useAppStore()
   const [sessions, setSessions] = useState<TutorSession[]>([])
   const [sessionId, setSessionId] = useState('')
   const [messages, setMessages] = useState<TutorMessage[]>([])
   const [mode, setMode] = useState<TutorMode>('explain_simple')
-  const [subjectId, setSubjectId] = useState('')
+  const [subjectId, setSubjectId] = useState(initialContext.subjectId)
+  const [unitNumber, setUnitNumber] = useState<number | null>(initialContext.unitNumber)
+  const [topicId, setTopicId] = useState(initialContext.topicId)
+  const [lessonId, setLessonId] = useState(initialContext.lessonId)
   const [draft, setDraft] = useState('')
   const [sending, setSending] = useState(false)
   const [revealing, setRevealing] = useState(false)
@@ -100,15 +120,18 @@ export function TutorView() {
         if (!payload.ok) return
         const loaded = payload.data as TutorSession[]
         setSessions(loaded)
-        if (loaded[0]) {
+        if (loaded[0] && !initialContext.hasContext) {
           setSessionId(loaded[0].id)
           setMessages(loaded[0].messages || [])
           setMode((loaded[0].mode as TutorMode) || 'explain_simple')
           setSubjectId(loaded[0].subjectId || '')
+          setUnitNumber(loaded[0].unitNumber ?? null)
+          setTopicId(loaded[0].topicId || '')
+          setLessonId('')
         }
       })
       .catch(() => setError('Could not load tutor sessions.'))
-  }, [])
+  }, [initialContext.hasContext])
 
   useEffect(() => {
     if (!sending) return
@@ -133,7 +156,13 @@ export function TutorView() {
     const response = await fetch('/api/tutor/session', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title: 'New session', mode, subjectId: subjectId || undefined }),
+      body: JSON.stringify({
+        title: 'New session',
+        mode,
+        subjectId: subjectId || undefined,
+        unitNumber: unitNumber ?? undefined,
+        topicId: topicId || undefined,
+      }),
     })
     const payload = await response.json()
     if (!payload.ok) {
@@ -154,6 +183,9 @@ export function TutorView() {
     setMessages(item.messages || [])
     setMode((item.mode as TutorMode) || 'explain_simple')
     setSubjectId(item.subjectId || '')
+    setUnitNumber(item.unitNumber ?? null)
+    setTopicId(item.topicId || '')
+    setLessonId('')
     setError('')
   }
 
@@ -246,6 +278,7 @@ export function TutorView() {
           clientMessageId,
           message: clean,
           mode,
+          lessonId: lessonId || undefined,
           subjectName: subject?.name,
         }),
       })
@@ -343,7 +376,12 @@ export function TutorView() {
             </Select>
             <Select
               value={subjectId || 'all'}
-              onValueChange={(value) => setSubjectId(value === 'all' ? '' : value)}
+              onValueChange={(value) => {
+                setSubjectId(value === 'all' ? '' : value)
+                setUnitNumber(null)
+                setTopicId('')
+                setLessonId('')
+              }}
             >
               <SelectTrigger>
                 <SelectValue placeholder="Choose subject" />
@@ -362,6 +400,7 @@ export function TutorView() {
             <p className="mt-2 text-xs text-muted-foreground">
               {selectedMode.desc}
               {subject ? ` for ${subject.code}` : ''}
+              {unitNumber ? ` / Unit ${unitNumber}` : ''}
             </p>
           ) : null}
         </div>

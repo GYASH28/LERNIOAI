@@ -5,6 +5,10 @@ import { parseBody, revisionReviewSchema } from '@/lib/schemas'
 import { awardXp } from '@/lib/xp'
 import { evaluateAchievements } from '@/lib/achievements'
 import { DEMO_REVISION_DUE, isDemoMode } from '@/lib/demo-fixtures'
+import {
+  getStudentLearningScope,
+  scopedTopicWhere,
+} from '@/features/learning/server/get-student-learning-scope'
 
 /**
  * GET /api/revision/due
@@ -15,13 +19,15 @@ export async function GET() {
     if (isDemoMode()) return okResponse(DEMO_REVISION_DUE)
 
     const user = await requireUser()
+    const scope = await getStudentLearningScope(user.id)
+    if (!scope) return okResponse({ dueToday: [], overdue: [], upcoming: [], all: [] })
 
     const now = new Date()
     const endOfDay = new Date(now)
     endOfDay.setHours(23, 59, 59, 999)
 
     const all = await db.revisionSchedule.findMany({
-      where: { userId: user.id },
+      where: { userId: user.id, topic: scopedTopicWhere(scope) },
       include: { topic: { include: { unit: { include: { subject: true } } } } },
       orderBy: { nextDueDate: 'asc' },
     })
@@ -50,10 +56,14 @@ export async function POST(req: NextRequest) {
   return withApi(async () => {
     const user = await requireUser()
     const body = await parseBody(req, revisionReviewSchema)
+    const scope = await getStudentLearningScope(user.id)
+    if (!scope) {
+      throw new ApiError('NOT_FOUND', 'Revision schedule not found.', 404, false)
+    }
 
     // Enforce ownership at the query — never trust the scheduleId alone.
     const schedule = await db.revisionSchedule.findFirst({
-      where: { id: body.scheduleId, userId: user.id },
+      where: { id: body.scheduleId, userId: user.id, topic: scopedTopicWhere(scope) },
       include: { topic: true },
     })
     if (!schedule) {

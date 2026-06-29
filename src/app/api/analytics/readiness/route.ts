@@ -1,6 +1,13 @@
 import { db } from '@/lib/db'
 import { requireUser, withApi, okResponse, ApiError } from '@/lib/auth'
 import { getAiProvider } from '@/lib/ai/provider'
+import {
+  getStudentLearningScope,
+  isSubjectIdInLearningScope,
+  scopedLessonWhere,
+  scopedQuestionWhere,
+  scopedSubjectWhere,
+} from '@/features/learning/server/get-student-learning-scope'
 
 /**
  * POST /api/analytics/readiness
@@ -58,26 +65,57 @@ export async function POST(req: Request) {
 
     const body = (await req.json().catch(() => ({}))) as { subjectId?: string }
     if (!body.subjectId) throw new ApiError('BAD_REQUEST', 'subjectId required', 400, false)
+    const scope = await getStudentLearningScope(authUser.id)
+    if (!scope || !isSubjectIdInLearningScope(scope, body.subjectId)) {
+      throw new ApiError('NOT_FOUND', 'subject not found', 404, false)
+    }
 
     // Gather everything in parallel — much faster than serial queries.
     const [subject, lessonsCompletedAgg, lessonsTotalAgg, questionAgg, correctCount, quizAgg, focusAgg, revisionCount, masteryAgg] =
       await Promise.all([
-        db.subject.findUnique({
-          where: { id: body.subjectId },
+        db.subject.findFirst({
+          where: { id: body.subjectId, ...scopedSubjectWhere(scope) },
           select: { id: true, name: true, code: true },
         }),
         db.lessonCompletion.count({
-          where: { userId: authUser.id, completedAt: { not: null }, lesson: { topic: { unit: { subjectId: body.subjectId } } } },
+          where: {
+            userId: authUser.id,
+            completedAt: { not: null },
+            lesson: {
+              AND: [
+                scopedLessonWhere(scope),
+                scopedLessonSubjectWhere(body.subjectId),
+              ],
+            },
+          },
         }),
         db.lesson.count({
-          where: { topic: { unit: { subjectId: body.subjectId } } },
+          where: {
+            AND: [
+              scopedLessonWhere(scope),
+              scopedLessonSubjectWhere(body.subjectId),
+            ],
+          },
         }),
         db.questionAttempt.count({
-          where: { userId: authUser.id, question: { subjectId: body.subjectId } },
+          where: {
+            userId: authUser.id,
+            question: {
+              ...scopedQuestionWhere(scope),
+              subjectId: body.subjectId,
+            },
+          },
         }),
         // separate correct count — can't combine with above because isCorrect is nullable
         db.questionAttempt.count({
-          where: { userId: authUser.id, isCorrect: true, question: { subjectId: body.subjectId } },
+          where: {
+            userId: authUser.id,
+            isCorrect: true,
+            question: {
+              ...scopedQuestionWhere(scope),
+              subjectId: body.subjectId,
+            },
+          },
         }),
         db.quizAttempt.aggregate({
           _count: true,
@@ -88,10 +126,21 @@ export async function POST(req: Request) {
           _sum: { durationMins: true },
           where: { userId: authUser.id, subjectId: body.subjectId },
         }),
-        db.revisionAttempt.count({ where: { userId: authUser.id } }),
+        countScopedRevisionAttempts(authUser.id, body.subjectId),
         db.userTopicMastery.groupBy({
           by: ['state'],
-          where: { userId: authUser.id, topic: { unit: { subjectId: body.subjectId } } },
+          where: {
+            userId: authUser.id,
+            topic: {
+              status: 'active',
+              archivedAt: null,
+              unit: {
+                status: 'active',
+                archivedAt: null,
+                subjectId: body.subjectId,
+              },
+            },
+          },
           _count: true,
         }),
       ])
@@ -220,6 +269,37 @@ export async function POST(req: Request) {
 // Helpers
 // ============================================================
 
+function scopedLessonSubjectWhere(subjectId: string) {
+  return {
+    OR: [
+      { topic: { unit: { subjectId } } },
+      { unit: { subjectId } },
+    ],
+  }
+}
+
+async function countScopedRevisionAttempts(userId: string, subjectId: string): Promise<number> {
+  const schedules = await db.revisionSchedule.findMany({
+    where: {
+      userId,
+      topic: {
+        status: 'active',
+        archivedAt: null,
+        unit: {
+          status: 'active',
+          archivedAt: null,
+          subjectId,
+        },
+      },
+    },
+    select: { id: true },
+  })
+  if (schedules.length === 0) return 0
+  return db.revisionAttempt.count({
+    where: { userId, scheduleId: { in: schedules.map((schedule) => schedule.id) } },
+  })
+}
+
 function computeHeuristicScore(s: ReadinessResult['inputs']): number {
   if (s.lessonsAvailable === 0) return 0
   const lessonProgress = s.lessonsCompleted / Math.max(1, s.lessonsAvailable)
@@ -252,22 +332,29 @@ function parseReadinessJson(
   try {
     // Strip markdown fences if present
     const cleaned = raw.replace(/```json\s*/gi, '').replace(/```\s*$/g, '').trim()
-    const obj = JSON.parse(cleaned)
+    const obj = JSON.parse(cleaned) as unknown
     if (typeof obj !== 'object' || obj === null) return null
+    const record = obj as Record<string, unknown>
 
-    const readinessScore = clampInt(obj.readinessScore, 0, 100, fallbackScore)
-    const strengths = arrayOfStrings(obj.strengths).slice(0, 4)
-    const weaknesses = arrayOfStrings(obj.weaknesses).slice(0, 4)
-    const recs = Array.isArray(obj.recommendations)
-      ? obj.recommendations
-          .filter((r: unknown) => r && typeof r === 'object')
+    const readinessScore = clampInt(record.readinessScore, 0, 100, fallbackScore)
+    const strengths = arrayOfStrings(record.strengths).slice(0, 4)
+    const weaknesses = arrayOfStrings(record.weaknesses).slice(0, 4)
+    const recs = Array.isArray(record.recommendations)
+      ? record.recommendations
+          .filter(isRecord)
           .slice(0, 5)
-          .map((r: any) => ({
-            action: String(r.action ?? '').slice(0, 200),
-            reason: String(r.reason ?? '').slice(0, 200),
-            priority: ['high', 'medium', 'low'].includes(r.priority) ? r.priority : 'medium',
-          }))
-          .filter((r: any) => r.action)
+          .map((r) => {
+            const priority =
+              typeof r.priority === 'string' && ['high', 'medium', 'low'].includes(r.priority)
+                ? r.priority as 'high' | 'medium' | 'low'
+                : 'medium'
+            return {
+              action: String(r.action ?? '').slice(0, 200),
+              reason: String(r.reason ?? '').slice(0, 200),
+              priority,
+            }
+          })
+          .filter((r) => r.action)
       : []
 
     if (strengths.length === 0 && weaknesses.length === 0 && recs.length === 0) {
@@ -291,6 +378,10 @@ function arrayOfStrings(v: unknown): string[] {
   return v
     .filter((x) => typeof x === 'string' && x.trim().length > 0)
     .map((x) => x.trim().slice(0, 200))
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null
 }
 
 function defaultStrengths(s: ReadinessResult['inputs']): string[] {

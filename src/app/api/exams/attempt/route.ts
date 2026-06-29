@@ -1,8 +1,16 @@
 import { NextRequest } from 'next/server'
+import type { Prisma } from '@prisma/client'
 import { db } from '@/lib/db'
 import { requireUser, withApi, okResponse, ApiError } from '@/lib/auth'
 import { parseBody, createAttemptSchema } from '@/lib/schemas'
 import { toExamDTO, type ExamQuestionDTO } from '@/lib/questions'
+import {
+  getStudentLearningScope,
+  isSubjectIdInLearningScope,
+  scopedLessonWhere,
+  scopedQuestionWhere,
+  subjectIdsForLearningScope,
+} from '@/features/learning/server/get-student-learning-scope'
 
 /**
  * POST /api/exams/attempt
@@ -20,6 +28,11 @@ export async function POST(req: NextRequest) {
   return withApi(async () => {
     const user = await requireUser()
     const body = await parseBody(req, createAttemptSchema)
+    const scope = await getStudentLearningScope(user.id)
+    const scopedSubjectIds = subjectIdsForLearningScope(scope)
+    if (!scope || scopedSubjectIds.length === 0 || !isSubjectIdInLearningScope(scope, body.subjectId)) {
+      throw new ApiError('NOT_FOUND', 'Subject not found.', 404, false)
+    }
 
     // Resolve the question paper (if given) — server-authoritative source of
     // subject + duration + totalMarks. The body.subjectId is only used as a
@@ -28,8 +41,8 @@ export async function POST(req: NextRequest) {
     let durationMins = body.durationMins
     let paperTitle: string | null = null
     if (body.questionPaperId) {
-      const paper = await db.questionPaper.findUnique({
-        where: { id: body.questionPaperId },
+      const paper = await db.questionPaper.findFirst({
+        where: { id: body.questionPaperId, subjectId: { in: scopedSubjectIds } },
         select: { id: true, subjectId: true, duration: true, totalMarks: true, title: true },
       })
       if (!paper) {
@@ -44,13 +57,33 @@ export async function POST(req: NextRequest) {
     if (durationMins === undefined) {
       durationMins = body.mode === 'mock' ? 180 : 30
     }
+    if (!isSubjectIdInLearningScope(scope, paperSubjectId)) {
+      throw new ApiError('NOT_FOUND', 'Subject not found.', 404, false)
+    }
+    const lesson = body.lessonId
+      ? await db.lesson.findFirst({
+          where: { id: body.lessonId, ...scopedLessonWhere(scope) },
+          select: {
+            id: true,
+            unit: { select: { subjectId: true, number: true } },
+            topic: { select: { unit: { select: { subjectId: true, number: true } } } },
+          },
+        })
+      : null
+    if (body.lessonId && !lesson) {
+      throw new ApiError('NOT_FOUND', 'Lesson not found.', 404, false)
+    }
+    const lessonSubjectId = lesson?.topic?.unit.subjectId ?? lesson?.unit?.subjectId ?? null
+    if (lessonSubjectId && lessonSubjectId !== paperSubjectId) {
+      throw new ApiError('BAD_REQUEST', 'lessonId must belong to the selected subject.', 400, false)
+    }
 
     // ------------------------------------------------------------------
     // Load the question set server-side. We deliberately use simple random
     // selection (Math.random shuffle) — same as the previous client-side
     // behaviour — but now the result is held by the server.
     // ------------------------------------------------------------------
-    const where: Record<string, unknown> = { subjectId: paperSubjectId }
+    const where: Prisma.QuestionWhereInput = { ...scopedQuestionWhere(scope), subjectId: paperSubjectId }
     if (body.difficulty) where.difficulty = body.difficulty
     if (body.unitNumbers && body.unitNumbers.length > 0) {
       where.unitNumber = { in: body.unitNumbers }
@@ -98,6 +131,7 @@ export async function POST(req: NextRequest) {
       data: {
         userId: user.id,
         subjectId: paperSubjectId,
+        lessonId: lesson?.id ?? null,
         mode: storedMode,
         status: 'in_progress',
         unitNumbers: body.unitNumbers && body.unitNumbers.length > 0

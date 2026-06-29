@@ -19,6 +19,7 @@ import type { AppBootstrapData, DashboardSnapshot } from '@/lib/app-bootstrap-ty
 import type { ViewKey } from '@/lib/types'
 import { publicUserSelect, toPublicUserDTO } from '@/lib/user-dto'
 import { getLocalDateStringInKolkata, getLocalDayStartInKolkata } from '@/lib/timezone'
+import { getStudentLearningScope } from '@/features/learning/server/get-student-learning-scope'
 
 /**
  * Serialise a Prisma result (or any plain object graph containing Date
@@ -50,53 +51,6 @@ function serializeForClient<T>(value: T): T {
     return out as unknown as T
   }
   return value
-}
-
-async function getSubjects() {
-  return db.subject.findMany({
-    select: {
-      id: true,
-      code: true,
-      name: true,
-      shortName: true,
-      credits: true,
-      icon: true,
-      accentColor: true,
-      mascotKey: true,
-      description: true,
-      units: {
-        orderBy: { number: 'asc' },
-        select: {
-          id: true,
-          number: true,
-          title: true,
-          description: true,
-          weightage: true,
-          topics: {
-            orderBy: { title: 'asc' },
-            select: {
-              id: true,
-              slug: true,
-              title: true,
-              description: true,
-              difficulty: true,
-              examWeightage: true,
-            },
-          },
-          lessons: {
-            orderBy: { order: 'asc' },
-            select: {
-              id: true,
-              title: true,
-              order: true,
-              durationMin: true,
-            },
-          },
-        },
-      },
-    },
-    orderBy: { code: 'asc' },
-  })
 }
 
 async function getActivitySnapshot(userId: string, dailyMins: number) {
@@ -285,12 +239,13 @@ export async function getAppBootstrap(initialView: ViewKey): Promise<AppBootstra
   }
 
   try {
-    const [freshUser, subjects] = await Promise.all([
+    const [freshUser, learningScope] = await Promise.all([
       db.user.findUnique({ where: { id: authUser.id }, select: publicUserSelect }),
-      getSubjects(),
+      getStudentLearningScope(authUser.id),
     ])
 
     const user = freshUser ? toPublicUserDTO({ ...freshUser, level: levelFromXp(freshUser.xp) }) : null
+    const subjects = learningScope?.subjects ?? []
     const dashboard =
       initialView === 'dashboard' && user
         ? await getDashboardSnapshot(user.id, user.dailyMins)

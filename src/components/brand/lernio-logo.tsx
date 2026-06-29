@@ -7,10 +7,10 @@ type LogoSize = 'sm' | 'md' | 'lg'
 export const LERNIO_LOGO_SYMBOL_SRC = '/brand/lernio-logo-symbol.webp'
 export const LERNIO_LOGO_FULL_SRC = '/brand/lernio-logo-transparent.webp'
 
-const tileSize: Record<LogoSize, string> = {
-  sm: 'h-8 w-8 rounded-lg',
-  md: 'h-11 w-11 rounded-xl',
-  lg: 'h-16 w-16 rounded-2xl',
+const tileSize: Record<LogoSize, { className: string; pixels: number }> = {
+  sm: { className: 'rounded-lg', pixels: 32 },
+  md: { className: 'rounded-xl', pixels: 44 },
+  lg: { className: 'rounded-2xl', pixels: 64 },
 }
 
 const nameSize: Record<LogoSize, string> = {
@@ -39,9 +39,10 @@ export function LernioLogoTile({
       aria-hidden="true"
       className={cn(
         'relative grid shrink-0 place-items-center overflow-hidden bg-[#10131c] shadow-[0_12px_30px_rgba(226,52,151,0.20)] ring-1 ring-border',
-        tileSize[size],
+        tileSize[size].className,
         className,
       )}
+      style={{ width: tileSize[size].pixels, height: tileSize[size].pixels }}
     >
       <img
         src={LERNIO_LOGO_SYMBOL_SRC}

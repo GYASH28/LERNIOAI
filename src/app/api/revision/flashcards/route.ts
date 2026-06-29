@@ -3,6 +3,12 @@ import { requireUser, withApi, okResponse, ApiError } from '@/lib/auth'
 import { awardXp } from '@/lib/xp'
 import { evaluateAchievements } from '@/lib/achievements'
 import { z } from 'zod'
+import {
+  getStudentLearningScope,
+  isSubjectIdInLearningScope,
+  scopedTopicWhere,
+  subjectIdsForLearningScope,
+} from '@/features/learning/server/get-student-learning-scope'
 
 /**
  * Flashcard deck built from the user's SM-2 revision schedule.
@@ -45,6 +51,12 @@ export async function GET(req: Request) {
     const subjectId = url.searchParams.get('subjectId')
     const limitParam = url.searchParams.get('limit')
     const limit = Math.max(1, Math.min(50, Number.parseInt(limitParam ?? '20', 10) || 20))
+    const scope = await getStudentLearningScope(user.id)
+    const scopedSubjectIds = subjectIdsForLearningScope(scope)
+    if (!scope || scopedSubjectIds.length === 0) return okResponse({ cards: [], totalDue: 0 })
+    if (subjectId && !isSubjectIdInLearningScope(scope, subjectId)) {
+      return okResponse({ cards: [], totalDue: 0 })
+    }
 
     const now = new Date()
     const endOfDay = new Date(now)
@@ -56,7 +68,15 @@ export async function GET(req: Request) {
       where: {
         userId: user.id,
         nextDueDate: { lte: endOfDay },
-        ...(subjectId ? { topic: { unit: { subjectId } } } : {}),
+        topic: {
+          status: 'active',
+          archivedAt: null,
+          unit: {
+            status: 'active',
+            archivedAt: null,
+            subjectId: subjectId ?? { in: scopedSubjectIds },
+          },
+        },
       },
       include: {
         topic: {
@@ -139,10 +159,14 @@ export async function POST(req: Request) {
       throw new ApiError('BAD_REQUEST', 'scheduleId and quality (0-5) are required.', 400, false)
     }
     const { scheduleId, quality } = body.data
+    const scope = await getStudentLearningScope(user.id)
+    if (!scope) {
+      throw new ApiError('NOT_FOUND', 'Schedule not found.', 404, false)
+    }
 
     // Load the schedule (ownership enforced by userId).
     const schedule = await db.revisionSchedule.findFirst({
-      where: { id: scheduleId, userId: user.id },
+      where: { id: scheduleId, userId: user.id, topic: scopedTopicWhere(scope) },
       include: { topic: { select: { title: true } } },
     })
     if (!schedule) {
@@ -198,7 +222,6 @@ export async function POST(req: Request) {
     })
 
     // Award XP (idempotent per attempt).
-    const today = new Date().toISOString().slice(0, 10)
     const xp = await awardXp({
       userId: user.id,
       eventType: 'revision',

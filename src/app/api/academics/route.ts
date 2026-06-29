@@ -1,8 +1,8 @@
 import { NextRequest } from 'next/server'
-import { db } from '@/lib/db'
 import { canAttemptDatabase } from '@/lib/db-health'
 import { withApi, okResponse, getCurrentUser } from '@/lib/auth'
 import { DEMO_SUBJECTS, isDemoMode } from '@/lib/demo-fixtures'
+import { getStudentLearningScope } from '@/features/learning/server/get-student-learning-scope'
 
 /**
  * GET /api/academics
@@ -26,84 +26,16 @@ export async function GET(req: NextRequest) {
     }
 
     const authUser = await getCurrentUser()
-    const allowedInstitutionCodes = ['PUBLIC']
-
-    if (authUser) {
-      const membership = await db.institutionMembership.findFirst({
-        where: {
-          userId: authUser.id,
-          status: 'verified',
-        },
-        include: { institution: true },
-      })
-      if (membership) {
-        allowedInstitutionCodes.push(membership.institution.code)
-      }
+    if (!authUser) {
+      return Response.json(
+        { ok: true, data: subjectId ? null : [], requestId: crypto.randomUUID() },
+        { headers: { 'Cache-Control': 'private, no-store' } },
+      )
     }
 
-    // Publicly accessible read-only syllabus
-    const subjects = await db.subject.findMany({
-      where: {
-        AND: [
-          subjectId ? { id: subjectId } : {},
-          {
-            scheme: {
-              institution: {
-                code: { in: allowedInstitutionCodes },
-              },
-            },
-          },
-        ],
-      },
-      select: {
-        id: true,
-        code: true,
-        name: true,
-        shortName: true,
-        credits: true,
-        icon: true,
-        accentColor: true,
-        mascotKey: true,
-        description: true,
-        units: {
-          orderBy: { number: 'asc' },
-          select: {
-            id: true,
-            number: true,
-            title: true,
-            description: true,
-            weightage: true,
-            topics: {
-              orderBy: { title: 'asc' },
-              select: {
-                id: true,
-                slug: true,
-                title: true,
-                description: true,
-                difficulty: true,
-                examWeightage: true,
-              },
-            },
-            lessons: {
-              where: { status: 'published' },
-              orderBy: { order: 'asc' },
-              select: {
-                id: true,
-                title: true,
-                order: true,
-                durationMin: true,
-              },
-            },
-          },
-        },
-      },
-      orderBy: { code: 'asc' },
-    })
-
-    const isPublic = !authUser || !allowedInstitutionCodes.includes('CWIT')
-    const headers = isPublic
-      ? { 'Cache-Control': 'public, max-age=300, stale-while-revalidate=3600' }
-      : { 'Cache-Control': 'private, no-store' }
+    const learningScope = await getStudentLearningScope(authUser.id, { subjectId })
+    const subjects = learningScope?.subjects ?? []
+    const headers = { 'Cache-Control': 'private, no-store' }
 
     if (subjectId) {
       return Response.json({ ok: true, data: subjects[0] ?? null, requestId: crypto.randomUUID() }, { headers })

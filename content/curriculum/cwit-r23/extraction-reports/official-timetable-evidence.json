@@ -1,0 +1,1062 @@
+{
+  "generatedAt": "2026-06-29T02:37:35.035Z",
+  "status": "review_only",
+  "source": {
+    "sourceId": "cwit-r23-winter-2025-timetable",
+    "title": "CWIT Winter Examination 2025 Time Table",
+    "sourceUrl": "https://cwit.mespune.org/wp-content/uploads/2025/10/Winter-Examination-2025.pdf",
+    "localPdfPath": "content-import/official/Winter-Examination-2025.pdf",
+    "extractedTextPath": "tmp/pdfs/official/Winter-Examination-2025.txt",
+    "columnTextPath": "tmp/pdfs/official/Winter-Examination-2025.columns.json"
+  },
+  "extraction": {
+    "pageCount": 1,
+    "textCharacters": 7409,
+    "limitation": "The official timetable is a dense PDF table. This report records exact whole-page and fixed-column text-extracted R23 CP/CI code appearances only; it does not infer semester placement from table position or course-code numbering."
+  },
+  "totals": {
+    "appearances": 41,
+    "wholePageTextAppearances": 7,
+    "columnCropAppearances": 34,
+    "uniqueCodes": 34,
+    "compCodes": 17,
+    "ciotCodes": 17,
+    "publicationReadySemesterManifests": 0
+  },
+  "codes": [
+    {
+      "code": "R23CI1301",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "appearances": [
+        {
+          "code": "R23CI1301",
+          "departmentCode": "CIOT",
+          "programmeCode": "DCIOT",
+          "page": 1,
+          "lineNumber": 8,
+          "lineText": "(R23CI1301)",
+          "nearbyLines": [
+            "B. ELEX.",
+            "(R23CI1301)",
+            "(ONLINE)"
+          ],
+          "columnLabel": "afternoon_dcp_iot",
+          "session": "afternoon",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CI1601",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "appearances": [
+        {
+          "code": "R23CI1601",
+          "departmentCode": "CIOT",
+          "programmeCode": "DCIOT",
+          "page": 1,
+          "lineNumber": 12,
+          "lineText": "15/11/2025 (R23CE2801) (R23ME2801) (R23EE2302) (R23CP1401) (R23CI1601) (R23EX6301)",
+          "nearbyLines": [
+            "SATURDAY EM EM EEMA PIC PIC ELE.ENG.",
+            "15/11/2025 (R23CE2801) (R23ME2801) (R23EE2302) (R23CP1401) (R23CI1601) (R23EX6301)",
+            "GEOTECHNICAL PRODUCTION"
+          ],
+          "columnLabel": null,
+          "session": null,
+          "matchType": "exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        },
+        {
+          "code": "R23CI1601",
+          "departmentCode": "CIOT",
+          "programmeCode": "DCIOT",
+          "page": 1,
+          "lineNumber": 2,
+          "lineText": "(R23CI1601)",
+          "nearbyLines": [
+            "PIC",
+            "(R23CI1601)",
+            "APPLIED"
+          ],
+          "columnLabel": "afternoon_dcp_iot",
+          "session": "afternoon",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CI1603",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "appearances": [
+        {
+          "code": "R23CI1603",
+          "departmentCode": "CIOT",
+          "programmeCode": "DCIOT",
+          "page": 1,
+          "lineNumber": 37,
+          "lineText": "(R23CP1403) (R23CI1603) (R23EX2509)",
+          "nearbyLines": [
+            "09/12/2025 M (R A 2 N 3 A C G E E 2 M 10 E 7 N ) T (R23ME2202) (R23 T M O E M 2 208) (R23 U E E E E 2 312) PRO P G Y R T A H M O M N ING PRO P G Y R T A H M O M N ING ELEC P T O R W O . NICs",
+            "(R23CP1403) (R23CI1603) (R23EX2509)",
+            "12 F / R 1 I 2 D 1 A 20 Y 2 5 D S E ( T R S R I 2 ( G U 3 '4 N C C H E T O 2 r U F s 8 ) R 0 R 6 E C ) S C E ( N R G 2 P I 3 N O M E W E E E 2 R 2 R I 1 N 0 G ) . S P ( W R R O 2 IT 3 T A C E E N H E C D G 2 T 3 E I 1 O A 4 N R ) PR (R O 2 G 3 R P C . A H P M . 1 F 4 M 06 IN ) G C (R O 2 C M 3 L C P O U I3 U T 6 D I 0 N 2 G ) ( E R M S 2 Y 3 B E S E X T D E 2 D M 5 E 1 D 0)"
+          ],
+          "columnLabel": null,
+          "session": null,
+          "matchType": "exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        },
+        {
+          "code": "R23CI1603",
+          "departmentCode": "CIOT",
+          "programmeCode": "DCIOT",
+          "page": 1,
+          "lineNumber": 23,
+          "lineText": "(R23CI1603)",
+          "nearbyLines": [
+            "PROGRAMMING",
+            "(R23CI1603)"
+          ],
+          "columnLabel": "afternoon_dcp_iot",
+          "session": "afternoon",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CI1604",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "appearances": [
+        {
+          "code": "R23CI1604",
+          "departmentCode": "CIOT",
+          "programmeCode": "DCIOT",
+          "page": 1,
+          "lineNumber": 38,
+          "lineText": "(R23CI1604)",
+          "nearbyLines": [
+            "PROGRAMMING",
+            "(R23CI1604)",
+            "WIRELESS"
+          ],
+          "columnLabel": "morning_dcp_iot",
+          "session": "morning",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CI1701",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "appearances": [
+        {
+          "code": "R23CI1701",
+          "departmentCode": "CIOT",
+          "programmeCode": "DCIOT",
+          "page": 1,
+          "lineNumber": 24,
+          "lineText": "(R23CI1701)",
+          "nearbyLines": [
+            "MATHEMATICS",
+            "(R23CI1701)",
+            "BASIC SCIENCE"
+          ],
+          "columnLabel": "morning_dcp_iot",
+          "session": "morning",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CI1702",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "appearances": [
+        {
+          "code": "R23CI1702",
+          "departmentCode": "CIOT",
+          "programmeCode": "DCIOT",
+          "page": 1,
+          "lineNumber": 17,
+          "lineText": "(R23CI1702)",
+          "nearbyLines": [
+            "(ENGLISH)",
+            "(R23CI1702)",
+            "FUNDAMENTALS"
+          ],
+          "columnLabel": "morning_dcp_iot",
+          "session": "morning",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CI1703",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "appearances": [
+        {
+          "code": "R23CI1703",
+          "departmentCode": "CIOT",
+          "programmeCode": "DCIOT",
+          "page": 1,
+          "lineNumber": 5,
+          "lineText": "(R23CI1703)",
+          "nearbyLines": [
+            "MATHS.",
+            "(R23CI1703)",
+            "B.ELE"
+          ],
+          "columnLabel": "afternoon_dcp_iot",
+          "session": "afternoon",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CI2602",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "appearances": [
+        {
+          "code": "R23CI2602",
+          "departmentCode": "CIOT",
+          "programmeCode": "DCIOT",
+          "page": 1,
+          "lineNumber": 3,
+          "lineText": "(R23CI2602)",
+          "nearbyLines": [
+            "STRUCTURES",
+            "(R23CI2602)",
+            "OBJECT"
+          ],
+          "columnLabel": "morning_dcp_iot",
+          "session": "morning",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CI2603",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "appearances": [
+        {
+          "code": "R23CI2603",
+          "departmentCode": "CIOT",
+          "programmeCode": "DCIOT",
+          "page": 1,
+          "lineNumber": 22,
+          "lineText": "(R23CP6404) (R23CI2603)",
+          "nearbyLines": [
+            "(R23EE2306) LLERS (R23EX2504)",
+            "(R23CP6404) (R23CI2603)",
+            "2 T 5 U /1 E 1 S / D 20 A 2 Y 5 C ( O R ( M E 2 N M 3C G . E L S 1 I K S 7 I H 0 L 2 ) L ) S C ( O R ( M E 2 N 3 M M G . L E S I 1 K S 7 I H L 0 ) 2 L ) S cO (R ( M E 2 N M 3E G . E L S 1 I K S 7 I H 0 L 2 ) L ) S C ( O R ( M E 2 N 3 M C G , P L S 1 I K S 7 I H 0 L 2 ) L ) S C ( O ( R E M 2 N M 3 G C . L I S 1 I K 7 S 0 I H L 2 ) L ) S C ( O R ( M E 2 N 3 M E G . X L S 1 I K 7 S 0 H IL 2 ) ) L S (R ( 2 O S 3 N C V L E Y I 1 N - 1 E I 0 ) 2 (R ( B B 2 O 3 . . N E C E L L P L I E 1 N E . 3 E X & 0 ) 1 ) (R ( B B O 2 . 3 . N E E C L L L I I 1 E N E 3 X E 0 . ) 1 )"
+          ],
+          "columnLabel": null,
+          "session": null,
+          "matchType": "exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        },
+        {
+          "code": "R23CI2603",
+          "departmentCode": "CIOT",
+          "programmeCode": "DCIOT",
+          "page": 1,
+          "lineNumber": 14,
+          "lineText": "(R23CI2603)",
+          "nearbyLines": [
+            "LLERS",
+            "(R23CI2603)",
+            "COMM. SKILLS"
+          ],
+          "columnLabel": "morning_dcp_iot",
+          "session": "morning",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CI2604",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "appearances": [
+        {
+          "code": "R23CI2604",
+          "departmentCode": "CIOT",
+          "programmeCode": "DCIOT",
+          "page": 1,
+          "lineNumber": 21,
+          "lineText": "(R23CI2604)",
+          "nearbyLines": [
+            "APPLICATIONS",
+            "(R23CI2604)",
+            "BASIC"
+          ],
+          "columnLabel": "morning_dcp_iot",
+          "session": "morning",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CI2607",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "appearances": [
+        {
+          "code": "R23CI2607",
+          "departmentCode": "CIOT",
+          "programmeCode": "DCIOT",
+          "page": 1,
+          "lineNumber": 16,
+          "lineText": "(R23CI2607)",
+          "nearbyLines": [
+            "DBMS",
+            "(R23CI2607)",
+            "COMPUTER"
+          ],
+          "columnLabel": "afternoon_dcp_iot",
+          "session": "afternoon",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CI2608",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "appearances": [
+        {
+          "code": "R23CI2608",
+          "departmentCode": "CIOT",
+          "programmeCode": "DCIOT",
+          "page": 1,
+          "lineNumber": 20,
+          "lineText": "(R23CI2608)",
+          "nearbyLines": [
+            "AND SECURITY",
+            "(R23CI2608)",
+            "PYTHON"
+          ],
+          "columnLabel": "afternoon_dcp_iot",
+          "session": "afternoon",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CI2609",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "appearances": [
+        {
+          "code": "R23CI2609",
+          "departmentCode": "CIOT",
+          "programmeCode": "DCIOT",
+          "page": 1,
+          "lineNumber": 14,
+          "lineText": "(R23CI2609)",
+          "nearbyLines": [
+            "IOTAP",
+            "(R23CI2609)",
+            "DBMS"
+          ],
+          "columnLabel": "afternoon_dcp_iot",
+          "session": "afternoon",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CI2610",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "appearances": [
+        {
+          "code": "R23CI2610",
+          "departmentCode": "CIOT",
+          "programmeCode": "DCIOT",
+          "page": 1,
+          "lineNumber": 35,
+          "lineText": "(R23CI2610)",
+          "nearbyLines": [
+            "ENGINEERING",
+            "(R23CI2610)",
+            "JAVA"
+          ],
+          "columnLabel": "morning_dcp_iot",
+          "session": "morning",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CI2611",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "appearances": [
+        {
+          "code": "R23CI2611",
+          "departmentCode": "CIOT",
+          "programmeCode": "DCIOT",
+          "page": 1,
+          "lineNumber": 41,
+          "lineText": "(R23CI2611)",
+          "nearbyLines": [
+            "NETWORK C",
+            "(R23CI2611)"
+          ],
+          "columnLabel": "morning_dcp_iot",
+          "session": "morning",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CI3602",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "appearances": [
+        {
+          "code": "R23CI3602",
+          "departmentCode": "CIOT",
+          "programmeCode": "DCIOT",
+          "page": 1,
+          "lineNumber": 32,
+          "lineText": "(R23CI3602)",
+          "nearbyLines": [
+            "COMPUTING",
+            "(R23CI3602)",
+            "SOFTWARE"
+          ],
+          "columnLabel": "morning_dcp_iot",
+          "session": "morning",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CI6604",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "appearances": [
+        {
+          "code": "R23CI6604",
+          "departmentCode": "CIOT",
+          "programmeCode": "DCIOT",
+          "page": 1,
+          "lineNumber": 18,
+          "lineText": "(R23EE2304) (R23CI6604)",
+          "nearbyLines": [
+            "T 2 H 0 U /1 R 11 S 2 D 0 A 25 Y (R S B E 2 U 3 R I C V L E D IC 2 I E N 1 S 0 G s 2 ) M M ( E R A E 2 S T 3 U R A M R O N E E L D 2 M O 2 G E 0 N 4 Y ) T T D R I A ST N R E S I M P B G U IS . T S I I O O N N cO (R M 2 M D 3C . A N T P I A 2 C 4 A 0 T 4 I ) O N PRO O W O G R I R B T IE A H J N E M T C C M E + T + D I N G T (R EC 2 D 3 H I E G N X IT I 2 Q A 5 U L 0 E S) S",
+            "(R23EE2304) (R23CI6604)",
+            "21 F / R 1 I 1 D /2 A 0 Y 25 (R B 2 . 3 C C O E N 2 S 1 T 01 . ) ( E R N 2 G 3M G H E .D 6 rs R 2 0 G 3 . ) (R2 F 3 .O E . E E 2 .E 30 . 1) (R2 B 3 . E E X L 1 E 5 X 0 1)"
+          ],
+          "columnLabel": null,
+          "session": null,
+          "matchType": "exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        },
+        {
+          "code": "R23CI6604",
+          "departmentCode": "CIOT",
+          "programmeCode": "DCIOT",
+          "page": 1,
+          "lineNumber": 8,
+          "lineText": "(R23CI6604)",
+          "nearbyLines": [
+            "WITH C++",
+            "(R23CI6604)",
+            "DIGITAL"
+          ],
+          "columnLabel": "morning_dcp_iot",
+          "session": "morning",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CP1301",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "appearances": [
+        {
+          "code": "R23CP1301",
+          "departmentCode": "COMP",
+          "programmeCode": "DCOMP",
+          "page": 1,
+          "lineNumber": 8,
+          "lineText": "(R23CP1301)",
+          "nearbyLines": [
+            "B. ELEX",
+            "(R23CP1301)",
+            "(ONLINE)"
+          ],
+          "columnLabel": "afternoon_dcp",
+          "session": "afternoon",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CP1401",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "appearances": [
+        {
+          "code": "R23CP1401",
+          "departmentCode": "COMP",
+          "programmeCode": "DCOMP",
+          "page": 1,
+          "lineNumber": 12,
+          "lineText": "15/11/2025 (R23CE2801) (R23ME2801) (R23EE2302) (R23CP1401) (R23CI1601) (R23EX6301)",
+          "nearbyLines": [
+            "SATURDAY EM EM EEMA PIC PIC ELE.ENG.",
+            "15/11/2025 (R23CE2801) (R23ME2801) (R23EE2302) (R23CP1401) (R23CI1601) (R23EX6301)",
+            "GEOTECHNICAL PRODUCTION"
+          ],
+          "columnLabel": null,
+          "session": null,
+          "matchType": "exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        },
+        {
+          "code": "R23CP1401",
+          "departmentCode": "COMP",
+          "programmeCode": "DCOMP",
+          "page": 1,
+          "lineNumber": 2,
+          "lineText": "(R23CP1401)",
+          "nearbyLines": [
+            "PIC",
+            "(R23CP1401)",
+            "APPLIED"
+          ],
+          "columnLabel": "afternoon_dcp",
+          "session": "afternoon",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CP1403",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "appearances": [
+        {
+          "code": "R23CP1403",
+          "departmentCode": "COMP",
+          "programmeCode": "DCOMP",
+          "page": 1,
+          "lineNumber": 37,
+          "lineText": "(R23CP1403) (R23CI1603) (R23EX2509)",
+          "nearbyLines": [
+            "09/12/2025 M (R A 2 N 3 A C G E E 2 M 10 E 7 N ) T (R23ME2202) (R23 T M O E M 2 208) (R23 U E E E E 2 312) PRO P G Y R T A H M O M N ING PRO P G Y R T A H M O M N ING ELEC P T O R W O . NICs",
+            "(R23CP1403) (R23CI1603) (R23EX2509)",
+            "12 F / R 1 I 2 D 1 A 20 Y 2 5 D S E ( T R S R I 2 ( G U 3 '4 N C C H E T O 2 r U F s 8 ) R 0 R 6 E C ) S C E ( N R G 2 P I 3 N O M E W E E E 2 R 2 R I 1 N 0 G ) . S P ( W R R O 2 IT 3 T A C E E N H E C D G 2 T 3 E I 1 O A 4 N R ) PR (R O 2 G 3 R P C . A H P M . 1 F 4 M 06 IN ) G C (R O 2 C M 3 L C P O U I3 U T 6 D I 0 N 2 G ) ( E R M S 2 Y 3 B E S E X T D E 2 D M 5 E 1 D 0)"
+          ],
+          "columnLabel": null,
+          "session": null,
+          "matchType": "exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        },
+        {
+          "code": "R23CP1403",
+          "departmentCode": "COMP",
+          "programmeCode": "DCOMP",
+          "page": 1,
+          "lineNumber": 22,
+          "lineText": "(R23CP1403)",
+          "nearbyLines": [
+            "PROGRAMMING",
+            "(R23CP1403)"
+          ],
+          "columnLabel": "afternoon_dcp",
+          "session": "afternoon",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CP1404",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "appearances": [
+        {
+          "code": "R23CP1404",
+          "departmentCode": "COMP",
+          "programmeCode": "DCOMP",
+          "page": 1,
+          "lineNumber": 14,
+          "lineText": "(R23CP1404)",
+          "nearbyLines": [
+            "J.P",
+            "(R23CP1404)",
+            "DBMS"
+          ],
+          "columnLabel": "afternoon_dcp",
+          "session": "afternoon",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CP1405",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "appearances": [
+        {
+          "code": "R23CP1405",
+          "departmentCode": "COMP",
+          "programmeCode": "DCOMP",
+          "page": 1,
+          "lineNumber": 37,
+          "lineText": "(R23CP1405)",
+          "nearbyLines": [
+            "PROGRAMMING",
+            "(R23CP1405)",
+            "ve papers."
+          ],
+          "columnLabel": "morning_dcp",
+          "session": "morning",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CP1406",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "appearances": [
+        {
+          "code": "R23CP1406",
+          "departmentCode": "COMP",
+          "programmeCode": "DCOMP",
+          "page": 1,
+          "lineNumber": 28,
+          "lineText": "(R23CP1406)",
+          "nearbyLines": [
+            "PROGRAMMING",
+            "(R23CP1406)",
+            "SOFTWARE"
+          ],
+          "columnLabel": "morning_dcp",
+          "session": "morning",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CP1701",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "appearances": [
+        {
+          "code": "R23CP1701",
+          "departmentCode": "COMP",
+          "programmeCode": "DCOMP",
+          "page": 1,
+          "lineNumber": 21,
+          "lineText": "(R23CP1701)",
+          "nearbyLines": [
+            "MATHEMATICS",
+            "(R23CP1701)",
+            "BASIC SCIENCE"
+          ],
+          "columnLabel": "morning_dcp",
+          "session": "morning",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CP1702",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "appearances": [
+        {
+          "code": "R23CP1702",
+          "departmentCode": "COMP",
+          "programmeCode": "DCOMP",
+          "page": 1,
+          "lineNumber": 14,
+          "lineText": "(R23CP1702)",
+          "nearbyLines": [
+            "(ENGLISH)",
+            "(R23CP1702)",
+            "MICROPROCESS"
+          ],
+          "columnLabel": "morning_dcp",
+          "session": "morning",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CP1703",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "appearances": [
+        {
+          "code": "R23CP1703",
+          "departmentCode": "COMP",
+          "programmeCode": "DCOMP",
+          "page": 1,
+          "lineNumber": 5,
+          "lineText": "(R23CP1703)",
+          "nearbyLines": [
+            "MATHS.",
+            "(R23CP1703)",
+            "B.ELE. &"
+          ],
+          "columnLabel": "afternoon_dcp",
+          "session": "afternoon",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CP2402",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "appearances": [
+        {
+          "code": "R23CP2402",
+          "departmentCode": "COMP",
+          "programmeCode": "DCOMP",
+          "page": 1,
+          "lineNumber": 3,
+          "lineText": "(R23CP2402)",
+          "nearbyLines": [
+            "STRUCTURES",
+            "(R23CP2402)",
+            "DATA"
+          ],
+          "columnLabel": "morning_dcp",
+          "session": "morning",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CP2403",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "appearances": [
+        {
+          "code": "R23CP2403",
+          "departmentCode": "COMP",
+          "programmeCode": "DCOMP",
+          "page": 1,
+          "lineNumber": 18,
+          "lineText": "(R23CP2403)",
+          "nearbyLines": [
+            "PROGRAMMING",
+            "(R23CP2403)",
+            "BASIC"
+          ],
+          "columnLabel": "morning_dcp",
+          "session": "morning",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CP2404",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "appearances": [
+        {
+          "code": "R23CP2404",
+          "departmentCode": "COMP",
+          "programmeCode": "DCOMP",
+          "page": 1,
+          "lineNumber": 6,
+          "lineText": "(R23CP2404)",
+          "nearbyLines": [
+            "cOMM.NICATION",
+            "(R23CP2404)",
+            "OBJECT"
+          ],
+          "columnLabel": "morning_dcp",
+          "session": "morning",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CP2406",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "appearances": [
+        {
+          "code": "R23CP2406",
+          "departmentCode": "COMP",
+          "programmeCode": "DCOMP",
+          "page": 1,
+          "lineNumber": 11,
+          "lineText": "(R23CP2406)",
+          "nearbyLines": [
+            "0.s",
+            "(R23CP2406)",
+            "(ONLINE)"
+          ],
+          "columnLabel": "afternoon_dcp",
+          "session": "afternoon",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CP2407",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "appearances": [
+        {
+          "code": "R23CP2407",
+          "departmentCode": "COMP",
+          "programmeCode": "DCOMP",
+          "page": 1,
+          "lineNumber": 16,
+          "lineText": "(R23CP2407)",
+          "nearbyLines": [
+            "DBMS",
+            "(R23CP2407)",
+            "COMPUTER"
+          ],
+          "columnLabel": "afternoon_dcp",
+          "session": "afternoon",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CP2408",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "appearances": [
+        {
+          "code": "R23CP2408",
+          "departmentCode": "COMP",
+          "programmeCode": "DCOMP",
+          "page": 1,
+          "lineNumber": 19,
+          "lineText": "(R23CP2408)",
+          "nearbyLines": [
+            "NETWORKS",
+            "(R23CP2408)",
+            "PYTHON"
+          ],
+          "columnLabel": "afternoon_dcp",
+          "session": "afternoon",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CP3401",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "appearances": [
+        {
+          "code": "R23CP3401",
+          "departmentCode": "COMP",
+          "programmeCode": "DCOMP",
+          "page": 1,
+          "lineNumber": 34,
+          "lineText": "(R23CP3401)",
+          "nearbyLines": [
+            "TRENDS IN C.N",
+            "(R23CP3401)",
+            "ADVANCED"
+          ],
+          "columnLabel": "morning_dcp",
+          "session": "morning",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    },
+    {
+      "code": "R23CP6404",
+      "departmentCode": "COMP",
+      "programmeCode": "DCOMP",
+      "appearances": [
+        {
+          "code": "R23CP6404",
+          "departmentCode": "COMP",
+          "programmeCode": "DCOMP",
+          "page": 1,
+          "lineNumber": 22,
+          "lineText": "(R23CP6404) (R23CI2603)",
+          "nearbyLines": [
+            "(R23EE2306) LLERS (R23EX2504)",
+            "(R23CP6404) (R23CI2603)",
+            "2 T 5 U /1 E 1 S / D 20 A 2 Y 5 C ( O R ( M E 2 N M 3C G . E L S 1 I K S 7 I H 0 L 2 ) L ) S C ( O R ( M E 2 N 3 M M G . L E S I 1 K S 7 I H L 0 ) 2 L ) S cO (R ( M E 2 N M 3E G . E L S 1 I K S 7 I H 0 L 2 ) L ) S C ( O R ( M E 2 N 3 M C G , P L S 1 I K S 7 I H 0 L 2 ) L ) S C ( O ( R E M 2 N M 3 G C . L I S 1 I K 7 S 0 I H L 2 ) L ) S C ( O R ( M E 2 N 3 M E G . X L S 1 I K 7 S 0 H IL 2 ) ) L S (R ( 2 O S 3 N C V L E Y I 1 N - 1 E I 0 ) 2 (R ( B B 2 O 3 . . N E C E L L P L I E 1 N E . 3 E X & 0 ) 1 ) (R ( B B O 2 . 3 . N E E C L L L I I 1 E N E 3 X E 0 . ) 1 )"
+          ],
+          "columnLabel": null,
+          "session": null,
+          "matchType": "exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        },
+        {
+          "code": "R23CP6404",
+          "departmentCode": "COMP",
+          "programmeCode": "DCOMP",
+          "page": 1,
+          "lineNumber": 11,
+          "lineText": "(R23CP6404)",
+          "nearbyLines": [
+            "WITH C++",
+            "(R23CP6404)",
+            "COMM, SKILLS"
+          ],
+          "columnLabel": "morning_dcp",
+          "session": "morning",
+          "matchType": "column_crop_exact_text_code",
+          "evidenceStatus": "timetable_evidence_only"
+        }
+      ],
+      "firstPage": 1,
+      "semesterPlacementStatus": "not_semester_placement_verified",
+      "publicationStatus": "blocked_until_official_semester_manifest"
+    }
+  ]
+}

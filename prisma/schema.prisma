@@ -130,6 +130,7 @@ model Subject {
   courseCatalog         CourseCatalog?         @relation(fields: [courseCatalogId], references: [id], onDelete: SetNull)
   credits               Int                    @default(4)
   category              String?
+  displayOrder          Int                    @default(0)
   lectureHours          Int?
   tutorialHours         Int?
   practicalHours        Int?
@@ -154,6 +155,8 @@ model Subject {
   questions             Question[]
   resources             Resource[]
   electiveOptions       ElectiveOption[]
+  electiveSelections    StudentElectiveSelection[]
+  classElectiveAllocations ClassElectiveAllocation[]
   courseOutcomes        CourseOutcome[]
   practicalExperiments  PracticalExperiment[]
   recommendedReferences RecommendedReference[]
@@ -166,6 +169,7 @@ model Subject {
   @@index([courseCatalogId])
   @@index([electiveGroupId])
   @@index([schemeId, status])
+  @@index([schemeId, semesterId, displayOrder])
 }
 
 model Unit {
@@ -177,6 +181,10 @@ model Unit {
   outcomes              String?
   sourceEvidence        String?
   status                String                 @default("active")
+  reviewStatus          String                 @default("draft")
+  publishedAt           DateTime?
+  reviewedById          String?
+  publishedById         String?
   version               Int                    @default(1)
   archivedAt            DateTime?
   subjectId             String
@@ -188,6 +196,7 @@ model Unit {
   createdAt             DateTime               @default(now())
 
   @@unique([subjectId, number])
+  @@index([subjectId, status, reviewStatus])
 }
 
 model Topic {
@@ -201,6 +210,10 @@ model Topic {
   outcomes              String?
   sourceEvidence        String?
   status                String                 @default("active")
+  reviewStatus          String                 @default("draft")
+  publishedAt           DateTime?
+  reviewedById          String?
+  publishedById         String?
   version               Int                    @default(1)
   archivedAt            DateTime?
   unitId                String
@@ -214,6 +227,7 @@ model Topic {
   createdAt             DateTime               @default(now())
 
   @@unique([unitId, slug])
+  @@index([unitId, status, reviewStatus])
 }
 
 // ============================================================
@@ -254,6 +268,8 @@ model ElectiveGroup {
   sourceEvidence String?
   subjects       Subject[]
   options        ElectiveOption[]
+  studentSelections StudentElectiveSelection[]
+  classAllocations  ClassElectiveAllocation[]
   createdAt      DateTime         @default(now())
   updatedAt      DateTime         @updatedAt
 
@@ -296,6 +312,47 @@ model SubjectApplicability {
 
   @@index([subjectId, status])
   @@index([programmeId, schemeId, semesterId])
+}
+
+model StudentElectiveSelection {
+  id              String        @id @default(cuid())
+  userId          String
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  electiveGroupId String
+  electiveGroup   ElectiveGroup @relation(fields: [electiveGroupId], references: [id], onDelete: Cascade)
+  subjectId       String
+  subject         Subject       @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  status          String        @default("active")
+  selectedAt      DateTime      @default(now())
+  selectedById    String?
+  sourceEvidence  String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@unique([userId, electiveGroupId])
+  @@index([subjectId, status])
+  @@index([electiveGroupId, status])
+}
+
+model ClassElectiveAllocation {
+  id              String        @id @default(cuid())
+  classGroupId    String
+  classGroup      ClassGroup    @relation(fields: [classGroupId], references: [id], onDelete: Cascade)
+  electiveGroupId String
+  electiveGroup   ElectiveGroup @relation(fields: [electiveGroupId], references: [id], onDelete: Cascade)
+  subjectId       String
+  subject         Subject       @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  status          String        @default("active")
+  effectiveFrom   DateTime?
+  effectiveTo     DateTime?
+  allocatedById   String?
+  sourceEvidence  String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@unique([classGroupId, electiveGroupId])
+  @@index([subjectId, status])
+  @@index([electiveGroupId, status])
 }
 
 model CourseOutcome {
@@ -778,7 +835,7 @@ model Lesson {
   reviseContent    String? // short notes, flashcards, formulas
 
   citations          String? // JSON array of source citations
-  status             String    @default("published") // draft | under_review | verified | published | archived
+  status             String    @default("draft") // draft | under_review | verified | published | archived
   version            Int       @default(1)
   createdById        String?
   submittedById      String?
@@ -794,12 +851,146 @@ model Lesson {
   changeSummary      String?
   archivedAt         DateTime?
 
-  completions LessonCompletion[]
-  createdAt   DateTime           @default(now())
-  updatedAt   DateTime           @updatedAt
+  completions        LessonCompletion[]
+  questionAttempts   QuestionAttempt[]
+  resources          LessonResource[]
+  videoWatchProgress VideoWatchProgress[]
+  quizAttempts       QuizAttempt[]
+  generatedDocuments GeneratedLessonDocument[]
+  contentJobs        ContentGenerationJob[]
+  completionCriteria LessonCompletionCriteria?
+  createdAt          DateTime                  @default(now())
+  updatedAt          DateTime                  @updatedAt
 
   @@index([status, updatedAt])
   @@index([createdById])
+}
+
+model LessonResource {
+  id                 String   @id @default(cuid())
+  lessonId           String
+  lesson             Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  resourceId         String
+  resource           Resource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  role               String // primary_video | alternate_video | lesson_notes | transcript | infographic | worksheet | formula_sheet | lab_demo | reference
+  sortOrder          Int      @default(0)
+  isPrimary          Boolean  @default(false)
+  isRequired         Boolean  @default(false)
+  startSeconds       Int?
+  endSeconds         Int?
+  coveragePercentage Int?
+  verificationStatus String   @default("pending")
+  status             String   @default("draft")
+  sourceEvidence     String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@unique([lessonId, resourceId, role])
+  @@index([lessonId, role, status])
+  @@index([resourceId])
+}
+
+model VideoChapter {
+  id                 String   @id @default(cuid())
+  resourceId         String
+  resource           Resource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  title              String
+  startSeconds       Int
+  endSeconds         Int?
+  order              Int      @default(0)
+  transcriptSnippet  String?
+  sourceEvidence     String?
+  verificationStatus String   @default("pending")
+  status             String   @default("draft")
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@unique([resourceId, startSeconds, title])
+  @@index([resourceId, status])
+}
+
+model GeneratedLessonDocument {
+  id                     String                 @id @default(cuid())
+  lessonId               String
+  lesson                 Lesson                 @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  outputResourceId       String?
+  outputResource         Resource?              @relation("GeneratedDocumentOutputResource", fields: [outputResourceId], references: [id], onDelete: SetNull)
+  documentType           String                 @default("lesson_notes") // lesson_notes | quick_notes | revision_sheet | formula_sheet | unit_pack | subject_handbook
+  sourceVideoResourceIds String?
+  sourceTranscriptHash   String?
+  curriculumSourceIds    String?
+  templateVersion        String
+  aiProvider             String?
+  aiModel                String?
+  generationStatus       String                 @default("draft") // draft | generating | validation_failed | ready_for_review | approved | published | failed | archived
+  validationResults      String?
+  reviewerId             String?
+  publisherId            String?
+  generatedAt            DateTime?
+  reviewedAt             DateTime?
+  publishedAt            DateTime?
+  storageObjectKey       String?
+  htmlObjectKey          String?
+  thumbnailObjectKey     String?
+  pageCount              Int?
+  contentHash            String?
+  version                Int                    @default(1)
+  contentJobs            ContentGenerationJob[]
+  createdAt              DateTime               @default(now())
+  updatedAt              DateTime               @updatedAt
+
+  @@index([lessonId, documentType, generationStatus])
+  @@index([outputResourceId])
+  @@index([contentHash])
+}
+
+model ContentGenerationJob {
+  id                  String                   @id @default(cuid())
+  lessonId            String
+  lesson              Lesson                   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  generatedDocumentId String?
+  generatedDocument   GeneratedLessonDocument? @relation(fields: [generatedDocumentId], references: [id], onDelete: SetNull)
+  jobType             String                   @default("lesson_notes")
+  state               String                   @default("queued") // queued | running | validation_failed | awaiting_review | completed | failed | cancelled
+  attemptCount        Int                      @default(0)
+  provider            String?
+  model               String?
+  templateVersion     String?
+  inputSummaryJson    String?
+  validationJson      String?
+  errorCode           String?
+  errorMessage        String?
+  requestedById       String?
+  reviewedById        String?
+  publishedById       String?
+  leaseOwner          String?
+  leaseUntil          DateTime?
+  startedAt           DateTime?
+  completedAt         DateTime?
+  createdAt           DateTime                 @default(now())
+  updatedAt           DateTime                 @updatedAt
+
+  @@index([state, updatedAt])
+  @@index([lessonId, jobType])
+  @@index([generatedDocumentId])
+}
+
+model LessonCompletionCriteria {
+  id                    String   @id @default(cuid())
+  lessonId              String   @unique
+  lesson                Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  requiredResourceRoles String?
+  minimumVideoPercent   Int      @default(0)
+  requirePractice       Boolean  @default(false)
+  requireQuizPass       Boolean  @default(false)
+  minimumQuizScore      Int?
+  requireExplicitDone   Boolean  @default(true)
+  criteriaJson          String?
+  status                String   @default("active")
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  @@index([status])
 }
 
 // ============================================================
@@ -909,6 +1100,8 @@ model User {
   studyTasks                  StudyTask[]
   studySessions               StudySession[]
   tutorSessions               TutorSession[]
+  videoWatchProgress          VideoWatchProgress[]
+  electiveSelections          StudentElectiveSelection[]
   codingSubmissions           CodingSubmission[]
   labProgress                 LabProgress[]
   achievements                UserAchievement[]
@@ -1152,6 +1345,7 @@ model ClassGroup {
   authorityGrants     AuthorityGrant[]
   teachingAssignments TeachingAssignment[]
   memberships         ClassMembership[]
+  electiveAllocations ClassElectiveAllocation[]
   createdAt           DateTime             @default(now())
   updatedAt           DateTime             @updatedAt
 
@@ -1356,9 +1550,32 @@ model LessonCompletion {
   progress    Float     @default(0) // 0-100
   scrollPos   Float     @default(0)
   completedAt DateTime?
+  lastVisited DateTime?
   createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
   @@unique([userId, lessonId, mode])
+  @@index([userId, lastVisited])
+}
+
+model VideoWatchProgress {
+  id             String    @id @default(cuid())
+  userId         String
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lessonId       String
+  lesson         Lesson    @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  resourceId     String
+  resource       Resource  @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  lastSecond     Int       @default(0)
+  watchedSeconds Int       @default(0)
+  watchPercent   Float     @default(0)
+  completedAt    DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@unique([userId, lessonId, resourceId])
+  @@index([lessonId, resourceId])
+  @@index([userId, updatedAt])
 }
 
 model QuestionAttempt {
@@ -1367,6 +1584,8 @@ model QuestionAttempt {
   user          User     @relation(fields: [userId], references: [id])
   questionId    String
   question      Question @relation(fields: [questionId], references: [id])
+  lessonId      String?
+  lesson        Lesson?  @relation(fields: [lessonId], references: [id], onDelete: SetNull)
   userAnswer    String?
   isCorrect     Boolean?
   timeTakenMs   Int      @default(0)
@@ -1378,6 +1597,7 @@ model QuestionAttempt {
 
   @@index([userId, createdAt])
   @@index([questionId])
+  @@index([lessonId])
 }
 
 model QuizAttempt {
@@ -1385,6 +1605,8 @@ model QuizAttempt {
   userId         String
   user           User      @relation(fields: [userId], references: [id])
   subjectId      String?
+  lessonId       String?
+  lesson         Lesson?   @relation(fields: [lessonId], references: [id], onDelete: SetNull)
   mode           String // practice | chapter_test | mock_exam
   unitNumbers    String? // JSON array
   // Lifecycle: 'in_progress' | 'submitted' | 'locked'. Prevents double-submit
@@ -1406,6 +1628,7 @@ model QuizAttempt {
   @@index([userId, startedAt])
   @@index([userId, status])
   @@index([subjectId])
+  @@index([lessonId, status])
 }
 
 // ============================================================
@@ -1515,8 +1738,8 @@ model TutorMessage {
   feedback        String? // up | down | null
   createdAt       DateTime     @default(now())
 
-  @@index([sessionId, createdAt])
   @@unique([sessionId, role, clientMessageId])
+  @@index([sessionId, createdAt])
 }
 
 // ============================================================
@@ -1578,7 +1801,7 @@ model LabProgress {
 // ============================================================
 
 model Resource {
-  id                  String                 @id @default(cuid())
+  id                  String                    @id @default(cuid())
   title               String
   type                String // pdf | docx | image | text | video_link | web_link | code | lab_manual | question_paper | model_answer
   url                 String?
@@ -1589,35 +1812,39 @@ model Resource {
   durationSeconds     Int?
   content             String?
   subjectId           String
-  subject             Subject                @relation(fields: [subjectId], references: [id])
+  subject             Subject                   @relation(fields: [subjectId], references: [id])
   unitNumber          Int?
   topicId             String?
-  source              String                 @default("platform") // platform | drive | teacher | student
-  visibility          String                 @default("public") // public | private | submitted | published
-  verified            Boolean                @default(false)
+  source              String                    @default("platform") // platform | drive | teacher | student
+  visibility          String                    @default("public") // public | private | submitted | published
+  verified            Boolean                   @default(false)
   contributorId       String?
   year                Int?
-  language            String                 @default("en")
+  language            String                    @default("en")
   difficulty          String?
   license             String?
   creator             String?
   publishedAt         DateTime?
   lastMetadataCheckAt DateTime?
-  linkHealth          String                 @default("unknown")
+  linkHealth          String                    @default("unknown")
   redirectUrl         String?
-  reviewStatus        String                 @default("pending")
+  reviewStatus        String                    @default("pending")
   reviewedById        String?
   reviewedAt          DateTime?
   qualityScore        Int?
   qualityRubricJson   String?
   sourceTrust         String?
-  moderationStatus    String                 @default("clear")
+  moderationStatus    String                    @default("clear")
   archivedAt          DateTime?
-  downloads           Int                    @default(0)
-  rating              Float                  @default(0)
+  downloads           Int                       @default(0)
+  rating              Float                     @default(0)
+  lessonResources     LessonResource[]
+  videoChapters       VideoChapter[]
+  videoWatchProgress  VideoWatchProgress[]
+  generatedDocuments  GeneratedLessonDocument[] @relation("GeneratedDocumentOutputResource")
   topicMappings       ResourceTopicMapping[]
   reviews             ResourceReview[]
-  createdAt           DateTime               @default(now())
+  createdAt           DateTime                  @default(now())
 
   @@index([subjectId, visibility])
   @@index([contributorId])

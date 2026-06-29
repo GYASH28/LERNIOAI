@@ -12,18 +12,20 @@ import {
   LayoutDashboard, BookOpen, PenTool, Bot, FlaskConical, Code2,
   FileText, RotateCw, Library, CalendarCheck, BarChart3, User,
   Search, CornerDownLeft, ArrowUp, ArrowDown, Sun, Moon, Sparkles,
+  Layers, PlayCircle,
 } from 'lucide-react'
 import { usePrefs } from '@/components/theme-provider'
-import type { ViewKey } from '@/lib/types'
+import type { ApiResult, ViewKey } from '@/lib/types'
 import { cn } from '@/lib/utils'
 import { routeForView } from '@/lib/routes'
+import type { LearningSearchResult, LearningSearchResultKind } from '@/features/learning/utils/learning-search'
 
 interface CommandItem {
   id: string
   label: string
   hint?: string
   icon: React.ComponentType<{ className?: string }>
-  group: 'Navigate' | 'Actions' | 'Appearance'
+  group: 'Learning' | 'Navigate' | 'Actions' | 'Appearance'
   keywords?: string
   action: () => void
 }
@@ -72,6 +74,8 @@ function paletteReducer(state: PaletteState, action: PaletteAction): PaletteStat
 export function CommandPalette() {
   const [open, setOpen] = useState(false)
   const [state, dispatch] = useReducer(paletteReducer, { query: '', activeIdx: 0 })
+  const [learningResults, setLearningResults] = useState<LearningSearchResult[]>([])
+  const [learningSearchPending, setLearningSearchPending] = useState(false)
   const { query, activeIdx } = state
   const inputRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
@@ -80,6 +84,19 @@ export function CommandPalette() {
     router.push(routeForView(view))
     setOpen(false)
   }, [router])
+
+  const navigateToHref = useCallback((href: string) => {
+    router.push(href)
+    setOpen(false)
+  }, [router])
+
+  const updateQuery = useCallback((nextQuery: string) => {
+    dispatch({ type: 'setQuery', query: nextQuery })
+    if (nextQuery.trim().length < 2) {
+      setLearningResults([])
+      setLearningSearchPending(false)
+    }
+  }, [])
 
   // Global Cmd/Ctrl+K shortcut
   useEffect(() => {
@@ -108,7 +125,48 @@ export function CommandPalette() {
     return undefined
   }, [open])
 
+  useEffect(() => {
+    const q = query.trim()
+    if (!open || q.length < 2) {
+      return undefined
+    }
+
+    const controller = new AbortController()
+    const timer = window.setTimeout(async () => {
+      setLearningSearchPending(true)
+      try {
+        const response = await fetch(`/api/search/learning?q=${encodeURIComponent(q)}&limit=8`, {
+          signal: controller.signal,
+          cache: 'no-store',
+        })
+        const payload = await response.json() as ApiResult<{ results: LearningSearchResult[] }>
+        if (!controller.signal.aborted) {
+          setLearningResults(payload.ok ? payload.data.results : [])
+        }
+      } catch {
+        if (!controller.signal.aborted) setLearningResults([])
+      } finally {
+        if (!controller.signal.aborted) setLearningSearchPending(false)
+      }
+    }, 180)
+
+    return () => {
+      controller.abort()
+      window.clearTimeout(timer)
+    }
+  }, [open, query])
+
   const items = useMemo<CommandItem[]>(() => {
+    const learningItems: CommandItem[] = learningResults.map((result) => ({
+      id: `learning-${result.id}`,
+      label: result.title,
+      hint: result.subtitle,
+      icon: iconForLearningResult(result.kind),
+      group: 'Learning',
+      keywords: `${result.kind} ${result.title} ${result.subtitle} ${result.subjectCode || ''}`,
+      action: () => navigateToHref(result.href),
+    }))
+
     const navItems: CommandItem[] = NAV_ITEMS.map((n) => ({
       id: `nav-${n.key}`,
       label: n.label,
@@ -185,8 +243,8 @@ export function CommandPalette() {
       },
     ]
 
-    return [...navItems, ...actionItems, ...appearanceItems]
-  }, [navigateToView, setPref])
+    return [...learningItems, ...navItems, ...actionItems, ...appearanceItems]
+  }, [learningResults, navigateToHref, navigateToView, setPref])
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
@@ -230,7 +288,11 @@ export function CommandPalette() {
       open={open}
       onOpenChange={(o) => {
         setOpen(o)
-        if (!o) dispatch({ type: 'reset' })
+        if (!o) {
+          dispatch({ type: 'reset' })
+          setLearningResults([])
+          setLearningSearchPending(false)
+        }
       }}
     >
       <DialogContent
@@ -248,7 +310,7 @@ export function CommandPalette() {
           <input
             ref={inputRef}
             value={query}
-            onChange={(e) => dispatch({ type: 'setQuery', query: e.target.value })}
+            onChange={(e) => updateQuery(e.target.value)}
             placeholder="Search views, actions, settings…"
             className="flex-1 bg-transparent border-0 outline-none text-sm placeholder:text-muted-foreground focus:ring-0"
           />
@@ -262,7 +324,9 @@ export function CommandPalette() {
           {flatWithIndex.length === 0 ? (
             <div className="px-6 py-10 text-center">
               <Search className="h-8 w-8 text-muted-foreground/40 mx-auto mb-2" />
-              <p className="text-sm font-medium">No matches</p>
+              <p className="text-sm font-medium">
+                {learningSearchPending ? 'Searching learning...' : 'No matches'}
+              </p>
               <p className="text-xs text-muted-foreground mt-0.5">Try a different keyword.</p>
             </div>
           ) : (
@@ -328,4 +392,23 @@ export function CommandPalette() {
       </DialogContent>
     </Dialog>
   )
+}
+
+function iconForLearningResult(kind: LearningSearchResultKind): React.ComponentType<{ className?: string }> {
+  switch (kind) {
+    case 'semester':
+      return CalendarCheck
+    case 'subject':
+      return BookOpen
+    case 'unit':
+      return Layers
+    case 'topic':
+      return Sparkles
+    case 'lesson':
+      return PlayCircle
+    case 'notes':
+      return FileText
+    case 'resource':
+      return Library
+  }
 }

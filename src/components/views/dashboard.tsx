@@ -25,6 +25,10 @@ import { cn } from '@/lib/utils'
 import { routeForView } from '@/lib/routes'
 import type { Subject, ViewKey } from '@/lib/types'
 import type { DashboardSnapshot } from '@/lib/app-bootstrap-types'
+import {
+  canonicalContinueLearningRoute,
+  canonicalSubjectRouteForUser,
+} from '@/features/learning/utils/canonical-learning-routes'
 
 interface DashboardData {
   mastery: any[]
@@ -74,6 +78,12 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
   }
 
   const handleContinue = () => {
+    const canonicalRoute = canonicalContinueLearningRoute(user, subjects, continueLearning)
+    if (canonicalRoute) {
+      router.push(canonicalRoute)
+      return
+    }
+
     if (continueLearning) {
       setLearnContext({
         subjectId: continueLearning.subjectId,
@@ -86,6 +96,11 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
     } else if (subjects.length > 0) {
       const firstSubject = subjects[0]
       if (firstSubject.units[0]?.topics[0]) {
+        const subjectRoute = canonicalSubjectRouteForUser(user, firstSubject)
+        if (subjectRoute) {
+          router.push(subjectRoute)
+          return
+        }
         setLearnContext({
           subjectId: firstSubject.id,
           unitNumber: firstSubject.units[0].number,
@@ -429,6 +444,11 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
             const avgMastery = subjectMastery.length > 0 ? Math.round(subjectMastery.reduce((a: number, m: any) => a + m.score, 0) / subjectMastery.length) : 0
             return (
               <SubjectCard key={subject.id} subject={subject} lessonPct={pct} masteryPct={avgMastery} onClick={() => {
+                const subjectRoute = canonicalSubjectRouteForUser(user, subject)
+                if (subjectRoute) {
+                  router.push(subjectRoute)
+                  return
+                }
                 setLearnContext({ subjectId: subject.id })
                 goToView('learn')
               }} />

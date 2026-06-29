@@ -1,8 +1,13 @@
-import { NextResponse } from 'next/server'
 import { requireUser, withApi, ApiError, okResponse } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { awardXp } from '@/lib/xp'
 import { evaluateAchievements } from '@/lib/achievements'
+import {
+  getStudentLearningScope,
+  scopedLessonWhere,
+  subjectIdsForLearningScope,
+  topicIdsForLearningScope,
+} from '@/features/learning/server/get-student-learning-scope'
 
 /**
  * POST /api/analytics/quests/claim
@@ -73,25 +78,47 @@ export async function POST() {
       select: { id: true, dailyMins: true, streakFreezes: true },
     })
     if (!user) throw new ApiError('NOT_FOUND', 'User not found.', 404, false)
+    const scope = await getStudentLearningScope(user.id)
+    const scopedSubjectIds = subjectIdsForLearningScope(scope)
+    const scopedTopicIds = topicIdsForLearningScope(scope)
+    const hasLearningScope = Boolean(scope && scopedSubjectIds.length > 0)
 
     const dailyGoalMins = user.dailyMins || 120
     const xpTarget = Math.max(80, Math.round(dailyGoalMins * 1.2))
 
     const [lessonsToday, questionsToday, sessionsToday, revisionsToday, xpEventsToday] =
       await Promise.all([
-        db.lessonCompletion.count({
-          where: { userId: user.id, completedAt: { gte: todayStart, lt: todayEnd } },
-        }),
-        db.questionAttempt.count({
-          where: { userId: user.id, createdAt: { gte: todayStart, lt: todayEnd } },
-        }),
-        db.studySession.findMany({
-          where: { userId: user.id, startedAt: { gte: todayStart, lt: todayEnd } },
-          select: { durationMins: true },
-        }),
-        db.revisionAttempt.count({
-          where: { userId: user.id, createdAt: { gte: todayStart, lt: todayEnd } },
-        }),
+        hasLearningScope
+          ? db.lessonCompletion.count({
+              where: {
+                userId: user.id,
+                completedAt: { gte: todayStart, lt: todayEnd },
+                lesson: scopedLessonWhere(scope!),
+              },
+            })
+          : 0,
+        hasLearningScope
+          ? db.questionAttempt.count({
+              where: {
+                userId: user.id,
+                createdAt: { gte: todayStart, lt: todayEnd },
+                question: { subjectId: { in: scopedSubjectIds } },
+              },
+            })
+          : 0,
+        hasLearningScope
+          ? db.studySession.findMany({
+              where: {
+                userId: user.id,
+                startedAt: { gte: todayStart, lt: todayEnd },
+                OR: [{ subjectId: null }, { subjectId: { in: scopedSubjectIds } }],
+              },
+              select: { durationMins: true },
+            })
+          : [],
+        hasLearningScope
+          ? countScopedRevisionAttemptsToday(user.id, scopedTopicIds, todayStart, todayEnd)
+          : 0,
         db.xpEvent.findMany({
           where: { userId: user.id, createdAt: { gte: todayStart, lt: todayEnd } },
           select: { amount: true },
@@ -159,5 +186,26 @@ export async function POST() {
       allComplete: true,
       newlyUnlocked,
     })
+  })
+}
+
+async function countScopedRevisionAttemptsToday(
+  userId: string,
+  topicIds: string[],
+  todayStart: Date,
+  todayEnd: Date,
+): Promise<number> {
+  if (topicIds.length === 0) return 0
+  const schedules = await db.revisionSchedule.findMany({
+    where: { userId, topicId: { in: topicIds } },
+    select: { id: true },
+  })
+  if (schedules.length === 0) return 0
+  return db.revisionAttempt.count({
+    where: {
+      userId,
+      scheduleId: { in: schedules.map((schedule) => schedule.id) },
+      createdAt: { gte: todayStart, lt: todayEnd },
+    },
   })
 }

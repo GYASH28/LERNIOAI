@@ -6,6 +6,7 @@ import { db } from '@/lib/db'
 import { checkRateLimit } from '@/lib/rate-limit'
 import { toPublicUserDTO } from '@/lib/user-dto'
 import { assertRequestBodySize } from '@/lib/schemas'
+import { TARGET_CWIT_DEPARTMENT_CODES, TARGET_CWIT_PROGRAMME_CODES } from '@/lib/cwit-departments'
 
 export async function GET() {
   return withApi(async () => {
@@ -13,7 +14,12 @@ export async function GET() {
       where: {
         status: 'active',
         archivedAt: null,
-        department: { status: 'active', archivedAt: null },
+        code: { in: [...TARGET_CWIT_PROGRAMME_CODES] },
+        department: {
+          status: 'active',
+          archivedAt: null,
+          code: { in: [...TARGET_CWIT_DEPARTMENT_CODES] },
+        },
       },
       orderBy: [
         { department: { code: 'asc' } },

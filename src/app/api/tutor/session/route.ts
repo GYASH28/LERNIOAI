@@ -7,6 +7,12 @@ import {
   updateTutorSessionSchema,
 } from '@/lib/schemas'
 import { DEMO_TUTOR_SESSIONS, isDemoMode } from '@/lib/demo-fixtures'
+import {
+  findScopedTopic,
+  findScopedUnit,
+  getStudentLearningScope,
+  isSubjectIdInLearningScope,
+} from '@/features/learning/server/get-student-learning-scope'
 
 /**
  * GET /api/tutor/session
@@ -58,6 +64,32 @@ export async function POST(req: NextRequest) {
     }
 
     const user = await requireUser()
+    const learningScope = await getStudentLearningScope(user.id)
+    if (body.subjectId && !isSubjectIdInLearningScope(learningScope, body.subjectId)) {
+      throw new ApiError('NOT_FOUND', 'Subject not found.', 404, false)
+    }
+    if (body.unitNumber && !body.subjectId) {
+      throw new ApiError('VALIDATION_ERROR', 'Select a subject before selecting a unit.', 400, false)
+    }
+    if (body.subjectId && body.unitNumber) {
+      const unit = await findScopedUnit(learningScope!, {
+        subjectId: body.subjectId,
+        unitNumber: body.unitNumber,
+      })
+      if (!unit) {
+        throw new ApiError('NOT_FOUND', 'Unit not found.', 404, false)
+      }
+    }
+    if (body.topicId) {
+      const topic = await findScopedTopic(learningScope!, {
+        topicId: body.topicId,
+        subjectId: body.subjectId ?? null,
+        unitNumber: body.unitNumber ?? null,
+      })
+      if (!topic) {
+        throw new ApiError('NOT_FOUND', 'Topic not found.', 404, false)
+      }
+    }
 
     const session = await db.tutorSession.create({
       data: {

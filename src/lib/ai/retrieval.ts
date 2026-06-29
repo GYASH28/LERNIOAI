@@ -37,12 +37,14 @@ export interface RetrievedChunk {
 }
 
 export interface RetrieveParams {
+  lessonId?: string
   subjectId?: string
   unitNumber?: number
   topicId?: string
   subjectName?: string
   unitTitle?: string
   topicTitle?: string
+  allowedSubjectIds?: string[]
   /** Cap on number of lessons pulled (default 5). */
   maxLessons?: number
   /** Cap on number of chunks returned (default 12). */
@@ -110,10 +112,20 @@ interface ReviseContent {
 export async function retrieveLessonContext(
   params: RetrieveParams,
 ): Promise<RetrievedChunk[]> {
-  const { subjectId, unitNumber, topicId, subjectName, unitTitle, topicTitle } = params
-  if (!subjectId && !unitNumber && !topicId && !subjectName && !unitTitle && !topicTitle) return []
+  const { lessonId, subjectId, unitNumber, topicId, subjectName, unitTitle, topicTitle, allowedSubjectIds } = params
+  if (!lessonId && !subjectId && !unitNumber && !topicId && !subjectName && !unitTitle && !topicTitle) return []
+  if (allowedSubjectIds && allowedSubjectIds.length === 0) return []
 
-  const lessons = await fetchLessons({ subjectName, unitTitle, topicTitle })
+  const lessons = await fetchLessons({
+    subjectId,
+    unitNumber,
+    topicId,
+    lessonId,
+    subjectName,
+    unitTitle,
+    topicTitle,
+    allowedSubjectIds,
+  })
   if (lessons.length === 0) return []
 
   const maxLessons = params.maxLessons ?? 5
@@ -175,11 +187,14 @@ async function fetchLessons(params: {
   subjectId?: string
   unitNumber?: number
   topicId?: string
+  lessonId?: string
   subjectName?: string
   unitTitle?: string
   topicTitle?: string
+  allowedSubjectIds?: string[]
 }) {
   const idScoped: Prisma.LessonWhereInput[] = [
+    params.lessonId ? { id: params.lessonId } : null,
     params.topicId ? { topicId: params.topicId } : null,
     params.unitNumber && params.subjectId
       ? {
@@ -240,7 +255,18 @@ async function fetchLessons(params: {
   // for older sessions and deliberately remains case-insensitive.
   const where: Prisma.LessonWhereInput = {
     status: { in: ['published', 'verified'] },
-    OR: idScoped.length ? idScoped : textScoped,
+    archivedAt: null,
+    AND: [
+      { OR: idScoped.length ? idScoped : textScoped },
+      params.allowedSubjectIds
+        ? {
+            OR: [
+              { unit: { subjectId: { in: params.allowedSubjectIds } } },
+              { topic: { unit: { subjectId: { in: params.allowedSubjectIds } } } },
+            ],
+          }
+        : {},
+    ],
   }
 
   const lessons = await db.lesson.findMany({
@@ -256,6 +282,7 @@ async function fetchLessons(params: {
   // Rank by specificity: topic match > unit match > subject match.
   const score = (l: (typeof lessons)[number]): number => {
     let s = 0
+    if (params.lessonId && l.id === params.lessonId) s += 400
     if (params.topicId && l.topicId === params.topicId) s += 200
     if (params.unitNumber && (l.unit?.number === params.unitNumber || l.topic?.unit?.number === params.unitNumber)) s += 120
     if (params.subjectId && (l.unit?.subjectId === params.subjectId || l.topic?.unit?.subjectId === params.subjectId)) s += 80

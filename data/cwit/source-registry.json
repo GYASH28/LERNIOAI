@@ -16,12 +16,52 @@
     "notes": "Official department page listing NEP 2020 MPECS R23 curriculum and historical curriculum downloads."
   },
   {
+    "title": "Computer Engineering R23 Curriculum",
+    "sourceType": "official_pdf",
+    "sourceUrl": "https://cwit.mespune.org/wp-content/uploads/2021/07/COMPUTER-MPECS-23-CURRICULUM.pdf",
+    "revisionLabel": "MPECS 2023 / R23",
+    "departmentCode": "COMP",
+    "notes": "Official CWIT Computer Engineering R23 curriculum PDF. Final authority for DCOMP curriculum parsing."
+  },
+  {
+    "title": "Computer Engineering R23 Learning and Assessment Structure",
+    "sourceType": "official_pdf",
+    "sourceUrl": "https://cwit.mespune.org/wp-content/uploads/2021/07/DCP_SEM-1_R23.pdf",
+    "revisionLabel": "MPECS 2023 / R23",
+    "departmentCode": "COMP",
+    "notes": "Official CWIT DCP R23 structure PDF for learning and assessment scheme evidence."
+  },
+  {
     "title": "Computer Engineering and IoT Department Page",
     "sourceType": "structure_sheet",
     "sourceUrl": "https://cwit.mespune.org/department/department-of-computer-engineering-iot/",
     "revisionLabel": "R23 source index",
     "departmentCode": "CIOT",
     "notes": "Official department page for Diploma Programme in Computer Engineering and IoT."
+  },
+  {
+    "title": "Computer Engineering and IoT R23 Curriculum",
+    "sourceType": "official_pdf",
+    "sourceUrl": "https://cwit.mespune.org/wp-content/uploads/2023/07/IOTR23_ALL_Curriculam-FINALV.pdf",
+    "revisionLabel": "MPECS 2023 / R23",
+    "departmentCode": "CIOT",
+    "notes": "Official CWIT Computer Engineering and IoT R23 curriculum PDF. Final authority for DCIOT curriculum parsing."
+  },
+  {
+    "title": "Computer Engineering and IoT R23 Learning and Assessment Structure",
+    "sourceType": "official_pdf",
+    "sourceUrl": "https://cwit.mespune.org/wp-content/uploads/2023/07/DCI_SEM-1_R23.pdf",
+    "revisionLabel": "MPECS 2023 / R23",
+    "departmentCode": "CIOT",
+    "notes": "Official CWIT DCI R23 structure PDF for learning and assessment scheme evidence."
+  },
+  {
+    "title": "CWIT Winter Examination 2025 Time Table",
+    "sourceType": "official_pdf",
+    "sourceUrl": "https://cwit.mespune.org/wp-content/uploads/2025/10/Winter-Examination-2025.pdf",
+    "revisionLabel": "MPECS R23 Winter 2025",
+    "departmentCode": null,
+    "notes": "Official CWIT examination timetable retained as review-only course-code appearance evidence. It is not sufficient authority for CIOT semester placement or manifest publication."
   },
   {
     "title": "Civil Engineering R18 Curriculum",

@@ -4,6 +4,13 @@ import { requireUser, withApi, okResponse, ApiError } from '@/lib/auth'
 import { parseBody, lessonCompletionSchema } from '@/lib/schemas'
 import { awardXp } from '@/lib/xp'
 import { evaluateAchievements } from '@/lib/achievements'
+import {
+  findScopedLesson,
+  getStudentLearningScope,
+  hasResolvedLearningScope,
+  scopedLessonWhere,
+} from '@/features/learning/server/get-student-learning-scope'
+import { getLessonCompletionPolicyState } from '@/features/learning/server/lesson-completion-policy'
 
 /**
  * GET /api/progress/lesson
@@ -12,8 +19,12 @@ import { evaluateAchievements } from '@/lib/achievements'
 export async function GET() {
   return withApi(async () => {
     const user = await requireUser()
+    const learningScope = await getStudentLearningScope(user.id, { includeSubjects: false })
+    if (!hasResolvedLearningScope(learningScope)) {
+      return okResponse([])
+    }
     const records = await db.lessonCompletion.findMany({
-      where: { userId: user.id },
+      where: { userId: user.id, lesson: scopedLessonWhere(learningScope) },
       include: { lesson: true },
     })
     return okResponse(records)
@@ -31,9 +42,13 @@ export async function POST(req: NextRequest) {
   return withApi(async () => {
     const user = await requireUser()
     const body = await parseBody(req, lessonCompletionSchema)
+    const learningScope = await getStudentLearningScope(user.id, { includeSubjects: false })
 
-    // Verify the lesson exists (don't leak existence to other resources via FK error).
-    const lesson = await db.lesson.findUnique({ where: { id: body.lessonId } })
+    // Verify the lesson is in the student's active learning scope before
+    // writing progress or awarding XP. This prevents cross-semester IDOR.
+    const lesson = learningScope
+      ? await findScopedLesson(learningScope, body.lessonId)
+      : null
     if (!lesson) {
       throw new ApiError('NOT_FOUND', 'Lesson not found.', 404, false)
     }
@@ -44,9 +59,21 @@ export async function POST(req: NextRequest) {
 
     const newProgress = Math.max(existing?.progress ?? 0, body.progress ?? 0)
     const newScrollPos = body.scrollPos ?? existing?.scrollPos ?? 0
+    const visitedAt = new Date()
     const nowCompleted = body.completed === true
+    if (nowCompleted) {
+      const policy = await getLessonCompletionPolicyState(user.id, body.lessonId, true)
+      if (!policy.canComplete) {
+        throw new ApiError(
+          'COMPLETION_CRITERIA_NOT_MET',
+          policy.blockers.join(' '),
+          409,
+          true,
+        )
+      }
+    }
     const completedAt = nowCompleted
-      ? new Date()
+      ? visitedAt
       : existing?.completedAt ?? null
 
     const record = await db.lessonCompletion.upsert({
@@ -55,6 +82,7 @@ export async function POST(req: NextRequest) {
         progress: newProgress,
         scrollPos: newScrollPos,
         completedAt,
+        lastVisited: visitedAt,
       },
       create: {
         userId: user.id,
@@ -63,6 +91,7 @@ export async function POST(req: NextRequest) {
         progress: newProgress,
         scrollPos: newScrollPos,
         completedAt,
+        lastVisited: visitedAt,
       },
     })
 

@@ -10,6 +10,14 @@ import {
   chunksToContextBlock,
 } from '@/lib/ai/retrieval'
 import { getAiProvider, type Citation, type TutorMessage } from '@/lib/ai/provider'
+import {
+  findScopedTopic,
+  findScopedUnit,
+  getStudentLearningScope,
+  isSubjectIdInLearningScope,
+  scopedLessonWhere,
+  subjectIdsForLearningScope,
+} from '@/features/learning/server/get-student-learning-scope'
 
 export const runtime = 'nodejs'
 export const maxDuration = 60
@@ -19,6 +27,7 @@ interface ChatBody {
   clientMessageId: string
   message: string
   mode?: string
+  lessonId?: string
   subjectName?: string
   unitTitle?: string
   topicTitle?: string
@@ -85,7 +94,7 @@ export async function POST(req: NextRequest) {
     const user = await requireUser()
     const body = (await parseBody(req, tutorChatSchema)) as ChatBody
 
-    const { sessionId, clientMessageId, message, subjectName, unitTitle, topicTitle } = body
+    const { sessionId, clientMessageId, message, lessonId, subjectName, unitTitle, topicTitle } = body
     const mode = body.mode || 'explain_simple'
 
     const session = await db.tutorSession.findUnique({
@@ -100,6 +109,60 @@ export async function POST(req: NextRequest) {
     })
     if (!session || session.userId !== user.id) {
       throw new ApiError('NOT_FOUND', 'Tutor session not found.', 404, false)
+    }
+    const learningScope = await getStudentLearningScope(user.id)
+    if (session.subjectId && !isSubjectIdInLearningScope(learningScope, session.subjectId)) {
+      throw new ApiError('NOT_FOUND', 'Tutor session not found.', 404, false)
+    }
+    if (session.subjectId && session.unitNumber) {
+      const unit = await findScopedUnit(learningScope!, {
+        subjectId: session.subjectId,
+        unitNumber: session.unitNumber,
+      })
+      if (!unit) {
+        throw new ApiError('NOT_FOUND', 'Tutor session not found.', 404, false)
+      }
+    }
+    if (session.topicId) {
+      const topic = await findScopedTopic(learningScope!, {
+        topicId: session.topicId,
+        subjectId: session.subjectId,
+        unitNumber: session.unitNumber,
+      })
+      if (!topic) {
+        throw new ApiError('NOT_FOUND', 'Tutor session not found.', 404, false)
+      }
+    }
+    if (lessonId) {
+      const lesson = await db.lesson.findFirst({
+        where: {
+          id: lessonId,
+          AND: [
+            scopedLessonWhere(learningScope!),
+            session.subjectId
+              ? {
+                  OR: [
+                    { unit: { subjectId: session.subjectId } },
+                    { topic: { unit: { subjectId: session.subjectId } } },
+                  ],
+                }
+              : {},
+            session.unitNumber
+              ? {
+                  OR: [
+                    { unit: { number: session.unitNumber } },
+                    { topic: { unit: { number: session.unitNumber } } },
+                  ],
+                }
+              : {},
+            session.topicId ? { topicId: session.topicId } : {},
+          ],
+        },
+        select: { id: true, title: true },
+      })
+      if (!lesson) {
+        throw new ApiError('NOT_FOUND', 'Lesson not found.', 404, false)
+      }
     }
 
     const existingAssistant = await db.tutorMessage.findFirst({
@@ -147,12 +210,14 @@ export async function POST(req: NextRequest) {
     })
 
     const chunks = await retrieveLessonContext({
+      lessonId,
       subjectId: session.subjectId ?? undefined,
       unitNumber: session.unitNumber ?? undefined,
       topicId: session.topicId ?? undefined,
       subjectName: session.subjectId ? undefined : subjectName,
       unitTitle: session.unitNumber ? undefined : unitTitle,
       topicTitle: session.topicId ? undefined : topicTitle,
+      allowedSubjectIds: subjectIdsForLearningScope(learningScope),
     })
     const contextBlock = chunksToContextBlock(chunks)
     const citations: Citation[] = chunksToCitations(chunks)

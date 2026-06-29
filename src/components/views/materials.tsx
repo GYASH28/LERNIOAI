@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useMemo } from 'react'
 import { useAppStore } from '@/store/app-store'
 import { Mascot } from '@/components/mascots/mascot'
 import { Card, CardContent } from '@/components/ui/card'
@@ -87,29 +87,56 @@ export function MaterialsView() {
   const [materials, setMaterials] = useState<Resource[]>([])
   const [search, setSearch] = useState('')
   const [subjectFilter, setSubjectFilter] = useState('all')
+  const [unitFilter, setUnitFilter] = useState('all')
+  const [topicFilter, setTopicFilter] = useState('all')
   const [typeFilter, setTypeFilter] = useState('all')
+  const [languageFilter, setLanguageFilter] = useState('all')
   const [verifiedOnly, setVerifiedOnly] = useState(false)
   const [loading, setLoading] = useState(true)
   const [contribOpen, setContribOpen] = useState(false)
   const [tab, setTab] = useState('browse')
   const [previewResource, setPreviewResource] = useState<Resource | null>(null)
+  const selectedSubject = useMemo(
+    () => subjects.find((subject) => subject.id === subjectFilter) ?? null,
+    [subjects, subjectFilter],
+  )
+  const availableUnits = useMemo(() => selectedSubject?.units ?? [], [selectedSubject])
+  const selectedUnit = useMemo(
+    () => availableUnits.find((unit) => String(unit.number) === unitFilter) ?? null,
+    [availableUnits, unitFilter],
+  )
+  const availableTopics = useMemo(() => selectedUnit?.topics ?? [], [selectedUnit])
 
   const load = useCallback(() => {
     setLoading(true)
     const params = new URLSearchParams()
     if (subjectFilter !== 'all') params.set('subjectId', subjectFilter)
+    if (unitFilter !== 'all') params.set('unitNumber', unitFilter)
+    if (topicFilter !== 'all') params.set('topicId', topicFilter)
     if (typeFilter !== 'all') params.set('type', typeFilter)
+    if (languageFilter !== 'all') params.set('language', languageFilter)
     if (search) params.set('q', search)
     fetch(`/api/materials?${params}`)
       .then((r) => r.json())
       .then((d) => { setMaterials(d.data || []); setLoading(false) })
       .catch(() => { setMaterials([]); setLoading(false) })
-  }, [subjectFilter, typeFilter, search])
+  }, [subjectFilter, unitFilter, topicFilter, typeFilter, languageFilter, search])
 
   useEffect(() => {
     const t = setTimeout(load, 300)
     return () => clearTimeout(t)
   }, [load])
+
+  const updateSubjectFilter = (value: string) => {
+    setSubjectFilter(value)
+    setUnitFilter('all')
+    setTopicFilter('all')
+  }
+
+  const updateUnitFilter = (value: string) => {
+    setUnitFilter(value)
+    setTopicFilter('all')
+  }
 
   return (
     <div className="space-y-4">
@@ -158,12 +185,30 @@ export function MaterialsView() {
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search materials..." className="pl-9" />
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                <Select value={subjectFilter} onValueChange={setSubjectFilter}>
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-6">
+                <Select value={subjectFilter} onValueChange={updateSubjectFilter}>
                   <SelectTrigger><SelectValue placeholder="Subject" /></SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">All Subjects</SelectItem>
                     {subjects.map((s) => <SelectItem key={s.id} value={s.id}>{s.name}</SelectItem>)}
+                  </SelectContent>
+                </Select>
+                <Select value={unitFilter} onValueChange={updateUnitFilter} disabled={!selectedSubject}>
+                  <SelectTrigger><SelectValue placeholder="Unit" /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Units</SelectItem>
+                    {availableUnits.map((unit) => (
+                      <SelectItem key={unit.id} value={String(unit.number)}>Unit {unit.number}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <Select value={topicFilter} onValueChange={setTopicFilter} disabled={!selectedUnit}>
+                  <SelectTrigger><SelectValue placeholder="Topic" /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Topics</SelectItem>
+                    {availableTopics.map((topic) => (
+                      <SelectItem key={topic.id} value={topic.id}>{topic.title}</SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
                 <Select value={typeFilter} onValueChange={setTypeFilter}>
@@ -179,6 +224,16 @@ export function MaterialsView() {
                     <SelectItem value="lab_manual">Lab Manual</SelectItem>
                     <SelectItem value="question_paper">Question Paper</SelectItem>
                     <SelectItem value="model_answer">Model Answer</SelectItem>
+                  </SelectContent>
+                </Select>
+                <Select value={languageFilter} onValueChange={setLanguageFilter}>
+                  <SelectTrigger><SelectValue placeholder="Language" /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Languages</SelectItem>
+                    <SelectItem value="en">English</SelectItem>
+                    <SelectItem value="hi">Hindi</SelectItem>
+                    <SelectItem value="mr">Marathi</SelectItem>
+                    <SelectItem value="en-Hinglish">Hinglish</SelectItem>
                   </SelectContent>
                 </Select>
                 <label className="flex items-center gap-2 p-2 rounded-lg border cursor-pointer">
@@ -594,7 +649,8 @@ function MyContributions() {
   }, [])
 
   useEffect(() => {
-    load()
+    const timer = window.setTimeout(load, 0)
+    return () => window.clearTimeout(timer)
   }, [load])
 
   const patch = async (id: string, body: Record<string, unknown>) => {
