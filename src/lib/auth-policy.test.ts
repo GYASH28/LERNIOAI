@@ -39,6 +39,26 @@ describe('assertSafeRuntimeConfig', () => {
     ).toThrow(/LERNIO_DEMO_MODE/)
   })
 
+  it('rejects demo mode in Vercel production', () => {
+    expect(() =>
+      assertSafeRuntimeConfig({
+        demoModeEnv: 'true',
+        nodeEnv: 'production',
+        vercelEnv: 'production',
+      }),
+    ).toThrow(/LERNIO_DEMO_MODE/)
+  })
+
+  it('allows demo mode in Vercel preview builds', () => {
+    expect(() =>
+      assertSafeRuntimeConfig({
+        demoModeEnv: 'true',
+        nodeEnv: 'production',
+        vercelEnv: 'preview',
+      }),
+    ).not.toThrow()
+  })
+
   it('allows demo mode outside production', () => {
     expect(() =>
       assertSafeRuntimeConfig({

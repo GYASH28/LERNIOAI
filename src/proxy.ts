@@ -1,6 +1,7 @@
 import { withAuth } from 'next-auth/middleware'
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
+import { isProductionRuntime } from '@/lib/auth-policy'
 
 function createNonce() {
   const bytes = new Uint8Array(16)
@@ -92,8 +93,10 @@ export default withAuth(
         if (publicPaths.has(req.nextUrl.pathname)) return true
         if (
           process.env.LERNIO_DEMO_MODE === 'true' &&
-          process.env.NODE_ENV !== 'production' &&
-          process.env.VERCEL_ENV !== 'production'
+          !isProductionRuntime({
+            nodeEnv: process.env.NODE_ENV,
+            vercelEnv: process.env.VERCEL_ENV,
+          })
         ) {
           return true
         }

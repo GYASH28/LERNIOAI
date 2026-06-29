@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import { canAttemptDatabase } from '@/lib/db-health'
 import { isDatabaseUnavailableError } from '@/lib/api-error-policy'
+import { isProductionRuntime } from '@/lib/auth-policy'
 
 /**
  * Readiness probe.
@@ -70,7 +71,10 @@ export async function GET() {
   const auth: ProviderState = providerState(process.env.NEXTAUTH_SECRET)
   const ai: ProviderState = providerState(process.env.GROQ_API_KEY)
   const email = emailProviderState()
-  const production = process.env.NODE_ENV === 'production' || process.env.VERCEL_ENV === 'production'
+  const production = isProductionRuntime({
+    nodeEnv: process.env.NODE_ENV,
+    vercelEnv: process.env.VERCEL_ENV,
+  })
   const productionAuthBroken = production && auth === 'unconfigured'
   const productionDemoBroken = production && process.env.LERNIO_DEMO_MODE === 'true'
 

@@ -15,7 +15,8 @@ export interface RuntimeSafetyInput {
 }
 
 export function isProductionRuntime(input: RuntimeSafetyInput): boolean {
-  return input.nodeEnv === 'production' || input.vercelEnv === 'production'
+  if (input.vercelEnv) return input.vercelEnv === 'production'
+  return input.nodeEnv === 'production'
 }
 
 export function assertSafeRuntimeConfig(input: RuntimeSafetyInput): void {
