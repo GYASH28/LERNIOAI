@@ -49,6 +49,11 @@
    - Results include current-semester subjects, units, topics, published lessons and approved resources only.
    - Command palette results route through canonical Learn URLs instead of client-only Zustand state.
 
+8. LEO grounding
+   - LEO retrieval is scoped through `getStudentLearningScope()`.
+   - Retrieved context includes published/verified lesson mode content plus student-visible approved lesson resources, approved generated documents and verified/approved video chapter snippets.
+   - Draft, unreviewed, private or archived resources and generated documents are excluded by the same publication policy used by Lesson Studio.
+
 ## Data Model Additions
 
 Minimum additions:

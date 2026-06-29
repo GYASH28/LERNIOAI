@@ -496,6 +496,27 @@ Date: 2026-06-28
 - `npx vitest run src/lib/coding/coding-scope.test.ts src/features/learning/server/get-student-learning-scope.test.ts`: passed, 2 files and 8 tests.
 - `npm run typecheck`: passed.
 
+## Phase 18 Progress: LEO Approved Resource Grounding
+
+### Changed
+
+- Extended `src/lib/ai/retrieval.ts` so LEO retrieves student-visible `LessonResource` rows and approved generated lesson documents alongside the existing five-mode lesson JSON content.
+- Reused `studentLessonResourceWhere()` and `studentGeneratedDocumentWhere()` so draft, private, unverified, held or archived artifacts do not enter normal student grounding.
+- Added approved video chapter transcript snippets to the retrieved course context when chapter rows are verified/approved.
+- Added approved generated note/document artifact metadata as retrievable sources.
+- Changed context/citation grouping so prompt source numbers and saved citation payloads stay aligned after source deduplication.
+- Added `src/lib/ai/retrieval.test.ts` for resource/document chunking and citation-number alignment.
+
+### Evidence Boundary
+
+- Retrieval can now use approved lesson resources and generated documents when they exist.
+- Most candidate videos and generated notes are still not published `LessonResource` or approved document rows, so this is a grounding capability improvement rather than content publication.
+
+### Additional Verification
+
+- `npx vitest run src/lib/ai/retrieval.test.ts src/lib/ai/groq-provider.test.ts`: passed, 2 files and 7 tests.
+- `npm run typecheck`: passed.
+
 ## Remaining Manual Verification
 
 - Database dry-run/write needs a reachable PostgreSQL connection.
@@ -528,7 +549,7 @@ Date: 2026-06-28
 - `npx tsx scripts/promote-curriculum-official-structure.ts --write --overwrite`: passed, 51 official subject outcome set(s) written.
 - `npm run notes:validate`: passed, 0 document(s) present/valid.
 - `npm run notes:render-pdf`: passed, 0 document(s) rendered.
-- `npm run check`: passed, including migration encoding, lint, typecheck and 41 Vitest files / 142 tests. Lint still reports 132 existing warnings and 0 errors.
+- `npm run check`: passed, including migration encoding, lint, typecheck and 42 Vitest files / 144 tests. Lint still reports 132 existing warnings and 0 errors.
 - `npm run lint`: passed with 0 errors and 132 existing warnings.
 - `npm run typecheck`: passed.
 - `npx prisma validate`: passed.
@@ -536,13 +557,14 @@ Date: 2026-06-28
 - `npx prisma migrate status`: failed because the configured PostgreSQL database at `localhost:5432` is unreachable in the local environment.
 - `npm run check:migrations`: passed.
 - `npx vitest run src/lib/coding/coding-scope.test.ts src/features/learning/server/get-student-learning-scope.test.ts`: passed, 2 files and 8 tests.
+- `npx vitest run src/lib/ai/retrieval.test.ts src/lib/ai/groq-provider.test.ts`: passed, 2 files and 7 tests.
 - `npm run coverage:learning`: passed and wrote `content/reports/cwit-r23-learning-coverage.json` with 8/12 manifests present, 59 subject structures, 51 outcome-backed subject structures, 0 subject structures with promoted units, 27 unit candidate review rows needing manual review, 252 YouTube review-queue subject mappings, 65 unplaced official-subject blockers, 18 missing manifest-subject blockers, 34 unique timetable evidence codes, 81 official catalog course entries and 194 pending verification items.
 - `npm run content:import:youtube-guides -- --sem12 content-import/CWIT_Semester_1_2_YouTube_Lecture_Links.pdf --sem36 content-import/CWIT_Semester_3_to_6_YouTube_Lecture_Links.pdf --dry-run`: passed, extracting 103 deduplicated source URL rows, 102 unique URLs, 100 draft candidates and 3 skipped non-YouTube URLs from the supplied PDFs.
 - `npm run resources:youtube:candidates`: passed, 100 candidate(s) written.
 - `npx tsx scripts/verify-youtube-candidates.ts --write`: passed, 100 metadata check(s), 6 found and 94 unavailable/unverified by public oEmbed.
 - `npm run resources:youtube:review-queue`: passed, 100 candidate(s), 252 subject mapping(s), 0 ready for lesson mapping, 65 unplaced official-subject blockers, 18 missing manifest-subject blockers and 169 lesson-structure blockers.
 - `npx tsx scripts/check-resource-link-health.ts --write`: passed and wrote 100 checked rows; 100 healthy, 0 stale/unhealthy/unknown.
-- `npm run build`: passed with 90 static pages generated and `/api/coding` included.
+- `npm run build`: passed with 90 static pages generated and `/api/coding` plus LEO tutor routes included.
 - `npm run test:e2e`: passed against `next start` production server, 146 Playwright tests.
 - Smoke checks against `next start`: `/api/health` returned 200 and `/api/ready` returned 503 because PostgreSQL is unavailable.
 - Production server was started with `npm run start` on `http://localhost:3000` for smoke/e2e validation, then stopped.

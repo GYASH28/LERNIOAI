@@ -21,6 +21,12 @@ import 'server-only'
 import type { Prisma } from '@prisma/client'
 import { db } from '@/lib/db'
 import type { Citation } from '@/lib/ai/provider'
+import {
+  STUDENT_LESSON_RESOURCE_STATUSES,
+  STUDENT_LESSON_RESOURCE_VERIFICATION_STATUSES,
+  studentGeneratedDocumentWhere,
+  studentLessonResourceWhere,
+} from '@/lib/resources/student-publication-policy'
 
 // ============================================================
 // Public types
@@ -34,6 +40,15 @@ export interface RetrievedChunk {
   topic?: string
   location: string // e.g. "learn > definition", "revise > shortNotes"
   snippet: string
+}
+
+interface RetrievedSourceGroup {
+  sourceId: string
+  title: string
+  subject?: string
+  unit?: string
+  topic?: string
+  snippets: Array<{ location: string; snippet: string }>
 }
 
 export interface RetrieveParams {
@@ -142,24 +157,17 @@ export async function retrieveLessonContext(
 
 /**
  * Convert retrieved chunks into the Citation shape used by the provider/API.
- * Dedupes by sourceId so each lesson is cited once (with its best snippet).
+ * Groups by sourceId so prompt context numbering and API citations stay aligned.
  */
 export function chunksToCitations(chunks: RetrievedChunk[]): Citation[] {
-  const byLesson = new Map<string, RetrievedChunk>()
-  for (const ch of chunks) {
-    const existing = byLesson.get(ch.sourceId)
-    if (!existing || ch.snippet.length > existing.snippet.length) {
-      byLesson.set(ch.sourceId, ch)
-    }
-  }
-  return Array.from(byLesson.values()).map((ch) => ({
-    sourceId: ch.sourceId,
-    title: ch.title,
-    subject: ch.subject,
-    unit: ch.unit,
-    topic: ch.topic,
-    location: ch.location,
-    snippet: truncate(ch.snippet, 200),
+  return groupChunksBySource(chunks).map((group) => ({
+    sourceId: group.sourceId,
+    title: group.title,
+    subject: group.subject,
+    unit: group.unit,
+    topic: group.topic,
+    location: group.snippets[0]?.location,
+    snippet: truncate(group.snippets.map((item) => item.snippet).join(' '), 200),
   }))
 }
 
@@ -169,12 +177,15 @@ export function chunksToCitations(chunks: RetrievedChunk[]): Citation[] {
  */
 export function chunksToContextBlock(chunks: RetrievedChunk[]): string {
   if (chunks.length === 0) return ''
-  const parts = chunks.map((ch, i) => {
-    const header = `[${i + 1}] ${ch.title} — ${ch.location}`
-    const meta = [ch.subject, ch.unit, ch.topic].filter(Boolean).join(' / ')
-    return `${header}${meta ? ` (${meta})` : ''}:\n${ch.snippet}`
+  const parts = groupChunksBySource(chunks).map((group, i) => {
+    const header = `[${i + 1}] ${group.title}`
+    const meta = [group.subject, group.unit, group.topic].filter(Boolean).join(' / ')
+    const body = group.snippets
+      .map((item) => `${item.location}:\n${item.snippet}`)
+      .join('\n\n')
+    return `${header}${meta ? ` (${meta})` : ''}:\n${body}`
   })
-  return 'RETRIEVED LESSON CONTEXT (cite by [n] when referencing):\n\n' + parts.join('\n\n')
+  return 'RETRIEVED COURSE CONTEXT (cite by [n] when referencing):\n\n' + parts.join('\n\n')
 }
 
 // ============================================================
@@ -274,6 +285,66 @@ async function fetchLessons(params: {
     include: {
       topic: { include: { unit: { include: { subject: true } } } },
       unit: { include: { subject: true } },
+      resources: {
+        where: studentLessonResourceWhere(),
+        orderBy: [{ role: 'asc' }, { isPrimary: 'desc' }, { sortOrder: 'asc' }, { createdAt: 'asc' }],
+        select: {
+          id: true,
+          role: true,
+          isPrimary: true,
+          startSeconds: true,
+          endSeconds: true,
+          coveragePercentage: true,
+          resource: {
+            select: {
+              id: true,
+              title: true,
+              type: true,
+              url: true,
+              canonicalUrl: true,
+              provider: true,
+              creator: true,
+              durationSeconds: true,
+              language: true,
+              videoChapters: {
+                where: {
+                  status: { in: [...STUDENT_LESSON_RESOURCE_STATUSES] },
+                  verificationStatus: { in: [...STUDENT_LESSON_RESOURCE_VERIFICATION_STATUSES] },
+                },
+                orderBy: [{ order: 'asc' }, { startSeconds: 'asc' }],
+                select: {
+                  id: true,
+                  title: true,
+                  startSeconds: true,
+                  endSeconds: true,
+                  transcriptSnippet: true,
+                },
+              },
+            },
+          },
+        },
+      },
+      generatedDocuments: {
+        where: studentGeneratedDocumentWhere(),
+        orderBy: [{ documentType: 'asc' }, { version: 'desc' }],
+        select: {
+          id: true,
+          documentType: true,
+          version: true,
+          pageCount: true,
+          storageObjectKey: true,
+          htmlObjectKey: true,
+          outputResource: {
+            select: {
+              id: true,
+              title: true,
+              type: true,
+              url: true,
+              canonicalUrl: true,
+            },
+          },
+        },
+      },
     },
     take: 12,
     orderBy: { order: 'asc' },
@@ -309,7 +380,7 @@ function containsInsensitive(value: string): Prisma.StringFilter {
 // Internal: lesson -> chunks
 // ============================================================
 
-function lessonToChunks(lesson: LessonWithRelations): RetrievedChunk[] {
+export function lessonRecordToRetrievedChunks(lesson: LessonContentSource): RetrievedChunk[] {
   const subjectName =
     lesson.topic?.unit?.subject?.name || lesson.unit?.subject?.name
   const unitTitle = lesson.topic?.unit?.title || lesson.unit?.title
@@ -405,8 +476,198 @@ function lessonToChunks(lesson: LessonWithRelations): RetrievedChunk[] {
     }
   }
 
-  // Cap each lesson to 5 chunks to keep prompt budget reasonable.
-  return chunks.slice(0, 5)
+  const baseMeta = {
+    subject: base.subject,
+    unit: base.unit,
+    topic: base.topic,
+  }
+  const resourceChunks = (lesson.resources ?? []).flatMap((item) => lessonResourceToChunks(item, baseMeta))
+  const documentChunks = (lesson.generatedDocuments ?? []).map((document) =>
+    generatedDocumentToChunk(document, baseMeta),
+  )
+
+  // Keep a compact but mixed context: lesson body first, then approved
+  // supporting artifacts that can improve grounding without flooding the prompt.
+  return [
+    ...chunks.slice(0, 5),
+    ...resourceChunks.slice(0, 4),
+    ...documentChunks.slice(0, 3),
+  ].slice(0, 10)
+}
+
+function lessonToChunks(lesson: LessonWithRelations): RetrievedChunk[] {
+  return lessonRecordToRetrievedChunks(lesson)
+}
+
+interface LessonContextSubject {
+  name: string
+}
+
+interface LessonContextUnit {
+  title: string
+  subject?: LessonContextSubject | null
+}
+
+interface LessonContextTopic {
+  title: string
+  unit?: LessonContextUnit | null
+}
+
+interface LessonResourceContextSource {
+  id: string
+  role: string
+  isPrimary?: boolean
+  startSeconds?: number | null
+  endSeconds?: number | null
+  coveragePercentage?: number | null
+  resource: {
+    id: string
+    title: string
+    type: string
+    url?: string | null
+    canonicalUrl?: string | null
+    provider?: string | null
+    creator?: string | null
+    durationSeconds?: number | null
+    language?: string | null
+    videoChapters?: Array<{
+      id: string
+      title: string
+      startSeconds: number
+      endSeconds?: number | null
+      transcriptSnippet?: string | null
+    }>
+  }
+}
+
+interface GeneratedDocumentContextSource {
+  id: string
+  documentType: string
+  version: number
+  pageCount?: number | null
+  storageObjectKey?: string | null
+  htmlObjectKey?: string | null
+  outputResource?: {
+    id: string
+    title: string
+    type: string
+    url?: string | null
+    canonicalUrl?: string | null
+  } | null
+}
+
+interface LessonContentSource {
+  id: string
+  title: string
+  learnContent?: string | null
+  simplifyContent?: string | null
+  visualiseContent?: string | null
+  practiseContent?: string | null
+  reviseContent?: string | null
+  topic?: LessonContextTopic | null
+  unit?: LessonContextUnit | null
+  resources?: LessonResourceContextSource[]
+  generatedDocuments?: GeneratedDocumentContextSource[]
+}
+
+function lessonResourceToChunks(
+  item: LessonResourceContextSource,
+  base: Pick<RetrievedChunk, 'subject' | 'unit' | 'topic'>,
+): RetrievedChunk[] {
+  const resourceTitle = item.resource.title
+  const sourceId = `resource:${item.resource.id}`
+  const roleLabel = item.role.replace(/_/g, ' ')
+  const chunks: RetrievedChunk[] = []
+  const details = [
+    `Approved ${roleLabel}: ${resourceTitle}`,
+    item.resource.creator ? `Creator: ${item.resource.creator}` : '',
+    item.resource.provider ? `Provider: ${item.resource.provider}` : '',
+    item.resource.durationSeconds ? `Duration: ${Math.round(item.resource.durationSeconds / 60)} min` : '',
+    item.coveragePercentage != null ? `Lesson coverage: ${item.coveragePercentage}%` : '',
+  ].filter(Boolean)
+
+  chunks.push({
+    sourceId,
+    title: resourceTitle,
+    ...base,
+    location: `resource > ${item.role}`,
+    snippet: `${details.join('. ')}.`,
+  })
+
+  for (const chapter of item.resource.videoChapters ?? []) {
+    if (!chapter.transcriptSnippet?.trim()) continue
+    chunks.push({
+      sourceId,
+      title: resourceTitle,
+      ...base,
+      location: `resource > chapter: ${chapter.title}`,
+      snippet: `${formatTimestamp(chapter.startSeconds)} ${chapter.title}: ${chapter.transcriptSnippet.trim()}`,
+    })
+  }
+
+  return chunks
+}
+
+function generatedDocumentToChunk(
+  document: GeneratedDocumentContextSource,
+  base: Pick<RetrievedChunk, 'subject' | 'unit' | 'topic'>,
+): RetrievedChunk {
+  const title = document.outputResource?.title ?? documentTitle(document.documentType)
+  const delivery = document.outputResource
+    ? `approved output resource: ${document.outputResource.title}`
+    : document.htmlObjectKey
+      ? 'approved HTML artifact'
+      : 'approved storage artifact'
+  const pageInfo = document.pageCount ? `${document.pageCount} page(s)` : 'page count unavailable'
+
+  return {
+    sourceId: `generated-document:${document.id}`,
+    title,
+    ...base,
+    location: `generated document > ${document.documentType}`,
+    snippet: `Approved ${documentTitle(document.documentType)} (${delivery}), version ${document.version}, ${pageInfo}.`,
+  }
+}
+
+function groupChunksBySource(chunks: RetrievedChunk[]): RetrievedSourceGroup[] {
+  const groups: RetrievedSourceGroup[] = []
+  const bySource = new Map<string, RetrievedSourceGroup>()
+
+  for (const chunk of chunks) {
+    let group = bySource.get(chunk.sourceId)
+    if (!group) {
+      group = {
+        sourceId: chunk.sourceId,
+        title: chunk.title,
+        subject: chunk.subject,
+        unit: chunk.unit,
+        topic: chunk.topic,
+        snippets: [],
+      }
+      bySource.set(chunk.sourceId, group)
+      groups.push(group)
+    }
+
+    if (group.snippets.length < 3) {
+      group.snippets.push({
+        location: chunk.location,
+        snippet: truncate(chunk.snippet, 500),
+      })
+    }
+  }
+
+  return groups
+}
+
+function documentTitle(type: string): string {
+  return type.replace(/_/g, ' ')
+}
+
+function formatTimestamp(seconds: number): string {
+  const safeSeconds = Math.max(0, Math.floor(seconds))
+  const minutes = Math.floor(safeSeconds / 60)
+  const remainder = safeSeconds % 60
+  return `${minutes}:${String(remainder).padStart(2, '0')}`
 }
 
 function safeParse<T>(s: string | null | undefined): T | null {

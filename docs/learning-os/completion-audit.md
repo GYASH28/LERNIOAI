@@ -36,6 +36,7 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - Added explicit empty CIOT Semester 3-6 blocker manifests instead of leaving those semester slots absent.
 - Updated curriculum validation so empty subject lists are valid only for draft `needs_official_source` manifests.
 - Added optional subject/unit/topic/lesson scope fields for coding challenges/submissions and scoped `/api/coding` to the student's learning scope.
+- Extended LEO retrieval to include student-visible approved lesson resources, video chapter snippets and approved generated note/document artifacts.
 
 ## Verification Completed Locally
 
@@ -52,6 +53,7 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - `npm run resources:link-health -- 10` dry-run checked 10 URLs, all healthy.
 - `npm run check` passed.
 - `npm run build` passed.
+- `npx vitest run src/lib/ai/retrieval.test.ts src/lib/ai/groq-provider.test.ts` passed.
 - `npm run test:e2e` passed with 146 Playwright tests.
 - `npm run test:a11y` passed.
 - `npm run test:visual` passed.
