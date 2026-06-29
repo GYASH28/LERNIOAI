@@ -2,6 +2,8 @@ import { NextRequest } from 'next/server'
 import { db } from '@/lib/db'
 import { requireUser, withApi, okResponse, ApiError } from '@/lib/auth'
 import { parseBody, codingRunSchema, codingSubmitSchema } from '@/lib/schemas'
+import { evaluateAchievements } from '@/lib/achievements'
+import { awardXp } from '@/lib/xp'
 import {
   getStudentLearningScope,
   hasResolvedLearningScope,
@@ -14,6 +16,13 @@ import {
   codingChallengeContextFromRecord,
   codingChallengeWhereForLearningScope,
 } from '@/lib/coding/coding-scope'
+import {
+  parseCodingTestCases,
+  publicCodingTestResults,
+  runCodingSubmission,
+} from '@/lib/coding/code-runner'
+
+export const runtime = 'nodejs'
 
 /**
  * GET /api/coding
@@ -121,16 +130,17 @@ export async function GET() {
 /**
  * HONEST CODE-LAB POLICY (audit finding 8 — coding honesty):
  *
- * The sandbox has no isolated C++ runner. We therefore:
+ * Next.js never executes untrusted code itself. We therefore:
  *   - "Run"  = LOCAL SYNTAX PREVIEW only. We do a light static check (matching
  *              braces, presence of `int main(`) and return that feedback.
  *              We do NOT execute, do NOT compare against test cases, do NOT
  *              award XP, and do NOT record a "passed" submission.
- *   - "Submit" = disabled in this build. We record the code as a draft
- *                 submission and return a clear message that real execution
- *                 requires the production runner.
+ *   - "Submit" = reviewed test execution only through a configured trusted
+ *                 remote runner. Without CODE_RUNNER_URL, or without reviewed
+ *                 test cases, the code is saved but cannot pass or award XP.
  *
- * Wrong programs can NEVER "pass" because we never claim they pass.
+ * Wrong programs can NEVER "pass" unless the trusted runner returns a complete
+ * all-tests-passed result that this route validates before persistence.
  */
 export async function POST(req: NextRequest) {
   return withApi(async () => {
@@ -178,8 +188,24 @@ export async function POST(req: NextRequest) {
         throw new ApiError('NOT_FOUND', 'Coding challenge not found.', 404, false)
       }
       const context = codingChallengeContextFromRecord(challenge)
+      const testCases = parseCodingTestCases(challenge.testCases)
+      const runner = await runCodingSubmission({
+        challengeId: challenge.id,
+        language: body.language,
+        code: body.code,
+        testCases,
+        timeLimitMs: challenge.timeLimitMs,
+        memoryLimitKB: challenge.memoryLimitKB,
+      })
+      const passed = runner.configured && runner.status === 'passed' && runner.testResults.every((result) => result.passed)
+      const submissionStatus = runner.configured
+        ? passed
+          ? 'passed'
+          : runner.status === 'failed'
+            ? 'failed'
+            : 'error'
+        : 'submitted'
 
-      // Persist as a draft — never mark as passed/failed since we cannot run it.
       const submission = await db.codingSubmission.create({
         data: {
           userId: user.id,
@@ -190,21 +216,43 @@ export async function POST(req: NextRequest) {
           lessonId: context.lessonId,
           code: body.code,
           language: body.language,
-          status: 'submitted',
-          output: null,
-          compileError: null,
-          testResults: null,
+          status: submissionStatus,
+          output: runner.output,
+          compileError: runner.compileError,
+          testResults: runner.testResults.length ? JSON.stringify(runner.testResults) : null,
         },
       })
 
+      let xpGain = 0
+      if (passed) {
+        const xp = await awardXp({
+          userId: user.id,
+          eventType: 'coding_pass',
+          amount: xpForCodingDifficulty(challenge.difficulty),
+          idempotencyKey: `coding_pass:${user.id}:${challenge.id}`,
+          sourceId: submission.id,
+        })
+        xpGain = xp.awarded ? xp.amount : 0
+        try {
+          await evaluateAchievements({ userId: user.id, trigger: 'coding_pass' })
+        } catch {
+          // Achievement evaluation should never break a verified coding submission.
+        }
+      }
+
       return okResponse({
-        submission,
-        status: 'not_executed',
-        message:
-          'Code submitted as a draft. Real test execution requires the production code runner, which is not available in this environment. Your code has been saved — a teacher can review it manually.',
-        // Be explicit so the client cannot mistake this for a pass.
-        passed: false,
-        xpGain: 0,
+        submission: {
+          ...submission,
+          testResults: null,
+        },
+        status: runner.configured ? 'executed' : 'not_executed',
+        runnerStatus: runner.status,
+        message: runner.configured
+          ? runner.message
+          : `${runner.message} Your code has been saved for manual review.`,
+        passed,
+        xpGain,
+        testResults: publicCodingTestResults(runner.testResults),
       })
     }
 
@@ -311,6 +359,10 @@ interface CodingChallengeListRow {
 const codingChallengeContextSelect = {
   id: true,
   title: true,
+  difficulty: true,
+  testCases: true,
+  timeLimitMs: true,
+  memoryLimitKB: true,
   subjectId: true,
   unitId: true,
   topicId: true,
@@ -339,6 +391,12 @@ const codingChallengeContextSelect = {
     },
   },
 } as const
+
+function xpForCodingDifficulty(difficulty: string): number {
+  if (difficulty === 'hard') return 80
+  if (difficulty === 'medium') return 50
+  return 30
+}
 
 function toCodingChallengeDto(challenge: CodingChallengeListRow) {
   const context = codingChallengeContextFromRecord(challenge)

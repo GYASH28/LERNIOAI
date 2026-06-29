@@ -60,9 +60,10 @@ interface Challenge {
 }
 
 /**
- * Result of a "Syntax Preview" run or a "Save Draft" submit.
+ * Result of a "Syntax Preview" run or a challenge submission.
  *
- * HONESTY CONTRACT — this view NEVER claims a program passed.
+ * HONESTY CONTRACT — this view only claims a program passed after a trusted
+ * runner result is validated by the server.
  * `status` can only be one of:
  *   - idle          : nothing run yet
  *   - running       : a request is in flight
@@ -79,9 +80,10 @@ interface SyntaxCheck {
 }
 
 interface RunResult {
-  status: 'idle' | 'running' | 'preview_ok' | 'preview_issues' | 'draft_saved' | 'error'
+  status: 'idle' | 'running' | 'preview_ok' | 'preview_issues' | 'draft_saved' | 'passed' | 'failed' | 'runner_error' | 'error'
   message: string
   syntax: SyntaxCheck | null
+  xpGain?: number
 }
 
 // ---------------------------------------------------------------------------
@@ -463,7 +465,7 @@ export function CodingView() {
 
       if (syntax.ok) {
         setMascotState('hinting')
-        setMascotMessage('Structure looks fine — but remember, this only checks braces, main(), and return. It does NOT run your code. To verify correctness you need the real runner (coming soon).')
+        setMascotMessage('Structure looks fine, but remember this only checks braces, main(), and return. Use Submit for reviewed test execution when the runner is configured.')
       } else {
         setMascotState('error')
         setMascotMessage(`Found ${syntax.issues.length} structural issue(s). Check the Issues tab — these are quick fixes.`)
@@ -483,11 +485,9 @@ export function CodingView() {
     }
   }, [code])
 
-  // ---- Save Draft (was "Submit") ----
-  // HONEST: there is no real runner, so "Submit" cannot grade. We relabel it
-  // "Save Draft" and persist the code as a draft submission. The API returns
-  // a clear "not_executed" status with passed:false and xpGain:0 — we surface
-  // that message honestly. NO XP is awarded.
+  // ---- Submit ----
+  // Runs reviewed tests only when the server has a trusted runner configured.
+  // Otherwise the API saves the submission for manual review without awarding XP.
   const handleSaveDraft = useCallback(async () => {
     if (!code.trim()) {
       setMascotState('warning')
@@ -515,13 +515,32 @@ export function CodingView() {
       if (!json.ok) throw new Error(json.error?.message || 'Save failed')
 
       const data = json.data as ApiSubmitResponse
+      const resultStatus: RunResult['status'] = data.status === 'executed'
+        ? data.passed
+          ? 'passed'
+          : data.runnerStatus === 'failed'
+            ? 'failed'
+            : 'runner_error'
+        : 'draft_saved'
       setRunResult({
-        status: 'draft_saved',
+        status: resultStatus,
         message: data.message || 'Code saved as a draft. Real test scoring requires the production code runner.',
         syntax: null,
+        xpGain: data.xpGain,
       })
-      setMascotState('idle')
-      setMascotMessage('Draft saved. Your code is stored on your account — a teacher can review it manually. Automated scoring arrives with the code runner.')
+      if (resultStatus === 'passed') {
+        setMascotState('greeting')
+        setMascotMessage(data.xpGain > 0 ? `All reviewed tests passed. XP gained: ${data.xpGain}.` : 'All reviewed tests passed.')
+      } else if (resultStatus === 'failed') {
+        setMascotState('hinting')
+        setMascotMessage('The runner finished, but at least one reviewed test failed. Read the output and revise your solution.')
+      } else if (resultStatus === 'runner_error') {
+        setMascotState('error')
+        setMascotMessage('The code runner could not complete this submission. Your code was saved for review.')
+      } else {
+        setMascotState('idle')
+        setMascotMessage('Draft saved. Your code is stored on your account for manual review.')
+      }
     } catch (e) {
       setRunResult({
         status: 'error',
@@ -635,8 +654,8 @@ export function CodingView() {
         <div className="text-xs leading-relaxed text-amber-900 dark:text-amber-200">
           <span className="font-semibold">Syntax-learning playground.</span>{' '}
           This lab checks your code&apos;s structure locally — it does <span className="font-semibold">not</span> compile
-          or execute it. Real code execution and test scoring require a sandboxed runner{' '}
-          <span className="italic">(coming soon)</span>. No XP is awarded for previews or drafts.
+          or execute it. Submit uses a trusted production runner when configured; otherwise the code is saved for
+          manual review. No XP is awarded for previews or unexecuted drafts.
         </div>
       </motion.div>
 
@@ -670,7 +689,7 @@ export function CodingView() {
           </div>
           <div className="hidden md:flex flex-col gap-1.5 items-end">
             <Badge variant="outline" className="font-mono text-meta">syntax preview</Badge>
-            <span className="text-meta text-muted-foreground">No real runner yet</span>
+            <span className="text-meta text-muted-foreground">runner-gated submit</span>
           </div>
         </div>
       </motion.div>
@@ -905,7 +924,7 @@ export function CodingView() {
                   </TooltipContent>
                 </Tooltip>
 
-                {/* Save Draft (was "Submit") — honest label + tooltip */}
+                {/* Submit through the configured runner, or save for review if execution is unavailable. */}
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button
@@ -915,13 +934,13 @@ export function CodingView() {
                       className="h-7 px-3 text-xs gap-1.5 bg-amber-500 hover:bg-amber-600 text-white"
                     >
                       {running ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Save className="h-3.5 w-3.5" />}
-                      Save Draft
+                      Submit
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent side="bottom" className="max-w-[240px]">
-                    <p className="font-medium">Save Draft</p>
+                    <p className="font-medium">Submit</p>
                     <p className="text-muted-foreground text-meta mt-0.5">
-                      Saves your code as a draft submission. Test scoring requires the production runner (not yet available). No XP is awarded.
+                      Runs reviewed tests when the production runner is configured; otherwise saves your code for manual review.
                     </p>
                   </TooltipContent>
                 </Tooltip>
@@ -967,6 +986,9 @@ export function CodingView() {
                 {runResult.status === 'preview_ok' && <span className="text-emerald-400">● structure ok</span>}
                 {runResult.status === 'preview_issues' && <span className="text-amber-400">● {issueCount} issue(s)</span>}
                 {runResult.status === 'draft_saved' && <span className="text-sky-400">● draft saved</span>}
+                {runResult.status === 'passed' && <span className="text-emerald-400">● passed</span>}
+                {runResult.status === 'failed' && <span className="text-rose-400">● failed</span>}
+                {runResult.status === 'runner_error' && <span className="text-amber-400">● runner error</span>}
                 {runResult.status === 'error' && <span className="text-rose-400">● error</span>}
                 {runResult.status === 'idle' && <span className="text-zinc-500">● idle</span>}
               </div>
@@ -1015,9 +1037,9 @@ export function CodingView() {
                         <span className="not-italic font-semibold">not</span> compile or run your code.
                       </p>
                       <p>
-                        <span className="text-amber-400 not-italic font-semibold">Save Draft</span> stores your code on
-                        your account as a draft submission. It is not scored — real test scoring needs the sandboxed
-                        runner (coming soon).
+                        <span className="text-amber-400 not-italic font-semibold">Submit</span> sends your code for
+                        reviewed test execution when the production runner is configured. If execution is unavailable,
+                        the submission is saved for manual review.
                       </p>
                     </div>
                   ) : runResult.message ? (
@@ -1027,6 +1049,24 @@ export function CodingView() {
                         <>
                           {'\n\n'}
                           <span className="text-zinc-500">Status: saved as draft · passed: false · xp gained: 0</span>
+                        </>
+                      )}
+                      {runResult.status === 'passed' && (
+                        <>
+                          {'\n\n'}
+                          <span className="text-emerald-400">Status: passed · xp gained: {runResult.xpGain ?? 0}</span>
+                        </>
+                      )}
+                      {runResult.status === 'failed' && (
+                        <>
+                          {'\n\n'}
+                          <span className="text-rose-400">Status: failed · xp gained: 0</span>
+                        </>
+                      )}
+                      {runResult.status === 'runner_error' && (
+                        <>
+                          {'\n\n'}
+                          <span className="text-amber-400">Status: runner error · passed: false · xp gained: 0</span>
                         </>
                       )}
                       {runResult.status === 'preview_ok' && (
@@ -1102,8 +1142,8 @@ export function CodingView() {
                       <Info className="h-4 w-4 text-amber-500" /> How this lab works (honestly)
                     </p>
                     <p className="text-muted-foreground">
-                      This is a <span className="font-medium text-foreground">syntax-learning playground</span>. The
-                      sandbox does not yet have an isolated C++ compiler/runner, so we cannot safely execute your code.
+                      This lab keeps execution server-controlled. The app never runs student code inside Next.js; it
+                      submits reviewed challenge tests only to a configured trusted runner.
                     </p>
                     <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
                       <li>
@@ -1112,16 +1152,16 @@ export function CodingView() {
                         It does not compile or run anything.
                       </li>
                       <li>
-                        <span className="font-medium text-foreground">Save Draft</span> — stores your code as a draft
-                        submission linked to the challenge. A teacher can review it manually.
+                        <span className="font-medium text-foreground">Submit</span> — executes reviewed tests when the
+                        production runner is configured, otherwise saves your code for manual review.
                       </li>
                       <li>
                         <span className="font-medium text-foreground">No fake passes</span> — this view never claims a
-                        program passed a test, because no tests are run.
+                        program passed unless the server validates a complete all-tests-passed runner response.
                       </li>
                       <li>
-                        <span className="font-medium text-foreground">No XP</span> — XP is only awarded server-side by
-                        the idempotent ledger for real, verified passes — which require the runner.
+                        <span className="font-medium text-foreground">XP gated</span> — XP is only awarded server-side by
+                        the idempotent ledger for real, verified passes.
                       </li>
                     </ul>
                   </div>
@@ -1259,10 +1299,19 @@ interface ApiRunResponse {
 }
 
 interface ApiSubmitResponse {
-  status: 'not_executed'
-  passed: false
-  xpGain: 0
+  status: 'not_executed' | 'executed'
+  runnerStatus?: 'passed' | 'failed' | 'compile_error' | 'runtime_error' | 'timeout' | 'runner_error'
+  passed: boolean
+  xpGain: number
   message: string
+  testResults?: Array<{
+    index: number
+    passed: boolean
+    actual: string
+    stderr: string | null
+    durationMs: number | null
+    memoryKB: number | null
+  }>
 }
 
 // ---------------------------------------------------------------------------
@@ -1435,7 +1484,7 @@ function explainCode(code: string, challenge: Challenge | null): string {
     out += `${(hasClass ? 6 : 1) + 1}. **Output** — You use \`cout\` (character output) to print to the console. \`<<\` is the insertion operator.\n\n`
   }
 
-  out += `\nNote: this is a static read of your code. I can't verify it actually compiles or produces the right output — only the sandboxed runner (coming soon) can do that.\n`
+  out += `\nNote: this is a static read of your code. I can't verify it actually compiles or produces the right output — only a configured trusted runner can do that.\n`
   if (challenge) {
     out += `\nIn the context of “${challenge.title}”: make sure your code actually solves the problem — ${challenge.hint?.toLowerCase() ?? 'break it into smaller steps.'}`
   }

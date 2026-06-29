@@ -9,6 +9,7 @@ Date: 2026-06-29
 - `npx prisma migrate deploy` passes.
 - `/api/health` returns 200.
 - `/api/ready` returns 200.
+- Coding Lab production runner environment is configured if automated coding passes/XP are enabled (`CODE_RUNNER_URL` plus token or HMAC secret).
 - Only COMP/DCOMP and CIOT/DCIOT are selectable for this deployment.
 - CIOT Semester 3-6 status is either officially verified or explicitly blocked.
 - No normal-student route exposes draft/unreviewed curriculum, questions, resources or generated documents.
@@ -43,7 +44,7 @@ npm run test:visual
 ## Vercel Deployment Order
 
 1. Confirm `.vercel/project.json` points at the intended `lernio-ai` project.
-2. Confirm production environment variables are configured in Vercel.
+2. Confirm production environment variables are configured in Vercel, including code-runner credentials when Coding Lab scoring is enabled.
 3. Backup database.
 4. Run migrations.
 5. Deploy preview.
@@ -69,4 +70,4 @@ Vercel preview deployment is live, but not production-promotable:
 - `/` smoke check: 200
 - `/api/ready`: 503 with `database: unavailable`, `auth: configured`, `ai: unconfigured`, and `email: unconfigured`
 
-The non-database gates passed locally on 2026-06-29: `npx prisma validate`, `npx prisma generate`, `npm run check:migrations`, `npm run curriculum:validate` with 12 manifests, `npm run coverage:learning` with 12/12 manifests present and 194 pending verification items, `npm run check` (45 test files / 158 tests passed), `npm run build` (91 static pages), `npm run test:e2e` (146 Playwright tests passed), `npm run test:a11y`, and `npm run test:visual`. Including newly added labs route unit tests.
+The non-database gates passed locally on 2026-06-29: `npx prisma validate`, `npx prisma generate`, `npm run check:migrations`, `npm run curriculum:validate` with 12 manifests, `npm run coverage:learning` with 12/12 manifests present and 194 pending verification items, `npm run check` (46 test files / 164 tests passed), `npm run build` (91 static pages), `npm run test:e2e` (146 Playwright tests passed), `npm run test:a11y`, and `npm run test:visual`. Including labs route and trusted coding-runner unit tests.

@@ -88,7 +88,7 @@ Date: 2026-06-28
 - Auto-planner generation now uses scoped weak topics and scoped revision schedules.
 - Analytics activity, calendar, focus, readiness, readiness radar, daily quests and quest-claim checks now aggregate only scoped learning activity where the underlying rows carry subject/topic links.
 - Command palette inspection found static navigation/actions only; no curriculum search API is exposed there.
-- Coding challenges now have optional subject/unit/topic/lesson fields and `/api/coding` filters linked challenges through the student's learning scope; imported reviewed mappings and the production runner remain pending.
+- Coding challenges now have optional subject/unit/topic/lesson fields and `/api/coding` filters linked challenges through the student's learning scope; imported reviewed mappings remain pending, and runner execution is gated by trusted runner service configuration.
 
 ### Additional Verification
 
@@ -636,6 +636,26 @@ Date: 2026-06-28
 - `npm run check`: passed, 45 files and 158 tests with 129 existing warnings and 0 errors.
 - `npm run build`: passed with 91 static pages generated.
 
+## Phase 26 Progress: Trusted Coding Runner Integration
+
+### Changed
+
+- Added `src/lib/coding/code-runner.ts` as the trusted remote runner client for Coding Lab submissions.
+- Added signed runner requests with `CODE_RUNNER_URL`, optional bearer token and optional HMAC signature support.
+- Added defensive runner response validation so a pass is accepted only when the runner returns a complete all-tests-passed result for the reviewed test set.
+- Updated `POST /api/coding` to execute reviewed challenge tests only through the configured runner, persist `passed`/`failed`/`error`, hide expected test values from the browser response, and award idempotent `coding_pass` XP only for validated passes.
+- Kept syntax preview as non-executing structural feedback only.
+- Updated the Coding Lab UI to show runner-gated submit results while preserving manual-review fallback when runner execution is unavailable.
+- Documented runner environment variables in `.env.example`.
+- Added focused tests for runner configuration, request signing, incomplete result rejection, parser behavior and hidden expected-test values.
+
+### Additional Verification
+
+- `npx vitest run src/lib/coding/code-runner.test.ts`: passed (6 tests).
+- `npm run typecheck`: passed.
+- `npm run check`: passed, 46 files and 164 tests with 129 existing warnings and 0 errors.
+- `npm run build`: passed with 91 static pages generated.
+
 ## Remaining Manual Verification
 
 - Database dry-run/write needs a reachable PostgreSQL connection.
@@ -647,7 +667,7 @@ Date: 2026-06-28
 - Link-health checks prove current URL reachability only, not lesson fit, playlist membership, captions, duration or embeddability.
 - Poppler `pdftoppm` is not installed, but the Winter 2025 timetable was rendered with `pypdfium2` to `tmp/pdfs/rendered/Winter-Examination-2025-page-1.png` and visually inspected as legible/nonblank.
 - Practical experiments still need manual review and import before they can populate the scoped Labs UI.
-- Coding now supports optional curriculum links and scoped API filtering, but reviewed challenge mappings/imports and the production runner are still pending.
+- Coding now supports optional curriculum links, scoped API filtering and trusted runner integration; reviewed challenge mappings/imports and deployed runner service credentials are still pending.
 - Materials now filter by scoped subject/unit/topic/type/language and optional lesson-level `LessonResource` mappings, but production coverage still needs published mappings.
 - XP ledger totals remain user-global where historical XP events do not contain reliable curriculum subject ownership.
 - Completion criteria now consume lesson-scoped practice attempts and lesson-scoped quiz-pass evidence; production usefulness still depends on reviewed lesson question coverage.
@@ -696,4 +716,3 @@ Date: 2026-06-28
 3. Find or obtain official CIOT Semester 3-6 semester-placement evidence beyond review-only timetable code appearances.
 4. Run database-backed manifest import dry-run/write once PostgreSQL is reachable.
 5. Add lesson-level YouTube mapping review workflow.
-

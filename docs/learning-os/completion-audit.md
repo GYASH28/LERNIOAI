@@ -44,6 +44,7 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - Added authority-scoped Learning OS preview access for teacher/coordinator/reviewer/admin coverage, catalog, unit, YouTube candidate, notes and resource-review surfaces.
 - Added lesson-scoped quiz-attempt selection and stored lesson-scope provenance so quiz completion evidence cannot be satisfied by a broad subject quiz.
 - Added curriculum-aware Labs integration, scoping labs to the student's active subjects, checking publication safety, and listing official experiments or structured blocker information.
+- Added trusted Coding Lab runner integration: submissions execute only through a configured remote runner, runner responses are validated before any pass/XP, expected test values stay server-side, and unconfigured runner paths save submissions for manual review without XP.
 
 ## Verification Completed Locally
 
@@ -66,6 +67,9 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - `npx vitest run src/lib/learning/learning-ops-authority.test.ts src/lib/resources/resource-governance.test.ts` passed.
 - `npx vitest run src/features/learning/server/lesson-completion-policy.test.ts` passed.
 - `npx vitest run src/app/api/labs/route.test.ts` passed.
+- `npx vitest run src/lib/coding/code-runner.test.ts` passed.
+- `npm run check` passed with 46 test files / 164 tests.
+- `npm run build` passed with 91 static pages.
 - `npm run test:e2e` passed with 146 Playwright tests.
 - `npm run test:a11y` passed.
 - `npm run test:visual` passed.
@@ -84,7 +88,7 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - `/api/ready` returning 200.
 - Published subject structures with official units/topics/lessons.
 - Published `LessonResource` video mappings and approved note artifacts.
-- Imported and reviewed curriculum-linked coding challenge mappings plus a production code runner.
+- Imported and reviewed curriculum-linked coding challenge mappings plus configured production code-runner service credentials.
 - Authenticated learning E2E and accessibility tests.
 - Production deployment with post-deploy smoke checks.
 - Production Vercel promotion after `/api/ready` returns 200 and demo mode is disabled for production.
