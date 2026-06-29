@@ -116,6 +116,7 @@ Link-health report:
 - `src/lib/lesson-notes/generation-worker.ts` implements the provider/storage boundary for `ContentGenerationJob` processing. It accepts only generated documents whose programme, semester, subject, unit, lesson slug, deep link, document type, template version, target version and source IDs match the queued lesson input.
 - `npm run notes:generate:work -- --limit 1` processes queued jobs when `LESSON_NOTE_GENERATOR_URL` and `LESSON_NOTE_ARTIFACT_STORE_URL` are configured.
 - `/api/admin/learning/notes/jobs` lets scoped learning-ops reviewers/admins list and queue generation jobs with audit events.
+- `/api/learning/notes/[documentId]` verifies the signed-in student's current learning scope and the student-visible generated-document policy before redirecting to a signed HTML/PDF artifact URL. Lesson studio now exposes only controlled HTML/PDF hrefs for generated documents, not raw storage object keys.
 - Actual approved note documents still require configured provider/storage services plus reviewer approval/publication; generated worker output stops at `ready_for_review`.
 
 ## Coverage Report
@@ -157,6 +158,7 @@ The import pipeline must preserve:
 - Student-visible resource checks are centralized in `src/lib/resources/student-publication-policy.ts`.
 - Normal students can see only clear, verified, non-archived resources with `public` or `published` visibility through approved/published lesson-resource mappings.
 - Generated documents without an approved output resource need a usable HTML/PDF storage key before they can appear in lesson studio data.
+- Students access generated-document artifacts through `/api/learning/notes/[documentId]`; raw private storage keys are not rendered into lesson pages.
 - Generated notes must record curriculum sources, source video IDs, transcript/caption hash when used, template version, AI model/provider metadata, validation result, reviewer and published resource ID.
 - Full transcripts must not be copied into notes.
 

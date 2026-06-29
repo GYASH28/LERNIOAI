@@ -692,6 +692,23 @@ Date: 2026-06-28
 - `npm run check`: passed, 48 files and 175 tests with 129 existing warnings and 0 errors.
 - `npm run build`: passed with 92 static pages generated.
 
+## Phase 29 Progress: Controlled Generated Note Delivery
+
+### Changed
+
+- Added `src/lib/storage/signed-object-url.ts` for bounded signed object URLs using `STORAGE_PUBLIC_BASE_URL`, `STORAGE_SIGNING_SECRET` and `STORAGE_SIGNED_URL_TTL_SECONDS`. Production requires a signing secret.
+- Added `/api/learning/notes/[documentId]` to verify the signed-in user's current learning scope and `studentGeneratedDocumentWhere()` before redirecting to signed HTML/PDF artifacts or an approved output resource URL.
+- Updated `getLessonStudio()` so generated documents expose `htmlHref` and `pdfHref` only; raw `htmlObjectKey` and `storageObjectKey` values are no longer returned to the lesson page.
+- Updated the canonical lesson page to open generated HTML notes and PDF downloads through the controlled note delivery route.
+- Added tests for signed object URL construction, production secret enforcement, in-scope note delivery, PDF attachment redirects, storage-unconfigured failure and unresolved-scope denial.
+
+### Additional Verification
+
+- `npx vitest run src/lib/storage/signed-object-url.test.ts src/app/api/learning/notes/[documentId]/route.test.ts`: passed (7 tests).
+- `npm run typecheck`: passed.
+- `npm run check`: passed, 50 files and 182 tests with 129 existing warnings and 0 errors.
+- `npm run build`: passed with 92 static pages generated.
+
 ## Remaining Manual Verification
 
 - Database dry-run/write needs a reachable PostgreSQL connection.
@@ -723,7 +740,7 @@ Date: 2026-06-28
 - `npm run notes:validate`: passed, 0 document(s) present/valid.
 - `npm run notes:render-pdf`: passed, 0 document(s) rendered.
 - `npx vitest run src/lib/lesson-notes/generation-worker.test.ts src/app/api/admin/learning/notes/jobs/route.test.ts`: passed, 2 files and 9 tests.
-- `npm run check`: passed, including migration encoding, lint, typecheck and 48 Vitest files / 175 tests. Lint still reports 129 existing warnings and 0 errors.
+- `npm run check`: passed, including migration encoding, lint, typecheck and 50 Vitest files / 182 tests. Lint still reports 129 existing warnings and 0 errors.
 - `npm run lint`: passed with 0 errors and 129 existing warnings.
 - `npm run typecheck`: passed.
 - `npx prisma validate`: passed.

@@ -9,7 +9,7 @@
 | `/learn/[programmeCode]/semester/[semesterNumber]` | `src/app/learn/[programmeCode]/semester/[semesterNumber]/page.tsx` -> `getSemesterOverview` | Server-rendered, scoped semester overview foundation. |
 | `/learn/[programmeCode]/semester/[semesterNumber]/subject/[subjectCode]` | `src/app/learn/[programmeCode]/semester/[semesterNumber]/subject/[subjectCode]/page.tsx` -> `getSubjectOverview` | Server-rendered, scoped subject overview foundation. |
 | `/learn/[programmeCode]/semester/[semesterNumber]/subject/[subjectCode]/unit/[unitNumber]` | `src/app/learn/[programmeCode]/semester/[semesterNumber]/subject/[subjectCode]/unit/[unitNumber]/page.tsx` -> `getUnitOverview` | Server-rendered, scoped unit route with topic summary and lesson links. |
-| `/learn/[programmeCode]/semester/[semesterNumber]/subject/[subjectCode]/lesson/[lessonSlug]` | `src/app/learn/[programmeCode]/semester/[semesterNumber]/subject/[subjectCode]/lesson/[lessonSlug]/page.tsx` -> `getLessonStudio` | Server-rendered, scoped lesson studio foundation with curriculum rail, approved resources, notes, mode content, previous/next navigation and a handoff to lesson-filtered Materials. |
+| `/learn/[programmeCode]/semester/[semesterNumber]/subject/[subjectCode]/lesson/[lessonSlug]` | `src/app/learn/[programmeCode]/semester/[semesterNumber]/subject/[subjectCode]/lesson/[lessonSlug]/page.tsx` -> `getLessonStudio` | Server-rendered, scoped lesson studio foundation with curriculum rail, approved resources, generated-note delivery links, mode content, previous/next navigation and a handoff to lesson-filtered Materials. Generated note object keys are not exposed to the page. |
 | `/practice` | `src/app/practice/page.tsx` -> `RouteViewPage` | Client view backed by scoped question/progress APIs. |
 | `/revision` | `src/app/revision/page.tsx` -> `RouteViewPage` | Client view backed by scoped revision APIs, with source lesson links on due items and flashcards when a scoped lesson exists. |
 | `/exams` | `src/app/exams/page.tsx` -> `RouteViewPage` | Client view backed by scoped paper/question/attempt APIs. |
@@ -26,6 +26,7 @@
 |---|---|
 | `/api/search/learning?q=...` | Authenticated, private/no-store scoped search across the student's current semester, subjects, units, topics, published lessons and approved resources. Results return canonical Learn/materials hrefs and never include draft resources. |
 | `/api/labs` | Scoped API returning current student scope, published/verified PracticalExperiment rows, and blocker states. |
+| `/api/learning/notes/[documentId]` | Authenticated generated-note delivery route. It verifies the document is student-visible and belongs to the caller's current scoped lessons, then redirects to a signed HTML/PDF artifact URL or an approved output resource URL. |
 
 ## Admin/Reviewer Routes
 

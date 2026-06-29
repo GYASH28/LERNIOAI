@@ -245,17 +245,28 @@ export default async function LessonStudioPage({
                       {document.pageCount ? ` / ${document.pageCount} pages` : ''}
                       {document.publishedAt ? ` / published ${formatDate(document.publishedAt)}` : ''}
                     </p>
-                    {document.outputResource?.url ? (
-                      <a
-                        href={document.outputResource.url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="mt-2 inline-flex items-center gap-2 text-sm font-medium text-primary"
-                      >
-                        <ExternalLink className="h-4 w-4" />
-                        {document.outputResource.title}
-                      </a>
-                    ) : null}
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {document.htmlHref ? (
+                        <a
+                          href={document.htmlHref}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-2 text-sm font-medium text-primary"
+                        >
+                          <ExternalLink className="h-4 w-4" />
+                          Open HTML
+                        </a>
+                      ) : null}
+                      {document.pdfHref ? (
+                        <a
+                          href={document.pdfHref}
+                          className="inline-flex items-center gap-2 text-sm font-medium text-primary"
+                        >
+                          <FileText className="h-4 w-4" />
+                          Download PDF
+                        </a>
+                      ) : null}
+                    </div>
                   </div>
                 ))}
                 {studio.resources.notes.map((resource) => (

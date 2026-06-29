@@ -144,13 +144,12 @@ export interface LessonStudio {
     version: number
     pageCount: number | null
     publishedAt: Date | null
-    storageObjectKey: string | null
-    htmlObjectKey: string | null
+    htmlHref: string | null
+    pdfHref: string | null
     outputResource: {
       id: string
       title: string
       type: string
-      url: string | null
     } | null
   }>
   completion: {
@@ -419,7 +418,7 @@ export async function getLessonStudio(
         ['infographic', 'lab_demo', 'reference'].includes(resource.role),
       ),
     },
-    generatedDocuments: lesson.generatedDocuments,
+    generatedDocuments: lesson.generatedDocuments.map(mapGeneratedDocument),
     completion: {
       completedModeCount,
       totalModeCount: LESSON_MODE_KEYS.length,
@@ -430,6 +429,42 @@ export async function getLessonStudio(
       requireExplicitDone: lesson.completionCriteria?.requireExplicitDone ?? true,
     },
     videoProgress: lesson.videoWatchProgress,
+  }
+}
+
+function mapGeneratedDocument(document: {
+  id: string
+  documentType: string
+  version: number
+  pageCount: number | null
+  publishedAt: Date | null
+  storageObjectKey: string | null
+  htmlObjectKey: string | null
+  outputResource: {
+    id: string
+    title: string
+    type: string
+    url: string | null
+  } | null
+}): LessonStudio['generatedDocuments'][number] {
+  const baseHref = `/api/learning/notes/${document.id}`
+  const hasHtml = Boolean(document.htmlObjectKey || document.outputResource?.url)
+  const hasPdf = Boolean(document.storageObjectKey || document.outputResource?.url)
+  return {
+    id: document.id,
+    documentType: document.documentType,
+    version: document.version,
+    pageCount: document.pageCount,
+    publishedAt: document.publishedAt,
+    htmlHref: hasHtml ? `${baseHref}?format=html` : null,
+    pdfHref: hasPdf ? `${baseHref}?format=pdf` : null,
+    outputResource: document.outputResource
+      ? {
+          id: document.outputResource.id,
+          title: document.outputResource.title,
+          type: document.outputResource.type,
+        }
+      : null,
   }
 }
 

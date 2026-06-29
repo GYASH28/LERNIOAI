@@ -11,6 +11,7 @@ Date: 2026-06-29
 - `/api/ready` returns 200.
 - Coding Lab production runner environment is configured if automated coding passes/XP are enabled (`CODE_RUNNER_URL` plus token or HMAC secret).
 - Lesson-note generation stays disabled unless `LESSON_NOTE_GENERATOR_URL` and `LESSON_NOTE_ARTIFACT_STORE_URL` are configured with production tokens and a reviewer publication process is ready.
+- Generated-note delivery requires `STORAGE_PUBLIC_BASE_URL` and `STORAGE_SIGNING_SECRET` before private HTML/PDF artifact links can work in production.
 - Only COMP/DCOMP and CIOT/DCIOT are selectable for this deployment.
 - CIOT Semester 3-6 status is either officially verified or explicitly blocked.
 - No normal-student route exposes draft/unreviewed curriculum, questions, resources or generated documents.
@@ -73,4 +74,4 @@ Vercel preview deployment is live, but not production-promotable:
 - `/` smoke check: 200
 - `/api/ready`: 503 with `database: unavailable`, `auth: configured`, `ai: unconfigured`, and `email: unconfigured`
 
-The non-database gates passed locally on 2026-06-29: `npx prisma validate`, `npx prisma generate`, `npm run check:migrations`, `npm run curriculum:validate` with 12 manifests, `npm run coverage:learning` with 12/12 manifests present and 194 pending verification items, `npm run check` (48 test files / 175 tests passed), `npm run build` (92 static pages), `npm run test:e2e` (146 Playwright tests passed), `npm run test:a11y`, and `npm run test:visual`. Including labs route, trusted coding-runner, lesson-resource mapping, lesson-note worker and lesson-note queue-route tests.
+The non-database gates passed locally on 2026-06-29: `npx prisma validate`, `npx prisma generate`, `npm run check:migrations`, `npm run curriculum:validate` with 12 manifests, `npm run coverage:learning` with 12/12 manifests present and 194 pending verification items, `npm run check` (50 test files / 182 tests passed), `npm run build` (92 static pages), `npm run test:e2e` (146 Playwright tests passed), `npm run test:a11y`, and `npm run test:visual`. Including labs route, trusted coding-runner, lesson-resource mapping, lesson-note worker, lesson-note queue-route and generated-note delivery tests.

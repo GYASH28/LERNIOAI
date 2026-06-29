@@ -47,6 +47,7 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - Added trusted Coding Lab runner integration: submissions execute only through a configured remote runner, runner responses are validated before any pass/XP, expected test values stay server-side, and unconfigured runner paths save submissions for manual review without XP.
 - Added an authority-scoped lesson-resource mapping workflow in the resource review queue with governed roles, same-subject validation, reviewer evidence requirements, audited draft/approve actions and primary-video demotion.
 - Added a lesson-note generation worker boundary and audited queue API: scoped reviewers/admins can queue jobs for published/verified lessons, workers claim/lease/retry jobs, generated documents are validated against lesson identity and approved source IDs, HTML artifacts are written through configured storage, and AI output stops at `ready_for_review` until reviewer publication.
+- Added controlled generated-note delivery: lesson studio now links to `/api/learning/notes/[documentId]`, which checks the student's learning scope and generated-document publication policy before redirecting to signed HTML/PDF artifacts; raw storage object keys are not rendered into lesson pages.
 
 ## Verification Completed Locally
 
@@ -72,7 +73,8 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - `npx vitest run src/lib/coding/code-runner.test.ts` passed.
 - `npx vitest run src/lib/resources/resource-governance.test.ts` passed.
 - `npx vitest run src/lib/lesson-notes/generation-worker.test.ts src/app/api/admin/learning/notes/jobs/route.test.ts` passed.
-- `npm run check` passed with 48 test files / 175 tests.
+- `npx vitest run src/lib/storage/signed-object-url.test.ts src/app/api/learning/notes/[documentId]/route.test.ts` passed.
+- `npm run check` passed with 50 test files / 182 tests.
 - `npm run build` passed with 92 static pages.
 - `npm run test:e2e` passed with 146 Playwright tests.
 - `npm run test:a11y` passed.
