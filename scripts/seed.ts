@@ -54,7 +54,7 @@ const INSTITUTION = {
 
 const ACTIVE_DEPARTMENT_CODE = "COMP";
 const ACTIVE_PROGRAMME_CODE = "DCOMP";
-const SCHEME = { name: "G Scheme 2023", code: "G2023", startYear: 2023 };
+const SCHEME = { name: "G Scheme 2023", code: "G2023", startYear: 2023, status: "published" };
 const SEMESTER = {
   number: 3,
   name: "Semester 3",
@@ -2420,6 +2420,7 @@ const DEMO_USER = {
   onboarded: true,
   semesterNumber: 3,
   dailyMins: 120,
+  departmentCode: "COMP",
   lastActiveDate: new Date().toISOString().slice(0, 10),
 };
 
@@ -2548,7 +2549,7 @@ async function main() {
           durationSemesters: item.code === "SH" ? 2 : 6,
           intake: item.programme.intake,
           intakeNote: item.programme.intakeNote,
-          status: item.programme.status ?? "active",
+          status: "active",
         },
       });
       programmes[item.programme.code] = programme;
@@ -2591,6 +2592,8 @@ async function main() {
         description: s.description,
         semesterId: semester.id,
         schemeId: scheme.id,
+        reviewStatus: "published",
+        publishedAt: new Date(),
       },
     });
     subjectIds[s.code] = subject.id;
@@ -2603,6 +2606,8 @@ async function main() {
           description: u.description,
           weightage: u.weightage,
           subjectId: subject.id,
+          reviewStatus: "published",
+          publishedAt: new Date(),
         },
       });
       unitIds[`${s.code}-${u.number}`] = unit.id;
@@ -2616,6 +2621,8 @@ async function main() {
             difficulty: t.difficulty,
             examWeightage: t.examWeightage,
             unitId: unit.id,
+            reviewStatus: "published",
+            publishedAt: new Date(),
           },
         });
         topicIds[`${s.code}-${t.slug}`] = topic.id;

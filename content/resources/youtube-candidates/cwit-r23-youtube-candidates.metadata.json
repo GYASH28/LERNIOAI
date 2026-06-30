@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "status": "draft",
   "verificationStatus": "metadata_checked_unreviewed",
-  "generatedAt": "2026-06-28T16:26:33.244Z",
+  "generatedAt": "2026-06-30T06:51:23.226Z",
   "sourceUrlCount": 103,
   "uniqueSourceUrlCount": 102,
   "sourceHierarchyNote": "These YouTube links are candidate resources only. They must be metadata checked, mapped to verified lessons and reviewed before publication.",
@@ -64,7 +64,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -106,7 +106,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -148,7 +148,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -190,7 +190,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -232,7 +232,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -274,7 +274,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -316,7 +316,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -358,7 +358,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -400,7 +400,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -442,7 +442,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -484,7 +484,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -526,7 +526,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -568,7 +568,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -610,7 +610,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -652,7 +652,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -694,7 +694,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -736,7 +736,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -778,7 +778,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -820,7 +820,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -862,7 +862,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -904,7 +904,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -946,7 +946,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -988,7 +988,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -1030,7 +1030,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -1072,7 +1072,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -1114,7 +1114,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -1156,7 +1156,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -1198,7 +1198,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -1240,7 +1240,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -1282,7 +1282,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -1324,7 +1324,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -1366,7 +1366,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -1410,7 +1410,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -1454,7 +1454,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -1498,7 +1498,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -1538,7 +1538,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -1578,7 +1578,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -1618,7 +1618,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -1660,7 +1660,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -1702,7 +1702,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -1746,7 +1746,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -1790,7 +1790,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -1834,7 +1834,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "found",
         "httpStatus": 200,
         "title": "Python Tkinter GUI Design Using ttkbootstrap - Complete Course",
@@ -1878,7 +1878,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "found",
         "httpStatus": 200,
         "title": "Java Swing GUI Full Course ☕",
@@ -1921,7 +1921,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -1964,7 +1964,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -2007,7 +2007,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -2050,7 +2050,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -2092,7 +2092,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -2134,7 +2134,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -2176,7 +2176,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -2216,7 +2216,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -2256,7 +2256,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -2296,7 +2296,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -2336,7 +2336,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "found",
         "httpStatus": 200,
         "title": "Operating Systems Course for Beginners",
@@ -2379,7 +2379,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -2422,7 +2422,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -2465,7 +2465,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -2508,7 +2508,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -2552,7 +2552,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -2596,7 +2596,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -2640,7 +2640,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -2683,7 +2683,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -2726,7 +2726,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -2769,7 +2769,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -2811,7 +2811,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -2853,7 +2853,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -2895,7 +2895,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -2937,7 +2937,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -2980,7 +2980,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -3023,7 +3023,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -3066,7 +3066,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -3109,7 +3109,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -3150,7 +3150,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -3191,7 +3191,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -3232,7 +3232,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -3273,7 +3273,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -3315,7 +3315,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -3357,7 +3357,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -3399,7 +3399,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -3443,7 +3443,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -3487,7 +3487,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -3531,7 +3531,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -3575,7 +3575,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -3617,7 +3617,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -3659,7 +3659,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -3701,7 +3701,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -3742,7 +3742,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -3783,7 +3783,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -3824,7 +3824,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "found",
         "httpStatus": 200,
         "title": "Complete Machine Learning Course in 60 Hours - Part 1 | Full Machine Learning Course with Python",
@@ -3868,7 +3868,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -3912,7 +3912,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -3956,7 +3956,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -3999,7 +3999,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -4042,7 +4042,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "found",
         "httpStatus": 200,
         "title": "Lec-2: What is Cloud Computing | Evolution and Applications | Easiest introduction in Hindi",
@@ -4085,7 +4085,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "found",
         "httpStatus": 200,
         "title": "Cloud Computing Full Course 2026 | Cloud Computing Tutorial | Cloud Computing Course | Simplilearn",
@@ -4129,7 +4129,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -4173,7 +4173,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -4217,7 +4217,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -4257,7 +4257,7 @@
       "publicationStatus": "draft",
       "metadata": {
         "method": "youtube_oembed",
-        "checkedAt": "2026-06-28T16:26:46.166Z",
+        "checkedAt": "2026-06-30T06:52:11.191Z",
         "metadataStatus": "not_supported_for_playlist",
         "httpStatus": null,
         "title": null,
@@ -4275,7 +4275,7 @@
       }
     }
   ],
-  "metadataCheckedAt": "2026-06-28T16:26:46.166Z",
+  "metadataCheckedAt": "2026-06-30T06:52:11.191Z",
   "metadataMethod": "youtube_oembed",
   "metadataLimitApplied": null,
   "metadataSummary": {

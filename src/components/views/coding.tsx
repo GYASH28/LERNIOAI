@@ -84,6 +84,14 @@ interface RunResult {
   message: string
   syntax: SyntaxCheck | null
   xpGain?: number
+  testResults?: Array<{
+    index: number
+    passed: boolean
+    actual: string
+    stderr: string | null
+    durationMs: number | null
+    memoryKB: number | null
+  }>
 }
 
 // ---------------------------------------------------------------------------
@@ -527,6 +535,7 @@ export function CodingView() {
         message: data.message || 'Code saved as a draft. Real test scoring requires the production code runner.',
         syntax: null,
         xpGain: data.xpGain,
+        testResults: data.testResults,
       })
       if (resultStatus === 'passed') {
         setMascotState('greeting')
@@ -1043,39 +1052,54 @@ export function CodingView() {
                       </p>
                     </div>
                   ) : runResult.message ? (
-                    <pre className="whitespace-pre-wrap break-words leading-relaxed">
-                      {runResult.message}
-                      {runResult.status === 'draft_saved' && (
-                        <>
-                          {'\n\n'}
-                          <span className="text-zinc-500">Status: saved as draft · passed: false · xp gained: 0</span>
-                        </>
+                    <div className="space-y-4">
+                      <pre className="whitespace-pre-wrap break-words leading-relaxed font-mono">
+                        {runResult.message}
+                        {runResult.status === 'draft_saved' && (
+                          <span className="block mt-2 text-zinc-500 font-sans text-xs">Status: saved as draft · passed: false · xp gained: 0</span>
+                        )}
+                        {runResult.status === 'passed' && (
+                          <span className="block mt-2 text-emerald-400 font-bold font-sans text-xs">Status: passed · xp gained: {runResult.xpGain ?? 0}</span>
+                        )}
+                        {runResult.status === 'failed' && (
+                          <span className="block mt-2 text-rose-400 font-bold font-sans text-xs">Status: failed · xp gained: 0</span>
+                        )}
+                        {runResult.status === 'runner_error' && (
+                          <span className="block mt-2 text-amber-400 font-bold font-sans text-xs">Status: runner error · passed: false · xp gained: 0</span>
+                        )}
+                        {runResult.status === 'preview_ok' && (
+                          <span className="block mt-2 text-zinc-500 font-sans text-xs">Note: this is a structural check only — not a compile or test run.</span>
+                        )}
+                      </pre>
+
+                      {runResult.testResults && runResult.testResults.length > 0 && (
+                        <div className="space-y-2 border-t border-zinc-800 pt-3 mt-3">
+                          <p className="font-semibold text-zinc-300 font-sans text-xs">Test Case Execution Results:</p>
+                          <div className="grid gap-2">
+                            {runResult.testResults.map((tr) => (
+                              <div key={tr.index} className="rounded border border-zinc-800 bg-zinc-900/45 p-2.5 space-y-1.5 text-xs font-sans">
+                                <div className="flex items-center justify-between">
+                                  <span className="font-semibold text-zinc-400">Test Case #{tr.index + 1}</span>
+                                  <Badge className={tr.passed ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-rose-500/10 text-rose-400 border-rose-500/20'}>
+                                    {tr.passed ? 'Passed' : 'Failed'}
+                                  </Badge>
+                                </div>
+                                {tr.stderr && (
+                                  <div className="text-rose-400 bg-rose-950/20 p-1.5 rounded font-mono text-[10px] whitespace-pre-wrap">{tr.stderr}</div>
+                                )}
+                                <div className="grid grid-cols-1 gap-1 text-[10px] text-zinc-500">
+                                  <div className="truncate">Actual Output: <span className="font-mono text-zinc-300 bg-black/35 px-1 py-0.5 rounded">{tr.actual || '(no output)'}</span></div>
+                                  <div className="flex justify-between text-zinc-600 mt-1">
+                                    <span>Time: {tr.durationMs ?? 'N/A'} ms</span>
+                                    <span>Memory: {tr.memoryKB ?? 'N/A'} KB</span>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
                       )}
-                      {runResult.status === 'passed' && (
-                        <>
-                          {'\n\n'}
-                          <span className="text-emerald-400">Status: passed · xp gained: {runResult.xpGain ?? 0}</span>
-                        </>
-                      )}
-                      {runResult.status === 'failed' && (
-                        <>
-                          {'\n\n'}
-                          <span className="text-rose-400">Status: failed · xp gained: 0</span>
-                        </>
-                      )}
-                      {runResult.status === 'runner_error' && (
-                        <>
-                          {'\n\n'}
-                          <span className="text-amber-400">Status: runner error · passed: false · xp gained: 0</span>
-                        </>
-                      )}
-                      {runResult.status === 'preview_ok' && (
-                        <>
-                          {'\n\n'}
-                          <span className="text-zinc-500">Note: this is a structural check only — not a compile or test run.</span>
-                        </>
-                      )}
-                    </pre>
+                    </div>
                   ) : (
                     <div className="text-zinc-500 italic">
                       Nothing to show yet.

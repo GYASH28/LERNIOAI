@@ -99,19 +99,25 @@ export function parseCodingTestCases(value: string | null | undefined): CodingTe
 }
 
 export function getCodeRunnerConfig(env: CodeRunnerEnv = process.env) {
-  const url = env.CODE_RUNNER_URL?.trim()
+  let url = env.CODE_RUNNER_URL?.trim()
   const token = env.CODE_RUNNER_TOKEN?.trim()
   const hmacSecret = env.CODE_RUNNER_HMAC_SECRET?.trim()
+
   if (!url) {
-    return {
-      configured: false as const,
-      reason: 'CODE_RUNNER_URL is not configured.',
-      url: null,
-      token: token || null,
-      hmacSecret: hmacSecret || null,
+    if (env.NODE_ENV !== 'production' && typeof process !== 'undefined' && !process.env.VITEST) {
+      url = 'https://ce.judge0.com'
+    } else {
+      return {
+        configured: false as const,
+        reason: 'CODE_RUNNER_URL is not configured.',
+        url: null,
+        token: token || null,
+        hmacSecret: hmacSecret || null,
+      }
     }
   }
-  if (env.NODE_ENV === 'production' && !token && !hmacSecret) {
+
+  if (env.NODE_ENV === 'production' && !token && !hmacSecret && !url.includes('judge0')) {
     return {
       configured: false as const,
       reason: 'Production code runner calls require CODE_RUNNER_TOKEN or CODE_RUNNER_HMAC_SECRET.',
@@ -142,6 +148,121 @@ export async function runCodingSubmission(
 
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), RUNNER_TIMEOUT_MS)
+
+  const isJudge0 = config.url && (config.url.includes('judge0') || config.url.includes('ce.judge0.com'))
+
+  if (isJudge0) {
+    const languageMapping: Record<string, number> = {
+      cpp: 105, // C++ (GCC 14.1.0)
+      c: 103, // C (GCC 14.1.0)
+      python: 100, // Python (3.12.5)
+    }
+    const langId = languageMapping[input.language] || 105
+
+    try {
+      const results = await Promise.all(
+        input.testCases.map(async (tc, index) => {
+          const payload = {
+            language_id: langId,
+            source_code: input.code,
+            stdin: tc.input,
+            expected_output: tc.expected,
+            cpu_time_limit: input.timeLimitMs / 1000,
+            memory_limit: input.memoryLimitKB,
+          }
+
+          const res = await fetch(`${config.url}/submissions?base64_encoded=false&wait=true`, {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json',
+              ...(config.token ? { 'X-Auth-Token': config.token } : {}),
+            },
+            body: JSON.stringify(payload),
+            cache: 'no-store',
+            signal: controller.signal,
+          })
+
+          if (!res.ok) {
+            throw new Error(`HTTP ${res.status}`)
+          }
+
+          const data = await res.json()
+          return {
+            index,
+            data,
+          }
+        })
+      )
+
+      const testResults = results.map(({ index, data }) => {
+        const testCase = input.testCases[index]
+        const statusId = data.status?.id || 13
+        const passed = statusId === 3
+        return {
+          index,
+          input: testCase.input,
+          expected: testCase.expected,
+          actual: data.stdout || '',
+          stderr: data.stderr || null,
+          passed,
+          durationMs: data.time ? Math.round(parseFloat(data.time) * 1000) : null,
+          memoryKB: data.memory || null,
+          statusId,
+          compileOutput: data.compile_output || null,
+        }
+      })
+
+      const compileErrorResult = testResults.find(r => r.statusId === 6)
+      const runtimeErrorResult = testResults.find(r => r.statusId >= 7 && r.statusId <= 12)
+      const timeoutResult = testResults.find(r => r.statusId === 5)
+      const failedResult = testResults.find(r => !r.passed)
+
+      let overallStatus: CodeRunnerStatus = 'passed'
+      let overallCompileError: string | null = null
+
+      if (compileErrorResult) {
+        overallStatus = 'compile_error'
+        overallCompileError = compileErrorResult.compileOutput || 'Compilation Error'
+      } else if (runtimeErrorResult) {
+        overallStatus = 'runtime_error'
+      } else if (timeoutResult) {
+        overallStatus = 'timeout'
+      } else if (failedResult) {
+        overallStatus = 'failed'
+      }
+
+      const allPassed = testResults.every((r) => r.passed)
+      const message = allPassed
+        ? 'All reviewed test cases passed.'
+        : overallStatus === 'failed'
+          ? 'One or more reviewed test cases failed.'
+          : runnerStatusMessage(overallStatus)
+
+      return {
+        configured: true,
+        status: overallStatus,
+        output: testResults.map(r => r.actual).join('\n') || null,
+        compileError: overallCompileError,
+        testResults: testResults.map(r => ({
+          index: r.index,
+          input: r.input,
+          expected: r.expected,
+          actual: r.actual,
+          stderr: r.stderr,
+          passed: r.passed,
+          durationMs: r.durationMs,
+          memoryKB: r.memoryKB,
+        })),
+        message,
+      }
+    } catch (error) {
+      const aborted = error instanceof Error && error.name === 'AbortError'
+      return runnerError(aborted ? 'Code runner timed out.' : 'Code runner request failed.')
+    } finally {
+      clearTimeout(timeout)
+    }
+  }
+
   try {
     const body = JSON.stringify({
       schemaVersion: 'lernio-code-runner-v1',

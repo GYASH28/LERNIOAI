@@ -1,6 +1,6 @@
 {
   "manifestVersion": 1,
-  "generatedAt": "2026-06-28T16:26:46.176Z",
+  "generatedAt": "2026-06-30T06:52:28.611Z",
   "source": "content\\resources\\youtube-candidates\\cwit-r23-youtube-candidates.metadata.json",
   "status": "report_only",
   "note": "This report checks URL reachability only. YouTube playlists still require YouTube Data API or manual review for membership, duration, captions and embeddability.",
@@ -16,7 +16,7 @@
   },
   "resources": [
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PL5ZIcm-hgbJM1xRu_2OUf0qRXBNf9Z3n-",
       "finalUrl": "https://www.youtube.com/playlist?list=PL5ZIcm-hgbJM1xRu_2OUf0qRXBNf9Z3n-",
       "status": "healthy",
@@ -36,7 +36,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLI8OA8TUlOBlddBz37DpVJfqmR4yC28ai",
       "finalUrl": "https://www.youtube.com/playlist?list=PLI8OA8TUlOBlddBz37DpVJfqmR4yC28ai",
       "status": "healthy",
@@ -56,7 +56,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLoh2jNeWbsgZoYQYB0GxZoNFVoDn8vKZM",
       "finalUrl": "https://www.youtube.com/playlist?list=PLoh2jNeWbsgZoYQYB0GxZoNFVoDn8vKZM",
       "status": "healthy",
@@ -76,7 +76,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLm_MSClsnwm8p9NuVzdMZUiP5Djm8DVaV",
       "finalUrl": "https://www.youtube.com/playlist?list=PLm_MSClsnwm8p9NuVzdMZUiP5Djm8DVaV",
       "status": "healthy",
@@ -96,7 +96,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLnuii5I0tFh7TEeLYoZ4b-S_abStOp5mW",
       "finalUrl": "https://www.youtube.com/playlist?list=PLnuii5I0tFh7TEeLYoZ4b-S_abStOp5mW",
       "status": "healthy",
@@ -116,7 +116,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLWb9C8G05qzt7u0HDraRSS3lQ8jLJx1G6",
       "finalUrl": "https://www.youtube.com/playlist?list=PLWb9C8G05qzt7u0HDraRSS3lQ8jLJx1G6",
       "status": "healthy",
@@ -136,7 +136,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PL1s7mOle6KPbVCFZ871mzdvvPTEkAK3Us",
       "finalUrl": "https://www.youtube.com/playlist?list=PL1s7mOle6KPbVCFZ871mzdvvPTEkAK3Us",
       "status": "healthy",
@@ -156,7 +156,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PL9vL8QnJ37pIEbyEcFDSwwu8eo1UtCtsm",
       "finalUrl": "https://www.youtube.com/playlist?list=PL9vL8QnJ37pIEbyEcFDSwwu8eo1UtCtsm",
       "status": "healthy",
@@ -176,7 +176,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLygzxZFYe8Z3mH7Sr9SaHHwQWrUql8yga",
       "finalUrl": "https://www.youtube.com/playlist?list=PLygzxZFYe8Z3mH7Sr9SaHHwQWrUql8yga",
       "status": "healthy",
@@ -196,7 +196,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLZKrqjMKcJMkC5o3Urv98fdJpbD8RO1al",
       "finalUrl": "https://www.youtube.com/playlist?list=PLZKrqjMKcJMkC5o3Urv98fdJpbD8RO1al",
       "status": "healthy",
@@ -216,7 +216,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLZZO-6oaoZNUPPcmHkZMe99_5JxW1ed2p",
       "finalUrl": "https://www.youtube.com/playlist?list=PLZZO-6oaoZNUPPcmHkZMe99_5JxW1ed2p",
       "status": "healthy",
@@ -236,7 +236,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PL8Lrb8MsHQ7HKxnMWDRHWe7bcgBAd5vJw",
       "finalUrl": "https://www.youtube.com/playlist?list=PL8Lrb8MsHQ7HKxnMWDRHWe7bcgBAd5vJw",
       "status": "healthy",
@@ -256,7 +256,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLFe9iOZ1HkC5U8C8w5hDSTS0rZZQiU364",
       "finalUrl": "https://www.youtube.com/playlist?list=PLFe9iOZ1HkC5U8C8w5hDSTS0rZZQiU364",
       "status": "healthy",
@@ -276,7 +276,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLioynBxm_xWuqdt4bq8jyl8FuqVhyoO7q",
       "finalUrl": "https://www.youtube.com/playlist?list=PLioynBxm_xWuqdt4bq8jyl8FuqVhyoO7q",
       "status": "healthy",
@@ -296,7 +296,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLS0spxc8nUsAt5iBvXjRlzr4fsep5Ov-o",
       "finalUrl": "https://www.youtube.com/playlist?list=PLS0spxc8nUsAt5iBvXjRlzr4fsep5Ov-o",
       "status": "healthy",
@@ -316,7 +316,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PL2fcFLN5f1xNVUhSP_MsLynZX2eShi36z",
       "finalUrl": "https://www.youtube.com/playlist?list=PL2fcFLN5f1xNVUhSP_MsLynZX2eShi36z",
       "status": "healthy",
@@ -336,7 +336,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLxCxO_FWPIhtWs0utLrv-qWIKB_KbC2tS",
       "finalUrl": "https://www.youtube.com/playlist?list=PLxCxO_FWPIhtWs0utLrv-qWIKB_KbC2tS",
       "status": "healthy",
@@ -356,7 +356,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLYsKWjcnp5DJS9zW6UsjSahmd-mPUh-Js",
       "finalUrl": "https://www.youtube.com/playlist?list=PLYsKWjcnp5DJS9zW6UsjSahmd-mPUh-Js",
       "status": "healthy",
@@ -376,7 +376,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PL508C30656B253DBF",
       "finalUrl": "https://www.youtube.com/playlist?list=PL508C30656B253DBF",
       "status": "healthy",
@@ -396,7 +396,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLWn8QRqY8ySxoL2FZNzZ6XeaoBwhCm6Hw",
       "finalUrl": "https://www.youtube.com/playlist?list=PLWn8QRqY8ySxoL2FZNzZ6XeaoBwhCm6Hw",
       "status": "healthy",
@@ -416,7 +416,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PL5ZIcm-hgbJPc0UXeviNFMKwWUoaqavb0",
       "finalUrl": "https://www.youtube.com/playlist?list=PL5ZIcm-hgbJPc0UXeviNFMKwWUoaqavb0",
       "status": "healthy",
@@ -436,7 +436,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLI8OA8TUlOBk171Ca4pAwUIp9CmtKwocs",
       "finalUrl": "https://www.youtube.com/playlist?list=PLI8OA8TUlOBk171Ca4pAwUIp9CmtKwocs",
       "status": "healthy",
@@ -456,7 +456,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLzwxHFTohkSpLLEib3e0I5IYNECGphzgL",
       "finalUrl": "https://www.youtube.com/playlist?list=PLzwxHFTohkSpLLEib3e0I5IYNECGphzgL",
       "status": "healthy",
@@ -476,7 +476,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PL-iXAqgUNsnbtO_IFKziLrqRavXeu5Ben",
       "finalUrl": "https://www.youtube.com/playlist?list=PL-iXAqgUNsnbtO_IFKziLrqRavXeu5Ben",
       "status": "healthy",
@@ -496,7 +496,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PL3sp5tnO0dkOS1XP3Y2TiY7MbvQxns9X4",
       "finalUrl": "https://www.youtube.com/playlist?list=PL3sp5tnO0dkOS1XP3Y2TiY7MbvQxns9X4",
       "status": "healthy",
@@ -516,7 +516,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLBlnK6fEyqRggZZgYpPMUxdY1CYkZtARR",
       "finalUrl": "https://www.youtube.com/playlist?list=PLBlnK6fEyqRggZZgYpPMUxdY1CYkZtARR",
       "status": "healthy",
@@ -536,7 +536,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PL_OdF9Z6GmVYOINTG45tGE3wNG-KvRMJa",
       "finalUrl": "https://www.youtube.com/playlist?list=PL_OdF9Z6GmVYOINTG45tGE3wNG-KvRMJa",
       "status": "healthy",
@@ -556,7 +556,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLA3GkZPtsafbK3YyxdRzF5yh1TuwGn_Lu",
       "finalUrl": "https://www.youtube.com/playlist?list=PLA3GkZPtsafbK3YyxdRzF5yh1TuwGn_Lu",
       "status": "healthy",
@@ -576,7 +576,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLLWdCRHpILQaxDGbblmbHL_sM0qV_kcw-",
       "finalUrl": "https://www.youtube.com/playlist?list=PLLWdCRHpILQaxDGbblmbHL_sM0qV_kcw-",
       "status": "healthy",
@@ -596,7 +596,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLmUFXlqL3HKRCdGyjuP87Iaht1_Tshp39",
       "finalUrl": "https://www.youtube.com/playlist?list=PLmUFXlqL3HKRCdGyjuP87Iaht1_Tshp39",
       "status": "healthy",
@@ -616,7 +616,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLu0W_9lII9agiCUZYRsvtGTXdxkzPyItg",
       "finalUrl": "https://www.youtube.com/playlist?list=PLu0W_9lII9agiCUZYRsvtGTXdxkzPyItg",
       "status": "healthy",
@@ -636,7 +636,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLZ8-rdXtysy5zLdQ6uX7VDQFF5koiGLe7",
       "finalUrl": "https://www.youtube.com/playlist?list=PLZ8-rdXtysy5zLdQ6uX7VDQFF5koiGLe7",
       "status": "healthy",
@@ -656,7 +656,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PL43PaEDPkuyG-fRxdVnD1ro8J29Xtojhb",
       "finalUrl": "https://www.youtube.com/playlist?list=PL43PaEDPkuyG-fRxdVnD1ro8J29Xtojhb",
       "status": "healthy",
@@ -678,7 +678,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLbRMhDVUMngd7TO4neo4G1gMSQCHCQ9rE",
       "finalUrl": "https://www.youtube.com/playlist?list=PLbRMhDVUMngd7TO4neo4G1gMSQCHCQ9rE",
       "status": "healthy",
@@ -700,7 +700,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLyqSpQzTE6M85-7YIdoH3OyvDEghd5JLu",
       "finalUrl": "https://www.youtube.com/playlist?list=PLyqSpQzTE6M85-7YIdoH3OyvDEghd5JLu",
       "status": "healthy",
@@ -722,7 +722,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PL6yu2hI-rPKA1URkLQ7__EdadsPLXSqUZ",
       "finalUrl": "https://www.youtube.com/playlist?list=PL6yu2hI-rPKA1URkLQ7__EdadsPLXSqUZ",
       "status": "healthy",
@@ -740,7 +740,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PL7987F30C41A9ADCB",
       "finalUrl": "https://www.youtube.com/playlist?list=PL7987F30C41A9ADCB",
       "status": "healthy",
@@ -758,7 +758,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLXOYj6DUOGrqjdqkWSZi4we3Q3oWCvmsW",
       "finalUrl": "https://www.youtube.com/playlist?list=PLXOYj6DUOGrqjdqkWSZi4we3Q3oWCvmsW",
       "status": "healthy",
@@ -776,7 +776,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLhXQeMKeH2-KpEXsbYzFFAeN6acs5ifAG",
       "finalUrl": "https://www.youtube.com/playlist?list=PLhXQeMKeH2-KpEXsbYzFFAeN6acs5ifAG",
       "status": "healthy",
@@ -796,7 +796,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLxCzCOWd7aiEwaANNt3OqJPVIxwp2ebiT",
       "finalUrl": "https://www.youtube.com/playlist?list=PLxCzCOWd7aiEwaANNt3OqJPVIxwp2ebiT",
       "status": "healthy",
@@ -816,7 +816,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLBlnK6fEyqRh6isJ01MBnbNpV3ZsktSyS",
       "finalUrl": "https://www.youtube.com/playlist?list=PLBlnK6fEyqRh6isJ01MBnbNpV3ZsktSyS",
       "status": "healthy",
@@ -838,7 +838,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLdo5W4Nhv31YU5Wx1dopka58teWP9aCee",
       "finalUrl": "https://www.youtube.com/playlist?list=PLdo5W4Nhv31YU5Wx1dopka58teWP9aCee",
       "status": "healthy",
@@ -860,7 +860,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/watch?v=0tM-l_ZsxjU",
       "finalUrl": "https://www.youtube.com/watch?v=0tM-l_ZsxjU",
       "status": "healthy",
@@ -882,7 +882,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/watch?v=Kmgo00avvEw",
       "finalUrl": "https://www.youtube.com/watch?v=Kmgo00avvEw",
       "status": "healthy",
@@ -904,7 +904,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLBIfK3DghyO6SVpIKk3QnToRTawKj6LaF",
       "finalUrl": "https://www.youtube.com/playlist?list=PLBIfK3DghyO6SVpIKk3QnToRTawKj6LaF",
       "status": "healthy",
@@ -925,7 +925,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLBlnK6fEyqRgyFCCgqdcBowmSp_BTKs4F",
       "finalUrl": "https://www.youtube.com/playlist?list=PLBlnK6fEyqRgyFCCgqdcBowmSp_BTKs4F",
       "status": "healthy",
@@ -946,7 +946,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLeaNmybb7X-vUsE24RyEBGqhfAlx4LxXz",
       "finalUrl": "https://www.youtube.com/playlist?list=PLeaNmybb7X-vUsE24RyEBGqhfAlx4LxXz",
       "status": "healthy",
@@ -967,7 +967,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLgGbWId6zgaWNZu4bG-DvAWsN1G1GYUiw",
       "finalUrl": "https://www.youtube.com/playlist?list=PLgGbWId6zgaWNZu4bG-DvAWsN1G1GYUiw",
       "status": "healthy",
@@ -988,7 +988,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PL-6c20OcmteA3xDpzoHqOHOIVT01UFrFI",
       "finalUrl": "https://www.youtube.com/playlist?list=PL-6c20OcmteA3xDpzoHqOHOIVT01UFrFI",
       "status": "healthy",
@@ -1008,7 +1008,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLBlnK6fEyqRgMCUAG0XRw78UA8qnv6jEx",
       "finalUrl": "https://www.youtube.com/playlist?list=PLBlnK6fEyqRgMCUAG0XRw78UA8qnv6jEx",
       "status": "healthy",
@@ -1028,7 +1028,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLBlnK6fEyqRjYKHIzipvvuuZMTlJKsvQK",
       "finalUrl": "https://www.youtube.com/playlist?list=PLBlnK6fEyqRjYKHIzipvvuuZMTlJKsvQK",
       "status": "healthy",
@@ -1048,7 +1048,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLdguAlzSoZprsOmvd_ZeuUM-5HeVFZIke",
       "finalUrl": "https://www.youtube.com/playlist?list=PLdguAlzSoZprsOmvd_ZeuUM-5HeVFZIke",
       "status": "healthy",
@@ -1066,7 +1066,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLYxfF2qa9dis7Db06-a2RNFhOaUTBScWn",
       "finalUrl": "https://www.youtube.com/playlist?list=PLYxfF2qa9dis7Db06-a2RNFhOaUTBScWn",
       "status": "healthy",
@@ -1084,7 +1084,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLxCzCOWd7aiGz9donHRrE9I3Mwn6XdP8p",
       "finalUrl": "https://www.youtube.com/playlist?list=PLxCzCOWd7aiGz9donHRrE9I3Mwn6XdP8p",
       "status": "healthy",
@@ -1102,7 +1102,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/watch?v=yK1uBHPdp30",
       "finalUrl": "https://www.youtube.com/watch?v=yK1uBHPdp30",
       "status": "healthy",
@@ -1120,7 +1120,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PL8lID45FIDTQz6Du4nUfaqJvxOwz86xik",
       "finalUrl": "https://www.youtube.com/playlist?list=PL8lID45FIDTQz6Du4nUfaqJvxOwz86xik",
       "status": "healthy",
@@ -1141,7 +1141,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLBlnK6fEyqRiyryTrbKHX1Sh9luYI0dhX",
       "finalUrl": "https://www.youtube.com/playlist?list=PLBlnK6fEyqRiyryTrbKHX1Sh9luYI0dhX",
       "status": "healthy",
@@ -1162,7 +1162,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLmdxycs9ZImdo9VA_Cg7rbJpWLtNCYcZ2",
       "finalUrl": "https://www.youtube.com/playlist?list=PLmdxycs9ZImdo9VA_Cg7rbJpWLtNCYcZ2",
       "status": "healthy",
@@ -1183,7 +1183,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLxCzCOWd7aiFAN6I8CuViBuCdJgiOkT2Y",
       "finalUrl": "https://www.youtube.com/playlist?list=PLxCzCOWd7aiFAN6I8CuViBuCdJgiOkT2Y",
       "status": "healthy",
@@ -1204,7 +1204,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLu0W_9lII9agICnT8t4iYVSZ3eykIAOME",
       "finalUrl": "https://www.youtube.com/playlist?list=PLu0W_9lII9agICnT8t4iYVSZ3eykIAOME",
       "status": "healthy",
@@ -1226,7 +1226,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLWKjhJtqVAblQe2CCWqV4Zy3LY01Z8aF1",
       "finalUrl": "https://www.youtube.com/playlist?list=PLWKjhJtqVAblQe2CCWqV4Zy3LY01Z8aF1",
       "status": "healthy",
@@ -1248,7 +1248,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLxCzCOWd7aiFjkQbGj_yHeTEVPn422_z5",
       "finalUrl": "https://www.youtube.com/playlist?list=PLxCzCOWd7aiFjkQbGj_yHeTEVPn422_z5",
       "status": "healthy",
@@ -1270,7 +1270,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLCCWsGv21PgVDS3S1lnRbmWCqudrtZIbU",
       "finalUrl": "https://www.youtube.com/playlist?list=PLCCWsGv21PgVDS3S1lnRbmWCqudrtZIbU",
       "status": "healthy",
@@ -1291,7 +1291,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLsyeobzWxl7pe_IiTfNyr55kwJPWbgxB5",
       "finalUrl": "https://www.youtube.com/playlist?list=PLsyeobzWxl7pe_IiTfNyr55kwJPWbgxB5",
       "status": "healthy",
@@ -1312,7 +1312,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLsyeobzWxl7pFZoGT1NbZJpywedeyzyaf",
       "finalUrl": "https://www.youtube.com/playlist?list=PLsyeobzWxl7pFZoGT1NbZJpywedeyzyaf",
       "status": "healthy",
@@ -1333,7 +1333,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PL4S7L6ygAUXfdVSkyR5gMT5jC8o9VTx49",
       "finalUrl": "https://www.youtube.com/playlist?list=PL4S7L6ygAUXfdVSkyR5gMT5jC8o9VTx49",
       "status": "healthy",
@@ -1353,7 +1353,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLXPm4k-8ERi046Ltkll1hcbaeCeBTNbdF",
       "finalUrl": "https://www.youtube.com/playlist?list=PLXPm4k-8ERi046Ltkll1hcbaeCeBTNbdF",
       "status": "healthy",
@@ -1373,7 +1373,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLxCzCOWd7aiEed7SKZBnC6ypFDWYLRvB2",
       "finalUrl": "https://www.youtube.com/playlist?list=PLxCzCOWd7aiEed7SKZBnC6ypFDWYLRvB2",
       "status": "healthy",
@@ -1393,7 +1393,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLYwpaL_SFmcCB7zUM0YSDR-1mM4KoiyLM",
       "finalUrl": "https://www.youtube.com/playlist?list=PLYwpaL_SFmcCB7zUM0YSDR-1mM4KoiyLM",
       "status": "healthy",
@@ -1413,7 +1413,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLR77UJiTj7USmpKgzSSGwc7WljLZfm5xN",
       "finalUrl": "https://www.youtube.com/playlist?list=PLR77UJiTj7USmpKgzSSGwc7WljLZfm5xN",
       "status": "healthy",
@@ -1434,7 +1434,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLrW5vJdpAaLr8RANkMTjwayB7dc4pO46H",
       "finalUrl": "https://www.youtube.com/playlist?list=PLrW5vJdpAaLr8RANkMTjwayB7dc4pO46H",
       "status": "healthy",
@@ -1455,7 +1455,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLu0W_9lII9ahKZ42vg2w9ERPmShYbYAB7",
       "finalUrl": "https://www.youtube.com/playlist?list=PLu0W_9lII9ahKZ42vg2w9ERPmShYbYAB7",
       "status": "healthy",
@@ -1476,7 +1476,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLZ8-rdXtysy5zLdQ6uX7VDQFF5koiGLe7",
       "finalUrl": "https://www.youtube.com/playlist?list=PLZ8-rdXtysy5zLdQ6uX7VDQFF5koiGLe7",
       "status": "healthy",
@@ -1497,7 +1497,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PL2PkZdv6p7ZnPIMuAVv3QckkrpgECa6d3",
       "finalUrl": "https://www.youtube.com/playlist?list=PL2PkZdv6p7ZnPIMuAVv3QckkrpgECa6d3",
       "status": "healthy",
@@ -1516,7 +1516,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLjGG94etKypLHyBN8mOgwJLHD2FFIMGq5",
       "finalUrl": "https://www.youtube.com/playlist?list=PLjGG94etKypLHyBN8mOgwJLHD2FFIMGq5",
       "status": "healthy",
@@ -1535,7 +1535,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLLAZ4kZ9dFpOFJ9JcVW9u4PlSWO-VFoao",
       "finalUrl": "https://www.youtube.com/playlist?list=PLLAZ4kZ9dFpOFJ9JcVW9u4PlSWO-VFoao",
       "status": "healthy",
@@ -1554,7 +1554,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLpherdrLyny8YN4M24iRJBMCXkLcGbmhY",
       "finalUrl": "https://www.youtube.com/playlist?list=PLpherdrLyny8YN4M24iRJBMCXkLcGbmhY",
       "status": "healthy",
@@ -1573,7 +1573,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLu0W_9lII9agK8pojo23OHiNz3Jm6VQCH",
       "finalUrl": "https://www.youtube.com/playlist?list=PLu0W_9lII9agK8pojo23OHiNz3Jm6VQCH",
       "status": "healthy",
@@ -1593,7 +1593,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLX6MKaDw0naZILVYjo8_quA4JI8Jz-idL",
       "finalUrl": "https://www.youtube.com/playlist?list=PLX6MKaDw0naZILVYjo8_quA4JI8Jz-idL",
       "status": "healthy",
@@ -1613,7 +1613,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLY3TW4ACyv_YqRF54UuACh4h0o98p8Ljd",
       "finalUrl": "https://www.youtube.com/playlist?list=PLY3TW4ACyv_YqRF54UuACh4h0o98p8Ljd",
       "status": "healthy",
@@ -1633,7 +1633,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PL2zqvGhQWd_NFuos0C0E0ILhvuT6u13lC",
       "finalUrl": "https://www.youtube.com/playlist?list=PL2zqvGhQWd_NFuos0C0E0ILhvuT6u13lC",
       "status": "healthy",
@@ -1655,7 +1655,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PL4g1oAdmuCfrl88GPnJHCJNi0vr416XmZ",
       "finalUrl": "https://www.youtube.com/playlist?list=PL4g1oAdmuCfrl88GPnJHCJNi0vr416XmZ",
       "status": "healthy",
@@ -1677,7 +1677,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PL7T88QvMOZMhxnHI5KJuw3uUakiXrvgiJ",
       "finalUrl": "https://www.youtube.com/playlist?list=PL7T88QvMOZMhxnHI5KJuw3uUakiXrvgiJ",
       "status": "healthy",
@@ -1699,7 +1699,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLOyJV-YxkLaUNxdPCtPE_IcEcNz5DLDxw",
       "finalUrl": "https://www.youtube.com/playlist?list=PLOyJV-YxkLaUNxdPCtPE_IcEcNz5DLDxw",
       "status": "healthy",
@@ -1721,7 +1721,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLEiEAq2VkUUJfPOj5nRounXvf3n17PCft",
       "finalUrl": "https://www.youtube.com/playlist?list=PLEiEAq2VkUUJfPOj5nRounXvf3n17PCft",
       "status": "healthy",
@@ -1741,7 +1741,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLxzTa0VPR9rw4QEQ49PdsFd3SmVXDR3-i",
       "finalUrl": "https://www.youtube.com/playlist?list=PLxzTa0VPR9rw4QEQ49PdsFd3SmVXDR3-i",
       "status": "healthy",
@@ -1761,7 +1761,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLptLP7KjDoqVRWHPQIIstwlbKbr-OCG3l",
       "finalUrl": "https://www.youtube.com/playlist?list=PLptLP7KjDoqVRWHPQIIstwlbKbr-OCG3l",
       "status": "healthy",
@@ -1781,7 +1781,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLnxlbeknIQabSODsSrViSCRYdNzlI3S7G",
       "finalUrl": "https://www.youtube.com/playlist?list=PLnxlbeknIQabSODsSrViSCRYdNzlI3S7G",
       "status": "healthy",
@@ -1800,7 +1800,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLxK1FVS_3IoL3TL_IZI6mFs4kjJENqdtg",
       "finalUrl": "https://www.youtube.com/playlist?list=PLxK1FVS_3IoL3TL_IZI6mFs4kjJENqdtg",
       "status": "healthy",
@@ -1819,7 +1819,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/watch?v=LcWFedjaR4Q",
       "finalUrl": "https://www.youtube.com/watch?v=LcWFedjaR4Q",
       "status": "healthy",
@@ -1838,7 +1838,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PL9ooVrP1hQOHYamtWSSlt5jF52WvP0cHl",
       "finalUrl": "https://www.youtube.com/playlist?list=PL9ooVrP1hQOHYamtWSSlt5jF52WvP0cHl",
       "status": "healthy",
@@ -1860,7 +1860,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLuAoMvvRllpSlX-RmzvABaB-ct1lq75Br",
       "finalUrl": "https://www.youtube.com/playlist?list=PLuAoMvvRllpSlX-RmzvABaB-ct1lq75Br",
       "status": "healthy",
@@ -1882,7 +1882,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLxCzCOWd7aiHQ9Qyo70JCTkTxczPnVC6s",
       "finalUrl": "https://www.youtube.com/playlist?list=PLxCzCOWd7aiHQ9Qyo70JCTkTxczPnVC6s",
       "status": "healthy",
@@ -1904,7 +1904,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLiineyru3vMCz3AExYPOFmR_DrZpIoOOE",
       "finalUrl": "https://www.youtube.com/playlist?list=PLiineyru3vMCz3AExYPOFmR_DrZpIoOOE",
       "status": "healthy",
@@ -1925,7 +1925,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/watch?v=aaL61HouKLs",
       "finalUrl": "https://www.youtube.com/watch?v=aaL61HouKLs",
       "status": "healthy",
@@ -1946,7 +1946,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/watch?v=q3m1AB9ECXo",
       "finalUrl": "https://www.youtube.com/watch?v=q3m1AB9ECXo",
       "status": "healthy",
@@ -1967,7 +1967,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PL6UwySlcwEYJ2hFuGIvr4VEHUAfl-GCNT",
       "finalUrl": "https://www.youtube.com/playlist?list=PL6UwySlcwEYJ2hFuGIvr4VEHUAfl-GCNT",
       "status": "healthy",
@@ -1989,7 +1989,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLnGaO7jfHOvalh3Jt48Ni4IsRcHBGbHHn",
       "finalUrl": "https://www.youtube.com/playlist?list=PLnGaO7jfHOvalh3Jt48Ni4IsRcHBGbHHn",
       "status": "healthy",
@@ -2011,7 +2011,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLOWdy-NBQHJsGVJJ0OpBpxTbPW1v99Y2a",
       "finalUrl": "https://www.youtube.com/playlist?list=PLOWdy-NBQHJsGVJJ0OpBpxTbPW1v99Y2a",
       "status": "healthy",
@@ -2033,7 +2033,7 @@
       "verificationStatus": "metadata_checked_unreviewed"
     },
     {
-      "checkedAt": "2026-06-28T16:26:46.176Z",
+      "checkedAt": "2026-06-30T06:52:28.611Z",
       "url": "https://www.youtube.com/playlist?list=PLm_MSClsnwm8jU0kPRug2n7Yv4oSk7HLk",
       "finalUrl": "https://www.youtube.com/playlist?list=PLm_MSClsnwm8jU0kPRug2n7Yv4oSk7HLk",
       "status": "healthy",
