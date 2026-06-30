@@ -1,5 +1,4 @@
 import { spawnSync } from 'node:child_process'
-import { resolve } from 'node:path'
 
 if (
   process.env.LERNIO_DEMO_MODE === 'true' &&
@@ -9,12 +8,13 @@ if (
   process.exit(1)
 }
 
-function runCli(relativeCliPath, args, env = process.env) {
-  const cliPath = resolve(process.cwd(), relativeCliPath)
-  const result = spawnSync(process.execPath, [cliPath, ...args], {
+function runCommand(cmd, args) {
+  console.log(`[vercel-build] Running: ${cmd} ${args.join(' ')}`)
+  const result = spawnSync(cmd, args, {
     cwd: process.cwd(),
-    env,
+    env: process.env,
     stdio: 'inherit',
+    shell: true,
   })
 
   if (result.error) throw result.error
@@ -22,7 +22,22 @@ function runCli(relativeCliPath, args, env = process.env) {
 }
 
 console.log('[vercel-build] Generating Prisma Client...')
-runCli('node_modules/prisma/build/index.js', ['generate'])
+runCommand('npx', ['prisma', 'generate'])
+
+console.log('[vercel-build] Running Prisma migrations...')
+runCommand('npx', ['prisma', 'migrate', 'deploy'])
+
+console.log('[vercel-build] Seeding CWIT departments...')
+runCommand('npx', ['tsx', 'scripts/upsert-cwit-departments.ts'])
+
+console.log('[vercel-build] Seeding CWIT sources...')
+runCommand('npx', ['tsx', 'scripts/import-cwit-source-registry.ts'])
+
+console.log('[vercel-build] Importing curriculum manifests...')
+runCommand('npx', ['tsx', 'scripts/import-curriculum-manifests.ts', '--write'])
+
+console.log('[vercel-build] Setting up default admin user...')
+runCommand('npx', ['tsx', 'scripts/upsert-admin.ts'])
 
 console.log('[vercel-build] Building Next.js...')
-runCli('node_modules/next/dist/bin/next', ['build', '--webpack'])
+runCommand('npx', ['next', 'build', '--webpack'])
