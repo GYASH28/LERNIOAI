@@ -65,3 +65,4 @@ db/lernio-dev.db
 # Work tracking file (not part of the repo)
 worklog.md
 *.bak
+.env*
