@@ -36,6 +36,9 @@ runCommand('npx', ['tsx', 'scripts/import-cwit-source-registry.ts'])
 console.log('[vercel-build] Importing curriculum manifests...')
 runCommand('npx', ['tsx', 'scripts/import-curriculum-manifests.ts', '--write'])
 
+console.log('[vercel-build] Publishing curriculum and migrating users...')
+runCommand('npx', ['tsx', 'scripts/publish-curriculum.ts'])
+
 console.log('[vercel-build] Setting up default admin user...')
 runCommand('npx', ['tsx', 'scripts/upsert-admin.ts'])
 
