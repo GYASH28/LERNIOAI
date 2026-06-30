@@ -809,6 +809,9 @@ Date: 2026-06-28
 - `npm run resources:youtube:review-queue`: passed, 100 candidate(s), 252 subject mapping(s), 0 ready for lesson mapping, 65 unplaced official-subject blockers, 18 missing manifest-subject blockers and 169 lesson-structure blockers.
 - `npx tsx scripts/check-resource-link-health.ts --write`: passed and wrote 100 checked rows; 100 healthy, 0 stale/unhealthy/unknown.
 - `npm run build`: passed with 93 static pages generated and `/api/coding`, `/api/admin/learning/notes/jobs`, `/api/admin/resources/youtube-candidates/promote` plus LEO tutor routes included.
+- Production deployment `dpl_8HZ1NyzEZeaJiCMhob5NvL5Z51io` deployed Ready on Vercel and was aliased to `https://lernio-ai.vercel.app`.
+- Production smoke checks: `/`, `/sign-in` and `/api/health` returned 200; Vercel error logs for the latest deployment returned no logs.
+- Production readiness check: `/api/ready` returned 503 because `DATABASE_URL`, `GROQ_API_KEY` and Resend email variables are not configured; auth is configured.
 - `npm run test:e2e`: passed against `next start` production server, 146 Playwright tests.
 - Smoke checks against `next start`: `/api/health` returned 200 and `/api/ready` returned 503 because PostgreSQL is unavailable.
 - Production server was started with `npm run start` on `http://localhost:3000` for smoke/e2e validation, then stopped.

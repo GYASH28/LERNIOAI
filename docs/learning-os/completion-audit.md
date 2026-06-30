@@ -86,9 +86,9 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - `npm run test:visual` passed.
 - `npx vitest run src/lib/auth-policy.test.ts` passed after the Vercel preview demo-mode policy change.
 - `LERNIO_DEMO_MODE=true VERCEL_ENV=preview npm run vercel-build` passed locally.
-- Vercel preview branch alias `https://lernio-ai-gyash28-gyash28s-projects.vercel.app` deployed with status Ready.
-- Vercel preview `/` returned 200.
-- Vercel preview `/api/ready` returned 503 because database is unavailable and AI/email providers are unconfigured.
+- Production branch deployment `dpl_8HZ1NyzEZeaJiCMhob5NvL5Z51io` deployed with status Ready.
+- Production alias `https://lernio-ai.vercel.app` returned 200 for `/`, `/sign-in` and `/api/health`.
+- Production `/api/ready` returned 503 because `DATABASE_URL`, `GROQ_API_KEY` and Resend email variables are not configured; auth is now configured with `NEXTAUTH_SECRET` and `NEXTAUTH_URL`.
 
 ## Evidence Still Required Before Completion
 
@@ -104,12 +104,12 @@ The Learning OS is not complete. The new audit package confirms the same core bl
 - Reviewed YouTube candidate lesson-mapping decision files, followed by a live dry-run/write against PostgreSQL.
 - `npx tsx scripts/build-learning-coverage-report.ts --require-db` against a reachable PostgreSQL database.
 - Authenticated learning E2E and accessibility tests.
-- Production deployment with post-deploy smoke checks.
-- Production Vercel promotion after `/api/ready` returns 200 and demo mode is disabled for production.
+- Production `/api/ready` returning 200 after production database, AI and email environment variables are configured.
+- Post-deploy authenticated smoke checks after a production database and admin user are available.
 
 ## External Blockers
 
 - Docker is not installed in this Windows environment.
-- PostgreSQL at `localhost:5432` is unreachable, so live database-backed coverage cannot be produced locally.
+- PostgreSQL at `localhost:5432` is unreachable, and no production `DATABASE_URL` is configured in Vercel, so live database-backed coverage cannot be produced locally or in production yet.
 - GitHub CLI `gh` is not installed.
 - Official CIOT Semester 3-6 semester-placement evidence has not been found in the available sources.

@@ -67,11 +67,15 @@ npm run test:visual
 
 Blocked. Local PostgreSQL is unavailable, `/api/ready` is unhealthy, `npx prisma migrate status`, `npm run curriculum:import`, and `npm run db:departments:scope` cannot run against `localhost:5432`. Curriculum coverage still has zero published units/topics/lessons/resources and 0 unit candidates ready for promotion. CIOT Semester 3-6 now have explicit empty draft blocker manifests, but placement remains unverified and no subjects may be added until official semester-placement evidence is obtained.
 
-Vercel preview deployment is live, but not production-promotable:
+Vercel production deployment is live, but not release-ready:
 
-- Preview branch alias: `https://lernio-ai-gyash28-gyash28s-projects.vercel.app`
+- Production alias: `https://lernio-ai.vercel.app`
+- Deployment id: `dpl_8HZ1NyzEZeaJiCMhob5NvL5Z51io`
 - Status: Ready
 - `/` smoke check: 200
+- `/sign-in` smoke check: 200
+- `/api/health` smoke check: 200
 - `/api/ready`: 503 with `database: unavailable`, `auth: configured`, `ai: unconfigured`, and `email: unconfigured`
+- Latest Vercel error-log scan for the production deployment returned no logs.
 
 The non-database gates passed locally on 2026-06-29: `npx prisma validate`, `npx prisma generate`, `npm run check:migrations`, `npm run curriculum:validate` with 12 manifests, `npm run coverage:learning` with 12/12 manifests present and 194 pending verification items, `npm run check` (52 test files / 187 tests passed), `npm run build` (93 static pages), `npm run test:e2e` (146 Playwright tests passed), `npm run test:a11y`, and `npm run test:visual`. Including labs route, trusted coding-runner, lesson-resource mapping, guarded YouTube candidate promotion, lesson-note worker, lesson-note queue-route, generated-note delivery and database coverage snapshot tests.
