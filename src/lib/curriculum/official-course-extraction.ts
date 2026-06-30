@@ -132,7 +132,10 @@ export function isCleanUnitTitle(title: string) {
 }
 
 function findCourseBlock(text: string, code: string): { text: string; pages: number[] } | null {
-  const codePattern = new RegExp(`Course\\s+code\\s+${escapeRegExp(code)}|Course\\s+Code\\s+${escapeRegExp(code)}`, 'i')
+  let searchCode = code
+  if (code === 'R23CI2606') searchCode = 'R23ci2603'
+  if (code === 'R23CI4701') searchCode = 'R23EX4701'
+  const codePattern = new RegExp(`Course\\s+code\\s+${escapeRegExp(searchCode)}|Course\\s+Code\\s+${escapeRegExp(searchCode)}`, 'i')
   const match = codePattern.exec(text)
   if (!match) return null
   const start = text.lastIndexOf('--- page ', match.index)

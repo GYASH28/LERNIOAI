@@ -9,27 +9,1170 @@
   "schemeRevision": "MPECS 2023",
   "semesterNumber": 3,
   "status": "draft",
-  "verificationStatus": "needs_official_source",
+  "verificationStatus": "structure_verified",
   "sourceReferences": [
     {
-      "sourceId": "ciot-r23-curriculum-catalog",
-      "title": "Computer Engineering and IoT R23 Curriculum Course Catalog Extraction",
-      "localPath": "content/curriculum/cwit-r23/extraction-reports/official-course-catalog.json",
-      "evidence": "Official CIOT course codes exist in the extracted catalog, but this report does not prove semester placement."
-    },
-    {
-      "sourceId": "cwit-r23-winter-2025-timetable",
-      "title": "CWIT Winter Examination 2025 Time Table Evidence",
-      "localPath": "content/curriculum/cwit-r23/extraction-reports/official-timetable-evidence.json",
-      "pages": [1],
-      "evidence": "The timetable contains CIOT R23 code appearances only; the extraction report explicitly does not infer semester placement."
+      "sourceId": "ciot-r23-curriculum",
+      "title": "Computer Engineering and IoT R23 Curriculum",
+      "sourceUrl": "https://cwit.mespune.org/wp-content/uploads/2023/07/IOTR23_ALL_Curriculam-FINALV.pdf",
+      "localPath": "content-import/official/CIOT_R23_curriculum.pdf",
+      "evidence": "Official Semester 3 learning and assessment scheme table and curriculum index for Diploma in Computer Engineering and IoT."
     }
   ],
   "manifestNotes": [
-    "This manifest is intentionally empty and draft-only.",
-    "Official CIOT Semester 3 placement evidence has not been found in the available source set.",
-    "Do not add subjects, units, topics, lessons, or resources here until an official semester structure source is registered and reviewed."
+    "Subject rows are structure verified from the official R23 curriculum PDF.",
+    "Units, topics, outcomes and practical experiments are intentionally empty until parsed from the official curriculum PDF."
   ],
-  "blockedReason": "missing_official_semester_placement_evidence",
-  "subjects": []
+  "subjects": [
+    {
+      "order": 1,
+      "officialSubjectCode": "R23CI2602",
+      "name": "Data Structures",
+      "category": "DSC",
+      "credits": 4,
+      "assessment": {
+        "totalMarks": 175
+      },
+      "units": [
+        {
+          "order": 1,
+          "title": "Introduction to Data Structures",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                129,
+                130,
+                131,
+                132,
+                133,
+                134
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official course content extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "Searching and Sorting",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                129,
+                130,
+                131,
+                132,
+                133,
+                134
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official course content extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "Linked List",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                129,
+                130,
+                131,
+                132,
+                133,
+                134
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official course content extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "Stack",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                129,
+                130,
+                131,
+                132,
+                133,
+                134
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official course content extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "Queue",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                129,
+                130,
+                131,
+                132,
+                133,
+                134
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official course content extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "Tree",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                129,
+                130,
+                131,
+                132,
+                133,
+                134
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official course content extraction; topics remain pending review."
+        }
+      ],
+      "outcomes": [
+        {
+          "order": 1,
+          "code": "CO1",
+          "text": "Perform basic operations on Arrays.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                129,
+                130,
+                131,
+                132,
+                133,
+                134
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 2,
+          "code": "CO2",
+          "text": "Apply different Searching and sorting methods.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                129,
+                130,
+                131,
+                132,
+                133,
+                134
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 3,
+          "code": "CO3",
+          "text": "Implement basic operations on Linked List.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                129,
+                130,
+                131,
+                132,
+                133,
+                134
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 4,
+          "code": "CO4",
+          "text": "Perform operations on Stack using Array and Linked List Implementations.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                129,
+                130,
+                131,
+                132,
+                133,
+                134
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 5,
+          "code": "CO5",
+          "text": "Perform operations on Queue using Array and Linked List Implementations.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                129,
+                130,
+                131,
+                132,
+                133,
+                134
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 6,
+          "code": "CO6",
+          "text": "Create and Traverse Tree to solve problems. C)",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                129,
+                130,
+                131,
+                132,
+                133,
+                134
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        }
+      ],
+      "practicalExperiments": [],
+      "sourceReferences": [
+        {
+          "sourceId": "ciot-r23-curriculum",
+          "pages": [
+            128,
+            129,
+            130,
+            131,
+            132,
+            133
+          ]
+        }
+      ],
+      "verificationStatus": "structure_verified"
+    },
+    {
+      "order": 2,
+      "officialSubjectCode": "R23CI6604",
+      "name": "Object Oriented Programming With C++",
+      "category": "SEC",
+      "credits": 3,
+      "assessment": {
+        "totalMarks": 175
+      },
+      "units": [],
+      "outcomes": [
+        {
+          "order": 1,
+          "code": "CO1",
+          "text": "Understand basic concepts of OOP languages - tokens, Operators, Expressions and Control Structures in C++.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                101,
+                102,
+                103,
+                104,
+                105,
+                106,
+                107
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 2,
+          "code": "CO2",
+          "text": "Define class, objects, use of static variables , friend functions.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                101,
+                102,
+                103,
+                104,
+                105,
+                106,
+                107
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 3,
+          "code": "CO3",
+          "text": "Develop C++ programs using constructors and destructors.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                101,
+                102,
+                103,
+                104,
+                105,
+                106,
+                107
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 4,
+          "code": "CO4",
+          "text": "Implement different types of inheritances and use of exception handling",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                101,
+                102,
+                103,
+                104,
+                105,
+                106,
+                107
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 5,
+          "code": "CO5",
+          "text": "Use of pointers, Implement polymorphism concept, its types.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                101,
+                102,
+                103,
+                104,
+                105,
+                106,
+                107
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 6,
+          "code": "CO6",
+          "text": "Use console I/O and perform file operations using streams.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                101,
+                102,
+                103,
+                104,
+                105,
+                106,
+                107
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        }
+      ],
+      "practicalExperiments": [],
+      "sourceReferences": [
+        {
+          "sourceId": "ciot-r23-curriculum",
+          "pages": [
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106
+          ]
+        }
+      ],
+      "verificationStatus": "structure_verified"
+    },
+    {
+      "order": 3,
+      "officialSubjectCode": "R23CI2603",
+      "name": "Digital Techniques & Microcontroller",
+      "category": "DSC",
+      "credits": 4,
+      "assessment": {
+        "totalMarks": 175
+      },
+      "units": [],
+      "outcomes": [
+        {
+          "order": 1,
+          "code": "CO1",
+          "text": "Understand and use binary, octal, hexadecimal number systems and laws of Boolean algebra.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                135,
+                136,
+                137,
+                138,
+                139,
+                140,
+                141
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 2,
+          "code": "CO2",
+          "text": "Understand concept and working of combinational circuits",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                135,
+                136,
+                137,
+                138,
+                139,
+                140,
+                141
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 3,
+          "code": "CO3",
+          "text": "Understand concept of Flip flops , their types and applications",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                135,
+                136,
+                137,
+                138,
+                139,
+                140,
+                141
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 4,
+          "code": "CO4",
+          "text": "Understand architecture of 8051 microcontroller.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                135,
+                136,
+                137,
+                138,
+                139,
+                140,
+                141
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 5,
+          "code": "CO5",
+          "text": "Describe software program development tools.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                135,
+                136,
+                137,
+                138,
+                139,
+                140,
+                141
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 6,
+          "code": "CO6",
+          "text": "Construct and execute assembly language programs using instruction set of 8051. C)",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                135,
+                136,
+                137,
+                138,
+                139,
+                140,
+                141
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        }
+      ],
+      "practicalExperiments": [],
+      "sourceReferences": [
+        {
+          "sourceId": "ciot-r23-curriculum",
+          "pages": [
+            134,
+            135,
+            136,
+            137,
+            138,
+            139,
+            140
+          ]
+        }
+      ],
+      "verificationStatus": "structure_verified"
+    },
+    {
+      "order": 4,
+      "officialSubjectCode": "R23CI2604",
+      "name": "Internet of Things and Applications (IoTA)",
+      "category": "DSC",
+      "credits": 3,
+      "assessment": {
+        "totalMarks": 100
+      },
+      "units": [],
+      "outcomes": [
+        {
+          "order": 1,
+          "code": "CO1",
+          "text": ". Understand the fundamentals of IoT and IoT enabling technologies.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                142,
+                143,
+                144,
+                145,
+                146,
+                147
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 2,
+          "code": "CO2",
+          "text": ". Identify Sensors and actuators for interfacing with Raspberry Pi board required for IoT.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                142,
+                143,
+                144,
+                145,
+                146,
+                147
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 3,
+          "code": "CO3",
+          "text": ". Describe Architecture of Raspberry Pi and Arduino.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                142,
+                143,
+                144,
+                145,
+                146,
+                147
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 4,
+          "code": "CO4",
+          "text": ". Construct and execute Python program for Raspberry Pi board.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                142,
+                143,
+                144,
+                145,
+                146,
+                147
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 5,
+          "code": "CO5",
+          "text": ". Understand the IoT network protocols.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                142,
+                143,
+                144,
+                145,
+                146,
+                147
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 6,
+          "code": "CO6",
+          "text": ". Develop a small IoT based application.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                142,
+                143,
+                144,
+                145,
+                146,
+                147
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        }
+      ],
+      "practicalExperiments": [],
+      "sourceReferences": [
+        {
+          "sourceId": "ciot-r23-curriculum",
+          "pages": [
+            141,
+            142,
+            143,
+            144,
+            145,
+            146
+          ]
+        }
+      ],
+      "verificationStatus": "structure_verified"
+    },
+    {
+      "order": 5,
+      "officialSubjectCode": "R23CI2605",
+      "name": "User Interface Programming",
+      "category": "DSC",
+      "credits": 2,
+      "assessment": {
+        "totalMarks": 100
+      },
+      "units": [],
+      "outcomes": [
+        {
+          "order": 1,
+          "code": "CO1",
+          "text": "Understand the .Net framework and VB. Net features",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                148,
+                149,
+                150,
+                151,
+                152
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 2,
+          "code": "CO2",
+          "text": "Write and compile a Console based programs using data types, operators, conditional and iterative statements etc.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                148,
+                149,
+                150,
+                151,
+                152
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 3,
+          "code": "CO3",
+          "text": "Write the programs using arrays, functions and apply the concept of exception handling.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                148,
+                149,
+                150,
+                151,
+                152
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 4,
+          "code": "CO4",
+          "text": "Design the forms and use the different basic controls.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                148,
+                149,
+                150,
+                151,
+                152
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 5,
+          "code": "CO5",
+          "text": "Use different Dialog Box and handle the events.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                148,
+                149,
+                150,
+                151,
+                152
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 6,
+          "code": "CO6",
+          "text": "Write the graphics program and perform different operations on database.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                148,
+                149,
+                150,
+                151,
+                152
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        }
+      ],
+      "practicalExperiments": [],
+      "sourceReferences": [
+        {
+          "sourceId": "ciot-r23-curriculum",
+          "pages": [
+            147,
+            148,
+            149,
+            150,
+            151
+          ]
+        }
+      ],
+      "verificationStatus": "structure_verified"
+    },
+    {
+      "order": 6,
+      "officialSubjectCode": "R23CI1602",
+      "name": "Animation Techniques",
+      "category": "AEC",
+      "credits": 4,
+      "assessment": {
+        "totalMarks": 75
+      },
+      "units": [],
+      "outcomes": [
+        {
+          "order": 1,
+          "code": "CO1",
+          "text": "Understand coordinate system and use different graphics functions and standards.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                25,
+                26,
+                27,
+                28,
+                29,
+                30
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 2,
+          "code": "CO2",
+          "text": "Understand OpenGL, apply 2D and 3D transformations (translation, rotation, scaling) and implement different projection techniques.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                25,
+                26,
+                27,
+                28,
+                29,
+                30
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 3,
+          "code": "CO3",
+          "text": "Create and manipulate 2D textures and 3D shapes, implement basic lighting and shading techniques.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                25,
+                26,
+                27,
+                28,
+                29,
+                30
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 4,
+          "code": "CO4",
+          "text": "Use of Blender, apply Lighting and Texturing effects and create animations.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                25,
+                26,
+                27,
+                28,
+                29,
+                30
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 5,
+          "code": "CO5",
+          "text": "Create simple animations using keyframes, principles of animation, and apply basic textures to 3D models.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                25,
+                26,
+                27,
+                28,
+                29,
+                30
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 6,
+          "code": "CO6",
+          "text": "Use editing tools for both video and audio, apply color correction techniques.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                25,
+                26,
+                27,
+                28,
+                29,
+                30
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        }
+      ],
+      "practicalExperiments": [],
+      "sourceReferences": [
+        {
+          "sourceId": "ciot-r23-curriculum",
+          "pages": [
+            24,
+            25,
+            26,
+            27,
+            28,
+            29
+          ]
+        }
+      ],
+      "verificationStatus": "structure_verified"
+    },
+    {
+      "order": 7,
+      "officialSubjectCode": "R23CI4602",
+      "name": "Indian Constitution",
+      "category": "VEC",
+      "credits": 1,
+      "assessment": {
+        "totalMarks": 100
+      },
+      "units": [],
+      "outcomes": [
+        {
+          "order": 1,
+          "code": "CO1",
+          "text": "Identify and explore the basic features and modalities about Indian constitution.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                225,
+                226,
+                227,
+                228,
+                229,
+                230,
+                231,
+                232,
+                233,
+                234
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 2,
+          "code": "CO2",
+          "text": "Understand the basic principles governing the system of government and its organization under the Constitution of India.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                225,
+                226,
+                227,
+                228,
+                229,
+                230,
+                231,
+                232,
+                233,
+                234
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 3,
+          "code": "CO3",
+          "text": "Interpret the meaning of the constitution's authorship within the context of law, rights and government.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                225,
+                226,
+                227,
+                228,
+                229,
+                230,
+                231,
+                232,
+                233,
+                234
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 4,
+          "code": "CO4",
+          "text": "Understand the administrative structure of various branches of government.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                225,
+                226,
+                227,
+                228,
+                229,
+                230,
+                231,
+                232,
+                233,
+                234
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 5,
+          "code": "CO5",
+          "text": "Examine different aspects of Indian Legal System and its related bodies..",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                225,
+                226,
+                227,
+                228,
+                229,
+                230,
+                231,
+                232,
+                233,
+                234
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 6,
+          "code": "CO6",
+          "text": "Follow procedure to cast vote using voter-id. C)",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                225,
+                226,
+                227,
+                228,
+                229,
+                230,
+                231,
+                232,
+                233,
+                234
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        }
+      ],
+      "practicalExperiments": [],
+      "sourceReferences": [
+        {
+          "sourceId": "ciot-r23-curriculum",
+          "pages": [
+            224,
+            225,
+            226,
+            227,
+            228,
+            229,
+            230,
+            231,
+            232,
+            233
+          ]
+        }
+      ],
+      "verificationStatus": "structure_verified"
+    }
+  ]
 }

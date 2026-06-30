@@ -9,27 +9,1064 @@
   "schemeRevision": "MPECS 2023",
   "semesterNumber": 4,
   "status": "draft",
-  "verificationStatus": "needs_official_source",
+  "verificationStatus": "structure_verified",
   "sourceReferences": [
     {
-      "sourceId": "ciot-r23-curriculum-catalog",
-      "title": "Computer Engineering and IoT R23 Curriculum Course Catalog Extraction",
-      "localPath": "content/curriculum/cwit-r23/extraction-reports/official-course-catalog.json",
-      "evidence": "Official CIOT course codes exist in the extracted catalog, but this report does not prove semester placement."
-    },
-    {
-      "sourceId": "cwit-r23-winter-2025-timetable",
-      "title": "CWIT Winter Examination 2025 Time Table Evidence",
-      "localPath": "content/curriculum/cwit-r23/extraction-reports/official-timetable-evidence.json",
-      "pages": [1],
-      "evidence": "The timetable contains CIOT R23 code appearances only; the extraction report explicitly does not infer semester placement."
+      "sourceId": "ciot-r23-curriculum",
+      "title": "Computer Engineering and IoT R23 Curriculum",
+      "sourceUrl": "https://cwit.mespune.org/wp-content/uploads/2023/07/IOTR23_ALL_Curriculam-FINALV.pdf",
+      "localPath": "content-import/official/CIOT_R23_curriculum.pdf",
+      "evidence": "Official Semester 4 learning and assessment scheme table and curriculum index for Diploma in Computer Engineering and IoT."
     }
   ],
   "manifestNotes": [
-    "This manifest is intentionally empty and draft-only.",
-    "Official CIOT Semester 4 placement evidence has not been found in the available source set.",
-    "Do not add subjects, units, topics, lessons, or resources here until an official semester structure source is registered and reviewed."
+    "Subject rows are structure verified from the official R23 curriculum PDF.",
+    "Units, topics, outcomes and practical experiments are intentionally empty until parsed from the official curriculum PDF."
   ],
-  "blockedReason": "missing_official_semester_placement_evidence",
-  "subjects": []
+  "subjects": [
+    {
+      "order": 1,
+      "officialSubjectCode": "R23CI2606",
+      "name": "Embedded Operating System",
+      "category": "DSC",
+      "credits": 4,
+      "assessment": {
+        "totalMarks": 175
+      },
+      "units": [],
+      "outcomes": [
+        {
+          "order": 1,
+          "code": "CO1",
+          "text": "Understand and use binary, octal, hexadecimal number systems and laws of Boolean algebra.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                135,
+                136,
+                137,
+                138,
+                139,
+                140,
+                141
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 2,
+          "code": "CO2",
+          "text": "Understand concept and working of combinational circuits",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                135,
+                136,
+                137,
+                138,
+                139,
+                140,
+                141
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 3,
+          "code": "CO3",
+          "text": "Understand concept of Flip flops , their types and applications",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                135,
+                136,
+                137,
+                138,
+                139,
+                140,
+                141
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 4,
+          "code": "CO4",
+          "text": "Understand architecture of 8051 microcontroller.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                135,
+                136,
+                137,
+                138,
+                139,
+                140,
+                141
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 5,
+          "code": "CO5",
+          "text": "Describe software program development tools.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                135,
+                136,
+                137,
+                138,
+                139,
+                140,
+                141
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 6,
+          "code": "CO6",
+          "text": "Construct and execute assembly language programs using instruction set of 8051. C)",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                135,
+                136,
+                137,
+                138,
+                139,
+                140,
+                141
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        }
+      ],
+      "practicalExperiments": [],
+      "sourceReferences": [
+        {
+          "sourceId": "ciot-r23-curriculum",
+          "pages": [
+            152,
+            153,
+            154,
+            155,
+            156,
+            157,
+            158,
+            159
+          ]
+        }
+      ],
+      "verificationStatus": "structure_verified"
+    },
+    {
+      "order": 2,
+      "officialSubjectCode": "R23CI2607",
+      "name": "Database Management Systems",
+      "category": "DSC",
+      "credits": 4,
+      "assessment": {
+        "totalMarks": 175
+      },
+      "units": [],
+      "outcomes": [
+        {
+          "order": 1,
+          "code": "CO1",
+          "text": "Understand the concept of database systems and draw ER diagram.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                161,
+                162,
+                163,
+                164,
+                165,
+                166,
+                167,
+                168
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 2,
+          "code": "CO2",
+          "text": "Create database, modify, and append data in database.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                161,
+                162,
+                163,
+                164,
+                165,
+                166,
+                167,
+                168
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 3,
+          "code": "CO3",
+          "text": "Apply integrity constraints and normalize database to normal forms.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                161,
+                162,
+                163,
+                164,
+                165,
+                166,
+                167,
+                168
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 4,
+          "code": "CO4",
+          "text": "Write PL/SQL programs and handle the errors in PL/SQL.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                161,
+                162,
+                163,
+                164,
+                165,
+                166,
+                167,
+                168
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 5,
+          "code": "CO5",
+          "text": "Write cursor programs and apply the concept of transaction and concurrency control.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                161,
+                162,
+                163,
+                164,
+                165,
+                166,
+                167,
+                168
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 6,
+          "code": "CO6",
+          "text": "Write function programs and know the concept of distributed database.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                161,
+                162,
+                163,
+                164,
+                165,
+                166,
+                167,
+                168
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        }
+      ],
+      "practicalExperiments": [],
+      "sourceReferences": [
+        {
+          "sourceId": "ciot-r23-curriculum",
+          "pages": [
+            160,
+            161,
+            162,
+            163,
+            164,
+            165,
+            166,
+            167
+          ]
+        }
+      ],
+      "verificationStatus": "structure_verified"
+    },
+    {
+      "order": 3,
+      "officialSubjectCode": "R23CI2608",
+      "name": "Computer Networks And Security",
+      "category": "DSC",
+      "credits": 3,
+      "assessment": {
+        "totalMarks": 175
+      },
+      "units": [],
+      "outcomes": [
+        {
+          "order": 1,
+          "code": "CO1",
+          "text": "Identify type of network, topology, components and its role in different applications.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                169,
+                170,
+                171,
+                172,
+                173,
+                174
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 2,
+          "code": "CO2",
+          "text": "Select specific Ethernet type from given criteria.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                169,
+                170,
+                171,
+                172,
+                173,
+                174
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 3,
+          "code": "CO3",
+          "text": "Describe principles, design issues of layers and relate protocols with OSI and TCP/IP model layers.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                169,
+                170,
+                171,
+                172,
+                173,
+                174
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 4,
+          "code": "CO4",
+          "text": "Relate protocols of transport and application layer",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                169,
+                170,
+                171,
+                172,
+                173,
+                174
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 5,
+          "code": "CO5",
+          "text": "Design networks with IPV4 addressing.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                169,
+                170,
+                171,
+                172,
+                173,
+                174
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 6,
+          "code": "CO6",
+          "text": "Identify role of cryptography in various Network applications.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                169,
+                170,
+                171,
+                172,
+                173,
+                174
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        }
+      ],
+      "practicalExperiments": [],
+      "sourceReferences": [
+        {
+          "sourceId": "ciot-r23-curriculum",
+          "pages": [
+            168,
+            169,
+            170,
+            171,
+            172,
+            173
+          ]
+        }
+      ],
+      "verificationStatus": "structure_verified"
+    },
+    {
+      "order": 4,
+      "officialSubjectCode": "R23CI1603",
+      "name": "Python Programming",
+      "category": "AEC",
+      "credits": 3,
+      "assessment": {
+        "totalMarks": 175
+      },
+      "units": [],
+      "outcomes": [
+        {
+          "order": 1,
+          "code": "CO1",
+          "text": "Install and develop simple Python program using IDE and develop python program using operators.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 2,
+          "code": "CO2",
+          "text": "Write a program using conditional and looping statements.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 3,
+          "code": "CO3",
+          "text": "Perform operations using Python Data Structures.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 4,
+          "code": "CO4",
+          "text": "Develop Python program using functions, modules and packages.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 5,
+          "code": "CO5",
+          "text": "Apply object-oriented approach to solve given problem using python.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 6,
+          "code": "CO6",
+          "text": "Write program using Exception handling and File Operations.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        }
+      ],
+      "practicalExperiments": [],
+      "sourceReferences": [
+        {
+          "sourceId": "ciot-r23-curriculum",
+          "pages": [
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36
+          ]
+        }
+      ],
+      "verificationStatus": "structure_verified"
+    },
+    {
+      "order": 5,
+      "officialSubjectCode": "R23CI1604",
+      "name": "Java Programming",
+      "category": "AEC",
+      "credits": 3,
+      "assessment": {
+        "totalMarks": 175
+      },
+      "units": [],
+      "outcomes": [
+        {
+          "order": 1,
+          "code": "CO1",
+          "text": "Understand Java fundamentals including program structure, data types, operators, and control statements. 2.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 2,
+          "code": "CO2",
+          "text": "Develop Java programs using classes, objects, methods, constructors, and inheritance. 3.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 3,
+          "code": "CO3",
+          "text": "Implement interfaces for multiple inheritance and create and use packages in Java. 4.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 4,
+          "code": "CO4",
+          "text": "Handle exceptions and develop multithreaded Java applications. 5.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 5,
+          "code": "CO5",
+          "text": "Apply collection framework, stream I/O, and file handling techniques in Java programs. 6.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 6,
+          "code": "CO6",
+          "text": "Design GUI applications using AWT/Applets and implement database connectivity using JDBC.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        }
+      ],
+      "practicalExperiments": [],
+      "sourceReferences": [
+        {
+          "sourceId": "ciot-r23-curriculum",
+          "pages": [
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44
+          ]
+        }
+      ],
+      "verificationStatus": "structure_verified"
+    },
+    {
+      "order": 6,
+      "officialSubjectCode": "R23CI6405",
+      "name": "Entrepreneurship Development & Marketing Management",
+      "category": "SEC",
+      "credits": 2,
+      "assessment": {
+        "totalMarks": 100
+      },
+      "units": [],
+      "outcomes": [
+        {
+          "order": 1,
+          "code": "CO1",
+          "text": "Understand the fundamental concepts of entrepreneurship, motivation, creativity, and innovation to develop entrepreneurial competencies and problem-solving skills.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                108,
+                109,
+                110,
+                111,
+                112,
+                113,
+                114
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 2,
+          "code": "CO2",
+          "text": "Develop the ability to identify, evaluate, and analyse business opportunities and ideas using market research and SWOT analysis.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                108,
+                109,
+                110,
+                111,
+                112,
+                113,
+                114
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 3,
+          "code": "CO3",
+          "text": "Gain knowledge of government and non-government support for entrepreneurship and develop skills in business plan preparation and financial analysis.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                108,
+                109,
+                110,
+                111,
+                112,
+                113,
+                114
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 4,
+          "code": "CO4",
+          "text": "Develop an understanding of marketing management principles, consumer behaviour, and market strategies for effective business decision-making.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                108,
+                109,
+                110,
+                111,
+                112,
+                113,
+                114
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 5,
+          "code": "CO5",
+          "text": "Develop strategic marketing skills in pricing, branding, market planning, and international market entry.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                108,
+                109,
+                110,
+                111,
+                112,
+                113,
+                114
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 6,
+          "code": "CO6",
+          "text": "Gain expertise in digital marketing strategies, including SEO, SEM, content marketing, social media, and Al-driven business solutions.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                108,
+                109,
+                110,
+                111,
+                112,
+                113,
+                114
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        }
+      ],
+      "practicalExperiments": [],
+      "sourceReferences": [
+        {
+          "sourceId": "ciot-r23-curriculum",
+          "pages": [
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113
+          ]
+        }
+      ],
+      "verificationStatus": "structure_verified"
+    },
+    {
+      "order": 7,
+      "officialSubjectCode": "R23CI4603",
+      "name": "Problem-Solving and Ethics",
+      "category": "VEC",
+      "credits": 2,
+      "assessment": {
+        "totalMarks": 100
+      },
+      "units": [],
+      "outcomes": [
+        {
+          "order": 1,
+          "code": "CO1",
+          "text": "Identify and classify problems based on their nature and complexity, and apply a systematic problem-solving approach to analyze real-life and engineering-related situations.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                235,
+                236,
+                237,
+                238,
+                239,
+                240
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 2,
+          "code": "CO2",
+          "text": "Apply appropriate problem-solving techniques and tools such as brainstorming, flowcharts, decision trees, root cause analysis, and SWOT analysis to develop effective and feasible solutions.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                235,
+                236,
+                237,
+                238,
+                239,
+                240
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 3,
+          "code": "CO3",
+          "text": "Use logical reasoning and analytical thinking skills to solve problems involving patterns, sequences, and logical relationships in technical and real-world contexts.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                235,
+                236,
+                237,
+                238,
+                239,
+                240
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 4,
+          "code": "CO4",
+          "text": "Analyze ethical issues and moral dilemmas using ethical theories and structured ethical decision- making processes in personal, professional, and technological environments.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                235,
+                236,
+                237,
+                238,
+                239,
+                240
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 5,
+          "code": "CO5",
+          "text": "Demonstrate professional ethics, integrity, teamwork, and social responsibility while responding to workplace scenarios related to Computer Engineering and IoT domains.",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                235,
+                236,
+                237,
+                238,
+                239,
+                240
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        },
+        {
+          "order": 6,
+          "code": "CO6",
+          "text": "Apply problem-solving and ethical reasoning skills to a real-world case or project and communicate solutions effectively through presentations, reports, and peer discussions. C)",
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                235,
+                236,
+                237,
+                238,
+                239,
+                240
+              ]
+            }
+          ],
+          "verificationStatus": "content_verified"
+        }
+      ],
+      "practicalExperiments": [],
+      "sourceReferences": [
+        {
+          "sourceId": "ciot-r23-curriculum",
+          "pages": [
+            234,
+            235,
+            236,
+            237,
+            238,
+            239
+          ]
+        }
+      ],
+      "verificationStatus": "structure_verified"
+    }
+  ]
 }
