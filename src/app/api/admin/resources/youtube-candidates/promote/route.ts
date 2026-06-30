@@ -1,7 +1,8 @@
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { ApiError, okResponse, withApi } from '@/lib/auth'
+import { okResponse, withApi } from '@/lib/auth'
 import { requireLearningOpsPreviewAccess } from '@/lib/learning/learning-ops-authority'
+import { assertCanPromoteYouTubeCandidates } from '@/lib/resources/youtube-candidate-promotion-access'
 import {
   PromoteYouTubeCandidateMappingsSchema,
   promoteYouTubeCandidateMappings,
@@ -35,16 +36,4 @@ export async function POST(request: Request) {
 
     return okResponse({ ...result, write })
   })
-}
-
-function assertCanPromoteYouTubeCandidates(access: Awaited<ReturnType<typeof requireLearningOpsPreviewAccess>>) {
-  const canPromote =
-    access.authority.activeRoles.includes('admin') ||
-    access.authority.capabilities.includes('resources.update') ||
-    access.authority.capabilities.includes('resources.review') ||
-    access.authority.capabilities.includes('resources.publish')
-
-  if (!canPromote) {
-    throw new ApiError('FORBIDDEN', 'You do not have permission to promote YouTube candidates.', 403, false)
-  }
 }

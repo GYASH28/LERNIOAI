@@ -60,9 +60,10 @@ npx tsx scripts/promote-youtube-candidate-mappings.ts --decisions path/to/review
 npx tsx scripts/promote-youtube-candidate-mappings.ts --decisions path/to/reviewed-youtube-mappings.json --write --actor-user-id <reviewer_user_id>
 ```
 
-7. The admin API mirrors the same guardrails at `POST /api/admin/resources/youtube-candidates/promote`; it dry-runs by default and writes only with `?write=1`.
-8. Approved lesson mappings must create governed `Resource` and `LessonResource` rows.
-9. Broken primary videos must be replaced or ranked below approved alternates.
+7. Reviewers can also use `/admin/resources/youtube-candidates`; the Promotion Handoff panel only shows `ready_for_lesson_mapping_review` rows, filters lesson choices by the reviewed subject and supports Validate dry-runs before Promote writes.
+8. The admin API mirrors the same guardrails at `POST /api/admin/resources/youtube-candidates/promote`; it dry-runs by default and writes only with `?write=1`.
+9. Approved lesson mappings must create governed `Resource` and `LessonResource` rows.
+10. Broken primary videos must be replaced or ranked below approved alternates.
 
 ## Lesson Notes
 

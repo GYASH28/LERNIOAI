@@ -746,6 +746,7 @@ Date: 2026-06-28
 - Approved writes create or update published/verified resources, approved/verified lesson mappings, review-decision rows and audit events, including primary-video demotion for competing primary mappings.
 - Added `scripts/promote-youtube-candidate-mappings.ts` and `npm run resources:youtube:promote` for dry-run-by-default operator promotion.
 - Added `POST /api/admin/resources/youtube-candidates/promote`, which requires scoped learning-ops resource permissions, dry-runs by default and writes only with `?write=1`.
+- Added the `/admin/resources/youtube-candidates` Promotion Handoff panel so scoped reviewers can validate and promote only ready candidate mappings against subject-filtered lesson options from the admin UI.
 - Updated the content operations runbook with the reviewed decision-file shape and dry-run/write commands.
 
 ### Evidence Boundary
@@ -757,6 +758,21 @@ Date: 2026-06-28
 
 - `npx vitest run src/lib/resources/youtube-candidate-promotion.test.ts src/lib/resources/youtube-candidate-review.test.ts src/lib/resources/resource-governance.test.ts`: passed, 3 files and 14 tests.
 - `npm run typecheck`: passed.
+
+## Phase 32 Progress: Admin YouTube Promotion Handoff
+
+### Changed
+
+- Factored the YouTube promotion permission check into `src/lib/resources/youtube-candidate-promotion-access.ts` and reused it from the API route and admin UI server actions.
+- Added Validate and Promote server actions to `/admin/resources/youtube-candidates`, using the same guarded promotion service as the CLI/API.
+- Added a Promotion Handoff panel that lists only `ready_for_lesson_mapping_review` mappings, filters selectable lessons to the reviewed subject and exposes role, draft/approve decision, timing, coverage, title override, language, required flag and reviewer evidence controls.
+- The panel remains read-only with an explicit empty state while the current static review queue has 0 ready lesson mappings.
+
+### Additional Verification
+
+- `npm run check`: passed, including migration encoding, lint with existing warnings, typecheck and 52 Vitest files / 187 tests.
+- `npm run build`: passed with 93 static pages generated and `/admin/resources/youtube-candidates` plus `/api/admin/resources/youtube-candidates/promote` included as dynamic routes.
+- `npx vitest run src/lib/resources/youtube-candidate-promotion.test.ts src/lib/resources/youtube-candidate-review.test.ts`: passed, 2 files and 8 tests.
 
 ## Remaining Manual Verification
 
