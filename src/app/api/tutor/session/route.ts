@@ -14,35 +14,56 @@ import {
   isSubjectIdInLearningScope,
 } from '@/features/learning/server/get-student-learning-scope'
 
-/**
- * GET /api/tutor/session
- * Lists the current user's tutor sessions.
- * Query: ?archived=true to include archived sessions.
- */
+const safeMessageSelect = {
+  id: true,
+  role: true,
+  content: true,
+  mode: true,
+  groundingStatus: true,
+  citations: true,
+  followUps: true,
+  feedback: true,
+  createdAt: true,
+} as const
+
+const safeSessionSelect = {
+  id: true,
+  title: true,
+  subjectId: true,
+  unitNumber: true,
+  topicId: true,
+  mode: true,
+  language: true,
+  archived: true,
+  createdAt: true,
+  updatedAt: true,
+  messages: {
+    orderBy: { createdAt: 'asc' as const },
+    select: safeMessageSelect,
+  },
+} as const
+
+/** Lists the current user's tutor sessions. */
 export async function GET(req: NextRequest) {
   return withApi(async () => {
     if (isDemoMode()) return okResponse(DEMO_TUTOR_SESSIONS)
 
     const user = await requireUser()
-    const sp = req.nextUrl.searchParams
-    const includeArchived = sp.get('archived') === 'true'
+    const includeArchived = req.nextUrl.searchParams.get('archived') === 'true'
 
     const sessions = await db.tutorSession.findMany({
       where: {
         userId: user.id,
         archived: includeArchived ? undefined : false,
       },
-      include: { messages: { orderBy: { createdAt: 'asc' } } },
+      select: safeSessionSelect,
       orderBy: { updatedAt: 'desc' },
     })
     return okResponse(sessions)
   })
 }
 
-/**
- * POST /api/tutor/session
- * Creates a new tutor session. Field whitelist via Zod.
- */
+/** Creates a new tutor session. */
 export async function POST(req: NextRequest) {
   return withApi(async () => {
     const body = await parseBody(req, createTutorSessionSchema)
@@ -101,28 +122,18 @@ export async function POST(req: NextRequest) {
         mode: body.mode ?? 'explain_simple',
         language: body.language ?? 'en',
       },
-      include: { messages: true },
+      select: safeSessionSelect,
     })
     return okResponse(session)
   })
 }
 
-/**
- * PATCH /api/tutor/session
- * Updates a tutor session owned by the current user. Ownership is enforced
- * by querying with `{ id, userId: user.id }` — 404 if not found.
- *
- * Body: { sessionId, ...updateFields }
- */
+/** Updates a tutor session owned by the current user. */
 export async function PATCH(req: NextRequest) {
   return withApi(async () => {
-    if (isDemoMode()) {
-      return okResponse({ updated: true, demo: true })
-    }
+    if (isDemoMode()) return okResponse({ updated: true, demo: true })
 
     const user = await requireUser()
-
-    // Clone FIRST so we can read the body twice (peek for sessionId, then parse).
     const cloned = req.clone()
     let rawBody: unknown
     try {
@@ -130,6 +141,7 @@ export async function PATCH(req: NextRequest) {
     } catch {
       throw new ApiError('BAD_REQUEST', 'Invalid request body.', 400, false)
     }
+
     if (
       typeof rawBody !== 'object' ||
       rawBody === null ||
@@ -137,10 +149,9 @@ export async function PATCH(req: NextRequest) {
     ) {
       throw new ApiError('BAD_REQUEST', 'sessionId is required.', 400, false)
     }
+
     const sessionId = (rawBody as Record<string, unknown>).sessionId as string
     const body = await parseBody(cloned, updateTutorSessionSchema)
-
-    // Ownership check (use findFirst so we can 404 cleanly without leaking).
     const existing = await db.tutorSession.findUnique({
       where: { id: sessionId },
       select: { id: true, userId: true },
@@ -158,28 +169,23 @@ export async function PATCH(req: NextRequest) {
     const session = await db.tutorSession.update({
       where: { id: sessionId },
       data,
-      include: { messages: { orderBy: { createdAt: 'asc' } } },
+      select: safeSessionSelect,
     })
     return okResponse(session)
   })
 }
 
-/**
- * DELETE /api/tutor/session?sessionId=...
- * Deletes a tutor session owned by the current user.
- */
+/** Deletes a tutor session owned by the current user. */
 export async function DELETE(req: NextRequest) {
   return withApi(async () => {
     if (isDemoMode()) return okResponse({ deleted: true, demo: true })
 
     const user = await requireUser()
-    const sp = req.nextUrl.searchParams
-    const sessionId = sp.get('sessionId')
+    const sessionId = req.nextUrl.searchParams.get('sessionId')
     if (!sessionId) {
       throw new ApiError('BAD_REQUEST', 'sessionId is required.', 400, false)
     }
 
-    // Enforce ownership via the where clause.
     const existing = await db.tutorSession.findUnique({
       where: { id: sessionId },
       select: { id: true, userId: true },
@@ -188,8 +194,10 @@ export async function DELETE(req: NextRequest) {
       throw new ApiError('NOT_FOUND', 'Session not found.', 404, false)
     }
 
-    await db.tutorMessage.deleteMany({ where: { sessionId } })
-    await db.tutorSession.delete({ where: { id: sessionId } })
+    await db.$transaction([
+      db.tutorMessage.deleteMany({ where: { sessionId } }),
+      db.tutorSession.delete({ where: { id: sessionId } }),
+    ])
     return okResponse({ deleted: true })
   })
 }

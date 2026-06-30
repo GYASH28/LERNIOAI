@@ -335,7 +335,6 @@ export function CodingView() {
       })
       const payload = await response.json()
       if (!response.ok || !payload?.ok) throw new Error(safeApiMessage(payload, 'Could not save draft.'))
-
       const data = payload.data
       const resultStatus: SyntaxResult['status'] = data.status === 'executed'
         ? data.passed
