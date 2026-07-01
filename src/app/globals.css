@@ -257,3 +257,45 @@ button:not(:disabled):hover {
 button:not(:disabled):active {
   transform: translateY(0);
 }
+
+/* ──────────────────────────────────────────────────────────────────────────
+   TOPBAR LAYOUT — fullscreen with collapsible top bar
+   ────────────────────────────────────────────────────────────────────────── */
+
+/* Remove sidebar margin — content is now full width */
+.app-main-container {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Top bar smooth show/hide transition */
+header[class*="sticky top-0"] {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Fullscreen content area */
+.app-main-scroll {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  .app-main-scroll {
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-main-scroll {
+    padding: 2rem;
+  }
+}
+
+/* Remove bottom mobile nav padding since we use the top bar drawer now */
+@media (max-width: 767px) {
+  .app-main-scroll {
+    padding-bottom: 1rem;
+  }
+}
