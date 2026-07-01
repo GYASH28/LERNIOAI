@@ -700,6 +700,37 @@ function ManifestLessonView({
                 </div>
               </div>
             </div>
+
+            {/* Key concepts / study notes */}
+            <div className="rounded-lg border border-border bg-card p-5">
+              <h2 className="text-lg font-semibold">Key Concepts &amp; Study Notes</h2>
+              <div className="mt-3 space-y-3 text-sm text-muted-foreground">
+                <div className="rounded-md bg-muted/50 p-3">
+                  <p className="font-semibold text-foreground">What you'll learn</p>
+                  <p className="mt-1">{subject.coverageFocus}</p>
+                </div>
+                <div className="rounded-md bg-muted/50 p-3">
+                  <p className="font-semibold text-foreground">How to study this lesson</p>
+                  <ol className="mt-1 list-inside list-decimal space-y-1">
+                    <li>Watch the primary lecture playlist from start to finish.</li>
+                    <li>Take notes while watching — write down key terms, formulas, and code snippets.</li>
+                    <li>If a topic is unclear, watch the alternate lecture for a different explanation.</li>
+                    <li>For programming subjects, type out every code example yourself — don't just watch.</li>
+                    <li>Use &ldquo;Ask LEO&rdquo; to clarify any doubts with AI-powered help.</li>
+                    <li>Practise with the practice questions linked in the sidebar.</li>
+                  </ol>
+                </div>
+                <div className="rounded-md bg-amber-500/5 border border-amber-500/20 p-3">
+                  <p className="font-semibold text-amber-700 dark:text-amber-400">Important</p>
+                  <p className="mt-1 text-xs">
+                    These curated YouTube lectures are public resources selected to match your CWIT R23 syllabus.
+                    They are not an official endorsement by CWIT or MSBTE. Always cross-reference with your
+                    classroom notes, laboratory manual, and teacher instructions. Detailed lesson notes
+                    (generated and reviewed) will be available here once the content pipeline is fully operational.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Sidebar */}

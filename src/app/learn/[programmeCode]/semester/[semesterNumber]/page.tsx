@@ -199,6 +199,37 @@ function ManifestSemesterView({
           })}
         </div>
       </section>
+
+      {/* Semester switcher */}
+      <section className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+        <h2 className="mb-4 text-lg font-semibold">All Semesters</h2>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+          {[1, 2, 3, 4, 5, 6].map((sem) => {
+            const isActive = sem === semesterNumber
+            const isAvailable = [1, 2, 3, 4, 5, 6].includes(sem)
+            return (
+              <Link
+                key={sem}
+                href={isAvailable ? `/learn/${programmeCode}/semester/${sem}` : '#'}
+                className={`rounded-lg border p-4 text-center transition-colors ${
+                  isActive
+                    ? 'border-primary bg-primary/10 text-primary'
+                    : isAvailable
+                      ? 'border-border bg-card hover:border-primary/40 hover:bg-accent/5'
+                      : 'border-border bg-muted/30 opacity-50'
+                }`}
+                aria-disabled={!isAvailable}
+              >
+                <p className="text-xs text-muted-foreground">Semester</p>
+                <p className="mt-1 text-2xl font-bold">{sem}</p>
+                {isActive && (
+                  <p className="mt-1 text-[10px] font-semibold uppercase text-primary">Current</p>
+                )}
+              </Link>
+            )
+          })}
+        </div>
+      </section>
     </main>
   )
 }
