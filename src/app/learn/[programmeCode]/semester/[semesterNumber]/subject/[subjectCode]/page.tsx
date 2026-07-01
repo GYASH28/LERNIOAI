@@ -99,6 +99,36 @@ export default async function SubjectLearningPage({
           </div>
         </section>
 
+        {/* ─── Download Notes PDF ─── */}
+        {(() => {
+          const pdfUrl = `/lesson-notes/${subjectCodeResolved.toLowerCase()}-${subject.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')}.pdf`
+          const pdfFiles: Record<string, string> = {
+            'R23CP2402': '/lesson-notes/r23cp2402-data-structures.pdf',
+            'R23CP6404': '/lesson-notes/r23cp6404-object-oriented-programming-with-c++.pdf',
+            'R23CP1401': '/lesson-notes/r23cp1401-programming-in-c.pdf',
+          }
+          const url = pdfFiles[subjectCodeResolved]
+          if (!url) return null
+          return (
+            <section>
+              <a
+                href={url}
+                download
+                className="flex items-center justify-between rounded-lg border border-primary/30 bg-primary/5 p-4 sm:p-5 transition-colors hover:bg-primary/10"
+              >
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-primary">Study Material</p>
+                  <h2 className="mt-1 text-base font-semibold sm:text-lg">Download Full Notes PDF</h2>
+                  <p className="mt-1 text-sm text-muted-foreground hidden sm:block">
+                    Complete notes with charts, diagrams, code examples, and practice quizzes
+                  </p>
+                </div>
+                <FileText className="h-6 w-6 shrink-0 text-primary sm:h-8 sm:w-8" aria-hidden="true" />
+              </a>
+            </section>
+          )
+        })()}
+
         {/* ─── Coverage Focus ─── */}
         <section>
           <div className="rounded-lg border border-border bg-card p-4 sm:p-5">
