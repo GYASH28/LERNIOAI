@@ -32,6 +32,8 @@ import {
   Moon,
   ChevronDown,
   ChevronUp,
+  Trophy,
+  GraduationCap,
 } from 'lucide-react'
 import type { ViewKey } from '@/lib/types'
 import { routeForView } from '@/lib/routes'
@@ -51,6 +53,13 @@ const NAV_ITEMS: { key: ViewKey; label: string; icon: typeof BookOpen }[] = [
   { key: 'planner', label: 'Planner', icon: CalendarCheck },
   { key: 'analytics', label: 'Analytics', icon: BarChart3 },
   { key: 'profile', label: 'Profile', icon: User },
+]
+
+const EXTRA_LINKS: { href: string; label: string; icon: typeof BookOpen }[] = [
+  { href: '/leaderboard', label: 'Leaderboard', icon: Trophy },
+  { href: '/teacher-dashboard', label: 'Teacher Dashboard', icon: GraduationCap },
+  { href: '/feedback', label: 'Feedback', icon: MessageSquare },
+  { href: '/help', label: 'Help Center', icon: HelpCircle },
 ]
 
 function isActivePath(pathname: string, href: string) {
@@ -275,6 +284,16 @@ export function TopBar() {
 
             {/* Divider */}
             <div className="my-3 border-t border-border" />
+
+            {/* Extra links */}
+            <div className="space-y-0.5">
+              {EXTRA_LINKS.map((link) => (
+                <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)} className="flex items-center gap-2.5 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground">
+                  <link.icon className="h-4 w-4" />
+                  {link.label}
+                </Link>
+              ))}
+            </div>
 
             {/* Quick actions */}
             <div className="space-y-0.5">

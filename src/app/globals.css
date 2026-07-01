@@ -378,3 +378,17 @@ html {
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
 }
+
+/* Dark mode fixes for new pages */
+.dark .bg-card { background-color: hsl(var(--card, 215 28% 17%)); }
+.dark .bg-muted\/30 { background-color: hsl(var(--muted, 215 28% 17%) \/ 0.3); }
+.dark .bg-muted\/50 { background-color: hsl(var(--muted, 215 28% 17%) \/ 0.5); }
+.dark .border-border { border-color: hsl(var(--border, 215 28% 20%)); }
+.dark .bg-background { background-color: hsl(var(--background, 222 47% 11%)); }
+.dark .text-foreground { color: hsl(var(--foreground, 210 40% 98%)); }
+.dark .text-muted-foreground { color: hsl(var(--muted-foreground, 215 20% 65%)); }
+.dark .bg-primary\/5 { background-color: hsl(var(--primary, 217 91% 60%) \/ 0.05); }
+.dark .bg-primary\/10 { background-color: hsl(var(--primary, 217 91% 60%) \/ 0.1); }
+.dark .bg-zinc-900 { background-color: #18181b; }
+.dark .text-zinc-300 { color: #d4d4d8; }
+.dark .text-green-400 { color: #4ade80; }

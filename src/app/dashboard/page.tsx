@@ -14,6 +14,10 @@ import {
   Award,
 } from 'lucide-react'
 import { getManifestSubjectsForSemester } from '@/lib/curriculum/manifest-data'
+import { ContinueLearningCard } from '@/components/dashboard/continue-learning-card'
+import { StreakHeatmap } from '@/components/dashboard/streak-heatmap'
+import { ExamCountdown } from '@/components/dashboard/exam-countdown'
+import { ProgressRing } from '@/components/learning/progress-ring'
 
 export const dynamic = 'force-dynamic'
 
@@ -86,85 +90,38 @@ export default async function DashboardPage() {
               </div>
             </div>
           </div>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <Link
-              href="/learn"
-              className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
-            >
-              <BookOpen className="h-4 w-4" />
-              Continue Learning
-            </Link>
-            <Link
-              href="/tutor"
-              className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm font-medium hover:bg-accent transition-colors"
-            >
-              <PlayCircle className="h-4 w-4" />
-              Ask LEO
-            </Link>
-          </div>
         </section>
 
-        {/* ─── Continue Learning ─── */}
-        {recentlyViewed.length > 0 && (
-          <section className="mt-6">
-            <h2 className="mb-3 text-lg font-semibold">Continue Learning</h2>
-            <div className="grid gap-3 sm:grid-cols-3">
-              {recentlyViewed.map((item, i) => (
-                <Link
-                  key={i}
-                  href={item.href}
-                  className="group rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary/40 hover:bg-accent/5"
-                >
-                  <div className="flex items-center gap-2">
-                    <PlayCircle className="h-4 w-4 text-primary" />
-                    <p className="text-xs text-muted-foreground">
-                      {new Date(item.viewedAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}
-                    </p>
-                  </div>
-                  <p className="mt-2 truncate text-sm font-medium">{item.title}</p>
-                  <div className="mt-2 flex items-center gap-1 text-xs text-primary opacity-0 transition-opacity group-hover:opacity-100">
-                    Resume <ArrowRight className="h-3 w-3" />
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </section>
-        )}
+        {/* ─── Continue Where You Left Off ─── */}
+        <section className="mt-6">
+          <ContinueLearningCard />
+        </section>
 
-        {/* ─── My Subjects ─── */}
+        {/* ─── Streak Heatmap + Exam Countdown ─── */}
+        <section className="mt-6 grid gap-4 lg:grid-cols-2">
+          <StreakHeatmap />
+          <ExamCountdown examDate={null} />
+        </section>
+
+        {/* ─── My Subjects with Progress Rings ─── */}
         <section className="mt-6">
           <div className="mb-3 flex items-center justify-between">
             <h2 className="text-lg font-semibold">My Subjects</h2>
-            <Link href="/learn" className="text-xs text-muted-foreground hover:text-primary">
-              View all
-            </Link>
+            <Link href="/learn" className="text-xs text-muted-foreground hover:text-primary">View all</Link>
           </div>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {subjects.slice(0, 6).map((subject) => {
               const subjectCode = subject.code
-              const subjectHref = `/learn/${programmeCode}/semester/${semesterNumber}/subject/${subjectCode}`
+              const subjectHref = `/learn/DCOMP/semester/${semesterNumber}/subject/${subjectCode}`
               return (
-                <Link
-                  key={subjectCode}
-                  href={subjectHref}
-                  className="group rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary/40 hover:bg-accent/5"
-                >
+                <Link key={subjectCode} href={subjectHref} className="group rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary/40 hover:bg-accent/5">
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
-                      {subjectCode}
-                    </span>
-                    {subject.priority === 'critical' && (
-                      <span className="rounded bg-red-600/10 px-1 py-0.5 text-[9px] font-bold uppercase text-red-600">
-                        Critical
-                      </span>
-                    )}
+                    <span className="text-[10px] font-semibold uppercase text-muted-foreground">{subjectCode}</span>
+                    <ProgressRing value={Math.min((subject.resources.length * 10), 100)} size={36} label="" />
                   </div>
                   <h3 className="mt-1 truncate text-sm font-semibold">{subject.name}</h3>
                   <div className="mt-2 flex items-center gap-3 text-xs text-muted-foreground">
-                    <span className="flex items-center gap-1">
-                      <PlayCircle className="h-3 w-3" />
-                      {subject.resources.length} videos
-                    </span>
+                    <span className="flex items-center gap-1"><PlayCircle className="h-3 w-3" />{subject.resources.length} videos</span>
                     <span>{subject.credits} credits</span>
                   </div>
                 </Link>
