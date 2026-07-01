@@ -26,7 +26,7 @@ import { LessonModeCompletionButton } from '@/features/learning/components/lesso
 import { LessonVisitRecorder } from '@/features/learning/components/lesson/lesson-visit-recorder'
 import { LessonVideoPlayer } from '@/features/learning/components/lesson/lesson-video-player'
 import { getManifestSubject, type ManifestSubject } from '@/lib/curriculum/manifest-data'
-import { YouTubePlayer } from '@/components/learning/youtube-player'
+import { YouTubePlayer } from '@/components/learning/youtube-player-lazy'
 import { BookmarkButton } from '@/components/learning/bookmark-button'
 import { RecentlyViewedTracker } from '@/components/learning/recently-viewed-tracker'
 
