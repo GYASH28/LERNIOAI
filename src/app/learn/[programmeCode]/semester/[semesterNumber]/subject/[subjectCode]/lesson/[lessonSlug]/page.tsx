@@ -27,6 +27,8 @@ import { LessonVisitRecorder } from '@/features/learning/components/lesson/lesso
 import { LessonVideoPlayer } from '@/features/learning/components/lesson/lesson-video-player'
 import { getManifestSubject } from '@/lib/curriculum/manifest-data'
 import { YouTubePlayer } from '@/components/learning/youtube-player'
+import { BookmarkButton } from '@/components/learning/bookmark-button'
+import { RecentlyViewedTracker } from '@/components/learning/recently-viewed-tracker'
 
 export const dynamic = 'force-dynamic'
 
@@ -616,6 +618,12 @@ function ManifestLessonView({
 
   return (
     <main className="min-h-screen bg-background text-foreground">
+      <RecentlyViewedTracker
+        resourceType="lesson"
+        resourceId={subjectCode}
+        title={subject.name}
+        href={`/learn/${programmeCode}/semester/${semesterNumber}/subject/${subjectCode}/lesson/${lessonSlug}`}
+      />
       {/* Breadcrumbs */}
       <section className="border-b border-border/70 bg-muted/30">
         <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
@@ -629,7 +637,15 @@ function ManifestLessonView({
               {subjectCode}
             </Link>
           </div>
-          <h1 className="mt-3 text-2xl font-bold tracking-normal sm:text-3xl">{subject.name}</h1>
+          <div className="mt-3 flex items-center gap-3">
+              <h1 className="text-2xl font-bold tracking-normal sm:text-3xl">{subject.name}</h1>
+              <BookmarkButton
+                resourceType="lesson"
+                resourceId={subjectCode}
+                label={subject.name}
+                size="sm"
+              />
+            </div>
           <p className="mt-1 text-sm text-muted-foreground">{subject.coverageFocus}</p>
         </div>
       </section>

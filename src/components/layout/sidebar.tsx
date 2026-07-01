@@ -34,6 +34,7 @@ import type { ViewKey } from '@/lib/types'
 import { Button } from '@/components/ui/button'
 import { routeForView } from '@/lib/routes'
 import { usePrefs } from '@/components/theme-provider'
+import { NotificationBell } from '@/components/navbar/notification-bell'
 
 const NAV_ITEMS: { key: ViewKey; label: string; icon: typeof BookOpen }[] = [
   { key: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -222,6 +223,7 @@ export function Sidebar() {
               Ctrl K
             </kbd>
           </button>
+          <NotificationBell />
           <Link
             href={routeForView('profile')}
             onClick={() => setSidebarOpen(false)}
