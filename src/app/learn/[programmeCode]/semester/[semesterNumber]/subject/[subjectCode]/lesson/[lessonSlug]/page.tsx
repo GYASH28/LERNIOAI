@@ -9,6 +9,7 @@ import {
   FileText,
   ListChecks,
   MessageCircle,
+  PlayCircle,
   Sparkles,
   Target,
   Video,
@@ -24,6 +25,8 @@ import {
 import { LessonModeCompletionButton } from '@/features/learning/components/lesson/lesson-mode-completion-button'
 import { LessonVisitRecorder } from '@/features/learning/components/lesson/lesson-visit-recorder'
 import { LessonVideoPlayer } from '@/features/learning/components/lesson/lesson-video-player'
+import { getManifestSubject } from '@/lib/curriculum/manifest-data'
+import { YouTubePlayer } from '@/components/learning/youtube-player'
 
 export const dynamic = 'force-dynamic'
 
@@ -46,13 +49,36 @@ export default async function LessonStudioPage({
   const semester = Number.parseInt(semesterNumber, 10)
   if (!Number.isInteger(semester)) notFound()
 
-  const studio = await getLessonStudio(authUser.id, {
-    programmeCode,
-    semesterNumber: semester,
-    subjectCode,
-    lessonSlug,
-  })
-  if (!studio) notFound()
+  let studio = null
+  try {
+    studio = await getLessonStudio(authUser.id, {
+      programmeCode,
+      semesterNumber: semester,
+      subjectCode,
+      lessonSlug,
+    })
+  } catch {
+    // DB unavailable — fall through to manifest fallback
+  }
+
+  // Manifest fallback: if DB has no lesson, show manifest-based lesson view
+  if (!studio) {
+    const manifestSubject = getManifestSubject(programmeCode, semester, subjectCode)
+    if (manifestSubject) {
+      const expectedSlug = manifestSubject.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80)
+      if (lessonSlug === expectedSlug || lessonSlug.includes(expectedSlug) || expectedSlug.includes(lessonSlug)) {
+        return (
+          <ManifestLessonView
+            programmeCode={programmeCode}
+            semesterNumber={semester}
+            subjectCode={subjectCode}
+            subject={manifestSubject}
+          />
+        )
+      }
+    }
+    notFound()
+  }
   if (studio.needsCanonicalRedirect) redirect(studio.canonicalPath)
 
   const unitHref = `/learn/${studio.programme.code}/semester/${studio.semester.number}/subject/${studio.subject.code}/unit/${studio.unit.number}`
@@ -568,4 +594,149 @@ function formatSeconds(seconds: number): string {
 
 function formatDate(date: Date): string {
   return new Intl.DateTimeFormat('en-IN', { dateStyle: 'medium' }).format(date)
+}
+
+// ─── Manifest-based lesson fallback view ────────────────────────────────────
+
+function ManifestLessonView({
+  programmeCode,
+  semesterNumber,
+  subjectCode,
+  subject,
+}: {
+  programmeCode: string
+  semesterNumber: number
+  subjectCode: string
+  subject: import('@/lib/curriculum/manifest-data').ManifestSubject
+}) {
+  const subjectHref = `/learn/${programmeCode}/semester/${semesterNumber}/subject/${subjectCode}`
+  const semesterHref = `/learn/${programmeCode}/semester/${semesterNumber}`
+  const primaryVideos = subject.resources.filter((r) => r.role === 'primary_video')
+  const alternateVideos = subject.resources.filter((r) => r.role !== 'primary_video')
+
+  return (
+    <main className="min-h-screen bg-background text-foreground">
+      {/* Breadcrumbs */}
+      <section className="border-b border-border/70 bg-muted/30">
+        <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+            <Link href={semesterHref} className="inline-flex items-center gap-1 font-medium hover:text-foreground">
+              <ArrowLeft className="h-3 w-3" />
+              Semester {semesterNumber}
+            </Link>
+            <span>/</span>
+            <Link href={subjectHref} className="font-medium hover:text-foreground">
+              {subjectCode}
+            </Link>
+          </div>
+          <h1 className="mt-3 text-2xl font-bold tracking-normal sm:text-3xl">{subject.name}</h1>
+          <p className="mt-1 text-sm text-muted-foreground">{subject.coverageFocus}</p>
+        </div>
+      </section>
+
+      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
+          {/* Main content: video player */}
+          <div className="space-y-6">
+            {primaryVideos.length > 0 && (
+              <div>
+                <div className="mb-3 flex items-center gap-2">
+                  <PlayCircle className="h-5 w-5 text-primary" aria-hidden="true" />
+                  <h2 className="text-lg font-semibold">Primary Lecture</h2>
+                </div>
+                <YouTubePlayer
+                  url={primaryVideos[0]!.url}
+                  title={primaryVideos[0]!.title}
+                  channel={primaryVideos[0]!.channel}
+                  language={primaryVideos[0]!.language}
+                  description={primaryVideos[0]!.description}
+                  isPlaylist={!!primaryVideos[0]!.playlistId}
+                />
+              </div>
+            )}
+
+            {alternateVideos.length > 0 && (
+              <div>
+                <div className="mb-3 flex items-center gap-2">
+                  <Video className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+                  <h2 className="text-lg font-semibold">Alternate Lectures</h2>
+                </div>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {alternateVideos.map((resource, i) => (
+                    <YouTubePlayer
+                      key={i}
+                      url={resource.url}
+                      title={resource.title}
+                      channel={resource.channel}
+                      language={resource.language}
+                      description={resource.description}
+                      isPlaylist={!!resource.playlistId}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Lesson overview */}
+            <div className="rounded-lg border border-border bg-card p-5">
+              <h2 className="text-lg font-semibold">Lesson Overview</h2>
+              <p className="mt-2 text-sm text-muted-foreground">{subject.description}</p>
+              <div className="mt-4 grid gap-2 sm:grid-cols-2">
+                <div className="rounded-md bg-muted px-3 py-2">
+                  <p className="text-xs text-muted-foreground">Subject Code</p>
+                  <p className="text-sm font-semibold">{subjectCode}</p>
+                </div>
+                <div className="rounded-md bg-muted px-3 py-2">
+                  <p className="text-xs text-muted-foreground">Credits</p>
+                  <p className="text-sm font-semibold">{subject.credits}</p>
+                </div>
+                <div className="rounded-md bg-muted px-3 py-2">
+                  <p className="text-xs text-muted-foreground">Category</p>
+                  <p className="text-sm font-semibold capitalize">{subject.category}</p>
+                </div>
+                <div className="rounded-md bg-muted px-3 py-2">
+                  <p className="text-xs text-muted-foreground">Resources</p>
+                  <p className="text-sm font-semibold">{subject.resources.length} video lectures</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Sidebar */}
+          <aside className="space-y-4">
+            <div className="rounded-lg border border-border bg-card p-4">
+              <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Study Tools</h3>
+              <div className="mt-3 space-y-2">
+                <Link href={`/tutor?subject=${subjectCode}`} className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-sm hover:bg-accent transition-colors">
+                  <MessageCircle className="h-4 w-4 text-primary" />
+                  Ask LEO about this lesson
+                </Link>
+                <Link href={`/practice?subject=${subjectCode}`} className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-sm hover:bg-accent transition-colors">
+                  <ListChecks className="h-4 w-4 text-primary" />
+                  Practice questions
+                </Link>
+                <Link href={subjectHref} className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-sm hover:bg-accent transition-colors">
+                  <BookOpen className="h-4 w-4 text-primary" />
+                  All subject resources
+                </Link>
+              </div>
+            </div>
+
+            <div className="rounded-lg border border-border bg-card p-4">
+              <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Source</h3>
+              <p className="mt-2 text-xs text-muted-foreground">
+                YouTube lectures curated from the CWIT R23 YouTube Lecture Guide.
+                Videos are public resources and are not an official endorsement by CWIT or MSBTE.
+              </p>
+              {subject.resources[0] && (
+                <p className="mt-2 text-xs text-muted-foreground">
+                  Source: {subject.resources[0].sourcePdf} · Page {subject.resources[0].sourcePage}
+                </p>
+              )}
+            </div>
+          </aside>
+        </div>
+      </div>
+    </main>
+  )
 }
