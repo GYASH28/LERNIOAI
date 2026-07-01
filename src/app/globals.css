@@ -299,3 +299,82 @@ header[class*="sticky top-0"] {
     padding-bottom: 1rem;
   }
 }
+
+/* ──────────────────────────────────────────────────────────────────────────
+   MOBILE UI FIXES
+   ────────────────────────────────────────────────────────────────────────── */
+
+/* Reduce top bar height on mobile */
+@media (max-width: 768px) {
+  header[class*="sticky top-0"] > div {
+    height: 3rem !important;  /* 48px instead of 56px */
+  }
+}
+
+/* Better content padding on mobile */
+@media (max-width: 640px) {
+  .app-main-scroll,
+  main[class*="mx-auto max-w"] {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    padding-top: 1rem !important;
+  }
+}
+
+/* Ensure tables are scrollable on mobile */
+table {
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Better card spacing on mobile */
+@media (max-width: 640px) {
+  .rounded-lg.border.border-border.bg-card {
+    padding: 0.75rem !important;
+  }
+}
+
+/* Fix YouTube embed aspect ratio on mobile */
+.aspect-video {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+}
+
+/* Prevent horizontal scroll on mobile */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Better font sizes on mobile */
+@media (max-width: 640px) {
+  h1 {
+    font-size: 1.5rem !important;
+  }
+  h2 {
+    font-size: 1.25rem !important;
+  }
+  h3 {
+    font-size: 1.1rem !important;
+  }
+}
+
+/* Fix bottom navigation safe area on mobile */
+@supports (padding: max(0px)) {
+  .fixed.bottom-0 {
+    padding-bottom: max(0px, env(safe-area-inset-bottom));
+  }
+}
+
+/* Smooth scrolling on mobile */
+* {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent text size adjust on mobile */
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
