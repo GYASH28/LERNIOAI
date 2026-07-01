@@ -23,14 +23,12 @@ describe('getStudentLearningScope integration test', () => {
     expect(scope.semester?.number).toBe(3)
     expect(scope.semesterNumber).toBe(3)
 
-    // Subjects array should contain the seeded COMP Semester 3 subjects:
-    // CS201, CS202, CS203, CS204
     expect(scope.subjects.length).toBeGreaterThanOrEqual(4)
     const codes = scope.subjects.map((s) => s.code)
-    expect(codes).toContain('CS201')
-    expect(codes).toContain('CS202')
-    expect(codes).toContain('CS203')
-    expect(codes).toContain('CS204')
+    expect(codes).toContain('R23CP2402')
+    expect(codes).toContain('R23CP6404')
+    expect(codes).toContain('R23CP2403')
+    expect(codes).toContain('R23CP2404')
   })
 
   it('resolves scope for admin user and allows previewing drafts', async () => {

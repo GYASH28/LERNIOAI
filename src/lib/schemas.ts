@@ -33,13 +33,39 @@ export const passwordPolicySchema = z
     message: 'Use at least one letter and one number, or choose a longer passphrase.',
   })
 
-export function assertRequestBodySize(req: Request, maxBytes = DEFAULT_BODY_LIMIT_BYTES) {
+export async function assertRequestBodySize(req: Request, maxBytes = DEFAULT_BODY_LIMIT_BYTES) {
   const length = req.headers.get('content-length')
-  if (!length) return
+  if (length) {
+    const bytes = Number(length)
+    if (Number.isFinite(bytes) && bytes > maxBytes) {
+      throw new ApiError('PAYLOAD_TOO_LARGE', 'Request body is too large.', 413, false)
+    }
+  }
 
-  const bytes = Number(length)
-  if (Number.isFinite(bytes) && bytes > maxBytes) {
-    throw new ApiError('PAYLOAD_TOO_LARGE', 'Request body is too large.', 413, false)
+  // Fallback stream protection (e.g. chunked encoding without content-length)
+  if (!req.body) return
+
+  try {
+    const clonedStream = req.clone().body
+    if (!clonedStream) return
+
+    const reader = clonedStream.getReader()
+    let totalBytes = 0
+
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) break
+      if (value) {
+        totalBytes += value.length
+        if (totalBytes > maxBytes) {
+          reader.cancel().catch(() => {})
+          throw new ApiError('PAYLOAD_TOO_LARGE', 'Request body is too large.', 413, false)
+        }
+      }
+    }
+  } catch (err) {
+    if (err instanceof ApiError) throw err
+    // Ignore stream closed or clone issues and proceed
   }
 }
 
@@ -371,7 +397,7 @@ export async function parseBody<T>(
   schema: z.ZodSchema<T>,
   options: { maxBytes?: number } = {},
 ): Promise<T> {
-  assertRequestBodySize(req, options.maxBytes)
+  await assertRequestBodySize(req, options.maxBytes)
 
   let json: unknown
   try {

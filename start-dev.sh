@@ -7,7 +7,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 while true; do
   echo "[$(date)] Starting dev server in $SCRIPT_DIR ..."
-  bun run dev > /tmp/lernio-dev.log 2>&1
+  npm run dev > /tmp/lernio-dev.log 2>&1
   EXIT_CODE=$?
   echo "[$(date)] Dev server exited with code $EXIT_CODE, restarting in 2s..."
   sleep 2

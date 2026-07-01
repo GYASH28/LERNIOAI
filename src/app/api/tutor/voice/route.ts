@@ -27,7 +27,7 @@ import { assertRequestBodySize } from '@/lib/schemas'
  */
 export async function POST(req: Request) {
   return withApi(async () => {
-    assertRequestBodySize(req, 12 * 1024 * 1024)
+    await assertRequestBodySize(req, 12 * 1024 * 1024)
 
     const user = await requireUser()
     const limiter = await checkRateLimit({

@@ -3,35 +3,18 @@ import { db } from '@/lib/db'
 import { canAttemptDatabase } from '@/lib/db-health'
 import { isDatabaseUnavailableError } from '@/lib/api-error-policy'
 import { isProductionRuntime } from '@/lib/auth-policy'
+import { getCurrentUser } from '@/lib/auth'
 
 /**
  * Readiness probe.
  *
- * Verifies that the process can actually serve real traffic by
- * checking critical dependencies. In production, database and auth
- * configuration are hard requirements. AI/email can remain degraded
- * only because the product has explicit retry/error states for them.
- *
- * No secrets are leaked; we only report booleans and short labels.
- * Cheap enough for Vercel's deployment smoke test, but heavier than
- * `/api/health`, so don't poll at sub-second intervals.
+ * Verifies that the process can actually serve real traffic by checking database.
+ * Does not leak internal provider configurations to public, unauthenticated clients.
  */
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
 
 type ProviderState = 'configured' | 'unconfigured'
-
-interface ReadinessReport {
-  status: 'ready' | 'degraded' | 'unavailable'
-  service: 'lernio-ai'
-  time: string
-  checks: {
-    database: 'ok' | 'unavailable'
-    auth: ProviderState
-    ai: ProviderState
-    email: ProviderState
-  }
-}
 
 function providerState(value: string | undefined): ProviderState {
   return value && value.trim().length > 0 ? 'configured' : 'unconfigured'
@@ -45,27 +28,17 @@ function emailProviderState(): ProviderState {
   )
 }
 
-export async function GET() {
+export async function GET(req: Request) {
   let database: 'ok' | 'unavailable' = 'ok'
 
   try {
     if (!(await canAttemptDatabase())) {
       database = 'unavailable'
     } else {
-      // A trivial scalar query is the cheapest reachability check that
-      // still proves the connection pool, credentials and schema are
-      // all in working order. `findUnique` on a non-existent id returns
-      // null without raising, so this doubles as a Prisma Client check.
       await db.user.findUnique({ where: { id: '__lernio_ready_probe__' }, select: { id: true } })
     }
   } catch (err) {
-    if (isDatabaseUnavailableError(err)) {
-      database = 'unavailable'
-    } else {
-      // Any other Prisma error (e.g. relation missing, schema drift)
-      // still means we are not ready to serve real traffic.
-      database = 'unavailable'
-    }
+    database = 'unavailable'
   }
 
   const auth: ProviderState = providerState(process.env.NEXTAUTH_SECRET)
@@ -78,26 +51,52 @@ export async function GET() {
   const productionAuthBroken = production && auth === 'unconfigured'
   const productionDemoBroken = production && process.env.LERNIO_DEMO_MODE === 'true'
 
-  const overall: ReadinessReport['status'] =
+  const overall =
     database === 'unavailable' || productionAuthBroken || productionDemoBroken
       ? 'unavailable'
-      : auth === 'unconfigured' || ai === 'unconfigured' || email === 'unconfigured'
-        ? 'degraded'
-        : 'ready'
+      : 'ready'
 
-  const report: ReadinessReport = {
-    status: overall,
-    service: 'lernio-ai',
-    time: new Date().toISOString(),
-    checks: {
-      database,
-      auth,
-      ai,
-      email,
-    },
+  // Check auth to see if we should show the detailed report
+  let showDetailed = false
+  const authHeader = req.headers.get('authorization')
+  if (authHeader && process.env.READINESS_TOKEN && authHeader === `Bearer ${process.env.READINESS_TOKEN}`) {
+    showDetailed = true
+  } else {
+    try {
+      const user = await getCurrentUser()
+      if (user?.role === 'admin') {
+        showDetailed = true
+      }
+    } catch {
+      // Ignore auth errors
+    }
   }
 
-  return NextResponse.json(report, {
-    status: overall === 'unavailable' ? 503 : 200,
-  })
+  if (showDetailed) {
+    const detailedOverall =
+      database === 'unavailable' || productionAuthBroken || productionDemoBroken
+        ? 'unavailable'
+        : auth === 'unconfigured' || ai === 'unconfigured' || email === 'unconfigured'
+          ? 'degraded'
+          : 'ready'
+
+    return NextResponse.json({
+      status: detailedOverall,
+      service: 'lernio-ai',
+      time: new Date().toISOString(),
+      checks: {
+        database,
+        auth,
+        ai,
+        email,
+      },
+    }, {
+      status: detailedOverall === 'unavailable' ? 503 : 200,
+    })
+  }
+
+  return NextResponse.json(
+    { ok: overall === 'ready' },
+    { status: overall === 'unavailable' ? 503 : 200 }
+  )
 }

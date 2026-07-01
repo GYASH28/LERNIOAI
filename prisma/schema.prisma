@@ -1547,6 +1547,7 @@ model UserTopicMastery {
   updatedAt     DateTime  @updatedAt
 
   @@unique([userId, topicId])
+  @@index([userId, state])
 }
 
 model LessonCompletion {
@@ -1565,6 +1566,8 @@ model LessonCompletion {
 
   @@unique([userId, lessonId, mode])
   @@index([userId, lastVisited])
+  @@index([userId, completedAt])
+  @@index([completedAt])
 }
 
 model VideoWatchProgress {
@@ -1607,6 +1610,7 @@ model QuestionAttempt {
   @@index([userId, createdAt])
   @@index([questionId])
   @@index([lessonId])
+  @@index([userId, isCorrect])
 }
 
 model QuizAttempt {
@@ -1638,6 +1642,7 @@ model QuizAttempt {
   @@index([userId, status])
   @@index([subjectId])
   @@index([lessonId, status])
+  @@index([userId, subjectId, completedAt])
 }
 
 // ============================================================
@@ -1671,6 +1676,9 @@ model RevisionAttempt {
   correct      Boolean
   quality      Int      @default(3) // SM-2 quality 0-5
   createdAt    DateTime @default(now())
+
+  @@index([userId, scheduleId])
+  @@index([userId, createdAt])
 }
 
 // ============================================================
@@ -1713,6 +1721,10 @@ model StudySession {
   xpEarned     Int       @default(0)
   startedAt    DateTime  @default(now())
   endedAt      DateTime?
+
+  @@index([userId, startedAt])
+  @@index([userId, subjectId, startedAt])
+  @@index([userId])
 }
 
 // ============================================================

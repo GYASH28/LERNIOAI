@@ -12,7 +12,7 @@ const isProduction = process.env.NODE_ENV === 'production'
 
 function contentSecurityPolicy() {
   return buildContentSecurityPolicy({
-    allowUnsafeInlineScript: true,
+    allowUnsafeInlineScript: false,
     nodeEnv: process.env.NODE_ENV,
     storagePublicBaseUrl: process.env.STORAGE_PUBLIC_BASE_URL,
   })

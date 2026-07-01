@@ -36,7 +36,7 @@ Elevated access comes from server-controlled flows:
 - `TeachingAssignment` rows for teacher subject scope
 - `ClassMembership` rows for CR/class scope
 
-No hardcoded email grants admin authority. `ultimatebracegaming@gmail.com` can be the bootstrap email only when `LERNIO_ADMIN_EMAIL` is set and `npm run db:admin` is run with an explicit password.
+No hardcoded email grants admin authority. `admin@lernio.ai` can be the bootstrap email only when `LERNIO_ADMIN_EMAIL` is set and `npm run db:admin` is run with an explicit password.
 
 ## Session Freshness
 
@@ -64,7 +64,7 @@ PowerShell:
 
 ```powershell
 $env:DATABASE_URL="postgresql://..."
-$env:LERNIO_ADMIN_EMAIL="ultimatebracegaming@gmail.com"
+$env:LERNIO_ADMIN_EMAIL="admin@lernio.ai"
 $env:LERNIO_ADMIN_PASSWORD="use-a-long-temporary-password"
 npm run db:admin
 Remove-Item Env:\LERNIO_ADMIN_PASSWORD

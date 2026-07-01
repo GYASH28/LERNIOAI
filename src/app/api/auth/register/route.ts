@@ -50,7 +50,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   return withApi(async () => {
-    assertRequestBodySize(request, 32 * 1024)
+    await assertRequestBodySize(request, 32 * 1024)
 
     const body = await request.json().catch(() => null)
     if (!body) {

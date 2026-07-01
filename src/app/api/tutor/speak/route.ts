@@ -30,7 +30,7 @@ const ALLOWED_VOICES = new Set(['hannah', 'autumn', 'diana', 'austin', 'daniel',
 
 export async function POST(req: Request) {
   return withApi(async () => {
-    assertRequestBodySize(req, 16 * 1024)
+    await assertRequestBodySize(req, 16 * 1024)
 
     const user = await requireUser()
     const limiter = await checkRateLimit({

@@ -73,7 +73,7 @@ Tutor chat, text-to-speech, and speech-to-text calls go through `getAiProvider()
 
 ## Content Security Policy
 
-App pages receive a nonce-backed CSP from `src/proxy.ts`; fallback/static headers use the same policy builder in `src/lib/security/content-security-policy.ts`.
+App pages receive a nonce-backed CSP from `src/middleware.ts`; fallback/static headers use the same policy builder in `src/lib/security/content-security-policy.ts`.
 
 - Default source is `self`.
 - Script execution allows self, the per-request nonce and the YouTube iframe API origin; development adds `unsafe-eval` only for local tooling.

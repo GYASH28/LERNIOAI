@@ -26,7 +26,7 @@ GROQ_MODEL="llama-3.3-70b-versatile"
 GROQ_FAST_MODEL="llama-3.1-8b-instant"
 RESEND_API_KEY=""
 EMAIL_FROM="Lernio <no-reply@your-domain.example>"
-LERNIO_ADMIN_EMAIL="ultimatebracegaming@gmail.com"
+LERNIO_ADMIN_EMAIL="admin@lernio.ai"
 LERNIO_ADMIN_PASSWORD=""
 ```
 

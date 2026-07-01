@@ -17,6 +17,8 @@ import GoogleProvider from 'next-auth/providers/google'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { compare } from 'bcryptjs'
 import { db } from '@/lib/db'
+import crypto from 'crypto'
+import { sendVerificationEmail } from '@/lib/email'
 import { isDatabaseUnavailableError } from '@/lib/api-error-policy'
 import { assertSafeRuntimeConfig, resolveAuthMode } from '@/lib/auth-policy'
 import { DEMO_AUTH_USER } from '@/lib/demo-fixtures'
@@ -258,18 +260,43 @@ export const authOptions: NextAuthOptions = {
         select: { id: true },
       })
 
+      // Require email verification for OAuth users.
+      // Google verifies emails at signup, but we should not assume this.
+      // An attacker controlling a Google Workspace domain can create
+      // accounts with arbitrary unverified emails.
+      const emailVerified = (user as any).emailVerified;
+      const isVerified = emailVerified !== null && emailVerified !== undefined;
+
       await db.user.update({
         where: { id: user.id },
         data: {
           role: 'student',
           status: 'active',
           provider: 'oauth',
-          profileComplete: true,
+          profileComplete: isVerified,
           departmentCode: 'COMP',
           semesterNumber: 3,
           ...(defaultScheme ? { schemeId: defaultScheme.id } : {}),
         },
       })
+
+      if (!isVerified && user.email) {
+        // Trigger the existing email-verification flow.
+        const token = crypto.randomBytes(32).toString('hex')
+        const tokenHash = crypto.createHash('sha256').update(token).digest('hex')
+        const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000)
+
+        await db.emailVerificationToken.deleteMany({ where: { email: user.email } })
+        await db.emailVerificationToken.create({
+          data: {
+            email: user.email,
+            tokenHash,
+            expiresAt,
+          },
+        })
+
+        await sendVerificationEmail(user.email, token)
+      }
     },
   },
 }
