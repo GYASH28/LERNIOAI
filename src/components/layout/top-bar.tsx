@@ -199,6 +199,9 @@ export function TopBar() {
               {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </button>
 
+            {/* User avatar with dropdown (desktop) */}
+            <UserMenu user={user} isDark={isDark} setPref={setPref} />
+
             {/* Hide bar button */}
             <button
               onClick={toggleHidden}
@@ -312,5 +315,86 @@ export function TopBar() {
         </div>
       )}
     </>
+  )
+}
+
+// ─── User Menu (desktop dropdown with profile, settings, logout) ─────────────
+
+import { useState as useState2, useRef as useRef2, useEffect as useEffect2 } from 'react'
+import { ChevronDown as ChevronDown2 } from 'lucide-react'
+
+function UserMenu({ user, isDark, setPref }: { user: { name: string; email: string } | null; isDark: boolean; setPref: (p: { appearance: string }) => void }) {
+  const [open, setOpen] = useState2(false)
+  const ref = useRef2<HTMLDivElement>(null)
+
+  useEffect2(() => {
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
+
+  if (!user) return null
+
+  const initials = user.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()
+
+  return (
+    <div className="relative" ref={ref}>
+      <button
+        onClick={() => setOpen(!open)}
+        className="flex items-center gap-1.5 rounded-md px-1.5 py-1 transition-colors hover:bg-accent"
+        aria-label="User menu"
+      >
+        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
+          {initials}
+        </span>
+        <ChevronDown2 className="hidden h-3 w-3 text-muted-foreground sm:block" />
+      </button>
+
+      {open && (
+        <div className="absolute right-0 top-10 z-50 w-56 rounded-lg border border-border bg-popover shadow-lg">
+          {/* User info */}
+          <div className="border-b border-border p-3">
+            <p className="text-sm font-semibold truncate">{user.name}</p>
+            <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+          </div>
+
+          {/* Menu items */}
+          <div className="p-1.5 space-y-0.5">
+            <Link href="/profile" onClick={() => setOpen(false)} className="flex items-center gap-2.5 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-colors">
+              <User className="h-4 w-4" />
+              Profile
+            </Link>
+            <Link href="/settings" onClick={() => setOpen(false)} className="flex items-center gap-2.5 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-colors">
+              <Settings className="h-4 w-4" />
+              Settings
+            </Link>
+            <Link href="/feedback" onClick={() => setOpen(false)} className="flex items-center gap-2.5 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-colors">
+              <MessageSquare className="h-4 w-4" />
+              Send Feedback
+            </Link>
+            <Link href="/help" onClick={() => setOpen(false)} className="flex items-center gap-2.5 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-colors">
+              <HelpCircle className="h-4 w-4" />
+              Help Center
+            </Link>
+
+            {/* Divider */}
+            <div className="my-1 border-t border-border" />
+
+            {/* Logout */}
+            <button
+              onClick={() => signOut({ callbackUrl: '/sign-in' })}
+              className="flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-sm text-red-600 hover:bg-red-500/10 transition-colors"
+            >
+              <LogOut className="h-4 w-4" />
+              Sign Out
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
   )
 }
