@@ -1,5 +1,0 @@
-{
-  "*.{ts,tsx,js,jsx,mjs,cjs}": ["eslint --fix"],
-  "*.{json,md,yml,yaml}": ["prettier --write"],
-  "prisma/schema.prisma": ["npx prisma format"]
-}

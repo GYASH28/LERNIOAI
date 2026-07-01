@@ -25,7 +25,7 @@ import {
 import { LessonModeCompletionButton } from '@/features/learning/components/lesson/lesson-mode-completion-button'
 import { LessonVisitRecorder } from '@/features/learning/components/lesson/lesson-visit-recorder'
 import { LessonVideoPlayer } from '@/features/learning/components/lesson/lesson-video-player'
-import { getManifestSubject } from '@/lib/curriculum/manifest-data'
+import { getManifestSubject, type ManifestSubject } from '@/lib/curriculum/manifest-data'
 import { YouTubePlayer } from '@/components/learning/youtube-player'
 import { BookmarkButton } from '@/components/learning/bookmark-button'
 import { RecentlyViewedTracker } from '@/components/learning/recently-viewed-tracker'
@@ -609,7 +609,7 @@ function ManifestLessonView({
   programmeCode: string
   semesterNumber: number
   subjectCode: string
-  subject: import('@/lib/curriculum/manifest-data').ManifestSubject
+  subject: ManifestSubject
 }) {
   const subjectHref = `/learn/${programmeCode}/semester/${semesterNumber}/subject/${subjectCode}`
   const semesterHref = `/learn/${programmeCode}/semester/${semesterNumber}`
