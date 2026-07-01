@@ -37,7 +37,146 @@
       "assessment": {
         "totalMarks": 150
       },
-      "units": [],
+      "units": [
+        {
+          "order": 1,
+          "title": "Handheld Computer Operating system",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                168,
+                169,
+                170,
+                171,
+                172,
+                173,
+                174,
+                175,
+                176
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "Implementation 2",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                168,
+                169,
+                170,
+                171,
+                172,
+                173,
+                174,
+                175,
+                176
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "Queue Scheduling, Multilevel algorithms",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                168,
+                169,
+                170,
+                171,
+                172,
+                173,
+                174,
+                175,
+                176
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "(Process Termination, Resource",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                168,
+                169,
+                170,
+                171,
+                172,
+                173,
+                174,
+                175,
+                176
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "hardware. allocation",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                168,
+                169,
+                170,
+                171,
+                172,
+                173,
+                174,
+                175,
+                176
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "n processes using scheduling 2",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                168,
+                169,
+                170,
+                171,
+                172,
+                173,
+                174,
+                175,
+                176
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,
@@ -193,7 +332,54 @@
       "assessment": {
         "totalMarks": 175
       },
-      "units": [],
+      "units": [
+        {
+          "order": 4,
+          "title": "control structures",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                177,
+                178,
+                179,
+                180,
+                181,
+                182,
+                183,
+                184,
+                185
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "(DCL) for granting and revoking control the access to data using SQL. 2",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                177,
+                178,
+                179,
+                180,
+                181,
+                182,
+                183,
+                184,
+                185
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,
@@ -352,7 +538,29 @@
       "units": [
         {
           "order": 2,
-          "title": "Local Area Network",
+          "title": "Ethernet (10Base5), Thin Ethernet of WLAN",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                186,
+                187,
+                188,
+                189,
+                190,
+                191,
+                192,
+                193
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "Link Control Protocol, Authentication",
           "topics": [],
           "sourceReferences": [
             {
@@ -374,7 +582,7 @@
         },
         {
           "order": 4,
-          "title": "IP Addressing and Routing",
+          "title": "Masking",
           "topics": [],
           "sourceReferences": [
             {
@@ -396,7 +604,7 @@
         },
         {
           "order": 5,
-          "title": "Transport and Application",
+          "title": "UDP, applications. process (control connection",
           "topics": [],
           "sourceReferences": [
             {
@@ -588,7 +796,96 @@
       "assessment": {
         "totalMarks": 175
       },
-      "units": [],
+      "units": [
+        {
+          "order": 1,
+          "title": "LLO",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                194,
+                195,
+                196,
+                197,
+                198,
+                199,
+                200,
+                201
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "for performing basic input and 2",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                194,
+                195,
+                196,
+                197,
+                198,
+                199,
+                200,
+                201
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "using a while loop. 2",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                194,
+                195,
+                196,
+                197,
+                198,
+                199,
+                200,
+                201
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "demonstrate 2",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                194,
+                195,
+                196,
+                197,
+                198,
+                199,
+                200,
+                201
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,
@@ -738,7 +1035,118 @@
       "assessment": {
         "totalMarks": 175
       },
-      "units": [],
+      "units": [
+        {
+          "order": 1,
+          "title": "OOPs, Language",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                202,
+                203,
+                204,
+                205,
+                206,
+                207,
+                208,
+                209
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "(all forms of if statement) 2",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                202,
+                203,
+                204,
+                205,
+                206,
+                207,
+                208,
+                209
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "Interfaces: Multiple Inheritance,",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                202,
+                203,
+                204,
+                205,
+                206,
+                207,
+                208,
+                209
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "Errors, Create",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                202,
+                203,
+                204,
+                205,
+                206,
+                207,
+                208,
+                209
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "AWT& JDBC",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                202,
+                203,
+                204,
+                205,
+                206,
+                207,
+                208,
+                209
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,
@@ -888,7 +1296,113 @@
       "assessment": {
         "totalMarks": 25
       },
-      "units": [],
+      "units": [
+        {
+          "order": 2,
+          "title": "professional Engineer and 2",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                210,
+                211,
+                212,
+                213,
+                214,
+                215,
+                216
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "growth, and areas needing 2",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                210,
+                211,
+                212,
+                213,
+                214,
+                215,
+                216
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "and Marketing Manager. 2",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                210,
+                211,
+                212,
+                213,
+                214,
+                215,
+                216
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "entrepreneurial traits and identify improvement in entrepreneurial 2",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                210,
+                211,
+                212,
+                213,
+                214,
+                215,
+                216
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "Group will propose the business 2",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                210,
+                211,
+                212,
+                213,
+                214,
+                215,
+                216
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,
@@ -1034,8 +1548,50 @@
       },
       "units": [
         {
+          "order": 1,
+          "title": "TRAINING (FULL EXIT INP R23CP5404",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                217,
+                218,
+                219,
+                220,
+                221,
+                222,
+                223
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
           "order": 2,
-          "title": "Professional Practice in Engineering",
+          "title": "+ case study competence, lifelong learning,",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                217,
+                218,
+                219,
+                220,
+                221,
+                222,
+                223
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "colleagues",
           "topics": [],
           "sourceReferences": [
             {

@@ -141,7 +141,7 @@
         },
         {
           "order": 6,
-          "title": "Numerical Methods",
+          "title": "method and Newton -Raphson method for finding approximate square",
           "topics": [],
           "sourceReferences": [
             {
@@ -319,8 +319,54 @@
           "notes": "Promoted from official summary table extraction; topics remain pending review."
         },
         {
+          "order": 3,
+          "title": "Switch Unit: Differences, use of multi protective device for the given",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                76,
+                77,
+                78,
+                79,
+                80,
+                81,
+                82,
+                83,
+                84
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "applications",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                76,
+                77,
+                78,
+                79,
+                80,
+                81,
+                82,
+                83,
+                84
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
           "order": 5,
-          "title": "Transistors",
+          "title": "phase current and line current in three phase 2",
           "topics": [],
           "sourceReferences": [
             {
@@ -343,7 +389,7 @@
         },
         {
           "order": 6,
-          "title": "Sensors and Transducers",
+          "title": "Transducers : Need of transducer, quantity measurement",
           "topics": [],
           "sourceReferences": [
             {
@@ -521,6 +567,28 @@
       },
       "units": [
         {
+          "order": 1,
+          "title": "constants, string constants,",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                85,
+                86,
+                87,
+                88,
+                89,
+                90,
+                91,
+                92
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
           "order": 2,
           "title": "Control structures",
           "topics": [],
@@ -610,7 +678,7 @@
         },
         {
           "order": 6,
-          "title": "File Handling",
+          "title": "conditional operator",
           "topics": [],
           "sourceReferences": [
             {
@@ -761,7 +829,7 @@
       "units": [
         {
           "order": 1,
-          "title": "Introduction to Linux Operating System",
+          "title": "Install the Linux Operating System",
           "topics": [],
           "sourceReferences": [
             {
@@ -777,11 +845,11 @@
             }
           ],
           "verificationStatus": "structure_verified",
-          "notes": "Promoted from official course content extraction; topics remain pending review."
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         },
         {
           "order": 2,
-          "title": "General Purpose Utilities",
+          "title": "script: Recording your session 6",
           "topics": [],
           "sourceReferences": [
             {
@@ -797,11 +865,11 @@
             }
           ],
           "verificationStatus": "structure_verified",
-          "notes": "Promoted from official course content extraction; topics remain pending review."
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         },
         {
           "order": 3,
-          "title": "File Management in Linux",
+          "title": "Execute general-purpose Linux",
           "topics": [],
           "sourceReferences": [
             {
@@ -817,11 +885,51 @@
             }
           ],
           "verificationStatus": "structure_verified",
-          "notes": "Promoted from official course content extraction; topics remain pending review."
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         },
         {
           "order": 4,
-          "title": "The vi Editor",
+          "title": "Execute file and Directory",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                93,
+                94,
+                95,
+                96,
+                97,
+                98
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "tac: to display the file content in reverse order. 4",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                93,
+                94,
+                95,
+                96,
+                97,
+                98
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "read: Making scripts interactive, Using command 6",
           "topics": [],
           "sourceReferences": [
             {
@@ -979,7 +1087,7 @@
       "units": [
         {
           "order": 1,
-          "title": "Introduction to HTML",
+          "title": "*Work with basic HTML tags. 2",
           "topics": [],
           "sourceReferences": [
             {
@@ -1000,7 +1108,28 @@
         },
         {
           "order": 2,
-          "title": "Lists and Links",
+          "title": "*Work on paragraph in webpage Assign title to webpage. Practice 4",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                99,
+                100,
+                101,
+                102,
+                103,
+                104,
+                105
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "given type of' frame' with 6",
           "topics": [],
           "sourceReferences": [
             {
@@ -1021,7 +1150,7 @@
         },
         {
           "order": 5,
-          "title": "Cascading Style sheets",
+          "title": "*Work on HTML web page link. hyperlinks to 4",
           "topics": [],
           "sourceReferences": [
             {
@@ -1042,7 +1171,7 @@
         },
         {
           "order": 6,
-          "title": "Website Hosting",
+          "title": "*Use of links in web page. 2",
           "topics": [],
           "sourceReferences": [
             {
@@ -1204,7 +1333,27 @@
       "assessment": {
         "totalMarks": 50
       },
-      "units": [],
+      "units": [
+        {
+          "order": 2,
+          "title": "b. Passive listening selective listening",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                106,
+                107,
+                108,
+                109,
+                110
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,
@@ -1317,7 +1466,128 @@
       "assessment": {
         "totalMarks": 50
       },
-      "units": [],
+      "units": [
+        {
+          "order": 1,
+          "title": "Prepare a poster [handmade or using graphic design tool] on any ONE 5",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                111,
+                112,
+                113,
+                114,
+                115,
+                116
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "Prepare a Report on any One of the above theme/topic. 5",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                111,
+                112,
+                113,
+                114,
+                115,
+                116
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "Social Activity 5",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                111,
+                112,
+                113,
+                114,
+                115,
+                116
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "Prepare a Presentation using AI Tools on Global Warming/ Harmful 5",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                111,
+                112,
+                113,
+                114,
+                115,
+                116
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "Prepare a one minute reel/video [any language] on the importance of 5",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                111,
+                112,
+                113,
+                114,
+                115,
+                116
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "Visit to orphanage/ social organisation to create awareness about the 5",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                111,
+                112,
+                113,
+                114,
+                115,
+                116
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,

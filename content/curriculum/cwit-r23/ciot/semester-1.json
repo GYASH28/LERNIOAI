@@ -67,7 +67,7 @@
         },
         {
           "order": 2,
-          "title": "Trigonometry",
+          "title": "problem(s). factorization formulae. (without",
           "topics": [],
           "sourceReferences": [
             {
@@ -111,7 +111,7 @@
         },
         {
           "order": 4,
-          "title": "Differential Calculus",
+          "title": "problems based on rules of Quotient of functions",
           "topics": [],
           "sourceReferences": [
             {
@@ -133,7 +133,7 @@
         },
         {
           "order": 5,
-          "title": "Differential Calculus",
+          "title": "differentiation to find given normal",
           "topics": [],
           "sourceReferences": [
             {
@@ -306,7 +306,7 @@
       "units": [
         {
           "order": 1,
-          "title": "Units and Measurements",
+          "title": "Unit I: Units and Measurements",
           "topics": [],
           "sourceReferences": [
             {
@@ -329,7 +329,7 @@
         },
         {
           "order": 5,
-          "title": "Chemistry of Electronic Waste",
+          "title": "Unit V: Chemistry of Electronic Waste",
           "topics": [],
           "sourceReferences": [
             {
@@ -348,7 +348,7 @@
             }
           ],
           "verificationStatus": "structure_verified",
-          "notes": "Promoted from official course content extraction; topics remain pending review."
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         }
       ],
       "outcomes": [
@@ -550,7 +550,88 @@
       "assessment": {
         "totalMarks": 100
       },
-      "units": [],
+      "units": [
+        {
+          "order": 1,
+          "title": "Desktop/laptop/server type",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                71,
+                72,
+                73,
+                74,
+                75,
+                76
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "Preventive Maintenance of PC",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                71,
+                72,
+                73,
+                74,
+                75,
+                76
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "Perform BIOS settings",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                71,
+                72,
+                73,
+                74,
+                75,
+                76
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "Manage a Hard disk",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                71,
+                72,
+                73,
+                74,
+                75,
+                76
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,
@@ -689,6 +770,32 @@
       },
       "units": [
         {
+          "order": 1,
+          "title": "I System",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                77,
+                78,
+                79,
+                80,
+                81,
+                82,
+                83,
+                84,
+                85,
+                86,
+                87,
+                88
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
           "order": 2,
           "title": "Operating Systems",
           "topics": [],
@@ -742,7 +849,7 @@
         },
         {
           "order": 4,
-          "title": "Spreadsheets",
+          "title": "Work with tables in Word",
           "topics": [],
           "sourceReferences": [
             {
@@ -769,6 +876,32 @@
         {
           "order": 5,
           "title": "Presentation Tool",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                77,
+                78,
+                79,
+                80,
+                81,
+                82,
+                83,
+                84,
+                85,
+                86,
+                87,
+                88
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "Create, open and edit",
           "topics": [],
           "sourceReferences": [
             {

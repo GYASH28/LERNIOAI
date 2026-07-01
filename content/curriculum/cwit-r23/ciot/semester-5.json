@@ -33,7 +33,92 @@
       "assessment": {
         "totalMarks": 100
       },
-      "units": [],
+      "units": [
+        {
+          "order": 1,
+          "title": "Introduction to Software Engineering",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                208,
+                209,
+                210,
+                211,
+                212,
+                213,
+                214
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "Write use cases and create the Use-Case Diagram",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                208,
+                209,
+                210,
+                211,
+                212,
+                213,
+                214
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "empirical method",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                208,
+                209,
+                210,
+                211,
+                212,
+                213,
+                214
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "Project Tracking: Timeline charts, chart / Gantt chart to track",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                208,
+                209,
+                210,
+                211,
+                212,
+                213,
+                214
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,
@@ -182,7 +267,128 @@
       "assessment": {
         "totalMarks": 100
       },
-      "units": [],
+      "units": [
+        {
+          "order": 1,
+          "title": "IoT Overview and Technologies",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                175,
+                176,
+                177,
+                178,
+                179,
+                180
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "IoT Design Methodology",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                175,
+                176,
+                177,
+                178,
+                179,
+                180
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "IoT Protocols",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                175,
+                176,
+                177,
+                178,
+                179,
+                180
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "Layered Communication",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                175,
+                176,
+                177,
+                178,
+                179,
+                180
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "IIoT",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                175,
+                176,
+                177,
+                178,
+                179,
+                180
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "Architecture of IIoT",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                175,
+                176,
+                177,
+                178,
+                179,
+                180
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,
@@ -324,7 +530,158 @@
       "assessment": {
         "totalMarks": 150
       },
-      "units": [],
+      "units": [
+        {
+          "order": 1,
+          "title": "Introduction to Wireless Ad",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                181,
+                182,
+                183,
+                184,
+                185,
+                186,
+                187,
+                188,
+                189,
+                190,
+                191
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "Ad Hoc Network Architecture",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                181,
+                182,
+                183,
+                184,
+                185,
+                186,
+                187,
+                188,
+                189,
+                190,
+                191
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "Routing Protocols in Ad Hoc",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                181,
+                182,
+                183,
+                184,
+                185,
+                186,
+                187,
+                188,
+                189,
+                190,
+                191
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "Medium Access Control",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                181,
+                182,
+                183,
+                184,
+                185,
+                186,
+                187,
+                188,
+                189,
+                190,
+                191
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "Energy, QoS & Security in Ad Hoc",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                181,
+                182,
+                183,
+                184,
+                185,
+                186,
+                187,
+                188,
+                189,
+                190,
+                191
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "Emerging Trends &",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                181,
+                182,
+                183,
+                184,
+                185,
+                186,
+                187,
+                188,
+                189,
+                190,
+                191
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,
@@ -501,7 +858,74 @@
       "assessment": {
         "totalMarks": 175
       },
-      "units": [],
+      "units": [
+        {
+          "order": 1,
+          "title": "System: - Motors Used in Robotics",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                192,
+                193,
+                194,
+                195,
+                196,
+                197,
+                198,
+                199
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "LLO",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                192,
+                193,
+                194,
+                195,
+                196,
+                197,
+                198,
+                199
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "IoT-enabled Robotic Systems",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                192,
+                193,
+                194,
+                195,
+                196,
+                197,
+                198,
+                199
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,
@@ -657,7 +1081,140 @@
       "assessment": {
         "totalMarks": 175
       },
-      "units": [],
+      "units": [
+        {
+          "order": 1,
+          "title": "Develop a Java Swing Understand Swing basics and 2",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                200,
+                201,
+                202,
+                203,
+                204,
+                205,
+                206,
+                207
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "Steps Involved in Event Handling, listeners, and adapter",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                200,
+                201,
+                202,
+                203,
+                204,
+                205,
+                206,
+                207
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "using Socket, ServerSocket,",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                200,
+                201,
+                202,
+                203,
+                204,
+                205,
+                206,
+                207
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "of a JSP Page, MVC in JSP,",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                200,
+                201,
+                202,
+                203,
+                204,
+                205,
+                206,
+                207
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "Design a Swing GUI using Organize GUI components 2",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                200,
+                201,
+                202,
+                203,
+                204,
+                205,
+                206,
+                207
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "Introduction, Web Service,",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                200,
+                201,
+                202,
+                203,
+                204,
+                205,
+                206,
+                207
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,
@@ -851,6 +1408,24 @@
           "notes": "Promoted from official course content extraction; topics remain pending review."
         },
         {
+          "order": 3,
+          "title": "Seminar Preparation,",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                53,
+                54,
+                55,
+                56
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official course content extraction; topics remain pending review."
+        },
+        {
           "order": 4,
           "title": "Project Problem",
           "topics": [],
@@ -871,6 +1446,24 @@
         {
           "order": 5,
           "title": "Project Planning & Action",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                53,
+                54,
+                55,
+                56
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official course content extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "Project Proposal,",
           "topics": [],
           "sourceReferences": [
             {
@@ -1014,7 +1607,113 @@
       "assessment": {
         "totalMarks": 150
       },
-      "units": [],
+      "units": [
+        {
+          "order": 1,
+          "title": "Introduction to Cyber Security",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                257,
+                258,
+                259,
+                260,
+                261,
+                262,
+                263
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "Cryptool/ OpenSSL",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                257,
+                258,
+                259,
+                260,
+                261,
+                262,
+                263
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "Network Security",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                257,
+                258,
+                259,
+                260,
+                261,
+                262,
+                263
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "Operating System & Application",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                257,
+                258,
+                259,
+                260,
+                261,
+                262,
+                263
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "Cyber Laws, Ethics & Digital Forensics",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                257,
+                258,
+                259,
+                260,
+                261,
+                262,
+                263
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [],
       "practicalExperiments": [],
       "sourceReferences": [
@@ -1042,7 +1741,118 @@
       "assessment": {
         "totalMarks": 150
       },
-      "units": [],
+      "units": [
+        {
+          "order": 1,
+          "title": "Introduction to Cloud Computing",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                241,
+                242,
+                243,
+                244,
+                245,
+                246,
+                247,
+                248
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "Virtualization in Cloud Computing",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                241,
+                242,
+                243,
+                244,
+                245,
+                246,
+                247,
+                248
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "Data Storage in Cloud Computing",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                241,
+                242,
+                243,
+                244,
+                245,
+                246,
+                247,
+                248
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "Security in Cloud Computing",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                241,
+                242,
+                243,
+                244,
+                245,
+                246,
+                247,
+                248
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "Cloud Platforms",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                241,
+                242,
+                243,
+                244,
+                245,
+                246,
+                247,
+                248
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,
@@ -1198,7 +2008,140 @@
       "assessment": {
         "totalMarks": 150
       },
-      "units": [],
+      "units": [
+        {
+          "order": 1,
+          "title": "Introduction to Data Analytics",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                249,
+                250,
+                251,
+                252,
+                253,
+                254,
+                255,
+                256
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "Data Collection and Preprocessing",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                249,
+                250,
+                251,
+                252,
+                253,
+                254,
+                255,
+                256
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "Statistical Analysis & EDA",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                249,
+                250,
+                251,
+                252,
+                253,
+                254,
+                255,
+                256
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "Data Visualization",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                249,
+                250,
+                251,
+                252,
+                253,
+                254,
+                255,
+                256
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "Machine Learning Basics",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                249,
+                250,
+                251,
+                252,
+                253,
+                254,
+                255,
+                256
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "analytics across",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                249,
+                250,
+                251,
+                252,
+                253,
+                254,
+                255,
+                256
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [],
       "practicalExperiments": [],
       "sourceReferences": [

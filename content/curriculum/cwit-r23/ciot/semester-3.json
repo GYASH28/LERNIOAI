@@ -52,7 +52,7 @@
             }
           ],
           "verificationStatus": "structure_verified",
-          "notes": "Promoted from official course content extraction; topics remain pending review."
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         },
         {
           "order": 2,
@@ -72,7 +72,7 @@
             }
           ],
           "verificationStatus": "structure_verified",
-          "notes": "Promoted from official course content extraction; topics remain pending review."
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         },
         {
           "order": 3,
@@ -92,7 +92,7 @@
             }
           ],
           "verificationStatus": "structure_verified",
-          "notes": "Promoted from official course content extraction; topics remain pending review."
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         },
         {
           "order": 4,
@@ -112,7 +112,7 @@
             }
           ],
           "verificationStatus": "structure_verified",
-          "notes": "Promoted from official course content extraction; topics remain pending review."
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         },
         {
           "order": 5,
@@ -132,7 +132,7 @@
             }
           ],
           "verificationStatus": "structure_verified",
-          "notes": "Promoted from official course content extraction; topics remain pending review."
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         },
         {
           "order": 6,
@@ -152,7 +152,7 @@
             }
           ],
           "verificationStatus": "structure_verified",
-          "notes": "Promoted from official course content extraction; topics remain pending review."
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         }
       ],
       "outcomes": [
@@ -299,7 +299,7 @@
       "units": [
         {
           "order": 1,
-          "title": "Principles of Object",
+          "title": "Principles of Object Oriented Programming",
           "topics": [],
           "sourceReferences": [
             {
@@ -316,7 +316,112 @@
             }
           ],
           "verificationStatus": "structure_verified",
-          "notes": "Promoted from official course content extraction; topics remain pending review."
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "Functions in C++, Classes & Objects",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                101,
+                102,
+                103,
+                104,
+                105,
+                106,
+                107
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "Constructors and Destructors",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                101,
+                102,
+                103,
+                104,
+                105,
+                106,
+                107
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "Inheritance & Exception Handling",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                101,
+                102,
+                103,
+                104,
+                105,
+                106,
+                107
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "Pointers and Polymorphism",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                101,
+                102,
+                103,
+                104,
+                105,
+                106,
+                107
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "Console I/O Operations & File Handling",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                101,
+                102,
+                103,
+                104,
+                105,
+                106,
+                107
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         }
       ],
       "outcomes": [
@@ -467,7 +572,134 @@
       "assessment": {
         "totalMarks": 175
       },
-      "units": [],
+      "units": [
+        {
+          "order": 1,
+          "title": "Logic Gates and Logic Families",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                135,
+                136,
+                137,
+                138,
+                139,
+                140,
+                141
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "Combinational Logic Circuits",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                135,
+                136,
+                137,
+                138,
+                139,
+                140,
+                141
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "Sequential Logic Circuits",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                135,
+                136,
+                137,
+                138,
+                139,
+                140,
+                141
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "The 8051 Microcontroller",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                135,
+                136,
+                137,
+                138,
+                139,
+                140,
+                141
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "8051 Instruction Set & Programming",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                135,
+                136,
+                137,
+                138,
+                139,
+                140,
+                141
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "8051 Interrupts & Interfacing",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                135,
+                136,
+                137,
+                138,
+                139,
+                140,
+                141
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,
@@ -616,7 +848,128 @@
       "assessment": {
         "totalMarks": 100
       },
-      "units": [],
+      "units": [
+        {
+          "order": 1,
+          "title": "Introduction to IoT",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                142,
+                143,
+                144,
+                145,
+                146,
+                147
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "IoT Smart Devices & Hardware",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                142,
+                143,
+                144,
+                145,
+                146,
+                147
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "Raspberry Pi Architecture & Pin Diagram",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                142,
+                143,
+                144,
+                145,
+                146,
+                147
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "Raspberry Pi Programming with Python",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                142,
+                143,
+                144,
+                145,
+                146,
+                147
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "Communication Protocols under IoT",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                142,
+                143,
+                144,
+                145,
+                146,
+                147
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "IoT Applications & Case Studies",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                142,
+                143,
+                144,
+                145,
+                146,
+                147
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,
@@ -758,7 +1111,122 @@
       "assessment": {
         "totalMarks": 100
       },
-      "units": [],
+      "units": [
+        {
+          "order": 1,
+          "title": "Introduction to .NET Framework & VB.NET",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                148,
+                149,
+                150,
+                151,
+                152
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "The Visual Basic .NET Language",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                148,
+                149,
+                150,
+                151,
+                152
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "Arrays, Functions & Exception Handling",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                148,
+                149,
+                150,
+                151,
+                152
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "Basic Controls & Forms",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                148,
+                149,
+                150,
+                151,
+                152
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "Dialog Boxes and Event Handling",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                148,
+                149,
+                150,
+                151,
+                152
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "Database Programming & Graphics",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                148,
+                149,
+                150,
+                151,
+                152
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,
@@ -896,7 +1364,7 @@
       "units": [
         {
           "order": 1,
-          "title": "Basics of Computer Graphics",
+          "title": "Introduction to Animation & Multimedia",
           "topics": [],
           "sourceReferences": [
             {
@@ -912,11 +1380,11 @@
             }
           ],
           "verificationStatus": "structure_verified",
-          "notes": "Promoted from official course content extraction; topics remain pending review."
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         },
         {
           "order": 2,
-          "title": "Introduction to OpenGL",
+          "title": "2D Animation Concepts",
           "topics": [],
           "sourceReferences": [
             {
@@ -932,11 +1400,11 @@
             }
           ],
           "verificationStatus": "structure_verified",
-          "notes": "Promoted from official course content extraction; topics remain pending review."
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         },
         {
           "order": 3,
-          "title": "OpenGL and GULT",
+          "title": "3D Modeling & Animation",
           "topics": [],
           "sourceReferences": [
             {
@@ -952,11 +1420,11 @@
             }
           ],
           "verificationStatus": "structure_verified",
-          "notes": "Promoted from official course content extraction; topics remain pending review."
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         },
         {
           "order": 4,
-          "title": "3D Modeling and Animations",
+          "title": "Blender Basics",
           "topics": [],
           "sourceReferences": [
             {
@@ -972,11 +1440,31 @@
             }
           ],
           "verificationStatus": "structure_verified",
-          "notes": "Promoted from official course content extraction; topics remain pending review."
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "Rendering & Compositing",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                25,
+                26,
+                27,
+                28,
+                29,
+                30
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         },
         {
           "order": 6,
-          "title": "Corrections and Editing",
+          "title": "Post-Production & Video Editing",
           "topics": [],
           "sourceReferences": [
             {
@@ -992,7 +1480,7 @@
             }
           ],
           "verificationStatus": "structure_verified",
-          "notes": "Promoted from official course content extraction; topics remain pending review."
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         }
       ],
       "outcomes": [
@@ -1136,7 +1624,152 @@
       "assessment": {
         "totalMarks": 100
       },
-      "units": [],
+      "units": [
+        {
+          "order": 1,
+          "title": "Introduction to Constitution of India",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                225,
+                226,
+                227,
+                228,
+                229,
+                230,
+                231,
+                232,
+                233,
+                234
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "Fundamental Rights & Duties",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                225,
+                226,
+                227,
+                228,
+                229,
+                230,
+                231,
+                232,
+                233,
+                234
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "Union Government & Parliament",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                225,
+                226,
+                227,
+                228,
+                229,
+                230,
+                231,
+                232,
+                233,
+                234
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "State Government & Administration",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                225,
+                226,
+                227,
+                228,
+                229,
+                230,
+                231,
+                232,
+                233,
+                234
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "Local Self Government & Panchayati Raj",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                225,
+                226,
+                227,
+                228,
+                229,
+                230,
+                231,
+                232,
+                233,
+                234
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "Election Commission & Voter Education",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                225,
+                226,
+                227,
+                228,
+                229,
+                230,
+                231,
+                232,
+                233,
+                234
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,

@@ -36,7 +36,7 @@
       "units": [
         {
           "order": 1,
-          "title": "Management",
+          "title": "Concept and importance of used in software and IT",
           "topics": [],
           "sourceReferences": [
             {
@@ -53,7 +53,7 @@
             }
           ],
           "verificationStatus": "structure_verified",
-          "notes": "Promoted from official course content extraction; topics remain pending review."
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         },
         {
           "order": 2,
@@ -99,7 +99,7 @@
         },
         {
           "order": 4,
-          "title": "Financial Management",
+          "title": "Training, upskilling and improve software",
           "topics": [],
           "sourceReferences": [
             {
@@ -116,11 +116,11 @@
             }
           ],
           "verificationStatus": "structure_verified",
-          "notes": "Promoted from official course content extraction; topics remain pending review."
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         },
         {
           "order": 5,
-          "title": "Digital Resource & Asset",
+          "title": "techniques applied to IoT",
           "topics": [],
           "sourceReferences": [
             {
@@ -137,7 +137,28 @@
             }
           ],
           "verificationStatus": "structure_verified",
-          "notes": "Promoted from official course content extraction; topics remain pending review."
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "systems industry",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         }
       ],
       "outcomes": [
@@ -340,7 +361,7 @@
         },
         {
           "order": 2,
-          "title": "Selenium WebDriver",
+          "title": "Fundamentals architecture and WebDriver",
           "topics": [],
           "sourceReferences": [
             {
@@ -356,11 +377,11 @@
             }
           ],
           "verificationStatus": "structure_verified",
-          "notes": "Promoted from official course content extraction; topics remain pending review."
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         },
         {
           "order": 3,
-          "title": "Advanced Selenium",
+          "title": "frames, and windows",
           "topics": [],
           "sourceReferences": [
             {
@@ -376,11 +397,11 @@
             }
           ],
           "verificationStatus": "structure_verified",
-          "notes": "Promoted from official course content extraction; topics remain pending review."
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         },
         {
           "order": 4,
-          "title": "Project & Version",
+          "title": "o Branch",
           "topics": [],
           "sourceReferences": [
             {
@@ -396,7 +417,7 @@
             }
           ],
           "verificationStatus": "structure_verified",
-          "notes": "Promoted from official course content extraction; topics remain pending review."
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         },
         {
           "order": 5,
@@ -417,6 +438,26 @@
           ],
           "verificationStatus": "structure_verified",
           "notes": "Promoted from official course content extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "Concepts",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "ciot-r23-curriculum",
+              "pages": [
+                65,
+                66,
+                67,
+                68,
+                69,
+                70
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         }
       ],
       "outcomes": [

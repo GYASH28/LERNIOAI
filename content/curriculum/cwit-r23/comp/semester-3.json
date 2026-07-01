@@ -37,7 +37,140 @@
       "assessment": {
         "totalMarks": 175
       },
-      "units": [],
+      "units": [
+        {
+          "order": 1,
+          "title": "Introduction to Data Structures",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                117,
+                118,
+                119,
+                120,
+                121,
+                122,
+                123,
+                124
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "Searching and Sorting",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                117,
+                118,
+                119,
+                120,
+                121,
+                122,
+                123,
+                124
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "Linked List",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                117,
+                118,
+                119,
+                120,
+                121,
+                122,
+                123,
+                124
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "Stack",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                117,
+                118,
+                119,
+                120,
+                121,
+                122,
+                123,
+                124
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "Queue",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                117,
+                118,
+                119,
+                120,
+                121,
+                122,
+                123,
+                124
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "Tree",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                117,
+                118,
+                119,
+                120,
+                121,
+                122,
+                123,
+                124
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,
@@ -190,7 +323,7 @@
       "units": [
         {
           "order": 1,
-          "title": "Principles of Object",
+          "title": "Principles of Object Oriented Programming",
           "topics": [],
           "sourceReferences": [
             {
@@ -209,7 +342,122 @@
             }
           ],
           "verificationStatus": "structure_verified",
-          "notes": "Promoted from official course content extraction; topics remain pending review."
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "Functions in C++, Classes & Objects",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                125,
+                126,
+                127,
+                128,
+                129,
+                130,
+                131,
+                132,
+                133
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "Constructors and Destructors",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                125,
+                126,
+                127,
+                128,
+                129,
+                130,
+                131,
+                132,
+                133
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "Inheritance & Exception Handling",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                125,
+                126,
+                127,
+                128,
+                129,
+                130,
+                131,
+                132,
+                133
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "Pointers and Polymorphism",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                125,
+                126,
+                127,
+                128,
+                129,
+                130,
+                131,
+                132,
+                133
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "Console I/O Operations & File Handling",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                125,
+                126,
+                127,
+                128,
+                129,
+                130,
+                131,
+                132,
+                133
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         }
       ],
       "outcomes": [
@@ -367,7 +615,134 @@
       "assessment": {
         "totalMarks": 175
       },
-      "units": [],
+      "units": [
+        {
+          "order": 1,
+          "title": "Architecture of 8086",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                134,
+                135,
+                136,
+                137,
+                138,
+                139,
+                140
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "8086/8088 Instruction Set and Assembler Directives",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                134,
+                135,
+                136,
+                137,
+                138,
+                139,
+                140
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "Assembly Language Programming Techniques",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                134,
+                135,
+                136,
+                137,
+                138,
+                139,
+                140
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "Architecture of 80386 and Pentium",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                134,
+                135,
+                136,
+                137,
+                138,
+                139,
+                140
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "Interrupts and Interrupt Service Procedures",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                134,
+                135,
+                136,
+                137,
+                138,
+                139,
+                140
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "Support Chips and Interfacing",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                134,
+                135,
+                136,
+                137,
+                138,
+                139,
+                140
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,
@@ -553,8 +928,68 @@
           "notes": "Promoted from official summary table extraction; topics remain pending review."
         },
         {
+          "order": 3,
+          "title": "Analog and Digital Communication",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                141,
+                142,
+                143,
+                144,
+                145,
+                146
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
           "order": 4,
           "title": "Multiplexing & Switching",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                141,
+                142,
+                143,
+                144,
+                145,
+                146
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "Networking Standards & References",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                141,
+                142,
+                143,
+                144,
+                145,
+                146
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "Data Communication Technologies",
           "topics": [],
           "sourceReferences": [
             {
@@ -710,7 +1145,122 @@
       "assessment": {
         "totalMarks": 100
       },
-      "units": [],
+      "units": [
+        {
+          "order": 1,
+          "title": "Introduction to .NET Framework & VB.NET",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                147,
+                148,
+                149,
+                150,
+                151
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "The Visual Basic .NET Language",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                147,
+                148,
+                149,
+                150,
+                151
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "Arrays, Functions & Exception Handling",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                147,
+                148,
+                149,
+                150,
+                151
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "Basic Controls & Forms",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                147,
+                148,
+                149,
+                150,
+                151
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "Dialog Boxes and Event Handling",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                147,
+                148,
+                149,
+                150,
+                151
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "Database Programming & Graphics",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                147,
+                148,
+                149,
+                150,
+                151
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,
@@ -842,7 +1392,134 @@
       "assessment": {
         "totalMarks": 75
       },
-      "units": [],
+      "units": [
+        {
+          "order": 1,
+          "title": "Introduction to Animation & Multimedia",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                152,
+                153,
+                154,
+                155,
+                156,
+                157,
+                158
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "2D Animation Concepts",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                152,
+                153,
+                154,
+                155,
+                156,
+                157,
+                158
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "3D Modeling & Animation",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                152,
+                153,
+                154,
+                155,
+                156,
+                157,
+                158
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "Blender Basics",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                152,
+                153,
+                154,
+                155,
+                156,
+                157,
+                158
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "Rendering & Compositing",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                152,
+                153,
+                154,
+                155,
+                156,
+                157,
+                158
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "Post-Production & Video Editing",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                152,
+                153,
+                154,
+                155,
+                156,
+                157,
+                158
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,
@@ -986,7 +1663,146 @@
       "assessment": {
         "totalMarks": 25
       },
-      "units": [],
+      "units": [
+        {
+          "order": 1,
+          "title": "Introduction to Constitution of India",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                159,
+                160,
+                161,
+                162,
+                163,
+                164,
+                165,
+                166,
+                167
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "Fundamental Rights & Duties",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                159,
+                160,
+                161,
+                162,
+                163,
+                164,
+                165,
+                166,
+                167
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "Union Government & Parliament",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                159,
+                160,
+                161,
+                162,
+                163,
+                164,
+                165,
+                166,
+                167
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "State Government & Administration",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                159,
+                160,
+                161,
+                162,
+                163,
+                164,
+                165,
+                166,
+                167
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "Local Self Government & Panchayati Raj",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                159,
+                160,
+                161,
+                162,
+                163,
+                164,
+                165,
+                166,
+                167
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "Election Commission & Voter Education",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                159,
+                160,
+                161,
+                162,
+                163,
+                164,
+                165,
+                166,
+                167
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,

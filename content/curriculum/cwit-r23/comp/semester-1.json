@@ -150,7 +150,7 @@
         },
         {
           "order": 6,
-          "title": "Statistics",
+          "title": "given simple engineering problem(s)",
           "topics": [],
           "sourceReferences": [
             {
@@ -318,6 +318,30 @@
           "notes": "Promoted from official summary table extraction; topics remain pending review."
         },
         {
+          "order": 3,
+          "title": "Heat, Laser and Optical Fibre",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official course content extraction; topics remain pending review."
+        },
+        {
           "order": 5,
           "title": "Chemistry of Electronic Waste",
           "topics": [],
@@ -343,7 +367,7 @@
         },
         {
           "order": 6,
-          "title": "Environmental Regulations",
+          "title": "manufacturing. electronics, as well as the",
           "topics": [],
           "sourceReferences": [
             {
@@ -363,7 +387,7 @@
             }
           ],
           "verificationStatus": "structure_verified",
-          "notes": "Promoted from official course content extraction; topics remain pending review."
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         }
       ],
       "outcomes": [
@@ -527,7 +551,134 @@
       "assessment": {
         "totalMarks": 150
       },
-      "units": [],
+      "units": [
+        {
+          "order": 1,
+          "title": "situation",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "Effective Communication",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "dialogues",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "Vocabulary Building",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "Presentation Skills",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "Public Speaking",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,
@@ -672,8 +823,8 @@
       },
       "units": [
         {
-          "order": 4,
-          "title": "Scale and Natural Scale. scale and isometric",
+          "order": 1,
+          "title": "Draw different types of lines, dimensioning styles.(Sketch Book) 1",
           "topics": [],
           "sourceReferences": [
             {
@@ -689,7 +840,87 @@
             }
           ],
           "verificationStatus": "structure_verified",
-          "notes": "Promoted from official course content extraction; topics remain pending review."
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "Draw different types of Engineering Curves.(Sketchbook) 2",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                45,
+                46,
+                47,
+                48,
+                49,
+                50
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "Draw four problems on orthographic projections using first angle method of 2",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                45,
+                46,
+                47,
+                48,
+                49,
+                50
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "Draw two problems on Isometric view of simple objects having plain and 2",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                45,
+                46,
+                47,
+                48,
+                49,
+                50
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "Draw free hand Sketches of different standard components ((01Sheet) 2",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                45,
+                46,
+                47,
+                48,
+                49,
+                50
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         }
       ],
       "outcomes": [
@@ -828,7 +1059,65 @@
       "assessment": {
         "totalMarks": 100
       },
-      "units": [],
+      "units": [
+        {
+          "order": 3,
+          "title": "Preventive Maintenance of PC Maintenance of PC using vacuum 2",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                51,
+                52,
+                53,
+                54,
+                55
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "Perform BIOS settings 2",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                51,
+                52,
+                53,
+                54,
+                55
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "Manage a Hard disk 2",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                51,
+                52,
+                53,
+                54,
+                55
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,
@@ -962,7 +1251,7 @@
       "units": [
         {
           "order": 1,
-          "title": "Introduction to Computer",
+          "title": "LLO",
           "topics": [],
           "sourceReferences": [
             {
@@ -982,11 +1271,35 @@
             }
           ],
           "verificationStatus": "structure_verified",
-          "notes": "Promoted from official course content extraction; topics remain pending review."
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "Word Processing. b) Text, lines",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         },
         {
           "order": 3,
-          "title": "Word Processing",
+          "title": "Shapes in Word Processing. images, shapes in a 1",
           "topics": [],
           "sourceReferences": [
             {
@@ -1010,7 +1323,7 @@
         },
         {
           "order": 4,
-          "title": "Spreadsheets",
+          "title": "Processing. various table formatting 2",
           "topics": [],
           "sourceReferences": [
             {
@@ -1055,6 +1368,30 @@
           ],
           "verificationStatus": "structure_verified",
           "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "Basics of DOS, Network ,",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official course content extraction; topics remain pending review."
         }
       ],
       "outcomes": [
@@ -1217,7 +1554,27 @@
       "assessment": {
         "totalMarks": 50
       },
-      "units": [],
+      "units": [
+        {
+          "order": 5,
+          "title": "higher durations",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                66,
+                67,
+                68,
+                69,
+                70
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [],
       "practicalExperiments": [],
       "sourceReferences": [

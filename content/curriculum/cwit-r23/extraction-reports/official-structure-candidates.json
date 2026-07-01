@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-07-01T03:15:49.577Z",
+  "generatedAt": "2026-07-01T04:57:39.675Z",
   "status": "review_only",
   "note": "Course outcome and unit-title candidates are extracted from official PDF text. Promotable rows are still draft manifest data until reviewed/imported; no generated content is published.",
   "totals": {
     "subjects": 86,
     "courseBlocksFound": 81,
     "subjectsWithOutcomes": 74,
-    "subjectsWithUnitCandidates": 35,
-    "subjectsWithPromotableUnitCandidates": 3,
-    "structurePromotable": 74
+    "subjectsWithUnitCandidates": 77,
+    "subjectsWithPromotableUnitCandidates": 49,
+    "structurePromotable": 76
   },
   "subjects": [
     {
@@ -59,8 +59,8 @@
         },
         {
           "order": 2,
-          "rawLabel": "II",
-          "title": "Trigonometry",
+          "rawLabel": "2",
+          "title": "problem(s). factorization formulae. (without",
           "source": "summary_table"
         },
         {
@@ -71,14 +71,14 @@
         },
         {
           "order": 4,
-          "rawLabel": "IV",
-          "title": "Differential Calculus",
+          "rawLabel": "4",
+          "title": "problems based on rules of Quotient of functions",
           "source": "summary_table"
         },
         {
           "order": 5,
-          "rawLabel": "V",
-          "title": "Differential Calculus",
+          "rawLabel": "5",
+          "title": "differentiation to find given normal",
           "source": "summary_table"
         },
         {
@@ -89,10 +89,8 @@
         }
       ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Duplicate unit titles were extracted."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -143,15 +141,15 @@
       "candidateUnits": [
         {
           "order": 1,
-          "rawLabel": "I",
-          "title": "Units and Measurements",
+          "rawLabel": "1",
+          "title": "Unit I: Units and Measurements",
           "source": "summary_table"
         },
         {
           "order": 5,
-          "rawLabel": "V",
-          "title": "Chemistry of Electronic Waste",
-          "source": "course_content"
+          "rawLabel": "5",
+          "title": "Unit V: Chemistry of Electronic Waste",
+          "source": "summary_table"
         }
       ],
       "unitQuality": {
@@ -242,12 +240,37 @@
           "text": "Use diagnostic software for fault finding in Computer system."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Desktop/laptop/server type",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Preventive Maintenance of PC",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Perform BIOS settings",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Manage a Hard disk",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
         "promotable": false,
         "blockers": [
           "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
+          "Unit order is not consecutive from 1."
         ]
       },
       "extractionStatus": "structure_promotable"
@@ -301,6 +324,12 @@
       ],
       "candidateUnits": [
         {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "I System",
+          "source": "summary_table"
+        },
+        {
           "order": 2,
           "rawLabel": "II",
           "title": "Operating Systems",
@@ -314,8 +343,8 @@
         },
         {
           "order": 4,
-          "rawLabel": "IV",
-          "title": "Spreadsheets",
+          "rawLabel": "4",
+          "title": "Work with tables in Word",
           "source": "summary_table"
         },
         {
@@ -323,15 +352,17 @@
           "rawLabel": "V",
           "title": "Presentation Tool",
           "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Create, open and edit",
+          "source": "summary_table"
         }
       ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1.",
-          "Unit order is not consecutive from 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -400,8 +431,8 @@
       "candidateUnits": [
         {
           "order": 1,
-          "rawLabel": "I",
-          "title": "Indefinite Integration",
+          "rawLabel": "1",
+          "title": "substitution. functions using the integration by",
           "source": "summary_table"
         },
         {
@@ -424,9 +455,9 @@
         },
         {
           "order": 5,
-          "rawLabel": "V",
-          "title": "Differential",
-          "source": "course_content"
+          "rawLabel": "5",
+          "title": "Differential equations",
+          "source": "summary_table"
         },
         {
           "order": 6,
@@ -507,42 +538,45 @@
       ],
       "candidateUnits": [
         {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "*Install and study the C programming 2",
+          "source": "summary_table"
+        },
+        {
           "order": 2,
-          "rawLabel": "II",
-          "title": "Control structures",
+          "rawLabel": "2",
+          "title": "Implement C programs using Constants and 2",
           "source": "summary_table"
         },
         {
           "order": 3,
-          "rawLabel": "III",
-          "title": "Arrays and structure",
+          "rawLabel": "3",
+          "title": "*Implement C programs using arithmetic 2",
           "source": "summary_table"
         },
         {
           "order": 4,
-          "rawLabel": "IV",
-          "title": "Functions",
+          "rawLabel": "4",
+          "title": "Implement C programs using implicit and 2",
           "source": "summary_table"
         },
         {
           "order": 5,
-          "rawLabel": "V",
-          "title": "Pointers",
+          "rawLabel": "5",
+          "title": "*Write well-commented C programs using 4",
           "source": "summary_table"
         },
         {
           "order": 6,
-          "rawLabel": "VI",
-          "title": "File Handling",
+          "rawLabel": "6",
+          "title": "*Implement minimum two C programs 2",
           "source": "summary_table"
         }
       ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Unit order does not start at 1.",
-          "Unit order is not consecutive from 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -588,37 +622,45 @@
       ],
       "candidateUnits": [
         {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Unit - I",
+          "source": "summary_table"
+        },
+        {
           "order": 2,
-          "rawLabel": "II",
-          "title": "General Purpose Utilities",
-          "source": "course_content"
+          "rawLabel": "2",
+          "title": "Unit - II: General Purpose Utilities",
+          "source": "summary_table"
         },
         {
           "order": 3,
-          "rawLabel": "III",
-          "title": "File Management in Linux",
-          "source": "course_content"
+          "rawLabel": "3",
+          "title": "Unit - III: File Management in Linux",
+          "source": "summary_table"
         },
         {
           "order": 4,
-          "rawLabel": "IV",
-          "title": "The vi Editor",
-          "source": "course_content"
+          "rawLabel": "4",
+          "title": "Unit - IV: The vi Editor",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Unit - V: Filters, Regular Expressions",
+          "source": "summary_table"
         },
         {
           "order": 6,
-          "rawLabel": "VI",
-          "title": "Shell & Shell Programming",
-          "source": "course_content"
+          "rawLabel": "6",
+          "title": "Unit - VI: Shell & Shell Programming",
+          "source": "summary_table"
         }
       ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1.",
-          "Unit order is not consecutive from 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -667,14 +709,26 @@
       "candidateUnits": [
         {
           "order": 1,
-          "rawLabel": "I",
-          "title": "Introduction to HTML",
+          "rawLabel": "1",
+          "title": "<HEAD>,<TITLE>,meta",
           "source": "summary_table"
         },
         {
           "order": 2,
           "rawLabel": "II",
           "title": "Lists and Links",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "III",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Table, Frames and Forms",
           "source": "summary_table"
         },
         {
@@ -691,11 +745,8 @@
         }
       ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order is not consecutive from 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -718,26 +769,26 @@
         {
           "order": 3,
           "rawLabel": "3",
-          "title": "Interview",
-          "source": "course_content"
+          "title": "UNIT NO. 3 - Interview",
+          "source": "summary_table"
         },
         {
           "order": 4,
           "rawLabel": "4",
-          "title": "Writing Skills-1",
-          "source": "course_content"
+          "title": "UNIT NO. 4 - Writing Skills-1",
+          "source": "summary_table"
         },
         {
           "order": 5,
           "rawLabel": "5",
-          "title": "Writing Skills-2",
-          "source": "course_content"
+          "title": "UNIT NO. 5 - Writing Skills-2",
+          "source": "summary_table"
         },
         {
           "order": 6,
           "rawLabel": "6",
-          "title": "Writing Skills-3",
-          "source": "course_content"
+          "title": "UNIT NO. 6 - Writing Skills-3",
+          "source": "summary_table"
         }
       ],
       "unitQuality": {
@@ -791,13 +842,47 @@
           "text": "Apply basic financial knowledge in daily life."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Prepare a poster [handmade or using graphic design tool] on any 5",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Prepare a Report on any One of the above theme/topic. 5",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Social Activity 5",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Prepare a Presentation using AI Tools on Global Warming/ 5",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Prepare a one minute reel/video [any language] on the importance of 5",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Visit to orphanage/ social organisation to create awareness about the 5",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -845,39 +930,39 @@
       "candidateUnits": [
         {
           "order": 1,
-          "rawLabel": "I",
+          "rawLabel": "1",
           "title": "Introduction to Data Structures",
-          "source": "course_content"
+          "source": "summary_table"
         },
         {
           "order": 2,
-          "rawLabel": "II",
+          "rawLabel": "2",
           "title": "Searching and Sorting",
-          "source": "course_content"
+          "source": "summary_table"
         },
         {
           "order": 3,
-          "rawLabel": "III",
+          "rawLabel": "3",
           "title": "Linked List",
-          "source": "course_content"
+          "source": "summary_table"
         },
         {
           "order": 4,
-          "rawLabel": "IV",
+          "rawLabel": "4",
           "title": "Stack",
-          "source": "course_content"
+          "source": "summary_table"
         },
         {
           "order": 5,
-          "rawLabel": "V",
+          "rawLabel": "5",
           "title": "Queue",
-          "source": "course_content"
+          "source": "summary_table"
         },
         {
           "order": 6,
-          "rawLabel": "VI",
+          "rawLabel": "6",
           "title": "Tree",
-          "source": "course_content"
+          "source": "summary_table"
         }
       ],
       "unitQuality": {
@@ -931,16 +1016,44 @@
       "candidateUnits": [
         {
           "order": 1,
-          "rawLabel": "I",
-          "title": "Principles of Object",
-          "source": "course_content"
+          "rawLabel": "1",
+          "title": "Principles of Object Oriented Programming",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Functions in C++, Classes & Objects",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Constructors and Destructors",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Inheritance & Exception Handling",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Pointers and Polymorphism",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Console I/O Operations & File Handling",
+          "source": "summary_table"
         }
       ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -986,13 +1099,47 @@
           "text": "Construct and execute assembly language programs using instruction set of 8051. C)"
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Logic Gates and Logic Families",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Combinational Logic Circuits",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Sequential Logic Circuits",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "The 8051 Microcontroller",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "8051 Instruction Set & Programming",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "8051 Interrupts & Interfacing",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -1037,13 +1184,47 @@
           "text": ". Develop a small IoT based application."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Introduction to IoT",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "IoT Smart Devices & Hardware",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Raspberry Pi Architecture & Pin Diagram",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Raspberry Pi Programming with Python",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Communication Protocols under IoT",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "IoT Applications & Case Studies",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -1087,13 +1268,47 @@
           "text": "Write the graphics program and perform different operations on database."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Introduction to .NET Framework & VB.NET",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "The Visual Basic .NET Language",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Arrays, Functions & Exception Handling",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Basic Controls & Forms",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Dialog Boxes and Event Handling",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Database Programming & Graphics",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -1141,40 +1356,44 @@
       "candidateUnits": [
         {
           "order": 1,
-          "rawLabel": "I",
-          "title": "Basics of Computer Graphics",
-          "source": "course_content"
+          "rawLabel": "1",
+          "title": "Introduction to Animation & Multimedia",
+          "source": "summary_table"
         },
         {
           "order": 2,
           "rawLabel": "2",
-          "title": "Introduction to OpenGL",
-          "source": "course_content"
+          "title": "2D Animation Concepts",
+          "source": "summary_table"
         },
         {
           "order": 3,
           "rawLabel": "3",
-          "title": "OpenGL and GULT",
-          "source": "course_content"
+          "title": "3D Modeling & Animation",
+          "source": "summary_table"
         },
         {
           "order": 4,
           "rawLabel": "4",
-          "title": "3D Modeling and Animations",
-          "source": "course_content"
+          "title": "Blender Basics",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Rendering & Compositing",
+          "source": "summary_table"
         },
         {
           "order": 6,
           "rawLabel": "6",
-          "title": "Corrections and Editing",
-          "source": "course_content"
+          "title": "Post-Production & Video Editing",
+          "source": "summary_table"
         }
       ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Unit order is not consecutive from 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -1223,13 +1442,47 @@
           "text": "Follow procedure to cast vote using voter-id. C)"
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Introduction to Constitution of India",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Fundamental Rights & Duties",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Union Government & Parliament",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "State Government & Administration",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Local Self Government & Panchayati Raj",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Election Commission & Voter Education",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -1275,12 +1528,42 @@
           "text": "Construct and execute assembly language programs using instruction set of 8051. C)"
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Logic Gates and Logic Families",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Decoder- 3:8, Binary to Gray Code",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "The 8051 Microcontroller",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Verification of truth tables of flip-flops using ICs 7474,",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Addressing Modes of 8051",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
         "promotable": false,
         "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
+          "Unit order is not consecutive from 1."
         ]
       },
       "extractionStatus": "structure_promotable"
@@ -1328,13 +1611,47 @@
           "text": "Write function programs and know the concept of distributed database."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Language, Data Manipulation",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "(DDL) for creating, altering and droping to manage database using SQL 2",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Structured Query Language (SQL)",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "comparisons, displaying user messages, structures",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Programs based on cursors",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "(DCL) for granting and revoking to control the access to data using",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -1379,13 +1696,47 @@
           "text": "Identify role of cryptography in various Network applications."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Service",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Local Area Network",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Data link and Network Layer Protocols",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "IP Addressing and Routing",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "applications",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "IoT Network Security",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -1431,13 +1782,47 @@
           "text": "Write program using Exception handling and File Operations."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "a) Install and configure Python IDE",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "b) Develop a program to using Python IDE. 2",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Data Structures in Python",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Python Functions, Modules, and Package",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Parameterized), the self parameter",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Exception Handling and File Handling",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -1484,13 +1869,47 @@
           "text": "Design GUI applications using AWT/Applets and implement database connectivity using JDBC."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Java Evolution, Overview of Java",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Write programs to demonstrate use of:if 2",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "implement different control 2",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Different types of Loops (for, while and implement different control 2",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "methods of: 2",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Write programs to demonstrate use of 2",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -1538,31 +1957,45 @@
       ],
       "candidateUnits": [
         {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Introduction and Entrepreneurial",
+          "source": "summary_table"
+        },
+        {
           "order": 2,
           "rawLabel": "2",
-          "title": "Business Opportunity",
+          "title": "Business Opportunity Identification",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Government Support,",
           "source": "course_content"
         },
         {
           "order": 4,
           "rawLabel": "4",
           "title": "Introduction to Marketing",
-          "source": "course_content"
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Business Expansion international marketing,",
+          "source": "summary_table"
         },
         {
           "order": 6,
           "rawLabel": "6",
           "title": "Digital Marketing",
-          "source": "course_content"
+          "source": "summary_table"
         }
       ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1.",
-          "Unit order is not consecutive from 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -1684,12 +2117,37 @@
           "text": "Apply software quality assurance principles to ensure dependable and maintainable software. C)"
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Introduction to Software Engineering",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Write use cases and create the Use-Case Diagram",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "empirical method",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Project Tracking: Timeline charts, chart / Gantt chart to track",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
         "promotable": false,
         "blockers": [
           "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
+          "Unit order is not consecutive from 1."
         ]
       },
       "extractionStatus": "structure_promotable"
@@ -1735,13 +2193,47 @@
           "text": "Design scalable, secure IIoT architectures using service frameworks."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "IoT Overview and Technologies",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "IoT Design Methodology",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "IoT Protocols",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Layered Communication",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "IIoT",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Architecture of IIoT",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -1791,13 +2283,47 @@
           "text": "Understand emerging technologies and analyze real-world applications and future scope of ad hoc networks"
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Introduction to Wireless Ad",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Ad Hoc Network Architecture",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Routing Protocols in Ad Hoc",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Medium Access Control",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Energy, QoS & Security in Ad Hoc",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Emerging Trends &",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -1844,12 +2370,31 @@
           "text": "Implement communication interfaces and IoT concepts for monitoring and controlling robotic systems, including drones."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "System: - Motors Used in Robotics",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "LLO",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "IoT-enabled Robotic Systems",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
         "promotable": false,
         "blockers": [
           "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
+          "Unit order is not consecutive from 1."
         ]
       },
       "extractionStatus": "structure_promotable"
@@ -1897,13 +2442,47 @@
           "text": "Understand the fundamentals of Hibernate ORM, SOAP and RESTful web services for building scalable and interoperable web applications."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Develop a Java Swing Understand Swing basics and 2",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Steps Involved in Event Handling, listeners, and adapter",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "using Socket, ServerSocket,",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "of a JSP Page, MVC in JSP,",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Design a Swing GUI using Organize GUI components 2",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Introduction, Web Service,",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -1960,6 +2539,12 @@
           "source": "course_content"
         },
         {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Seminar Preparation,",
+          "source": "course_content"
+        },
+        {
           "order": 4,
           "rawLabel": "4",
           "title": "Project Problem",
@@ -1970,14 +2555,17 @@
           "rawLabel": "5",
           "title": "Project Planning & Action",
           "source": "course_content"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Project Proposal,",
+          "source": "course_content"
         }
       ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order is not consecutive from 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -1998,15 +2586,43 @@
         263
       ],
       "candidateOutcomes": [],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Introduction to Cyber Security",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Cryptool/ OpenSSL",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Network Security",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Operating System & Application",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Cyber Laws, Ethics & Digital Forensics",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
-      "extractionStatus": "needs_review"
+      "extractionStatus": "structure_promotable"
     },
     {
       "manifest": "content/curriculum/cwit-r23/ciot/semester-5.json",
@@ -2051,13 +2667,41 @@
           "text": "Future Trends and Cloud Applications."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Introduction to Cloud Computing",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Virtualization in Cloud Computing",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Data Storage in Cloud Computing",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Security in Cloud Computing",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Cloud Platforms",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -2079,15 +2723,49 @@
         256
       ],
       "candidateOutcomes": [],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Introduction to Data Analytics",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Data Collection and Preprocessing",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Statistical Analysis & EDA",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Data Visualization",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Machine Learning Basics",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "analytics across",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
-      "extractionStatus": "needs_review"
+      "extractionStatus": "structure_promotable"
     },
     {
       "manifest": "content/curriculum/cwit-r23/ciot/semester-6.json",
@@ -2134,9 +2812,9 @@
       "candidateUnits": [
         {
           "order": 1,
-          "rawLabel": "I",
-          "title": "Management",
-          "source": "course_content"
+          "rawLabel": "1",
+          "title": "Concept and importance of used in software and IT",
+          "source": "summary_table"
         },
         {
           "order": 2,
@@ -2152,15 +2830,21 @@
         },
         {
           "order": 4,
-          "rawLabel": "IV",
-          "title": "Financial Management",
-          "source": "course_content"
+          "rawLabel": "4",
+          "title": "Training, upskilling and improve software",
+          "source": "summary_table"
         },
         {
           "order": 5,
-          "rawLabel": "V",
-          "title": "Digital Resource & Asset",
-          "source": "course_content"
+          "rawLabel": "5",
+          "title": "techniques applied to IoT",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "systems industry",
+          "source": "summary_table"
         }
       ],
       "unitQuality": {
@@ -2239,26 +2923,32 @@
         {
           "order": 2,
           "rawLabel": "2",
-          "title": "Selenium WebDriver",
-          "source": "course_content"
+          "title": "Fundamentals architecture and WebDriver",
+          "source": "summary_table"
         },
         {
           "order": 3,
           "rawLabel": "3",
-          "title": "Advanced Selenium",
-          "source": "course_content"
+          "title": "frames, and windows",
+          "source": "summary_table"
         },
         {
           "order": 4,
           "rawLabel": "4",
-          "title": "Project & Version",
-          "source": "course_content"
+          "title": "o Branch",
+          "source": "summary_table"
         },
         {
           "order": 5,
           "rawLabel": "5",
           "title": "Introduction to Tosca &",
           "source": "course_content"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Concepts",
+          "source": "summary_table"
         }
       ],
       "unitQuality": {
@@ -2357,8 +3047,8 @@
         },
         {
           "order": 6,
-          "rawLabel": "VI",
-          "title": "Statistics",
+          "rawLabel": "6",
+          "title": "given simple engineering problem(s)",
           "source": "summary_table"
         }
       ],
@@ -2423,6 +3113,12 @@
           "source": "summary_table"
         },
         {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "Heat, Laser and Optical Fibre",
+          "source": "course_content"
+        },
+        {
           "order": 5,
           "rawLabel": "V",
           "title": "Chemistry of Electronic Waste",
@@ -2430,9 +3126,9 @@
         },
         {
           "order": 6,
-          "rawLabel": "VI",
-          "title": "Environmental Regulations",
-          "source": "course_content"
+          "rawLabel": "6",
+          "title": "manufacturing. electronics, as well as the",
+          "source": "summary_table"
         }
       ],
       "unitQuality": {
@@ -2486,13 +3182,47 @@
           "text": "Compose and deliver speeches in given formal situations 19"
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "situation",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Effective Communication",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "dialogues",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Vocabulary Building",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Presentation Skills",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Public Speaking",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -2539,17 +3269,39 @@
       ],
       "candidateUnits": [
         {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Draw different types of lines, dimensioning styles.(Sketch Book) 1",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Draw different types of Engineering Curves.(Sketchbook) 2",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Draw four problems on orthographic projections using first angle method of 2",
+          "source": "summary_table"
+        },
+        {
           "order": 4,
           "rawLabel": "4",
-          "title": "Scale and Natural Scale. scale and isometric",
-          "source": "course_content"
+          "title": "Draw two problems on Isometric view of simple objects having plain and 2",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Draw free hand Sketches of different standard components ((01Sheet) 2",
+          "source": "summary_table"
         }
       ],
       "unitQuality": {
         "promotable": false,
         "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1.",
           "Unit order is not consecutive from 1."
         ]
       },
@@ -2595,12 +3347,32 @@
           "text": "Use diagnostic software for fault finding in Computer system. H)"
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Preventive Maintenance of PC Maintenance of PC using vacuum 2",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Perform BIOS settings 2",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Manage a Hard disk 2",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
         "promotable": false,
         "blockers": [
           "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
+          "Unit order does not start at 1.",
+          "Unit order is not consecutive from 1."
         ]
       },
       "extractionStatus": "structure_promotable"
@@ -2653,20 +3425,26 @@
       "candidateUnits": [
         {
           "order": 1,
-          "rawLabel": "I",
-          "title": "Introduction to Computer",
-          "source": "course_content"
+          "rawLabel": "1",
+          "title": "LLO",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Word Processing. b) Text, lines",
+          "source": "summary_table"
         },
         {
           "order": 3,
-          "rawLabel": "III",
-          "title": "Word Processing",
+          "rawLabel": "3",
+          "title": "Shapes in Word Processing. images, shapes in a 1",
           "source": "summary_table"
         },
         {
           "order": 4,
-          "rawLabel": "IV",
-          "title": "Spreadsheets",
+          "rawLabel": "4",
+          "title": "Processing. various table formatting 2",
           "source": "summary_table"
         },
         {
@@ -2674,14 +3452,17 @@
           "rawLabel": "V",
           "title": "Presentation Tool",
           "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "Basics of DOS, Network ,",
+          "source": "course_content"
         }
       ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order is not consecutive from 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -2700,12 +3481,20 @@
         70
       ],
       "candidateOutcomes": [],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "higher durations",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
         "promotable": false,
         "blockers": [
           "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
+          "Unit order does not start at 1.",
+          "Unit order is not consecutive from 1."
         ]
       },
       "extractionStatus": "needs_review"
@@ -2779,16 +3568,14 @@
         },
         {
           "order": 6,
-          "rawLabel": "VI",
-          "title": "Numerical Methods",
+          "rawLabel": "6",
+          "title": "method and Newton -Raphson method for finding approximate square",
           "source": "summary_table"
         }
       ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Duplicate unit titles were extracted."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -2850,24 +3637,33 @@
           "source": "summary_table"
         },
         {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Switch Unit: Differences, use of multi protective device for the given",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "applications",
+          "source": "summary_table"
+        },
+        {
           "order": 5,
-          "rawLabel": "V",
-          "title": "Transistors",
+          "rawLabel": "5",
+          "title": "phase current and line current in three phase 2",
           "source": "summary_table"
         },
         {
           "order": 6,
-          "rawLabel": "VI",
-          "title": "Sensors and Transducers",
+          "rawLabel": "6",
+          "title": "Transducers : Need of transducer, quantity measurement",
           "source": "summary_table"
         }
       ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order is not consecutive from 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -2912,6 +3708,12 @@
       ],
       "candidateUnits": [
         {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "constants, string constants,",
+          "source": "summary_table"
+        },
+        {
           "order": 2,
           "rawLabel": "II",
           "title": "Control structures",
@@ -2937,17 +3739,14 @@
         },
         {
           "order": 6,
-          "rawLabel": "VI",
-          "title": "File Handling",
+          "rawLabel": "6",
+          "title": "conditional operator",
           "source": "summary_table"
         }
       ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Unit order does not start at 1.",
-          "Unit order is not consecutive from 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -2995,34 +3794,44 @@
       "candidateUnits": [
         {
           "order": 1,
-          "rawLabel": "I",
-          "title": "Introduction to Linux Operating System",
-          "source": "course_content"
+          "rawLabel": "1",
+          "title": "Install the Linux Operating System",
+          "source": "summary_table"
         },
         {
           "order": 2,
-          "rawLabel": "II",
-          "title": "General Purpose Utilities",
-          "source": "course_content"
+          "rawLabel": "2",
+          "title": "script: Recording your session 6",
+          "source": "summary_table"
         },
         {
           "order": 3,
-          "rawLabel": "III",
-          "title": "File Management in Linux",
-          "source": "course_content"
+          "rawLabel": "3",
+          "title": "Execute general-purpose Linux",
+          "source": "summary_table"
         },
         {
           "order": 4,
-          "rawLabel": "IV",
-          "title": "The vi Editor",
+          "rawLabel": "4",
+          "title": "Execute file and Directory",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "tac: to display the file content in reverse order. 4",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "read: Making scripts interactive, Using command 6",
           "source": "summary_table"
         }
       ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -3071,33 +3880,38 @@
       "candidateUnits": [
         {
           "order": 1,
-          "rawLabel": "I",
-          "title": "Introduction to HTML",
+          "rawLabel": "1",
+          "title": "*Work with basic HTML tags. 2",
           "source": "summary_table"
         },
         {
           "order": 2,
-          "rawLabel": "II",
-          "title": "Lists and Links",
+          "rawLabel": "2",
+          "title": "*Work on paragraph in webpage Assign title to webpage. Practice 4",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "given type of' frame' with 6",
           "source": "summary_table"
         },
         {
           "order": 5,
-          "rawLabel": "V",
-          "title": "Cascading Style sheets",
+          "rawLabel": "5",
+          "title": "*Work on HTML web page link. hyperlinks to 4",
           "source": "summary_table"
         },
         {
           "order": 6,
-          "rawLabel": "VI",
-          "title": "Website Hosting",
+          "rawLabel": "6",
+          "title": "*Use of links in web page. 2",
           "source": "summary_table"
         }
       ],
       "unitQuality": {
         "promotable": false,
         "blockers": [
-          "Fewer than five unit titles were extracted.",
           "Unit order is not consecutive from 1."
         ]
       },
@@ -3139,12 +3953,20 @@
           "text": "Write a leave application, request and apology letter."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "b. Passive listening selective listening",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
         "promotable": false,
         "blockers": [
           "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
+          "Unit order does not start at 1.",
+          "Unit order is not consecutive from 1."
         ]
       },
       "extractionStatus": "structure_promotable"
@@ -3190,13 +4012,47 @@
           "text": "Apply basic financial knowledge in daily life."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Prepare a poster [handmade or using graphic design tool] on any ONE 5",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Prepare a Report on any One of the above theme/topic. 5",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Social Activity 5",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Prepare a Presentation using AI Tools on Global Warming/ Harmful 5",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Prepare a one minute reel/video [any language] on the importance of 5",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Visit to orphanage/ social organisation to create awareness about the 5",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -3243,13 +4099,47 @@
           "text": "Create and Traverse Tree to solve problems."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Introduction to Data Structures",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Searching and Sorting",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Linked List",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Stack",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Queue",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Tree",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -3300,16 +4190,44 @@
       "candidateUnits": [
         {
           "order": 1,
-          "rawLabel": "I",
-          "title": "Principles of Object",
-          "source": "course_content"
+          "rawLabel": "1",
+          "title": "Principles of Object Oriented Programming",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Functions in C++, Classes & Objects",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Constructors and Destructors",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Inheritance & Exception Handling",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Pointers and Polymorphism",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Console I/O Operations & File Handling",
+          "source": "summary_table"
         }
       ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -3355,13 +4273,47 @@
           "text": "Understand use of support chips."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Architecture of 8086",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "8086/8088 Instruction Set and Assembler Directives",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Assembly Language Programming Techniques",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Architecture of 80386 and Pentium",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Interrupts and Interrupt Service Procedures",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Support Chips and Interfacing",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -3409,29 +4361,44 @@
       "candidateUnits": [
         {
           "order": 1,
-          "rawLabel": "I",
+          "rawLabel": "1",
           "title": "Introduction to Communication",
           "source": "summary_table"
         },
         {
           "order": 2,
-          "rawLabel": "II",
+          "rawLabel": "2",
           "title": "Transmission Media",
           "source": "summary_table"
         },
         {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Analog and Digital Communication",
+          "source": "summary_table"
+        },
+        {
           "order": 4,
-          "rawLabel": "IV",
+          "rawLabel": "4",
           "title": "Multiplexing & Switching",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Networking Standards & References",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Data Communication Technologies",
           "source": "summary_table"
         }
       ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order is not consecutive from 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -3475,13 +4442,47 @@
           "text": "Write the graphics program and perform different operations on database."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Introduction to .NET Framework & VB.NET",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "The Visual Basic .NET Language",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Arrays, Functions & Exception Handling",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Basic Controls & Forms",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Dialog Boxes and Event Handling",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Database Programming & Graphics",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -3527,13 +4528,47 @@
           "text": "Use editing tools for both video and audio, apply color correction techniques."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Introduction to Animation & Multimedia",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "2D Animation Concepts",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "3D Modeling & Animation",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Blender Basics",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Rendering & Compositing",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Post-Production & Video Editing",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -3581,13 +4616,47 @@
           "text": "Follow procedure to cast vote using voter-id."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Introduction to Constitution of India",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Fundamental Rights & Duties",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Union Government & Parliament",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "State Government & Administration",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Local Self Government & Panchayati Raj",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Election Commission & Voter Education",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -3635,13 +4704,47 @@
           "text": "Compare and analyze different file systems and directory structures."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Handheld Computer Operating system",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Implementation 2",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Queue Scheduling, Multilevel algorithms",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "(Process Termination, Resource",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "hardware. allocation",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "n processes using scheduling 2",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -3689,12 +4792,26 @@
           "text": "Write function programs and know the concept of distributed database."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "control structures",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "(DCL) for granting and revoking control the access to data using SQL. 2",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
         "promotable": false,
         "blockers": [
           "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
+          "Unit order does not start at 1.",
+          "Unit order is not consecutive from 1."
         ]
       },
       "extractionStatus": "structure_promotable"
@@ -3745,20 +4862,26 @@
       "candidateUnits": [
         {
           "order": 2,
-          "rawLabel": "II",
-          "title": "Local Area Network",
+          "rawLabel": "2",
+          "title": "Ethernet (10Base5), Thin Ethernet of WLAN",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Link Control Protocol, Authentication",
           "source": "summary_table"
         },
         {
           "order": 4,
-          "rawLabel": "IV",
-          "title": "IP Addressing and Routing",
+          "rawLabel": "4",
+          "title": "Masking",
           "source": "summary_table"
         },
         {
           "order": 5,
-          "rawLabel": "V",
-          "title": "Transport and Application",
+          "rawLabel": "5",
+          "title": "UDP, applications. process (control connection",
           "source": "summary_table"
         },
         {
@@ -3771,7 +4894,6 @@
       "unitQuality": {
         "promotable": false,
         "blockers": [
-          "Fewer than five unit titles were extracted.",
           "Unit order does not start at 1.",
           "Unit order is not consecutive from 1."
         ]
@@ -3821,12 +4943,37 @@
           "text": "Perform file operations using Python"
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "LLO",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "for performing basic input and 2",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "using a while loop. 2",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "demonstrate 2",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
         "promotable": false,
         "blockers": [
           "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
+          "Unit order is not consecutive from 1."
         ]
       },
       "extractionStatus": "structure_promotable"
@@ -3874,12 +5021,42 @@
           "text": "Design applet and graphics programs."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "OOPs, Language",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "(all forms of if statement) 2",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Interfaces: Multiple Inheritance,",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Errors, Create",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "AWT& JDBC",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
         "promotable": false,
         "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
+          "Unit order is not consecutive from 1."
         ]
       },
       "extractionStatus": "structure_promotable"
@@ -3926,12 +5103,43 @@
           "text": "Use basic digital marketing methods like social media, SEO, and online advertising."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "professional Engineer and 2",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "growth, and areas needing 2",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "and Marketing Manager. 2",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "entrepreneurial traits and identify improvement in entrepreneurial 2",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Group will propose the business 2",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
         "promotable": false,
         "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
+          "Unit order does not start at 1.",
+          "Unit order is not consecutive from 1."
         ]
       },
       "extractionStatus": "structure_promotable"
@@ -3980,9 +5188,21 @@
       ],
       "candidateUnits": [
         {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "TRAINING (FULL EXIT INP R23CP5404",
+          "source": "summary_table"
+        },
+        {
           "order": 2,
-          "rawLabel": "II",
-          "title": "Professional Practice in Engineering",
+          "rawLabel": "2",
+          "title": "+ case study competence, lifelong learning,",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "colleagues",
           "source": "summary_table"
         }
       ],
@@ -3990,7 +5210,6 @@
         "promotable": false,
         "blockers": [
           "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1.",
           "Unit order is not consecutive from 1."
         ]
       },
@@ -4037,13 +5256,47 @@
           "text": "Use quality assurance principles in software development."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Introduction to software Engineering",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Requirement Engineering",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Design Engineering",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Software Testing Techniques",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Process and project Metrics, Software project",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Risk management and project scheduling",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -4089,12 +5342,48 @@
           "text": "Develop and integrate applications using Hibernate ORM and web services (SOAP & REST)."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Introduction to Swings &Swing Controls",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Java Layout Managers & Swing Event",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Design and develop a Java Swing",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Develop a Java application that",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Develop a Java program using JSP",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Develop a Java program using JSP",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
         "promotable": false,
         "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
+          "Duplicate unit titles were extracted."
         ]
       },
       "extractionStatus": "structure_promotable"
@@ -4142,12 +5431,48 @@
           "text": "Develop database-driven applications using MySQLi and PDO."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "LLO",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Control Structures, Functions, Arrays",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "LLO",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "LLO",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "LLO",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "LLO",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
         "promotable": false,
         "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
+          "Duplicate unit titles were extracted."
         ]
       },
       "extractionStatus": "structure_promotable"
@@ -4300,15 +5625,33 @@
       ],
       "candidateUnits": [
         {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Internet Architecture and Network",
+          "source": "summary_table"
+        },
+        {
           "order": 2,
-          "rawLabel": "II",
+          "rawLabel": "2",
           "title": "Routing Protocols",
           "source": "summary_table"
         },
         {
           "order": 3,
-          "rawLabel": "III",
-          "title": "Protocols",
+          "rawLabel": "3",
+          "title": "Transport Layer Protocols",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Wireless Network Technologies",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "V 5",
           "source": "summary_table"
         },
         {
@@ -4319,12 +5662,8 @@
         }
       ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1.",
-          "Unit order is not consecutive from 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -4373,12 +5712,37 @@
           "text": "Evaluate cloud database platforms and emerging database technologies."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Multiversion Concurrency",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "allocation strategies in a 2",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "dimensional models using",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "SQL Database ,Google Cloud SQL",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
         "promotable": false,
         "blockers": [
           "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
+          "Unit order is not consecutive from 1."
         ]
       },
       "extractionStatus": "structure_promotable"
@@ -4427,8 +5791,14 @@
       "candidateUnits": [
         {
           "order": 1,
-          "rawLabel": "I",
-          "title": "Introduction to Data Science",
+          "rawLabel": "1",
+          "title": "Study Data Science concepts, lifecycle and Understand basic concepts and 2",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Identify structured, semi-structured and Differentiate types of data in real- 2",
           "source": "summary_table"
         },
         {
@@ -4451,16 +5821,14 @@
         },
         {
           "order": 6,
-          "rawLabel": "VI",
-          "title": "Emerging Trends in Data Science",
+          "rawLabel": "6",
+          "title": "Study CSV, JSON and XML data formats using Interpret different data 2",
           "source": "summary_table"
         }
       ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Unit order is not consecutive from 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -4507,25 +5875,45 @@
       ],
       "candidateUnits": [
         {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Management Fundamentals for IT",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Organization & Work Systems in IT",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Human Resource Management in IT",
+          "source": "summary_table"
+        },
+        {
           "order": 4,
-          "rawLabel": "IV",
-          "title": "Financial Management &",
-          "source": "course_content"
+          "rawLabel": "4",
+          "title": "Financial Management & Taxation",
+          "source": "summary_table"
         },
         {
           "order": 5,
-          "rawLabel": "V",
-          "title": "Digital Resource & Asset",
-          "source": "course_content"
+          "rawLabel": "5",
+          "title": "1) ABC analysis",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "projects of software applications",
+          "source": "summary_table"
         }
       ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1.",
-          "Unit order is not consecutive from 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -4574,22 +5962,39 @@
       ],
       "candidateUnits": [
         {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "II Intelligence",
+          "source": "summary_table"
+        },
+        {
           "order": 3,
-          "rawLabel": "III",
-          "title": "Internet of Things",
+          "rawLabel": "3",
+          "title": "learning techniques on labelled datasets 2",
           "source": "summary_table"
         },
         {
           "order": 4,
-          "rawLabel": "IV",
-          "title": "Sustainable Computing",
+          "rawLabel": "4",
+          "title": "Interference",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "assess the maturity level of a technology 2",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "societal implications through media 2",
           "source": "summary_table"
         }
       ],
       "unitQuality": {
         "promotable": false,
         "blockers": [
-          "Fewer than five unit titles were extracted.",
           "Unit order does not start at 1.",
           "Unit order is not consecutive from 1."
         ]
@@ -4642,13 +6047,47 @@
           "text": "Apply and analyze unsupervised learning techniques."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Introduction to Machine Learning",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Introduction to data and its types",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Data pre-processing",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Feature Engineering",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Classification, Multi-Label Classification) algorithms such as Linear",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Applications of clustering. analyze patterns",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -4695,12 +6134,20 @@
           "text": "Design AI workflows with no-code automation tools while addressing ethical and responsible AI practices."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Cleaning, Transformations, M-Language calculate business metrics using 7",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
         "promotable": false,
         "blockers": [
           "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
+          "Unit order does not start at 1.",
+          "Unit order is not consecutive from 1."
         ]
       },
       "extractionStatus": "structure_promotable"
@@ -4746,12 +6193,26 @@
           "text": "Execute Tosca test cases with test data management, recovery scenarios, configuration, and reporting for result analysis."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "tools. 2",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "close(). 2",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
         "promotable": false,
         "blockers": [
           "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
+          "Unit order does not start at 1.",
+          "Unit order is not consecutive from 1."
         ]
       },
       "extractionStatus": "structure_promotable"
@@ -4826,36 +6287,46 @@
       ],
       "candidateUnits": [
         {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "classification",
+          "source": "summary_table"
+        },
+        {
           "order": 2,
-          "rawLabel": "II",
-          "title": "User Authentication and Access Control",
+          "rawLabel": "2",
+          "title": "methods",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Caesar cipher, Playfair cipher,",
           "source": "summary_table"
         },
         {
           "order": 4,
-          "rawLabel": "IV",
-          "title": "Modern Encryption and Digital Security",
+          "rawLabel": "4",
+          "title": "algorithms: purpose and comparison",
           "source": "summary_table"
         },
         {
           "order": 5,
-          "rawLabel": "V",
-          "title": "Network and E-mail Security",
+          "rawLabel": "5",
+          "title": "to generate or validate a strong password 2",
           "source": "summary_table"
         },
         {
           "order": 6,
-          "rawLabel": "VI",
-          "title": "Database and Cloud Security",
+          "rawLabel": "6",
+          "title": "methods",
           "source": "summary_table"
         }
       ],
       "unitQuality": {
         "promotable": false,
         "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1.",
-          "Unit order is not consecutive from 1."
+          "Duplicate unit titles were extracted."
         ]
       },
       "extractionStatus": "structure_promotable"
@@ -4903,25 +6374,45 @@
       ],
       "candidateUnits": [
         {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "community cloud, hybrid cloud",
+          "source": "summary_table"
+        },
+        {
           "order": 2,
           "rawLabel": "II",
           "title": "Virtualization in Cloud",
           "source": "summary_table"
         },
         {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "center services",
+          "source": "summary_table"
+        },
+        {
           "order": 4,
-          "rawLabel": "IV",
-          "title": "Cloud Service Management",
+          "rawLabel": "4",
+          "title": "users and federated cloud in cloud computing",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "control concepts",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "integration",
           "source": "summary_table"
         }
       ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1.",
-          "Unit order is not consecutive from 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     },
@@ -4967,13 +6458,47 @@
           "text": "Visualize the data using a R/Python."
         }
       ],
-      "candidateUnits": [],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "compilers, online compliers",
+          "source": "summary_table"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "R Flow Control",
+          "source": "summary_table"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "R Data Structure",
+          "source": "summary_table"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Pie Slices, Create a 3D Pie Chart",
+          "source": "summary_table"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Manipulate data using R",
+          "source": "summary_table"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Data Visualization Using R and Python",
+          "source": "summary_table"
+        }
+      ],
       "unitQuality": {
-        "promotable": false,
-        "blockers": [
-          "Fewer than five unit titles were extracted.",
-          "Unit order does not start at 1."
-        ]
+        "promotable": true,
+        "blockers": []
       },
       "extractionStatus": "structure_promotable"
     }

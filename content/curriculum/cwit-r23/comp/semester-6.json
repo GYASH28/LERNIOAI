@@ -40,8 +40,8 @@
       },
       "units": [
         {
-          "order": 4,
-          "title": "Financial Management &",
+          "order": 1,
+          "title": "Management Fundamentals for IT",
           "topics": [],
           "sourceReferences": [
             {
@@ -57,11 +57,71 @@
             }
           ],
           "verificationStatus": "structure_verified",
-          "notes": "Promoted from official course content extraction; topics remain pending review."
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "Organization & Work Systems in IT",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                283,
+                284,
+                285,
+                286,
+                287,
+                288
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "Human Resource Management in IT",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                283,
+                284,
+                285,
+                286,
+                287,
+                288
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "Financial Management & Taxation",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                283,
+                284,
+                285,
+                286,
+                287,
+                288
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         },
         {
           "order": 5,
-          "title": "Digital Resource & Asset",
+          "title": "1) ABC analysis",
           "topics": [],
           "sourceReferences": [
             {
@@ -77,7 +137,27 @@
             }
           ],
           "verificationStatus": "structure_verified",
-          "notes": "Promoted from official course content extraction; topics remain pending review."
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "projects of software applications",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                283,
+                284,
+                285,
+                286,
+                287,
+                288
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
         }
       ],
       "outcomes": [
@@ -219,8 +299,30 @@
       },
       "units": [
         {
+          "order": 2,
+          "title": "II Intelligence",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                289,
+                290,
+                291,
+                292,
+                293,
+                294,
+                295,
+                296
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
           "order": 3,
-          "title": "Internet of Things",
+          "title": "learning techniques on labelled datasets 2",
           "topics": [],
           "sourceReferences": [
             {
@@ -242,7 +344,51 @@
         },
         {
           "order": 4,
-          "title": "Sustainable Computing",
+          "title": "Interference",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                289,
+                290,
+                291,
+                292,
+                293,
+                294,
+                295,
+                296
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "assess the maturity level of a technology 2",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                289,
+                290,
+                291,
+                292,
+                293,
+                294,
+                295,
+                296
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "societal implications through media 2",
           "topics": [],
           "sourceReferences": [
             {
@@ -412,7 +558,158 @@
       "assessment": {
         "totalMarks": 175
       },
-      "units": [],
+      "units": [
+        {
+          "order": 1,
+          "title": "Introduction to Machine Learning",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                297,
+                298,
+                299,
+                300,
+                301,
+                302,
+                303,
+                304,
+                305,
+                306,
+                307
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "Introduction to data and its types",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                297,
+                298,
+                299,
+                300,
+                301,
+                302,
+                303,
+                304,
+                305,
+                306,
+                307
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "Data pre-processing",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                297,
+                298,
+                299,
+                300,
+                301,
+                302,
+                303,
+                304,
+                305,
+                306,
+                307
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "Feature Engineering",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                297,
+                298,
+                299,
+                300,
+                301,
+                302,
+                303,
+                304,
+                305,
+                306,
+                307
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "Classification, Multi-Label Classification) algorithms such as Linear",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                297,
+                298,
+                299,
+                300,
+                301,
+                302,
+                303,
+                304,
+                305,
+                306,
+                307
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "Applications of clustering. analyze patterns",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                297,
+                298,
+                299,
+                300,
+                301,
+                302,
+                303,
+                304,
+                305,
+                306,
+                307
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,
@@ -580,7 +877,30 @@
       "assessment": {
         "totalMarks": 75
       },
-      "units": [],
+      "units": [
+        {
+          "order": 5,
+          "title": "Cleaning, Transformations, M-Language calculate business metrics using 7",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                308,
+                309,
+                310,
+                311,
+                312,
+                313,
+                314,
+                315
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,
@@ -730,7 +1050,48 @@
       "assessment": {
         "totalMarks": 50
       },
-      "units": [],
+      "units": [
+        {
+          "order": 2,
+          "title": "tools. 2",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                316,
+                317,
+                318,
+                319,
+                320,
+                321
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "close(). 2",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                316,
+                317,
+                318,
+                319,
+                320,
+                321
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,
@@ -893,8 +1254,50 @@
       },
       "units": [
         {
+          "order": 1,
+          "title": "classification",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                328,
+                329,
+                330,
+                331,
+                332,
+                333,
+                334
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
           "order": 2,
-          "title": "User Authentication and Access Control",
+          "title": "methods",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                328,
+                329,
+                330,
+                331,
+                332,
+                333,
+                334
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "Caesar cipher, Playfair cipher,",
           "topics": [],
           "sourceReferences": [
             {
@@ -915,7 +1318,7 @@
         },
         {
           "order": 4,
-          "title": "Modern Encryption and Digital Security",
+          "title": "algorithms: purpose and comparison",
           "topics": [],
           "sourceReferences": [
             {
@@ -936,7 +1339,7 @@
         },
         {
           "order": 5,
-          "title": "Network and E-mail Security",
+          "title": "to generate or validate a strong password 2",
           "topics": [],
           "sourceReferences": [
             {
@@ -957,7 +1360,7 @@
         },
         {
           "order": 6,
-          "title": "Database and Cloud Security",
+          "title": "methods",
           "topics": [],
           "sourceReferences": [
             {
@@ -1123,6 +1526,26 @@
       },
       "units": [
         {
+          "order": 1,
+          "title": "community cloud, hybrid cloud",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                335,
+                336,
+                337,
+                338,
+                339,
+                340
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
           "order": 2,
           "title": "Virtualization in Cloud",
           "topics": [],
@@ -1143,8 +1566,68 @@
           "notes": "Promoted from official summary table extraction; topics remain pending review."
         },
         {
+          "order": 3,
+          "title": "center services",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                335,
+                336,
+                337,
+                338,
+                339,
+                340
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
           "order": 4,
-          "title": "Cloud Service Management",
+          "title": "users and federated cloud in cloud computing",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                335,
+                336,
+                337,
+                338,
+                339,
+                340
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "control concepts",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                335,
+                336,
+                337,
+                338,
+                339,
+                340
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "integration",
           "topics": [],
           "sourceReferences": [
             {
@@ -1301,7 +1784,134 @@
       "assessment": {
         "totalMarks": 175
       },
-      "units": [],
+      "units": [
+        {
+          "order": 1,
+          "title": "compilers, online compliers",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                341,
+                342,
+                343,
+                344,
+                345,
+                346,
+                347
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 2,
+          "title": "R Flow Control",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                341,
+                342,
+                343,
+                344,
+                345,
+                346,
+                347
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 3,
+          "title": "R Data Structure",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                341,
+                342,
+                343,
+                344,
+                345,
+                346,
+                347
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 4,
+          "title": "Pie Slices, Create a 3D Pie Chart",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                341,
+                342,
+                343,
+                344,
+                345,
+                346,
+                347
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 5,
+          "title": "Manipulate data using R",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                341,
+                342,
+                343,
+                344,
+                345,
+                346,
+                347
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        },
+        {
+          "order": 6,
+          "title": "Data Visualization Using R and Python",
+          "topics": [],
+          "sourceReferences": [
+            {
+              "sourceId": "comp-r23-curriculum",
+              "pages": [
+                341,
+                342,
+                343,
+                344,
+                345,
+                346,
+                347
+              ]
+            }
+          ],
+          "verificationStatus": "structure_verified",
+          "notes": "Promoted from official summary table extraction; topics remain pending review."
+        }
+      ],
       "outcomes": [
         {
           "order": 1,
