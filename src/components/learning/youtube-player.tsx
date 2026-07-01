@@ -35,8 +35,8 @@ function extractVideoId(url: string): string | null {
  * YouTube video/playlist embed player with thumbnails.
  *
  * For single videos: uses i.ytimg.com thumbnail (instant, no API needed).
- * For playlists: fetches thumbnail via YouTube oEmbed API (one request per
- * playlist, cached in localStorage to avoid re-fetching).
+ * For playlists: fetches thumbnail via our server-side API route
+ * (/api/youtube-thumbnail) which proxies YouTube's oEmbed API (avoids CORS).
  */
 export function YouTubePlayer({
   url,
@@ -48,49 +48,49 @@ export function YouTubePlayer({
 }: YouTubePlayerProps) {
   const [playing, setPlaying] = useState(false)
   const [thumbnail, setThumbnail] = useState<string | null>(null)
-  const [thumbnailLoading, setThumbnailLoading] = useState(true)
+  const [thumbLoaded, setThumbLoaded] = useState(false)
+  const [thumbError, setThumbError] = useState(false)
 
   const videoId = extractVideoId(url)
   const playlistId = extractPlaylistId(url)
 
-  // For single videos, we can get the thumbnail instantly
   useEffect(() => {
+    // For single videos, use i.ytimg.com directly (instant, no fetch)
     if (videoId) {
       setThumbnail(`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`)
-      setThumbnailLoading(false)
       return
     }
 
-    // For playlists, try to fetch via oEmbed
+    // For playlists, fetch via our server-side API (avoids CORS)
     if (playlistId) {
-      // Check localStorage cache first
+      // Check localStorage cache
       const cacheKey = `yt_thumb_${playlistId}`
-      const cached = localStorage.getItem(cacheKey)
-      if (cached) {
-        setThumbnail(cached)
-        setThumbnailLoading(false)
-        return
-      }
+      try {
+        const cached = localStorage.getItem(cacheKey)
+        if (cached) {
+          setThumbnail(cached)
+          return
+        }
+      } catch {}
 
-      // Fetch via oEmbed (returns thumbnail_url for playlists)
-      setThumbnailLoading(true)
-      fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`)
+      // Fetch from our API route
+      fetch(`/api/youtube-thumbnail?url=${encodeURIComponent(url)}`)
         .then((res) => res.json())
         .then((data) => {
-          if (data.thumbnail_url) {
-            setThumbnail(data.thumbnail_url)
-            localStorage.setItem(cacheKey, data.thumbnail_url)
+          if (data.thumbnail) {
+            setThumbnail(data.thumbnail)
+            try {
+              localStorage.setItem(cacheKey, data.thumbnail)
+            } catch {}
           }
         })
         .catch(() => {
-          // Fallback: use YouTube's placeholder for playlists
-          setThumbnail(null)
+          setThumbError(true)
         })
-        .finally(() => setThumbnailLoading(false))
       return
     }
 
-    setThumbnailLoading(false)
+    setThumbError(true)
   }, [url, videoId, playlistId])
 
   const buildEmbedUrl = useCallback(() => {
@@ -119,32 +119,41 @@ export function YouTubePlayer({
         ) : (
           <button
             onClick={() => setPlaying(true)}
-            className="absolute inset-0 flex h-full w-full items-center justify-center transition-all hover:bg-black/20"
+            className="absolute inset-0 flex h-full w-full items-center justify-center transition-all"
             aria-label={`Play: ${title}`}
           >
-            {/* Thumbnail background */}
-            {thumbnailLoading ? (
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-zinc-800 to-zinc-900">
-                <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
-              </div>
-            ) : thumbnail ? (
+            {/* Thumbnail */}
+            {thumbnail && !thumbError ? (
               <img
                 src={thumbnail}
                 alt={title}
                 className="absolute inset-0 h-full w-full object-cover"
-                onError={(e) => {
-                  // If thumbnail fails to load, show gradient fallback
-                  e.currentTarget.style.display = 'none'
+                onLoad={() => setThumbLoaded(true)}
+                onError={() => {
+                  setThumbError(true)
+                  setThumbLoaded(true)
                 }}
               />
-            ) : (
+            ) : null}
+
+            {/* Loading state (no thumbnail yet, no error) */}
+            {!thumbnail && !thumbError && (
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-zinc-800 to-zinc-900">
+                <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+              </div>
+            )}
+
+            {/* Fallback (thumbnail failed) */}
+            {thumbError && (
               <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-red-900/30 to-red-700/20">
-                <Youtube className="h-16 w-16 text-red-600" aria-hidden="true" />
+                <Youtube className="h-12 w-12 text-red-600/80" aria-hidden="true" />
               </div>
             )}
 
             {/* Dark overlay for better play button visibility */}
-            <div className="absolute inset-0 bg-black/30 transition-opacity hover:bg-black/40" />
+            {thumbLoaded && !thumbError && (
+              <div className="absolute inset-0 bg-black/30" />
+            )}
 
             {/* Play button */}
             <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full bg-red-600 shadow-2xl transition-transform hover:scale-110 sm:h-16 sm:w-16">
