@@ -27,6 +27,7 @@ import {
   Search,
   LogOut,
   ShieldCheck,
+  MessageSquare,
   Sun,
   Moon,
 } from 'lucide-react'
@@ -232,6 +233,15 @@ export function Sidebar() {
           >
             <Settings className="h-4 w-4" />
             <span className="md:hidden xl:inline">Settings and preferences</span>
+          </Link>
+          <Link
+            href="/feedback"
+            onClick={() => setSidebarOpen(false)}
+            className="flex w-full items-center justify-center gap-2 rounded-lg px-2 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground xl:justify-start"
+            title="Send feedback"
+          >
+            <MessageSquare className="h-4 w-4" />
+            <span className="md:hidden xl:inline">Send feedback</span>
           </Link>
           <ThemeToggleSidebar />
           {user && (
