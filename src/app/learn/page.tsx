@@ -1,11 +1,11 @@
 import { redirect } from 'next/navigation'
-import { RouteViewPage } from '@/components/app/route-view-page'
 import { isDatabaseUnavailableError } from '@/lib/api-error-policy'
 import { getCurrentUser } from '@/lib/auth'
 import {
   getStudentLearningScope,
   hasResolvedLearningScope,
 } from '@/features/learning/server/get-student-learning-scope'
+import { LearnViewClient } from './learn-view-client'
 
 export const dynamic = 'force-dynamic'
 
@@ -24,5 +24,5 @@ export default async function LearnPage() {
     if (!isDatabaseUnavailableError(error)) throw error
   }
 
-  return <RouteViewPage view="learn" />
+  return <LearnViewClient />
 }

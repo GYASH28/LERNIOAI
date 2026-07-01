@@ -251,13 +251,23 @@ export const authOptions: NextAuthOptions = {
   },
   events: {
     async createUser({ user }) {
+      // Auto-assign new OAuth users to COMP / R23 scheme so they can
+      // immediately access the Learn section without the complete-profile step.
+      const defaultScheme = await db.academicScheme.findFirst({
+        where: { code: 'R23', programme: { code: 'DCOMP' } },
+        select: { id: true },
+      })
+
       await db.user.update({
         where: { id: user.id },
         data: {
           role: 'student',
           status: 'active',
           provider: 'oauth',
-          profileComplete: false,
+          profileComplete: true,
+          departmentCode: 'COMP',
+          semesterNumber: 3,
+          ...(defaultScheme ? { schemeId: defaultScheme.id } : {}),
         },
       })
     },
