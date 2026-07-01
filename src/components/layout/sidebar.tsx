@@ -27,10 +27,13 @@ import {
   Search,
   LogOut,
   ShieldCheck,
+  Sun,
+  Moon,
 } from 'lucide-react'
 import type { ViewKey } from '@/lib/types'
 import { Button } from '@/components/ui/button'
 import { routeForView } from '@/lib/routes'
+import { usePrefs } from '@/components/theme-provider'
 
 const NAV_ITEMS: { key: ViewKey; label: string; icon: typeof BookOpen }[] = [
   { key: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -228,6 +231,7 @@ export function Sidebar() {
             <Settings className="h-4 w-4" />
             <span className="md:hidden xl:inline">Settings and preferences</span>
           </Link>
+          <ThemeToggleSidebar />
           {user && (
             <button
               type="button"
@@ -333,5 +337,26 @@ export function MobileNav() {
         </button>
       </div>
     </nav>
+  )
+}
+
+// ─── Dark mode toggle for sidebar ───────────────────────────────────────────
+// Uses the existing ThemeProvider's usePrefs() to toggle between light/dark.
+
+function ThemeToggleSidebar() {
+  const { pref, setPref } = usePrefs()
+  const isDark = pref.appearance === 'dark'
+
+  return (
+    <button
+      type="button"
+      onClick={() => setPref({ appearance: isDark ? 'light' : 'dark' })}
+      className="flex w-full items-center justify-center gap-2 rounded-lg px-2 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground xl:justify-start"
+      title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+    >
+      {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+      <span className="md:hidden xl:inline">{isDark ? 'Light mode' : 'Dark mode'}</span>
+    </button>
   )
 }
