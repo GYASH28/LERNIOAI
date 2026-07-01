@@ -1,0 +1,638 @@
+{
+  "$schema": "https://lernio.ai/schemas/curriculum-manifest.json",
+  "institutionCode": "CWIT",
+  "schemeCode": "R23",
+  "schemeName": "CWIT R23 Diploma Scheme",
+  "sourceDocuments": [
+    "CWIT_Semester_1_2_YouTube_Lecture_Links.pdf",
+    "CWIT_Semester_3_to_6_YouTube_Lecture_Links.pdf"
+  ],
+  "verificationStatus": "candidate",
+  "notes": "Extracted from the two curated YouTube lecture guide PDFs dated 28 June 2026. Subject codes follow CWIT R23 scheme. Resources are public YouTube playlists/videos mapped to subjects. Per the master prompt, these are candidates requiring reviewer approval before student publication.",
+  "programmes": [
+    {
+      "code": "DCOMP",
+      "name": "Diploma in Computer Engineering",
+      "departmentCode": "COMP"
+    },
+    {
+      "code": "DCIOT",
+      "name": "Diploma in Computer Engineering & IoT",
+      "departmentCode": "CIOT"
+    }
+  ],
+  "semesters": [
+    {
+      "number": 1,
+      "name": "Semester 1",
+      "description": "Foundation semester shared by Computer Engineering and Computer Engineering & IoT.",
+      "subjects": [
+        {
+          "code": "R23CP1701",
+          "alternateCode": "R23CI1701",
+          "name": "Basic Mathematics",
+          "category": "theory",
+          "priority": "high",
+          "credits": 4,
+          "description": "Differentiation, integration, applications, differential equations and step-by-step numerical problem solving.",
+          "coverageFocus": "Differentiation, integration, applications, differential equations and step-by-step numerical problem solving.",
+          "resources": [
+            {
+              "title": "Basic Mathematics (M-1) | K Scheme | MSBTE | FY Diploma in Engineering",
+              "channel": "Kharat Academy",
+              "language": "hi-Hinglish",
+              "role": "primary_video",
+              "url": "https://www.youtube.com/playlist?list=PL5ZIcm-hgbJM1xRu_2OUf0qRXBNf9Z3n-",
+              "playlistId": "PL5ZIcm-hgbJM1xRu_2OUf0qRXBNf9Z3n-",
+              "description": "Structured first-year diploma mathematics series; suitable as the main exam-preparation playlist.",
+              "sourcePdf": "sem12",
+              "sourcePage": 3
+            },
+            {
+              "title": "Diploma (MSBTE) Semester 1 Basic Mathematics - Complete Lecture Videos",
+              "channel": "YouTube playlist",
+              "language": "hi-Hinglish",
+              "role": "alternate_video",
+              "url": "https://www.youtube.com/playlist?list=PLoh2jNeWbsgZoYQYB0GxZoNFVoDn8vKZM",
+              "playlistId": "PLoh2jNeWbsgZoYQYB0GxZoNFVoDn8vKZM",
+              "description": "Useful second explanation source when a topic is unclear in the primary playlist.",
+              "sourcePdf": "sem12",
+              "sourcePage": 3
+            },
+            {
+              "title": "Basic Mathematics - Diploma Semester 1",
+              "channel": "Maharashtra Engineering Academy",
+              "language": "hi-Hinglish",
+              "role": "alternate_video",
+              "url": "https://www.youtube.com/playlist?list=PLI8OA8TUlOBlddBz37DpVJfqmR4yC28ai",
+              "playlistId": "PLI8OA8TUlOBlddBz37DpVJfqmR4yC28ai",
+              "description": "Additional diploma-oriented practice and revision coverage.",
+              "sourcePdf": "sem12",
+              "sourcePage": 3
+            }
+          ]
+        },
+        {
+          "code": "R23CP2701",
+          "alternateCode": "R23CI2701",
+          "name": "Basic Science",
+          "category": "theory",
+          "priority": "important",
+          "credits": 4,
+          "description": "Foundational physics, chemistry, numerical problems, concepts and laboratory-related understanding.",
+          "coverageFocus": "Foundational physics, chemistry, numerical problems, concepts and laboratory-related understanding.",
+          "resources": [
+            {
+              "title": "Basic Physics - MSBTE Diploma - Semester 1",
+              "channel": "YouTube playlist",
+              "language": "en-Hinglish",
+              "role": "primary_video",
+              "url": "https://www.youtube.com/playlist?list=PLm_MSClsnwm8p9NuVzdMZUiP5Djm8DVaV",
+              "playlistId": "PLm_MSClsnwm8p9NuVzdMZUiP5Djm8DVaV",
+              "description": "Diploma-first coverage for the physics portion of Basic Science.",
+              "sourcePdf": "sem12",
+              "sourcePage": 4
+            },
+            {
+              "title": "Basic Chemistry - First Semester",
+              "channel": "YouTube playlist",
+              "language": "en-Hinglish",
+              "role": "primary_video",
+              "url": "https://www.youtube.com/playlist?list=PLWb9C8G05qzt7u0HDraRSS3lQ8jLJx1G6",
+              "playlistId": "PLWb9C8G05qzt7u0HDraRSS3lQ8jLJx1G6",
+              "description": "Dedicated chemistry series for first-semester concepts and exam revision.",
+              "sourcePdf": "sem12",
+              "sourcePage": 4
+            },
+            {
+              "title": "Polytechnic Basic Science - Physics and Chemistry - First Year",
+              "channel": "YouTube playlist",
+              "language": "hi-Hinglish",
+              "role": "alternate_video",
+              "url": "https://www.youtube.com/playlist?list=PLnuii5I0tFh7TEeLYoZ4b-S_abStOp5mW",
+              "playlistId": "PLnuii5I0tFh7TEeLYoZ4b-S_abStOp5mW",
+              "description": "A combined backup resource for quick revision across both parts.",
+              "sourcePdf": "sem12",
+              "sourcePage": 4
+            }
+          ]
+        },
+        {
+          "code": "R23CP1702",
+          "alternateCode": "R23CI1702",
+          "name": "Communication Skills - English",
+          "category": "theory",
+          "priority": "skill_support",
+          "credits": 2,
+          "description": "Grammar, speaking, listening, professional vocabulary, presentations and technical communication.",
+          "coverageFocus": "Grammar, speaking, listening, professional vocabulary, presentations and technical communication.",
+          "resources": [
+            {
+              "title": "Communicative English for Engineering Students",
+              "channel": "NPTEL",
+              "language": "en",
+              "role": "primary_video",
+              "url": "https://www.youtube.com/playlist?list=PL9vL8QnJ37pIEbyEcFDSwwu8eo1UtCtsm",
+              "playlistId": "PL9vL8QnJ37pIEbyEcFDSwwu8eo1UtCtsm",
+              "description": "Covers communication principles, grammar and professional/engineering contexts.",
+              "sourcePdf": "sem12",
+              "sourcePage": 5
+            },
+            {
+              "title": "First-Year Diploma Subject Lectures - Includes Communication Skills English",
+              "channel": "YouTube playlist",
+              "language": "hi-English",
+              "role": "alternate_video",
+              "url": "https://www.youtube.com/playlist?list=PL1s7mOle6KPbVCFZ871mzdvvPTEkAK3Us",
+              "playlistId": "PL1s7mOle6KPbVCFZ871mzdvvPTEkAK3Us",
+              "description": "Useful for diploma-specific revision and mixed first-year subject support.",
+              "sourcePdf": "sem12",
+              "sourcePage": 5
+            }
+          ]
+        },
+        {
+          "code": "R23CP2201",
+          "alternateCode": "R23CI2201",
+          "name": "Engineering Graphics",
+          "category": "theory",
+          "priority": "high",
+          "credits": 4,
+          "description": "Drawing conventions, projections, dimensioning, orthographic views and problem-solving demonstrations.",
+          "coverageFocus": "Drawing conventions, projections, dimensioning, orthographic views and problem-solving demonstrations.",
+          "resources": [
+            {
+              "title": "MSBTE K Scheme Engineering Graphics 311008",
+              "channel": "YouTube playlist",
+              "language": "hi-Hinglish",
+              "role": "primary_video",
+              "url": "https://www.youtube.com/playlist?list=PLZKrqjMKcJMkC5o3Urv98fdJpbD8RO1al",
+              "playlistId": "PLZKrqjMKcJMkC5o3Urv98fdJpbD8RO1al",
+              "description": "The closest K-scheme/diploma-oriented engineering graphics playlist found.",
+              "sourcePdf": "sem12",
+              "sourcePage": 6
+            },
+            {
+              "title": "Engineering Drawing / Engineering Graphics - Orthographic and Projection Topics",
+              "channel": "YouTube playlist",
+              "language": "hi-Hinglish",
+              "role": "alternate_video",
+              "url": "https://www.youtube.com/playlist?list=PLZZO-6oaoZNUPPcmHkZMe99_5JxW1ed2p",
+              "playlistId": "PLZZO-6oaoZNUPPcmHkZMe99_5JxW1ed2p",
+              "description": "Additional visual explanations for projection and drawing construction.",
+              "sourcePdf": "sem12",
+              "sourcePage": 6
+            },
+            {
+              "title": "Engineering Graphics Tutorials",
+              "channel": "iCON Engineering Tutorials",
+              "language": "en-Hinglish",
+              "role": "alternate_video",
+              "url": "https://www.youtube.com/playlist?list=PLygzxZFYe8Z3mH7Sr9SaHHwQWrUql8yga",
+              "playlistId": "PLygzxZFYe8Z3mH7Sr9SaHHwQWrUql8yga",
+              "description": "Useful for extra worked examples and drawing practice.",
+              "sourcePdf": "sem12",
+              "sourcePage": 6
+            }
+          ]
+        },
+        {
+          "code": "R23CP6401",
+          "alternateCode": "R23CI6601",
+          "name": "Engineering Workshop Practice",
+          "category": "practical",
+          "priority": "practical",
+          "credits": 4,
+          "description": "PC components and assembly, storage/OS setup, peripherals, basic LAN, maintenance and troubleshooting.",
+          "coverageFocus": "PC components and assembly, storage/OS setup, peripherals, basic LAN, maintenance and troubleshooting.",
+          "resources": [
+            {
+              "title": "Computer Hardware Full Course",
+              "channel": "YouTube playlist",
+              "language": "hi",
+              "role": "primary_video",
+              "url": "https://www.youtube.com/playlist?list=PLS0spxc8nUsAt5iBvXjRlzr4fsep5Ov-o",
+              "playlistId": "PLS0spxc8nUsAt5iBvXjRlzr4fsep5Ov-o",
+              "description": "Practical foundation for identifying hardware, assembly and maintenance tasks.",
+              "sourcePdf": "sem12",
+              "sourcePage": 7
+            },
+            {
+              "title": "Computer Hardware and Networking Course",
+              "channel": "YouTube playlist",
+              "language": "hi",
+              "role": "alternate_video",
+              "url": "https://www.youtube.com/playlist?list=PL8Lrb8MsHQ7HKxnMWDRHWe7bcgBAd5vJw",
+              "playlistId": "PL8Lrb8MsHQ7HKxnMWDRHWe7bcgBAd5vJw",
+              "description": "Adds networking and system-setup coverage useful for workshop practicals.",
+              "sourcePdf": "sem12",
+              "sourcePage": 7
+            },
+            {
+              "title": "Computer Troubleshooting Tutorials",
+              "channel": "YouTube playlist",
+              "language": "hi",
+              "role": "alternate_video",
+              "url": "https://www.youtube.com/playlist?list=PLioynBxm_xWuqdt4bq8jyl8FuqVhyoO7q",
+              "playlistId": "PLioynBxm_xWuqdt4bq8jyl8FuqVhyoO7q",
+              "description": "Useful for diagnosing common PC, OS and peripheral problems.",
+              "sourcePdf": "sem12",
+              "sourcePage": 7
+            },
+            {
+              "title": "Computer Networking Practical - Peer-to-Peer and Switch-Based LAN",
+              "channel": "YouTube playlist",
+              "language": "hi-Hinglish",
+              "role": "alternate_video",
+              "url": "https://www.youtube.com/playlist?list=PLFe9iOZ1HkC5U8C8w5hDSTS0rZZQiU364",
+              "playlistId": "PLFe9iOZ1HkC5U8C8w5hDSTS0rZZQiU364",
+              "description": "Supports the LAN creation and connectivity portion of the workshop syllabus.",
+              "sourcePdf": "sem12",
+              "sourcePage": 7
+            }
+          ]
+        },
+        {
+          "code": "R23CP6402",
+          "alternateCode": "R23CI6602",
+          "name": "Fundamentals of ICT",
+          "category": "theory",
+          "priority": "important",
+          "credits": 4,
+          "description": "Computer fundamentals, hardware/software, operating systems, office tools, internet and digital skills.",
+          "coverageFocus": "Computer fundamentals, hardware/software, operating systems, office tools, internet and digital skills.",
+          "resources": [
+            {
+              "title": "Information Communication Technology (ICT)",
+              "channel": "YouTube playlist",
+              "language": "en",
+              "role": "primary_video",
+              "url": "https://www.youtube.com/playlist?list=PLYsKWjcnp5DJS9zW6UsjSahmd-mPUh-Js",
+              "playlistId": "PLYsKWjcnp5DJS9zW6UsjSahmd-mPUh-Js",
+              "description": "Broad conceptual coverage of ICT and computing foundations.",
+              "sourcePdf": "sem12",
+              "sourcePage": 8
+            },
+            {
+              "title": "Computer Basics Course",
+              "channel": "YouTube playlist",
+              "language": "hi",
+              "role": "alternate_video",
+              "url": "https://www.youtube.com/playlist?list=PLxCxO_FWPIhtWs0utLrv-qWIKB_KbC2tS",
+              "playlistId": "PLxCxO_FWPIhtWs0utLrv-qWIKB_KbC2tS",
+              "description": "Easy entry point for computer fundamentals and everyday practical usage.",
+              "sourcePdf": "sem12",
+              "sourcePage": 8
+            },
+            {
+              "title": "Fundamentals of ICT - MSBTE Lab Manual Support",
+              "channel": "YouTube playlist",
+              "language": "hi-Hinglish",
+              "role": "alternate_video",
+              "url": "https://www.youtube.com/playlist?list=PL2fcFLN5f1xNVUhSP_MsLynZX2eShi36z",
+              "playlistId": "PL2fcFLN5f1xNVUhSP_MsLynZX2eShi36z",
+              "description": "Useful for practical-file and laboratory task support.",
+              "sourcePdf": "sem12",
+              "sourcePage": 8
+            }
+          ]
+        },
+        {
+          "code": "R23CP4701",
+          "alternateCode": "R23CI4701",
+          "name": "Yoga and Meditation",
+          "category": "theory",
+          "priority": "optional",
+          "credits": 2,
+          "description": "Basic yoga practice, breathing, concentration, relaxation and wellbeing.",
+          "coverageFocus": "Basic yoga practice, breathing, concentration, relaxation and wellbeing. Follow college instructions for assessed activities.",
+          "resources": [
+            {
+              "title": "Yoga for Beginners",
+              "channel": "YouTube playlist",
+              "language": "en",
+              "role": "primary_video",
+              "url": "https://www.youtube.com/playlist?list=PL508C30656B253DBF",
+              "playlistId": "PL508C30656B253DBF",
+              "description": "Simple guided sessions suitable for foundational practice.",
+              "sourcePdf": "sem12",
+              "sourcePage": 9
+            },
+            {
+              "title": "Guided Pranayama and Meditation",
+              "channel": "YouTube playlist",
+              "language": "en-Hindi",
+              "role": "alternate_video",
+              "url": "https://www.youtube.com/playlist?list=PLWn8QRqY8ySxoL2FZNzZ6XeaoBwhCm6Hw",
+              "playlistId": "PLWn8QRqY8ySxoL2FZNzZ6XeaoBwhCm6Hw",
+              "description": "Supports breathing, relaxation and concentration practice.",
+              "sourcePdf": "sem12",
+              "sourcePage": 9
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "name": "Semester 2",
+      "description": "Shared subjects for CP and CI, plus one CI-only electronics subject.",
+      "subjects": [
+        {
+          "code": "R23CP1703",
+          "alternateCode": "R23CI1703",
+          "name": "Applied Mathematics",
+          "category": "theory",
+          "priority": "high",
+          "credits": 4,
+          "description": "Second-semester diploma mathematics with worked examples and exam-oriented problem solving.",
+          "coverageFocus": "Second-semester diploma mathematics with worked examples and exam-oriented problem solving.",
+          "resources": [
+            {
+              "title": "Applied Mathematics - Diploma Semester 2 - K Scheme",
+              "channel": "Maharashtra Engineering Academy",
+              "language": "hi-Hinglish",
+              "role": "primary_video",
+              "url": "https://www.youtube.com/playlist?list=PLI8OA8TUlOBk171Ca4pAwUIp9CmtKwocs",
+              "playlistId": "PLI8OA8TUlOBk171Ca4pAwUIp9CmtKwocs",
+              "description": "Direct diploma/K-scheme alignment and systematic semester coverage.",
+              "sourcePdf": "sem12",
+              "sourcePage": 10
+            },
+            {
+              "title": "Applied Mathematics (M-2) | K Scheme | MSBTE",
+              "channel": "Kharat Academy",
+              "language": "hi-Hinglish",
+              "role": "alternate_video",
+              "url": "https://www.youtube.com/playlist?list=PL5ZIcm-hgbJPc0UXeviNFMKwWUoaqavb0",
+              "playlistId": "PL5ZIcm-hgbJPc0UXeviNFMKwWUoaqavb0",
+              "description": "Strong backup for detailed numerical explanations and revision.",
+              "sourcePdf": "sem12",
+              "sourcePage": 10
+            },
+            {
+              "title": "Integration - Diploma Mathematics Topic Series",
+              "channel": "YouTube playlist",
+              "language": "hi-Hinglish",
+              "role": "alternate_video",
+              "url": "https://www.youtube.com/playlist?list=PLzwxHFTohkSpLLEib3e0I5IYNECGphzgL",
+              "playlistId": "PLzwxHFTohkSpLLEib3e0I5IYNECGphzgL",
+              "description": "Extra practice for one of the most calculation-heavy areas.",
+              "sourcePdf": "sem12",
+              "sourcePage": 10
+            }
+          ]
+        },
+        {
+          "code": "R23CP1401",
+          "alternateCode": "R23CI1601",
+          "name": "Programming in C",
+          "category": "theory",
+          "priority": "critical",
+          "credits": 5,
+          "description": "C syntax, decisions, loops, functions, arrays, strings, pointers, structures and file handling with coding practice.",
+          "coverageFocus": "C syntax, decisions, loops, functions, arrays, strings, pointers, structures and file handling with coding practice.",
+          "resources": [
+            {
+              "title": "Programming in C - MSBTE / Diploma Playlist",
+              "channel": "YouTube playlist",
+              "language": "hi-Hinglish",
+              "role": "primary_video",
+              "url": "https://www.youtube.com/playlist?list=PL3sp5tnO0dkOS1XP3Y2TiY7MbvQxns9X4",
+              "playlistId": "PL3sp5tnO0dkOS1XP3Y2TiY7MbvQxns9X4",
+              "description": "Closest diploma-oriented sequence for subject and exam preparation.",
+              "sourcePdf": "sem12",
+              "sourcePage": 11
+            },
+            {
+              "title": "C Programming and Data Structures",
+              "channel": "Neso Academy",
+              "language": "en",
+              "role": "alternate_video",
+              "url": "https://www.youtube.com/playlist?list=PLBlnK6fEyqRggZZgYpPMUxdY1CYkZtARR",
+              "playlistId": "PLBlnK6fEyqRggZZgYpPMUxdY1CYkZtARR",
+              "description": "Clear, detailed concept explanations; excellent for logic, pointers and fundamentals.",
+              "sourcePdf": "sem12",
+              "sourcePage": 11
+            },
+            {
+              "title": "Programming in C - K Scheme",
+              "channel": "YouTube playlist",
+              "language": "hi-Hinglish",
+              "role": "alternate_video",
+              "url": "https://www.youtube.com/playlist?list=PL-iXAqgUNsnbtO_IFKziLrqRavXeu5Ben",
+              "playlistId": "PL-iXAqgUNsnbtO_IFKziLrqRavXeu5Ben",
+              "description": "Additional syllabus-oriented coverage and question practice.",
+              "sourcePdf": "sem12",
+              "sourcePage": 11
+            }
+          ]
+        },
+        {
+          "code": "R23CP2401",
+          "alternateCode": "R23CI2601",
+          "name": "Linux Basics",
+          "category": "theory",
+          "priority": "high",
+          "credits": 4,
+          "description": "Linux structure, filesystem navigation, commands, permissions, vi editor, pipes/redirection and basic shell scripting.",
+          "coverageFocus": "Linux structure, filesystem navigation, commands, permissions, vi editor, pipes/redirection and basic shell scripting.",
+          "resources": [
+            {
+              "title": "Linux Basics - MSBTE Practical / Manual Playlist",
+              "channel": "YouTube playlist",
+              "language": "hi-Hinglish",
+              "role": "primary_video",
+              "url": "https://www.youtube.com/playlist?list=PLLWdCRHpILQaxDGbblmbHL_sM0qV_kcw-",
+              "playlistId": "PLLWdCRHpILQaxDGbblmbHL_sM0qV_kcw-",
+              "description": "Closest syllabus and laboratory-focused resource found for diploma students.",
+              "sourcePdf": "sem12",
+              "sourcePage": 12
+            },
+            {
+              "title": "Linux Tutorial for Beginners",
+              "channel": "YouTube playlist",
+              "language": "hi",
+              "role": "alternate_video",
+              "url": "https://www.youtube.com/playlist?list=PLA3GkZPtsafbK3YyxdRzF5yh1TuwGn_Lu",
+              "playlistId": "PLA3GkZPtsafbK3YyxdRzF5yh1TuwGn_Lu",
+              "description": "Terminal demonstrations for filesystem, permissions and everyday commands.",
+              "sourcePdf": "sem12",
+              "sourcePage": 12
+            },
+            {
+              "title": "Linux Shell Scripting Tutorial",
+              "channel": "YouTube playlist",
+              "language": "hi",
+              "role": "alternate_video",
+              "url": "https://www.youtube.com/playlist?list=PL_OdF9Z6GmVYOINTG45tGE3wNG-KvRMJa",
+              "playlistId": "PL_OdF9Z6GmVYOINTG45tGE3wNG-KvRMJa",
+              "description": "Useful when the syllabus reaches shell variables, control structures and scripts.",
+              "sourcePdf": "sem12",
+              "sourcePage": 12
+            }
+          ]
+        },
+        {
+          "code": "R23CP6403",
+          "alternateCode": "R23CI6603",
+          "name": "Web Page Designing",
+          "category": "theory",
+          "priority": "high",
+          "credits": 5,
+          "description": "HTML structure, links/lists/images, tables/forms, CSS, responsive pages and practical website creation.",
+          "coverageFocus": "HTML structure, links/lists/images, tables/forms, CSS, responsive pages and practical website creation.",
+          "resources": [
+            {
+              "title": "Web Page Designing - Diploma Practical / Lab Playlist",
+              "channel": "YouTube playlist",
+              "language": "hi-Hinglish",
+              "role": "primary_video",
+              "url": "https://www.youtube.com/playlist?list=PLmUFXlqL3HKRCdGyjuP87Iaht1_Tshp39",
+              "playlistId": "PLmUFXlqL3HKRCdGyjuP87Iaht1_Tshp39",
+              "description": "Practical-oriented videos suitable for laboratory tasks and journal work.",
+              "sourcePdf": "sem12",
+              "sourcePage": 13
+            },
+            {
+              "title": "Web Development Course - HTML, CSS and JavaScript",
+              "channel": "CodeWithHarry",
+              "language": "hi",
+              "role": "alternate_video",
+              "url": "https://www.youtube.com/playlist?list=PLu0W_9lII9agiCUZYRsvtGTXdxkzPyItg",
+              "playlistId": "PLu0W_9lII9agiCUZYRsvtGTXdxkzPyItg",
+              "description": "Deeper coding demonstrations and a project-based learning path.",
+              "sourcePdf": "sem12",
+              "sourcePage": 13
+            },
+            {
+              "title": "HTML and CSS Tutorials",
+              "channel": "CodeWithHarry",
+              "language": "hi",
+              "role": "alternate_video",
+              "url": "https://www.youtube.com/playlist?list=PLZ8-rdXtysy5zLdQ6uX7VDQFF5koiGLe7",
+              "playlistId": "PLZ8-rdXtysy5zLdQ6uX7VDQFF5koiGLe7",
+              "description": "Focused revision for the core HTML/CSS portion of the subject.",
+              "sourcePdf": "sem12",
+              "sourcePage": 13
+            }
+          ]
+        },
+        {
+          "code": "R23CP6701",
+          "alternateCode": "R23CI6701",
+          "name": "Professional Communication",
+          "category": "theory",
+          "priority": "skill_support",
+          "credits": 2,
+          "description": "Workplace communication, presentations, group discussion, interviews, reports, emails and professional conduct.",
+          "coverageFocus": "Workplace communication, presentations, group discussion, interviews, reports, emails and professional conduct.",
+          "resources": [
+            {
+              "title": "Professional Communication - MSBTE Manual Solution",
+              "channel": "YouTube playlist",
+              "language": "hi-English",
+              "role": "primary_video",
+              "url": "https://www.youtube.com/playlist?list=PL43PaEDPkuyG-fRxdVnD1ro8J29Xtojhb",
+              "playlistId": "PL43PaEDPkuyG-fRxdVnD1ro8J29Xtojhb",
+              "description": "Useful for practical activities, assignments and manual completion.",
+              "sourcePdf": "sem12",
+              "sourcePage": 14
+            },
+            {
+              "title": "Communicative English for Engineering Students",
+              "channel": "NPTEL",
+              "language": "en",
+              "role": "alternate_video",
+              "url": "https://www.youtube.com/playlist?list=PL9vL8QnJ37pIEbyEcFDSwwu8eo1UtCtsm",
+              "playlistId": "PL9vL8QnJ37pIEbyEcFDSwwu8eo1UtCtsm",
+              "description": "Builds the broader communication competence required for interviews and workplaces.",
+              "sourcePdf": "sem12",
+              "sourcePage": 14
+            }
+          ]
+        },
+        {
+          "code": "R23CP4401",
+          "alternateCode": "R23CI4601",
+          "name": "Social and Life Skills",
+          "category": "theory",
+          "priority": "supplementary",
+          "credits": 2,
+          "description": "Self-management, teamwork, learning skills, workplace behaviour, decision-making and work-life balance.",
+          "coverageFocus": "Self-management, teamwork, learning skills, workplace behaviour, decision-making and work-life balance.",
+          "resources": [
+            {
+              "title": "Effective Learning for Professional Development",
+              "channel": "NPTEL",
+              "language": "en",
+              "role": "primary_video",
+              "url": "https://www.youtube.com/playlist?list=PLbRMhDVUMngd7TO4neo4G1gMSQCHCQ9rE",
+              "playlistId": "PLbRMhDVUMngd7TO4neo4G1gMSQCHCQ9rE",
+              "description": "Relevant modules on learning, professional growth, life skills and work-life balance.",
+              "sourcePdf": "sem12",
+              "sourcePage": 14
+            },
+            {
+              "title": "Working in Contemporary Teams",
+              "channel": "NPTEL",
+              "language": "en",
+              "role": "alternate_video",
+              "url": "https://www.youtube.com/playlist?list=PLyqSpQzTE6M85-7YIdoH3OyvDEghd5JLu",
+              "playlistId": "PLyqSpQzTE6M85-7YIdoH3OyvDEghd5JLu",
+              "description": "Useful for teamwork, collaboration, leadership and interpersonal skill development.",
+              "sourcePdf": "sem12",
+              "sourcePage": 14
+            }
+          ]
+        },
+        {
+          "code": "R23CI1301",
+          "alternateCode": null,
+          "name": "Basic Electrical and Electronics Engineering",
+          "category": "theory",
+          "priority": "critical_for_iot",
+          "credits": 4,
+          "programmeRestriction": "DCIOT",
+          "description": "Ohm's law, KCL/KVL, series-parallel circuits, passive components, diodes, transistors, basic digital electronics and practical measurements. CIOT only.",
+          "coverageFocus": "Ohm's law, KCL/KVL, series-parallel circuits, passive components, diodes, transistors, basic digital electronics and practical measurements.",
+          "resources": [
+            {
+              "title": "Basic Electrical and Electronics Engineering - MSBTE Manual Practicals",
+              "channel": "YouTube playlist",
+              "language": "hi-Hinglish",
+              "role": "primary_video",
+              "url": "https://www.youtube.com/playlist?list=PL6yu2hI-rPKA1URkLQ7__EdadsPLXSqUZ",
+              "playlistId": "PL6yu2hI-rPKA1URkLQ7__EdadsPLXSqUZ",
+              "description": "Practical/manual-oriented support closest to diploma laboratory requirements.",
+              "sourcePdf": "sem12",
+              "sourcePage": 15
+            },
+            {
+              "title": "Basic Electronics",
+              "channel": "YouTube playlist",
+              "language": "hi-Hinglish",
+              "role": "alternate_video",
+              "url": "https://www.youtube.com/playlist?list=PLXOYj6DUOGrqjdqkWSZi4we3Q3oWCvmsW",
+              "playlistId": "PLXOYj6DUOGrqjdqkWSZi4we3Q3oWCvmsW",
+              "description": "Beginner-friendly coverage of components and core electronics concepts.",
+              "sourcePdf": "sem12",
+              "sourcePage": 15
+            },
+            {
+              "title": "Basic Electronics",
+              "channel": "NPTEL - Prof. T. S. Natarajan",
+              "language": "en",
+              "role": "alternate_video",
+              "url": "https://www.youtube.com/playlist?list=PL7987F30C41A9ADCB",
+              "playlistId": "PL7987F30C41A9ADCB",
+              "description": "More detailed theory for students who want stronger electronics fundamentals.",
+              "sourcePdf": "sem12",
+              "sourcePage": 15
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

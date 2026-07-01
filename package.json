@@ -56,7 +56,8 @@
     "resources:link-health": "tsx scripts/check-resource-link-health.ts",
     "notes:validate": "tsx scripts/validate-lesson-note-documents.ts",
     "notes:render-pdf": "tsx scripts/render-lesson-note-pdfs.ts",
-    "notes:generate:work": "tsx scripts/process-content-generation-jobs.ts"
+    "notes:generate:work": "tsx scripts/process-content-generation-jobs.ts",
+    "curriculum:import-with-resources": "tsx scripts/import-cwit-curriculum-with-resources.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
