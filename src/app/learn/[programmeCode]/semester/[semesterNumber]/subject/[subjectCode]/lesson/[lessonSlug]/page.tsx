@@ -74,6 +74,7 @@ export default async function LessonStudioPage({
             programmeCode={programmeCode}
             semesterNumber={semester}
             subjectCode={subjectCode}
+            lessonSlug={lessonSlug}
             subject={manifestSubject}
           />
         )
@@ -604,11 +605,13 @@ function ManifestLessonView({
   programmeCode,
   semesterNumber,
   subjectCode,
+  lessonSlug,
   subject,
 }: {
   programmeCode: string
   semesterNumber: number
   subjectCode: string
+  lessonSlug: string
   subject: ManifestSubject
 }) {
   const subjectHref = `/learn/${programmeCode}/semester/${semesterNumber}/subject/${subjectCode}`
