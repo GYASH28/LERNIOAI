@@ -122,6 +122,7 @@ export default function RootLayout({
             <CommandPalette />
             <Toaster />
             <FeedbackWidget />
+            <RegisterSW />
           </LernioMotionProvider>
         </ThemeProvider>
       </body>
