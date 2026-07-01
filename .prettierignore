@@ -1,0 +1,14 @@
+node_modules/
+.next/
+out/
+build/
+dist/
+coverage/
+.vercel/
+prisma/migrations/**/migration.sql
+package-lock.json
+*.lock
+*.log
+.env
+.env.local
+.env.*.local

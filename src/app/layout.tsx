@@ -1,10 +1,30 @@
-/* eslint-disable @next/next/no-sync-scripts -- Theme bootstrap must run before first paint. */
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { LernioMotionProvider } from "@/components/motion";
 import { GlobalExperienceRuntime } from "@/components/app/global-experience-runtime";
+import { CommandPalette } from "@/components/cmdk/command-palette";
+import { RouteLoadingBar } from "@/components/app/route-loading-bar";
+import { Toaster } from "@/components/ui/sonner";
+
+// ──────────────────────────────────────────────────────────────────────────
+// WHITE-SCREEN FLASH FIX
+// ──────────────────────────────────────────────────────────────────────────
+// Previously this script was loaded via <script src="/theme-no-flash.js" />
+// which is a render-blocking EXTERNAL fetch. The browser had to:
+//   1. Download the HTML
+//   2. Hit the <script src> tag
+//   3. BLOCK parsing to fetch the JS file over the network
+//   4. Execute the script
+//   5. Continue parsing + painting
+// During step 3 the page showed a white screen.
+//
+// The fix: inline the script directly into the HTML head so it runs
+// synchronously with ZERO network round-trip. This is the standard
+// pattern used by next-themes and every theme library.
+// ──────────────────────────────────────────────────────────────────────────
+const themeNoFlashScript = `(function(){try{var p=null;var m=document.cookie.match(/(?:^|;\\s*)lernio-theme=([^;]+)/);if(m){p=JSON.parse(decodeURIComponent(m[1]));}if(!p&&window.localStorage){var s=localStorage.getItem('lernio-theme-prefs');if(s){p=JSON.parse(s);}}if(!p&&window.localStorage){var lg=localStorage.getItem('lernio-prefs');if(lg){var lp=JSON.parse(lg);p={};if(lp.theme==='light'||lp.theme==='dark'||lp.theme==='system'){p.appearance=lp.theme;}if(typeof lp.reducedMotion==='boolean'){p.motion=lp.reducedMotion?'reduced':'full';}if(typeof lp.lowPower==='boolean'){p.lowPower=lp.lowPower;}}}p=p||{};var app=p.appearance||'system';var pal=p.palette||'aurora';var con=p.contrast||'normal';var den=p.density||'comfortable';var sur=p.surfaceStyle||'soft';var sti=p.subjectTint||'subtle';var mot=p.motion||'full';var lpw=!!p.lowPower;var osRed=window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(osRed&&mot!=='none'){mot='reduced';}var dark=app==='dark'||(app==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches);var r=document.documentElement;r.classList.toggle('dark',dark);r.classList.toggle('reduce-motion',mot!=='full');r.setAttribute('data-appearance',app);r.setAttribute('data-palette',pal);r.setAttribute('data-contrast',con);r.setAttribute('data-density',den);r.setAttribute('data-surface',sur);r.setAttribute('data-subject-tint',sti);r.setAttribute('data-motion',mot);r.setAttribute('data-low-power',String(lpw));}catch(e){}})();`;
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -86,15 +106,21 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script src="/theme-no-flash.js" />
+        {/* Inline theme-no-flash script — runs synchronously before paint.
+            Previously this was <script src="/theme-no-flash.js" /> which
+            caused a white-screen flash due to the network round-trip. */}
+        <script dangerouslySetInnerHTML={{ __html: themeNoFlashScript }} />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
         <ThemeProvider>
           <LernioMotionProvider>
+            <RouteLoadingBar />
             {children}
             <GlobalExperienceRuntime />
+            <CommandPalette />
+            <Toaster />
           </LernioMotionProvider>
         </ThemeProvider>
       </body>

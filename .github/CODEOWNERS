@@ -1,0 +1,24 @@
+# Lernio AI Codeowners
+# Audit fix #33 (CVSS 3.5): previously no CODEOWNERS file existed.
+
+*                          @GYASH28
+
+# Security-critical paths require explicit review.
+src/lib/auth.ts            @GYASH28
+src/lib/authority/         @GYASH28
+src/lib/security/          @GYASH28
+src/lib/rate-limit.ts      @GYASH28
+src/middleware.ts          @GYASH28
+prisma/schema.prisma       @GYASH28
+prisma/migrations/         @GYASH28
+
+# API route handlers — security review required.
+src/app/api/auth/          @GYASH28
+src/app/api/admin/         @GYASH28
+src/app/api/tutor/         @GYASH28
+
+# CI/CD and deployment config.
+.github/workflows/         @GYASH28
+scripts/vercel-build.mjs   @GYASH28
+scripts/db-deploy.mjs      @GYASH28
+next.config.ts             @GYASH28

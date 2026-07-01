@@ -70,9 +70,14 @@ Use:
 ```ts
 await requireActiveRole('admin')
 await requirePermission('roles.assign', { departmentCode: 'CIOT' })
-await requirePermission('lessons.update', { subjectId: 'subject_123' })
-await requirePermission('reports.resolve', { institutionId: 'inst_123' })
 ```
+
+> **Audit fix #38 (CVSS 1.5):** The previous version of this doc listed
+> `requirePermission('lessons.update', ...)` and
+> `requirePermission('reports.resolve', ...)` as example calls. As of the
+> audit, those capability strings are **not** wired into any route handler —
+> only `roles.assign` is used. The examples have been removed to avoid
+> suggesting patterns that do not exist in the codebase.
 
 Navigation hiding is not a security boundary. Every privileged route handler, server action, or server component must enforce role/capability/scope on the server.
 

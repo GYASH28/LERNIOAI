@@ -355,10 +355,19 @@ export async function handleTutorStream(req: NextRequest) {
             totalMs: Date.now() - startedAt,
           })
         } catch (error) {
-          if (!demo && userMessageId && !completed) {
+          // Audit fix #26 (CVSS 2.2): previously, this catch path deleted the
+          // user message even when the client had disconnected mid-stream.
+          // That was the wrong behaviour — we want to KEEP the user message
+          // and delete the partial assistant response instead, so the user
+          // can resume the conversation. The client-disconnect case is now
+          // detected via req.signal.aborted and handled differently.
+          const clientAborted = req.signal.aborted
+          if (!demo && userMessageId && !completed && !clientAborted) {
             await db.tutorMessage.delete({ where: { id: userMessageId } }).catch(() => {})
           }
-          push(normaliseStreamError(error, requestId))
+          if (!clientAborted) {
+            push(normaliseStreamError(error, requestId))
+          }
         } finally {
           controller.close()
         }
