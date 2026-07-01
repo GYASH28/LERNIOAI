@@ -264,7 +264,7 @@ export const authOptions: NextAuthOptions = {
       // Google verifies emails at signup, but we should not assume this.
       // An attacker controlling a Google Workspace domain can create
       // accounts with arbitrary unverified emails.
-      const emailVerified = (user as any).emailVerified;
+      const emailVerified = (user as { emailVerified?: Date | null }).emailVerified;
       const isVerified = emailVerified !== null && emailVerified !== undefined;
 
       await db.user.update({
@@ -297,6 +297,70 @@ export const authOptions: NextAuthOptions = {
 
         await sendVerificationEmail(user.email, token)
       }
+    },
+  },
+  // ────────────────────────────────────────────────────────────────────────
+  // Audit fix #3 (CVSS 6.5): explicit cookie security override.
+  // next-auth v4 defaults to sameSite='lax' and secure='auto', which is too
+  // permissive. Force sameSite='strict' and secure=true in production to
+  // harden against CSRF and session-hijacking via non-HTTPS origins.
+  // Cookie names use __Secure- / __Host- prefixes per RFC 6265bis for
+  // additional protection against cookie tossing attacks.
+  // ────────────────────────────────────────────────────────────────────────
+  cookies: {
+    sessionToken: {
+      name: `__Secure-next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'strict',
+        path: '/',
+        secure: process.env.NODE_ENV === 'production',
+      },
+    },
+    callbackUrl: {
+      name: `__Secure-next-auth.callback-url`,
+      options: {
+        httpOnly: true,
+        sameSite: 'strict',
+        path: '/',
+        secure: process.env.NODE_ENV === 'production',
+      },
+    },
+    csrfToken: {
+      name: `__Host-next-auth.csrf-token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'strict',
+        path: '/',
+        secure: process.env.NODE_ENV === 'production',
+      },
+    },
+    pkceCodeVerifier: {
+      name: `__Secure-next-auth.pkce.code-verifier`,
+      options: {
+        httpOnly: true,
+        sameSite: 'strict',
+        path: '/',
+        secure: process.env.NODE_ENV === 'production',
+      },
+    },
+    state: {
+      name: `__Secure-next-auth.state`,
+      options: {
+        httpOnly: true,
+        sameSite: 'strict',
+        path: '/',
+        secure: process.env.NODE_ENV === 'production',
+      },
+    },
+    nonce: {
+      name: `__Secure-next-auth.nonce`,
+      options: {
+        httpOnly: true,
+        sameSite: 'strict',
+        path: '/',
+        secure: process.env.NODE_ENV === 'production',
+      },
     },
   },
 }

@@ -12,9 +12,11 @@
     "start": "next start -p 3000",
     "postinstall": "prisma generate",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
     "test:a11y": "playwright test tests/e2e/a11y.spec.ts",
     "test:visual": "playwright test tests/e2e/visual.spec.ts",
@@ -25,8 +27,9 @@
     "db:push": "prisma db push",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
-    "db:deploy": "prisma migrate deploy",
+    "db:migrate:deploy": "prisma migrate deploy",
     "db:reset": "prisma migrate reset",
+    "db:deploy": "node scripts/db-deploy.mjs",
     "db:admin": "tsx scripts/upsert-admin.ts",
     "db:seed": "tsx scripts/seed.ts",
     "db:departments": "tsx scripts/upsert-cwit-departments.ts",
@@ -50,7 +53,8 @@
     "resources:link-health": "tsx scripts/check-resource-link-health.ts",
     "notes:validate": "tsx scripts/validate-lesson-note-documents.ts",
     "notes:render-pdf": "tsx scripts/render-lesson-note-pdfs.ts",
-    "notes:generate:work": "tsx scripts/process-content-generation-jobs.ts"
+    "notes:generate:work": "tsx scripts/process-content-generation-jobs.ts",
+    "curriculum:import-with-resources": "tsx scripts/import-cwit-curriculum-with-resources.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",

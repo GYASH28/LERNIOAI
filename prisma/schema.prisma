@@ -1116,6 +1116,9 @@ model User {
   achievements                UserAchievement[]
   contributions               Contribution[]
   bookmarks                   Bookmark[]
+  recentlyViewed              RecentlyViewed[]
+  notifications               Notification[]
+  feedback                    Feedback[]
   xpEvents                    XpEvent[]
   accounts                    Account[]
   sessions                    Session[]
@@ -2030,4 +2033,66 @@ model PasswordResetToken {
   createdAt DateTime  @default(now())
 
   @@index([email])
+}
+
+// ============================================================
+// RECENTLY VIEWED (Phase 19: continue-learning persistence)
+// ============================================================
+
+model RecentlyViewed {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  resourceType String   // lesson | subject | resource
+  resourceId   String
+  title        String
+  href         String
+  scrollPos    Float    @default(0)
+  viewedAt     DateTime @default(now())
+
+  @@unique([userId, resourceType, resourceId])
+  @@index([userId, viewedAt])
+}
+
+// ============================================================
+// NOTIFICATIONS (Phase B6.1: in-app notification center)
+// ============================================================
+
+model Notification {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      String    // achievement_unlocked | buddy_request | streak_warning | group_mention | system | feedback_reply
+  title     String
+  body      String?
+  link      String?
+  readAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId, readAt])
+  @@index([userId, createdAt])
+}
+
+// ============================================================
+// FEEDBACK (Phase B10.3: in-app feedback widget)
+// ============================================================
+
+model Feedback {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  rating      Int       // 1-5
+  type        String    // bug | idea | praise | question
+  description String
+  screenshot  String?   // base64 or URL
+  pageUrl     String?
+  userAgent   String?
+  status      String    @default("new") // new | in_progress | resolved | closed
+  reply       String?
+  repliedBy   String?
+  repliedAt   DateTime?
+  createdAt   DateTime  @default(now())
+
+  @@index([userId, createdAt])
+  @@index([status, createdAt])
 }

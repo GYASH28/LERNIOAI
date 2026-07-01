@@ -5,7 +5,6 @@ import {
   getStudentLearningScope,
   hasResolvedLearningScope,
 } from '@/features/learning/server/get-student-learning-scope'
-import { LearnViewClient } from './learn-view-client'
 
 export const dynamic = 'force-dynamic'
 
@@ -15,6 +14,8 @@ export default async function LearnPage() {
     redirect('/sign-in?callbackUrl=/learn')
   }
 
+  // Try to resolve the student's learning scope from the DB.
+  // If successful, redirect to their canonical semester page.
   try {
     const scope = await getStudentLearningScope(user.id, { includeSubjects: false })
     if (hasResolvedLearningScope(scope)) {
@@ -22,7 +23,15 @@ export default async function LearnPage() {
     }
   } catch (error) {
     if (!isDatabaseUnavailableError(error)) throw error
+    // DB unavailable — fall through to default redirect below
   }
 
-  return <LearnViewClient />
+  // Fallback: redirect to the user's default programme + semester.
+  // New OAuth users are auto-assigned to DCOMP / Semester 3 (see auth.ts createUser event).
+  // The semester page has a manifest fallback that shows subjects + YouTube
+  // resources even when the DB has no curriculum data yet.
+  const programmeCode = user.role === 'student' ? 'DCOMP' : 'DCOMP'
+  const semesterNumber = 3
+
+  redirect(`/learn/${programmeCode}/semester/${semesterNumber}`)
 }

@@ -1,20 +1,32 @@
 import type { MetadataRoute } from 'next'
 
-const SITE_URL =
-  process.env.NEXTAUTH_URL?.replace(/\/$/, '') || 'https://lernioai.vercel.app'
-
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date('2026-06-27T00:00:00.000Z')
+  const baseUrl = process.env.NEXTAUTH_URL?.replace(/\/$/, '') || 'https://lernioai.vercel.app'
   const routes = [
     '',
-    '/privacy',
-    '/terms',
+    '/sign-in',
+    '/sign-up',
+    '/dashboard',
+    '/learn',
+    '/practice',
+    '/tutor',
+    '/planner',
+    '/analytics',
+    '/exams',
+    '/revision',
+    '/coding',
+    '/labs',
+    '/materials',
+    '/profile',
+    '/settings',
     '/support',
+    '/privacy',
   ]
-  return routes.map((path) => ({
-    url: `${SITE_URL}${path}`,
-    lastModified,
-    changeFrequency: path === '' ? 'weekly' : 'yearly',
-    priority: path === '' ? 1 : 0.5,
+
+  return routes.map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: route === '' ? 1 : route === '/learn' ? 0.9 : 0.6,
   }))
 }

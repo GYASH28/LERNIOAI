@@ -8,18 +8,43 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./vitest.setup.ts'],
-    // user-event replaces clipboard ownership inside jsdom with a non-spy
-    // implementation. Streaming parsing and Copilot runtime policy are covered
-    // separately without weakening the production copy control.
+    // Audit fix #32 (CVSS 2.5): removed the silent exclusion of
+    // `**/components/ai/ai-copilot.test.tsx`. The test file exists in the
+    // repo but was being skipped in CI — a coverage hole. If the test fails,
+    // either fix it or delete it; do not leave dead test files in the repo.
     exclude: [
       '**/node_modules/**',
       '**/.next/**',
       '**/tests/e2e/**',
-      '**/components/ai/ai-copilot.test.tsx',
     ],
     coverage: {
       provider: 'v8',
-      reporter: ['text', 'html'],
+      reporter: ['text', 'html', 'lcov'],
+      // Audit fix #28 (CVSS 5.3): added coverage thresholds.
+      // Currently 95.5% of API routes have zero tests, so we start with
+      // low thresholds and ratchet them up as coverage improves.
+      thresholds: {
+        lines: 30,
+        functions: 30,
+        statements: 30,
+        branches: 20,
+        perFile: false,
+      },
+      exclude: [
+        'node_modules/**',
+        '.next/**',
+        'out/**',
+        'build/**',
+        'src/types/**',
+        '**/*.d.ts',
+        'vitest.config.ts',
+        'vitest.setup.ts',
+        'playwright.config.ts',
+        'next.config.ts',
+        'tailwind.config.ts',
+        'postcss.config.mjs',
+        'eslint.config.mjs',
+      ],
     },
   },
   resolve: {
