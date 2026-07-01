@@ -42,6 +42,7 @@
     "examples/**",
     "skills/**",
     "mini-services/**",
-    "upload/**"
+    "upload/**",
+    "scripts/**"
   ]
 }

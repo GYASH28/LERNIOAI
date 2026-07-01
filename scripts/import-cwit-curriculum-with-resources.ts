@@ -93,9 +93,6 @@ async function findOrCreateInstitution() {
       code: 'CWIT',
       name: 'Cusrow Wadia Institute of Technology',
       city: 'Pune',
-      state: 'Maharashtra',
-      country: 'India',
-      status: 'active',
     },
   })
 }
@@ -119,6 +116,7 @@ async function findOrCreateScheme(institutionId: string) {
         code: 'R23',
         name: 'CWIT R23 Diploma Scheme',
         status: 'active',
+        startYear: 2023,
         programmeId: programme.id,
         institutionId,
       },
@@ -134,12 +132,13 @@ async function findOrCreateSemester(schemeId: string, number: number, name: stri
   })
   if (existing) return existing
   return db.semester.create({
-    data: { schemeId, number, name, status: 'active' },
+    data: { schemeId, number, name },
   })
 }
 
 async function findOrCreateSubject(
   semesterId: string,
+  schemeId: string,
   programmeCode: string,
   entry: SubjectEntry,
 ) {
@@ -160,7 +159,7 @@ async function findOrCreateSubject(
       status: 'published',
       reviewStatus: 'approved',
       semesterId,
-      schemeId: (await db.semester.findUnique({ where: { id: semesterId } }))?.schemeId ?? '',
+      schemeId,
     },
   })
 }
@@ -197,22 +196,18 @@ async function findOrCreateTopic(unitId: string, slug: string, title: string) {
 
 async function findOrCreateLesson(
   topicId: string,
-  slug: string,
   title: string,
   description: string,
 ) {
-  const existing = await db.lesson.findFirst({ where: { topicId, slug } })
+  const existing = await db.lesson.findFirst({ where: { topicId, title } })
   if (existing) return existing
   return db.lesson.create({
     data: {
       topicId,
-      slug,
       title,
-      description,
       order: 1,
       status: 'published',
-      reviewStatus: 'approved',
-      contentJson: JSON.stringify({
+      learnContent: JSON.stringify({
         type: 'lesson',
         sections: [
           {
@@ -342,6 +337,7 @@ async function main() {
 
             const subject = await findOrCreateSubject(
               semester.id,
+              schemeId,
               programmeCode,
               subjectEntry,
             )
@@ -363,10 +359,8 @@ async function main() {
             )
             stats.topics++
 
-            const lessonSlug = slugify(`${subjectEntry.name}-overview`)
             const lesson = await findOrCreateLesson(
               topic.id,
-              lessonSlug,
               `${subjectEntry.name} — Overview & Lectures`,
               subjectEntry.coverageFocus,
             )
