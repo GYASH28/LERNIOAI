@@ -30,8 +30,8 @@ import {
   MessageSquare,
   Sun,
   Moon,
-  ChevronLeft,
-  ChevronRight,
+  ChevronDown,
+  ChevronUp,
 } from 'lucide-react'
 import type { ViewKey } from '@/lib/types'
 import { routeForView } from '@/lib/routes'
@@ -314,6 +314,3 @@ export function TopBar() {
     </>
   )
 }
-
-// Import ChevronDown for the dropdown
-import { ChevronDown } from 'lucide-react'
