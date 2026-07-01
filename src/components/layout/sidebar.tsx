@@ -52,7 +52,7 @@ const NAV_ITEMS: { key: ViewKey; label: string; icon: typeof BookOpen }[] = [
   { key: 'profile', label: 'Profile', icon: User },
 ]
 
-const MOBILE_PRIMARY: ViewKey[] = ['dashboard', 'learn', 'practice', 'tutor']
+const MOBILE_PRIMARY: ViewKey[] = ['dashboard', 'learn', 'tutor', 'planner']
 
 const AUTHORITY_ROUTES: Record<string, { href: string; label: string }> = {
   admin: { href: '/admin', label: 'Admin workspace' },
@@ -279,7 +279,7 @@ function NavItem({
   return (
     <Link
       href={routeForView(item.key)}
-      prefetch={false}
+      prefetch={true}
       onClick={() => {
         setView(item.key)
         onNavigate()
@@ -329,7 +329,7 @@ export function MobileNav() {
             <Link
               key={item.key}
               href={routeForView(item.key)}
-              prefetch={false}
+              prefetch={true}
               onClick={() => useAppStore.getState().setView(item.key)}
               className={cn(
                 'flex min-w-[56px] flex-col items-center gap-0.5 rounded-lg px-3 py-1.5 transition-colors',

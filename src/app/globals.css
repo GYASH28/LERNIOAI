@@ -191,3 +191,69 @@ main {
     cursor: auto;
   }
 }
+
+/* ──────────────────────────────────────────────────────────────────────────
+   POLISH: micro-interactions and transitions
+   ────────────────────────────────────────────────────────────────────────── */
+
+/* Smooth hover transitions on cards */
+a[class*="rounded-lg border"], button[class*="rounded-lg border"] {
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* Subtle hover lift on cards */
+a[class*="rounded-lg border border-border bg-card"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Smooth color transitions for interactive elements */
+button, a {
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+/* Better focus visible states */
+*:focus-visible {
+  outline: 2px solid hsl(var(--primary, 217 91% 60%));
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Smooth scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground, 215 16% 47%) / 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground, 215 16% 47%) / 0.5);
+}
+
+/* Better selection color */
+::selection {
+  background: hsl(var(--primary, 217 91% 60%) / 0.2);
+}
+
+/* Smooth link underlines */
+a {
+  text-underline-offset: 2px;
+}
+
+/* Remove tap highlight on mobile */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Better button hover states */
+button:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+button:not(:disabled):active {
+  transform: translateY(0);
+}
