@@ -11,7 +11,7 @@ import {
   Calendar,
   BarChart3,
   Settings,
-  HelpCircle,
+  HelpCircle, Bell, Trophy,
   Moon,
   Sun,
   type LucideIcon,
@@ -79,6 +79,8 @@ export function CommandPalette() {
     { id: 'nav-exams', label: 'Exams & quizzes', icon: BookOpen, action: () => navigate('/exams'), group: 'navigate' },
     { id: 'nav-revision', label: 'Revision', icon: BookOpen, action: () => navigate('/revision'), group: 'navigate' },
     { id: 'nav-coding', label: 'Coding lab', icon: BookOpen, action: () => navigate('/coding'), group: 'navigate' },
+    { id: 'nav-achievements', label: 'Achievements', icon: Trophy, action: () => navigate('/achievements'), group: 'navigate' },
+    { id: 'nav-notifications', label: 'Notifications', icon: Bell, action: () => navigate('/notifications'), group: 'navigate' },
     // Quick actions
     {
       id: 'quick-theme',
@@ -89,7 +91,7 @@ export function CommandPalette() {
     },
     // Settings
     { id: 'set-settings', label: 'Settings', icon: Settings, action: () => navigate('/settings'), group: 'settings' },
-    { id: 'set-help', label: 'Help & support', icon: HelpCircle, action: () => navigate('/support'), group: 'settings' },
+    { id: 'set-help', label: 'Help & support', icon: HelpCircle, Bell, Trophy, action: () => navigate('/support'), group: 'settings' },
   ]
 
   const grouped = items.reduce<Record<string, CommandItem[]>>((acc, item) => {
