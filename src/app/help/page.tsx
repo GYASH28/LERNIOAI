@@ -1,11 +1,11 @@
 import { redirect } from 'next/navigation'
 import { getCurrentUser } from '@/lib/auth'
-import { BookOpen, Bot, Calendar, BarChart3, Code2, FlaskConical, RotateCw, PenTool, FileText, Library, type LucideIcon } from 'lucide-react'
+import { BookOpen, Bot, Calendar, BarChart3, PenTool, type LucideIcon } from 'lucide-react'
 import Link from 'next/link'
 
 export const dynamic = 'force-dynamic'
 
-const HELP_CATEGORIES: { title: string; icon: LucideIcon; articles: { title: string; href: string; description: string }[] }[] = [
+const HELP_CATEGORIES: { title: string; icon: LucideIcon; articles: { title: string; href: string; icon?: LucideIcon; description: string }[] }[] = [
   {
     title: 'Getting Started',
     icon: BookOpen,

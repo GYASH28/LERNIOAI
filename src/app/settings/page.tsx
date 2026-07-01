@@ -1,11 +1,29 @@
 import { redirect } from 'next/navigation'
 import { getCurrentUser } from '@/lib/auth'
+import { db } from '@/lib/db'
 import { SettingsTabs } from './settings-tabs'
 
 export const dynamic = 'force-dynamic'
 
 export default async function SettingsPage() {
-  const user = await getCurrentUser()
+  const authUser = await getCurrentUser()
+  if (!authUser) redirect('/sign-in?callbackUrl=/settings')
+
+  // Fetch the full user record to access fields not on AuthUser
+  const user = await db.user.findUnique({
+    where: { id: authUser.id },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      role: true,
+      preferredLang: true,
+      examDate: true,
+      dailyMins: true,
+      avatar: true,
+    },
+  })
+
   if (!user) redirect('/sign-in?callbackUrl=/settings')
 
   return (
@@ -16,16 +34,7 @@ export default async function SettingsPage() {
           Manage your account, preferences, and privacy.
         </p>
         <div className="mt-6">
-          <SettingsTabs initialUser={{
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            role: user.role,
-            preferredLang: user.preferredLang,
-            examDate: user.examDate,
-            dailyMins: user.dailyMins,
-            avatar: user.avatar ?? null,
-          }} />
+          <SettingsTabs initialUser={user} />
         </div>
       </div>
     </main>
