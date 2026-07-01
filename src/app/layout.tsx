@@ -7,6 +7,8 @@ import { GlobalExperienceRuntime } from "@/components/app/global-experience-runt
 import { CommandPalette } from "@/components/cmdk/command-palette";
 import { RouteLoadingBar } from "@/components/app/route-loading-bar";
 import { Toaster } from "@/components/ui/sonner";
+import { FeedbackWidget } from "@/components/feedback/feedback-widget";
+import { RegisterSW } from "@/components/app/register-sw";
 
 // ──────────────────────────────────────────────────────────────────────────
 // WHITE-SCREEN FLASH FIX
