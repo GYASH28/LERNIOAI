@@ -27,6 +27,46 @@ async function main() {
   })
   console.log(`[publish] Activated ${activatedSubjects.count} subjects.`)
 
+  // 3. Publish and activate all units under R23 subjects
+  const activatedUnits = await db.unit.updateMany({
+    where: {
+      subject: {
+        scheme: {
+          code: 'R23',
+        },
+      },
+      reviewStatus: {
+        in: ['structure_verified', 'content_verified', 'published'],
+      },
+    },
+    data: {
+      status: 'active',
+      publishedAt: new Date(),
+    },
+  })
+  console.log(`[publish] Activated and published ${activatedUnits.count} units.`)
+
+  // 4. Publish and activate all topics under R23 units
+  const activatedTopics = await db.topic.updateMany({
+    where: {
+      unit: {
+        subject: {
+          scheme: {
+            code: 'R23',
+          },
+        },
+      },
+      reviewStatus: {
+        in: ['structure_verified', 'content_verified', 'published'],
+      },
+    },
+    data: {
+      status: 'active',
+      publishedAt: new Date(),
+    },
+  })
+  console.log(`[publish] Activated and published ${activatedTopics.count} topics.`)
+
   // 3. Migrate users from G Scheme to R23
   const r23Comp = await db.academicScheme.findFirst({
     where: { code: 'R23', programme: { code: 'DCOMP' } },

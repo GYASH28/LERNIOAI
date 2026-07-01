@@ -88,6 +88,7 @@ interface LearningAppProps {
   initialUser?: User | null
   initialSubjects?: Subject[]
   initialDashboard?: DashboardSnapshot | null
+  children?: ReactNode
 }
 
 export function LearningApp({
@@ -95,6 +96,7 @@ export function LearningApp({
   initialUser = null,
   initialSubjects = [],
   initialDashboard = null,
+  children,
 }: LearningAppProps) {
   const [_bootstrapped] = useState(() => {
     useAppStore.setState({
@@ -165,7 +167,7 @@ export function LearningApp({
           <TopBar onMenuClick={() => setMenuOpen(!menuOpen)} />
           <StudentUtilityBar />
           <div className="app-main-scroll">
-            <ViewRouter view={view} initialDashboard={initialDashboard} />
+            {children ? children : <ViewRouter view={view} initialDashboard={initialDashboard} />}
           </div>
           <Footer />
         </main>

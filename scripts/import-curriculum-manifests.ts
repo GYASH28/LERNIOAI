@@ -556,7 +556,9 @@ function lessonStatus(verificationStatus: string): string {
 }
 
 function publishedAtFor(verificationStatus: string): Date | null {
-  return verificationStatus === 'published' ? new Date() : null
+  return ['structure_verified', 'content_verified', 'published'].includes(verificationStatus)
+    ? new Date()
+    : null
 }
 
 function normalizeText(value: string | string[] | null | undefined): string | null {

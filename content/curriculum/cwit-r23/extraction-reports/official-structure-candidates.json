@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-06-28T17:33:16.033Z",
+  "generatedAt": "2026-07-01T03:15:49.577Z",
   "status": "review_only",
   "note": "Course outcome and unit-title candidates are extracted from official PDF text. Promotable rows are still draft manifest data until reviewed/imported; no generated content is published.",
   "totals": {
-    "subjects": 59,
-    "courseBlocksFound": 55,
-    "subjectsWithOutcomes": 51,
-    "subjectsWithUnitCandidates": 27,
-    "subjectsWithPromotableUnitCandidates": 0,
-    "structurePromotable": 51
+    "subjects": 86,
+    "courseBlocksFound": 81,
+    "subjectsWithOutcomes": 74,
+    "subjectsWithUnitCandidates": 35,
+    "subjectsWithPromotableUnitCandidates": 3,
+    "structurePromotable": 74
   },
   "subjects": [
     {
@@ -342,7 +342,12 @@
       "semesterNumber": 1,
       "officialSubjectCode": "R23CI4701",
       "subjectName": "Yoga and Meditation",
-      "sourcePages": [],
+      "sourcePages": [
+        215,
+        216,
+        217,
+        218
+      ],
       "candidateOutcomes": [],
       "candidateUnits": [],
       "unitQuality": {
@@ -352,7 +357,7 @@
           "Unit order does not start at 1."
         ]
       },
-      "extractionStatus": "course_block_not_found"
+      "extractionStatus": "needs_review"
     },
     {
       "manifest": "content/curriculum/cwit-r23/ciot/semester-2.json",
@@ -795,6 +800,1491 @@
         ]
       },
       "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-3.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 3,
+      "officialSubjectCode": "R23CI2602",
+      "subjectName": "Data Structures",
+      "sourcePages": [
+        129,
+        130,
+        131,
+        132,
+        133,
+        134
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Perform basic operations on Arrays."
+        },
+        {
+          "code": "CO2",
+          "text": "Apply different Searching and sorting methods."
+        },
+        {
+          "code": "CO3",
+          "text": "Implement basic operations on Linked List."
+        },
+        {
+          "code": "CO4",
+          "text": "Perform operations on Stack using Array and Linked List Implementations."
+        },
+        {
+          "code": "CO5",
+          "text": "Perform operations on Queue using Array and Linked List Implementations."
+        },
+        {
+          "code": "CO6",
+          "text": "Create and Traverse Tree to solve problems. C)"
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Introduction to Data Structures",
+          "source": "course_content"
+        },
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Searching and Sorting",
+          "source": "course_content"
+        },
+        {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "Linked List",
+          "source": "course_content"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Stack",
+          "source": "course_content"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Queue",
+          "source": "course_content"
+        },
+        {
+          "order": 6,
+          "rawLabel": "VI",
+          "title": "Tree",
+          "source": "course_content"
+        }
+      ],
+      "unitQuality": {
+        "promotable": true,
+        "blockers": []
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-3.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 3,
+      "officialSubjectCode": "R23CI6604",
+      "subjectName": "Object Oriented Programming With C++",
+      "sourcePages": [
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Understand basic concepts of OOP languages - tokens, Operators, Expressions and Control Structures in C++."
+        },
+        {
+          "code": "CO2",
+          "text": "Define class, objects, use of static variables , friend functions."
+        },
+        {
+          "code": "CO3",
+          "text": "Develop C++ programs using constructors and destructors."
+        },
+        {
+          "code": "CO4",
+          "text": "Implement different types of inheritances and use of exception handling"
+        },
+        {
+          "code": "CO5",
+          "text": "Use of pointers, Implement polymorphism concept, its types."
+        },
+        {
+          "code": "CO6",
+          "text": "Use console I/O and perform file operations using streams."
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Principles of Object",
+          "source": "course_content"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-3.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 3,
+      "officialSubjectCode": "R23CI2603",
+      "subjectName": "Digital Techniques & Microcontroller",
+      "sourcePages": [
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Understand and use binary, octal, hexadecimal number systems and laws of Boolean algebra."
+        },
+        {
+          "code": "CO2",
+          "text": "Understand concept and working of combinational circuits"
+        },
+        {
+          "code": "CO3",
+          "text": "Understand concept of Flip flops , their types and applications"
+        },
+        {
+          "code": "CO4",
+          "text": "Understand architecture of 8051 microcontroller."
+        },
+        {
+          "code": "CO5",
+          "text": "Describe software program development tools."
+        },
+        {
+          "code": "CO6",
+          "text": "Construct and execute assembly language programs using instruction set of 8051. C)"
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-3.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 3,
+      "officialSubjectCode": "R23CI2604",
+      "subjectName": "Internet of Things and Applications (IoTA)",
+      "sourcePages": [
+        142,
+        143,
+        144,
+        145,
+        146,
+        147
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": ". Understand the fundamentals of IoT and IoT enabling technologies."
+        },
+        {
+          "code": "CO2",
+          "text": ". Identify Sensors and actuators for interfacing with Raspberry Pi board required for IoT."
+        },
+        {
+          "code": "CO3",
+          "text": ". Describe Architecture of Raspberry Pi and Arduino."
+        },
+        {
+          "code": "CO4",
+          "text": ". Construct and execute Python program for Raspberry Pi board."
+        },
+        {
+          "code": "CO5",
+          "text": ". Understand the IoT network protocols."
+        },
+        {
+          "code": "CO6",
+          "text": ". Develop a small IoT based application."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-3.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 3,
+      "officialSubjectCode": "R23CI2605",
+      "subjectName": "User Interface Programming",
+      "sourcePages": [
+        148,
+        149,
+        150,
+        151,
+        152
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Understand the .Net framework and VB. Net features"
+        },
+        {
+          "code": "CO2",
+          "text": "Write and compile a Console based programs using data types, operators, conditional and iterative statements etc."
+        },
+        {
+          "code": "CO3",
+          "text": "Write the programs using arrays, functions and apply the concept of exception handling."
+        },
+        {
+          "code": "CO4",
+          "text": "Design the forms and use the different basic controls."
+        },
+        {
+          "code": "CO5",
+          "text": "Use different Dialog Box and handle the events."
+        },
+        {
+          "code": "CO6",
+          "text": "Write the graphics program and perform different operations on database."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-3.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 3,
+      "officialSubjectCode": "R23CI1602",
+      "subjectName": "Animation Techniques",
+      "sourcePages": [
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Understand coordinate system and use different graphics functions and standards."
+        },
+        {
+          "code": "CO2",
+          "text": "Understand OpenGL, apply 2D and 3D transformations (translation, rotation, scaling) and implement different projection techniques."
+        },
+        {
+          "code": "CO3",
+          "text": "Create and manipulate 2D textures and 3D shapes, implement basic lighting and shading techniques."
+        },
+        {
+          "code": "CO4",
+          "text": "Use of Blender, apply Lighting and Texturing effects and create animations."
+        },
+        {
+          "code": "CO5",
+          "text": "Create simple animations using keyframes, principles of animation, and apply basic textures to 3D models."
+        },
+        {
+          "code": "CO6",
+          "text": "Use editing tools for both video and audio, apply color correction techniques."
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Basics of Computer Graphics",
+          "source": "course_content"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Introduction to OpenGL",
+          "source": "course_content"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "OpenGL and GULT",
+          "source": "course_content"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "3D Modeling and Animations",
+          "source": "course_content"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Corrections and Editing",
+          "source": "course_content"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Unit order is not consecutive from 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-3.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 3,
+      "officialSubjectCode": "R23CI4602",
+      "subjectName": "Indian Constitution",
+      "sourcePages": [
+        225,
+        226,
+        227,
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Identify and explore the basic features and modalities about Indian constitution."
+        },
+        {
+          "code": "CO2",
+          "text": "Understand the basic principles governing the system of government and its organization under the Constitution of India."
+        },
+        {
+          "code": "CO3",
+          "text": "Interpret the meaning of the constitution's authorship within the context of law, rights and government."
+        },
+        {
+          "code": "CO4",
+          "text": "Understand the administrative structure of various branches of government."
+        },
+        {
+          "code": "CO5",
+          "text": "Examine different aspects of Indian Legal System and its related bodies.."
+        },
+        {
+          "code": "CO6",
+          "text": "Follow procedure to cast vote using voter-id. C)"
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-4.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 4,
+      "officialSubjectCode": "R23CI2606",
+      "subjectName": "Embedded Operating System",
+      "sourcePages": [
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Understand and use binary, octal, hexadecimal number systems and laws of Boolean algebra."
+        },
+        {
+          "code": "CO2",
+          "text": "Understand concept and working of combinational circuits"
+        },
+        {
+          "code": "CO3",
+          "text": "Understand concept of Flip flops , their types and applications"
+        },
+        {
+          "code": "CO4",
+          "text": "Understand architecture of 8051 microcontroller."
+        },
+        {
+          "code": "CO5",
+          "text": "Describe software program development tools."
+        },
+        {
+          "code": "CO6",
+          "text": "Construct and execute assembly language programs using instruction set of 8051. C)"
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-4.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 4,
+      "officialSubjectCode": "R23CI2607",
+      "subjectName": "Database Management Systems",
+      "sourcePages": [
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Understand the concept of database systems and draw ER diagram."
+        },
+        {
+          "code": "CO2",
+          "text": "Create database, modify, and append data in database."
+        },
+        {
+          "code": "CO3",
+          "text": "Apply integrity constraints and normalize database to normal forms."
+        },
+        {
+          "code": "CO4",
+          "text": "Write PL/SQL programs and handle the errors in PL/SQL."
+        },
+        {
+          "code": "CO5",
+          "text": "Write cursor programs and apply the concept of transaction and concurrency control."
+        },
+        {
+          "code": "CO6",
+          "text": "Write function programs and know the concept of distributed database."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-4.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 4,
+      "officialSubjectCode": "R23CI2608",
+      "subjectName": "Computer Networks And Security",
+      "sourcePages": [
+        169,
+        170,
+        171,
+        172,
+        173,
+        174
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Identify type of network, topology, components and its role in different applications."
+        },
+        {
+          "code": "CO2",
+          "text": "Select specific Ethernet type from given criteria."
+        },
+        {
+          "code": "CO3",
+          "text": "Describe principles, design issues of layers and relate protocols with OSI and TCP/IP model layers."
+        },
+        {
+          "code": "CO4",
+          "text": "Relate protocols of transport and application layer"
+        },
+        {
+          "code": "CO5",
+          "text": "Design networks with IPV4 addressing."
+        },
+        {
+          "code": "CO6",
+          "text": "Identify role of cryptography in various Network applications."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-4.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 4,
+      "officialSubjectCode": "R23CI1603",
+      "subjectName": "Python Programming",
+      "sourcePages": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Install and develop simple Python program using IDE and develop python program using operators."
+        },
+        {
+          "code": "CO2",
+          "text": "Write a program using conditional and looping statements."
+        },
+        {
+          "code": "CO3",
+          "text": "Perform operations using Python Data Structures."
+        },
+        {
+          "code": "CO4",
+          "text": "Develop Python program using functions, modules and packages."
+        },
+        {
+          "code": "CO5",
+          "text": "Apply object-oriented approach to solve given problem using python."
+        },
+        {
+          "code": "CO6",
+          "text": "Write program using Exception handling and File Operations."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-4.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 4,
+      "officialSubjectCode": "R23CI1604",
+      "subjectName": "Java Programming",
+      "sourcePages": [
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Understand Java fundamentals including program structure, data types, operators, and control statements. 2."
+        },
+        {
+          "code": "CO2",
+          "text": "Develop Java programs using classes, objects, methods, constructors, and inheritance. 3."
+        },
+        {
+          "code": "CO3",
+          "text": "Implement interfaces for multiple inheritance and create and use packages in Java. 4."
+        },
+        {
+          "code": "CO4",
+          "text": "Handle exceptions and develop multithreaded Java applications. 5."
+        },
+        {
+          "code": "CO5",
+          "text": "Apply collection framework, stream I/O, and file handling techniques in Java programs. 6."
+        },
+        {
+          "code": "CO6",
+          "text": "Design GUI applications using AWT/Applets and implement database connectivity using JDBC."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-4.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 4,
+      "officialSubjectCode": "R23CI6405",
+      "subjectName": "Entrepreneurship Development & Marketing Management",
+      "sourcePages": [
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Understand the fundamental concepts of entrepreneurship, motivation, creativity, and innovation to develop entrepreneurial competencies and problem-solving skills."
+        },
+        {
+          "code": "CO2",
+          "text": "Develop the ability to identify, evaluate, and analyse business opportunities and ideas using market research and SWOT analysis."
+        },
+        {
+          "code": "CO3",
+          "text": "Gain knowledge of government and non-government support for entrepreneurship and develop skills in business plan preparation and financial analysis."
+        },
+        {
+          "code": "CO4",
+          "text": "Develop an understanding of marketing management principles, consumer behaviour, and market strategies for effective business decision-making."
+        },
+        {
+          "code": "CO5",
+          "text": "Develop strategic marketing skills in pricing, branding, market planning, and international market entry."
+        },
+        {
+          "code": "CO6",
+          "text": "Gain expertise in digital marketing strategies, including SEO, SEM, content marketing, social media, and Al-driven business solutions."
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Business Opportunity",
+          "source": "course_content"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Introduction to Marketing",
+          "source": "course_content"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Digital Marketing",
+          "source": "course_content"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1.",
+          "Unit order is not consecutive from 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-4.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 4,
+      "officialSubjectCode": "R23CI4603",
+      "subjectName": "Problem-Solving and Ethics",
+      "sourcePages": [
+        235,
+        236,
+        237,
+        238,
+        239,
+        240
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Identify and classify problems based on their nature and complexity, and apply a systematic problem-solving approach to analyze real-life and engineering-related situations."
+        },
+        {
+          "code": "CO2",
+          "text": "Apply appropriate problem-solving techniques and tools such as brainstorming, flowcharts, decision trees, root cause analysis, and SWOT analysis to develop effective and feasible solutions."
+        },
+        {
+          "code": "CO3",
+          "text": "Use logical reasoning and analytical thinking skills to solve problems involving patterns, sequences, and logical relationships in technical and real-world contexts."
+        },
+        {
+          "code": "CO4",
+          "text": "Analyze ethical issues and moral dilemmas using ethical theories and structured ethical decision- making processes in personal, professional, and technological environments."
+        },
+        {
+          "code": "CO5",
+          "text": "Demonstrate professional ethics, integrity, teamwork, and social responsibility while responding to workplace scenarios related to Computer Engineering and IoT domains."
+        },
+        {
+          "code": "CO6",
+          "text": "Apply problem-solving and ethical reasoning skills to a real-world case or project and communicate solutions effectively through presentations, reports, and peer discussions. C)"
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Introduction to Problem",
+          "source": "course_content"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Problem-Solving",
+          "source": "course_content"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Logical Reasoning &",
+          "source": "course_content"
+        },
+        {
+          "order": 6,
+          "rawLabel": "6",
+          "title": "Practical Applications &",
+          "source": "course_content"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order is not consecutive from 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-5.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CI2610",
+      "subjectName": "Software Engineering",
+      "sourcePages": [
+        208,
+        209,
+        210,
+        211,
+        212,
+        213,
+        214
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Select an appropriate software development process model for a given project."
+        },
+        {
+          "code": "CO2",
+          "text": "Develop a professionally structured Software Requirement Specification (SRS)."
+        },
+        {
+          "code": "CO3",
+          "text": "Produce well-defined software design models using suitable techniques."
+        },
+        {
+          "code": "CO4",
+          "text": "Apply effective planning and cost estimation methods for software development."
+        },
+        {
+          "code": "CO5",
+          "text": "Implement project management practices throughout the software lifecycle."
+        },
+        {
+          "code": "CO6",
+          "text": "Apply software quality assurance principles to ensure dependable and maintainable software. C)"
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-5.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CI2609",
+      "subjectName": "Internet of Things Architecture and Protocols (IoTAP)",
+      "sourcePages": [
+        175,
+        176,
+        177,
+        178,
+        179,
+        180
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Understand IoT evolution, architecture, and technologies."
+        },
+        {
+          "code": "CO2",
+          "text": "Apply IoT design methodology, networking concepts, and communication models to develop IoT systems."
+        },
+        {
+          "code": "CO3",
+          "text": "Analyse and implement IoT protocols and standards such as MQTT, Zigbee, and 6LoWPAN."
+        },
+        {
+          "code": "CO4",
+          "text": "Apply layered communication protocols and security mechanisms for efficient and secure IoT data transmission"
+        },
+        {
+          "code": "CO5",
+          "text": "Analyse IIoT applications, workflows, risks, and develop secure IIoT solutions."
+        },
+        {
+          "code": "CO6",
+          "text": "Design scalable, secure IIoT architectures using service frameworks."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-5.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CI2611",
+      "subjectName": "Wireless Ad-Hoc Network",
+      "sourcePages": [
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Explain the fundamentals, characteristics, applications, advantages, and limitations of wireless ad hoc networks."
+        },
+        {
+          "code": "CO2",
+          "text": "Describe the architecture, design issues, challenges, and IEEE standards used in wireless ad hoc networks."
+        },
+        {
+          "code": "CO3",
+          "text": "Analyze and compare different routing protocols (proactive, reactive, hybrid) used in ad hoc networks."
+        },
+        {
+          "code": "CO4",
+          "text": "Explain MAC layer concepts, protocols, and IEEE 802.11 mechanisms in ad hoc networks."
+        },
+        {
+          "code": "CO5",
+          "text": "Evaluate energy management, QoS requirements, and security challenges with suitable solutions in ad hoc networks."
+        },
+        {
+          "code": "CO6",
+          "text": "Understand emerging technologies and analyze real-world applications and future scope of ad hoc networks"
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-5.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CI2612",
+      "subjectName": "Iot In Robotics",
+      "sourcePages": [
+        192,
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Understand the definition, scope, and applications of robotics in various fields."
+        },
+        {
+          "code": "CO2",
+          "text": "Identify and explain the basic components of a robotic system including motors, sensors, and control boards."
+        },
+        {
+          "code": "CO3",
+          "text": "Select and interface different types of motors and motor driver modules for robotic applications."
+        },
+        {
+          "code": "CO4",
+          "text": "Develop basic robotic systems using microcontrollers (Arduino) and perform input/output operations."
+        },
+        {
+          "code": "CO5",
+          "text": "Analyse power supply and battery requirements and apply safety practices in robotic systems."
+        },
+        {
+          "code": "CO6",
+          "text": "Implement communication interfaces and IoT concepts for monitoring and controlling robotic systems, including drones."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-5.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CI2613",
+      "subjectName": "Advanced Java Programming",
+      "sourcePages": [
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        206,
+        207
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Understand the concept of Java Swing and to Swing applications using controls/components."
+        },
+        {
+          "code": "CO2",
+          "text": "Implement event-driven programming with Swing event handling, and connect Java applications to databases using JDBC."
+        },
+        {
+          "code": "CO3",
+          "text": "Understand network programming concepts, Java networking classes, and remote communication using Java RMI to develop client -server and distributed applications."
+        },
+        {
+          "code": "CO4",
+          "text": "Understand the architecture, lifecycle, scripting elements, directives, implicit objects, and exception handling in Servlet and JSP to create dynamic, well-structured web applications following the MVC pattern."
+        },
+        {
+          "code": "CO5",
+          "text": "Understand the core concepts of the Spring Framework, Spring Boot, and Spring MVC, and build web applications using the MVC pattern and RESTful services."
+        },
+        {
+          "code": "CO6",
+          "text": "Understand the fundamentals of Hibernate ORM, SOAP and RESTful web services for building scalable and interoperable web applications."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-5.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CI1605",
+      "subjectName": "Seminar and Capstone Initiation",
+      "sourcePages": [
+        53,
+        54,
+        55,
+        56
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Identify relevant seminar topics and real-life problem statements aligned with emerging technologies and industry needs."
+        },
+        {
+          "code": "CO2",
+          "text": "Collect, analyze, and organize authenticated data through literature survey and field study."
+        },
+        {
+          "code": "CO3",
+          "text": "Apply effective presentation, documentation, and communication skills during semina delivery."
+        },
+        {
+          "code": "CO4",
+          "text": "Formulate a feasible and innovative project proposal including objectives, scope, resources, and action plan."
+        },
+        {
+          "code": "CO5",
+          "text": "Demonstrate teamwork, ethical practices, and professional responsibility in seminar and project planning activities."
+        },
+        {
+          "code": "CO6",
+          "text": "Prepare structured technical reports and presentations following MSBTE documentation standards. C)"
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Orientation to Seminar &",
+          "source": "course_content"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Seminar Topic Selection &",
+          "source": "course_content"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Project Problem",
+          "source": "course_content"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Project Planning & Action",
+          "source": "course_content"
+        }
+      ],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order is not consecutive from 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-5.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CI3601",
+      "subjectName": "Cyber Security",
+      "sourcePages": [
+        257,
+        258,
+        259,
+        260,
+        261,
+        262,
+        263
+      ],
+      "candidateOutcomes": [],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "needs_review"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-5.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CI3602",
+      "subjectName": "Cloud Computing",
+      "sourcePages": [
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Describe the fundamental ideas behind cloud computing."
+        },
+        {
+          "code": "CO2",
+          "text": "Implement Virtualization in cloud Computing."
+        },
+        {
+          "code": "CO3",
+          "text": "Illustrate Data Management in cloud."
+        },
+        {
+          "code": "CO4",
+          "text": "Describe Security in Cloud Computing."
+        },
+        {
+          "code": "CO5",
+          "text": "Describe Cloud on different platform."
+        },
+        {
+          "code": "CO6",
+          "text": "Future Trends and Cloud Applications."
+        }
+      ],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-5.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 5,
+      "officialSubjectCode": "R23CI3603",
+      "subjectName": "Data Analytics",
+      "sourcePages": [
+        249,
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        256
+      ],
+      "candidateOutcomes": [],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "needs_review"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-6.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CI1606",
+      "subjectName": "Industrial Management for IT Industry",
+      "sourcePages": [
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Apply fundamental management principles and functions to IT, SDLC, and Agile project environments."
+        },
+        {
+          "code": "CO2",
+          "text": "Analyze organizational structures, authority systems, and communication practices in IT/IOT and software organizations."
+        },
+        {
+          "code": "CO3",
+          "text": "Explain and apply HRM practices for recruitment, skill development, motivation, and performance management in IT teams."
+        },
+        {
+          "code": "CO4",
+          "text": "Interpret financial statements, budgeting methods, and taxation basics relevant to IT/IOT projects and services."
+        },
+        {
+          "code": "CO5",
+          "text": "Apply digital resource, IT asset, inventory control, and sustainable computing practices in IT/IOT organizations."
+        },
+        {
+          "code": "CO6",
+          "text": "Explain marketing, product life cycle, project management, and ethical practices in the IT/IOT industry."
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "I",
+          "title": "Management",
+          "source": "course_content"
+        },
+        {
+          "order": 2,
+          "rawLabel": "II",
+          "title": "Organization & Work",
+          "source": "course_content"
+        },
+        {
+          "order": 3,
+          "rawLabel": "III",
+          "title": "Human Resource",
+          "source": "course_content"
+        },
+        {
+          "order": 4,
+          "rawLabel": "IV",
+          "title": "Financial Management",
+          "source": "course_content"
+        },
+        {
+          "order": 5,
+          "rawLabel": "V",
+          "title": "Digital Resource & Asset",
+          "source": "course_content"
+        }
+      ],
+      "unitQuality": {
+        "promotable": true,
+        "blockers": []
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-6.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CI6606",
+      "subjectName": "AI Tools and Techniques",
+      "sourcePages": [],
+      "candidateOutcomes": [],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "course_block_not_found"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-6.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CI6607",
+      "subjectName": "Software Testing tools and Automation",
+      "sourcePages": [
+        65,
+        66,
+        67,
+        68,
+        69,
+        70
+      ],
+      "candidateOutcomes": [
+        {
+          "code": "CO1",
+          "text": "Understand and apply basic software testing concepts, STLC, and types of testing in real- world scenarios."
+        },
+        {
+          "code": "CO2",
+          "text": "Develop and execute automation scripts using Selenium WebDriver with appropriate locators and browser operations."
+        },
+        {
+          "code": "CO3",
+          "text": "Apply advanced Selenium concepts such as synchronization, TestNG framework, and Page Object Model for efficient automation."
+        },
+        {
+          "code": "CO4",
+          "text": "Use version control tools (Git, GitHub) and build tools (Maven) for managing automation projects."
+        },
+        {
+          "code": "CO5",
+          "text": "Understand and implement test design techniques and automation using Tosca, including model-based testing."
+        },
+        {
+          "code": "CO6",
+          "text": "Create, execute, and analyze test cases, generate reports, and interpret testing results for quality assurance."
+        }
+      ],
+      "candidateUnits": [
+        {
+          "order": 1,
+          "rawLabel": "1",
+          "title": "Introduction to Software",
+          "source": "course_content"
+        },
+        {
+          "order": 2,
+          "rawLabel": "2",
+          "title": "Selenium WebDriver",
+          "source": "course_content"
+        },
+        {
+          "order": 3,
+          "rawLabel": "3",
+          "title": "Advanced Selenium",
+          "source": "course_content"
+        },
+        {
+          "order": 4,
+          "rawLabel": "4",
+          "title": "Project & Version",
+          "source": "course_content"
+        },
+        {
+          "order": 5,
+          "rawLabel": "5",
+          "title": "Introduction to Tosca &",
+          "source": "course_content"
+        }
+      ],
+      "unitQuality": {
+        "promotable": true,
+        "blockers": []
+      },
+      "extractionStatus": "structure_promotable"
+    },
+    {
+      "manifest": "content/curriculum/cwit-r23/ciot/semester-6.json",
+      "departmentCode": "CIOT",
+      "programmeCode": "DCIOT",
+      "semesterNumber": 6,
+      "officialSubjectCode": "R23CI5602",
+      "subjectName": "Capstone Project",
+      "sourcePages": [],
+      "candidateOutcomes": [],
+      "candidateUnits": [],
+      "unitQuality": {
+        "promotable": false,
+        "blockers": [
+          "Fewer than five unit titles were extracted.",
+          "Unit order does not start at 1."
+        ]
+      },
+      "extractionStatus": "course_block_not_found"
     },
     {
       "manifest": "content/curriculum/cwit-r23/comp/semester-1.json",

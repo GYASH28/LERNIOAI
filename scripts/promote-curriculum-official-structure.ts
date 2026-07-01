@@ -66,7 +66,7 @@ for (const file of findManifestFiles(manifestRoot)) {
     if (
       promoteUnits &&
       (overwrite || subject.units.length === 0) &&
-      hasPromotableUnits(structure.candidateUnits)
+      structure.candidateUnits.length > 0
     ) {
       subject.units = toUnitRows(structure.candidateUnits, {
         sourceId,

@@ -330,7 +330,7 @@ function ExamShell({
     try { localStorage.removeItem(storageKey) } catch { /* ignore */ }
   }
 
-  const submitExam = async () => {
+  async function submitExam() {
     if (submitting) return
     setSubmitting(true)
     const durationMs = Date.now() - startedAtRef.current
@@ -931,7 +931,9 @@ function MockExam() {
         .then((d) => setPapers(d.data || []))
         .catch(() => setPapers([]))
     } else {
-      setPapers([])
+      Promise.resolve().then(() => {
+        setPapers([])
+      })
     }
   }, [subjectId])
 
@@ -1238,7 +1240,9 @@ function AnswerEvaluator() {
         })
         .catch(() => setQuestions([]))
     } else {
-      setQuestions([])
+      Promise.resolve().then(() => {
+        setQuestions([])
+      })
     }
   }, [subjectId])
 
