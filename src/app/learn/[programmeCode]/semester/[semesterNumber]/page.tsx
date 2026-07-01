@@ -15,7 +15,6 @@ import {
 import { getCurrentUser } from '@/lib/auth'
 import { getManifestSubjectsForSemester, type ManifestSubject } from '@/lib/curriculum/manifest-data'
 
-export const dynamic = 'force-dynamic'
 
 export default async function SemesterLearningPage({
   params,

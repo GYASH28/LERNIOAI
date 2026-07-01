@@ -102,3 +102,92 @@
      already respect prefers-reduced-motion and the app's custom
      Full / Reduced / None / Low Power policies. */
 }
+
+/* ──────────────────────────────────────────────────────────────────────────
+   PERFORMANCE OPTIMIZATIONS
+   ────────────────────────────────────────────────────────────────────────── */
+
+/* Disable animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Optimize font rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Prevent layout shift from images */
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* GPU acceleration for animated elements */
+.transform-gpu {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Reduce paint complexity for sticky elements */
+.sticky {
+  will-change: transform;
+}
+
+/* Hide scrollbar but keep functionality on mobile nav */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Smooth focus ring transitions */
+*:focus-visible {
+  transition: box-shadow 0.15s ease-in-out;
+}
+
+/* Prevent text selection on UI elements */
+button, [role="button"], nav, .no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+/* Better tap targets on mobile */
+@media (max-width: 768px) {
+  button, a, [role="button"] {
+    min-height: 40px;
+    min-width: 40px;
+  }
+}
+
+/* Smooth page transitions */
+main {
+  animation: fadeIn 0.15s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Reduce bundle size: only load custom cursor styles on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  .premium-cursor-enabled {
+    cursor: auto;
+  }
+}

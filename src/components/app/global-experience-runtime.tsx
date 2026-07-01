@@ -3,24 +3,23 @@
 import dynamic from 'next/dynamic'
 import { usePathname } from 'next/navigation'
 
-const ThemeAtmosphere = dynamic(
-  () => import('@/components/motion/theme-atmosphere').then((module) => module.ThemeAtmosphere),
-  { ssr: false },
-)
-const LernioCursor = dynamic(
-  () => import('@/components/ui/lernio-cursor').then((module) => module.LernioCursor),
-  { ssr: false },
-)
-const DevOverlayCleanup = dynamic(
-  () => import('@/components/dev-overlay-cleanup').then((module) => module.DevOverlayCleanup),
-  { ssr: false },
-)
+// Lazy-load only the essential runtime components.
+// Removed: LernioCursor (causes jank on every mouse move)
+// Removed: ThemeAtmosphere (heavy animation layer, causes re-renders)
+// Kept: AchievementUnlockToaster (lightweight, only renders on unlock)
+// Kept: SonnerToaster (needed for toast notifications)
+// Kept: DevOverlayCleanup (lightweight DOM cleanup)
+
 const AchievementUnlockToaster = dynamic(
   () => import('@/components/ui/achievement-unlock-toaster').then((module) => module.AchievementUnlockToaster),
   { ssr: false },
 )
 const SonnerToaster = dynamic(
   () => import('@/components/ui/sonner').then((module) => module.Toaster),
+  { ssr: false },
+)
+const DevOverlayCleanup = dynamic(
+  () => import('@/components/dev-overlay-cleanup').then((module) => module.DevOverlayCleanup),
   { ssr: false },
 )
 
@@ -44,7 +43,6 @@ function isLearningRuntimeRoute(pathname: string) {
 export function GlobalExperienceRuntime() {
   const pathname = usePathname() || '/'
   const enableLearningRuntime = isLearningRuntimeRoute(pathname)
-  const enablePremiumCursor = enableLearningRuntime && !pathname.startsWith('/exams')
 
   if (!enableLearningRuntime) {
     return <DevOverlayCleanup />
@@ -52,8 +50,6 @@ export function GlobalExperienceRuntime() {
 
   return (
     <>
-      <ThemeAtmosphere />
-      {enablePremiumCursor ? <LernioCursor /> : null}
       <AchievementUnlockToaster />
       <SonnerToaster position="top-right" richColors />
       <DevOverlayCleanup />

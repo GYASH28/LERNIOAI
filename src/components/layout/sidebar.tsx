@@ -69,7 +69,11 @@ function isActivePath(pathname: string, href: string) {
 
 export function Sidebar() {
   const pathname = usePathname()
-  const { sidebarOpen, setSidebarOpen, user, xp, streak } = useAppStore()
+  const sidebarOpen = useAppStore((s) => s.sidebarOpen)
+  const setSidebarOpen = useAppStore((s) => s.setSidebarOpen)
+  const user = useAppStore((s) => s.user)
+  const xp = useAppStore((s) => s.xp)
+  const streak = useAppStore((s) => s.streak)
 
   return (
     <>

@@ -18,7 +18,6 @@ import { getManifestSubject, type ManifestSubject } from '@/lib/curriculum/manif
 import { enhanceSubject } from '@/lib/curriculum/enhanced-manifest'
 import { YouTubePlayer } from '@/components/learning/youtube-player-lazy'
 
-export const dynamic = 'force-dynamic'
 
 export default async function SubjectLearningPage({
   params,
