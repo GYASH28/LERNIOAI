@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { PlayCircle, CheckCircle2, XCircle, RotateCw, ChevronRight, Zap } from 'lucide-react'
+import Link from 'next/link'
+import { PlayCircle, CheckCircle2, XCircle, RotateCw, ChevronRight, Zap, ArrowLeft } from 'lucide-react'
 
 interface SubjectInfo { code: string; name: string; quizCount: number; coverageFocus: string }
 
@@ -60,9 +61,20 @@ export function PracticeClient({ subjects }: { subjects: SubjectInfo[] }) {
     const q = questions[current]
     return (
       <div className="rounded-lg border border-border bg-card p-4 sm:p-6">
+        {/* Exit button */}
+        <div className="mb-3 flex items-center justify-between">
+          <button
+            onClick={() => { if (confirm('Leave the practice? Your progress will be lost.')) reset() }}
+            className="inline-flex items-center gap-1.5 rounded-md border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+          >
+            <ArrowLeft className="h-3.5 w-3.5" />
+            Exit
+          </button>
+          <span className="flex items-center gap-1 text-xs font-bold text-primary"><Zap className="h-3 w-3" />Score: {score}</span>
+        </div>
         <div className="mb-3 flex items-center justify-between">
           <span className="text-xs text-muted-foreground">Question {current + 1} / {questions.length}</span>
-          <span className="flex items-center gap-1 text-xs font-bold text-primary"><Zap className="h-3 w-3" />Score: {score}</span>
+          <span className="text-xs text-muted-foreground">{subjects.find(s => s.code === selected)?.name}</span>
         </div>
         <div className="mb-4 h-1.5 overflow-hidden rounded-full bg-muted"><div className="h-full bg-primary transition-all" style={{ width: `${((current + 1) / questions.length) * 100}%` }} /></div>
         <p className="mb-4 text-sm font-medium whitespace-pre-line">{q.question}</p>
@@ -92,6 +104,14 @@ export function PracticeClient({ subjects }: { subjects: SubjectInfo[] }) {
 
   return (
     <div>
+      {/* Back to dashboard */}
+      <div className="mb-4">
+        <Link href="/dashboard" className="inline-flex items-center gap-1.5 rounded-md border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">
+          <ArrowLeft className="h-3.5 w-3.5" />
+          Back to Dashboard
+        </Link>
+      </div>
+
       {/* Preset selector */}
       <h2 className="mb-3 text-sm font-semibold uppercase text-muted-foreground">Choose Practice Length</h2>
       <div className="mb-6 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">

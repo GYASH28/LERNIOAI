@@ -1,7 +1,9 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { FileText, Clock, PlayCircle, CheckCircle2, XCircle, RotateCw, Award, Timer } from 'lucide-react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { FileText, Clock, PlayCircle, CheckCircle2, XCircle, RotateCw, Award, Timer, ArrowLeft, Home } from 'lucide-react'
 
 interface SubjectInfo { code: string; name: string; credits: number; quizCount: number; coverageFocus: string }
 
@@ -79,6 +81,24 @@ export function ExamsClient({ subjects }: { subjects: SubjectInfo[] }) {
   if (showResults) {
     return (
       <div className="rounded-lg border border-border bg-card p-4 sm:p-6">
+        {/* Back button */}
+        <div className="mb-4 flex items-center justify-between">
+          <button
+            onClick={reset}
+            className="inline-flex items-center gap-1.5 rounded-md border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+          >
+            <ArrowLeft className="h-3.5 w-3.5" />
+            Back to Subjects
+          </button>
+          <Link
+            href="/dashboard"
+            className="inline-flex items-center gap-1.5 rounded-md border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+          >
+            <Home className="h-3.5 w-3.5" />
+            Dashboard
+          </Link>
+        </div>
+
         <div className="text-center mb-6">
           <Award className="mx-auto h-12 w-12 text-amber-500" />
           <h2 className="mt-3 text-xl font-bold">Exam Complete!</h2>
@@ -123,6 +143,28 @@ export function ExamsClient({ subjects }: { subjects: SubjectInfo[] }) {
     const q = questions[currentQ]
     return (
       <div className="rounded-lg border border-border bg-card p-4 sm:p-6">
+        {/* Back / exit button */}
+        <div className="mb-4 flex items-center justify-between">
+          <button
+            onClick={() => {
+              if (confirm('Leave the exam? Your progress will be lost.')) {
+                reset()
+              }
+            }}
+            className="inline-flex items-center gap-1.5 rounded-md border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+          >
+            <ArrowLeft className="h-3.5 w-3.5" />
+            Exit Exam
+          </button>
+          <Link
+            href="/dashboard"
+            className="inline-flex items-center gap-1.5 rounded-md border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+          >
+            <Home className="h-3.5 w-3.5" />
+            Dashboard
+          </Link>
+        </div>
+
         {/* Header with timer */}
         <div className="mb-4 flex items-center justify-between">
           <div>
@@ -178,6 +220,17 @@ export function ExamsClient({ subjects }: { subjects: SubjectInfo[] }) {
   // Subject + preset selection
   return (
     <div>
+      {/* Back to dashboard button */}
+      <div className="mb-4">
+        <Link
+          href="/dashboard"
+          className="inline-flex items-center gap-1.5 rounded-md border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" />
+          Back to Dashboard
+        </Link>
+      </div>
+
       {/* Preset selector */}
       <h2 className="mb-3 text-sm font-semibold uppercase text-muted-foreground">Choose Exam Type</h2>
       <div className="mb-6 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">

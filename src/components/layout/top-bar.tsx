@@ -70,6 +70,37 @@ function isActivePath(pathname: string, href: string) {
 }
 
 /**
+ * Handle sign-out reliably across environments.
+ * next-auth's signOut() can silently fail if the session cookie is already
+ * invalid or if there's a network hiccup. This wrapper:
+ *   1. Calls signOut() with redirect:false (so we control navigation)
+ *   2. Clears local app state
+ *   3. Forces a hard navigation to /sign-in (most reliable)
+ *   4. Falls back to window.location if router.push fails
+ */
+function useSignOut() {
+  return useCallback(async () => {
+    try {
+      // Clear local state first so stale data doesn't leak
+      try {
+        localStorage.removeItem('lernio-app-state')
+        localStorage.removeItem('lernio-prefs')
+      } catch {}
+
+      // Call signOut without redirect so we control navigation
+      await signOut({ redirect: false, callbackUrl: '/sign-in' }).catch(() => {})
+
+      // Force a hard navigation — this clears all client state and is the
+      // most reliable way to ensure the user is logged out
+      window.location.href = '/sign-in?signedOut=true'
+    } catch {
+      // Last-resort fallback
+      window.location.href = '/sign-in'
+    }
+  }, [])
+}
+
+/**
  * Collapsible TopBar — replaces the sidebar.
  * Can be hidden/shown with a toggle button.
  * On mobile, collapses into a hamburger menu drawer.
@@ -85,6 +116,7 @@ export function TopBar() {
   const streak = useAppStore((s) => s.streak)
   const { pref, setPref } = usePrefs()
   const isDark = pref.appearance === 'dark'
+  const handleSignOut = useSignOut()
 
   const toggleHidden = useCallback(() => setHidden((h) => !h), [])
   const toggleMobile = useCallback(() => setMobileOpen((o) => !o), [])
@@ -210,7 +242,7 @@ export function TopBar() {
             </button>
 
             {/* User avatar with dropdown (desktop) */}
-            <UserMenu user={user} isDark={isDark} setPref={setPref} />
+            <UserMenu user={user} isDark={isDark} setPref={setPref} onSignOut={handleSignOut} />
 
             {/* Hide bar button */}
             <button
@@ -323,7 +355,7 @@ export function TopBar() {
               </button>
               {user && (
                 <button
-                  onClick={() => signOut({ callbackUrl: '/sign-in' })}
+                  onClick={handleSignOut}
                   className="flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground"
                 >
                   <LogOut className="h-4 w-4" />
@@ -340,8 +372,9 @@ export function TopBar() {
 
 // ─── User Menu (desktop dropdown with profile, settings, logout) ─────────────
 
-function UserMenu({ user, isDark, setPref }: { user: { name: string; email: string } | null; isDark: boolean; setPref: (p: { appearance: string }) => void }) {
+function UserMenu({ user, isDark, setPref, onSignOut }: { user: { name: string; email: string } | null; isDark: boolean; setPref: (p: { appearance: string }) => void; onSignOut: () => void }) {
   const [open, setOpen] = useState(false)
+  const [signingOut, setSigningOut] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -357,6 +390,16 @@ function UserMenu({ user, isDark, setPref }: { user: { name: string; email: stri
   if (!user) return null
 
   const initials = user.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()
+
+  const handleSignOutClick = async () => {
+    setSigningOut(true)
+    try {
+      await onSignOut()
+    } finally {
+      setSigningOut(false)
+      setOpen(false)
+    }
+  }
 
   return (
     <div className="relative" ref={ref}>
@@ -403,11 +446,12 @@ function UserMenu({ user, isDark, setPref }: { user: { name: string; email: stri
 
             {/* Logout */}
             <button
-              onClick={() => signOut({ callbackUrl: '/sign-in' })}
-              className="flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-sm text-red-600 hover:bg-red-500/10 transition-colors"
+              onClick={handleSignOutClick}
+              disabled={signingOut}
+              className="flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-sm text-red-600 hover:bg-red-500/10 transition-colors disabled:opacity-50"
             >
               <LogOut className="h-4 w-4" />
-              Sign Out
+              {signingOut ? 'Signing out…' : 'Sign Out'}
             </button>
           </div>
         </div>
