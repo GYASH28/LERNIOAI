@@ -18,10 +18,10 @@ import { PublicFooter } from '@/components/marketing/public-footer'
 
 const SITE_URL = process.env.NEXTAUTH_URL?.replace(/\/$/, '') || 'https://lernioai.vercel.app'
 
-// Landing page is static — getCurrentUser is optional and wrapped in try/catch.
-// This makes the page load instantly (no DB call on every request).
-export const dynamic = 'force-static'
-export const revalidate = 3600 // revalidate every hour
+// Landing page — force-dynamic is safer for client components (CinematicIntro
+// uses sessionStorage/window). The page is fast enough without static caching.
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 export const metadata: Metadata = {
   alternates: {

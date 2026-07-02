@@ -315,7 +315,10 @@ export function CinematicIntro() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const frameRef = useRef<number | null>(null)
   const finishingRef = useRef(false)
-  const [phase, setPhase] = useState<Phase>('checking')
+  // Start in 'complete' phase so the page content is visible by default.
+  // The useEffect below will switch to 'playing' if the intro should play.
+  // This prevents a blank dark screen if JS is slow to execute.
+  const [phase, setPhase] = useState<Phase>('complete')
   const [mode, setMode] = useState<LandingIntroMode>('full')
   const [runId, setRunId] = useState(0)
   const [stage, setStage] = useState('Awakening academic intelligence')
