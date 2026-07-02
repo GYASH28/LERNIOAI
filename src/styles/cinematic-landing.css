@@ -277,188 +277,303 @@ html[data-landing-motion="enhanced"] [data-landing-section="revealed"] [data-lan
 }
 
 .knowledge-book-shell {
-  min-height: 31rem;
+  min-height: 34rem;
   border-radius: 1.5rem;
   background:
-    radial-gradient(24rem 20rem at 50% 42%, color-mix(in oklch, var(--brand) 21%, transparent), transparent 70%),
+    radial-gradient(28rem 22rem at 50% 40%, color-mix(in oklch, var(--brand) 24%, transparent), transparent 70%),
+    radial-gradient(20rem 16rem at 80% 80%, color-mix(in oklch, var(--secondary-action) 14%, transparent), transparent 65%),
     linear-gradient(145deg, color-mix(in oklch, var(--card) 88%, var(--brand) 12%), var(--card));
   box-shadow:
-    0 2.2rem 5rem rgb(3 20 13 / 0.18),
-    inset 0 1px 0 rgb(255 255 255 / 0.08);
-  perspective: 1200px;
+    0 2.5rem 6rem rgb(3 20 13 / 0.22),
+    inset 0 1px 0 rgb(255 255 255 / 0.1);
+  perspective: 1400px;
+  position: relative;
 }
 
 .knowledge-book-scene {
   overflow: hidden;
   transform-style: preserve-3d;
+  position: relative;
 }
 
+/* ─── Background grid ─── */
 .knowledge-book-grid {
   position: absolute;
   inset: -20%;
   background-image:
-    linear-gradient(to right, color-mix(in oklch, var(--brand) 10%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in oklch, var(--brand) 8%, transparent) 1px, transparent 1px);
+    linear-gradient(to right, color-mix(in oklch, var(--brand) 8%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklch, var(--brand) 6%, transparent) 1px, transparent 1px);
   background-size: 2.5rem 2.5rem;
-  mask-image: radial-gradient(circle at center, black 0 42%, transparent 72%);
+  mask-image: radial-gradient(circle at center, black 0 38%, transparent 68%);
   transform: rotateX(68deg) translateY(7rem);
-  opacity: 0.7;
+  opacity: 0.5;
 }
 
+/* ─── Glowing halos ─── */
 .knowledge-book-halo {
   position: absolute;
-  width: 17rem;
+  width: 18rem;
   aspect-ratio: 1;
   border-radius: 50%;
-  filter: blur(42px);
-  opacity: 0.28;
+  filter: blur(48px);
+  opacity: 0.35;
+  animation: knowledge-halo-pulse 6s ease-in-out infinite;
 }
 
 .knowledge-book-halo--one {
-  left: 8%;
-  top: 9%;
+  left: 5%;
+  top: 8%;
   background: color-mix(in oklch, var(--brand) 70%, transparent);
 }
 
 .knowledge-book-halo--two {
-  right: 3%;
-  bottom: 10%;
+  right: 0%;
+  bottom: 8%;
   background: color-mix(in oklch, var(--secondary-action) 62%, transparent);
+  animation-delay: -2s;
 }
 
+.knowledge-book-halo--three {
+  left: 40%;
+  top: 50%;
+  width: 14rem;
+  background: color-mix(in oklch, var(--brand) 50%, var(--secondary-action) 30%);
+  opacity: 0.2;
+  animation-delay: -4s;
+}
+
+@keyframes knowledge-halo-pulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(1.1); }
+}
+
+/* ─── 3D Book Stage ─── */
 .knowledge-book-stage {
   position: relative;
-  width: min(26rem, 84%);
-  height: 20rem;
-  transform: translateY(-0.45rem) rotateX(8deg) rotateY(-8deg);
+  width: min(28rem, 88%);
+  height: 22rem;
+  margin: 2rem auto;
+  transform: translateY(-0.5rem) rotateX(12deg) rotateY(-6deg);
   transform-style: preserve-3d;
   animation: knowledge-book-breathe 7s ease-in-out infinite;
 }
 
 .knowledge-book-shadow {
   position: absolute;
-  left: 12%;
-  right: 12%;
-  bottom: 1.5rem;
-  height: 3.5rem;
+  left: 10%;
+  right: 10%;
+  bottom: 1rem;
+  height: 3rem;
   border-radius: 50%;
-  background: rgb(3 18 12 / 0.34);
-  filter: blur(18px);
-  transform: rotateX(78deg) translateZ(-4rem);
+  background: radial-gradient(ellipse, rgb(3 18 12 / 0.4), transparent 70%);
+  filter: blur(20px);
+  transform: rotateX(80deg) translateZ(-5rem);
 }
 
-.knowledge-book {
+/* ─── The 3D Book — realistic open book ─── */
+.knowledge-book-3d {
   position: absolute;
-  inset: 2.8rem 1.3rem 1rem;
+  inset: 1rem;
   transform-style: preserve-3d;
 }
 
-.knowledge-book__cover,
-.knowledge-book__pages {
+/* Book cover back (dark, visible behind pages) */
+.kb-cover-back {
   position: absolute;
-  top: 4.6rem;
-  width: 49%;
-  height: 9.2rem;
-  transform-origin: bottom center;
+  left: 5%;
+  right: 5%;
+  top: 15%;
+  bottom: 15%;
+  background: linear-gradient(145deg,
+    color-mix(in oklch, var(--brand) 55%, black 25%),
+    color-mix(in oklch, var(--brand) 30%, black 45%));
+  border-radius: 0.5rem;
+  transform: translateZ(-0.8rem) rotateX(2deg);
+  box-shadow: 0 1rem 2rem rgb(3 20 13 / 0.3);
+}
+
+/* Pages — cream colored, with text lines */
+.kb-page {
+  position: absolute;
+  top: 15%;
+  width: 44%;
+  height: 70%;
+  transform-origin: center bottom;
   transform-style: preserve-3d;
-}
-
-.knowledge-book__cover {
-  z-index: 1;
-  border: 1px solid color-mix(in oklch, var(--brand) 72%, white 12%);
-  background:
-    linear-gradient(150deg, color-mix(in oklch, var(--brand) 72%, black 18%), color-mix(in oklch, var(--brand) 48%, black 34%));
-  box-shadow: 0 1.4rem 2rem rgb(3 20 13 / 0.28);
-}
-
-.knowledge-book__cover--left {
-  left: 0;
-  border-radius: 1.1rem 0.2rem 0.7rem 1.4rem;
-  transform: rotateY(22deg) rotateZ(5deg) translateZ(-0.55rem);
-}
-
-.knowledge-book__cover--right {
-  right: 0;
-  border-radius: 0.2rem 1.1rem 1.4rem 0.7rem;
-  transform: rotateY(-22deg) rotateZ(-5deg) translateZ(-0.55rem);
-}
-
-.knowledge-book__pages {
-  z-index: 2;
+  background: linear-gradient(180deg, #FFFEF7 0%, #FFF9E8 50%, #F5EFD5 100%);
+  border: 1px solid rgba(180, 160, 100, 0.2);
+  box-shadow:
+    inset 0 0 1rem rgba(120, 100, 60, 0.08),
+    0 0.3rem 0.8rem rgba(3 20 13 / 0.1);
   overflow: hidden;
-  border: 1px solid color-mix(in oklch, var(--brand) 24%, var(--border));
-  background:
-    repeating-linear-gradient(180deg, rgb(255 252 232 / 0.96) 0 3px, rgb(210 231 215 / 0.94) 3px 4px);
-  box-shadow: inset 0 -0.8rem 1rem rgb(52 102 75 / 0.13);
 }
 
-.knowledge-book__pages::after {
-  content: "";
-  position: absolute;
-  inset: 11% 12% 17%;
-  background:
-    linear-gradient(color-mix(in oklch, var(--brand) 22%, transparent) 1px, transparent 1px);
-  background-size: 100% 1.1rem;
-  opacity: 0.65;
+.kb-page--left {
+  left: 6%;
+  border-radius: 0.3rem 0.1rem 0.1rem 0.3rem;
+  transform: rotateY(35deg) translateZ(0.3rem);
+  box-shadow:
+    inset 0 0 1rem rgba(120, 100, 60, 0.08),
+    inset -0.3rem 0 0.5rem rgba(120, 100, 60, 0.15),
+    0 0.3rem 0.8rem rgba(3 20 13 / 0.1);
 }
 
-.knowledge-book__pages--left {
-  left: 1.5%;
-  border-radius: 1rem 0.15rem 0.55rem 1.1rem;
-  transform: rotateY(18deg) rotateZ(4deg) translateZ(0.2rem);
+.kb-page--right {
+  right: 6%;
+  border-radius: 0.1rem 0.3rem 0.3rem 0.1rem;
+  transform: rotateY(-35deg) translateZ(0.3rem);
+  box-shadow:
+    inset 0 0 1rem rgba(120, 100, 60, 0.08),
+    inset 0.3rem 0 0.5rem rgba(120, 100, 60, 0.15),
+    0 0.3rem 0.8rem rgba(3 20 13 / 0.1);
 }
 
-.knowledge-book__pages--right {
-  right: 1.5%;
-  border-radius: 0.15rem 1rem 1.1rem 0.55rem;
-  transform: rotateY(-18deg) rotateZ(-4deg) translateZ(0.2rem);
+/* Page content — text lines and headings */
+.kb-page-content {
+  padding: 1.2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
-.knowledge-book__pages i {
-  position: absolute;
-  top: 0.7rem;
-  bottom: 0.7rem;
-  width: 1px;
-  background: color-mix(in oklch, var(--brand) 18%, transparent);
+.kb-page-title {
+  font-size: 0.55rem;
+  font-weight: 800;
+  color: color-mix(in oklch, var(--brand) 70%, black 30%);
+  letter-spacing: 1.5px;
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
 }
 
-.knowledge-book__pages i:nth-child(1) { left: 28%; }
-.knowledge-book__pages i:nth-child(2) { left: 52%; }
-.knowledge-book__pages i:nth-child(3) { left: 76%; }
+.kb-page-heading {
+  font-size: 0.5rem;
+  font-weight: 700;
+  color: color-mix(in oklch, var(--brand) 50%, black 30%);
+  margin-top: 0.3rem;
+  margin-bottom: 0.2rem;
+}
 
-.knowledge-book__spine {
+.kb-page-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.kb-page-lines--short {
+  margin-top: 0;
+}
+
+.kb-page-lines span {
+  display: block;
+  height: 1px;
+  background: linear-gradient(90deg,
+    rgba(120, 100, 60, 0.3) 0%,
+    rgba(120, 100, 60, 0.25) 80%,
+    transparent 100%);
+}
+
+.kb-page-lines span:nth-child(odd) {
+  width: 90%;
+}
+
+.kb-page-lines span:nth-child(even) {
+  width: 75%;
+}
+
+.kb-page-lines span:nth-child(3n) {
+  width: 85%;
+}
+
+/* Code block on right page */
+.kb-page-code {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-top: 0.3rem;
+  padding: 0.4rem;
+  background: rgba(15, 23, 42, 0.08);
+  border-radius: 0.2rem;
+  border-left: 2px solid color-mix(in oklch, var(--brand) 60%, transparent);
+}
+
+.kb-code-line {
+  font-family: 'Courier New', monospace;
+  font-size: 0.42rem;
+  color: color-mix(in oklch, var(--brand) 80%, black 20%);
+  font-weight: 600;
+}
+
+/* Center spine — the binding */
+.kb-spine {
   position: absolute;
   left: 50%;
-  top: 4.5rem;
-  width: 0.8rem;
-  height: 10.3rem;
-  border-radius: 999px;
-  transform: translateX(-50%) translateZ(0.8rem);
-  background: linear-gradient(180deg, color-mix(in oklch, var(--brand) 80%, white 8%), color-mix(in oklch, var(--brand) 45%, black 35%));
-  box-shadow: 0 0 1.6rem color-mix(in oklch, var(--brand) 42%, transparent);
-  z-index: 4;
+  top: 14%;
+  bottom: 14%;
+  width: 1.2rem;
+  transform: translateX(-50%) translateZ(0.5rem);
+  background: linear-gradient(180deg,
+    color-mix(in oklch, var(--brand) 50%, black 30%) 0%,
+    color-mix(in oklch, var(--brand) 70%, black 20%) 50%,
+    color-mix(in oklch, var(--brand) 40%, black 40%) 100%);
+  border-radius: 0.2rem;
+  box-shadow:
+    0 0 1.5rem color-mix(in oklch, var(--brand) 35%, transparent),
+    inset 0 0 0.3rem rgba(0, 0, 0, 0.3);
+  z-index: 3;
 }
 
-.knowledge-book__bookmark {
+/* Page edges — visible thickness on the outer edges */
+.kb-page-edges {
   position: absolute;
-  left: calc(50% + 0.8rem);
-  top: 10.6rem;
-  width: 0.65rem;
-  height: 5.5rem;
-  border-radius: 0 0 999px 999px;
-  background: var(--secondary-action);
-  transform: translateZ(1.1rem) rotate(-4deg);
-  z-index: 5;
+  top: 15%;
+  width: 0.5rem;
+  height: 70%;
+  background: repeating-linear-gradient(
+    180deg,
+    #FFFEF7 0 1px,
+    #F0E8C8 1px 2px
+  );
+  z-index: 1;
 }
 
+.kb-page-edges--left {
+  left: 5.5%;
+  border-radius: 0.1rem 0 0 0.1rem;
+  transform: rotateY(35deg) translateX(-0.3rem) translateZ(0.1rem);
+  box-shadow: -0.2rem 0 0.3rem rgba(120, 100, 60, 0.2);
+}
+
+.kb-page-edges--right {
+  right: 5.5%;
+  border-radius: 0 0.1rem 0.1rem 0;
+  transform: rotateY(-35deg) translateX(0.3rem) translateZ(0.1rem);
+  box-shadow: 0.2rem 0 0.3rem rgba(120, 100, 60, 0.2);
+}
+
+/* Bookmark ribbon */
+.kb-bookmark {
+  position: absolute;
+  right: 28%;
+  top: 12%;
+  width: 0.7rem;
+  height: 4.5rem;
+  background: linear-gradient(180deg, var(--secondary-action), color-mix(in oklch, var(--secondary-action) 60%, black 40%));
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+  transform: translateZ(1.2rem) rotate(3deg);
+  z-index: 5;
+  box-shadow: 0 0.3rem 0.6rem rgba(3 20 13 / 0.2);
+}
+
+/* ─── AI Core — floating above the book ─── */
 .knowledge-book-core {
   position: absolute;
   left: 50%;
-  top: 4rem;
-  width: 9rem;
-  height: 9rem;
-  transform: translateX(-50%) translateZ(5rem);
+  top: 1rem;
+  width: 8rem;
+  height: 8rem;
+  transform: translateX(-50%) translateZ(6rem);
   transform-style: preserve-3d;
+  z-index: 6;
 }
 
 .knowledge-book-core__glass {
@@ -481,8 +596,8 @@ html[data-landing-motion="enhanced"] [data-landing-section="revealed"] [data-lan
 .knowledge-book-core__facet {
   display: grid;
   place-items: center;
-  width: 3.2rem;
-  height: 3.2rem;
+  width: 3rem;
+  height: 3rem;
   clip-path: polygon(50% 0, 92% 24%, 82% 76%, 50% 100%, 18% 76%, 8% 24%);
   background: rgb(9 72 48 / 0.42);
   backdrop-filter: blur(5px);
@@ -512,86 +627,118 @@ html[data-landing-motion="enhanced"] [data-landing-section="revealed"] [data-lan
   animation: knowledge-book-ring 9s linear infinite;
 }
 
+/* ─── Orbiting modules — COUNTER-ROTATED so text stays straight ─── */
+.knowledge-book-orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30rem;
+  height: 30rem;
+  margin: -15rem 0 0 -15rem;
+  animation: knowledge-book-orbit 32s linear infinite;
+  pointer-events: none;
+}
+
+.knowledge-book-orbit-item {
+  --module-angle: calc(var(--orbit-index) * 60deg);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Place item on the orbit circle */
+  transform:
+    rotate(var(--module-angle))
+    translateX(13.5rem)
+    rotate(calc(var(--module-angle) * -1));
+}
+
+/* Counter-rotation wrapper — undoes the parent orbit rotation
+   so the text/icon always faces the viewer and stays readable */
+.knowledge-book-orbit-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid color-mix(in oklch, var(--border) 50%, var(--orbit-color, var(--brand)) 50%);
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--card) 92%, transparent);
+  color: var(--text-strong);
+  font-size: 0.7rem;
+  font-weight: 700;
+  white-space: nowrap;
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 0.4rem 1.2rem rgb(3 20 13 / 0.15),
+    0 0 0.5rem color-mix(in oklch, var(--orbit-color, var(--brand)) 20%, transparent);
+  /* This is the KEY: counter-rotate to undo the parent's orbit rotation.
+     The parent rotates 360deg over 32s, so we apply the reverse animation. */
+  animation: knowledge-book-orbit-counter 32s linear infinite reverse;
+}
+
+@keyframes knowledge-book-orbit-counter {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── Floating mini books ─── */
 .knowledge-mini-books {
   position: absolute;
   inset: 0;
   transform-style: preserve-3d;
+  pointer-events: none;
 }
 
 .knowledge-mini-book {
   --mini-angle: calc(var(--mini-index) * 90deg);
   position: absolute;
   left: 50%;
-  top: 43%;
-  display: grid;
-  width: 3.8rem;
-  height: 2.7rem;
-  place-items: center;
-  border: 1px solid color-mix(in oklch, var(--brand) 44%, var(--border));
-  border-radius: 0.35rem 0.6rem 0.6rem 0.35rem;
-  background: color-mix(in oklch, var(--card) 80%, var(--brand) 20%);
-  box-shadow: 0 0.7rem 1.3rem rgb(3 20 13 / 0.16);
+  top: 45%;
+  display: flex;
+  align-items: center;
+  width: 4.2rem;
+  height: 3rem;
   transform:
     rotate(var(--mini-angle))
-    translateX(8.7rem)
+    translateX(9.5rem)
     rotate(calc(var(--mini-angle) * -1))
-    translateZ(3rem);
-  animation: knowledge-mini-float 4.8s ease-in-out infinite;
+    translateZ(2rem);
+  animation: knowledge-mini-float 5s ease-in-out infinite;
 }
 
-.knowledge-mini-book::before {
-  content: "";
-  position: absolute;
-  left: 0.35rem;
-  top: 0.3rem;
-  bottom: 0.3rem;
-  width: 0.22rem;
-  border-radius: 999px;
-  background: var(--brand);
+.knowledge-mini-book-spine {
+  width: 0.5rem;
+  height: 100%;
+  background: var(--mini-color, var(--brand));
+  border-radius: 0.15rem 0 0 0.15rem;
+  box-shadow: 0 0 0.3rem color-mix(in oklch, var(--mini-color, var(--brand)) 40%, transparent);
 }
 
-.knowledge-mini-book b {
-  font-size: 0.55rem;
-  color: var(--text-strong);
-}
-
-.knowledge-book-orbit {
-  position: absolute;
-  width: 27rem;
-  height: 27rem;
-  animation: knowledge-book-orbit 34s linear infinite;
-}
-
-.knowledge-book-module {
-  --module-angle: calc(var(--orbit-index) * 60deg);
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  display: inline-flex;
-  min-width: 6.8rem;
-  min-height: 2.45rem;
+.knowledge-mini-book-cover {
+  flex: 1;
+  height: 100%;
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.42rem;
-  border: 1px solid color-mix(in oklch, var(--border) 65%, var(--brand) 35%);
-  border-radius: 0.75rem;
-  padding: 0.45rem 0.65rem;
-  background: color-mix(in oklch, var(--card) 86%, transparent);
+  padding: 0.2rem 0.3rem;
+  background: linear-gradient(145deg,
+    color-mix(in oklch, var(--card) 90%, var(--mini-color, var(--brand)) 10%),
+    color-mix(in oklch, var(--card) 70%, var(--mini-color, var(--brand)) 20%));
+  border: 1px solid color-mix(in oklch, var(--mini-color, var(--brand)) 30%, var(--border));
+  border-left: none;
+  border-radius: 0 0.25rem 0.25rem 0;
+  box-shadow: 0 0.6rem 1.2rem rgb(3 20 13 / 0.15);
+}
+
+.knowledge-mini-book-cover b {
+  font-size: 0.5rem;
   color: var(--text-strong);
-  box-shadow: 0 0.9rem 1.8rem rgb(3 20 13 / 0.14);
-  font-size: 0.7rem;
-  font-weight: 800;
-  backdrop-filter: blur(12px);
-  transform:
-    rotate(var(--module-angle))
-    translateX(12.4rem)
-    rotate(calc(var(--module-angle) * -1));
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.1;
 }
 
-.knowledge-book-module:nth-child(even) {
-  border-radius: 999px;
-}
-
+/* ─── Status bar ─── */
 .knowledge-book-status {
   position: absolute;
   left: 1rem;
@@ -607,11 +754,11 @@ html[data-landing-motion="enhanced"] [data-landing-section="revealed"] [data-lan
   min-width: 0;
   align-items: baseline;
   justify-content: center;
-  gap: 0.28rem;
-  border: 1px solid color-mix(in oklch, var(--border) 70%, var(--brand) 30%);
+  gap: 0.3rem;
+  border: 1px solid color-mix(in oklch, var(--border) 65%, var(--brand) 35%);
   border-radius: 0.7rem;
-  padding: 0.5rem;
-  background: color-mix(in oklch, var(--card) 82%, transparent);
+  padding: 0.55rem;
+  background: color-mix(in oklch, var(--card) 85%, transparent);
   color: var(--text-secondary);
   font-size: 0.68rem;
   font-weight: 700;
@@ -619,8 +766,9 @@ html[data-landing-motion="enhanced"] [data-landing-section="revealed"] [data-lan
 }
 
 .knowledge-book-status strong {
-  color: var(--text-strong);
-  font-size: 1rem;
+  color: var(--brand);
+  font-size: 1.1rem;
+  font-weight: 800;
 }
 
 @keyframes landing-aurora-drift {
@@ -680,38 +828,48 @@ html[data-landing-motion="enhanced"] [data-landing-section="revealed"] [data-lan
   }
 
   .knowledge-book-shell {
-    min-height: 25rem;
+    min-height: 28rem;
   }
 
   .knowledge-book-stage {
     width: 22rem;
     max-width: 94%;
-    height: 17rem;
-    transform: translateY(-1rem) scale(0.82) rotateX(8deg) rotateY(-5deg);
+    height: 18rem;
+    transform: translateY(-0.5rem) scale(0.85) rotateX(10deg) rotateY(-4deg);
   }
 
   .knowledge-book-orbit {
-    width: 20rem;
-    height: 20rem;
+    width: 22rem;
+    height: 22rem;
+    margin: -11rem 0 0 -11rem;
   }
 
-  .knowledge-book-module {
-    min-width: 5.4rem;
-    min-height: 2.1rem;
-    padding: 0.35rem 0.48rem;
-    font-size: 0.62rem;
+  .knowledge-book-orbit-item {
     transform:
       rotate(var(--module-angle))
-      translateX(9.25rem)
+      translateX(10rem)
       rotate(calc(var(--module-angle) * -1));
   }
 
-  .knowledge-book-status {
-    grid-template-columns: 1fr;
+  .knowledge-book-orbit-counter {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.6rem;
   }
 
-  .knowledge-book-status span:nth-child(n+2) {
-    display: none;
+  .knowledge-mini-book {
+    transform:
+      rotate(var(--mini-angle))
+      translateX(7.5rem)
+      rotate(calc(var(--mini-angle) * -1))
+      translateZ(1.5rem);
+  }
+
+  .knowledge-book-status {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .knowledge-book-status span:nth-child(3) {
+    grid-column: 1 / -1;
   }
 }
 
@@ -723,7 +881,9 @@ html[data-landing-motion="enhanced"] [data-landing-section="revealed"] [data-lan
   .knowledge-book-core__glass,
   .knowledge-book-core__ring,
   .knowledge-mini-book,
-  .knowledge-book-orbit {
+  .knowledge-book-orbit,
+  .knowledge-book-orbit-counter,
+  .knowledge-book-halo {
     animation: none !important;
   }
 }
@@ -736,6 +896,8 @@ html[data-motion="reduced"] .knowledge-book-core__glass,
 html[data-motion="reduced"] .knowledge-book-core__ring,
 html[data-motion="reduced"] .knowledge-mini-book,
 html[data-motion="reduced"] .knowledge-book-orbit,
+html[data-motion="reduced"] .knowledge-book-orbit-counter,
+html[data-motion="reduced"] .knowledge-book-halo,
 html[data-motion="none"] .landing-hero-aurora,
 html[data-motion="none"] .landing-hero-grid,
 html[data-motion="none"] .landing-live-pill i,
@@ -744,10 +906,14 @@ html[data-motion="none"] .knowledge-book-core__glass,
 html[data-motion="none"] .knowledge-book-core__ring,
 html[data-motion="none"] .knowledge-mini-book,
 html[data-motion="none"] .knowledge-book-orbit,
+html[data-motion="none"] .knowledge-book-orbit-counter,
+html[data-motion="none"] .knowledge-book-halo,
 html[data-low-power="true"] .knowledge-book-stage,
 html[data-low-power="true"] .knowledge-book-core__glass,
 html[data-low-power="true"] .knowledge-book-core__ring,
 html[data-low-power="true"] .knowledge-mini-book,
-html[data-low-power="true"] .knowledge-book-orbit {
+html[data-low-power="true"] .knowledge-book-orbit,
+html[data-low-power="true"] .knowledge-book-orbit-counter,
+html[data-low-power="true"] .knowledge-book-halo {
   animation: none !important;
 }
