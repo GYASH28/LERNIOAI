@@ -94,6 +94,14 @@ export default withAuth(
 
 export const config = {
   matcher: [
-    '/((?!api/auth|api/academics|api/health|api/ready|_next/static|_next/image|favicon.ico|brand/|theme-no-flash.js|robots.txt|sitemap.xml|manifest.webmanifest).*)',
+    // Exclude from auth middleware:
+    // - api/auth/*          (next-auth endpoints)
+    // - api/academics/*     (public academic data)
+    // - api/health          (liveness probe)
+    // - api/ready           (readiness probe)
+    // - api/youtube-thumbnail (public thumbnail proxy — needed on learn pages)
+    // - api/quiz/generate   (public quiz generator — used by practice/exams)
+    // - _next/static, _next/image, favicon.ico, brand/, etc. (static assets)
+    '/((?!api/auth|api/academics|api/health|api/ready|api/youtube-thumbnail|api/quiz/generate|_next/static|_next/image|favicon.ico|brand/|theme-no-flash.js|robots.txt|sitemap.xml|manifest.webmanifest).*)',
   ],
 }
