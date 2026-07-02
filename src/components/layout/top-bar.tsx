@@ -34,6 +34,7 @@ import {
   ChevronUp,
   Trophy,
   GraduationCap,
+  HelpCircle,
 } from 'lucide-react'
 import type { ViewKey } from '@/lib/types'
 import { routeForView } from '@/lib/routes'
