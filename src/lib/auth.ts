@@ -67,9 +67,14 @@ const providers: NextAuthOptions['providers'] = [
       if (!email || !password || password.length > 256) return null
 
       const failKey = `credential_login_fail:${email}`
-      const existingFail = await db.rateLimitBucket.findUnique({
-        where: { key: failKey },
-      })
+      let existingFail: Awaited<ReturnType<typeof db.rateLimitBucket.findUnique>> = null
+      try {
+        existingFail = await db.rateLimitBucket.findUnique({
+          where: { key: failKey },
+        })
+      } catch {
+        // DB unreachable — skip rate limit check, proceed to credential check
+      }
       if (existingFail && existingFail.resetAt > new Date() && existingFail.count >= MAX_LOGIN_ATTEMPTS) {
         return null
       }
@@ -84,20 +89,27 @@ const providers: NextAuthOptions['providers'] = [
         return DEMO_AUTH_USER
       }
 
-      const user = await db.user.findUnique({
-        where: { email },
-        select: {
-          id: true,
-          email: true,
-          name: true,
-          passwordHash: true,
-          role: true,
-          status: true,
-          profileComplete: true,
-          authorityVersion: true,
-          sessionsRevokedAt: true,
-        },
-      })
+      let user: Awaited<ReturnType<typeof db.user.findUnique>> = null
+      try {
+        user = await db.user.findUnique({
+          where: { email },
+          select: {
+            id: true,
+            email: true,
+            name: true,
+            passwordHash: true,
+            role: true,
+            status: true,
+            profileComplete: true,
+            authorityVersion: true,
+            sessionsRevokedAt: true,
+          },
+        })
+      } catch {
+        // DB unreachable — sign-in cannot proceed. Return null so next-auth
+        // shows the generic "CredentialsSignin" error to the user.
+        return null
+      }
 
       if (!user?.passwordHash || user.status === 'disabled' || user.status === 'pending_verification') {
         await checkRateLimit({
@@ -105,7 +117,7 @@ const providers: NextAuthOptions['providers'] = [
           identifier: email,
           limit: MAX_LOGIN_ATTEMPTS,
           windowMs: LOGIN_WINDOW_MS,
-        })
+        }).catch(() => {})
         return null
       }
 
@@ -116,7 +128,7 @@ const providers: NextAuthOptions['providers'] = [
           identifier: email,
           limit: MAX_LOGIN_ATTEMPTS,
           windowMs: LOGIN_WINDOW_MS,
-        })
+        }).catch(() => {})
         return null
       }
 
@@ -381,7 +393,15 @@ async function resolveUserFromSession(): Promise<AuthUser | null> {
 
   if (authMode.mode === 'session') {
     if (session?.user?.sessionRevoked) return null
-    const u = await db.user.findUnique({ where: { email: authMode.email } })
+    // DB call must be resilient — on Vercel the database may be unreachable,
+    // unmigrated, or DATABASE_URL may be misconfigured. Returning null here
+    // causes the caller to redirect to /sign-in instead of crashing the page.
+    let u: Awaited<ReturnType<typeof db.user.findUnique>> = null
+    try {
+      u = await db.user.findUnique({ where: { email: authMode.email } })
+    } catch {
+      return null
+    }
     if (!u || u.status === 'disabled' || u.status === 'pending_verification') return null
     return {
       id: u.id,

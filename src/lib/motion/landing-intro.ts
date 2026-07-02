@@ -1,4 +1,4 @@
-export const LANDING_INTRO_STORAGE_KEY = 'lernio-cinematic-intro-v3'
+export const LANDING_INTRO_STORAGE_KEY = 'lernio-cinematic-intro-v4'
 
 export type LandingIntroMode = 'full' | 'compact' | 'reduced' | 'skip'
 
