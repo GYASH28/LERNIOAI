@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useAppStore } from '@/store/app-store'
-import { Sidebar, MobileNav } from '@/components/layout/sidebar'
+import { TopBar as NewTopBar } from '@/components/layout/top-bar'
 import { MascotToastContainer } from '@/components/mascots/mascot-toast'
 import { Footer } from '@/components/layout/footer'
 import { Button } from '@/components/ui/button'
@@ -161,18 +161,13 @@ export function LearningApp({
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <div className="flex flex-1">
-        <Sidebar />
-        <main className="app-main-container flex-1 min-w-0 flex flex-col">
-          <TopBar onMenuClick={() => setMenuOpen(!menuOpen)} />
-          <StudentUtilityBar />
-          <div className="app-main-scroll">
-            {children ? children : <ViewRouter view={view} initialDashboard={initialDashboard} />}
-          </div>
-          <Footer />
-        </main>
-      </div>
-      <MobileNav />
+      <NewTopBar />
+      <main className="app-main-container flex-1 min-w-0 flex flex-col">
+        <div className="app-main-scroll">
+          {children ? children : <ViewRouter view={view} initialDashboard={initialDashboard} />}
+        </div>
+        <Footer />
+      </main>
       <MascotToastContainer />
       <CommandPalette />
       <FocusTimerWidget />

@@ -26,7 +26,8 @@ import { LessonModeCompletionButton } from '@/features/learning/components/lesso
 import { LessonVisitRecorder } from '@/features/learning/components/lesson/lesson-visit-recorder'
 import { LessonVideoPlayer } from '@/features/learning/components/lesson/lesson-video-player'
 import { getManifestSubject, type ManifestSubject } from '@/lib/curriculum/manifest-data'
-import { YouTubePlayer } from '@/components/learning/youtube-player'
+import { generateLessonNotes } from '@/lib/curriculum/lesson-notes/notes-generator'
+import { YouTubePlayer } from '@/components/learning/youtube-player-lazy'
 import { BookmarkButton } from '@/components/learning/bookmark-button'
 import { RecentlyViewedTracker } from '@/components/learning/recently-viewed-tracker'
 
@@ -618,6 +619,12 @@ function ManifestLessonView({
   const semesterHref = `/learn/${programmeCode}/semester/${semesterNumber}`
   const primaryVideos = subject.resources.filter((r) => r.role === 'primary_video')
   const alternateVideos = subject.resources.filter((r) => r.role !== 'primary_video')
+  const lessonNotes = generateLessonNotes(
+    subject.name,
+    subjectCode,
+    subject.coverageFocus,
+    subject.resources.map((r) => ({ title: r.title, channel: r.channel, url: r.url, role: r.role, description: r.description })),
+  )
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -720,35 +727,20 @@ function ManifestLessonView({
               </div>
             </div>
 
-            {/* Key concepts / study notes */}
-            <div className="rounded-lg border border-border bg-card p-5">
-              <h2 className="text-lg font-semibold">Key Concepts &amp; Study Notes</h2>
-              <div className="mt-3 space-y-3 text-sm text-muted-foreground">
-                <div className="rounded-md bg-muted/50 p-3">
-                  <p className="font-semibold text-foreground">What you'll learn</p>
-                  <p className="mt-1">{subject.coverageFocus}</p>
+            {/* Generated lesson notes */}
+            <div className="space-y-4">
+              {lessonNotes.sections.map((section, i) => (
+                <div key={i} className="rounded-lg border border-border bg-card p-5">
+                  <h2 className="text-lg font-semibold">{section.title}</h2>
+                  <div className="mt-3 text-sm text-muted-foreground">
+                    {section.content.split('\n').map((line, j) => (
+                      <p key={j} className={line.startsWith('•') || /^\d+\./.test(line) ? 'mt-1' : 'mt-2'}>
+                        {line || '\u00A0'}
+                      </p>
+                    ))}
+                  </div>
                 </div>
-                <div className="rounded-md bg-muted/50 p-3">
-                  <p className="font-semibold text-foreground">How to study this lesson</p>
-                  <ol className="mt-1 list-inside list-decimal space-y-1">
-                    <li>Watch the primary lecture playlist from start to finish.</li>
-                    <li>Take notes while watching — write down key terms, formulas, and code snippets.</li>
-                    <li>If a topic is unclear, watch the alternate lecture for a different explanation.</li>
-                    <li>For programming subjects, type out every code example yourself — don't just watch.</li>
-                    <li>Use &ldquo;Ask LEO&rdquo; to clarify any doubts with AI-powered help.</li>
-                    <li>Practise with the practice questions linked in the sidebar.</li>
-                  </ol>
-                </div>
-                <div className="rounded-md bg-amber-500/5 border border-amber-500/20 p-3">
-                  <p className="font-semibold text-amber-700 dark:text-amber-400">Important</p>
-                  <p className="mt-1 text-xs">
-                    These curated YouTube lectures are public resources selected to match your CWIT R23 syllabus.
-                    They are not an official endorsement by CWIT or MSBTE. Always cross-reference with your
-                    classroom notes, laboratory manual, and teacher instructions. Detailed lesson notes
-                    (generated and reviewed) will be available here once the content pipeline is fully operational.
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 

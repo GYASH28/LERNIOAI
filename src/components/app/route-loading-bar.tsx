@@ -1,59 +1,52 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 
 /**
- * Route Loading Bar.
+ * Route Loading Bar — only shows when navigation takes >200ms.
  *
- * Shows a thin progress bar at the top of the page during route
- * transitions — the same UX pattern used by YouTube, GitHub, and NProgress.
- * Eliminates the "did I click?" uncertainty during navigation.
+ * The previous version faked a 900ms loading bar on EVERY navigation,
+ * making the app feel slow even when pages loaded instantly. This version
+ * only appears if the page hasn't loaded within 200ms, and disappears
+ * the moment the new page renders.
  */
 export function RouteLoadingBar() {
   const pathname = usePathname()
-  const [isLoading, setIsLoading] = useState(false)
-  const [progress, setProgress] = useState(0)
+  const [visible, setVisible] = useState(false)
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const prevPath = useRef(pathname)
 
   useEffect(() => {
-    // On pathname change, show the bar briefly then complete.
-    setIsLoading(true)
-    setProgress(15)
+    if (prevPath.current === pathname) return
+    prevPath.current = pathname
 
-    const tick1 = setTimeout(() => setProgress(45), 100)
-    const tick2 = setTimeout(() => setProgress(75), 300)
-    const tick3 = setTimeout(() => setProgress(95), 600)
-    const done = setTimeout(() => {
-      setProgress(100)
-      setTimeout(() => {
-        setIsLoading(false)
-        setProgress(0)
-      }, 200)
-    }, 900)
+    // Start a timer — only show the bar if navigation takes >200ms
+    timerRef.current = setTimeout(() => setVisible(true), 200)
+
+    // Hide immediately on next render (the new page has loaded)
+    requestAnimationFrame(() => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current)
+        timerRef.current = null
+      }
+      setVisible(false)
+    })
 
     return () => {
-      clearTimeout(tick1)
-      clearTimeout(tick2)
-      clearTimeout(tick3)
-      clearTimeout(done)
+      if (timerRef.current) clearTimeout(timerRef.current)
     }
   }, [pathname])
 
-  if (!isLoading && progress === 0) return null
+  if (!visible) return null
 
   return (
     <div
-      className="fixed top-0 left-0 right-0 z-[60] h-0.5 bg-transparent pointer-events-none"
+      className="fixed top-0 left-0 right-0 z-[60] h-0.5 pointer-events-none"
       role="progressbar"
-      aria-valuenow={progress}
-      aria-valuemin={0}
-      aria-valuemax={100}
-      aria-label="Page loading"
+      aria-label="Loading"
     >
-      <div
-        className="h-full bg-primary transition-all duration-300 ease-out"
-        style={{ width: `${progress}%`, opacity: progress > 0 ? 1 : 0 }}
-      />
+      <div className="h-full w-1/3 animate-pulse bg-primary" />
     </div>
   )
 }

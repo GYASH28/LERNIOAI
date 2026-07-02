@@ -6,8 +6,8 @@ import { LernioMotionProvider } from "@/components/motion";
 import { GlobalExperienceRuntime } from "@/components/app/global-experience-runtime";
 import { CommandPalette } from "@/components/cmdk/command-palette";
 import { RouteLoadingBar } from "@/components/app/route-loading-bar";
-import { Toaster } from "@/components/ui/sonner";
 import { RegisterSW } from "@/components/app/register-sw";
+import { KeyboardShortcuts } from "@/components/app/keyboard-shortcuts";
 
 // ──────────────────────────────────────────────────────────────────────────
 // WHITE-SCREEN FLASH FIX
@@ -121,7 +121,7 @@ export default function RootLayout({
             {children}
             <GlobalExperienceRuntime />
             <CommandPalette />
-            <Toaster />
+            <KeyboardShortcuts />
             <RegisterSW />
           </LernioMotionProvider>
         </ThemeProvider>

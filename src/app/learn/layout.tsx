@@ -1,19 +1,7 @@
-import { getAppBootstrap } from '@/lib/app-bootstrap'
-import { LearningApp } from '@/components/app/learning-app'
-
-export const dynamic = 'force-dynamic'
+import { LearnShell } from '@/components/app/learn-shell'
 
 export default async function LearnLayout({ children }: { children: React.ReactNode }) {
-  const bootstrap = await getAppBootstrap('learn')
-
-  return (
-    <LearningApp
-      initialView="learn"
-      initialUser={bootstrap.user}
-      initialSubjects={bootstrap.subjects}
-      initialDashboard={bootstrap.dashboard}
-    >
-      {children}
-    </LearningApp>
-  )
+  // No DB bootstrap — learn pages read from static JSON manifests.
+  // This makes every learn page load instantly (no DB round-trip).
+  return <LearnShell>{children}</LearnShell>
 }

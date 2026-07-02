@@ -91,7 +91,9 @@ export function CommandPalette() {
     },
     // Settings
     { id: 'set-settings', label: 'Settings', icon: Settings, action: () => navigate('/settings'), group: 'settings' },
-    { id: 'set-help', label: 'Help & support', icon: HelpCircle, Bell, Trophy, action: () => navigate('/support'), group: 'settings' },
+    { id: 'set-help', label: 'Help & support', icon: HelpCircle, action: () => navigate('/help'), group: 'settings' },
+    { id: 'set-leaderboard', label: 'Leaderboard', icon: Trophy, action: () => navigate('/leaderboard'), group: 'settings' },
+    { id: 'set-notifications', label: 'Notifications', icon: Bell, action: () => navigate('/notifications'), group: 'settings' },
   ]
 
   const grouped = items.reduce<Record<string, CommandItem[]>>((acc, item) => {

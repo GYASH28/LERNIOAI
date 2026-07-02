@@ -102,3 +102,293 @@
      already respect prefers-reduced-motion and the app's custom
      Full / Reduced / None / Low Power policies. */
 }
+
+/* ──────────────────────────────────────────────────────────────────────────
+   PERFORMANCE OPTIMIZATIONS
+   ────────────────────────────────────────────────────────────────────────── */
+
+/* Disable animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Optimize font rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Prevent layout shift from images */
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* GPU acceleration for animated elements */
+.transform-gpu {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Reduce paint complexity for sticky elements */
+.sticky {
+  will-change: transform;
+}
+
+/* Hide scrollbar but keep functionality on mobile nav */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Smooth focus ring transitions */
+*:focus-visible {
+  transition: box-shadow 0.15s ease-in-out;
+}
+
+/* Prevent text selection on UI elements */
+button, [role="button"], nav, .no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+/* Better tap targets on mobile */
+@media (max-width: 768px) {
+  button, a, [role="button"] {
+    min-height: 40px;
+    min-width: 40px;
+  }
+}
+
+/* Smooth page transitions */
+main {
+  animation: fadeIn 0.15s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Reduce bundle size: only load custom cursor styles on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  .premium-cursor-enabled {
+    cursor: auto;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   POLISH: micro-interactions and transitions
+   ────────────────────────────────────────────────────────────────────────── */
+
+/* Smooth hover transitions on cards */
+a[class*="rounded-lg border"], button[class*="rounded-lg border"] {
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* Subtle hover lift on cards */
+a[class*="rounded-lg border border-border bg-card"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Smooth color transitions for interactive elements */
+button, a {
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+/* Better focus visible states */
+*:focus-visible {
+  outline: 2px solid hsl(var(--primary, 217 91% 60%));
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Smooth scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground, 215 16% 47%) / 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground, 215 16% 47%) / 0.5);
+}
+
+/* Better selection color */
+::selection {
+  background: hsl(var(--primary, 217 91% 60%) / 0.2);
+}
+
+/* Smooth link underlines */
+a {
+  text-underline-offset: 2px;
+}
+
+/* Remove tap highlight on mobile */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Better button hover states */
+button:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+button:not(:disabled):active {
+  transform: translateY(0);
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   TOPBAR LAYOUT — fullscreen with collapsible top bar
+   ────────────────────────────────────────────────────────────────────────── */
+
+/* Remove sidebar margin — content is now full width */
+.app-main-container {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Top bar smooth show/hide transition */
+header[class*="sticky top-0"] {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Fullscreen content area */
+.app-main-scroll {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  .app-main-scroll {
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-main-scroll {
+    padding: 2rem;
+  }
+}
+
+/* Remove bottom mobile nav padding since we use the top bar drawer now */
+@media (max-width: 767px) {
+  .app-main-scroll {
+    padding-bottom: 1rem;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   MOBILE UI FIXES
+   ────────────────────────────────────────────────────────────────────────── */
+
+/* Reduce top bar height on mobile */
+@media (max-width: 768px) {
+  header[class*="sticky top-0"] > div {
+    height: 3rem !important;  /* 48px instead of 56px */
+  }
+}
+
+/* Better content padding on mobile */
+@media (max-width: 640px) {
+  .app-main-scroll,
+  main[class*="mx-auto max-w"] {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    padding-top: 1rem !important;
+  }
+}
+
+/* Ensure tables are scrollable on mobile */
+table {
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Better card spacing on mobile */
+@media (max-width: 640px) {
+  .rounded-lg.border.border-border.bg-card {
+    padding: 0.75rem !important;
+  }
+}
+
+/* Fix YouTube embed aspect ratio on mobile */
+.aspect-video {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+}
+
+/* Prevent horizontal scroll on mobile */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Better font sizes on mobile */
+@media (max-width: 640px) {
+  h1 {
+    font-size: 1.5rem !important;
+  }
+  h2 {
+    font-size: 1.25rem !important;
+  }
+  h3 {
+    font-size: 1.1rem !important;
+  }
+}
+
+/* Fix bottom navigation safe area on mobile */
+@supports (padding: max(0px)) {
+  .fixed.bottom-0 {
+    padding-bottom: max(0px, env(safe-area-inset-bottom));
+  }
+}
+
+/* Smooth scrolling on mobile */
+* {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent text size adjust on mobile */
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+/* Dark mode fixes for new pages */
+.dark .bg-card { background-color: hsl(var(--card, 215 28% 17%)); }
+.dark .bg-muted\/30 { background-color: hsl(var(--muted, 215 28% 17%) \/ 0.3); }
+.dark .bg-muted\/50 { background-color: hsl(var(--muted, 215 28% 17%) \/ 0.5); }
+.dark .border-border { border-color: hsl(var(--border, 215 28% 20%)); }
+.dark .bg-background { background-color: hsl(var(--background, 222 47% 11%)); }
+.dark .text-foreground { color: hsl(var(--foreground, 210 40% 98%)); }
+.dark .text-muted-foreground { color: hsl(var(--muted-foreground, 215 20% 65%)); }
+.dark .bg-primary\/5 { background-color: hsl(var(--primary, 217 91% 60%) \/ 0.05); }
+.dark .bg-primary\/10 { background-color: hsl(var(--primary, 217 91% 60%) \/ 0.1); }
+.dark .bg-zinc-900 { background-color: #18181b; }
+.dark .text-zinc-300 { color: #d4d4d8; }
+.dark .text-green-400 { color: #4ade80; }
