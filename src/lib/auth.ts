@@ -402,7 +402,21 @@ async function resolveUserFromSession(): Promise<AuthUser | null> {
 }
 
 export async function getCurrentUser(): Promise<AuthUser | null> {
-  return resolveUserFromSession()
+  // Add a 5-second timeout — if getServerSession or the DB query hangs,
+  // return null instead of blocking the page render forever.
+  // This prevents the "stuck on loading" issue when the DB is slow.
+  return new Promise((resolve) => {
+    const timer = setTimeout(() => resolve(null), 5000)
+    resolveUserFromSession()
+      .then((user) => {
+        clearTimeout(timer)
+        resolve(user)
+      })
+      .catch(() => {
+        clearTimeout(timer)
+        resolve(null)
+      })
+  })
 }
 
 /**

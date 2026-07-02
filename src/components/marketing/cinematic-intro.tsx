@@ -265,6 +265,21 @@ export function CinematicIntro() {
   }, [announceComplete])
 
   useEffect(() => {
+    // SAFETY NET: If the intro is still in 'checking' phase after 3 seconds,
+    // force it to complete. This prevents the app from being stuck on a
+    // blank loading screen if the useEffect below fails for any reason.
+    if (phase !== 'checking') return
+    const safetyTimer = setTimeout(() => {
+      if (phase === 'checking') {
+        safeMarkSeen()
+        announceComplete()
+        setPhase('complete')
+      }
+    }, 3000)
+    return () => clearTimeout(safetyTimer)
+  }, [announceComplete, phase])
+
+  useEffect(() => {
     const connection = (navigator as Navigator & {
       connection?: { saveData?: boolean; effectiveType?: string }
       deviceMemory?: number
@@ -306,10 +321,22 @@ export function CinematicIntro() {
   useEffect(() => {
     if (phase !== 'playing' || mode === 'skip') return
 
+    // SAFETY NET: Force-complete the intro after max duration + 3 seconds.
+    // This prevents the app from being stuck if requestAnimationFrame fails.
+    const maxDuration = introDurationMs(mode, window.innerWidth) + 3000
+    const forceCompleteTimer = setTimeout(() => {
+      finish()
+    }, maxDuration)
+
     const canvas = canvasRef.current
-    if (!canvas) return
+    if (!canvas) {
+      clearTimeout(forceCompleteTimer)
+      finish()
+      return
+    }
     const context = canvas.getContext('2d', { alpha: false })
     if (!context) {
+      clearTimeout(forceCompleteTimer)
       finish()
       return
     }
@@ -383,6 +410,7 @@ export function CinematicIntro() {
       if (frameRef.current !== null) window.cancelAnimationFrame(frameRef.current)
       window.removeEventListener('resize', resize)
       document.removeEventListener('visibilitychange', onVisibility)
+      clearTimeout(forceCompleteTimer)
     }
   }, [finish, mode, phase])
 

@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { getCurrentUser } from '@/lib/auth'
 import { CinematicIntro } from '@/components/marketing/cinematic-intro'
 import { LandingMotionController } from '@/components/marketing/landing-motion-controller'
 import { PublicHeader } from '@/components/marketing/public-header'
@@ -19,8 +18,10 @@ import { PublicFooter } from '@/components/marketing/public-footer'
 
 const SITE_URL = process.env.NEXTAUTH_URL?.replace(/\/$/, '') || 'https://lernioai.vercel.app'
 
-export const dynamic = 'force-dynamic'
-export const revalidate = 0
+// Landing page is static — getCurrentUser is optional and wrapped in try/catch.
+// This makes the page load instantly (no DB call on every request).
+export const dynamic = 'force-static'
+export const revalidate = 3600 // revalidate every hour
 
 export const metadata: Metadata = {
   alternates: {
@@ -49,8 +50,11 @@ const softwareApplicationLd = {
 }
 
 export default async function LandingPage() {
-  const currentUser = await getCurrentUser().catch(() => null)
-  const isAuthenticated = Boolean(currentUser)
+  // Landing page is static — no auth check needed.
+  // The buttons show "Get Started" / "Sign In" by default.
+  // Authenticated users see the same landing page; they can click
+  // "Dashboard" in the header to go to their dashboard.
+  const isAuthenticated = false
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
