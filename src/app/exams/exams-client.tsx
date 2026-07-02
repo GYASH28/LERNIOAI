@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { FileText, Clock, PlayCircle, CheckCircle2, XCircle, RotateCw, Award } from 'lucide-react'
 
-interface SubjectInfo { code: string; name: string; credits: number; quizCount: number }
+interface SubjectInfo { code: string; name: string; credits: number; quizCount: number; coverageFocus: string }
 
 type Mode = 'practice' | 'chapter_test' | 'mock_exam'
 
@@ -21,11 +21,12 @@ export function ExamsClient({ subjects }: { subjects: SubjectInfo[] }) {
     setLoading(true)
     setError('')
     try {
-      const res = await fetch(`/api/quiz/generate?subject=${subjectCode}&count=${mode === 'mock_exam' ? 20 : mode === 'chapter_test' ? 10 : 5}`)
+      const subject = subjects.find(s => s.code === subjectCode)
+      const res = await fetch(`/api/quiz/generate?subject=${subjectCode}&count=${mode === 'mock_exam' ? 20 : mode === 'chapter_test' ? 10 : 5}&name=${encodeURIComponent(subject?.name ?? subjectCode)}&coverage=${encodeURIComponent(subject?.coverageFocus ?? '')}`)
       const data = await res.json()
       const qs = data?.data?.questions ?? data?.questions ?? []
-      if (qs.length === 0) {
-        setError('No quiz questions available for this subject yet. Try Data Structures, OOP C++, or Programming in C.')
+      if (!res.ok || qs.length === 0) {
+        setError(data?.error ?? 'No quiz questions available for this subject.')
         setLoading(false)
         return
       }

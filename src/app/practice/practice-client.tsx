@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { PlayCircle, CheckCircle2, XCircle, RotateCw, ChevronRight } from 'lucide-react'
 
-interface SubjectInfo { code: string; name: string; quizCount: number }
+interface SubjectInfo { code: string; name: string; quizCount: number; coverageFocus: string }
 
 export function PracticeClient({ subjects }: { subjects: SubjectInfo[] }) {
   const [selected, setSelected] = useState<string | null>(null)
@@ -19,12 +19,13 @@ export function PracticeClient({ subjects }: { subjects: SubjectInfo[] }) {
   const start = async (code: string) => {
     setLoading(true); setError('')
     try {
-      const res = await fetch(`/api/quiz/generate?subject=${code}&count=5`)
+      const subject = subjects.find(s => s.code === code)
+      const res = await fetch(`/api/quiz/generate?subject=${code}&count=5&name=${encodeURIComponent(subject?.name ?? code)}&coverage=${encodeURIComponent(subject?.coverageFocus ?? '')}`)
       const data = await res.json()
       const qs = data?.data?.questions ?? data?.questions ?? []
-      if (qs.length === 0) { setError('No questions for this subject. Try Data Structures, OOP C++, or C.'); setLoading(false); return }
+      if (!res.ok || qs.length === 0) { setError(data?.error ?? 'No questions available.'); setLoading(false); return }
       setQuestions(qs); setSelected(code); setCurrent(0); setSelectedAns(null); setShowAnswer(false); setScore(0); setDone(false)
-    } catch { setError('Failed to load.') }
+    } catch { setError('Failed to load. Check your connection.') }
     setLoading(false)
   }
 
