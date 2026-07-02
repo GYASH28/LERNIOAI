@@ -1,61 +1,41 @@
-const CACHE_NAME = 'lernio-v5';
-const STATIC_ASSETS = ['/', '/dashboard', '/learn', '/materials', '/manifest.webmanifest'];
+// Service Worker — temporarily disabled to fix blank page issues.
+// The previous service worker was caching stale JavaScript that didn't
+// match new HTML deploys, causing React hydration failures (blank page).
+//
+// This file unregisters ALL existing service workers and clears ALL caches.
+// Once the site is stable, we can re-enable a simpler caching strategy.
 
-// Network-first with 3-second timeout for navigation requests.
-// If the network doesn't respond in 3s, fall back to cache.
-// This prevents the "stuck on loading" issue when the server is slow.
-const NAVIGATION_TIMEOUT = 3000;
+const CACHE_NAME = 'lernio-v6-clear';
 
+// On install: skip waiting so this SW activates immediately
 self.addEventListener('install', (event) => {
-  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(STATIC_ASSETS).catch(() => {})));
   self.skipWaiting();
 });
 
+// On activate: delete ALL caches and claim all clients
 self.addEventListener('activate', (event) => {
-  event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))));
-  self.clients.claim();
+  event.waitUntil(
+    (async () => {
+      // Delete ALL caches (lernio-v1 through v5 and any others)
+      const keys = await caches.keys();
+      await Promise.all(keys.map((key) => caches.delete(key)));
+
+      // Unregister this service worker so it doesn't intercept future requests
+      await self.registration.unregister();
+
+      // Take control of all clients
+      await self.clients.claim();
+
+      // Notify all open tabs to reload
+      const clients = await self.clients.matchAll({ type: 'window' });
+      for (const client of clients) {
+        client.navigate(client.url);
+      }
+    })()
+  );
 });
 
+// Don't intercept any fetches — let the browser handle everything normally
 self.addEventListener('fetch', (event) => {
-  if (event.request.method !== 'GET') return;
-  if (event.request.url.includes('/api/')) return;
-
-  if (event.request.mode === 'navigate') {
-    // Network-first with timeout — don't let users wait forever
-    event.respondWith(
-      Promise.race([
-        fetch(event.request).then(response => {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
-          return response;
-        }),
-        new Promise((resolve) => {
-          setTimeout(() => {
-            caches.match(event.request).then(cached => resolve(cached || caches.match('/')))
-          }, NAVIGATION_TIMEOUT)
-        })
-      ]).catch(() => caches.match(event.request).then(cached => cached || caches.match('/')))
-    );
-  } else if (event.request.url.includes('/lesson-notes/')) {
-    // Cache-first for PDFs (large files, don't change often)
-    event.respondWith(
-      caches.match(event.request).then(cached => cached || fetch(event.request).then(response => {
-        const clone = response.clone();
-        caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
-        return response;
-      }))
-    );
-  } else {
-    // Stale-while-revalidate for other assets
-    event.respondWith(
-      caches.match(event.request).then(cached => {
-        const fetchPromise = fetch(event.request).then(response => {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
-          return response;
-        }).catch(() => cached);
-        return cached || fetchPromise;
-      })
-    );
-  }
+  // Do nothing — pass through to the network
 });
