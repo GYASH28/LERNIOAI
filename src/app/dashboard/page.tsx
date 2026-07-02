@@ -47,7 +47,7 @@ export default async function DashboardPage() {
       orderBy: { viewedAt: 'desc' },
       take: 3,
       select: { title: true, href: true, viewedAt: true },
-    })
+    }).catch(() => [])
   } catch {
     // DB unavailable — use defaults
   }

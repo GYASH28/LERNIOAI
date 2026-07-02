@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { signOut } from 'next-auth/react'
@@ -339,14 +339,11 @@ export function TopBar() {
 
 // ─── User Menu (desktop dropdown with profile, settings, logout) ─────────────
 
-import { useState as useState2, useRef as useRef2, useEffect as useEffect2 } from 'react'
-import { ChevronDown as ChevronDown2 } from 'lucide-react'
-
 function UserMenu({ user, isDark, setPref }: { user: { name: string; email: string } | null; isDark: boolean; setPref: (p: { appearance: string }) => void }) {
-  const [open, setOpen] = useState2(false)
-  const ref = useRef2<HTMLDivElement>(null)
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
 
-  useEffect2(() => {
+  useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (ref.current && !ref.current.contains(e.target as Node)) {
         setOpen(false)
@@ -370,7 +367,7 @@ function UserMenu({ user, isDark, setPref }: { user: { name: string; email: stri
         <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
           {initials}
         </span>
-        <ChevronDown2 className="hidden h-3 w-3 text-muted-foreground sm:block" />
+        <ChevronDown className="hidden h-3 w-3 text-muted-foreground sm:block" />
       </button>
 
       {open && (
