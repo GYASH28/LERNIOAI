@@ -1,9 +1,18 @@
 'use client'
 
 import { useState } from 'react'
-import { PlayCircle, CheckCircle2, XCircle, RotateCw, ChevronRight } from 'lucide-react'
+import { PlayCircle, CheckCircle2, XCircle, RotateCw, ChevronRight, Zap } from 'lucide-react'
 
 interface SubjectInfo { code: string; name: string; quizCount: number; coverageFocus: string }
+
+const PRESETS = [
+  { key: 'quick', label: 'Quick (5Q)', count: 5 },
+  { key: 'short', label: 'Short (10Q)', count: 10 },
+  { key: 'medium', label: 'Medium (20Q)', count: 20 },
+  { key: 'long', label: 'Long (35Q)', count: 35 },
+  { key: 'full', label: 'Full (50Q)', count: 50 },
+  { key: 'marathon', label: 'Marathon (70Q)', count: 70 },
+]
 
 export function PracticeClient({ subjects }: { subjects: SubjectInfo[] }) {
   const [selected, setSelected] = useState<string | null>(null)
@@ -15,17 +24,18 @@ export function PracticeClient({ subjects }: { subjects: SubjectInfo[] }) {
   const [loading, setLoading] = useState(false)
   const [done, setDone] = useState(false)
   const [error, setError] = useState('')
+  const [presetCount, setPresetCount] = useState(5)
 
   const start = async (code: string) => {
     setLoading(true); setError('')
     try {
       const subject = subjects.find(s => s.code === code)
-      const res = await fetch(`/api/quiz/generate?subject=${code}&count=5&name=${encodeURIComponent(subject?.name ?? code)}&coverage=${encodeURIComponent(subject?.coverageFocus ?? '')}`)
+      const res = await fetch(`/api/quiz/generate?subject=${code}&count=${presetCount}&name=${encodeURIComponent(subject?.name ?? code)}&coverage=${encodeURIComponent(subject?.coverageFocus ?? '')}`)
       const data = await res.json()
       const qs = data?.data?.questions ?? data?.questions ?? []
       if (!res.ok || qs.length === 0) { setError(data?.error ?? 'No questions available.'); setLoading(false); return }
       setQuestions(qs); setSelected(code); setCurrent(0); setSelectedAns(null); setShowAnswer(false); setScore(0); setDone(false)
-    } catch { setError('Failed to load. Check your connection.') }
+    } catch { setError('Failed to load.') }
     setLoading(false)
   }
 
@@ -37,9 +47,12 @@ export function PracticeClient({ subjects }: { subjects: SubjectInfo[] }) {
     <div className="rounded-lg border border-border bg-card p-6 text-center">
       <CheckCircle2 className="mx-auto h-12 w-12 text-green-600" />
       <h2 className="mt-3 text-xl font-bold">Practice Complete!</h2>
-      <p className="text-3xl font-bold text-primary">{score}/{questions.length}</p>
+      <p className="text-4xl font-bold text-primary">{score}/{questions.length}</p>
       <p className="text-sm text-muted-foreground">{Math.round((score / questions.length) * 100)}% correct</p>
-      <button onClick={reset} className="mt-4 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground">Back to Subjects</button>
+      <div className="mt-4 flex justify-center gap-2">
+        <button onClick={reset} className="rounded-md border border-border px-4 py-2 text-sm font-medium hover:bg-accent">Back to Subjects</button>
+        <button onClick={() => { reset(); setTimeout(() => start(selected!), 100) }} className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground">Try Again</button>
+      </div>
     </div>
   )
 
@@ -49,8 +62,9 @@ export function PracticeClient({ subjects }: { subjects: SubjectInfo[] }) {
       <div className="rounded-lg border border-border bg-card p-4 sm:p-6">
         <div className="mb-3 flex items-center justify-between">
           <span className="text-xs text-muted-foreground">Question {current + 1} / {questions.length}</span>
-          <span className="text-xs font-bold text-primary">Score: {score}</span>
+          <span className="flex items-center gap-1 text-xs font-bold text-primary"><Zap className="h-3 w-3" />Score: {score}</span>
         </div>
+        <div className="mb-4 h-1.5 overflow-hidden rounded-full bg-muted"><div className="h-full bg-primary transition-all" style={{ width: `${((current + 1) / questions.length) * 100}%` }} /></div>
         <p className="mb-4 text-sm font-medium whitespace-pre-line">{q.question}</p>
         <div className="space-y-2">
           {q.options.map((opt: string, i: number) => {
@@ -78,12 +92,25 @@ export function PracticeClient({ subjects }: { subjects: SubjectInfo[] }) {
 
   return (
     <div>
+      {/* Preset selector */}
+      <h2 className="mb-3 text-sm font-semibold uppercase text-muted-foreground">Choose Practice Length</h2>
+      <div className="mb-6 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
+        {PRESETS.map(p => (
+          <button key={p.key} onClick={() => setPresetCount(p.count)} className={`rounded-lg border p-3 text-center transition-colors ${presetCount === p.count ? 'border-primary bg-primary/5' : 'border-border bg-card hover:bg-accent/5'}`}>
+            <p className="text-xs font-semibold">{p.label}</p>
+          </button>
+        ))}
+      </div>
+
       {error && <div className="mb-4 rounded-md border border-amber-500/30 bg-amber-500/5 p-3 text-sm text-amber-700">{error}</div>}
+
+      {/* Subject list */}
+      <h2 className="mb-3 text-sm font-semibold uppercase text-muted-foreground">Select a Subject ({presetCount} questions)</h2>
       <div className="grid gap-3 sm:grid-cols-2">
         {subjects.map(s => (
           <button key={s.code} onClick={() => start(s.code)} disabled={loading} className="flex items-center justify-between rounded-lg border border-border bg-card p-4 text-left transition-colors hover:border-primary/40 hover:bg-accent/5 disabled:opacity-50">
-            <div className="min-w-0"><p className="text-[10px] font-semibold uppercase text-muted-foreground">{s.code}</p><h3 className="mt-1 text-sm font-medium">{s.name}</h3><p className="mt-1 text-xs text-muted-foreground">{s.quizCount > 0 ? `${s.quizCount} questions` : 'No questions yet'}</p></div>
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-primary/10">{loading ? <RotateCw className="h-4 w-4 animate-spin text-primary" /> : s.quizCount > 0 ? <PlayCircle className="h-4 w-4 text-primary" /> : <ChevronRight className="h-4 w-4 text-muted-foreground" />}</div>
+            <div className="min-w-0"><p className="text-[10px] font-semibold uppercase text-muted-foreground">{s.code}</p><h3 className="mt-1 text-sm font-medium">{s.name}</h3><p className="mt-1 text-xs text-muted-foreground">{presetCount} random questions</p></div>
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-primary/10">{loading ? <RotateCw className="h-4 w-4 animate-spin text-primary" /> : <PlayCircle className="h-4 w-4 text-primary" />}</div>
           </button>
         ))}
       </div>
