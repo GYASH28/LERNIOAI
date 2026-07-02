@@ -3,10 +3,8 @@ import { authOptions } from '@/lib/auth'
 import { checkRateLimit } from '@/lib/rate-limit'
 import { NextRequest, NextResponse } from 'next/server'
 
-// Initialize NextAuth once at module load. If this throws, we catch it
-// and provide a fallback handler that returns a clean error instead of
-// crashing every /api/auth/* endpoint with a 500.
-let handler: ((req: any) => Promise<any>) | null = null
+// Initialize NextAuth once at module load.
+let handler: ((req: any, res: any) => any) | null = null
 let initError: string | null = null
 
 try {
@@ -16,8 +14,22 @@ try {
   console.error('[nextauth] Initialization failed:', initError)
 }
 
-async function rateLimitedHandler(req: NextRequest) {
-  // If NextAuth failed to initialize, return a clean error.
+/**
+ * NextAuth v4 route handler for Next.js 16 App Router.
+ *
+ * The challenge: next-auth v4 expects an Express-style (req, res) pair where
+ * req.query contains the route params (like `nextauth: ['signin', 'google']`).
+ * Next.js 16 route handlers receive (req: NextRequest, { params }).
+ *
+ * Solution: We construct a minimal req/res shim that gives next-auth what it
+ * needs without trying to modify the immutable NextRequest object.
+ */
+
+interface RouteContext {
+  params: Promise<{ nextauth: string[] }>
+}
+
+async function handleAuth(req: NextRequest, context: RouteContext) {
   if (!handler) {
     return NextResponse.json(
       { error: 'Auth service unavailable', detail: initError },
@@ -27,7 +39,7 @@ async function rateLimitedHandler(req: NextRequest) {
 
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0] ?? 'unknown'
 
-  // Rate limiting — wrapped in try/catch so DB issues never block auth.
+  // Rate limiting (non-blocking)
   try {
     const globalLimit = await checkRateLimit({
       action: 'auth_global',
@@ -52,70 +64,136 @@ async function rateLimitedHandler(req: NextRequest) {
       }
     }
   } catch {
-    // DB unavailable — skip rate limiting, allow the request through.
+    // DB unavailable — skip rate limiting
   }
 
-  // Call the NextAuth handler.
-  // next-auth v4 expects a request with a `query` property (Express-style
-  // req.query). Next.js 16 route handlers use NextRequest which doesn't have
-  // `query` and has read-only properties we can't override.
-  // Solution: create a Proxy that adds `query` and `body` to the request
-  // without modifying the original NextRequest object.
-  try {
-    const url = new URL(req.url)
+  // Get the nextauth route params (e.g., ['signin', 'google'])
+  const { nextauth } = await context.params
 
-    // Parse query params from the URL
-    const query: Record<string, string | string[]> = {}
-    url.searchParams.forEach((value, key) => {
-      if (key in query) {
-        const existing = query[key]
-        query[key] = Array.isArray(existing) ? [...existing, value] : [existing, value]
+  // Parse query params from the URL
+  const url = new URL(req.url)
+  const query: Record<string, any> = { nextauth }
+  url.searchParams.forEach((value, key) => {
+    if (key in query) {
+      const existing = query[key]
+      query[key] = Array.isArray(existing) ? [...existing, value] : [existing, value]
+    } else {
+      query[key] = value
+    }
+  })
+
+  // Read body for POST requests
+  let body: any = undefined
+  if (req.method === 'POST') {
+    try {
+      const contentType = req.headers.get('content-type') || ''
+      if (contentType.includes('application/json')) {
+        body = await req.json()
+      } else if (contentType.includes('application/x-www-form-urlencoded')) {
+        const text = await req.text()
+        const params = new URLSearchParams(text)
+        body = Object.fromEntries(params.entries())
       } else {
-        query[key] = value
+        body = {}
       }
-    })
+    } catch {
+      body = {}
+    }
+  }
 
-    // Read body for POST requests (credentials callback, etc.)
-    let body: any = undefined
-    if (req.method === 'POST') {
-      try {
-        const contentType = req.headers.get('content-type') || ''
-        if (contentType.includes('application/json')) {
-          body = await req.json()
-        } else if (contentType.includes('application/x-www-form-urlencoded')) {
-          const text = await req.text()
-          const params = new URLSearchParams(text)
-          body = Object.fromEntries(params.entries())
+  // Convert Headers to a plain object
+  const headersObj: Record<string, string> = {}
+  req.headers.forEach((value, key) => {
+    headersObj[key] = value
+  })
+
+  // Create a request-like object that next-auth v4 can consume
+  const reqShim = {
+    url: req.url,
+    method: req.method,
+    headers: headersObj,
+    query,
+    body,
+    cookies: Object.fromEntries(
+      req.cookies.getAll().map((c) => [c.name, c.value])
+    ),
+  }
+
+  // Create a response-like object that captures what next-auth writes to it
+  const headers = new Map<string, string[]>()
+  const cookies: Array<{ name: string; value: string; options: any }> = []
+  let responseStatus = 200
+  let responseBody: any = null
+
+  const resShim = {
+    getHeader: (name: string) => headers.get(name.toLowerCase())?.[0],
+    setHeader: (name: string, value: string | string[]) => {
+      headers.set(name.toLowerCase(), Array.isArray(value) ? value : [value])
+    },
+    status: (code: number) => {
+      responseStatus = code
+      return resShim
+    },
+    json: (data: any) => {
+      responseBody = data
+    },
+    end: (data?: any) => {
+      if (data) responseBody = data
+    },
+    redirect: (url: string) => {
+      return NextResponse.redirect(url, { status: 302 })
+    },
+    cookie: (name: string, value: string, options: any) => {
+      cookies.push({ name, value, options })
+    },
+    clearCookie: (name: string, options?: any) => {
+      cookies.push({ name, value: '', options: { ...options, maxAge: 0 } })
+    },
+  }
+
+  try {
+    // Call next-auth's handler with our shimmed req/res
+    await handler(reqShim, resShim)
+
+    // Build the NextResponse from what next-auth wrote to resShim
+
+    // Check for redirect (Location header)
+    const location = headers.get('location')?.[0]
+    if (location) {
+      const response = NextResponse.redirect(location, { status: 302 })
+      // Copy cookies
+      for (const cookie of cookies) {
+        response.cookies.set(cookie.name, cookie.value, cookie.options || {})
+      }
+      // Copy other headers
+      for (const [key, values] of headers) {
+        if (key !== 'location') {
+          for (const v of values) {
+            response.headers.append(key, v)
+          }
         }
-      } catch {
-        // Body parsing failed — continue without body
+      }
+      return response
+    }
+
+    // JSON or other response
+    const response = NextResponse.json(responseBody ?? '', { status: responseStatus })
+
+    // Copy cookies
+    for (const cookie of cookies) {
+      response.cookies.set(cookie.name, cookie.value, cookie.options || {})
+    }
+
+    // Copy headers
+    for (const [key, values] of headers) {
+      if (key !== 'location') {
+        for (const v of values) {
+          response.headers.append(key, v)
+        }
       }
     }
 
-    // Create a proxy request object that next-auth v4 can read.
-    // We can't modify NextRequest (read-only props), so we create a
-    // plain object that looks like an Express request.
-    const shimmedReq = {
-      url: req.url,
-      method: req.method,
-      headers: Object.fromEntries(req.headers.entries()),
-      query,
-      body,
-      cookies: req.cookies,
-      // next-auth may call these
-      json: async () => body,
-      text: async () => JSON.stringify(body ?? {}),
-    }
-
-    const result = await handler(shimmedReq)
-
-    // If the handler returned a Response, pass it through
-    if (result instanceof Response) {
-      return result
-    }
-
-    // Otherwise wrap the result in a NextResponse
-    return NextResponse.json(result)
+    return response
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Unknown auth handler error'
     console.error('[nextauth] Handler error:', message)
@@ -126,4 +204,4 @@ async function rateLimitedHandler(req: NextRequest) {
   }
 }
 
-export { rateLimitedHandler as GET, rateLimitedHandler as POST }
+export { handleAuth as GET, handleAuth as POST }
