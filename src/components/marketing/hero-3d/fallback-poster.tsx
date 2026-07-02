@@ -1,11 +1,11 @@
 import type { CSSProperties } from 'react'
 import {
   BookOpen,
+  Bot,
   Brain,
   Code2,
   FileText,
   GraduationCap,
-  Sparkles,
 } from 'lucide-react'
 
 const ORBIT_MODULES = [
@@ -14,7 +14,7 @@ const ORBIT_MODULES = [
   { label: 'Exams', icon: GraduationCap, color: '#F59E0B' },
   { label: 'Notes', icon: FileText, color: '#10B981' },
   { label: 'Practicals', icon: Code2, color: '#EC4899' },
-  { label: 'LEO AI', icon: Sparkles, color: '#06B6D4' },
+  { label: 'LEO AI', icon: Bot, color: '#06B6D4' },
 ] as const
 
 const MINI_BOOKS = [
@@ -80,23 +80,8 @@ export function KnowledgeCorePoster() {
             <div className="kb-page-edges kb-page-edges--left" />
             <div className="kb-page-edges kb-page-edges--right" />
 
-            {/* Cover back (visible behind pages) */}
-            <div className="kb-cover-back" />
-
             {/* Bookmark */}
             <div className="kb-bookmark" />
-          </div>
-
-          {/* Floating AI core above the book */}
-          <div className="knowledge-book-core">
-            <span className="knowledge-book-core__ring knowledge-book-core__ring--one" />
-            <span className="knowledge-book-core__ring knowledge-book-core__ring--two" />
-            <span className="knowledge-book-core__ring knowledge-book-core__ring--three" />
-            <span className="knowledge-book-core__glass">
-              <span className="knowledge-book-core__facet">
-                <Sparkles className="h-6 w-6" />
-              </span>
-            </span>
           </div>
         </div>
 

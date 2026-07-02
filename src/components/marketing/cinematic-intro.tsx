@@ -65,64 +65,18 @@ function drawBook(
 
   // ─── Book shadow ───
   context.save()
-  context.fillStyle = 'rgba(0, 0, 0, 0.35)'
+  context.fillStyle = 'rgba(0, 0, 0, 0.3)'
   context.filter = 'blur(12px)'
   context.beginPath()
-  context.ellipse(0, 90, 130 + spread * 0.5, 18, 0, 0, Math.PI * 2)
+  context.ellipse(0, 90, 130 + spread * 0.5, 16, 0, 0, Math.PI * 2)
   context.fill()
   context.restore()
 
-  // ─── Book cover (dark, behind pages) ───
+  // ─── Pages (cream colored) — no dark cover behind them ───
   context.save()
-  context.shadowColor = 'rgba(6, 182, 212, 0.4)'
-  context.shadowBlur = 30 + pulse * 12
-  context.shadowOffsetY = 8
-
-  const coverGradient = context.createLinearGradient(-140, -60, 140, 80)
-  coverGradient.addColorStop(0, '#0E7490')
-  coverGradient.addColorStop(0.5, '#0891B2')
-  coverGradient.addColorStop(1, '#0E7490')
-  context.fillStyle = coverGradient
-
-  // Left cover
-  context.beginPath()
-  context.moveTo(0, 10)
-  context.bezierCurveTo(-30, -18 - pageLift, -80 - spread, -45, -135 - spread, -8)
-  context.lineTo(-122 - spread, 78)
-  context.bezierCurveTo(-68 - spread, 50, -28, 62, 0, 78)
-  context.closePath()
-  context.fill()
-
-  // Right cover
-  context.beginPath()
-  context.moveTo(0, 10)
-  context.bezierCurveTo(30, -18 - pageLift, 80 + spread, -45, 135 + spread, -8)
-  context.lineTo(122 + spread, 78)
-  context.bezierCurveTo(68 + spread, 50, 28, 62, 0, 78)
-  context.closePath()
-  context.fill()
-  context.restore()
-
-  // ─── Cover border (highlight) ───
-  context.strokeStyle = 'rgba(6, 182, 212, 0.8)'
-  context.lineWidth = 2.5
-  context.beginPath()
-  context.moveTo(0, 10)
-  context.bezierCurveTo(-30, -18 - pageLift, -80 - spread, -45, -135 - spread, -8)
-  context.lineTo(-122 - spread, 78)
-  context.bezierCurveTo(-68 - spread, 50, -28, 62, 0, 78)
-  context.stroke()
-
-  context.beginPath()
-  context.moveTo(0, 10)
-  context.bezierCurveTo(30, -18 - pageLift, 80 + spread, -45, 135 + spread, -8)
-  context.lineTo(122 + spread, 78)
-  context.bezierCurveTo(68 + spread, 50, 28, 62, 0, 78)
-  context.stroke()
-
-  // ─── Pages (cream colored, on top of covers) ───
-  context.save()
-  context.shadowBlur = 0
+  context.shadowColor = 'rgba(6, 182, 212, 0.25)'
+  context.shadowBlur = 20 + pulse * 8
+  context.shadowOffsetY = 6
 
   const pageGradient = context.createLinearGradient(-120, -50, 120, 70)
   pageGradient.addColorStop(0, '#FFFEF7')
@@ -132,23 +86,51 @@ function drawBook(
 
   // Left page
   context.beginPath()
-  context.moveTo(-4, 14)
-  context.bezierCurveTo(-28, -12 - pageLift * 0.8, -72 - spread * 0.9, -38, -124 - spread * 0.9, -4)
-  context.lineTo(-112 - spread * 0.9, 72)
-  context.bezierCurveTo(-62 - spread * 0.9, 44, -24, 56, -4, 72)
+  context.moveTo(0, 10)
+  context.bezierCurveTo(-30, -18 - pageLift, -80 - spread, -45, -135 - spread, -8)
+  context.lineTo(-122 - spread, 78)
+  context.bezierCurveTo(-68 - spread, 50, -28, 62, 0, 78)
   context.closePath()
   context.fill()
 
   // Right page
   context.beginPath()
-  context.moveTo(4, 14)
-  context.bezierCurveTo(28, -12 - pageLift * 0.8, 72 + spread * 0.9, -38, 124 + spread * 0.9, -4)
-  context.lineTo(112 + spread * 0.9, 72)
-  context.bezierCurveTo(62 + spread * 0.9, 44, 24, 56, 4, 72)
+  context.moveTo(0, 10)
+  context.bezierCurveTo(30, -18 - pageLift, 80 + spread, -45, 135 + spread, -8)
+  context.lineTo(122 + spread, 78)
+  context.bezierCurveTo(68 + spread, 50, 28, 62, 0, 78)
   context.closePath()
   context.fill()
+  context.restore()
+
+  // ─── Page border ───
+  context.strokeStyle = 'rgba(180, 160, 100, 0.3)'
+  context.lineWidth = 1.5
+  context.beginPath()
+  context.moveTo(0, 10)
+  context.bezierCurveTo(-30, -18 - pageLift, -80 - spread, -45, -135 - spread, -8)
+  context.lineTo(-122 - spread, 78)
+  context.bezierCurveTo(-68 - spread, 50, -28, 62, 0, 78)
+  context.stroke()
+
+  context.beginPath()
+  context.moveTo(0, 10)
+  context.bezierCurveTo(30, -18 - pageLift, 80 + spread, -45, 135 + spread, -8)
+  context.lineTo(122 + spread, 78)
+  context.bezierCurveTo(68 + spread, 50, 28, 62, 0, 78)
+  context.stroke()
+
+  // ─── Center line (subtle, where pages meet) ───
+  context.strokeStyle = 'rgba(120, 100, 60, 0.2)'
+  context.lineWidth = 1
+  context.beginPath()
+  context.moveTo(0, 10)
+  context.lineTo(0, 78)
+  context.stroke()
 
   // ─── Text lines on pages ───
+  context.save()
+  context.shadowBlur = 0
   context.strokeStyle = 'rgba(120, 100, 60, 0.3)'
   context.lineWidth = 1
 
@@ -187,44 +169,6 @@ function drawBook(
   context.fillText('arr.push(42)', 25 + spread * 0.9, 30)
 
   context.restore()
-
-  // ─── Center spine (binding) ───
-  context.save()
-  context.shadowColor = 'rgba(6, 182, 212, 0.5)'
-  context.shadowBlur = 15
-  const spineGradient = context.createLinearGradient(0, 0, 0, 70)
-  spineGradient.addColorStop(0, '#0891B2')
-  spineGradient.addColorStop(0.5, '#06B6D4')
-  spineGradient.addColorStop(1, '#0E7490')
-  context.fillStyle = spineGradient
-  context.fillRect(-5, 10, 10, 68)
-  context.restore()
-
-  // ─── AI Core glow — centered ON the spine (like a glowing jewel) ───
-  const glow = context.createRadialGradient(0, 35, 2, 0, 35, 60)
-  glow.addColorStop(0, 'rgba(232, 255, 242, 0.98)')
-  glow.addColorStop(0.22, 'rgba(86, 255, 178, 0.8)')
-  glow.addColorStop(0.5, 'rgba(6, 182, 212, 0.45)')
-  glow.addColorStop(1, 'rgba(14, 116, 144, 0)')
-  context.fillStyle = glow
-  context.beginPath()
-  context.arc(0, 35, 60, 0, Math.PI * 2)
-  context.fill()
-
-  // Core orb (smaller, sits on the spine)
-  context.fillStyle = '#eafff2'
-  context.beginPath()
-  context.arc(0, 35, 10 + pulse * 2.5, 0, Math.PI * 2)
-  context.fill()
-
-  // Orbit rings (tighter)
-  context.strokeStyle = 'rgba(6, 182, 212, 0.5)'
-  context.lineWidth = 1.2
-  for (let ring = 0; ring < 3; ring += 1) {
-    context.beginPath()
-    context.ellipse(0, 35, 30 + ring * 12, 8 + ring * 5, -0.1 + ring * 0.15, 0, Math.PI * 2)
-    context.stroke()
-  }
 
   // ─── Bookmark ribbon ───
   context.save()

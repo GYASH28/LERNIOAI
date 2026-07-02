@@ -377,19 +377,10 @@ html[data-landing-motion="enhanced"] [data-landing-section="revealed"] [data-lan
   transform-style: preserve-3d;
 }
 
-/* Book cover back (dark, visible behind pages) */
+/* Book cover back — REMOVED per user request (was showing as brown shade).
+   Kept as hidden to avoid breaking the JSX reference. */
 .kb-cover-back {
-  position: absolute;
-  left: 4%;
-  right: 4%;
-  top: 10%;
-  bottom: 10%;
-  background: linear-gradient(145deg,
-    color-mix(in oklch, var(--brand) 60%, black 20%),
-    color-mix(in oklch, var(--brand) 35%, black 40%));
-  border-radius: 0.6rem;
-  transform: translateZ(-1rem) rotateX(2deg);
-  box-shadow: 0 1.2rem 2.5rem rgb(3 20 13 / 0.35);
+  display: none;
 }
 
 /* Pages — cream colored, with text lines */
@@ -508,23 +499,10 @@ html[data-landing-motion="enhanced"] [data-landing-section="revealed"] [data-lan
   line-height: 1.3;
 }
 
-/* Center spine — the binding (slimmer, more elegant) */
+/* Center spine — REMOVED per user request (was showing as brown shade).
+   The pages meet at the center naturally; no visible binding needed. */
 .kb-spine {
-  position: absolute;
-  left: 50%;
-  top: 10%;
-  bottom: 10%;
-  width: 0.6rem;
-  transform: translateX(-50%) translateZ(0.5rem);
-  background: linear-gradient(180deg,
-    color-mix(in oklch, var(--brand) 40%, black 40%) 0%,
-    color-mix(in oklch, var(--brand) 55%, black 30%) 50%,
-    color-mix(in oklch, var(--brand) 35%, black 45%) 100%);
-  border-radius: 0.15rem;
-  box-shadow:
-    0 0 0.8rem color-mix(in oklch, var(--brand) 25%, transparent),
-    inset 0 0 0.2rem rgba(0, 0, 0, 0.4);
-  z-index: 3;
+  display: none;
 }
 
 /* Page edges — visible thickness on the outer edges */
@@ -919,5 +897,108 @@ html[data-low-power="true"] .knowledge-mini-book,
 html[data-low-power="true"] .knowledge-book-orbit,
 html[data-low-power="true"] .knowledge-book-orbit-counter,
 html[data-low-power="true"] .knowledge-book-halo {
+  animation: none !important;
+}
+
+/* ═══════════════ AI TUTOR CORE ORB ═══════════════ */
+/* The glowing AI core orb, integrated into the AI Tutor section card.
+   Positioned in the top-right corner of the tutor demo card. */
+.tutor-core-orb {
+  position: absolute;
+  top: -1.5rem;
+  right: -1.5rem;
+  width: 5rem;
+  height: 5rem;
+  transform-style: preserve-3d;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.tutor-core-orb__glass {
+  position: absolute;
+  inset: 0.8rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgb(226 255 239 / 0.65);
+  border-radius: 42% 58% 54% 46%;
+  background:
+    radial-gradient(circle at 32% 26%, rgb(255 255 255 / 0.92), transparent 28%),
+    linear-gradient(145deg, color-mix(in oklch, var(--brand) 74%, white 16%), color-mix(in oklch, var(--secondary-action) 62%, var(--brand)));
+  color: white;
+  box-shadow:
+    0 0 0 0.4rem color-mix(in oklch, var(--brand) 12%, transparent),
+    0 0 1.8rem color-mix(in oklch, var(--brand) 48%, transparent);
+  animation: tutor-core-facet 5.4s ease-in-out infinite;
+}
+
+.tutor-core-orb__facet {
+  display: grid;
+  place-items: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  clip-path: polygon(50% 0, 92% 24%, 82% 76%, 50% 100%, 18% 76%, 8% 24%);
+  background: rgb(9 72 48 / 0.42);
+  backdrop-filter: blur(5px);
+}
+
+.tutor-core-orb__ring {
+  position: absolute;
+  inset: 0.3rem;
+  border: 1px solid color-mix(in oklch, var(--brand) 52%, transparent);
+  border-radius: 50%;
+}
+
+.tutor-core-orb__ring--one {
+  transform: rotateX(68deg);
+  animation: knowledge-book-ring 8s linear infinite;
+}
+
+.tutor-core-orb__ring--two {
+  transform: rotateY(70deg) rotateZ(20deg);
+  animation: knowledge-book-ring 11s linear infinite reverse;
+}
+
+.tutor-core-orb__ring--three {
+  inset: 0.7rem;
+  transform: rotateX(58deg) rotateY(40deg);
+  border-color: color-mix(in oklch, var(--secondary-action) 52%, transparent);
+  animation: knowledge-book-ring 9s linear infinite;
+}
+
+@keyframes tutor-core-facet {
+  50% { transform: rotate(8deg) scale(1.06); }
+}
+
+@media (max-width: 767px) {
+  .tutor-core-orb {
+    width: 3.5rem;
+    height: 3.5rem;
+    top: -1rem;
+    right: -1rem;
+  }
+
+  .tutor-core-orb__glass {
+    inset: 0.5rem;
+  }
+
+  .tutor-core-orb__facet {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tutor-core-orb__glass,
+  .tutor-core-orb__ring {
+    animation: none !important;
+  }
+}
+
+html[data-motion="reduced"] .tutor-core-orb__glass,
+html[data-motion="reduced"] .tutor-core-orb__ring,
+html[data-motion="none"] .tutor-core-orb__glass,
+html[data-motion="none"] .tutor-core-orb__ring,
+html[data-low-power="true"] .tutor-core-orb__glass,
+html[data-low-power="true"] .tutor-core-orb__ring {
   animation: none !important;
 }
