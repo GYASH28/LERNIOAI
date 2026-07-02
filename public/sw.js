@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lernio-v4';
+const CACHE_NAME = 'lernio-v5';
 const STATIC_ASSETS = ['/', '/dashboard', '/learn', '/materials', '/manifest.webmanifest'];
 
 // Network-first with 3-second timeout for navigation requests.
