@@ -56,12 +56,14 @@ async function rateLimitedHandler(req: NextRequest) {
   }
 
   // Call the NextAuth handler.
-  // next-auth v4 expects a request with a `query` property (from Express-style
-  // req). Next.js 16 route handlers use NextRequest which doesn't have `query`.
-  // We create a shim object that merges url, method, headers, body, and query
-  // so next-auth v4 can parse the route params correctly.
+  // next-auth v4 expects a request with a `query` property (Express-style
+  // req.query). Next.js 16 route handlers use NextRequest which doesn't have
+  // `query` and has read-only properties we can't override.
+  // Solution: create a Proxy that adds `query` and `body` to the request
+  // without modifying the original NextRequest object.
   try {
     const url = new URL(req.url)
+
     // Parse query params from the URL
     const query: Record<string, string | string[]> = {}
     url.searchParams.forEach((value, key) => {
@@ -90,16 +92,30 @@ async function rateLimitedHandler(req: NextRequest) {
       }
     }
 
-    // Build a NextRequest-like object that includes `query`
-    const shimmedReq = Object.assign(req, {
+    // Create a proxy request object that next-auth v4 can read.
+    // We can't modify NextRequest (read-only props), so we create a
+    // plain object that looks like an Express request.
+    const shimmedReq = {
+      url: req.url,
+      method: req.method,
+      headers: Object.fromEntries(req.headers.entries()),
       query,
       body,
-      headers: req.headers,
-      method: req.method,
-      url: req.url,
-    }) as NextRequest
+      cookies: req.cookies,
+      // next-auth may call these
+      json: async () => body,
+      text: async () => JSON.stringify(body ?? {}),
+    }
 
-    return await handler(shimmedReq)
+    const result = await handler(shimmedReq)
+
+    // If the handler returned a Response, pass it through
+    if (result instanceof Response) {
+      return result
+    }
+
+    // Otherwise wrap the result in a NextResponse
+    return NextResponse.json(result)
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Unknown auth handler error'
     console.error('[nextauth] Handler error:', message)
