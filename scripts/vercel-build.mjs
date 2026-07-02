@@ -84,4 +84,4 @@ if (autoMigrate && !isProduction) {
 }
 
 console.log('[vercel-build] Building Next.js...')
-runCommand('npx', ['next', 'build'])
+runCommand('npx', ['next', 'build', '--webpack'])
