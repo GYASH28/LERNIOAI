@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import type { ChangeEvent, FormEvent, ReactNode } from 'react'
-import { signIn } from 'next-auth/react'
 import { ChevronDown, Mail, UserPlus } from 'lucide-react'
 import {
   AuthShell,
@@ -142,11 +141,54 @@ function SignUpForm() {
   async function handleGoogle() {
     setSubmitting(true)
     setError('')
-    setStatusMessage('Redirecting to Google...')
+    setStatusMessage('Opening Google sign-in...')
+
     try {
-      await signIn('google', { callbackUrl: '/complete-profile' })
-    } catch {
-      setError('Google sign in failed. Please try again.')
+      const { getFirebaseAuth, isFirebaseConfigured } = await import('@/lib/firebase/client')
+
+      if (!isFirebaseConfigured()) {
+        setError('Google sign-in is not configured. Please use email/password.')
+        setStatusMessage('')
+        setSubmitting(false)
+        return
+      }
+
+      const firebaseAuth = getFirebaseAuth()
+      if (!firebaseAuth) {
+        setError('Google sign-in is not available. Please use email/password.')
+        setStatusMessage('')
+        setSubmitting(false)
+        return
+      }
+
+      const { GoogleAuthProvider, signInWithPopup } = await import('firebase/auth')
+      const provider = new GoogleAuthProvider()
+      provider.setCustomParameters({ prompt: 'select_account' })
+
+      setStatusMessage('Waiting for Google...')
+      const result = await signInWithPopup(firebaseAuth, provider)
+      const idToken = await result.user.getIdToken()
+
+      setStatusMessage('Creating your profile...')
+      const response = await fetch('/api/auth/firebase', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ idToken }),
+      })
+
+      const data = await response.json()
+      if (!response.ok || !data.ok) {
+        throw new Error(data?.error?.message || 'Failed to sign in')
+      }
+
+      window.location.href = '/complete-profile'
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Google sign in failed'
+      if (message.includes('popup') || message.includes('cancelled')) {
+        setError('Google sign-in was cancelled.')
+      } else {
+        setError(message || 'Google sign in failed. Please try again.')
+      }
       setStatusMessage('')
       setSubmitting(false)
     }

@@ -3,8 +3,6 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import type { FormEvent } from 'react'
-import { signIn } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
 import { LockKeyhole, LogIn, Mail } from 'lucide-react'
 import {
   AuthShell,
@@ -19,16 +17,12 @@ import { Label } from '@/components/ui/label'
 import { safeCallbackPath } from '@/lib/auth-policy'
 import { getCampusDashboardPath } from '@/lib/campus-auth'
 
-// Always show the Google button — if Google OAuth isn't configured on the
-// server, next-auth will show an error page when clicked, but the
-// email/password form always works. This avoids depending on getProviders().
 const GOOGLE_ENABLED = true
 
 function routeNotice(verified: string | null, error: string | null) {
   if (verified === 'true') {
     return { status: 'Email verified. You can sign in now.', error: null }
   }
-
   if (verified === 'false') {
     const message =
       error === 'missing_token'
@@ -38,9 +32,7 @@ function routeNotice(verified: string | null, error: string | null) {
           : 'The verification link is invalid or expired.'
     return { status: null, error: message }
   }
-
   if (!error) return { status: null, error: null }
-
   return {
     status: null,
     error: error === 'CredentialsSignin'
@@ -50,7 +42,6 @@ function routeNotice(verified: string | null, error: string | null) {
 }
 
 function SignInForm() {
-  const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
@@ -59,17 +50,13 @@ function SignInForm() {
   const [oauthLoading, setOauthLoading] = useState(false)
   const [notice, setNotice] = useState<{ status: string | null; error: string | null }>({ status: null, error: null })
 
-  // Read URL params in useEffect (avoids useSearchParams which requires Suspense
-  // and can cause the form to hang in "Loading" state if hydration fails).
   useEffect(() => {
     try {
       const params = new URLSearchParams(window.location.search)
       const verified = params.get('verified')
       const routeError = params.get('error')
       setNotice(routeNotice(verified, routeError))
-    } catch {
-      // ignore
-    }
+    } catch {}
   }, [])
 
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -82,6 +69,8 @@ function SignInForm() {
       const params = new URLSearchParams(window.location.search)
       const callbackUrl = safeCallbackPath(params.get('callbackUrl'))
 
+      // Lazy import to avoid loading next-auth on page render
+      const { signIn } = await import('next-auth/react')
       const result = await signIn('credentials', {
         email: email.trim(),
         password,
@@ -111,7 +100,6 @@ function SignInForm() {
         destination = callbackUrl
       }
 
-      // Hard navigation for reliability — router.push can silently fail
       window.location.href = destination
     } catch {
       setSubmitting(false)
@@ -124,37 +112,48 @@ function SignInForm() {
     setOauthLoading(true)
     setError(null)
     setStatusMessage('Opening Google sign-in...')
+
     try {
       const { getFirebaseAuth, isFirebaseConfigured } = await import('@/lib/firebase/client')
+
       if (!isFirebaseConfigured()) {
-        setError('Google sign-in is not configured.')
+        setError('Google sign-in is not configured. Please use email/password.')
         setOauthLoading(false)
         setStatusMessage('')
         return
       }
+
       const firebaseAuth = getFirebaseAuth()
       if (!firebaseAuth) {
-        setError('Google sign-in unavailable.')
+        setError('Google sign-in is not available. Please use email/password.')
         setOauthLoading(false)
         setStatusMessage('')
         return
       }
+
       const { GoogleAuthProvider, signInWithPopup } = await import('firebase/auth')
       const provider = new GoogleAuthProvider()
       provider.setCustomParameters({ prompt: 'select_account' })
+
       setStatusMessage('Waiting for Google...')
       const result = await signInWithPopup(firebaseAuth, provider)
       const idToken = await result.user.getIdToken()
+
       setStatusMessage('Signing you in...')
       const response = await fetch('/api/auth/firebase', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ idToken }),
       })
+
       const data = await response.json()
-      if (!response.ok || !data.ok) throw new Error(data?.error?.message || 'Failed to sign in')
+      if (!response.ok || !data.ok) {
+        throw new Error(data?.error?.message || 'Failed to sign in')
+      }
+
       const params = new URLSearchParams(window.location.search)
       let destination = safeCallbackPath(params.get('callbackUrl'))
+
       if (destination === '/dashboard') {
         try {
           const userResponse = await fetch('/api/user', { cache: 'no-store' })
@@ -164,13 +163,16 @@ function SignInForm() {
           }
         } catch {}
       }
+
       window.location.href = destination
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Google sign in failed'
       if (message.includes('popup') || message.includes('cancelled')) {
         setError('Google sign-in was cancelled.')
+      } else if (message.includes('configuration-not-found')) {
+        setError('Google sign-in is not configured. Please use email/password.')
       } else {
-        setError(message)
+        setError(message || 'Google sign in failed. Please try again.')
       }
       setOauthLoading(false)
       setStatusMessage('')
@@ -286,9 +288,6 @@ function SignInForm() {
   )
 }
 
-// No Suspense wrapper — the form renders immediately on the client.
-// This eliminates the "Loading secure sign-in" hang that was caused by
-// useSearchParams() requiring Suspense + getProviders() hanging on 500.
 export default function SignInPage() {
   return <SignInForm />
 }
