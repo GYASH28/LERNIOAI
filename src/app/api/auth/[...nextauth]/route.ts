@@ -136,12 +136,32 @@ async function handleAuth(req: NextRequest, context: RouteContext) {
     },
     json: (data: any) => {
       responseBody = data
+      return resShim
+    },
+    send: (data?: any) => {
+      if (data !== undefined) responseBody = data
+      return resShim
     },
     end: (data?: any) => {
-      if (data) responseBody = data
+      if (data !== undefined) responseBody = data
+      return resShim
     },
-    redirect: (url: string) => {
-      return NextResponse.redirect(url, { status: 302 })
+    write: (data?: any) => {
+      if (data !== undefined) responseBody = data
+      return resShim
+    },
+    redirect: (statusOrUrl: number | string, url?: string) => {
+      // Handle both redirect(url) and redirect(status, url)
+      const redirectUrl = typeof statusOrUrl === 'string' ? statusOrUrl : url || ''
+      if (redirectUrl) {
+        headers.set('location', [redirectUrl])
+      }
+      if (typeof statusOrUrl === 'number') {
+        responseStatus = statusOrUrl
+      } else {
+        responseStatus = 302
+      }
+      return resShim
     },
     cookie: (name: string, value: string, options: any) => {
       cookies.push({ name, value, options })
@@ -149,6 +169,8 @@ async function handleAuth(req: NextRequest, context: RouteContext) {
     clearCookie: (name: string, options?: any) => {
       cookies.push({ name, value: '', options: { ...options, maxAge: 0 } })
     },
+    finished: false,
+    headersSent: false,
   }
 
   try {
