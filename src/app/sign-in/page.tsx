@@ -62,12 +62,26 @@ function SignInForm() {
 
   useEffect(() => {
     let mounted = true
-    getProviders().then((items) => {
-      if (mounted) setProviders(items)
-    })
+    // Add a timeout fallback — if getProviders() hangs (e.g. DB issue),
+    // we still render the form after 3 seconds so users can sign in
+    // with email/password.
+    const timeout = setTimeout(() => {
+      if (mounted && !providers) setProviders({})
+    }, 3000)
+
+    getProviders()
+      .then((items) => {
+        if (mounted) setProviders(items ?? {})
+      })
+      .catch(() => {
+        if (mounted) setProviders({})
+      })
+
     return () => {
       mounted = false
+      clearTimeout(timeout)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   async function submit(event: FormEvent<HTMLFormElement>) {

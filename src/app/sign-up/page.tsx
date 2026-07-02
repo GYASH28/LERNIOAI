@@ -80,12 +80,24 @@ function SignUpForm() {
 
   useEffect(() => {
     let mounted = true
-    getProviders().then((items) => {
-      if (mounted) setProviders(items)
-    })
+    // Timeout fallback — if getProviders() hangs, render the form anyway.
+    const timeout = setTimeout(() => {
+      if (mounted && !providers) setProviders({})
+    }, 3000)
+
+    getProviders()
+      .then((items) => {
+        if (mounted) setProviders(items ?? {})
+      })
+      .catch(() => {
+        if (mounted) setProviders({})
+      })
+
     return () => {
       mounted = false
+      clearTimeout(timeout)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   function handleChange(event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
