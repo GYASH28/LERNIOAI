@@ -388,36 +388,55 @@ export const authOptions: NextAuthOptions = {
  * administrator signs in with a real database account.
  */
 async function resolveUserFromSession(): Promise<AuthUser | null> {
-  const session = await getServerSession(authOptions)
+  // Bypass getServerSession (which is broken on Next.js 16) and read
+  // the JWT directly from cookies. This is much faster AND works with
+  // Next.js 16's route handler changes.
+  try {
+    // Import cookies() from next/headers — async in Next.js 15+
+    const { cookies } = await import('next/headers')
+    const cookieStore = await cookies()
+    const sessionCookie = cookieStore.get(
+      process.env.NODE_ENV === 'production'
+        ? '__Secure-next-auth.session-token'
+        : 'next-auth.session-token'
+    )
 
-  // If we have a session with user data, use it directly WITHOUT another
-  // DB query. The jwt callback already populated the token with id, role,
-  // status, etc. Doing a second DB query here was the #1 performance killer
-  // (every page load = 2 DB queries on a slow Postgres).
-  if (session?.user?.email && session.user.id) {
-    if (session.user.sessionRevoked) return null
-    return {
-      id: String(session.user.id),
-      email: session.user.email,
-      name: session.user.name || session.user.email.split('@')[0],
-      role: normalizeRole(session.user.role),
-      status: session.user.status || 'active',
-      profileComplete: session.user.profileComplete ?? true,
-      authorityVersion: session.user.authorityVersion ?? 0,
+    if (!sessionCookie?.value) {
+      // No session cookie — check demo mode
+      const authMode = resolveAuthMode({
+        demoModeEnv: process.env.LERNIO_DEMO_MODE,
+        sessionEmail: null,
+      })
+      if (authMode.mode === 'demo') {
+        return DEMO_AUTH_USER
+      }
+      return null
     }
+
+    // Decode the JWT directly (no DB query, no getServerSession)
+    const jwt = (await import('jsonwebtoken')).default
+    const secret = process.env.NEXTAUTH_SECRET
+    if (!secret) return null
+
+    const decoded = jwt.verify(sessionCookie.value, secret) as any
+
+    if (!decoded?.email || !decoded?.id) return null
+    if (decoded.sessionRevoked === true) return null
+    if (decoded.status === 'revoked' || decoded.status === 'disabled') return null
+
+    return {
+      id: String(decoded.id),
+      email: String(decoded.email),
+      name: String(decoded.name || decoded.email.split('@')[0]),
+      role: normalizeRole(decoded.role),
+      status: String(decoded.status || 'active'),
+      profileComplete: decoded.profileComplete ?? true,
+      authorityVersion: Number(decoded.authorityVersion ?? 0),
+    }
+  } catch {
+    // JWT verification failed or cookies() not available
+    return null
   }
-
-  // No session — check demo mode
-  const authMode = resolveAuthMode({
-    demoModeEnv: process.env.LERNIO_DEMO_MODE,
-    sessionEmail: session?.user?.email,
-  })
-
-  if (authMode.mode === 'demo') {
-    return DEMO_AUTH_USER
-  }
-
-  return null
 }
 
 export async function getCurrentUser(): Promise<AuthUser | null> {

@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+export const dynamic = 'force-dynamic'
+
 import { requireActiveRole } from '@/lib/auth'
 import { getWorkspaceOverview } from '@/lib/authority/workspace-data'
 import { WorkspaceDashboard } from '@/components/authority/workspace-dashboard'
