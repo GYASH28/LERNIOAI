@@ -123,13 +123,55 @@ function SignInForm() {
   async function handleGoogleSignIn() {
     setOauthLoading(true)
     setError(null)
-    setStatusMessage('Redirecting to Google...')
+    setStatusMessage('Opening Google sign-in...')
     try {
+      const { getFirebaseAuth, isFirebaseConfigured } = await import('@/lib/firebase/client')
+      if (!isFirebaseConfigured()) {
+        setError('Google sign-in is not configured.')
+        setOauthLoading(false)
+        setStatusMessage('')
+        return
+      }
+      const firebaseAuth = getFirebaseAuth()
+      if (!firebaseAuth) {
+        setError('Google sign-in unavailable.')
+        setOauthLoading(false)
+        setStatusMessage('')
+        return
+      }
+      const { GoogleAuthProvider, signInWithPopup } = await import('firebase/auth')
+      const provider = new GoogleAuthProvider()
+      provider.setCustomParameters({ prompt: 'select_account' })
+      setStatusMessage('Waiting for Google...')
+      const result = await signInWithPopup(firebaseAuth, provider)
+      const idToken = await result.user.getIdToken()
+      setStatusMessage('Signing you in...')
+      const response = await fetch('/api/auth/firebase', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ idToken }),
+      })
+      const data = await response.json()
+      if (!response.ok || !data.ok) throw new Error(data?.error?.message || 'Failed to sign in')
       const params = new URLSearchParams(window.location.search)
-      const callbackUrl = safeCallbackPath(params.get('callbackUrl'))
-      await signIn('google', { callbackUrl })
-    } catch {
-      setError('Google sign in failed. Please try again.')
+      let destination = safeCallbackPath(params.get('callbackUrl'))
+      if (destination === '/dashboard') {
+        try {
+          const userResponse = await fetch('/api/user', { cache: 'no-store' })
+          const userPayload = await userResponse.json().catch(() => null)
+          if (userPayload?.ok && userPayload.data?.role) {
+            destination = getCampusDashboardPath(userPayload.data.role)
+          }
+        } catch {}
+      }
+      window.location.href = destination
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Google sign in failed'
+      if (message.includes('popup') || message.includes('cancelled')) {
+        setError('Google sign-in was cancelled.')
+      } else {
+        setError(message)
+      }
       setOauthLoading(false)
       setStatusMessage('')
     }
