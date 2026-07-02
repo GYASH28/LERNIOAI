@@ -1,13 +1,11 @@
 import type { ReactNode } from 'react'
-import dynamic from 'next/dynamic'
-
-const TopBar = dynamic(() => import('@/components/layout/top-bar').then(m => ({ default: m.TopBar })), { ssr: false })
-const Footer = dynamic(() => import('@/components/layout/footer').then(m => ({ default: m.Footer })), { ssr: false })
+import { TopBar } from '@/components/layout/top-bar'
+import { Footer } from '@/components/layout/footer'
 
 /**
  * Lightweight shell for learn pages.
- * Uses dynamic imports with ssr: false to avoid prerendering issues
- * with client components that use Zustand/next-auth at build time.
+ * TopBar and Footer are already 'use client' components,
+ * so they can be imported directly without dynamic().
  */
 export function LearnShell({ children }: { children: ReactNode }) {
   return (
