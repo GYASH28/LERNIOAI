@@ -200,29 +200,29 @@ function drawBook(
   context.fillRect(-5, 10, 10, 68)
   context.restore()
 
-  // ─── AI Core glow above the book ───
-  const glow = context.createRadialGradient(0, -40, 2, 0, -40, 80)
+  // ─── AI Core glow — centered ON the spine (like a glowing jewel) ───
+  const glow = context.createRadialGradient(0, 35, 2, 0, 35, 60)
   glow.addColorStop(0, 'rgba(232, 255, 242, 0.98)')
-  glow.addColorStop(0.22, 'rgba(86, 255, 178, 0.85)')
-  glow.addColorStop(0.5, 'rgba(6, 182, 212, 0.5)')
+  glow.addColorStop(0.22, 'rgba(86, 255, 178, 0.8)')
+  glow.addColorStop(0.5, 'rgba(6, 182, 212, 0.45)')
   glow.addColorStop(1, 'rgba(14, 116, 144, 0)')
   context.fillStyle = glow
   context.beginPath()
-  context.arc(0, -40, 80, 0, Math.PI * 2)
+  context.arc(0, 35, 60, 0, Math.PI * 2)
   context.fill()
 
-  // Core orb
+  // Core orb (smaller, sits on the spine)
   context.fillStyle = '#eafff2'
   context.beginPath()
-  context.arc(0, -40, 12 + pulse * 3, 0, Math.PI * 2)
+  context.arc(0, 35, 10 + pulse * 2.5, 0, Math.PI * 2)
   context.fill()
 
-  // Orbit rings
+  // Orbit rings (tighter)
   context.strokeStyle = 'rgba(6, 182, 212, 0.5)'
-  context.lineWidth = 1.5
+  context.lineWidth = 1.2
   for (let ring = 0; ring < 3; ring += 1) {
     context.beginPath()
-    context.ellipse(0, -40, 45 + ring * 20, 12 + ring * 8, -0.1 + ring * 0.15, 0, Math.PI * 2)
+    context.ellipse(0, 35, 30 + ring * 12, 8 + ring * 5, -0.1 + ring * 0.15, 0, Math.PI * 2)
     context.stroke()
   }
 

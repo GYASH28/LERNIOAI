@@ -508,22 +508,22 @@ html[data-landing-motion="enhanced"] [data-landing-section="revealed"] [data-lan
   line-height: 1.3;
 }
 
-/* Center spine — the binding */
+/* Center spine — the binding (slimmer, more elegant) */
 .kb-spine {
   position: absolute;
   left: 50%;
-  top: 9%;
-  bottom: 9%;
-  width: 1.5rem;
-  transform: translateX(-50%) translateZ(0.6rem);
+  top: 10%;
+  bottom: 10%;
+  width: 0.6rem;
+  transform: translateX(-50%) translateZ(0.5rem);
   background: linear-gradient(180deg,
-    color-mix(in oklch, var(--brand) 50%, black 30%) 0%,
-    color-mix(in oklch, var(--brand) 75%, black 15%) 50%,
-    color-mix(in oklch, var(--brand) 40%, black 40%) 100%);
-  border-radius: 0.25rem;
+    color-mix(in oklch, var(--brand) 40%, black 40%) 0%,
+    color-mix(in oklch, var(--brand) 55%, black 30%) 50%,
+    color-mix(in oklch, var(--brand) 35%, black 45%) 100%);
+  border-radius: 0.15rem;
   box-shadow:
-    0 0 1.8rem color-mix(in oklch, var(--brand) 40%, transparent),
-    inset 0 0 0.4rem rgba(0, 0, 0, 0.35);
+    0 0 0.8rem color-mix(in oklch, var(--brand) 25%, transparent),
+    inset 0 0 0.2rem rgba(0, 0, 0, 0.4);
   z-index: 3;
 }
 
@@ -569,21 +569,21 @@ html[data-landing-motion="enhanced"] [data-landing-section="revealed"] [data-lan
   box-shadow: 0 0.4rem 0.8rem rgba(3 20 13 / 0.25);
 }
 
-/* ─── AI Core — positioned ABOVE the book, not overlapping ─── */
+/* ─── AI Core — sits ON the spine like a glowing jewel ─── */
 .knowledge-book-core {
   position: absolute;
   left: 50%;
-  top: -2.5rem;
-  width: 7rem;
-  height: 7rem;
-  transform: translateX(-50%) translateZ(7rem);
+  top: 42%;
+  width: 5rem;
+  height: 5rem;
+  transform: translate(-50%, -50%) translateZ(1.5rem);
   transform-style: preserve-3d;
-  z-index: 6;
+  z-index: 7;
 }
 
 .knowledge-book-core__glass {
   position: absolute;
-  inset: 1.8rem;
+  inset: 1rem;
   display: grid;
   place-items: center;
   border: 1px solid rgb(226 255 239 / 0.65);
@@ -593,24 +593,29 @@ html[data-landing-motion="enhanced"] [data-landing-section="revealed"] [data-lan
     linear-gradient(145deg, color-mix(in oklch, var(--brand) 74%, white 16%), color-mix(in oklch, var(--secondary-action) 62%, var(--brand)));
   color: white;
   box-shadow:
-    0 0 0 0.7rem color-mix(in oklch, var(--brand) 12%, transparent),
-    0 0 2.8rem color-mix(in oklch, var(--brand) 48%, transparent);
+    0 0 0 0.5rem color-mix(in oklch, var(--brand) 12%, transparent),
+    0 0 2.2rem color-mix(in oklch, var(--brand) 48%, transparent);
   animation: knowledge-core-facet 5.4s ease-in-out infinite;
 }
 
 .knowledge-book-core__facet {
   display: grid;
   place-items: center;
-  width: 3rem;
-  height: 3rem;
+  width: 2.2rem;
+  height: 2.2rem;
   clip-path: polygon(50% 0, 92% 24%, 82% 76%, 50% 100%, 18% 76%, 8% 24%);
   background: rgb(9 72 48 / 0.42);
   backdrop-filter: blur(5px);
 }
 
+.knowledge-book-core__facet svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
 .knowledge-book-core__ring {
   position: absolute;
-  inset: 0.7rem;
+  inset: 0.4rem;
   border: 1px solid color-mix(in oklch, var(--brand) 52%, transparent);
   border-radius: 50%;
 }
@@ -626,7 +631,7 @@ html[data-landing-motion="enhanced"] [data-landing-section="revealed"] [data-lan
 }
 
 .knowledge-book-core__ring--three {
-  inset: 1.25rem;
+  inset: 0.8rem;
   transform: rotateX(58deg) rotateY(40deg);
   border-color: color-mix(in oklch, var(--secondary-action) 52%, transparent);
   animation: knowledge-book-ring 9s linear infinite;
