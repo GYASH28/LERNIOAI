@@ -3,16 +3,12 @@
  *
  * Runs:
  *   1. `prisma generate` — generates the Prisma Client (always needed)
- *   2. `prisma migrate deploy` — applies pending migrations (idempotent, safe)
- *   3. Seed scripts — upserts CWIT departments, sources, curriculum, admin
- *   4. `next build --webpack` — the actual Next.js build
+ *   2. `prisma migrate deploy` — applies pending migrations (idempotent, fast)
+ *   3. Seed check — if DB already has departments, skip all seeds (FAST)
+ *   4. Seed scripts — only run on first deploy or if DB is empty
+ *   5. `next build --webpack` — the actual Next.js build
  *
- * All DB steps use UPSERT semantics, so they are safe to run on every build.
- * A failed step is logged but does NOT fail the build (the app degrades
- * gracefully — pages load, sign-in shows an error if the DB is broken).
- *
- * To skip DB setup (e.g. for preview branches that share a DB), set
- * `LERNIO_SKIP_DB_SETUP=true`.
+ * To skip ALL DB setup, set LERNIO_SKIP_DB_SETUP=true.
  */
 import { spawnSync } from 'node:child_process'
 
@@ -46,6 +42,17 @@ function runCommand(cmd, args, { required = true } = {}) {
   return true
 }
 
+function runCommandCapture(cmd, args) {
+  const result = spawnSync(cmd, args, {
+    cwd: process.cwd(),
+    env: process.env,
+    stdio: 'pipe',
+    shell: true,
+    encoding: 'utf-8',
+  })
+  return result.stdout?.trim() || ''
+}
+
 // ─── Step 1: Prisma Client ────────────────────────────────────────────────
 console.log('[vercel-build] Generating Prisma Client...')
 runCommand('npx', ['prisma', 'generate'])
@@ -59,24 +66,44 @@ if (skipDbSetup) {
 } else if (!hasDatabaseUrl) {
   console.warn('[vercel-build] DATABASE_URL not set — skipping DB migrations and seeds.')
 } else {
-  console.log('[vercel-build] Running Prisma migrations (idempotent)...')
-  // migrate deploy is idempotent — safe to run on every build
+  console.log('[vercel-build] Running Prisma migrations (idempotent, fast)...')
   runCommand('npx', ['prisma', 'migrate', 'deploy'], { required: false })
 
-  console.log('[vercel-build] Seeding CWIT departments (upsert)...')
-  runCommand('npx', ['tsx', 'scripts/upsert-cwit-departments.ts'], { required: false })
+  // ─── FAST CHECK: is the DB already seeded? ────────────────────────────
+  // On first deploy this runs all seeds (~5 min). On every subsequent
+  // deploy it runs ONE count query (~100ms) and skips everything.
+  console.log('[vercel-build] Checking if DB is already seeded...')
+  const seededCheck = runCommandCapture('npx', ['tsx', 'scripts/db-seeded-check.ts'])
+  console.log(`[vercel-build] Seed check result: ${seededCheck}`)
 
-  console.log('[vercel-build] Seeding CWIT sources (upsert)...')
-  runCommand('npx', ['tsx', 'scripts/import-cwit-source-registry.ts'], { required: false })
+  let alreadySeeded = false
+  try {
+    const parsed = JSON.parse(seededCheck)
+    alreadySeeded = Boolean(parsed.seeded)
+  } catch {
+    // If the check fails, assume not seeded and run all seeds
+  }
 
-  console.log('[vercel-build] Importing curriculum manifests (upsert)...')
-  runCommand('npx', ['tsx', 'scripts/import-curriculum-manifests.ts', '--write'], { required: false })
+  if (alreadySeeded) {
+    console.log('[vercel-build] DB already seeded — skipping all seed scripts. ✅')
+  } else {
+    console.log('[vercel-build] DB not seeded — running seed scripts (this may take a few minutes)...')
 
-  console.log('[vercel-build] Publishing curriculum...')
-  runCommand('npx', ['tsx', 'scripts/publish-curriculum.ts'], { required: false })
+    console.log('[vercel-build] Seeding CWIT departments (upsert)...')
+    runCommand('npx', ['tsx', 'scripts/upsert-cwit-departments.ts'], { required: false })
 
-  console.log('[vercel-build] Setting up default admin user (upsert)...')
-  runCommand('npx', ['tsx', 'scripts/upsert-admin.ts'], { required: false })
+    console.log('[vercel-build] Seeding CWIT sources (upsert)...')
+    runCommand('npx', ['tsx', 'scripts/import-cwit-source-registry.ts'], { required: false })
+
+    console.log('[vercel-build] Importing curriculum manifests (upsert)...')
+    runCommand('npx', ['tsx', 'scripts/import-curriculum-manifests.ts', '--write'], { required: false })
+
+    console.log('[vercel-build] Publishing curriculum...')
+    runCommand('npx', ['tsx', 'scripts/publish-curriculum.ts'], { required: false })
+
+    console.log('[vercel-build] Setting up default admin user (upsert)...')
+    runCommand('npx', ['tsx', 'scripts/upsert-admin.ts'], { required: false })
+  }
 }
 
 // ─── Step 3: Next.js build ────────────────────────────────────────────────
