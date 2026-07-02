@@ -1,10 +1,10 @@
 'use client'
 
 import Link from 'next/link'
-import { Suspense, useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { FormEvent } from 'react'
-import { getProviders, signIn } from 'next-auth/react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { signIn } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import { LockKeyhole, LogIn, Mail } from 'lucide-react'
 import {
   AuthShell,
@@ -18,6 +18,11 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { safeCallbackPath } from '@/lib/auth-policy'
 import { getCampusDashboardPath } from '@/lib/campus-auth'
+
+// Always show the Google button — if Google OAuth isn't configured on the
+// server, next-auth will show an error page when clicked, but the
+// email/password form always works. This avoids depending on getProviders().
+const GOOGLE_ENABLED = true
 
 function routeNotice(verified: string | null, error: string | null) {
   if (verified === 'true') {
@@ -46,42 +51,25 @@ function routeNotice(verified: string | null, error: string | null) {
 
 function SignInForm() {
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const callbackUrl = safeCallbackPath(searchParams.get('callbackUrl'))
-  const verified = searchParams.get('verified')
-  const routeError = searchParams.get('error')
-  const notice = useMemo(() => routeNotice(verified, routeError), [verified, routeError])
-
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [statusMessage, setStatusMessage] = useState('')
   const [submitting, setSubmitting] = useState(false)
-  const [oauthLoading, setOauthLoading] = useState<string | null>(null)
-  const [providers, setProviders] = useState<Record<string, { id: string; name: string }> | null>(null)
+  const [oauthLoading, setOauthLoading] = useState(false)
+  const [notice, setNotice] = useState<{ status: string | null; error: string | null }>({ status: null, error: null })
 
+  // Read URL params in useEffect (avoids useSearchParams which requires Suspense
+  // and can cause the form to hang in "Loading" state if hydration fails).
   useEffect(() => {
-    let mounted = true
-    // Add a timeout fallback — if getProviders() hangs (e.g. DB issue),
-    // we still render the form after 3 seconds so users can sign in
-    // with email/password.
-    const timeout = setTimeout(() => {
-      if (mounted && !providers) setProviders({})
-    }, 3000)
-
-    getProviders()
-      .then((items) => {
-        if (mounted) setProviders(items ?? {})
-      })
-      .catch(() => {
-        if (mounted) setProviders({})
-      })
-
-    return () => {
-      mounted = false
-      clearTimeout(timeout)
+    try {
+      const params = new URLSearchParams(window.location.search)
+      const verified = params.get('verified')
+      const routeError = params.get('error')
+      setNotice(routeNotice(verified, routeError))
+    } catch {
+      // ignore
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -90,48 +78,59 @@ function SignInForm() {
     setError(null)
     setStatusMessage('Checking your account...')
 
-    const result = await signIn('credentials', {
-      email: email.trim(),
-      password,
-      redirect: false,
-      callbackUrl,
-    })
-
-    setSubmitting(false)
-    setStatusMessage('')
-
-    if (result?.error) {
-      setError('Invalid email or password.')
-      return
-    }
-
-    let destination = result?.url ?? callbackUrl
     try {
-      const path = destination.startsWith('http') ? new URL(destination).pathname : destination
-      if (path === '/dashboard') {
-        const response = await fetch('/api/user', { cache: 'no-store' })
-        const payload = await response.json().catch(() => null)
-        if (payload?.ok && payload.data?.role) {
-          destination = getCampusDashboardPath(payload.data.role)
-        }
-      }
-    } catch {
-      destination = callbackUrl
-    }
+      const params = new URLSearchParams(window.location.search)
+      const callbackUrl = safeCallbackPath(params.get('callbackUrl'))
 
-    router.push(destination)
-    router.refresh()
+      const result = await signIn('credentials', {
+        email: email.trim(),
+        password,
+        redirect: false,
+        callbackUrl,
+      })
+
+      setSubmitting(false)
+      setStatusMessage('')
+
+      if (result?.error) {
+        setError('Invalid email or password.')
+        return
+      }
+
+      let destination = result?.url ?? callbackUrl
+      try {
+        const path = destination.startsWith('http') ? new URL(destination).pathname : destination
+        if (path === '/dashboard') {
+          const response = await fetch('/api/user', { cache: 'no-store' })
+          const payload = await response.json().catch(() => null)
+          if (payload?.ok && payload.data?.role) {
+            destination = getCampusDashboardPath(payload.data.role)
+          }
+        }
+      } catch {
+        destination = callbackUrl
+      }
+
+      // Hard navigation for reliability — router.push can silently fail
+      window.location.href = destination
+    } catch {
+      setSubmitting(false)
+      setStatusMessage('')
+      setError('Sign in failed. Please try again.')
+    }
   }
 
-  async function handleOAuthSignIn(provider: string) {
-    setOauthLoading(provider)
+  async function handleGoogleSignIn() {
+    setOauthLoading(true)
     setError(null)
     setStatusMessage('Redirecting to Google...')
     try {
-      await signIn(provider, { callbackUrl })
+      const params = new URLSearchParams(window.location.search)
+      const callbackUrl = safeCallbackPath(params.get('callbackUrl'))
+      await signIn('google', { callbackUrl })
     } catch {
       setError('Google sign in failed. Please try again.')
-      setOauthLoading(null)
+      setOauthLoading(false)
       setStatusMessage('')
     }
   }
@@ -205,13 +204,13 @@ function SignInForm() {
           </p>
         ) : null}
 
-        <Button type="submit" className={`w-full ${authPrimaryButtonClass}`} disabled={submitting || !!oauthLoading}>
+        <Button type="submit" className={`w-full ${authPrimaryButtonClass}`} disabled={submitting || oauthLoading}>
           <LogIn className="h-4 w-4" />
           {submitting ? 'Signing in...' : 'Sign in'}
         </Button>
       </form>
 
-      {providers?.google ? (
+      {GOOGLE_ENABLED ? (
         <div>
           <div className="my-5 flex items-center gap-3 text-xs font-semibold text-muted-foreground">
             <span className="h-px flex-1 bg-border" />
@@ -222,10 +221,10 @@ function SignInForm() {
             type="button"
             variant="secondary"
             className={`w-full ${authSecondaryButtonClass}`}
-            disabled={submitting || !!oauthLoading}
-            onClick={() => handleOAuthSignIn('google')}
+            disabled={submitting || oauthLoading}
+            onClick={handleGoogleSignIn}
           >
-            {oauthLoading === 'google' ? (
+            {oauthLoading ? (
               <span className="h-4 w-4 animate-spin rounded-full border-2 border-muted-foreground/30 border-t-primary" />
             ) : (
               <GoogleMark />
@@ -245,22 +244,9 @@ function SignInForm() {
   )
 }
 
+// No Suspense wrapper — the form renders immediately on the client.
+// This eliminates the "Loading secure sign-in" hang that was caused by
+// useSearchParams() requiring Suspense + getProviders() hanging on 500.
 export default function SignInPage() {
-  return (
-    <Suspense
-      fallback={
-        <AuthShell
-          eyebrow="Welcome back"
-          title="Sign in to Lernio"
-          description="Loading secure sign-in."
-          backHref="/"
-          backLabel="Intro"
-        >
-          <div className="h-72 animate-pulse rounded-lg bg-muted" />
-        </AuthShell>
-      }
-    >
-      <SignInForm />
-    </Suspense>
-  )
+  return <SignInForm />
 }

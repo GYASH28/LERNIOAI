@@ -1,9 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import { Suspense, useEffect, useState } from 'react'
+import { useState } from 'react'
 import type { ChangeEvent, FormEvent, ReactNode } from 'react'
-import { getProviders, signIn } from 'next-auth/react'
+import { signIn } from 'next-auth/react'
 import { ChevronDown, Mail, UserPlus } from 'lucide-react'
 import {
   AuthShell,
@@ -76,29 +76,8 @@ function SignUpForm() {
   const [submitting, setSubmitting] = useState(false)
   const [statusMessage, setStatusMessage] = useState('')
   const [error, setError] = useState('')
-  const [providers, setProviders] = useState<Record<string, { id: string; name: string }> | null>(null)
-
-  useEffect(() => {
-    let mounted = true
-    // Timeout fallback — if getProviders() hangs, render the form anyway.
-    const timeout = setTimeout(() => {
-      if (mounted && !providers) setProviders({})
-    }, 3000)
-
-    getProviders()
-      .then((items) => {
-        if (mounted) setProviders(items ?? {})
-      })
-      .catch(() => {
-        if (mounted) setProviders({})
-      })
-
-    return () => {
-      mounted = false
-      clearTimeout(timeout)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  // Always enable Google — avoids depending on getProviders() API call.
+  const [providers, setProviders] = useState<Record<string, { id: string; name: string }>>({ google: { id: 'google', name: 'Google' } })
 
   function handleChange(event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     setForm((current) => ({ ...current, [event.target.name]: event.target.value }))
@@ -345,23 +324,7 @@ function SignUpForm() {
   )
 }
 
+// No Suspense wrapper — the form renders immediately.
 export default function SignUpPage() {
-  return (
-    <Suspense
-      fallback={
-        <AuthShell
-          eyebrow="Create profile"
-          title="Start with a student account"
-          description="Loading signup."
-          backHref="/"
-          backLabel="Intro"
-          className="max-w-2xl"
-        >
-          <div className="h-96 animate-pulse rounded-lg bg-muted" />
-        </AuthShell>
-      }
-    >
-      <SignUpForm />
-    </Suspense>
-  )
+  return <SignUpForm />
 }

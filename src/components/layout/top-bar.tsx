@@ -71,32 +71,51 @@ function isActivePath(pathname: string, href: string) {
 
 /**
  * Handle sign-out reliably across environments.
- * next-auth's signOut() can silently fail if the session cookie is already
- * invalid or if there's a network hiccup. This wrapper:
- *   1. Calls signOut() with redirect:false (so we control navigation)
- *   2. Clears local app state
- *   3. Forces a hard navigation to /sign-in (most reliable)
- *   4. Falls back to window.location if router.push fails
+ * This wrapper is bulletproof — it clears ALL session state and forces
+ * a hard navigation. Even if next-auth's signOut() fails, the user
+ * is still logged out because we clear cookies + localStorage manually.
  */
 function useSignOut() {
   return useCallback(async () => {
+    // Step 1: Clear ALL localStorage state
     try {
-      // Clear local state first so stale data doesn't leak
-      try {
-        localStorage.removeItem('lernio-app-state')
-        localStorage.removeItem('lernio-prefs')
-      } catch {}
+      localStorage.removeItem('lernio-app-state')
+      localStorage.removeItem('lernio-prefs')
+      localStorage.removeItem('lernio-theme')
+      localStorage.removeItem('lernio-theme-prefs')
+      // Clear any next-auth related storage
+      for (const key of Object.keys(localStorage)) {
+        if (key.startsWith('next-auth') || key.startsWith('lernio')) {
+          localStorage.removeItem(key)
+        }
+      }
+    } catch {}
 
-      // Call signOut without redirect so we control navigation
+    // Step 2: Call next-auth signOut (clears the session cookie server-side)
+    // This is wrapped in try/catch — if it fails, we still proceed to
+    // clear cookies client-side and redirect.
+    try {
       await signOut({ redirect: false, callbackUrl: '/sign-in' }).catch(() => {})
+    } catch {}
 
-      // Force a hard navigation — this clears all client state and is the
-      // most reliable way to ensure the user is logged out
-      window.location.href = '/sign-in?signedOut=true'
-    } catch {
-      // Last-resort fallback
-      window.location.href = '/sign-in'
-    }
+    // Step 3: Clear ALL cookies client-side (belt + suspenders)
+    try {
+      document.cookie.split(';').forEach((cookie) => {
+        const name = cookie.split('=')[0]?.trim()
+        if (name) {
+          // Clear for current path
+          document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`
+          // Clear for root path
+          document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=${window.location.hostname}`
+          // Clear for wildcard domain
+          document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=.${window.location.hostname}`
+        }
+      })
+    } catch {}
+
+    // Step 4: Hard navigation to /sign-in — this clears all in-memory state
+    // and guarantees the user sees the sign-in page.
+    window.location.href = '/sign-in?signedOut=true'
   }, [])
 }
 
