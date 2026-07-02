@@ -102,6 +102,6 @@ export const config = {
     // - api/youtube-thumbnail (public thumbnail proxy — needed on learn pages)
     // - api/quiz/generate   (public quiz generator — used by practice/exams)
     // - _next/static, _next/image, favicon.ico, brand/, etc. (static assets)
-    '/((?!api/auth|api/academics|api/health|api/ready|api/youtube-thumbnail|api/quiz/generate|_next/static|_next/image|favicon.ico|brand/|theme-no-flash.js|robots.txt|sitemap.xml|manifest.webmanifest).*)',
+    '/((?!api/auth|api/academics|api/health|api/ready|api/youtube-thumbnail|api/quiz/generate|api/coding|api/firebase|_next/static|_next/image|favicon.ico|brand/|theme-no-flash.js|sw.js|robots.txt|sitemap.xml|manifest.webmanifest|lesson-notes).*)',
   ],
 }
