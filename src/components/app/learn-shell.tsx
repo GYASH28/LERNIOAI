@@ -1,15 +1,13 @@
-'use client'
-
 import type { ReactNode } from 'react'
-import { TopBar } from '@/components/layout/top-bar'
-import { Footer } from '@/components/layout/footer'
+import dynamic from 'next/dynamic'
+
+const TopBar = dynamic(() => import('@/components/layout/top-bar').then(m => ({ default: m.TopBar })), { ssr: false })
+const Footer = dynamic(() => import('@/components/layout/footer').then(m => ({ default: m.Footer })), { ssr: false })
 
 /**
- * Lightweight shell for learn pages — no DB queries, no Zustand store,
- * no lazy-loaded views. Just the TopBar + content + footer.
- *
- * This replaces the heavy LearningApp wrapper which called getAppBootstrap()
- * (a DB query) on every page load, causing 2-3 second delays.
+ * Lightweight shell for learn pages.
+ * Uses dynamic imports with ssr: false to avoid prerendering issues
+ * with client components that use Zustand/next-auth at build time.
  */
 export function LearnShell({ children }: { children: ReactNode }) {
   return (
