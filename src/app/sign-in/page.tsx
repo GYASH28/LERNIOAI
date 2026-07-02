@@ -1,63 +1,19 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import type { FormEvent } from 'react'
-import { LockKeyhole, LogIn, Mail } from 'lucide-react'
-import {
-  AuthShell,
-  GoogleMark,
-  authInputClass,
-  authPrimaryButtonClass,
-  authSecondaryButtonClass,
-} from '@/components/auth/auth-shell'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { safeCallbackPath } from '@/lib/auth-policy'
-import { getCampusDashboardPath } from '@/lib/campus-auth'
+import { LockKeyhole, LogIn, Mail, ArrowLeft } from 'lucide-react'
 
 const GOOGLE_ENABLED = true
 
-function routeNotice(verified: string | null, error: string | null) {
-  if (verified === 'true') {
-    return { status: 'Email verified. You can sign in now.', error: null }
-  }
-  if (verified === 'false') {
-    const message =
-      error === 'missing_token'
-        ? 'The verification link is missing its token.'
-        : error === 'server_error'
-          ? 'We could not verify that email. Try the link again.'
-          : 'The verification link is invalid or expired.'
-    return { status: null, error: message }
-  }
-  if (!error) return { status: null, error: null }
-  return {
-    status: null,
-    error: error === 'CredentialsSignin'
-      ? 'Invalid email or password.'
-      : 'Your session could not be verified. Please sign in again.',
-  }
-}
-
-function SignInForm() {
+export default function SignInPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [statusMessage, setStatusMessage] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [oauthLoading, setOauthLoading] = useState(false)
-  const [notice, setNotice] = useState<{ status: string | null; error: string | null }>({ status: null, error: null })
-
-  useEffect(() => {
-    try {
-      const params = new URLSearchParams(window.location.search)
-      const verified = params.get('verified')
-      const routeError = params.get('error')
-      setNotice(routeNotice(verified, routeError))
-    } catch {}
-  }, [])
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -67,9 +23,8 @@ function SignInForm() {
 
     try {
       const params = new URLSearchParams(window.location.search)
-      const callbackUrl = safeCallbackPath(params.get('callbackUrl'))
+      const callbackUrl = params.get('callbackUrl') || '/dashboard'
 
-      // Lazy import to avoid loading next-auth on page render
       const { signIn } = await import('next-auth/react')
       const result = await signIn('credentials', {
         email: email.trim(),
@@ -86,20 +41,7 @@ function SignInForm() {
         return
       }
 
-      let destination = result?.url ?? callbackUrl
-      try {
-        const path = destination.startsWith('http') ? new URL(destination).pathname : destination
-        if (path === '/dashboard') {
-          const response = await fetch('/api/user', { cache: 'no-store' })
-          const payload = await response.json().catch(() => null)
-          if (payload?.ok && payload.data?.role) {
-            destination = getCampusDashboardPath(payload.data.role)
-          }
-        }
-      } catch {
-        destination = callbackUrl
-      }
-
+      const destination = result?.url ?? callbackUrl
       window.location.href = destination
     } catch {
       setSubmitting(false)
@@ -152,25 +94,12 @@ function SignInForm() {
       }
 
       const params = new URLSearchParams(window.location.search)
-      let destination = safeCallbackPath(params.get('callbackUrl'))
-
-      if (destination === '/dashboard') {
-        try {
-          const userResponse = await fetch('/api/user', { cache: 'no-store' })
-          const userPayload = await userResponse.json().catch(() => null)
-          if (userPayload?.ok && userPayload.data?.role) {
-            destination = getCampusDashboardPath(userPayload.data.role)
-          }
-        } catch {}
-      }
-
+      const destination = params.get('callbackUrl') || '/dashboard'
       window.location.href = destination
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Google sign in failed'
       if (message.includes('popup') || message.includes('cancelled')) {
         setError('Google sign-in was cancelled.')
-      } else if (message.includes('configuration-not-found')) {
-        setError('Google sign-in is not configured. Please use email/password.')
       } else {
         setError(message || 'Google sign in failed. Please try again.')
       }
@@ -179,115 +108,185 @@ function SignInForm() {
     }
   }
 
-  const visibleError = error ?? notice.error
-  const visibleStatus = statusMessage || notice.status
-
   return (
-    <AuthShell
-      eyebrow="Welcome back"
-      title="Sign in to Lernio"
-      description="Use your student profile, invited campus role, or connected Google account."
-      backHref="/"
-      backLabel="Intro"
-    >
-      <form onSubmit={submit} className="space-y-4">
-        <label className="block">
-          <Label htmlFor="email" className="text-sm font-semibold text-foreground">
-            Email
-          </Label>
-          <span className="relative mt-2 block">
-            <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input
-              id="email"
-              type="email"
-              name="email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              placeholder="student@lernio.ai"
-              autoComplete="email"
-              required
-              className={`${authInputClass} pl-10`}
-            />
-          </span>
-        </label>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-12" style={{ backgroundColor: '#0f172a' }}>
+      <div className="w-full max-w-md space-y-6" style={{ backgroundColor: '#1e293b', borderRadius: '16px', padding: '32px', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)' }}>
+        {/* Back link */}
+        <Link
+          href="/"
+          className="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Intro
+        </Link>
 
+        {/* Header */}
         <div>
-          <div className="flex items-center justify-between gap-3">
-            <Label htmlFor="password" className="text-sm font-semibold text-foreground">
-              Password
-            </Label>
-            <Link href="/forgot-password" className="text-xs font-bold text-primary transition hover:text-foreground">
-              Forgot password?
-            </Link>
-          </div>
-          <span className="relative mt-2 block">
-            <LockKeyhole className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input
-              id="password"
-              type="password"
-              name="password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              placeholder="Your password"
-              autoComplete="current-password"
-              required
-              className={`${authInputClass} pl-10`}
-            />
-          </span>
+          <p className="text-sm font-bold text-cyan-400">Welcome back</p>
+          <h1 className="mt-2 text-3xl font-extrabold text-white">Sign in to Lernio</h1>
+          <p className="mt-2 text-sm text-gray-400">
+            Use your student profile or connected Google account.
+          </p>
         </div>
 
-        {visibleError ? (
-          <p className="rounded-lg border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm font-semibold text-destructive">
-            {visibleError}
-          </p>
-        ) : null}
-
-        {visibleStatus ? (
-          <p className="rounded-lg border border-primary/30 bg-primary/10 px-3 py-2 text-sm font-semibold text-primary">
-            {visibleStatus}
-          </p>
-        ) : null}
-
-        <Button type="submit" className={`w-full ${authPrimaryButtonClass}`} disabled={submitting || oauthLoading}>
-          <LogIn className="h-4 w-4" />
-          {submitting ? 'Signing in...' : 'Sign in'}
-        </Button>
-      </form>
-
-      {GOOGLE_ENABLED ? (
-        <div>
-          <div className="my-5 flex items-center gap-3 text-xs font-semibold text-muted-foreground">
-            <span className="h-px flex-1 bg-border" />
-            or
-            <span className="h-px flex-1 bg-border" />
+        {/* Error / Status messages */}
+        {error && (
+          <div style={{ backgroundColor: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.4)', borderRadius: '8px', padding: '12px', color: '#fca5a5', fontSize: '14px', fontWeight: 600 }}>
+            {error}
           </div>
-          <Button
+        )}
+        {statusMessage && (
+          <div style={{ backgroundColor: 'rgba(6,182,212,0.1)', border: '1px solid rgba(6,182,212,0.4)', borderRadius: '8px', padding: '12px', color: '#67e8f9', fontSize: '14px', fontWeight: 600 }}>
+            {statusMessage}
+          </div>
+        )}
+
+        {/* Email/password form */}
+        <form onSubmit={submit} className="space-y-4">
+          <div>
+            <label htmlFor="email" className="block text-sm font-semibold text-white mb-2">
+              Email
+            </label>
+            <div className="relative">
+              <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+              <input
+                id="email"
+                type="email"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="student@lernio.ai"
+                autoComplete="email"
+                required
+                style={{
+                  width: '100%',
+                  height: '44px',
+                  borderRadius: '8px',
+                  border: '1px solid #334155',
+                  backgroundColor: '#0f172a',
+                  color: '#f8fafc',
+                  paddingLeft: '40px',
+                  paddingRight: '12px',
+                  fontSize: '14px',
+                  outline: 'none',
+                }}
+              />
+            </div>
+          </div>
+
+          <div>
+            <div className="flex items-center justify-between mb-2">
+              <label htmlFor="password" className="block text-sm font-semibold text-white">
+                Password
+              </label>
+              <Link href="/forgot-password" className="text-xs font-bold text-cyan-400 hover:text-white transition-colors">
+                Forgot password?
+              </Link>
+            </div>
+            <div className="relative">
+              <LockKeyhole className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+              <input
+                id="password"
+                type="password"
+                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Your password"
+                autoComplete="current-password"
+                required
+                style={{
+                  width: '100%',
+                  height: '44px',
+                  borderRadius: '8px',
+                  border: '1px solid #334155',
+                  backgroundColor: '#0f172a',
+                  color: '#f8fafc',
+                  paddingLeft: '40px',
+                  paddingRight: '12px',
+                  fontSize: '14px',
+                  outline: 'none',
+                }}
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            disabled={submitting || oauthLoading}
+            style={{
+              width: '100%',
+              height: '44px',
+              borderRadius: '8px',
+              border: 'none',
+              backgroundColor: submitting || oauthLoading ? '#0e7490' : '#06b6d4',
+              color: '#ffffff',
+              fontSize: '14px',
+              fontWeight: 600,
+              cursor: submitting || oauthLoading ? 'not-allowed' : 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+            }}
+          >
+            <LogIn className="h-4 w-4" />
+            {submitting ? 'Signing in...' : 'Sign in'}
+          </button>
+        </form>
+
+        {/* Divider */}
+        <div className="flex items-center gap-3 text-xs font-semibold text-gray-500">
+          <div className="flex-1 h-px bg-gray-700" />
+          or
+          <div className="flex-1 h-px bg-gray-700" />
+        </div>
+
+        {/* Google button */}
+        {GOOGLE_ENABLED && (
+          <button
             type="button"
-            variant="secondary"
-            className={`w-full ${authSecondaryButtonClass}`}
             disabled={submitting || oauthLoading}
             onClick={handleGoogleSignIn}
+            style={{
+              width: '100%',
+              height: '44px',
+              borderRadius: '8px',
+              border: '1px solid #334155',
+              backgroundColor: '#0f172a',
+              color: '#f8fafc',
+              fontSize: '14px',
+              fontWeight: 600,
+              cursor: submitting || oauthLoading ? 'not-allowed' : 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+            }}
           >
             {oauthLoading ? (
-              <span className="h-4 w-4 animate-spin rounded-full border-2 border-muted-foreground/30 border-t-primary" />
+              <span style={{ width: '16px', height: '16px', border: '2px solid #334155', borderTopColor: '#06b6d4', borderRadius: '50%', display: 'inline-block', animation: 'spin 1s linear infinite' }} />
             ) : (
-              <GoogleMark />
+              <svg className="h-4 w-4" viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+              </svg>
             )}
             Continue with Google
-          </Button>
-        </div>
-      ) : null}
+          </button>
+        )}
 
-      <p className="mt-6 text-center text-sm text-muted-foreground">
-        New to Lernio?{' '}
-        <Link href="/sign-up" className="font-bold text-primary hover:text-foreground">
-          Create a profile
-        </Link>
-      </p>
-    </AuthShell>
+        {/* Sign up link */}
+        <p className="text-center text-sm text-gray-400">
+          New to Lernio?{' '}
+          <Link href="/sign-up" className="font-bold text-cyan-400 hover:text-white transition-colors">
+            Create a profile
+          </Link>
+        </p>
+      </div>
+
+      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+    </div>
   )
-}
-
-export default function SignInPage() {
-  return <SignInForm />
 }
