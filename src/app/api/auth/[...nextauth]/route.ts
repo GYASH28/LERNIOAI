@@ -14,17 +14,6 @@ try {
   console.error('[nextauth] Initialization failed:', initError)
 }
 
-/**
- * NextAuth v4 route handler for Next.js 16 App Router.
- *
- * The challenge: next-auth v4 expects an Express-style (req, res) pair where
- * req.query contains the route params (like `nextauth: ['signin', 'google']`).
- * Next.js 16 route handlers receive (req: NextRequest, { params }).
- *
- * Solution: We construct a minimal req/res shim that gives next-auth what it
- * needs without trying to modify the immutable NextRequest object.
- */
-
 interface RouteContext {
   params: Promise<{ nextauth: string[] }>
 }
@@ -67,7 +56,7 @@ async function handleAuth(req: NextRequest, context: RouteContext) {
     // DB unavailable — skip rate limiting
   }
 
-  // Get the nextauth route params (e.g., ['signin', 'google'])
+  // Get the nextauth route params
   const { nextauth } = await context.params
 
   // Parse query params from the URL
@@ -107,7 +96,95 @@ async function handleAuth(req: NextRequest, context: RouteContext) {
     headersObj[key] = value
   })
 
-  // Create a request-like object that next-auth v4 can consume
+  // Response state captured by the res proxy
+  const resHeaders = new Map<string, string[]>()
+  const resCookies: Array<{ name: string; value: string; options: any }> = []
+  let responseStatus = 200
+  let responseBody: any = null
+
+  // Create a response proxy that catches ALL method calls
+  // next-auth v4 calls many methods (send, json, end, status, redirect,
+  // setHeader, getHeader, cookie, clearCookie, write, etc.)
+  // Using a Proxy ensures we never miss a method.
+  const resShim = new Proxy({} as any, {
+    get(_target, prop: string) {
+      // Return actual values for state properties
+      if (prop === 'finished') return false
+      if (prop === 'headersSent') return false
+      if (prop === 'statusCode') return responseStatus
+
+      // Return functions for all method calls
+      return (...args: any[]) => {
+        const method = prop
+
+        if (method === 'getHeader') {
+          return resHeaders.get(String(args[0]).toLowerCase())?.[0]
+        }
+        if (method === 'setHeader' || method === 'header') {
+          const name = String(args[0]).toLowerCase()
+          const value = args[1]
+          resHeaders.set(name, Array.isArray(value) ? value : [String(value)])
+          return resShim
+        }
+        if (method === 'status') {
+          responseStatus = args[0]
+          return resShim
+        }
+        if (method === 'json') {
+          responseBody = args[0]
+          return resShim
+        }
+        if (method === 'send' || method === 'end' || method === 'write') {
+          if (args[0] !== undefined) responseBody = args[0]
+          return resShim
+        }
+        if (method === 'redirect') {
+          // Handle redirect(url) and redirect(status, url)
+          if (typeof args[0] === 'number') {
+            responseStatus = args[0]
+            if (args[1]) resHeaders.set('location', [args[1]])
+          } else if (args[0]) {
+            responseStatus = 302
+            resHeaders.set('location', [args[0]])
+          }
+          return resShim
+        }
+        if (method === 'cookie') {
+          resCookies.push({ name: args[0], value: args[1], options: args[2] || {} })
+          return resShim
+        }
+        if (method === 'clearCookie') {
+          resCookies.push({ name: args[0], value: '', options: { ...(args[1] || {}), maxAge: 0 } })
+          return resShim
+        }
+        if (method === 'get') {
+          return resHeaders.get(String(args[0]).toLowerCase())?.[0]
+        }
+        if (method === 'set') {
+          const name = String(args[0]).toLowerCase()
+          resHeaders.set(name, [String(args[1])])
+          return resShim
+        }
+        if (method === 'remove') {
+          resHeaders.delete(String(args[0]).toLowerCase())
+          return resShim
+        }
+        if (method === 'has') {
+          return resHeaders.has(String(args[0]).toLowerCase())
+        }
+        // Unknown method — return the shim for chaining, ignore the call
+        return resShim
+      }
+    },
+    set(_target, prop: string, value: any) {
+      if (prop === 'statusCode' || prop === 'status') {
+        responseStatus = value
+      }
+      return true
+    },
+  })
+
+  // Create the request shim
   const reqShim = {
     url: req.url,
     method: req.method,
@@ -119,76 +196,22 @@ async function handleAuth(req: NextRequest, context: RouteContext) {
     ),
   }
 
-  // Create a response-like object that captures what next-auth writes to it
-  const headers = new Map<string, string[]>()
-  const cookies: Array<{ name: string; value: string; options: any }> = []
-  let responseStatus = 200
-  let responseBody: any = null
-
-  const resShim = {
-    getHeader: (name: string) => headers.get(name.toLowerCase())?.[0],
-    setHeader: (name: string, value: string | string[]) => {
-      headers.set(name.toLowerCase(), Array.isArray(value) ? value : [value])
-    },
-    status: (code: number) => {
-      responseStatus = code
-      return resShim
-    },
-    json: (data: any) => {
-      responseBody = data
-      return resShim
-    },
-    send: (data?: any) => {
-      if (data !== undefined) responseBody = data
-      return resShim
-    },
-    end: (data?: any) => {
-      if (data !== undefined) responseBody = data
-      return resShim
-    },
-    write: (data?: any) => {
-      if (data !== undefined) responseBody = data
-      return resShim
-    },
-    redirect: (statusOrUrl: number | string, url?: string) => {
-      // Handle both redirect(url) and redirect(status, url)
-      const redirectUrl = typeof statusOrUrl === 'string' ? statusOrUrl : url || ''
-      if (redirectUrl) {
-        headers.set('location', [redirectUrl])
-      }
-      if (typeof statusOrUrl === 'number') {
-        responseStatus = statusOrUrl
-      } else {
-        responseStatus = 302
-      }
-      return resShim
-    },
-    cookie: (name: string, value: string, options: any) => {
-      cookies.push({ name, value, options })
-    },
-    clearCookie: (name: string, options?: any) => {
-      cookies.push({ name, value: '', options: { ...options, maxAge: 0 } })
-    },
-    finished: false,
-    headersSent: false,
-  }
-
   try {
     // Call next-auth's handler with our shimmed req/res
     await handler(reqShim, resShim)
 
-    // Build the NextResponse from what next-auth wrote to resShim
+    // Build the NextResponse from captured state
 
     // Check for redirect (Location header)
-    const location = headers.get('location')?.[0]
+    const location = resHeaders.get('location')?.[0]
     if (location) {
-      const response = NextResponse.redirect(location, { status: 302 })
+      const response = NextResponse.redirect(location, { status: responseStatus || 302 })
       // Copy cookies
-      for (const cookie of cookies) {
+      for (const cookie of resCookies) {
         response.cookies.set(cookie.name, cookie.value, cookie.options || {})
       }
-      // Copy other headers
-      for (const [key, values] of headers) {
+      // Copy other headers (except location, already handled by redirect)
+      for (const [key, values] of resHeaders) {
         if (key !== 'location') {
           for (const v of values) {
             response.headers.append(key, v)
@@ -202,12 +225,12 @@ async function handleAuth(req: NextRequest, context: RouteContext) {
     const response = NextResponse.json(responseBody ?? '', { status: responseStatus })
 
     // Copy cookies
-    for (const cookie of cookies) {
+    for (const cookie of resCookies) {
       response.cookies.set(cookie.name, cookie.value, cookie.options || {})
     }
 
     // Copy headers
-    for (const [key, values] of headers) {
+    for (const [key, values] of resHeaders) {
       if (key !== 'location') {
         for (const v of values) {
           response.headers.append(key, v)
