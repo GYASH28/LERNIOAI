@@ -55,11 +55,51 @@ async function rateLimitedHandler(req: NextRequest) {
     // DB unavailable — skip rate limiting, allow the request through.
   }
 
-  // Call the NextAuth handler — wrapped in try/catch so any runtime
-  // error returns a clean 500 with the error message instead of a
-  // silent empty 500 response.
+  // Call the NextAuth handler.
+  // next-auth v4 expects a request with a `query` property (from Express-style
+  // req). Next.js 16 route handlers use NextRequest which doesn't have `query`.
+  // We create a shim object that merges url, method, headers, body, and query
+  // so next-auth v4 can parse the route params correctly.
   try {
-    return await handler(req)
+    const url = new URL(req.url)
+    // Parse query params from the URL
+    const query: Record<string, string | string[]> = {}
+    url.searchParams.forEach((value, key) => {
+      if (key in query) {
+        const existing = query[key]
+        query[key] = Array.isArray(existing) ? [...existing, value] : [existing, value]
+      } else {
+        query[key] = value
+      }
+    })
+
+    // Read body for POST requests (credentials callback, etc.)
+    let body: any = undefined
+    if (req.method === 'POST') {
+      try {
+        const contentType = req.headers.get('content-type') || ''
+        if (contentType.includes('application/json')) {
+          body = await req.json()
+        } else if (contentType.includes('application/x-www-form-urlencoded')) {
+          const text = await req.text()
+          const params = new URLSearchParams(text)
+          body = Object.fromEntries(params.entries())
+        }
+      } catch {
+        // Body parsing failed — continue without body
+      }
+    }
+
+    // Build a NextRequest-like object that includes `query`
+    const shimmedReq = Object.assign(req, {
+      query,
+      body,
+      headers: req.headers,
+      method: req.method,
+      url: req.url,
+    }) as NextRequest
+
+    return await handler(shimmedReq)
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Unknown auth handler error'
     console.error('[nextauth] Handler error:', message)
