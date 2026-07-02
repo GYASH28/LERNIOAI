@@ -202,11 +202,14 @@ export const authOptions: NextAuthOptions = {
           !token.role ||
           !token.status ||
           token.profileComplete === undefined ||
-          token.authorityVersion === undefined ||
-          !token.authorityCheckedAt ||
-          Date.now() - Number(token.authorityCheckedAt) > 60_000
+          token.authorityVersion === undefined
         )
       ) {
+        // Only query DB if critical token fields are missing.
+        // NOTE: Removed the 60-second authority recheck — it caused a DB
+        // query on EVERY page load, making pages take 5-10+ seconds.
+        // Authority is now only checked at login time. To force a recheck,
+        // the user must sign out and sign back in.
         const fresh = await db.user.findUnique({
           where: { email: token.email },
           select: {
@@ -217,7 +220,7 @@ export const authOptions: NextAuthOptions = {
             authorityVersion: true,
             sessionsRevokedAt: true,
           },
-        })
+        }).catch(() => null)
         if (fresh) {
           const authIssuedAt =
             Number(token.authIssuedAt) ||
@@ -386,33 +389,29 @@ export const authOptions: NextAuthOptions = {
  */
 async function resolveUserFromSession(): Promise<AuthUser | null> {
   const session = await getServerSession(authOptions)
+
+  // If we have a session with user data, use it directly WITHOUT another
+  // DB query. The jwt callback already populated the token with id, role,
+  // status, etc. Doing a second DB query here was the #1 performance killer
+  // (every page load = 2 DB queries on a slow Postgres).
+  if (session?.user?.email && session.user.id) {
+    if (session.user.sessionRevoked) return null
+    return {
+      id: String(session.user.id),
+      email: session.user.email,
+      name: session.user.name || session.user.email.split('@')[0],
+      role: normalizeRole(session.user.role),
+      status: session.user.status || 'active',
+      profileComplete: session.user.profileComplete ?? true,
+      authorityVersion: session.user.authorityVersion ?? 0,
+    }
+  }
+
+  // No session — check demo mode
   const authMode = resolveAuthMode({
     demoModeEnv: process.env.LERNIO_DEMO_MODE,
     sessionEmail: session?.user?.email,
   })
-
-  if (authMode.mode === 'session') {
-    if (session?.user?.sessionRevoked) return null
-    // DB call must be resilient — on Vercel the database may be unreachable,
-    // unmigrated, or DATABASE_URL may be misconfigured. Returning null here
-    // causes the caller to redirect to /sign-in instead of crashing the page.
-    let u: Awaited<ReturnType<typeof db.user.findUnique>> = null
-    try {
-      u = await db.user.findUnique({ where: { email: authMode.email } })
-    } catch {
-      return null
-    }
-    if (!u || u.status === 'disabled' || u.status === 'pending_verification') return null
-    return {
-      id: u.id,
-      email: u.email,
-      name: u.name,
-      role: normalizeRole(u.role),
-      status: u.status,
-      profileComplete: u.profileComplete,
-      authorityVersion: u.authorityVersion,
-    }
-  }
 
   if (authMode.mode === 'demo') {
     return DEMO_AUTH_USER
@@ -422,11 +421,12 @@ async function resolveUserFromSession(): Promise<AuthUser | null> {
 }
 
 export async function getCurrentUser(): Promise<AuthUser | null> {
-  // Add a 5-second timeout — if getServerSession or the DB query hangs,
-  // return null instead of blocking the page render forever.
-  // This prevents the "stuck on loading" issue when the DB is slow.
+  // 2-second timeout — if getServerSession or the DB query is slow,
+  // return null immediately so the page renders without waiting.
+  // Pages redirect to /sign-in if user is null, so slow DB = redirect
+  // instead of 25-second hang.
   return new Promise((resolve) => {
-    const timer = setTimeout(() => resolve(null), 5000)
+    const timer = setTimeout(() => resolve(null), 2000)
     resolveUserFromSession()
       .then((user) => {
         clearTimeout(timer)

@@ -96,31 +96,26 @@ async function handleAuth(req: NextRequest, context: RouteContext) {
     headersObj[key] = value
   })
 
-  // Response state captured by the res proxy
+  // Response state
   const resHeaders = new Map<string, string[]>()
   const resCookies: Array<{ name: string; value: string; options: any }> = []
   let responseStatus = 200
   let responseBody: any = null
 
   // Create a response proxy that catches ALL method calls
-  // next-auth v4 calls many methods (send, json, end, status, redirect,
-  // setHeader, getHeader, cookie, clearCookie, write, etc.)
-  // Using a Proxy ensures we never miss a method.
   const resShim = new Proxy({} as any, {
     get(_target, prop: string) {
-      // Return actual values for state properties
       if (prop === 'finished') return false
       if (prop === 'headersSent') return false
       if (prop === 'statusCode') return responseStatus
 
-      // Return functions for all method calls
       return (...args: any[]) => {
         const method = prop
 
-        if (method === 'getHeader') {
+        if (method === 'getHeader' || method === 'get') {
           return resHeaders.get(String(args[0]).toLowerCase())?.[0]
         }
-        if (method === 'setHeader' || method === 'header') {
+        if (method === 'setHeader' || method === 'header' || method === 'set') {
           const name = String(args[0]).toLowerCase()
           const value = args[1]
           resHeaders.set(name, Array.isArray(value) ? value : [String(value)])
@@ -139,7 +134,6 @@ async function handleAuth(req: NextRequest, context: RouteContext) {
           return resShim
         }
         if (method === 'redirect') {
-          // Handle redirect(url) and redirect(status, url)
           if (typeof args[0] === 'number') {
             responseStatus = args[0]
             if (args[1]) resHeaders.set('location', [args[1]])
@@ -157,14 +151,6 @@ async function handleAuth(req: NextRequest, context: RouteContext) {
           resCookies.push({ name: args[0], value: '', options: { ...(args[1] || {}), maxAge: 0 } })
           return resShim
         }
-        if (method === 'get') {
-          return resHeaders.get(String(args[0]).toLowerCase())?.[0]
-        }
-        if (method === 'set') {
-          const name = String(args[0]).toLowerCase()
-          resHeaders.set(name, [String(args[1])])
-          return resShim
-        }
         if (method === 'remove') {
           resHeaders.delete(String(args[0]).toLowerCase())
           return resShim
@@ -172,7 +158,6 @@ async function handleAuth(req: NextRequest, context: RouteContext) {
         if (method === 'has') {
           return resHeaders.has(String(args[0]).toLowerCase())
         }
-        // Unknown method — return the shim for chaining, ignore the call
         return resShim
       }
     },
@@ -184,33 +169,40 @@ async function handleAuth(req: NextRequest, context: RouteContext) {
     },
   })
 
-  // Create the request shim
-  const reqShim = {
-    url: req.url,
-    method: req.method,
-    headers: headersObj,
-    query,
-    body,
-    cookies: Object.fromEntries(
-      req.cookies.getAll().map((c) => [c.name, c.value])
-    ),
-  }
+  // Create a request proxy that wraps the real NextRequest
+  // and adds the missing `query` and `body` properties.
+  // Using a Proxy ensures next-auth can access ANY property on req
+  // (url, method, headers, cookies, etc.) via the real NextRequest,
+  // while also getting the `query` and `body` properties it expects.
+  const reqShim = new Proxy(req as any, {
+    get(target: any, prop: string) {
+      // Return our shimmed query/body/cookies
+      if (prop === 'query') return query
+      if (prop === 'body') return body
+      if (prop === 'cookies') {
+        return Object.fromEntries(
+          req.cookies.getAll().map((c) => [c.name, c.value])
+        )
+      }
+      // For everything else, return the real NextRequest property
+      const value = target[prop]
+      if (typeof value === 'function') {
+        return value.bind(target)
+      }
+      return value
+    },
+  })
 
   try {
-    // Call next-auth's handler with our shimmed req/res
     await handler(reqShim, resShim)
 
     // Build the NextResponse from captured state
-
-    // Check for redirect (Location header)
     const location = resHeaders.get('location')?.[0]
     if (location) {
       const response = NextResponse.redirect(location, { status: responseStatus || 302 })
-      // Copy cookies
       for (const cookie of resCookies) {
         response.cookies.set(cookie.name, cookie.value, cookie.options || {})
       }
-      // Copy other headers (except location, already handled by redirect)
       for (const [key, values] of resHeaders) {
         if (key !== 'location') {
           for (const v of values) {
@@ -221,15 +213,10 @@ async function handleAuth(req: NextRequest, context: RouteContext) {
       return response
     }
 
-    // JSON or other response
     const response = NextResponse.json(responseBody ?? '', { status: responseStatus })
-
-    // Copy cookies
     for (const cookie of resCookies) {
       response.cookies.set(cookie.name, cookie.value, cookie.options || {})
     }
-
-    // Copy headers
     for (const [key, values] of resHeaders) {
       if (key !== 'location') {
         for (const v of values) {
@@ -237,7 +224,6 @@ async function handleAuth(req: NextRequest, context: RouteContext) {
         }
       }
     }
-
     return response
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Unknown auth handler error'
