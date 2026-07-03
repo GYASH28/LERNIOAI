@@ -1,294 +1,345 @@
 /* ============================================================
-   Lernio AI — Neomorphism Design System
-   Soft UI with extruded/inset shadows for a tactile feel.
-   Works in both light and dark themes.
+   Lernio AI — Premium Design Overhaul
+   Glassmorphism + Gradient accents + Glow effects + Micro-interactions
    ============================================================ */
 
-/* ─── Neomorphism Shadow Variables ─── */
-:root {
-  --neo-bg: var(--canvas);
-  --neo-light: rgba(255, 255, 255, 0.8);
-  --neo-dark: rgba(0, 0, 0, 0.08);
-  --neo-distance: 6px;
-  --neo-blur: 12px;
-  --neo-radius: 16px;
-
-  /* Raised (extruded) shadow */
-  --neo-raised:
-    var(--neo-distance) var(--neo-distance) var(--neo-blur) var(--neo-dark),
-    calc(-1 * var(--neo-distance)) calc(-1 * var(--neo-distance)) var(--neo-blur) var(--neo-light);
-
-  /* Pressed (inset) shadow */
-  --neo-pressed:
-    inset var(--neo-distance) var(--neo-distance) var(--neo-blur) var(--neo-dark),
-    inset calc(-1 * var(--neo-distance)) calc(-1 * var(--neo-distance)) var(--neo-blur) var(--neo-light);
-
-  /* Hover (slightly raised) */
-  --neo-hover:
-    calc(var(--neo-distance) + 2px) calc(var(--neo-distance) + 2px) calc(var(--neo-blur) + 4px) var(--neo-dark),
-    calc(-1 * (var(--neo-distance) + 2px)) calc(-1 * (var(--neo-distance) + 2px)) calc(var(--neo-blur) + 4px) var(--neo-light);
+/* ─── Premium Background ─── */
+body {
+  background: var(--canvas);
+  position: relative;
+  overflow-x: hidden;
 }
 
-/* Dark mode adjustments */
-.dark {
-  --neo-light: rgba(255, 255, 255, 0.04);
-  --neo-dark: rgba(0, 0, 0, 0.35);
+/* Ambient gradient orbs in background */
+body::before {
+  content: '';
+  position: fixed;
+  top: -20%;
+  left: -10%;
+  width: 50%;
+  height: 60%;
+  background: radial-gradient(ellipse, color-mix(in oklch, var(--brand) 12%, transparent), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+  animation: orb-drift 20s ease-in-out infinite;
+  filter: blur(40px);
 }
 
-/* ─── Neomorphism Utility Classes ─── */
-
-/* Card — raised surface */
-.neo-card {
-  background: var(--neo-bg);
-  border-radius: var(--neo-radius);
-  box-shadow: var(--neo-raised);
-  border: none !important;
-  transition: box-shadow 0.3s ease, transform 0.2s ease;
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -20%;
+  right: -10%;
+  width: 50%;
+  height: 60%;
+  background: radial-gradient(ellipse, color-mix(in oklch, var(--secondary-action) 10%, transparent), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+  animation: orb-drift 25s ease-in-out infinite reverse;
+  filter: blur(40px);
 }
 
-.neo-card:hover {
-  box-shadow: var(--neo-hover);
-  transform: translateY(-2px);
+@keyframes orb-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.1); }
+  66% { transform: translate(-20px, 30px) scale(0.9); }
 }
 
-/* Inset surface — pressed card (for inputs, wells) */
-.neo-inset {
-  background: var(--neo-bg);
-  border-radius: var(--neo-radius);
-  box-shadow: var(--neo-pressed);
-  border: none !important;
+/* Content above orbs */
+main, header, footer {
+  position: relative;
+  z-index: 1;
 }
 
-/* Button — raised, presses on active */
-.neo-btn {
-  background: var(--neo-bg);
-  border-radius: 12px;
-  box-shadow: var(--neo-raised);
-  border: none !important;
-  transition: box-shadow 0.2s ease, transform 0.1s ease;
-}
-
-.neo-btn:hover {
-  box-shadow: var(--neo-hover);
-}
-
-.neo-btn:active {
-  box-shadow: var(--neo-pressed);
-  transform: scale(0.98);
-}
-
-/* Input — inset */
-.neo-input {
-  background: var(--neo-bg);
-  border-radius: 12px;
-  box-shadow: var(--neo-pressed);
-  border: none !important;
-  transition: box-shadow 0.3s ease;
-}
-
-.neo-input:focus {
+/* ─── Glassmorphism Cards ─── */
+.card,
+[class*="bg-card"]:not(input):not(textarea):not(button):not(select) {
+  background: color-mix(in oklch, var(--surface-1) 70%, transparent) !important;
+  backdrop-filter: blur(20px) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(1.2) !important;
+  border: 1px solid color-mix(in oklch, var(--brand) 8%, transparent) !important;
   box-shadow:
-    inset var(--neo-distance) var(--neo-distance) var(--neo-blur) var(--neo-dark),
-    inset calc(-1 * var(--neo-distance)) calc(-1 * var(--neo-distance)) var(--neo-blur) var(--neo-light),
-    0 0 0 3px color-mix(in oklch, var(--brand) 30%, transparent);
+    0 4px 24px -4px rgba(0, 0, 0, 0.08),
+    0 1px 4px -1px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+  border-radius: 20px !important;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.3s ease !important;
 }
 
-/* Badge / chip */
-.neo-chip {
-  background: var(--neo-bg);
-  border-radius: 999px;
+/* Card hover — lift + glow */
+.card:hover,
+[class*="bg-card"]:not(input):not(textarea):not(button):not(select):hover {
+  transform: translateY(-4px) !important;
   box-shadow:
-    3px 3px 6px var(--neo-dark),
-    -3px -3px 6px var(--neo-light);
-  border: none !important;
+    0 12px 40px -8px rgba(0, 0, 0, 0.12),
+    0 4px 12px -2px rgba(0, 0, 0, 0.08),
+    0 0 0 1px color-mix(in oklch, var(--brand) 20%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  border-color: color-mix(in oklch, var(--brand) 25%, transparent) !important;
 }
 
-/* Sidebar / nav panel */
-.neo-panel {
-  background: var(--neo-bg);
-  border-radius: var(--neo-radius);
-  box-shadow: var(--neo-raised);
-  border: none !important;
-}
-
-/* ─── Apply neomorphism to existing components ─── */
-
-/* Cards */
-.card, [class*="bg-card"]:not(input):not(textarea):not(button) {
-  border: none !important;
-  box-shadow: var(--neo-raised) !important;
-  border-radius: var(--neo-radius) !important;
-}
-
-/* Inputs */
+/* ─── Premium Inputs ─── */
 input[type="text"], input[type="email"], input[type="password"],
 input[type="search"], input[type="url"], input[type="number"],
 textarea, select {
-  border: 1px solid transparent !important;
-  box-shadow: var(--neo-pressed) !important;
-  border-radius: 12px !important;
-  transition: box-shadow 0.3s ease !important;
+  background: color-mix(in oklch, var(--surface-2) 50%, transparent) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid color-mix(in oklch, var(--brand) 10%, var(--border-default)) !important;
+  border-radius: 14px !important;
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.04),
+    0 1px 2px rgba(0, 0, 0, 0.02) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 input:focus, textarea:focus, select:focus {
-  border-color: transparent !important;
+  border-color: color-mix(in oklch, var(--brand) 50%, transparent) !important;
   box-shadow:
-    inset var(--neo-distance) var(--neo-distance) var(--neo-blur) var(--neo-dark),
-    inset calc(-1 * var(--neo-distance)) calc(-1 * var(--neo-distance)) var(--neo-blur) var(--neo-light),
-    0 0 0 3px color-mix(in oklch, var(--brand) 30%, transparent) !important;
+    inset 0 2px 4px rgba(0, 0, 0, 0.04),
+    0 0 0 4px color-mix(in oklch, var(--brand) 15%, transparent),
+    0 0 20px -4px color-mix(in oklch, var(--brand) 30%, transparent) !important;
+  outline: none !important;
 }
 
-/* Buttons */
-button:not(.neo-btn):not([class*="animate-spin"]):not([class*="border-t-primary"]) {
-  border: none !important;
-  box-shadow: var(--neo-raised);
-  border-radius: 12px;
-  transition: box-shadow 0.2s ease, transform 0.1s ease;
+/* ─── Premium Buttons ─── */
+button {
+  border-radius: 14px !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative;
+  overflow: hidden;
 }
 
-button:not(.neo-btn):not([class*="animate-spin"]):not([class*="border-t-primary"]):hover {
-  box-shadow: var(--neo-hover);
+/* Button shine effect on hover */
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transition: left 0.5s ease;
+  pointer-events: none;
 }
 
-button:not(.neo-btn):not([class*="animate-spin"]):not([class*="border-t-primary"]):active {
-  box-shadow: var(--neo-pressed);
-  transform: scale(0.98);
+button:hover::before {
+  left: 100%;
 }
 
-/* Primary buttons keep their color but get neo shadow */
+/* Primary buttons — gradient + glow */
 button[class*="bg-primary"] {
+  background: linear-gradient(135deg,
+    var(--brand) 0%,
+    color-mix(in oklch, var(--brand) 80%, var(--secondary-action)) 100%) !important;
   border: none !important;
   box-shadow:
-    var(--neo-raised),
-    0 4px 12px color-mix(in oklch, var(--brand) 30%, transparent) !important;
+    0 4px 12px -2px color-mix(in oklch, var(--brand) 40%, transparent),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
 }
 
 button[class*="bg-primary"]:hover {
+  transform: translateY(-2px) !important;
   box-shadow:
-    var(--neo-hover),
-    0 6px 16px color-mix(in oklch, var(--brand) 40%, transparent) !important;
+    0 8px 24px -4px color-mix(in oklch, var(--brand) 50%, transparent),
+    0 4px 8px -2px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
 }
 
-/* ─── Subtle Animations ─── */
-
-/* Fade in on page load */
-@keyframes neo-fade-in {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+button[class*="bg-primary"]:active {
+  transform: translateY(0) scale(0.98) !important;
 }
 
-/* Slide in from left */
-@keyframes neo-slide-left {
-  from { opacity: 0; transform: translateX(-12px); }
-  to { opacity: 1; transform: translateX(0); }
+/* Secondary/outline buttons — glass */
+button[class*="border"]:not([class*="bg-primary"]) {
+  background: color-mix(in oklch, var(--surface-1) 50%, transparent) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid color-mix(in oklch, var(--brand) 15%, var(--border-default)) !important;
+  box-shadow:
+    0 2px 8px -2px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
 }
 
-/* Scale in */
-@keyframes neo-scale-in {
-  from { opacity: 0; transform: scale(0.96); }
-  to { opacity: 1; transform: scale(1); }
+button[class*="border"]:not([class*="bg-primary"]):hover {
+  border-color: color-mix(in oklch, var(--brand) 35%, transparent) !important;
+  box-shadow:
+    0 4px 12px -2px color-mix(in oklch, var(--brand) 20%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  transform: translateY(-1px) !important;
 }
 
-/* Gentle float */
-@keyframes neo-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
+/* ─── Top Bar — Glassmorphism ─── */
+header[class*="sticky"] {
+  background: color-mix(in oklch, var(--surface-1) 75%, transparent) !important;
+  backdrop-filter: blur(24px) saturate(1.4) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(1.4) !important;
+  border-bottom: 1px solid color-mix(in oklch, var(--brand) 8%, transparent) !important;
+  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.06) !important;
 }
 
-/* Shimmer for loading */
-@keyframes neo-shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+/* Nav links — glass pills */
+header nav a[class*="rounded"] {
+  background: transparent !important;
+  border: none !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative;
 }
 
-/* Apply entrance animations to common elements */
-main > div > div > section,
-main > div > div > div[class*="grid"],
-main > div > div > div[class*="rounded"] {
-  animation: neo-fade-in 0.4s ease-out;
+header nav a[class*="rounded"]:hover {
+  background: color-mix(in oklch, var(--brand) 10%, transparent) !important;
+  box-shadow: 0 2px 8px -2px color-mix(in oklch, var(--brand) 20%, transparent) !important;
 }
 
-/* Stagger children */
-main > div > div > div > div[class*="card"],
-main > div > div > div > a[class*="rounded"] {
-  animation: neo-fade-in 0.4s ease-out backwards;
+header nav a[class*="bg-primary"] {
+  background: linear-gradient(135deg,
+    color-mix(in oklch, var(--brand) 15%, transparent),
+    color-mix(in oklch, var(--brand) 8%, transparent)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 2px 6px -1px color-mix(in oklch, var(--brand) 15%, transparent) !important;
 }
 
-main > div > div > div > div[class*="card"]:nth-child(1),
-main > div > div > div > a[class*="rounded"]:nth-child(1) { animation-delay: 0.05s; }
-main > div > div > div > div[class*="card"]:nth-child(2),
-main > div > div > div > a[class*="rounded"]:nth-child(2) { animation-delay: 0.1s; }
-main > div > div > div > div[class*="card"]:nth-child(3),
-main > div > div > div > a[class*="rounded"]:nth-child(3) { animation-delay: 0.15s; }
-main > div > div > div > div[class*="card"]:nth-child(4),
-main > div > div > div > a[class*="rounded"]:nth-child(4) { animation-delay: 0.2s; }
-main > div > div > div > div[class*="card"]:nth-child(5),
-main > div > div > div > a[class*="rounded"]:nth-child(5) { animation-delay: 0.25s; }
-main > div > div > div > div[class*="card"]:nth-child(6),
-main > div > div > div > a[class*="rounded"]:nth-child(6) { animation-delay: 0.3s; }
+/* ─── Badges — Glass pills ─── */
+[class*="bg-primary/10"], [class*="bg-amber-500/10"], [class*="bg-orange-500/10"],
+[class*="bg-green-500/10"], [class*="bg-red-500/10"], [class*="bg-blue-500/10"],
+[class*="bg-violet-500/10"], [class*="bg-cyan-500/10"], [class*="bg-pink-500/10"],
+[class*="bg-emerald-500/10"] {
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid color-mix(in oklch, currentColor 15%, transparent) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 1px 4px -1px rgba(0, 0, 0, 0.04) !important;
+}
 
-/* Links hover */
+/* ─── Links — Smooth hover ─── */
 a {
-  transition: color 0.2s ease, transform 0.15s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 a:hover {
   transform: translateY(-1px);
 }
 
-/* Theme toggle smooth transition */
-*, *::before, *::after {
-  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+/* ─── Section headings — Gradient text ─── */
+h1, h2, h3 {
+  letter-spacing: -0.02em;
 }
 
-/* Scrollbar styling */
+h1 {
+  background: linear-gradient(135deg, var(--text-strong), color-mix(in oklch, var(--brand) 60%, var(--text-strong)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── Entrance Animations ─── */
+@keyframes premium-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes premium-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes premium-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Apply entrance animation to main content */
+main > div > div,
+main > div > section {
+  animation: premium-fade-up 0.5s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+}
+
+/* Stagger grid children */
+main > div > div > div[class*="grid"] > *,
+main > div > div > div > div[class*="card"],
+main > div > div > div > a[class*="rounded"] {
+  animation: premium-scale-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+}
+
+main > div > div > div[class*="grid"] > *:nth-child(1),
+main > div > div > div > div[class*="card"]:nth-child(1),
+main > div > div > div > a[class*="rounded"]:nth-child(1) { animation-delay: 0.05s; }
+
+main > div > div > div[class*="grid"] > *:nth-child(2),
+main > div > div > div > div[class*="card"]:nth-child(2),
+main > div > div > div > a[class*="rounded"]:nth-child(2) { animation-delay: 0.1s; }
+
+main > div > div > div[class*="grid"] > *:nth-child(3),
+main > div > div > div > div[class*="card"]:nth-child(3),
+main > div > div > div > a[class*="rounded"]:nth-child(3) { animation-delay: 0.15s; }
+
+main > div > div > div[class*="grid"] > *:nth-child(4),
+main > div > div > div > div[class*="card"]:nth-child(4),
+main > div > div > div > a[class*="rounded"]:nth-child(4) { animation-delay: 0.2s; }
+
+main > div > div > div[class*="grid"] > *:nth-child(5),
+main > div > div > div > div[class*="card"]:nth-child(5),
+main > div > div > div > a[class*="rounded"]:nth-child(5) { animation-delay: 0.25s; }
+
+main > div > div > div[class*="grid"] > *:nth-child(6),
+main > div > div > div > div[class*="card"]:nth-child(6),
+main > div > div > div > a[class*="rounded"]:nth-child(6) { animation-delay: 0.3s; }
+
+/* ─── Scrollbar ─── */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--neo-bg);
-  box-shadow: inset 2px 2px 4px var(--neo-dark), inset -2px -2px 4px var(--neo-light);
-  border-radius: 10px;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: color-mix(in oklch, var(--brand) 40%, var(--neo-bg));
-  border-radius: 10px;
-  box-shadow: 2px 2px 4px var(--neo-dark), -2px -2px 4px var(--neo-light);
+  background: color-mix(in oklch, var(--brand) 30%, transparent);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: color-mix(in oklch, var(--brand) 60%, var(--neo-bg));
+  background: color-mix(in oklch, var(--brand) 50%, transparent);
+  background-clip: padding-box;
 }
 
-/* Top bar neomorphism */
-header[class*="sticky"] {
-  box-shadow: var(--neo-raised) !important;
-  border: none !important;
+/* ─── Selection ─── */
+::selection {
+  background: color-mix(in oklch, var(--brand) 25%, transparent);
+  color: var(--text-strong);
 }
 
-/* Nav links */
-header a[class*="rounded"] {
-  border: none !important;
-  transition: all 0.2s ease;
+/* ─── Focus visible ─── */
+*:focus-visible {
+  outline: 2px solid color-mix(in oklch, var(--brand) 50%, transparent);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
-header a[class*="rounded"]:hover {
-  box-shadow: var(--neo-pressed);
-}
-
-header a[class*="bg-primary"] {
-  box-shadow: var(--neo-raised) !important;
-}
-
-/* Badge neomorphism */
-[class*="bg-primary/10"], [class*="bg-amber-500/10"], [class*="bg-orange-500/10"],
-[class*="bg-green-500/10"], [class*="bg-red-500/10"], [class*="bg-blue-500/10"],
-[class*="bg-violet-500/10"] {
-  border: none !important;
-  box-shadow: 2px 2px 4px var(--neo-dark), -2px -2px 4px var(--neo-light);
+/* ─── Smooth transitions everywhere ─── */
+*, *::before, *::after {
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+              box-shadow 0.3s ease, color 0.2s ease;
 }
 
 /* ─── Reduced motion ─── */
@@ -297,4 +348,32 @@ header a[class*="bg-primary"] {
     animation: none !important;
     transition: none !important;
   }
+
+  body::before, body::after {
+    display: none;
+  }
+}
+
+/* ─── Dark mode specific ─── */
+.dark body::before {
+  background: radial-gradient(ellipse, color-mix(in oklch, var(--brand) 8%, transparent), transparent 60%);
+}
+
+.dark body::after {
+  background: radial-gradient(ellipse, color-mix(in oklch, var(--secondary-action) 6%, transparent), transparent 60%);
+}
+
+/* Dark mode cards — more transparent for depth */
+.dark .card,
+.dark [class*="bg-card"]:not(input):not(textarea):not(button):not(select) {
+  background: color-mix(in oklch, var(--surface-1) 60%, transparent) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Dark mode h1 — brighter gradient */
+.dark h1 {
+  background: linear-gradient(135deg, var(--text-strong), color-mix(in oklch, var(--brand) 70%, var(--text-strong)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
