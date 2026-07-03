@@ -83,6 +83,23 @@ export default function SignInPage() {
       const destination = result?.url
         ? new URL(result.url, window.location.origin).toString()
         : callbackUrl
+
+      // Check user role and redirect accordingly
+      try {
+        const userResponse = await fetch('/api/user', { cache: 'no-store' })
+        const userPayload = await userResponse.json().catch(() => null)
+        if (userPayload?.ok && userPayload.data?.role) {
+          const role = userPayload.data.role
+          if (role === 'admin') {
+            window.location.href = '/admin'
+            return
+          } else if (role === 'teacher') {
+            window.location.href = '/teacher-dashboard'
+            return
+          }
+        }
+      } catch {}
+
       window.location.href = destination
     } catch {
       setSubmitting(false)

@@ -25,6 +25,10 @@ export default async function DashboardPage() {
   const user = await getCurrentUser()
   if (!user) redirect('/sign-in?callbackUrl=/dashboard')
 
+  // Redirect admins and teachers to their dashboards
+  if (user.role === 'admin') redirect('/admin')
+  if (user.role === 'teacher') redirect('/teacher-dashboard')
+
   // Fetch user's XP, streak, and recent activity
   let xp = 0
   let streak = 0
