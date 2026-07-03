@@ -46,7 +46,7 @@ interface Lesson {
   formulas: string[]
   tables: DataTable[]
   diagrams: Diagram[]
-  codeExamples: CodeExample[]
+  codeExamples?: CodeExample[]
   commonMistakes: string[]
   examTips: string[]
   practiceQuestions: PracticeQuestion[]
@@ -78,10 +78,22 @@ interface SubjectNotes {
  * - Common mistakes (warning box)
  * - Exam tips (info box)
  * - Interactive practice quiz
+ *
+ * All optional fields are accessed via optional chaining + defaults so that
+ * partially-populated JSON files don't crash the page.
  */
 export function LessonNotesRenderer({ notes }: { notes: SubjectNotes }) {
   const [expandedUnit, setExpandedUnit] = useState<number | null>(0)
   const [expandedLesson, setExpandedLesson] = useState<string | null>(null)
+
+  // Guard: if notes or units are missing, show a friendly message instead of crashing
+  if (!notes?.units?.length) {
+    return (
+      <div className="rounded-lg border border-border bg-card p-6 text-center text-sm text-muted-foreground">
+        Lesson notes for this subject are being prepared. Check back soon!
+      </div>
+    )
+  }
 
   return (
     <div className="space-y-4">
@@ -118,13 +130,15 @@ export function LessonNotesRenderer({ notes }: { notes: SubjectNotes }) {
                   {expandedLesson === lesson.slug && (
                     <div className="p-4 pl-6 space-y-6 bg-muted/20">
                       {/* Overview */}
-                      <div>
-                        <h4 className="text-sm font-semibold mb-2">Overview</h4>
-                        <p className="text-sm text-muted-foreground leading-relaxed">{lesson.overview}</p>
-                      </div>
+                      {lesson.overview && (
+                        <div>
+                          <h4 className="text-sm font-semibold mb-2">Overview</h4>
+                          <p className="text-sm text-muted-foreground leading-relaxed">{lesson.overview}</p>
+                        </div>
+                      )}
 
                       {/* Key Concepts */}
-                      {lesson.keyConcepts.length > 0 && (
+                      {lesson.keyConcepts?.length > 0 && (
                         <div>
                           <h4 className="text-sm font-semibold mb-2 flex items-center gap-1.5">
                             <Lightbulb className="h-4 w-4 text-amber-500" />
@@ -142,7 +156,7 @@ export function LessonNotesRenderer({ notes }: { notes: SubjectNotes }) {
                       )}
 
                       {/* Formulas */}
-                      {lesson.formulas.length > 0 && (
+                      {lesson.formulas?.length > 0 && (
                         <div className="rounded-md border border-primary/20 bg-primary/5 p-3">
                           <h4 className="text-sm font-semibold mb-2 text-primary">Formulas</h4>
                           <div className="space-y-1.5">
@@ -154,7 +168,7 @@ export function LessonNotesRenderer({ notes }: { notes: SubjectNotes }) {
                       )}
 
                       {/* Tables */}
-                      {lesson.tables.map((table, i) => (
+                      {(lesson.tables ?? []).map((table, i) => (
                         <div key={i}>
                           <h4 className="text-sm font-semibold mb-2">{table.title}</h4>
                           <div className="overflow-x-auto">
@@ -182,7 +196,7 @@ export function LessonNotesRenderer({ notes }: { notes: SubjectNotes }) {
                       ))}
 
                       {/* Diagrams */}
-                      {lesson.diagrams.map((diagram, i) => (
+                      {(lesson.diagrams ?? []).map((diagram, i) => (
                         <div key={i}>
                           <h4 className="text-sm font-semibold mb-2">{diagram.title}</h4>
                           <pre className="rounded-md border border-border bg-muted/50 p-3 text-xs font-mono overflow-x-auto whitespace-pre">{diagram.content}</pre>
@@ -190,7 +204,7 @@ export function LessonNotesRenderer({ notes }: { notes: SubjectNotes }) {
                       ))}
 
                       {/* Code Examples */}
-                      {lesson.codeExamples.map((example, i) => (
+                      {(lesson.codeExamples ?? []).map((example, i) => (
                         <div key={i}>
                           <h4 className="text-sm font-semibold mb-2 flex items-center gap-1.5">
                             <Code2 className="h-4 w-4 text-green-500" />
@@ -202,7 +216,7 @@ export function LessonNotesRenderer({ notes }: { notes: SubjectNotes }) {
                       ))}
 
                       {/* Common Mistakes */}
-                      {lesson.commonMistakes.length > 0 && (
+                      {lesson.commonMistakes?.length > 0 && (
                         <div className="rounded-md border border-red-500/20 bg-red-500/5 p-3">
                           <h4 className="text-sm font-semibold mb-2 flex items-center gap-1.5 text-red-600">
                             <AlertTriangle className="h-4 w-4" />
@@ -220,7 +234,7 @@ export function LessonNotesRenderer({ notes }: { notes: SubjectNotes }) {
                       )}
 
                       {/* Exam Tips */}
-                      {lesson.examTips.length > 0 && (
+                      {lesson.examTips?.length > 0 && (
                         <div className="rounded-md border border-blue-500/20 bg-blue-500/5 p-3">
                           <h4 className="text-sm font-semibold mb-2 flex items-center gap-1.5 text-blue-600">
                             <GraduationCap className="h-4 w-4" />
@@ -238,7 +252,7 @@ export function LessonNotesRenderer({ notes }: { notes: SubjectNotes }) {
                       )}
 
                       {/* Practice Quiz */}
-                      {lesson.practiceQuestions.length > 0 && (
+                      {lesson.practiceQuestions?.length > 0 && (
                         <PracticeQuiz questions={lesson.practiceQuestions} />
                       )}
                     </div>

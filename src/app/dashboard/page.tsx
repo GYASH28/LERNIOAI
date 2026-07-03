@@ -29,6 +29,8 @@ export default async function DashboardPage() {
   let xp = 0
   let streak = 0
   let level = 1
+  let userSemester: number | null = null
+  let userDept: string | null = null
   let recentlyViewed: { title: string; href: string; viewedAt: Date }[] = []
 
   try {
@@ -40,6 +42,8 @@ export default async function DashboardPage() {
       xp = dbUser.xp
       streak = dbUser.streak
       level = dbUser.level
+      userSemester = dbUser.semesterNumber
+      userDept = dbUser.departmentCode
     }
 
     recentlyViewed = await db.recentlyViewed.findMany({
@@ -47,14 +51,14 @@ export default async function DashboardPage() {
       orderBy: { viewedAt: 'desc' },
       take: 3,
       select: { title: true, href: true, viewedAt: true },
-    })
+    }).catch(() => [])
   } catch {
     // DB unavailable — use defaults
   }
 
-  // Determine programme and semester
-  const programmeCode = user.role === 'student' ? 'DCOMP' : 'DCOMP'
-  const semesterNumber = 3
+  // Determine programme and semester from user's DB record
+  const programmeCode = userDept === 'DCIOT' ? 'DCIOT' : 'DCOMP'
+  const semesterNumber = userSemester || 3
 
   // Get manifest subjects for the user's semester
   const subjects = getManifestSubjectsForSemester(programmeCode, semesterNumber)

@@ -17,6 +17,8 @@
 @import "../styles/motion.css";
 @import "../styles/motion-components.css";
 @import "../styles/prose.css";
+@import "../styles/neomorphism.css";
+@import "../styles/mobile.css";
 @import "../styles/accessibility.css";
 @import "../styles/utilities.css";
 @import "../styles/marketing.css";
@@ -379,16 +381,8 @@ html {
   -ms-text-size-adjust: 100%;
 }
 
-/* Dark mode fixes for new pages */
-.dark .bg-card { background-color: hsl(var(--card, 215 28% 17%)); }
-.dark .bg-muted\/30 { background-color: hsl(var(--muted, 215 28% 17%) \/ 0.3); }
-.dark .bg-muted\/50 { background-color: hsl(var(--muted, 215 28% 17%) \/ 0.5); }
-.dark .border-border { border-color: hsl(var(--border, 215 28% 20%)); }
-.dark .bg-background { background-color: hsl(var(--background, 222 47% 11%)); }
-.dark .text-foreground { color: hsl(var(--foreground, 210 40% 98%)); }
-.dark .text-muted-foreground { color: hsl(var(--muted-foreground, 215 20% 65%)); }
-.dark .bg-primary\/5 { background-color: hsl(var(--primary, 217 91% 60%) \/ 0.05); }
-.dark .bg-primary\/10 { background-color: hsl(var(--primary, 217 91% 60%) \/ 0.1); }
-.dark .bg-zinc-900 { background-color: #18181b; }
-.dark .text-zinc-300 { color: #d4d4d8; }
-.dark .text-green-400 { color: #4ade80; }
+/* Dark mode is handled by the theme system in tokens.css + themes.css.
+   The .dark class on <html> triggers OKLCH-based token overrides that
+   cascade into all shadcn components via the legacy token mappings.
+   Do NOT add hardcoded HSL overrides here — they conflict with the
+   OKLCH theme system and create cursed color combinations. */

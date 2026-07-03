@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation'
+import { BackButton } from "@/components/ui/back-button"
 import { getCurrentUser } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { Users, BookOpen, TrendingUp, AlertCircle } from 'lucide-react'
@@ -21,6 +22,7 @@ export default async function TeacherDashboardPage() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:px-8">
+          <BackButton />
         <h1 className="text-2xl font-bold mb-1">Teacher Dashboard</h1>
         <p className="text-sm text-muted-foreground mb-6">Overview of student progress and engagement</p>
         <div className="grid gap-4 sm:grid-cols-3 mb-6">
