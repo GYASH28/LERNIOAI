@@ -1,9 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { Suspense, useEffect, useState } from 'react'
+import { useState } from 'react'
 import type { ChangeEvent, FormEvent, ReactNode } from 'react'
-import { getProviders, signIn } from 'next-auth/react'
 import { ChevronDown, Mail, UserPlus } from 'lucide-react'
 import {
   AuthShell,
@@ -59,7 +58,7 @@ function ToggleSection({
   return (
     <button
       type="button"
-      className="inline-flex items-center gap-2 rounded-lg border border-border bg-muted px-3 py-2 text-sm font-bold text-primary transition hover:border-strong hover:bg-background"
+      className="inline-flex items-center gap-2 rounded-lg border border-border bg-muted/30 px-3 py-2 text-sm font-bold text-primary transition hover:border-primary/40 hover:bg-muted"
       onClick={onClick}
       aria-expanded={open}
     >
@@ -76,17 +75,6 @@ function SignUpForm() {
   const [submitting, setSubmitting] = useState(false)
   const [statusMessage, setStatusMessage] = useState('')
   const [error, setError] = useState('')
-  const [providers, setProviders] = useState<Record<string, { id: string; name: string }> | null>(null)
-
-  useEffect(() => {
-    let mounted = true
-    getProviders().then((items) => {
-      if (mounted) setProviders(items)
-    })
-    return () => {
-      mounted = false
-    }
-  }, [])
 
   function handleChange(event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     setForm((current) => ({ ...current, [event.target.name]: event.target.value }))
@@ -97,11 +85,7 @@ function SignUpForm() {
     if (!form.email.trim()) return 'Enter your email address.'
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) return 'Enter a valid email address.'
     if (form.rollNumber.trim() && !/^[A-Za-z0-9/-]{1,32}$/.test(form.rollNumber.trim())) return 'Roll number format is not valid.'
-    const longPassphrase = form.password.trim().length >= 16
-    const mixedShortPassword = form.password.length >= 12 && /[A-Za-z]/.test(form.password) && /\d/.test(form.password)
-    if (!longPassphrase && !mixedShortPassword) {
-      return 'Use at least 12 characters with a letter and number, or a longer passphrase.'
-    }
+    if (form.password.length < 8) return 'Password must be at least 8 characters.'
     if (form.password !== form.confirmPassword) return 'Passwords do not match.'
     return ''
   }
@@ -138,8 +122,20 @@ function SignUpForm() {
         throw new Error(json.error?.message || 'Could not create this account.')
       }
 
-      setForm(initialForm)
-      setStatusMessage('Profile created. Check your email to verify the account before signing in.')
+      // Auto sign-in after registration
+      setStatusMessage('Signing you in...')
+      const { signIn } = await import('next-auth/react')
+      const result = await signIn('credentials', {
+        email: form.email.trim(),
+        password: form.password,
+        redirect: false,
+        callbackUrl: '/dashboard',
+      })
+      if (result?.error) {
+        throw new Error('Account created, but automatic sign-in failed. Use the sign-in page.')
+      }
+
+      window.location.href = result?.url ?? '/dashboard'
     } catch (signupError) {
       setError(signupError instanceof Error ? signupError.message : 'Could not create this account.')
       setStatusMessage('')
@@ -151,11 +147,53 @@ function SignUpForm() {
   async function handleGoogle() {
     setSubmitting(true)
     setError('')
-    setStatusMessage('Redirecting to Google...')
+    setStatusMessage('Opening Google sign-in...')
+
     try {
-      await signIn('google', { callbackUrl: '/complete-profile' })
-    } catch {
-      setError('Google sign in failed. Please try again.')
+      const { getFirebaseAuth, isFirebaseConfigured } = await import('@/lib/firebase/client')
+      if (!isFirebaseConfigured()) {
+        setError('Google sign-in is not configured. Please use email/password.')
+        setStatusMessage('')
+        setSubmitting(false)
+        return
+      }
+
+      const firebaseAuth = getFirebaseAuth()
+      if (!firebaseAuth) {
+        setError('Google sign-in is not available.')
+        setStatusMessage('')
+        setSubmitting(false)
+        return
+      }
+
+      const { GoogleAuthProvider, signInWithPopup } = await import('firebase/auth')
+      const provider = new GoogleAuthProvider()
+      provider.setCustomParameters({ prompt: 'select_account' })
+
+      setStatusMessage('Waiting for Google...')
+      const result = await signInWithPopup(firebaseAuth, provider)
+      const idToken = await result.user.getIdToken()
+
+      setStatusMessage('Creating your profile...')
+      const response = await fetch('/api/auth/firebase', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ idToken }),
+      })
+
+      const data = await response.json()
+      if (!response.ok || !data.ok) {
+        throw new Error(data?.error?.message || 'Failed to sign in')
+      }
+
+      window.location.href = '/complete-profile'
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Google sign in failed'
+      if (message.includes('popup') || message.includes('cancelled')) {
+        setError('Google sign-in was cancelled.')
+      } else {
+        setError(message)
+      }
       setStatusMessage('')
       setSubmitting(false)
     }
@@ -205,7 +243,7 @@ function SignUpForm() {
             name="password"
             value={form.password}
             onChange={handleChange}
-            placeholder="12+ characters or a long passphrase"
+            placeholder="At least 8 characters"
             autoComplete="new-password"
             className={authInputClass}
             required
@@ -235,7 +273,7 @@ function SignUpForm() {
         </div>
 
         {showAcademic ? (
-          <div className="grid gap-4 rounded-lg border border-border bg-muted/60 p-4 sm:col-span-2 sm:grid-cols-2">
+          <div className="grid gap-4 rounded-lg border border-border bg-muted/20 p-4 sm:col-span-2 sm:grid-cols-2">
             <Field label="Roll number">
               <Input
                 name="rollNumber"
@@ -309,19 +347,17 @@ function SignUpForm() {
         </Button>
       </form>
 
-      {providers?.google ? (
-        <>
-          <div className="my-5 flex items-center gap-3 text-xs font-semibold text-muted-foreground">
-            <span className="h-px flex-1 bg-border" />
-            or
-            <span className="h-px flex-1 bg-border" />
-          </div>
-          <Button type="button" variant="secondary" className={`w-full ${authSecondaryButtonClass}`} disabled={submitting} onClick={handleGoogle}>
-            <GoogleMark />
-            Continue with Google
-          </Button>
-        </>
-      ) : null}
+      <div>
+        <div className="my-5 flex items-center gap-3 text-xs font-semibold text-muted-foreground">
+          <span className="h-px flex-1 bg-border" />
+          or
+          <span className="h-px flex-1 bg-border" />
+        </div>
+        <Button type="button" variant="secondary" className={`w-full ${authSecondaryButtonClass}`} disabled={submitting} onClick={handleGoogle}>
+          <GoogleMark />
+          Continue with Google
+        </Button>
+      </div>
 
       <p className="mt-6 text-center text-sm text-muted-foreground">
         Already have an account?{' '}
@@ -334,22 +370,5 @@ function SignUpForm() {
 }
 
 export default function SignUpPage() {
-  return (
-    <Suspense
-      fallback={
-        <AuthShell
-          eyebrow="Create profile"
-          title="Start with a student account"
-          description="Loading signup."
-          backHref="/"
-          backLabel="Intro"
-          className="max-w-2xl"
-        >
-          <div className="h-96 animate-pulse rounded-lg bg-muted" />
-        </AuthShell>
-      }
-    >
-      <SignUpForm />
-    </Suspense>
-  )
+  return <SignUpForm />
 }

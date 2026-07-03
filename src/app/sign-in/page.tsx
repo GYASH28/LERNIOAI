@@ -1,10 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { Suspense, useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { FormEvent } from 'react'
-import { getProviders, signIn } from 'next-auth/react'
-import { useRouter, useSearchParams } from 'next/navigation'
 import { LockKeyhole, LogIn, Mail } from 'lucide-react'
 import {
   AuthShell,
@@ -18,6 +16,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { safeCallbackPath } from '@/lib/auth-policy'
 import { getCampusDashboardPath } from '@/lib/campus-auth'
+
+const GOOGLE_ENABLED = true
 
 function routeNotice(verified: string | null, error: string | null) {
   if (verified === 'true') {
@@ -45,29 +45,21 @@ function routeNotice(verified: string | null, error: string | null) {
 }
 
 function SignInForm() {
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const callbackUrl = safeCallbackPath(searchParams.get('callbackUrl'))
-  const verified = searchParams.get('verified')
-  const routeError = searchParams.get('error')
-  const notice = useMemo(() => routeNotice(verified, routeError), [verified, routeError])
-
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [statusMessage, setStatusMessage] = useState('')
   const [submitting, setSubmitting] = useState(false)
-  const [oauthLoading, setOauthLoading] = useState<string | null>(null)
-  const [providers, setProviders] = useState<Record<string, { id: string; name: string }> | null>(null)
+  const [oauthLoading, setOauthLoading] = useState(false)
+  const [notice, setNotice] = useState<{ status: string | null; error: string | null }>({ status: null, error: null })
 
   useEffect(() => {
-    let mounted = true
-    getProviders().then((items) => {
-      if (mounted) setProviders(items)
-    })
-    return () => {
-      mounted = false
-    }
+    try {
+      const params = new URLSearchParams(window.location.search)
+      const verified = params.get('verified')
+      const routeError = params.get('error')
+      setNotice(routeNotice(verified, routeError))
+    } catch {}
   }, [])
 
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -76,48 +68,116 @@ function SignInForm() {
     setError(null)
     setStatusMessage('Checking your account...')
 
-    const result = await signIn('credentials', {
-      email: email.trim(),
-      password,
-      redirect: false,
-      callbackUrl,
-    })
-
-    setSubmitting(false)
-    setStatusMessage('')
-
-    if (result?.error) {
-      setError('Invalid email or password.')
-      return
-    }
-
-    let destination = result?.url ?? callbackUrl
     try {
-      const path = destination.startsWith('http') ? new URL(destination).pathname : destination
-      if (path === '/dashboard') {
-        const response = await fetch('/api/user', { cache: 'no-store' })
-        const payload = await response.json().catch(() => null)
-        if (payload?.ok && payload.data?.role) {
-          destination = getCampusDashboardPath(payload.data.role)
-        }
-      }
-    } catch {
-      destination = callbackUrl
-    }
+      const params = new URLSearchParams(window.location.search)
+      const callbackUrl = safeCallbackPath(params.get('callbackUrl'))
 
-    router.push(destination)
-    router.refresh()
+      // Lazy import next-auth only when submitting
+      const { signIn } = await import('next-auth/react')
+      const result = await signIn('credentials', {
+        email: email.trim(),
+        password,
+        redirect: false,
+        callbackUrl,
+      })
+
+      setSubmitting(false)
+      setStatusMessage('')
+
+      if (result?.error) {
+        setError('Invalid email or password.')
+        return
+      }
+
+      let destination = result?.url ?? callbackUrl
+      try {
+        const path = destination.startsWith('http') ? new URL(destination).pathname : destination
+        if (path === '/dashboard') {
+          const response = await fetch('/api/user', { cache: 'no-store' })
+          const payload = await response.json().catch(() => null)
+          if (payload?.ok && payload.data?.role) {
+            destination = getCampusDashboardPath(payload.data.role)
+          }
+        }
+      } catch {
+        destination = callbackUrl
+      }
+
+      window.location.href = destination
+    } catch {
+      setSubmitting(false)
+      setStatusMessage('')
+      setError('Sign in failed. Please try again.')
+    }
   }
 
-  async function handleOAuthSignIn(provider: string) {
-    setOauthLoading(provider)
+  async function handleGoogleSignIn() {
+    setOauthLoading(true)
     setError(null)
-    setStatusMessage('Redirecting to Google...')
+    setStatusMessage('Opening Google sign-in...')
+
     try {
-      await signIn(provider, { callbackUrl })
-    } catch {
-      setError('Google sign in failed. Please try again.')
-      setOauthLoading(null)
+      const { getFirebaseAuth, isFirebaseConfigured } = await import('@/lib/firebase/client')
+
+      if (!isFirebaseConfigured()) {
+        setError('Google sign-in is not configured. Please use email/password.')
+        setOauthLoading(false)
+        setStatusMessage('')
+        return
+      }
+
+      const firebaseAuth = getFirebaseAuth()
+      if (!firebaseAuth) {
+        setError('Google sign-in is not available. Please use email/password.')
+        setOauthLoading(false)
+        setStatusMessage('')
+        return
+      }
+
+      const { GoogleAuthProvider, signInWithPopup } = await import('firebase/auth')
+      const provider = new GoogleAuthProvider()
+      provider.setCustomParameters({ prompt: 'select_account' })
+
+      setStatusMessage('Waiting for Google...')
+      const result = await signInWithPopup(firebaseAuth, provider)
+      const idToken = await result.user.getIdToken()
+
+      setStatusMessage('Signing you in...')
+      const response = await fetch('/api/auth/firebase', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ idToken }),
+      })
+
+      const data = await response.json()
+      if (!response.ok || !data.ok) {
+        throw new Error(data?.error?.message || 'Failed to sign in')
+      }
+
+      const params = new URLSearchParams(window.location.search)
+      let destination = safeCallbackPath(params.get('callbackUrl'))
+
+      if (destination === '/dashboard') {
+        try {
+          const userResponse = await fetch('/api/user', { cache: 'no-store' })
+          const userPayload = await userResponse.json().catch(() => null)
+          if (userPayload?.ok && userPayload.data?.role) {
+            destination = getCampusDashboardPath(userPayload.data.role)
+          }
+        } catch {}
+      }
+
+      window.location.href = destination
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Google sign in failed'
+      if (message.includes('popup') || message.includes('cancelled')) {
+        setError('Google sign-in was cancelled.')
+      } else if (message.includes('configuration-not-found')) {
+        setError('Google sign-in is not configured. Please use email/password.')
+      } else {
+        setError(message || 'Google sign in failed. Please try again.')
+      }
+      setOauthLoading(false)
       setStatusMessage('')
     }
   }
@@ -191,13 +251,13 @@ function SignInForm() {
           </p>
         ) : null}
 
-        <Button type="submit" className={`w-full ${authPrimaryButtonClass}`} disabled={submitting || !!oauthLoading}>
+        <Button type="submit" className={`w-full ${authPrimaryButtonClass}`} disabled={submitting || oauthLoading}>
           <LogIn className="h-4 w-4" />
           {submitting ? 'Signing in...' : 'Sign in'}
         </Button>
       </form>
 
-      {providers?.google ? (
+      {GOOGLE_ENABLED ? (
         <div>
           <div className="my-5 flex items-center gap-3 text-xs font-semibold text-muted-foreground">
             <span className="h-px flex-1 bg-border" />
@@ -208,10 +268,10 @@ function SignInForm() {
             type="button"
             variant="secondary"
             className={`w-full ${authSecondaryButtonClass}`}
-            disabled={submitting || !!oauthLoading}
-            onClick={() => handleOAuthSignIn('google')}
+            disabled={submitting || oauthLoading}
+            onClick={handleGoogleSignIn}
           >
-            {oauthLoading === 'google' ? (
+            {oauthLoading ? (
               <span className="h-4 w-4 animate-spin rounded-full border-2 border-muted-foreground/30 border-t-primary" />
             ) : (
               <GoogleMark />
@@ -232,21 +292,5 @@ function SignInForm() {
 }
 
 export default function SignInPage() {
-  return (
-    <Suspense
-      fallback={
-        <AuthShell
-          eyebrow="Welcome back"
-          title="Sign in to Lernio"
-          description="Loading secure sign-in."
-          backHref="/"
-          backLabel="Intro"
-        >
-          <div className="h-72 animate-pulse rounded-lg bg-muted" />
-        </AuthShell>
-      }
-    >
-      <SignInForm />
-    </Suspense>
-  )
+  return <SignInForm />
 }

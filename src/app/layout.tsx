@@ -105,7 +105,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      data-palette="aurora"
+      data-appearance="system"
+      data-contrast="normal"
+      data-density="comfortable"
+      data-surface="soft"
+      data-subject-tint="subtle"
+      data-motion="full"
+      data-low-power="false"
+    >
       <head>
         {/* Inline theme-no-flash script — runs synchronously before paint.
             Previously this was <script src="/theme-no-flash.js" /> which
