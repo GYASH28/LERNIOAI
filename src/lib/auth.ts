@@ -13,7 +13,6 @@ import 'server-only'
 import type { NextAuthOptions } from 'next-auth'
 import { getServerSession } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import GoogleProvider from 'next-auth/providers/google'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { compare } from 'bcryptjs'
 import { db } from '@/lib/db'
@@ -147,14 +146,7 @@ const providers: NextAuthOptions['providers'] = [
   }),
 ]
 
-if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
-  providers.push(
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    }),
-  )
-}
+// Google OAuth provider removed — email/password only for reliability.
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db),
@@ -388,74 +380,41 @@ export const authOptions: NextAuthOptions = {
  * administrator signs in with a real database account.
  */
 async function resolveUserFromSession(): Promise<AuthUser | null> {
-  // Bypass getServerSession (which is broken on Next.js 16) and read
-  // the JWT directly from cookies. This is much faster AND works with
-  // Next.js 16's route handler changes.
   try {
-    // Import cookies() from next/headers — async in Next.js 15+
-    const { cookies } = await import('next/headers')
-    const cookieStore = await cookies()
-    const sessionCookie = cookieStore.get(
-      process.env.NODE_ENV === 'production'
-        ? '__Secure-next-auth.session-token'
-        : 'next-auth.session-token'
-    )
+    const session = await getServerSession(authOptions)
 
-    if (!sessionCookie?.value) {
-      // No session cookie — check demo mode
-      const authMode = resolveAuthMode({
-        demoModeEnv: process.env.LERNIO_DEMO_MODE,
-        sessionEmail: null,
-      })
-      if (authMode.mode === 'demo') {
-        return DEMO_AUTH_USER
+    if (session?.user?.email && (session.user as any).id) {
+      const u = session.user as any
+      if (u.sessionRevoked) return null
+      return {
+        id: String(u.id),
+        email: String(u.email),
+        name: String(u.name || u.email.split('@')[0]),
+        role: normalizeRole(u.role),
+        status: String(u.status || 'active'),
+        profileComplete: u.profileComplete ?? true,
+        authorityVersion: Number(u.authorityVersion ?? 0),
       }
-      return null
     }
 
-    // Decode the JWT directly (no DB query, no getServerSession)
-    const jwt = (await import('jsonwebtoken')).default
-    const secret = process.env.NEXTAUTH_SECRET
-    if (!secret) return null
+    // No session — check demo mode
+    const authMode = resolveAuthMode({
+      demoModeEnv: process.env.LERNIO_DEMO_MODE,
+      sessionEmail: session?.user?.email,
+    })
 
-    const decoded = jwt.verify(sessionCookie.value, secret) as any
-
-    if (!decoded?.email || !decoded?.id) return null
-    if (decoded.sessionRevoked === true) return null
-    if (decoded.status === 'revoked' || decoded.status === 'disabled') return null
-
-    return {
-      id: String(decoded.id),
-      email: String(decoded.email),
-      name: String(decoded.name || decoded.email.split('@')[0]),
-      role: normalizeRole(decoded.role),
-      status: String(decoded.status || 'active'),
-      profileComplete: decoded.profileComplete ?? true,
-      authorityVersion: Number(decoded.authorityVersion ?? 0),
+    if (authMode.mode === 'demo') {
+      return DEMO_AUTH_USER
     }
+
+    return null
   } catch {
-    // JWT verification failed or cookies() not available
     return null
   }
 }
 
 export async function getCurrentUser(): Promise<AuthUser | null> {
-  // 2-second timeout — if getServerSession or the DB query is slow,
-  // return null immediately so the page renders without waiting.
-  // Pages redirect to /sign-in if user is null, so slow DB = redirect
-  // instead of 25-second hang.
-  return new Promise((resolve) => {
-    const timer = setTimeout(() => resolve(null), 2000)
-    resolveUserFromSession()
-      .then((user) => {
-        clearTimeout(timer)
-        resolve(user)
-      })
-      .catch(() => {
-        clearTimeout(timer)
-        resolve(null)
-      })
-  })
+  return resolveUserFromSession()
 }
 
 /**

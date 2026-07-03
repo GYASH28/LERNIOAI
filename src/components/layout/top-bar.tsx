@@ -77,25 +77,14 @@ function isActivePath(pathname: string, href: string) {
  */
 function useSignOut() {
   return useCallback(async () => {
-    // Step 1: Sign out from Firebase
-    try {
-      const { getFirebaseAuth } = await import('@/lib/firebase/client')
-      const firebaseAuth = getFirebaseAuth()
-      if (firebaseAuth) {
-        const { signOut: firebaseSignOut } = await import('firebase/auth')
-        await firebaseSignOut(firebaseAuth).catch(() => {})
-      }
-    } catch {}
-
-    // Step 1.5: Clear ALL localStorage state
+    // Step 1: Clear ALL localStorage state
     try {
       localStorage.removeItem('lernio-app-state')
       localStorage.removeItem('lernio-prefs')
       localStorage.removeItem('lernio-theme')
       localStorage.removeItem('lernio-theme-prefs')
-      // Clear any next-auth / firebase related storage
       for (const key of Object.keys(localStorage)) {
-        if (key.startsWith('next-auth') || key.startsWith('lernio') || key.startsWith('firebase')) {
+        if (key.startsWith('next-auth') || key.startsWith('lernio')) {
           localStorage.removeItem(key)
         }
       }
