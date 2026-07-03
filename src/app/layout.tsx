@@ -126,6 +126,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
+        {/* Calming animated background */}
+        <div className="bg-mesh" aria-hidden="true" />
+        <div className="bg-dots" aria-hidden="true" />
         <div className="bg-orb-3" aria-hidden="true" />
         <ThemeProvider>
           <LernioMotionProvider>
