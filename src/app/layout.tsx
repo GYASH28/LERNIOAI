@@ -126,6 +126,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
+        <div className="bg-orb-3" aria-hidden="true" />
         <ThemeProvider>
           <LernioMotionProvider>
             <RouteLoadingBar />

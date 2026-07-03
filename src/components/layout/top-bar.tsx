@@ -128,6 +128,8 @@ export function TopBar() {
   const [hidden, setHidden] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [mobileMoreOpen, setMobileMoreOpen] = useState(false)
+  const [moreOpen, setMoreOpen] = useState(false)
+  const moreRef = useRef<HTMLDivElement>(null)
 
   const user = useAppStore((s) => s.user)
   const xp = useAppStore((s) => s.xp)
@@ -138,6 +140,22 @@ export function TopBar() {
 
   const toggleHidden = useCallback(() => setHidden((h) => !h), [])
   const toggleMobile = useCallback(() => setMobileOpen((o) => !o), [])
+
+  // Close "More" dropdown when clicking outside
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (moreRef.current && !moreRef.current.contains(e.target as Node)) {
+        setMoreOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
+
+  // Close "More" dropdown on route change
+  useEffect(() => {
+    setMoreOpen(false)
+  }, [pathname])
 
   // Primary nav items shown on desktop
   const primaryItems = NAV_ITEMS.slice(0, 7)
@@ -193,32 +211,40 @@ export function TopBar() {
             })}
 
             {/* More dropdown for secondary items */}
-            <div className="group relative">
-              <button className="flex items-center gap-1 rounded-md px-2.5 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">
+            <div className="relative" ref={moreRef}>
+              <button
+                onClick={() => setMoreOpen(!moreOpen)}
+                className="flex items-center gap-1 rounded-md px-2.5 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+              >
                 <span className="hidden lg:inline">More</span>
-                <ChevronDown className="h-3 w-3" />
+                <ChevronDown className={`h-3 w-3 transition-transform ${moreOpen ? 'rotate-180' : ''}`} />
               </button>
-              <div className="absolute right-0 top-full hidden min-w-[180px] rounded-lg border border-border bg-popover py-1 shadow-lg group-hover:block">
-                {moreItems.map((item) => {
-                  const href = routeForView(item.key)
-                  const active = isActivePath(pathname, href)
-                  return (
-                    <Link
-                      key={item.key}
-                      href={href}
-                      prefetch={true}
-                      onClick={() => useAppStore.getState().setView(item.key)}
-                      className={cn(
-                        'flex items-center gap-2 px-3 py-2 text-sm transition-colors',
-                        active ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:bg-accent hover:text-foreground',
-                      )}
-                    >
-                      <item.icon className="h-4 w-4" />
-                      {item.label}
-                    </Link>
-                  )
-                })}
-              </div>
+              {moreOpen && (
+                <div className="absolute right-0 top-full mt-1 min-w-[200px] rounded-xl border border-border bg-popover/95 backdrop-blur-xl py-2 shadow-2xl z-50">
+                  {moreItems.map((item) => {
+                    const href = routeForView(item.key)
+                    const active = isActivePath(pathname, href)
+                    return (
+                      <Link
+                        key={item.key}
+                        href={href}
+                        prefetch={true}
+                        onClick={() => {
+                          useAppStore.getState().setView(item.key)
+                          setMoreOpen(false)
+                        }}
+                        className={cn(
+                          'flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors',
+                          active ? 'bg-primary/10 text-primary font-medium' : 'text-muted-foreground hover:bg-accent hover:text-foreground',
+                        )}
+                      >
+                        <item.icon className="h-4 w-4" />
+                        {item.label}
+                      </Link>
+                    )
+                  })}
+                </div>
+              )}
             </div>
           </nav>
 
