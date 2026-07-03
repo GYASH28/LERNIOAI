@@ -65,25 +65,6 @@ export default async function CodingPage() {
                 </ul>
               </div>
             </div>
-
-            {/* Language info */}
-            <div className="mt-4 rounded-lg border border-border bg-card p-4">
-              <h3 className="text-sm font-semibold mb-2">Supported Languages</h3>
-              <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">
-                {[
-                  { name: 'C', desc: 'gcc 10.2' },
-                  { name: 'C++', desc: 'g++ 10.2' },
-                  { name: 'Python', desc: '3.10' },
-                  { name: 'Java', desc: 'OpenJDK 15' },
-                  { name: 'JavaScript', desc: 'Node 18' },
-                ].map((l) => (
-                  <div key={l.name} className="rounded-md border border-border bg-muted/30 px-3 py-2 text-center">
-                    <p className="text-xs font-semibold">{l.name}</p>
-                    <p className="text-[10px] text-muted-foreground">{l.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
         <Footer />
