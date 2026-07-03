@@ -570,6 +570,133 @@ for w in words:
   },
 ]
 
+// ─── Browser-based code execution (free, unlimited, no API) ───
+
+/**
+ * Run JavaScript code in the browser by capturing console.log output.
+ */
+function runJavaScriptInBrowser(code: string): string {
+  const output: string[] = []
+  const originalLog = console.log
+  const originalError = console.error
+  const originalWarn = console.warn
+
+  const captureLog = (...args: any[]) => {
+    output.push(args.map(a => {
+      if (typeof a === 'object') {
+        try { return JSON.stringify(a) } catch { return String(a) }
+      }
+      return String(a)
+    }).join(' '))
+  }
+
+  console.log = captureLog
+  console.error = captureLog
+  console.warn = captureLog
+
+  try {
+    // Create a function scope and execute
+    const fn = new Function(code)
+    fn()
+    if (output.length === 0) {
+      output.push('No output (code ran successfully)')
+    }
+  } catch (err) {
+    output.push(`Error: ${err instanceof Error ? err.message : String(err)}`)
+  } finally {
+    console.log = originalLog
+    console.error = originalError
+    console.warn = originalWarn
+  }
+
+  return output.join('\n')
+}
+
+/**
+ * Run Python code in the browser using Pyodide (WebAssembly).
+ * Pyodide is loaded from CDN — completely free and unlimited.
+ */
+let pyodidePromise: Promise<any> | null = null
+
+async function loadPyodide(): Promise<any> {
+  if (pyodidePromise) return pyodidePromise
+
+  pyodidePromise = new Promise((resolve, reject) => {
+    // Load Pyodide script from CDN
+    const script = document.createElement('script')
+    script.src = 'https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js'
+    script.onload = async () => {
+      try {
+        // @ts-ignore
+        const pyodide = await window.loadPyodide({
+          indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.26.2/full/',
+        })
+        resolve(pyodide)
+      } catch (err) {
+        reject(err)
+      }
+    }
+    script.onerror = () => reject(new Error('Failed to load Pyodide'))
+    document.head.appendChild(script)
+  })
+
+  return pyodidePromise
+}
+
+async function runPythonInBrowser(code: string, stdin?: string): Promise<string> {
+  try {
+    const pyodide = await loadPyodide()
+
+    // Capture stdout
+    pyodide.runPython(`
+import sys
+import io
+sys.stdout = io.StringIO()
+sys.stderr = io.StringIO()
+`)
+
+    // If stdin is provided, set it
+    if (stdin) {
+      pyodide.runPython(`
+import sys
+sys.stdin = io.StringIO(${JSON.stringify(stdin)})
+`)
+    }
+
+    // Run the user's code
+    try {
+      pyodide.runPython(code)
+    } catch (err: any) {
+      // Get stderr output
+      const stderr = pyodide.runPython('sys.stderr.getvalue()')
+      const stdout = pyodide.runPython('sys.stdout.getvalue()')
+      let result = ''
+      if (stdout) result += stdout
+      if (stderr) result += `\nError:\n${stderr}`
+      if (!result) result = `Error: ${err.message || String(err)}`
+      return result
+    }
+
+    // Get captured output
+    const stdout = pyodide.runPython('sys.stdout.getvalue()')
+    const stderr = pyodide.runPython('sys.stderr.getvalue()')
+
+    let result = ''
+    if (stdout) result += stdout
+    if (stderr) result += `\n${stderr}`
+    if (!result) result = 'No output (code ran successfully)'
+
+    return result
+  } catch (err) {
+    if (err instanceof Error && err.message.includes('Failed to load Pyodide')) {
+      return 'Loading Python runtime... Please try again in a few seconds.\n\nFirst run downloads Pyodide (~10MB). Subsequent runs are instant.'
+    }
+    return `Error: ${err instanceof Error ? err.message : String(err)}`
+  }
+}
+
+// ─── Component ───
+
 export function CodePlayground({
   language = 'c',
   initialCode,
@@ -605,7 +732,24 @@ export function CodePlayground({
   const runCode = async () => {
     setRunning(true)
     setOutput('⏳ Running...')
+
     try {
+      // Python and JavaScript run IN THE BROWSER — free, unlimited, no API
+      if (lang === 'javascript') {
+        const result = runJavaScriptInBrowser(code)
+        setOutput(result)
+        setRunning(false)
+        return
+      }
+
+      if (lang === 'python') {
+        const result = await runPythonInBrowser(code, stdin)
+        setOutput(result)
+        setRunning(false)
+        return
+      }
+
+      // C, C++, Java → use server API (Wandbox — free, unlimited)
       const res = await fetch('/api/coding', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
