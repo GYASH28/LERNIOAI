@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import {
   CheckCircle2, XCircle, Clock, FileText, Users, Calendar,
-  TrendingUp, ChevronRight, Loader2, ClipboardList, Award, ArrowLeft
+  TrendingUp, ChevronRight, Loader2, ClipboardList, Award, ArrowLeft, Download
 } from 'lucide-react'
 
 interface Student {
@@ -347,6 +347,11 @@ export function AttendanceClient({
           <ArrowLeft className="h-4 w-4 inline mr-1" /> Back
         </button>
         <h3 className="text-sm font-semibold uppercase text-muted-foreground">Session History</h3>
+        {sessions.length > 0 && (
+          <button onClick={() => exportAllSessionsCSV(sessions)} className="flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-xs font-medium hover:bg-accent/50 transition-colors">
+            <Download className="h-3.5 w-3.5" /> Export All (CSV)
+          </button>
+        )}
         {loading ? (
           <div className="flex justify-center py-8"><Loader2 className="h-6 w-6 animate-spin text-primary" /></div>
         ) : sessions.length === 0 ? (
@@ -459,6 +464,12 @@ export function AttendanceClient({
                 <span className="text-red-500 font-bold">{sessionDetail.absentCount} Absent</span>
                 <span className="text-muted-foreground">{sessionDetail.totalStudents} Total</span>
               </div>
+              <button
+                onClick={() => exportSessionCSV(sessionDetail)}
+                className="mt-3 flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-xs font-medium hover:bg-accent/50 transition-colors"
+              >
+                <Download className="h-3.5 w-3.5" /> Export This Session (CSV)
+              </button>
             </div>
             <div className="space-y-2">
               {sessionDetail.records?.map((r: any) => (
@@ -487,6 +498,55 @@ export function AttendanceClient({
   }
 
   return null
+}
+
+// ─── CSV Export ───
+function exportSessionCSV(session: any) {
+  const headers = ['Roll No', 'Name', 'Email', 'Status', 'Remark']
+  const rows = session.records?.map((r: any) => [
+    r.user?.rollNumber || '',
+    r.user?.name || '',
+    r.user?.email || '',
+    r.status,
+    r.remark || '',
+  ]) || []
+
+  const csv = [headers, ...rows].map(row =>
+    row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',')
+  ).join('\n')
+
+  const blob = new Blob([csv], { type: 'text/csv' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = `attendance_${session.subjectName || 'class'}_${new Date(session.date).toISOString().slice(0, 10)}.csv`
+  a.click()
+  URL.revokeObjectURL(url)
+}
+
+function exportAllSessionsCSV(sessions: SessionSummary[]) {
+  const headers = ['Date', 'Subject Code', 'Subject Name', 'Total', 'Present', 'Absent', 'Taken By']
+  const rows = sessions.map(s => [
+    new Date(s.date).toLocaleDateString('en-IN'),
+    s.subjectCode || '',
+    s.subjectName || 'General',
+    s.totalStudents,
+    s.presentCount,
+    s.absentCount,
+    s.takenBy?.name || 'Unknown',
+  ])
+
+  const csv = [headers, ...rows].map(row =>
+    row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',')
+  ).join('\n')
+
+  const blob = new Blob([csv], { type: 'text/csv' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = `attendance_summary_${new Date().toISOString().slice(0, 10)}.csv`
+  a.click()
+  URL.revokeObjectURL(url)
 }
 
 function StatCard({ icon: Icon, label, value, color }: { icon: any; label: string; value: string | number; color: string }) {

@@ -27,11 +27,9 @@ export default async function DashboardPage() {
 
   // Redirect role-based users to their dashboards
   if (user.role === 'admin') redirect('/admin')
+  if (user.role === 'coordinator') redirect('/coordinator')
   if (user.role === 'teacher') redirect('/teacher-dashboard')
   if (user.role === 'cr') redirect('/cr')
-  if (user.role === 'coordinator') redirect('/coordinator')
-  if (user.role === 'moderator') redirect('/moderator')
-  if (user.role === 'reviewer') redirect('/reviewer')
 
   // Fetch user's XP, streak, and recent activity
   let xp = 0
@@ -115,6 +113,27 @@ export default async function DashboardPage() {
           <ExamCountdown examDate={null} />
         </section>
 
+        {/* ─── Attendance Quick View ─── */}
+        <section className="mt-6">
+          <div className="mb-3 flex items-center justify-between">
+            <h2 className="text-lg font-semibold">Attendance</h2>
+            <Link href="/attendance" className="text-xs text-muted-foreground hover:text-primary">View details</Link>
+          </div>
+          <div className="rounded-xl border border-border bg-card p-5">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-muted-foreground">Check your attendance records and percentage</p>
+                <Link href="/attendance" className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline">
+                  Open Attendance →
+                </Link>
+              </div>
+              <div className="flex h-16 w-16 items-center justify-center rounded-full border-4 border-primary/20">
+                <span className="text-sm font-bold text-primary">—</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* ─── My Subjects with Progress Rings ─── */}
         <section className="mt-6">
           <div className="mb-3 flex items-center justify-between">
@@ -124,7 +143,7 @@ export default async function DashboardPage() {
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {subjects.slice(0, 6).map((subject) => {
               const subjectCode = subject.code
-              const subjectHref = `/learn/DCOMP/semester/${semesterNumber}/subject/${subjectCode}`
+              const subjectHref = `/learn/${programmeCode}/semester/${semesterNumber}/subject/${subjectCode}`
               return (
                 <Link key={subjectCode} href={subjectHref} className="group rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary/40 hover:bg-accent/5">
                   <div className="flex items-center justify-between">
