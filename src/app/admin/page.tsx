@@ -35,8 +35,16 @@ const ACTIONS = [
 
 export default async function AdminPage() {
   const authority = await requireActiveRole('admin')
-  const data = await getAdminCommandCenterData()
-  const firstName = authority.user.name.split(' ')[0]
+
+  let data: any = { metrics: [] }
+  try {
+    data = await getAdminCommandCenterData()
+  } catch (err) {
+    console.error('[admin] Failed to load command center data:', err)
+    // Continue with empty data — page still renders
+  }
+
+  const firstName = (authority.user.name || 'Admin').split(' ')[0]
 
   return (
     <CampusmateAdminShell user={{ name: authority.user.name, email: authority.user.email }}>
@@ -47,17 +55,19 @@ export default async function AdminPage() {
           <p className="mt-3 max-w-2xl text-muted-foreground">Choose a task below. Only the useful daily management tools are shown.</p>
         </section>
 
-        <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          {data.metrics.slice(0, 4).map((metric) => (
-            <Card key={metric.label} surface="panel">
-              <CardHeader className="pb-2">
-                <CardDescription>{metric.label}</CardDescription>
-                <CardTitle className="text-3xl font-black">{metric.value}</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-muted-foreground">{metric.detail}</CardContent>
-            </Card>
-          ))}
-        </section>
+        {data.metrics && data.metrics.length > 0 && (
+          <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            {data.metrics.slice(0, 4).map((metric: any) => (
+              <Card key={metric.label} surface="panel">
+                <CardHeader className="pb-2">
+                  <CardDescription>{metric.label}</CardDescription>
+                  <CardTitle className="text-3xl font-black">{metric.value}</CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm text-muted-foreground">{metric.detail}</CardContent>
+              </Card>
+            ))}
+          </section>
+        )}
 
         <section>
           <h3 className="mb-4 text-xl font-black">Quick actions</h3>
