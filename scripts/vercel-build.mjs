@@ -66,8 +66,10 @@ if (skipDbSetup) {
 } else if (!hasDatabaseUrl) {
   console.warn('[vercel-build] DATABASE_URL not set — skipping DB migrations and seeds.')
 } else {
-  console.log('[vercel-build] Running Prisma migrations (idempotent, fast)...')
+  console.log('[vercel-build] Running Prisma migrations + db push (ensures all tables exist)...')
   runCommand('npx', ['prisma', 'migrate', 'deploy'], { required: false })
+  // Also run db push to create any new tables that don't have migrations
+  runCommand('npx', ['prisma', 'db', 'push', '--accept-data-loss'], { required: false })
 
   // ─── FAST CHECK: is the DB already seeded? ────────────────────────────
   // On first deploy this runs all seeds (~5 min). On every subsequent

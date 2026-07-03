@@ -1121,6 +1121,8 @@ model User {
   feedback                    Feedback[]
   xpEvents                    XpEvent[]
   accounts                    Account[]
+  attendanceSessionsTaken     AttendanceSession[]
+  attendanceRecords           AttendanceRecord[]
   sessions                    Session[]
   roleRequests                RoleRequest[]
   authorityGrants             AuthorityGrant[]        @relation("AuthorityGrantUser")
