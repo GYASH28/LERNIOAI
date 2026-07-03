@@ -86,12 +86,9 @@ if (skipDbSetup) {
 
   if (alreadySeeded) {
     console.log('[vercel-build] DB already seeded — skipping curriculum seeds. ✅')
-
-    // ALWAYS run cleanup — delete all users and recreate admin
-    // This fixes: old emails stuck in DB, admin registered as student,
-    // pending_verification blocking login, etc.
-    console.log('[vercel-build] Cleaning up all users and recreating admin...')
-    runCommand('npx', ['tsx', 'scripts/cleanup-users.ts'], { required: false })
+    // Always run admin upsert — ensures admin role is correct
+    console.log('[vercel-build] Ensuring admin user has correct role...')
+    runCommand('npx', ['tsx', 'scripts/upsert-admin.ts'], { required: false })
   } else {
     console.log('[vercel-build] DB not seeded — running seed scripts (this may take a few minutes)...')
 

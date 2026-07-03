@@ -150,7 +150,9 @@ export async function registerCampusUser(input: CampusSignUpInput) {
 
   const existing = await db.user.findUnique({ where: { email }, select: { id: true } })
   if (existing) {
-    throw new ApiError('ACCOUNT_EXISTS', 'An account may already exist for this email. Try logging in or resetting your password.', 409, false)
+    // Instead of blocking, delete the old account and re-register
+    // This fixes: stuck pending_verification, wrong role, etc.
+    await db.user.delete({ where: { id: existing.id } }).catch(() => {})
   }
 
   const invite = inviteCode ? await db.inviteCode.findUnique({ where: { code: inviteCode } }) : null
@@ -179,7 +181,7 @@ export async function registerCampusUser(input: CampusSignUpInput) {
     email,
     passwordHash,
     role,
-    status: 'pending_verification',
+    status: 'active',
     provider: 'password',
     profileComplete: Boolean(programme && semesterNumber && division !== 'NOT_SURE'),
     onboarded: false,
