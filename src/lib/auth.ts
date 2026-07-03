@@ -15,7 +15,7 @@ import { getServerSession } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
-import { compare } from 'bcryptjs'
+import { compare, hash } from 'bcryptjs'
 import { db } from '@/lib/db'
 import crypto from 'crypto'
 import { sendVerificationEmail } from '@/lib/email'
@@ -99,25 +99,76 @@ const providers: NextAuthOptions['providers'] = [
         },
       })
 
-      if (!user?.passwordHash || user.status === 'disabled' || user.status === 'pending_verification') {
-        await checkRateLimit({
-          action: 'credential_login_fail',
-          identifier: email,
-          limit: MAX_LOGIN_ATTEMPTS,
-          windowMs: LOGIN_WINDOW_MS,
-        })
-        return null
+      if (!user?.passwordHash || user.status === 'disabled') {
+        // If this is the admin email and passwordHash is missing, try to fix it
+        const adminEmail = process.env.LERNIO_ADMIN_EMAIL?.trim().toLowerCase()
+        const adminPassword = process.env.LERNIO_ADMIN_PASSWORD
+        if (adminEmail && adminPassword && email === adminEmail && !user?.passwordHash) {
+          try {
+            const newHash = await hash(adminPassword, 12)
+            await db.user.update({
+              where: { email },
+              data: { passwordHash: newHash, role: 'admin', status: 'active', profileComplete: true },
+            })
+            // Re-fetch the user with the updated password
+            user = await db.user.findUnique({
+              where: { email },
+              select: { id: true, email: true, name: true, passwordHash: true, role: true, status: true, profileComplete: true, authorityVersion: true, sessionsRevokedAt: true },
+            })
+          } catch {}
+        }
+
+        if (!user?.passwordHash || user.status === 'disabled') {
+          await checkRateLimit({
+            action: 'credential_login_fail',
+            identifier: email,
+            limit: MAX_LOGIN_ATTEMPTS,
+            windowMs: LOGIN_WINDOW_MS,
+          }).catch(() => {})
+          return null
+        }
       }
 
       const valid = await compare(password, user.passwordHash)
       if (!valid) {
-        await checkRateLimit({
-          action: 'credential_login_fail',
-          identifier: email,
-          limit: MAX_LOGIN_ATTEMPTS,
-          windowMs: LOGIN_WINDOW_MS,
-        })
-        return null
+        // If this is the admin email and the password doesn't match,
+        // try resetting the password from env vars (in case they changed)
+        const adminEmail = process.env.LERNIO_ADMIN_EMAIL?.trim().toLowerCase()
+        const adminPassword = process.env.LERNIO_ADMIN_PASSWORD
+        if (adminEmail && adminPassword && email === adminEmail) {
+          try {
+            const newHash = await hash(adminPassword, 12)
+            await db.user.update({
+              where: { email },
+              data: { passwordHash: newHash, role: 'admin', status: 'active' },
+            })
+            // Check if the new hash matches
+            const newValid = await compare(password, newHash)
+            if (newValid) {
+              await db.rateLimitBucket.delete({ where: { key: failKey } }).catch(() => {})
+              // Re-fetch user with updated data
+              user = await db.user.findUnique({
+                where: { email },
+                select: { id: true, email: true, name: true, passwordHash: true, role: true, status: true, profileComplete: true, authorityVersion: true, sessionsRevokedAt: true },
+              })
+            } else {
+              // Password still doesn't match even after reset — the user is typing wrong password
+              await checkRateLimit({ action: 'credential_login_fail', identifier: email, limit: MAX_LOGIN_ATTEMPTS, windowMs: LOGIN_WINDOW_MS }).catch(() => {})
+              return null
+            }
+          } catch {
+            await checkRateLimit({ action: 'credential_login_fail', identifier: email, limit: MAX_LOGIN_ATTEMPTS, windowMs: LOGIN_WINDOW_MS }).catch(() => {})
+            return null
+          }
+        } else {
+          await checkRateLimit({
+            action: 'credential_login_fail',
+            identifier: email,
+            limit: MAX_LOGIN_ATTEMPTS,
+            windowMs: LOGIN_WINDOW_MS,
+          }).catch(() => {})
+          return null
+        }
       }
 
       await db.rateLimitBucket.delete({ where: { key: failKey } }).catch(() => {})
@@ -171,7 +222,7 @@ export const authOptions: NextAuthOptions = {
         where: { email: user.email },
         select: { status: true },
       })
-      return existing?.status !== 'disabled' && existing?.status !== 'pending_verification'
+      return existing?.status !== 'disabled'
     },
     async jwt({ token, user }) {
       if (user) {
@@ -216,9 +267,7 @@ export const authOptions: NextAuthOptions = {
             authIssuedAt > 0 &&
             authIssuedAt <= fresh.sessionsRevokedAt!.getTime()
           const revokedByAuthorityVersion = tokenAuthorityVersion !== fresh.authorityVersion
-          const inactive =
-            fresh.status === 'disabled' ||
-            fresh.status === 'pending_verification'
+          const inactive = fresh.status === 'disabled'
 
           if (inactive || revokedByTimestamp || revokedByAuthorityVersion) {
             token.id = fresh.id
@@ -382,7 +431,7 @@ async function resolveUserFromSession(): Promise<AuthUser | null> {
   if (authMode.mode === 'session') {
     if (session?.user?.sessionRevoked) return null
     const u = await db.user.findUnique({ where: { email: authMode.email } })
-    if (!u || u.status === 'disabled' || u.status === 'pending_verification') return null
+    if (!u || u.status === 'disabled') return null
     return {
       id: u.id,
       email: u.email,

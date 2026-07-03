@@ -1,8 +1,9 @@
 import { redirect } from 'next/navigation'
 import { getCurrentUser } from '@/lib/auth'
+import { db } from '@/lib/db'
 
-// Don't force-dynamic — this page just redirects. Making it dynamic
-// causes an unnecessary server round-trip on every visit.
+export const dynamic = 'force-dynamic'
+
 export default async function LearnPage() {
   const user = await getCurrentUser()
   if (!user) {
