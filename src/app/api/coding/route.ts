@@ -17,9 +17,8 @@ export const runtime = 'nodejs'
 // Wandbox compiler IDs
 const WANDBOX_COMPILERS: Record<string, string> = {
   c: 'gcc-head-c',
-  cpp: 'gcc-head-pp',
-  'c++': 'gcc-head-pp',
-  // Java not supported well on Wandbox — fall back to message
+  cpp: 'gcc-head',
+  'c++': 'gcc-head',
 }
 
 export async function POST(req: NextRequest) {
