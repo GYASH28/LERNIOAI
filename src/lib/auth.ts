@@ -110,7 +110,9 @@ const providers: NextAuthOptions['providers'] = [
         return null
       }
 
-      if (!user?.passwordHash || user.status === 'disabled' || user.status === 'pending_verification') {
+      if (!user?.passwordHash || user.status === 'disabled') {
+        // Note: Allow pending_verification users to login — email verification
+        // is optional since we don't have email sending configured.
         await checkRateLimit({
           action: 'credential_login_fail',
           identifier: email,
@@ -175,7 +177,7 @@ export const authOptions: NextAuthOptions = {
         where: { email: user.email },
         select: { status: true },
       })
-      return existing?.status !== 'disabled' && existing?.status !== 'pending_verification'
+      return existing?.status !== 'disabled'
     },
     async jwt({ token, user }) {
       if (user) {
@@ -223,9 +225,7 @@ export const authOptions: NextAuthOptions = {
             authIssuedAt > 0 &&
             authIssuedAt <= fresh.sessionsRevokedAt!.getTime()
           const revokedByAuthorityVersion = tokenAuthorityVersion !== fresh.authorityVersion
-          const inactive =
-            fresh.status === 'disabled' ||
-            fresh.status === 'pending_verification'
+          const inactive = fresh.status === 'disabled'
 
           if (inactive || revokedByTimestamp || revokedByAuthorityVersion) {
             token.id = fresh.id
