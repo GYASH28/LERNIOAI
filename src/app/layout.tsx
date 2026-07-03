@@ -8,6 +8,7 @@ import { CommandPalette } from "@/components/cmdk/command-palette";
 import { RouteLoadingBar } from "@/components/app/route-loading-bar";
 import { RegisterSW } from "@/components/app/register-sw";
 import { KeyboardShortcuts } from "@/components/app/keyboard-shortcuts";
+import { AnimatedBackground } from "@/components/ui/animated-background";
 
 // ──────────────────────────────────────────────────────────────────────────
 // WHITE-SCREEN FLASH FIX
@@ -127,9 +128,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
         {/* Calming animated background */}
-        <div className="bg-mesh" aria-hidden="true" />
-        <div className="bg-dots" aria-hidden="true" />
-        <div className="bg-orb-3" aria-hidden="true" />
+        <AnimatedBackground />
         <ThemeProvider>
           <LernioMotionProvider>
             <RouteLoadingBar />

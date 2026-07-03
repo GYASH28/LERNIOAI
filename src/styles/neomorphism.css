@@ -3,75 +3,15 @@
    Glassmorphism + Gradient accents + Glow effects + Micro-interactions
    ============================================================ */
 
-/* ─── Premium Animated Background ─── */
+/* ─── Premium Background ─── */
 body {
   background: var(--canvas);
   position: relative;
   overflow-x: hidden;
 }
 
-/* Ambient gradient orbs in background — more visible */
-body::before {
-  content: '';
-  position: fixed;
-  top: -15%;
-  left: -10%;
-  width: 60%;
-  height: 70%;
-  background: radial-gradient(ellipse, color-mix(in oklch, var(--brand) 18%, transparent), transparent 55%);
-  pointer-events: none;
-  z-index: 0;
-  animation: orb-drift-1 25s ease-in-out infinite;
-  filter: blur(60px);
-  opacity: 0.7;
-}
-
-body::after {
-  content: '';
-  position: fixed;
-  bottom: -15%;
-  right: -10%;
-  width: 60%;
-  height: 70%;
-  background: radial-gradient(ellipse, color-mix(in oklch, var(--secondary-action) 15%, transparent), transparent 55%);
-  pointer-events: none;
-  z-index: 0;
-  animation: orb-drift-2 30s ease-in-out infinite;
-  filter: blur(60px);
-  opacity: 0.6;
-}
-
-/* Third orb — center */
-.bg-orb-3 {
-  position: fixed;
-  top: 30%;
-  left: 40%;
-  width: 40%;
-  height: 50%;
-  background: radial-gradient(ellipse, color-mix(in oklch, var(--brand) 8%, var(--secondary-action) 8%, transparent), transparent 60%);
-  pointer-events: none;
-  z-index: 0;
-  animation: orb-drift-3 35s ease-in-out infinite;
-  filter: blur(80px);
-  opacity: 0.5;
-}
-
-@keyframes orb-drift-1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(50px, -30px) scale(1.15); }
-  66% { transform: translate(-30px, 40px) scale(0.85); }
-}
-
-@keyframes orb-drift-2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(-40px, 30px) scale(1.1); }
-  66% { transform: translate(30px, -40px) scale(0.9); }
-}
-
-@keyframes orb-drift-3 {
-  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-  50% { transform: translate(20px, -20px) scale(1.2) rotate(180deg); }
-}
+/* Background animations handled by canvas component (AnimatedBackground) */
+/* CSS orbs removed — canvas provides better, more visible animation */
 
 /* Content above orbs */
 main, header, footer {
