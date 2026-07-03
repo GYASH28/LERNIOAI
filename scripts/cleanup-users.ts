@@ -73,12 +73,13 @@ async function main() {
 
   if (!adminEmail || !adminPassword) {
     console.log('\n⚠️  LERNIO_ADMIN_EMAIL or LERNIO_ADMIN_PASSWORD not set')
-    console.log('   Skipping admin creation. Set these env vars and run again.')
+    console.log('   All users deleted. Admin NOT created — set these env vars and redeploy.')
     return
   }
 
   if (adminPassword.length < 8) {
     console.log('\n⚠️  Admin password must be at least 8 characters')
+    console.log('   All users deleted. Admin NOT created — fix password and redeploy.')
     return
   }
 
