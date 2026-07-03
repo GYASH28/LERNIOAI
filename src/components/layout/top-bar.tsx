@@ -36,6 +36,7 @@ import {
   GraduationCap,
   HelpCircle,
   ClipboardList,
+  Users,
 } from 'lucide-react'
 import type { ViewKey } from '@/lib/types'
 import { routeForView } from '@/lib/routes'
@@ -58,6 +59,7 @@ const NAV_ITEMS: { key: ViewKey; label: string; icon: typeof BookOpen }[] = [
 ]
 
 const EXTRA_LINKS: { href: string; label: string; icon: typeof BookOpen }[] = [
+  { href: '/class', label: 'My Class', icon: Users },
   { href: '/attendance', label: 'Attendance', icon: ClipboardList },
   { href: '/leaderboard', label: 'Leaderboard', icon: Trophy },
   { href: '/teacher-dashboard', label: 'Teacher Dashboard', icon: GraduationCap },

@@ -1123,6 +1123,8 @@ model User {
   accounts                    Account[]
   attendanceSessionsTaken     AttendanceSession[]
   attendanceRecords           AttendanceRecord[]
+  classAsCR                   Class?           @relation("ClassCR")
+  classMembershipsNew         ClassMember[]    @relation("ClassMemberUser")
   sessions                    Session[]
   roleRequests                RoleRequest[]
   authorityGrants             AuthorityGrant[]        @relation("AuthorityGrantUser")
@@ -2138,4 +2140,36 @@ model AttendanceRecord {
   @@unique([sessionId, userId])
   @@index([userId, createdAt])
   @@index([sessionId])
+}
+
+// ============================================================
+// CLASS SYSTEM
+// ============================================================
+
+model Class {
+  id              String   @id @default(cuid())
+  departmentCode  String   // DCOMP, DCIOT
+  semesterNumber  Int      // 1-6
+  division        String   // A, B, C
+  crId            String?  @unique // CR user ID
+  cr              User?    @relation("ClassCR", fields: [crId], references: [id], onDelete: SetNull)
+  academicYear    String?  // e.g. "2025-2026"
+  createdAt       DateTime @default(now())
+
+  members         ClassMember[]
+
+  @@unique([departmentCode, semesterNumber, division])
+  @@index([departmentCode, semesterNumber])
+}
+
+model ClassMember {
+  id        String   @id @default(cuid())
+  classId   String
+  class     Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation("ClassMemberUser", fields: [userId], references: [id], onDelete: Cascade)
+  joinedAt  DateTime @default(now())
+
+  @@unique([classId, userId])
+  @@index([userId])
 }
