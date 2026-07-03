@@ -1,4 +1,6 @@
 import { redirect } from 'next/navigation'
+export const dynamic = 'force-dynamic'
+
 import { requireActiveRole } from '@/lib/auth'
 import { getAdminModuleData } from '@/lib/admin/campusmate-data'
 import { CampusmateAdminShell } from '@/components/admin/campusmate-admin-shell'

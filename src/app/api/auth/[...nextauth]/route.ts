@@ -1,19 +1,35 @@
 import NextAuth from 'next-auth'
 import { authOptions } from '@/lib/auth'
+import { checkRateLimit } from '@/lib/rate-limit'
 import { NextRequest, NextResponse } from 'next/server'
 
-const handler = NextAuth(authOptions)
+// Initialize NextAuth once at module load.
+let handler: ((req: any, res: any) => any) | null = null
+let initError: string | null = null
+
+try {
+  handler = NextAuth(authOptions)
+} catch (err) {
+  initError = err instanceof Error ? err.message : 'Unknown NextAuth init error'
+  console.error('[nextauth] Initialization failed:', initError)
+}
 
 interface RouteContext {
   params: Promise<{ nextauth: string[] }>
 }
 
 async function handleAuth(req: NextRequest, context: RouteContext) {
+  if (!handler) {
+    return NextResponse.json(
+      { error: 'Auth service unavailable', detail: initError },
+      { status: 503 },
+    )
+  }
+
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0] ?? 'unknown'
 
-  // Rate limiting — wrapped in try/catch so DB issues never block auth
+  // Rate limiting (non-blocking)
   try {
-    const { checkRateLimit } = await import('@/lib/rate-limit')
     const globalLimit = await checkRateLimit({
       action: 'auth_global',
       identifier: ip,
@@ -23,12 +39,27 @@ async function handleAuth(req: NextRequest, context: RouteContext) {
     if (!globalLimit.allowed) {
       return NextResponse.json({ error: 'Too many requests' }, { status: 429 })
     }
-  } catch {}
 
-  // Get route params (nextauth: ['csrf'], ['providers'], ['callback', 'credentials'], etc.)
+    const url = new URL(req.url)
+    if (url.pathname === '/api/auth/callback/credentials') {
+      const credLimit = await checkRateLimit({
+        action: 'auth_cred_callback',
+        identifier: ip,
+        limit: 10,
+        windowMs: 60 * 1000,
+      })
+      if (!credLimit.allowed) {
+        return NextResponse.json({ error: 'Too many login attempts' }, { status: 429 })
+      }
+    }
+  } catch {
+    // DB unavailable — skip rate limiting
+  }
+
+  // Get the nextauth route params
   const { nextauth } = await context.params
 
-  // Parse query from URL
+  // Parse query params from the URL
   const url = new URL(req.url)
   const query: Record<string, any> = { nextauth }
   url.searchParams.forEach((value, key) => {
@@ -40,7 +71,7 @@ async function handleAuth(req: NextRequest, context: RouteContext) {
     }
   })
 
-  // Read body for POST
+  // Read body for POST requests
   let body: any = undefined
   if (req.method === 'POST') {
     try {
@@ -49,7 +80,8 @@ async function handleAuth(req: NextRequest, context: RouteContext) {
         body = await req.json()
       } else if (contentType.includes('application/x-www-form-urlencoded')) {
         const text = await req.text()
-        body = Object.fromEntries(new URLSearchParams(text).entries())
+        const params = new URLSearchParams(text)
+        body = Object.fromEntries(params.entries())
       } else {
         body = {}
       }
@@ -58,7 +90,7 @@ async function handleAuth(req: NextRequest, context: RouteContext) {
     }
   }
 
-  // Convert headers to plain object
+  // Convert Headers to a plain object
   const headersObj: Record<string, string> = {}
   req.headers.forEach((value, key) => {
     headersObj[key] = value
@@ -70,13 +102,12 @@ async function handleAuth(req: NextRequest, context: RouteContext) {
   let responseStatus = 200
   let responseBody: any = null
 
-  // Response proxy — catches ALL method calls from next-auth v4
+  // Create a response proxy that catches ALL method calls
   const resShim = new Proxy({} as any, {
-    get(_target: any, prop: string) {
+    get(_target, prop: string) {
       if (prop === 'finished') return false
       if (prop === 'headersSent') return false
       if (prop === 'statusCode') return responseStatus
-      if (prop === 'cookies') return resCookies
 
       return (...args: any[]) => {
         const method = prop
@@ -95,13 +126,11 @@ async function handleAuth(req: NextRequest, context: RouteContext) {
           return resShim
         }
         if (method === 'json') {
-          responseBody = typeof args[0] === 'string' ? args[0] : JSON.stringify(args[0])
+          responseBody = args[0]
           return resShim
         }
         if (method === 'send' || method === 'end' || method === 'write') {
-          if (args[0] !== undefined && args[0] !== null) {
-            responseBody = typeof args[0] === 'string' ? args[0] : JSON.stringify(args[0])
-          }
+          if (args[0] !== undefined) responseBody = args[0]
           return resShim
         }
         if (method === 'redirect') {
@@ -110,7 +139,7 @@ async function handleAuth(req: NextRequest, context: RouteContext) {
             if (args[1]) resHeaders.set('location', [args[1]])
           } else if (args[0]) {
             responseStatus = 302
-            resHeaders.set('location', [String(args[0])])
+            resHeaders.set('location', [args[0]])
           }
           return resShim
         }
@@ -129,11 +158,10 @@ async function handleAuth(req: NextRequest, context: RouteContext) {
         if (method === 'has') {
           return resHeaders.has(String(args[0]).toLowerCase())
         }
-        // Unknown method — return shim for chaining
         return resShim
       }
     },
-    set(_target: any, prop: string, value: any) {
+    set(_target, prop: string, value: any) {
       if (prop === 'statusCode' || prop === 'status') {
         responseStatus = value
       }
@@ -141,20 +169,34 @@ async function handleAuth(req: NextRequest, context: RouteContext) {
     },
   })
 
-  // Request shim — plain object with all properties next-auth v4 expects
-  const reqShim = {
-    url: req.url,
-    method: req.method,
-    headers: headersObj,
-    query,
-    body,
-    cookies: Object.fromEntries(req.cookies.getAll().map((c) => [c.name, c.value])),
-  }
+  // Create a request proxy that wraps the real NextRequest
+  // and adds the missing `query` and `body` properties.
+  // Using a Proxy ensures next-auth can access ANY property on req
+  // (url, method, headers, cookies, etc.) via the real NextRequest,
+  // while also getting the `query` and `body` properties it expects.
+  const reqShim = new Proxy(req as any, {
+    get(target: any, prop: string) {
+      // Return our shimmed query/body/cookies
+      if (prop === 'query') return query
+      if (prop === 'body') return body
+      if (prop === 'cookies') {
+        return Object.fromEntries(
+          req.cookies.getAll().map((c) => [c.name, c.value])
+        )
+      }
+      // For everything else, return the real NextRequest property
+      const value = target[prop]
+      if (typeof value === 'function') {
+        return value.bind(target)
+      }
+      return value
+    },
+  })
 
   try {
     await handler(reqShim, resShim)
 
-    // Check for redirect
+    // Build the NextResponse from captured state
     const location = resHeaders.get('location')?.[0]
     if (location) {
       const response = NextResponse.redirect(location, { status: responseStatus || 302 })
@@ -171,7 +213,6 @@ async function handleAuth(req: NextRequest, context: RouteContext) {
       return response
     }
 
-    // JSON or text response
     const response = NextResponse.json(responseBody ?? '', { status: responseStatus })
     for (const cookie of resCookies) {
       response.cookies.set(cookie.name, cookie.value, cookie.options || {})
@@ -185,8 +226,8 @@ async function handleAuth(req: NextRequest, context: RouteContext) {
     }
     return response
   } catch (err) {
-    const message = err instanceof Error ? err.message : 'Unknown auth error'
-    console.error('[nextauth] Error:', message)
+    const message = err instanceof Error ? err.message : 'Unknown auth handler error'
+    console.error('[nextauth] Handler error:', message)
     return NextResponse.json(
       { error: 'Auth handler error', detail: message },
       { status: 500 },

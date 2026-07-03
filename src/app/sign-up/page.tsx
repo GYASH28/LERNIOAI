@@ -2,20 +2,8 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import type { ChangeEvent, FormEvent, ReactNode } from 'react'
-import { ChevronDown, Mail, UserPlus } from 'lucide-react'
-import {
-  AuthShell,
-  GoogleMark,
-  authInputClass,
-  authPrimaryButtonClass,
-  authSecondaryButtonClass,
-  authSelectClass,
-} from '@/components/auth/auth-shell'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { CAMPUS_DIVISIONS, CAMPUS_SEMESTERS, CWIT_PROGRAMMES } from '@/lib/campus-auth'
+import type { FormEvent } from 'react'
+import { ChevronDown, Mail, UserPlus, ArrowLeft } from 'lucide-react'
 
 const initialForm = {
   name: '',
@@ -29,54 +17,14 @@ const initialForm = {
   inviteCode: '',
 }
 
-function Field({
-  label,
-  children,
-  className = '',
-}: {
-  label: string
-  children: ReactNode
-  className?: string
-}) {
-  return (
-    <label className={`block ${className}`}>
-      <Label className="text-sm font-semibold text-foreground">{label}</Label>
-      <span className="mt-2 block">{children}</span>
-    </label>
-  )
-}
-
-function ToggleSection({
-  open,
-  onClick,
-  children,
-}: {
-  open: boolean
-  onClick: () => void
-  children: ReactNode
-}) {
-  return (
-    <button
-      type="button"
-      className="inline-flex items-center gap-2 rounded-lg border border-border bg-muted/30 px-3 py-2 text-sm font-bold text-primary transition hover:border-primary/40 hover:bg-muted"
-      onClick={onClick}
-      aria-expanded={open}
-    >
-      {children}
-      <ChevronDown className={`h-4 w-4 transition ${open ? 'rotate-180' : ''}`} />
-    </button>
-  )
-}
-
-function SignUpForm() {
+export default function SignUpPage() {
   const [form, setForm] = useState(initialForm)
-  const [showAcademic, setShowAcademic] = useState(false)
   const [showInvite, setShowInvite] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [statusMessage, setStatusMessage] = useState('')
   const [error, setError] = useState('')
 
-  function handleChange(event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
+  function handleChange(event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     setForm((current) => ({ ...current, [event.target.name]: event.target.value }))
   }
 
@@ -84,8 +32,7 @@ function SignUpForm() {
     if (!form.name.trim()) return 'Enter your full name.'
     if (!form.email.trim()) return 'Enter your email address.'
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) return 'Enter a valid email address.'
-    if (form.rollNumber.trim() && !/^[A-Za-z0-9/-]{1,32}$/.test(form.rollNumber.trim())) return 'Roll number format is not valid.'
-    if (form.password.length < 8) return 'Password must be at least 8 characters.'
+    if (form.password.length < 12) return 'Password must be at least 12 characters.'
     if (form.password !== form.confirmPassword) return 'Passwords do not match.'
     return ''
   }
@@ -100,7 +47,7 @@ function SignUpForm() {
 
     setSubmitting(true)
     setError('')
-    setStatusMessage(showInvite && form.inviteCode.trim() ? 'Checking invite code...' : 'Creating your profile...')
+    setStatusMessage('Creating your profile...')
 
     try {
       const response = await fetch('/api/auth/register', {
@@ -122,20 +69,8 @@ function SignUpForm() {
         throw new Error(json.error?.message || 'Could not create this account.')
       }
 
-      // Auto sign-in after registration
-      setStatusMessage('Signing you in...')
-      const { signIn } = await import('next-auth/react')
-      const result = await signIn('credentials', {
-        email: form.email.trim(),
-        password: form.password,
-        redirect: false,
-        callbackUrl: '/dashboard',
-      })
-      if (result?.error) {
-        throw new Error('Account created, but automatic sign-in failed. Use the sign-in page.')
-      }
-
-      window.location.href = result?.url ?? '/dashboard'
+      setForm(initialForm)
+      setStatusMessage('Profile created. Check your email to verify the account before signing in.')
     } catch (signupError) {
       setError(signupError instanceof Error ? signupError.message : 'Could not create this account.')
       setStatusMessage('')
@@ -199,176 +134,185 @@ function SignUpForm() {
     }
   }
 
+  const inputStyle: React.CSSProperties = {
+    width: '100%',
+    height: '44px',
+    borderRadius: '8px',
+    border: '1px solid #334155',
+    backgroundColor: '#0f172a',
+    color: '#f8fafc',
+    padding: '0 12px',
+    fontSize: '14px',
+    outline: 'none',
+  }
+
   return (
-    <AuthShell
-      eyebrow="Create profile"
-      title="Start with a student account"
-      description="Students can sign up directly. CR, teacher, coordinator, reviewer, moderator, and admin access need an invite code."
-      backHref="/"
-      backLabel="Intro"
-      className="max-w-2xl"
-    >
-      <form onSubmit={submit} className="grid gap-4 sm:grid-cols-2">
-        <Field label="Full name" className="sm:col-span-2">
-          <Input
-            name="name"
-            value={form.name}
-            onChange={handleChange}
-            placeholder="Your name"
-            autoComplete="name"
-            className={authInputClass}
-            required
-          />
-        </Field>
-
-        <Field label="Email" className="sm:col-span-2">
-          <span className="relative block">
-            <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              placeholder="you@example.com"
-              autoComplete="email"
-              className={`${authInputClass} pl-10`}
-              required
-            />
-          </span>
-        </Field>
-
-        <Field label="Password">
-          <Input
-            type="password"
-            name="password"
-            value={form.password}
-            onChange={handleChange}
-            placeholder="At least 8 characters"
-            autoComplete="new-password"
-            className={authInputClass}
-            required
-          />
-        </Field>
-
-        <Field label="Confirm password">
-          <Input
-            type="password"
-            name="confirmPassword"
-            value={form.confirmPassword}
-            onChange={handleChange}
-            placeholder="Repeat password"
-            autoComplete="new-password"
-            className={authInputClass}
-            required
-          />
-        </Field>
-
-        <div className="flex flex-wrap gap-2 sm:col-span-2">
-          <ToggleSection open={showAcademic} onClick={() => setShowAcademic((value) => !value)}>
-            {showAcademic ? 'Hide academic details' : 'Add academic details'}
-          </ToggleSection>
-          <ToggleSection open={showInvite} onClick={() => setShowInvite((value) => !value)}>
-            {showInvite ? 'Hide invite code' : 'Have an invite code'}
-          </ToggleSection>
-        </div>
-
-        {showAcademic ? (
-          <div className="grid gap-4 rounded-lg border border-border bg-muted/20 p-4 sm:col-span-2 sm:grid-cols-2">
-            <Field label="Roll number">
-              <Input
-                name="rollNumber"
-                value={form.rollNumber}
-                onChange={handleChange}
-                placeholder="Optional"
-                inputMode="text"
-                pattern="[A-Za-z0-9/-]{1,32}"
-                className={authInputClass}
-              />
-            </Field>
-            <Field label="Department / programme">
-              <select name="departmentCode" value={form.departmentCode} onChange={handleChange} className={authSelectClass}>
-                <option value="">Choose later</option>
-                {CWIT_PROGRAMMES.map((programme) => (
-                  <option key={programme.programmeCode} value={programme.departmentCode}>
-                    {programme.programmeName}
-                  </option>
-                ))}
-              </select>
-            </Field>
-            <Field label="Semester">
-              <select name="semesterNumber" value={form.semesterNumber} onChange={handleChange} className={authSelectClass}>
-                <option value="">Choose later</option>
-                {CAMPUS_SEMESTERS.map((semester) => (
-                  <option key={semester} value={semester}>
-                    Semester {semester}
-                  </option>
-                ))}
-              </select>
-            </Field>
-            <Field label="Division">
-              <select name="division" value={form.division} onChange={handleChange} className={authSelectClass}>
-                {CAMPUS_DIVISIONS.map((division) => (
-                  <option key={division} value={division}>
-                    {division === 'NOT_SURE' ? 'Not sure' : `Division ${division}`}
-                  </option>
-                ))}
-              </select>
-            </Field>
-          </div>
-        ) : null}
-
-        {showInvite ? (
-          <Field label="Invite code" className="sm:col-span-2">
-            <Input
-              name="inviteCode"
-              value={form.inviteCode}
-              onChange={(event) => setForm((current) => ({ ...current, inviteCode: event.target.value.toUpperCase() }))}
-              placeholder="LM-TEA-123456"
-              className={authInputClass}
-            />
-          </Field>
-        ) : null}
-
-        {error ? (
-          <p className="rounded-lg border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm font-semibold text-destructive sm:col-span-2">
-            {error}
-          </p>
-        ) : null}
-
-        {statusMessage ? (
-          <p className="rounded-lg border border-primary/30 bg-primary/10 px-3 py-2 text-sm font-semibold text-primary sm:col-span-2">
-            {statusMessage}
-          </p>
-        ) : null}
-
-        <Button type="submit" className={`w-full sm:col-span-2 ${authPrimaryButtonClass}`} disabled={submitting}>
-          <UserPlus className="h-4 w-4" />
-          {submitting ? 'Creating profile...' : 'Create profile'}
-        </Button>
-      </form>
-
-      <div>
-        <div className="my-5 flex items-center gap-3 text-xs font-semibold text-muted-foreground">
-          <span className="h-px flex-1 bg-border" />
-          or
-          <span className="h-px flex-1 bg-border" />
-        </div>
-        <Button type="button" variant="secondary" className={`w-full ${authSecondaryButtonClass}`} disabled={submitting} onClick={handleGoogle}>
-          <GoogleMark />
-          Continue with Google
-        </Button>
-      </div>
-
-      <p className="mt-6 text-center text-sm text-muted-foreground">
-        Already have an account?{' '}
-        <Link href="/sign-in" className="font-bold text-primary hover:text-foreground">
-          Sign in
+    <div className="min-h-screen flex items-center justify-center px-4 py-12" style={{ backgroundColor: '#0f172a' }}>
+      <div className="w-full max-w-2xl" style={{ backgroundColor: '#1e293b', borderRadius: '16px', padding: '32px', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)' }}>
+        <Link href="/" className="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors mb-4">
+          <ArrowLeft className="h-4 w-4" />
+          Intro
         </Link>
-      </p>
-    </AuthShell>
-  )
-}
 
-export default function SignUpPage() {
-  return <SignUpForm />
+        <div className="mb-6">
+          <p className="text-sm font-bold text-cyan-400">Create profile</p>
+          <h1 className="mt-2 text-3xl font-extrabold text-white">Start with a student account</h1>
+          <p className="mt-2 text-sm text-gray-400">
+            Students can sign up directly. CR, teacher, coordinator, reviewer, moderator, and admin access need an invite code.
+          </p>
+        </div>
+
+        {error && (
+          <div style={{ backgroundColor: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.4)', borderRadius: '8px', padding: '12px', color: '#fca5a5', fontSize: '14px', fontWeight: 600, marginBottom: '16px' }}>
+            {error}
+          </div>
+        )}
+        {statusMessage && (
+          <div style={{ backgroundColor: 'rgba(6,182,212,0.1)', border: '1px solid rgba(6,182,212,0.4)', borderRadius: '8px', padding: '12px', color: '#67e8f9', fontSize: '14px', fontWeight: 600, marginBottom: '16px' }}>
+            {statusMessage}
+          </div>
+        )}
+
+        <form onSubmit={submit} className="grid gap-4 sm:grid-cols-2">
+          <div>
+            <label className="block text-sm font-semibold text-white mb-2">Full name</label>
+            <input style={inputStyle} type="text" name="name" value={form.name} onChange={handleChange} placeholder="Aarav Sharma" required />
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-white mb-2">Email</label>
+            <input style={inputStyle} type="email" name="email" value={form.email} onChange={handleChange} placeholder="aarav@lernio.ai" required />
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-white mb-2">Password (min 12 chars)</label>
+            <input style={inputStyle} type="password" name="password" value={form.password} onChange={handleChange} placeholder="••••••••••••" required />
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-white mb-2">Confirm password</label>
+            <input style={inputStyle} type="password" name="confirmPassword" value={form.confirmPassword} onChange={handleChange} placeholder="••••••••••••" required />
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-white mb-2">Roll number (optional)</label>
+            <input style={inputStyle} type="text" name="rollNumber" value={form.rollNumber} onChange={handleChange} placeholder="2023/DCOMP/045" />
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-white mb-2">Department</label>
+            <select style={inputStyle} name="departmentCode" value={form.departmentCode} onChange={handleChange}>
+              <option value="">Select department</option>
+              <option value="DCOMP">Computer Engineering (DCOMP)</option>
+              <option value="DCIOT">Computer IoT (DCIOT)</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-white mb-2">Semester</label>
+            <select style={inputStyle} name="semesterNumber" value={form.semesterNumber} onChange={handleChange}>
+              <option value="">Select semester</option>
+              {[1, 2, 3, 4, 5, 6].map((s) => (
+                <option key={s} value={s}>Semester {s}</option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-white mb-2">Division</label>
+            <select style={inputStyle} name="division" value={form.division} onChange={handleChange}>
+              <option value="NOT_SURE">Not sure</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+            </select>
+          </div>
+
+          {showInvite && (
+            <div className="sm:col-span-2">
+              <label className="block text-sm font-semibold text-white mb-2">Invite code</label>
+              <input style={inputStyle} type="text" name="inviteCode" value={form.inviteCode} onChange={handleChange} placeholder="Enter invite code for role-based access" />
+            </div>
+          )}
+
+          <div className="sm:col-span-2">
+            <button
+              type="button"
+              onClick={() => setShowInvite(!showInvite)}
+              className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-white transition-colors"
+            >
+              <ChevronDown className="h-3 w-3" />
+              {showInvite ? 'Hide invite code' : 'Have an invite code? (CR / Teacher / Admin)'}
+            </button>
+          </div>
+
+          <button
+            type="submit"
+            disabled={submitting}
+            style={{
+              width: '100%',
+              height: '44px',
+              borderRadius: '8px',
+              border: 'none',
+              backgroundColor: submitting ? '#0e7490' : '#06b6d4',
+              color: '#ffffff',
+              fontSize: '14px',
+              fontWeight: 600,
+              cursor: submitting ? 'not-allowed' : 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+            }}
+            className="sm:col-span-2"
+          >
+            <UserPlus className="h-4 w-4" />
+            {submitting ? 'Creating profile...' : 'Create profile'}
+          </button>
+        </form>
+
+        <div className="flex items-center gap-3 text-xs font-semibold text-gray-500 my-5">
+          <div className="flex-1 h-px bg-gray-700" />
+          or
+          <div className="flex-1 h-px bg-gray-700" />
+        </div>
+
+        <button
+          type="button"
+          disabled={submitting}
+          onClick={handleGoogle}
+          style={{
+            width: '100%',
+            height: '44px',
+            borderRadius: '8px',
+            border: '1px solid #334155',
+            backgroundColor: '#0f172a',
+            color: '#f8fafc',
+            fontSize: '14px',
+            fontWeight: 600,
+            cursor: submitting ? 'not-allowed' : 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '8px',
+          }}
+        >
+          <svg className="h-4 w-4" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+          </svg>
+          Continue with Google
+        </button>
+
+        <p className="mt-6 text-center text-sm text-gray-400">
+          Already have an account?{' '}
+          <Link href="/sign-in" className="font-bold text-cyan-400 hover:text-white transition-colors">
+            Sign in
+          </Link>
+        </p>
+      </div>
+    </div>
+  )
 }

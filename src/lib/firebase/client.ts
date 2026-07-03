@@ -1,8 +1,3 @@
-/**
- * Firebase client SDK initialization.
- * Used for Google sign-in via Firebase Authentication (popup flow).
- */
-
 import { initializeApp, type FirebaseApp } from 'firebase/app'
 import { getAuth, type Auth } from 'firebase/auth'
 
@@ -29,9 +24,5 @@ export function getFirebaseAuth(): Auth | null {
 }
 
 export function isFirebaseConfigured(): boolean {
-  return Boolean(
-    firebaseConfig.apiKey &&
-    firebaseConfig.projectId &&
-    firebaseConfig.authDomain
-  )
+  return Boolean(firebaseConfig.apiKey && firebaseConfig.projectId && firebaseConfig.authDomain)
 }

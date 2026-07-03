@@ -1,7 +1,3 @@
-/**
- * Firebase Admin SDK — server-side token verification.
- */
-
 import admin from 'firebase-admin'
 
 let initialized = false

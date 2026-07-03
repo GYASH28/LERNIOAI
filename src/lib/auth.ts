@@ -67,9 +67,14 @@ const providers: NextAuthOptions['providers'] = [
       if (!email || !password || password.length > 256) return null
 
       const failKey = `credential_login_fail:${email}`
-      const existingFail = await db.rateLimitBucket.findUnique({
-        where: { key: failKey },
-      })
+      let existingFail: Awaited<ReturnType<typeof db.rateLimitBucket.findUnique>> = null
+      try {
+        existingFail = await db.rateLimitBucket.findUnique({
+          where: { key: failKey },
+        })
+      } catch {
+        // DB unreachable — skip rate limit check, proceed to credential check
+      }
       if (existingFail && existingFail.resetAt > new Date() && existingFail.count >= MAX_LOGIN_ATTEMPTS) {
         return null
       }
@@ -84,20 +89,27 @@ const providers: NextAuthOptions['providers'] = [
         return DEMO_AUTH_USER
       }
 
-      const user = await db.user.findUnique({
-        where: { email },
-        select: {
-          id: true,
-          email: true,
-          name: true,
-          passwordHash: true,
-          role: true,
-          status: true,
-          profileComplete: true,
-          authorityVersion: true,
-          sessionsRevokedAt: true,
-        },
-      })
+      let user: Awaited<ReturnType<typeof db.user.findUnique>> = null
+      try {
+        user = await db.user.findUnique({
+          where: { email },
+          select: {
+            id: true,
+            email: true,
+            name: true,
+            passwordHash: true,
+            role: true,
+            status: true,
+            profileComplete: true,
+            authorityVersion: true,
+            sessionsRevokedAt: true,
+          },
+        })
+      } catch {
+        // DB unreachable — sign-in cannot proceed. Return null so next-auth
+        // shows the generic "CredentialsSignin" error to the user.
+        return null
+      }
 
       if (!user?.passwordHash || user.status === 'disabled' || user.status === 'pending_verification') {
         await checkRateLimit({
@@ -105,7 +117,7 @@ const providers: NextAuthOptions['providers'] = [
           identifier: email,
           limit: MAX_LOGIN_ATTEMPTS,
           windowMs: LOGIN_WINDOW_MS,
-        })
+        }).catch(() => {})
         return null
       }
 
@@ -116,7 +128,7 @@ const providers: NextAuthOptions['providers'] = [
           identifier: email,
           limit: MAX_LOGIN_ATTEMPTS,
           windowMs: LOGIN_WINDOW_MS,
-        })
+        }).catch(() => {})
         return null
       }
 
@@ -190,11 +202,14 @@ export const authOptions: NextAuthOptions = {
           !token.role ||
           !token.status ||
           token.profileComplete === undefined ||
-          token.authorityVersion === undefined ||
-          !token.authorityCheckedAt ||
-          Date.now() - Number(token.authorityCheckedAt) > 60_000
+          token.authorityVersion === undefined
         )
       ) {
+        // Only query DB if critical token fields are missing.
+        // NOTE: Removed the 60-second authority recheck — it caused a DB
+        // query on EVERY page load, making pages take 5-10+ seconds.
+        // Authority is now only checked at login time. To force a recheck,
+        // the user must sign out and sign back in.
         const fresh = await db.user.findUnique({
           where: { email: token.email },
           select: {
@@ -205,7 +220,7 @@ export const authOptions: NextAuthOptions = {
             authorityVersion: true,
             sessionsRevokedAt: true,
           },
-        })
+        }).catch(() => null)
         if (fresh) {
           const authIssuedAt =
             Number(token.authIssuedAt) ||
@@ -373,36 +388,74 @@ export const authOptions: NextAuthOptions = {
  * administrator signs in with a real database account.
  */
 async function resolveUserFromSession(): Promise<AuthUser | null> {
-  const session = await getServerSession(authOptions)
-  const authMode = resolveAuthMode({
-    demoModeEnv: process.env.LERNIO_DEMO_MODE,
-    sessionEmail: session?.user?.email,
-  })
+  // Bypass getServerSession (which is broken on Next.js 16) and read
+  // the JWT directly from cookies. This is much faster AND works with
+  // Next.js 16's route handler changes.
+  try {
+    // Import cookies() from next/headers — async in Next.js 15+
+    const { cookies } = await import('next/headers')
+    const cookieStore = await cookies()
+    const sessionCookie = cookieStore.get(
+      process.env.NODE_ENV === 'production'
+        ? '__Secure-next-auth.session-token'
+        : 'next-auth.session-token'
+    )
 
-  if (authMode.mode === 'session') {
-    if (session?.user?.sessionRevoked) return null
-    const u = await db.user.findUnique({ where: { email: authMode.email } })
-    if (!u || u.status === 'disabled' || u.status === 'pending_verification') return null
-    return {
-      id: u.id,
-      email: u.email,
-      name: u.name,
-      role: normalizeRole(u.role),
-      status: u.status,
-      profileComplete: u.profileComplete,
-      authorityVersion: u.authorityVersion,
+    if (!sessionCookie?.value) {
+      // No session cookie — check demo mode
+      const authMode = resolveAuthMode({
+        demoModeEnv: process.env.LERNIO_DEMO_MODE,
+        sessionEmail: null,
+      })
+      if (authMode.mode === 'demo') {
+        return DEMO_AUTH_USER
+      }
+      return null
     }
-  }
 
-  if (authMode.mode === 'demo') {
-    return DEMO_AUTH_USER
-  }
+    // Decode the JWT directly (no DB query, no getServerSession)
+    const jwt = (await import('jsonwebtoken')).default
+    const secret = process.env.NEXTAUTH_SECRET
+    if (!secret) return null
 
-  return null
+    const decoded = jwt.verify(sessionCookie.value, secret) as any
+
+    if (!decoded?.email || !decoded?.id) return null
+    if (decoded.sessionRevoked === true) return null
+    if (decoded.status === 'revoked' || decoded.status === 'disabled') return null
+
+    return {
+      id: String(decoded.id),
+      email: String(decoded.email),
+      name: String(decoded.name || decoded.email.split('@')[0]),
+      role: normalizeRole(decoded.role),
+      status: String(decoded.status || 'active'),
+      profileComplete: decoded.profileComplete ?? true,
+      authorityVersion: Number(decoded.authorityVersion ?? 0),
+    }
+  } catch {
+    // JWT verification failed or cookies() not available
+    return null
+  }
 }
 
 export async function getCurrentUser(): Promise<AuthUser | null> {
-  return resolveUserFromSession()
+  // 2-second timeout — if getServerSession or the DB query is slow,
+  // return null immediately so the page renders without waiting.
+  // Pages redirect to /sign-in if user is null, so slow DB = redirect
+  // instead of 25-second hang.
+  return new Promise((resolve) => {
+    const timer = setTimeout(() => resolve(null), 2000)
+    resolveUserFromSession()
+      .then((user) => {
+        clearTimeout(timer)
+        resolve(user)
+      })
+      .catch(() => {
+        clearTimeout(timer)
+        resolve(null)
+      })
+  })
 }
 
 /**

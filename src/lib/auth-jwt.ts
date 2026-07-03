@@ -13,15 +13,8 @@ export async function signJwt(payload: {
   if (!secret) throw new Error('NEXTAUTH_SECRET is not set')
   const now = Math.floor(Date.now() / 1000)
   return jwt.sign(
-    {
-      ...payload,
-      iat: now,
-      exp: now + 30 * 24 * 60 * 60,
-      authIssuedAt: Date.now(),
-      authorityCheckedAt: Date.now(),
-      sessionRevoked: false,
-    },
+    { ...payload, iat: now, exp: now + 30 * 24 * 60 * 60, authIssuedAt: Date.now(), authorityCheckedAt: Date.now(), sessionRevoked: false },
     secret,
-    { algorithm: 'HS256' },
+    { algorithm: 'HS256' }
   )
 }
