@@ -21,7 +21,7 @@ export default async function LearnPage() {
     })
     if (dbUser) {
       programmeCode = dbUser.departmentCode === 'DCIOT' ? 'DCIOT' : 'DCOMP'
-      semesterNumber = dbUser.semesterNumber || 1
+      semesterNumber = dbUser.semesterNumber || 3
     }
   } catch {
     // DB unavailable — default to semester 1

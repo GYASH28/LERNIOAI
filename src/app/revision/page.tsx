@@ -20,7 +20,7 @@ export default async function RevisionPage() {
     })
     if (dbUser) {
       programmeCode = dbUser.departmentCode === 'DCIOT' ? 'DCIOT' : 'DCOMP'
-      semesterNumber = dbUser.semesterNumber || 1
+      semesterNumber = dbUser.semesterNumber || 3
     }
   } catch {}
   const subjects = getManifestSubjectsForSemester(programmeCode, semesterNumber)

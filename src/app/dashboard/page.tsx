@@ -58,7 +58,7 @@ export default async function DashboardPage() {
 
   // Determine programme and semester from user's DB record
   const programmeCode = userDept === 'DCIOT' ? 'DCIOT' : 'DCOMP'
-  const semesterNumber = userSemester || 1
+  const semesterNumber = userSemester || 3
 
   // Get manifest subjects for the user's semester
   const subjects = getManifestSubjectsForSemester(programmeCode, semesterNumber)

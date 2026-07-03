@@ -183,7 +183,7 @@ export async function registerCampusUser(input: CampusSignUpInput) {
     role,
     status: 'active',
     provider: 'password',
-    profileComplete: Boolean(programme && semesterNumber && division !== 'NOT_SURE'),
+    profileComplete: Boolean(programme && semesterNumber),
     onboarded: false,
     branch: invite?.branch || programme?.programmeName || null,
     departmentCode: programme?.departmentCode || null,
