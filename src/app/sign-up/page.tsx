@@ -84,6 +84,7 @@ export default function SignUpPage() {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) return 'Enter a valid email address.'
     if (!form.departmentCode) return 'Select your department / programme.'
     if (!form.semesterNumber) return 'Select your current semester.'
+    if (!form.division || form.division === 'NOT_SURE') return 'Select your division (A, B, or C).'
     if (form.rollNumber.trim() && !/^[A-Za-z0-9/-]{1,32}$/.test(form.rollNumber.trim())) return 'Roll number format is not valid.'
     if (form.password.length < 8) return 'Password must be at least 8 characters.'
     if (form.password !== form.confirmPassword) return 'Passwords do not match.'
@@ -252,13 +253,12 @@ export default function SignUpPage() {
                 ))}
               </select>
             </Field>
-            <Field label="Division">
-              <select name="division" value={form.division} onChange={handleChange} className={authSelectClass}>
-                {CAMPUS_DIVISIONS.map((division) => (
-                  <option key={division} value={division}>
-                    {division === 'NOT_SURE' ? 'Not sure' : `Division ${division}`}
-                  </option>
-                ))}
+            <Field label="Division *">
+              <select name="division" value={form.division} onChange={handleChange} className={authSelectClass} required>
+                <option value="">Select division</option>
+                <option value="A">Division A</option>
+                <option value="B">Division B</option>
+                <option value="C">Division C</option>
               </select>
             </Field>
           </div>
