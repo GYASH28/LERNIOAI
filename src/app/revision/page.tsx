@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation'
 import { getCurrentUser } from '@/lib/auth'
+import { db } from '@/lib/db'
 import { getManifestSubjectsForSemester } from '@/lib/curriculum/manifest-data'
 import { RevisionClient } from './revision-client'
 
@@ -9,7 +10,20 @@ export default async function RevisionPage() {
   const user = await getCurrentUser()
   if (!user) redirect('/sign-in?callbackUrl=/revision')
 
-  const subjects = getManifestSubjectsForSemester('DCOMP', 3)
+  // Get user's actual semester from DB
+  let programmeCode = 'DCOMP'
+  let semesterNumber = 1
+  try {
+    const dbUser = await db.user.findUnique({
+      where: { id: user.id },
+      select: { semesterNumber: true, departmentCode: true },
+    })
+    if (dbUser) {
+      programmeCode = dbUser.departmentCode === 'DCIOT' ? 'DCIOT' : 'DCOMP'
+      semesterNumber = dbUser.semesterNumber || 1
+    }
+  } catch {}
+  const subjects = getManifestSubjectsForSemester(programmeCode, semesterNumber)
 
   return (
     <main className="min-h-screen bg-background text-foreground">

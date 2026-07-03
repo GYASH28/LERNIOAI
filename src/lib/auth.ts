@@ -282,7 +282,7 @@ export const authOptions: NextAuthOptions = {
           provider: 'oauth',
           profileComplete: isVerified,
           departmentCode: 'COMP',
-          semesterNumber: 3,
+          semesterNumber: null,
           ...(defaultScheme ? { schemeId: defaultScheme.id } : {}),
         },
       })

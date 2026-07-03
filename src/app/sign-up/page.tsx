@@ -68,7 +68,7 @@ function ToggleSection({
 
 export default function SignUpPage() {
   const [form, setForm] = useState(initialForm)
-  const [showAcademic, setShowAcademic] = useState(false)
+  const [showAcademic] = useState(true) // Always visible — academic details are mandatory
   const [showInvite, setShowInvite] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [statusMessage, setStatusMessage] = useState('')
@@ -82,6 +82,8 @@ export default function SignUpPage() {
     if (!form.name.trim()) return 'Enter your full name.'
     if (!form.email.trim()) return 'Enter your email address.'
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) return 'Enter a valid email address.'
+    if (!form.departmentCode) return 'Select your department / programme.'
+    if (!form.semesterNumber) return 'Select your current semester.'
     if (form.rollNumber.trim() && !/^[A-Za-z0-9/-]{1,32}$/.test(form.rollNumber.trim())) return 'Roll number format is not valid.'
     if (form.password.length < 8) return 'Password must be at least 8 characters.'
     if (form.password !== form.confirmPassword) return 'Passwords do not match.'
@@ -212,16 +214,13 @@ export default function SignUpPage() {
         </Field>
 
         <div className="flex flex-wrap gap-2 sm:col-span-2">
-          <ToggleSection open={showAcademic} onClick={() => setShowAcademic((value) => !value)}>
-            {showAcademic ? 'Hide academic details' : 'Add academic details'}
-          </ToggleSection>
           <ToggleSection open={showInvite} onClick={() => setShowInvite((value) => !value)}>
             {showInvite ? 'Hide invite code' : 'Have an invite code'}
           </ToggleSection>
         </div>
 
-        {showAcademic ? (
-          <div className="grid gap-4 rounded-lg border border-border bg-muted/20 p-4 sm:col-span-2 sm:grid-cols-2">
+        {/* Academic details — always visible, mandatory */}
+        <div className="grid gap-4 rounded-lg border border-border bg-muted/20 p-4 sm:col-span-2 sm:grid-cols-2">
             <Field label="Roll number">
               <Input
                 name="rollNumber"
@@ -233,9 +232,9 @@ export default function SignUpPage() {
                 className={authInputClass}
               />
             </Field>
-            <Field label="Department / programme">
-              <select name="departmentCode" value={form.departmentCode} onChange={handleChange} className={authSelectClass}>
-                <option value="">Choose later</option>
+            <Field label="Department / programme *">
+              <select name="departmentCode" value={form.departmentCode} onChange={handleChange} className={authSelectClass} required>
+                <option value="">Select department</option>
                 {CWIT_PROGRAMMES.map((programme) => (
                   <option key={programme.programmeCode} value={programme.departmentCode}>
                     {programme.programmeName}
@@ -243,9 +242,9 @@ export default function SignUpPage() {
                 ))}
               </select>
             </Field>
-            <Field label="Semester">
-              <select name="semesterNumber" value={form.semesterNumber} onChange={handleChange} className={authSelectClass}>
-                <option value="">Choose later</option>
+            <Field label="Semester *">
+              <select name="semesterNumber" value={form.semesterNumber} onChange={handleChange} className={authSelectClass} required>
+                <option value="">Select semester</option>
                 {CAMPUS_SEMESTERS.map((semester) => (
                   <option key={semester} value={semester}>
                     Semester {semester}
@@ -263,7 +262,6 @@ export default function SignUpPage() {
               </select>
             </Field>
           </div>
-        ) : null}
 
         {showInvite ? (
           <Field label="Invite code" className="sm:col-span-2">
