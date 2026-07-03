@@ -9,6 +9,7 @@ import { RouteLoadingBar } from "@/components/app/route-loading-bar";
 import { RegisterSW } from "@/components/app/register-sw";
 import { KeyboardShortcuts } from "@/components/app/keyboard-shortcuts";
 import { AnimatedBackground } from "@/components/ui/animated-background";
+import { CustomCursor } from "@/components/ui/custom-cursor";
 
 // ──────────────────────────────────────────────────────────────────────────
 // WHITE-SCREEN FLASH FIX
@@ -137,6 +138,7 @@ export default function RootLayout({
             <CommandPalette />
             <KeyboardShortcuts />
             <RegisterSW />
+            <CustomCursor />
           </LernioMotionProvider>
         </ThemeProvider>
       </body>
