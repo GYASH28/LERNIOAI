@@ -90,11 +90,16 @@ export default function SignInPage() {
         const userPayload = await userResponse.json().catch(() => null)
         if (userPayload?.ok && userPayload.data?.role) {
           const role = userPayload.data.role
-          if (role === 'admin') {
-            window.location.href = '/admin'
-            return
-          } else if (role === 'teacher') {
-            window.location.href = '/teacher-dashboard'
+          const roleRedirects: Record<string, string> = {
+            admin: '/admin',
+            teacher: '/teacher-dashboard',
+            cr: '/cr',
+            coordinator: '/coordinator',
+            moderator: '/moderator',
+            reviewer: '/reviewer',
+          }
+          if (roleRedirects[role]) {
+            window.location.href = roleRedirects[role]
             return
           }
         }
