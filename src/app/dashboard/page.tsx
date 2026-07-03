@@ -1,5 +1,4 @@
 import { redirect } from 'next/navigation'
-import { BackButton } from "@/components/ui/back-button"
 import { getCurrentUser } from '@/lib/auth'
 import { db } from '@/lib/db'
 import Link from 'next/link'
@@ -64,7 +63,6 @@ export default async function DashboardPage() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
-          <BackButton />
         {/* ─── Semester Hero ─── */}
         <section className="rounded-xl border border-primary/20 bg-gradient-to-br from-primary/5 to-transparent p-5 sm:p-6">
           <div className="flex flex-wrap items-start justify-between gap-4">
