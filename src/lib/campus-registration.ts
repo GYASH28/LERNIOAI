@@ -227,7 +227,8 @@ export async function registerCampusUser(input: CampusSignUpInput) {
       return user
     })
 
-    await sendVerificationEmail(email, verificationToken)
+    // Send verification email — don't block registration if it fails
+    await sendVerificationEmail(email, verificationToken).catch(() => {})
     return user
   } catch (error) {
     if (isPrismaUniqueConstraintError(error)) {
