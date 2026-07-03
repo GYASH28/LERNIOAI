@@ -87,6 +87,10 @@ if (skipDbSetup) {
   if (alreadySeeded) {
     console.log('[vercel-build] DB already seeded — skipping curriculum seeds. ✅')
     // Always run admin upsert — ensures admin role is correct
+    const adminEmail = process.env.LERNIO_ADMIN_EMAIL
+    const adminPass = process.env.LERNIO_ADMIN_PASSWORD
+    console.log(`[vercel-build] Admin email configured: ${adminEmail ? 'YES (' + adminEmail + ')' : 'NO'}`)
+    console.log(`[vercel-build] Admin password configured: ${adminPass ? 'YES (' + adminPass.length + ' chars)' : 'NO'}`)
     console.log('[vercel-build] Ensuring admin user has correct role...')
     runCommand('npx', ['tsx', 'scripts/upsert-admin.ts'], { required: false })
   } else {

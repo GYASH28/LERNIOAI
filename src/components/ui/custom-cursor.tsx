@@ -263,10 +263,17 @@ export function CustomCursor() {
       </div>
 
       <style>{`
-        /* Hide default cursor on desktop only */
+        /* Hide default cursor on desktop ONLY on non-input elements */
         @media (hover: hover) and (pointer: fine) {
-          * {
+          body, div, span, a, button, p, h1, h2, h3, h4, h5, h6,
+          section, nav, header, footer, main, aside, article, ul, li,
+          table, thead, tbody, tr, td, th, label, img, svg, canvas {
             cursor: none !important;
+          }
+
+          /* Keep text cursor for inputs and textareas */
+          input, textarea, select, [contenteditable] {
+            cursor: text !important;
           }
         }
 
