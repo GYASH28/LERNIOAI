@@ -63,29 +63,68 @@ export function PlannerClient({ subjects }: { subjects: SubjectInfo[] }) {
     save(tasks.filter(t => t.id !== id))
   }
 
-  const autoPlan = () => {
-    const plan: Task[] = []
-    const weakSubjects = subjects.filter(s => s.credits >= 5).slice(0, 5)
-    weakSubjects.forEach((s, i) => {
-      const day = DAYS[i % 7]
-      plan.push({
-        id: `auto-${Date.now()}-${i}`,
-        title: `Study: ${s.name} — watch primary lecture`,
-        subject: s.code,
-        date: day,
-        priority: s.credits >= 5 ? 4 : 2,
-        completed: false,
+  const [generating, setGenerating] = useState(false)
+
+  const autoPlan = async () => {
+    setGenerating(true)
+    try {
+      // Call the AI to generate a personalized study plan
+      const response = await fetch('/api/planner/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          subjects: subjects.map(s => ({
+            code: s.code,
+            name: s.name,
+            credits: s.credits,
+            coverageFocus: s.coverageFocus,
+          })),
+        }),
       })
-      plan.push({
-        id: `auto-${Date.now()}-${i}-quiz`,
-        title: `Practice quiz: ${s.name}`,
-        subject: s.code,
-        date: DAYS[(i + 3) % 7],
-        priority: 3,
-        completed: false,
+      const data = await response.json()
+
+      if (data.ok && data.tasks) {
+        save([...tasks, ...data.tasks])
+      } else {
+        // Fallback: generate a simple plan if AI fails
+        const plan: Task[] = []
+        subjects.slice(0, 5).forEach((s, i) => {
+          plan.push({
+            id: `auto-${Date.now()}-${i}`,
+            title: `Study: ${s.name} — watch primary lecture`,
+            subject: s.code,
+            date: DAYS[i % 7],
+            priority: s.credits >= 5 ? 4 : 2,
+            completed: false,
+          })
+          plan.push({
+            id: `auto-${Date.now()}-${i}-quiz`,
+            title: `Practice quiz: ${s.name}`,
+            subject: s.code,
+            date: DAYS[(i + 3) % 7],
+            priority: 3,
+            completed: false,
+          })
+        })
+        save([...tasks, ...plan])
+      }
+    } catch {
+      // Fallback plan on error
+      const plan: Task[] = []
+      subjects.slice(0, 5).forEach((s, i) => {
+        plan.push({
+          id: `auto-${Date.now()}-${i}`,
+          title: `Study: ${s.name}`,
+          subject: s.code,
+          date: DAYS[i % 7],
+          priority: 3,
+          completed: false,
+        })
       })
-    })
-    save([...tasks, ...plan])
+      save([...tasks, ...plan])
+    } finally {
+      setGenerating(false)
+    }
   }
 
   const subjectName = (code: string) => subjects.find(s => s.code === code)?.name ?? code
@@ -96,8 +135,8 @@ export function PlannerClient({ subjects }: { subjects: SubjectInfo[] }) {
     <div>
       {/* Actions */}
       <div className="mb-4 flex flex-wrap gap-2">
-        <button onClick={autoPlan} className="flex items-center gap-1.5 rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors">
-          <Sparkles className="h-4 w-4" /> Auto-Plan Week
+        <button onClick={autoPlan} disabled={generating} className="flex items-center gap-1.5 rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-50">
+          <Sparkles className={`h-4 w-4 ${generating ? 'animate-spin' : ''}`} /> {generating ? 'AI Planning...' : 'AI Auto-Plan'}
         </button>
         <button onClick={() => setShowAdd(!showAdd)} className="flex items-center gap-1.5 rounded-md border border-border px-3 py-2 text-sm font-medium hover:bg-accent transition-colors">
           <Plus className="h-4 w-4" /> Add Task

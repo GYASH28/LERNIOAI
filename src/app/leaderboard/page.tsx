@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation'
+import { BackButton } from "@/components/ui/back-button"
 import { getCurrentUser } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { Trophy } from 'lucide-react'
@@ -14,6 +15,7 @@ export default async function LeaderboardPage() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-3xl px-4 py-6 sm:px-6 lg:px-8">
+          <BackButton />
         <div className="mb-6 flex items-center gap-3">
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-500/10"><Trophy className="h-6 w-6 text-amber-600" /></div>
           <div><h1 className="text-2xl font-bold">Leaderboard</h1><p className="text-sm text-muted-foreground">Top students by XP</p></div>
