@@ -85,7 +85,17 @@ if (skipDbSetup) {
   }
 
   if (alreadySeeded) {
-    console.log('[vercel-build] DB already seeded — skipping all seed scripts. ✅')
+    console.log('[vercel-build] DB already seeded — skipping curriculum seeds. ✅')
+
+    // Run cleanup if LERNIO_CLEANUP_USERS=true (one-time operation)
+    if (process.env.LERNIO_CLEANUP_USERS === 'true') {
+      console.log('[vercel-build] LERNIO_CLEANUP_USERS=true — deleting all users and recreating admin...')
+      runCommand('npx', ['tsx', 'scripts/cleanup-users.ts'], { required: false })
+    } else {
+      // Always run admin upsert — ensures admin role is correct
+      console.log('[vercel-build] Ensuring admin user has correct role...')
+      runCommand('npx', ['tsx', 'scripts/upsert-admin.ts'], { required: false })
+    }
   } else {
     console.log('[vercel-build] DB not seeded — running seed scripts (this may take a few minutes)...')
 
