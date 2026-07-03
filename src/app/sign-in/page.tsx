@@ -23,7 +23,9 @@ export default function SignInPage() {
 
     try {
       const params = new URLSearchParams(window.location.search)
-      const callbackUrl = params.get('callbackUrl') || '/dashboard'
+      const callbackPath = params.get('callbackUrl') || '/dashboard'
+      // Make callbackUrl absolute — Next.js 16 requires absolute URLs
+      const callbackUrl = new URL(callbackPath, window.location.origin).toString()
 
       const { signIn } = await import('next-auth/react')
       const result = await signIn('credentials', {
@@ -41,7 +43,10 @@ export default function SignInPage() {
         return
       }
 
-      const destination = result?.url ?? callbackUrl
+      // Make destination absolute
+      const destination = result?.url
+        ? new URL(result.url, window.location.origin).toString()
+        : callbackUrl
       window.location.href = destination
     } catch {
       setSubmitting(false)

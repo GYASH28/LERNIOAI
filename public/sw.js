@@ -5,7 +5,7 @@
 // This file unregisters ALL existing service workers and clears ALL caches.
 // Once the site is stable, we can re-enable a simpler caching strategy.
 
-const CACHE_NAME = 'lernio-v6-clear';
+const CACHE_NAME = 'lernio-v7-clear';
 
 // On install: skip waiting so this SW activates immediately
 self.addEventListener('install', (event) => {
