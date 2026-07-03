@@ -177,7 +177,7 @@ export function TopBar() {
   return (
     <>
       {/* Desktop top bar */}
-      <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+      <header className="sticky top-0 z-[100] border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80" style={{ zIndex: 100 }}>
         <div className="flex h-14 items-center gap-3 px-3 sm:px-4">
           {/* Logo + collapse */}
           <Link href="/dashboard" className="flex shrink-0 items-center gap-2">
@@ -220,7 +220,7 @@ export function TopBar() {
                 <ChevronDown className={`h-3 w-3 transition-transform ${moreOpen ? 'rotate-180' : ''}`} />
               </button>
               {moreOpen && (
-                <div className="absolute right-0 top-full mt-1 min-w-[200px] rounded-xl border border-border bg-popover/95 backdrop-blur-xl py-2 shadow-2xl z-50">
+                <div className="absolute right-0 top-full mt-2 min-w-[200px] rounded-xl border border-border bg-popover/95 backdrop-blur-xl py-2 shadow-2xl" style={{ zIndex: 9999 }}>
                   {moreItems.map((item) => {
                     const href = routeForView(item.key)
                     const active = isActivePath(pathname, href)
