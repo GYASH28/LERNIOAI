@@ -3,6 +3,7 @@ import { getCurrentUser } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { getManifestSubjectsForSemester } from '@/lib/curriculum/manifest-data'
 import { RevisionClient } from './revision-client'
+import { BackButton } from '@/components/ui/back-button'
 
 export const dynamic = 'force-dynamic'
 
@@ -12,7 +13,7 @@ export default async function RevisionPage() {
 
   // Get user's actual semester from DB
   let programmeCode = 'DCOMP'
-  let semesterNumber = 1
+  let semesterNumber = 3
   try {
     const dbUser = await db.user.findUnique({
       where: { id: user.id },
@@ -28,8 +29,9 @@ export default async function RevisionPage() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-3xl px-4 py-6 sm:px-6 lg:px-8">
-        <h1 className="text-2xl font-bold">Revision</h1>
-        <p className="mt-1 text-sm text-muted-foreground">Review key concepts from your subjects. Flip cards to test your recall.</p>
+        <BackButton />
+        <h1 className="text-2xl font-bold">Revision Center</h1>
+        <p className="mt-1 text-sm text-muted-foreground">Flashcards · Formula Sheets · Glossary · Quick Quiz · Summaries</p>
         <div className="mt-6">
           <RevisionClient subjects={subjects.map(s => ({ code: s.code, name: s.name, coverageFocus: s.coverageFocus }))} />
         </div>
