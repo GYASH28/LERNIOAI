@@ -213,12 +213,25 @@ async function handleAuth(req: NextRequest, context: RouteContext) {
       return response
     }
 
-    const response = NextResponse.json(responseBody ?? '', { status: responseStatus })
+    // JSON or text response
+    // Use new Response instead of NextResponse.json because responseBody
+    // may already be a JSON string (from res.end(JSON.stringify(...)))
+    const bodyStr = responseBody ?? ''
+    const response = new Response(bodyStr, {
+      status: responseStatus,
+      headers: { 'content-type': 'application/json' },
+    })
+    // Copy cookies
     for (const cookie of resCookies) {
-      response.cookies.set(cookie.name, cookie.value, cookie.options || {})
+      response.headers.append(
+        'set-cookie',
+        `${cookie.name}=${cookie.value}; Path=/; HttpOnly; SameSite=Lax${
+          cookie.options?.maxAge !== undefined ? `; Max-Age=${cookie.options.maxAge}` : ''
+        }${cookie.options?.secure ? '; Secure' : ''}`
+      )
     }
     for (const [key, values] of resHeaders) {
-      if (key !== 'location') {
+      if (key !== 'location' && key !== 'set-cookie') {
         for (const v of values) {
           response.headers.append(key, v)
         }
