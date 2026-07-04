@@ -24,20 +24,14 @@ CREATE TABLE "Class" (
     CONSTRAINT "Class_pkey" PRIMARY KEY ("id")
 );
 
--- Unique constraint on the natural key (dept + sem + division)
 CREATE UNIQUE INDEX "Class_departmentCode_semesterNumber_division_key" ON "Class"("departmentCode", "semesterNumber", "division");
--- CR is unique per class (one CR per class)
 CREATE UNIQUE INDEX "Class_crId_key" ON "Class"("crId");
--- Index for listing classes by department + semester
 CREATE INDEX "Class_departmentCode_semesterNumber_idx" ON "Class"("departmentCode", "semesterNumber");
 
--- Foreign key: Class.crId → User.id, ON DELETE SET NULL (CR can leave without deleting class)
 ALTER TABLE "Class" ADD CONSTRAINT "Class_crId_fkey"
     FOREIGN KEY ("crId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
--- ============================================================
 -- ClassMember: many-to-many between User and Class
--- ============================================================
 CREATE TABLE "ClassMember" (
     "id"        TEXT   NOT NULL,
     "classId"   TEXT   NOT NULL,
@@ -47,7 +41,6 @@ CREATE TABLE "ClassMember" (
     CONSTRAINT "ClassMember_pkey" PRIMARY KEY ("id")
 );
 
--- One membership per (class, user) pair
 CREATE UNIQUE INDEX "ClassMember_classId_userId_key" ON "ClassMember"("classId", "userId");
 CREATE INDEX "ClassMember_userId_idx" ON "ClassMember"("userId");
 
@@ -56,9 +49,7 @@ ALTER TABLE "ClassMember" ADD CONSTRAINT "ClassMember_classId_fkey"
 ALTER TABLE "ClassMember" ADD CONSTRAINT "ClassMember_userId_fkey"
     FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
--- ============================================================
 -- ClassAnnouncement: posts by CR/teacher/admin to a class
--- ============================================================
 CREATE TABLE "ClassAnnouncement" (
     "id"           TEXT   NOT NULL,
     "classId"      TEXT   NOT NULL,
@@ -83,9 +74,7 @@ ALTER TABLE "ClassAnnouncement" ADD CONSTRAINT "ClassAnnouncement_classId_fkey"
 ALTER TABLE "ClassAnnouncement" ADD CONSTRAINT "ClassAnnouncement_authorId_fkey"
     FOREIGN KEY ("authorId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
--- ============================================================
 -- ClassTimetable: weekly schedule slots per class
--- ============================================================
 CREATE TABLE "ClassTimetable" (
     "id"           TEXT   NOT NULL,
     "classId"      TEXT   NOT NULL,
@@ -104,7 +93,6 @@ CREATE TABLE "ClassTimetable" (
     CONSTRAINT "ClassTimetable_pkey" PRIMARY KEY ("id")
 );
 
--- One slot per (class, day, period)
 CREATE UNIQUE INDEX "ClassTimetable_classId_dayOfWeek_periodIndex_key" ON "ClassTimetable"("classId", "dayOfWeek", "periodIndex");
 CREATE INDEX "ClassTimetable_classId_dayOfWeek_idx" ON "ClassTimetable"("classId", "dayOfWeek");
 CREATE INDEX "ClassTimetable_teacherId_dayOfWeek_idx" ON "ClassTimetable"("teacherId", "dayOfWeek");

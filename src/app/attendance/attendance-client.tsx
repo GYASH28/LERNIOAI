@@ -512,7 +512,7 @@ function exportSessionCSV(session: any) {
   ]) || []
 
   const csv = [headers, ...rows].map(row =>
-    row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',')
+    row.map((cell: any) => `"${String(cell).replace(/"/g, '""')}"`).join(',')
   ).join('\n')
 
   const blob = new Blob([csv], { type: 'text/csv' })
@@ -537,7 +537,7 @@ function exportAllSessionsCSV(sessions: SessionSummary[]) {
   ])
 
   const csv = [headers, ...rows].map(row =>
-    row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',')
+    row.map((cell: any) => `"${String(cell).replace(/"/g, '""')}"`).join(',')
   ).join('\n')
 
   const blob = new Blob([csv], { type: 'text/csv' })

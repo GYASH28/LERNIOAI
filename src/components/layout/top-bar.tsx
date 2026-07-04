@@ -247,6 +247,29 @@ export function TopBar() {
                       </Link>
                     )
                   })}
+
+                  {/* Divider between nav items and extra links */}
+                  <div className="my-1 border-t border-border" />
+
+                  {/* Extra links — same as mobile drawer (My Class, Attendance, etc.) */}
+                  {EXTRA_LINKS.map((link) => {
+                    const active = isActivePath(pathname, link.href)
+                    return (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        prefetch={true}
+                        onClick={() => setMoreOpen(false)}
+                        className={cn(
+                          'flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors',
+                          active ? 'bg-primary/10 text-primary font-medium' : 'text-muted-foreground hover:bg-accent hover:text-foreground',
+                        )}
+                      >
+                        <link.icon className="h-4 w-4" />
+                        {link.label}
+                      </Link>
+                    )
+                  })}
                 </div>
               )}
             </div>
@@ -420,7 +443,7 @@ export function TopBar() {
 
 // ─── User Menu (desktop dropdown with profile, settings, logout) ─────────────
 
-function UserMenu({ user, isDark, setPref, onSignOut }: { user: { name: string; email: string } | null; isDark: boolean; setPref: (p: { appearance: string }) => void; onSignOut: () => void }) {
+function UserMenu({ user, isDark, setPref, onSignOut }: { user: { name: string; email: string } | null; isDark: boolean; setPref: (p: any) => void; onSignOut: () => void }) {
   const [open, setOpen] = useState(false)
   const [signingOut, setSigningOut] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
