@@ -149,3 +149,90 @@ export async function PATCH(request: Request, ctx: { params: Promise<{ id: strin
     return okResponse({ user })
   })
 }
+
+/**
+ * DELETE /api/admin/users/[id]
+ * Permanently delete a user account. Cascading deletes clean up:
+ * - ClassMember entries (class memberships)
+ * - AttendanceRecord entries
+ * - AttendanceSession entries (sessions they took)
+ * - ClassAnnouncement entries (announcements they authored)
+ * - ClassTimetable entries (slots they taught)
+ * - RecentlyViewed, Bookmarks, Notifications, Feedback, etc.
+ *
+ * Safety:
+ * - Admin cannot delete themselves
+ * - Admin cannot delete the last remaining admin account
+ */
+export async function DELETE(_request: Request, ctx: { params: Promise<{ id: string }> }) {
+  return withApi(async () => {
+    const authority = await requireActiveRole('admin')
+    const { id } = await ctx.params
+
+    // Safety 1: Can't delete yourself
+    if (id === authority.user.id) {
+      throw new ApiError(
+        'CANNOT_DELETE_SELF',
+        'You cannot delete your own account. Ask another admin to do it.',
+        400,
+        false,
+      )
+    }
+
+    // Fetch the target user
+    const target = await db.user.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        status: true,
+        createdAt: true,
+      },
+    })
+    if (!target) {
+      throw new ApiError('NOT_FOUND', 'User not found.', 404, false)
+    }
+
+    // Safety 2: Can't delete the last admin
+    if (target.role === 'admin') {
+      const adminCount = await db.user.count({
+        where: { role: 'admin', status: 'active' },
+      })
+      if (adminCount <= 1) {
+        throw new ApiError(
+          'LAST_ADMIN',
+          'Cannot delete the last active admin account. Promote another user to admin first.',
+          400,
+          false,
+        )
+      }
+    }
+
+    // If the target is a CR, unset them as CR on their class first
+    // (the Class.crId has ON DELETE SET NULL, but let's be explicit)
+    if (target.role === 'cr') {
+      await db.class.updateMany({
+        where: { crId: id },
+        data: { crId: null },
+      }).catch(() => {})
+    }
+
+    // Delete the user — cascading deletes handle the rest
+    await db.user.delete({ where: { id } })
+
+    // Write audit event
+    await writeAuditEvent({
+      actorUserId: authority.user.id,
+      targetUserId: id,
+      action: 'user.deleted',
+      entityType: 'User',
+      entityId: id,
+      summary: `Deleted user ${target.email} (${target.name})`,
+      metadata: { deletedEmail: target.email, deletedName: target.name, deletedRole: target.role },
+    })
+
+    return okResponse({ deleted: true, email: target.email, name: target.name })
+  })
+}
