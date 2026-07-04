@@ -1,10 +1,10 @@
 import { redirect } from 'next/navigation'
-import { getCurrentUser, requireUser } from '@/lib/auth'
+import { requireActiveRole } from '@/lib/auth'
 import { db } from '@/lib/db'
 import Link from 'next/link'
 import {
   Users, BookOpen, FileText, Database, Shield, Settings,
-  ClipboardList, Megaphone, BarChart3, Download, AlertTriangle
+  ClipboardList, Megaphone, BarChart3, Download, AlertTriangle,
 } from 'lucide-react'
 import { BackButton } from '@/components/ui/back-button'
 
@@ -13,9 +13,15 @@ export const dynamic = 'force-dynamic'
 export const metadata = { title: 'Admin Dashboard' }
 
 export default async function AdminPage() {
-  const user = await getCurrentUser()
-  if (!user) redirect('/sign-in?callbackUrl=/admin')
-  if (user.role !== 'admin') redirect('/dashboard')
+  // Use requireActiveRole (DB-backed) instead of getCurrentUser (JWT-only)
+  // This fixes the "admin redirected to student dashboard" bug when JWT is stale
+  let authority
+  try {
+    authority = await requireActiveRole('admin')
+  } catch {
+    redirect('/sign-in?callbackUrl=/admin')
+  }
+  const user = authority.user
 
   // Fetch quick stats — all wrapped in try/catch for resilience
   let stats = {
