@@ -87,26 +87,44 @@ export async function DELETE() {
     }
 
     await db.$transaction(async (tx) => {
-      await tx.tutorMessage.deleteMany({
-        where: { session: { userId: user.id } },
-      })
-      await tx.tutorSession.deleteMany({ where: { userId: user.id } })
-      await tx.questionAttempt.deleteMany({ where: { userId: user.id } })
-      await tx.quizAttempt.deleteMany({ where: { userId: user.id } })
-      await tx.userTopicMastery.deleteMany({ where: { userId: user.id } })
-      await tx.revisionSchedule.deleteMany({ where: { userId: user.id } })
-      await tx.revisionAttempt.deleteMany({ where: { userId: user.id } })
-      await tx.lessonCompletion.deleteMany({ where: { userId: user.id } })
-      await tx.studyTask.deleteMany({ where: { userId: user.id } })
-      await tx.studySession.deleteMany({ where: { userId: user.id } })
-      await tx.codingSubmission.deleteMany({ where: { userId: user.id } })
-      await tx.labProgress.deleteMany({ where: { userId: user.id } })
-      await tx.userAchievement.deleteMany({ where: { userId: user.id } })
-      await tx.xpEvent.deleteMany({ where: { userId: user.id } })
-      await tx.contribution.deleteMany({ where: { userId: user.id } })
-      await tx.bookmark.deleteMany({ where: { userId: user.id } })
-      await tx.roleRequest.deleteMany({ where: { userId: user.id } })
-      await tx.institutionMembership.deleteMany({ where: { userId: user.id } })
+      // Clean up ALL related records — some have cascade, some don't.
+      // Delete explicitly to avoid foreign key constraint violations.
+      await tx.tutorMessage.deleteMany({ where: { session: { userId: user.id } } }).catch(() => {})
+      await tx.tutorSession.deleteMany({ where: { userId: user.id } }).catch(() => {})
+      await tx.questionAttempt.deleteMany({ where: { userId: user.id } }).catch(() => {})
+      await tx.quizAttempt.deleteMany({ where: { userId: user.id } }).catch(() => {})
+      await tx.userTopicMastery.deleteMany({ where: { userId: user.id } }).catch(() => {})
+      await tx.revisionSchedule.deleteMany({ where: { userId: user.id } }).catch(() => {})
+      await tx.revisionAttempt.deleteMany({ where: { userId: user.id } }).catch(() => {})
+      await tx.lessonCompletion.deleteMany({ where: { userId: user.id } }).catch(() => {})
+      await tx.studyTask.deleteMany({ where: { userId: user.id } }).catch(() => {})
+      await tx.studySession.deleteMany({ where: { userId: user.id } }).catch(() => {})
+      await tx.codingSubmission.deleteMany({ where: { userId: user.id } }).catch(() => {})
+      await tx.labProgress.deleteMany({ where: { userId: user.id } }).catch(() => {})
+      await tx.userAchievement.deleteMany({ where: { userId: user.id } }).catch(() => {})
+      await tx.xpEvent.deleteMany({ where: { userId: user.id } }).catch(() => {})
+      await tx.contribution.deleteMany({ where: { userId: user.id } }).catch(() => {})
+      await tx.bookmark.deleteMany({ where: { userId: user.id } }).catch(() => {})
+      await tx.roleRequest.deleteMany({ where: { userId: user.id } }).catch(() => {})
+      await tx.institutionMembership.deleteMany({ where: { userId: user.id } }).catch(() => {})
+      await tx.notification.deleteMany({ where: { userId: user.id } }).catch(() => {})
+      await tx.feedback.deleteMany({ where: { userId: user.id } }).catch(() => {})
+      await tx.recentlyViewed.deleteMany({ where: { userId: user.id } }).catch(() => {})
+      await tx.videoWatchProgress.deleteMany({ where: { userId: user.id } }).catch(() => {})
+      await tx.studentElectiveSelection.deleteMany({ where: { userId: user.id } }).catch(() => {})
+      // Class system tables
+      await tx.classMember.deleteMany({ where: { userId: user.id } }).catch(() => {})
+      await tx.attendanceRecord.deleteMany({ where: { userId: user.id } }).catch(() => {})
+      await tx.attendanceSession.deleteMany({ where: { takenById: user.id } }).catch(() => {})
+      await tx.classAnnouncement.deleteMany({ where: { authorId: user.id } }).catch(() => {})
+      await tx.classTimetable.deleteMany({ where: { teacherId: user.id } }).catch(() => {})
+      // Authority system tables
+      await tx.roleAssignment.deleteMany({ where: { userId: user.id } }).catch(() => {})
+      await tx.classMembership.deleteMany({ where: { userId: user.id } }).catch(() => {})
+      await tx.teachingAssignment.deleteMany({ where: { teacherId: user.id } }).catch(() => {})
+      await tx.teachingAssignment.deleteMany({ where: { assignedById: user.id } }).catch(() => {})
+      // Unset CR from any classes
+      await tx.class.updateMany({ where: { crId: user.id }, data: { crId: null } }).catch(() => {})
 
       const deleted = await tx.user.deleteMany({ where: { id: user.id } })
       if (deleted.count === 0) {
