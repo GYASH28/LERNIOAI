@@ -217,7 +217,6 @@ export async function DELETE(_request: Request, ctx: { params: Promise<{ id: str
     }
 
     // If the target is a CR, unset them as CR on their class first
-    // (the Class.crId has ON DELETE SET NULL, but let's be explicit)
     if (target.role === 'cr') {
       await db.class.updateMany({
         where: { crId: id },
@@ -225,8 +224,58 @@ export async function DELETE(_request: Request, ctx: { params: Promise<{ id: str
       }).catch(() => {})
     }
 
-    // Delete the user — cascading deletes handle the rest
-    await db.user.delete({ where: { id } })
+    // Clean up ALL related records BEFORE deleting the user.
+    // Same approach as DELETE /api/user — use Promise.allSettled so
+    // failures don't block the deletion.
+    const cleanup = [
+      db.tutorMessage.deleteMany({ where: { session: { userId: id } } }),
+      db.tutorSession.deleteMany({ where: { userId: id } }),
+      db.questionAttempt.deleteMany({ where: { userId: id } }),
+      db.quizAttempt.deleteMany({ where: { userId: id } }),
+      db.userTopicMastery.deleteMany({ where: { userId: id } }),
+      db.revisionSchedule.deleteMany({ where: { userId: id } }),
+      db.revisionAttempt.deleteMany({ where: { userId: id } }),
+      db.lessonCompletion.deleteMany({ where: { userId: id } }),
+      db.studyTask.deleteMany({ where: { userId: id } }),
+      db.studySession.deleteMany({ where: { userId: id } }),
+      db.codingSubmission.deleteMany({ where: { userId: id } }),
+      db.labProgress.deleteMany({ where: { userId: id } }),
+      db.userAchievement.deleteMany({ where: { userId: id } }),
+      db.xpEvent.deleteMany({ where: { userId: id } }),
+      db.contribution.deleteMany({ where: { userId: id } }),
+      db.bookmark.deleteMany({ where: { userId: id } }),
+      db.roleRequest.deleteMany({ where: { userId: id } }),
+      db.institutionMembership.deleteMany({ where: { userId: id } }),
+      db.notification.deleteMany({ where: { userId: id } }),
+      db.feedback.deleteMany({ where: { userId: id } }),
+      db.recentlyViewed.deleteMany({ where: { userId: id } }),
+      db.videoWatchProgress.deleteMany({ where: { userId: id } }),
+      db.studentElectiveSelection.deleteMany({ where: { userId: id } }),
+      db.classMember.deleteMany({ where: { userId: id } }),
+      db.attendanceRecord.deleteMany({ where: { userId: id } }),
+      db.attendanceSession.deleteMany({ where: { takenById: id } }),
+      db.classAnnouncement.deleteMany({ where: { authorId: id } }),
+      db.classTimetable.deleteMany({ where: { teacherId: id } }),
+      db.class.updateMany({ where: { crId: id }, data: { crId: null } }),
+      db.roleAssignment.deleteMany({ where: { userId: id } }),
+      db.classMembership.deleteMany({ where: { userId: id } }),
+      db.teachingAssignment.deleteMany({ where: { teacherId: id } }),
+      db.teachingAssignment.deleteMany({ where: { assignedById: id } }),
+      db.authorityGrant.deleteMany({ where: { userId: id } }),
+      db.authorityGrant.deleteMany({ where: { createdById: id } }),
+      db.authorityGrant.deleteMany({ where: { revokedById: id } }),
+      db.auditEvent.deleteMany({ where: { actorUserId: id } }),
+      db.auditEvent.deleteMany({ where: { targetUserId: id } }),
+      db.roleAuditLog.deleteMany({ where: { actorUserId: id } }),
+      db.roleAuditLog.deleteMany({ where: { targetUserId: id } }),
+      db.account.deleteMany({ where: { userId: id } }),
+      db.session.deleteMany({ where: { userId: id } }),
+    ]
+
+    await Promise.allSettled(cleanup)
+
+    // Now delete the user
+    await db.user.deleteMany({ where: { id } })
 
     // Write audit event
     await writeAuditEvent({
