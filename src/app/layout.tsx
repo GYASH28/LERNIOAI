@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { headers } from "next/headers";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { LernioMotionProvider } from "@/components/motion";
@@ -120,11 +121,18 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Read the CSP nonce from the middleware-set header so Next.js can apply
+  // it to inline scripts (RSC stream + theme-no-flash). Without this, the
+  // browser blocks the inline RSC scripts and React never hydrates — which
+  // is why forms submit via GET, buttons don't fire onClick, and the page
+  // feels "stuck" / unscrollable on the deployed site.
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
+
   return (
     <html
       lang="en"
@@ -140,9 +148,12 @@ export default function RootLayout({
     >
       <head>
         {/* Inline theme-no-flash script — runs synchronously before paint.
-            Previously this was <script src="/theme-no-flash.js" /> which
-            caused a white-screen flash due to the network round-trip. */}
-        <script dangerouslySetInnerHTML={{ __html: themeNoFlashScript }} />
+            nonce is required by the CSP middleware so this inline script
+            is allowed to execute. */}
+        <script
+          nonce={nonce}
+          dangerouslySetInnerHTML={{ __html: themeNoFlashScript }}
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
