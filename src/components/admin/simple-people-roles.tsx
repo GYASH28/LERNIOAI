@@ -61,7 +61,9 @@ export function SimplePeopleRoles() {
           const seenDept = new Set<string>()
 
           for (const sem of Object.keys(bySemester)) {
-            for (const c of bySemester[sem]) {
+            const semClasses = bySemester[sem]
+            if (!Array.isArray(semClasses)) continue
+            for (const c of semClasses) {
               classGroups.push({
                 id: c.id,
                 label: `${c.departmentCode} - Sem ${c.semesterNumber} - Div ${c.division}${c._count?.members ? ` (${c._count.members} students)` : ''}${c.cr ? ` - CR: ${c.cr.name}` : ''}`,
@@ -80,26 +82,16 @@ export function SimplePeopleRoles() {
             }
           }
 
-          setOptions({ departments, subjects: [], classGroups })
-
-          // Also try the old access/options API for subjects (needed for teacher, but we removed teacher)
-          try {
-            const optionsRes = await fetch('/api/admin/access/options', { cache: 'no-store' })
-            const optionsData = await optionsRes.json()
-            if (optionsData?.ok && optionsData.data?.subjects?.length) {
-              setOptions(prev => ({ ...prev, subjects: optionsData.data.subjects }))
-            }
-          } catch {}
-        }
-      } catch {
-        // Class API failed — try old access/options as fallback
-        try {
-          const optionsRes = await fetch('/api/admin/access/options', { cache: 'no-store' })
-          const optionsData = await optionsRes.json()
-          if (optionsData?.ok && optionsData.data) {
-            setOptions(optionsData.data)
+          if (classGroups.length === 0) {
+            setMessage('No classes found. Run: npx tsx scripts/seed-classes.ts to create 36 classes.')
           }
-        } catch {}
+
+          setOptions({ departments, subjects: [], classGroups })
+        } else {
+          setMessage(classData?.error || 'Could not load classes. Make sure you are signed in as admin.')
+        }
+      } catch (err) {
+        setMessage('Could not load classes: ' + (err instanceof Error ? err.message : 'Network error'))
       }
     } catch (error) {
       setMessage(error instanceof Error ? error.message : 'Could not load people.')

@@ -27,7 +27,36 @@ export async function GET(req: NextRequest) {
 
     if (!dbUser) return NextResponse.json({ error: 'User not found' }, { status: 404 })
 
+    // teacher-classes action: admin/teacher can view all classes (even without dept/sem/div)
+    // This MUST be checked BEFORE the profile-completion check below, because admins
+    // typically don't have departmentCode/semesterNumber/division set.
+    if (action === 'teacher-classes') {
+      if (dbUser.role !== 'teacher' && dbUser.role !== 'admin' && dbUser.role !== 'coordinator') {
+        return NextResponse.json({ error: 'Not authorized' }, { status: 403 })
+      }
+
+      // Admin sees ALL classes; teachers/coordinators see only their department
+      const whereClause = dbUser.role === 'admin' ? {} : { departmentCode: dbUser.departmentCode || 'DCOMP' }
+
+      const classes = await db.class.findMany({
+        where: whereClause,
+        include: {
+          cr: { select: { id: true, name: true, email: true } },
+          _count: { select: { members: true } }
+        },
+        orderBy: [{ departmentCode: 'asc' }, { semesterNumber: 'asc' }, { division: 'asc' }]
+      })
+
+      const bySemester: Record<number, any[]> = {}
+      for (let s = 1; s <= 6; s++) {
+        bySemester[s] = classes.filter(c => c.semesterNumber === s)
+      }
+
+      return NextResponse.json({ ok: true, data: bySemester })
+    }
+
     // If user has no department/semester/division, return empty state instead of erroring
+    // (but only for my-class action — teacher-classes is handled above)
     if (!dbUser.departmentCode || !dbUser.semesterNumber || !dbUser.division) {
       return NextResponse.json({
         ok: true,
@@ -126,33 +155,6 @@ export async function GET(req: NextRequest) {
       }
 
       return NextResponse.json({ ok: true, data: classRecord })
-    }
-
-    if (action === 'teacher-classes') {
-      if (dbUser.role !== 'teacher' && dbUser.role !== 'admin' && dbUser.role !== 'coordinator') {
-        return NextResponse.json({ error: 'Not authorized' }, { status: 403 })
-      }
-
-      // Admin sees ALL classes; teachers/coordinators see only their department
-      const whereClause = dbUser.role === 'admin' ? {} : { departmentCode: dbUser.departmentCode || 'DCOMP' }
-
-      // Get all classes, semesters 1-6
-      const classes = await db.class.findMany({
-        where: whereClause,
-        include: {
-          cr: { select: { id: true, name: true, email: true } },
-          _count: { select: { members: true } }
-        },
-        orderBy: [{ departmentCode: 'asc' }, { semesterNumber: 'asc' }, { division: 'asc' }]
-      })
-
-      // Group by semester
-      const bySemester: Record<number, any[]> = {}
-      for (let s = 1; s <= 6; s++) {
-        bySemester[s] = classes.filter(c => c.semesterNumber === s)
-      }
-
-      return NextResponse.json({ ok: true, data: bySemester })
     }
 
     if (action === 'class') {
