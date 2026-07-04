@@ -27,6 +27,15 @@ export async function GET(req: NextRequest) {
 
     if (!dbUser) return NextResponse.json({ error: 'User not found' }, { status: 404 })
 
+    // If user has no department/semester/division, return empty state instead of erroring
+    if (!dbUser.departmentCode || !dbUser.semesterNumber || !dbUser.division) {
+      return NextResponse.json({
+        ok: true,
+        data: null,
+        message: 'Please complete your profile with department, semester, and division to join a class.',
+      })
+    }
+
     if (action === 'my-class') {
       // Find or create the user's class
       const dept = dbUser.departmentCode || 'DCOMP'
@@ -170,6 +179,13 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Unknown action' }, { status: 400 })
   } catch (err) {
     console.error('[class API]', err)
+    // Check if this is a "table does not exist" error (migrations not applied)
+    const errMsg = err instanceof Error ? err.message : String(err)
+    if (errMsg.includes('does not exist') || errMsg.includes('relation') || errMsg.includes('table')) {
+      return NextResponse.json({
+        error: 'Database tables not set up yet. An admin needs to run: npx prisma migrate deploy',
+      }, { status: 500 })
+    }
     return NextResponse.json({ error: 'Internal error' }, { status: 500 })
   }
 }

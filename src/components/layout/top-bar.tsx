@@ -58,11 +58,11 @@ const NAV_ITEMS: { key: ViewKey; label: string; icon: typeof BookOpen }[] = [
   { key: 'profile', label: 'Profile', icon: User },
 ]
 
-const EXTRA_LINKS: { href: string; label: string; icon: typeof BookOpen }[] = [
-  { href: '/class', label: 'My Class', icon: Users },
+const ALL_EXTRA_LINKS: { href: string; label: string; icon: typeof BookOpen; roles?: string[] }[] = [
+  { href: '/class', label: 'My Class', icon: Users, roles: ['student', 'cr'] },
   { href: '/attendance', label: 'Attendance', icon: ClipboardList },
-  { href: '/leaderboard', label: 'Leaderboard', icon: Trophy },
-  { href: '/teacher-dashboard', label: 'Teacher Dashboard', icon: GraduationCap },
+  { href: '/leaderboard', label: 'Leaderboard', icon: Trophy, roles: ['student', 'cr', 'teacher', 'coordinator', 'admin'] },
+  { href: '/teacher-dashboard', label: 'Teacher Dashboard', icon: GraduationCap, roles: ['teacher', 'coordinator', 'admin'] },
   { href: '/feedback', label: 'Feedback', icon: MessageSquare },
   { href: '/help', label: 'Help Center', icon: HelpCircle },
 ]
@@ -136,6 +136,10 @@ export function TopBar() {
   const moreRef = useRef<HTMLDivElement>(null)
 
   const user = useAppStore((s) => s.user)
+  // Filter extra links based on user role — e.g. students don't see "Teacher Dashboard",
+  // staff don't see "My Class" (they use /class for teaching view instead)
+  const userRole = user?.role || 'student'
+  const EXTRA_LINKS = ALL_EXTRA_LINKS.filter(link => !link.roles || link.roles.includes(userRole))
   const xp = useAppStore((s) => s.xp)
   const streak = useAppStore((s) => s.streak)
   const { pref, setPref } = usePrefs()
