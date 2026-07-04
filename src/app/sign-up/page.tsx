@@ -23,7 +23,7 @@ const initialForm = {
   rollNumber: '',
   departmentCode: '',
   semesterNumber: '',
-  division: 'NOT_SURE',
+  division: '',
   inviteCode: '',
 }
 
@@ -85,7 +85,8 @@ export default function SignUpPage() {
     if (!form.departmentCode) return 'Select your department / programme.'
     if (!form.semesterNumber) return 'Select your current semester.'
     if (!form.division || form.division === 'NOT_SURE') return 'Select your division (A, B, or C).'
-    if (form.rollNumber.trim() && !/^[A-Za-z0-9/-]{1,32}$/.test(form.rollNumber.trim())) return 'Roll number format is not valid.'
+    if (!form.rollNumber.trim()) return 'Enter your 6-digit roll number.'
+    if (!/^\d{6}$/.test(form.rollNumber.trim())) return 'Roll number must be exactly 6 digits (e.g. 255044).'
     if (form.password.length < 8) return 'Password must be at least 8 characters.'
     if (form.password !== form.confirmPassword) return 'Passwords do not match.'
     return ''
@@ -222,16 +223,19 @@ export default function SignUpPage() {
 
         {/* Academic details — always visible, mandatory */}
         <div className="grid gap-4 rounded-lg border border-border bg-muted/20 p-4 sm:col-span-2 sm:grid-cols-2">
-            <Field label="Roll number">
+            <Field label="Roll number *">
               <Input
                 name="rollNumber"
                 value={form.rollNumber}
                 onChange={handleChange}
-                placeholder="Optional"
-                inputMode="text"
-                pattern="[A-Za-z0-9/-]{1,32}"
+                placeholder="e.g. 255044 (6 digits)"
+                inputMode="numeric"
+                pattern="[0-9]{6}"
+                maxLength={6}
                 className={authInputClass}
+                required
               />
+              <p className="mt-1 text-[10px] text-muted-foreground">Enter your official 6-digit roll number.</p>
             </Field>
             <Field label="Department / programme *">
               <select name="departmentCode" value={form.departmentCode} onChange={handleChange} className={authSelectClass} required>

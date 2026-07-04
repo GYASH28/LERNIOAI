@@ -51,7 +51,7 @@ export async function GET(req: NextRequest) {
             include: {
               user: { select: { id: true, name: true, email: true, rollNumber: true, xp: true, streak: true, role: true } }
             },
-            orderBy: { user: { name: 'asc' } }
+            orderBy: [{ user: { rollNumber: "asc" } }, { user: { name: "asc" } }]
           }
         }
       })
@@ -85,7 +85,7 @@ export async function GET(req: NextRequest) {
                 include: {
                   user: { select: { id: true, name: true, email: true, rollNumber: true, xp: true, streak: true, role: true } }
                 },
-                orderBy: { user: { name: 'asc' } }
+                orderBy: [{ user: { rollNumber: "asc" } }, { user: { name: "asc" } }]
               }
             }
           })
@@ -107,7 +107,7 @@ export async function GET(req: NextRequest) {
                 include: {
                   user: { select: { id: true, name: true, email: true, rollNumber: true, xp: true, streak: true, role: true } }
                 },
-                orderBy: { user: { name: 'asc' } }
+                orderBy: [{ user: { rollNumber: "asc" } }, { user: { name: "asc" } }]
               }
             }
           })
@@ -166,7 +166,7 @@ export async function GET(req: NextRequest) {
             include: {
               user: { select: { id: true, name: true, email: true, rollNumber: true, xp: true, streak: true, role: true } }
             },
-            orderBy: { user: { name: 'asc' } }
+            orderBy: [{ user: { rollNumber: "asc" } }, { user: { name: "asc" } }]
           }
         }
       })
