@@ -92,8 +92,6 @@ export default function SignInPage() {
           const role = userPayload.data.role
           const roleRedirects: Record<string, string> = {
             admin: '/admin',
-            coordinator: '/coordinator',
-            teacher: '/teacher-dashboard',
             cr: '/cr',
           }
           if (roleRedirects[role]) {
