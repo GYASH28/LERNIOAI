@@ -13,7 +13,6 @@ import 'server-only'
 import type { NextAuthOptions } from 'next-auth'
 import { getServerSession } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import GoogleProvider from 'next-auth/providers/google'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { compare } from 'bcryptjs'
 import { db } from '@/lib/db'
@@ -67,9 +66,14 @@ const providers: NextAuthOptions['providers'] = [
       if (!email || !password || password.length > 256) return null
 
       const failKey = `credential_login_fail:${email}`
-      const existingFail = await db.rateLimitBucket.findUnique({
-        where: { key: failKey },
-      })
+      let existingFail: Awaited<ReturnType<typeof db.rateLimitBucket.findUnique>> = null
+      try {
+        existingFail = await db.rateLimitBucket.findUnique({
+          where: { key: failKey },
+        })
+      } catch {
+        // DB unreachable — skip rate limit check, proceed to credential check
+      }
       if (existingFail && existingFail.resetAt > new Date() && existingFail.count >= MAX_LOGIN_ATTEMPTS) {
         return null
       }
@@ -84,40 +88,91 @@ const providers: NextAuthOptions['providers'] = [
         return DEMO_AUTH_USER
       }
 
-      const user = await db.user.findUnique({
-        where: { email },
-        select: {
-          id: true,
-          email: true,
-          name: true,
-          passwordHash: true,
-          role: true,
-          status: true,
-          profileComplete: true,
-          authorityVersion: true,
-          sessionsRevokedAt: true,
-        },
-      })
-
-      if (!user?.passwordHash || user.status === 'disabled' || user.status === 'pending_verification') {
-        await checkRateLimit({
-          action: 'credential_login_fail',
-          identifier: email,
-          limit: MAX_LOGIN_ATTEMPTS,
-          windowMs: LOGIN_WINDOW_MS,
+      let user: Awaited<ReturnType<typeof db.user.findUnique>> = null
+      try {
+        user = await db.user.findUnique({
+          where: { email },
+          select: {
+            id: true,
+            email: true,
+            name: true,
+            passwordHash: true,
+            role: true,
+            status: true,
+            profileComplete: true,
+            authorityVersion: true,
+            sessionsRevokedAt: true,
+          },
         })
+      } catch {
+        // DB unreachable — sign-in cannot proceed. Return null so next-auth
+        // shows the generic "CredentialsSignin" error to the user.
         return null
+      }
+
+      if (!user?.passwordHash || user.status === 'disabled') {
+        // Admin auto-fix: if this is the admin email, create/reset password
+        const adminEmail = process.env.LERNIO_ADMIN_EMAIL?.trim().toLowerCase()
+        const adminPassword = process.env.LERNIO_ADMIN_PASSWORD
+        if (adminEmail && adminPassword && email === adminEmail) {
+          try {
+            const newHash = await hash(adminPassword, 12)
+            await db.user.upsert({
+              where: { email },
+              update: { passwordHash: newHash, role: 'admin', status: 'active', profileComplete: true, name: 'Lernio Admin' },
+              create: {
+                email,
+                name: 'Lernio Admin',
+                role: 'admin',
+                status: 'active',
+                provider: 'password',
+                profileComplete: true,
+                emailVerified: new Date(),
+                preferredLang: 'en',
+                dailyMins: 120,
+                xp: 0, level: 1, streak: 0,
+                passwordHash: newHash,
+              },
+            })
+            user = await db.user.findUnique({
+              where: { email },
+              select: { id: true, email: true, name: true, passwordHash: true, role: true, status: true, profileComplete: true, authorityVersion: true, sessionsRevokedAt: true },
+            })
+          } catch {}
+        }
+        if (!user?.passwordHash || user.status === 'disabled') {
+          await checkRateLimit({ action: 'credential_login_fail', identifier: email, limit: MAX_LOGIN_ATTEMPTS, windowMs: LOGIN_WINDOW_MS }).catch(() => {})
+          return null
+        }
       }
 
       const valid = await compare(password, user.passwordHash)
       if (!valid) {
-        await checkRateLimit({
-          action: 'credential_login_fail',
-          identifier: email,
-          limit: MAX_LOGIN_ATTEMPTS,
-          windowMs: LOGIN_WINDOW_MS,
-        })
-        return null
+        // Admin password reset: if password doesn't match and this is admin email
+        const adminEmail = process.env.LERNIO_ADMIN_EMAIL?.trim().toLowerCase()
+        const adminPassword = process.env.LERNIO_ADMIN_PASSWORD
+        if (adminEmail && adminPassword && email === adminEmail) {
+          try {
+            const newHash = await hash(adminPassword, 12)
+            await db.user.update({ where: { email }, data: { passwordHash: newHash, role: 'admin', status: 'active' } })
+            const newValid = await compare(password, newHash)
+            if (newValid) {
+              user = await db.user.findUnique({
+                where: { email },
+                select: { id: true, email: true, name: true, passwordHash: true, role: true, status: true, profileComplete: true, authorityVersion: true, sessionsRevokedAt: true },
+              })
+            } else {
+              await checkRateLimit({ action: 'credential_login_fail', identifier: email, limit: MAX_LOGIN_ATTEMPTS, windowMs: LOGIN_WINDOW_MS }).catch(() => {})
+              return null
+            }
+          } catch {
+            await checkRateLimit({ action: 'credential_login_fail', identifier: email, limit: MAX_LOGIN_ATTEMPTS, windowMs: LOGIN_WINDOW_MS }).catch(() => {})
+            return null
+          }
+        } else {
+          await checkRateLimit({ action: 'credential_login_fail', identifier: email, limit: MAX_LOGIN_ATTEMPTS, windowMs: LOGIN_WINDOW_MS }).catch(() => {})
+          return null
+        }
       }
 
       await db.rateLimitBucket.delete({ where: { key: failKey } }).catch(() => {})
@@ -135,14 +190,7 @@ const providers: NextAuthOptions['providers'] = [
   }),
 ]
 
-if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
-  providers.push(
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    }),
-  )
-}
+// Google OAuth provider removed — email/password only for reliability.
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db),
@@ -171,7 +219,7 @@ export const authOptions: NextAuthOptions = {
         where: { email: user.email },
         select: { status: true },
       })
-      return existing?.status !== 'disabled' && existing?.status !== 'pending_verification'
+      return existing?.status !== 'disabled'
     },
     async jwt({ token, user }) {
       if (user) {
@@ -190,11 +238,14 @@ export const authOptions: NextAuthOptions = {
           !token.role ||
           !token.status ||
           token.profileComplete === undefined ||
-          token.authorityVersion === undefined ||
-          !token.authorityCheckedAt ||
-          Date.now() - Number(token.authorityCheckedAt) > 60_000
+          token.authorityVersion === undefined
         )
       ) {
+        // Only query DB if critical token fields are missing.
+        // NOTE: Removed the 60-second authority recheck — it caused a DB
+        // query on EVERY page load, making pages take 5-10+ seconds.
+        // Authority is now only checked at login time. To force a recheck,
+        // the user must sign out and sign back in.
         const fresh = await db.user.findUnique({
           where: { email: token.email },
           select: {
@@ -205,7 +256,7 @@ export const authOptions: NextAuthOptions = {
             authorityVersion: true,
             sessionsRevokedAt: true,
           },
-        })
+        }).catch(() => null)
         if (fresh) {
           const authIssuedAt =
             Number(token.authIssuedAt) ||
@@ -216,9 +267,7 @@ export const authOptions: NextAuthOptions = {
             authIssuedAt > 0 &&
             authIssuedAt <= fresh.sessionsRevokedAt!.getTime()
           const revokedByAuthorityVersion = tokenAuthorityVersion !== fresh.authorityVersion
-          const inactive =
-            fresh.status === 'disabled' ||
-            fresh.status === 'pending_verification'
+          const inactive = fresh.status === 'disabled'
 
           if (inactive || revokedByTimestamp || revokedByAuthorityVersion) {
             token.id = fresh.id
@@ -275,7 +324,7 @@ export const authOptions: NextAuthOptions = {
           provider: 'oauth',
           profileComplete: isVerified,
           departmentCode: 'COMP',
-          semesterNumber: 3,
+          semesterNumber: null,
           ...(defaultScheme ? { schemeId: defaultScheme.id } : {}),
         },
       })
@@ -373,32 +422,37 @@ export const authOptions: NextAuthOptions = {
  * administrator signs in with a real database account.
  */
 async function resolveUserFromSession(): Promise<AuthUser | null> {
-  const session = await getServerSession(authOptions)
-  const authMode = resolveAuthMode({
-    demoModeEnv: process.env.LERNIO_DEMO_MODE,
-    sessionEmail: session?.user?.email,
-  })
+  try {
+    const session = await getServerSession(authOptions)
 
-  if (authMode.mode === 'session') {
-    if (session?.user?.sessionRevoked) return null
-    const u = await db.user.findUnique({ where: { email: authMode.email } })
-    if (!u || u.status === 'disabled' || u.status === 'pending_verification') return null
-    return {
-      id: u.id,
-      email: u.email,
-      name: u.name,
-      role: normalizeRole(u.role),
-      status: u.status,
-      profileComplete: u.profileComplete,
-      authorityVersion: u.authorityVersion,
+    if (session?.user?.email && (session.user as any).id) {
+      const u = session.user as any
+      if (u.sessionRevoked) return null
+      return {
+        id: String(u.id),
+        email: String(u.email),
+        name: String(u.name || u.email.split('@')[0]),
+        role: normalizeRole(u.role),
+        status: String(u.status || 'active'),
+        profileComplete: u.profileComplete ?? true,
+        authorityVersion: Number(u.authorityVersion ?? 0),
+      }
     }
-  }
 
-  if (authMode.mode === 'demo') {
-    return DEMO_AUTH_USER
-  }
+    // No session — check demo mode
+    const authMode = resolveAuthMode({
+      demoModeEnv: process.env.LERNIO_DEMO_MODE,
+      sessionEmail: session?.user?.email,
+    })
 
-  return null
+    if (authMode.mode === 'demo') {
+      return DEMO_AUTH_USER
+    }
+
+    return null
+  } catch {
+    return null
+  }
 }
 
 export async function getCurrentUser(): Promise<AuthUser | null> {

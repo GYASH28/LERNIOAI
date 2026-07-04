@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+export const dynamic = 'force-dynamic'
+
 import { revalidatePath } from 'next/cache'
 import { ClipboardCheck, PlayCircle } from 'lucide-react'
 import { db } from '@/lib/db'

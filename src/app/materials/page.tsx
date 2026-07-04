@@ -1,6 +1,5 @@
 import { redirect } from 'next/navigation'
 import { getCurrentUser } from '@/lib/auth'
-import { db } from '@/lib/db'
 import Link from 'next/link'
 import { BookOpen, Download, ArrowLeft, FileText, Star } from 'lucide-react'
 import { MaterialsList } from './materials-list'

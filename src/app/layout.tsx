@@ -8,6 +8,8 @@ import { CommandPalette } from "@/components/cmdk/command-palette";
 import { RouteLoadingBar } from "@/components/app/route-loading-bar";
 import { RegisterSW } from "@/components/app/register-sw";
 import { KeyboardShortcuts } from "@/components/app/keyboard-shortcuts";
+import { AnimatedBackground } from "@/components/ui/animated-background";
+import { CustomCursor } from "@/components/ui/custom-cursor";
 
 // ──────────────────────────────────────────────────────────────────────────
 // WHITE-SCREEN FLASH FIX
@@ -124,7 +126,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      data-palette="aurora"
+      data-appearance="system"
+      data-contrast="normal"
+      data-density="comfortable"
+      data-surface="soft"
+      data-subject-tint="subtle"
+      data-motion="full"
+      data-low-power="false"
+    >
       <head>
         {/* Inline theme-no-flash script — runs synchronously before paint.
             Previously this was <script src="/theme-no-flash.js" /> which
@@ -134,6 +147,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
+        {/* Calming animated background */}
+        <AnimatedBackground />
         <ThemeProvider>
           <LernioMotionProvider>
             <RouteLoadingBar />
@@ -142,6 +157,7 @@ export default function RootLayout({
             <CommandPalette />
             <KeyboardShortcuts />
             <RegisterSW />
+            <CustomCursor />
           </LernioMotionProvider>
         </ThemeProvider>
       </body>

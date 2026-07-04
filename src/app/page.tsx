@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { getCurrentUser } from '@/lib/auth'
 import { CinematicIntro } from '@/components/marketing/cinematic-intro'
 import { LandingMotionController } from '@/components/marketing/landing-motion-controller'
 import { PublicHeader } from '@/components/marketing/public-header'
@@ -19,6 +18,8 @@ import { PublicFooter } from '@/components/marketing/public-footer'
 
 const SITE_URL = process.env.NEXTAUTH_URL?.replace(/\/$/, '') || 'https://lernioai.vercel.app'
 
+// Landing page — force-dynamic is safer for client components (CinematicIntro
+// uses sessionStorage/window). The page is fast enough without static caching.
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
@@ -49,8 +50,11 @@ const softwareApplicationLd = {
 }
 
 export default async function LandingPage() {
-  const currentUser = await getCurrentUser().catch(() => null)
-  const isAuthenticated = Boolean(currentUser)
+  // Landing page is static — no auth check needed.
+  // The buttons show "Get Started" / "Sign In" by default.
+  // Authenticated users see the same landing page; they can click
+  // "Dashboard" in the header to go to their dashboard.
+  const isAuthenticated = false
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">

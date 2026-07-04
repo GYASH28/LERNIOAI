@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation'
+import { BackButton } from "@/components/ui/back-button"
 import { getCurrentUser } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { NotificationsList } from './notifications-list'
@@ -17,7 +18,8 @@ export default async function NotificationsPage() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <div className="mx-auto max-w-2xl px-5 py-8 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 lg:px-8">
+          <BackButton />
         <h1 className="text-2xl font-bold">Notifications</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Stay updated on your progress, achievements, and important alerts.

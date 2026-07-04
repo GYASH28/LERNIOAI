@@ -1,16 +1,31 @@
 import { redirect } from 'next/navigation'
 import { getCurrentUser } from '@/lib/auth'
+import { db } from '@/lib/db'
 
-// Don't force-dynamic — this page just redirects. Making it dynamic
-// causes an unnecessary server round-trip on every visit.
+export const dynamic = 'force-dynamic'
+
 export default async function LearnPage() {
   const user = await getCurrentUser()
   if (!user) {
     redirect('/sign-in?callbackUrl=/learn')
   }
 
-  // Skip the DB scope resolution — it's slow and causes a redirect chain.
-  // New OAuth users are auto-assigned to DCOMP / Semester 3.
-  // The semester page reads from the manifest (instant, no DB needed).
-  redirect('/learn/DCOMP/semester/3')
+  // Get user's actual semester and department from DB
+  let programmeCode = 'DCOMP'
+  let semesterNumber = 1
+
+  try {
+    const dbUser = await db.user.findUnique({
+      where: { id: user.id },
+      select: { semesterNumber: true, departmentCode: true },
+    })
+    if (dbUser) {
+      programmeCode = dbUser.departmentCode === 'DCIOT' ? 'DCIOT' : 'DCOMP'
+      semesterNumber = dbUser.semesterNumber || 3
+    }
+  } catch {
+    // DB unavailable — default to semester 1
+  }
+
+  redirect(`/learn/${programmeCode}/semester/${semesterNumber}`)
 }
