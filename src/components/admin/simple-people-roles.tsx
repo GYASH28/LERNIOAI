@@ -115,26 +115,37 @@ export function SimplePeopleRoles() {
     setBusy(true)
     setMessage('')
     try {
-      await read(await fetch('/api/admin/role-assignments', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          userId,
-          role: 'cr' as const,
-          institutionId: classGroup?.institutionId || null,
-          departmentCode: classGroup?.departmentCode || null,
-          classGroupId: classGroupId,
-          subjectId: null,
-          reason: 'Assigned from People & Roles.',
-        }),
-      }))
-      await read(await fetch(`/api/admin/users/${userId}`, {
+      // Step 1: Update user role to 'cr' via admin PATCH API
+      const patchRes = await fetch(`/api/admin/users/${userId}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ role, departmentCode: classGroup?.departmentCode || null }),
-      }))
-      setMessage('Role assigned successfully.')
-      setUserId(''); setDepartmentId(''); setSubjectId(''); setClassGroupId('')
+        body: JSON.stringify({
+          role: 'cr',
+          departmentCode: classGroup?.departmentCode || null,
+        }),
+      })
+      const patchData = await patchRes.json()
+      if (!patchRes.ok || !patchData?.ok) {
+        throw new Error(patchData?.error?.message || 'Failed to update user role.')
+      }
+
+      // Step 2: Set this user as CR of the class via our Class API PATCH
+      const crRes = await fetch('/api/class', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          classId: classGroupId,
+          setCR: userId,
+        }),
+      })
+      const crData = await crRes.json()
+      if (!crRes.ok || !crData?.ok) {
+        setMessage(`Role updated to CR, but class assignment failed: ${crData?.error || 'Unknown error'}`)
+      } else {
+        setMessage('CR role assigned successfully!')
+      }
+
+      setUserId(''); setClassGroupId('')
       await load()
     } catch (error) {
       setMessage(error instanceof Error ? error.message : 'Could not assign this role.')
@@ -167,7 +178,11 @@ export function SimplePeopleRoles() {
     setBusy(true)
     setMessage('')
     try {
-      await read(await fetch(`/api/admin/users/${user.id}`, { method: 'DELETE' }))
+      const res = await fetch(`/api/admin/users/${user.id}`, { method: 'DELETE' })
+      const data = await res.json().catch(() => null)
+      if (!res.ok || !data?.ok) {
+        throw new Error(data?.error?.message || data?.error || 'Failed to delete user.')
+      }
       setMessage(`${user.name} has been deleted.`)
       await load()
     } catch (error) {

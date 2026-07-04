@@ -192,3 +192,127 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Internal error' }, { status: 500 })
   }
 }
+
+/**
+ * PATCH /api/class
+ * Body: { classId, alias?, avatarEmoji?, avatarColor?, setCR? }
+ * - alias/avatarEmoji/avatarColor: update class identity (admin/CR/teacher)
+ * - setCR: assign a user as CR of this class (admin only)
+ */
+export async function PATCH(req: NextRequest) {
+  try {
+    const user = await getCurrentUser()
+    if (!user) return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
+
+    const body = await req.json().catch(() => null)
+    if (!body?.classId) return NextResponse.json({ error: 'Missing classId' }, { status: 400 })
+
+    const dbUser = await db.user.findUnique({
+      where: { id: user.id },
+      select: { role: true, departmentCode: true },
+    })
+    if (!dbUser) return NextResponse.json({ error: 'User not found' }, { status: 404 })
+
+    const existing = await db.class.findUnique({
+      where: { id: body.classId },
+      select: { id: true, departmentCode: true, crId: true },
+    })
+    if (!existing) return NextResponse.json({ error: 'Class not found' }, { status: 404 })
+
+    // Permission check
+    const isStaff = dbUser.role === 'admin' || dbUser.role === 'coordinator' || dbUser.role === 'teacher'
+    const isCR = dbUser.role === 'cr' && existing.crId === user.id
+    if (!isStaff && !isCR) {
+      return NextResponse.json({ error: 'Not authorized' }, { status: 403 })
+    }
+
+    const data: any = {}
+
+    // Identity updates
+    if (typeof body.alias === 'string') {
+      data.alias = body.alias.trim().slice(0, 60) || null
+      data.aliasUpdatedBy = user.id
+      data.aliasUpdatedAt = new Date()
+    }
+    if (typeof body.avatarEmoji === 'string') {
+      data.avatarEmoji = body.avatarEmoji.trim().slice(0, 8) || null
+    }
+    if (typeof body.avatarColor === 'string') {
+      const c = body.avatarColor.trim().slice(0, 9)
+      data.avatarColor = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(c) ? c.toLowerCase() : null
+    }
+
+    // CR assignment (admin only)
+    if (body.setCR) {
+      if (dbUser.role !== 'admin') {
+        return NextResponse.json({ error: 'Only admins can assign CRs' }, { status: 403 })
+      }
+      // Verify the target user exists and is a student/cr
+      const targetUser = await db.user.findUnique({
+        where: { id: body.setCR },
+        select: { id: true, role: true, name: true },
+      })
+      if (!targetUser) return NextResponse.json({ error: 'Target user not found' }, { status: 404 })
+
+      // Update the user's role to 'cr'
+      await db.user.update({
+        where: { id: body.setCR },
+        data: { role: 'cr', isCR: true },
+      })
+
+      // Set them as CR of this class
+      data.crId = body.setCR
+    }
+
+    // Also update the user's departmentCode/semesterNumber/division if setCR is used
+    // (so they join the class as a member)
+    if (body.setCR) {
+      const cls = await db.class.findUnique({
+        where: { id: body.classId },
+        select: { departmentCode: true, semesterNumber: true, division: true },
+      })
+      if (cls) {
+        await db.user.update({
+          where: { id: body.setCR },
+          data: {
+            departmentCode: cls.departmentCode,
+            semesterNumber: cls.semesterNumber,
+            division: cls.division,
+          },
+        })
+
+        // Add as class member if not already
+        const existingMember = await db.classMember.findUnique({
+          where: { classId_userId: { classId: body.classId, userId: body.setCR } },
+          select: { id: true },
+        }).catch(() => null)
+
+        if (!existingMember) {
+          await db.classMember.create({
+            data: { classId: body.classId, userId: body.setCR },
+          }).catch(() => {})
+        }
+      }
+    }
+
+    const updated = await db.class.update({
+      where: { id: body.classId },
+      data,
+      include: {
+        cr: { select: { id: true, name: true, email: true } },
+        _count: { select: { members: true } },
+      },
+    })
+
+    return NextResponse.json({ ok: true, data: updated })
+  } catch (err) {
+    console.error('[class API PATCH]', err)
+    const errMsg = err instanceof Error ? err.message : String(err)
+    if (errMsg.includes('does not exist') || errMsg.includes('relation') || errMsg.includes('table')) {
+      return NextResponse.json({
+        error: 'Database tables not set up yet. Run: npx prisma migrate deploy',
+      }, { status: 500 })
+    }
+    return NextResponse.json({ error: 'Internal error' }, { status: 500 })
+  }
+}
