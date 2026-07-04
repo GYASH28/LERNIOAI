@@ -19,6 +19,7 @@ import {
   GraduationCap,
   ClipboardList,
   ChevronRight,
+  AlertTriangle,
 } from 'lucide-react'
 import { getManifestSubjectsForSemester } from '@/lib/curriculum/manifest-data'
 import { ContinueLearningCard } from '@/components/dashboard/continue-learning-card'
@@ -162,10 +163,32 @@ export default async function DashboardPage() {
   const subjects = getManifestSubjectsForSemester(programmeCode, semesterNumber)
   const totalResources = subjects.reduce((sum, s) => sum + s.resources.length, 0)
   const alias = classInfo?.alias?.trim()
+  const needsClassSetup = !userDept || !userSemester || !userDivision
 
   return (
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-6xl px-5 py-6 sm:px-6 lg:px-8">
+        {/* ─── Profile completion prompt ─── */}
+        {needsClassSetup && (
+          <section className="mb-5 rounded-xl border border-amber-500/40 bg-amber-500/10 p-4">
+            <div className="flex items-start gap-3">
+              <AlertTriangle className="h-5 w-5 text-amber-500 shrink-0 mt-0.5" />
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-semibold text-amber-600">Complete your profile</p>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  You haven&apos;t set your department, semester, or division yet. This is needed to join a class, see classmates, and track attendance.
+                </p>
+                <Link
+                  href="/profile"
+                  className="mt-2 inline-block rounded-md bg-amber-500 px-3 py-1.5 text-xs font-semibold text-white hover:bg-amber-600"
+                >
+                  Set up now →
+                </Link>
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* ─── Semester Hero ─── */}
         <section className="rounded-xl border border-primary/20 bg-gradient-to-br from-primary/5 to-transparent p-5 sm:p-6">
           <div className="flex flex-wrap items-start justify-between gap-4">

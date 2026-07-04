@@ -1086,6 +1086,11 @@ model User {
   assignedAt            DateTime?
   preferredLang         String    @default("en") // en | hi | mr
   examDate              String? // ISO date
+  // Contact + privacy fields
+  phone                 String?
+  photoUrl              String?
+  showPhoneToClassmates Boolean   @default(false)
+  showEmailToClassmates Boolean   @default(false)
   dailyMins             Int       @default(120)
   xp                    Int       @default(0)
   level                 Int       @default(1)
