@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import {
   Users, Crown, Mail, Loader2, Flame, Zap, Info, Megaphone, Clock,
   Pin, PinOff, Pencil, Trash2, ShieldCheck, ChevronRight, Sparkles, X,
+  BarChart3,
 } from 'lucide-react'
 import { ClassAvatar } from '@/components/class/class-avatar'
 import { ClassIdentityEditor } from '@/components/class/class-identity-editor'
@@ -13,7 +14,7 @@ import {
   type AnnouncementData,
 } from '@/components/class/announcement'
 
-type Tab = 'overview' | 'announcements' | 'timetable'
+type Tab = 'overview' | 'announcements' | 'polls' | 'timetable'
 
 interface ClassData {
   id: string
@@ -199,6 +200,7 @@ export function ClassClient({ userRole, userId }: { userRole: string; userId: st
         {[
           { id: 'overview' as Tab, label: 'Overview', icon: Info },
           { id: 'announcements' as Tab, label: 'Announcements', icon: Megaphone },
+          { id: 'polls' as Tab, label: 'Polls', icon: BarChart3 },
           { id: 'timetable' as Tab, label: "Today's Classes", icon: Clock },
         ].map((t) => {
           const Icon = t.icon
@@ -356,6 +358,10 @@ export function ClassClient({ userRole, userId }: { userRole: string; userId: st
         </div>
       )}
 
+      {tab === 'polls' && (
+        <PollsTab classId={classData.id} currentUserId={userId} canModerate={canModerate} />
+      )}
+
       {tab === 'timetable' && (
         <div className="rounded-xl border border-border bg-card p-4">
           <h3 className="flex items-center gap-2 text-sm font-semibold">
@@ -389,6 +395,228 @@ export function ClassClient({ userRole, userId }: { userRole: string; userId: st
           <p className="mt-3 text-[10px] text-muted-foreground">
             Full weekly timetable editing is coming soon. For now, today&apos;s schedule is shown.
           </p>
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ============================================================================
+// Polls Tab — WhatsApp-style class polls
+// ============================================================================
+
+interface PollData {
+  id: string
+  question: string
+  options: string[]
+  tally: number[]
+  totalVotes: number
+  myVotes: number[]
+  open: boolean
+  multipleChoice: boolean
+  deadline: string | null
+  createdBy: { id: string; name: string; role: string }
+  createdAt: string
+}
+
+function PollsTab({ classId, currentUserId, canModerate }: { classId: string; currentUserId: string; canModerate: boolean }) {
+  const [polls, setPolls] = useState<PollData[]>([])
+  const [loading, setLoading] = useState(true)
+  const [showComposer, setShowComposer] = useState(false)
+  const [question, setQuestion] = useState('')
+  const [options, setOptions] = useState<string[]>(['', ''])
+  const [multipleChoice, setMultipleChoice] = useState(false)
+  const [busy, setBusy] = useState(false)
+  const [error, setError] = useState('')
+
+  const fetchPolls = useCallback(() => {
+    fetch(`/api/class/polls?classId=${classId}`)
+      .then((r) => r.json())
+      .then((d) => { if (d.ok) setPolls(d.data) })
+      .catch(() => {})
+      .finally(() => setLoading(false))
+  }, [classId])
+
+  useEffect(() => { fetchPolls() }, [fetchPolls])
+
+  const createPoll = async () => {
+    const validOptions = options.map((o) => o.trim()).filter(Boolean)
+    if (!question.trim() || validOptions.length < 2) {
+      setError('Need a question and at least 2 options')
+      return
+    }
+    setBusy(true)
+    setError('')
+    try {
+      const res = await fetch('/api/class/polls', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ classId, question: question.trim(), options: validOptions, multipleChoice }),
+      })
+      const data = await res.json()
+      if (!res.ok || !data.ok) throw new Error(data.error || 'Failed to create poll')
+      setQuestion(''); setOptions(['', '']); setMultipleChoice(false); setShowComposer(false)
+      fetchPolls()
+    } catch (e: any) {
+      setError(e.message)
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  const vote = async (pollId: string, optionIndex: number) => {
+    try {
+      await fetch(`/api/class/polls/${pollId}/vote`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ optionIndex }),
+      })
+      fetchPolls()
+    } catch {}
+  }
+
+  const closePoll = async (pollId: string) => {
+    await fetch(`/api/class/polls/${pollId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ close: true }),
+    })
+    fetchPolls()
+  }
+
+  const deletePoll = async (pollId: string) => {
+    if (!confirm('Delete this poll?')) return
+    await fetch(`/api/class/polls/${pollId}`, { method: 'DELETE' })
+    fetchPolls()
+  }
+
+  if (loading) {
+    return <div className="flex justify-center py-8"><Loader2 className="h-6 w-6 animate-spin text-primary" /></div>
+  }
+
+  return (
+    <div className="space-y-3">
+      {canModerate && !showComposer && (
+        <button
+          onClick={() => setShowComposer(true)}
+          className="w-full rounded-xl border border-dashed border-border bg-card/50 p-4 text-left text-sm text-muted-foreground hover:bg-accent/30 hover:text-foreground transition-colors"
+        >
+          + Create a poll…
+        </button>
+      )}
+
+      {showComposer && (
+        <div className="rounded-xl border border-primary/30 bg-card p-4 space-y-3">
+          <input
+            type="text"
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
+            placeholder="Ask a question (e.g. 'Reschedule extra lecture?')"
+            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm font-semibold outline-none focus:border-primary"
+            maxLength={300}
+            autoFocus
+          />
+          <div className="space-y-2">
+            {options.map((opt, i) => (
+              <div key={i} className="flex items-center gap-2">
+                <input
+                  type="text"
+                  value={opt}
+                  onChange={(e) => { const next = [...options]; next[i] = e.target.value; setOptions(next) }}
+                  placeholder={`Option ${i + 1}`}
+                  className="flex-1 rounded-md border border-border bg-background px-3 py-1.5 text-sm outline-none focus:border-primary"
+                  maxLength={100}
+                />
+                {options.length > 2 && (
+                  <button onClick={() => setOptions(options.filter((_, idx) => idx !== i))} className="text-muted-foreground hover:text-red-500">
+                    <X className="h-4 w-4" />
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
+          {options.length < 6 && (
+            <button onClick={() => setOptions([...options, ''])} className="text-xs text-primary hover:underline">+ Add option</button>
+          )}
+          <label className="flex items-center gap-2 text-xs">
+            <input type="checkbox" checked={multipleChoice} onChange={(e) => setMultipleChoice(e.target.checked)} />
+            <span>Allow multiple selections</span>
+          </label>
+          {error && <p className="text-xs text-red-500">{error}</p>}
+          <div className="flex justify-end gap-2">
+            <button onClick={() => { setShowComposer(false); setQuestion(''); setOptions(['', '']); setError('') }} className="rounded-md border border-border px-3 py-1.5 text-xs">Cancel</button>
+            <button onClick={createPoll} disabled={busy} className="rounded-md bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground hover:bg-primary/90 disabled:opacity-50">
+              {busy ? 'Creating…' : 'Create poll'}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {polls.length === 0 ? (
+        <div className="rounded-xl border border-dashed border-border bg-card/50 p-8 text-center">
+          <BarChart3 className="h-6 w-6 mx-auto mb-2 text-muted-foreground" />
+          <p className="text-sm font-medium">No polls yet</p>
+          <p className="text-xs text-muted-foreground">{canModerate ? 'Create one above to get your class voting.' : 'Check back later.'}</p>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {polls.map((poll) => {
+            const maxTally = Math.max(1, ...poll.tally)
+            const isCreator = poll.createdBy.id === currentUserId
+            return (
+              <div key={poll.id} className="rounded-xl border border-border bg-card p-4">
+                <div className="flex items-start justify-between gap-2 mb-3">
+                  <div>
+                    <p className="text-sm font-bold">{poll.question}</p>
+                    <p className="text-[10px] text-muted-foreground">
+                      by {poll.createdBy.name} · {new Date(poll.createdAt).toLocaleDateString()} · {poll.totalVotes} vote{poll.totalVotes === 1 ? '' : 's'}
+                    </p>
+                  </div>
+                  <div className="flex gap-1">
+                    {!poll.open && <span className="rounded-full bg-muted px-2 py-0.5 text-[9px] font-bold uppercase">Closed</span>}
+                    {(isCreator || canModerate) && poll.open && (
+                      <button onClick={() => closePoll(poll.id)} className="rounded p-1 text-muted-foreground hover:bg-accent hover:text-foreground text-[10px]">Close</button>
+                    )}
+                    {(isCreator || canModerate) && (
+                      <button onClick={() => deletePoll(poll.id)} className="rounded p-1 text-muted-foreground hover:bg-accent hover:text-red-500">
+                        <Trash2 className="h-3.5 w-3.5" />
+                      </button>
+                    )}
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  {poll.options.map((opt, i) => {
+                    const count = poll.tally[i] || 0
+                    const pct = poll.totalVotes > 0 ? Math.round((count / poll.totalVotes) * 100) : 0
+                    const mine = poll.myVotes.includes(i)
+                    return (
+                      <button
+                        key={i}
+                        onClick={() => poll.open && vote(poll.id, i)}
+                        disabled={!poll.open}
+                        className={`relative w-full overflow-hidden rounded-lg border px-3 py-2 text-left text-sm transition-all ${
+                          mine ? 'border-primary bg-primary/5' : 'border-border bg-background hover:bg-accent/30'
+                        } ${!poll.open ? 'cursor-default' : 'cursor-pointer'}`}
+                      >
+                        <div
+                          className="absolute inset-y-0 left-0 bg-primary/10 transition-all"
+                          style={{ width: `${(count / maxTally) * 100}%` }}
+                        />
+                        <div className="relative flex items-center justify-between">
+                          <span className="font-medium">{opt}</span>
+                          <span className="text-xs text-muted-foreground">
+                            {mine && <span className="mr-1 text-primary">✓</span>}
+                            {count} · {pct}%
+                          </span>
+                        </div>
+                      </button>
+                    )
+                  })}
+                </div>
+                {!poll.open && <p className="mt-2 text-[10px] text-muted-foreground italic">Poll closed · {poll.totalVotes} total votes</p>}
+              </div>
+            )
+          })}
         </div>
       )}
     </div>
