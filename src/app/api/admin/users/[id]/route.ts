@@ -116,7 +116,13 @@ export async function PATCH(request: Request, ctx: { params: Promise<{ id: strin
     }
 
     if (parsed.data.role && parsed.data.role !== target.role) {
-      await assertPrimaryRoleIsBackedByAuthority(id, parsed.data.role)
+      // Skip authority check for CR and student roles — we use our own
+      // Class model for CR assignment, not the old authority system.
+      // The authority check requires a RoleAssignment record which we
+      // don't create (and don't need) for CR/student roles.
+      if (parsed.data.role !== 'cr' && parsed.data.role !== 'student') {
+        await assertPrimaryRoleIsBackedByAuthority(id, parsed.data.role)
+      }
     }
 
     const user = await db.user.update({
