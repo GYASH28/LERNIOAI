@@ -30,7 +30,7 @@ export function SimplePeopleRoles() {
   const [options, setOptions] = useState<Options>({ departments: [], subjects: [], classGroups: [] })
   const [query, setQuery] = useState('')
   const [userId, setUserId] = useState('')
-  const [role, setRole] = useState<'teacher' | 'coordinator' | 'cr'>('teacher')
+  const [role, setRole] = useState<'cr'>('cr')
   const [departmentId, setDepartmentId] = useState('')
   const [subjectId, setSubjectId] = useState('')
   const [classGroupId, setClassGroupId] = useState('')
@@ -61,12 +61,9 @@ export function SimplePeopleRoles() {
   }, [query, users])
 
   async function assign() {
-    const department = options.departments.find((item) => item.id === departmentId)
     const classGroup = options.classGroups.find((item) => item.id === classGroupId)
     if (!userId) return setMessage('Choose a person.')
-    if (role === 'teacher' && (!department || !subjectId)) return setMessage('Choose the teacher’s department and subject.')
-    if (role === 'coordinator' && !department) return setMessage('Choose the coordinator’s department.')
-    if (role === 'cr' && !classGroup) return setMessage('Choose the CR’s class.')
+    if (!classGroup) return setMessage('Choose the CR\u2019s class.')
 
     setBusy(true)
     setMessage('')
@@ -76,18 +73,18 @@ export function SimplePeopleRoles() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           userId,
-          role,
-          institutionId: classGroup?.institutionId || department?.institutionId || null,
-          departmentCode: classGroup?.departmentCode || department?.code || null,
-          classGroupId: role === 'cr' ? classGroupId : null,
-          subjectId: role === 'teacher' ? subjectId : null,
+          role: 'cr' as const,
+          institutionId: classGroup?.institutionId || null,
+          departmentCode: classGroup?.departmentCode || null,
+          classGroupId: classGroupId,
+          subjectId: null,
           reason: 'Assigned from People & Roles.',
         }),
       }))
       await read(await fetch(`/api/admin/users/${userId}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ role, departmentCode: classGroup?.departmentCode || department?.code || null }),
+        body: JSON.stringify({ role, departmentCode: classGroup?.departmentCode || null }),
       }))
       setMessage('Role assigned successfully.')
       setUserId(''); setDepartmentId(''); setSubjectId(''); setClassGroupId('')
@@ -138,7 +135,7 @@ export function SimplePeopleRoles() {
 
     {message ? <div className="rounded-xl border border-primary/25 bg-primary/10 px-4 py-3 text-sm font-semibold">{message}</div> : null}
 
-    <Card surface="elevated"><CardHeader><CardTitle className="flex items-center gap-2"><UserCog className="h-5 w-5 text-primary" />Assign a role</CardTitle><CardDescription>The account will immediately receive the selected workspace.</CardDescription></CardHeader><CardContent className="grid gap-3 md:grid-cols-2 xl:grid-cols-4"><select className={selectClass} value={userId} onChange={(event) => setUserId(event.target.value)}><option value="">Choose person</option>{users.filter((user) => user.status === 'active' && user.role !== 'admin').map((user) => <option key={user.id} value={user.id}>{user.name} — {user.email}</option>)}</select><select className={selectClass} value={role} onChange={(event) => setRole(event.target.value as typeof role)}><option value="teacher">Teacher</option><option value="coordinator">Coordinator / HOD</option><option value="cr">Class Representative</option></select>{role !== 'cr' ? <select className={selectClass} value={departmentId} onChange={(event) => setDepartmentId(event.target.value)}><option value="">Choose department</option>{options.departments.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}</select> : <select className={selectClass} value={classGroupId} onChange={(event) => setClassGroupId(event.target.value)}><option value="">Choose class</option>{options.classGroups.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}</select>}{role === 'teacher' ? <select className={selectClass} value={subjectId} onChange={(event) => setSubjectId(event.target.value)}><option value="">Choose subject</option>{options.subjects.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}</select> : null}<Button onClick={() => void assign()} disabled={busy} className="md:col-span-2 xl:col-span-4"><UserCheck className="h-4 w-4" />{busy ? 'Saving…' : 'Assign role'}</Button></CardContent></Card>
+    <Card surface="elevated"><CardHeader><CardTitle className="flex items-center gap-2"><UserCog className="h-5 w-5 text-primary" />Assign CR role</CardTitle><CardDescription>Select a student to make them a Class Representative.</CardDescription></CardHeader><CardContent className="grid gap-3 md:grid-cols-2 xl:grid-cols-4"><select className={selectClass} value={userId} onChange={(event) => setUserId(event.target.value)}><option value="">Choose person</option>{users.filter((user) => user.status === 'active' && user.role !== 'admin').map((user) => <option key={user.id} value={user.id}>{user.name} — {user.email}</option>)}</select><select className={selectClass} value={classGroupId} onChange={(event) => setClassGroupId(event.target.value)}><option value="">Choose class</option>{options.classGroups.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}</select><Button onClick={() => void assign()} disabled={busy} className="md:col-span-2 xl:col-span-4"><UserCheck className="h-4 w-4" />{busy ? 'Saving…' : 'Assign CR role'}</Button></CardContent></Card>
 
     <Card surface="elevated"><CardHeader><CardTitle>People</CardTitle><CardDescription>Search users and manage account access.</CardDescription></CardHeader><CardContent className="grid gap-4"><label className="relative"><Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" /><Input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search by name, email, or role" className="pl-9" /></label><div className="divide-y divide-border overflow-hidden rounded-2xl border border-border">{visibleUsers.map((user) => <article key={user.id} className="grid gap-3 p-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-center"><div><div className="flex flex-wrap items-center gap-2"><p className="font-black">{user.name}</p><Badge variant="outline" className="capitalize">{user.role}</Badge><Badge variant={user.status === 'active' ? 'secondary' : 'destructive'}>{user.status}</Badge></div><p className="text-sm text-muted-foreground">{user.email}{user.departmentCode ? ` · ${user.departmentCode}` : ''}</p></div><div className="flex gap-2"><Button size="sm" variant="outline" disabled={busy} onClick={() => void changeStatus(user)}>{user.status === 'active' ? <UserX className="h-4 w-4" /> : <UserCheck className="h-4 w-4" />}{user.status === 'active' ? 'Disable' : 'Restore'}</Button><Button size="sm" variant="outline" disabled={busy} onClick={() => void deleteUser(user)} className="text-red-500 hover:bg-red-500/10"><Trash2 className="h-4 w-4" /></Button></div></article>)}</div></CardContent></Card>
 

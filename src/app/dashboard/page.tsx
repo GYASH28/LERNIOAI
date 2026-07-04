@@ -34,10 +34,9 @@ export default async function DashboardPage() {
   const user = await getCurrentUser()
   if (!user) redirect('/sign-in?callbackUrl=/dashboard')
 
-  // Redirect role-based users to their dashboards
+  // Redirect admins to admin dashboard, CRs to CR dashboard
+  // Teachers and coordinators are removed — they use the student dashboard
   if (user.role === 'admin') redirect('/admin')
-  if (user.role === 'coordinator') redirect('/coordinator')
-  if (user.role === 'teacher') redirect('/teacher-dashboard')
   if (user.role === 'cr') redirect('/cr')
 
   // Fetch user's XP, streak, class info, and recent activity

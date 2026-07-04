@@ -33,7 +33,6 @@ import {
   ChevronDown,
   ChevronUp,
   Trophy,
-  GraduationCap,
   HelpCircle,
   ClipboardList,
   Users,
@@ -61,8 +60,7 @@ const NAV_ITEMS: { key: ViewKey; label: string; icon: typeof BookOpen }[] = [
 const ALL_EXTRA_LINKS: { href: string; label: string; icon: typeof BookOpen; roles?: string[] }[] = [
   { href: '/class', label: 'My Class', icon: Users, roles: ['student', 'cr'] },
   { href: '/attendance', label: 'Attendance', icon: ClipboardList },
-  { href: '/leaderboard', label: 'Leaderboard', icon: Trophy, roles: ['student', 'cr', 'teacher', 'coordinator', 'admin'] },
-  { href: '/teacher-dashboard', label: 'Teacher Dashboard', icon: GraduationCap, roles: ['teacher', 'coordinator', 'admin'] },
+  { href: '/leaderboard', label: 'Leaderboard', icon: Trophy, roles: ['student', 'cr', 'admin'] },
   { href: '/feedback', label: 'Feedback', icon: MessageSquare },
   { href: '/help', label: 'Help Center', icon: HelpCircle },
 ]
