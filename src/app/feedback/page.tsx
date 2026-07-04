@@ -10,7 +10,7 @@ export default async function FeedbackPage() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-2xl px-5 py-8 sm:px-6 lg:px-8">
         <h1 className="text-2xl font-bold">Send Feedback</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Found a bug? Have an idea? Let us know — we read every message.

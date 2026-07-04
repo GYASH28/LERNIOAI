@@ -1136,6 +1136,11 @@ model User {
   verifiedClassMemberships    ClassMembership[]       @relation("ClassMembershipVerifiedBy")
   auditEventsAuthored         AuditEvent[]            @relation("AuditEventActor")
   auditEventsTargeted         AuditEvent[]            @relation("AuditEventTargetUser")
+  // Class system reverse relations (lightweight)
+  classAsCR                   Class?                  @relation("ClassCR")
+  classMembers                ClassMember[]           @relation("ClassMemberUser")
+  announcementsAuthored       ClassAnnouncement[]
+  timetableSlotsAsTeacher     ClassTimetable[]
 }
 
 model InviteCode {
@@ -2095,4 +2100,87 @@ model Feedback {
 
   @@index([userId, createdAt])
   @@index([status, createdAt])
+}
+
+// ============================================================
+// CLASS SYSTEM (lightweight) — first-class class entity
+// ============================================================
+
+model Class {
+  id              String   @id @default(cuid())
+  departmentCode  String   // DCOMP, DCIOT
+  semesterNumber  Int      // 1-6
+  division        String   // A, B, C
+  crId            String?  @unique // CR user ID
+  cr              User?    @relation("ClassCR", fields: [crId], references: [id], onDelete: SetNull)
+  academicYear    String?  // e.g. "2025-2026"
+  room            String?  // default classroom
+  // Friendly identity — set by CR/Admin
+  alias           String?  // Friendly name, e.g. "Toppers of 2026"
+  avatarEmoji     String?  // Single emoji, e.g. "🚀"
+  avatarColor     String?  // Hex color, e.g. "#7C3AED"
+  aliasUpdatedBy  String?
+  aliasUpdatedAt  DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  members         ClassMember[]
+  announcements   ClassAnnouncement[]
+  timetableSlots  ClassTimetable[]
+
+  @@unique([departmentCode, semesterNumber, division])
+  @@index([departmentCode, semesterNumber])
+}
+
+model ClassMember {
+  id        String   @id @default(cuid())
+  classId   String
+  class     Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation("ClassMemberUser", fields: [userId], references: [id], onDelete: Cascade)
+  joinedAt  DateTime @default(now())
+
+  @@unique([classId, userId])
+  @@index([userId])
+}
+
+model ClassAnnouncement {
+  id           String   @id @default(cuid())
+  classId      String
+  class        Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
+  authorId     String
+  author       User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  title        String
+  body         String
+  pinned       Boolean  @default(false)
+  pinnedUntil  DateTime?
+  archivedAt   DateTime?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([classId, createdAt])
+  @@index([classId, pinned, pinnedUntil])
+  @@index([authorId])
+}
+
+model ClassTimetable {
+  id           String   @id @default(cuid())
+  classId      String
+  class        Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
+  dayOfWeek    Int      // 0=Sun, 1=Mon, ..., 6=Sat
+  periodIndex  Int      // 1-based period number
+  subjectName  String?
+  teacherId    String?
+  teacher      User?    @relation(fields: [teacherId], references: [id], onDelete: SetNull)
+  room         String?
+  startTime    String   // "09:00"
+  endTime      String   // "10:00"
+  isBreak      Boolean  @default(false)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@unique([classId, dayOfWeek, periodIndex])
+  @@index([classId, dayOfWeek])
+  @@index([teacherId, dayOfWeek])
 }

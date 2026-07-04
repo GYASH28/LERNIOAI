@@ -185,7 +185,7 @@ export function AuthShell({
         </aside>
 
         {/* Right form panel */}
-        <section className="flex min-h-dvh flex-col px-4 py-5 sm:px-6 lg:px-10">
+        <section className="flex min-h-dvh flex-col px-5 py-6 sm:px-6 lg:px-10">
           <div className="flex items-center justify-between">
             <BrandLockup />
             <Link

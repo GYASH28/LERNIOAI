@@ -48,7 +48,7 @@ export default async function HelpArticlePage({
   if (!article) {
     return (
       <main className="min-h-screen bg-background text-foreground">
-        <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-2xl px-5 py-8 sm:px-6 lg:px-8">
           <Link href="/help" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
             <ArrowLeft className="h-4 w-4" />
             Help Center
@@ -62,7 +62,7 @@ export default async function HelpArticlePage({
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-2xl px-5 py-8 sm:px-6 lg:px-8">
         <Link href="/help" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
           <ArrowLeft className="h-4 w-4" />
           Help Center

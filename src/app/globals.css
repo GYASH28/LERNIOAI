@@ -301,38 +301,68 @@ header[class*="sticky top-0"] {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   MOBILE UI FIXES
+   MOBILE UI / UX — full-screen, generous, native-feeling
+   ──────────────────────────────────────────────────────────────────────────
+   Goals:
+   • Use the entire mobile viewport (notch/Dynamic Island included)
+   • Generous padding so content doesn't feel cramped
+   • 44px minimum touch targets (Apple HIG / Material spec)
+   • Safe-area insets for notch + home indicator
+   • Don't override component-level paddings (let designers control them)
    ────────────────────────────────────────────────────────────────────────── */
 
-/* Reduce top bar height on mobile */
-@media (max-width: 768px) {
-  header[class*="sticky top-0"] > div {
-    height: 3rem !important;  /* 48px instead of 56px */
+/* Full-bleed root: let the app use the entire screen. */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+  /* viewport-fit=cover from <meta viewport> lets us use the notch area;
+     safe-area-inset-* then keeps content readable. */
+}
+
+/* Safe-area padding for the top bar (notch / Dynamic Island) */
+@supports (padding: max(0px)) {
+  header[class*="sticky top-0"] {
+    padding-top: max(0px, env(safe-area-inset-top));
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+  /* Bottom safe area for home indicator */
+  .fixed.bottom-0,
+  footer {
+    padding-bottom: max(0px, env(safe-area-inset-bottom));
   }
 }
 
-/* Better content padding on mobile */
+/* Don't override the top bar height — h-14 (56px) is the right size
+   for touch targets on mobile. Previously this was forced to 48px
+   which made buttons too cramped. */
+
+/* Generous content padding on mobile — uses full width with breathing room.
+   px-5 = 20px on each side, comfortable for reading on phones. */
 @media (max-width: 640px) {
   .app-main-scroll,
   main[class*="mx-auto max-w"] {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
-    padding-top: 1rem !important;
+    padding-left: 1.25rem !important;   /* 20px */
+    padding-right: 1.25rem !important;  /* 20px */
+    padding-top: 1.25rem !important;    /* 20px */
+    padding-bottom: 2rem !important;    /* 32px — extra space at bottom */
   }
 }
 
-/* Ensure tables are scrollable on mobile */
-table {
-  display: block;
-  overflow-x: auto;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
-}
+/* Don't override card padding globally — let each component decide.
+   Removing the old `.rounded-lg.border.border-border.bg-card { padding: 0.75rem !important }`
+   rule that was making every card cramped. */
 
-/* Better card spacing on mobile */
+/* Tables: only force horizontal scroll on small screens AND only for
+   tables explicitly marked as "responsive". Real table layouts (like
+   timetable grids) should NOT be forced to display:block. */
 @media (max-width: 640px) {
-  .rounded-lg.border.border-border.bg-card {
-    padding: 0.75rem !important;
+  table.responsive-table,
+  .table-responsive table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
@@ -342,29 +372,25 @@ table {
   width: 100%;
 }
 
-/* Prevent horizontal scroll on mobile */
-html, body {
-  overflow-x: hidden;
-  max-width: 100%;
-}
+/* Don't override h1/h2/h3 font sizes on mobile — the natural Tailwind
+   sizes (text-2xl, text-3xl) are already appropriate. Forcing them
+   smaller killed the visual hierarchy. */
 
-/* Better font sizes on mobile */
-@media (max-width: 640px) {
-  h1 {
-    font-size: 1.5rem !important;
+/* 44px minimum touch target for primary interactive elements (Apple HIG).
+   We only apply this to standalone icon buttons, not to inline links in
+   text, to avoid breaking dense lists. */
+@media (max-width: 768px) {
+  button[class*="h-8"],
+  button[class*="h-9"],
+  a[class*="h-8"],
+  a[class*="h-9"] {
+    min-height: 40px;
   }
-  h2 {
-    font-size: 1.25rem !important;
-  }
-  h3 {
-    font-size: 1.1rem !important;
-  }
-}
-
-/* Fix bottom navigation safe area on mobile */
-@supports (padding: max(0px)) {
-  .fixed.bottom-0 {
-    padding-bottom: max(0px, env(safe-area-inset-bottom));
+  /* Icon-only buttons need the full 44px */
+  button:not(:empty):not([class*="text-xs"]):not([class*="text-sm"]):not([class*="px-"]):not([class*="w-full"]),
+  a:not(:empty):not([class*="text-xs"]):not([class*="text-sm"]):not([class*="px-"]):not([class*="w-full"]) {
+    min-height: 40px;
+    min-width: 40px;
   }
 }
 
@@ -377,6 +403,45 @@ html, body {
 html {
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
+}
+
+/* Increase default spacing between sections on mobile for visual breathing room */
+@media (max-width: 640px) {
+  main[class*="mx-auto max-w"] > section + section,
+  main[class*="mx-auto max-w"] > div + section,
+  main[class*="mx-auto max-w"] > section > div + div {
+    margin-top: 1.25rem;  /* 20px between sections */
+  }
+}
+
+/* Prevent iOS rubber-band scroll on body (only inside scroll containers) */
+body {
+  overscroll-behavior-y: none;
+}
+
+/* Inputs: 16px+ font size prevents iOS Safari auto-zoom on focus */
+@media (max-width: 640px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"],
+  input[type="number"],
+  input[type="search"],
+  input[type="url"],
+  input[type="date"],
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+/* Better tap feedback — quick scale-down on active */
+@media (max-width: 768px) {
+  button:active:not(:disabled),
+  a:active {
+    transform: scale(0.97);
+    transition: transform 0.08s ease-out;
+  }
 }
 
 /* Dark mode fixes for new pages */

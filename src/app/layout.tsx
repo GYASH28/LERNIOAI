@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -97,6 +97,25 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+};
+
+// ──────────────────────────────────────────────────────────────────────────
+// VIEWPORT — full-screen mobile experience
+// ──────────────────────────────────────────────────────────────────────────
+// viewport-fit=cover lets content extend into the notch/Dynamic Island area
+// on iPhone, so the app truly uses the full screen. maximumScale=5 prevents
+// iOS auto-zoom on input focus while still allowing user zoom for a11y.
+// ──────────────────────────────────────────────────────────────────────────
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
 };
 
 export default function RootLayout({

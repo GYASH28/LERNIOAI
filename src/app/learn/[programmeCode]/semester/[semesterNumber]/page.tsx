@@ -63,7 +63,7 @@ function ManifestSemesterView({
     <main className="min-h-screen bg-background text-foreground">
       {/* ─── Hero ─── */}
       <section className="border-b border-border/70 bg-muted/30">
-        <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl px-5 py-6 sm:px-6 lg:px-8">
           <Link href="/learn" className="inline-flex w-fit items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
             <ArrowLeft className="h-4 w-4" />
             <span className="hidden sm:inline">Learn</span>
@@ -90,7 +90,7 @@ function ManifestSemesterView({
         </div>
       </section>
 
-      <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8 space-y-8">
+      <div className="mx-auto max-w-6xl px-5 py-6 sm:px-6 lg:px-8 space-y-8">
         {/* ─── My Subjects ─── */}
         <section>
           <div className="mb-4 flex items-center justify-between">

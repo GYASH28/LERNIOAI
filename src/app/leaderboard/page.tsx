@@ -13,7 +13,7 @@ export default async function LeaderboardPage() {
   const ranked = users.map((u, i) => ({ rank: i+1, id: u.id, name: u.id === user.id ? u.name+' (You)' : u.name, xp: u.xp, streak: u.streak, avatar: u.avatar, isYou: u.id === user.id }))
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <div className="mx-auto max-w-3xl px-4 py-6 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-3xl px-5 py-6 sm:px-6 lg:px-8">
         <div className="mb-6 flex items-center gap-3">
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-500/10"><Trophy className="h-6 w-6 text-amber-600" /></div>
           <div><h1 className="text-2xl font-bold">Leaderboard</h1><p className="text-sm text-muted-foreground">Top students by XP</p></div>

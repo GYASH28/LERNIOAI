@@ -34,6 +34,8 @@ import {
   ChevronUp,
   Trophy,
   GraduationCap,
+  HelpCircle,
+  Users,
 } from 'lucide-react'
 import type { ViewKey } from '@/lib/types'
 import { routeForView } from '@/lib/routes'
@@ -56,6 +58,7 @@ const NAV_ITEMS: { key: ViewKey; label: string; icon: typeof BookOpen }[] = [
 ]
 
 const EXTRA_LINKS: { href: string; label: string; icon: typeof BookOpen }[] = [
+  { href: '/class', label: 'My Class', icon: Users },
   { href: '/leaderboard', label: 'Leaderboard', icon: Trophy },
   { href: '/teacher-dashboard', label: 'Teacher Dashboard', icon: GraduationCap },
   { href: '/feedback', label: 'Feedback', icon: MessageSquare },
@@ -77,7 +80,6 @@ export function TopBar() {
   const pathname = usePathname() || '/'
   const [hidden, setHidden] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [mobileMoreOpen, setMobileMoreOpen] = useState(false)
 
   const user = useAppStore((s) => s.user)
   const xp = useAppStore((s) => s.xp)
@@ -141,13 +143,14 @@ export function TopBar() {
               )
             })}
 
-            {/* More dropdown for secondary items */}
+            {/* More dropdown for secondary items + extra links */}
             <div className="group relative">
               <button className="flex items-center gap-1 rounded-md px-2.5 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">
                 <span className="hidden lg:inline">More</span>
                 <ChevronDown className="h-3 w-3" />
               </button>
-              <div className="absolute right-0 top-full hidden min-w-[180px] rounded-lg border border-border bg-popover py-1 shadow-lg group-hover:block">
+              <div className="absolute right-0 top-full hidden min-w-[200px] rounded-lg border border-border bg-popover py-1 shadow-lg group-hover:block">
+                {/* Secondary nav items */}
                 {moreItems.map((item) => {
                   const href = routeForView(item.key)
                   const active = isActivePath(pathname, href)
@@ -164,6 +167,26 @@ export function TopBar() {
                     >
                       <item.icon className="h-4 w-4" />
                       {item.label}
+                    </Link>
+                  )
+                })}
+                {/* Divider between nav items and extra links */}
+                <div className="my-1 border-t border-border" />
+                {/* Extra links (same as mobile drawer) */}
+                {EXTRA_LINKS.map((link) => {
+                  const active = isActivePath(pathname, link.href)
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      prefetch={true}
+                      className={cn(
+                        'flex items-center gap-2 px-3 py-2 text-sm transition-colors',
+                        active ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:bg-accent hover:text-foreground',
+                      )}
+                    >
+                      <link.icon className="h-4 w-4" />
+                      {link.label}
                     </Link>
                   )
                 })}
@@ -209,7 +232,7 @@ export function TopBar() {
             </button>
 
             {/* User avatar with dropdown (desktop) */}
-            <UserMenu user={user} isDark={isDark} setPref={setPref} />
+            <UserMenu user={user} />
 
             {/* Hide bar button */}
             <button
@@ -342,7 +365,7 @@ export function TopBar() {
 import { useState as useState2, useRef as useRef2, useEffect as useEffect2 } from 'react'
 import { ChevronDown as ChevronDown2 } from 'lucide-react'
 
-function UserMenu({ user, isDark, setPref }: { user: { name: string; email: string } | null; isDark: boolean; setPref: (p: { appearance: string }) => void }) {
+function UserMenu({ user }: { user: { name: string; email: string } | null }) {
   const [open, setOpen] = useState2(false)
   const ref = useRef2<HTMLDivElement>(null)
 
