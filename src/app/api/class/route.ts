@@ -133,16 +133,17 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({ error: 'Not authorized' }, { status: 403 })
       }
 
-      const dept = dbUser.departmentCode || 'DCOMP'
+      // Admin sees ALL classes; teachers/coordinators see only their department
+      const whereClause = dbUser.role === 'admin' ? {} : { departmentCode: dbUser.departmentCode || 'DCOMP' }
 
-      // Get all classes for this department, semesters 1-6
+      // Get all classes, semesters 1-6
       const classes = await db.class.findMany({
-        where: { departmentCode: dept },
+        where: whereClause,
         include: {
           cr: { select: { id: true, name: true, email: true } },
           _count: { select: { members: true } }
         },
-        orderBy: [{ semesterNumber: 'asc' }, { division: 'asc' }]
+        orderBy: [{ departmentCode: 'asc' }, { semesterNumber: 'asc' }, { division: 'asc' }]
       })
 
       // Group by semester

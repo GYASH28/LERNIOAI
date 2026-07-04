@@ -49,16 +49,57 @@ export function SimplePeopleRoles() {
         setMessage(peopleData?.error?.message || 'Could not load users.')
       }
 
-      // Fetch options (departments, classes) — this might fail, that's OK
+      // Fetch classes directly from our Class API (not the old access/options)
       try {
-        const optionsRes = await fetch('/api/admin/access/options', { cache: 'no-store' })
-        const optionsData = await optionsRes.json()
-        if (optionsData?.ok && optionsData.data) {
-          setOptions(optionsData.data)
+        const classRes = await fetch('/api/class?action=teacher-classes', { cache: 'no-store' })
+        const classData = await classRes.json()
+        if (classData?.ok && classData.data) {
+          // Flatten the bySemester object into classGroups format
+          const bySemester = classData.data
+          const classGroups: Options['classGroups'] = []
+          const departments: Options['departments'] = []
+          const seenDept = new Set<string>()
+
+          for (const sem of Object.keys(bySemester)) {
+            for (const c of bySemester[sem]) {
+              classGroups.push({
+                id: c.id,
+                label: `${c.departmentCode} - Sem ${c.semesterNumber} - Div ${c.division}${c._count?.members ? ` (${c._count.members} students)` : ''}${c.cr ? ` - CR: ${c.cr.name}` : ''}`,
+                institutionId: '',
+                departmentCode: c.departmentCode,
+              })
+              if (!seenDept.has(c.departmentCode)) {
+                seenDept.add(c.departmentCode)
+                departments.push({
+                  id: c.departmentCode,
+                  code: c.departmentCode,
+                  institutionId: '',
+                  label: c.departmentCode === 'DCOMP' ? 'Computer Engineering' : 'Computer Engineering & IoT',
+                })
+              }
+            }
+          }
+
+          setOptions({ departments, subjects: [], classGroups })
+
+          // Also try the old access/options API for subjects (needed for teacher, but we removed teacher)
+          try {
+            const optionsRes = await fetch('/api/admin/access/options', { cache: 'no-store' })
+            const optionsData = await optionsRes.json()
+            if (optionsData?.ok && optionsData.data?.subjects?.length) {
+              setOptions(prev => ({ ...prev, subjects: optionsData.data.subjects }))
+            }
+          } catch {}
         }
       } catch {
-        // Options failed — admin can still assign roles without class selector
-        // if they use the API directly
+        // Class API failed — try old access/options as fallback
+        try {
+          const optionsRes = await fetch('/api/admin/access/options', { cache: 'no-store' })
+          const optionsData = await optionsRes.json()
+          if (optionsData?.ok && optionsData.data) {
+            setOptions(optionsData.data)
+          }
+        } catch {}
       }
     } catch (error) {
       setMessage(error instanceof Error ? error.message : 'Could not load people.')
