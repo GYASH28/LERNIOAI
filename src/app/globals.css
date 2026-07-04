@@ -313,10 +313,14 @@ header[class*="sticky top-0"] {
    • Don't override component-level paddings (let designers control them)
    ────────────────────────────────────────────────────────────────────────── */
 
-/* Full-bleed root: let the app use the entire screen. */
-html, body {
+/* Full-bleed root: prevent horizontal scroll only (keep vertical scroll native).
+   DO NOT set overflow-x:hidden on html — it breaks iOS Safari vertical scroll.
+   DO NOT set max-width:100% on html/body — it can clip content and break scroll on some Android browsers. */
+html {
   overflow-x: hidden;
-  max-width: 100%;
+}
+body {
+  overflow-x: hidden;
   /* viewport-fit=cover from <meta viewport> lets us use the notch area;
      safe-area-inset-* then keeps content readable. */
 }
@@ -416,10 +420,8 @@ html {
   }
 }
 
-/* Prevent iOS rubber-band scroll on body (only inside scroll containers) */
-body {
-  overscroll-behavior-y: none;
-}
+/* NOTE: Do NOT set overscroll-behavior-y: none on body — it breaks iOS Safari
+   scrolling on some devices. Leaving default rubber-band behavior. */
 
 /* Inputs: 16px+ font size prevents iOS Safari auto-zoom on focus */
 @media (max-width: 640px) {
@@ -437,14 +439,9 @@ body {
   }
 }
 
-/* Better tap feedback — quick scale-down on active */
-@media (max-width: 768px) {
-  button:active:not(:disabled),
-  a:active {
-    transform: scale(0.97);
-    transition: transform 0.08s ease-out;
-  }
-}
+/* NOTE: Removed the `transform: scale(0.97)` tap feedback rule.
+   It was causing scroll jank on mobile because every button/a transform
+   during a scroll-touch triggered a repaint. Native :active styling is enough. */
 
 /* Dark mode is handled by the theme system in tokens.css + themes.css.
    The .dark class on <html> triggers OKLCH-based token overrides that

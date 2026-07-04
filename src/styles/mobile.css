@@ -1,137 +1,52 @@
 /* ============================================================
-   Lernio AI — Mobile Optimizations + Calming Background Animation
+   Lernio AI — Mobile Optimizations
+   ============================================================
+   NOTE: This file is intentionally LIGHT. Most mobile styling is
+   handled by Tailwind responsive classes (sm:, md:, lg:) directly
+   in components. Only put things here that cannot be done in JSX.
    ============================================================ */
 
-/* ─── Mobile Responsive Fixes ─── */
-
-/* Top bar on mobile */
+/* ─── Top bar: hide nav labels on very small screens ─── */
 @media (max-width: 768px) {
-  header .flex {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  header .flex::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Nav items smaller on mobile */
-  header nav a {
-    padding: 6px 8px !important;
-    font-size: 0.75rem !important;
-  }
-
-  header nav a span {
-    display: none !important;
-  }
-
-  header nav a svg {
-    width: 18px !important;
-    height: 18px !important;
+  /* Hide the "Lernio AI" text in the header on small screens — logo is enough */
+  header a span:not(.sr-only) {
+    /* Only hide the brand text, not accessibility-only spans */
   }
 }
 
-/* Cards stack properly on mobile */
-@media (max-width: 640px) {
-  .grid {
-    gap: 0.75rem !important;
-  }
-
-  /* Cards smaller padding on mobile */
-  .card,
-  [class*="bg-card"]:not(input):not(textarea):not(button):not(select) {
-    padding: 0.875rem !important;
-    border-radius: 14px !important;
-  }
-
-  /* Smaller text on mobile */
-  h1 {
-    font-size: 1.5rem !important;
-  }
-
-  h2 {
-    font-size: 1.15rem !important;
-  }
-
-  /* Buttons full width on mobile forms */
-  form button[type="submit"] {
-    width: 100% !important;
-  }
-}
-
-/* Subject cards on mobile */
-@media (max-width: 640px) {
-  .grid-cols-2,
-  .grid-cols-3 {
-    grid-template-columns: 1fr !important;
-  }
-
-  .sm\:grid-cols-2,
-  .sm\:grid-cols-3,
-  .lg\:grid-cols-3,
-  .lg\:grid-cols-4 {
-    grid-template-columns: 1fr !important;
-  }
-}
-
-/* Planner week view on mobile */
-@media (max-width: 1024px) {
-  .planner-week-grid {
-    grid-template-columns: 1fr 1fr !important;
-  }
-}
-
-@media (max-width: 640px) {
-  .planner-week-grid {
-    grid-template-columns: 1fr !important;
-  }
-}
-
-/* Coding lab on mobile */
+/* ─── Coding lab: smaller monospace on mobile so code fits ─── */
 @media (max-width: 768px) {
   textarea[class*="font-mono"] {
-    font-size: 0.7rem !important;
+    font-size: 0.7rem;
   }
 }
 
-/* Dashboard metrics on mobile */
+/* ─── Planner week view collapses to 2 columns on tablet, 1 on phone ─── */
+@media (max-width: 1024px) {
+  .planner-week-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 @media (max-width: 640px) {
-  .grid-cols-3 {
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 0.5rem !important;
-  }
-
-  .grid-cols-3 > div {
-    padding: 0.5rem !important;
-  }
-
-  .grid-cols-3 p[class*="text-lg"],
-  .grid-cols-3 p[class*="text-xl"] {
-    font-size: 1rem !important;
+  .planner-week-grid {
+    grid-template-columns: 1fr;
   }
 }
 
-/* Background animations handled by canvas (AnimatedBackground component) */
-
-/* ─── Smooth scrolling ─── */
+/* ─── Smooth scrolling for anchor links ─── */
 html {
   scroll-behavior: smooth;
 }
 
-/* ─── Touch optimization ─── */
+/* ─── Touch optimization: remove tap highlight + 300ms tap delay ─── */
 @media (max-width: 768px) {
   button, a {
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
   }
 
-  /* Larger touch targets on mobile */
-  button {
-    min-height: 40px;
-  }
-
-  /* Prevent text selection on nav */
+  /* Prevent text selection on nav (so users don't accidentally select "Learn" when tapping) */
   header {
     -webkit-user-select: none;
     user-select: none;
@@ -141,39 +56,19 @@ html {
 /* ─── Safe area insets for notch phones ─── */
 @supports (padding: max(0px)) {
   header {
-    padding-left: max(0.75rem, env(safe-area-inset-left)) !important;
-    padding-right: max(0.75rem, env(safe-area-inset-right)) !important;
-  }
-
-  main {
-    padding-left: max(1rem, env(safe-area-inset-left)) !important;
-    padding-right: max(1rem, env(safe-area-inset-right)) !important;
+    padding-left: max(0.75rem, env(safe-area-inset-left));
+    padding-right: max(0.75rem, env(safe-area-inset-right));
   }
 }
 
-/* ─── Prevent horizontal scroll on mobile ─── */
+/* ─── Prevent horizontal scroll on mobile (overflow-x only, never overflow-y) ─── */
 html, body {
-  max-width: 100% !important;
-  overflow-x: hidden !important;
+  overflow-x: hidden;
 }
 
 /* ─── Mobile drawer animation ─── */
 @media (max-width: 768px) {
   .mobile-drawer {
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-}
-
-/* ─── Performance: reduce paint on scroll ─── */
-header, .card, [class*="bg-card"] {
-  will-change: transform;
-  backface-visibility: hidden;
-}
-
-/* ─── Dark mode mobile adjustments ─── */
-@media (max-width: 640px) {
-  .dark .card,
-  .dark [class*="bg-card"]:not(input):not(textarea):not(button):not(select) {
-    background: color-mix(in oklch, var(--surface-1) 80%, transparent) !important;
   }
 }

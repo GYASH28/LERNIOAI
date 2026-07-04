@@ -15,13 +15,18 @@ export function AnimatedBackground() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
+    // Respect prefers-reduced-motion — skip animation entirely for users
+    // who set this preference. Also skip on small screens to save battery
+    // and prevent scroll jank on low-end mobile devices.
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReducedMotion) return
+
     let width = window.innerWidth
     let height = window.innerHeight
     canvas.width = width
     canvas.height = height
 
     // Get brand color from CSS variable
-    const root = getComputedStyle(document.documentElement)
     const isDark = document.documentElement.classList.contains('dark')
     const brandColor = isDark ? '6, 182, 212' : '6, 182, 212'     // cyan
     const accentColor = isDark ? '139, 92, 246' : '139, 92, 246'  // violet
@@ -38,7 +43,9 @@ export function AnimatedBackground() {
       pulse: number
     }
 
-    const particleCount = Math.min(40, Math.floor(width / 30))
+    // Fewer particles on mobile (saves battery + reduces scroll jank)
+    const isMobile = width < 768
+    const particleCount = isMobile ? Math.min(15, Math.floor(width / 60)) : Math.min(40, Math.floor(width / 30))
     const particles: Particle[] = []
 
     for (let i = 0; i < particleCount; i++) {
@@ -142,19 +149,33 @@ export function AnimatedBackground() {
 
     animate()
 
-    // Resize handler
+    // Resize handler (passive — doesn't block scroll)
     const handleResize = () => {
       width = window.innerWidth
       height = window.innerHeight
       canvas.width = width
       canvas.height = height
     }
-    window.addEventListener('resize', handleResize)
+    window.addEventListener('resize', handleResize, { passive: true })
+
+    // Pause animation when tab is hidden (saves CPU/battery)
+    const handleVisibility = () => {
+      if (document.hidden) {
+        if (animationId) {
+          cancelAnimationFrame(animationId)
+          animationId = null as any
+        }
+      } else if (!animationId) {
+        animate()
+      }
+    }
+    document.addEventListener('visibilitychange', handleVisibility)
 
     // Cleanup
     return () => {
-      cancelAnimationFrame(animationId)
+      if (animationId) cancelAnimationFrame(animationId)
       window.removeEventListener('resize', handleResize)
+      document.removeEventListener('visibilitychange', handleVisibility)
     }
   }, [])
 

@@ -39,17 +39,21 @@ export function CustomCursor() {
   const [clicking, setClicking] = useState(false)
   const [hidden, setHidden] = useState(true) // Start hidden until mouse moves
   const [isDark, setIsDark] = useState(false)
+  const [isTouchDevice, setIsTouchDevice] = useState(false) // deferred to avoid hydration mismatch
   const pathname = usePathname()
   const pageTheme = getPageTheme(pathname)
   const accentColor = PAGE_ACCENTS[pageTheme]
 
   useEffect(() => {
-    setIsDark(document.documentElement.classList.contains('dark'))
-
-    // Don't show on touch devices
+    // Detect touch device in useEffect (client-only) to avoid hydration mismatch.
+    // Running this during render causes server/client divergence which can break
+    // React event handling and make the page feel "stuck" / unscrollable.
     if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+      setIsTouchDevice(true)
       return
     }
+
+    setIsDark(document.documentElement.classList.contains('dark'))
 
     const cursor = cursorRef.current
     if (!cursor) return
@@ -88,8 +92,8 @@ export function CustomCursor() {
     }
   }, [])
 
-  // Don't render on touch devices
-  if (typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
+  // Don't render on touch devices — native cursor/touch is fine
+  if (isTouchDevice) {
     return null
   }
 
@@ -123,11 +127,10 @@ export function CustomCursor() {
         <div
           style={{
             transform: `scale(${scale})`,
-            transition: 'transform 0.12s cubic-bezier(0.4, 0, 0.2, 1)',
+            transition: 'transform 0.12s cubic-bezier(0.4, 0, 0.2, 1), filter 0.2s ease',
             filter: hovering
               ? `drop-shadow(0 0 6px rgba(${accentColor}, 0.5)) drop-shadow(0 2px 4px rgba(0,0,0,0.2))`
               : 'drop-shadow(0 2px 3px rgba(0,0,0,0.3))',
-            transitionFilter: 'filter 0.2s ease',
           }}
         >
           <svg width="22" height="22" viewBox="0 0 24 24">
