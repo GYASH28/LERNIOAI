@@ -40,12 +40,26 @@ export function SimplePeopleRoles() {
   const load = useCallback(async () => {
     setBusy(true)
     try {
-      const [people, available] = await Promise.all([
-        fetch('/api/admin/users?page=1&pageSize=50', { cache: 'no-store' }).then((response) => read<{ users: UserRow[] }>(response)),
-        fetch('/api/admin/access/options', { cache: 'no-store' }).then((response) => read<Options>(response)),
-      ])
-      setUsers(people.users)
-      setOptions(available)
+      // Fetch users — this is the most important data
+      const peopleRes = await fetch('/api/admin/users?page=1&pageSize=50', { cache: 'no-store' })
+      const peopleData = await peopleRes.json()
+      if (peopleData?.ok && peopleData.data?.users) {
+        setUsers(peopleData.data.users)
+      } else {
+        setMessage(peopleData?.error?.message || 'Could not load users.')
+      }
+
+      // Fetch options (departments, classes) — this might fail, that's OK
+      try {
+        const optionsRes = await fetch('/api/admin/access/options', { cache: 'no-store' })
+        const optionsData = await optionsRes.json()
+        if (optionsData?.ok && optionsData.data) {
+          setOptions(optionsData.data)
+        }
+      } catch {
+        // Options failed — admin can still assign roles without class selector
+        // if they use the API directly
+      }
     } catch (error) {
       setMessage(error instanceof Error ? error.message : 'Could not load people.')
     } finally {
