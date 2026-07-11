@@ -10,7 +10,7 @@ export function GET(request: NextRequest) {
     const user = await getCurrentUser()
     if (!user) throw new ApiError('UNAUTHENTICATED', 'Sign in required', 401, false)
     const users = await db.user.findMany({
-      where: { role: 'student', status: 'active' },
+      where: { role: 'student', status: 'active', email: { not: 'student@lernio.ai' }, id: { not: 'demo-user' } },
       select: { id: true, name: true, xp: true, streak: true, avatar: true },
       orderBy: [{ xp: 'desc' }], take: 50,
     })

@@ -15,8 +15,8 @@ const FAQS = [
     a: 'Any diploma student with an email address can create an account directly. You do not need an invite code. Academic details such as programme, semester, division and roll number are optional at signup and can be completed later.',
   },
   {
-    q: 'Do teachers and staff need approval?',
-    a: 'Yes. CR, teacher, HOD and admin access is guarded by server-side authority assignments. Review and moderation are scoped capabilities granted to the right staff member rather than normal public signup roles.',
+    q: 'How do CRs get access?',
+    a: 'CR (Class Representative) access is granted by the admin via invite codes. The admin creates a CR invite for a specific class, shares the code with the chosen student, and the student redeems it during sign-up to become the CR for that class.',
   },
   {
     q: 'Which subjects are available today?',

@@ -17,6 +17,8 @@
 @import "../styles/motion.css";
 @import "../styles/motion-components.css";
 @import "../styles/prose.css";
+@import "../styles/neomorphism.css";
+@import "../styles/mobile.css";
 @import "../styles/accessibility.css";
 @import "../styles/utilities.css";
 @import "../styles/marketing.css";
@@ -301,38 +303,72 @@ header[class*="sticky top-0"] {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   MOBILE UI FIXES
+   MOBILE UI / UX — full-screen, generous, native-feeling
+   ──────────────────────────────────────────────────────────────────────────
+   Goals:
+   • Use the entire mobile viewport (notch/Dynamic Island included)
+   • Generous padding so content doesn't feel cramped
+   • 44px minimum touch targets (Apple HIG / Material spec)
+   • Safe-area insets for notch + home indicator
+   • Don't override component-level paddings (let designers control them)
    ────────────────────────────────────────────────────────────────────────── */
 
-/* Reduce top bar height on mobile */
-@media (max-width: 768px) {
-  header[class*="sticky top-0"] > div {
-    height: 3rem !important;  /* 48px instead of 56px */
+/* Full-bleed root: prevent horizontal scroll only (keep vertical scroll native).
+   DO NOT set overflow-x:hidden on html — it breaks iOS Safari vertical scroll.
+   DO NOT set max-width:100% on html/body — it can clip content and break scroll on some Android browsers. */
+html {
+  overflow-x: hidden;
+}
+body {
+  overflow-x: hidden;
+  /* viewport-fit=cover from <meta viewport> lets us use the notch area;
+     safe-area-inset-* then keeps content readable. */
+}
+
+/* Safe-area padding for the top bar (notch / Dynamic Island) */
+@supports (padding: max(0px)) {
+  header[class*="sticky top-0"] {
+    padding-top: max(0px, env(safe-area-inset-top));
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+  /* Bottom safe area for home indicator */
+  .fixed.bottom-0,
+  footer {
+    padding-bottom: max(0px, env(safe-area-inset-bottom));
   }
 }
 
-/* Better content padding on mobile */
+/* Don't override the top bar height — h-14 (56px) is the right size
+   for touch targets on mobile. Previously this was forced to 48px
+   which made buttons too cramped. */
+
+/* Generous content padding on mobile — uses full width with breathing room.
+   px-5 = 20px on each side, comfortable for reading on phones. */
 @media (max-width: 640px) {
   .app-main-scroll,
   main[class*="mx-auto max-w"] {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
-    padding-top: 1rem !important;
+    padding-left: 1.25rem !important;   /* 20px */
+    padding-right: 1.25rem !important;  /* 20px */
+    padding-top: 1.25rem !important;    /* 20px */
+    padding-bottom: 2rem !important;    /* 32px — extra space at bottom */
   }
 }
 
-/* Ensure tables are scrollable on mobile */
-table {
-  display: block;
-  overflow-x: auto;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
-}
+/* Don't override card padding globally — let each component decide.
+   Removing the old `.rounded-lg.border.border-border.bg-card { padding: 0.75rem !important }`
+   rule that was making every card cramped. */
 
-/* Better card spacing on mobile */
+/* Tables: only force horizontal scroll on small screens AND only for
+   tables explicitly marked as "responsive". Real table layouts (like
+   timetable grids) should NOT be forced to display:block. */
 @media (max-width: 640px) {
-  .rounded-lg.border.border-border.bg-card {
-    padding: 0.75rem !important;
+  table.responsive-table,
+  .table-responsive table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
@@ -342,29 +378,25 @@ table {
   width: 100%;
 }
 
-/* Prevent horizontal scroll on mobile */
-html, body {
-  overflow-x: hidden;
-  max-width: 100%;
-}
+/* Don't override h1/h2/h3 font sizes on mobile — the natural Tailwind
+   sizes (text-2xl, text-3xl) are already appropriate. Forcing them
+   smaller killed the visual hierarchy. */
 
-/* Better font sizes on mobile */
-@media (max-width: 640px) {
-  h1 {
-    font-size: 1.5rem !important;
+/* 44px minimum touch target for primary interactive elements (Apple HIG).
+   We only apply this to standalone icon buttons, not to inline links in
+   text, to avoid breaking dense lists. */
+@media (max-width: 768px) {
+  button[class*="h-8"],
+  button[class*="h-9"],
+  a[class*="h-8"],
+  a[class*="h-9"] {
+    min-height: 40px;
   }
-  h2 {
-    font-size: 1.25rem !important;
-  }
-  h3 {
-    font-size: 1.1rem !important;
-  }
-}
-
-/* Fix bottom navigation safe area on mobile */
-@supports (padding: max(0px)) {
-  .fixed.bottom-0 {
-    padding-bottom: max(0px, env(safe-area-inset-bottom));
+  /* Icon-only buttons need the full 44px */
+  button:not(:empty):not([class*="text-xs"]):not([class*="text-sm"]):not([class*="px-"]):not([class*="w-full"]),
+  a:not(:empty):not([class*="text-xs"]):not([class*="text-sm"]):not([class*="px-"]):not([class*="w-full"]) {
+    min-height: 40px;
+    min-width: 40px;
   }
 }
 
@@ -379,16 +411,40 @@ html {
   -ms-text-size-adjust: 100%;
 }
 
-/* Dark mode fixes for new pages */
-.dark .bg-card { background-color: hsl(var(--card, 215 28% 17%)); }
-.dark .bg-muted\/30 { background-color: hsl(var(--muted, 215 28% 17%) \/ 0.3); }
-.dark .bg-muted\/50 { background-color: hsl(var(--muted, 215 28% 17%) \/ 0.5); }
-.dark .border-border { border-color: hsl(var(--border, 215 28% 20%)); }
-.dark .bg-background { background-color: hsl(var(--background, 222 47% 11%)); }
-.dark .text-foreground { color: hsl(var(--foreground, 210 40% 98%)); }
-.dark .text-muted-foreground { color: hsl(var(--muted-foreground, 215 20% 65%)); }
-.dark .bg-primary\/5 { background-color: hsl(var(--primary, 217 91% 60%) \/ 0.05); }
-.dark .bg-primary\/10 { background-color: hsl(var(--primary, 217 91% 60%) \/ 0.1); }
-.dark .bg-zinc-900 { background-color: #18181b; }
-.dark .text-zinc-300 { color: #d4d4d8; }
-.dark .text-green-400 { color: #4ade80; }
+/* Increase default spacing between sections on mobile for visual breathing room */
+@media (max-width: 640px) {
+  main[class*="mx-auto max-w"] > section + section,
+  main[class*="mx-auto max-w"] > div + section,
+  main[class*="mx-auto max-w"] > section > div + div {
+    margin-top: 1.25rem;  /* 20px between sections */
+  }
+}
+
+/* NOTE: Do NOT set overscroll-behavior-y: none on body — it breaks iOS Safari
+   scrolling on some devices. Leaving default rubber-band behavior. */
+
+/* Inputs: 16px+ font size prevents iOS Safari auto-zoom on focus */
+@media (max-width: 640px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"],
+  input[type="number"],
+  input[type="search"],
+  input[type="url"],
+  input[type="date"],
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+/* NOTE: Removed the `transform: scale(0.97)` tap feedback rule.
+   It was causing scroll jank on mobile because every button/a transform
+   during a scroll-touch triggered a repaint. Native :active styling is enough. */
+
+/* Dark mode is handled by the theme system in tokens.css + themes.css.
+   The .dark class on <html> triggers OKLCH-based token overrides that
+   cascade into all shadcn components via the legacy token mappings.
+   Do NOT add hardcoded HSL overrides here — they conflict with the
+   OKLCH theme system and create cursed color combinations. */

@@ -1,6 +1,5 @@
 import { redirect } from 'next/navigation'
 import { getCurrentUser } from '@/lib/auth'
-import { db } from '@/lib/db'
 import Link from 'next/link'
 import { BookOpen, Download, ArrowLeft, FileText, Star } from 'lucide-react'
 import { MaterialsList } from './materials-list'
@@ -22,7 +21,7 @@ export default async function MaterialsPage() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-5xl px-5 py-6 sm:px-6 lg:px-8">
         <Link href="/dashboard" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-3"><ArrowLeft className="h-4 w-4" />Dashboard</Link>
         <h1 className="text-2xl font-bold">Materials</h1>
         <p className="mt-1 text-sm text-muted-foreground">Study notes, question papers, and resources for all subjects.</p>

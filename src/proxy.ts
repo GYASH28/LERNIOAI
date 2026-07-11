@@ -1,7 +1,5 @@
-import { withAuth } from 'next-auth/middleware'
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
-import { isProductionRuntime } from '@/lib/auth-policy'
 import { buildContentSecurityPolicy } from '@/lib/security/content-security-policy'
 
 function createNonce() {
@@ -10,7 +8,21 @@ function createNonce() {
   return btoa(String.fromCharCode(...bytes))
 }
 
-function securedNext(req: NextRequest) {
+function buildProxyContentSecurityPolicy(nonce: string) {
+  return buildContentSecurityPolicy({
+    nonce,
+    nodeEnv: process.env.NODE_ENV,
+    storagePublicBaseUrl: process.env.STORAGE_PUBLIC_BASE_URL,
+  })
+}
+
+/**
+ * Lightweight middleware — only adds CSP headers.
+ * Auth is handled by getCurrentUser() in each page component.
+ * No withAuth redirect (which caused the 'URL is malformed' error
+ * because next-auth v4 uses relative URLs for redirects).
+ */
+export function proxy(req: NextRequest) {
   const nonce = createNonce()
   const requestHeaders = new Headers(req.headers)
   requestHeaders.set('x-nonce', nonce)
@@ -24,76 +36,13 @@ function securedNext(req: NextRequest) {
   return response
 }
 
-function securedRedirect(url: URL) {
-  const nonce = createNonce()
-  const response = NextResponse.redirect(url)
-  response.headers.set('Content-Security-Policy', buildProxyContentSecurityPolicy(nonce))
-  return response
-}
-
-function buildProxyContentSecurityPolicy(nonce: string) {
-  return buildContentSecurityPolicy({
-    nonce,
-    nodeEnv: process.env.NODE_ENV,
-    storagePublicBaseUrl: process.env.STORAGE_PUBLIC_BASE_URL,
-  })
-}
-
-const publicPaths = new Set([
-  '/',
-  '/sign-in',
-  '/sign-up',
-  '/forgot-password',
-  '/reset-password',
-  '/privacy',
-  '/terms',
-  '/support',
-])
-
-export default withAuth(
-  function proxy(req) {
-    const pathname = req.nextUrl.pathname
-    const token = req.nextauth.token
-
-    if (token?.sessionRevoked === true || token?.status === 'revoked') {
-      return securedRedirect(new URL('/sign-in', req.url))
-    }
-
-    if (
-      token &&
-      token.profileComplete === false &&
-      pathname !== '/complete-profile' &&
-      !publicPaths.has(pathname)
-    ) {
-      return securedRedirect(new URL('/complete-profile', req.url))
-    }
-
-    return securedNext(req)
-  },
-  {
-    pages: {
-      signIn: '/sign-in',
-    },
-    callbacks: {
-      authorized: ({ token, req }) => {
-        if (publicPaths.has(req.nextUrl.pathname)) return true
-        if (
-          process.env.LERNIO_DEMO_MODE === 'true' &&
-          !isProductionRuntime({
-            nodeEnv: process.env.NODE_ENV,
-            vercelEnv: process.env.VERCEL_ENV,
-          })
-        ) {
-          return true
-        }
-        return Boolean(token) && token?.sessionRevoked !== true && token?.status !== 'revoked'
-      },
-    },
-  },
-)
+export default proxy
 
 export const config = {
   matcher: [
-    '/((?!api/auth|api/academics|api/health|api/ready|_next/static|_next/image|favicon.ico|brand/|theme-no-flash.js|robots.txt|sitemap.xml|manifest.webmanifest).*)',
+    // Exclude from middleware:
+    // - api/*             (API routes handle their own auth)
+    // - _next/static, _next/image, favicon.ico, brand/, etc. (static assets)
+    '/((?!api|_next/static|_next/image|favicon.ico|brand/|theme-no-flash.js|sw.js|robots.txt|sitemap.xml|manifest.webmanifest|lesson-notes).*)',
   ],
 }

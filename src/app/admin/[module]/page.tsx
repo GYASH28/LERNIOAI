@@ -1,4 +1,6 @@
 import { redirect } from 'next/navigation'
+export const dynamic = 'force-dynamic'
+
 import { requireActiveRole } from '@/lib/auth'
 import { getAdminModuleData } from '@/lib/admin/campusmate-data'
 import { CampusmateAdminShell } from '@/components/admin/campusmate-admin-shell'
@@ -9,7 +11,15 @@ import { SimpleSiteOperations } from '@/components/admin/simple-site-operations'
 
 export default async function AdminModulePage({ params }: { params: Promise<{ module: string }> }) {
   const { module } = await params
-  const authority = await requireActiveRole('admin')
+
+  // Use try/catch so unauthenticated users get redirected to sign-in
+  // instead of seeing the error boundary "Something went wrong" page
+  let authority
+  try {
+    authority = await requireActiveRole('admin')
+  } catch {
+    redirect('/sign-in?callbackUrl=/admin/' + module)
+  }
   const user = { name: authority.user.name, email: authority.user.email }
 
   if (module === 'access') redirect('/admin/users')
