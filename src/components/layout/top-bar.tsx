@@ -33,6 +33,9 @@ import {
   ChevronDown,
   ChevronUp,
   Trophy,
+  HelpCircle,
+  ClipboardList,
+  Users,
   GraduationCap,
 } from 'lucide-react'
 import type { ViewKey } from '@/lib/types'
@@ -342,7 +345,7 @@ export function TopBar() {
 import { useState as useState2, useRef as useRef2, useEffect as useEffect2 } from 'react'
 import { ChevronDown as ChevronDown2 } from 'lucide-react'
 
-function UserMenu({ user, isDark, setPref }: { user: { name: string; email: string } | null; isDark: boolean; setPref: (p: { appearance: string }) => void }) {
+function UserMenu({ user, isDark, setPref }: { user: { name: string; email: string } | null; isDark: boolean; setPref: (p: any) => void }) {
   const [open, setOpen] = useState2(false)
   const ref = useRef2<HTMLDivElement>(null)
 

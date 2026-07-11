@@ -300,64 +300,74 @@ export const authOptions: NextAuthOptions = {
     },
   },
   // ────────────────────────────────────────────────────────────────────────
-  // Audit fix #3 (CVSS 6.5): explicit cookie security override.
-  // next-auth v4 defaults to sameSite='lax' and secure='auto', which is too
-  // permissive. Force sameSite='strict' and secure=true in production to
-  // harden against CSRF and session-hijacking via non-HTTPS origins.
-  // Cookie names use __Secure- / __Host- prefixes per RFC 6265bis for
-  // additional protection against cookie tossing attacks.
+  // Cookie security: use __Secure- / __Host- prefixes ONLY in production
+  // (where secure=true). In development, browsers reject __Secure- cookies
+  // that don't have the Secure flag, causing sessions to not persist.
+  // Also use sameSite='lax' (not 'strict') so OAuth redirects work.
   // ────────────────────────────────────────────────────────────────────────
   cookies: {
     sessionToken: {
-      name: `__Secure-next-auth.session-token`,
+      name: process.env.NODE_ENV === 'production'
+        ? `__Secure-next-auth.session-token`
+        : `next-auth.session-token`,
       options: {
         httpOnly: true,
-        sameSite: 'strict',
+        sameSite: 'lax',
         path: '/',
         secure: process.env.NODE_ENV === 'production',
       },
     },
     callbackUrl: {
-      name: `__Secure-next-auth.callback-url`,
+      name: process.env.NODE_ENV === 'production'
+        ? `__Secure-next-auth.callback-url`
+        : `next-auth.callback-url`,
       options: {
         httpOnly: true,
-        sameSite: 'strict',
+        sameSite: 'lax',
         path: '/',
         secure: process.env.NODE_ENV === 'production',
       },
     },
     csrfToken: {
-      name: `__Host-next-auth.csrf-token`,
+      name: process.env.NODE_ENV === 'production'
+        ? `__Host-next-auth.csrf-token`
+        : `next-auth.csrf-token`,
       options: {
         httpOnly: true,
-        sameSite: 'strict',
+        sameSite: 'lax',
         path: '/',
         secure: process.env.NODE_ENV === 'production',
       },
     },
     pkceCodeVerifier: {
-      name: `__Secure-next-auth.pkce.code-verifier`,
+      name: process.env.NODE_ENV === 'production'
+        ? `__Secure-next-auth.pkce.code-verifier`
+        : `next-auth.pkce.code-verifier`,
       options: {
         httpOnly: true,
-        sameSite: 'strict',
+        sameSite: 'lax',
         path: '/',
         secure: process.env.NODE_ENV === 'production',
       },
     },
     state: {
-      name: `__Secure-next-auth.state`,
+      name: process.env.NODE_ENV === 'production'
+        ? `__Secure-next-auth.state`
+        : `next-auth.state`,
       options: {
         httpOnly: true,
-        sameSite: 'strict',
+        sameSite: 'lax',
         path: '/',
         secure: process.env.NODE_ENV === 'production',
       },
     },
     nonce: {
-      name: `__Secure-next-auth.nonce`,
+      name: process.env.NODE_ENV === 'production'
+        ? `__Secure-next-auth.nonce`
+        : `next-auth.nonce`,
       options: {
         httpOnly: true,
-        sameSite: 'strict',
+        sameSite: 'lax',
         path: '/',
         secure: process.env.NODE_ENV === 'production',
       },
