@@ -3,10 +3,30 @@ import { getCurrentUser } from '@/lib/auth'
 import { db } from '@/lib/db'
 import Link from 'next/link'
 import {
+<<<<<<< HEAD
   BookOpen, PlayCircle, Target, Flame, Zap, TrendingUp, ArrowRight,
   Calendar, Award, Crown, Mail, Clock, Users, GraduationCap,
   ClipboardList, ChevronRight, AlertTriangle, Database, RotateCw,
   BarChart3,
+=======
+  BookOpen,
+  PlayCircle,
+  Target,
+  Flame,
+  Zap,
+  TrendingUp,
+  ArrowRight,
+  Calendar,
+  Award,
+  Crown,
+  Mail,
+  Clock,
+  Users,
+  GraduationCap,
+  ClipboardList,
+  ChevronRight,
+  AlertTriangle,
+>>>>>>> 252dc7529c7d4f0155542b59d0d759804dcafb68
 } from 'lucide-react'
 import { getManifestSubjectsForSemester } from '@/lib/curriculum/manifest-data'
 import { ContinueLearningCard } from '@/components/dashboard/continue-learning-card'
@@ -22,6 +42,10 @@ export default async function DashboardPage() {
   if (!user) redirect('/sign-in?callbackUrl=/dashboard')
 
   // Redirect admins to admin dashboard, CRs to CR dashboard
+<<<<<<< HEAD
+=======
+  // Teachers and coordinators are removed — they use the student dashboard
+>>>>>>> 252dc7529c7d4f0155542b59d0d759804dcafb68
   if (user.role === 'admin') redirect('/admin')
   if (user.role === 'cr') redirect('/cr')
 
@@ -34,18 +58,51 @@ export default async function DashboardPage() {
   let userDivision: string | null = null
   let recentlyViewed: { title: string; href: string; viewedAt: Date }[] = []
   let classInfo: {
+<<<<<<< HEAD
     id: string; alias: string | null; avatarEmoji: string | null; avatarColor: string | null;
     departmentCode: string; semesterNumber: number; division: string; room: string | null;
     cr: { id: string; name: string; email: string; rollNumber: string | null } | null;
     _count: { members: number };
   } | null = null
   let todaySlots: Array<{ id: string; subjectName: string | null; startTime: string; endTime: string; room: string | null; isBreak: boolean }> = []
+=======
+    id: string
+    alias: string | null
+    avatarEmoji: string | null
+    avatarColor: string | null
+    departmentCode: string
+    semesterNumber: number
+    division: string
+    room: string | null
+    cr: { id: string; name: string; email: string; rollNumber: string | null } | null
+    _count: { members: number }
+  } | null = null
+  let todaySlots: Array<{
+    id: string
+    subjectName: string | null
+    startTime: string
+    endTime: string
+    room: string | null
+    isBreak: boolean
+  }> = []
+>>>>>>> 252dc7529c7d4f0155542b59d0d759804dcafb68
   let attendancePct: number | null = null
 
   try {
     const dbUser = await db.user.findUnique({
       where: { id: user.id },
+<<<<<<< HEAD
       select: { xp: true, streak: true, level: true, semesterNumber: true, departmentCode: true, division: true },
+=======
+      select: {
+        xp: true,
+        streak: true,
+        level: true,
+        semesterNumber: true,
+        departmentCode: true,
+        division: true,
+      },
+>>>>>>> 252dc7529c7d4f0155542b59d0d759804dcafb68
     })
     if (dbUser) {
       xp = dbUser.xp
@@ -56,25 +113,43 @@ export default async function DashboardPage() {
       userDivision = dbUser.division
     }
 
+<<<<<<< HEAD
     recentlyViewed = await db.recentlyViewed.findMany({
       where: { userId: user.id },
       orderBy: { viewedAt: 'desc' },
       take: 3,
       select: { title: true, href: true, viewedAt: true },
     }).catch(() => [])
+=======
+    recentlyViewed = await db.recentlyViewed
+      .findMany({
+        where: { userId: user.id },
+        orderBy: { viewedAt: 'desc' },
+        take: 3,
+        select: { title: true, href: true, viewedAt: true },
+      })
+      .catch(() => [])
+>>>>>>> 252dc7529c7d4f0155542b59d0d759804dcafb68
 
     // Fetch the user's class + today's timetable + attendance
     if (userDept && userSemester && userDivision) {
       const cls = await db.class.findUnique({
         where: {
           departmentCode_semesterNumber_division: {
+<<<<<<< HEAD
             departmentCode: userDept, semesterNumber: userSemester, division: userDivision,
+=======
+            departmentCode: userDept,
+            semesterNumber: userSemester,
+            division: userDivision,
+>>>>>>> 252dc7529c7d4f0155542b59d0d759804dcafb68
           },
         },
         include: {
           cr: { select: { id: true, name: true, email: true, rollNumber: true } },
           _count: { select: { members: true } },
         },
+<<<<<<< HEAD
       }).catch(() => null)
       if (cls) {
         classInfo = cls
@@ -98,6 +173,44 @@ export default async function DashboardPage() {
           }).catch(() => [])
           const total = records.length
           const present = records.filter(r => r.status === 'present' || r.status === 'late').length
+=======
+      })
+      if (cls) {
+        classInfo = cls
+
+        // Today's timetable
+        const today = new Date().getDay()
+        todaySlots = await db.classTimetable
+          .findMany({
+            where: { classId: cls.id, dayOfWeek: today, isActive: true },
+            orderBy: { periodIndex: 'asc' },
+            select: { id: true, subjectName: true, startTime: true, endTime: true, room: true, isBreak: true },
+          })
+          .catch(() => [])
+
+        // Attendance percentage (last 90 days)
+        const since = new Date(Date.now() - 90 * 24 * 60 * 60 * 1000)
+        const sessions = await db.attendanceSession
+          .findMany({
+            where: {
+              departmentCode: userDept,
+              semesterNumber: userSemester,
+              division: userDivision,
+              date: { gte: since },
+            },
+            select: { id: true },
+          })
+          .catch(() => [])
+        if (sessions.length > 0) {
+          const records = await db.attendanceRecord
+            .findMany({
+              where: { sessionId: { in: sessions.map((s) => s.id) }, userId: user.id },
+              select: { status: true },
+            })
+            .catch(() => [])
+          const total = records.length
+          const present = records.filter((r) => r.status === 'present' || r.status === 'late').length
+>>>>>>> 252dc7529c7d4f0155542b59d0d759804dcafb68
           attendancePct = total > 0 ? Math.round((present / total) * 100) : null
         }
       }
@@ -112,6 +225,7 @@ export default async function DashboardPage() {
   const totalResources = subjects.reduce((sum, s) => sum + s.resources.length, 0)
   const alias = classInfo?.alias?.trim()
   const needsClassSetup = !userDept || !userSemester || !userDivision
+<<<<<<< HEAD
 
   // Time-based greeting
   const hour = new Date().getHours()
@@ -130,6 +244,12 @@ export default async function DashboardPage() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-6xl px-5 py-6 sm:px-6 lg:px-8 page-wipe">
+=======
+
+  return (
+    <main className="min-h-screen bg-background text-foreground">
+      <div className="mx-auto max-w-6xl px-5 py-6 sm:px-6 lg:px-8">
+>>>>>>> 252dc7529c7d4f0155542b59d0d759804dcafb68
         {/* ─── Profile completion prompt ─── */}
         {needsClassSetup && (
           <section className="mb-5 rounded-xl border border-amber-500/40 bg-amber-500/10 p-4">
@@ -138,9 +258,18 @@ export default async function DashboardPage() {
               <div className="min-w-0 flex-1">
                 <p className="text-sm font-semibold text-amber-600">Complete your profile</p>
                 <p className="text-xs text-muted-foreground mt-0.5">
+<<<<<<< HEAD
                   Set your department, semester, and division to join a class, see classmates, and track attendance.
                 </p>
                 <Link href="/profile" className="mt-2 inline-block rounded-md bg-amber-500 px-3 py-1.5 text-xs font-semibold text-white hover:bg-amber-600">
+=======
+                  You haven&apos;t set your department, semester, or division yet. This is needed to join a class, see classmates, and track attendance.
+                </p>
+                <Link
+                  href="/profile"
+                  className="mt-2 inline-block rounded-md bg-amber-500 px-3 py-1.5 text-xs font-semibold text-white hover:bg-amber-600"
+                >
+>>>>>>> 252dc7529c7d4f0155542b59d0d759804dcafb68
                   Set up now →
                 </Link>
               </div>
@@ -148,8 +277,13 @@ export default async function DashboardPage() {
           </section>
         )}
 
+<<<<<<< HEAD
         {/* ─── Dynamic Hero with Time-Based Greeting ─── */}
         <section className={`rounded-xl border border-primary/20 bg-gradient-to-br ${heroGradient} p-5 sm:p-6`}>
+=======
+        {/* ─── Semester Hero ─── */}
+        <section className="rounded-xl border border-primary/20 bg-gradient-to-br from-primary/5 to-transparent p-5 sm:p-6">
+>>>>>>> 252dc7529c7d4f0155542b59d0d759804dcafb68
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div className="min-w-0">
               <p className="text-xs font-semibold uppercase tracking-wide text-primary">
@@ -184,7 +318,11 @@ export default async function DashboardPage() {
           <section className="mt-5 grid gap-3 sm:grid-cols-2">
             <Link
               href="/class"
+<<<<<<< HEAD
               className="quest-card block rounded-xl border border-amber-500/30 bg-gradient-to-br from-amber-500/5 to-transparent p-4"
+=======
+              className="block rounded-xl border border-amber-500/30 bg-gradient-to-br from-amber-500/5 to-transparent p-4 transition-all hover:border-amber-500/50 hover:shadow-sm"
+>>>>>>> 252dc7529c7d4f0155542b59d0d759804dcafb68
             >
               <div className="flex items-center gap-3">
                 <ClassAvatar
@@ -219,7 +357,11 @@ export default async function DashboardPage() {
 
             <Link
               href="/attendance"
+<<<<<<< HEAD
               className="quest-card block rounded-xl border border-border bg-card p-4"
+=======
+              className="block rounded-xl border border-border bg-card p-4 transition-all hover:border-primary/40 hover:shadow-sm"
+>>>>>>> 252dc7529c7d4f0155542b59d0d759804dcafb68
             >
               <div className="flex items-center gap-3">
                 <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
@@ -232,7 +374,11 @@ export default async function DashboardPage() {
                   </h2>
                   <p className="text-xs text-muted-foreground">
                     {attendancePct !== null
+<<<<<<< HEAD
                       ? attendancePct >= 75 ? '✅ Good standing' : '⚠️ Below 75% — at risk'
+=======
+                      ? attendancePct >= 75 ? 'Good standing' : 'Below 75% — at risk'
+>>>>>>> 252dc7529c7d4f0155542b59d0d759804dcafb68
                       : 'No sessions yet'}
                   </p>
                 </div>
@@ -253,12 +399,17 @@ export default async function DashboardPage() {
           <ExamCountdown examDate={null} />
         </section>
 
+<<<<<<< HEAD
         {/* ─── Quick Actions as Game Menu ─── */}
+=======
+        {/* ─── Quick Actions ─── */}
+>>>>>>> 252dc7529c7d4f0155542b59d0d759804dcafb68
         <section className="mt-5">
           <div className="mb-3 flex items-center justify-between">
             <h2 className="text-lg font-semibold">Quick Actions</h2>
           </div>
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
+<<<<<<< HEAD
             {[
               { href: '/learn', icon: BookOpen, label: 'Learn', color: 'bg-blue-500/10 text-blue-500' },
               { href: '/class', icon: Users, label: 'My Class', color: 'bg-amber-500/10 text-amber-500' },
@@ -296,17 +447,57 @@ export default async function DashboardPage() {
           <div className="mb-3 flex items-center justify-between">
             <h2 className="text-lg font-semibold">My Subjects</h2>
             <Link href="/learn" className="text-xs text-muted-foreground hover:text-primary">View all →</Link>
+=======
+            <Link href="/learn" className="flex flex-col items-center gap-1.5 rounded-lg border border-border bg-card p-3 text-center transition-colors hover:border-primary/40 hover:bg-accent/5 sm:p-4">
+              <BookOpen className="h-5 w-5 text-primary" />
+              <span className="text-xs font-medium sm:text-sm">Learn</span>
+            </Link>
+            <Link href="/class" className="flex flex-col items-center gap-1.5 rounded-lg border border-border bg-card p-3 text-center transition-colors hover:border-amber-500/40 hover:bg-amber-500/5 sm:p-4">
+              <Users className="h-5 w-5 text-amber-500" />
+              <span className="text-xs font-medium sm:text-sm">My Class</span>
+            </Link>
+            <Link href="/attendance" className="flex flex-col items-center gap-1.5 rounded-lg border border-border bg-card p-3 text-center transition-colors hover:border-primary/40 hover:bg-accent/5 sm:p-4">
+              <ClipboardList className="h-5 w-5 text-primary" />
+              <span className="text-xs font-medium sm:text-sm">Attendance</span>
+            </Link>
+            <Link href="/practice" className="flex flex-col items-center gap-1.5 rounded-lg border border-border bg-card p-3 text-center transition-colors hover:border-primary/40 hover:bg-accent/5 sm:p-4">
+              <Target className="h-5 w-5 text-primary" />
+              <span className="text-xs font-medium sm:text-sm">Practice</span>
+            </Link>
+            <Link href="/tutor" className="flex flex-col items-center gap-1.5 rounded-lg border border-border bg-card p-3 text-center transition-colors hover:border-primary/40 hover:bg-accent/5 sm:p-4">
+              <PlayCircle className="h-5 w-5 text-primary" />
+              <span className="text-xs font-medium sm:text-sm">Ask LEO</span>
+            </Link>
+            <Link href="/materials" className="flex flex-col items-center gap-1.5 rounded-lg border border-border bg-card p-3 text-center transition-colors hover:border-primary/40 hover:bg-accent/5 sm:p-4">
+              <GraduationCap className="h-5 w-5 text-primary" />
+              <span className="text-xs font-medium sm:text-sm">Materials</span>
+            </Link>
+          </div>
+        </section>
+
+        {/* ─── My Subjects with Progress Rings ─── */}
+        <section className="mt-5">
+          <div className="mb-3 flex items-center justify-between">
+            <h2 className="text-lg font-semibold">My Subjects</h2>
+            <Link href="/learn" className="text-xs text-muted-foreground hover:text-primary">
+              View all
+            </Link>
+>>>>>>> 252dc7529c7d4f0155542b59d0d759804dcafb68
           </div>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {subjects.slice(0, 6).map((subject) => {
               const subjectCode = subject.code
               const subjectHref = `/learn/${programmeCode}/semester/${semesterNumber}/subject/${subjectCode}`
+<<<<<<< HEAD
               const progress = Math.min(subject.resources.length * 10, 100)
               const estimatedMins = subject.resources.length * 15
+=======
+>>>>>>> 252dc7529c7d4f0155542b59d0d759804dcafb68
               return (
                 <Link
                   key={subjectCode}
                   href={subjectHref}
+<<<<<<< HEAD
                   prefetch={true}
                   className="quest-card group rounded-xl border border-border bg-card p-4"
                 >
@@ -324,12 +515,30 @@ export default async function DashboardPage() {
                     {estimatedMins > 0 && (
                       <span className="flex items-center gap-1"><Clock className="h-3 w-3" />~{Math.round(estimatedMins / 60)}h {estimatedMins % 60}m</span>
                     )}
+=======
+                  className="group rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary/40 hover:bg-accent/5"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-semibold uppercase text-muted-foreground">
+                      {subjectCode}
+                    </span>
+                    <ProgressRing value={Math.min(subject.resources.length * 10, 100)} size={36} label="" />
+                  </div>
+                  <h3 className="mt-1 truncate text-sm font-semibold">{subject.name}</h3>
+                  <div className="mt-2 flex items-center gap-3 text-xs text-muted-foreground">
+                    <span className="flex items-center gap-1">
+                      <PlayCircle className="h-3 w-3" />
+                      {subject.resources.length} videos
+                    </span>
+                    <span>{subject.credits} credits</span>
+>>>>>>> 252dc7529c7d4f0155542b59d0d759804dcafb68
                   </div>
                 </Link>
               )
             })}
           </div>
         </section>
+<<<<<<< HEAD
 
         {/* ─── Today's Goal ─── */}
         <section className="mt-5">
@@ -345,6 +554,8 @@ export default async function DashboardPage() {
             </div>
           </div>
         </section>
+=======
+>>>>>>> 252dc7529c7d4f0155542b59d0d759804dcafb68
       </div>
     </main>
   )

@@ -110,7 +110,7 @@ export default async function LessonStudioPage({
     <main className="min-h-screen bg-background text-foreground">
       <LessonVisitRecorder lessonId={studio.lesson.id} />
       <section className="border-b border-border/70 bg-muted/30">
-        <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-6 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col gap-6 px-5 py-6 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
             <Link href={subjectHref} className="inline-flex items-center gap-2 font-medium hover:text-foreground">
               <ArrowLeft className="h-4 w-4" />
@@ -660,7 +660,7 @@ function ManifestLessonView({
         </div>
       </section>
 
-      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-5 py-6 sm:px-6 lg:px-8">
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
           {/* Main content: video player */}
           <div className="space-y-6">

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { signOut } from 'next-auth/react'
@@ -33,7 +33,13 @@ import {
   ChevronDown,
   ChevronUp,
   Trophy,
+  HelpCircle,
+  ClipboardList,
+  Users,
+<<<<<<< HEAD
   GraduationCap,
+=======
+>>>>>>> fa0d58c31b6e4cc51a2a9953c0c70789b870ba44
 } from 'lucide-react'
 import type { ViewKey } from '@/lib/types'
 import { routeForView } from '@/lib/routes'
@@ -55,9 +61,10 @@ const NAV_ITEMS: { key: ViewKey; label: string; icon: typeof BookOpen }[] = [
   { key: 'profile', label: 'Profile', icon: User },
 ]
 
-const EXTRA_LINKS: { href: string; label: string; icon: typeof BookOpen }[] = [
-  { href: '/leaderboard', label: 'Leaderboard', icon: Trophy },
-  { href: '/teacher-dashboard', label: 'Teacher Dashboard', icon: GraduationCap },
+const ALL_EXTRA_LINKS: { href: string; label: string; icon: typeof BookOpen; roles?: string[] }[] = [
+  { href: '/class', label: 'My Class', icon: Users, roles: ['student', 'cr'] },
+  { href: '/attendance', label: 'Attendance', icon: ClipboardList },
+  { href: '/leaderboard', label: 'Leaderboard', icon: Trophy, roles: ['student', 'cr', 'admin'] },
   { href: '/feedback', label: 'Feedback', icon: MessageSquare },
   { href: '/help', label: 'Help Center', icon: HelpCircle },
 ]
@@ -66,6 +73,55 @@ function isActivePath(pathname: string, href: string) {
   if (href === '/dashboard' && pathname === '/dashboard') return true
   if (href !== '/dashboard' && pathname.startsWith(href)) return true
   return false
+}
+
+/**
+ * Handle sign-out reliably across environments.
+ * This wrapper is bulletproof — it clears ALL session state and forces
+ * a hard navigation. Even if next-auth's signOut() fails, the user
+ * is still logged out because we clear cookies + localStorage manually.
+ */
+function useSignOut() {
+  return useCallback(async () => {
+    // Step 1: Clear ALL localStorage state
+    try {
+      localStorage.removeItem('lernio-app-state')
+      localStorage.removeItem('lernio-prefs')
+      localStorage.removeItem('lernio-theme')
+      localStorage.removeItem('lernio-theme-prefs')
+      for (const key of Object.keys(localStorage)) {
+        if (key.startsWith('next-auth') || key.startsWith('lernio')) {
+          localStorage.removeItem(key)
+        }
+      }
+    } catch {}
+
+    // Step 2: Call next-auth signOut (clears the session cookie server-side)
+    // This is wrapped in try/catch — if it fails, we still proceed to
+    // clear cookies client-side and redirect.
+    try {
+      await signOut({ redirect: false, callbackUrl: '/sign-in' }).catch(() => {})
+    } catch {}
+
+    // Step 3: Clear ALL cookies client-side (belt + suspenders)
+    try {
+      document.cookie.split(';').forEach((cookie) => {
+        const name = cookie.split('=')[0]?.trim()
+        if (name) {
+          // Clear for current path
+          document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`
+          // Clear for root path
+          document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=${window.location.hostname}`
+          // Clear for wildcard domain
+          document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=.${window.location.hostname}`
+        }
+      })
+    } catch {}
+
+    // Step 4: Hard navigation to /sign-in — this clears all in-memory state
+    // and guarantees the user sees the sign-in page.
+    window.location.href = '/sign-in?signedOut=true'
+  }, [])
 }
 
 /**
@@ -78,15 +134,38 @@ export function TopBar() {
   const [hidden, setHidden] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [mobileMoreOpen, setMobileMoreOpen] = useState(false)
+  const [moreOpen, setMoreOpen] = useState(false)
+  const moreRef = useRef<HTMLDivElement>(null)
 
   const user = useAppStore((s) => s.user)
+  // Filter extra links based on user role — e.g. students don't see "Teacher Dashboard",
+  // staff don't see "My Class" (they use /class for teaching view instead)
+  const userRole = user?.role || 'student'
+  const EXTRA_LINKS = ALL_EXTRA_LINKS.filter(link => !link.roles || link.roles.includes(userRole))
   const xp = useAppStore((s) => s.xp)
   const streak = useAppStore((s) => s.streak)
   const { pref, setPref } = usePrefs()
   const isDark = pref.appearance === 'dark'
+  const handleSignOut = useSignOut()
 
   const toggleHidden = useCallback(() => setHidden((h) => !h), [])
   const toggleMobile = useCallback(() => setMobileOpen((o) => !o), [])
+
+  // Close "More" dropdown when clicking outside
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (moreRef.current && !moreRef.current.contains(e.target as Node)) {
+        setMoreOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
+
+  // Close "More" dropdown on route change
+  useEffect(() => {
+    setMoreOpen(false)
+  }, [pathname])
 
   // Primary nav items shown on desktop
   const primaryItems = NAV_ITEMS.slice(0, 7)
@@ -108,7 +187,7 @@ export function TopBar() {
   return (
     <>
       {/* Desktop top bar */}
-      <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+      <header className="sticky top-0 z-[100] border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80" style={{ zIndex: 100 }}>
         <div className="flex h-14 items-center gap-3 px-3 sm:px-4">
           {/* Logo + collapse */}
           <Link href="/dashboard" className="flex shrink-0 items-center gap-2">
@@ -142,32 +221,63 @@ export function TopBar() {
             })}
 
             {/* More dropdown for secondary items */}
-            <div className="group relative">
-              <button className="flex items-center gap-1 rounded-md px-2.5 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">
+            <div className="relative" ref={moreRef}>
+              <button
+                onClick={() => setMoreOpen(!moreOpen)}
+                className="flex items-center gap-1 rounded-md px-2.5 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+              >
                 <span className="hidden lg:inline">More</span>
-                <ChevronDown className="h-3 w-3" />
+                <ChevronDown className={`h-3 w-3 transition-transform ${moreOpen ? 'rotate-180' : ''}`} />
               </button>
-              <div className="absolute right-0 top-full hidden min-w-[180px] rounded-lg border border-border bg-popover py-1 shadow-lg group-hover:block">
-                {moreItems.map((item) => {
-                  const href = routeForView(item.key)
-                  const active = isActivePath(pathname, href)
-                  return (
-                    <Link
-                      key={item.key}
-                      href={href}
-                      prefetch={true}
-                      onClick={() => useAppStore.getState().setView(item.key)}
-                      className={cn(
-                        'flex items-center gap-2 px-3 py-2 text-sm transition-colors',
-                        active ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:bg-accent hover:text-foreground',
-                      )}
-                    >
-                      <item.icon className="h-4 w-4" />
-                      {item.label}
-                    </Link>
-                  )
-                })}
-              </div>
+              {moreOpen && (
+                <div className="absolute right-0 top-full mt-2 min-w-[200px] rounded-xl border border-border bg-popover/95 backdrop-blur-xl py-2 shadow-2xl" style={{ zIndex: 9999 }}>
+                  {moreItems.map((item) => {
+                    const href = routeForView(item.key)
+                    const active = isActivePath(pathname, href)
+                    return (
+                      <Link
+                        key={item.key}
+                        href={href}
+                        prefetch={true}
+                        onClick={() => {
+                          useAppStore.getState().setView(item.key)
+                          setMoreOpen(false)
+                        }}
+                        className={cn(
+                          'flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors',
+                          active ? 'bg-primary/10 text-primary font-medium' : 'text-muted-foreground hover:bg-accent hover:text-foreground',
+                        )}
+                      >
+                        <item.icon className="h-4 w-4" />
+                        {item.label}
+                      </Link>
+                    )
+                  })}
+
+                  {/* Divider between nav items and extra links */}
+                  <div className="my-1 border-t border-border" />
+
+                  {/* Extra links — same as mobile drawer (My Class, Attendance, etc.) */}
+                  {EXTRA_LINKS.map((link) => {
+                    const active = isActivePath(pathname, link.href)
+                    return (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        prefetch={true}
+                        onClick={() => setMoreOpen(false)}
+                        className={cn(
+                          'flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors',
+                          active ? 'bg-primary/10 text-primary font-medium' : 'text-muted-foreground hover:bg-accent hover:text-foreground',
+                        )}
+                      >
+                        <link.icon className="h-4 w-4" />
+                        {link.label}
+                      </Link>
+                    )
+                  })}
+                </div>
+              )}
             </div>
           </nav>
 
@@ -209,7 +319,7 @@ export function TopBar() {
             </button>
 
             {/* User avatar with dropdown (desktop) */}
-            <UserMenu user={user} isDark={isDark} setPref={setPref} />
+            <UserMenu user={user} isDark={isDark} setPref={setPref} onSignOut={handleSignOut} />
 
             {/* Hide bar button */}
             <button
@@ -322,7 +432,7 @@ export function TopBar() {
               </button>
               {user && (
                 <button
-                  onClick={() => signOut({ callbackUrl: '/sign-in' })}
+                  onClick={handleSignOut}
                   className="flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground"
                 >
                   <LogOut className="h-4 w-4" />
@@ -339,14 +449,20 @@ export function TopBar() {
 
 // ─── User Menu (desktop dropdown with profile, settings, logout) ─────────────
 
-import { useState as useState2, useRef as useRef2, useEffect as useEffect2 } from 'react'
-import { ChevronDown as ChevronDown2 } from 'lucide-react'
+function UserMenu({ user, isDark, setPref, onSignOut }: { user: { name: string; email: string } | null; isDark: boolean; setPref: (p: any) => void; onSignOut: () => void }) {
+  const [open, setOpen] = useState(false)
+  const [signingOut, setSigningOut] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
 
-function UserMenu({ user, isDark, setPref }: { user: { name: string; email: string } | null; isDark: boolean; setPref: (p: { appearance: string }) => void }) {
+<<<<<<< HEAD
+function UserMenu({ user, isDark, setPref }: { user: { name: string; email: string } | null; isDark: boolean; setPref: (p: any) => void }) {
   const [open, setOpen] = useState2(false)
   const ref = useRef2<HTMLDivElement>(null)
 
   useEffect2(() => {
+=======
+  useEffect(() => {
+>>>>>>> fa0d58c31b6e4cc51a2a9953c0c70789b870ba44
     const handler = (e: MouseEvent) => {
       if (ref.current && !ref.current.contains(e.target as Node)) {
         setOpen(false)
@@ -360,6 +476,16 @@ function UserMenu({ user, isDark, setPref }: { user: { name: string; email: stri
 
   const initials = user.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()
 
+  const handleSignOutClick = async () => {
+    setSigningOut(true)
+    try {
+      await onSignOut()
+    } finally {
+      setSigningOut(false)
+      setOpen(false)
+    }
+  }
+
   return (
     <div className="relative" ref={ref}>
       <button
@@ -370,7 +496,7 @@ function UserMenu({ user, isDark, setPref }: { user: { name: string; email: stri
         <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
           {initials}
         </span>
-        <ChevronDown2 className="hidden h-3 w-3 text-muted-foreground sm:block" />
+        <ChevronDown className="hidden h-3 w-3 text-muted-foreground sm:block" />
       </button>
 
       {open && (
@@ -405,11 +531,12 @@ function UserMenu({ user, isDark, setPref }: { user: { name: string; email: stri
 
             {/* Logout */}
             <button
-              onClick={() => signOut({ callbackUrl: '/sign-in' })}
-              className="flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-sm text-red-600 hover:bg-red-500/10 transition-colors"
+              onClick={handleSignOutClick}
+              disabled={signingOut}
+              className="flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-sm text-red-600 hover:bg-red-500/10 transition-colors disabled:opacity-50"
             >
               <LogOut className="h-4 w-4" />
-              Sign Out
+              {signingOut ? 'Signing out…' : 'Sign Out'}
             </button>
           </div>
         </div>
