@@ -27,8 +27,9 @@ import { LessonVisitRecorder } from '@/features/learning/components/lesson/lesso
 import { LessonVideoPlayer } from '@/features/learning/components/lesson/lesson-video-player'
 import { getManifestSubject, type ManifestSubject } from '@/lib/curriculum/manifest-data'
 import { generateLessonNotes } from '@/lib/curriculum/lesson-notes/notes-generator'
-import { getSubjectNotes } from '@/lib/curriculum/lesson-notes-loader'
+import { getSubjectNotes, findLessonBySlug, getAdjacentLessons } from '@/lib/curriculum/lesson-notes-loader'
 import { LessonNotesRenderer } from '@/components/learning/lesson-notes-renderer'
+import { InteractiveNotesRenderer } from '@/components/learning/interactive-notes-renderer'
 import { YouTubePlayer } from '@/components/learning/youtube-player-lazy'
 import { BookmarkButton } from '@/components/learning/bookmark-button'
 import { RecentlyViewedTracker } from '@/components/learning/recently-viewed-tracker'
@@ -265,16 +266,31 @@ export default async function LessonStudioPage({
           <section className="grid gap-4 rounded-lg border border-border bg-card p-4">
             <div className="flex items-center gap-2">
               <FileText className="h-5 w-5 text-primary" />
-              <h2 className="text-lg font-semibold tracking-normal">Study Notes</h2>
+              <h2 className="text-lg font-semibold tracking-normal">Interactive Study Notes</h2>
             </div>
 
-            {/* Rich JSON lesson notes (units, lessons, concepts, formulas, code, quizzes) */}
+            {/* V3 Interactive Notes — render the SPECIFIC lesson if found */}
             {(() => {
               const subjectNotes = getSubjectNotes(studio.subject.code)
-              if (subjectNotes) {
-                return <LessonNotesRenderer notes={subjectNotes} />
+              if (!subjectNotes) return null
+
+              // Try to find the specific lesson by slug
+              const match = findLessonBySlug(studio.subject.code, lessonSlug)
+              if (match) {
+                const { prev, next } = getAdjacentLessons(studio.subject.code, lessonSlug)
+                const lessonBaseHref = `/learn/${studio.programme.code}/semester/${studio.semester.number}/subject/${studio.subject.code}/lesson`
+                return (
+                  <InteractiveNotesRenderer
+                    lesson={match.lesson}
+                    subject={subjectNotes}
+                    prevHref={prev ? `${lessonBaseHref}/${prev.slug}` : null}
+                    nextHref={next ? `${lessonBaseHref}/${next.slug}` : null}
+                  />
+                )
               }
-              return null
+
+              // Fallback: show all units/lessons as collapsible accordion
+              return <LessonNotesRenderer notes={subjectNotes} />
             })()}
 
             {/* DB-generated documents */}

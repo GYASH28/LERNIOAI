@@ -29,7 +29,7 @@ export default async function PracticePage() {
   const subjects = getManifestSubjectsForSemester(programmeCode, semesterNumber)
   const subjectsWithQuizCount = subjects.map(s => {
     const notes = getSubjectNotes(s.code)
-    const quizCount = notes ? notes.units.reduce((sum, u) => sum + u.lessons.reduce((s2, l) => s2 + l.practiceQuestions.length, 0), 0) : 0
+    const quizCount = notes ? notes.units.reduce((sum, u) => sum + u.lessons.reduce((s2, l) => s2 + (l.practiceQuestions?.length ?? 0), 0), 0) : 0
     return { code: s.code, name: s.name, quizCount, coverageFocus: s.coverageFocus }
   })
 

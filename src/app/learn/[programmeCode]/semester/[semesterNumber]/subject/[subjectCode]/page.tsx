@@ -13,7 +13,6 @@ import {
   Layers,
   GraduationCap,
   ListChecks,
-  NotebookPen,
   type LucideIcon,
 } from 'lucide-react'
 import { getCurrentUser } from '@/lib/auth'
@@ -21,7 +20,7 @@ import { getManifestSubject, type ManifestSubject } from '@/lib/curriculum/manif
 import { enhanceSubject } from '@/lib/curriculum/enhanced-manifest'
 import { getSubjectNotes } from '@/lib/curriculum/lesson-notes-loader'
 import { YouTubePlayer } from '@/components/learning/youtube-player-lazy'
-import { LessonNotesRenderer } from '@/components/learning/lesson-notes-renderer'
+import { ComprehensiveNotesSection } from '@/components/learning/comprehensive-notes-section'
 
 
 export default async function SubjectLearningPage({
@@ -237,22 +236,11 @@ export default async function SubjectLearningPage({
           </section>
         )}
 
-        {/* ─── Lesson Notes (from JSON data) ─── */}
+        {/* ─── Complete Notes Hub (lesson notes, revision, formulas, interview, viva, PYQs, quizzes, flashcards, AI) ─── */}
         {(() => {
           const notes = getSubjectNotes(subjectCodeResolved)
           if (!notes) return null
-          return (
-            <section>
-              <div className="mb-4 flex items-center gap-2">
-                <NotebookPen className="h-5 w-5 text-primary" aria-hidden="true" />
-                <h2 className="text-lg font-semibold">Detailed Lesson Notes & Quizzes</h2>
-              </div>
-              <p className="mb-4 text-sm text-muted-foreground">
-                Expand each unit to access detailed notes with concepts, formulas, tables, diagrams, code examples, and practice quizzes.
-              </p>
-              <LessonNotesRenderer notes={notes} />
-            </section>
-          )
+          return <ComprehensiveNotesSection notes={notes} />
         })()}
 
         {/* ─── Start Lesson CTA ─── */}

@@ -24,6 +24,7 @@
 @import "../styles/ai-tutor.css";
 @import "../styles/cursor.css";
 @import "../styles/app-layout.css";
+@import "../styles/interactive-notes.css";
 
 @custom-variant dark (&:is(.dark *));
 
