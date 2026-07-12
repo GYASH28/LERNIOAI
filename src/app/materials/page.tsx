@@ -40,7 +40,7 @@ export default async function MaterialsPage() {
                   <div className="min-w-0 flex-1"><p className="text-[10px] font-semibold uppercase text-muted-foreground">{p.code}</p><h3 className="mt-1 text-sm font-medium leading-tight">{p.name}</h3></div>
                   <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-amber-500/10"><FileText className="h-4 w-4 text-amber-600" /></div>
                 </div>
-                <div className="mt-3 flex items-center gap-1.5 text-xs text-primary opacity-0 group-hover:opacity-100"><Download className="h-3 w-3" />Download</div>
+                <div className="mt-3 flex items-center gap-1.5 text-xs text-primary font-semibold"><Download className="h-3 w-3" />Download PDF</div>
               </a>
             ))}
           </div>

@@ -162,7 +162,7 @@ export default async function LessonStudioPage({
       </section>
 
       <section className="mx-auto grid max-w-7xl gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[280px_minmax(0,1fr)_320px] lg:px-8">
-        <aside className="h-fit rounded-lg border border-border bg-card p-4 lg:sticky lg:top-6">
+        <aside className="rounded-lg border border-border bg-card p-4 lg:sticky lg:top-20 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Curriculum</h2>
           <div className="mt-3 grid gap-4">
             {studio.navigation.units.map((unit) => (
@@ -378,7 +378,7 @@ export default async function LessonStudioPage({
           </div>
         </div>
 
-        <aside className="grid h-fit gap-4 lg:sticky lg:top-6">
+        <aside className="grid gap-4 lg:sticky lg:top-20 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto">
           <section className="rounded-lg border border-border bg-card p-4">
             <div className="flex items-center gap-2">
               <ListChecks className="h-5 w-5 text-primary" />

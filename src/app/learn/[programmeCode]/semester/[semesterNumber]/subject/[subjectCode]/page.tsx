@@ -223,6 +223,42 @@ export default async function SubjectLearningPage({
           </div>
         </section>
 
+        {/* ─── Quick Revision Hub (moved above videos for faster access) ─── */}
+        {(() => {
+          const notes = getSubjectNotes(subjectCodeResolved)
+          if (notes) return <QuickRevisionHub notes={notes} />
+          // No V3 notes yet — show a friendly "coming soon" card with PDF link
+          return (
+            <section>
+              <div className="mb-4 flex items-center gap-2">
+                <NotebookPen className="h-5 w-5 text-primary" aria-hidden="true" />
+                <h2 className="text-lg font-semibold">Quick Revision Hub</h2>
+              </div>
+              <div className="rounded-lg border border-dashed border-border bg-card p-6 text-center">
+                <FileText className="h-10 w-10 mx-auto mb-3 text-muted-foreground" />
+                <p className="text-sm font-semibold">Revision notes coming soon for this subject</p>
+                <p className="mt-1 text-xs text-muted-foreground max-w-md mx-auto">
+                  We&apos;re preparing concise revision material with formulas, key concepts, viva &amp; interview questions, and PYQs.
+                </p>
+                {(() => {
+                  const safeName = subject.name.toLowerCase().replace(/&/g, 'and').replace(/\//g, '-').replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-').replace(/^-+|-+$/g, '')
+                  const pdfUrl = `/lesson-notes/${subjectCodeResolved.toLowerCase()}-${safeName}.pdf`
+                  return (
+                    <a
+                      href={pdfUrl}
+                      download
+                      className="mt-4 inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+                    >
+                      <FileText className="h-4 w-4" />
+                      Download PDF Summary
+                    </a>
+                  )
+                })()}
+              </div>
+            </section>
+          )
+        })()}
+
         {/* ─── Primary Video Lectures ─── */}
         {primaryVideos.length > 0 && (
           <section>
@@ -270,42 +306,6 @@ export default async function SubjectLearningPage({
             </div>
           </section>
         )}
-
-        {/* ─── Quick Revision Hub (concise — not full lesson notes) ─── */}
-        {(() => {
-          const notes = getSubjectNotes(subjectCodeResolved)
-          if (notes) return <QuickRevisionHub notes={notes} />
-          // No V3 notes yet — show a friendly "coming soon" card with PDF link
-          return (
-            <section>
-              <div className="mb-4 flex items-center gap-2">
-                <NotebookPen className="h-5 w-5 text-primary" aria-hidden="true" />
-                <h2 className="text-lg font-semibold">Quick Revision Hub</h2>
-              </div>
-              <div className="rounded-lg border border-dashed border-border bg-card p-6 text-center">
-                <FileText className="h-10 w-10 mx-auto mb-3 text-muted-foreground" />
-                <p className="text-sm font-semibold">Revision notes coming soon for this subject</p>
-                <p className="mt-1 text-xs text-muted-foreground max-w-md mx-auto">
-                  We&apos;re preparing concise revision material with formulas, key concepts, viva &amp; interview questions, and PYQs.
-                </p>
-                {(() => {
-                  const safeName = subject.name.toLowerCase().replace(/&/g, 'and').replace(/\//g, '-').replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-').replace(/^-+|-+$/g, '')
-                  const pdfUrl = `/lesson-notes/${subjectCodeResolved.toLowerCase()}-${safeName}.pdf`
-                  return (
-                    <a
-                      href={pdfUrl}
-                      download
-                      className="mt-4 inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
-                    >
-                      <FileText className="h-4 w-4" />
-                      Download PDF Summary
-                    </a>
-                  )
-                })()}
-              </div>
-            </section>
-          )
-        })()}
 
         {/* ─── Start Lesson CTA ─── */}
         <section>

@@ -54,8 +54,17 @@ export function MaterialsList({ pdfs }: { pdfs: PdfResource[] }) {
   if (selectedSubject) {
     const subject = pdfs.find(p => p.code === selectedSubject)
     if (!subject) {
-      setSelectedSubject(null)
-      return null
+      return (
+        <div className="space-y-4">
+          <button
+            onClick={() => setSelectedSubject(null)}
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
+          >
+            <ArrowLeft className="h-4 w-4" /> Back to all subjects
+          </button>
+          <p className="text-sm text-muted-foreground">Subject not found.</p>
+        </div>
+      )
     }
 
     const topics = generateTopics(subject.name, subject.code)

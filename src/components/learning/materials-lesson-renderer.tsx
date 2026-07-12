@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo, useRef, useEffect } from 'react'
+import Link from 'next/link'
 import {
   BookOpen,
   Target,
@@ -243,7 +244,7 @@ export function MaterialsLessonRenderer({
       {/* Footer nav */}
       <nav className="mt-10 flex items-stretch gap-3 border-t border-border pt-6 no-print">
         {prevHref ? (
-          <a
+          <Link
             href={prevHref}
             className="flex flex-1 items-center gap-3 rounded-xl border border-border bg-card p-4 hover:border-primary/30 hover:bg-accent/5 transition-colors"
           >
@@ -252,12 +253,12 @@ export function MaterialsLessonRenderer({
               <p className="text-[10px] font-semibold uppercase text-muted-foreground">Previous</p>
               <p className="truncate text-sm font-semibold">{prevTitle || 'Previous lesson'}</p>
             </div>
-          </a>
+          </Link>
         ) : (
           <div className="flex-1" />
         )}
         {nextHref ? (
-          <a
+          <Link
             href={nextHref}
             className="flex flex-1 items-center justify-end gap-3 rounded-xl border border-border bg-card p-4 hover:border-primary/30 hover:bg-accent/5 transition-colors"
           >
@@ -266,7 +267,7 @@ export function MaterialsLessonRenderer({
               <p className="truncate text-sm font-semibold">{nextTitle || 'Next lesson'}</p>
             </div>
             <ArrowRight className="h-5 w-5 text-muted-foreground shrink-0" />
-          </a>
+          </Link>
         ) : (
           <div className="flex-1" />
         )}

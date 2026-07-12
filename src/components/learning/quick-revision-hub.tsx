@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import {
   FileText,
   Zap,
@@ -366,14 +367,14 @@ export function QuickRevisionHub({ notes }: { notes: SubjectNotes }) {
                   <p className="text-xs text-muted-foreground">Ask LEO anything about this subject</p>
                 </div>
               </div>
-              <a
+              <Link
                 href={`/tutor?subject=${encodeURIComponent(notes.subjectName)}`}
                 className="inline-flex items-center gap-1.5 rounded-md bg-violet-600 px-4 py-2 text-sm font-medium text-white hover:bg-violet-700 transition-colors"
               >
                 <Bot className="h-4 w-4" />
                 Open LEO AI Tutor
                 <ChevronRight className="h-4 w-4" />
-              </a>
+              </Link>
             </div>
           )}
         </div>

@@ -5,6 +5,8 @@ import { redirect } from 'next/navigation'
 import { getCurrentUser } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { BackButton } from '@/components/ui/back-button'
+import { TopBar } from '@/components/layout/top-bar'
+import { Footer } from '@/components/layout/footer'
 import { CrDashboardClient } from './cr-dashboard-client'
 
 export const metadata: Metadata = { title: 'CR Dashboard' }
@@ -44,7 +46,9 @@ export default async function CrPage() {
   }
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen flex flex-col bg-background text-foreground">
+      <TopBar />
+      <main className="flex-1 page-wipe">
       <div className="mx-auto max-w-5xl px-5 py-6 sm:px-6 lg:px-8">
         <BackButton />
         <h1 className="text-2xl font-bold">CR Dashboard</h1>
@@ -64,6 +68,8 @@ export default async function CrPage() {
           />
         </div>
       </div>
-    </main>
+      </main>
+      <Footer />
+    </div>
   )
 }

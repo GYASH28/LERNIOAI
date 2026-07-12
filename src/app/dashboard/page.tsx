@@ -2,11 +2,14 @@ import { redirect } from 'next/navigation'
 import { getCurrentUser } from '@/lib/auth'
 import { db } from '@/lib/db'
 import Link from 'next/link'
+import { TopBar } from '@/components/layout/top-bar'
+import { Footer } from '@/components/layout/footer'
 import {
   BookOpen, PlayCircle, Target, Flame, Zap, TrendingUp, ArrowRight,
   Calendar, Award, Crown, Mail, Clock, Users, GraduationCap,
   ClipboardList, ChevronRight, AlertTriangle, Database, RotateCw,
   BarChart3,
+  Code2,
 } from 'lucide-react'
 import { getManifestSubjectsForSemester } from '@/lib/curriculum/manifest-data'
 import { ContinueLearningCard } from '@/components/dashboard/continue-learning-card'
@@ -32,6 +35,8 @@ export default async function DashboardPage() {
   let userSemester: number | null = null
   let userDept: string | null = null
   let userDivision: string | null = null
+  let dailyMins = 120
+  let examDate: string | null = null
   let recentlyViewed: { title: string; href: string; viewedAt: Date }[] = []
   let classInfo: {
     id: string; alias: string | null; avatarEmoji: string | null; avatarColor: string | null;
@@ -45,7 +50,7 @@ export default async function DashboardPage() {
   try {
     const dbUser = await db.user.findUnique({
       where: { id: user.id },
-      select: { xp: true, streak: true, level: true, semesterNumber: true, departmentCode: true, division: true },
+      select: { xp: true, streak: true, level: true, semesterNumber: true, departmentCode: true, division: true, dailyMins: true, examDate: true },
     })
     if (dbUser) {
       xp = dbUser.xp
@@ -54,6 +59,8 @@ export default async function DashboardPage() {
       userSemester = dbUser.semesterNumber
       userDept = dbUser.departmentCode
       userDivision = dbUser.division
+      if (dbUser.dailyMins) dailyMins = dbUser.dailyMins
+      if (dbUser.examDate) examDate = dbUser.examDate
     }
 
     recentlyViewed = await db.recentlyViewed.findMany({
@@ -128,8 +135,10 @@ export default async function DashboardPage() {
     : 'from-indigo-500/10 via-blue-900/5 to-transparent'
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
-      <div className="mx-auto max-w-6xl px-5 py-6 sm:px-6 lg:px-8 page-wipe">
+    <div className="min-h-screen flex flex-col bg-background text-foreground">
+      <TopBar />
+      <main className="flex-1 page-wipe">
+      <div className="mx-auto max-w-6xl px-5 py-6 sm:px-6 lg:px-8">
         {/* ─── Profile completion prompt ─── */}
         {needsClassSetup && (
           <section className="mb-5 rounded-xl border border-amber-500/40 bg-amber-500/10 p-4">
@@ -250,7 +259,7 @@ export default async function DashboardPage() {
         {/* ─── Streak Heatmap + Exam Countdown ─── */}
         <section className="mt-5 grid gap-4 lg:grid-cols-2">
           <StreakHeatmap />
-          <ExamCountdown examDate={null} />
+          <ExamCountdown examDate={examDate} />
         </section>
 
         {/* ─── Quick Actions as Game Menu ─── */}
@@ -265,10 +274,10 @@ export default async function DashboardPage() {
               { href: '/attendance', icon: ClipboardList, label: 'Attendance', color: 'bg-emerald-500/10 text-emerald-600' },
               { href: '/practice', icon: Target, label: 'Practice', color: 'bg-violet-500/10 text-violet-500' },
               { href: '/tutor', icon: PlayCircle, label: 'Ask LEO', color: 'bg-cyan-500/10 text-cyan-500' },
-              { href: '/materials', icon: GraduationCap, label: 'Materials', color: 'bg-rose-500/10 text-rose-500' },
+              { href: '/materials', icon: BookOpen, label: 'Materials', color: 'bg-rose-500/10 text-rose-500' },
               { href: '/exams', icon: GraduationCap, label: 'Exams', color: 'bg-orange-500/10 text-orange-500' },
               { href: '/revision', icon: RotateCw, label: 'Revision', color: 'bg-teal-500/10 text-teal-500' },
-              { href: '/coding', icon: PlayCircle, label: 'Coding Lab', color: 'bg-indigo-500/10 text-indigo-500' },
+              { href: '/coding', icon: Code2, label: 'Coding Lab', color: 'bg-indigo-500/10 text-indigo-500' },
               { href: '/labs', icon: Database, label: 'Labs', color: 'bg-purple-500/10 text-purple-500' },
               { href: '/analytics', icon: BarChart3, label: 'Analytics', color: 'bg-pink-500/10 text-pink-500' },
               { href: '/leaderboard', icon: Crown, label: 'Leaderboard', color: 'bg-yellow-500/10 text-yellow-500' },
@@ -338,14 +347,16 @@ export default async function DashboardPage() {
               <Target className="h-5 w-5 text-primary" />
               <h3 className="text-sm font-semibold">Today&apos;s Goal</h3>
             </div>
-            <p className="mt-3 text-3xl font-bold count-up">120 min</p>
-            <p className="text-xs text-muted-foreground">Study 2 hours today to maintain your streak 🔥</p>
+            <p className="mt-3 text-3xl font-bold count-up">{dailyMins} min</p>
+            <p className="text-xs text-muted-foreground">Study {dailyMins} minutes today to maintain your streak</p>
             <div className="mt-3 h-2 overflow-hidden rounded-full bg-muted">
               <div className="h-full bg-gradient-to-r from-primary to-violet-500 transition-all duration-500" style={{ width: '0%' }} />
             </div>
           </div>
         </section>
       </div>
-    </main>
+      </main>
+      <Footer />
+    </div>
   )
 }
