@@ -21,7 +21,7 @@ import { getManifestSubject, type ManifestSubject } from '@/lib/curriculum/manif
 import { enhanceSubject } from '@/lib/curriculum/enhanced-manifest'
 import { getSubjectNotes } from '@/lib/curriculum/lesson-notes-loader'
 import { YouTubePlayer } from '@/components/learning/youtube-player-lazy'
-import { ComprehensiveNotesSection } from '@/components/learning/comprehensive-notes-section'
+import { QuickRevisionHub } from '@/components/learning/quick-revision-hub'
 
 
 export default async function SubjectLearningPage({
@@ -271,23 +271,22 @@ export default async function SubjectLearningPage({
           </section>
         )}
 
-        {/* ─── Complete Notes Hub (lesson notes, revision, formulas, interview, viva, PYQs, quizzes, flashcards, AI) ─── */}
+        {/* ─── Quick Revision Hub (concise — not full lesson notes) ─── */}
         {(() => {
           const notes = getSubjectNotes(subjectCodeResolved)
-          if (notes) return <ComprehensiveNotesSection notes={notes} />
+          if (notes) return <QuickRevisionHub notes={notes} />
           // No V3 notes yet — show a friendly "coming soon" card with PDF link
           return (
             <section>
               <div className="mb-4 flex items-center gap-2">
                 <NotebookPen className="h-5 w-5 text-primary" aria-hidden="true" />
-                <h2 className="text-lg font-semibold">Complete Notes Hub</h2>
+                <h2 className="text-lg font-semibold">Quick Revision Hub</h2>
               </div>
               <div className="rounded-lg border border-dashed border-border bg-card p-6 text-center">
                 <FileText className="h-10 w-10 mx-auto mb-3 text-muted-foreground" />
-                <p className="text-sm font-semibold">Interactive notes coming soon for this subject</p>
+                <p className="text-sm font-semibold">Revision notes coming soon for this subject</p>
                 <p className="mt-1 text-xs text-muted-foreground max-w-md mx-auto">
-                  We&apos;re writing comprehensive V3 notes with diagrams, code examples, quizzes, flashcards,
-                  and AI-powered explanations. In the meantime, you can download the PDF summary below.
+                  We&apos;re preparing concise revision material with formulas, key concepts, viva &amp; interview questions, and PYQs.
                 </p>
                 {(() => {
                   const safeName = subject.name.toLowerCase().replace(/&/g, 'and').replace(/\//g, '-').replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-').replace(/^-+|-+$/g, '')

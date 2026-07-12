@@ -786,30 +786,44 @@ function ManifestLessonView({
               </div>
             </div>
 
-            {/* ─── V3 Interactive Notes (replaces generated text notes) ─── */}
+            {/* ─── Concise Lesson Summary (revision-focused, NOT full textbook) ─── */}
             {subjectNotes && lessonMatch ? (
               <section className="rounded-lg border border-primary/30 bg-card p-5">
                 <div className="mb-3 flex items-center gap-2">
                   <FileText className="h-5 w-5 text-primary" aria-hidden="true" />
-                  <h2 className="text-lg font-semibold">Interactive Notes — {lessonMatch.lesson.title}</h2>
+                  <h2 className="text-lg font-semibold">Lesson Summary — {lessonMatch.lesson.title}</h2>
                 </div>
-                <InteractiveNotesRenderer
-                  lesson={lessonMatch.lesson}
-                  subject={subjectNotes}
-                  prevHref={prev ? `${lessonBaseHref}/${prev.slug}` : null}
-                  nextHref={next ? `${lessonBaseHref}/${next.slug}` : null}
-                />
-              </section>
-            ) : subjectNotes ? (
-              <section className="rounded-lg border border-primary/30 bg-card p-5">
-                <div className="mb-3 flex items-center gap-2">
-                  <FileText className="h-5 w-5 text-primary" aria-hidden="true" />
-                  <h2 className="text-lg font-semibold">Study Notes — All Units</h2>
+                <div className="space-y-4">
+                  {lessonMatch.lesson.overview && (
+                    <div>
+                      <h3 className="mb-1 text-xs font-semibold uppercase text-muted-foreground">Overview</h3>
+                      <p className="text-sm text-foreground leading-relaxed">{lessonMatch.lesson.overview}</p>
+                    </div>
+                  )}
+                  {lessonMatch.lesson.keyConcepts?.length ? (
+                    <div>
+                      <h3 className="mb-1.5 text-xs font-semibold uppercase text-muted-foreground">Key Concepts</h3>
+                      <ul className="space-y-1">
+                        {lessonMatch.lesson.keyConcepts.slice(0, 5).map((c, i) => (
+                          <li key={i} className="text-sm text-foreground flex gap-2">
+                            <span className="text-primary shrink-0">•</span>
+                            <span>{c}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
+                  {lessonMatch.lesson.formulas?.length ? (
+                    <div>
+                      <h3 className="mb-1.5 text-xs font-semibold uppercase text-muted-foreground">Key Formulas</h3>
+                      <div className="space-y-1">
+                        {lessonMatch.lesson.formulas.slice(0, 3).map((f, i) => (
+                          <p key={i} className="rounded-md border-l-2 border-primary bg-primary/5 px-3 py-1.5 font-mono text-sm">{f}</p>
+                        ))}
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
-                <p className="mb-4 text-sm text-muted-foreground">
-                  Browse all units and lessons below. Click any lesson to open its full interactive notes.
-                </p>
-                <LessonNotesRenderer notes={subjectNotes} />
               </section>
             ) : (
               <div className="space-y-4">
@@ -825,13 +839,6 @@ function ManifestLessonView({
                     </div>
                   </div>
                 ))}
-                <div className="rounded-lg border border-dashed border-border bg-background/50 p-4 text-center">
-                  <FileText className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-                  <p className="text-sm font-medium">Detailed interactive notes coming soon for this subject</p>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    We&apos;re writing comprehensive V3 notes with diagrams, code examples, and quizzes.
-                  </p>
-                </div>
               </div>
             )}
           </div>

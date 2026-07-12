@@ -118,7 +118,7 @@ export function MaterialsList({ pdfs }: { pdfs: PdfResource[] }) {
           <div className="materials-section__body">
             {topics.map((topic, i) => {
               const slug = topic.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80)
-              const lessonHref = `/learn/DCOMP/semester/${subject.semester}/subject/${subject.code}/lesson/${slug}`
+              const lessonHref = `/materials/lesson/${subject.code}/${slug}`
               return (
                 <Link
                   key={i}
@@ -129,7 +129,7 @@ export function MaterialsList({ pdfs }: { pdfs: PdfResource[] }) {
                   <div className="materials-lesson__info">
                     <p className="materials-lesson__title">{topic}</p>
                     <p className="materials-lesson__hint">
-                      Lesson {i + 1} · Click to open interactive notes with diagrams, code, quizzes &amp; AI tools
+                      Lesson {i + 1} · Click to open the interactive textbook page
                     </p>
                   </div>
                   <ChevronRight className="h-4 w-4 text-muted-foreground shrink-0" />
@@ -170,21 +170,7 @@ export function MaterialsList({ pdfs }: { pdfs: PdfResource[] }) {
           </Link>
         </div>
 
-        {/* Subject page link */}
-        <Link
-          href={`/learn/DCOMP/semester/${subject.semester}/subject/${subject.code}`}
-          className="materials-download"
-          style={{ background: 'linear-gradient(135deg, color-mix(in oklch, var(--brand) 5%, var(--surface-1)), var(--surface-1))' }}
-        >
-          <div className="materials-download__icon" style={{ background: 'color-mix(in oklch, var(--brand) 12%, transparent)', color: 'var(--brand)' }}>
-            <Layers className="h-5 w-5" />
-          </div>
-          <div className="min-w-0 flex-1">
-            <p className="materials-download__title">View Full Subject Page</p>
-            <p className="materials-download__hint">Complete Notes Hub · Video lectures · Unit map · Study tools</p>
-          </div>
-          <ChevronRight className="h-4 w-4 text-muted-foreground shrink-0" />
-        </Link>
+        {/* Subject page link removed — Materials is now independent from Learn */}
       </div>
     )
   }
