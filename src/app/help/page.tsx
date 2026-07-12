@@ -2,6 +2,8 @@ import { redirect } from 'next/navigation'
 import { getCurrentUser } from '@/lib/auth'
 import { BookOpen, Bot, Calendar, BarChart3, PenTool, type LucideIcon } from 'lucide-react'
 import Link from 'next/link'
+import { TopBar } from '@/components/layout/top-bar'
+import { Footer } from '@/components/layout/footer'
 
 export const dynamic = 'force-dynamic'
 
@@ -49,7 +51,9 @@ export default async function HelpPage() {
   if (!user) redirect('/sign-in?callbackUrl=/help')
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen flex flex-col bg-background text-foreground">
+      <TopBar />
+      <main className="flex-1 page-wipe bg-background text-foreground">
       <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
         <h1 className="text-2xl font-bold">Help Center</h1>
         <p className="mt-1 text-sm text-muted-foreground">
@@ -87,5 +91,7 @@ export default async function HelpPage() {
         </div>
       </div>
     </main>
+      <Footer />
+    </div>
   )
 }

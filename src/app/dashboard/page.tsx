@@ -18,6 +18,8 @@ import { ContinueLearningCard } from '@/components/dashboard/continue-learning-c
 import { StreakHeatmap } from '@/components/dashboard/streak-heatmap'
 import { ExamCountdown } from '@/components/dashboard/exam-countdown'
 import { ProgressRing } from '@/components/learning/progress-ring'
+import { TopBar } from '@/components/layout/top-bar'
+import { Footer } from '@/components/layout/footer'
 
 export const dynamic = 'force-dynamic'
 
@@ -61,7 +63,9 @@ export default async function DashboardPage() {
   const totalResources = subjects.reduce((sum, s) => sum + s.resources.length, 0)
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen flex flex-col bg-background text-foreground">
+      <TopBar />
+      <main className="flex-1 page-wipe bg-background text-foreground">
       <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
         {/* ─── Semester Hero ─── */}
         <section className="rounded-xl border border-primary/20 bg-gradient-to-br from-primary/5 to-transparent p-5 sm:p-6">
@@ -171,5 +175,7 @@ export default async function DashboardPage() {
         </section>
       </div>
     </main>
+      <Footer />
+    </div>
   )
 }

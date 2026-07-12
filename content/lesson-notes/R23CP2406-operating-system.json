@@ -1,0 +1,195 @@
+{
+  "subjectCode": "R23CP2406",
+  "subjectName": "Operating System",
+  "semester": 3,
+  "credits": 4,
+  "units": [
+    {
+      "number": 1,
+      "title": "Introduction to Operating Systems",
+      "weightage": 12,
+      "lessons": [
+        {
+          "slug": "os-introduction",
+          "title": "Introduction to Operating Systems",
+          "durationMin": 25,
+          "difficulty": "easy",
+          "overview": "An Operating System (OS) is system software that manages computer hardware and software resources, and provides common services for computer programs. It acts as an intermediary between users and hardware, managing CPU, memory, storage, and I/O devices. Examples include Windows, Linux, macOS, and Android.",
+          "keyConcepts": [
+            "Operating System: A program that manages hardware and provides services to applications",
+            "Kernel: The core of the OS — runs in privileged mode, manages CPU, memory, I/O",
+            "System Call: Interface between user programs and the kernel (open(), read(), write(), fork())",
+            "User Mode vs Kernel Mode: User mode = restricted access, Kernel mode = full access",
+            "Batch OS: Jobs processed in batches, no user interaction",
+            "Time-Sharing OS: Multiple users share CPU time (multitasking)",
+            "Real-Time OS: Strict timing constraints (RTLinux, VxWorks)",
+            "Distributed OS: Multiple computers work as one system"
+          ],
+          "formulas": [
+            "CPU Utilization = (Busy Time / Total Time) × 100%",
+            "Throughput = Number of processes completed per unit time",
+            "Turnaround Time = Completion Time - Arrival Time",
+            "Waiting Time = Turnaround Time - Burst Time",
+            "Response Time = First CPU allocation - Arrival Time"
+          ],
+          "tables": [
+            {
+              "headers": ["OS Type", "Characteristic", "Example"],
+              "rows": [
+                ["Batch", "Jobs processed sequentially, no interaction", "Early IBM mainframes"],
+                ["Time-Sharing", "Multiple users, quick response", "Unix, Linux"],
+                ["Real-Time", "Guaranteed response time", "VxWorks, RTLinux"],
+                ["Distributed", "Multiple networked computers", "Amoeba, LOCUS"],
+                ["Mobile", "Touch interface, power management", "Android, iOS"]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Confusing OS with kernel — kernel is a part of the OS",
+            "Forgetting that system calls are the ONLY way user programs access hardware",
+            "Mixing up throughput and turnaround time"
+          ],
+          "examTips": [
+            "Always define OS as 'system software that manages hardware and provides services'",
+            "List 5 OS services: Process management, Memory management, File management, I/O management, Security",
+            "Draw the OS architecture: Hardware → Kernel → System Calls → User Applications",
+            "Know the 5 scheduling metrics: CPU utilization, throughput, turnaround time, waiting time, response time"
+          ],
+          "practiceQuestions": [
+            "What is an operating system? List its main functions.",
+            "Explain the difference between user mode and kernel mode.",
+            "What is a system call? Give 5 examples.",
+            "List different types of operating systems with examples."
+          ]
+        },
+        {
+          "slug": "process-management",
+          "title": "Process Management and Scheduling",
+          "durationMin": 35,
+          "difficulty": "medium",
+          "overview": "A process is a program in execution. Process management involves creating, scheduling, suspending, and terminating processes. The OS uses scheduling algorithms to decide which process gets the CPU and for how long. Key concepts include process states, the PCB (Process Control Block), context switching, and various CPU scheduling algorithms.",
+          "keyConcepts": [
+            "Process: A program in execution (active entity, has PCB)",
+            "Program: A set of instructions on disk (passive entity)",
+            "PCB (Process Control Block): Data structure storing process info (PID, state, PC, registers, memory info)",
+            "Process States: New → Ready → Running → Waiting → Terminated",
+            "Context Switch: Saving the state of one process and loading another",
+            "Preemptive Scheduling: OS can force a running process to give up CPU",
+            "Non-Preemptive Scheduling: Process keeps CPU until it finishes or blocks",
+            "FCFS: First Come First Serve — simple but may cause convoy effect",
+            "SJF: Shortest Job First — optimal but needs future knowledge",
+            "Round Robin: Each process gets a time quantum, then preempted",
+            "Priority Scheduling: Highest priority process runs first"
+          ],
+          "formulas": [
+            "FCFS: Avg Waiting Time = (Σ Waiting Time) / n",
+            "SJF (non-preemptive): Sort by burst time, then schedule",
+            "Round Robin: Time Quantum = q; if burst > q, preempt and add to ready queue",
+            "Turnaround Time = Completion Time - Arrival Time",
+            "Waiting Time = Turnaround Time - Burst Time"
+          ],
+          "tables": [
+            {
+              "headers": ["Algorithm", "Type", "Pros", "Cons"],
+              "rows": [
+                ["FCFS", "Non-preemptive", "Simple, fair", "Convoy effect, poor avg wait"],
+                ["SJF", "Non-preemptive", "Optimal avg wait", "Starvation for long jobs"],
+                ["Round Robin", "Preemptive", "Fair, good response time", "High context switch overhead"],
+                ["Priority", "Both", "Important jobs first", "Starvation (solve with aging)"]
+              ]
+            }
+          ],
+          "codeExamples": [
+            {
+              "language": "c",
+              "code": "// Process Control Block structure\nstruct PCB {\n  int pid;            // Process ID\n  int state;          // NEW, READY, RUNNING, WAITING, TERMINATED\n  int program_counter; // Next instruction address\n  int registers[16];   // CPU registers\n  int priority;        // Scheduling priority\n  int burst_time;      // CPU time needed\n  int arrival_time;    // When process arrived\n  struct PCB *next;    // Next PCB in ready queue\n};"
+            }
+          ],
+          "commonMistakes": [
+            "Forgetting to sort by arrival time before applying FCFS",
+            "In SJF, choosing the shortest remaining time at each preemption point (SRTF is preemptive SJF)",
+            "In Round Robin, not adding the preempted process to the END of the queue",
+            "Confusing waiting time with response time"
+          ],
+          "examTips": [
+            "Draw the Gantt chart for each scheduling algorithm",
+            "Calculate: Completion Time → Turnaround Time → Waiting Time → Average",
+            "For Round Robin, show the ready queue at each time quantum",
+            "For SJF, always pick the shortest burst among arrived processes"
+          ],
+          "practiceQuestions": [
+            "What is a PCB? What information does it contain?",
+            "Draw and explain the 5-state process model.",
+            "Solve: P1(0,5), P2(1,3), P3(2,1) using FCFS, SJF, and Round Robin (q=2).",
+            "What is the convoy effect? Which algorithm suffers from it?",
+            "Explain the difference between preemptive and non-preemptive scheduling."
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Memory Management",
+      "weightage": 15,
+      "lessons": [
+        {
+          "slug": "memory-management",
+          "title": "Memory Management and Paging",
+          "durationMin": 35,
+          "difficulty": "hard",
+          "overview": "Memory management is the process of controlling and coordinating computer memory, assigning portions called blocks to various running programs, and optimizing system performance. Key concepts include contiguous allocation, paging, segmentation, and virtual memory. Paging eliminates external fragmentation by dividing memory into fixed-size frames.",
+          "keyConcepts": [
+            "Logical Address: Address generated by the CPU (virtual address)",
+            "Physical Address: Address in RAM (actual address)",
+            "MMU (Memory Management Unit): Hardware that maps logical to physical addresses",
+            "Contiguous Allocation: Each process gets a single contiguous block of memory",
+            "Fragmentation: External (free space between allocated blocks) and Internal (wasted space within a block)",
+            "Paging: Divide logical memory into pages and physical memory into frames (same size)",
+            "Page Table: Maps page numbers to frame numbers",
+            "Segmentation: Memory divided into segments of variable size (based on program structure)",
+            "Virtual Memory: Uses disk as extension of RAM — enables running programs larger than RAM",
+            "Page Fault: Occurs when a referenced page is not in RAM (must be fetched from disk)"
+          ],
+          "formulas": [
+            "Page Number = Logical Address / Page Size",
+            "Offset = Logical Address % Page Size",
+            "Physical Address = Frame Number × Page Size + Offset",
+            "Page Size = 2^n (typically 4KB = 2^12)",
+            "Number of Pages = Process Size / Page Size",
+            "TLB Hit Ratio = TLB Hits / Total Accesses"
+          ],
+          "tables": [
+            {
+              "headers": ["Concept", "Paging", "Segmentation"],
+              "rows": [
+                ["Block Size", "Fixed (page size)", "Variable (segment size)"],
+                ["Fragmentation", "Internal only", "External only"],
+                ["Address Space", "One-dimensional", "Two-dimensional (segment, offset)"],
+                ["Visibility", "Invisible to user", "Visible to user"],
+                ["Table", "Page table", "Segment table"]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Forgetting that page size = frame size (they must be the same)",
+            "Confusing internal fragmentation (within allocated block) with external (between blocks)",
+            "Not computing the physical address correctly: Frame × PageSize + Offset"
+          ],
+          "examTips": [
+            "Always compute: Page# = Address / PageSize, Offset = Address % PageSize",
+            "Draw the page table with page number → frame number mapping",
+            "For virtual memory, explain page fault handling steps",
+            "Compare paging vs segmentation in a table"
+          ],
+          "practiceQuestions": [
+            "What is the difference between logical and physical addresses?",
+            "Explain paging with an example. How is a physical address computed?",
+            "What is virtual memory? How does it work?",
+            "What is a page fault? Explain the steps to handle it.",
+            "Differentiate between internal and external fragmentation."
+          ]
+        }
+      ]
+    }
+  ]
+}

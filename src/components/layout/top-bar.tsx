@@ -340,7 +340,7 @@ export function TopBar() {
 
 // ─── User Menu (desktop dropdown with profile, settings, logout) ─────────────
 
-function UserMenu({ user, isDark, setPref }: { user: { name: string; email: string } | null; isDark: boolean; setPref: (p: { appearance: string }) => void }) {
+function UserMenu({ user, isDark, setPref }: { user: { name: string; email: string } | null; isDark: boolean; setPref: (p: any) => void }) {
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
