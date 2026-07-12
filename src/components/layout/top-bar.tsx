@@ -77,6 +77,7 @@ export function TopBar() {
   const [hidden, setHidden] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [mobileMoreOpen, setMobileMoreOpen] = useState(false)
+  const [moreOpen, setMoreOpen] = useState(false)
 
   const user = useAppStore((s) => s.user)
   const xp = useAppStore((s) => s.xp)
@@ -140,33 +141,59 @@ export function TopBar() {
               )
             })}
 
-            {/* More dropdown for secondary items */}
-            <div className="group relative">
-              <button className="flex items-center gap-1 rounded-md px-2.5 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">
+            {/* More dropdown for secondary items — click + keyboard accessible */}
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setMoreOpen((v) => !v)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Escape') setMoreOpen(false)
+                }}
+                onBlur={(e) => {
+                  // Close when focus leaves the dropdown container
+                  if (!e.currentTarget.parentElement?.contains(e.relatedTarget as Node)) {
+                    setMoreOpen(false)
+                  }
+                }}
+                aria-expanded={moreOpen}
+                aria-haspopup="true"
+                className={cn(
+                  'flex items-center gap-1 rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors',
+                  moreOpen ? 'bg-accent text-foreground' : 'text-muted-foreground hover:bg-accent hover:text-foreground',
+                )}
+              >
                 <span className="hidden lg:inline">More</span>
-                <ChevronDown className="h-3 w-3" />
+                <ChevronDown className={cn('h-3 w-3 transition-transform', moreOpen && 'rotate-180')} />
               </button>
-              <div className="absolute right-0 top-full hidden min-w-[180px] rounded-lg border border-border bg-popover py-1 shadow-lg group-hover:block">
-                {moreItems.map((item) => {
-                  const href = routeForView(item.key)
-                  const active = isActivePath(pathname, href)
-                  return (
-                    <Link
-                      key={item.key}
-                      href={href}
-                      prefetch={true}
-                      onClick={() => useAppStore.getState().setView(item.key)}
-                      className={cn(
-                        'flex items-center gap-2 px-3 py-2 text-sm transition-colors',
-                        active ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:bg-accent hover:text-foreground',
-                      )}
-                    >
-                      <item.icon className="h-4 w-4" />
-                      {item.label}
-                    </Link>
-                  )
-                })}
-              </div>
+              {moreOpen && (
+                <div
+                  className="absolute right-0 top-full z-50 min-w-[180px] rounded-lg border border-border bg-popover py-1 shadow-lg"
+                  onMouseLeave={() => setMoreOpen(false)}
+                >
+                  {moreItems.map((item) => {
+                    const href = routeForView(item.key)
+                    const active = isActivePath(pathname, href)
+                    return (
+                      <Link
+                        key={item.key}
+                        href={href}
+                        prefetch={true}
+                        onClick={() => {
+                          useAppStore.getState().setView(item.key)
+                          setMoreOpen(false)
+                        }}
+                        className={cn(
+                          'flex items-center gap-2 px-3 py-2 text-sm transition-colors',
+                          active ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:bg-accent hover:text-foreground',
+                        )}
+                      >
+                        <item.icon className="h-4 w-4" />
+                        {item.label}
+                      </Link>
+                    )
+                  })}
+                </div>
+              )}
             </div>
           </nav>
 

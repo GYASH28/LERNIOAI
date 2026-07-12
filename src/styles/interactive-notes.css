@@ -1641,3 +1641,244 @@ mark.search-hit {
   .materials-sections { gap: 1rem; }
   .materials-lesson-section { page-break-inside: avoid; }
 }
+
+/* =============================================================================
+   NATIVE DIAGRAMS — HTML/CSS flowcharts, mind maps, and fallbacks
+   Replaces Mermaid entirely. No syntax errors ever surface to students.
+   ============================================================================= */
+
+.native-diagram {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card, 0.75rem);
+  background: var(--surface-1);
+  padding: 1.25rem;
+  margin: 1rem 0;
+  overflow-x: auto;
+}
+.native-diagram__title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.native-diagram__pre {
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-control, 0.5rem);
+  padding: 1rem;
+  font-family: var(--font-geist-mono, ui-monospace, monospace);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--text-default);
+  overflow-x: auto;
+  white-space: pre;
+}
+.native-diagram__explanation {
+  margin-top: 0.75rem;
+  font-size: 0.6875rem;
+  color: var(--text-secondary);
+  text-align: center;
+  font-style: italic;
+}
+
+/* ─── Flowchart ─── */
+.native-flowchart {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+.native-flowchart--horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+}
+.native-flowchart__node-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.native-flowchart--horizontal .native-flowchart__node-group {
+  flex-direction: row;
+  align-items: center;
+}
+.native-flowchart__node {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  min-width: 80px;
+  max-width: 200px;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.3;
+  border: 2px solid var(--brand);
+  background: color-mix(in oklch, var(--brand) 8%, var(--surface-1));
+  color: var(--text-strong);
+  transition: all 150ms var(--motion-fast, 120ms);
+}
+.native-flowchart__node:hover {
+  background: color-mix(in oklch, var(--brand) 15%, var(--surface-1));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px color-mix(in oklch, var(--brand) 20%, transparent);
+}
+.native-flowchart__node--rect {
+  border-radius: var(--radius-control, 0.5rem);
+}
+.native-flowchart__node--round {
+  border-radius: var(--radius-pill, 9999px);
+}
+.native-flowchart__node--decision {
+  border-radius: 0;
+  transform: rotate(45deg);
+  width: 100px;
+  height: 100px;
+  min-width: 100px;
+  max-width: 100px;
+}
+.native-flowchart__node--decision span {
+  transform: rotate(-45deg);
+}
+.native-flowchart__node--database {
+  border-radius: 50% / 20%;
+  border-top-width: 4px;
+  border-bottom-width: 4px;
+}
+.native-flowchart__node--circle {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+  max-width: 80px;
+}
+
+/* ─── Edges ─── */
+.native-flowchart__edges {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+.native-flowchart__edges--vertical {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.native-flowchart__edges--horizontal {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.native-flowchart__edge-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+.native-flowchart--horizontal .native-flowchart__edge-group {
+  flex-direction: row;
+}
+.native-flowchart__arrow {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 1rem;
+  color: var(--brand);
+  font-weight: 700;
+}
+.native-flowchart__edge-label {
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--surface-2);
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--radius-pill, 9999px);
+  border: 1px solid var(--border-subtle);
+}
+
+/* ─── Mind map ─── */
+.native-mindmap {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem;
+}
+.native-mindmap__node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.native-mindmap__label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.375rem 0.875rem;
+  border-radius: var(--radius-control, 0.5rem);
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-default);
+  transition: all 150ms var(--motion-fast, 120ms);
+}
+.native-mindmap__label:hover {
+  background: color-mix(in oklch, var(--brand) 8%, var(--surface-2));
+  border-color: color-mix(in oklch, var(--brand) 30%, var(--border-subtle));
+}
+.native-mindmap__label--root {
+  background: var(--brand);
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: 0.5rem 1.25rem;
+  border: 2px solid var(--brand);
+  box-shadow: 0 4px 12px color-mix(in oklch, var(--brand) 25%, transparent);
+}
+.native-mindmap__children {
+  display: flex;
+  flex-direction: row;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border-subtle);
+  position: relative;
+}
+.native-mindmap__children::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 0.5rem;
+  background: var(--border-subtle);
+}
+
+/* ─── Fallback ─── */
+.native-diagram--fallback {
+  background: var(--surface-2);
+  border-style: dashed;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 640px) {
+  .native-flowchart--horizontal {
+    flex-direction: column;
+  }
+  .native-flowchart--horizontal .native-flowchart__node-group {
+    flex-direction: column;
+  }
+  .native-mindmap__children {
+    flex-direction: column;
+  }
+}
+
+/* ─── Print ─── */
+@media print {
+  .native-diagram {
+    page-break-inside: avoid;
+    border: 1px solid #ccc;
+  }
+}

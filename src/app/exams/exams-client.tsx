@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { FileText, Clock, PlayCircle, CheckCircle2, XCircle, RotateCw, Award, Timer, ArrowLeft, Home } from 'lucide-react'
+import { FileText, Clock, PlayCircle, CheckCircle2, XCircle, RotateCw, Award, Timer, ArrowLeft, Home, BookOpen } from 'lucide-react'
 
 interface SubjectInfo { code: string; name: string; credits: number; quizCount: number; coverageFocus: string }
 
@@ -26,6 +26,7 @@ export function ExamsClient({ subjects }: { subjects: SubjectInfo[] }) {
   const [answers, setAnswers] = useState<Record<number, number>>({})
   const [showResults, setShowResults] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [loadingCode, setLoadingCode] = useState<string | null>(null)
   const [error, setError] = useState('')
   const [timeLeft, setTimeLeft] = useState(0)
   const [examStarted, setExamStarted] = useState(false)
@@ -50,20 +51,20 @@ export function ExamsClient({ subjects }: { subjects: SubjectInfo[] }) {
   }
 
   const startExam = async (subjectCode: string) => {
-    setLoading(true); setError('')
+    setLoading(true); setLoadingCode(subjectCode); setError('')
     try {
       const subject = subjects.find(s => s.code === subjectCode)
       const res = await fetch(`/api/quiz/generate?subject=${subjectCode}&preset=${preset}&name=${encodeURIComponent(subject?.name ?? subjectCode)}&coverage=${encodeURIComponent(subject?.coverageFocus ?? '')}`)
       const data = await res.json()
       const qs = data?.data?.questions ?? data?.questions ?? []
-      if (!res.ok || qs.length === 0) { setError(data?.error ?? 'Failed to load.'); setLoading(false); return }
+      if (!res.ok || qs.length === 0) { setError(data?.error ?? 'Failed to load.'); setLoading(false); setLoadingCode(null); return }
       setQuestions(qs)
       setSelectedSubject(subjectCode)
       setCurrentQ(0); setAnswers({}); setShowResults(false)
       setTimeLeft(currentPreset.timeMin * 60)
       setExamStarted(true)
     } catch { setError('Failed to load.') }
-    setLoading(false)
+    setLoading(false); setLoadingCode(null)
   }
 
   const selectAnswer = (qIndex: number, aIndex: number) => {
@@ -246,14 +247,25 @@ export function ExamsClient({ subjects }: { subjects: SubjectInfo[] }) {
 
       {/* Subject list */}
       <h2 className="mb-3 text-sm font-semibold uppercase text-muted-foreground">Select a Subject ({currentPreset.count} questions)</h2>
-      <div className="grid gap-3 sm:grid-cols-2">
-        {subjects.map(s => (
-          <button key={s.code} onClick={() => startExam(s.code)} disabled={loading} className="flex items-center justify-between rounded-lg border border-border bg-card p-4 text-left transition-colors hover:border-primary/40 hover:bg-accent/5 disabled:opacity-50">
-            <div className="min-w-0"><p className="text-[10px] font-semibold uppercase text-muted-foreground">{s.code}</p><h3 className="mt-1 text-sm font-medium">{s.name}</h3><p className="mt-1 text-xs text-muted-foreground">{s.credits} credits · {currentPreset.count} questions · {currentPreset.timeMin} min</p></div>
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-primary/10">{loading ? <RotateCw className="h-4 w-4 animate-spin text-primary" /> : <PlayCircle className="h-4 w-4 text-primary" />}</div>
-          </button>
-        ))}
-      </div>
+      {subjects.length === 0 ? (
+        <div className="rounded-lg border border-dashed border-border bg-card p-8 text-center">
+          <BookOpen className="mx-auto h-10 w-10 text-muted-foreground mb-2" />
+          <p className="text-sm font-semibold">No subjects available</p>
+          <p className="mt-1 text-xs text-muted-foreground">Subjects will appear here once your curriculum is loaded. Try refreshing the page.</p>
+        </div>
+      ) : (
+        <div className="grid gap-3 sm:grid-cols-2">
+          {subjects.map(s => {
+            const isLoadingThis = loading && loadingCode === s.code
+            return (
+              <button key={s.code} onClick={() => startExam(s.code)} disabled={loading} className="flex items-center justify-between rounded-lg border border-border bg-card p-4 text-left transition-colors hover:border-primary/40 hover:bg-accent/5 disabled:opacity-50">
+                <div className="min-w-0"><p className="text-[10px] font-semibold uppercase text-muted-foreground">{s.code}</p><h3 className="mt-1 text-sm font-medium">{s.name}</h3><p className="mt-1 text-xs text-muted-foreground">{s.credits} credits · {s.quizCount > 0 ? `${s.quizCount} Qs available` : `${currentPreset.count} AI questions`} · {currentPreset.timeMin} min</p></div>
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-primary/10">{isLoadingThis ? <RotateCw className="h-4 w-4 animate-spin text-primary" /> : <PlayCircle className="h-4 w-4 text-primary" />}</div>
+              </button>
+            )
+          })}
+        </div>
+      )}
     </div>
   )
 }

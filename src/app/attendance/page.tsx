@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation'
+import Link from 'next/link'
 import { getCurrentUser } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { BackButton } from '@/components/ui/back-button'
@@ -49,7 +50,7 @@ export default async function AttendancePage() {
             <span className="text-muted-foreground">
               {dbUser.departmentCode} · Semester {dbUser.semesterNumber} · Division {dbUser.division}
             </span>
-            <a href="/class" className="ml-auto text-primary hover:underline">View class →</a>
+            <Link href="/class" className="ml-auto text-primary hover:underline">View class →</Link>
           </div>
         )}
 
@@ -60,9 +61,9 @@ export default async function AttendancePage() {
             <p className="text-xs text-muted-foreground mt-0.5">
               You need to set your department, semester, and division to use attendance.
             </p>
-            <a href="/profile" className="mt-1 inline-block text-xs font-semibold text-primary hover:underline">
+            <Link href="/profile" className="mt-1 inline-block text-xs font-semibold text-primary hover:underline">
               Set up now →
-            </a>
+            </Link>
           </div>
         )}
 

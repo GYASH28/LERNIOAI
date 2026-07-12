@@ -18,9 +18,10 @@ export function NotificationBell() {
   const [open, setOpen] = useState(false)
   const [notifications, setNotifications] = useState<Notification[]>([])
   const [unreadCount, setUnreadCount] = useState(0)
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   const fetchNotifications = useCallback(async () => {
+    setLoading(true)
     try {
       const res = await fetch('/api/notifications?limit=10')
       if (!res.ok) return
@@ -29,6 +30,8 @@ export function NotificationBell() {
       setUnreadCount(data.unreadCount ?? 0)
     } catch {
       // silent fail
+    } finally {
+      setLoading(false)
     }
   }, [])
 
