@@ -9,37 +9,32 @@ import {
   ChevronRight,
   Code2,
   Lightbulb,
-  AlertTriangle,
   GraduationCap,
+  BookOpen,
+  Target,
+  Zap,
+  Table as TableIcon,
+  ExternalLink,
 } from 'lucide-react'
 import type {
   PracticeQuestion,
-  CodeExample,
-  DataTable,
-  Diagram,
   Lesson,
   Unit,
   SubjectNotes,
 } from '@/lib/curriculum/lesson-notes-loader'
+import { CodeBlock } from './code-block'
+import { Callout } from './callout'
 
-// Re-export for backward compat (callers that imported from this file)
-export type {
-  PracticeQuestion,
-  CodeExample,
-  DataTable,
-  Diagram,
-  Lesson,
-  Unit,
-  SubjectNotes,
-}
+// Re-export for backward compat
+export type { PracticeQuestion, Lesson, Unit, SubjectNotes }
 
 /**
- * Legacy accordion-style lesson notes renderer (subject page bottom section).
- *
- * For the V3 premium in-lesson reader, see `InteractiveNotesRenderer`.
- * This component remains in use on the subject page where we want a
- * compact, collapsible overview of every unit/lesson rather than a
- * single-lesson deep read.
+ * Premium accordion-style lesson notes renderer.
+ * Used on the subject page "Complete Notes Hub" → Lessons tab.
+ * Each lesson expands to show overview, objectives, key concepts,
+ * formulas, tables, code examples (syntax-highlighted), callouts,
+ * common mistakes, exam tips, and a link to open the full interactive
+ * reader.
  */
 export function LessonNotesRenderer({ notes }: { notes: SubjectNotes }) {
   const [expandedUnit, setExpandedUnit] = useState<number | null>(0)
@@ -47,245 +42,281 @@ export function LessonNotesRenderer({ notes }: { notes: SubjectNotes }) {
 
   if (!notes?.units?.length) {
     return (
-      <div className="rounded-lg border border-border bg-card p-6 text-center text-sm text-muted-foreground">
-        Lesson notes for this subject are being prepared. Check back soon!
+      <div className="notes-empty">
+        <div className="notes-empty__icon">
+          <BookOpen className="h-7 w-7" />
+        </div>
+        <p className="notes-empty__title">Lesson notes coming soon</p>
+        <p className="notes-empty__desc">
+          We&apos;re writing comprehensive notes for this subject. Check back soon!
+        </p>
       </div>
     )
   }
 
   return (
-    <div className="space-y-4">
-      {notes.units.map((unit) => (
-        <div key={unit.number} className="rounded-lg border border-border bg-card overflow-hidden">
-          <button
-            onClick={() => setExpandedUnit(expandedUnit === unit.number ? null : unit.number)}
-            className="flex w-full items-center justify-between p-4 text-left hover:bg-accent/5 transition-colors"
-            type="button"
-          >
-            <div>
-              <p className="text-xs font-semibold uppercase text-muted-foreground">
-                Unit {unit.number} · {unit.weightage}% weightage
-              </p>
-              <h3 className="mt-1 text-base font-semibold">{unit.title}</h3>
-            </div>
-            {expandedUnit === unit.number ? (
-              <ChevronUp className="h-5 w-5 text-muted-foreground" />
-            ) : (
-              <ChevronDown className="h-5 w-5 text-muted-foreground" />
-            )}
-          </button>
+    <div className="space-y-3">
+      {notes.units.map((unit) => {
+        const isUnitOpen = expandedUnit === unit.number
+        return (
+          <div key={unit.number} className="unit-group">
+            {/* Unit header */}
+            <button
+              onClick={() => setExpandedUnit(isUnitOpen ? null : unit.number)}
+              className="unit-group__header w-full text-left"
+              type="button"
+            >
+              <div className="unit-group__title">
+                <span className="unit-group__badge">U{unit.number}</span>
+                <span>{unit.title}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="unit-group__weight">{unit.weightage}% · {unit.lessons.length} lessons</span>
+                {isUnitOpen ? (
+                  <ChevronUp className="h-4 w-4 text-muted-foreground" />
+                ) : (
+                  <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                )}
+              </div>
+            </button>
 
-          {expandedUnit === unit.number && (
-            <div className="border-t border-border divide-y divide-border">
-              {unit.lessons.map((lesson) => {
-                const lessonHref = buildLessonHref(notes, lesson)
-                return (
-                  <div key={lesson.slug}>
-                    <div className="flex items-stretch">
-                      <button
-                        onClick={() =>
-                          setExpandedLesson(expandedLesson === lesson.slug ? null : lesson.slug)
-                        }
-                        className="flex flex-1 min-w-0 items-center justify-between p-3 pl-6 text-left hover:bg-accent/5 transition-colors"
-                        type="button"
-                      >
-                        <div className="min-w-0">
-                          <p className="text-sm font-medium truncate">{lesson.title}</p>
-                          <p className="text-xs text-muted-foreground">
-                            {lesson.durationMin} min · {lesson.difficulty}
-                          </p>
-                        </div>
-                        {expandedLesson === lesson.slug ? (
-                          <ChevronUp className="h-4 w-4 text-muted-foreground shrink-0" />
-                        ) : (
-                          <ChevronDown className="h-4 w-4 text-muted-foreground shrink-0" />
-                        )}
-                      </button>
-                      {lessonHref && (
-                        <a
-                          href={lessonHref}
-                          className="flex items-center gap-1 px-4 text-xs font-semibold text-primary hover:bg-primary/5 transition-colors border-l border-border"
-                          title="Open interactive notes"
+            {/* Lessons */}
+            {isUnitOpen && (
+              <div className="unit-group__body">
+                {unit.lessons.map((lesson, lessonIdx) => {
+                  const lessonHref = buildLessonHref(notes, lesson)
+                  const isLessonOpen = expandedLesson === lesson.slug
+                  return (
+                    <div key={lesson.slug} className="lesson-item">
+                      <div className="lesson-item__header">
+                        <button
+                          onClick={() =>
+                            setExpandedLesson(isLessonOpen ? null : lesson.slug)
+                          }
+                          className="lesson-item__toggle"
+                          type="button"
                         >
-                          Open
-                          <ChevronRight />
-                        </a>
-                      )}
-                    </div>
-
-                    {expandedLesson === lesson.slug && (
-                      <div className="p-4 pl-6 space-y-6 bg-muted/20">
-                        {lesson.overview && (
-                          <div>
-                            <h4 className="text-sm font-semibold mb-2">Overview</h4>
-                            <p className="text-sm text-muted-foreground leading-relaxed">
-                              {lesson.overview}
-                            </p>
-                          </div>
-                        )}
-
-                        {lesson.keyConcepts?.length ? (
-                          <div>
-                            <h4 className="text-sm font-semibold mb-2 flex items-center gap-1.5">
-                              <Lightbulb className="h-4 w-4 text-amber-500" />
-                              Key Concepts
-                            </h4>
-                            <ul className="space-y-1.5">
-                              {lesson.keyConcepts.map((concept, i) => (
-                                <li key={i} className="text-sm text-muted-foreground flex gap-2">
-                                  <span className="text-primary shrink-0">•</span>
-                                  <span>{concept}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ) : null}
-
-                        {lesson.formulas?.length ? (
-                          <div className="rounded-md border border-primary/20 bg-primary/5 p-3">
-                            <h4 className="text-sm font-semibold mb-2 text-primary">Formulas</h4>
-                            <div className="space-y-1.5">
-                              {lesson.formulas.map((formula, i) => (
-                                <p key={i} className="text-sm font-mono text-foreground">
-                                  {formula}
-                                </p>
-                              ))}
+                          <span className="lesson-item__number">{lessonIdx + 1}</span>
+                          <div className="lesson-item__info">
+                            <p className="lesson-item__title">{lesson.title}</p>
+                            <div className="lesson-item__meta">
+                              <span className="flex items-center gap-0.5">
+                                <BookOpen className="h-3 w-3" />
+                                {lesson.durationMin} min
+                              </span>
+                              <span>·</span>
+                              <span className={`lesson-item__difficulty lesson-item__difficulty--${lesson.difficulty}`}>
+                                {lesson.difficulty}
+                              </span>
                             </div>
                           </div>
-                        ) : null}
-
-                        {(lesson.tables ?? []).map((table, i) => (
-                          <div key={i}>
-                            {table.title && (
-                              <h4 className="text-sm font-semibold mb-2">{table.title}</h4>
-                            )}
-                            <div className="overflow-x-auto">
-                              <table className="w-full text-xs border border-border rounded-md overflow-hidden">
-                                <thead className="bg-primary/10">
-                                  <tr>
-                                    {table.headers.map((header, j) => (
-                                      <th
-                                        key={j}
-                                        className="px-3 py-2 text-left font-semibold border-b border-border"
-                                      >
-                                        {header}
-                                      </th>
-                                    ))}
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {table.rows.map((row, j) => (
-                                    <tr
-                                      key={j}
-                                      className={j % 2 === 0 ? 'bg-card' : 'bg-muted/30'}
-                                    >
-                                      {row.map((cell, k) => (
-                                        <td
-                                          key={k}
-                                          className="px-3 py-2 border-b border-border/50 font-mono"
-                                        >
-                                          {cell}
-                                        </td>
-                                      ))}
-                                    </tr>
-                                  ))}
-                                </tbody>
-                              </table>
-                            </div>
-                            {table.note && (
-                              <p className="mt-1 text-xs text-muted-foreground italic">
-                                {table.note}
-                              </p>
-                            )}
-                          </div>
-                        ))}
-
-                        {(lesson.diagrams ?? []).map((diagram, i) => (
-                          <div key={i}>
-                            <h4 className="text-sm font-semibold mb-2">{diagram.title}</h4>
-                            <pre className="rounded-md border border-border bg-muted/50 p-3 text-xs font-mono overflow-x-auto whitespace-pre">
-                              {diagram.content}
-                            </pre>
-                          </div>
-                        ))}
-
-                        {(lesson.codeExamples ?? []).map((example, i) => (
-                          <div key={i}>
-                            <h4 className="text-sm font-semibold mb-2 flex items-center gap-1.5">
-                              <Code2 className="h-4 w-4 text-green-500" />
-                              {example.title}
-                            </h4>
-                            <pre className="rounded-md border border-border bg-zinc-900 text-zinc-100 p-3 text-xs font-mono overflow-x-auto whitespace-pre">
-                              {example.code}
-                            </pre>
-                            <p className="mt-1.5 text-xs text-muted-foreground">
-                              {example.explanation}
-                            </p>
-                          </div>
-                        ))}
-
-                        {lesson.commonMistakes?.length ? (
-                          <div className="rounded-md border border-red-500/20 bg-red-500/5 p-3">
-                            <h4 className="text-sm font-semibold mb-2 flex items-center gap-1.5 text-red-600">
-                              <AlertTriangle className="h-4 w-4" />
-                              Common Mistakes
-                            </h4>
-                            <ul className="space-y-1">
-                              {lesson.commonMistakes.map((mistake, i) => (
-                                <li
-                                  key={i}
-                                  className="text-sm text-muted-foreground flex gap-2"
-                                >
-                                  <span className="text-red-500 shrink-0">✗</span>
-                                  <span>{mistake}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ) : null}
-
-                        {lesson.examTips?.length ? (
-                          <div className="rounded-md border border-blue-500/20 bg-blue-500/5 p-3">
-                            <h4 className="text-sm font-semibold mb-2 flex items-center gap-1.5 text-blue-600">
-                              <GraduationCap className="h-4 w-4" />
-                              Exam Tips
-                            </h4>
-                            <ul className="space-y-1">
-                              {lesson.examTips.map((tip, i) => (
-                                <li
-                                  key={i}
-                                  className="text-sm text-muted-foreground flex gap-2"
-                                >
-                                  <span className="text-blue-500 shrink-0">→</span>
-                                  <span>{tip}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ) : null}
-
-                        {lesson.practiceQuestions?.length ? (
-                          <PracticeQuiz questions={lesson.practiceQuestions} />
-                        ) : null}
-
+                          {isLessonOpen ? (
+                            <ChevronUp className="h-4 w-4 text-muted-foreground shrink-0" />
+                          ) : (
+                            <ChevronDown className="h-4 w-4 text-muted-foreground shrink-0" />
+                          )}
+                        </button>
                         {lessonHref && (
                           <a
                             href={lessonHref}
-                            className="inline-flex items-center gap-1.5 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+                            className="lesson-item__open-btn"
+                            title="Open full interactive notes"
                           >
-                            Open full interactive notes
-                            <ChevronRight className="h-4 w-4" />
+                            Open
+                            <ChevronRight className="h-3 w-3" />
                           </a>
                         )}
                       </div>
-                    )}
-                  </div>
-                )
-              })}
-            </div>
-          )}
-        </div>
-      ))}
+
+                      {/* Expanded lesson body */}
+                      {isLessonOpen && (
+                        <div className="lesson-item__body">
+                          {/* Overview */}
+                          {lesson.overview && (
+                            <div className="lesson-subsection">
+                              <div className="lesson-subsection__label">
+                                <BookOpen className="h-3.5 w-3.5" />
+                                Overview
+                              </div>
+                              <p className="lesson-subsection__content text-muted-foreground leading-relaxed">
+                                {lesson.overview}
+                              </p>
+                            </div>
+                          )}
+
+                          {/* Objectives */}
+                          {lesson.objectives && lesson.objectives.length > 0 && (
+                            <div className="lesson-subsection">
+                              <div className="lesson-subsection__label">
+                                <Target className="h-3.5 w-3.5" />
+                                Learning Objectives
+                              </div>
+                              <ul className="space-y-1.5">
+                                {lesson.objectives.map((o, i) => (
+                                  <li key={i} className="flex gap-2 text-sm text-foreground">
+                                    <CheckCircle2 className="h-3.5 w-3.5 shrink-0 mt-0.5 text-primary" />
+                                    <span>{o}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+
+                          {/* Key Concepts */}
+                          {lesson.keyConcepts?.length ? (
+                            <div className="lesson-subsection">
+                              <div className="lesson-subsection__label">
+                                <Lightbulb className="h-3.5 w-3.5" />
+                                Key Concepts
+                              </div>
+                              <div className="grid gap-2 sm:grid-cols-2">
+                                {lesson.keyConcepts.map((concept, i) => (
+                                  <div
+                                    key={i}
+                                    className="rounded-md border border-amber-500/20 bg-amber-500/5 p-2.5 text-xs text-foreground"
+                                  >
+                                    {concept}
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          ) : null}
+
+                          {/* Formulas */}
+                          {lesson.formulas?.length ? (
+                            <div className="lesson-subsection">
+                              <div className="lesson-subsection__label">
+                                <Zap className="h-3.5 w-3.5" />
+                                Formulas
+                              </div>
+                              <div className="space-y-1.5">
+                                {lesson.formulas.map((formula, i) => (
+                                  <div
+                                    key={i}
+                                    className="rounded-md border-l-[3px] border-primary bg-primary/5 px-3 py-2"
+                                  >
+                                    <p className="font-mono text-sm text-foreground">{formula}</p>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          ) : null}
+
+                          {/* Tables */}
+                          {(lesson.tables ?? []).map((table, i) => (
+                            <div key={i} className="lesson-subsection">
+                              <div className="lesson-subsection__label">
+                                <TableIcon className="h-3.5 w-3.5" />
+                                {table.title || `Table ${i + 1}`}
+                              </div>
+                              <div className="overflow-x-auto rounded-lg border border-border">
+                                <table className="w-full text-xs">
+                                  <thead className="bg-primary/10">
+                                    <tr>
+                                      {table.headers.map((header, j) => (
+                                        <th
+                                          key={j}
+                                          className="border-b border-border px-3 py-2 text-left font-semibold"
+                                        >
+                                          {header}
+                                        </th>
+                                      ))}
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    {table.rows.map((row, j) => (
+                                      <tr
+                                        key={j}
+                                        className={j % 2 === 0 ? 'bg-card' : 'bg-muted/30'}
+                                      >
+                                        {row.map((cell, k) => (
+                                          <td
+                                            key={k}
+                                            className="border-b border-border/50 px-3 py-2 align-top"
+                                          >
+                                            {cell}
+                                          </td>
+                                        ))}
+                                      </tr>
+                                    ))}
+                                  </tbody>
+                                </table>
+                              </div>
+                              {table.note && (
+                                <p className="mt-1.5 text-xs italic text-muted-foreground">{table.note}</p>
+                              )}
+                            </div>
+                          ))}
+
+                          {/* Code Examples — syntax highlighted */}
+                          {(lesson.codeExamples ?? []).map((example, i) => (
+                            <div key={i} className="lesson-subsection">
+                              <div className="lesson-subsection__label">
+                                <Code2 className="h-3.5 w-3.5" />
+                                {example.title}
+                              </div>
+                              <CodeBlock
+                                code={example.code}
+                                language={example.language}
+                                title={example.title}
+                                showLineNumbers
+                                collapsible
+                                collapseThreshold={15}
+                              />
+                              {example.explanation && (
+                                <p className="mt-1.5 text-xs text-muted-foreground">{example.explanation}</p>
+                              )}
+                            </div>
+                          ))}
+
+                          {/* Callouts (from examTips + commonMistakes) */}
+                          {lesson.examTips && lesson.examTips.length > 0 && (
+                            <div className="lesson-subsection">
+                              {lesson.examTips.slice(0, 2).map((tip, i) => (
+                                <Callout key={i} type="exam-tip" content={tip} />
+                              ))}
+                            </div>
+                          )}
+                          {lesson.commonMistakes && lesson.commonMistakes.length > 0 && (
+                            <div className="lesson-subsection">
+                              {lesson.commonMistakes.slice(0, 2).map((m, i) => (
+                                <Callout key={i} type="warning" content={m} />
+                              ))}
+                            </div>
+                          )}
+
+                          {/* Practice Quiz (inline, compact) */}
+                          {lesson.practiceQuestions?.length ? (
+                            <div className="lesson-subsection">
+                              <div className="lesson-subsection__label">
+                                <GraduationCap className="h-3.5 w-3.5" />
+                                Quick Quiz ({lesson.practiceQuestions.length} questions)
+                              </div>
+                              <PracticeQuiz questions={lesson.practiceQuestions} />
+                            </div>
+                          ) : null}
+
+                          {/* CTA — open full interactive reader */}
+                          {lessonHref && (
+                            <a
+                              href={lessonHref}
+                              className="mt-3 inline-flex items-center gap-1.5 rounded-md bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground hover:bg-primary/90 transition-colors"
+                            >
+                              <ExternalLink className="h-3.5 w-3.5" />
+                              Open full interactive notes
+                              <ChevronRight className="h-3.5 w-3.5" />
+                            </a>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
+            )}
+          </div>
+        )
+      })}
     </div>
   )
 }
@@ -335,12 +366,11 @@ function PracticeQuiz({ questions }: { questions: PracticeQuestion[] }) {
 
   if (completed) {
     return (
-      <div className="rounded-md border border-green-500/20 bg-green-500/5 p-4 text-center">
+      <div className="rounded-lg border border-green-500/20 bg-green-500/5 p-4 text-center">
         <CheckCircle2 className="mx-auto h-8 w-8 text-green-600" />
         <p className="mt-2 text-lg font-bold">Quiz Complete!</p>
         <p className="text-sm text-muted-foreground">
-          You scored {score} / {questions.length} (
-          {Math.round((score / questions.length) * 100)}%)
+          You scored {score} / {questions.length} ({Math.round((score / questions.length) * 100)}%)
         </p>
         <button
           onClick={handleRestart}
@@ -354,14 +384,14 @@ function PracticeQuiz({ questions }: { questions: PracticeQuestion[] }) {
   }
 
   return (
-    <div className="rounded-md border border-border bg-card p-4">
+    <div className="rounded-lg border border-border bg-card p-4">
       <div className="mb-3 flex items-center justify-between">
         <h4 className="text-sm font-semibold flex items-center gap-1.5">
           <GraduationCap className="h-4 w-4 text-primary" />
           Practice Quiz
         </h4>
         <span className="text-xs text-muted-foreground">
-          Question {currentQ + 1} / {questions.length} · Score: {score}
+          Q{currentQ + 1} / {questions.length} · Score: {score}
         </span>
       </div>
       <p className="mb-3 text-sm font-medium whitespace-pre-line">{question.question}</p>
@@ -415,4 +445,3 @@ function PracticeQuiz({ questions }: { questions: PracticeQuestion[] }) {
     </div>
   )
 }
-
