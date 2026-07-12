@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { FileText, Download, Search, BookOpen } from 'lucide-react'
+import { FileText, Download, Search, BookOpen, ChevronRight, ArrowLeft } from 'lucide-react'
+import Link from 'next/link'
 
 interface PdfResource {
   code: string
@@ -16,128 +17,310 @@ interface PdfResource {
 export function MaterialsList({ pdfs }: { pdfs: PdfResource[] }) {
   const [search, setSearch] = useState('')
   const [semesterFilter, setSemesterFilter] = useState<number | null>(null)
+  const [selectedSubject, setSelectedSubject] = useState<string | null>(null)
 
   const filtered = useMemo(() => {
-    return pdfs.filter((pdf) => {
-      const matchesSearch = pdf.name.toLowerCase().includes(search.toLowerCase()) ||
-                            pdf.code.toLowerCase().includes(search.toLowerCase())
-      const matchesSemester = semesterFilter === null || pdf.semester === semesterFilter
-      return matchesSearch && matchesSemester
-    })
+    let result = pdfs
+    if (search.trim()) {
+      const q = search.toLowerCase()
+      result = result.filter(p => p.name.toLowerCase().includes(q) || p.code.toLowerCase().includes(q))
+    }
+    if (semesterFilter !== null) {
+      result = result.filter(p => p.semester === semesterFilter)
+    }
+    return result
   }, [pdfs, search, semesterFilter])
 
-  const grouped = useMemo(() => {
+  // Group by semester
+  const bySemester = useMemo(() => {
     const groups: Record<number, PdfResource[]> = {}
-    for (const pdf of filtered) {
-      if (!groups[pdf.semester]) groups[pdf.semester] = []
-      groups[pdf.semester].push(pdf)
-    }
-    return groups
+    filtered.forEach(p => {
+      if (!groups[p.semester]) groups[p.semester] = []
+      groups[p.semester].push(p)
+    })
+    return Object.entries(groups).sort(([a], [b]) => Number(a) - Number(b))
   }, [filtered])
 
+  // If a subject is selected, show its detail page
+  if (selectedSubject) {
+    const subject = pdfs.find(p => p.code === selectedSubject)
+    if (!subject) {
+      setSelectedSubject(null)
+      return null
+    }
+
+    return (
+      <div className="space-y-4">
+        <button
+          onClick={() => setSelectedSubject(null)}
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
+        >
+          <ArrowLeft className="h-4 w-4" /> Back to all subjects
+        </button>
+
+        <div className="rounded-xl border border-primary/20 bg-gradient-to-br from-primary/5 to-transparent p-5">
+          <div className="flex items-center gap-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
+              <BookOpen className="h-6 w-6 text-primary" />
+            </div>
+            <div>
+              <h2 className="text-lg font-bold">{subject.name}</h2>
+              <p className="text-xs text-muted-foreground">
+                {subject.code} · Semester {subject.semester} · {subject.credits} credits
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Topics / Lessons list */}
+        <div className="rounded-xl border border-border bg-card p-4">
+          <h3 className="mb-3 text-sm font-semibold uppercase text-muted-foreground">Lessons & Topics</h3>
+          <div className="space-y-2">
+            {/* Generate lesson topics from the subject name */}
+            {generateTopics(subject.name, subject.code).map((topic, i) => (
+              <div
+                key={i}
+                className="quest-card flex items-center gap-3 rounded-lg border border-border bg-background p-3"
+              >
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
+                  {i + 1}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-medium">{topic}</p>
+                  <p className="text-[10px] text-muted-foreground">Lesson {i + 1}</p>
+                </div>
+                <ChevronRight className="h-4 w-4 text-muted-foreground" />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Download PDF */}
+        <div className="rounded-xl border border-border bg-card p-4">
+          <h3 className="mb-3 text-sm font-semibold uppercase text-muted-foreground">Download</h3>
+          <a
+            href={subject.url}
+            className="quest-card flex items-center gap-3 rounded-lg border border-border bg-background p-3 hover:border-primary/40"
+          >
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-500/10">
+              <FileText className="h-5 w-5 text-red-500" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-medium">Complete Study Notes (PDF)</p>
+              <p className="text-[10px] text-muted-foreground">All topics in one document</p>
+            </div>
+            <Download className="h-4 w-4 text-muted-foreground" />
+          </a>
+        </div>
+
+        {/* Interactive quiz link */}
+        <div className="rounded-xl border border-border bg-card p-4">
+          <h3 className="mb-3 text-sm font-semibold uppercase text-muted-foreground">Practice</h3>
+          <Link
+            href={`/exams`}
+            className="quest-card flex items-center gap-3 rounded-lg border border-border bg-background p-3 hover:border-primary/40"
+          >
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-500/10">
+              <BookOpen className="h-5 w-5 text-emerald-600" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-medium">Take Practice Quiz</p>
+              <p className="text-[10px] text-muted-foreground">AI-generated questions for this subject</p>
+            </div>
+            <ChevronRight className="h-4 w-4 text-muted-foreground" />
+          </Link>
+        </div>
+      </div>
+    )
+  }
+
+  // Subject list view
   return (
-    <div>
-      {/* Search + filters */}
-      <div className="mb-6 space-y-3">
-        <div className="flex items-center gap-2 rounded-lg border border-border bg-card px-3 py-2">
-          <Search className="h-4 w-4 text-muted-foreground shrink-0" />
+    <div className="space-y-4">
+      {/* Search + filter */}
+      <div className="flex flex-wrap items-center gap-2">
+        <div className="relative flex-1 min-w-[200px]">
+          <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search subjects..."
-            className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+            className="w-full rounded-md border border-border bg-background py-2 pl-8 pr-3 text-sm outline-none focus:border-primary"
           />
         </div>
-        <div className="flex flex-wrap gap-2">
-          <button
-            onClick={() => setSemesterFilter(null)}
-            className={`rounded-md border px-3 py-1.5 text-xs font-medium transition-colors ${
-              semesterFilter === null
-                ? 'border-primary bg-primary/10 text-primary'
-                : 'border-border text-muted-foreground hover:bg-accent'
-            }`}
-          >
-            All Semesters
-          </button>
-          {[1, 2, 3, 4, 5, 6].map((sem) => (
-            <button
-              key={sem}
-              onClick={() => setSemesterFilter(sem)}
-              className={`rounded-md border px-3 py-1.5 text-xs font-medium transition-colors ${
-                semesterFilter === sem
-                  ? 'border-primary bg-primary/10 text-primary'
-                  : 'border-border text-muted-foreground hover:bg-accent'
-              }`}
-            >
-              Sem {sem}
-            </button>
-          ))}
-        </div>
+        <select
+          value={semesterFilter ?? ''}
+          onChange={(e) => setSemesterFilter(e.target.value ? Number(e.target.value) : null)}
+          className="rounded-md border border-border bg-background px-2 py-2 text-xs"
+        >
+          <option value="">All semesters</option>
+          {[1, 2, 3, 4, 5, 6].map(s => <option key={s} value={s}>Sem {s}</option>)}
+        </select>
       </div>
 
-      {/* Results count */}
-      <p className="mb-4 text-xs text-muted-foreground">
-        {filtered.length} of {pdfs.length} subjects
-      </p>
-
-      {/* Grouped by semester */}
-      <div className="space-y-8">
-        {Object.entries(grouped)
-          .sort(([a], [b]) => Number(a) - Number(b))
-          .map(([sem, items]) => (
-            <div key={sem}>
-              <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold">
-                <BookOpen className="h-4 w-4 text-primary" />
-                Semester {sem}
-                <span className="text-xs text-muted-foreground">({items.length} subjects)</span>
-              </h2>
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {items.map((pdf) => (
-                  <a
-                    key={pdf.code}
-                    href={pdf.url}
-                    download
-                    className="group rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary/40 hover:bg-accent/5"
-                  >
-                    <div className="flex items-start justify-between gap-2">
-                      <div className="min-w-0 flex-1">
-                        <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
-                          {pdf.code}
-                        </p>
-                        <h3 className="mt-1 text-sm font-medium leading-tight">{pdf.name}</h3>
-                        <div className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
-                          <span>{pdf.credits} credits</span>
-                          <span>·</span>
-                          <span className="capitalize">{pdf.category}</span>
-                        </div>
-                      </div>
-                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                        <FileText className="h-4 w-4 text-primary" />
-                      </div>
-                    </div>
-                    <div className="mt-3 flex items-center gap-1.5 text-xs font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
-                      <Download className="h-3 w-3" />
-                      Download PDF
-                    </div>
-                    {pdf.hasDetailedNotes && (
-                      <span className="mt-2 inline-block rounded bg-green-500/10 px-1.5 py-0.5 text-[10px] font-bold text-green-600">
-                        Detailed Notes + Quizzes
-                      </span>
-                    )}
-                  </a>
-                ))}
-              </div>
+      {/* Subject cards grouped by semester */}
+      {bySemester.length === 0 ? (
+        <div className="flex flex-col items-center py-12 text-center">
+          <div className="mb-3 text-4xl">📚</div>
+          <p className="text-sm font-medium">No subjects found</p>
+          <p className="text-xs text-muted-foreground">Try a different search or filter.</p>
+        </div>
+      ) : (
+        bySemester.map(([sem, subjects]) => (
+          <div key={sem}>
+            <h3 className="mb-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
+              Semester {sem}
+            </h3>
+            <div className="grid gap-2 sm:grid-cols-2">
+              {subjects.map((pdf) => (
+                <button
+                  key={pdf.code}
+                  onClick={() => setSelectedSubject(pdf.code)}
+                  className="quest-card flex items-center gap-3 rounded-xl border border-border bg-card p-3 text-left"
+                >
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 subject-badge">
+                    <BookOpen className="h-5 w-5 text-primary" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-sm font-semibold">{pdf.name}</p>
+                    <p className="text-[10px] text-muted-foreground">
+                      {pdf.code} · 💎 {pdf.credits} credits
+                      {pdf.hasDetailedNotes && ' · ✨ Detailed notes'}
+                    </p>
+                  </div>
+                  <ChevronRight className="h-4 w-4 text-muted-foreground shrink-0" />
+                </button>
+              ))}
             </div>
-          ))}
-      </div>
-
-      {filtered.length === 0 && (
-        <div className="rounded-lg border border-dashed border-border py-16 text-center">
-          <FileText className="mx-auto h-8 w-8 text-muted-foreground" />
-          <p className="mt-2 text-sm text-muted-foreground">No materials found matching your search.</p>
-        </div>
+          </div>
+        ))
       )}
     </div>
   )
+}
+
+/**
+ * Generate topic list from subject name.
+ * This gives each subject a lesson-level structure for the materials page.
+ */
+function generateTopics(subjectName: string, subjectCode: string): string[] {
+  // Pre-defined topic lists for known subjects
+  const TOPIC_MAP: Record<string, string[]> = {
+    'Data Structures': [
+      'Introduction to Data Structures',
+      'Arrays and Dynamic Arrays',
+      'Linked Lists (Singly, Doubly, Circular)',
+      'Stacks and Applications',
+      'Queues and Priority Queues',
+      'Trees — Binary Trees',
+      'Binary Search Trees (BST)',
+      'AVL Trees and Rotations',
+      'Heaps and Heap Sort',
+      'Hash Tables and Collision Resolution',
+      'Graphs — Representation',
+      'Depth-First Search (DFS)',
+      'Breadth-First Search (BFS)',
+      'Sorting Algorithms',
+      'Searching Algorithms',
+      'Dynamic Programming Basics',
+      'Time and Space Complexity Analysis',
+    ],
+    'Object Oriented Programming with C++': [
+      'Introduction to OOP Concepts',
+      'C++ Basics and Syntax',
+      'Classes and Objects',
+      'Constructors and Destructors',
+      'Encapsulation and Access Specifiers',
+      'Inheritance — Single, Multiple, Multilevel',
+      'Polymorphism — Function Overloading',
+      'Operator Overloading',
+      'Virtual Functions and Runtime Polymorphism',
+      'Templates — Function and Class Templates',
+      'Exception Handling',
+      'STL — Containers, Iterators, Algorithms',
+      'File Handling in C++',
+      'Memory Management — new and delete',
+      'Namespaces and Scope Resolution',
+    ],
+    'Programming in C': [
+      'Introduction to C Programming',
+      'Data Types, Variables, and Constants',
+      'Operators and Expressions',
+      'Input and Output Functions',
+      'Control Structures — if, switch, loops',
+      'Arrays — One and Two Dimensional',
+      'Strings and String Functions',
+      'Functions and Recursion',
+      'Pointers — Basics and Arithmetic',
+      'Pointers and Arrays',
+      'Dynamic Memory Allocation',
+      'Structures and Unions',
+      'File Handling in C',
+      'Preprocessor Directives',
+      'Command Line Arguments',
+    ],
+    'Database Management System': [
+      'Introduction to DBMS',
+      'Database Models and Architecture',
+      'Entity-Relationship Model',
+      'Relational Model and Constraints',
+      'Normalization — 1NF, 2NF, 3NF, BCNF',
+      'SQL — DDL, DML, DCL Commands',
+      'SQL Queries and Joins',
+      'Transactions and ACID Properties',
+      'Concurrency Control and Locking',
+      'Indexing and Hashing',
+      'Database Security',
+      'NoSQL Databases Overview',
+    ],
+    'Operating System': [
+      'Introduction to Operating Systems',
+      'Process Management and Scheduling',
+      'Threads and Multithreading',
+      'CPU Scheduling Algorithms',
+      'Process Synchronization',
+      'Inter-Process Communication (IPC)',
+      'Deadlocks — Prevention and Avoidance',
+      'Memory Management',
+      'Paging and Segmentation',
+      'Virtual Memory and Page Replacement',
+      'File System Management',
+      'Disk Scheduling Algorithms',
+      'Linux Commands and Shell Scripting',
+    ],
+    'Computer Networks': [
+      'Introduction to Computer Networks',
+      'OSI Model — 7 Layers',
+      'TCP/IP Model',
+      'Physical Layer — Transmission Media',
+      'Data Link Layer — Framing, Error Detection',
+      'MAC Layer — Multiple Access Protocols',
+      'Network Layer — IP Addressing, Subnetting',
+      'Routing Algorithms',
+      'Transport Layer — TCP and UDP',
+      'Session and Presentation Layers',
+      'Application Layer — HTTP, DNS, SMTP, FTP',
+      'Network Security — Firewalls, VPN',
+    ],
+  }
+
+  // Check if we have predefined topics
+  if (TOPIC_MAP[subjectName]) {
+    return TOPIC_MAP[subjectName]
+  }
+
+  // Generic topics for unknown subjects
+  return [
+    'Introduction and Overview',
+    'Fundamental Concepts',
+    'Key Terminology',
+    'Core Principles',
+    'Practical Applications',
+    'Common Algorithms/Methods',
+    'Advanced Topics',
+    'Problem-Solving Techniques',
+    'Exam Important Points',
+    'Summary and Key Takeaways',
+  ]
 }
