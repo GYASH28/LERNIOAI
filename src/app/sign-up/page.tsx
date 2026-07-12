@@ -200,6 +200,28 @@ export default function SignUpPage() {
             className={authInputClass}
             required
           />
+          {form.password.length > 0 && (
+            <div className="mt-1.5 flex items-center gap-2">
+              <div className="flex h-1.5 flex-1 overflow-hidden rounded-full bg-muted">
+                <div
+                  className={`h-full transition-all duration-300 ${
+                    form.password.length < 4 ? 'w-1/4 bg-red-500' :
+                    form.password.length < 8 ? 'w-1/2 bg-amber-500' :
+                    form.password.length < 12 ? 'w-3/4 bg-blue-500' :
+                    'w-full bg-emerald-500'
+                  }`}
+                />
+              </div>
+              <span className={`text-[10px] font-medium ${
+                form.password.length < 4 ? 'text-red-500' :
+                form.password.length < 8 ? 'text-amber-500' :
+                form.password.length < 12 ? 'text-blue-500' :
+                'text-emerald-500'
+              }`}>
+                {form.password.length < 4 ? 'Weak' : form.password.length < 8 ? 'Fair' : form.password.length < 12 ? 'Good' : 'Strong'}
+              </span>
+            </div>
+          )}
         </Field>
 
         <Field label="Confirm password">
