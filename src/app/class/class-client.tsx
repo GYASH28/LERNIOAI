@@ -285,42 +285,48 @@ export function ClassClient({ userRole, userId }: { userRole: string; userId: st
             )}
           </div>
 
-          {/* Classmates list */}
+          {/* Classmates grid */}
           <div>
             <h3 className="mb-3 text-sm font-semibold uppercase text-muted-foreground">
               Classmates ({members.length})
             </h3>
-            <div className="space-y-2">
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
               {members.map((m) => (
                 <div
                   key={m.id}
-                  className={`flex items-center gap-3 rounded-lg border p-3 transition-colors ${
+                  className={`quest-card relative flex flex-col items-center rounded-xl border p-3 text-center ${
                     m.user.role === 'cr'
                       ? 'border-amber-500/30 bg-amber-500/5'
-                      : 'border-border bg-card hover:bg-accent/5'
+                      : 'border-border bg-card'
                   }`}
                 >
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
-                    {(m.user.name || '?').charAt(0).toUpperCase()}
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2">
-                      <p className="text-sm font-medium truncate">{m.user.name}</p>
-                      {m.user.role === 'cr' && <Crown className="h-3.5 w-3.5 text-amber-500 shrink-0" />}
-                    </div>
-                    <p className="text-xs text-muted-foreground truncate">
-                      {m.user.rollNumber || m.user.email}
-                    </p>
+                  {/* Avatar with ring for self, crown for CR */}
+                  <div className="relative mb-2">
+                    <span className={`flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-lg font-bold text-primary ${
+                      m.userId === userId ? 'ring-2 ring-primary ring-offset-2 ring-offset-background' : ''
+                    }`}>
+                      {(m.user.name || '?').charAt(0).toUpperCase()}
+                    </span>
+                    {m.user.role === 'cr' && (
+                      <Crown className="absolute -top-2 left-1/2 -translate-x-1/2 h-4 w-4 text-amber-500" />
+                    )}
                   </div>
-                  <div className="flex items-center gap-3 text-xs">
+                  {/* Name */}
+                  <p className="text-xs font-medium truncate w-full">{m.user.name}</p>
+                  {/* Roll number */}
+                  <p className="text-[10px] text-muted-foreground truncate w-full">
+                    {m.user.rollNumber || ''}
+                  </p>
+                  {/* Stats badges */}
+                  <div className="mt-1.5 flex items-center gap-2 text-[10px]">
                     {m.user.streak > 0 && (
                       <span className="flex items-center gap-0.5 text-orange-500 font-medium">
-                        <Flame className="h-3 w-3" />{m.user.streak}
+                        <Flame className="h-2.5 w-2.5" />{m.user.streak}
                       </span>
                     )}
                     {m.user.xp > 0 && (
                       <span className="flex items-center gap-0.5 text-amber-500 font-medium">
-                        <Zap className="h-3 w-3" />{m.user.xp}
+                        <Zap className="h-2.5 w-2.5" />{m.user.xp}
                       </span>
                     )}
                   </div>
