@@ -72,7 +72,19 @@ export default async function LessonStudioPage({
     const manifestSubject = getManifestSubject(programmeCode, semester, subjectCode)
     if (manifestSubject) {
       const expectedSlug = manifestSubject.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80)
-      if (lessonSlug === expectedSlug || lessonSlug.includes(expectedSlug) || expectedSlug.includes(lessonSlug)) {
+      // Also accept any slug that matches a real lesson in our V3 notes JSON
+      // (so unit-map lesson links like /lesson/introduction-to-dbms work).
+      const resolvedCode = programmeCode === 'DCIOT' && manifestSubject.alternateCode
+        ? manifestSubject.alternateCode
+        : subjectCode
+      const v3Notes = getSubjectNotes(resolvedCode)
+      const v3Match = v3Notes ? findLessonBySlug(resolvedCode, lessonSlug) : null
+      if (
+        lessonSlug === expectedSlug ||
+        lessonSlug.includes(expectedSlug) ||
+        expectedSlug.includes(lessonSlug) ||
+        v3Match
+      ) {
         return (
           <ManifestLessonView
             programmeCode={programmeCode}
@@ -671,6 +683,19 @@ function ManifestLessonView({
     subject.resources.map((r) => ({ title: r.title, channel: r.channel, url: r.url, role: r.role, description: r.description })),
   )
 
+  // ─── V3 Interactive Notes lookup ─────────────────────────────────────────
+  // Try to find rich notes for this subject. The subject code in the URL may
+  // be the DCIOT variant — resolve to the COMP alternate code if applicable.
+  const resolvedSubjectCode = programmeCode === 'DCIOT' && subject.alternateCode
+    ? subject.alternateCode
+    : subjectCode
+  const subjectNotes = getSubjectNotes(resolvedSubjectCode)
+  // Try to find the SPECIFIC lesson by slug — if found, render that lesson's
+  // premium interactive notes; else fall back to the whole-subject accordion.
+  const lessonMatch = subjectNotes ? findLessonBySlug(resolvedSubjectCode, lessonSlug) : null
+  const { prev, next } = subjectNotes ? getAdjacentLessons(resolvedSubjectCode, lessonSlug) : { prev: null, next: null }
+  const lessonBaseHref = `/learn/${programmeCode}/semester/${semesterNumber}/subject/${subjectCode}/lesson`
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <RecentlyViewedTracker
@@ -772,21 +797,54 @@ function ManifestLessonView({
               </div>
             </div>
 
-            {/* Generated lesson notes */}
-            <div className="space-y-4">
-              {lessonNotes.sections.map((section, i) => (
-                <div key={i} className="rounded-lg border border-border bg-card p-5">
-                  <h2 className="text-lg font-semibold">{section.title}</h2>
-                  <div className="mt-3 text-sm text-muted-foreground">
-                    {section.content.split('\n').map((line, j) => (
-                      <p key={j} className={line.startsWith('•') || /^\d+\./.test(line) ? 'mt-1' : 'mt-2'}>
-                        {line || '\u00A0'}
-                      </p>
-                    ))}
-                  </div>
+            {/* ─── V3 Interactive Notes (replaces generated text notes) ─── */}
+            {subjectNotes && lessonMatch ? (
+              <section className="rounded-lg border border-primary/30 bg-card p-5">
+                <div className="mb-3 flex items-center gap-2">
+                  <FileText className="h-5 w-5 text-primary" aria-hidden="true" />
+                  <h2 className="text-lg font-semibold">Interactive Notes — {lessonMatch.lesson.title}</h2>
                 </div>
-              ))}
-            </div>
+                <InteractiveNotesRenderer
+                  lesson={lessonMatch.lesson}
+                  subject={subjectNotes}
+                  prevHref={prev ? `${lessonBaseHref}/${prev.slug}` : null}
+                  nextHref={next ? `${lessonBaseHref}/${next.slug}` : null}
+                />
+              </section>
+            ) : subjectNotes ? (
+              <section className="rounded-lg border border-primary/30 bg-card p-5">
+                <div className="mb-3 flex items-center gap-2">
+                  <FileText className="h-5 w-5 text-primary" aria-hidden="true" />
+                  <h2 className="text-lg font-semibold">Study Notes — All Units</h2>
+                </div>
+                <p className="mb-4 text-sm text-muted-foreground">
+                  Browse all units and lessons below. Click any lesson to open its full interactive notes.
+                </p>
+                <LessonNotesRenderer notes={subjectNotes} />
+              </section>
+            ) : (
+              <div className="space-y-4">
+                {lessonNotes.sections.map((section, i) => (
+                  <div key={i} className="rounded-lg border border-border bg-card p-5">
+                    <h2 className="text-lg font-semibold">{section.title}</h2>
+                    <div className="mt-3 text-sm text-muted-foreground">
+                      {section.content.split('\n').map((line, j) => (
+                        <p key={j} className={line.startsWith('•') || /^\d+\./.test(line) ? 'mt-1' : 'mt-2'}>
+                          {line || '\u00A0'}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+                <div className="rounded-lg border border-dashed border-border bg-background/50 p-4 text-center">
+                  <FileText className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
+                  <p className="text-sm font-medium">Detailed interactive notes coming soon for this subject</p>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    We&apos;re writing comprehensive V3 notes with diagrams, code examples, and quizzes.
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Sidebar */}

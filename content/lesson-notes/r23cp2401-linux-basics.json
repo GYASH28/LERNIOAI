@@ -1,0 +1,2065 @@
+{
+  "subjectCode": "R23CP2401",
+  "subjectName": "Linux Basics",
+  "semester": 2,
+  "credits": 3,
+  "units": [
+    {
+      "number": 1,
+      "title": "Linux Introduction",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "linux-introduction",
+          "title": "Introduction to Linux",
+          "durationMin": 25,
+          "difficulty": "easy",
+          "overview": "Linux is an open-source, Unix-like operating system kernel created by Linus Torvalds in 1991. It's the foundation of distributions (distros) like Ubuntu, Debian, Fedora, and CentOS. Linux is multi-user, multitasking, and free — powering most servers, smartphones (Android), and embedded systems worldwide.",
+          "keyConcepts": [
+            "Linux: open-source OS kernel by Linus Torvalds (1991)",
+            "Distribution (distro): kernel + tools + package manager (Ubuntu, Fedora, Debian)",
+            "Kernel: core of the OS — manages CPU, memory, devices",
+            "Shell: command interpreter (bash, zsh, fish)",
+            "Terminal: text interface to the shell",
+            "Multi-user: multiple users can log in simultaneously",
+            "Open source: free to use, modify, distribute (GPL license)",
+            "Everything is a file: devices, processes, config — all represented as files"
+          ],
+          "formulas": [
+            "Linux = Kernel + GNU tools + Package manager",
+            "Shell: text-in → command-out",
+            "Path: absolute (/) or relative (./, ../)"
+          ],
+          "tables": [
+            {
+              "title": "Linux vs Windows",
+              "headers": [
+                "Aspect",
+                "Linux",
+                "Windows"
+              ],
+              "rows": [
+                [
+                  "Cost",
+                  "Free (open source)",
+                  "Paid (proprietary)"
+                ],
+                [
+                  "Source code",
+                  "Open",
+                  "Closed"
+                ],
+                [
+                  "Customisation",
+                  "High",
+                  "Limited"
+                ],
+                [
+                  "Server market",
+                  "~90%",
+                  "~10%"
+                ],
+                [
+                  "GUI",
+                  "Optional (CLI-friendly)",
+                  "Default"
+                ],
+                [
+                  "Security",
+                  "User-based permissions",
+                  "User-based"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Confusing Linux (kernel) with a distribution (Ubuntu, Fedora)",
+            "Treating Linux as a single OS — it's a kernel + ecosystem",
+            "Forgetting that Linux is case-sensitive (File.txt ≠ file.txt)",
+            "Not understanding the root user (sudo) vs regular user"
+          ],
+          "examTips": [
+            "Mention Linus Torvalds (1991) and that Linux is just the kernel",
+            "List 2-3 popular distros (Ubuntu, Fedora, Debian)",
+            "State that Linux is multi-user and open source"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Who created Linux?",
+              "options": [
+                "Bill Gates",
+                "Linus Torvalds",
+                "Richard Stallman",
+                "Steve Jobs"
+              ],
+              "answer": 1,
+              "explanation": "Linus Torvalds created Linux in 1991 as a student in Finland."
+            },
+            {
+              "question": "Linux is which type of software?",
+              "options": [
+                "Proprietary",
+                "Open source",
+                "Freeware",
+                "Shareware"
+              ],
+              "answer": 1,
+              "explanation": "Linux is open source under the GPL license — free to use, modify, distribute."
+            },
+            {
+              "question": "Ubuntu is a Linux:",
+              "options": [
+                "Kernel",
+                "Distribution",
+                "Shell",
+                "Editor"
+              ],
+              "answer": 1,
+              "explanation": "Ubuntu is a Linux distribution — it bundles the Linux kernel with tools and a package manager."
+            },
+            {
+              "question": "Linux file names are:",
+              "options": [
+                "Case-insensitive",
+                "Case-sensitive",
+                "Always lowercase",
+                "Uppercase only"
+              ],
+              "answer": 1,
+              "explanation": "Linux is case-sensitive: File.txt and file.txt are different files."
+            }
+          ],
+          "objectives": [
+            "Understand Linux and explain its significance",
+            "Understand Distribution (distro) and explain its significance",
+            "Understand Kernel and explain its significance",
+            "Understand Shell and explain its significance",
+            "Understand Terminal and explain its significance",
+            "Attempt the practice quiz and viva questions on Introduction to Linux"
+          ],
+          "prerequisites": [
+            "Basic computer literacy",
+            "Familiarity with command-line interfaces",
+            "Understanding of files and directories"
+          ],
+          "theory": "## Introduction\n\nLinux is an open-source, Unix-like operating system kernel created by Linus Torvalds in 1991. It's the foundation of distributions (distros) like Ubuntu, Debian, Fedora, and CentOS. Linux is multi-user, multitasking, and free — powering most servers, smartphones (Android), and embedded systems worldwide.\n## Key Concepts\n\n- Linux: open-source OS kernel by Linus Torvalds (1991)\n- Distribution (distro): kernel + tools + package manager (Ubuntu, Fedora, Debian)\n- Kernel: core of the OS — manages CPU, memory, devices\n- Shell: command interpreter (bash, zsh, fish)\n- Terminal: text interface to the shell\n- Multi-user: multiple users can log in simultaneously\n- Open source: free to use, modify, distribute (GPL license)\n- Everything is a file: devices, processes, config — all represented as files\n\n## Important Formulas\n\n- `Linux = Kernel + GNU tools + Package manager`\n- `Shell: text-in → command-out`\n- `Path: absolute (/) or relative (./, ../)`\n\n## Comparison Tables\n\n### Linux vs Windows\n\n| Aspect | Linux | Windows |\n| --- | --- | --- |\n| Cost | Free (open source) | Paid (proprietary) |\n| Source code | Open | Closed |\n| Customisation | High | Limited |\n| Server market | ~90% | ~10% |\n| GUI | Optional (CLI-friendly) | Default |\n| Security | User-based permissions | User-based |\n\n\n## Summary\n\nLinux is an open-source, Unix-like operating system kernel created by Linus Torvalds in 1991. It's the foundation of distributions (distros) like Ubuntu, Debian, Fedora, and CentOS. Linux is multi-user, multitasking, and free — powering most servers, smartphones (Android), and embedded systems worldwide.",
+          "analogies": [
+            {
+              "scenario": "Linux file system like a tree",
+              "mapping": "Root / = trunk, /home = a big branch, /etc = config branch, leaves = files. Climbing down = cd, listing branches = ls."
+            },
+            {
+              "scenario": "Permissions like a house",
+              "mapping": "Owner = you, Group = family, Others = strangers. r = look through window, w = rearrange furniture, x = enter the house."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Introduction to Linux — Process Flow",
+              "content": "flowchart TD\n    A[Login] --> B[Shell]\n    B --> C{Command}\n    C -->|ls| D[List files]\n    C -->|cd| E[Change dir]\n    C -->|chmod| F[Change perms]\n    C -->|sudo| G[Root ops]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Introduction to Linux — Concept Map",
+              "content": "mindmap\n  root((Introduction to Linux))\n    Basics\n      Kernel\n      Shell\n      Distros\n    Files\n      ls\n      cd\n      pwd\n    Permissions\n      chmod\n      chown\n      rwx\n    Processes\n      ps\n      top\n      kill\n    Scripting\n      Variables\n      Loops\n      Conditions"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) for command execution, O(n) for file listing",
+            "space": "O(1) per process"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "Who created Linux?",
+              "solution": "Correct answer: Linus Torvalds",
+              "explanation": "Linus Torvalds created Linux in 1991 as a student in Finland."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Introduction to Linux with reference to the key concepts.",
+              "solution": "Mention Linus Torvalds (1991) and that Linux is just the kernel → List 2-3 popular distros (Ubuntu, Fedora, Debian) → State that Linux is multi-user and open source",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Linux.",
+              "modelAnswer": "open-source OS kernel by Linus Torvalds (1991)"
+            },
+            {
+              "marks": 2,
+              "question": "Define Distribution (distro).",
+              "modelAnswer": "kernel + tools + package manager (Ubuntu, Fedora, Debian)"
+            },
+            {
+              "marks": 2,
+              "question": "Define Kernel.",
+              "modelAnswer": "core of the OS — manages CPU, memory, devices"
+            },
+            {
+              "marks": 2,
+              "question": "What is a shell?",
+              "modelAnswer": "A shell is a command-line interpreter that takes user commands and executes them. Common shells: bash, zsh, fish."
+            },
+            {
+              "marks": 2,
+              "question": "Define PID.",
+              "modelAnswer": "PID (Process ID) is a unique number Linux assigns to each running process. Used to manage processes (kill, renice)."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Linux = Kernel + GNU tools + Package manager",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Linux file permissions with an example.",
+              "modelAnswer": "Each file has permissions for user (owner), group, and others — each can have r (read), w (write), x (execute). Shown as rwxr-xr--. Numeric: r=4, w=2, x=1. Example: chmod 755 file → rwx for owner, r-x for group and others. Directories need 'x' to enter (cd). Use chmod (permissions), chown (owner), chgrp (group)."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between kill and kill -9?",
+              "modelAnswer": "kill PID (default signal SIGTERM) asks the process to terminate gracefully — it can clean up. kill -9 PID (SIGKILL) force-kills immediately — process can't catch or ignore. Always try kill first; use -9 only if process hangs. The -9 cannot be blocked."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Linux.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Distribution (distro).",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Linux = Kernel + GNU tools + Package manager",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Shell: text-in → command-out",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Introduction to Linux in detail with a diagram.",
+              "modelAnswer": "Linux is an open-source, Unix-like operating system kernel created by Linus Torvalds in 1991. It's the foundation of distributions (distros) like Ubuntu, Debian, Fedora, and CentOS. Linux is multi-user, multitasking, and free — powering most servers, smartphones (Android), and embedded systems worldwide."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Introduction to Linux with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Introduction to Linux\n\n**One-line definition:** Linux is an open-source, Unix-like operating system kernel created by Linus Torvalds in 1991. It's the foundation of distributions (distros) like Ubuntu, Debian, Fedora, and CentOS. Linux is multi-use\n\n**Key points:**\n\n- Linux: open-source OS kernel by Linus Torvalds (1991)\n- Distribution (distro): kernel + tools + package manager (Ubuntu, Fedora, Debian)\n- Kernel: core of the OS — manages CPU, memory, devices\n- Shell: command interpreter (bash, zsh, fish)\n- Terminal: text interface to the shell\n\n**Important formulas:**\n\n- `Linux = Kernel + GNU tools + Package manager`\n- `Shell: text-in → command-out`\n- `Path: absolute (/) or relative (./, ../)`\n\n**Common mistake to avoid:** Confusing Linux (kernel) with a distribution (Ubuntu, Fedora)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Linux: open-source OS kernel by Linus Torvalds (1991)",
+            "Distribution (distro): kernel + tools + package manager (Ubuntu, Fedora, Debian)",
+            "Kernel: core of the OS — manages CPU, memory, devices",
+            "Shell: command interpreter (bash, zsh, fish)",
+            "Terminal: text interface to the shell",
+            "Formula: Linux = Kernel + GNU tools + Package manager",
+            "Formula: Shell: text-in → command-out",
+            "Formula: Path: absolute (/) or relative (./, ../)",
+            "ls -la, cd, pwd, mkdir, rm, cp, mv",
+            "r=4, w=2, x=1; 755 = rwxr-xr-x",
+            "ps aux, top, kill -9 PID"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "rwx",
+              "expansion": "Read, Write, Execute",
+              "meaning": "The 3 Linux permission types. Numeric: r=4, w=2, x=1."
+            },
+            {
+              "phrase": "PID",
+              "expansion": "Process ID",
+              "meaning": "Unique number Linux assigns to each running process."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Mention Linus Torvalds (1991) and that Linux is just the kernel"
+            },
+            {
+              "type": "exam-tip",
+              "content": "List 2-3 popular distros (Ubuntu, Fedora, Debian)"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing Linux (kernel) with a distribution (Ubuntu, Fedora)"
+            },
+            {
+              "type": "warning",
+              "content": "Treating Linux as a single OS — it's a kernel + ecosystem"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Linux is an open-source, Unix-like operating system kernel created by Linus Torvalds in 1991. It's the foundation of distributions (distros) like Ubuntu, Debian, Fedora, and CentOS. Linux is multi-user, multitasking, and free — powering most servers, smartphones (Android), and embedded systems world..."
+            },
+            {
+              "type": "definition",
+              "content": "Linux: open-source OS kernel by Linus Torvalds (1991)"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Linux?",
+              "back": "open-source OS kernel by Linus Torvalds (1991)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Distribution (distro)?",
+              "back": "kernel + tools + package manager (Ubuntu, Fedora, Debian)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Kernel?",
+              "back": "core of the OS — manages CPU, memory, devices",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Shell?",
+              "back": "command interpreter (bash, zsh, fish)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Terminal?",
+              "back": "text interface to the shell",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Multi-user?",
+              "back": "multiple users can log in simultaneously",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Open source?",
+              "back": "free to use, modify, distribute (GPL license)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Everything is a file?",
+              "back": "devices, processes, config — all represented as files",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Linux is an open-source, Unix-like operating system kernel created by Linus Torvalds in 1991. It's the foundation of distributions (distros) like Ubuntu, Debian, Fedora, and CentOS. Linux is multi-user, multitasking, and free — powering most servers, smartphones (Android), and embedded systems world"
+            },
+            {
+              "style": "detailed",
+              "content": "Linux is an open-source, Unix-like operating system kernel created by Linus Torvalds in 1991. It's the foundation of distributions (distros) like Ubuntu, Debian, Fedora, and CentOS. Linux is multi-user, multitasking, and free — powering most servers, smartphones (Android), and embedded systems worldwide.\n\nKey concepts: Linux: open-source OS kernel by Linus Torvalds (1991), Distribution (distro): kernel + tools + package manager (Ubuntu, Fedora, Debian), Kernel: core of the OS — manages CPU, memory, devices."
+            }
+          ],
+          "recommendedNextLessons": [
+            "linux-file-system",
+            "linux-permissions"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "File System and Commands",
+      "weightage": 25,
+      "lessons": [
+        {
+          "slug": "linux-file-system",
+          "title": "File System and Basic Commands",
+          "durationMin": 35,
+          "difficulty": "medium",
+          "overview": "Linux uses a hierarchical file system starting from root (/). Key directories: /home (user files), /etc (config), /var (logs), /bin (binaries), /tmp (temporary). Basic commands: ls (list), cd (change dir), pwd (print working dir), mkdir (make dir), rm (remove), cp (copy), mv (move).",
+          "keyConcepts": [
+            "Root directory: / (top of hierarchy)",
+            "/home: user home directories (/home/username)",
+            "/etc: system configuration files",
+            "/bin, /usr/bin: executable binaries",
+            "/var: variable data (logs, mail, spool)",
+            "/tmp: temporary files (cleared on reboot)",
+            "ls: list directory contents",
+            "cd: change directory, pwd: print working directory"
+          ],
+          "formulas": [
+            "Path: /etc/passwd (absolute) or ../etc/passwd (relative)",
+            ". = current dir, .. = parent dir, ~ = home dir",
+            "ls -l = long format, -a = show hidden",
+            "chmod 755 file = rwxr-xr-x"
+          ],
+          "tables": [
+            {
+              "title": "Essential commands",
+              "headers": [
+                "Command",
+                "Purpose",
+                "Example"
+              ],
+              "rows": [
+                [
+                  "ls",
+                  "List files",
+                  "ls -la"
+                ],
+                [
+                  "cd",
+                  "Change dir",
+                  "cd /home"
+                ],
+                [
+                  "pwd",
+                  "Show current dir",
+                  "pwd"
+                ],
+                [
+                  "mkdir",
+                  "Make dir",
+                  "mkdir notes"
+                ],
+                [
+                  "rm",
+                  "Remove",
+                  "rm file.txt"
+                ],
+                [
+                  "cp",
+                  "Copy",
+                  "cp a.txt b.txt"
+                ],
+                [
+                  "mv",
+                  "Move/rename",
+                  "mv old.txt new.txt"
+                ],
+                [
+                  "cat",
+                  "Show file",
+                  "cat file.txt"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Using rm -rf / (deletes everything — never do this!)",
+            "Forgetting that Linux is case-sensitive",
+            "Confusing cp (copy) with mv (move/rename)",
+            "Not using tab completion (saves typing, avoids errors)"
+          ],
+          "examTips": [
+            "List the standard directories (/etc, /home, /var, /bin, /tmp)",
+            "Show ls -l output and explain permissions (rwx)",
+            "Mention tab completion and arrow-key history"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which command shows current directory?",
+              "options": [
+                "cd",
+                "pwd",
+                "ls",
+                "dir"
+              ],
+              "answer": 1,
+              "explanation": "pwd (Print Working Directory) shows the current path."
+            },
+            {
+              "question": "Which directory holds user homes?",
+              "options": [
+                "/etc",
+                "/home",
+                "/var",
+                "/bin"
+              ],
+              "answer": 1,
+              "explanation": "/home contains user home directories (e.g., /home/alice)."
+            },
+            {
+              "question": "What does ls -a do?",
+              "options": [
+                "List all (including hidden)",
+                "List in long format",
+                "Sort by size",
+                "Archive"
+              ],
+              "answer": 0,
+              "explanation": "-a shows all files, including hidden ones (starting with .)."
+            },
+            {
+              "question": "rm -rf does what?",
+              "options": [
+                "Remove file",
+                "Remove directory recursively without prompt",
+                "Read multiple files",
+                "Rename files"
+              ],
+              "answer": 1,
+              "explanation": "-r = recursive (directories), -f = force (no prompt). DANGEROUS!"
+            }
+          ],
+          "objectives": [
+            "Understand Root directory and explain its significance",
+            "Understand /home and explain its significance",
+            "Understand /etc and explain its significance",
+            "Understand /bin, /usr/bin and explain its significance",
+            "Understand /var and explain its significance",
+            "Attempt the practice quiz and viva questions on File System and Basic Commands"
+          ],
+          "prerequisites": [
+            "Basic computer literacy",
+            "Familiarity with command-line interfaces",
+            "Understanding of files and directories",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nLinux uses a hierarchical file system starting from root (/). Key directories: /home (user files), /etc (config), /var (logs), /bin (binaries), /tmp (temporary). Basic commands: ls (list), cd (change dir), pwd (print working dir), mkdir (make dir), rm (remove), cp (copy), mv (move).\n## Key Concepts\n\n- Root directory: / (top of hierarchy)\n- /home: user home directories (/home/username)\n- /etc: system configuration files\n- /bin, /usr/bin: executable binaries\n- /var: variable data (logs, mail, spool)\n- /tmp: temporary files (cleared on reboot)\n- ls: list directory contents\n- cd: change directory, pwd: print working directory\n\n## Important Formulas\n\n- `Path: /etc/passwd (absolute) or ../etc/passwd (relative)`\n- `. = current dir, .. = parent dir, ~ = home dir`\n- `ls -l = long format, -a = show hidden`\n- `chmod 755 file = rwxr-xr-x`\n\n## Comparison Tables\n\n### Essential commands\n\n| Command | Purpose | Example |\n| --- | --- | --- |\n| ls | List files | ls -la |\n| cd | Change dir | cd /home |\n| pwd | Show current dir | pwd |\n| mkdir | Make dir | mkdir notes |\n| rm | Remove | rm file.txt |\n| cp | Copy | cp a.txt b.txt |\n| mv | Move/rename | mv old.txt new.txt |\n| cat | Show file | cat file.txt |\n\n\n## Summary\n\nLinux uses a hierarchical file system starting from root (/). Key directories: /home (user files), /etc (config), /var (logs), /bin (binaries), /tmp (temporary). Basic commands: ls (list), cd (change dir), pwd (print working dir), mkdir (make dir), rm (remove), cp (copy), mv (move).",
+          "analogies": [
+            {
+              "scenario": "Linux file system like a tree",
+              "mapping": "Root / = trunk, /home = a big branch, /etc = config branch, leaves = files. Climbing down = cd, listing branches = ls."
+            },
+            {
+              "scenario": "Permissions like a house",
+              "mapping": "Owner = you, Group = family, Others = strangers. r = look through window, w = rearrange furniture, x = enter the house."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "File System and Basic Commands — Process Flow",
+              "content": "flowchart TD\n    A[Login] --> B[Shell]\n    B --> C{Command}\n    C -->|ls| D[List files]\n    C -->|cd| E[Change dir]\n    C -->|chmod| F[Change perms]\n    C -->|sudo| G[Root ops]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "File System and Basic Commands — Concept Map",
+              "content": "mindmap\n  root((File System and Basic Commands))\n    Basics\n      Kernel\n      Shell\n      Distros\n    Files\n      ls\n      cd\n      pwd\n    Permissions\n      chmod\n      chown\n      rwx\n    Processes\n      ps\n      top\n      kill\n    Scripting\n      Variables\n      Loops\n      Conditions"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) for command execution, O(n) for file listing",
+            "space": "O(1) per process"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "Which command shows current directory?",
+              "solution": "Correct answer: pwd",
+              "explanation": "pwd (Print Working Directory) shows the current path."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain File System and Basic Commands with reference to the key concepts.",
+              "solution": "List the standard directories (/etc, /home, /var, /bin, /tmp) → Show ls -l output and explain permissions (rwx) → Mention tab completion and arrow-key history",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Root directory.",
+              "modelAnswer": "/ (top of hierarchy)"
+            },
+            {
+              "marks": 2,
+              "question": "Define /home.",
+              "modelAnswer": "user home directories (/home/username)"
+            },
+            {
+              "marks": 2,
+              "question": "Define /etc.",
+              "modelAnswer": "system configuration files"
+            },
+            {
+              "marks": 2,
+              "question": "What is a shell?",
+              "modelAnswer": "A shell is a command-line interpreter that takes user commands and executes them. Common shells: bash, zsh, fish."
+            },
+            {
+              "marks": 2,
+              "question": "Define PID.",
+              "modelAnswer": "PID (Process ID) is a unique number Linux assigns to each running process. Used to manage processes (kill, renice)."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Path: /etc/passwd (absolute) or ../etc/passwd (relative)",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Linux file permissions with an example.",
+              "modelAnswer": "Each file has permissions for user (owner), group, and others — each can have r (read), w (write), x (execute). Shown as rwxr-xr--. Numeric: r=4, w=2, x=1. Example: chmod 755 file → rwx for owner, r-x for group and others. Directories need 'x' to enter (cd). Use chmod (permissions), chown (owner), chgrp (group)."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between kill and kill -9?",
+              "modelAnswer": "kill PID (default signal SIGTERM) asks the process to terminate gracefully — it can clean up. kill -9 PID (SIGKILL) force-kills immediately — process can't catch or ignore. Always try kill first; use -9 only if process hangs. The -9 cannot be blocked."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Root directory.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define /home.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Path: /etc/passwd (absolute) or ../etc/passwd (relative)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: . = current dir, .. = parent dir, ~ = home dir",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain File System and Basic Commands in detail with a diagram.",
+              "modelAnswer": "Linux uses a hierarchical file system starting from root (/). Key directories: /home (user files), /etc (config), /var (logs), /bin (binaries), /tmp (temporary). Basic commands: ls (list), cd (change dir), pwd (print working dir), mkdir (make dir), rm (remove), cp (copy), mv (move)."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss File System and Basic Commands with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — File System and Basic Commands\n\n**One-line definition:** Linux uses a hierarchical file system starting from root (/). Key directories: /home (user files), /etc (config), /var (logs), /bin (binaries), /tmp (temporary). Basic commands: ls (list), cd (change \n\n**Key points:**\n\n- Root directory: / (top of hierarchy)\n- /home: user home directories (/home/username)\n- /etc: system configuration files\n- /bin, /usr/bin: executable binaries\n- /var: variable data (logs, mail, spool)\n\n**Important formulas:**\n\n- `Path: /etc/passwd (absolute) or ../etc/passwd (relative)`\n- `. = current dir, .. = parent dir, ~ = home dir`\n- `ls -l = long format, -a = show hidden`\n- `chmod 755 file = rwxr-xr-x`\n\n**Common mistake to avoid:** Using rm -rf / (deletes everything — never do this!)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Root directory: / (top of hierarchy)",
+            "/home: user home directories (/home/username)",
+            "/etc: system configuration files",
+            "/bin, /usr/bin: executable binaries",
+            "/var: variable data (logs, mail, spool)",
+            "Formula: Path: /etc/passwd (absolute) or ../etc/passwd (relative)",
+            "Formula: . = current dir, .. = parent dir, ~ = home dir",
+            "Formula: ls -l = long format, -a = show hidden",
+            "Formula: chmod 755 file = rwxr-xr-x",
+            "ls -la, cd, pwd, mkdir, rm, cp, mv",
+            "r=4, w=2, x=1; 755 = rwxr-xr-x",
+            "ps aux, top, kill -9 PID"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "rwx",
+              "expansion": "Read, Write, Execute",
+              "meaning": "The 3 Linux permission types. Numeric: r=4, w=2, x=1."
+            },
+            {
+              "phrase": "PID",
+              "expansion": "Process ID",
+              "meaning": "Unique number Linux assigns to each running process."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "List the standard directories (/etc, /home, /var, /bin, /tmp)"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Show ls -l output and explain permissions (rwx)"
+            },
+            {
+              "type": "warning",
+              "content": "Using rm -rf / (deletes everything — never do this!)"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting that Linux is case-sensitive"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Linux uses a hierarchical file system starting from root (/). Key directories: /home (user files), /etc (config), /var (logs), /bin (binaries), /tmp (temporary). Basic commands: ls (list), cd (change dir), pwd (print working dir), mkdir (make dir), rm (remove), cp (copy), mv (move)."
+            },
+            {
+              "type": "definition",
+              "content": "Root directory: / (top of hierarchy)"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Root directory?",
+              "back": "/ (top of hierarchy)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is /home?",
+              "back": "user home directories (/home/username)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is /etc?",
+              "back": "system configuration files",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is /bin, /usr/bin?",
+              "back": "executable binaries",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is /var?",
+              "back": "variable data (logs, mail, spool)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is /tmp?",
+              "back": "temporary files (cleared on reboot)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is ls?",
+              "back": "list directory contents",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is cd?",
+              "back": "change directory, pwd: print working directory",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Linux uses a hierarchical file system starting from root (/). Key directories: /home (user files), /etc (config), /var (logs), /bin (binaries), /tmp (temporary). Basic commands: ls (list), cd (change dir), pwd (print working dir), mkdir (make dir), rm (remove), cp (copy), mv (move)."
+            },
+            {
+              "style": "detailed",
+              "content": "Linux uses a hierarchical file system starting from root (/). Key directories: /home (user files), /etc (config), /var (logs), /bin (binaries), /tmp (temporary). Basic commands: ls (list), cd (change dir), pwd (print working dir), mkdir (make dir), rm (remove), cp (copy), mv (move).\n\nKey concepts: Root directory: / (top of hierarchy), /home: user home directories (/home/username), /etc: system configuration files."
+            }
+          ],
+          "recommendedNextLessons": [
+            "linux-permissions",
+            "linux-processes"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "File Permissions and Ownership",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "linux-permissions",
+          "title": "File Permissions and Ownership",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "Linux file permissions control who can read (r), write (w), or execute (x) a file. Permissions are set for three categories: owner (user), group, and others. Use chmod to change permissions, chown to change owner, chgrp to change group. Numeric (octal) or symbolic notation can be used.",
+          "keyConcepts": [
+            "Three permission types: read (r), write (w), execute (x)",
+            "Three categories: user (u), group (g), others (o)",
+            "Symbolic: u+r, g-w, o=x (add/remove/set)",
+            "Numeric (octal): 4=r, 2=w, 1=x; sum to combine",
+            "chmod: change permissions",
+            "chown: change owner",
+            "chgrp: change group",
+            "Common: 755 (rwxr-xr-x), 644 (rw-r--r--)"
+          ],
+          "formulas": [
+            "r = 4, w = 2, x = 1 (octal values)",
+            "755 = rwx (7) + r-x (5) + r-x (5)",
+            "644 = rw- (6) + r-- (4) + r-- (4)",
+            "chmod u+x file: add execute for user",
+            "chmod 755 file: rwxr-xr-x"
+          ],
+          "tables": [
+            {
+              "title": "Permission numbers",
+              "headers": [
+                "Octal",
+                "Symbolic",
+                "Meaning"
+              ],
+              "rows": [
+                [
+                  "7",
+                  "rwx",
+                  "read + write + execute"
+                ],
+                [
+                  "6",
+                  "rw-",
+                  "read + write"
+                ],
+                [
+                  "5",
+                  "r-x",
+                  "read + execute"
+                ],
+                [
+                  "4",
+                  "r--",
+                  "read only"
+                ],
+                [
+                  "3",
+                  "-wx",
+                  "write + execute"
+                ],
+                [
+                  "0",
+                  "---",
+                  "no access"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Confusing chmod (permissions) with chown (ownership)",
+            "Forgetting that 7 = 4+2+1 (rwx), not 7 separate",
+            "Setting 777 on sensitive files (security risk — world-writable)",
+            "Not understanding that 'execute' on a directory means 'can enter'"
+          ],
+          "examTips": [
+            "Memorise r=4, w=2, x=1",
+            "Common modes: 755 (scripts/dirs), 644 (regular files)",
+            "Show both symbolic (u+x) and numeric (755) forms"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Octal value of rwx?",
+              "options": [
+                "5",
+                "6",
+                "7",
+                "8"
+              ],
+              "answer": 2,
+              "explanation": "r=4, w=2, x=1 → 4+2+1 = 7."
+            },
+            {
+              "question": "Which command changes permissions?",
+              "options": [
+                "chown",
+                "chmod",
+                "chgrp",
+                "chperm"
+              ],
+              "answer": 1,
+              "explanation": "chmod (change mode) modifies permissions."
+            },
+            {
+              "question": "Permission 644 means:",
+              "options": [
+                "rwxrwxrwx",
+                "rw-r--r--",
+                "rwxr-xr-x",
+                "r--------"
+              ],
+              "answer": 1,
+              "explanation": "6=rw-, 4=r--, 4=r-- → rw-r--r-- (owner read/write, others read-only)."
+            },
+            {
+              "question": "What does 'execute' permission on a directory allow?",
+              "options": [
+                "List its contents",
+                "Enter (cd into) it",
+                "Delete it",
+                "Rename it"
+              ],
+              "answer": 1,
+              "explanation": "For directories, 'x' means 'can enter' (cd into). 'r' means 'can list contents'."
+            }
+          ],
+          "objectives": [
+            "Understand Three permission types and explain its significance",
+            "Understand Three categories and explain its significance",
+            "Understand Symbolic and explain its significance",
+            "Understand Numeric (octal) and explain its significance",
+            "Understand chmod and explain its significance",
+            "Attempt the practice quiz and viva questions on File Permissions and Ownership"
+          ],
+          "prerequisites": [
+            "Basic computer literacy",
+            "Familiarity with command-line interfaces",
+            "Understanding of files and directories",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nLinux file permissions control who can read (r), write (w), or execute (x) a file. Permissions are set for three categories: owner (user), group, and others. Use chmod to change permissions, chown to change owner, chgrp to change group. Numeric (octal) or symbolic notation can be used.\n## Key Concepts\n\n- Three permission types: read (r), write (w), execute (x)\n- Three categories: user (u), group (g), others (o)\n- Symbolic: u+r, g-w, o=x (add/remove/set)\n- Numeric (octal): 4=r, 2=w, 1=x; sum to combine\n- chmod: change permissions\n- chown: change owner\n- chgrp: change group\n- Common: 755 (rwxr-xr-x), 644 (rw-r--r--)\n\n## Important Formulas\n\n- `r = 4, w = 2, x = 1 (octal values)`\n- `755 = rwx (7) + r-x (5) + r-x (5)`\n- `644 = rw- (6) + r-- (4) + r-- (4)`\n- `chmod u+x file: add execute for user`\n- `chmod 755 file: rwxr-xr-x`\n\n## Comparison Tables\n\n### Permission numbers\n\n| Octal | Symbolic | Meaning |\n| --- | --- | --- |\n| 7 | rwx | read + write + execute |\n| 6 | rw- | read + write |\n| 5 | r-x | read + execute |\n| 4 | r-- | read only |\n| 3 | -wx | write + execute |\n| 0 | --- | no access |\n\n\n## Summary\n\nLinux file permissions control who can read (r), write (w), or execute (x) a file. Permissions are set for three categories: owner (user), group, and others. Use chmod to change permissions, chown to change owner, chgrp to change group. Numeric (octal) or symbolic notation can be used.",
+          "analogies": [
+            {
+              "scenario": "Linux file system like a tree",
+              "mapping": "Root / = trunk, /home = a big branch, /etc = config branch, leaves = files. Climbing down = cd, listing branches = ls."
+            },
+            {
+              "scenario": "Permissions like a house",
+              "mapping": "Owner = you, Group = family, Others = strangers. r = look through window, w = rearrange furniture, x = enter the house."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "File Permissions and Ownership — Process Flow",
+              "content": "flowchart TD\n    A[Login] --> B[Shell]\n    B --> C{Command}\n    C -->|ls| D[List files]\n    C -->|cd| E[Change dir]\n    C -->|chmod| F[Change perms]\n    C -->|sudo| G[Root ops]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "File Permissions and Ownership — Concept Map",
+              "content": "mindmap\n  root((File Permissions and Ownership))\n    Basics\n      Kernel\n      Shell\n      Distros\n    Files\n      ls\n      cd\n      pwd\n    Permissions\n      chmod\n      chown\n      rwx\n    Processes\n      ps\n      top\n      kill\n    Scripting\n      Variables\n      Loops\n      Conditions"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) for command execution, O(n) for file listing",
+            "space": "O(1) per process"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "Octal value of rwx?",
+              "solution": "Correct answer: 7",
+              "explanation": "r=4, w=2, x=1 → 4+2+1 = 7."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain File Permissions and Ownership with reference to the key concepts.",
+              "solution": "Memorise r=4, w=2, x=1 → Common modes: 755 (scripts/dirs), 644 (regular files) → Show both symbolic (u+x) and numeric (755) forms",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Three permission types.",
+              "modelAnswer": "read (r), write (w), execute (x)"
+            },
+            {
+              "marks": 2,
+              "question": "Define Three categories.",
+              "modelAnswer": "user (u), group (g), others (o)"
+            },
+            {
+              "marks": 2,
+              "question": "Define Symbolic.",
+              "modelAnswer": "u+r, g-w, o=x (add/remove/set)"
+            },
+            {
+              "marks": 2,
+              "question": "What is a shell?",
+              "modelAnswer": "A shell is a command-line interpreter that takes user commands and executes them. Common shells: bash, zsh, fish."
+            },
+            {
+              "marks": 2,
+              "question": "Define PID.",
+              "modelAnswer": "PID (Process ID) is a unique number Linux assigns to each running process. Used to manage processes (kill, renice)."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: r = 4, w = 2, x = 1 (octal values)",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Linux file permissions with an example.",
+              "modelAnswer": "Each file has permissions for user (owner), group, and others — each can have r (read), w (write), x (execute). Shown as rwxr-xr--. Numeric: r=4, w=2, x=1. Example: chmod 755 file → rwx for owner, r-x for group and others. Directories need 'x' to enter (cd). Use chmod (permissions), chown (owner), chgrp (group)."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between kill and kill -9?",
+              "modelAnswer": "kill PID (default signal SIGTERM) asks the process to terminate gracefully — it can clean up. kill -9 PID (SIGKILL) force-kills immediately — process can't catch or ignore. Always try kill first; use -9 only if process hangs. The -9 cannot be blocked."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Three permission types.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Three categories.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: r = 4, w = 2, x = 1 (octal values)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: 755 = rwx (7) + r-x (5) + r-x (5)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain File Permissions and Ownership in detail with a diagram.",
+              "modelAnswer": "Linux file permissions control who can read (r), write (w), or execute (x) a file. Permissions are set for three categories: owner (user), group, and others. Use chmod to change permissions, chown to change owner, chgrp to change group. Numeric (octal) or symbolic notation can be used."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss File Permissions and Ownership with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — File Permissions and Ownership\n\n**One-line definition:** Linux file permissions control who can read (r), write (w), or execute (x) a file. Permissions are set for three categories: owner (user), group, and others. Use chmod to change permissions, chown to \n\n**Key points:**\n\n- Three permission types: read (r), write (w), execute (x)\n- Three categories: user (u), group (g), others (o)\n- Symbolic: u+r, g-w, o=x (add/remove/set)\n- Numeric (octal): 4=r, 2=w, 1=x; sum to combine\n- chmod: change permissions\n\n**Important formulas:**\n\n- `r = 4, w = 2, x = 1 (octal values)`\n- `755 = rwx (7) + r-x (5) + r-x (5)`\n- `644 = rw- (6) + r-- (4) + r-- (4)`\n- `chmod u+x file: add execute for user`\n- `chmod 755 file: rwxr-xr-x`\n\n**Common mistake to avoid:** Confusing chmod (permissions) with chown (ownership)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Three permission types: read (r), write (w), execute (x)",
+            "Three categories: user (u), group (g), others (o)",
+            "Symbolic: u+r, g-w, o=x (add/remove/set)",
+            "Numeric (octal): 4=r, 2=w, 1=x; sum to combine",
+            "chmod: change permissions",
+            "Formula: r = 4, w = 2, x = 1 (octal values)",
+            "Formula: 755 = rwx (7) + r-x (5) + r-x (5)",
+            "Formula: 644 = rw- (6) + r-- (4) + r-- (4)",
+            "Formula: chmod u+x file: add execute for user",
+            "Formula: chmod 755 file: rwxr-xr-x",
+            "ls -la, cd, pwd, mkdir, rm, cp, mv",
+            "r=4, w=2, x=1; 755 = rwxr-xr-x",
+            "ps aux, top, kill -9 PID"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "rwx",
+              "expansion": "Read, Write, Execute",
+              "meaning": "The 3 Linux permission types. Numeric: r=4, w=2, x=1."
+            },
+            {
+              "phrase": "PID",
+              "expansion": "Process ID",
+              "meaning": "Unique number Linux assigns to each running process."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Memorise r=4, w=2, x=1"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Common modes: 755 (scripts/dirs), 644 (regular files)"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing chmod (permissions) with chown (ownership)"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting that 7 = 4+2+1 (rwx), not 7 separate"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Linux file permissions control who can read (r), write (w), or execute (x) a file. Permissions are set for three categories: owner (user), group, and others. Use chmod to change permissions, chown to change owner, chgrp to change group. Numeric (octal) or symbolic notation can be used."
+            },
+            {
+              "type": "definition",
+              "content": "Three permission types: read (r), write (w), execute (x)"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Three permission types?",
+              "back": "read (r), write (w), execute (x)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Three categories?",
+              "back": "user (u), group (g), others (o)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Symbolic?",
+              "back": "u+r, g-w, o=x (add/remove/set)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Numeric (octal)?",
+              "back": "4=r, 2=w, 1=x; sum to combine",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is chmod?",
+              "back": "change permissions",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is chown?",
+              "back": "change owner",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is chgrp?",
+              "back": "change group",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Common?",
+              "back": "755 (rwxr-xr-x), 644 (rw-r--r--)",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Linux file permissions control who can read (r), write (w), or execute (x) a file. Permissions are set for three categories: owner (user), group, and others. Use chmod to change permissions, chown to change owner, chgrp to change group. Numeric (octal) or symbolic notation can be used."
+            },
+            {
+              "style": "detailed",
+              "content": "Linux file permissions control who can read (r), write (w), or execute (x) a file. Permissions are set for three categories: owner (user), group, and others. Use chmod to change permissions, chown to change owner, chgrp to change group. Numeric (octal) or symbolic notation can be used.\n\nKey concepts: Three permission types: read (r), write (w), execute (x), Three categories: user (u), group (g), others (o), Symbolic: u+r, g-w, o=x (add/remove/set)."
+            }
+          ],
+          "recommendedNextLessons": [
+            "linux-processes",
+            "shell-scripting"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Processes and Package Management",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "linux-processes",
+          "title": "Processes and Package Management",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "A process is a running program. Linux assigns each a unique PID (Process ID). Use ps, top, kill to manage processes. Package managers (apt for Debian/Ubuntu, dnf/yum for Fedora, pacman for Arch) install, update, and remove software from repositories.",
+          "keyConcepts": [
+            "Process: a running program (has PID)",
+            "PID: Process ID (unique number)",
+            "ps: snapshot of processes",
+            "top: real-time process monitor",
+            "kill: send signal to process (kill -9 PID = force)",
+            "apt: Debian/Ubuntu package manager",
+            "dnf/yum: Fedora/Red Hat package manager",
+            "sudo: run command as superuser"
+          ],
+          "formulas": [
+            "ps aux: list all processes",
+            "kill -9 PID: force kill",
+            "sudo apt update && sudo apt install <pkg>",
+            "sudo apt remove <pkg>",
+            "Foreground: Ctrl+Z to suspend, bg to background"
+          ],
+          "tables": [
+            {
+              "title": "Process management commands",
+              "headers": [
+                "Command",
+                "Purpose"
+              ],
+              "rows": [
+                [
+                  "ps aux",
+                  "List all processes"
+                ],
+                [
+                  "top",
+                  "Real-time monitor"
+                ],
+                [
+                  "kill PID",
+                  "Terminate gracefully"
+                ],
+                [
+                  "kill -9 PID",
+                  "Force kill"
+                ],
+                [
+                  "bg / fg",
+                  "Background / foreground"
+                ],
+                [
+                  "jobs",
+                  "List background jobs"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Using kill -9 by default (use plain kill first, -9 is force)",
+            "Forgetting sudo for system-wide package installs",
+            "Not running apt update before apt install (stale package list)",
+            "Confusing PID with process name"
+          ],
+          "examTips": [
+            "List both ps (snapshot) and top (real-time)",
+            "Explain sudo (superuser do) for privileged operations",
+            "Mention that apt is for Debian/Ubuntu, dnf for Fedora"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What does ps aux do?",
+              "options": [
+                "Lists all processes",
+                "Kills a process",
+                "Installs a package",
+                "Shows memory"
+              ],
+              "answer": 0,
+              "explanation": "ps aux lists all running processes with details."
+            },
+            {
+              "question": "Which command FORCE kills a process?",
+              "options": [
+                "kill PID",
+                "kill -9 PID",
+                "kill -1 PID",
+                "stop PID"
+              ],
+              "answer": 1,
+              "explanation": "kill -9 sends SIGKILL — force kill, cannot be caught."
+            },
+            {
+              "question": "Ubuntu uses which package manager?",
+              "options": [
+                "dnf",
+                "apt",
+                "pacman",
+                "yum"
+              ],
+              "answer": 1,
+              "explanation": "Ubuntu/Debian use apt. Fedora uses dnf. Arch uses pacman."
+            },
+            {
+              "question": "What does sudo do?",
+              "options": [
+                "Runs as another user",
+                "Runs as superuser (root)",
+                "Suspend process",
+                "Switch user"
+              ],
+              "answer": 1,
+              "explanation": "sudo (superuser do) runs the command with root privileges."
+            }
+          ],
+          "objectives": [
+            "Understand Process and explain its significance",
+            "Understand PID and explain its significance",
+            "Understand ps and explain its significance",
+            "Understand top and explain its significance",
+            "Understand kill and explain its significance",
+            "Attempt the practice quiz and viva questions on Processes and Package Management"
+          ],
+          "prerequisites": [
+            "Basic computer literacy",
+            "Familiarity with command-line interfaces",
+            "Understanding of files and directories",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nA process is a running program. Linux assigns each a unique PID (Process ID). Use ps, top, kill to manage processes. Package managers (apt for Debian/Ubuntu, dnf/yum for Fedora, pacman for Arch) install, update, and remove software from repositories.\n## Key Concepts\n\n- Process: a running program (has PID)\n- PID: Process ID (unique number)\n- ps: snapshot of processes\n- top: real-time process monitor\n- kill: send signal to process (kill -9 PID = force)\n- apt: Debian/Ubuntu package manager\n- dnf/yum: Fedora/Red Hat package manager\n- sudo: run command as superuser\n\n## Important Formulas\n\n- `ps aux: list all processes`\n- `kill -9 PID: force kill`\n- `sudo apt update && sudo apt install <pkg>`\n- `sudo apt remove <pkg>`\n- `Foreground: Ctrl+Z to suspend, bg to background`\n\n## Comparison Tables\n\n### Process management commands\n\n| Command | Purpose |\n| --- | --- |\n| ps aux | List all processes |\n| top | Real-time monitor |\n| kill PID | Terminate gracefully |\n| kill -9 PID | Force kill |\n| bg / fg | Background / foreground |\n| jobs | List background jobs |\n\n\n## Summary\n\nA process is a running program. Linux assigns each a unique PID (Process ID). Use ps, top, kill to manage processes. Package managers (apt for Debian/Ubuntu, dnf/yum for Fedora, pacman for Arch) install, update, and remove software from repositories.",
+          "analogies": [
+            {
+              "scenario": "Linux file system like a tree",
+              "mapping": "Root / = trunk, /home = a big branch, /etc = config branch, leaves = files. Climbing down = cd, listing branches = ls."
+            },
+            {
+              "scenario": "Permissions like a house",
+              "mapping": "Owner = you, Group = family, Others = strangers. r = look through window, w = rearrange furniture, x = enter the house."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Processes and Package Management — Process Flow",
+              "content": "flowchart TD\n    A[Login] --> B[Shell]\n    B --> C{Command}\n    C -->|ls| D[List files]\n    C -->|cd| E[Change dir]\n    C -->|chmod| F[Change perms]\n    C -->|sudo| G[Root ops]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Processes and Package Management — Concept Map",
+              "content": "mindmap\n  root((Processes and Package Manageme))\n    Basics\n      Kernel\n      Shell\n      Distros\n    Files\n      ls\n      cd\n      pwd\n    Permissions\n      chmod\n      chown\n      rwx\n    Processes\n      ps\n      top\n      kill\n    Scripting\n      Variables\n      Loops\n      Conditions"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) for command execution, O(n) for file listing",
+            "space": "O(1) per process"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What does ps aux do?",
+              "solution": "Correct answer: Lists all processes",
+              "explanation": "ps aux lists all running processes with details."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Processes and Package Management with reference to the key concepts.",
+              "solution": "List both ps (snapshot) and top (real-time) → Explain sudo (superuser do) for privileged operations → Mention that apt is for Debian/Ubuntu, dnf for Fedora",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Process.",
+              "modelAnswer": "a running program (has PID)"
+            },
+            {
+              "marks": 2,
+              "question": "Define PID.",
+              "modelAnswer": "Process ID (unique number)"
+            },
+            {
+              "marks": 2,
+              "question": "Define ps.",
+              "modelAnswer": "snapshot of processes"
+            },
+            {
+              "marks": 2,
+              "question": "What is a shell?",
+              "modelAnswer": "A shell is a command-line interpreter that takes user commands and executes them. Common shells: bash, zsh, fish."
+            },
+            {
+              "marks": 2,
+              "question": "Define PID.",
+              "modelAnswer": "PID (Process ID) is a unique number Linux assigns to each running process. Used to manage processes (kill, renice)."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: ps aux: list all processes",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Linux file permissions with an example.",
+              "modelAnswer": "Each file has permissions for user (owner), group, and others — each can have r (read), w (write), x (execute). Shown as rwxr-xr--. Numeric: r=4, w=2, x=1. Example: chmod 755 file → rwx for owner, r-x for group and others. Directories need 'x' to enter (cd). Use chmod (permissions), chown (owner), chgrp (group)."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between kill and kill -9?",
+              "modelAnswer": "kill PID (default signal SIGTERM) asks the process to terminate gracefully — it can clean up. kill -9 PID (SIGKILL) force-kills immediately — process can't catch or ignore. Always try kill first; use -9 only if process hangs. The -9 cannot be blocked."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Process.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define PID.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: ps aux: list all processes",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: kill -9 PID: force kill",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Processes and Package Management in detail with a diagram.",
+              "modelAnswer": "A process is a running program. Linux assigns each a unique PID (Process ID). Use ps, top, kill to manage processes. Package managers (apt for Debian/Ubuntu, dnf/yum for Fedora, pacman for Arch) install, update, and remove software from repositories."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Processes and Package Management with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Processes and Package Management\n\n**One-line definition:** A process is a running program. Linux assigns each a unique PID (Process ID). Use ps, top, kill to manage processes. Package managers (apt for Debian/Ubuntu, dnf/yum for Fedora, pacman for Arch) insta\n\n**Key points:**\n\n- Process: a running program (has PID)\n- PID: Process ID (unique number)\n- ps: snapshot of processes\n- top: real-time process monitor\n- kill: send signal to process (kill -9 PID = force)\n\n**Important formulas:**\n\n- `ps aux: list all processes`\n- `kill -9 PID: force kill`\n- `sudo apt update && sudo apt install <pkg>`\n- `sudo apt remove <pkg>`\n- `Foreground: Ctrl+Z to suspend, bg to background`\n\n**Common mistake to avoid:** Using kill -9 by default (use plain kill first, -9 is force)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Process: a running program (has PID)",
+            "PID: Process ID (unique number)",
+            "ps: snapshot of processes",
+            "top: real-time process monitor",
+            "kill: send signal to process (kill -9 PID = force)",
+            "Formula: ps aux: list all processes",
+            "Formula: kill -9 PID: force kill",
+            "Formula: sudo apt update && sudo apt install <pkg>",
+            "Formula: sudo apt remove <pkg>",
+            "Formula: Foreground: Ctrl+Z to suspend, bg to background",
+            "ls -la, cd, pwd, mkdir, rm, cp, mv",
+            "r=4, w=2, x=1; 755 = rwxr-xr-x",
+            "ps aux, top, kill -9 PID"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "rwx",
+              "expansion": "Read, Write, Execute",
+              "meaning": "The 3 Linux permission types. Numeric: r=4, w=2, x=1."
+            },
+            {
+              "phrase": "PID",
+              "expansion": "Process ID",
+              "meaning": "Unique number Linux assigns to each running process."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "List both ps (snapshot) and top (real-time)"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Explain sudo (superuser do) for privileged operations"
+            },
+            {
+              "type": "warning",
+              "content": "Using kill -9 by default (use plain kill first, -9 is force)"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting sudo for system-wide package installs"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "A process is a running program. Linux assigns each a unique PID (Process ID). Use ps, top, kill to manage processes. Package managers (apt for Debian/Ubuntu, dnf/yum for Fedora, pacman for Arch) install, update, and remove software from repositories."
+            },
+            {
+              "type": "definition",
+              "content": "Process: a running program (has PID)"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Process?",
+              "back": "a running program (has PID)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is PID?",
+              "back": "Process ID (unique number)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is ps?",
+              "back": "snapshot of processes",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is top?",
+              "back": "real-time process monitor",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is kill?",
+              "back": "send signal to process (kill -9 PID = force)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is apt?",
+              "back": "Debian/Ubuntu package manager",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is dnf/yum?",
+              "back": "Fedora/Red Hat package manager",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is sudo?",
+              "back": "run command as superuser",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "A process is a running program. Linux assigns each a unique PID (Process ID). Use ps, top, kill to manage processes. Package managers (apt for Debian/Ubuntu, dnf/yum for Fedora, pacman for Arch) install, update, and remove software from repositories."
+            },
+            {
+              "style": "detailed",
+              "content": "A process is a running program. Linux assigns each a unique PID (Process ID). Use ps, top, kill to manage processes. Package managers (apt for Debian/Ubuntu, dnf/yum for Fedora, pacman for Arch) install, update, and remove software from repositories.\n\nKey concepts: Process: a running program (has PID), PID: Process ID (unique number), ps: snapshot of processes."
+            }
+          ],
+          "recommendedNextLessons": [
+            "shell-scripting"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Shell Scripting",
+      "weightage": 15,
+      "lessons": [
+        {
+          "slug": "shell-scripting",
+          "title": "Shell Scripting Basics",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "A shell script is a file containing shell commands, executed as a program. Start with #!/bin/bash (shebang). Variables: name=value (no spaces). Conditionals: if/then/else/fi. Loops: for/while. Scripts automate repetitive tasks like backups, deployment, system monitoring.",
+          "keyConcepts": [
+            "Shebang: #!/bin/bash (first line, specifies interpreter)",
+            "Variables: NAME=value (no spaces around =)",
+            "Use variable: $NAME or ${NAME}",
+            "Conditional: if [ condition ]; then ... fi",
+            "For loop: for i in 1 2 3; do ... done",
+            "While loop: while [ condition ]; do ... done",
+            "Make executable: chmod +x script.sh",
+            "Run: ./script.sh or bash script.sh"
+          ],
+          "formulas": [
+            "#!/bin/bash (shebang)",
+            "VAR=value; echo $VAR",
+            "if [ \"$a\" = \"$b\" ]; then ... fi",
+            "for i in 1 2 3; do echo $i; done",
+            "chmod +x script.sh && ./script.sh"
+          ],
+          "tables": [
+            {
+              "title": "Shell script constructs",
+              "headers": [
+                "Construct",
+                "Syntax"
+              ],
+              "rows": [
+                [
+                  "Variable",
+                  "NAME=value"
+                ],
+                [
+                  "Read input",
+                  "read VAR"
+                ],
+                [
+                  "If-else",
+                  "if [ cond ]; then ... else ... fi"
+                ],
+                [
+                  "For loop",
+                  "for i in list; do ... done"
+                ],
+                [
+                  "While loop",
+                  "while [ cond ]; do ... done"
+                ],
+                [
+                  "Function",
+                  "fname() { ... }"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Spaces around = in variable assignment (NAME = value is WRONG)",
+            "Forgetting the shebang line (#!/bin/bash)",
+            "Not making script executable (chmod +x)",
+            "Missing $ when referencing variables ($NAME, not NAME)"
+          ],
+          "examTips": [
+            "Always start scripts with #!/bin/bash",
+            "Show a complete script with variable, if, and for loop",
+            "Mention chmod +x to make executable"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is the first line of a bash script?",
+              "options": [
+                "#!/bin/bash",
+                "// comment",
+                "include bash",
+                "import bash"
+              ],
+              "answer": 0,
+              "explanation": "The shebang #!/bin/bash tells the system to use bash to interpret the script."
+            },
+            {
+              "question": "How do you assign a variable?",
+              "options": [
+                "NAME = value",
+                "NAME=value",
+                "NAME:=value",
+                "set NAME=value"
+              ],
+              "answer": 1,
+              "explanation": "Variable assignment in bash has NO spaces around =. NAME=value is correct."
+            },
+            {
+              "question": "How to make a script executable?",
+              "options": [
+                "chmod +x script.sh",
+                "exec script.sh",
+                "run script.sh",
+                "make script.sh"
+              ],
+              "answer": 0,
+              "explanation": "chmod +x adds execute permission, allowing ./script.sh to run."
+            },
+            {
+              "question": "How to reference a variable?",
+              "options": [
+                "NAME",
+                "$NAME",
+                "&NAME",
+                "@NAME"
+              ],
+              "answer": 1,
+              "explanation": "Use $NAME (or ${NAME}) to get the variable's value."
+            }
+          ],
+          "objectives": [
+            "Understand Shebang and explain its significance",
+            "Understand Variables and explain its significance",
+            "Understand Use variable and explain its significance",
+            "Understand Conditional and explain its significance",
+            "Understand For loop and explain its significance",
+            "Attempt the practice quiz and viva questions on Shell Scripting Basics"
+          ],
+          "prerequisites": [
+            "Basic computer literacy",
+            "Familiarity with command-line interfaces",
+            "Understanding of files and directories",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nA shell script is a file containing shell commands, executed as a program. Start with #!/bin/bash (shebang). Variables: name=value (no spaces). Conditionals: if/then/else/fi. Loops: for/while. Scripts automate repetitive tasks like backups, deployment, system monitoring.\n## Key Concepts\n\n- Shebang: #!/bin/bash (first line, specifies interpreter)\n- Variables: NAME=value (no spaces around =)\n- Use variable: $NAME or ${NAME}\n- Conditional: if [ condition ]; then ... fi\n- For loop: for i in 1 2 3; do ... done\n- While loop: while [ condition ]; do ... done\n- Make executable: chmod +x script.sh\n- Run: ./script.sh or bash script.sh\n\n## Important Formulas\n\n- `#!/bin/bash (shebang)`\n- `VAR=value; echo $VAR`\n- `if [ \"$a\" = \"$b\" ]; then ... fi`\n- `for i in 1 2 3; do echo $i; done`\n- `chmod +x script.sh && ./script.sh`\n\n## Comparison Tables\n\n### Shell script constructs\n\n| Construct | Syntax |\n| --- | --- |\n| Variable | NAME=value |\n| Read input | read VAR |\n| If-else | if [ cond ]; then ... else ... fi |\n| For loop | for i in list; do ... done |\n| While loop | while [ cond ]; do ... done |\n| Function | fname() { ... } |\n\n\n## Summary\n\nA shell script is a file containing shell commands, executed as a program. Start with #!/bin/bash (shebang). Variables: name=value (no spaces). Conditionals: if/then/else/fi. Loops: for/while. Scripts automate repetitive tasks like backups, deployment, system monitoring.",
+          "analogies": [
+            {
+              "scenario": "Linux file system like a tree",
+              "mapping": "Root / = trunk, /home = a big branch, /etc = config branch, leaves = files. Climbing down = cd, listing branches = ls."
+            },
+            {
+              "scenario": "Permissions like a house",
+              "mapping": "Owner = you, Group = family, Others = strangers. r = look through window, w = rearrange furniture, x = enter the house."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Shell Scripting Basics — Process Flow",
+              "content": "flowchart TD\n    A[Login] --> B[Shell]\n    B --> C{Command}\n    C -->|ls| D[List files]\n    C -->|cd| E[Change dir]\n    C -->|chmod| F[Change perms]\n    C -->|sudo| G[Root ops]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Shell Scripting Basics — Concept Map",
+              "content": "mindmap\n  root((Shell Scripting Basics))\n    Basics\n      Kernel\n      Shell\n      Distros\n    Files\n      ls\n      cd\n      pwd\n    Permissions\n      chmod\n      chown\n      rwx\n    Processes\n      ps\n      top\n      kill\n    Scripting\n      Variables\n      Loops\n      Conditions"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) for command execution, O(n) for file listing",
+            "space": "O(1) per process"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is the first line of a bash script?",
+              "solution": "Correct answer: #!/bin/bash",
+              "explanation": "The shebang #!/bin/bash tells the system to use bash to interpret the script."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Shell Scripting Basics with reference to the key concepts.",
+              "solution": "Always start scripts with #!/bin/bash → Show a complete script with variable, if, and for loop → Mention chmod +x to make executable",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Shebang.",
+              "modelAnswer": "#!/bin/bash (first line, specifies interpreter)"
+            },
+            {
+              "marks": 2,
+              "question": "Define Variables.",
+              "modelAnswer": "NAME=value (no spaces around =)"
+            },
+            {
+              "marks": 2,
+              "question": "Define Use variable.",
+              "modelAnswer": "$NAME or ${NAME}"
+            },
+            {
+              "marks": 2,
+              "question": "What is a shell?",
+              "modelAnswer": "A shell is a command-line interpreter that takes user commands and executes them. Common shells: bash, zsh, fish."
+            },
+            {
+              "marks": 2,
+              "question": "Define PID.",
+              "modelAnswer": "PID (Process ID) is a unique number Linux assigns to each running process. Used to manage processes (kill, renice)."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: #!/bin/bash (shebang)",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Linux file permissions with an example.",
+              "modelAnswer": "Each file has permissions for user (owner), group, and others — each can have r (read), w (write), x (execute). Shown as rwxr-xr--. Numeric: r=4, w=2, x=1. Example: chmod 755 file → rwx for owner, r-x for group and others. Directories need 'x' to enter (cd). Use chmod (permissions), chown (owner), chgrp (group)."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between kill and kill -9?",
+              "modelAnswer": "kill PID (default signal SIGTERM) asks the process to terminate gracefully — it can clean up. kill -9 PID (SIGKILL) force-kills immediately — process can't catch or ignore. Always try kill first; use -9 only if process hangs. The -9 cannot be blocked."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Shebang.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Variables.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: #!/bin/bash (shebang)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: VAR=value; echo $VAR",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Shell Scripting Basics in detail with a diagram.",
+              "modelAnswer": "A shell script is a file containing shell commands, executed as a program. Start with #!/bin/bash (shebang). Variables: name=value (no spaces). Conditionals: if/then/else/fi. Loops: for/while. Scripts automate repetitive tasks like backups, deployment, system monitoring."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Shell Scripting Basics with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Shell Scripting Basics\n\n**One-line definition:** A shell script is a file containing shell commands, executed as a program. Start with #!/bin/bash (shebang). Variables: name=value (no spaces). Conditionals: if/then/else/fi. Loops: for/while. Scripts\n\n**Key points:**\n\n- Shebang: #!/bin/bash (first line, specifies interpreter)\n- Variables: NAME=value (no spaces around =)\n- Use variable: $NAME or ${NAME}\n- Conditional: if [ condition ]; then ... fi\n- For loop: for i in 1 2 3; do ... done\n\n**Important formulas:**\n\n- `#!/bin/bash (shebang)`\n- `VAR=value; echo $VAR`\n- `if [ \"$a\" = \"$b\" ]; then ... fi`\n- `for i in 1 2 3; do echo $i; done`\n- `chmod +x script.sh && ./script.sh`\n\n**Common mistake to avoid:** Spaces around = in variable assignment (NAME = value is WRONG)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Shebang: #!/bin/bash (first line, specifies interpreter)",
+            "Variables: NAME=value (no spaces around =)",
+            "Use variable: $NAME or ${NAME}",
+            "Conditional: if [ condition ]; then ... fi",
+            "For loop: for i in 1 2 3; do ... done",
+            "Formula: #!/bin/bash (shebang)",
+            "Formula: VAR=value; echo $VAR",
+            "Formula: if [ \"$a\" = \"$b\" ]; then ... fi",
+            "Formula: for i in 1 2 3; do echo $i; done",
+            "Formula: chmod +x script.sh && ./script.sh",
+            "ls -la, cd, pwd, mkdir, rm, cp, mv",
+            "r=4, w=2, x=1; 755 = rwxr-xr-x",
+            "ps aux, top, kill -9 PID"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "rwx",
+              "expansion": "Read, Write, Execute",
+              "meaning": "The 3 Linux permission types. Numeric: r=4, w=2, x=1."
+            },
+            {
+              "phrase": "PID",
+              "expansion": "Process ID",
+              "meaning": "Unique number Linux assigns to each running process."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start scripts with #!/bin/bash"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Show a complete script with variable, if, and for loop"
+            },
+            {
+              "type": "warning",
+              "content": "Spaces around = in variable assignment (NAME = value is WRONG)"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting the shebang line (#!/bin/bash)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "A shell script is a file containing shell commands, executed as a program. Start with #!/bin/bash (shebang). Variables: name=value (no spaces). Conditionals: if/then/else/fi. Loops: for/while. Scripts automate repetitive tasks like backups, deployment, system monitoring."
+            },
+            {
+              "type": "definition",
+              "content": "Shebang: #!/bin/bash (first line, specifies interpreter)"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Shebang?",
+              "back": "#!/bin/bash (first line, specifies interpreter)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Variables?",
+              "back": "NAME=value (no spaces around =)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Use variable?",
+              "back": "$NAME or ${NAME}",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Conditional?",
+              "back": "if [ condition ]; then ... fi",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is For loop?",
+              "back": "for i in 1 2 3; do ... done",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is While loop?",
+              "back": "while [ condition ]; do ... done",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Make executable?",
+              "back": "chmod +x script.sh",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Run?",
+              "back": "./script.sh or bash script.sh",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "A shell script is a file containing shell commands, executed as a program. Start with #!/bin/bash (shebang). Variables: name=value (no spaces). Conditionals: if/then/else/fi. Loops: for/while. Scripts automate repetitive tasks like backups, deployment, system monitoring."
+            },
+            {
+              "style": "detailed",
+              "content": "A shell script is a file containing shell commands, executed as a program. Start with #!/bin/bash (shebang). Variables: name=value (no spaces). Conditionals: if/then/else/fi. Loops: for/while. Scripts automate repetitive tasks like backups, deployment, system monitoring.\n\nKey concepts: Shebang: #!/bin/bash (first line, specifies interpreter), Variables: NAME=value (no spaces around =), Use variable: $NAME or ${NAME}."
+            }
+          ],
+          "recommendedNextLessons": []
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "# Linux Basics — Quick Revision\n\n**Subject code:** R23CP2401  \n**Semester:** 2  \n**Credits:** 3  \n\n## Unit 1: Linux Introduction (20%)\n### Introduction to Linux\nLinux is an open-source, Unix-like operating system kernel created by Linus Torvalds in 1991. It's the foundation of distributions (distros) like Ubuntu, Debian, Fedora, and CentOS. Linux is multi-user, multitasking, and free — powering most servers, smartphones (Android), and em...\n\n**Formulas:**\n- `Linux = Kernel + GNU tools + Package manager`\n- `Shell: text-in → command-out`\n- `Path: absolute (/) or relative (./, ../)`\n\n## Unit 2: File System and Commands (25%)\n### File System and Basic Commands\nLinux uses a hierarchical file system starting from root (/). Key directories: /home (user files), /etc (config), /var (logs), /bin (binaries), /tmp (temporary). Basic commands: ls (list), cd (change dir), pwd (print working dir), mkdir (make dir), rm (remove), cp (copy), mv (mov...\n\n**Formulas:**\n- `Path: /etc/passwd (absolute) or ../etc/passwd (relative)`\n- `. = current dir, .. = parent dir, ~ = home dir`\n- `ls -l = long format, -a = show hidden`\n\n## Unit 3: File Permissions and Ownership (20%)\n### File Permissions and Ownership\nLinux file permissions control who can read (r), write (w), or execute (x) a file. Permissions are set for three categories: owner (user), group, and others. Use chmod to change permissions, chown to change owner, chgrp to change group. Numeric (octal) or symbolic notation can be...\n\n**Formulas:**\n- `r = 4, w = 2, x = 1 (octal values)`\n- `755 = rwx (7) + r-x (5) + r-x (5)`\n- `644 = rw- (6) + r-- (4) + r-- (4)`\n\n## Unit 4: Processes and Package Management (20%)\n### Processes and Package Management\nA process is a running program. Linux assigns each a unique PID (Process ID). Use ps, top, kill to manage processes. Package managers (apt for Debian/Ubuntu, dnf/yum for Fedora, pacman for Arch) install, update, and remove software from repositories.\n\n**Formulas:**\n- `ps aux: list all processes`\n- `kill -9 PID: force kill`\n- `sudo apt update && sudo apt install <pkg>`\n\n## Unit 5: Shell Scripting (15%)\n### Shell Scripting Basics\nA shell script is a file containing shell commands, executed as a program. Start with #!/bin/bash (shebang). Variables: name=value (no spaces). Conditionals: if/then/else/fi. Loops: for/while. Scripts automate repetitive tasks like backups, deployment, system monitoring.\n\n**Formulas:**\n- `#!/bin/bash (shebang)`\n- `VAR=value; echo $VAR`\n- `if [ \"$a\" = \"$b\" ]; then ... fi`\n",
+  "interviewBank": [
+    {
+      "marks": 5,
+      "question": "Explain the formula: Linux = Kernel + GNU tools + Package manager",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 10,
+      "question": "Explain Linux file permissions with an example.",
+      "modelAnswer": "Each file has permissions for user (owner), group, and others — each can have r (read), w (write), x (execute). Shown as rwxr-xr--. Numeric: r=4, w=2, x=1. Example: chmod 755 file → rwx for owner, r-x for group and others. Directories need 'x' to enter (cd). Use chmod (permissions), chown (owner), chgrp (group)."
+    },
+    {
+      "marks": 5,
+      "question": "What is the difference between kill and kill -9?",
+      "modelAnswer": "kill PID (default signal SIGTERM) asks the process to terminate gracefully — it can clean up. kill -9 PID (SIGKILL) force-kills immediately — process can't catch or ignore. Always try kill first; use -9 only if process hangs. The -9 cannot be blocked."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: Path: /etc/passwd (absolute) or ../etc/passwd (relative)",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: r = 4, w = 2, x = 1 (octal values)",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: ps aux: list all processes",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: #!/bin/bash (shebang)",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    }
+  ],
+  "vivaBank": [
+    {
+      "marks": 2,
+      "question": "Define Linux.",
+      "modelAnswer": "open-source OS kernel by Linus Torvalds (1991)"
+    },
+    {
+      "marks": 2,
+      "question": "Define Distribution (distro).",
+      "modelAnswer": "kernel + tools + package manager (Ubuntu, Fedora, Debian)"
+    },
+    {
+      "marks": 2,
+      "question": "Define Kernel.",
+      "modelAnswer": "core of the OS — manages CPU, memory, devices"
+    },
+    {
+      "marks": 2,
+      "question": "What is a shell?",
+      "modelAnswer": "A shell is a command-line interpreter that takes user commands and executes them. Common shells: bash, zsh, fish."
+    },
+    {
+      "marks": 2,
+      "question": "Define PID.",
+      "modelAnswer": "PID (Process ID) is a unique number Linux assigns to each running process. Used to manage processes (kill, renice)."
+    },
+    {
+      "marks": 2,
+      "question": "Define Root directory.",
+      "modelAnswer": "/ (top of hierarchy)"
+    },
+    {
+      "marks": 2,
+      "question": "Define /home.",
+      "modelAnswer": "user home directories (/home/username)"
+    },
+    {
+      "marks": 2,
+      "question": "Define /etc.",
+      "modelAnswer": "system configuration files"
+    },
+    {
+      "marks": 2,
+      "question": "Define Three permission types.",
+      "modelAnswer": "read (r), write (w), execute (x)"
+    },
+    {
+      "marks": 2,
+      "question": "Define Three categories.",
+      "modelAnswer": "user (u), group (g), others (o)"
+    },
+    {
+      "marks": 2,
+      "question": "Define Symbolic.",
+      "modelAnswer": "u+r, g-w, o=x (add/remove/set)"
+    },
+    {
+      "marks": 2,
+      "question": "Define Process.",
+      "modelAnswer": "a running program (has PID)"
+    }
+  ],
+  "pyqBank": [
+    {
+      "marks": 10,
+      "question": "Explain Introduction to Linux in detail with a diagram.",
+      "modelAnswer": "Linux is an open-source, Unix-like operating system kernel created by Linus Torvalds in 1991. It's the foundation of distributions (distros) like Ubuntu, Debian, Fedora, and CentOS. Linux is multi-user, multitasking, and free — powering most servers, smartphones (Android), and embedded systems worldwide."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Introduction to Linux with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain File System and Basic Commands in detail with a diagram.",
+      "modelAnswer": "Linux uses a hierarchical file system starting from root (/). Key directories: /home (user files), /etc (config), /var (logs), /bin (binaries), /tmp (temporary). Basic commands: ls (list), cd (change dir), pwd (print working dir), mkdir (make dir), rm (remove), cp (copy), mv (move)."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss File System and Basic Commands with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain File Permissions and Ownership in detail with a diagram.",
+      "modelAnswer": "Linux file permissions control who can read (r), write (w), or execute (x) a file. Permissions are set for three categories: owner (user), group, and others. Use chmod to change permissions, chown to change owner, chgrp to change group. Numeric (octal) or symbolic notation can be used."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss File Permissions and Ownership with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Processes and Package Management in detail with a diagram.",
+      "modelAnswer": "A process is a running program. Linux assigns each a unique PID (Process ID). Use ps, top, kill to manage processes. Package managers (apt for Debian/Ubuntu, dnf/yum for Fedora, pacman for Arch) install, update, and remove software from repositories."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Processes and Package Management with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Shell Scripting Basics in detail with a diagram.",
+      "modelAnswer": "A shell script is a file containing shell commands, executed as a program. Start with #!/bin/bash (shebang). Variables: name=value (no spaces). Conditionals: if/then/else/fi. Loops: for/while. Scripts automate repetitive tasks like backups, deployment, system monitoring."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Shell Scripting Basics with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    }
+  ]
+}
