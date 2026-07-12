@@ -1,0 +1,312 @@
+{
+  "subjectCode": "R23CP2407",
+  "subjectName": "Database Management System",
+  "semester": 3,
+  "credits": 4,
+  "units": [
+    {
+      "number": 1,
+      "title": "Introduction to DBMS",
+      "weightage": 12,
+      "lessons": [
+        {
+          "slug": "introduction-to-dbms",
+          "title": "Introduction to DBMS",
+          "durationMin": 25,
+          "difficulty": "easy",
+          "overview": "A Database Management System (DBMS) is software that enables users to create, maintain, and manage databases. It provides an interface between the database and end-users or application programs, ensuring data is organized, secure, and accessible. DBMS replaces traditional file systems by offering centralized control, data independence, and concurrent access.",
+          "keyConcepts": [
+            "Database: An organized collection of structured data stored electronically",
+            "DBMS: Software that manages databases (e.g., MySQL, PostgreSQL, Oracle)",
+            "Data Independence: Separation of data structure from application programs",
+            "Schema: The blueprint or structure of the database",
+            "Instance: The actual data stored in the database at a given moment",
+            "Data Model: A conceptual framework describing how data is organized (hierarchical, network, relational, object-oriented)",
+            "Metadata: Data about data — describes the structure, constraints, and relationships",
+            "ACID Properties: Atomicity, Consistency, Isolation, Durability — ensure reliable transactions"
+          ],
+          "formulas": [
+            "Degree of relation = Number of columns (attributes)",
+            "Cardinality of relation = Number of rows (tuples)",
+            "Data Independence = Logical Independence + Physical Independence"
+          ],
+          "tables": [
+            {
+              "headers": ["Aspect", "File System", "DBMS"],
+              "rows": [
+                ["Data Access", "Application-specific", "Centralized via query language"],
+                ["Data Redundancy", "High (duplicated files)", "Low (normalized)"],
+                ["Data Consistency", "Difficult to maintain", "Enforced by constraints"],
+                ["Concurrency", "No concurrent access", "Supports concurrent access"],
+                ["Security", "File-level only", "Row/column/table-level"],
+                ["Backup", "Manual", "Automated recovery"]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Confusing DBMS with database — DBMS is the software, database is the data",
+            "Thinking data independence means no constraints — it means separating structure from application",
+            "Forgetting that schema is fixed but instance changes over time"
+          ],
+          "examTips": [
+            "Always mention ACID properties when asked about DBMS advantages",
+            "Draw the 3-schema architecture (external, conceptual, internal) if asked about data independence",
+            "Compare file system vs DBMS in a table for maximum marks"
+          ],
+          "practiceQuestions": [
+            "What is the difference between a database and a DBMS?",
+            "Explain the three levels of data abstraction in DBMS.",
+            "What are the advantages of DBMS over file systems?",
+            "Define schema and instance with examples."
+          ]
+        },
+        {
+          "slug": "dbms-architecture",
+          "title": "DBMS Architecture and Data Models",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "DBMS architecture defines how data is viewed and managed at different levels. The three-schema architecture separates user views from physical storage, providing data independence. Data models define the logical structure of the database — relational being the most widely used.",
+          "keyConcepts": [
+            "Three-Schema Architecture: External (user view), Conceptual (logical structure), Internal (physical storage)",
+            "Logical Data Independence: Change conceptual schema without affecting external schema",
+            "Physical Data Independence: Change internal schema without affecting conceptual schema",
+            "Relational Model: Data organized as tables (relations) with rows and columns",
+            "Tuple: A single row in a relation",
+            "Attribute: A single column in a relation",
+            "Domain: The set of allowed values for an attribute",
+            "Key: An attribute that uniquely identifies a tuple (primary key, candidate key, foreign key)"
+          ],
+          "formulas": [
+            "Number of tuples = Cardinality",
+            "Number of attributes = Degree / Arity",
+            "Primary Key = Candidate Key chosen by designer"
+          ],
+          "commonMistakes": [
+            "Confusing logical and physical data independence",
+            "Forgetting that a relation is a set (no duplicate tuples)",
+            "Mixing up candidate key and primary key"
+          ],
+          "examTips": [
+            "Draw the 3-schema architecture diagram clearly with arrows",
+            "List 4-5 data models: Hierarchical, Network, Relational, Object-Oriented, NoSQL",
+            "Define all key types: Super key, Candidate key, Primary key, Foreign key, Alternate key"
+          ],
+          "practiceQuestions": [
+            "Explain the three-schema architecture of DBMS.",
+            "What is logical data independence? Give an example.",
+            "List different types of keys in DBMS with examples.",
+            "Compare relational and hierarchical data models."
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "ER Model and Normalization",
+      "weightage": 18,
+      "lessons": [
+        {
+          "slug": "er-model",
+          "title": "Entity-Relationship Model",
+          "durationMin": 35,
+          "difficulty": "medium",
+          "overview": "The Entity-Relationship (ER) model is a high-level conceptual data model that uses diagrams to represent the structure of a database. It identifies entities (real-world objects), their attributes (properties), and relationships (associations between entities). ER diagrams are the first step in database design.",
+          "keyConcepts": [
+            "Entity: A real-world object that exists independently (Student, Course, Book)",
+            "Entity Set: A collection of similar entities",
+            "Attribute: A property of an entity (Student has Name, Roll No, Email)",
+            "Attribute Types: Simple (atomic), Composite (composed of sub-attributes), Derived (computed), Multi-valued (multiple values)",
+            "Relationship: An association between two or more entities",
+            "Cardinality: Maximum number of relationships an entity can participate in (1:1, 1:N, M:N)",
+            "Participation: Total (every entity must participate) vs Partial (entity may or may not participate)",
+            "Weak Entity: An entity that cannot exist without another (dependent entity) — has no primary key of its own"
+          ],
+          "formulas": [
+            "1:1 — One entity maps to exactly one other",
+            "1:N — One entity maps to many others",
+            "M:N — Many entities map to many others (requires junction table)"
+          ],
+          "tables": [
+            {
+              "headers": ["Symbol", "Meaning", "Example"],
+              "rows": [
+                ["Rectangle", "Entity", "Student, Course"],
+                ["Ellipse", "Attribute", "Name, Roll_No"],
+                ["Diamond", "Relationship", "Enrolls, Teaches"],
+                ["Double Rectangle", "Weak Entity", "Dependent"],
+                ["Double Diamond", "Weak Relationship", "Has_Dependent"],
+                ["Double Ellipse", "Multi-valued Attribute", "Phone_No"],
+                ["Dashed Ellipse", "Derived Attribute", "Age (from DOB)"]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Forgetting to show cardinality (1:1, 1:N, M:N) on relationships",
+            "Using a weak entity without an identifying relationship",
+            "Confusing derived attributes with stored attributes"
+          ],
+          "examTips": [
+            "Always label relationships with verbs (Enrolls, Teaches, Borrows)",
+            "Show cardinality as 1:1, 1:N, or M:N on both sides of the diamond",
+            "For weak entities, use double rectangle + double diamond",
+            "List all entity types, attribute types, and relationship types separately"
+          ],
+          "practiceQuestions": [
+            "Draw an ER diagram for a university with Students, Courses, and Departments.",
+            "What is a weak entity? Give an example.",
+            "Explain different types of attributes with examples.",
+            "What is cardinality? List the three types."
+          ]
+        },
+        {
+          "slug": "normalization",
+          "title": "Normalization",
+          "durationMin": 40,
+          "difficulty": "hard",
+          "overview": "Normalization is the process of organizing data in a database to reduce redundancy and improve data integrity. It involves decomposing tables into smaller, well-structured tables and defining relationships between them. Each normal form adds a constraint to eliminate specific types of anomalies.",
+          "keyConcepts": [
+            "Functional Dependency: X → Y means Y is determined by X (Roll_No → Name)",
+            "1NF: Every attribute is atomic (no repeating groups, no multi-valued attributes)",
+            "2NF: 1NF + No partial dependency (every non-key attribute depends on the ENTIRE primary key)",
+            "3NF: 2NF + No transitive dependency (no non-key attribute depends on another non-key attribute)",
+            "BCNF: 3NF + Every determinant is a candidate key (stronger than 3NF)",
+            "Anomalies: Insertion (can't add data without other data), Deletion (deleting one fact deletes another), Update (updating one place requires updating many)",
+            "Denormalization: Intentionally adding redundancy for performance (opposite of normalization)"
+          ],
+          "formulas": [
+            "1NF: All attributes are atomic",
+            "2NF: 1NF + No partial dependency (for composite keys only)",
+            "3NF: 2NF + No transitive dependency (X→Y, Y→Z implies X→Z is bad if Y is not a key)",
+            "BCNF: For every X→Y, X must be a super key"
+          ],
+          "tables": [
+            {
+              "headers": ["Normal Form", "Rule", "Eliminates"],
+              "rows": [
+                ["1NF", "Atomic values", "Repeating groups"],
+                ["2NF", "No partial dependency", "Redundancy from composite keys"],
+                ["3NF", "No transitive dependency", "Indirect dependencies"],
+                ["BCNF", "Every determinant is a key", "All anomalies"]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Forgetting that 2NF only applies to composite keys (single-attribute keys are automatically in 2NF)",
+            "Confusing transitive dependency with partial dependency",
+            "Not checking all functional dependencies before deciding the normal form"
+          ],
+          "examTips": [
+            "Always start by identifying all functional dependencies",
+            "Check 1NF → 2NF → 3NF → BCNF in order",
+            "Draw the dependency diagram to visualize partial and transitive dependencies",
+            "Show the decomposed tables with their primary keys and foreign keys"
+          ],
+          "practiceQuestions": [
+            "What is normalization? Why is it important?",
+            "Explain 1NF, 2NF, and 3NF with examples.",
+            "What are insertion, deletion, and update anomalies?",
+            "What is the difference between 3NF and BCNF?",
+            "Normalize the following table to 3NF: Student(Roll_No, Name, Course_ID, Course_Name, Instructor)"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "SQL and Transactions",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "sql-basics",
+          "title": "SQL — DDL, DML, and Queries",
+          "durationMin": 35,
+          "difficulty": "medium",
+          "overview": "SQL (Structured Query Language) is the standard language for managing and manipulating relational databases. It is divided into DDL (Data Definition Language), DML (Data Manipulation Language), DCL (Data Control Language), and TCL (Transaction Control Language). SQL allows you to create tables, insert/update/delete data, query data with joins, and manage permissions.",
+          "keyConcepts": [
+            "DDL: CREATE, ALTER, DROP, TRUNCATE — defines structure",
+            "DML: INSERT, UPDATE, DELETE — manipulates data",
+            "DCL: GRANT, REVOKE — controls access",
+            "TCL: COMMIT, ROLLBACK, SAVEPOINT — manages transactions",
+            "SELECT: The most important query — retrieves data",
+            "WHERE: Filters rows based on conditions",
+            "JOIN: Combines rows from two or more tables (INNER, LEFT, RIGHT, FULL)",
+            "GROUP BY: Groups rows by column values (used with aggregates)",
+            "HAVING: Filters groups (like WHERE but for groups)",
+            "ORDER BY: Sorts results (ASC or DESC)"
+          ],
+          "formulas": [
+            "SELECT columns FROM table WHERE condition GROUP BY col HAVING condition ORDER BY col",
+            "INNER JOIN: Only matching rows from both tables",
+            "LEFT JOIN: All rows from left + matching from right",
+            "COUNT(*), SUM(col), AVG(col), MIN(col), MAX(col) — aggregate functions"
+          ],
+          "codeExamples": [
+            {
+              "language": "sql",
+              "code": "-- Create a table\nCREATE TABLE Student (\n  roll_no INT PRIMARY KEY,\n  name VARCHAR(50) NOT NULL,\n  email VARCHAR(100) UNIQUE,\n  dept_id INT,\n  FOREIGN KEY (dept_id) REFERENCES Department(id)\n);\n\n-- Insert data\nINSERT INTO Student (roll_no, name, email, dept_id)\nVALUES (1, 'John', 'john@college.edu', 101);\n\n-- Query with JOIN\nSELECT s.name, d.dept_name\nFROM Student s\nINNER JOIN Department d ON s.dept_id = d.id\nWHERE d.dept_name = 'Computer Engineering'\nORDER BY s.name;\n\n-- Aggregate query\nSELECT dept_id, COUNT(*) as student_count\nFROM Student\nGROUP BY dept_id\nHAVING COUNT(*) > 10;"
+            }
+          ],
+          "commonMistakes": [
+            "Using WHERE instead of HAVING for aggregate conditions",
+            "Forgetting to use table aliases in JOINs",
+            "Not closing strings with single quotes in SQL"
+          ],
+          "examTips": [
+            "Write complete SQL syntax including semicolons",
+            "Use table aliases (s, d) for readability in JOINs",
+            "Show the output of each query as a sample table",
+            "Know the difference between DELETE (DML, can rollback) and TRUNCATE (DDL, cannot rollback)"
+          ],
+          "practiceQuestions": [
+            "Write SQL to create a Student table with primary key and foreign key.",
+            "Write a query to find all students in the Computer Engineering department.",
+            "What is the difference between WHERE and HAVING?",
+            "Explain INNER JOIN vs LEFT JOIN with examples.",
+            "Write a query to count the number of students in each department."
+          ]
+        },
+        {
+          "slug": "transactions-acid",
+          "title": "Transactions and ACID Properties",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "A transaction is a sequence of database operations treated as a single logical unit of work. The ACID properties ensure that transactions are processed reliably, even in the presence of failures, errors, or concurrent access. Understanding transactions is critical for building robust database applications.",
+          "keyConcepts": [
+            "Transaction: A logical unit of work (e.g., money transfer = debit + credit)",
+            "Atomicity: All operations execute completely or none do (all-or-nothing)",
+            "Consistency: Database remains in a valid state before and after transaction",
+            "Isolation: Concurrent transactions don't interfere with each other",
+            "Durability: Committed changes are permanent, even after system failure",
+            "Commit: Permanently save transaction changes",
+            "Rollback: Undo all changes since the last commit",
+            "Savepoint: A point within a transaction that you can roll back to",
+            "Concurrency Control: Mechanisms to ensure isolation (locking, timestamping, MVCC)"
+          ],
+          "formulas": [
+            "Transaction = BEGIN → Operations → COMMIT or ROLLBACK",
+            "Isolation Levels: Read Uncommitted < Read Committed < Repeatable Read < Serializable",
+            "Lock types: Shared (read), Exclusive (write)"
+          ],
+          "commonMistakes": [
+            "Confusing atomicity with isolation — atomicity is about all-or-nothing, isolation is about concurrency",
+            "Forgetting that durability requires a write to non-volatile storage (disk, not just RAM)",
+            "Not understanding that Read Uncommitted allows dirty reads"
+          ],
+          "examTips": [
+            "Explain each ACID property with a real-world example (bank transfer)",
+            "Draw a transaction state diagram (Active → Partially Committed → Committed → Failed → Terminated)",
+            "List the 4 isolation levels and the problems they prevent",
+            "Explain 2-phase locking protocol for concurrency control"
+          ],
+          "practiceQuestions": [
+            "Explain the ACID properties with examples.",
+            "What is a transaction? Explain its states.",
+            "What are dirty reads? How can they be prevented?",
+            "Explain shared lock and exclusive lock.",
+            "What is the difference between COMMIT and ROLLBACK?"
+          ]
+        }
+      ]
+    }
+  ]
+}
