@@ -72,26 +72,30 @@ export function MaterialsList({ pdfs }: { pdfs: PdfResource[] }) {
           </div>
         </div>
 
-        {/* Topics / Lessons list */}
+        {/* Topics / Lessons list — each lesson is a clickable link */}
         <div className="rounded-xl border border-border bg-card p-4">
           <h3 className="mb-3 text-sm font-semibold uppercase text-muted-foreground">Lessons & Topics</h3>
           <div className="space-y-2">
-            {/* Generate lesson topics from the subject name */}
-            {generateTopics(subject.name, subject.code).map((topic, i) => (
-              <div
-                key={i}
-                className="quest-card flex items-center gap-3 rounded-lg border border-border bg-background p-3"
-              >
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
-                  {i + 1}
-                </span>
-                <div className="min-w-0 flex-1">
-                  <p className="text-sm font-medium">{topic}</p>
-                  <p className="text-[10px] text-muted-foreground">Lesson {i + 1}</p>
-                </div>
-                <ChevronRight className="h-4 w-4 text-muted-foreground" />
-              </div>
-            ))}
+            {generateTopics(subject.name, subject.code).map((topic, i) => {
+              const slug = topic.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80)
+              const lessonHref = `/learn/DCOMP/semester/${subject.semester}/subject/${subject.code}/lesson/${slug}`
+              return (
+                <Link
+                  key={i}
+                  href={lessonHref}
+                  className="quest-card flex items-center gap-3 rounded-lg border border-border bg-background p-3 hover:border-primary/40 hover:bg-accent/5 transition-colors"
+                >
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
+                    {i + 1}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm font-medium">{topic}</p>
+                    <p className="text-[10px] text-muted-foreground">Lesson {i + 1} · Click to open interactive notes</p>
+                  </div>
+                  <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                </Link>
+              )
+            })}
           </div>
         </div>
 

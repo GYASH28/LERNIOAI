@@ -71,30 +71,19 @@ export default async function LessonStudioPage({
   if (!studio) {
     const manifestSubject = getManifestSubject(programmeCode, semester, subjectCode)
     if (manifestSubject) {
-      const expectedSlug = manifestSubject.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80)
-      // Also accept any slug that matches a real lesson in our V3 notes JSON
-      // (so unit-map lesson links like /lesson/introduction-to-dbms work).
-      const resolvedCode = programmeCode === 'DCIOT' && manifestSubject.alternateCode
-        ? manifestSubject.alternateCode
-        : subjectCode
-      const v3Notes = getSubjectNotes(resolvedCode)
-      const v3Match = v3Notes ? findLessonBySlug(resolvedCode, lessonSlug) : null
-      if (
-        lessonSlug === expectedSlug ||
-        lessonSlug.includes(expectedSlug) ||
-        expectedSlug.includes(lessonSlug) ||
-        v3Match
-      ) {
-        return (
-          <ManifestLessonView
-            programmeCode={programmeCode}
-            semesterNumber={semester}
-            subjectCode={subjectCode}
-            lessonSlug={lessonSlug}
-            subject={manifestSubject}
-          />
-        )
-      }
+      // Accept ANY lesson slug for a valid subject — the ManifestLessonView
+      // will try to find a specific V3 lesson match, and if none, will show
+      // the whole-subject accordion. This way lesson links from the materials
+      // page and unit map always work (no 404s).
+      return (
+        <ManifestLessonView
+          programmeCode={programmeCode}
+          semesterNumber={semester}
+          subjectCode={subjectCode}
+          lessonSlug={lessonSlug}
+          subject={manifestSubject}
+        />
+      )
     }
     notFound()
   }

@@ -1,0 +1,1946 @@
+{
+  "subjectCode": "R23CP5401",
+  "subjectName": "Seminar, Capstone Initiation and Internship Support",
+  "semester": 5,
+  "credits": 3,
+  "units": [
+    {
+      "number": 1,
+      "title": "Seminar",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "technical-presentation-skills",
+          "title": "Technical Presentation Skills",
+          "durationMin": 25,
+          "difficulty": "easy",
+          "overview": "Technical Presentation Skills is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Seminar. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "Technical Presentation Skills: Core concept in Seminar, Capstone Initiation and Internship Support",
+            "Definition: The formal definition and scope of technical presentation skills",
+            "Key principles: Fundamental rules and properties",
+            "Working: How technical presentation skills operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within Technical Presentation Skills",
+            "Relationship: connects to Seminar",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "Technical Presentation Skills — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in Seminar, Capstone Initiation and Internship Support"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding Seminar"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of Technical Presentation Skills",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is Technical Presentation Skills?",
+              "options": [
+                "A core concept in Seminar, Capstone Initiation and Internship Support",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "Technical Presentation Skills is a fundamental concept in Seminar, Capstone Initiation and Internship Support."
+            },
+            {
+              "question": "Technical Presentation Skills is studied under which unit?",
+              "options": [
+                "Seminar",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "Technical Presentation Skills belongs to the Seminar unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of Technical Presentation Skills?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "Technical Presentation Skills has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand Technical Presentation Skills and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on Technical Presentation Skills"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nTechnical Presentation Skills is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Seminar. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Technical Presentation Skills: Core concept in Seminar, Capstone Initiation and Internship Support\n- Definition: The formal definition and scope of technical presentation skills\n- Key principles: Fundamental rules and properties\n- Working: How technical presentation skills operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Technical Presentation Skills`\n- `Relationship: connects to Seminar`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Technical Presentation Skills — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Seminar, Capstone Initiation and Internship Support |\n| Importance | Essential for understanding Seminar |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nTechnical Presentation Skills is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Seminar. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Technical Presentation Skills — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Technical Presentation Skills — Concept Map",
+              "content": "mindmap\n  root((Technical Presentation Skills))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is Technical Presentation Skills?",
+              "solution": "Correct answer: A core concept in Seminar, Capstone Initiation and Internship Support",
+              "explanation": "Technical Presentation Skills is a fundamental concept in Seminar, Capstone Initiation and Internship Support."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Technical Presentation Skills with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Technical Presentation Skills.",
+              "modelAnswer": "Core concept in Seminar, Capstone Initiation and Internship Support"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of technical presentation skills"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Technical Presentation Skills",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Technical Presentation Skills.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Technical Presentation Skills",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to Seminar",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Technical Presentation Skills in detail with a diagram.",
+              "modelAnswer": "Technical Presentation Skills is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Seminar. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Technical Presentation Skills with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Technical Presentation Skills\n\n**One-line definition:** Technical Presentation Skills is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Seminar. This lesson provides a comprehensive understanding of the fundamental concep\n\n**Key points:**\n\n- Technical Presentation Skills: Core concept in Seminar, Capstone Initiation and Internship Support\n- Definition: The formal definition and scope of technical presentation skills\n- Key principles: Fundamental rules and properties\n- Working: How technical presentation skills operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within Technical Presentation Skills`\n- `Relationship: connects to Seminar`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of Technical Presentation Skills\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Technical Presentation Skills: Core concept in Seminar, Capstone Initiation and Internship Support",
+            "Definition: The formal definition and scope of technical presentation skills",
+            "Key principles: Fundamental rules and properties",
+            "Working: How technical presentation skills operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within Technical Presentation Skills",
+            "Formula: Relationship: connects to Seminar",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of Technical Presentation Skills"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Technical Presentation Skills is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Seminar. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "Technical Presentation Skills: Core concept in Seminar, Capstone Initiation and Internship Support"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Technical Presentation Skills?",
+              "back": "Core concept in Seminar, Capstone Initiation and Internship Support",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of technical presentation skills",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How technical presentation skills operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Technical Presentation Skills is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Seminar. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "Technical Presentation Skills is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Seminar. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Technical Presentation Skills: Core concept in Seminar, Capstone Initiation and , Definition: The formal definition and scope of technical presentation skills, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "project-initiation",
+            "internship-preparation"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Capstone Project",
+      "weightage": 25,
+      "lessons": [
+        {
+          "slug": "project-initiation",
+          "title": "Project Initiation",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "Project Initiation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Capstone Project. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "Project Initiation: Core concept in Seminar, Capstone Initiation and Internship Support",
+            "Definition: The formal definition and scope of project initiation",
+            "Key principles: Fundamental rules and properties",
+            "Working: How project initiation operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within Project Initiation",
+            "Relationship: connects to Capstone Project",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "Project Initiation — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in Seminar, Capstone Initiation and Internship Support"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding Capstone Project"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of Project Initiation",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is Project Initiation?",
+              "options": [
+                "A core concept in Seminar, Capstone Initiation and Internship Support",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "Project Initiation is a fundamental concept in Seminar, Capstone Initiation and Internship Support."
+            },
+            {
+              "question": "Project Initiation is studied under which unit?",
+              "options": [
+                "Capstone Project",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "Project Initiation belongs to the Capstone Project unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of Project Initiation?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "Project Initiation has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand Project Initiation and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on Project Initiation"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nProject Initiation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Capstone Project. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Project Initiation: Core concept in Seminar, Capstone Initiation and Internship Support\n- Definition: The formal definition and scope of project initiation\n- Key principles: Fundamental rules and properties\n- Working: How project initiation operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Project Initiation`\n- `Relationship: connects to Capstone Project`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Project Initiation — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Seminar, Capstone Initiation and Internship Support |\n| Importance | Essential for understanding Capstone Project |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nProject Initiation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Capstone Project. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Project Initiation — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Project Initiation — Concept Map",
+              "content": "mindmap\n  root((Project Initiation))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is Project Initiation?",
+              "solution": "Correct answer: A core concept in Seminar, Capstone Initiation and Internship Support",
+              "explanation": "Project Initiation is a fundamental concept in Seminar, Capstone Initiation and Internship Support."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Project Initiation with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Project Initiation.",
+              "modelAnswer": "Core concept in Seminar, Capstone Initiation and Internship Support"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of project initiation"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Project Initiation",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Project Initiation.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Project Initiation",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to Capstone Project",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Project Initiation in detail with a diagram.",
+              "modelAnswer": "Project Initiation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Capstone Project. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Project Initiation with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Project Initiation\n\n**One-line definition:** Project Initiation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Capstone Project. This lesson provides a comprehensive understanding of the fundamental concepts\n\n**Key points:**\n\n- Project Initiation: Core concept in Seminar, Capstone Initiation and Internship Support\n- Definition: The formal definition and scope of project initiation\n- Key principles: Fundamental rules and properties\n- Working: How project initiation operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within Project Initiation`\n- `Relationship: connects to Capstone Project`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of Project Initiation\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Project Initiation: Core concept in Seminar, Capstone Initiation and Internship Support",
+            "Definition: The formal definition and scope of project initiation",
+            "Key principles: Fundamental rules and properties",
+            "Working: How project initiation operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within Project Initiation",
+            "Formula: Relationship: connects to Capstone Project",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of Project Initiation"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Project Initiation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Capstone Project. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "Project Initiation: Core concept in Seminar, Capstone Initiation and Internship Support"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Project Initiation?",
+              "back": "Core concept in Seminar, Capstone Initiation and Internship Support",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of project initiation",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How project initiation operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Project Initiation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Capstone Project. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "Project Initiation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Capstone Project. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Project Initiation: Core concept in Seminar, Capstone Initiation and Internship , Definition: The formal definition and scope of project initiation, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "internship-preparation",
+            "technical-documentation"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Internship",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "internship-preparation",
+          "title": "Internship Preparation",
+          "durationMin": 35,
+          "difficulty": "hard",
+          "overview": "Internship Preparation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Internship. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "Internship Preparation: Core concept in Seminar, Capstone Initiation and Internship Support",
+            "Definition: The formal definition and scope of internship preparation",
+            "Key principles: Fundamental rules and properties",
+            "Working: How internship preparation operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within Internship Preparation",
+            "Relationship: connects to Internship",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "Internship Preparation — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in Seminar, Capstone Initiation and Internship Support"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding Internship"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of Internship Preparation",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is Internship Preparation?",
+              "options": [
+                "A core concept in Seminar, Capstone Initiation and Internship Support",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "Internship Preparation is a fundamental concept in Seminar, Capstone Initiation and Internship Support."
+            },
+            {
+              "question": "Internship Preparation is studied under which unit?",
+              "options": [
+                "Internship",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "Internship Preparation belongs to the Internship unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of Internship Preparation?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "Internship Preparation has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand Internship Preparation and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on Internship Preparation"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nInternship Preparation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Internship. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Internship Preparation: Core concept in Seminar, Capstone Initiation and Internship Support\n- Definition: The formal definition and scope of internship preparation\n- Key principles: Fundamental rules and properties\n- Working: How internship preparation operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Internship Preparation`\n- `Relationship: connects to Internship`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Internship Preparation — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Seminar, Capstone Initiation and Internship Support |\n| Importance | Essential for understanding Internship |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nInternship Preparation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Internship. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Internship Preparation — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Internship Preparation — Concept Map",
+              "content": "mindmap\n  root((Internship Preparation))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is Internship Preparation?",
+              "solution": "Correct answer: A core concept in Seminar, Capstone Initiation and Internship Support",
+              "explanation": "Internship Preparation is a fundamental concept in Seminar, Capstone Initiation and Internship Support."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Internship Preparation with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Internship Preparation.",
+              "modelAnswer": "Core concept in Seminar, Capstone Initiation and Internship Support"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of internship preparation"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Internship Preparation",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Internship Preparation.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Internship Preparation",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to Internship",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Internship Preparation in detail with a diagram.",
+              "modelAnswer": "Internship Preparation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Internship. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Internship Preparation with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Internship Preparation\n\n**One-line definition:** Internship Preparation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Internship. This lesson provides a comprehensive understanding of the fundamental concepts, \n\n**Key points:**\n\n- Internship Preparation: Core concept in Seminar, Capstone Initiation and Internship Support\n- Definition: The formal definition and scope of internship preparation\n- Key principles: Fundamental rules and properties\n- Working: How internship preparation operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within Internship Preparation`\n- `Relationship: connects to Internship`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of Internship Preparation\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Internship Preparation: Core concept in Seminar, Capstone Initiation and Internship Support",
+            "Definition: The formal definition and scope of internship preparation",
+            "Key principles: Fundamental rules and properties",
+            "Working: How internship preparation operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within Internship Preparation",
+            "Formula: Relationship: connects to Internship",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of Internship Preparation"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Internship Preparation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Internship. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "Internship Preparation: Core concept in Seminar, Capstone Initiation and Internship Support"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Internship Preparation?",
+              "back": "Core concept in Seminar, Capstone Initiation and Internship Support",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of internship preparation",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How internship preparation operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Internship Preparation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Internship. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "Internship Preparation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Internship. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Internship Preparation: Core concept in Seminar, Capstone Initiation and Interns, Definition: The formal definition and scope of internship preparation, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "technical-documentation",
+            "project-review-process"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Documentation",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "technical-documentation",
+          "title": "Technical Documentation",
+          "durationMin": 40,
+          "difficulty": "hard",
+          "overview": "Technical Documentation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Documentation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "Technical Documentation: Core concept in Seminar, Capstone Initiation and Internship Support",
+            "Definition: The formal definition and scope of technical documentation",
+            "Key principles: Fundamental rules and properties",
+            "Working: How technical documentation operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within Technical Documentation",
+            "Relationship: connects to Documentation",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "Technical Documentation — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in Seminar, Capstone Initiation and Internship Support"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding Documentation"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of Technical Documentation",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is Technical Documentation?",
+              "options": [
+                "A core concept in Seminar, Capstone Initiation and Internship Support",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "Technical Documentation is a fundamental concept in Seminar, Capstone Initiation and Internship Support."
+            },
+            {
+              "question": "Technical Documentation is studied under which unit?",
+              "options": [
+                "Documentation",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "Technical Documentation belongs to the Documentation unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of Technical Documentation?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "Technical Documentation has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand Technical Documentation and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on Technical Documentation"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nTechnical Documentation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Documentation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Technical Documentation: Core concept in Seminar, Capstone Initiation and Internship Support\n- Definition: The formal definition and scope of technical documentation\n- Key principles: Fundamental rules and properties\n- Working: How technical documentation operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Technical Documentation`\n- `Relationship: connects to Documentation`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Technical Documentation — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Seminar, Capstone Initiation and Internship Support |\n| Importance | Essential for understanding Documentation |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nTechnical Documentation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Documentation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Technical Documentation — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Technical Documentation — Concept Map",
+              "content": "mindmap\n  root((Technical Documentation))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is Technical Documentation?",
+              "solution": "Correct answer: A core concept in Seminar, Capstone Initiation and Internship Support",
+              "explanation": "Technical Documentation is a fundamental concept in Seminar, Capstone Initiation and Internship Support."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Technical Documentation with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Technical Documentation.",
+              "modelAnswer": "Core concept in Seminar, Capstone Initiation and Internship Support"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of technical documentation"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Technical Documentation",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Technical Documentation.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Technical Documentation",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to Documentation",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Technical Documentation in detail with a diagram.",
+              "modelAnswer": "Technical Documentation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Documentation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Technical Documentation with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Technical Documentation\n\n**One-line definition:** Technical Documentation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Documentation. This lesson provides a comprehensive understanding of the fundamental concep\n\n**Key points:**\n\n- Technical Documentation: Core concept in Seminar, Capstone Initiation and Internship Support\n- Definition: The formal definition and scope of technical documentation\n- Key principles: Fundamental rules and properties\n- Working: How technical documentation operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within Technical Documentation`\n- `Relationship: connects to Documentation`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of Technical Documentation\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Technical Documentation: Core concept in Seminar, Capstone Initiation and Internship Support",
+            "Definition: The formal definition and scope of technical documentation",
+            "Key principles: Fundamental rules and properties",
+            "Working: How technical documentation operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within Technical Documentation",
+            "Formula: Relationship: connects to Documentation",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of Technical Documentation"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Technical Documentation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Documentation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "Technical Documentation: Core concept in Seminar, Capstone Initiation and Internship Support"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Technical Documentation?",
+              "back": "Core concept in Seminar, Capstone Initiation and Internship Support",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of technical documentation",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How technical documentation operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Technical Documentation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Documentation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "Technical Documentation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Documentation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Technical Documentation: Core concept in Seminar, Capstone Initiation and Intern, Definition: The formal definition and scope of technical documentation, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "project-review-process"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Review",
+      "weightage": 15,
+      "lessons": [
+        {
+          "slug": "project-review-process",
+          "title": "Project Review Process",
+          "durationMin": 45,
+          "difficulty": "hard",
+          "overview": "Project Review Process is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Review. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "Project Review Process: Core concept in Seminar, Capstone Initiation and Internship Support",
+            "Definition: The formal definition and scope of project review process",
+            "Key principles: Fundamental rules and properties",
+            "Working: How project review process operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within Project Review Process",
+            "Relationship: connects to Review",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "Project Review Process — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in Seminar, Capstone Initiation and Internship Support"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding Review"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of Project Review Process",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is Project Review Process?",
+              "options": [
+                "A core concept in Seminar, Capstone Initiation and Internship Support",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "Project Review Process is a fundamental concept in Seminar, Capstone Initiation and Internship Support."
+            },
+            {
+              "question": "Project Review Process is studied under which unit?",
+              "options": [
+                "Review",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "Project Review Process belongs to the Review unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of Project Review Process?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "Project Review Process has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand Project Review Process and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on Project Review Process"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nProject Review Process is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Review. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Project Review Process: Core concept in Seminar, Capstone Initiation and Internship Support\n- Definition: The formal definition and scope of project review process\n- Key principles: Fundamental rules and properties\n- Working: How project review process operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Project Review Process`\n- `Relationship: connects to Review`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Project Review Process — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Seminar, Capstone Initiation and Internship Support |\n| Importance | Essential for understanding Review |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nProject Review Process is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Review. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Project Review Process — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Project Review Process — Concept Map",
+              "content": "mindmap\n  root((Project Review Process))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is Project Review Process?",
+              "solution": "Correct answer: A core concept in Seminar, Capstone Initiation and Internship Support",
+              "explanation": "Project Review Process is a fundamental concept in Seminar, Capstone Initiation and Internship Support."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Project Review Process with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Project Review Process.",
+              "modelAnswer": "Core concept in Seminar, Capstone Initiation and Internship Support"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of project review process"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Project Review Process",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Project Review Process.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Project Review Process",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to Review",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Project Review Process in detail with a diagram.",
+              "modelAnswer": "Project Review Process is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Review. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Project Review Process with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Project Review Process\n\n**One-line definition:** Project Review Process is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Review. This lesson provides a comprehensive understanding of the fundamental concepts, prin\n\n**Key points:**\n\n- Project Review Process: Core concept in Seminar, Capstone Initiation and Internship Support\n- Definition: The formal definition and scope of project review process\n- Key principles: Fundamental rules and properties\n- Working: How project review process operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within Project Review Process`\n- `Relationship: connects to Review`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of Project Review Process\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Project Review Process: Core concept in Seminar, Capstone Initiation and Internship Support",
+            "Definition: The formal definition and scope of project review process",
+            "Key principles: Fundamental rules and properties",
+            "Working: How project review process operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within Project Review Process",
+            "Formula: Relationship: connects to Review",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of Project Review Process"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Project Review Process is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Review. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "Project Review Process: Core concept in Seminar, Capstone Initiation and Internship Support"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Project Review Process?",
+              "back": "Core concept in Seminar, Capstone Initiation and Internship Support",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of project review process",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How project review process operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Project Review Process is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Review. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "Project Review Process is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Review. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Project Review Process: Core concept in Seminar, Capstone Initiation and Interns, Definition: The formal definition and scope of project review process, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": []
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "# Seminar, Capstone Initiation and Internship Support — Quick Revision\n\n**Subject code:** R23CP5401  \n**Semester:** 5  \n**Credits:** 3  \n\n## Unit 1: Seminar (20%)\n### Technical Presentation Skills\nTechnical Presentation Skills is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Seminar. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering stude...\n\n## Unit 2: Capstone Project (25%)\n### Project Initiation\nProject Initiation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Capstone Project. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering student...\n\n## Unit 3: Internship (20%)\n### Internship Preparation\nInternship Preparation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Internship. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Unit 4: Documentation (20%)\n### Technical Documentation\nTechnical Documentation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Documentation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering stude...\n\n## Unit 5: Review (15%)\n### Project Review Process\nProject Review Process is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Review. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n",
+  "interviewBank": [
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within Technical Presentation Skills",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 10,
+      "question": "Explain the key concepts from this lesson with examples.",
+      "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+    },
+    {
+      "marks": 5,
+      "question": "What are the practical applications of this topic?",
+      "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within Project Initiation",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within Internship Preparation",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within Technical Documentation",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within Project Review Process",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    }
+  ],
+  "vivaBank": [
+    {
+      "marks": 2,
+      "question": "Define Technical Presentation Skills.",
+      "modelAnswer": "Core concept in Seminar, Capstone Initiation and Internship Support"
+    },
+    {
+      "marks": 2,
+      "question": "Define Definition.",
+      "modelAnswer": "The formal definition and scope of technical presentation skills"
+    },
+    {
+      "marks": 2,
+      "question": "Define Key principles.",
+      "modelAnswer": "Fundamental rules and properties"
+    },
+    {
+      "marks": 2,
+      "question": "Define the main concept from this lesson.",
+      "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+    },
+    {
+      "marks": 2,
+      "question": "What is the practical importance of this topic?",
+      "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+    },
+    {
+      "marks": 2,
+      "question": "Define Project Initiation.",
+      "modelAnswer": "Core concept in Seminar, Capstone Initiation and Internship Support"
+    },
+    {
+      "marks": 2,
+      "question": "Define Internship Preparation.",
+      "modelAnswer": "Core concept in Seminar, Capstone Initiation and Internship Support"
+    },
+    {
+      "marks": 2,
+      "question": "Define Technical Documentation.",
+      "modelAnswer": "Core concept in Seminar, Capstone Initiation and Internship Support"
+    },
+    {
+      "marks": 2,
+      "question": "Define Project Review Process.",
+      "modelAnswer": "Core concept in Seminar, Capstone Initiation and Internship Support"
+    }
+  ],
+  "pyqBank": [
+    {
+      "marks": 10,
+      "question": "Explain Technical Presentation Skills in detail with a diagram.",
+      "modelAnswer": "Technical Presentation Skills is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Seminar. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Technical Presentation Skills with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Project Initiation in detail with a diagram.",
+      "modelAnswer": "Project Initiation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Capstone Project. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Project Initiation with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Internship Preparation in detail with a diagram.",
+      "modelAnswer": "Internship Preparation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Internship. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Internship Preparation with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Technical Documentation in detail with a diagram.",
+      "modelAnswer": "Technical Documentation is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Documentation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Technical Documentation with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Project Review Process in detail with a diagram.",
+      "modelAnswer": "Project Review Process is a key topic in Seminar, Capstone Initiation and Internship Support, covered under Review. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Project Review Process with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    }
+  ]
+}
