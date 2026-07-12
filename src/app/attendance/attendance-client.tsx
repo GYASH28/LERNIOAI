@@ -273,7 +273,7 @@ export function AttendanceClient({
           </div>
         </div>
 
-        {/* Quick actions */}
+        {/* Quick actions + search + legend */}
         <div className="flex items-center justify-between flex-wrap gap-2">
           <div className="flex gap-2">
             <button onClick={() => markAll('present')} className="rounded-lg bg-green-500/10 px-3 py-1.5 text-xs font-medium text-green-500 hover:bg-green-500/20">
@@ -283,9 +283,12 @@ export function AttendanceClient({
               All Absent
             </button>
           </div>
-          <div className="flex gap-3 text-xs">
+          <div className="flex flex-wrap gap-3 text-xs">
             <span className="text-green-500 font-bold">{presentCount} Present</span>
             <span className="text-red-500 font-bold">{absentCount} Absent</span>
+            <span className="text-amber-500 font-bold">{lateCount} Late</span>
+            <span className="text-blue-500 font-bold">{excusedCount} Excused</span>
+            <span className="text-purple-500 font-bold">{halfDayCount} Half-day</span>
             <span className="text-muted-foreground">{students.length} Total</span>
           </div>
         </div>
