@@ -2,8 +2,6 @@ import { redirect } from 'next/navigation'
 import { getCurrentUser } from '@/lib/auth'
 import { db } from '@/lib/db'
 import Link from 'next/link'
-import { TopBar } from '@/components/layout/top-bar'
-import { Footer } from '@/components/layout/footer'
 import {
   BookOpen, PlayCircle, Target, Flame, Zap, TrendingUp, ArrowRight,
   Calendar, Award, Crown, Mail, Clock, Users, GraduationCap,
@@ -15,12 +13,7 @@ import { ContinueLearningCard } from '@/components/dashboard/continue-learning-c
 import { StreakHeatmap } from '@/components/dashboard/streak-heatmap'
 import { ExamCountdown } from '@/components/dashboard/exam-countdown'
 import { ProgressRing } from '@/components/learning/progress-ring'
-<<<<<<< HEAD
-import { TopBar } from '@/components/layout/top-bar'
-import { Footer } from '@/components/layout/footer'
-=======
 import { ClassAvatar } from '@/components/class/class-avatar'
->>>>>>> 335b91df5b081340c259eddbbac5730e692eae74
 
 export const dynamic = 'force-dynamic'
 
@@ -135,15 +128,7 @@ export default async function DashboardPage() {
     : 'from-indigo-500/10 via-blue-900/5 to-transparent'
 
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground">
-      <TopBar />
-<<<<<<< HEAD
-      <main className="flex-1 page-wipe bg-background text-foreground">
-      <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
-        {/* ─── Semester Hero ─── */}
-        <section className="rounded-xl border border-primary/20 bg-gradient-to-br from-primary/5 to-transparent p-5 sm:p-6">
-=======
-      <main className="flex-1 page-wipe">
+    <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-6xl px-5 py-6 sm:px-6 lg:px-8 page-wipe">
         {/* ─── Profile completion prompt ─── */}
         {needsClassSetup && (
@@ -165,7 +150,6 @@ export default async function DashboardPage() {
 
         {/* ─── Dynamic Hero with Time-Based Greeting ─── */}
         <section className={`rounded-xl border border-primary/20 bg-gradient-to-br ${heroGradient} p-5 sm:p-6`}>
->>>>>>> 335b91df5b081340c259eddbbac5730e692eae74
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div className="min-w-0">
               <p className="text-xs font-semibold uppercase tracking-wide text-primary">
@@ -362,12 +346,6 @@ export default async function DashboardPage() {
           </div>
         </section>
       </div>
-<<<<<<< HEAD
     </main>
-=======
-      </main>
->>>>>>> 335b91df5b081340c259eddbbac5730e692eae74
-      <Footer />
-    </div>
   )
 }
