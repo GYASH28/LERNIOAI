@@ -33,7 +33,7 @@ interface SessionSummary {
   takenBy: { name: string } | null
 }
 
-type Status = 'present' | 'absent' | 'late' | 'excused'
+type Status = 'present' | 'absent' | 'late' | 'excused' | 'half_day'
 type View = 'dashboard' | 'take' | 'history' | 'my-attendance' | 'session-detail'
 
 export function AttendanceClient({
@@ -157,6 +157,9 @@ export function AttendanceClient({
 
   const presentCount = Object.values(marking).filter(s => s === 'present').length
   const absentCount = Object.values(marking).filter(s => s === 'absent').length
+  const lateCount = Object.values(marking).filter(s => s === 'late').length
+  const excusedCount = Object.values(marking).filter(s => s === 'excused').length
+  const halfDayCount = Object.values(marking).filter(s => s === 'half_day').length
 
   const formatDate = (d: string) => new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })
 

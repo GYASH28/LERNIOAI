@@ -1,1 +1,3 @@
-import { redirect } from 'next/navigation'\nexport const dynamic = 'force-dynamic'\nexport default function Page() { redirect('/dashboard') }
+import { redirect } from 'next/navigation'
+export const dynamic = 'force-dynamic'
+export default function Page() { redirect('/dashboard') }
