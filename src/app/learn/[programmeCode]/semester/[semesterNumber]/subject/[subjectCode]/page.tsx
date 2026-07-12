@@ -1,4 +1,6 @@
 import Link from 'next/link'
+export const dynamic = 'force-dynamic'
+
 import { notFound, redirect } from 'next/navigation'
 import {
   ArrowLeft,
@@ -53,7 +55,7 @@ export default async function SubjectLearningPage({
     <main className="min-h-screen bg-background text-foreground">
       {/* ─── Hero ─── */}
       <section className="border-b border-border/70 bg-muted/30">
-        <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl px-5 py-6 sm:px-6 lg:px-8">
           <Link href={semesterHref} className="inline-flex w-fit items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
             <ArrowLeft className="h-4 w-4" />
             <span className="hidden sm:inline">Semester {semesterNumber}</span>
@@ -82,7 +84,7 @@ export default async function SubjectLearningPage({
         </div>
       </section>
 
-      <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8 space-y-8">
+      <div className="mx-auto max-w-6xl px-5 py-6 sm:px-6 lg:px-8 space-y-8">
         {/* ─── Course Outcomes ─── */}
         <section>
           <div className="mb-4 flex items-center gap-2">

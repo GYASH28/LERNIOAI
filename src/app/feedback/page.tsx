@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation'
+import { BackButton } from "@/components/ui/back-button"
 import { getCurrentUser } from '@/lib/auth'
 import { FeedbackForm } from './feedback-form'
 import { TopBar } from '@/components/layout/top-bar'
@@ -15,6 +16,7 @@ export default async function FeedbackPage() {
       <TopBar />
       <main className="flex-1 page-wipe bg-background text-foreground">
       <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 lg:px-8">
+          <BackButton />
         <h1 className="text-2xl font-bold">Send Feedback</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Found a bug? Have an idea? Let us know — we read every message.

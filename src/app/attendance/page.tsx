@@ -3,8 +3,11 @@ import { getCurrentUser } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { BackButton } from '@/components/ui/back-button'
 import { AttendanceClient } from './attendance-client'
+<<<<<<< HEAD
 import { TopBar } from '@/components/layout/top-bar'
 import { Footer } from '@/components/layout/footer'
+=======
+>>>>>>> 335b91df5b081340c259eddbbac5730e692eae74
 
 export const dynamic = 'force-dynamic'
 
@@ -30,9 +33,13 @@ export default async function AttendancePage() {
   }
 
   return (
+<<<<<<< HEAD
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <TopBar />
       <main className="flex-1 page-wipe bg-background text-foreground">
+=======
+    <main className="min-h-screen bg-background text-foreground">
+>>>>>>> 335b91df5b081340c259eddbbac5730e692eae74
       <div className="mx-auto max-w-4xl px-5 py-6 sm:px-6 lg:px-8">
         <BackButton />
         <h1 className="text-2xl font-bold">Attendance</h1>
@@ -78,7 +85,10 @@ export default async function AttendancePage() {
         </div>
       </div>
     </main>
+<<<<<<< HEAD
       <Footer />
     </div>
+=======
+>>>>>>> 335b91df5b081340c259eddbbac5730e692eae74
   )
 }

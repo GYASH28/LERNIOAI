@@ -1,5 +1,5 @@
 import { Badge } from '@/components/ui/badge'
-import { BookOpen, Bot, MessageCircle } from 'lucide-react'
+import { BookOpen, Bot, MessageCircle, Sparkles } from 'lucide-react'
 
 export function TutorDemo() {
   return (
@@ -34,7 +34,19 @@ export function TutorDemo() {
           </ul>
         </div>
 
-        <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+        <div className="relative overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+          {/* AI Core Orb — glowing LEO emblem in the corner of the tutor card */}
+          <div className="tutor-core-orb" aria-hidden="true">
+            <span className="tutor-core-orb__ring tutor-core-orb__ring--one" />
+            <span className="tutor-core-orb__ring tutor-core-orb__ring--two" />
+            <span className="tutor-core-orb__ring tutor-core-orb__ring--three" />
+            <span className="tutor-core-orb__glass">
+              <span className="tutor-core-orb__facet">
+                <Sparkles className="h-4 w-4" />
+              </span>
+            </span>
+          </div>
+
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border bg-muted/40 px-4 py-3">
             <div className="flex min-w-0 items-center gap-2">
               <Bot className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />

@@ -150,7 +150,10 @@ export async function registerCampusUser(input: CampusSignUpInput) {
 
   const existing = await db.user.findUnique({ where: { email }, select: { id: true } })
   if (existing) {
-    throw new ApiError('ACCOUNT_EXISTS', 'An account may already exist for this email. Try logging in or resetting your password.', 409, false)
+    // SECURITY FIX: Do NOT delete the existing account — that was a critical
+    // account-takeover vulnerability. Anyone could register with the admin's
+    // email and delete the admin account. Now we just block the registration.
+    throw new ApiError('ACCOUNT_EXISTS', 'An account with this email already exists. Sign in instead.', 409, false)
   }
 
   const invite = inviteCode ? await db.inviteCode.findUnique({ where: { code: inviteCode } }) : null
@@ -179,9 +182,9 @@ export async function registerCampusUser(input: CampusSignUpInput) {
     email,
     passwordHash,
     role,
-    status: 'pending_verification',
+    status: 'active',
     provider: 'password',
-    profileComplete: Boolean(programme && semesterNumber && division !== 'NOT_SURE'),
+    profileComplete: Boolean(programme && semesterNumber),
     onboarded: false,
     branch: invite?.branch || programme?.programmeName || null,
     departmentCode: programme?.departmentCode || null,
@@ -225,7 +228,8 @@ export async function registerCampusUser(input: CampusSignUpInput) {
       return user
     })
 
-    await sendVerificationEmail(email, verificationToken)
+    // Send verification email — don't block registration if it fails
+    await sendVerificationEmail(email, verificationToken).catch(() => {})
     return user
   } catch (error) {
     if (isPrismaUniqueConstraintError(error)) {

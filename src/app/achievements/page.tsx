@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation'
+import { BackButton } from "@/components/ui/back-button"
 import { getCurrentUser } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { Trophy, Lock, Star } from 'lucide-react'
@@ -31,6 +32,7 @@ export default async function AchievementsPage() {
       <TopBar />
       <main className="flex-1 page-wipe bg-background text-foreground">
       <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
+          <BackButton />
         {/* Hero */}
         <div className="flex items-center gap-4">
           <div className="flex h-14 w-14 items-center justify-center rounded-full bg-amber-500/10">
