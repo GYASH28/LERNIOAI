@@ -88,21 +88,33 @@ const providers: NextAuthOptions['providers'] = [
         return DEMO_AUTH_USER
       }
 
-      let user: Awaited<ReturnType<typeof db.user.findUnique>> = null
+      type SelectedUser = {
+        id: string
+        email: string
+        name: string
+        passwordHash: string | null
+        role: string
+        status: string
+        profileComplete: boolean
+        authorityVersion: number
+        sessionsRevokedAt: Date | null
+      }
+      const selectFields = {
+        id: true,
+        email: true,
+        name: true,
+        passwordHash: true,
+        role: true,
+        status: true,
+        profileComplete: true,
+        authorityVersion: true,
+        sessionsRevokedAt: true,
+      } as const
+      let user: SelectedUser | null = null
       try {
         user = await db.user.findUnique({
           where: { email },
-          select: {
-            id: true,
-            email: true,
-            name: true,
-            passwordHash: true,
-            role: true,
-            status: true,
-            profileComplete: true,
-            authorityVersion: true,
-            sessionsRevokedAt: true,
-          },
+          select: selectFields,
         })
       } catch {
         // DB unreachable — sign-in cannot proceed. Return null so next-auth
@@ -136,7 +148,7 @@ const providers: NextAuthOptions['providers'] = [
             })
             user = await db.user.findUnique({
               where: { email },
-              select: { id: true, email: true, name: true, passwordHash: true, role: true, status: true, profileComplete: true, authorityVersion: true, sessionsRevokedAt: true },
+              select: selectFields,
             })
           } catch {}
         }
@@ -159,7 +171,7 @@ const providers: NextAuthOptions['providers'] = [
             if (newValid) {
               user = await db.user.findUnique({
                 where: { email },
-                select: { id: true, email: true, name: true, passwordHash: true, role: true, status: true, profileComplete: true, authorityVersion: true, sessionsRevokedAt: true },
+                select: selectFields,
               })
             } else {
               await checkRateLimit({ action: 'credential_login_fail', identifier: email, limit: MAX_LOGIN_ATTEMPTS, windowMs: LOGIN_WINDOW_MS }).catch(() => {})
@@ -176,6 +188,13 @@ const providers: NextAuthOptions['providers'] = [
       }
 
       await db.rateLimitBucket.delete({ where: { key: failKey } }).catch(() => {})
+
+      // After all the admin-auto-fix branches above, user is guaranteed non-null
+      // here (any path that left user null already returned). The non-null assertion
+      // is safe because every failure path returned early.
+      if (!user) {
+        return null
+      }
 
       return {
         id: user.id,

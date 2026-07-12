@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useRef, useEffect, useCallback } from 'react'
+import { useState, useMemo, useRef, useEffect } from 'react'
 import {
   BookOpen,
   Target,
@@ -28,7 +28,6 @@ import {
   Printer,
   Bookmark,
   BookmarkCheck,
-  Highlighter,
   X,
   ArrowLeft,
   ArrowRight,
@@ -36,12 +35,11 @@ import {
 import type {
   Lesson,
   SubjectNotes,
-  MarkedQuestion,
 } from '@/lib/curriculum/lesson-notes-loader'
 import { MarkdownRenderer } from './markdown-renderer'
 import { CodeBlock } from './code-block'
 import { DiagramRenderer } from './diagram-renderer'
-import { Callout, CalloutList } from './callout'
+import { CalloutList } from './callout'
 import {
   MarkedQuestionList,
   MnemonicList,
@@ -119,7 +117,12 @@ export function InteractiveNotesRenderer({
   const [activeSection, setActiveSection] = useState('overview')
   const [progress, setProgress] = useState(0)
   const [search, setSearch] = useState('')
-  const [bookmarked, setBookmarked] = useState(false)
+  const [bookmarked, setBookmarked] = useState(() => {
+    // Lazy init from localStorage (avoids setState-in-effect)
+    if (typeof window === 'undefined') return false
+    const key = `lernio:notes:bookmark:${subject.subjectCode}:${lesson.slug}`
+    return localStorage.getItem(key) === '1'
+  })
   const mainRef = useRef<HTMLElement>(null)
 
   const visibleSections = useMemo(
@@ -152,12 +155,6 @@ export function InteractiveNotesRenderer({
     handler()
     return () => window.removeEventListener('scroll', handler)
   }, [visibleSections])
-
-  // Restore bookmark state from localStorage
-  useEffect(() => {
-    const key = `lernio:notes:bookmark:${subject.subjectCode}:${lesson.slug}`
-    setBookmarked(localStorage.getItem(key) === '1')
-  }, [subject.subjectCode, lesson.slug])
 
   const toggleBookmark = () => {
     const key = `lernio:notes:bookmark:${subject.subjectCode}:${lesson.slug}`

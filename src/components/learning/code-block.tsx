@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useRef } from 'react'
 import { Check, Copy, Expand, Shrink } from 'lucide-react'
 import hljs from 'highlight.js/lib/core'
 
@@ -153,7 +153,7 @@ export function CodeBlock({
             className={`hljs language-${lang} block`}
             dangerouslySetInnerHTML={{
               __html: showLineNumbers
-                ? withLineNumbers(highlighted, visibleLines.length, lines.length - collapseThreshold)
+                ? withLineNumbers(highlighted)
                 : highlighted,
             }}
           />
@@ -185,7 +185,7 @@ export function CodeBlock({
   )
 }
 
-function withLineNumbers(highlightedHtml: string, visibleCount: number, hiddenCount: number): string {
+function withLineNumbers(highlightedHtml: string): string {
   // Inject line-number spans. Each line is wrapped in a flex row.
   const lines = highlightedHtml.split('\n')
   return lines
