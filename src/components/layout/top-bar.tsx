@@ -174,14 +174,15 @@ export function TopBar() {
           <div className="flex flex-1 items-center justify-end gap-1.5 md:flex-none">
             <button
               onClick={() => {
-                window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true }))
+                const isMac = navigator.platform.includes('Mac')
+                window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: isMac, ctrlKey: !isMac }))
               }}
               className="hidden items-center gap-1.5 rounded-md border border-border px-2.5 py-1.5 text-xs text-muted-foreground transition-colors hover:bg-accent sm:flex"
               aria-label="Quick search"
             >
               <Search className="h-3.5 w-3.5" />
               <span className="hidden lg:inline">Search</span>
-              <kbd className="hidden rounded border border-border px-1 font-mono text-[10px] lg:inline">⌘K</kbd>
+              <kbd className="hidden rounded border border-border px-1 font-mono text-[10px] lg:inline">{typeof navigator !== 'undefined' && navigator.platform.includes('Mac') ? '⌘K' : 'Ctrl K'}</kbd>
             </button>
 
             <NotificationBell />

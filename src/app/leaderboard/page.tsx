@@ -18,7 +18,7 @@ export default async function LeaderboardPage() {
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <TopBar />
       <main className="flex-1 page-wipe bg-background text-foreground">
-      <div className="mx-auto max-w-3xl px-4 py-6 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:px-8">
           <BackButton />
         <div className="mb-6 flex items-center gap-3">
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-500/10"><Trophy className="h-6 w-6 text-amber-600" /></div>

@@ -123,13 +123,13 @@ export default async function MaterialsLessonPage({
             </div>
 
             {/* Sidebar — lesson navigation */}
-            <aside className="space-y-4 lg:sticky lg:top-20 lg:self-start lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto">
+            <aside className="space-y-4 lg:sticky lg:top-20 lg:self-start">
               <div className="rounded-lg border border-border bg-card p-4">
                 <h3 className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                   <BookOpen className="h-4 w-4 text-primary" />
                   All Lessons
                 </h3>
-                <nav className="space-y-0.5 max-h-96 overflow-y-auto">
+                <nav className="space-y-0.5 lg:max-h-[calc(100vh-12rem)] lg:overflow-y-auto">
                   {allLessons.map((l, i) => {
                     const isActive = l.slug === lesson.slug
                     return (

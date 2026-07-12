@@ -16,7 +16,7 @@ export default async function CodingPage() {
       <TopBar />
       <main className="flex-1 min-w-0 flex flex-col">
         <div className="flex-1">
-          <div className="mx-auto max-w-4xl px-4 py-6 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:px-8">
             {/* Header */}
             <div className="mb-6">
               <div className="flex items-center gap-3 mb-2">

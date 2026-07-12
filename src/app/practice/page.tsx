@@ -37,7 +37,7 @@ export default async function PracticePage() {
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <TopBar />
       <main className="flex-1 page-wipe bg-background text-foreground">
-      <div className="mx-auto max-w-3xl px-4 py-6 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:px-8">
         <h1 className="text-2xl font-bold">Practice</h1>
         <p className="mt-1 text-sm text-muted-foreground">Quick practice quizzes with instant feedback. Choose a subject to start.</p>
         <div className="mt-6">
