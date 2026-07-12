@@ -195,9 +195,9 @@ export function PlannerClient({ subjects }: { subjects: SubjectInfo[] }) {
               className="rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none"
             >
               <option value={1}>Low</option>
-              <option value={2}>Low</option>
+              <option value={2}>Low-Medium</option>
               <option value={3}>Medium</option>
-              <option value={4}>High</option>
+              <option value={4}>Medium-High</option>
               <option value={5}>High</option>
             </select>
             <button onClick={addTask} className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">

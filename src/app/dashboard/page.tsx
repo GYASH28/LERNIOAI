@@ -2,6 +2,8 @@ import { redirect } from 'next/navigation'
 import { getCurrentUser } from '@/lib/auth'
 import { db } from '@/lib/db'
 import Link from 'next/link'
+import { TopBar } from '@/components/layout/top-bar'
+import { Footer } from '@/components/layout/footer'
 import {
   BookOpen, PlayCircle, Target, Flame, Zap, TrendingUp, ArrowRight,
   Calendar, Award, Crown, Mail, Clock, Users, GraduationCap,
@@ -128,7 +130,9 @@ export default async function DashboardPage() {
     : 'from-indigo-500/10 via-blue-900/5 to-transparent'
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen flex flex-col bg-background text-foreground">
+      <TopBar />
+      <main className="flex-1 page-wipe">
       <div className="mx-auto max-w-6xl px-5 py-6 sm:px-6 lg:px-8 page-wipe">
         {/* ─── Profile completion prompt ─── */}
         {needsClassSetup && (
@@ -346,6 +350,8 @@ export default async function DashboardPage() {
           </div>
         </section>
       </div>
-    </main>
+      </main>
+      <Footer />
+    </div>
   )
 }

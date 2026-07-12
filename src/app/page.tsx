@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getCurrentUser } from '@/lib/auth'
 import { CinematicIntro } from '@/components/marketing/cinematic-intro'
 import { LandingMotionController } from '@/components/marketing/landing-motion-controller'
 import { PublicHeader } from '@/components/marketing/public-header'
@@ -50,11 +51,9 @@ const softwareApplicationLd = {
 }
 
 export default async function LandingPage() {
-  // Landing page is static — no auth check needed.
-  // The buttons show "Get Started" / "Sign In" by default.
-  // Authenticated users see the same landing page; they can click
-  // "Dashboard" in the header to go to their dashboard.
-  const isAuthenticated = false
+  // Check if user is authenticated to show personalized CTA
+  const authUser = await getCurrentUser().catch(() => null)
+  const isAuthenticated = !!authUser
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">

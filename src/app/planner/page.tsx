@@ -1,4 +1,6 @@
 import { redirect } from 'next/navigation'
+import { TopBar } from "@/components/layout/top-bar"
+import { Footer } from "@/components/layout/footer"
 import { BackButton } from "@/components/ui/back-button"
 import { getCurrentUser } from '@/lib/auth'
 import { db } from '@/lib/db'
@@ -27,7 +29,9 @@ export default async function PlannerPage() {
   const subjects = getManifestSubjectsForSemester(programmeCode, semesterNumber)
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen flex flex-col bg-background text-foreground">
+      <TopBar />
+      <main className="flex-1 page-wipe bg-background text-foreground">
       <div className="mx-auto max-w-4xl px-4 py-6 sm:px-6 lg:px-8">
           <BackButton />
         <h1 className="text-2xl font-bold">Study Planner</h1>
@@ -37,5 +41,7 @@ export default async function PlannerPage() {
         </div>
       </div>
     </main>
+      <Footer />
+    </div>
   )
 }
