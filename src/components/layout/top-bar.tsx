@@ -33,10 +33,6 @@ import {
   ChevronDown,
   ChevronUp,
   Trophy,
-<<<<<<< HEAD
-  GraduationCap,
-=======
->>>>>>> d92da2e531b07bd2c1c6b47c60fa7756e321f845
   HelpCircle,
 } from 'lucide-react'
 import type { ViewKey } from '@/lib/types'

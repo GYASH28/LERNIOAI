@@ -117,4 +117,4 @@ if (skipDbSetup) {
 
 // ─── Step 3: Next.js build ────────────────────────────────────────────────
 console.log('[vercel-build] Building Next.js...')
-runCommand('npx', ['next', 'build', '--webpack'])
+runCommand('npx', ['next', 'build'])

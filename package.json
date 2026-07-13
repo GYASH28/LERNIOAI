@@ -110,10 +110,7 @@
     "react-markdown": "^10.1.0",
     "react-resizable-panels": "^3.0.3",
     "recharts": "^2.15.4",
-<<<<<<< HEAD
-=======
     "rehype-highlight": "^7.0.2",
->>>>>>> d92da2e531b07bd2c1c6b47c60fa7756e321f845
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.1",
     "server-only": "^0.0.1",

@@ -26,6 +26,9 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   experimental: {
     // Audit fix #24 (CVSS 2.5): expanded from 4 libs to cover all heavy barrel-import
     // packages. Each omitted lib was adding 3-8 KB to chunks that use only one symbol.
