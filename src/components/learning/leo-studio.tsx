@@ -59,6 +59,13 @@ import {
   Target,
   GitCompare,
   ArrowRight,
+  Copy,
+  Check,
+  RefreshCw,
+  ThumbsUp,
+  ThumbsDown,
+  ChevronDown as ChevronDownIcon,
+  PanelRight,
   type LucideIcon,
 } from 'lucide-react'
 import { LeoPremium } from '@/components/mascots/leo-premium'
@@ -263,6 +270,9 @@ export function LeoStudio() {
   const [ttsEnabled, setTtsEnabled] = useState(false)
   const [activeCitation, setActiveCitation] = useState<{ messageIdx: number; idx: number } | null>(null)
   const [pinnedLesson, setPinnedLesson] = useState<PinnedLesson | null>(null)
+  const [showScrollBtn, setShowScrollBtn] = useState(false)
+  const [mobileContextOpen, setMobileContextOpen] = useState(false)
+  const [copiedMsgId, setCopiedMsgId] = useState<string | null>(null)
 
   // ----- Refs -----
   const messagesRef = useRef<HTMLDivElement | null>(null)
@@ -340,6 +350,52 @@ export function LeoStudio() {
     return () => window.removeEventListener('keydown', onKey)
   }, [activeCitation])
 
+  // ----- Track scroll position to show/hide scroll-to-bottom button -----
+  useEffect(() => {
+    const el = messagesRef.current
+    if (!el) return
+    const onScroll = () => {
+      const { scrollTop, scrollHeight, clientHeight } = el
+      const distanceFromBottom = scrollHeight - scrollTop - clientHeight
+      setShowScrollBtn(distanceFromBottom > 200)
+    }
+    el.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+    return () => el.removeEventListener('scroll', onScroll)
+  }, [messages.length])
+
+  // ----- Copy message content -----
+  const onCopyMessage = useCallback((msg: ChatMessage) => {
+    navigator.clipboard.writeText(msg.content).then(() => {
+      setCopiedMsgId(msg.id)
+      toast.success('Copied to clipboard')
+      window.setTimeout(() => setCopiedMsgId(null), 1500)
+    }).catch(() => toast.error('Could not copy'))
+  }, [])
+
+  // ----- Regenerate last LEO response -----
+  const onRegenerate = useCallback(() => {
+    if (isStreaming || messages.length < 2) return
+    // Find the last user message
+    let lastUserIdx = -1
+    for (let i = messages.length - 1; i >= 0; i--) {
+      if (messages[i].role === 'user') { lastUserIdx = i; break }
+    }
+    if (lastUserIdx < 0) return
+    const lastUserMsg = messages[lastUserIdx]
+    // Remove everything after (and including) the last user message's response
+    setMessages((current) => current.slice(0, lastUserIdx))
+    // Resend — use a ref to avoid circular dependency
+    window.setTimeout(() => {
+      void sendMessageRef.current(lastUserMsg.content, lastUserMsg.teachingStyle)
+    }, 100)
+  }, [isStreaming, messages])
+
+  // ----- Scroll to bottom -----
+  const scrollToBottom = useCallback(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
+  }, [])
+
   // ----- Cleanup on unmount -----
   useEffect(() => {
     return () => {
@@ -390,8 +446,7 @@ export function LeoStudio() {
   }, [serverSessionId, teachingStyle])
 
   // ----- Send a message -----
-  const sendMessage = useCallback(
-    async (raw: string, styleOverride?: TeachingStyle) => {
+  const sendMessage = async (raw: string, styleOverride?: TeachingStyle) => {
       const clean = raw.trim()
       if (!clean || sendingRef.current) return
 
@@ -515,9 +570,11 @@ export function LeoStudio() {
         sendingRef.current = false
         setIsStreaming(false)
       }
-    },
-    [ensureServerSession, teachingStyle, ttsPlay],
-  )
+    }
+
+  // Ref to break the circular dependency (sendMessage → onRegenerate → sendMessage)
+  const sendMessageRef = useRef(sendMessage)
+  sendMessageRef.current = sendMessage
 
   // ----- Form submit handler -----
   const onSubmit = useCallback(
@@ -618,32 +675,27 @@ export function LeoStudio() {
       <div className="leo-studio__chat">
         {/* ---- Sticky header ---- */}
         <header className="leo-studio__header" role="banner">
-          <LeoPremium state={leoState} size="md" withFloat={false} ariaLabel="" />
-          <div className="min-w-0 flex-1">
-            <h1
-              className="m-0 text-base font-semibold leading-tight"
-              style={{ color: 'var(--text-strong)', letterSpacing: '-0.01em' }}
-            >
-              LEO
-            </h1>
-            <p
-              className="m-0 truncate text-xs"
-              style={{ color: 'var(--text-secondary)' }}
-            >
-              AI Learning Studio
-            </p>
+          <div className="leo-studio__header-info">
+            <LeoPremium state={leoState} size="md" withFloat={false} ariaLabel="" />
+            <div className="min-w-0">
+              <h1 className="leo-studio__header-title">
+                LEO
+                {leoState === 'thinking' && (
+                  <span className="leo-studio__header-status">thinking…</span>
+                )}
+                {leoState === 'encouraging' && (
+                  <span className="leo-studio__header-status">typing…</span>
+                )}
+              </h1>
+              <p className="leo-studio__header-subtitle">AI Learning Studio</p>
+            </div>
           </div>
 
-          {/* Teaching-style pills (horizontal scroll on mobile) */}
+          {/* Teaching-style pills (centered, horizontal scroll on mobile) */}
           <div
-            className="flex items-center gap-1.5 overflow-x-auto"
+            className="leo-studio__styles"
             role="group"
             aria-label="Teaching style"
-            style={{
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none',
-              maxWidth: 'min(38vw, 360px)',
-            }}
           >
             {TEACHING_STYLES.map((s) => {
               const Icon = s.icon
@@ -657,49 +709,55 @@ export function LeoStudio() {
                   title={s.description}
                   onClick={() => setTeachingStyle(s.id)}
                 >
-                  <span className="inline-flex items-center gap-1">
-                    <Icon className="h-3 w-3" aria-hidden />
-                    {s.label}
-                  </span>
+                  <Icon className="h-3 w-3" aria-hidden />
+                  {s.label}
                 </button>
               )
             })}
           </div>
 
-          {/* TTS toggle */}
-          <button
-            type="button"
-            onClick={onTtsToggle}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-lg border transition-colors"
-            style={{
-              borderColor: ttsEnabled ? 'var(--brand)' : 'var(--border-default)',
-              backgroundColor: ttsEnabled
-                ? 'color-mix(in oklch, var(--brand) 12%, transparent)'
-                : 'transparent',
-              color: ttsEnabled ? 'var(--brand)' : 'var(--text-secondary)',
-            }}
-            aria-pressed={ttsEnabled}
-            aria-label={ttsEnabled ? 'Disable voice playback' : 'Enable voice playback'}
-            title={ttsEnabled ? 'Voice on' : 'Voice off'}
-          >
-            {ttsEnabled ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
-          </button>
+          {/* Header actions */}
+          <div className="leo-studio__header-actions">
+            {/* TTS toggle */}
+            <button
+              type="button"
+              onClick={onTtsToggle}
+              className={cn('leo-icon-btn', ttsEnabled && 'is-active')}
+              aria-pressed={ttsEnabled}
+              aria-label={ttsEnabled ? 'Disable voice playback' : 'Enable voice playback'}
+              title={ttsEnabled ? 'Voice on' : 'Voice off'}
+            >
+              {ttsEnabled ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
+            </button>
 
-          {/* Clear chat */}
-          <button
-            type="button"
-            onClick={onClearChat}
-            disabled={isStreaming || messages.length === 0}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-lg border transition-colors disabled:cursor-not-allowed disabled:opacity-50"
-            style={{
-              borderColor: 'var(--border-default)',
-              color: 'var(--text-secondary)',
-            }}
-            aria-label="Clear conversation"
-            title="Clear conversation"
-          >
-            <Trash2 className="h-4 w-4" />
-          </button>
+            {/* Clear chat */}
+            <button
+              type="button"
+              onClick={onClearChat}
+              disabled={isStreaming || messages.length === 0}
+              className="leo-icon-btn"
+              aria-label="Clear conversation"
+              title="Clear conversation"
+            >
+              <Trash2 className="h-4 w-4" />
+            </button>
+
+            {/* Mobile context panel toggle */}
+            <button
+              type="button"
+              onClick={() => setMobileContextOpen(true)}
+              className="leo-context-toggle"
+              aria-label="Open context panel"
+              title="Context panel"
+            >
+              <PanelRight className="h-4 w-4" />
+              {(lastAssistant?.followUps?.length || 0) > 0 && (
+                <span className="leo-context-badge">
+                  {lastAssistant!.followUps!.length}
+                </span>
+              )}
+            </button>
+          </div>
         </header>
 
         {/* ---- Messages ---- */}
@@ -717,12 +775,13 @@ export function LeoStudio() {
               onUnpin={() => setPinnedLesson(null)}
             />
           ) : (
-            <div className="flex flex-col gap-4 pb-4">
+            <div className="leo-messages-list">
               {messages.map((message, idx) => (
                 <MessageBubble
                   key={message.id}
                   message={message}
                   messageIdx={idx}
+                  isLast={idx === messages.length - 1}
                   activeCitation={activeCitation}
                   onCitationClick={(cIdx) =>
                     setActiveCitation(
@@ -735,21 +794,42 @@ export function LeoStudio() {
                   ttsPlaying={ttsPlaying}
                   ttsLoading={ttsLoading}
                   onCloseCitation={() => setActiveCitation(null)}
+                  onCopy={() => onCopyMessage(message)}
+                  copied={copiedMsgId === message.id}
+                  onRegenerate={onRegenerate}
+                  canRegenerate={!isStreaming && idx === messages.length - 1 && message.role === 'assistant'}
                 />
               ))}
               <div ref={messagesEndRef} />
+
+              {/* Scroll-to-bottom button */}
+              <AnimatePresence>
+                {showScrollBtn && (
+                  <motion.button
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    onClick={scrollToBottom}
+                    className="leo-scroll-btn"
+                    aria-label="Scroll to latest"
+                    title="Jump to latest"
+                  >
+                    <ChevronDownIcon className="h-4 w-4" />
+                  </motion.button>
+                )}
+              </AnimatePresence>
             </div>
           )}
         </div>
 
         {/* ---- Input area ---- */}
         <div className="leo-studio__input">
-          <form onSubmit={onSubmit} className="w-full">
+          <form onSubmit={onSubmit}>
             <div className="leo-input-wrapper">
               <textarea
                 ref={inputRef}
                 className="leo-input-textarea"
-                placeholder="Ask LEO anything — concepts, code, exam prep…"
+                placeholder={`Ask LEO in ${TEACHING_STYLES.find(s => s.id === teachingStyle)?.label} mode…`}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={onInputKeyDown}
@@ -768,7 +848,6 @@ export function LeoStudio() {
                 aria-pressed={voiceRecording}
                 aria-label={voiceRecording ? 'Stop recording' : 'Start voice input'}
                 title={voiceRecording ? 'Stop recording' : 'Voice input'}
-                data-recording={voiceRecording ? 'true' : undefined}
               >
                 {voiceRecording ? <Square className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
               </button>
@@ -798,40 +877,13 @@ export function LeoStudio() {
             </div>
 
             {/* Meta line */}
-            <div
-              id="leo-input-meta"
-              className="mt-2 flex items-center justify-between text-[11px]"
-              style={{ color: 'var(--text-muted)' }}
-            >
+            <div id="leo-input-meta" className="leo-input-meta">
               <span>
                 {voiceError ? (
                   <span style={{ color: 'var(--destructive)' }}>{voiceError}</span>
                 ) : (
                   <span>
-                    <kbd
-                      className="rounded px-1"
-                      style={{
-                        background: 'var(--surface-inset)',
-                        border: '1px solid var(--border-subtle)',
-                        fontFamily: 'var(--font-mono, monospace)',
-                        fontSize: '10px',
-                      }}
-                    >
-                      Enter
-                    </kbd>{' '}
-                    send ·{' '}
-                    <kbd
-                      className="rounded px-1"
-                      style={{
-                        background: 'var(--surface-inset)',
-                        border: '1px solid var(--border-subtle)',
-                        fontFamily: 'var(--font-mono, monospace)',
-                        fontSize: '10px',
-                      }}
-                    >
-                      Shift+Enter
-                    </kbd>{' '}
-                    newline
+                    <kbd>Enter</kbd> send · <kbd>Shift+Enter</kbd> newline
                   </span>
                 )}
               </span>
@@ -844,7 +896,7 @@ export function LeoStudio() {
       </div>
 
       {/* =========================================================== */}
-      {/* Context panel (desktop only)                                 */}
+      {/* Context panel (desktop)                                      */}
       {/* =========================================================== */}
       <aside className="leo-studio__context" aria-label="Context panel">
         <ContextPanel
@@ -857,6 +909,68 @@ export function LeoStudio() {
           disabled={isStreaming}
         />
       </aside>
+
+      {/* =========================================================== */}
+      {/* Mobile context drawer                                        */}
+      {/* =========================================================== */}
+      <AnimatePresence>
+        {mobileContextOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileContextOpen(false)}
+              style={{
+                position: 'fixed',
+                inset: 0,
+                background: 'oklch(0 0 0 / 0.4)',
+                zIndex: 40,
+              }}
+            />
+            <motion.aside
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+              style={{
+                position: 'fixed',
+                top: 0,
+                right: 0,
+                bottom: 0,
+                width: '85%',
+                maxWidth: 340,
+                background: 'var(--surface-1)',
+                borderLeft: '1px solid var(--border-subtle)',
+                zIndex: 41,
+                overflowY: 'auto',
+                padding: '1.25rem 1rem',
+              }}
+              aria-label="Context panel"
+            >
+              <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '0.75rem' }}>
+                <button
+                  type="button"
+                  onClick={() => setMobileContextOpen(false)}
+                  className="leo-icon-btn"
+                  aria-label="Close panel"
+                >
+                  <ChevronDown className="h-4 w-4 rotate-90" />
+                </button>
+              </div>
+              <ContextPanel
+                pinnedLesson={pinnedLesson}
+                onUnpin={() => setPinnedLesson(null)}
+                followUps={lastAssistant?.followUps ?? []}
+                citations={allCitations}
+                lastCitations={lastAssistant?.citations ?? []}
+                onFollowUp={(p) => { onFollowUp(p); setMobileContextOpen(false) }}
+                disabled={isStreaming}
+              />
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
@@ -880,21 +994,27 @@ function EmptyState({
   return (
     <div className="leo-empty" role="region" aria-label="LEO welcome">
       <motion.div
+        className="leo-empty__hero"
         initial={{ opacity: 0, scale: 0.85 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.4, ease: 'easeOut' }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
       >
         <LeoPremium state="greeting" size="2xl" withFloat withGlow />
       </motion.div>
 
-      <h2 className="leo-empty__title mt-6">Hi, I&apos;m LEO</h2>
+      <h2 className="leo-empty__title">Hi, I&apos;m LEO</h2>
       <p className="leo-empty__lede">
         Your AI learning companion. Ask me anything — I&apos;ll teach, not just answer.
       </p>
 
+      <span className="leo-empty__hint">
+        <Sparkles className="h-3 w-3" />
+        6 teaching styles · Voice ready · Citation-backed
+      </span>
+
       {pinnedLesson && (
         <div
-          className="mt-4 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs"
+          className="mt-2 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs"
           style={{
             borderColor: 'var(--border-subtle)',
             background: 'var(--surface-inset)',
@@ -953,21 +1073,31 @@ function EmptyState({
 function MessageBubble({
   message,
   messageIdx,
+  isLast,
   activeCitation,
   onCitationClick,
   onSpeak,
   ttsPlaying,
   ttsLoading,
   onCloseCitation,
+  onCopy,
+  copied,
+  onRegenerate,
+  canRegenerate,
 }: {
   message: ChatMessage
   messageIdx: number
+  isLast: boolean
   activeCitation: { messageIdx: number; idx: number } | null
   onCitationClick: (idx: number) => void
   onSpeak: () => void
   ttsPlaying: boolean
   ttsLoading: boolean
   onCloseCitation: () => void
+  onCopy: () => void
+  copied: boolean
+  onRegenerate: () => void
+  canRegenerate: boolean
 }) {
   if (message.role === 'user') {
     return (
@@ -975,10 +1105,10 @@ function MessageBubble({
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.25, ease: 'easeOut' }}
-        className="flex justify-end"
+        className="leo-msg-row leo-msg-row--user"
       >
         <div className="leo-bubble-user">
-          <p className="m-0 whitespace-pre-wrap">{message.content}</p>
+          <p>{message.content}</p>
         </div>
       </motion.div>
     )
@@ -993,7 +1123,7 @@ function MessageBubble({
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.25, ease: 'easeOut' }}
-      className="flex items-start gap-3"
+      className="leo-msg-row"
     >
       <span className="leo-bubble-leo__avatar" aria-hidden>
         <LeoPremium
@@ -1012,58 +1142,73 @@ function MessageBubble({
           <div className="leo-bubble-leo__content">
             <MarkdownContent content={message.content} streaming={!!message.isStreaming} />
 
-            {/* Citation chips are inline-rendered, but also list them at the bottom
-                for screen readers + non-marker-aware users. */}
-            {citations.length > 0 && !message.isStreaming && (
-              <div className="mt-3 flex flex-wrap items-center gap-1.5 border-t pt-3"
-                style={{ borderColor: 'var(--border-subtle)' }}
-                aria-label="Sources cited"
-              >
-                <span
-                  className="mr-1 text-[10px] font-bold uppercase tracking-wider"
-                  style={{ color: 'var(--text-muted)' }}
-                >
-                  Sources
-                </span>
-                {citations.map((c, idx) => (
-                  <button
-                    key={`${c.sourceId}-${idx}`}
-                    type="button"
-                    className="leo-citation"
-                    onClick={() => onCitationClick(idx)}
-                    title={c.location || c.title}
-                    aria-label={`Citation ${idx + 1}: ${c.title}`}
-                  >
-                    {idx + 1}
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {/* Footer toolbar */}
+            {/* Citations + message actions footer */}
             {!message.isStreaming && message.content && (
-              <div
-                className="mt-3 flex items-center justify-end gap-1 border-t pt-2"
-                style={{ borderColor: 'var(--border-subtle)' }}
-              >
-                <button
-                  type="button"
-                  onClick={onSpeak}
-                  disabled={ttsLoading}
-                  className="inline-flex h-7 items-center gap-1 rounded-md px-2 text-[11px] font-medium transition-colors disabled:opacity-50"
-                  style={{ color: 'var(--text-secondary)' }}
-                  aria-label={ttsPlaying ? 'Stop voice playback' : 'Read this aloud'}
-                  title={ttsPlaying ? 'Stop voice' : 'Read aloud'}
-                >
-                  {ttsLoading ? (
-                    <Sparkles className="h-3 w-3 animate-pulse" />
-                  ) : ttsPlaying ? (
-                    <VolumeX className="h-3 w-3" />
-                  ) : (
-                    <Volume2 className="h-3 w-3" />
+              <div className="leo-msg-footer">
+                {citations.length > 0 && (
+                  <div className="leo-msg-citations" aria-label="Sources cited">
+                    <span className="leo-msg-citations__label">Sources</span>
+                    {citations.map((c, idx) => (
+                      <button
+                        key={`${c.sourceId}-${idx}`}
+                        type="button"
+                        className="leo-citation"
+                        onClick={() => onCitationClick(idx)}
+                        title={c.location || c.title}
+                        aria-label={`Citation ${idx + 1}: ${c.title}`}
+                      >
+                        {idx + 1}
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                <div className="leo-msg-actions">
+                  {/* Copy */}
+                  <button
+                    type="button"
+                    onClick={onCopy}
+                    className="leo-msg-action-btn"
+                    aria-label="Copy message"
+                    title="Copy"
+                  >
+                    {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+                    {copied ? 'Copied' : 'Copy'}
+                  </button>
+
+                  {/* Listen */}
+                  <button
+                    type="button"
+                    onClick={onSpeak}
+                    disabled={ttsLoading}
+                    className="leo-msg-action-btn"
+                    aria-label={ttsPlaying ? 'Stop voice playback' : 'Read this aloud'}
+                    title={ttsPlaying ? 'Stop voice' : 'Listen'}
+                  >
+                    {ttsLoading ? (
+                      <Sparkles className="h-3 w-3 animate-pulse" />
+                    ) : ttsPlaying ? (
+                      <VolumeX className="h-3 w-3" />
+                    ) : (
+                      <Volume2 className="h-3 w-3" />
+                    )}
+                    {ttsPlaying ? 'Stop' : 'Listen'}
+                  </button>
+
+                  {/* Regenerate (only on last assistant message) */}
+                  {canRegenerate && (
+                    <button
+                      type="button"
+                      onClick={onRegenerate}
+                      className="leo-msg-action-btn"
+                      aria-label="Regenerate response"
+                      title="Regenerate"
+                    >
+                      <RefreshCw className="h-3 w-3" />
+                      Retry
+                    </button>
                   )}
-                  {ttsPlaying ? 'Stop' : 'Listen'}
-                </button>
+                </div>
               </div>
             )}
           </div>
