@@ -1,1 +1,1 @@
-export { TutorView } from './tutor-v3'
+export { LeoStudio as TutorView } from '@/components/learning/leo-studio'
