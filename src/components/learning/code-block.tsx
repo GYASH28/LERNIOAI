@@ -40,20 +40,77 @@ export function CodeBlock({ code, language='plaintext', title, showLineNumbers=t
   catch { highlighted = code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') }
   const copy = async () => { try { await navigator.clipboard.writeText(code); setCopied(true); setTimeout(()=>setCopied(false),1500) } catch {} }
   return (
-    <div className="group relative rounded-lg border border-zinc-700/50 bg-[#0d1117] overflow-hidden">
-      <div className="flex items-center justify-between border-b border-zinc-700/50 bg-zinc-800/50 px-3 py-1.5">
+    <div
+      className="group relative rounded-lg border overflow-hidden"
+      style={{
+        backgroundColor: 'var(--surface-inset)',
+        borderColor: 'var(--border-subtle)',
+      }}
+    >
+      <div
+        className="flex items-center justify-between border-b px-3 py-1.5"
+        style={{
+          borderColor: 'var(--border-subtle)',
+          backgroundColor: 'var(--surface-2)',
+        }}
+      >
         <div className="flex items-center gap-2 min-w-0">
-          <span className="flex gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-red-500/70"/><span className="h-2.5 w-2.5 rounded-full bg-yellow-500/70"/><span className="h-2.5 w-2.5 rounded-full bg-green-500/70"/></span>
-          {title && <span className="ml-2 truncate text-xs font-medium text-zinc-300">{title}</span>}
-          <span className="ml-auto text-[10px] font-mono uppercase text-zinc-500">{lang}</span>
+          <span className="flex gap-1.5">
+            <span className="h-2.5 w-2.5 rounded-full bg-red-500/70" />
+            <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/70" />
+            <span className="h-2.5 w-2.5 rounded-full bg-green-500/70" />
+          </span>
+          {title && (
+            <span
+              className="ml-2 truncate text-xs font-medium"
+              style={{ color: 'var(--text-secondary)' }}
+            >
+              {title}
+            </span>
+          )}
+          <span
+            className="ml-auto text-[10px] font-mono uppercase"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            {lang}
+          </span>
         </div>
-        <button onClick={copy} className="flex items-center gap-1 rounded px-2 py-1 text-[10px] font-medium text-zinc-400 hover:bg-zinc-700/50 hover:text-zinc-100 transition-colors" type="button">
-          {copied ? <><Check className="h-3 w-3 text-green-400"/>Copied</> : <><Copy className="h-3 w-3"/>Copy</>}
+        <button
+          onClick={copy}
+          className="flex items-center gap-1 rounded px-2 py-1 text-[10px] font-medium transition-colors"
+          style={{ color: 'var(--text-muted)' }}
+          type="button"
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'var(--surface-3)'
+            e.currentTarget.style.color = 'var(--text-default)'
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'transparent'
+            e.currentTarget.style.color = 'var(--text-muted)'
+          }}
+        >
+          {copied ? (
+            <>
+              <Check className="h-3 w-3" style={{ color: 'var(--success)' }} />
+              Copied
+            </>
+          ) : (
+            <>
+              <Copy className="h-3 w-3" />
+              Copy
+            </>
+          )}
         </button>
       </div>
       <div className="overflow-x-auto">
-        <pre className="m-0 p-3 text-xs leading-relaxed font-mono">
-          <code className={`hljs language-${lang} block`} dangerouslySetInnerHTML={{ __html: highlighted }} />
+        <pre
+          className="m-0 p-3 text-xs leading-relaxed font-mono"
+          style={{ color: 'var(--text-default)' }}
+        >
+          <code
+            className={`hljs language-${lang} block`}
+            dangerouslySetInnerHTML={{ __html: highlighted }}
+          />
         </pre>
       </div>
     </div>

@@ -3,7 +3,7 @@ import { getCurrentUser } from '@/lib/auth'
 import { TopBar } from '@/components/layout/top-bar'
 import { Footer } from '@/components/layout/footer'
 import { getSubjectNotes, findLessonBySlug, getAdjacentLessons } from '@/lib/curriculum/lesson-notes-loader'
-import { PremiumLessonReader } from '@/components/learning/premium-lesson-reader'
+import { LearnModeReader } from '@/components/learning/learn-mode-reader'
 
 export const dynamic = 'force-dynamic'
 
@@ -35,8 +35,8 @@ export default async function MaterialsLessonPage({
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <TopBar />
       <main className="flex-1 page-wipe">
-        {/* Premium Lesson Reader — 10x better reading experience */}
-        <PremiumLessonReader
+        {/* Learn Mode Reader — guided 5-phase learning experience */}
+        <LearnModeReader
           lesson={lesson}
           subject={subjectNotes}
           prevHref={prev ? `/materials/lesson/${subjectCode}/${prev.slug}` : null}
