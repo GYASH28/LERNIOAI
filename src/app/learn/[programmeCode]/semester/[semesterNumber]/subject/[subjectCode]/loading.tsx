@@ -5,7 +5,7 @@ export default function SubjectLoading() {
     <div className="min-h-screen bg-background" aria-hidden="true">
       {/* Hero */}
       <div className="border-b border-border/70 bg-muted/30">
-        <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl px-5 py-6 sm:px-6 lg:px-8">
           <Skeleton variant="text" width={100} height={14} />
           <Skeleton variant="text" width={280} height={28} className="mt-3" />
           <Skeleton variant="text" width={400} height={14} className="mt-2" />
@@ -17,7 +17,7 @@ export default function SubjectLoading() {
         </div>
       </div>
       {/* Coverage focus */}
-      <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl px-5 py-6 sm:px-6 lg:px-8">
         <Skeleton variant="rect" height={80} />
       </div>
       {/* Video cards (matching the 2-col grid) */}

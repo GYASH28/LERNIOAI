@@ -1,0 +1,1946 @@
+{
+  "subjectCode": "R23CP3401",
+  "subjectName": "Recent Trends in Computer Networks",
+  "semester": 5,
+  "credits": 4,
+  "units": [
+    {
+      "number": 1,
+      "title": "Software Defined Networking",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "sdn-concepts",
+          "title": "SDN Concepts",
+          "durationMin": 25,
+          "difficulty": "easy",
+          "overview": "SDN Concepts is a key topic in Recent Trends in Computer Networks, covered under Software Defined Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "SDN Concepts: Core concept in Recent Trends in Computer Networks",
+            "Definition: The formal definition and scope of sdn concepts",
+            "Key principles: Fundamental rules and properties",
+            "Working: How sdn concepts operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within SDN Concepts",
+            "Relationship: connects to Software Defined Networking",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "SDN Concepts — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in Recent Trends in Computer Networks"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding Software Defined Networking"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of SDN Concepts",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is SDN Concepts?",
+              "options": [
+                "A core concept in Recent Trends in Computer Networks",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "SDN Concepts is a fundamental concept in Recent Trends in Computer Networks."
+            },
+            {
+              "question": "SDN Concepts is studied under which unit?",
+              "options": [
+                "Software Defined Networking",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "SDN Concepts belongs to the Software Defined Networking unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of SDN Concepts?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "SDN Concepts has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand SDN Concepts and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on SDN Concepts"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nSDN Concepts is a key topic in Recent Trends in Computer Networks, covered under Software Defined Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- SDN Concepts: Core concept in Recent Trends in Computer Networks\n- Definition: The formal definition and scope of sdn concepts\n- Key principles: Fundamental rules and properties\n- Working: How sdn concepts operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within SDN Concepts`\n- `Relationship: connects to Software Defined Networking`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### SDN Concepts — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Recent Trends in Computer Networks |\n| Importance | Essential for understanding Software Defined Networking |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nSDN Concepts is a key topic in Recent Trends in Computer Networks, covered under Software Defined Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "SDN Concepts — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "SDN Concepts — Concept Map",
+              "content": "mindmap\n  root((SDN Concepts))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is SDN Concepts?",
+              "solution": "Correct answer: A core concept in Recent Trends in Computer Networks",
+              "explanation": "SDN Concepts is a fundamental concept in Recent Trends in Computer Networks."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain SDN Concepts with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define SDN Concepts.",
+              "modelAnswer": "Core concept in Recent Trends in Computer Networks"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of sdn concepts"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within SDN Concepts",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define SDN Concepts.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within SDN Concepts",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to Software Defined Networking",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain SDN Concepts in detail with a diagram.",
+              "modelAnswer": "SDN Concepts is a key topic in Recent Trends in Computer Networks, covered under Software Defined Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss SDN Concepts with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — SDN Concepts\n\n**One-line definition:** SDN Concepts is a key topic in Recent Trends in Computer Networks, covered under Software Defined Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles\n\n**Key points:**\n\n- SDN Concepts: Core concept in Recent Trends in Computer Networks\n- Definition: The formal definition and scope of sdn concepts\n- Key principles: Fundamental rules and properties\n- Working: How sdn concepts operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within SDN Concepts`\n- `Relationship: connects to Software Defined Networking`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of SDN Concepts\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "SDN Concepts: Core concept in Recent Trends in Computer Networks",
+            "Definition: The formal definition and scope of sdn concepts",
+            "Key principles: Fundamental rules and properties",
+            "Working: How sdn concepts operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within SDN Concepts",
+            "Formula: Relationship: connects to Software Defined Networking",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of SDN Concepts"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "SDN Concepts is a key topic in Recent Trends in Computer Networks, covered under Software Defined Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "SDN Concepts: Core concept in Recent Trends in Computer Networks"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is SDN Concepts?",
+              "back": "Core concept in Recent Trends in Computer Networks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of sdn concepts",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How sdn concepts operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "SDN Concepts is a key topic in Recent Trends in Computer Networks, covered under Software Defined Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "SDN Concepts is a key topic in Recent Trends in Computer Networks, covered under Software Defined Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: SDN Concepts: Core concept in Recent Trends in Computer Networks, Definition: The formal definition and scope of sdn concepts, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "iot-protocols",
+            "modern-security-threats"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "IoT Networking",
+      "weightage": 25,
+      "lessons": [
+        {
+          "slug": "iot-protocols",
+          "title": "IoT Protocols",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "IoT Protocols is a key topic in Recent Trends in Computer Networks, covered under IoT Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "IoT Protocols: Core concept in Recent Trends in Computer Networks",
+            "Definition: The formal definition and scope of iot protocols",
+            "Key principles: Fundamental rules and properties",
+            "Working: How iot protocols operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within IoT Protocols",
+            "Relationship: connects to IoT Networking",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "IoT Protocols — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in Recent Trends in Computer Networks"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding IoT Networking"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of IoT Protocols",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is IoT Protocols?",
+              "options": [
+                "A core concept in Recent Trends in Computer Networks",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "IoT Protocols is a fundamental concept in Recent Trends in Computer Networks."
+            },
+            {
+              "question": "IoT Protocols is studied under which unit?",
+              "options": [
+                "IoT Networking",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "IoT Protocols belongs to the IoT Networking unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of IoT Protocols?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "IoT Protocols has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand IoT Protocols and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on IoT Protocols"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nIoT Protocols is a key topic in Recent Trends in Computer Networks, covered under IoT Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- IoT Protocols: Core concept in Recent Trends in Computer Networks\n- Definition: The formal definition and scope of iot protocols\n- Key principles: Fundamental rules and properties\n- Working: How iot protocols operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within IoT Protocols`\n- `Relationship: connects to IoT Networking`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### IoT Protocols — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Recent Trends in Computer Networks |\n| Importance | Essential for understanding IoT Networking |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nIoT Protocols is a key topic in Recent Trends in Computer Networks, covered under IoT Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "IoT Protocols — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "IoT Protocols — Concept Map",
+              "content": "mindmap\n  root((IoT Protocols))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is IoT Protocols?",
+              "solution": "Correct answer: A core concept in Recent Trends in Computer Networks",
+              "explanation": "IoT Protocols is a fundamental concept in Recent Trends in Computer Networks."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain IoT Protocols with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define IoT Protocols.",
+              "modelAnswer": "Core concept in Recent Trends in Computer Networks"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of iot protocols"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within IoT Protocols",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define IoT Protocols.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within IoT Protocols",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to IoT Networking",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain IoT Protocols in detail with a diagram.",
+              "modelAnswer": "IoT Protocols is a key topic in Recent Trends in Computer Networks, covered under IoT Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss IoT Protocols with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — IoT Protocols\n\n**One-line definition:** IoT Protocols is a key topic in Recent Trends in Computer Networks, covered under IoT Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practi\n\n**Key points:**\n\n- IoT Protocols: Core concept in Recent Trends in Computer Networks\n- Definition: The formal definition and scope of iot protocols\n- Key principles: Fundamental rules and properties\n- Working: How iot protocols operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within IoT Protocols`\n- `Relationship: connects to IoT Networking`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of IoT Protocols\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "IoT Protocols: Core concept in Recent Trends in Computer Networks",
+            "Definition: The formal definition and scope of iot protocols",
+            "Key principles: Fundamental rules and properties",
+            "Working: How iot protocols operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within IoT Protocols",
+            "Formula: Relationship: connects to IoT Networking",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of IoT Protocols"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "IoT Protocols is a key topic in Recent Trends in Computer Networks, covered under IoT Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "IoT Protocols: Core concept in Recent Trends in Computer Networks"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is IoT Protocols?",
+              "back": "Core concept in Recent Trends in Computer Networks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of iot protocols",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How iot protocols operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "IoT Protocols is a key topic in Recent Trends in Computer Networks, covered under IoT Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "IoT Protocols is a key topic in Recent Trends in Computer Networks, covered under IoT Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: IoT Protocols: Core concept in Recent Trends in Computer Networks, Definition: The formal definition and scope of iot protocols, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "modern-security-threats",
+            "cloud-network-architecture"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Network Security",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "modern-security-threats",
+          "title": "Modern Security Threats",
+          "durationMin": 35,
+          "difficulty": "hard",
+          "overview": "Modern Security Threats is a key topic in Recent Trends in Computer Networks, covered under Network Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "Modern Security Threats: Core concept in Recent Trends in Computer Networks",
+            "Definition: The formal definition and scope of modern security threats",
+            "Key principles: Fundamental rules and properties",
+            "Working: How modern security threats operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within Modern Security Threats",
+            "Relationship: connects to Network Security",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "Modern Security Threats — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in Recent Trends in Computer Networks"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding Network Security"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of Modern Security Threats",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is Modern Security Threats?",
+              "options": [
+                "A core concept in Recent Trends in Computer Networks",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "Modern Security Threats is a fundamental concept in Recent Trends in Computer Networks."
+            },
+            {
+              "question": "Modern Security Threats is studied under which unit?",
+              "options": [
+                "Network Security",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "Modern Security Threats belongs to the Network Security unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of Modern Security Threats?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "Modern Security Threats has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand Modern Security Threats and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on Modern Security Threats"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nModern Security Threats is a key topic in Recent Trends in Computer Networks, covered under Network Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Modern Security Threats: Core concept in Recent Trends in Computer Networks\n- Definition: The formal definition and scope of modern security threats\n- Key principles: Fundamental rules and properties\n- Working: How modern security threats operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Modern Security Threats`\n- `Relationship: connects to Network Security`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Modern Security Threats — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Recent Trends in Computer Networks |\n| Importance | Essential for understanding Network Security |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nModern Security Threats is a key topic in Recent Trends in Computer Networks, covered under Network Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Modern Security Threats — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Modern Security Threats — Concept Map",
+              "content": "mindmap\n  root((Modern Security Threats))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is Modern Security Threats?",
+              "solution": "Correct answer: A core concept in Recent Trends in Computer Networks",
+              "explanation": "Modern Security Threats is a fundamental concept in Recent Trends in Computer Networks."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Modern Security Threats with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Modern Security Threats.",
+              "modelAnswer": "Core concept in Recent Trends in Computer Networks"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of modern security threats"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Modern Security Threats",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Modern Security Threats.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Modern Security Threats",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to Network Security",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Modern Security Threats in detail with a diagram.",
+              "modelAnswer": "Modern Security Threats is a key topic in Recent Trends in Computer Networks, covered under Network Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Modern Security Threats with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Modern Security Threats\n\n**One-line definition:** Modern Security Threats is a key topic in Recent Trends in Computer Networks, covered under Network Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles\n\n**Key points:**\n\n- Modern Security Threats: Core concept in Recent Trends in Computer Networks\n- Definition: The formal definition and scope of modern security threats\n- Key principles: Fundamental rules and properties\n- Working: How modern security threats operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within Modern Security Threats`\n- `Relationship: connects to Network Security`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of Modern Security Threats\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Modern Security Threats: Core concept in Recent Trends in Computer Networks",
+            "Definition: The formal definition and scope of modern security threats",
+            "Key principles: Fundamental rules and properties",
+            "Working: How modern security threats operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within Modern Security Threats",
+            "Formula: Relationship: connects to Network Security",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of Modern Security Threats"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Modern Security Threats is a key topic in Recent Trends in Computer Networks, covered under Network Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "Modern Security Threats: Core concept in Recent Trends in Computer Networks"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Modern Security Threats?",
+              "back": "Core concept in Recent Trends in Computer Networks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of modern security threats",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How modern security threats operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Modern Security Threats is a key topic in Recent Trends in Computer Networks, covered under Network Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "Modern Security Threats is a key topic in Recent Trends in Computer Networks, covered under Network Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Modern Security Threats: Core concept in Recent Trends in Computer Networks, Definition: The formal definition and scope of modern security threats, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "cloud-network-architecture",
+            "5g-networks"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Cloud Networking",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "cloud-network-architecture",
+          "title": "Cloud Network Architecture",
+          "durationMin": 40,
+          "difficulty": "hard",
+          "overview": "Cloud Network Architecture is a key topic in Recent Trends in Computer Networks, covered under Cloud Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "Cloud Network Architecture: Core concept in Recent Trends in Computer Networks",
+            "Definition: The formal definition and scope of cloud network architecture",
+            "Key principles: Fundamental rules and properties",
+            "Working: How cloud network architecture operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within Cloud Network Architecture",
+            "Relationship: connects to Cloud Networking",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "Cloud Network Architecture — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in Recent Trends in Computer Networks"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding Cloud Networking"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of Cloud Network Architecture",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is Cloud Network Architecture?",
+              "options": [
+                "A core concept in Recent Trends in Computer Networks",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "Cloud Network Architecture is a fundamental concept in Recent Trends in Computer Networks."
+            },
+            {
+              "question": "Cloud Network Architecture is studied under which unit?",
+              "options": [
+                "Cloud Networking",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "Cloud Network Architecture belongs to the Cloud Networking unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of Cloud Network Architecture?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "Cloud Network Architecture has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand Cloud Network Architecture and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on Cloud Network Architecture"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nCloud Network Architecture is a key topic in Recent Trends in Computer Networks, covered under Cloud Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Cloud Network Architecture: Core concept in Recent Trends in Computer Networks\n- Definition: The formal definition and scope of cloud network architecture\n- Key principles: Fundamental rules and properties\n- Working: How cloud network architecture operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Cloud Network Architecture`\n- `Relationship: connects to Cloud Networking`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Cloud Network Architecture — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Recent Trends in Computer Networks |\n| Importance | Essential for understanding Cloud Networking |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nCloud Network Architecture is a key topic in Recent Trends in Computer Networks, covered under Cloud Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Cloud Network Architecture — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Cloud Network Architecture — Concept Map",
+              "content": "mindmap\n  root((Cloud Network Architecture))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is Cloud Network Architecture?",
+              "solution": "Correct answer: A core concept in Recent Trends in Computer Networks",
+              "explanation": "Cloud Network Architecture is a fundamental concept in Recent Trends in Computer Networks."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Cloud Network Architecture with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Cloud Network Architecture.",
+              "modelAnswer": "Core concept in Recent Trends in Computer Networks"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of cloud network architecture"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Cloud Network Architecture",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Cloud Network Architecture.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Cloud Network Architecture",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to Cloud Networking",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Cloud Network Architecture in detail with a diagram.",
+              "modelAnswer": "Cloud Network Architecture is a key topic in Recent Trends in Computer Networks, covered under Cloud Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Cloud Network Architecture with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Cloud Network Architecture\n\n**One-line definition:** Cloud Network Architecture is a key topic in Recent Trends in Computer Networks, covered under Cloud Networking. This lesson provides a comprehensive understanding of the fundamental concepts, princip\n\n**Key points:**\n\n- Cloud Network Architecture: Core concept in Recent Trends in Computer Networks\n- Definition: The formal definition and scope of cloud network architecture\n- Key principles: Fundamental rules and properties\n- Working: How cloud network architecture operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within Cloud Network Architecture`\n- `Relationship: connects to Cloud Networking`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of Cloud Network Architecture\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Cloud Network Architecture: Core concept in Recent Trends in Computer Networks",
+            "Definition: The formal definition and scope of cloud network architecture",
+            "Key principles: Fundamental rules and properties",
+            "Working: How cloud network architecture operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within Cloud Network Architecture",
+            "Formula: Relationship: connects to Cloud Networking",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of Cloud Network Architecture"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Cloud Network Architecture is a key topic in Recent Trends in Computer Networks, covered under Cloud Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "Cloud Network Architecture: Core concept in Recent Trends in Computer Networks"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Cloud Network Architecture?",
+              "back": "Core concept in Recent Trends in Computer Networks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of cloud network architecture",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How cloud network architecture operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Cloud Network Architecture is a key topic in Recent Trends in Computer Networks, covered under Cloud Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "Cloud Network Architecture is a key topic in Recent Trends in Computer Networks, covered under Cloud Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Cloud Network Architecture: Core concept in Recent Trends in Computer Networks, Definition: The formal definition and scope of cloud network architecture, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "5g-networks"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "5G and Beyond",
+      "weightage": 15,
+      "lessons": [
+        {
+          "slug": "5g-networks",
+          "title": "5G Networks",
+          "durationMin": 45,
+          "difficulty": "hard",
+          "overview": "5G Networks is a key topic in Recent Trends in Computer Networks, covered under 5G and Beyond. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "5G Networks: Core concept in Recent Trends in Computer Networks",
+            "Definition: The formal definition and scope of 5g networks",
+            "Key principles: Fundamental rules and properties",
+            "Working: How 5g networks operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within 5G Networks",
+            "Relationship: connects to 5G and Beyond",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "5G Networks — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in Recent Trends in Computer Networks"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding 5G and Beyond"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of 5G Networks",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is 5G Networks?",
+              "options": [
+                "A core concept in Recent Trends in Computer Networks",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "5G Networks is a fundamental concept in Recent Trends in Computer Networks."
+            },
+            {
+              "question": "5G Networks is studied under which unit?",
+              "options": [
+                "5G and Beyond",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "5G Networks belongs to the 5G and Beyond unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of 5G Networks?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "5G Networks has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand 5G Networks and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on 5G Networks"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\n5G Networks is a key topic in Recent Trends in Computer Networks, covered under 5G and Beyond. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- 5G Networks: Core concept in Recent Trends in Computer Networks\n- Definition: The formal definition and scope of 5g networks\n- Key principles: Fundamental rules and properties\n- Working: How 5g networks operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within 5G Networks`\n- `Relationship: connects to 5G and Beyond`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### 5G Networks — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Recent Trends in Computer Networks |\n| Importance | Essential for understanding 5G and Beyond |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\n5G Networks is a key topic in Recent Trends in Computer Networks, covered under 5G and Beyond. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "5G Networks — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "5G Networks — Concept Map",
+              "content": "mindmap\n  root((5G Networks))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is 5G Networks?",
+              "solution": "Correct answer: A core concept in Recent Trends in Computer Networks",
+              "explanation": "5G Networks is a fundamental concept in Recent Trends in Computer Networks."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain 5G Networks with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define 5G Networks.",
+              "modelAnswer": "Core concept in Recent Trends in Computer Networks"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of 5g networks"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within 5G Networks",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define 5G Networks.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within 5G Networks",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to 5G and Beyond",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain 5G Networks in detail with a diagram.",
+              "modelAnswer": "5G Networks is a key topic in Recent Trends in Computer Networks, covered under 5G and Beyond. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss 5G Networks with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — 5G Networks\n\n**One-line definition:** 5G Networks is a key topic in Recent Trends in Computer Networks, covered under 5G and Beyond. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical\n\n**Key points:**\n\n- 5G Networks: Core concept in Recent Trends in Computer Networks\n- Definition: The formal definition and scope of 5g networks\n- Key principles: Fundamental rules and properties\n- Working: How 5g networks operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within 5G Networks`\n- `Relationship: connects to 5G and Beyond`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of 5G Networks\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "5G Networks: Core concept in Recent Trends in Computer Networks",
+            "Definition: The formal definition and scope of 5g networks",
+            "Key principles: Fundamental rules and properties",
+            "Working: How 5g networks operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within 5G Networks",
+            "Formula: Relationship: connects to 5G and Beyond",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of 5G Networks"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "5G Networks is a key topic in Recent Trends in Computer Networks, covered under 5G and Beyond. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "5G Networks: Core concept in Recent Trends in Computer Networks"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is 5G Networks?",
+              "back": "Core concept in Recent Trends in Computer Networks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of 5g networks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How 5g networks operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "5G Networks is a key topic in Recent Trends in Computer Networks, covered under 5G and Beyond. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "5G Networks is a key topic in Recent Trends in Computer Networks, covered under 5G and Beyond. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: 5G Networks: Core concept in Recent Trends in Computer Networks, Definition: The formal definition and scope of 5g networks, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": []
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "# Recent Trends in Computer Networks — Quick Revision\n\n**Subject code:** R23CP3401  \n**Semester:** 5  \n**Credits:** 4  \n\n## Unit 1: Software Defined Networking (20%)\n### SDN Concepts\nSDN Concepts is a key topic in Recent Trends in Computer Networks, covered under Software Defined Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Unit 2: IoT Networking (25%)\n### IoT Protocols\nIoT Protocols is a key topic in Recent Trends in Computer Networks, covered under IoT Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Unit 3: Network Security (20%)\n### Modern Security Threats\nModern Security Threats is a key topic in Recent Trends in Computer Networks, covered under Network Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Unit 4: Cloud Networking (20%)\n### Cloud Network Architecture\nCloud Network Architecture is a key topic in Recent Trends in Computer Networks, covered under Cloud Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Unit 5: 5G and Beyond (15%)\n### 5G Networks\n5G Networks is a key topic in Recent Trends in Computer Networks, covered under 5G and Beyond. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n",
+  "interviewBank": [
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within SDN Concepts",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 10,
+      "question": "Explain the key concepts from this lesson with examples.",
+      "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+    },
+    {
+      "marks": 5,
+      "question": "What are the practical applications of this topic?",
+      "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within IoT Protocols",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within Modern Security Threats",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within Cloud Network Architecture",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within 5G Networks",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    }
+  ],
+  "vivaBank": [
+    {
+      "marks": 2,
+      "question": "Define SDN Concepts.",
+      "modelAnswer": "Core concept in Recent Trends in Computer Networks"
+    },
+    {
+      "marks": 2,
+      "question": "Define Definition.",
+      "modelAnswer": "The formal definition and scope of sdn concepts"
+    },
+    {
+      "marks": 2,
+      "question": "Define Key principles.",
+      "modelAnswer": "Fundamental rules and properties"
+    },
+    {
+      "marks": 2,
+      "question": "Define the main concept from this lesson.",
+      "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+    },
+    {
+      "marks": 2,
+      "question": "What is the practical importance of this topic?",
+      "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+    },
+    {
+      "marks": 2,
+      "question": "Define IoT Protocols.",
+      "modelAnswer": "Core concept in Recent Trends in Computer Networks"
+    },
+    {
+      "marks": 2,
+      "question": "Define Modern Security Threats.",
+      "modelAnswer": "Core concept in Recent Trends in Computer Networks"
+    },
+    {
+      "marks": 2,
+      "question": "Define Cloud Network Architecture.",
+      "modelAnswer": "Core concept in Recent Trends in Computer Networks"
+    },
+    {
+      "marks": 2,
+      "question": "Define 5G Networks.",
+      "modelAnswer": "Core concept in Recent Trends in Computer Networks"
+    }
+  ],
+  "pyqBank": [
+    {
+      "marks": 10,
+      "question": "Explain SDN Concepts in detail with a diagram.",
+      "modelAnswer": "SDN Concepts is a key topic in Recent Trends in Computer Networks, covered under Software Defined Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss SDN Concepts with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain IoT Protocols in detail with a diagram.",
+      "modelAnswer": "IoT Protocols is a key topic in Recent Trends in Computer Networks, covered under IoT Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss IoT Protocols with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Modern Security Threats in detail with a diagram.",
+      "modelAnswer": "Modern Security Threats is a key topic in Recent Trends in Computer Networks, covered under Network Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Modern Security Threats with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Cloud Network Architecture in detail with a diagram.",
+      "modelAnswer": "Cloud Network Architecture is a key topic in Recent Trends in Computer Networks, covered under Cloud Networking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Cloud Network Architecture with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain 5G Networks in detail with a diagram.",
+      "modelAnswer": "5G Networks is a key topic in Recent Trends in Computer Networks, covered under 5G and Beyond. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss 5G Networks with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    }
+  ]
+}

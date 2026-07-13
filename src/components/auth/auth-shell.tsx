@@ -75,15 +75,34 @@ function WorkspacePreview() {
 
   return (
     <div className="mt-auto w-full max-w-md">
-      <div className="rounded-lg border border-border bg-card p-4 text-card-foreground shadow-sm">
+      <div
+        className="rounded-lg border p-4 shadow-sm"
+        style={{
+          backgroundColor: 'rgb(30 41 59)',
+          borderColor: 'rgb(51 65 85)',
+          color: 'rgb(248 250 252)',
+        }}
+      >
         <div className="mb-4 flex items-center justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+            <p
+              className="text-xs font-semibold uppercase tracking-[0.14em]"
+              style={{ color: 'rgb(148 163 184)' }}
+            >
               Today
             </p>
-            <p className="mt-1 text-lg font-bold">Student command center</p>
+            <p className="mt-1 text-lg font-bold" style={{ color: 'rgb(248 250 252)' }}>
+              Student command center
+            </p>
           </div>
-          <span className="grid h-10 w-10 place-items-center rounded-lg bg-primary/10 text-primary ring-1 ring-border">
+          <span
+            className="grid h-10 w-10 place-items-center rounded-lg ring-1"
+            style={{
+              backgroundColor: 'rgba(6, 182, 212, 0.1)',
+              color: 'rgb(6, 182, 212)',
+              borderColor: 'rgb(51 65 85)',
+            }}
+          >
             <GraduationCap className="h-5 w-5" />
           </span>
         </div>
@@ -91,19 +110,30 @@ function WorkspacePreview() {
           {rows.map(([label, value, hint]) => (
             <div
               key={label}
-              className="grid grid-cols-[1fr_auto] items-center gap-3 rounded-lg border border-border bg-muted/40 px-3 py-2"
+              className="grid grid-cols-[1fr_auto] items-center gap-3 rounded-lg border px-3 py-2"
+              style={{
+                backgroundColor: 'rgba(51, 65, 85, 0.4)',
+                borderColor: 'rgb(51 65 85)',
+              }}
             >
               <div>
-                <p className="text-sm font-semibold text-foreground">{label}</p>
-                <p className="text-xs text-muted-foreground">{hint}</p>
+                <p className="text-sm font-semibold" style={{ color: 'rgb(248 250 252)' }}>
+                  {label}
+                </p>
+                <p className="text-xs" style={{ color: 'rgb(148 163 184)' }}>
+                  {hint}
+                </p>
               </div>
-              <p className="font-mono text-lg font-bold tabular-nums text-foreground">
+              <p
+                className="font-mono text-lg font-bold tabular-nums"
+                style={{ color: 'rgb(248 250 252)' }}
+              >
                 {value}
               </p>
             </div>
           ))}
         </div>
-        <p className="mt-3 text-xs text-muted-foreground">
+        <p className="mt-3 text-xs" style={{ color: 'rgb(148 163 184)' }}>
           Demo preview — not your account
         </p>
       </div>
@@ -185,7 +215,7 @@ export function AuthShell({
         </aside>
 
         {/* Right form panel */}
-        <section className="flex min-h-dvh flex-col px-4 py-5 sm:px-6 lg:px-10">
+        <section className="flex min-h-dvh flex-col px-5 py-6 sm:px-6 lg:px-10">
           <div className="flex items-center justify-between">
             <BrandLockup />
             <Link

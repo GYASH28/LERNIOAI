@@ -42,8 +42,8 @@ function ResetPasswordForm() {
   const [statusMessage, setStatusMessage] = useState('')
   const [submitting, setSubmitting] = useState(false)
 
-  const hasLength = password.length >= 12
-  const hasLongPassphrase = password.trim().length >= 16
+  const hasLength = password.length >= 8
+  const hasLongPassphrase = password.trim().length >= 12
   const hasLetter = /[A-Za-z]/.test(password)
   const hasNumber = /[0-9]/.test(password)
   const isMatch = password === confirmPassword && password.length > 0
@@ -59,7 +59,7 @@ function ResetPasswordForm() {
     }
 
     if (!passesPolicy) {
-      setError('Use at least 12 characters with a letter and number, or a longer passphrase.')
+      setError('Use at least 8 characters with a letter and number, or a longer passphrase.')
       return
     }
 
@@ -172,7 +172,7 @@ function ResetPasswordForm() {
                 <div className="h-full rounded-full bg-primary transition-all duration-300" style={{ width: `${Math.max(15, (strengthCount / 4) * 100)}%` }} />
               </div>
               <ul className="mt-3 grid gap-1.5 text-xs font-semibold text-muted-foreground">
-                <Rule passed={hasLength}>At least 12 characters</Rule>
+                <Rule passed={hasLength}>At least 8 characters</Rule>
                 <Rule passed={hasLetter}>Contains a letter</Rule>
                 <Rule passed={hasNumber}>Contains a number</Rule>
                 <Rule passed={hasLongPassphrase}>Or use a 16+ character passphrase</Rule>

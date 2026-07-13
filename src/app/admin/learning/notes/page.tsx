@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+export const dynamic = 'force-dynamic'
+
 import Link from 'next/link'
 import { FileText, ShieldCheck } from 'lucide-react'
 import { listLessonNotePreviews, type LessonNotePreview } from '@/lib/lesson-notes/lesson-note-files'

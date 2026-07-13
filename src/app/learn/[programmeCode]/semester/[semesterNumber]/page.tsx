@@ -1,4 +1,6 @@
 import Link from 'next/link'
+export const dynamic = 'force-dynamic'
+
 import { notFound, redirect } from 'next/navigation'
 import {
   ArrowLeft,
@@ -13,6 +15,7 @@ import {
   type LucideIcon,
 } from 'lucide-react'
 import { getCurrentUser } from '@/lib/auth'
+import { db } from '@/lib/db'
 import { getManifestSubjectsForSemester, type ManifestSubject } from '@/lib/curriculum/manifest-data'
 
 
@@ -33,7 +36,33 @@ export default async function SemesterLearningPage({
   const manifestSubjects = getManifestSubjectsForSemester(programmeCode, semester)
   if (manifestSubjects.length === 0) notFound()
 
-  return <ManifestSemesterView programmeCode={programmeCode} semesterNumber={semester} subjects={manifestSubjects} />
+  // Fetch user's daily goal + revision count for "This Week" section
+  let dailyMins = 120
+  let revisionDue = 0
+  let plannedLessons = 0
+  try {
+    const dbUser = await db.user.findUnique({
+      where: { id: authUser.id },
+      select: { dailyMins: true },
+    })
+    if (dbUser?.dailyMins) dailyMins = dbUser.dailyMins
+
+    // Count actual revision items due
+    revisionDue = await db.revisionSchedule.count({
+      where: { userId: authUser.id, nextDueDate: { lte: new Date() } },
+    }).catch(() => 0)
+
+    // Count lessons planned this week (from study tasks)
+    const weekStartStr = new Date().toISOString().slice(0, 10)
+    const weekEnd = new Date()
+    weekEnd.setDate(weekEnd.getDate() + 7)
+    const weekEndStr = weekEnd.toISOString().slice(0, 10)
+    plannedLessons = await db.studyTask.count({
+      where: { userId: authUser.id, scheduledDate: { gte: weekStartStr, lte: weekEndStr } },
+    }).catch(() => 0)
+  } catch {}
+
+  return <ManifestSemesterView programmeCode={programmeCode} semesterNumber={semester} subjects={manifestSubjects} dailyMins={dailyMins} revisionDue={revisionDue} plannedLessons={plannedLessons} />
 }
 
 // ─── Manifest-based semester view ───────────────────────────────────────────
@@ -42,10 +71,16 @@ function ManifestSemesterView({
   programmeCode,
   semesterNumber,
   subjects,
+  dailyMins,
+  revisionDue,
+  plannedLessons,
 }: {
   programmeCode: string
   semesterNumber: number
   subjects: ManifestSubject[]
+  dailyMins: number
+  revisionDue: number
+  plannedLessons: number
 }) {
   const totalResources = subjects.reduce((sum, s) => sum + s.resources.length, 0)
   const totalCredits = subjects.reduce((sum, s) => sum + s.credits, 0)
@@ -63,7 +98,7 @@ function ManifestSemesterView({
     <main className="min-h-screen bg-background text-foreground">
       {/* ─── Hero ─── */}
       <section className="border-b border-border/70 bg-muted/30">
-        <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl px-5 py-6 sm:px-6 lg:px-8">
           <Link href="/learn" className="inline-flex w-fit items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
             <ArrowLeft className="h-4 w-4" />
             <span className="hidden sm:inline">Learn</span>
@@ -90,7 +125,7 @@ function ManifestSemesterView({
         </div>
       </section>
 
-      <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8 space-y-8">
+      <div className="mx-auto max-w-6xl px-5 py-6 sm:px-6 lg:px-8 space-y-8">
         {/* ─── My Subjects ─── */}
         <section>
           <div className="mb-4 flex items-center justify-between">
@@ -172,7 +207,7 @@ function ManifestSemesterView({
           </div>
         </section>
 
-        {/* ─── This Week (placeholder) ─── */}
+        {/* ─── This Week ─── */}
         <section>
           <div className="mb-4 flex items-center gap-2">
             <Calendar className="h-5 w-5 text-primary" aria-hidden="true" />
@@ -184,24 +219,24 @@ function ManifestSemesterView({
                 <Clock className="h-4 w-4 text-primary" />
                 <p className="text-sm font-medium">Planned Lessons</p>
               </div>
-              <p className="mt-2 text-2xl font-bold">3</p>
-              <p className="text-xs text-muted-foreground">This week&apos;s target</p>
+              <p className="mt-2 text-2xl font-bold">{plannedLessons}</p>
+              <p className="text-xs text-muted-foreground">{plannedLessons > 0 ? 'Scheduled in your planner' : 'No lessons planned yet'}</p>
             </div>
             <div className="rounded-lg border border-border bg-card p-4">
               <div className="flex items-center gap-2">
                 <FileText className="h-4 w-4 text-primary" />
                 <p className="text-sm font-medium">Revision Due</p>
               </div>
-              <p className="mt-2 text-2xl font-bold">0</p>
-              <p className="text-xs text-muted-foreground">No revisions scheduled</p>
+              <p className="mt-2 text-2xl font-bold">{revisionDue}</p>
+              <p className="text-xs text-muted-foreground">{revisionDue > 0 ? 'Cards waiting for review' : 'All caught up'}</p>
             </div>
             <div className="rounded-lg border border-border bg-card p-4">
               <div className="flex items-center gap-2">
                 <Target className="h-4 w-4 text-primary" />
                 <p className="text-sm font-medium">Daily Goal</p>
               </div>
-              <p className="mt-2 text-2xl font-bold">120 min</p>
-              <p className="text-xs text-muted-foreground">2 hours per day</p>
+              <p className="mt-2 text-2xl font-bold">{dailyMins} min</p>
+              <p className="text-xs text-muted-foreground">{Math.round(dailyMins / 60)}h {dailyMins % 60}m per day</p>
             </div>
           </div>
         </section>

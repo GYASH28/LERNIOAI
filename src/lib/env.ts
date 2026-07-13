@@ -16,7 +16,11 @@ const envSchema = z.object({
   // Runtime
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
   VERCEL_ENV: z.enum(['production', 'preview', 'development']).optional(),
-  LERNIO_DEMO_MODE: z.string().transform((v) => v === 'true').default('false'),
+  LERNIO_DEMO_MODE: z
+    .string()
+    .optional()
+    .transform((v) => v === 'true')
+    .default(false),
 
   // Database
   DATABASE_URL: z.string().min(1, 'DATABASE_URL is required'),

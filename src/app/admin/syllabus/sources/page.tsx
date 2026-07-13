@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+export const dynamic = 'force-dynamic'
+
 import type { ReactNode } from 'react'
 import { revalidatePath } from 'next/cache'
 import { BookMarked, FilePlus2 } from 'lucide-react'

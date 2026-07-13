@@ -1,12 +1,12 @@
 import { db } from '@/lib/db'
-import { getCurrentUser, withApi, okResponse } from '@/lib/auth'
+import { requireUser, withApi, okResponse } from '@/lib/auth'
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
 
 export function GET(request: Request) {
   return withApi(async () => {
-    const user = await getCurrentUser()
+    const user = await requireUser()
     const url = new URL(request.url)
     const limit = Math.min(Number(url.searchParams.get('limit') ?? '20'), 100)
 

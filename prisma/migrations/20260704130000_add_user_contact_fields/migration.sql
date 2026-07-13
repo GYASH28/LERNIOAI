@@ -1,0 +1,5 @@
+-- Add contact + privacy fields to User table
+ALTER TABLE "User" ADD COLUMN IF NOT EXISTS "phone" TEXT;
+ALTER TABLE "User" ADD COLUMN IF NOT EXISTS "photoUrl" TEXT;
+ALTER TABLE "User" ADD COLUMN IF NOT EXISTS "showPhoneToClassmates" BOOLEAN NOT NULL DEFAULT false;
+ALTER TABLE "User" ADD COLUMN IF NOT EXISTS "showEmailToClassmates" BOOLEAN NOT NULL DEFAULT false;

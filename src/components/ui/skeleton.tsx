@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils'
+import type { CSSProperties, ReactNode } from 'react'
 
 /**
  * Reusable skeleton loader.
@@ -12,11 +13,17 @@ export function Skeleton({
   className,
   width,
   height,
+  style,
+  children,
+  ...rest
 }: {
   variant?: 'text' | 'circle' | 'rect' | 'card'
   className?: string
   width?: string | number
   height?: string | number
+  style?: CSSProperties
+  children?: ReactNode
+  [key: string]: unknown
 }) {
   const base = 'animate-pulse bg-muted'
   const shapes: Record<string, string> = {
@@ -25,10 +32,10 @@ export function Skeleton({
     rect: 'h-20 w-full rounded-md',
     card: 'h-32 w-full rounded-lg',
   }
-  const style: React.CSSProperties = {}
-  if (width !== undefined) style.width = typeof width === 'number' ? `${width}px` : width
-  if (height !== undefined) style.height = typeof height === 'number' ? `${height}px` : height
-  return <div className={cn(base, shapes[variant], className)} style={style} aria-hidden="true" />
+  const computedStyle: React.CSSProperties = { ...style }
+  if (width !== undefined) computedStyle.width = typeof width === 'number' ? `${width}px` : width
+  if (height !== undefined) computedStyle.height = typeof height === 'number' ? `${height}px` : height
+  return <div className={cn(base, shapes[variant], className)} style={computedStyle} aria-hidden="true" {...rest}>{children}</div>
 }
 
 /** Skeleton block for a list of N items (e.g. dashboard widgets). */

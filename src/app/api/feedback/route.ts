@@ -1,6 +1,6 @@
 import { z } from 'zod'
 import { db } from '@/lib/db'
-import { getCurrentUser, withApi, okResponse, ApiError } from '@/lib/auth'
+import { requireUser, withApi, okResponse, ApiError } from '@/lib/auth'
 import { parseBody } from '@/lib/schemas'
 
 export const dynamic = 'force-dynamic'
@@ -16,7 +16,7 @@ const createFeedbackSchema = z.object({
 
 export function GET() {
   return withApi(async () => {
-    const user = await getCurrentUser()
+    const user = await requireUser()
     // Only admins can see all feedback; students see their own
     if (user.role === 'admin') {
       const feedback = await db.feedback.findMany({
@@ -35,7 +35,7 @@ export function GET() {
 
 export function POST(request: Request) {
   return withApi(async () => {
-    const user = await getCurrentUser()
+    const user = await requireUser()
     const body = await parseBody(request, createFeedbackSchema)
 
     const feedback = await db.feedback.create({

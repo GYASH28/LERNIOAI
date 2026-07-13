@@ -393,3 +393,246 @@ html {
 .dark .bg-zinc-900 { background-color: #18181b; }
 .dark .text-zinc-300 { color: #d4d4d8; }
 .dark .text-green-400 { color: #4ade80; }
+
+/* ============================================================
+   WEB DESIGN MARVEL — Animations, Micro-interactions, Polish
+   All GPU-accelerated, performant, no layout thrashing
+   ============================================================ */
+
+/* --- Shimmer for skeletons --- */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* --- Card hover lift (GPU-accelerated, no layout shift) --- */
+.card-lift {
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
+  will-change: transform;
+}
+.card-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* --- Button ripple effect --- */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+.btn-ripple::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
+}
+.btn-ripple:active::after {
+  width: 200px;
+  height: 200px;
+  transition: 0s;
+}
+
+/* --- Number count-up animation --- */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.count-up {
+  animation: countUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- Scroll reveal (used with IntersectionObserver) --- */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  will-change: opacity, transform;
+}
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Tab indicator slide --- */
+.tab-indicator {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), width 0.25s ease;
+}
+
+/* --- Pulse glow for badges --- */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.3); }
+  50% { box-shadow: 0 0 0 6px rgba(124, 58, 237, 0); }
+}
+.pulse-glow {
+  animation: pulseGlow 2s infinite;
+}
+
+/* --- Confetti container (for level-up) --- */
+@keyframes confettiFall {
+  0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+.confetti-piece {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  top: 0;
+  animation: confettiFall 3s linear forwards;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* --- XP float particle --- */
+@keyframes xpFloat {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-60px) scale(0.8); opacity: 0; }
+}
+.xp-float {
+  animation: xpFloat 1s ease-out forwards;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* --- Streak flame flicker --- */
+@keyframes flameFlicker {
+  0%, 100% { transform: scale(1) rotate(-1deg); }
+  50% { transform: scale(1.05) rotate(1deg); }
+}
+.flame-flicker {
+  animation: flameFlicker 0.8s ease-in-out infinite;
+  display: inline-block;
+}
+
+/* --- Bottom sheet (mobile modal) --- */
+@keyframes sheetUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+@keyframes sheetDown {
+  from { transform: translateY(0); }
+  to { transform: translateY(100%); }
+}
+.bottom-sheet {
+  animation: sheetUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.bottom-sheet-closing {
+  animation: sheetDown 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* --- Page transition wipe --- */
+@keyframes pageWipe {
+  0% { opacity: 0; transform: translateY(4px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.page-wipe {
+  animation: pageWipe 0.2s ease-out;
+}
+
+/* --- Subject card 3D badge --- */
+.subject-badge {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+.subject-badge:hover {
+  transform: scale(1.1) rotate(-3deg);
+}
+
+/* --- Gradient text --- */
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary, #7c3aed), #ec4899);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* --- Quest card style --- */
+.quest-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.quest-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary, #7c3aed), #ec4899);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.quest-card:hover::before {
+  opacity: 1;
+}
+.quest-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Timeline dot pulse --- */
+@keyframes dotPulse {
+  0%, 100% { box-shadow: 0 0 0 0 currentColor; }
+  50% { box-shadow: 0 0 0 4px transparent; }
+}
+.timeline-dot {
+  animation: dotPulse 2s infinite;
+}
+
+/* --- Stagger reveal for grids --- */
+.stagger-item {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.stagger-item.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Glass morphism --- */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.dark .glass {
+  background: rgba(20, 20, 30, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* --- Safe area for bottom sheets on mobile --- */
+.bottom-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+/* --- Focus ring for accessibility --- */
+.focus-ring:focus-visible {
+  outline: 2px solid var(--primary, #7c3aed);
+  outline-offset: 2px;
+}
+
+/* --- Reduced motion: disable all animations --- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .scroll-reveal, .stagger-item {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

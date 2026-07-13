@@ -1,0 +1,2040 @@
+{
+  "subjectCode": "R23CP2403",
+  "subjectName": "Microprocessors and Its Programming",
+  "semester": 3,
+  "credits": 4,
+  "units": [
+    {
+      "number": 1,
+      "title": "Microprocessor Fundamentals",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "mp-introduction",
+          "title": "Introduction to Microprocessors",
+          "durationMin": 25,
+          "difficulty": "easy",
+          "overview": "A microprocessor is a single integrated circuit that contains the central processing unit (CPU) of a computer. It performs arithmetic and logic operations, controls data flow, and manages I/O. The Intel 8085 is an 8-bit microprocessor and the 8086 is a 16-bit microprocessor — both are foundational to understanding modern CPU architecture.",
+          "keyConcepts": [
+            "Microprocessor: CPU on a single IC",
+            "8-bit vs 16-bit: data bus width (8085 = 8-bit, 8086 = 16-bit)",
+            "ALU: Arithmetic Logic Unit — performs operations",
+            "CU: Control Unit — directs data flow",
+            "Registers: high-speed storage inside CPU (A, B, C, D, E, H, L for 8085)",
+            "Clock: timing signal — 8085 runs at 3 MHz, 8086 at 5-10 MHz",
+            "Address bus: unidirectional, carries address (16-bit on 8085 → 64KB)",
+            "Data bus: bidirectional, carries data"
+          ],
+          "formulas": [
+            "Memory addressable = 2^(address bus width)",
+            "8085: 16-bit address → 2^16 = 64 KB",
+            "8086: 20-bit address → 2^20 = 1 MB",
+            "Clock speed: 8085 = 3 MHz, 8086 = 5-10 MHz"
+          ],
+          "tables": [
+            {
+              "title": "8085 vs 8086",
+              "headers": [
+                "Feature",
+                "8085",
+                "8086"
+              ],
+              "rows": [
+                [
+                  "Data bus",
+                  "8-bit",
+                  "16-bit"
+                ],
+                [
+                  "Address bus",
+                  "16-bit",
+                  "20-bit"
+                ],
+                [
+                  "Memory",
+                  "64 KB",
+                  "1 MB"
+                ],
+                [
+                  "Clock",
+                  "3 MHz",
+                  "5-10 MHz"
+                ],
+                [
+                  "Pipeline",
+                  "No",
+                  "Yes (BIU + EU)"
+                ],
+                [
+                  "Year",
+                  "1976",
+                  "1978"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Confusing address bus width with data bus width",
+            "Forgetting that 8086 has separate BIU (Bus Interface Unit) and EU (Execution Unit)",
+            "Mixing up 8085 register pairs (BC, DE, HL)",
+            "Forgetting that 8085 has 74 instructions, 8086 has ~117"
+          ],
+          "examTips": [
+            "Always state the addressable memory formula: 2^(address bits)",
+            "Draw the architecture (ALU, CU, registers, buses) when asked",
+            "Memorise register names and their pairings"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "8085 is a ___-bit microprocessor.",
+              "options": [
+                "4",
+                "8",
+                "16",
+                "32"
+              ],
+              "answer": 1,
+              "explanation": "8085 has an 8-bit data bus — it's an 8-bit microprocessor."
+            },
+            {
+              "question": "How much memory can 8085 address?",
+              "options": [
+                "16 KB",
+                "64 KB",
+                "1 MB",
+                "16 MB"
+              ],
+              "answer": 1,
+              "explanation": "8085 has a 16-bit address bus → 2^16 = 64 KB."
+            },
+            {
+              "question": "Which unit performs arithmetic in a microprocessor?",
+              "options": [
+                "CU",
+                "ALU",
+                "RAM",
+                "Cache"
+              ],
+              "answer": 1,
+              "explanation": "ALU (Arithmetic Logic Unit) performs arithmetic and logical operations."
+            },
+            {
+              "question": "8086 has a ___-bit address bus.",
+              "options": [
+                "16",
+                "20",
+                "24",
+                "32"
+              ],
+              "answer": 1,
+              "explanation": "8086 has a 20-bit address bus → 2^20 = 1 MB."
+            }
+          ],
+          "objectives": [
+            "Understand Microprocessor and explain its significance",
+            "Understand 8-bit vs 16-bit and explain its significance",
+            "Understand ALU and explain its significance",
+            "Understand CU and explain its significance",
+            "Understand Registers and explain its significance",
+            "Attempt the practice quiz and viva questions on Introduction to Microprocessors"
+          ],
+          "prerequisites": [
+            "Basic digital electronics (gates, flip-flops)",
+            "Number systems (binary, hex, decimal)",
+            "Understanding of memory and registers"
+          ],
+          "theory": "## Introduction\n\nA microprocessor is a single integrated circuit that contains the central processing unit (CPU) of a computer. It performs arithmetic and logic operations, controls data flow, and manages I/O. The Intel 8085 is an 8-bit microprocessor and the 8086 is a 16-bit microprocessor — both are foundational to understanding modern CPU architecture.\n## Key Concepts\n\n- Microprocessor: CPU on a single IC\n- 8-bit vs 16-bit: data bus width (8085 = 8-bit, 8086 = 16-bit)\n- ALU: Arithmetic Logic Unit — performs operations\n- CU: Control Unit — directs data flow\n- Registers: high-speed storage inside CPU (A, B, C, D, E, H, L for 8085)\n- Clock: timing signal — 8085 runs at 3 MHz, 8086 at 5-10 MHz\n- Address bus: unidirectional, carries address (16-bit on 8085 → 64KB)\n- Data bus: bidirectional, carries data\n\n## Important Formulas\n\n- `Memory addressable = 2^(address bus width)`\n- `8085: 16-bit address → 2^16 = 64 KB`\n- `8086: 20-bit address → 2^20 = 1 MB`\n- `Clock speed: 8085 = 3 MHz, 8086 = 5-10 MHz`\n\n## Comparison Tables\n\n### 8085 vs 8086\n\n| Feature | 8085 | 8086 |\n| --- | --- | --- |\n| Data bus | 8-bit | 16-bit |\n| Address bus | 16-bit | 20-bit |\n| Memory | 64 KB | 1 MB |\n| Clock | 3 MHz | 5-10 MHz |\n| Pipeline | No | Yes (BIU + EU) |\n| Year | 1976 | 1978 |\n\n\n## Summary\n\nA microprocessor is a single integrated circuit that contains the central processing unit (CPU) of a computer. It performs arithmetic and logic operations, controls data flow, and manages I/O. The Intel 8085 is an 8-bit microprocessor and the 8086 is a 16-bit microprocessor — both are foundational to understanding modern CPU architecture.",
+          "analogies": [
+            {
+              "scenario": "Microprocessor like a factory manager",
+              "mapping": "CPU = manager, ALU = factory floor (work done), CU = supervisor (gives instructions), Registers = manager's desk (fast access), Memory = warehouse (slower access), Bus = corridors (data moves)."
+            },
+            {
+              "scenario": "Pipelining like an assembly line",
+              "mapping": "BIU = loader fetching raw material, EU = workers processing. While EU processes instruction 1, BIU fetches instruction 2 — parallel work, faster throughput."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Introduction to Microprocessors — Process Flow",
+              "content": "flowchart LR\n    A[Instruction Fetch] --> B[Decode]\n    B --> C[Execute]\n    C --> D[Write Back]\n    D --> A"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Introduction to Microprocessors — Concept Map",
+              "content": "mindmap\n  root((Introduction to Microprocessor))\n    Architecture\n      ALU\n      CU\n      Registers\n    Buses\n      Address\n      Data\n      Control\n    Instructions\n      Data Transfer\n      Arithmetic\n      Branch"
+            }
+          ],
+          "complexity": {
+            "time": "Clock-cycle based — instruction takes 1-9 T-states",
+            "space": "Register file (8-bit) + 64KB/1MB memory"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "8085 is a ___-bit microprocessor.",
+              "solution": "Correct answer: 8",
+              "explanation": "8085 has an 8-bit data bus — it's an 8-bit microprocessor."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Introduction to Microprocessors with reference to the key concepts.",
+              "solution": "Always state the addressable memory formula: 2^(address bits) → Draw the architecture (ALU, CU, registers, buses) when asked → Memorise register names and their pairings",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Microprocessor.",
+              "modelAnswer": "CPU on a single IC"
+            },
+            {
+              "marks": 2,
+              "question": "Define 8-bit vs 16-bit.",
+              "modelAnswer": "data bus width (8085 = 8-bit, 8086 = 16-bit)"
+            },
+            {
+              "marks": 2,
+              "question": "Define ALU.",
+              "modelAnswer": "Arithmetic Logic Unit — performs operations"
+            },
+            {
+              "marks": 2,
+              "question": "What is the size of the data bus in 8085?",
+              "modelAnswer": "8 bits. 8085 is an 8-bit microprocessor."
+            },
+            {
+              "marks": 2,
+              "question": "Define a flag.",
+              "modelAnswer": "A flag is a single bit in the flag register that indicates the status of an ALU operation (e.g., Zero flag is set when the result is zero)."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Memory addressable = 2^(address bus width)",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain pipelining in 8086. How does it improve performance?",
+              "modelAnswer": "8086 has two independent units: BIU (Bus Interface Unit) and EU (Execution Unit). BIU prefetches instructions into a 6-byte queue while EU executes the current instruction. This overlap means the EU doesn't wait for fetch, improving throughput by ~30%. 8085 has no pipelining — fetch-execute is sequential."
+            },
+            {
+              "marks": 5,
+              "question": "Why does 8086 use memory segmentation?",
+              "modelAnswer": "Segmentation allows a 16-bit architecture to address 20-bit (1 MB) memory. Each segment register (CS, DS, SS, ES) is 16 bits and points to a 64 KB block. Physical address = segment × 16 + offset. This also enables relocatable code and separate spaces for code, data, stack."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Microprocessor.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define 8-bit vs 16-bit.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Memory addressable = 2^(address bus width)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: 8085: 16-bit address → 2^16 = 64 KB",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Introduction to Microprocessors in detail with a diagram.",
+              "modelAnswer": "A microprocessor is a single integrated circuit that contains the central processing unit (CPU) of a computer. It performs arithmetic and logic operations, controls data flow, and manages I/O. The Intel 8085 is an 8-bit microprocessor and the 8086 is a 16-bit microprocessor — both are foundational to understanding modern CPU architecture."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Introduction to Microprocessors with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Introduction to Microprocessors\n\n**One-line definition:** A microprocessor is a single integrated circuit that contains the central processing unit (CPU) of a computer. It performs arithmetic and logic operations, controls data flow, and manages I/O. The Int\n\n**Key points:**\n\n- Microprocessor: CPU on a single IC\n- 8-bit vs 16-bit: data bus width (8085 = 8-bit, 8086 = 16-bit)\n- ALU: Arithmetic Logic Unit — performs operations\n- CU: Control Unit — directs data flow\n- Registers: high-speed storage inside CPU (A, B, C, D, E, H, L for 8085)\n\n**Important formulas:**\n\n- `Memory addressable = 2^(address bus width)`\n- `8085: 16-bit address → 2^16 = 64 KB`\n- `8086: 20-bit address → 2^20 = 1 MB`\n- `Clock speed: 8085 = 3 MHz, 8086 = 5-10 MHz`\n\n**Common mistake to avoid:** Confusing address bus width with data bus width\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Microprocessor: CPU on a single IC",
+            "8-bit vs 16-bit: data bus width (8085 = 8-bit, 8086 = 16-bit)",
+            "ALU: Arithmetic Logic Unit — performs operations",
+            "CU: Control Unit — directs data flow",
+            "Registers: high-speed storage inside CPU (A, B, C, D, E, H, L for 8085)",
+            "Formula: Memory addressable = 2^(address bus width)",
+            "Formula: 8085: 16-bit address → 2^16 = 64 KB",
+            "Formula: 8086: 20-bit address → 2^20 = 1 MB",
+            "Formula: Clock speed: 8085 = 3 MHz, 8086 = 5-10 MHz",
+            "8085: 8-bit data, 16-bit address (64KB)",
+            "8086: 16-bit data, 20-bit address (1MB)",
+            "Physical addr = seg × 16 + offset"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "SZAPC",
+              "expansion": "Sign, Zero, Aux carry, Parity, Carry",
+              "meaning": "The 5 flags in 8085 flag register (in bit positions 7, 6, 4, 2, 0)."
+            },
+            {
+              "phrase": "CS DS SS ES",
+              "expansion": "Code, Data, Stack, Extra Segment",
+              "meaning": "The 4 segment registers in 8086."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always state the addressable memory formula: 2^(address bits)"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw the architecture (ALU, CU, registers, buses) when asked"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing address bus width with data bus width"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting that 8086 has separate BIU (Bus Interface Unit) and EU (Execution Unit)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "A microprocessor is a single integrated circuit that contains the central processing unit (CPU) of a computer. It performs arithmetic and logic operations, controls data flow, and manages I/O. The Intel 8085 is an 8-bit microprocessor and the 8086 is a 16-bit microprocessor — both are foundational t..."
+            },
+            {
+              "type": "definition",
+              "content": "Microprocessor: CPU on a single IC"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Microprocessor?",
+              "back": "CPU on a single IC",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is 8-bit vs 16-bit?",
+              "back": "data bus width (8085 = 8-bit, 8086 = 16-bit)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is ALU?",
+              "back": "Arithmetic Logic Unit — performs operations",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is CU?",
+              "back": "Control Unit — directs data flow",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Registers?",
+              "back": "high-speed storage inside CPU (A, B, C, D, E, H, L for 8085)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Clock?",
+              "back": "timing signal — 8085 runs at 3 MHz, 8086 at 5-10 MHz",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Address bus?",
+              "back": "unidirectional, carries address (16-bit on 8085 → 64KB)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Data bus?",
+              "back": "bidirectional, carries data",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "A microprocessor is a single integrated circuit that contains the central processing unit (CPU) of a computer. It performs arithmetic and logic operations, controls data flow, and manages I/O. The Intel 8085 is an 8-bit microprocessor and the 8086 is a 16-bit microprocessor — both are foundational t"
+            },
+            {
+              "style": "detailed",
+              "content": "A microprocessor is a single integrated circuit that contains the central processing unit (CPU) of a computer. It performs arithmetic and logic operations, controls data flow, and manages I/O. The Intel 8085 is an 8-bit microprocessor and the 8086 is a 16-bit microprocessor — both are foundational to understanding modern CPU architecture.\n\nKey concepts: Microprocessor: CPU on a single IC, 8-bit vs 16-bit: data bus width (8085 = 8-bit, 8086 = 16-bit), ALU: Arithmetic Logic Unit — performs operations."
+            }
+          ],
+          "recommendedNextLessons": [
+            "8085-architecture",
+            "8085-instruction-set"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "8085 Architecture",
+      "weightage": 25,
+      "lessons": [
+        {
+          "slug": "8085-architecture",
+          "title": "8085 Architecture and Registers",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "The 8085 microprocessor has a specific internal architecture: an 8-bit ALU, a set of 8-bit registers (A, B, C, D, E, H, L), a 16-bit stack pointer (SP), a 16-bit program counter (PC), and flag registers. It operates on a 5 MHz clock and uses multiplexed address/data bus (AD0-AD7).",
+          "keyConcepts": [
+            "Accumulator (A): 8-bit register, holds one operand and result",
+            "General registers: B, C, D, E, H, L (8-bit each, can pair as BC, DE, HL)",
+            "Program Counter (PC): 16-bit, holds address of next instruction",
+            "Stack Pointer (SP): 16-bit, points to top of stack",
+            "Flag register: 5 flags — S, Z, AC, P, CY",
+            "Sign flag (S): set if MSB of result is 1",
+            "Zero flag (Z): set if result is 0",
+            "Carry flag (CY): set if operation generated a carry"
+          ],
+          "formulas": [
+            "Register pairs: BC, DE, HL (16-bit)",
+            "PC width = 16 bits → 64 KB addressable",
+            "Flag bits: S(7), Z(6), AC(4), P(2), CY(0)",
+            "Memory address = HL pair (when used as pointer)"
+          ],
+          "tables": [
+            {
+              "title": "8085 Flags",
+              "headers": [
+                "Flag",
+                "Bit",
+                "Set when"
+              ],
+              "rows": [
+                [
+                  "Sign (S)",
+                  "7",
+                  "MSB of result is 1 (negative)"
+                ],
+                [
+                  "Zero (Z)",
+                  "6",
+                  "Result is 0"
+                ],
+                [
+                  "Aux Carry (AC)",
+                  "4",
+                  "Carry from bit 3 to 4"
+                ],
+                [
+                  "Parity (P)",
+                  "2",
+                  "Result has even number of 1s"
+                ],
+                [
+                  "Carry (CY)",
+                  "0",
+                  "Carry out of MSB"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Forgetting which flag is in which bit position",
+            "Confusing stack pointer (grows downward) with program counter (increments)",
+            "Mixing up register pairs (B-C, D-E, H-L, NOT B-D)",
+            "Not understanding the HL pair as a memory pointer"
+          ],
+          "examTips": [
+            "Draw the 8085 architecture diagram (ALU, registers, timing/control, flags)",
+            "Memorise the 5 flags and what each means",
+            "Mention that HL pair is the standard memory pointer"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which register holds the result of ALU operations?",
+              "options": [
+                "B",
+                "C",
+                "A (Accumulator)",
+                "H"
+              ],
+              "answer": 2,
+              "explanation": "The Accumulator (A register) holds one operand and the result of ALU operations."
+            },
+            {
+              "question": "How many flags does 8085 have?",
+              "options": [
+                "3",
+                "4",
+                "5",
+                "8"
+              ],
+              "answer": 2,
+              "explanation": "8085 has 5 flags: Sign, Zero, Aux Carry, Parity, Carry."
+            },
+            {
+              "question": "What is the size of Program Counter in 8085?",
+              "options": [
+                "8-bit",
+                "12-bit",
+                "16-bit",
+                "20-bit"
+              ],
+              "answer": 2,
+              "explanation": "PC is 16-bit (matches address bus → 64 KB addressing)."
+            },
+            {
+              "question": "Which register pair is used as a memory pointer?",
+              "options": [
+                "BC",
+                "DE",
+                "HL",
+                "All of these"
+              ],
+              "answer": 2,
+              "explanation": "HL is the primary memory pointer. BC and DE can also be used with specific instructions (LDAX B, LDAX D)."
+            }
+          ],
+          "objectives": [
+            "Understand Accumulator (A) and explain its significance",
+            "Understand General registers and explain its significance",
+            "Understand Program Counter (PC) and explain its significance",
+            "Understand Stack Pointer (SP) and explain its significance",
+            "Understand Flag register and explain its significance",
+            "Attempt the practice quiz and viva questions on 8085 Architecture and Registers"
+          ],
+          "prerequisites": [
+            "Basic digital electronics (gates, flip-flops)",
+            "Number systems (binary, hex, decimal)",
+            "Understanding of memory and registers",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nThe 8085 microprocessor has a specific internal architecture: an 8-bit ALU, a set of 8-bit registers (A, B, C, D, E, H, L), a 16-bit stack pointer (SP), a 16-bit program counter (PC), and flag registers. It operates on a 5 MHz clock and uses multiplexed address/data bus (AD0-AD7).\n## Key Concepts\n\n- Accumulator (A): 8-bit register, holds one operand and result\n- General registers: B, C, D, E, H, L (8-bit each, can pair as BC, DE, HL)\n- Program Counter (PC): 16-bit, holds address of next instruction\n- Stack Pointer (SP): 16-bit, points to top of stack\n- Flag register: 5 flags — S, Z, AC, P, CY\n- Sign flag (S): set if MSB of result is 1\n- Zero flag (Z): set if result is 0\n- Carry flag (CY): set if operation generated a carry\n\n## Important Formulas\n\n- `Register pairs: BC, DE, HL (16-bit)`\n- `PC width = 16 bits → 64 KB addressable`\n- `Flag bits: S(7), Z(6), AC(4), P(2), CY(0)`\n- `Memory address = HL pair (when used as pointer)`\n\n## Comparison Tables\n\n### 8085 Flags\n\n| Flag | Bit | Set when |\n| --- | --- | --- |\n| Sign (S) | 7 | MSB of result is 1 (negative) |\n| Zero (Z) | 6 | Result is 0 |\n| Aux Carry (AC) | 4 | Carry from bit 3 to 4 |\n| Parity (P) | 2 | Result has even number of 1s |\n| Carry (CY) | 0 | Carry out of MSB |\n\n\n## Summary\n\nThe 8085 microprocessor has a specific internal architecture: an 8-bit ALU, a set of 8-bit registers (A, B, C, D, E, H, L), a 16-bit stack pointer (SP), a 16-bit program counter (PC), and flag registers. It operates on a 5 MHz clock and uses multiplexed address/data bus (AD0-AD7).",
+          "analogies": [
+            {
+              "scenario": "Microprocessor like a factory manager",
+              "mapping": "CPU = manager, ALU = factory floor (work done), CU = supervisor (gives instructions), Registers = manager's desk (fast access), Memory = warehouse (slower access), Bus = corridors (data moves)."
+            },
+            {
+              "scenario": "Pipelining like an assembly line",
+              "mapping": "BIU = loader fetching raw material, EU = workers processing. While EU processes instruction 1, BIU fetches instruction 2 — parallel work, faster throughput."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "8085 Architecture and Registers — Process Flow",
+              "content": "flowchart LR\n    A[Instruction Fetch] --> B[Decode]\n    B --> C[Execute]\n    C --> D[Write Back]\n    D --> A"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "8085 Architecture and Registers — Concept Map",
+              "content": "mindmap\n  root((8085 Architecture and Register))\n    Architecture\n      ALU\n      CU\n      Registers\n    Buses\n      Address\n      Data\n      Control\n    Instructions\n      Data Transfer\n      Arithmetic\n      Branch"
+            }
+          ],
+          "complexity": {
+            "time": "Clock-cycle based — instruction takes 1-9 T-states",
+            "space": "Register file (8-bit) + 64KB/1MB memory"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "Which register holds the result of ALU operations?",
+              "solution": "Correct answer: A (Accumulator)",
+              "explanation": "The Accumulator (A register) holds one operand and the result of ALU operations."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain 8085 Architecture and Registers with reference to the key concepts.",
+              "solution": "Draw the 8085 architecture diagram (ALU, registers, timing/control, flags) → Memorise the 5 flags and what each means → Mention that HL pair is the standard memory pointer",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Accumulator (A).",
+              "modelAnswer": "8-bit register, holds one operand and result"
+            },
+            {
+              "marks": 2,
+              "question": "Define General registers.",
+              "modelAnswer": "B, C, D, E, H, L (8-bit each, can pair as BC, DE, HL)"
+            },
+            {
+              "marks": 2,
+              "question": "Define Program Counter (PC).",
+              "modelAnswer": "16-bit, holds address of next instruction"
+            },
+            {
+              "marks": 2,
+              "question": "What is the size of the data bus in 8085?",
+              "modelAnswer": "8 bits. 8085 is an 8-bit microprocessor."
+            },
+            {
+              "marks": 2,
+              "question": "Define a flag.",
+              "modelAnswer": "A flag is a single bit in the flag register that indicates the status of an ALU operation (e.g., Zero flag is set when the result is zero)."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Register pairs: BC, DE, HL (16-bit)",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain pipelining in 8086. How does it improve performance?",
+              "modelAnswer": "8086 has two independent units: BIU (Bus Interface Unit) and EU (Execution Unit). BIU prefetches instructions into a 6-byte queue while EU executes the current instruction. This overlap means the EU doesn't wait for fetch, improving throughput by ~30%. 8085 has no pipelining — fetch-execute is sequential."
+            },
+            {
+              "marks": 5,
+              "question": "Why does 8086 use memory segmentation?",
+              "modelAnswer": "Segmentation allows a 16-bit architecture to address 20-bit (1 MB) memory. Each segment register (CS, DS, SS, ES) is 16 bits and points to a 64 KB block. Physical address = segment × 16 + offset. This also enables relocatable code and separate spaces for code, data, stack."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Accumulator (A).",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define General registers.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Register pairs: BC, DE, HL (16-bit)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: PC width = 16 bits → 64 KB addressable",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain 8085 Architecture and Registers in detail with a diagram.",
+              "modelAnswer": "The 8085 microprocessor has a specific internal architecture: an 8-bit ALU, a set of 8-bit registers (A, B, C, D, E, H, L), a 16-bit stack pointer (SP), a 16-bit program counter (PC), and flag registers. It operates on a 5 MHz clock and uses multiplexed address/data bus (AD0-AD7)."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss 8085 Architecture and Registers with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — 8085 Architecture and Registers\n\n**One-line definition:** The 8085 microprocessor has a specific internal architecture: an 8-bit ALU, a set of 8-bit registers (A, B, C, D, E, H, L), a 16-bit stack pointer (SP), a 16-bit program counter (PC), and flag registe\n\n**Key points:**\n\n- Accumulator (A): 8-bit register, holds one operand and result\n- General registers: B, C, D, E, H, L (8-bit each, can pair as BC, DE, HL)\n- Program Counter (PC): 16-bit, holds address of next instruction\n- Stack Pointer (SP): 16-bit, points to top of stack\n- Flag register: 5 flags — S, Z, AC, P, CY\n\n**Important formulas:**\n\n- `Register pairs: BC, DE, HL (16-bit)`\n- `PC width = 16 bits → 64 KB addressable`\n- `Flag bits: S(7), Z(6), AC(4), P(2), CY(0)`\n- `Memory address = HL pair (when used as pointer)`\n\n**Common mistake to avoid:** Forgetting which flag is in which bit position\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Accumulator (A): 8-bit register, holds one operand and result",
+            "General registers: B, C, D, E, H, L (8-bit each, can pair as BC, DE, HL)",
+            "Program Counter (PC): 16-bit, holds address of next instruction",
+            "Stack Pointer (SP): 16-bit, points to top of stack",
+            "Flag register: 5 flags — S, Z, AC, P, CY",
+            "Formula: Register pairs: BC, DE, HL (16-bit)",
+            "Formula: PC width = 16 bits → 64 KB addressable",
+            "Formula: Flag bits: S(7), Z(6), AC(4), P(2), CY(0)",
+            "Formula: Memory address = HL pair (when used as pointer)",
+            "8085: 8-bit data, 16-bit address (64KB)",
+            "8086: 16-bit data, 20-bit address (1MB)",
+            "Physical addr = seg × 16 + offset"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "SZAPC",
+              "expansion": "Sign, Zero, Aux carry, Parity, Carry",
+              "meaning": "The 5 flags in 8085 flag register (in bit positions 7, 6, 4, 2, 0)."
+            },
+            {
+              "phrase": "CS DS SS ES",
+              "expansion": "Code, Data, Stack, Extra Segment",
+              "meaning": "The 4 segment registers in 8086."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Draw the 8085 architecture diagram (ALU, registers, timing/control, flags)"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Memorise the 5 flags and what each means"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting which flag is in which bit position"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing stack pointer (grows downward) with program counter (increments)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "The 8085 microprocessor has a specific internal architecture: an 8-bit ALU, a set of 8-bit registers (A, B, C, D, E, H, L), a 16-bit stack pointer (SP), a 16-bit program counter (PC), and flag registers. It operates on a 5 MHz clock and uses multiplexed address/data bus (AD0-AD7)."
+            },
+            {
+              "type": "definition",
+              "content": "Accumulator (A): 8-bit register, holds one operand and result"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Accumulator (A)?",
+              "back": "8-bit register, holds one operand and result",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is General registers?",
+              "back": "B, C, D, E, H, L (8-bit each, can pair as BC, DE, HL)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Program Counter (PC)?",
+              "back": "16-bit, holds address of next instruction",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Stack Pointer (SP)?",
+              "back": "16-bit, points to top of stack",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Flag register?",
+              "back": "5 flags — S, Z, AC, P, CY",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Sign flag (S)?",
+              "back": "set if MSB of result is 1",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Zero flag (Z)?",
+              "back": "set if result is 0",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Carry flag (CY)?",
+              "back": "set if operation generated a carry",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "The 8085 microprocessor has a specific internal architecture: an 8-bit ALU, a set of 8-bit registers (A, B, C, D, E, H, L), a 16-bit stack pointer (SP), a 16-bit program counter (PC), and flag registers. It operates on a 5 MHz clock and uses multiplexed address/data bus (AD0-AD7)."
+            },
+            {
+              "style": "detailed",
+              "content": "The 8085 microprocessor has a specific internal architecture: an 8-bit ALU, a set of 8-bit registers (A, B, C, D, E, H, L), a 16-bit stack pointer (SP), a 16-bit program counter (PC), and flag registers. It operates on a 5 MHz clock and uses multiplexed address/data bus (AD0-AD7).\n\nKey concepts: Accumulator (A): 8-bit register, holds one operand and result, General registers: B, C, D, E, H, L (8-bit each, can pair as BC, DE, HL), Program Counter (PC): 16-bit, holds address of next instruction."
+            }
+          ],
+          "recommendedNextLessons": [
+            "8085-instruction-set",
+            "8086-architecture"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "8085 Instruction Set",
+      "weightage": 25,
+      "lessons": [
+        {
+          "slug": "8085-instruction-set",
+          "title": "8085 Instruction Set and Assembly",
+          "durationMin": 35,
+          "difficulty": "hard",
+          "overview": "The 8085 has 74 instructions organised by function: data transfer (MOV, MVI, LXI), arithmetic (ADD, SUB, INR, DCR), logical (ANA, ORA, XRA), branch (JMP, JZ, JC), and machine control (HLT, NOP, DI, EI). Each instruction has a specific opcode and may use 1-3 bytes.",
+          "keyConcepts": [
+            "MOV r1, r2: copy register r2 to r1",
+            "MVI r, data: move immediate 8-bit data to register r",
+            "LXI rp, data: load 16-bit immediate to register pair",
+            "ADD r: add register r to accumulator",
+            "SUB r: subtract register r from accumulator",
+            "JMP addr: unconditional jump",
+            "JZ / JNZ / JC / JNC: conditional jumps",
+            "HLT: halt the processor"
+          ],
+          "formulas": [
+            "MOV dst, src: dst ← src",
+            "MVI r, d: r ← d (8-bit immediate)",
+            "LXI rp, d: rp ← d (16-bit immediate)",
+            "ADD r: A ← A + r",
+            "STA addr: store A to memory[addr]"
+          ],
+          "tables": [
+            {
+              "title": "Instruction categories",
+              "headers": [
+                "Category",
+                "Examples",
+                "Bytes"
+              ],
+              "rows": [
+                [
+                  "Data Transfer",
+                  "MOV, MVI, LXI, LDA, STA",
+                  "1-3"
+                ],
+                [
+                  "Arithmetic",
+                  "ADD, SUB, INR, DCR, ADI",
+                  "1-2"
+                ],
+                [
+                  "Logical",
+                  "ANA, ORA, XRA, CMA",
+                  "1"
+                ],
+                [
+                  "Branch",
+                  "JMP, JZ, JC, CALL, RET",
+                  "1-3"
+                ],
+                [
+                  "Stack",
+                  "PUSH, POP, XTHL, SPHL",
+                  "1"
+                ],
+                [
+                  "Machine Control",
+                  "HLT, NOP, DI, EI, RST",
+                  "1"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Forgetting that MVI needs immediate data (MVI B 05H, not MVI B)",
+            "Mixing up LDA (load accumulator from memory) and STA (store accumulator to memory)",
+            "Confusing JZ (jump if zero) with JNZ (jump if NOT zero)",
+            "Forgetting that HLT ends program — code after HLT doesn't execute"
+          ],
+          "examTips": [
+            "Always write the addressing mode (immediate, direct, register, indirect)",
+            "Show byte count and T-states for instructions if asked",
+            "Write a complete program (with HLT) when asked to demonstrate"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What does MOV A, B do?",
+              "options": [
+                "Copy B to A",
+                "Copy A to B",
+                "Swap A and B",
+                "Add B to A"
+              ],
+              "answer": 0,
+              "explanation": "MOV A, B copies the contents of register B to register A."
+            },
+            {
+              "question": "Which instruction loads 8-bit immediate data?",
+              "options": [
+                "MOV",
+                "MVI",
+                "LXI",
+                "LDA"
+              ],
+              "answer": 1,
+              "explanation": "MVI (Move Immediate) loads 8-bit data directly into a register. LXI loads 16-bit immediate."
+            },
+            {
+              "question": "What does JZ do?",
+              "options": [
+                "Jump always",
+                "Jump if Zero flag is set",
+                "Jump if Zero flag is reset",
+                "Jump to zero"
+              ],
+              "answer": 1,
+              "explanation": "JZ jumps to the specified address if the Zero flag is set (i.e., result was zero)."
+            },
+            {
+              "question": "Which instruction stops the processor?",
+              "options": [
+                "STOP",
+                "END",
+                "HLT",
+                "EXIT"
+              ],
+              "answer": 2,
+              "explanation": "HLT (Halt) stops the processor. No code after HLT executes."
+            }
+          ],
+          "objectives": [
+            "Understand MOV r1, r2 and explain its significance",
+            "Understand MVI r, data and explain its significance",
+            "Understand LXI rp, data and explain its significance",
+            "Understand ADD r and explain its significance",
+            "Understand SUB r and explain its significance",
+            "Attempt the practice quiz and viva questions on 8085 Instruction Set and Assembly"
+          ],
+          "prerequisites": [
+            "Basic digital electronics (gates, flip-flops)",
+            "Number systems (binary, hex, decimal)",
+            "Understanding of memory and registers",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nThe 8085 has 74 instructions organised by function: data transfer (MOV, MVI, LXI), arithmetic (ADD, SUB, INR, DCR), logical (ANA, ORA, XRA), branch (JMP, JZ, JC), and machine control (HLT, NOP, DI, EI). Each instruction has a specific opcode and may use 1-3 bytes.\n## Key Concepts\n\n- MOV r1, r2: copy register r2 to r1\n- MVI r, data: move immediate 8-bit data to register r\n- LXI rp, data: load 16-bit immediate to register pair\n- ADD r: add register r to accumulator\n- SUB r: subtract register r from accumulator\n- JMP addr: unconditional jump\n- JZ / JNZ / JC / JNC: conditional jumps\n- HLT: halt the processor\n\n## Important Formulas\n\n- `MOV dst, src: dst ← src`\n- `MVI r, d: r ← d (8-bit immediate)`\n- `LXI rp, d: rp ← d (16-bit immediate)`\n- `ADD r: A ← A + r`\n- `STA addr: store A to memory[addr]`\n\n## Comparison Tables\n\n### Instruction categories\n\n| Category | Examples | Bytes |\n| --- | --- | --- |\n| Data Transfer | MOV, MVI, LXI, LDA, STA | 1-3 |\n| Arithmetic | ADD, SUB, INR, DCR, ADI | 1-2 |\n| Logical | ANA, ORA, XRA, CMA | 1 |\n| Branch | JMP, JZ, JC, CALL, RET | 1-3 |\n| Stack | PUSH, POP, XTHL, SPHL | 1 |\n| Machine Control | HLT, NOP, DI, EI, RST | 1 |\n\n\n## Summary\n\nThe 8085 has 74 instructions organised by function: data transfer (MOV, MVI, LXI), arithmetic (ADD, SUB, INR, DCR), logical (ANA, ORA, XRA), branch (JMP, JZ, JC), and machine control (HLT, NOP, DI, EI). Each instruction has a specific opcode and may use 1-3 bytes.",
+          "analogies": [
+            {
+              "scenario": "Microprocessor like a factory manager",
+              "mapping": "CPU = manager, ALU = factory floor (work done), CU = supervisor (gives instructions), Registers = manager's desk (fast access), Memory = warehouse (slower access), Bus = corridors (data moves)."
+            },
+            {
+              "scenario": "Pipelining like an assembly line",
+              "mapping": "BIU = loader fetching raw material, EU = workers processing. While EU processes instruction 1, BIU fetches instruction 2 — parallel work, faster throughput."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "8085 Instruction Set and Assembly — Process Flow",
+              "content": "flowchart LR\n    A[Instruction Fetch] --> B[Decode]\n    B --> C[Execute]\n    C --> D[Write Back]\n    D --> A"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "8085 Instruction Set and Assembly — Concept Map",
+              "content": "mindmap\n  root((8085 Instruction Set and Assem))\n    Architecture\n      ALU\n      CU\n      Registers\n    Buses\n      Address\n      Data\n      Control\n    Instructions\n      Data Transfer\n      Arithmetic\n      Branch"
+            }
+          ],
+          "complexity": {
+            "time": "Clock-cycle based — instruction takes 1-9 T-states",
+            "space": "Register file (8-bit) + 64KB/1MB memory"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What does MOV A, B do?",
+              "solution": "Correct answer: Copy B to A",
+              "explanation": "MOV A, B copies the contents of register B to register A."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain 8085 Instruction Set and Assembly with reference to the key concepts.",
+              "solution": "Always write the addressing mode (immediate, direct, register, indirect) → Show byte count and T-states for instructions if asked → Write a complete program (with HLT) when asked to demonstrate",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define MOV r1, r2.",
+              "modelAnswer": "copy register r2 to r1"
+            },
+            {
+              "marks": 2,
+              "question": "Define MVI r, data.",
+              "modelAnswer": "move immediate 8-bit data to register r"
+            },
+            {
+              "marks": 2,
+              "question": "Define LXI rp, data.",
+              "modelAnswer": "load 16-bit immediate to register pair"
+            },
+            {
+              "marks": 2,
+              "question": "What is the size of the data bus in 8085?",
+              "modelAnswer": "8 bits. 8085 is an 8-bit microprocessor."
+            },
+            {
+              "marks": 2,
+              "question": "Define a flag.",
+              "modelAnswer": "A flag is a single bit in the flag register that indicates the status of an ALU operation (e.g., Zero flag is set when the result is zero)."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: MOV dst, src: dst ← src",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain pipelining in 8086. How does it improve performance?",
+              "modelAnswer": "8086 has two independent units: BIU (Bus Interface Unit) and EU (Execution Unit). BIU prefetches instructions into a 6-byte queue while EU executes the current instruction. This overlap means the EU doesn't wait for fetch, improving throughput by ~30%. 8085 has no pipelining — fetch-execute is sequential."
+            },
+            {
+              "marks": 5,
+              "question": "Why does 8086 use memory segmentation?",
+              "modelAnswer": "Segmentation allows a 16-bit architecture to address 20-bit (1 MB) memory. Each segment register (CS, DS, SS, ES) is 16 bits and points to a 64 KB block. Physical address = segment × 16 + offset. This also enables relocatable code and separate spaces for code, data, stack."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define MOV r1, r2.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define MVI r, data.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: MOV dst, src: dst ← src",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: MVI r, d: r ← d (8-bit immediate)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain 8085 Instruction Set and Assembly in detail with a diagram.",
+              "modelAnswer": "The 8085 has 74 instructions organised by function: data transfer (MOV, MVI, LXI), arithmetic (ADD, SUB, INR, DCR), logical (ANA, ORA, XRA), branch (JMP, JZ, JC), and machine control (HLT, NOP, DI, EI). Each instruction has a specific opcode and may use 1-3 bytes."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss 8085 Instruction Set and Assembly with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — 8085 Instruction Set and Assembly\n\n**One-line definition:** The 8085 has 74 instructions organised by function: data transfer (MOV, MVI, LXI), arithmetic (ADD, SUB, INR, DCR), logical (ANA, ORA, XRA), branch (JMP, JZ, JC), and machine control (HLT, NOP, DI, EI\n\n**Key points:**\n\n- MOV r1, r2: copy register r2 to r1\n- MVI r, data: move immediate 8-bit data to register r\n- LXI rp, data: load 16-bit immediate to register pair\n- ADD r: add register r to accumulator\n- SUB r: subtract register r from accumulator\n\n**Important formulas:**\n\n- `MOV dst, src: dst ← src`\n- `MVI r, d: r ← d (8-bit immediate)`\n- `LXI rp, d: rp ← d (16-bit immediate)`\n- `ADD r: A ← A + r`\n- `STA addr: store A to memory[addr]`\n\n**Common mistake to avoid:** Forgetting that MVI needs immediate data (MVI B 05H, not MVI B)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "MOV r1, r2: copy register r2 to r1",
+            "MVI r, data: move immediate 8-bit data to register r",
+            "LXI rp, data: load 16-bit immediate to register pair",
+            "ADD r: add register r to accumulator",
+            "SUB r: subtract register r from accumulator",
+            "Formula: MOV dst, src: dst ← src",
+            "Formula: MVI r, d: r ← d (8-bit immediate)",
+            "Formula: LXI rp, d: rp ← d (16-bit immediate)",
+            "Formula: ADD r: A ← A + r",
+            "Formula: STA addr: store A to memory[addr]",
+            "8085: 8-bit data, 16-bit address (64KB)",
+            "8086: 16-bit data, 20-bit address (1MB)",
+            "Physical addr = seg × 16 + offset"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "SZAPC",
+              "expansion": "Sign, Zero, Aux carry, Parity, Carry",
+              "meaning": "The 5 flags in 8085 flag register (in bit positions 7, 6, 4, 2, 0)."
+            },
+            {
+              "phrase": "CS DS SS ES",
+              "expansion": "Code, Data, Stack, Extra Segment",
+              "meaning": "The 4 segment registers in 8086."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always write the addressing mode (immediate, direct, register, indirect)"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Show byte count and T-states for instructions if asked"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting that MVI needs immediate data (MVI B 05H, not MVI B)"
+            },
+            {
+              "type": "warning",
+              "content": "Mixing up LDA (load accumulator from memory) and STA (store accumulator to memory)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "The 8085 has 74 instructions organised by function: data transfer (MOV, MVI, LXI), arithmetic (ADD, SUB, INR, DCR), logical (ANA, ORA, XRA), branch (JMP, JZ, JC), and machine control (HLT, NOP, DI, EI). Each instruction has a specific opcode and may use 1-3 bytes."
+            },
+            {
+              "type": "definition",
+              "content": "MOV r1, r2: copy register r2 to r1"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is MOV r1, r2?",
+              "back": "copy register r2 to r1",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is MVI r, data?",
+              "back": "move immediate 8-bit data to register r",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is LXI rp, data?",
+              "back": "load 16-bit immediate to register pair",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is ADD r?",
+              "back": "add register r to accumulator",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is SUB r?",
+              "back": "subtract register r from accumulator",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is JMP addr?",
+              "back": "unconditional jump",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is JZ / JNZ / JC / JNC?",
+              "back": "conditional jumps",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is HLT?",
+              "back": "halt the processor",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "The 8085 has 74 instructions organised by function: data transfer (MOV, MVI, LXI), arithmetic (ADD, SUB, INR, DCR), logical (ANA, ORA, XRA), branch (JMP, JZ, JC), and machine control (HLT, NOP, DI, EI). Each instruction has a specific opcode and may use 1-3 bytes."
+            },
+            {
+              "style": "detailed",
+              "content": "The 8085 has 74 instructions organised by function: data transfer (MOV, MVI, LXI), arithmetic (ADD, SUB, INR, DCR), logical (ANA, ORA, XRA), branch (JMP, JZ, JC), and machine control (HLT, NOP, DI, EI). Each instruction has a specific opcode and may use 1-3 bytes.\n\nKey concepts: MOV r1, r2: copy register r2 to r1, MVI r, data: move immediate 8-bit data to register r, LXI rp, data: load 16-bit immediate to register pair."
+            }
+          ],
+          "recommendedNextLessons": [
+            "8086-architecture",
+            "interfacing-applications"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "8086 Architecture",
+      "weightage": 15,
+      "lessons": [
+        {
+          "slug": "8086-architecture",
+          "title": "8086 Architecture and Segments",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "The 8086 is a 16-bit microprocessor with a 20-bit address bus (1 MB memory). It introduced memory segmentation — dividing memory into code segment (CS), data segment (DS), stack segment (SS), and extra segment (ES). It has two independent units: Bus Interface Unit (BIU) and Execution Unit (EU) for pipelining.",
+          "keyConcepts": [
+            "BIU (Bus Interface Unit): handles bus operations, prefetches instructions",
+            "EU (Execution Unit): decodes and executes instructions",
+            "Pipelining: BIU fetches next instruction while EU executes current",
+            "Segments: CS (code), DS (data), SS (stack), ES (extra)",
+            "Physical address = segment × 16 + offset",
+            "General registers: AX, BX, CX, DX (16-bit, can be split AH/AL etc.)",
+            "Pointer registers: IP (instruction pointer), SP, BP",
+            "Index registers: SI (source), DI (destination)"
+          ],
+          "formulas": [
+            "Physical address = segment × 16 + offset (= segment << 4 + offset)",
+            "Each segment = 64 KB (16-bit offset)",
+            "Total addressable = 2^20 = 1 MB",
+            "AX = AH (high 8) + AL (low 8)"
+          ],
+          "tables": [
+            {
+              "title": "8086 Segments",
+              "headers": [
+                "Register",
+                "Segment",
+                "Purpose"
+              ],
+              "rows": [
+                [
+                  "CS",
+                  "Code Segment",
+                  "Holds instructions"
+                ],
+                [
+                  "DS",
+                  "Data Segment",
+                  "Holds data"
+                ],
+                [
+                  "SS",
+                  "Stack Segment",
+                  "Holds stack"
+                ],
+                [
+                  "ES",
+                  "Extra Segment",
+                  "Extra data (e.g., string ops)"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Forgetting to multiply segment by 16 (not add 16)",
+            "Confusing IP (instruction pointer) with SP (stack pointer)",
+            "Mixing up AX (16-bit) with AH/AL (8-bit halves)",
+            "Not understanding that segments can overlap"
+          ],
+          "examTips": [
+            "Show the physical address calculation: seg × 16 + offset",
+            "Draw the BIU and EU separately when explaining pipelining",
+            "Memorise the segment registers and their purposes"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "How is the physical address calculated in 8086?",
+              "options": [
+                "seg + offset",
+                "seg × 16 + offset",
+                "seg × offset",
+                "seg - offset"
+              ],
+              "answer": 1,
+              "explanation": "Physical address = segment × 16 + offset (equivalent to segment << 4 + offset)."
+            },
+            {
+              "question": "Which unit prefetches instructions in 8086?",
+              "options": [
+                "EU",
+                "BIU",
+                "ALU",
+                "CU"
+              ],
+              "answer": 1,
+              "explanation": "BIU (Bus Interface Unit) prefetches instructions into the queue while EU executes."
+            },
+            {
+              "question": "How much memory can 8086 address?",
+              "options": [
+                "64 KB",
+                "1 MB",
+                "16 MB",
+                "4 GB"
+              ],
+              "answer": 1,
+              "explanation": "8086 has a 20-bit address bus → 2^20 = 1 MB."
+            },
+            {
+              "question": "Which register is the instruction pointer?",
+              "options": [
+                "SP",
+                "BP",
+                "IP",
+                "SI"
+              ],
+              "answer": 2,
+              "explanation": "IP (Instruction Pointer) holds the offset of the next instruction (similar to PC in 8085)."
+            }
+          ],
+          "objectives": [
+            "Understand BIU (Bus Interface Unit) and explain its significance",
+            "Understand EU (Execution Unit) and explain its significance",
+            "Understand Pipelining and explain its significance",
+            "Understand Segments and explain its significance",
+            "Understand this concept and explain its significance",
+            "Attempt the practice quiz and viva questions on 8086 Architecture and Segments"
+          ],
+          "prerequisites": [
+            "Basic digital electronics (gates, flip-flops)",
+            "Number systems (binary, hex, decimal)",
+            "Understanding of memory and registers",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nThe 8086 is a 16-bit microprocessor with a 20-bit address bus (1 MB memory). It introduced memory segmentation — dividing memory into code segment (CS), data segment (DS), stack segment (SS), and extra segment (ES). It has two independent units: Bus Interface Unit (BIU) and Execution Unit (EU) for pipelining.\n## Key Concepts\n\n- BIU (Bus Interface Unit): handles bus operations, prefetches instructions\n- EU (Execution Unit): decodes and executes instructions\n- Pipelining: BIU fetches next instruction while EU executes current\n- Segments: CS (code), DS (data), SS (stack), ES (extra)\n- Physical address = segment × 16 + offset\n- General registers: AX, BX, CX, DX (16-bit, can be split AH/AL etc.)\n- Pointer registers: IP (instruction pointer), SP, BP\n- Index registers: SI (source), DI (destination)\n\n## Important Formulas\n\n- `Physical address = segment × 16 + offset (= segment << 4 + offset)`\n- `Each segment = 64 KB (16-bit offset)`\n- `Total addressable = 2^20 = 1 MB`\n- `AX = AH (high 8) + AL (low 8)`\n\n## Comparison Tables\n\n### 8086 Segments\n\n| Register | Segment | Purpose |\n| --- | --- | --- |\n| CS | Code Segment | Holds instructions |\n| DS | Data Segment | Holds data |\n| SS | Stack Segment | Holds stack |\n| ES | Extra Segment | Extra data (e.g., string ops) |\n\n\n## Summary\n\nThe 8086 is a 16-bit microprocessor with a 20-bit address bus (1 MB memory). It introduced memory segmentation — dividing memory into code segment (CS), data segment (DS), stack segment (SS), and extra segment (ES). It has two independent units: Bus Interface Unit (BIU) and Execution Unit (EU) for pipelining.",
+          "analogies": [
+            {
+              "scenario": "Microprocessor like a factory manager",
+              "mapping": "CPU = manager, ALU = factory floor (work done), CU = supervisor (gives instructions), Registers = manager's desk (fast access), Memory = warehouse (slower access), Bus = corridors (data moves)."
+            },
+            {
+              "scenario": "Pipelining like an assembly line",
+              "mapping": "BIU = loader fetching raw material, EU = workers processing. While EU processes instruction 1, BIU fetches instruction 2 — parallel work, faster throughput."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "8086 Architecture and Segments — Process Flow",
+              "content": "flowchart LR\n    A[Instruction Fetch] --> B[Decode]\n    B --> C[Execute]\n    C --> D[Write Back]\n    D --> A"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "8086 Architecture and Segments — Concept Map",
+              "content": "mindmap\n  root((8086 Architecture and Segments))\n    Architecture\n      ALU\n      CU\n      Registers\n    Buses\n      Address\n      Data\n      Control\n    Instructions\n      Data Transfer\n      Arithmetic\n      Branch"
+            }
+          ],
+          "complexity": {
+            "time": "Clock-cycle based — instruction takes 1-9 T-states",
+            "space": "Register file (8-bit) + 64KB/1MB memory"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "How is the physical address calculated in 8086?",
+              "solution": "Correct answer: seg × 16 + offset",
+              "explanation": "Physical address = segment × 16 + offset (equivalent to segment << 4 + offset)."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain 8086 Architecture and Segments with reference to the key concepts.",
+              "solution": "Show the physical address calculation: seg × 16 + offset → Draw the BIU and EU separately when explaining pipelining → Memorise the segment registers and their purposes",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define BIU (Bus Interface Unit).",
+              "modelAnswer": "handles bus operations, prefetches instructions"
+            },
+            {
+              "marks": 2,
+              "question": "Define EU (Execution Unit).",
+              "modelAnswer": "decodes and executes instructions"
+            },
+            {
+              "marks": 2,
+              "question": "Define Pipelining.",
+              "modelAnswer": "BIU fetches next instruction while EU executes current"
+            },
+            {
+              "marks": 2,
+              "question": "What is the size of the data bus in 8085?",
+              "modelAnswer": "8 bits. 8085 is an 8-bit microprocessor."
+            },
+            {
+              "marks": 2,
+              "question": "Define a flag.",
+              "modelAnswer": "A flag is a single bit in the flag register that indicates the status of an ALU operation (e.g., Zero flag is set when the result is zero)."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Physical address = segment × 16 + offset (= segment << 4 + offset)",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain pipelining in 8086. How does it improve performance?",
+              "modelAnswer": "8086 has two independent units: BIU (Bus Interface Unit) and EU (Execution Unit). BIU prefetches instructions into a 6-byte queue while EU executes the current instruction. This overlap means the EU doesn't wait for fetch, improving throughput by ~30%. 8085 has no pipelining — fetch-execute is sequential."
+            },
+            {
+              "marks": 5,
+              "question": "Why does 8086 use memory segmentation?",
+              "modelAnswer": "Segmentation allows a 16-bit architecture to address 20-bit (1 MB) memory. Each segment register (CS, DS, SS, ES) is 16 bits and points to a 64 KB block. Physical address = segment × 16 + offset. This also enables relocatable code and separate spaces for code, data, stack."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define BIU (Bus Interface Unit).",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define EU (Execution Unit).",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Physical address = segment × 16 + offset (= segment << 4 + offset)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Each segment = 64 KB (16-bit offset)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain 8086 Architecture and Segments in detail with a diagram.",
+              "modelAnswer": "The 8086 is a 16-bit microprocessor with a 20-bit address bus (1 MB memory). It introduced memory segmentation — dividing memory into code segment (CS), data segment (DS), stack segment (SS), and extra segment (ES). It has two independent units: Bus Interface Unit (BIU) and Execution Unit (EU) for pipelining."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss 8086 Architecture and Segments with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — 8086 Architecture and Segments\n\n**One-line definition:** The 8086 is a 16-bit microprocessor with a 20-bit address bus (1 MB memory). It introduced memory segmentation — dividing memory into code segment (CS), data segment (DS), stack segment (SS), and extr\n\n**Key points:**\n\n- BIU (Bus Interface Unit): handles bus operations, prefetches instructions\n- EU (Execution Unit): decodes and executes instructions\n- Pipelining: BIU fetches next instruction while EU executes current\n- Segments: CS (code), DS (data), SS (stack), ES (extra)\n- Physical address = segment × 16 + offset\n\n**Important formulas:**\n\n- `Physical address = segment × 16 + offset (= segment << 4 + offset)`\n- `Each segment = 64 KB (16-bit offset)`\n- `Total addressable = 2^20 = 1 MB`\n- `AX = AH (high 8) + AL (low 8)`\n\n**Common mistake to avoid:** Forgetting to multiply segment by 16 (not add 16)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "BIU (Bus Interface Unit): handles bus operations, prefetches instructions",
+            "EU (Execution Unit): decodes and executes instructions",
+            "Pipelining: BIU fetches next instruction while EU executes current",
+            "Segments: CS (code), DS (data), SS (stack), ES (extra)",
+            "Physical address = segment × 16 + offset",
+            "Formula: Physical address = segment × 16 + offset (= segment << 4 + offset)",
+            "Formula: Each segment = 64 KB (16-bit offset)",
+            "Formula: Total addressable = 2^20 = 1 MB",
+            "Formula: AX = AH (high 8) + AL (low 8)",
+            "8085: 8-bit data, 16-bit address (64KB)",
+            "8086: 16-bit data, 20-bit address (1MB)",
+            "Physical addr = seg × 16 + offset"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "SZAPC",
+              "expansion": "Sign, Zero, Aux carry, Parity, Carry",
+              "meaning": "The 5 flags in 8085 flag register (in bit positions 7, 6, 4, 2, 0)."
+            },
+            {
+              "phrase": "CS DS SS ES",
+              "expansion": "Code, Data, Stack, Extra Segment",
+              "meaning": "The 4 segment registers in 8086."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Show the physical address calculation: seg × 16 + offset"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw the BIU and EU separately when explaining pipelining"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting to multiply segment by 16 (not add 16)"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing IP (instruction pointer) with SP (stack pointer)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "The 8086 is a 16-bit microprocessor with a 20-bit address bus (1 MB memory). It introduced memory segmentation — dividing memory into code segment (CS), data segment (DS), stack segment (SS), and extra segment (ES). It has two independent units: Bus Interface Unit (BIU) and Execution Unit (EU) for p..."
+            },
+            {
+              "type": "definition",
+              "content": "BIU (Bus Interface Unit): handles bus operations, prefetches instructions"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is BIU (Bus Interface Unit)?",
+              "back": "handles bus operations, prefetches instructions",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is EU (Execution Unit)?",
+              "back": "decodes and executes instructions",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Pipelining?",
+              "back": "BIU fetches next instruction while EU executes current",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Segments?",
+              "back": "CS (code), DS (data), SS (stack), ES (extra)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is General registers?",
+              "back": "AX, BX, CX, DX (16-bit, can be split AH/AL etc.)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Pointer registers?",
+              "back": "IP (instruction pointer), SP, BP",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Index registers?",
+              "back": "SI (source), DI (destination)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What does the formula `Physical address` represent?",
+              "back": "segment × 16 + offset (= segment << 4 + offset)",
+              "hint": "Look at the formulas section."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "The 8086 is a 16-bit microprocessor with a 20-bit address bus (1 MB memory). It introduced memory segmentation — dividing memory into code segment (CS), data segment (DS), stack segment (SS), and extra segment (ES). It has two independent units: Bus Interface Unit (BIU) and Execution Unit (EU) for p"
+            },
+            {
+              "style": "detailed",
+              "content": "The 8086 is a 16-bit microprocessor with a 20-bit address bus (1 MB memory). It introduced memory segmentation — dividing memory into code segment (CS), data segment (DS), stack segment (SS), and extra segment (ES). It has two independent units: Bus Interface Unit (BIU) and Execution Unit (EU) for pipelining.\n\nKey concepts: BIU (Bus Interface Unit): handles bus operations, prefetches instructions, EU (Execution Unit): decodes and executes instructions, Pipelining: BIU fetches next instruction while EU executes current."
+            }
+          ],
+          "recommendedNextLessons": [
+            "interfacing-applications"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Interfacing and Applications",
+      "weightage": 15,
+      "lessons": [
+        {
+          "slug": "interfacing-applications",
+          "title": "Interfacing and Applications",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "Microprocessors interface with peripherals like keyboards, displays, ADCs/DACs, and sensors using I/O ports. Programmable peripheral chips include 8255 (PPI — Programmable Peripheral Interface), 8259 (PIC — Programmable Interrupt Controller), 8253/8254 (Timer), and 8257 (DMA controller).",
+          "keyConcepts": [
+            "8255 PPI: Programmable Peripheral Interface — 3 8-bit ports (A, B, C)",
+            "8259 PIC: Programmable Interrupt Controller — manages 8 interrupt lines",
+            "8253/8254: Programmable Timer/Counter",
+            "8257: DMA Controller — direct memory access without CPU",
+            "Memory-mapped I/O: I/O devices share address space with memory",
+            "Isolated I/O: separate I/O address space (IN/OUT instructions)",
+            "Interrupt: asynchronous signal requesting CPU attention",
+            "Polling vs Interrupt: CPU-initiated vs device-initiated"
+          ],
+          "formulas": [
+            "8255 modes: 0 (basic I/O), 1 (handshake), 2 (bidirectional)",
+            "8259 vector = IRQ × 4 (interrupt vector table)",
+            "I/O port address width = 8 bits → 256 I/O ports"
+          ],
+          "tables": [
+            {
+              "title": "Peripheral chips",
+              "headers": [
+                "Chip",
+                "Function",
+                "Ports/Lines"
+              ],
+              "rows": [
+                [
+                  "8255",
+                  "PPI — I/O ports",
+                  "3 × 8-bit"
+                ],
+                [
+                  "8259",
+                  "Interrupt Controller",
+                  "8 IRQs"
+                ],
+                [
+                  "8253/8254",
+                  "Timer/Counter",
+                  "3 counters"
+                ],
+                [
+                  "8257",
+                  "DMA Controller",
+                  "4 channels"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Confusing memory-mapped I/O with isolated I/O",
+            "Forgetting that 8255 has 3 ports (A, B, C — C can be split)",
+            "Mixing up polling (CPU asks) with interrupt (device tells)",
+            "Not understanding DMA bypasses CPU for transfers"
+          ],
+          "examTips": [
+            "Always state which chip number does what (8255 = PPI, 8259 = PIC)",
+            "Mention memory-mapped vs isolated I/O when discussing interfacing",
+            "Show how interrupts are handled (vector table for 8086)"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What does 8255 do?",
+              "options": [
+                "Timer",
+                "PPI (I/O ports)",
+                "Interrupt controller",
+                "DMA"
+              ],
+              "answer": 1,
+              "explanation": "8255 is the Programmable Peripheral Interface — provides 3 8-bit I/O ports."
+            },
+            {
+              "question": "Which chip manages interrupts?",
+              "options": [
+                "8255",
+                "8259",
+                "8253",
+                "8257"
+              ],
+              "answer": 1,
+              "explanation": "8259 is the Programmable Interrupt Controller (PIC), managing 8 interrupt lines."
+            },
+            {
+              "question": "What is DMA?",
+              "options": [
+                "Direct memory read",
+                "Direct Memory Access — bypasses CPU",
+                "A type of interrupt",
+                "A type of I/O port"
+              ],
+              "answer": 1,
+              "explanation": "DMA (Direct Memory Access) allows peripherals to transfer data to/from memory without CPU involvement, using the 8257 DMA controller."
+            },
+            {
+              "question": "In memory-mapped I/O, where do I/O devices live?",
+              "options": [
+                "Separate address space",
+                "Same address space as memory",
+                "In the CPU",
+                "In the BIOS"
+              ],
+              "answer": 1,
+              "explanation": "Memory-mapped I/O shares the memory address space. Isolated I/O uses a separate space (accessed via IN/OUT)."
+            }
+          ],
+          "objectives": [
+            "Understand 8255 PPI and explain its significance",
+            "Understand 8259 PIC and explain its significance",
+            "Understand 8253/8254 and explain its significance",
+            "Understand 8257 and explain its significance",
+            "Understand Memory-mapped I/O and explain its significance",
+            "Attempt the practice quiz and viva questions on Interfacing and Applications"
+          ],
+          "prerequisites": [
+            "Basic digital electronics (gates, flip-flops)",
+            "Number systems (binary, hex, decimal)",
+            "Understanding of memory and registers",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nMicroprocessors interface with peripherals like keyboards, displays, ADCs/DACs, and sensors using I/O ports. Programmable peripheral chips include 8255 (PPI — Programmable Peripheral Interface), 8259 (PIC — Programmable Interrupt Controller), 8253/8254 (Timer), and 8257 (DMA controller).\n## Key Concepts\n\n- 8255 PPI: Programmable Peripheral Interface — 3 8-bit ports (A, B, C)\n- 8259 PIC: Programmable Interrupt Controller — manages 8 interrupt lines\n- 8253/8254: Programmable Timer/Counter\n- 8257: DMA Controller — direct memory access without CPU\n- Memory-mapped I/O: I/O devices share address space with memory\n- Isolated I/O: separate I/O address space (IN/OUT instructions)\n- Interrupt: asynchronous signal requesting CPU attention\n- Polling vs Interrupt: CPU-initiated vs device-initiated\n\n## Important Formulas\n\n- `8255 modes: 0 (basic I/O), 1 (handshake), 2 (bidirectional)`\n- `8259 vector = IRQ × 4 (interrupt vector table)`\n- `I/O port address width = 8 bits → 256 I/O ports`\n\n## Comparison Tables\n\n### Peripheral chips\n\n| Chip | Function | Ports/Lines |\n| --- | --- | --- |\n| 8255 | PPI — I/O ports | 3 × 8-bit |\n| 8259 | Interrupt Controller | 8 IRQs |\n| 8253/8254 | Timer/Counter | 3 counters |\n| 8257 | DMA Controller | 4 channels |\n\n\n## Summary\n\nMicroprocessors interface with peripherals like keyboards, displays, ADCs/DACs, and sensors using I/O ports. Programmable peripheral chips include 8255 (PPI — Programmable Peripheral Interface), 8259 (PIC — Programmable Interrupt Controller), 8253/8254 (Timer), and 8257 (DMA controller).",
+          "analogies": [
+            {
+              "scenario": "Microprocessor like a factory manager",
+              "mapping": "CPU = manager, ALU = factory floor (work done), CU = supervisor (gives instructions), Registers = manager's desk (fast access), Memory = warehouse (slower access), Bus = corridors (data moves)."
+            },
+            {
+              "scenario": "Pipelining like an assembly line",
+              "mapping": "BIU = loader fetching raw material, EU = workers processing. While EU processes instruction 1, BIU fetches instruction 2 — parallel work, faster throughput."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Interfacing and Applications — Process Flow",
+              "content": "flowchart LR\n    A[Instruction Fetch] --> B[Decode]\n    B --> C[Execute]\n    C --> D[Write Back]\n    D --> A"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Interfacing and Applications — Concept Map",
+              "content": "mindmap\n  root((Interfacing and Applications))\n    Architecture\n      ALU\n      CU\n      Registers\n    Buses\n      Address\n      Data\n      Control\n    Instructions\n      Data Transfer\n      Arithmetic\n      Branch"
+            }
+          ],
+          "complexity": {
+            "time": "Clock-cycle based — instruction takes 1-9 T-states",
+            "space": "Register file (8-bit) + 64KB/1MB memory"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What does 8255 do?",
+              "solution": "Correct answer: PPI (I/O ports)",
+              "explanation": "8255 is the Programmable Peripheral Interface — provides 3 8-bit I/O ports."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Interfacing and Applications with reference to the key concepts.",
+              "solution": "Always state which chip number does what (8255 = PPI, 8259 = PIC) → Mention memory-mapped vs isolated I/O when discussing interfacing → Show how interrupts are handled (vector table for 8086)",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define 8255 PPI.",
+              "modelAnswer": "Programmable Peripheral Interface — 3 8-bit ports (A, B, C)"
+            },
+            {
+              "marks": 2,
+              "question": "Define 8259 PIC.",
+              "modelAnswer": "Programmable Interrupt Controller — manages 8 interrupt lines"
+            },
+            {
+              "marks": 2,
+              "question": "Define 8253/8254.",
+              "modelAnswer": "Programmable Timer/Counter"
+            },
+            {
+              "marks": 2,
+              "question": "What is the size of the data bus in 8085?",
+              "modelAnswer": "8 bits. 8085 is an 8-bit microprocessor."
+            },
+            {
+              "marks": 2,
+              "question": "Define a flag.",
+              "modelAnswer": "A flag is a single bit in the flag register that indicates the status of an ALU operation (e.g., Zero flag is set when the result is zero)."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: 8255 modes: 0 (basic I/O), 1 (handshake), 2 (bidirectional)",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain pipelining in 8086. How does it improve performance?",
+              "modelAnswer": "8086 has two independent units: BIU (Bus Interface Unit) and EU (Execution Unit). BIU prefetches instructions into a 6-byte queue while EU executes the current instruction. This overlap means the EU doesn't wait for fetch, improving throughput by ~30%. 8085 has no pipelining — fetch-execute is sequential."
+            },
+            {
+              "marks": 5,
+              "question": "Why does 8086 use memory segmentation?",
+              "modelAnswer": "Segmentation allows a 16-bit architecture to address 20-bit (1 MB) memory. Each segment register (CS, DS, SS, ES) is 16 bits and points to a 64 KB block. Physical address = segment × 16 + offset. This also enables relocatable code and separate spaces for code, data, stack."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define 8255 PPI.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define 8259 PIC.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: 8255 modes: 0 (basic I/O), 1 (handshake), 2 (bidirectional)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: 8259 vector = IRQ × 4 (interrupt vector table)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Interfacing and Applications in detail with a diagram.",
+              "modelAnswer": "Microprocessors interface with peripherals like keyboards, displays, ADCs/DACs, and sensors using I/O ports. Programmable peripheral chips include 8255 (PPI — Programmable Peripheral Interface), 8259 (PIC — Programmable Interrupt Controller), 8253/8254 (Timer), and 8257 (DMA controller)."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Interfacing and Applications with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Interfacing and Applications\n\n**One-line definition:** Microprocessors interface with peripherals like keyboards, displays, ADCs/DACs, and sensors using I/O ports. Programmable peripheral chips include 8255 (PPI — Programmable Peripheral Interface), 8259 \n\n**Key points:**\n\n- 8255 PPI: Programmable Peripheral Interface — 3 8-bit ports (A, B, C)\n- 8259 PIC: Programmable Interrupt Controller — manages 8 interrupt lines\n- 8253/8254: Programmable Timer/Counter\n- 8257: DMA Controller — direct memory access without CPU\n- Memory-mapped I/O: I/O devices share address space with memory\n\n**Important formulas:**\n\n- `8255 modes: 0 (basic I/O), 1 (handshake), 2 (bidirectional)`\n- `8259 vector = IRQ × 4 (interrupt vector table)`\n- `I/O port address width = 8 bits → 256 I/O ports`\n\n**Common mistake to avoid:** Confusing memory-mapped I/O with isolated I/O\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "8255 PPI: Programmable Peripheral Interface — 3 8-bit ports (A, B, C)",
+            "8259 PIC: Programmable Interrupt Controller — manages 8 interrupt lines",
+            "8253/8254: Programmable Timer/Counter",
+            "8257: DMA Controller — direct memory access without CPU",
+            "Memory-mapped I/O: I/O devices share address space with memory",
+            "Formula: 8255 modes: 0 (basic I/O), 1 (handshake), 2 (bidirectional)",
+            "Formula: 8259 vector = IRQ × 4 (interrupt vector table)",
+            "Formula: I/O port address width = 8 bits → 256 I/O ports",
+            "8085: 8-bit data, 16-bit address (64KB)",
+            "8086: 16-bit data, 20-bit address (1MB)",
+            "Physical addr = seg × 16 + offset"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "SZAPC",
+              "expansion": "Sign, Zero, Aux carry, Parity, Carry",
+              "meaning": "The 5 flags in 8085 flag register (in bit positions 7, 6, 4, 2, 0)."
+            },
+            {
+              "phrase": "CS DS SS ES",
+              "expansion": "Code, Data, Stack, Extra Segment",
+              "meaning": "The 4 segment registers in 8086."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always state which chip number does what (8255 = PPI, 8259 = PIC)"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Mention memory-mapped vs isolated I/O when discussing interfacing"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing memory-mapped I/O with isolated I/O"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting that 8255 has 3 ports (A, B, C — C can be split)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Microprocessors interface with peripherals like keyboards, displays, ADCs/DACs, and sensors using I/O ports. Programmable peripheral chips include 8255 (PPI — Programmable Peripheral Interface), 8259 (PIC — Programmable Interrupt Controller), 8253/8254 (Timer), and 8257 (DMA controller)."
+            },
+            {
+              "type": "definition",
+              "content": "8255 PPI: Programmable Peripheral Interface — 3 8-bit ports (A, B, C)"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is 8255 PPI?",
+              "back": "Programmable Peripheral Interface — 3 8-bit ports (A, B, C)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is 8259 PIC?",
+              "back": "Programmable Interrupt Controller — manages 8 interrupt lines",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is 8253/8254?",
+              "back": "Programmable Timer/Counter",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is 8257?",
+              "back": "DMA Controller — direct memory access without CPU",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Memory-mapped I/O?",
+              "back": "I/O devices share address space with memory",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Isolated I/O?",
+              "back": "separate I/O address space (IN/OUT instructions)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Interrupt?",
+              "back": "asynchronous signal requesting CPU attention",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Polling vs Interrupt?",
+              "back": "CPU-initiated vs device-initiated",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Microprocessors interface with peripherals like keyboards, displays, ADCs/DACs, and sensors using I/O ports. Programmable peripheral chips include 8255 (PPI — Programmable Peripheral Interface), 8259 (PIC — Programmable Interrupt Controller), 8253/8254 (Timer), and 8257 (DMA controller)."
+            },
+            {
+              "style": "detailed",
+              "content": "Microprocessors interface with peripherals like keyboards, displays, ADCs/DACs, and sensors using I/O ports. Programmable peripheral chips include 8255 (PPI — Programmable Peripheral Interface), 8259 (PIC — Programmable Interrupt Controller), 8253/8254 (Timer), and 8257 (DMA controller).\n\nKey concepts: 8255 PPI: Programmable Peripheral Interface — 3 8-bit ports (A, B, C), 8259 PIC: Programmable Interrupt Controller — manages 8 interrupt lines, 8253/8254: Programmable Timer/Counter."
+            }
+          ],
+          "recommendedNextLessons": []
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "# Microprocessors and Its Programming — Quick Revision\n\n**Subject code:** R23CP2403  \n**Semester:** 3  \n**Credits:** 4  \n\n## Unit 1: Microprocessor Fundamentals (20%)\n### Introduction to Microprocessors\nA microprocessor is a single integrated circuit that contains the central processing unit (CPU) of a computer. It performs arithmetic and logic operations, controls data flow, and manages I/O. The Intel 8085 is an 8-bit microprocessor and the 8086 is a 16-bit microprocessor — bot...\n\n**Formulas:**\n- `Memory addressable = 2^(address bus width)`\n- `8085: 16-bit address → 2^16 = 64 KB`\n- `8086: 20-bit address → 2^20 = 1 MB`\n\n## Unit 2: 8085 Architecture (25%)\n### 8085 Architecture and Registers\nThe 8085 microprocessor has a specific internal architecture: an 8-bit ALU, a set of 8-bit registers (A, B, C, D, E, H, L), a 16-bit stack pointer (SP), a 16-bit program counter (PC), and flag registers. It operates on a 5 MHz clock and uses multiplexed address/data bus (AD0-AD7)...\n\n**Formulas:**\n- `Register pairs: BC, DE, HL (16-bit)`\n- `PC width = 16 bits → 64 KB addressable`\n- `Flag bits: S(7), Z(6), AC(4), P(2), CY(0)`\n\n## Unit 3: 8085 Instruction Set (25%)\n### 8085 Instruction Set and Assembly\nThe 8085 has 74 instructions organised by function: data transfer (MOV, MVI, LXI), arithmetic (ADD, SUB, INR, DCR), logical (ANA, ORA, XRA), branch (JMP, JZ, JC), and machine control (HLT, NOP, DI, EI). Each instruction has a specific opcode and may use 1-3 bytes.\n\n**Formulas:**\n- `MOV dst, src: dst ← src`\n- `MVI r, d: r ← d (8-bit immediate)`\n- `LXI rp, d: rp ← d (16-bit immediate)`\n\n## Unit 4: 8086 Architecture (15%)\n### 8086 Architecture and Segments\nThe 8086 is a 16-bit microprocessor with a 20-bit address bus (1 MB memory). It introduced memory segmentation — dividing memory into code segment (CS), data segment (DS), stack segment (SS), and extra segment (ES). It has two independent units: Bus Interface Unit (BIU) and Execu...\n\n**Formulas:**\n- `Physical address = segment × 16 + offset (= segment << 4 + offset)`\n- `Each segment = 64 KB (16-bit offset)`\n- `Total addressable = 2^20 = 1 MB`\n\n## Unit 5: Interfacing and Applications (15%)\n### Interfacing and Applications\nMicroprocessors interface with peripherals like keyboards, displays, ADCs/DACs, and sensors using I/O ports. Programmable peripheral chips include 8255 (PPI — Programmable Peripheral Interface), 8259 (PIC — Programmable Interrupt Controller), 8253/8254 (Timer), and 8257 (DMA cont...\n\n**Formulas:**\n- `8255 modes: 0 (basic I/O), 1 (handshake), 2 (bidirectional)`\n- `8259 vector = IRQ × 4 (interrupt vector table)`\n- `I/O port address width = 8 bits → 256 I/O ports`\n",
+  "interviewBank": [
+    {
+      "marks": 5,
+      "question": "Explain the formula: Memory addressable = 2^(address bus width)",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 10,
+      "question": "Explain pipelining in 8086. How does it improve performance?",
+      "modelAnswer": "8086 has two independent units: BIU (Bus Interface Unit) and EU (Execution Unit). BIU prefetches instructions into a 6-byte queue while EU executes the current instruction. This overlap means the EU doesn't wait for fetch, improving throughput by ~30%. 8085 has no pipelining — fetch-execute is sequential."
+    },
+    {
+      "marks": 5,
+      "question": "Why does 8086 use memory segmentation?",
+      "modelAnswer": "Segmentation allows a 16-bit architecture to address 20-bit (1 MB) memory. Each segment register (CS, DS, SS, ES) is 16 bits and points to a 64 KB block. Physical address = segment × 16 + offset. This also enables relocatable code and separate spaces for code, data, stack."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: Register pairs: BC, DE, HL (16-bit)",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: MOV dst, src: dst ← src",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: Physical address = segment × 16 + offset (= segment << 4 + offset)",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: 8255 modes: 0 (basic I/O), 1 (handshake), 2 (bidirectional)",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    }
+  ],
+  "vivaBank": [
+    {
+      "marks": 2,
+      "question": "Define Microprocessor.",
+      "modelAnswer": "CPU on a single IC"
+    },
+    {
+      "marks": 2,
+      "question": "Define 8-bit vs 16-bit.",
+      "modelAnswer": "data bus width (8085 = 8-bit, 8086 = 16-bit)"
+    },
+    {
+      "marks": 2,
+      "question": "Define ALU.",
+      "modelAnswer": "Arithmetic Logic Unit — performs operations"
+    },
+    {
+      "marks": 2,
+      "question": "What is the size of the data bus in 8085?",
+      "modelAnswer": "8 bits. 8085 is an 8-bit microprocessor."
+    },
+    {
+      "marks": 2,
+      "question": "Define a flag.",
+      "modelAnswer": "A flag is a single bit in the flag register that indicates the status of an ALU operation (e.g., Zero flag is set when the result is zero)."
+    },
+    {
+      "marks": 2,
+      "question": "Define Accumulator (A).",
+      "modelAnswer": "8-bit register, holds one operand and result"
+    },
+    {
+      "marks": 2,
+      "question": "Define General registers.",
+      "modelAnswer": "B, C, D, E, H, L (8-bit each, can pair as BC, DE, HL)"
+    },
+    {
+      "marks": 2,
+      "question": "Define Program Counter (PC).",
+      "modelAnswer": "16-bit, holds address of next instruction"
+    },
+    {
+      "marks": 2,
+      "question": "Define MOV r1, r2.",
+      "modelAnswer": "copy register r2 to r1"
+    },
+    {
+      "marks": 2,
+      "question": "Define MVI r, data.",
+      "modelAnswer": "move immediate 8-bit data to register r"
+    },
+    {
+      "marks": 2,
+      "question": "Define LXI rp, data.",
+      "modelAnswer": "load 16-bit immediate to register pair"
+    },
+    {
+      "marks": 2,
+      "question": "Define BIU (Bus Interface Unit).",
+      "modelAnswer": "handles bus operations, prefetches instructions"
+    }
+  ],
+  "pyqBank": [
+    {
+      "marks": 10,
+      "question": "Explain Introduction to Microprocessors in detail with a diagram.",
+      "modelAnswer": "A microprocessor is a single integrated circuit that contains the central processing unit (CPU) of a computer. It performs arithmetic and logic operations, controls data flow, and manages I/O. The Intel 8085 is an 8-bit microprocessor and the 8086 is a 16-bit microprocessor — both are foundational to understanding modern CPU architecture."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Introduction to Microprocessors with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain 8085 Architecture and Registers in detail with a diagram.",
+      "modelAnswer": "The 8085 microprocessor has a specific internal architecture: an 8-bit ALU, a set of 8-bit registers (A, B, C, D, E, H, L), a 16-bit stack pointer (SP), a 16-bit program counter (PC), and flag registers. It operates on a 5 MHz clock and uses multiplexed address/data bus (AD0-AD7)."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss 8085 Architecture and Registers with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain 8085 Instruction Set and Assembly in detail with a diagram.",
+      "modelAnswer": "The 8085 has 74 instructions organised by function: data transfer (MOV, MVI, LXI), arithmetic (ADD, SUB, INR, DCR), logical (ANA, ORA, XRA), branch (JMP, JZ, JC), and machine control (HLT, NOP, DI, EI). Each instruction has a specific opcode and may use 1-3 bytes."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss 8085 Instruction Set and Assembly with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain 8086 Architecture and Segments in detail with a diagram.",
+      "modelAnswer": "The 8086 is a 16-bit microprocessor with a 20-bit address bus (1 MB memory). It introduced memory segmentation — dividing memory into code segment (CS), data segment (DS), stack segment (SS), and extra segment (ES). It has two independent units: Bus Interface Unit (BIU) and Execution Unit (EU) for pipelining."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss 8086 Architecture and Segments with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Interfacing and Applications in detail with a diagram.",
+      "modelAnswer": "Microprocessors interface with peripherals like keyboards, displays, ADCs/DACs, and sensors using I/O ports. Programmable peripheral chips include 8255 (PPI — Programmable Peripheral Interface), 8259 (PIC — Programmable Interrupt Controller), 8253/8254 (Timer), and 8257 (DMA controller)."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Interfacing and Applications with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    }
+  ]
+}

@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { headers } from "next/headers";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { LernioMotionProvider } from "@/components/motion";
@@ -8,6 +9,8 @@ import { CommandPalette } from "@/components/cmdk/command-palette";
 import { RouteLoadingBar } from "@/components/app/route-loading-bar";
 import { RegisterSW } from "@/components/app/register-sw";
 import { KeyboardShortcuts } from "@/components/app/keyboard-shortcuts";
+import { AnimatedBackground } from "@/components/ui/animated-background";
+import { CustomCursor } from "@/components/ui/custom-cursor";
 
 // ──────────────────────────────────────────────────────────────────────────
 // WHITE-SCREEN FLASH FIX
@@ -99,22 +102,64 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+// ──────────────────────────────────────────────────────────────────────────
+// VIEWPORT — full-screen mobile experience
+// ──────────────────────────────────────────────────────────────────────────
+// viewport-fit=cover lets content extend into the notch/Dynamic Island area
+// on iPhone, so the app truly uses the full screen. maximumScale=5 prevents
+// iOS auto-zoom on input focus while still allowing user zoom for a11y.
+// ──────────────────────────────────────────────────────────────────────────
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
+};
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Read the CSP nonce from the middleware-set header so Next.js can apply
+  // it to inline scripts (RSC stream + theme-no-flash). Without this, the
+  // browser blocks the inline RSC scripts and React never hydrates — which
+  // is why forms submit via GET, buttons don't fire onClick, and the page
+  // feels "stuck" / unscrollable on the deployed site.
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      data-palette="aurora"
+      data-appearance="system"
+      data-contrast="normal"
+      data-density="comfortable"
+      data-surface="soft"
+      data-subject-tint="subtle"
+      data-motion="full"
+      data-low-power="false"
+    >
       <head>
         {/* Inline theme-no-flash script — runs synchronously before paint.
-            Previously this was <script src="/theme-no-flash.js" /> which
-            caused a white-screen flash due to the network round-trip. */}
-        <script dangerouslySetInnerHTML={{ __html: themeNoFlashScript }} />
+            nonce is required by the CSP middleware so this inline script
+            is allowed to execute. */}
+        <script
+          nonce={nonce}
+          dangerouslySetInnerHTML={{ __html: themeNoFlashScript }}
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
+        {/* Calming animated background */}
+        <AnimatedBackground />
         <ThemeProvider>
           <LernioMotionProvider>
             <RouteLoadingBar />
@@ -123,6 +168,7 @@ export default function RootLayout({
             <CommandPalette />
             <KeyboardShortcuts />
             <RegisterSW />
+            <CustomCursor />
           </LernioMotionProvider>
         </ThemeProvider>
       </body>

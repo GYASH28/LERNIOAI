@@ -1086,6 +1086,11 @@ model User {
   assignedAt            DateTime?
   preferredLang         String    @default("en") // en | hi | mr
   examDate              String? // ISO date
+  // Contact + privacy fields
+  phone                 String?
+  photoUrl              String?
+  showPhoneToClassmates Boolean   @default(false)
+  showEmailToClassmates Boolean   @default(false)
   dailyMins             Int       @default(120)
   xp                    Int       @default(0)
   level                 Int       @default(1)
@@ -1121,6 +1126,12 @@ model User {
   feedback                    Feedback[]
   xpEvents                    XpEvent[]
   accounts                    Account[]
+  attendanceSessionsTaken     AttendanceSession[]
+  attendanceRecords           AttendanceRecord[]
+  classAsCR                   Class?           @relation("ClassCR")
+  classMembershipsNew         ClassMember[]    @relation("ClassMemberUser")
+  announcementsAuthored       ClassAnnouncement[]
+  timetableSlotsAsTeacher     ClassTimetable[]
   sessions                    Session[]
   roleRequests                RoleRequest[]
   authorityGrants             AuthorityGrant[]        @relation("AuthorityGrantUser")
@@ -2095,4 +2106,127 @@ model Feedback {
 
   @@index([userId, createdAt])
   @@index([status, createdAt])
+}
+
+// ============================================================
+// ATTENDANCE SYSTEM
+// ============================================================
+
+model AttendanceSession {
+  id            String   @id @default(cuid())
+  takenById     String   // CR or teacher who took attendance
+  takenBy       User     @relation(fields: [takenById], references: [id], onDelete: Cascade)
+  departmentCode String
+  semesterNumber Int
+  division       String
+  subjectCode   String?
+  subjectName   String?
+  date          DateTime @default(now()) // date of the class
+  totalStudents Int      @default(0)
+  presentCount  Int      @default(0)
+  absentCount   Int      @default(0)
+  notes         String?
+  createdAt     DateTime @default(now())
+
+  records       AttendanceRecord[]
+
+  @@index([departmentCode, semesterNumber, division, date])
+  @@index([takenById, createdAt])
+}
+
+model AttendanceRecord {
+  id            String   @id @default(cuid())
+  sessionId     String
+  session       AttendanceSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  status        String   // present | absent | late | excused
+  remark        String?
+  createdAt     DateTime @default(now())
+
+  @@unique([sessionId, userId])
+  @@index([userId, createdAt])
+  @@index([sessionId])
+}
+
+// ============================================================
+// CLASS SYSTEM
+// ============================================================
+
+model Class {
+  id              String   @id @default(cuid())
+  departmentCode  String   // DCOMP, DCIOT
+  semesterNumber  Int      // 1-6
+  division        String   // A, B, C
+  crId            String?  @unique // CR user ID
+  cr              User?    @relation("ClassCR", fields: [crId], references: [id], onDelete: SetNull)
+  academicYear    String?  // e.g. "2025-2026"
+  room            String?  // default classroom
+  alias           String?  // Friendly name, e.g. "Toppers of 2026"
+  avatarEmoji     String?  // Single emoji, e.g. "🚀"
+  avatarColor     String?  // Hex color, e.g. "#7C3AED"
+  aliasUpdatedBy  String?
+  aliasUpdatedAt  DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  members         ClassMember[]
+  announcements   ClassAnnouncement[]
+  timetableSlots  ClassTimetable[]
+
+  @@unique([departmentCode, semesterNumber, division])
+  @@index([departmentCode, semesterNumber])
+}
+
+model ClassMember {
+  id        String   @id @default(cuid())
+  classId   String
+  class     Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation("ClassMemberUser", fields: [userId], references: [id], onDelete: Cascade)
+  joinedAt  DateTime @default(now())
+
+  @@unique([classId, userId])
+  @@index([userId])
+}
+
+model ClassAnnouncement {
+  id           String   @id @default(cuid())
+  classId      String
+  class        Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
+  authorId     String
+  author       User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  title        String
+  body         String
+  pinned       Boolean  @default(false)
+  pinnedUntil  DateTime?
+  archivedAt   DateTime?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([classId, createdAt])
+  @@index([classId, pinned, pinnedUntil])
+  @@index([authorId])
+}
+
+model ClassTimetable {
+  id           String   @id @default(cuid())
+  classId      String
+  class        Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
+  dayOfWeek    Int      // 0=Sun, 1=Mon, ..., 6=Sat
+  periodIndex  Int      // 1-based period number
+  subjectName  String?
+  teacherId    String?
+  teacher      User?    @relation(fields: [teacherId], references: [id], onDelete: SetNull)
+  room         String?
+  startTime    String   // "09:00"
+  endTime      String   // "10:00"
+  isBreak      Boolean  @default(false)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@unique([classId, dayOfWeek, periodIndex])
+  @@index([classId, dayOfWeek])
+  @@index([teacherId, dayOfWeek])
 }
