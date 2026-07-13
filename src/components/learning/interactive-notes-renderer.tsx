@@ -31,7 +31,13 @@ import {
   X,
   ArrowLeft,
   ArrowRight,
+  Eye,
+  EyeOff,
+  Clock,
+  Link2,
 } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { toast } from 'sonner'
 import type {
   Lesson,
   SubjectNotes,
@@ -104,6 +110,8 @@ export interface InteractiveNotesRendererProps {
   showAI?: boolean
   /** Show the premium reader chrome (TOC, progress, search). Default true. */
   showReaderChrome?: boolean
+  /** Optional bookmark callback — invoked in addition to the internal localStorage toggle. */
+  onBookmarkToggle?: () => void
 }
 
 export function InteractiveNotesRenderer({
@@ -113,10 +121,12 @@ export function InteractiveNotesRenderer({
   nextHref,
   showAI = true,
   showReaderChrome = true,
+  onBookmarkToggle,
 }: InteractiveNotesRendererProps) {
   const [activeSection, setActiveSection] = useState('overview')
   const [progress, setProgress] = useState(0)
   const [search, setSearch] = useState('')
+  const [focusMode, setFocusMode] = useState(false)
   const [bookmarked, setBookmarked] = useState(() => {
     // Lazy init from localStorage (avoids setState-in-effect)
     if (typeof window === 'undefined') return false
@@ -129,6 +139,38 @@ export function InteractiveNotesRenderer({
     () => SECTIONS.filter((s) => s.has(lesson)),
     [lesson],
   )
+
+  // Estimated reading time — words / 200 wpm, rounded up to nearest minute.
+  // Counts text from the primary prose sections: overview, theory, key concepts,
+  // callouts, and worked examples.
+  const readingTimeMin = useMemo(() => {
+    const countWords = (s: string | undefined | null): number =>
+      s ? s.trim().split(/\s+/).filter(Boolean).length : 0
+    let words = 0
+    words += countWords(lesson.overview)
+    words += countWords(lesson.theory)
+    if (lesson.keyConcepts) {
+      words += lesson.keyConcepts.reduce((n, c) => n + countWords(c), 0)
+    }
+    if (lesson.callouts) {
+      words += lesson.callouts.reduce(
+        (n, c) => n + countWords(c.title) + countWords(c.content),
+        0,
+      )
+    }
+    if (lesson.workedExamples) {
+      words += lesson.workedExamples.reduce(
+        (n, ex) =>
+          n +
+          countWords(ex.title) +
+          countWords(ex.problem) +
+          countWords(ex.solution) +
+          countWords(ex.explanation),
+        0,
+      )
+    }
+    return Math.max(1, Math.ceil(words / 200))
+  }, [lesson])
 
   // Track scroll progress + active section
   useEffect(() => {
@@ -156,12 +198,26 @@ export function InteractiveNotesRenderer({
     return () => window.removeEventListener('scroll', handler)
   }, [visibleSections])
 
+  // ESC exits focus mode (and only focus mode — does not hijack other shortcuts).
+  useEffect(() => {
+    if (!focusMode) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        setFocusMode(false)
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [focusMode])
+
   const toggleBookmark = () => {
     const key = `lernio:notes:bookmark:${subject.subjectCode}:${lesson.slug}`
     const next = !bookmarked
     setBookmarked(next)
     if (next) localStorage.setItem(key, '1')
     else localStorage.removeItem(key)
+    onBookmarkToggle?.()
   }
 
   const handlePrint = () => window.print()
@@ -186,8 +242,8 @@ export function InteractiveNotesRenderer({
             lessonOverview={lesson.overview}
           />
         )}
-        {visibleSections.map((sec) => (
-          <SectionRenderer key={sec.id} section={sec} lesson={lesson} subject={subject} />
+        {visibleSections.map((sec, i) => (
+          <SectionRenderer key={sec.id} section={sec} lesson={lesson} subject={subject} index={i} />
         ))}
       </div>
     )
@@ -195,17 +251,55 @@ export function InteractiveNotesRenderer({
 
   return (
     <>
-      {/* Reading progress bar */}
-      <div className="reading-progress no-print" aria-hidden>
+      {/* Reading progress bar — sticky top, 3px, var(--brand), smooth width transition */}
+      <div
+        className="no-print"
+        aria-hidden
+        style={{
+          position: 'sticky',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 30,
+          height: '3px',
+          width: '100%',
+          background: 'transparent',
+          overflow: 'hidden',
+          pointerEvents: 'none',
+        }}
+      >
         <div
-          className="reading-progress__bar"
-          style={{ transform: `scaleX(${progress / 100})` }}
+          style={{
+            height: '100%',
+            width: `${progress}%`,
+            background: 'var(--brand)',
+            transition: 'width 150ms ease-out',
+          }}
         />
       </div>
 
-      <div className="premium-reader">
-        {/* Left — sticky TOC */}
-        <aside className="premium-reader__left no-print" aria-label="Table of contents">
+      {/* Floating Exit-focus button (only when focus mode is on) */}
+      {focusMode && (
+        <button
+          onClick={() => setFocusMode(false)}
+          className="fixed right-4 z-40 flex items-center gap-1.5 rounded-md border border-border bg-card px-3 py-1.5 text-xs font-medium shadow-md hover:bg-accent/50 transition-colors no-print"
+          style={{ top: 'calc(var(--topbar-height, 3.5rem) + 0.75rem)' }}
+          type="button"
+          title="Exit focus mode (Esc)"
+          aria-label="Exit focus mode"
+        >
+          <EyeOff className="h-3.5 w-3.5" />
+          Exit focus
+        </button>
+      )}
+
+      <div
+        className="premium-reader"
+        style={focusMode ? { gridTemplateColumns: 'minmax(0, 1fr)' } : undefined}
+      >
+        {/* Left — sticky TOC (hidden in focus mode) */}
+        {!focusMode && (
+          <aside className="premium-reader__left no-print" aria-label="Table of contents">
           <div className="mb-3 flex items-center gap-2">
             <BookOpen className="h-4 w-4 text-primary" />
             <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
@@ -252,6 +346,7 @@ export function InteractiveNotesRenderer({
             </button>
           </div>
         </aside>
+        )}
 
         {/* Center — main content */}
         <main className="premium-reader__main" ref={mainRef}>
@@ -267,39 +362,61 @@ export function InteractiveNotesRenderer({
                 {lesson.durationMin} min read
               </span>
               <span>·</span>
+              <span className="flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 font-semibold text-primary">
+                <Clock className="h-3 w-3" />
+                {readingTimeMin} min read
+              </span>
+              <span>·</span>
               <span className="rounded-full bg-primary/10 px-2 py-0.5 font-semibold text-primary">
                 {lesson.difficulty}
               </span>
               <span>·</span>
               <span>{visibleSections.length} sections</span>
+              {/* Focus-mode toggle */}
+              <button
+                onClick={() => setFocusMode((v) => !v)}
+                className="ml-auto flex items-center gap-1 rounded-md border border-border px-2 py-0.5 text-xs font-medium hover:bg-accent/50 transition-colors no-print"
+                type="button"
+                aria-pressed={focusMode}
+                title={focusMode ? 'Exit focus mode (Esc)' : 'Enter focus mode'}
+              >
+                {focusMode ? (
+                  <EyeOff className="h-3 w-3" />
+                ) : (
+                  <Eye className="h-3 w-3" />
+                )}
+                {focusMode ? 'Exit focus' : 'Focus'}
+              </button>
             </div>
           </header>
 
-          {/* Search box */}
-          <div className="mb-4 no-print">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-              <input
-                type="text"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search within this lesson…"
-                className="w-full rounded-md border border-border bg-card pl-9 pr-9 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
-              />
-              {search && (
-                <button
-                  onClick={() => setSearch('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                  type="button"
-                >
-                  <X className="h-4 w-4" />
-                </button>
-              )}
+          {/* Search box (hidden in focus mode) */}
+          {!focusMode && (
+            <div className="mb-4 no-print">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <input
+                  type="text"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search within this lesson…"
+                  className="w-full rounded-md border border-border bg-card pl-9 pr-9 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+                />
+                {search && (
+                  <button
+                    onClick={() => setSearch('')}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                    type="button"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                )}
+              </div>
             </div>
-          </div>
+          )}
 
-          {/* AI Toolbar */}
-          {showAI && (
+          {/* AI Toolbar (hidden in focus mode) */}
+          {showAI && !focusMode && (
             <AINotesToolbar
               subjectName={subject.subjectName}
               lessonTitle={lesson.title}
@@ -314,8 +431,8 @@ export function InteractiveNotesRenderer({
                 No sections match &ldquo;{search}&rdquo;.
               </p>
             )}
-            {sectionsToRender.map((sec) => (
-              <SectionRenderer key={sec.id} section={sec} lesson={lesson} subject={subject} search={searchLower} />
+            {sectionsToRender.map((sec, i) => (
+              <SectionRenderer key={sec.id} section={sec} lesson={lesson} subject={subject} search={searchLower} index={i} />
             ))}
           </div>
 
@@ -346,8 +463,9 @@ export function InteractiveNotesRenderer({
           </nav>
         </main>
 
-        {/* Right — quick actions / shortcuts */}
-        <aside className="premium-reader__right no-print" aria-label="Quick actions">
+        {/* Right — quick actions / shortcuts (hidden in focus mode) */}
+        {!focusMode && (
+          <aside className="premium-reader__right no-print" aria-label="Quick actions">
           <div className="mb-3 flex items-center gap-2">
             <Zap className="h-4 w-4 text-primary" />
             <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
@@ -406,6 +524,7 @@ export function InteractiveNotesRenderer({
             </div>
           </div>
         </aside>
+        )}
       </div>
     </>
   )
@@ -420,25 +539,44 @@ function SectionRenderer({
   lesson,
   subject,
   search,
+  index = 0,
 }: {
   section: SectionDef
   lesson: Lesson
   subject: SubjectNotes
   search?: string
+  index?: number
 }) {
   const Icon = section.icon
   return (
-    <section
-      id={`section-${section.id}`}
-      className="notes-section"
-      aria-labelledby={`heading-${section.id}`}
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.4, delay: 0.03 * index }}
     >
-      <h2 id={`heading-${section.id}`} className="notes-section__heading">
-        <Icon className="h-5 w-5 text-primary" />
-        {section.label}
-      </h2>
-      <SectionContent id={section.id} lesson={lesson} subject={subject} search={search} />
-    </section>
+      <section
+        id={`section-${section.id}`}
+        className="notes-section group"
+        aria-labelledby={`heading-${section.id}`}
+      >
+        <h2 id={`heading-${section.id}`} className="notes-section__heading">
+          <Icon className="h-5 w-5 text-primary" />
+          {section.label}
+          {/* Hover-revealed anchor link — copies deep link to this section */}
+          <button
+            onClick={() => copySectionLink(section.id)}
+            className="ml-auto opacity-0 transition-opacity duration-200 group-hover:opacity-100 focus-visible:opacity-100"
+            type="button"
+            aria-label={`Copy link to ${section.label} section`}
+            title="Copy link to this section"
+          >
+            <Link2 className="h-3.5 w-3.5 text-muted-foreground hover:text-primary" />
+          </button>
+        </h2>
+        <SectionContent id={section.id} lesson={lesson} subject={subject} search={search} />
+      </section>
+    </motion.div>
   )
 }
 
@@ -609,8 +747,6 @@ function SectionContent({
                 language={ex.language}
                 title={ex.title}
                 showLineNumbers
-                collapsible
-                collapseThreshold={20}
               />
               <p className="mt-1.5 text-xs text-muted-foreground">{ex.explanation}</p>
             </div>
@@ -688,7 +824,14 @@ function SectionContent({
       )
 
     case 'callouts':
-      return <CalloutList callouts={lesson.callouts!} />
+      return (
+        <div
+          className="shadow-premium-xs rounded-md p-4"
+          style={{ borderLeft: '4px solid var(--brand)' }}
+        >
+          <CalloutList callouts={lesson.callouts!} />
+        </div>
+      )
 
     case 'viva':
       return <MarkedQuestionList questions={lesson.vivaQuestions!} />
@@ -805,6 +948,19 @@ function SectionContent({
 // ─────────────────────────────────────────────────────────────────────────────
 // Helpers
 // ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Copy a deep link to a section heading to the clipboard and toast the result.
+ * Lives at module scope so it can be called from SectionRenderer without prop drilling.
+ */
+function copySectionLink(sectionId: string) {
+  if (typeof window === 'undefined') return
+  const url = `${window.location.origin}${window.location.pathname}#section-${sectionId}`
+  navigator.clipboard
+    .writeText(url)
+    .then(() => toast.success('Link copied', { description: url }))
+    .catch(() => toast.error('Could not copy link'))
+}
 
 function findUnitForLesson(subject: SubjectNotes, lesson: Lesson): number | string {
   for (const u of subject.units) {

@@ -1,0 +1,455 @@
+/* ============================================================
+   LERNIO AI 2.0 — Premium Design-System Enhancements
+   ------------------------------------------------------------
+   Additive layer (Task I-1). This file does NOT redefine any
+   existing token or override any existing rule — it only adds
+   new utility classes that compose on top of the semantic token
+   system defined in tokens.css.
+
+   Token contract (all resolved from tokens.css / themes.css):
+     --brand, --brand-soft, --brand-hover, --brand-active
+     --surface-1, --surface-2, --surface-elevated, --surface-overlay
+     --text-strong, --text-default, --text-secondary, --text-muted
+     --border-subtle, --border-default, --border-strong
+     --destructive, --warning, --success, --info
+     --chart-1 .. --chart-5
+     --radius-card, --radius-pill
+     --motion-standard, --ease-emphasised
+
+   All colour references use var() so the same class works across
+   every palette (Aurora Scholar, and any future palette) and
+   across light/dark appearances.
+
+   These classes are palette-agnostic by design — never hardcode
+   an oklch()/hex here.
+   ============================================================ */
+
+/* ============================================================
+   1. Premium elevation shadows
+   ------------------------------------------------------------
+   Layered shadows using oklch black at low opacity for light
+   mode, deeper for dark mode. The dark variants also pick up a
+   subtle brand-tinted glow so elevated surfaces feel "alive".
+   ============================================================ */
+.shadow-premium-xs {
+  box-shadow:
+    0 1px 2px oklch(0.2 0.02 280 / 0.05),
+    0 1px 1px oklch(0.2 0.02 280 / 0.04);
+}
+.shadow-premium-sm {
+  box-shadow:
+    0 1px 2px oklch(0.2 0.02 280 / 0.05),
+    0 2px 4px oklch(0.2 0.02 280 / 0.06),
+    0 1px 1px oklch(0.2 0.02 280 / 0.04);
+}
+.shadow-premium-md {
+  box-shadow:
+    0 2px 4px oklch(0.2 0.02 280 / 0.06),
+    0 6px 12px oklch(0.2 0.02 280 / 0.08),
+    0 2px 4px oklch(0.2 0.02 280 / 0.05);
+}
+.shadow-premium-lg {
+  box-shadow:
+    0 4px 8px oklch(0.2 0.02 280 / 0.08),
+    0 12px 24px oklch(0.2 0.02 280 / 0.10),
+    0 4px 8px oklch(0.2 0.02 280 / 0.06);
+}
+.shadow-premium-xl {
+  box-shadow:
+    0 8px 16px oklch(0.2 0.02 280 / 0.10),
+    0 24px 48px oklch(0.2 0.02 280 / 0.14),
+    0 8px 16px oklch(0.2 0.02 280 / 0.08);
+}
+
+.dark .shadow-premium-xs {
+  box-shadow:
+    0 1px 2px oklch(0 0 0 / 0.40),
+    0 1px 1px oklch(0 0 0 / 0.30);
+}
+.dark .shadow-premium-sm {
+  box-shadow:
+    0 1px 2px oklch(0 0 0 / 0.40),
+    0 2px 6px oklch(0 0 0 / 0.45);
+}
+.dark .shadow-premium-md {
+  box-shadow:
+    0 2px 4px oklch(0 0 0 / 0.45),
+    0 8px 20px oklch(0 0 0 / 0.50),
+    0 0 1px oklch(var(--brand) / 0.08);
+}
+.dark .shadow-premium-lg {
+  box-shadow:
+    0 4px 10px oklch(0 0 0 / 0.50),
+    0 16px 36px oklch(0 0 0 / 0.55),
+    0 0 1px oklch(var(--brand) / 0.10);
+}
+.dark .shadow-premium-xl {
+  box-shadow:
+    0 8px 20px oklch(0 0 0 / 0.55),
+    0 28px 60px oklch(0 0 0 / 0.60),
+    0 0 2px oklch(var(--brand) / 0.12);
+}
+
+/* ============================================================
+   2. 3D flip-card utilities (flashcards)
+   ------------------------------------------------------------
+   The card lives inside a perspective context. The inner element
+   preserves 3D so the back face renders rotated. Adding the
+   `.flipped` class to `.flip-card` rotates the inner 180deg.
+   ============================================================ */
+.flip-card {
+  perspective: 1600px;
+  width: 100%;
+}
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flip-card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+/* ============================================================
+   3. Aurora premium background
+   ------------------------------------------------------------
+   Three soft radial ellipses built from --brand at low opacity.
+   Sits behind a section; pair with `position: relative` and a
+   surface colour on the parent for best effect.
+   ============================================================ */
+.bg-aurora-premium {
+  position: relative;
+  background-color: var(--surface-1);
+  background-image:
+    radial-gradient(ellipse 60% 50% at 20% 10%,
+      oklch(from var(--brand) l c h / 0.10) 0%,
+      transparent 60%),
+    radial-gradient(ellipse 50% 40% at 85% 20%,
+      oklch(from var(--brand) l c h / 0.08) 0%,
+      transparent 55%),
+    radial-gradient(ellipse 70% 60% at 50% 100%,
+      oklch(from var(--brand) l c h / 0.07) 0%,
+      transparent 60%);
+  background-attachment: scroll;
+}
+/* Fallback for browsers without oklch(from ...) relative colour
+   support — use a plain alpha overlay of the brand token. */
+@supports not (background: oklch(from red l c h / 0.1)) {
+  .bg-aurora-premium {
+    background-image:
+      radial-gradient(ellipse 60% 50% at 20% 10%,
+        color-mix(in oklch, var(--brand) 10%, transparent) 0%,
+        transparent 60%),
+      radial-gradient(ellipse 50% 40% at 85% 20%,
+        color-mix(in oklch, var(--brand) 8%, transparent) 0%,
+        transparent 55%),
+      radial-gradient(ellipse 70% 60% at 50% 100%,
+        color-mix(in oklch, var(--brand) 7%, transparent) 0%,
+        transparent 60%);
+  }
+}
+
+/* ============================================================
+   4. Shimmer premium (skeleton loaders)
+   ------------------------------------------------------------
+   A soft sliding gradient using the brand token. Pairs with
+   skeleton primitives — apply to any element with a surface
+   background.
+   ============================================================ */
+@keyframes shimmer-premium-slide {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer-premium {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-inset, var(--surface-2));
+}
+.shimmer-premium::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in oklch, var(--brand) 12%, transparent) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  background-repeat: no-repeat;
+  animation: shimmer-premium-slide 1.6s var(--ease-standard, ease-in-out) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .shimmer-premium::after { animation: none; opacity: 0.4; }
+}
+
+/* ============================================================
+   5. Gradient text premium
+   ------------------------------------------------------------
+   Linear gradient from --brand to the subject-4 accent (falls
+   back to --brand if undefined). Clips to text so the element
+   stays semantic and selectable.
+   ============================================================ */
+.text-gradient-premium {
+  background-image: linear-gradient(
+    135deg,
+    var(--brand) 0%,
+    var(--subject-4, var(--chart-2, var(--brand))) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+/* On focus / selection, restore a readable colour. */
+.text-gradient-premium::selection {
+  -webkit-text-fill-color: var(--text-inverse);
+  color: var(--text-inverse);
+}
+
+/* ============================================================
+   6. Glass morphism premium
+   ------------------------------------------------------------
+   backdrop-blur + saturate over a semi-transparent surface.
+   Border picks up a faint brand tint so the glass reads as part
+   of the design system, not as a generic white slab.
+   ============================================================ */
+.glass-premium {
+  background: color-mix(in oklch, var(--surface-1) 65%, transparent);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border: 1px solid color-mix(in oklch, var(--border-default) 60%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in oklch, var(--surface-elevated) 40%, transparent),
+    0 8px 32px oklch(0.2 0.02 280 / 0.08);
+}
+.dark .glass-premium {
+  background: color-mix(in oklch, var(--surface-2) 55%, transparent);
+  border-color: color-mix(in oklch, var(--brand) 10%, transparent);
+  box-shadow:
+    inset 0 1px 0 oklch(1 0 0 / 0.05),
+    0 8px 32px oklch(0 0 0 / 0.40);
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .glass-premium {
+    background: var(--surface-overlay, var(--surface-1));
+  }
+}
+
+/* ============================================================
+   7. Stagger fade-in premium
+   ------------------------------------------------------------
+   Keyframe animation: translateY(8px) + opacity 0 → 1 over 0.5s.
+   Apply to grid children with an inline `animation-delay` for
+   the stagger effect.
+   ============================================================ */
+@keyframes stagger-in-premium {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.stagger-in-premium {
+  opacity: 0;
+  animation: stagger-in-premium 0.5s ease-out forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .stagger-in-premium {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ============================================================
+   8. Confetti container
+   ------------------------------------------------------------
+   Host element for the <Confetti /> React component (and any
+   CSS-only confetti). position: relative + overflow: hidden so
+   pieces never escape the bounds of the celebrating surface.
+   ============================================================ */
+.confetti-container {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* ============================================================
+   9. Premium scrollbar
+   ------------------------------------------------------------
+   Thin, rounded, brand-tinted thumb. Applied globally to any
+   element opting in via `.premium-scroll` — does NOT override
+   the global ::-webkit-scrollbar rules in globals.css.
+   ============================================================ */
+.premium-scroll {
+  scrollbar-width: thin;
+  scrollbar-color:
+    color-mix(in oklch, var(--brand) 40%, transparent)
+    transparent;
+}
+.premium-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.premium-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.premium-scroll::-webkit-scrollbar-thumb {
+  background: color-mix(in oklch, var(--brand) 35%, transparent);
+  border-radius: var(--radius-pill, 9999px);
+}
+.premium-scroll::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in oklch, var(--brand) 55%, transparent);
+}
+
+/* ============================================================
+   10. Confidence rating buttons (SM-2 review UX)
+   ------------------------------------------------------------
+   Four tones map directly to the RATING_PRESETS in sm-2.ts:
+     Again → --destructive
+     Hard  → --warning
+     Good  → --brand (primary)
+     Easy  → --success
+   Each button is a transparent base with a coloured border and
+   tinted background; on hover/active it fills with the tone.
+   ============================================================ */
+.rating-again,
+.rating-hard,
+.rating-good,
+.rating-easy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding: 0.625rem 0.875rem;
+  border-radius: var(--radius-control, 0.5rem);
+  border: 1px solid transparent;
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color var(--motion-standard, 200ms) var(--ease-standard, ease),
+    border-color var(--motion-standard, 200ms) var(--ease-standard, ease),
+    color var(--motion-standard, 200ms) var(--ease-standard, ease),
+    transform var(--motion-fast, 120ms) var(--ease-standard, ease);
+  background-color: transparent;
+  color: var(--text-default);
+}
+.rating-again:hover,
+.rating-hard:hover,
+.rating-good:hover,
+.rating-easy:hover {
+  transform: translateY(-1px);
+}
+.rating-again:active,
+.rating-hard:active,
+.rating-good:active,
+.rating-easy:active {
+  transform: translateY(0);
+}
+.rating-again:focus-visible,
+.rating-hard:focus-visible,
+.rating-good:focus-visible,
+.rating-easy:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus, 0 0 0 3px color-mix(in oklch, var(--focus-ring) 35%, transparent));
+}
+
+/* Again — destructive (forgot the card) */
+.rating-again {
+  border-color: color-mix(in oklch, var(--destructive) 40%, transparent);
+  background-color: color-mix(in oklch, var(--destructive) 8%, transparent);
+  color: var(--destructive);
+}
+.rating-again:hover {
+  background-color: color-mix(in oklch, var(--destructive) 16%, transparent);
+  border-color: color-mix(in oklch, var(--destructive) 60%, transparent);
+}
+
+/* Hard — warning (struggled) */
+.rating-hard {
+  border-color: color-mix(in oklch, var(--warning) 40%, transparent);
+  background-color: color-mix(in oklch, var(--warning) 10%, transparent);
+  color: color-mix(in oklch, var(--warning) 80%, var(--text-default));
+}
+.rating-hard:hover {
+  background-color: color-mix(in oklch, var(--warning) 20%, transparent);
+  border-color: color-mix(in oklch, var(--warning) 60%, transparent);
+}
+
+/* Good — brand (recalled with effort) */
+.rating-good {
+  border-color: color-mix(in oklch, var(--brand) 40%, transparent);
+  background-color: color-mix(in oklch, var(--brand) 10%, transparent);
+  color: var(--brand);
+}
+.rating-good:hover {
+  background-color: color-mix(in oklch, var(--brand) 18%, transparent);
+  border-color: color-mix(in oklch, var(--brand) 60%, transparent);
+}
+
+/* Easy — success (instant recall) */
+.rating-easy {
+  border-color: color-mix(in oklch, var(--success) 40%, transparent);
+  background-color: color-mix(in oklch, var(--success) 10%, transparent);
+  color: var(--success);
+}
+.rating-easy:hover {
+  background-color: color-mix(in oklch, var(--success) 18%, transparent);
+  border-color: color-mix(in oklch, var(--success) 60%, transparent);
+}
+
+/* Active/pressed "filled" modifier for the chosen rating */
+.rating-again.is-active,
+.rating-again[data-active="true"] {
+  background-color: var(--destructive);
+  border-color: var(--destructive);
+  color: var(--text-inverse);
+}
+.rating-hard.is-active,
+.rating-hard[data-active="true"] {
+  background-color: var(--warning);
+  border-color: var(--warning);
+  color: var(--warning-foreground, var(--text-strong));
+}
+.rating-good.is-active,
+.rating-good[data-active="true"] {
+  background-color: var(--brand);
+  border-color: var(--brand);
+  color: var(--brand-contrast, var(--text-inverse));
+}
+.rating-easy.is-active,
+.rating-easy[data-active="true"] {
+  background-color: var(--success);
+  border-color: var(--success);
+  color: var(--success-foreground, var(--text-inverse));
+}
+
+/* Disabled state — shared */
+.rating-again:disabled,
+.rating-hard:disabled,
+.rating-good:disabled,
+.rating-easy:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}

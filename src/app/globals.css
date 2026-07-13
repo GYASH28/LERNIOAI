@@ -25,6 +25,7 @@
 @import "../styles/cursor.css";
 @import "../styles/app-layout.css";
 @import "../styles/interactive-notes.css";
+@import "../styles/premium-enhancements.css";
 
 @custom-variant dark (&:is(.dark *));
 

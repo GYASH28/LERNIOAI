@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAppStore } from '@/store/app-store'
 import { Mascot } from '@/components/mascots/mascot'
@@ -12,9 +12,15 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { StreakHeatmap } from '@/components/ui/streak-heatmap'
 import { WeeklyXpChart } from '@/components/ui/weekly-xp-chart'
 import { DailyGoalRing } from '@/components/ui/daily-goal-ring'
-import { DailyQuestsCard } from '@/components/ui/daily-quests'
+// I-4: replaced by PremiumDailyQuests (rollback by uncommenting the line below)
+// import { DailyQuestsCard } from '@/components/ui/daily-quests'
+import { PremiumDailyQuests } from '@/components/ui/premium-daily-quests'
 import { StreakFreezeWidget } from '@/components/ui/streak-freeze-widget'
-import { AchievementWall } from '@/components/ui/achievement-wall'
+// I-4: replaced by PremiumAchievementWall (rollback by uncommenting the line below)
+// import { AchievementWall } from '@/components/ui/achievement-wall'
+import { PremiumAchievementWall } from '@/components/ui/premium-achievement-wall'
+import { Confetti } from '@/components/ui/confetti'
+import { toast } from 'sonner'
 import {
   BookOpen, RotateCw, CalendarCheck, Clock, TrendingDown, Trophy,
   Flame, Zap, ArrowRight, Play, CheckCircle2, AlertCircle,
@@ -45,6 +51,20 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
   const [revisionDue, setRevisionDue] = useState<any[]>(initialData?.revisionDue ?? [])
   const [tasks, setTasks] = useState<any[]>(initialData?.tasks ?? [])
   const [achievements, setAchievements] = useState<any[]>(initialData?.achievements ?? [])
+  // I-4: full achievement defs (locked + unlocked) so PremiumAchievementWall
+  // can render the completion ring + filter tabs correctly.
+  const [allAchievements, setAllAchievements] = useState<any[]>([])
+  // I-4: raw quest payload from /api/analytics/quests (so PremiumDailyQuests
+  // can be a pure presentational component driven by dashboard state).
+  const [questsData, setQuestsData] = useState<any | null>(null)
+  const [claimedQuests, setClaimedQuests] = useState<Set<string>>(new Set())
+  // I-4: dashboard-level celebration trigger (fires on continue-learning
+  // resume + quest claim).
+  const [confettiTrigger, setConfettiTrigger] = useState(0)
+  // I-4: newly unlocked achievement id — passed to PremiumAchievementWall so
+  // it can fire its own confetti + toast when a fresh unlock is detected.
+  const [newlyUnlockedId, setNewlyUnlockedId] = useState<string | null>(null)
+  const previousUnlockedRef = useRef<Set<string> | null>(null)
   const [activity, setActivity] = useState<{ xpByDay: number[]; activeDays: string[]; minutesToday: number; dailyGoalMins: number } | null>(initialData?.activity ?? null)
 
   useEffect(() => {
@@ -61,10 +81,51 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
       if (prog.ok) setData(prog.data)
       if (rev.ok) setRevisionDue(rev.data.dueToday || [])
       if (task.ok) setTasks(task.data || [])
-      if (ach.ok) setAchievements(ach.data.earned || [])
+      if (ach.ok) {
+        // I-4: store BOTH the earned list (for counting + newlyUnlockedId
+        // detection) AND the full def list (so the premium wall can show
+        // locked + in-progress achievements).
+        setAchievements(ach.data.earned || [])
+        setAllAchievements(ach.data.achievements || [])
+      }
       if (act.ok) setActivity(act.data)
     })
+
+    // I-4: fetch daily quests separately (the legacy DailyQuestsCard used to
+    // self-fetch; the premium presentational variant needs the data passed in).
+    fetch('/api/analytics/quests')
+      .then((r) => r.json())
+      .then((json) => {
+        if (json.ok) setQuestsData(json.data)
+      })
+      .catch(() => {
+        /* swallow — quest panel degrades silently to the empty state */
+      })
   }, [initialData, user])
+
+  // I-4: detect newly unlocked achievements by diffing the earned list
+  // against the previous render. On the very first population we just record
+  // the set without celebrating (avoids a burst on initial page load).
+  useEffect(() => {
+    if (!achievements || achievements.length === 0) return
+    const currentIds = new Set(
+      achievements
+        .map((e: any) => e?.achievement?.id || e?.achievementId)
+        .filter(Boolean) as string[],
+    )
+    if (currentIds.size === 0) return
+    if (previousUnlockedRef.current === null) {
+      previousUnlockedRef.current = currentIds
+      return
+    }
+    for (const id of currentIds) {
+      if (!previousUnlockedRef.current.has(id)) {
+        setNewlyUnlockedId(id)
+        previousUnlockedRef.current = currentIds
+        break
+      }
+    }
+  }, [achievements])
 
   const completedLessons = data?.lessonCompletions?.filter((l) => l.completedAt) || []
   const masteryRecords = data?.mastery || []
@@ -119,8 +180,77 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
       }, 0) / subjects.length)
     : 0
 
+  // I-4: map the dashboard's earned + def data into the prop shape that
+  // PremiumAchievementWall expects. When allAchievements is empty (e.g.
+  // initialData only had the earned list), fall back to mapping the earned
+  // records directly — they'll all show as unlocked.
+  const premiumAchievements = allAchievements.length > 0
+    ? allAchievements.map((def: any) => {
+        const earned = achievements.find((e: any) => e?.achievementId === def.id)
+        return {
+          id: def.id,
+          title: def.name,
+          description: def.description,
+          icon: def.icon,
+          rarity: def.rarity,
+          unlockedAt: earned?.earnedAt ?? null,
+          progress: def.progress,
+          target: def.target,
+        }
+      })
+    : achievements.map((e: any) => ({
+        id: e?.achievement?.id || e?.achievementId || e?.id,
+        title: e?.achievement?.name || 'Achievement',
+        description: e?.achievement?.description || '',
+        icon: e?.achievement?.icon,
+        unlockedAt: e?.earnedAt ?? null,
+      }))
+
+  // I-4: map /api/analytics/quests payload into the prop shape that
+  // PremiumDailyQuests expects.
+  const premiumQuests: Array<{
+    id: string
+    title: string
+    description: string
+    icon?: string
+    xp: number
+    progress: number
+    target: number
+    claimed?: boolean
+  }> = (questsData?.quests || []).map((q: any) => ({
+    id: q.key || q.id,
+    title: q.label || q.title || 'Quest',
+    description: q.description || '',
+    icon: q.icon,
+    xp: q.xpReward ?? q.xp ?? 0,
+    progress: q.current ?? q.progress ?? 0,
+    target: q.target ?? 1,
+    claimed: q.done || claimedQuests.has(q.key || q.id),
+  }))
+
+  // I-4: claim handler — fires the dashboard-level confetti (in addition to
+  // the premium panel's own burst) + tracks claimed state locally so the
+  // card flips to the completed state immediately.
+  const handleClaimQuest = (questId: string) => {
+    setClaimedQuests((prev) => {
+      const next = new Set(prev)
+      next.add(questId)
+      return next
+    })
+    setConfettiTrigger((t) => t + 1)
+    const q = premiumQuests.find((pq) => pq.id === questId)
+    toast.success(`+${q?.xp ?? 0} XP earned!`, {
+      description: q?.title,
+      duration: 4000,
+    })
+  }
+
   return (
     <div className="dashboard-shell space-y-6">
+      {/* I-4: dashboard-root celebration overlay (fires on continue-learning
+          resume + quest claim). Pointer-events-none, z-9999, self-cleans. */}
+      <Confetti trigger={confettiTrigger} />
+
       {/* Hero greeting */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
@@ -278,7 +408,16 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
                   <Progress value={overallProgress} className="h-1.5" />
                   <span className="text-xs text-muted-foreground shrink-0 tabular-nums">{overallProgress}%</span>
                 </div>
-                <Button onClick={handleContinue} size="sm" className="mt-3 gap-2 w-full">
+                <Button
+                  onClick={() => {
+                    // I-4: fire the dashboard-root confetti to celebrate
+                    // resuming / completing the current lesson.
+                    setConfettiTrigger((t) => t + 1)
+                    handleContinue()
+                  }}
+                  size="sm"
+                  className="mt-3 gap-2 w-full"
+                >
                   Resume <ArrowRight className="h-3.5 w-3.5" />
                 </Button>
               </div>
@@ -293,8 +432,8 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
           </CardContent>
         </Card>
 
-        {/* Daily Quests (NEW — Phase 10) */}
-        <DailyQuestsCard />
+        {/* Daily Quests (NEW — Phase 10 / I-4 upgraded to PremiumDailyQuests) */}
+        <PremiumDailyQuests quests={premiumQuests} onClaim={handleClaimQuest} />
       </div>
 
       {/* Row 1.5: Revision Due + Today's Plan + Exam Countdown */}
@@ -472,7 +611,12 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
 
       {/* Row 5: Achievements + Recent Activity */}
       <div className="dashboard-grid dashboard-grid--split">
-        <AchievementWall variant="compact" />
+        {/* I-4: upgraded to PremiumAchievementWall (rollback by swapping back
+            to <AchievementWall variant="compact" />) */}
+        <PremiumAchievementWall
+          achievements={premiumAchievements}
+          newlyUnlockedId={newlyUnlockedId}
+        />
 
         <Card>
           <CardHeader className="pb-3">
