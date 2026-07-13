@@ -73,6 +73,7 @@ import VisualRenderer, { type VisualData } from '@/components/learning/leo-visua
 import { CodeBlock } from '@/components/learning/code-block'
 import { Callout } from '@/components/learning/callout'
 import { consumeTutorStream, type TutorStreamEvent } from '@/lib/ai/stream-protocol'
+import { getRandomTip, type LearningTip } from '@/lib/ai/learning-tips'
 import { useTtsPlayer } from '@/hooks/use-tts-player'
 import { useVoiceRecorder } from '@/hooks/use-voice-recorder'
 import { cn } from '@/lib/utils'
@@ -1236,11 +1237,34 @@ function MessageBubble({
 /* -------------------------------------------------------------------------- */
 
 function TypingIndicator() {
+  const [tip, setTip] = useState<LearningTip>(() => getRandomTip())
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTip(getRandomTip())
+    }, 4000)
+    return () => clearInterval(interval)
+  }, [])
+
   return (
-    <div className="leo-typing" aria-label="LEO is thinking" role="status">
-      <span className="leo-typing__dot" />
-      <span className="leo-typing__dot" />
-      <span className="leo-typing__dot" />
+    <div>
+      <div className="leo-typing" aria-label="LEO is thinking" role="status">
+        <span className="leo-typing__dot" />
+        <span className="leo-typing__dot" />
+        <span className="leo-typing__dot" />
+      </div>
+      <p
+        style={{
+          marginTop: '0.5rem',
+          fontSize: '0.75rem',
+          color: 'var(--text-muted)',
+          fontStyle: 'italic',
+          lineHeight: 1.4,
+          maxWidth: '400px',
+        }}
+      >
+        {tip.emoji} {tip.text}
+      </p>
     </div>
   )
 }

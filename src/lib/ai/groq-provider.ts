@@ -358,7 +358,7 @@ function normaliseMessages(messages: TutorMessage[]): Array<{ role: 'user' | 'as
   return output
 }
 
-function fallbackTutorResponse(): TutorResponse {
+export function fallbackTutorResponse(): TutorResponse {
   return {
     content: SAFE_FALLBACK_MESSAGE,
     groundingStatus: 'general',

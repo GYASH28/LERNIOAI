@@ -16,7 +16,9 @@ import {
   type Citation,
   type TutorMessage as ProviderMessage,
 } from '@/lib/ai/provider'
-import { GroqStreamError, streamGroqChat } from '@/lib/ai/groq-stream'
+import { GroqStreamError } from '@/lib/ai/groq-stream'
+import { GeminiStreamError } from '@/lib/ai/gemini-provider'
+import { streamChat, decideRoute } from '@/lib/ai/router'
 import {
   buildTutorSystemPrompt,
   createTutorSessionTitle,
@@ -247,10 +249,15 @@ export async function handleTutorStream(req: NextRequest) {
         push({ type: 'meta', requestId, modelProfile, startedAt })
 
         try {
-          for await (const token of streamGroqChat({
+          const routeDecision = decideRoute(mode)
+          console.warn(
+            `[tutor-stream] route: ${routeDecision.primary} (fallback: ${routeDecision.fallback || 'none'}) — ${routeDecision.reason}`,
+          )
+          for await (const token of streamChat({
             systemPrompt,
             messages: [...history, { role: 'user', content: cleanMessage }],
             maxTokens: tutorMaxTokens(mode),
+            mode,
             profile: modelProfile,
             signal: req.signal,
           })) {
@@ -542,7 +549,7 @@ function normaliseStreamError(
   error: unknown,
   requestId: string,
 ): Extract<TutorStreamEvent, { type: 'error' }> {
-  if (error instanceof GroqStreamError) {
+  if (error instanceof GroqStreamError || error instanceof GeminiStreamError) {
     return {
       type: 'error',
       code: error.code,
