@@ -123,9 +123,6 @@ const nextConfig: NextConfig = {
       },
     ]
   },
-  turbopack: {
-    root: process.cwd(),
-  },
   devIndicators: false,
 };
 

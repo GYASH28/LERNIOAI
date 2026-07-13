@@ -1,0 +1,909 @@
+
+/* =============================================================================
+   PRESENTATION DECK — Slide-based interactive notes experience
+   Replaces the long-scroll article with a premium slide presentation.
+   ============================================================================= */
+
+.presentation-deck {
+  position: relative;
+  min-height: calc(100vh - 8rem);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Top bar ─── */
+.deck-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  margin-bottom: 0.75rem;
+}
+.deck-topbar__left, .deck-topbar__right {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.deck-topbar__center {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  justify-content: center;
+}
+.deck-counter {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-strong);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.deck-counter__total {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+.deck-current-title {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  padding-left: 0.75rem;
+  border-left: 1px solid var(--border-subtle);
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.deck-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.625rem;
+  border-radius: var(--radius-control, 0.5rem);
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-1);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 150ms var(--motion-fast, 120ms);
+}
+.deck-btn:hover {
+  background: var(--surface-2);
+  color: var(--text-strong);
+  border-color: var(--border-default, var(--border-subtle));
+}
+
+/* ─── Slide viewport ─── */
+.slide-viewport {
+  flex: 1;
+  position: relative;
+  min-height: 0;
+  border-radius: var(--radius-panel, 1rem);
+  overflow: hidden;
+  background: var(--surface-1);
+  border: 1px solid var(--border-subtle);
+}
+
+/* ─── Individual slide ─── */
+.slide {
+  height: 100%;
+  min-height: calc(100vh - 14rem);
+  max-height: calc(100vh - 10rem);
+  padding: 2rem 2.5rem;
+  overflow-y: auto;
+  animation: slide-enter 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  scrollbar-width: thin;
+}
+.slide[data-direction="1"] {
+  animation-name: slide-enter-forward;
+}
+.slide[data-direction="-1"] {
+  animation-name: slide-enter-backward;
+}
+@keyframes slide-enter-forward {
+  from { opacity: 0; transform: translateX(2rem); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slide-enter-backward {
+  from { opacity: 0; transform: translateX(-2rem); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ─── Slide content ─── */
+.slide-content {
+  max-width: 56rem;
+  margin: 0 auto;
+}
+.slide-content--title, .slide-content--closing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: calc(100vh - 16rem);
+}
+.slide-scrollable {
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+/* ─── Slide header ─── */
+.slide-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid color-mix(in oklch, var(--brand) 12%, var(--border-subtle));
+}
+.slide-header__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-card, 0.75rem);
+  background: color-mix(in oklch, var(--brand) 12%, transparent);
+  border: 1px solid color-mix(in oklch, var(--brand) 20%, transparent);
+  color: var(--brand);
+  flex-shrink: 0;
+}
+.slide-header__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-strong);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+/* ─── Lead text (overview) ─── */
+.slide-lead-text {
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: var(--text-default);
+  font-weight: 450;
+  max-width: 48rem;
+}
+
+/* ─── Card grids ─── */
+.slide-card-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+.slide-card-grid--2 {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+.slide-card-grid--1 {
+  grid-template-columns: 1fr;
+}
+
+/* ─── Objective cards ─── */
+.slide-objective-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-card, 0.75rem);
+  background: linear-gradient(135deg, color-mix(in oklch, var(--brand) 5%, var(--surface-1)), var(--surface-1));
+  border: 1px solid color-mix(in oklch, var(--brand) 20%, var(--border-subtle));
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-default);
+}
+.slide-objective-card__number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: var(--brand);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ─── Prereq cards ─── */
+.slide-prereq-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  padding: 0.875rem 1rem;
+  border-radius: var(--radius-card, 0.75rem);
+  background: color-mix(in oklch, #f59e0b 4%, var(--surface-1));
+  border: 1px solid color-mix(in oklch, #f59e0b 20%, var(--border-subtle));
+  font-size: 0.875rem;
+  color: var(--text-default);
+}
+
+/* ─── Concept cards ─── */
+.slide-concept-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  padding: 0.875rem 1rem;
+  border-radius: var(--radius-card, 0.75rem);
+  background: linear-gradient(135deg, color-mix(in oklch, #f59e0b 5%, var(--surface-1)), var(--surface-1));
+  border: 1px solid color-mix(in oklch, #f59e0b 20%, var(--border-subtle));
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--text-default);
+}
+
+/* ─── Analogy card ─── */
+.slide-analogy-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  border-radius: var(--radius-panel, 1rem);
+  background: linear-gradient(135deg, color-mix(in oklch, #8b5cf6 5%, var(--surface-1)), var(--surface-1));
+  border: 1px solid color-mix(in oklch, #8b5cf6 20%, var(--border-subtle));
+  text-align: center;
+}
+.slide-analogy-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: color-mix(in oklch, #8b5cf6 15%, transparent);
+  color: #8b5cf6;
+}
+.slide-analogy-card__scenario {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-strong);
+}
+.slide-analogy-card__mapping {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 40rem;
+}
+
+/* ─── Table ─── */
+.slide-table-wrap {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card, 0.75rem);
+  overflow: hidden;
+}
+.slide-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+}
+.slide-table th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--brand);
+  background: color-mix(in oklch, var(--brand) 6%, var(--surface-1));
+  border-bottom: 2px solid color-mix(in oklch, var(--brand) 20%, var(--border-subtle));
+}
+.slide-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-default);
+  vertical-align: top;
+  line-height: 1.5;
+}
+.slide-table tbody tr:last-child td { border-bottom: none; }
+.slide-table tbody tr:nth-child(even) { background: var(--surface-2); }
+.slide-table-note {
+  padding: 0.5rem 1rem;
+  font-size: 0.6875rem;
+  font-style: italic;
+  color: var(--text-secondary);
+  background: var(--surface-2);
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* ─── Code explanation ─── */
+.slide-code-explanation {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-card, 0.75rem);
+  background: color-mix(in oklch, var(--brand) 4%, var(--surface-1));
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ─── Complexity ─── */
+.slide-complexity-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.slide-complexity-card {
+  padding: 1.5rem;
+  border-radius: var(--radius-card, 0.75rem);
+  border: 2px solid;
+  text-align: center;
+}
+.slide-complexity-card--time {
+  border-color: color-mix(in oklch, #ef4444 30%, var(--border-subtle));
+  background: color-mix(in oklch, #ef4444 4%, var(--surface-1));
+}
+.slide-complexity-card--space {
+  border-color: color-mix(in oklch, #3b82f6 30%, var(--border-subtle));
+  background: color-mix(in oklch, #3b82f6 4%, var(--surface-1));
+}
+.slide-complexity-card__label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+.slide-complexity-card__value {
+  font-family: var(--font-geist-mono, ui-monospace, monospace);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-strong);
+}
+.slide-complexity-explanation {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  padding: 0.75rem 1rem;
+  background: var(--surface-2);
+  border-radius: var(--radius-card, 0.75rem);
+}
+
+/* ─── Worked example ─── */
+.slide-worked__problem, .slide-worked__solution {
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-card, 0.75rem);
+  margin-bottom: 0.75rem;
+}
+.slide-worked__problem {
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+}
+.slide-worked__solution {
+  background: color-mix(in oklch, #10b981 4%, var(--surface-1));
+  border: 1px solid color-mix(in oklch, #10b981 20%, var(--border-subtle));
+}
+.slide-worked__label {
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  margin-bottom: 0.375rem;
+}
+.slide-worked__text {
+  font-size: 0.9375rem;
+  color: var(--text-default);
+  line-height: 1.5;
+}
+.slide-worked__code {
+  font-size: 0.8125rem;
+  color: var(--text-strong);
+  font-family: var(--font-geist-mono, ui-monospace, monospace);
+  white-space: pre-wrap;
+  line-height: 1.6;
+}
+.slide-worked__explanation {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  padding: 0.5rem 0;
+}
+
+/* ─── Marks heading ─── */
+.slide-marks-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-strong);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.slide-marks-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.5rem;
+  min-width: 2rem;
+  padding: 0 0.5rem;
+  border-radius: var(--radius-pill, 9999px);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: white;
+}
+.slide-marks-badge[data-marks="2"]  { background: #10b981; }
+.slide-marks-badge[data-marks="5"]  { background: #3b82f6; }
+.slide-marks-badge[data-marks="10"] { background: #8b5cf6; }
+.slide-marks-badge[data-marks="15"] { background: #f59e0b; }
+
+/* ─── Formula grid ─── */
+.slide-formula-grid {
+  display: grid;
+  gap: 0.625rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+.slide-formula-card {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-card, 0.75rem);
+  background: linear-gradient(135deg, color-mix(in oklch, var(--brand) 6%, var(--surface-1)), var(--surface-1));
+  border: 1px solid color-mix(in oklch, var(--brand) 20%, var(--border-subtle));
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+/* ─── Summary card ─── */
+.slide-summary-card {
+  padding: 1.5rem;
+  border-radius: var(--radius-card, 0.75rem);
+  background: linear-gradient(135deg, color-mix(in oklch, var(--brand) 5%, var(--surface-1)), var(--surface-1));
+  border: 1px solid color-mix(in oklch, var(--brand) 20%, var(--border-subtle));
+}
+
+/* ─── Cheat sheet ─── */
+.slide-cheatsheet {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+.slide-cheatsheet-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.625rem 0.875rem;
+  border-radius: var(--radius-control, 0.5rem);
+  background: var(--surface-1);
+  border: 1px solid var(--border-subtle);
+  font-size: 0.8125rem;
+  color: var(--text-strong);
+}
+
+/* ─── AI summary ─── */
+.slide-ai-summary {
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-card, 0.75rem);
+  background: linear-gradient(135deg, color-mix(in oklch, #8b5cf6 5%, var(--surface-1)), var(--surface-1));
+  border: 1px solid color-mix(in oklch, #8b5cf6 20%, var(--border-subtle));
+}
+.slide-ai-summary__badge {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--radius-pill, 9999px);
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: color-mix(in oklch, #8b5cf6 20%, transparent);
+  color: #8b5cf6;
+  margin-bottom: 0.5rem;
+}
+.slide-ai-summary__text {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--text-default);
+}
+
+/* ─── Title slide ─── */
+.slide-title-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.875rem;
+  border-radius: var(--radius-pill, 9999px);
+  background: color-mix(in oklch, var(--brand) 12%, transparent);
+  border: 1px solid color-mix(in oklch, var(--brand) 20%, transparent);
+  color: var(--brand);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.5rem;
+}
+.slide-title-heading {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--text-strong);
+  max-width: 30ch;
+  margin: 0 auto;
+}
+.slide-title-subject {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  margin-top: 0.75rem;
+  font-weight: 500;
+}
+.slide-title-meta {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+.slide-meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: var(--radius-pill, 9999px);
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.slide-title-glow {
+  position: absolute;
+  width: 24rem;
+  height: 24rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in oklch, var(--brand) 15%, transparent), transparent 70%);
+  filter: blur(40px);
+  z-index: -1;
+  animation: slide-glow-breathe 5s ease-in-out infinite;
+}
+@keyframes slide-glow-breathe {
+  0%, 100% { opacity: 0.5; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+/* ─── Closing slide ─── */
+.slide-closing-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  background: color-mix(in oklch, #10b981 15%, transparent);
+  color: #10b981;
+  margin-bottom: 1.5rem;
+}
+.slide-closing-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-strong);
+  letter-spacing: -0.02em;
+}
+.slide-closing-subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+.slide-closing-meta {
+  margin-top: 1rem;
+}
+.slide-closing-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.slide-closing-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: var(--radius-control, 0.5rem);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 150ms var(--motion-fast, 120ms);
+}
+.slide-closing-btn--primary {
+  background: var(--brand);
+  color: white;
+}
+.slide-closing-btn--primary:hover {
+  background: color-mix(in oklch, var(--brand) 85%, black);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px color-mix(in oklch, var(--brand) 30%, transparent);
+}
+.slide-closing-btn--secondary {
+  background: var(--surface-2);
+  color: var(--text-strong);
+  border: 1px solid var(--border-subtle);
+}
+.slide-closing-btn--secondary:hover {
+  background: var(--surface-1);
+  border-color: var(--border-default, var(--border-subtle));
+}
+
+/* ─── Navigation arrows ─── */
+.deck-nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 1px solid var(--border-subtle);
+  background: color-mix(in oklch, var(--surface-1) 95%, transparent);
+  backdrop-filter: blur(12px);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 150ms var(--motion-fast, 120ms);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.deck-nav:hover:not(:disabled) {
+  background: var(--surface-2);
+  color: var(--text-strong);
+  border-color: color-mix(in oklch, var(--brand) 30%, var(--border-subtle));
+  transform: translateY(-50%) scale(1.05);
+}
+.deck-nav:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+.deck-nav--prev { left: 1rem; }
+.deck-nav--next { right: 1rem; }
+
+/* ─── Progress bar ─── */
+.deck-progress {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--surface-2);
+  z-index: 20;
+}
+.deck-progress__bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--brand), color-mix(in oklch, var(--brand) 60%, white));
+  transition: width 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  border-radius: 0 2px 2px 0;
+}
+
+/* ─── Dot navigation ─── */
+.deck-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+.deck-dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 150ms var(--motion-fast, 120ms);
+  opacity: 0.4;
+}
+.deck-dot:hover {
+  opacity: 0.8;
+  background: var(--surface-2);
+}
+.deck-dot--active {
+  opacity: 1;
+  background: var(--brand);
+  color: white;
+  border-color: var(--brand);
+  transform: scale(1.15);
+}
+.deck-dot__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── Overview modal ─── */
+.deck-overview {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  padding: 2rem;
+  animation: deck-fade-in 200ms ease both;
+}
+@keyframes deck-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.deck-overview__panel {
+  width: 100%;
+  max-width: 48rem;
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: var(--radius-panel, 1rem);
+  background: var(--surface-1);
+  border: 1px solid var(--border-subtle);
+  padding: 1.5rem;
+}
+.deck-overview__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.deck-overview__title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-strong);
+}
+.deck-overview__grid {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+.deck-overview__item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.875rem;
+  border-radius: var(--radius-control, 0.5rem);
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-1);
+  cursor: pointer;
+  transition: all 150ms var(--motion-fast, 120ms);
+  text-align: left;
+}
+.deck-overview__item:hover {
+  background: var(--surface-2);
+  border-color: color-mix(in oklch, var(--brand) 30%, var(--border-subtle));
+}
+.deck-overview__item--active {
+  background: color-mix(in oklch, var(--brand) 10%, var(--surface-1));
+  border-color: var(--brand);
+}
+.deck-overview__number {
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+.deck-overview__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brand);
+  flex-shrink: 0;
+}
+.deck-overview__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-strong);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ─── Keyboard hint ─── */
+.deck-hint {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-pill, 9999px);
+  background: color-mix(in oklch, var(--surface-1) 95%, transparent);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  font-size: 0.6875rem;
+  color: var(--text-secondary);
+  z-index: 20;
+  animation: deck-hint-fade 4s ease 2s forwards;
+}
+.deck-hint kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding: 0 0.25rem;
+  border-radius: 0.25rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  font-family: var(--font-geist-mono, ui-monospace, monospace);
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: var(--text-strong);
+}
+@keyframes deck-hint-fade {
+  to { opacity: 0; pointer-events: none; }
+}
+
+/* ─── Mobile ─── */
+@media (max-width: 768px) {
+  .slide {
+    padding: 1.25rem 1rem;
+    min-height: calc(100vh - 12rem);
+  }
+  .slide-header__title {
+    font-size: 1.25rem;
+  }
+  .slide-title-heading {
+    font-size: 1.75rem;
+  }
+  .slide-lead-text {
+    font-size: 1.0625rem;
+  }
+  .slide-complexity-grid {
+    grid-template-columns: 1fr;
+  }
+  .deck-nav {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  .deck-nav--prev { left: 0.5rem; }
+  .deck-nav--next { right: 0.5rem; }
+  .deck-dots {
+    gap: 0.125rem;
+  }
+  .deck-dot {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  .slide {
+    animation: none;
+  }
+  .slide-title-glow {
+    animation: none;
+  }
+  .deck-progress__bar {
+    transition: none;
+  }
+}
+
+/* ─── Print ─── */
+@media print {
+  .deck-topbar,
+  .deck-nav,
+  .deck-dots,
+  .deck-hint,
+  .deck-progress,
+  .deck-overview,
+  .no-print { display: none !important; }
+  .slide-viewport {
+    border: none;
+    overflow: visible;
+  }
+  .slide {
+    page-break-after: always;
+    animation: none;
+    max-height: none;
+  }
+}

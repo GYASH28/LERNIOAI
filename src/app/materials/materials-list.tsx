@@ -94,38 +94,56 @@ export function MaterialsList({ pdfs }: { pdfs: PdfResource[] }) {
               </h2>
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {items.map((pdf) => (
-                  <a
-                    key={pdf.code}
-                    href={pdf.url}
-                    download
-                    className="group rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary/40 hover:bg-accent/5"
-                  >
-                    <div className="flex items-start justify-between gap-2">
-                      <div className="min-w-0 flex-1">
-                        <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
-                          {pdf.code}
-                        </p>
-                        <h3 className="mt-1 text-sm font-medium leading-tight">{pdf.name}</h3>
-                        <div className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
-                          <span>{pdf.credits} credits</span>
-                          <span>·</span>
-                          <span className="capitalize">{pdf.category}</span>
+                  <div key={pdf.code} className="flex flex-col gap-2">
+                    {pdf.hasDetailedNotes ? (
+                      <a
+                        href={`/materials/lesson/${pdf.code}/${pdf.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80)}`}
+                        className="group flex-1 rounded-lg border border-primary/30 bg-gradient-to-br from-primary/5 to-transparent p-4 transition-all hover:border-primary/50 hover:shadow-md"
+                      >
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="min-w-0 flex-1">
+                            <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">{pdf.code}</p>
+                            <h3 className="mt-1 text-sm font-medium leading-tight">{pdf.name}</h3>
+                            <div className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
+                              <span>{pdf.credits} credits</span>
+                              <span>·</span>
+                              <span className="capitalize">{pdf.category}</span>
+                            </div>
+                          </div>
+                          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                            <BookOpen className="h-4 w-4 text-primary" />
+                          </div>
                         </div>
-                      </div>
-                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                        <FileText className="h-4 w-4 text-primary" />
-                      </div>
-                    </div>
-                    <div className="mt-3 flex items-center gap-1.5 text-xs font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
-                      <Download className="h-3 w-3" />
-                      Download PDF
-                    </div>
-                    {pdf.hasDetailedNotes && (
-                      <span className="mt-2 inline-block rounded bg-green-500/10 px-1.5 py-0.5 text-[10px] font-bold text-green-600">
-                        Detailed Notes + Quizzes
-                      </span>
+                        <div className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-primary">
+                          <BookOpen className="h-3 w-3" /> Open Interactive Presentation
+                        </div>
+                      </a>
+                    ) : (
+                      <a
+                        href={pdf.url}
+                        download
+                        className="group flex-1 rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary/40 hover:bg-accent/5"
+                      >
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="min-w-0 flex-1">
+                            <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">{pdf.code}</p>
+                            <h3 className="mt-1 text-sm font-medium leading-tight">{pdf.name}</h3>
+                            <div className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
+                              <span>{pdf.credits} credits</span>
+                              <span>·</span>
+                              <span className="capitalize">{pdf.category}</span>
+                            </div>
+                          </div>
+                          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                            <FileText className="h-4 w-4 text-primary" />
+                          </div>
+                        </div>
+                        <div className="mt-3 flex items-center gap-1.5 text-xs font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
+                          <Download className="h-3 w-3" /> Download PDF
+                        </div>
+                      </a>
                     )}
-                  </a>
+                  </div>
                 ))}
               </div>
             </div>
