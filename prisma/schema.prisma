@@ -1759,6 +1759,8 @@ model TutorSession {
   createdAt  DateTime       @default(now())
   updatedAt  DateTime       @updatedAt
   messages   TutorMessage[]
+  summaries  TutorSessionSummary[]
+  memories   TutorMemory[]
 
   @@index([userId, updatedAt])
   @@index([userId, archived])
@@ -1780,6 +1782,51 @@ model TutorMessage {
 
   @@unique([sessionId, role, clientMessageId])
   @@index([sessionId, createdAt])
+}
+
+/// Compressed summary of an older portion of a tutor conversation.
+/// Created when the conversation exceeds the short-term context window.
+model TutorSessionSummary {
+  id            String   @id @default(cuid())
+  sessionId     String
+  session       TutorSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  /// Text summary of the covered message range
+  summary       String
+  /// First message index covered (inclusive)
+  startIdx      Int
+  /// Last message index covered (inclusive)
+  endIdx        Int
+  /// Approximate token count of the original messages
+  originalTokens Int
+  /// Token count of the summary
+  summaryTokens Int
+  createdAt     DateTime @default(now())
+
+  @@index([sessionId, startIdx])
+}
+
+/// Auto-extracted memory from the conversation — goals, preferences,
+/// decisions, code snippets, file references, etc. Used to enrich
+/// the AI context so it "remembers" important facts.
+model TutorMemory {
+  id        String   @id @default(cuid())
+  sessionId String
+  session   TutorSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  /// goal | preference | decision | code_snippet | file_ref | fact | deadline | api_key_ref | project_name | constraint | other
+  category  String
+  /// Short label (e.g. "User goal: learn OS scheduling")
+  label     String
+  /// Full content of the memory
+  content   String
+  /// Whether this memory is still active (soft delete)
+  active    Boolean  @default(true)
+  /// How important this memory is (1-5, 5 = critical)
+  importance Int    @default(3)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([sessionId, active, importance])
+  @@index([sessionId, category])
 }
 
 // ============================================================

@@ -27,6 +27,12 @@ import {
 } from '@/lib/ai/tutor-runtime'
 import { encodeTutorStreamEvent, type TutorStreamEvent } from '@/lib/ai/stream-protocol'
 import { DEMO_TUTOR_SESSIONS, isDemoMode } from '@/lib/demo-fixtures'
+import {
+  buildContextForAI,
+  formatContextForSystemPrompt,
+} from '@/lib/ai/memory/retrieval'
+import { extractAndStoreMemories } from '@/lib/ai/memory/extractor'
+import { maybeSummarize } from '@/lib/ai/memory/summarizer'
 import type { TutorMessage, TutorSession } from '@/lib/types'
 
 interface ChatBody {
@@ -186,6 +192,18 @@ export async function handleTutorStream(req: NextRequest) {
           console.error('[tutor/stream] user message persistence unavailable; continuing ephemerally', error)
         }
       }
+
+      // === Memory System: extract memories + summarize old messages ===
+      // Run extraction and summarization in parallel, non-blocking.
+      // Failures are logged but never break the chat.
+      if (persistenceAvailable) {
+        extractAndStoreMemories(body.sessionId, { role: 'user', content: cleanMessage }).catch((err) => {
+          console.error('[tutor/stream] memory extraction failed (non-blocking)', err)
+        })
+        maybeSummarize(body.sessionId).catch((err) => {
+          console.error('[tutor/stream] summarization failed (non-blocking)', err)
+        })
+      }
     }
 
     let chunks: Awaited<ReturnType<typeof retrieveLessonContext>> = []
@@ -219,19 +237,42 @@ export async function handleTutorStream(req: NextRequest) {
       .filter(Boolean)
       .join('\n')
 
-    const systemPrompt = buildTutorSystemPrompt({
-      mode,
-      academicContext,
-      contextBlock,
-      citations,
-    })
-    const history: ProviderMessage[] = session.messages
+    // === Memory System: retrieve context (memories + summaries + recent messages) ===
+    let memoryContextBlock = ''
+    let history: ProviderMessage[] = session.messages
       .slice()
       .reverse()
       .map((stored) => ({
         role: stored.role === 'assistant' ? 'assistant' : 'user',
         content: stored.content,
       }))
+
+    if (!demo && persistenceAvailable) {
+      try {
+        const retrievedContext = await buildContextForAI(body.sessionId, cleanMessage)
+        memoryContextBlock = formatContextForSystemPrompt(retrievedContext)
+        // Use the memory system's recent messages (token-budgeted) instead of raw history
+        if (retrievedContext.recentMessages.length > 0) {
+          history = retrievedContext.recentMessages.map((m) => ({
+            role: m.role === 'assistant' ? 'assistant' : 'user',
+            content: m.content,
+          }))
+        }
+        console.warn(
+          `[tutor/stream] memory: ${retrievedContext.memories.length} memories, ${retrievedContext.summaries.length} summaries, ${retrievedContext.recentMessages.length} recent msgs, ~${retrievedContext.estimatedTokens} tokens`,
+        )
+      } catch (error) {
+        console.error('[tutor/stream] memory retrieval failed; using raw history', error)
+      }
+    }
+
+    const systemPrompt = buildTutorSystemPrompt({
+      mode,
+      academicContext,
+      contextBlock,
+      citations,
+    }) + (memoryContextBlock ? `\n\n${memoryContextBlock}` : '')
+
     const modelProfile = tutorModelProfile(mode)
     const requestId = crypto.randomUUID()
     const startedAt = Date.now()
