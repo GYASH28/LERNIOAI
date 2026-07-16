@@ -171,8 +171,8 @@
             {
               "title": "Worked example",
               "problem": "What is an operating system? List its main functions.",
-              "solution": "Refer to the theory section above and the key concepts. Structure your answer as: definition → explanation → example → conclusion.",
-              "explanation": "This is a sample answer outline. Expand each section with details from the lesson."
+              "solution": "An Operating System (OS) is system software that acts as an interface between the user and computer hardware. It manages all hardware resources (CPU, memory, I/O devices) and provides services to application programs.\n\nMain functions of an OS:\n1. **Process Management**: Creates, schedules, and terminates processes. Uses scheduling algorithms (FCFS, SJF, Round Robin) to allocate CPU time fairly.\n2. **Memory Management**: Allocates and deallocates memory to processes. Uses techniques like paging, segmentation, and virtual memory to manage limited RAM efficiently.\n3. **File Management**: Organizes data into files and directories. Provides create, read, write, delete operations. Manages file permissions and access control.\n4. **Device Management**: Manages all I/O devices (keyboard, mouse, printer, disk). Uses device drivers to communicate with hardware.\n5. **Security & Protection**: Prevents unauthorized access to data. Implements user authentication, file permissions, and process isolation.\n6. **User Interface**: Provides CLI (Command Line Interface) or GUI (Graphical User Interface) for user interaction.\n\nExample: When you open a browser, the OS allocates memory for it, assigns CPU time slices, manages network I/O, and ensures it cannot access other processes' memory.",
+              "explanation": "This answer follows the structure: Definition → Functions (with details) → Example. In a 5-mark exam, include at least 5 functions with one-line explanations each."
             },
             {
               "title": "Exam-style worked example",
@@ -557,9 +557,9 @@
           "workedExamples": [
             {
               "title": "Worked example",
-              "problem": "What is a PCB? What information does it contain?",
-              "solution": "Refer to the theory section above and the key concepts. Structure your answer as: definition → explanation → example → conclusion.",
-              "explanation": "This is a sample answer outline. Expand each section with details from the lesson."
+              "problem": "What is a process? Explain process states with a diagram.",
+              "solution": "A **process** is a program in execution. While a program is a passive entity (file on disk), a process is an active entity with its own memory space, program counter, registers, and open files.\n\n**Five Process States:**\n1. **New**: The process is being created. Example: When you double-click an app, the OS starts creating the process.\n2. **Ready**: The process is loaded in memory and waiting for CPU. Multiple processes can be in this state simultaneously in the ready queue.\n3. **Running**: CPU is executing the process instructions. Only one process per core can be in this state at a time.\n4. **Waiting (Blocked)**: The process is waiting for an I/O operation or event to complete. Example: Waiting for user input or disk read.\n5. **Terminated**: The process has finished execution. The OS reclaims its resources.\n\n**State Transitions:**\n- New → Ready: Process admitted to ready queue\n- Ready → Running: Scheduler dispatches the process (context switch)\n- Running → Ready: Time slice expires (preemption)\n- Running → Waiting: I/O or event wait request\n- Waiting → Ready: I/O or event completes\n- Running → Terminated: Process exits or is killed\n\n**Example:** When you open a file in a text editor:\n1. New: OS creates the editor process\n2. Ready: Editor waits in ready queue\n3. Running: CPU starts executing editor code\n4. Waiting: Editor waits for disk to read the file\n5. Ready: File read completes, editor back in ready queue\n6. Running: CPU continues executing editor\n7. Terminated: You close the editor",
+              "explanation": "In the exam, draw the 5-state diagram with arrows showing all transitions. Explain each state with a one-line description. A common mistake is forgetting the Running→Ready (preemption) transition."
             },
             {
               "title": "Exam-style worked example",
@@ -943,9 +943,9 @@
           "workedExamples": [
             {
               "title": "Worked example",
-              "problem": "What is the difference between logical and physical addresses?",
-              "solution": "Refer to the theory section above and the key concepts. Structure your answer as: definition → explanation → example → conclusion.",
-              "explanation": "This is a sample answer outline. Expand each section with details from the lesson."
+              "problem": "Explain paging in memory management with an example.",
+              "solution": "**Paging** is a memory management technique that eliminates external fragmentation by dividing logical memory into fixed-size blocks called **pages** and physical memory into blocks of the same size called **frames**.\n\n**Key Concepts:**\n- **Page**: Fixed-size block of logical memory (typically 4KB). The OS divides a process's logical address space into pages.\n- **Frame**: Fixed-size block of physical memory (same size as page). Physical memory is divided into frames.\n- **Page Table**: A data structure that maps page numbers to frame numbers. Each process has its own page table.\n\n**How Paging Works:**\n1. The CPU generates a logical address: `Page Number | Offset`\n2. The OS looks up the page number in the page table to find the corresponding frame number.\n3. The physical address is: `Frame Number | Offset`\n4. The data is accessed at the physical address.\n\n**Example:**\n- Page size = 4KB = 4096 bytes\n- Logical address: 8196 (binary: 000000000000001000000000001100)\n  - Page number = 8196 / 4096 = 2 (page 2)\n  - Offset = 8196 % 4096 = 4 (byte 4 within the page)\n- Page table says page 2 is in frame 5\n- Physical address = 5 × 4096 + 4 = 20484\n\n**Advantages:**\n- No external fragmentation (any free frame can hold any page)\n- Simple memory allocation\n\n**Disadvantages:**\n- Internal fragmentation (last page may not be full)\n- Page table overhead (extra memory for page table)\n- Two memory accesses needed (page table + actual data)",
+              "explanation": "In the exam, draw the page table mapping diagram showing logical address → page table → physical address. Include the formula: Physical Address = Frame Number × Page Size + Offset."
             },
             {
               "title": "Exam-style worked example",

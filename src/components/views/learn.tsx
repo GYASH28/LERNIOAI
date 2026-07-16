@@ -1364,7 +1364,7 @@ function SimplifyMode({ lesson, subject }: { lesson: Lesson; subject: Subject })
   const mascot = (subject.mascotKey || 'leo') as MascotKey
 
   if (!c) {
-    return <EmptyMode mascot={mascot} message="Simple version coming soon. Try the Learn tab for the full lesson." />
+    return <EmptyMode mascot={mascot} message="Full lesson available in the Learn tab." />
   }
 
   return (

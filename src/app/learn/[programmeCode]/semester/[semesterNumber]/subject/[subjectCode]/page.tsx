@@ -227,7 +227,7 @@ export default async function SubjectLearningPage({
         {(() => {
           const notes = getSubjectNotes(subjectCodeResolved)
           if (notes) return <QuickRevisionHub notes={notes} />
-          // No V3 notes yet — show a friendly "coming soon" card with PDF link
+          // No V3 notes available — show PDF link as fallback
           return (
             <section>
               <div className="mb-4 flex items-center gap-2">
@@ -236,9 +236,9 @@ export default async function SubjectLearningPage({
               </div>
               <div className="rounded-lg border border-dashed border-border bg-card p-6 text-center">
                 <FileText className="h-10 w-10 mx-auto mb-3 text-muted-foreground" />
-                <p className="text-sm font-semibold">Revision notes coming soon for this subject</p>
+                <p className="text-sm font-semibold">Download the PDF summary for this subject</p>
                 <p className="mt-1 text-xs text-muted-foreground max-w-md mx-auto">
-                  We&apos;re preparing concise revision material with formulas, key concepts, viva &amp; interview questions, and PYQs.
+                  Concise revision material with formulas, key concepts, viva &amp; interview questions, and PYQs.
                 </p>
                 {(() => {
                   const safeName = subject.name.toLowerCase().replace(/&/g, 'and').replace(/\//g, '-').replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-').replace(/^-+|-+$/g, '')
