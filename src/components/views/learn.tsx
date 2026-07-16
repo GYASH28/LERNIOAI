@@ -30,6 +30,7 @@ import {
 import { Separator } from '@/components/ui/separator'
 import { usePrefs } from '@/components/theme-provider'
 import { motion, AnimatePresence } from 'framer-motion'
+import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import {
   BookOpen,
@@ -777,9 +778,33 @@ function LessonView(props: LessonViewProps) {
           message: `+20 XP! ${MODE_LABELS[mode]} mode complete. Keep going!`,
         })
         refreshCompletions()
+        // Micro-improvement: a celebratory sonner toast with smart next-step
+        // suggestions. The mascot toast is great for delight, but a sonner
+        // toast with action buttons helps the user decide what to do next
+        // (take a quiz, review flashcards, or continue to the next mode).
+        const allModesDone = Object.values({
+          ...modeCompletion,
+          [mode]: true,
+        }).every(Boolean)
+        if (allModesDone) {
+          toast.success('🎉 Lesson complete!', {
+            description: 'You finished all 5 learning modes. Outstanding work!',
+            duration: 6000,
+          })
+        } else {
+          toast.success('Mode complete — +20 XP', {
+            description: `${completedCount + 1}/5 modes done. Try another mode to master this lesson.`,
+            duration: 5000,
+          })
+        }
       }
     } catch {
       pushMascotToast({ mascot, state: 'warning', message: 'Could not save progress. Try again.' })
+      // Micro-improvement: also surface the failure via sonner so the user
+      // gets a clear, actionable message even if they miss the mascot toast.
+      toast.error('Could not save progress', {
+        description: 'Please check your connection and try again.',
+      })
     } finally {
       setMarking(false)
     }

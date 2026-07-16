@@ -6,6 +6,7 @@ import { X } from 'lucide-react'
 
 const SHORTCUTS = [
   { keys: '⌘ K', description: 'Open command palette' },
+  { keys: '/', description: 'Quick search (open palette)' },
   { keys: 'G D', description: 'Go to Dashboard' },
   { keys: 'G L', description: 'Go to Learn' },
   { keys: 'G T', description: 'Go to AI Tutor' },
@@ -30,6 +31,22 @@ export function KeyboardShortcuts() {
       if (e.key === '?' && !e.metaKey && !e.ctrlKey) {
         e.preventDefault()
         setShowHelp(!showHelp)
+        return
+      }
+
+      // Micro-improvement: `/` opens the command palette (global quick search).
+      // This matches GitHub/Slack/Linear convention — power users expect it.
+      if (e.key === '/' && !e.metaKey && !e.ctrlKey && !e.altKey) {
+        e.preventDefault()
+        // Re-dispatch as Cmd/Ctrl+K so the CommandPalette listener picks it up.
+        window.dispatchEvent(
+          new KeyboardEvent('keydown', {
+            key: 'k',
+            metaKey: navigator.platform.includes('Mac'),
+            ctrlKey: !navigator.platform.includes('Mac'),
+            bubbles: true,
+          }),
+        )
         return
       }
 

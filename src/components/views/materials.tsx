@@ -461,8 +461,14 @@ function PreviewDialog({ resource, onClose }: { resource: Resource | null; onClo
             </pre>
           </ScrollArea>
         ) : resource.type === 'image' && resource.url ? (
-          <div className="flex items-center justify-center">
-            <img src={resource.url} alt={resource.title} className="max-w-full max-h-[60vh] rounded-lg" />
+          <div className="flex items-center justify-center min-h-[40vh]">
+            <img
+              src={resource.url}
+              alt={resource.title}
+              className="max-w-full max-h-[60vh] rounded-lg"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         ) : (resource.type === 'pdf' || resource.type === 'docx') && resource.url ? (
           <iframe

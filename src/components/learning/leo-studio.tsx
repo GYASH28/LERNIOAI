@@ -328,6 +328,53 @@ export function LeoStudio() {
     return () => window.clearTimeout(greetingTimer)
   }, [localSessionSeedRef])
 
+  // ----- Micro-improvement: restore unsent draft from localStorage so a
+  // page refresh doesn't lose what the user was typing. Also auto-focus the
+  // textarea on first mount (when the conversation is empty) so users can
+  // start typing immediately without an extra click. -----
+  useEffect(() => {
+    try {
+      const saved = window.localStorage.getItem('leo-studio-draft')
+      if (saved && saved.trim().length > 0) {
+        setInput(saved)
+      }
+    } catch {
+      // localStorage may be unavailable (private mode / disabled) — skip silently.
+    }
+    // Auto-focus only when there's no active conversation — avoids stealing
+    // focus while the user is reading a response.
+    if (messages.length === 0) {
+      inputRef.current?.focus()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  // ----- Micro-improvement: debounced auto-save of the current input to
+  // localStorage. Survives refresh, crashes, and accidental navigation. -----
+  useEffect(() => {
+    if (!input) return
+    const timer = window.setTimeout(() => {
+      try {
+        window.localStorage.setItem('leo-studio-draft', input)
+      } catch {
+        // ignore — storage may be full or disabled
+      }
+    }, 400)
+    return () => window.clearTimeout(timer)
+  }, [input])
+
+  // ----- Micro-improvement: warn before leaving the page with unsent input
+  // so users don't lose a half-typed question to an accidental back swipe. -----
+  useEffect(() => {
+    if (!input.trim()) return
+    const handler = (e: BeforeUnloadEvent) => {
+      e.preventDefault()
+      e.returnValue = ''
+    }
+    window.addEventListener('beforeunload', handler)
+    return () => window.removeEventListener('beforeunload', handler)
+  }, [input])
+
   // ----- Auto-scroll on new content -----
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
@@ -476,6 +523,11 @@ export function LeoStudio() {
       }
       setMessages((current) => [...current, userMsg, placeholder])
       setInput('')
+      // Micro-improvement: clear the saved draft now that the message has
+      // been sent — a refresh won't restore a message that's already in the
+      // transcript. (Done here rather than in a useEffect so it doesn't race
+      // with the draft-restore effect on mount.)
+      try { window.localStorage.removeItem('leo-studio-draft') } catch { /* ignore */ }
 
       const controller = new AbortController()
       abortRef.current = controller
@@ -625,6 +677,9 @@ export function LeoStudio() {
     setLeoState('greeting')
     window.setTimeout(() => setLeoState('idle'), 1500)
     ttsStop()
+    // Micro-improvement: clear any saved draft when the conversation is
+    // cleared so the user starts fresh.
+    try { window.localStorage.removeItem('leo-studio-draft') } catch { /* ignore */ }
     inputRef.current?.focus()
   }, [isStreaming, ttsStop])
 

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Bookmark, BookmarkCheck } from 'lucide-react'
+import { toast } from 'sonner'
 
 interface BookmarkButtonProps {
   resourceType: string // 'lesson' | 'resource' | 'subject'
@@ -19,7 +20,7 @@ export function BookmarkButton({ resourceType, resourceId, label, size = 'md' }:
     fetch('/api/bookmarks')
       .then((r) => r.json())
       .then((data) => {
-        const exists = data?.some((b: { resourceType: string; resourceId: string }) => 
+        const exists = data?.some((b: { resourceType: string; resourceId: string }) =>
           b.resourceType === resourceType && b.resourceId === resourceId
         )
         setBookmarked(exists)
@@ -34,13 +35,18 @@ export function BookmarkButton({ resourceType, resourceId, label, size = 'md' }:
         // Find and delete
         const res = await fetch('/api/bookmarks')
         const data = await res.json()
-        const bookmark = data?.find((b: { resourceType: string; resourceId: string; id: string }) => 
+        const bookmark = data?.find((b: { resourceType: string; resourceId: string; id: string }) =>
           b.resourceType === resourceType && b.resourceId === resourceId
         )
         if (bookmark) {
           await fetch(`/api/bookmarks/${bookmark.id}`, { method: 'DELETE' })
         }
         setBookmarked(false)
+        // Micro-improvement: surface the toggle so users get confirmation
+        // that their bookmark was actually removed (no silent failures).
+        toast.success('Bookmark removed', {
+          description: label ? `“${label}” was removed from your saves.` : 'Removed from your saves.',
+        })
       } else {
         await fetch('/api/bookmarks', {
           method: 'POST',
@@ -48,9 +54,16 @@ export function BookmarkButton({ resourceType, resourceId, label, size = 'md' }:
           body: JSON.stringify({ resourceType, resourceId, label }),
         })
         setBookmarked(true)
+        toast.success('Bookmarked', {
+          description: label ? `“${label}” saved. Find it in your bookmarks.` : 'Saved to your bookmarks.',
+        })
       }
     } catch {
-      // silent fail
+      // Micro-improvement: tell the user something went wrong instead of
+      // failing silently — they clicked the button and expect feedback.
+      toast.error('Could not update bookmark', {
+        description: 'Please check your connection and try again.',
+      })
     } finally {
       setLoading(false)
     }

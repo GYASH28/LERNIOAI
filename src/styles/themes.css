@@ -543,3 +543,620 @@
   --chart-axis:     oklch(0.72 0.018 350);
   --chart-tooltip:  oklch(0.97 0.006 350);
 }
+
+/* ============================================================
+   7. AMOLED — pure-black OLED-friendly with vivid neon accents
+   Dark-first. Light variant is a deep slate; dark variant is
+   true black (oklch(0 0 0)) with electric blue/purple neon.
+   ============================================================ */
+:root[data-palette="amoled"] {
+  --canvas:            oklch(0.16 0 0);
+  --canvas-subtle:     oklch(0.19 0 0);
+  --surface-1:         oklch(0.20 0 0);
+  --surface-2:         oklch(0.22 0 0);
+  --surface-3:         oklch(0.25 0 0);
+  --surface-elevated:  oklch(0.23 0 0);
+  --surface-overlay:   oklch(0.18 0 0);
+  --surface-inset:     oklch(0.13 0 0);
+
+  --text-strong:     oklch(0.99 0 0);
+  --text-default:    oklch(0.95 0 0);
+  --text-secondary:  oklch(0.72 0 0);
+  --text-muted:      oklch(0.58 0 0);
+  --text-disabled:   oklch(0.42 0 0);
+  --text-inverse:    oklch(0.10 0 0);
+  --text-link:       oklch(0.80 0.20 250);
+
+  --border-subtle:   oklch(1 0 0 / 6%);
+  --border-default:  oklch(1 0 0 / 10%);
+  --border-strong:   oklch(1 0 0 / 18%);
+
+  --focus-ring:      oklch(0.80 0.20 250);
+  --selection-bg:    oklch(0.40 0.18 250);
+
+  --brand:           oklch(0.75 0.22 250);
+  --brand-hover:     oklch(0.80 0.22 250);
+  --brand-active:    oklch(0.85 0.18 250);
+  --brand-soft:      oklch(0.30 0.10 250);
+  --brand-contrast:  oklch(0.10 0 0);
+  --secondary-action: oklch(0.70 0.25 290);
+
+  --chart-1:        oklch(0.75 0.22 250);
+  --chart-2:        oklch(0.70 0.25 290);
+  --chart-3:        oklch(0.80 0.18 180);
+  --chart-4:        oklch(0.78 0.22 340);
+  --chart-5:        oklch(0.82 0.20 145);
+  --chart-grid:     oklch(1 0 0 / 8%);
+  --chart-axis:     oklch(0.72 0 0);
+}
+
+:root[data-palette="amoled"].dark {
+  --canvas:            oklch(0 0 0);
+  --canvas-subtle:     oklch(0.04 0 0);
+  --surface-1:         oklch(0.06 0 0);
+  --surface-2:         oklch(0.08 0 0);
+  --surface-3:         oklch(0.10 0 0);
+  --surface-elevated:  oklch(0.08 0 0);
+  --surface-overlay:   oklch(0.03 0 0);
+  --surface-inset:     oklch(0.02 0 0);
+
+  --text-strong:     oklch(0.99 0 0);
+  --text-default:    oklch(0.96 0 0);
+  --text-secondary:  oklch(0.72 0 0);
+  --text-muted:      oklch(0.58 0 0);
+  --text-disabled:   oklch(0.42 0 0);
+  --text-inverse:    oklch(0.05 0 0);
+  --text-link:       oklch(0.80 0.20 250);
+
+  --border-subtle:   oklch(1 0 0 / 6%);
+  --border-default:  oklch(1 0 0 / 10%);
+  --border-strong:   oklch(1 0 0 / 18%);
+
+  --focus-ring:      oklch(0.80 0.20 250);
+  --selection-bg:    oklch(0.40 0.18 250);
+
+  --brand:           oklch(0.75 0.22 250);
+  --brand-hover:     oklch(0.80 0.22 250);
+  --brand-active:    oklch(0.85 0.18 250);
+  --brand-soft:      oklch(0.25 0.10 250);
+  --brand-contrast:  oklch(0 0 0);
+  --secondary-action: oklch(0.70 0.25 290);
+
+  --chart-1:        oklch(0.75 0.22 250);
+  --chart-2:        oklch(0.70 0.25 290);
+  --chart-3:        oklch(0.80 0.18 180);
+  --chart-4:        oklch(0.78 0.22 340);
+  --chart-5:        oklch(0.82 0.20 145);
+  --chart-grid:     oklch(1 0 0 / 8%);
+  --chart-axis:     oklch(0.72 0 0);
+  --chart-tooltip:  oklch(0.96 0 0);
+}
+
+/* ============================================================
+   8. Midnight — deep navy, elegant night-sky calm
+   Light: soft blue-gray. Dark: oklch(0.13 0.025 260) deep
+   navy with silver-blue accents.
+   ============================================================ */
+:root[data-palette="midnight"] {
+  --canvas:            oklch(0.96 0.008 250);
+  --canvas-subtle:     oklch(0.94 0.010 250);
+  --surface-1:         oklch(0.99 0.004 250);
+  --surface-2:         oklch(0.975 0.006 250);
+  --surface-3:         oklch(0.96 0.010 250);
+  --surface-elevated:  oklch(1 0 0);
+  --surface-overlay:   oklch(0.99 0.004 250);
+  --surface-inset:     oklch(0.95 0.012 250);
+
+  --text-strong:     oklch(0.18 0.022 260);
+  --text-default:    oklch(0.22 0.020 260);
+  --text-secondary:  oklch(0.46 0.020 260);
+  --text-muted:      oklch(0.60 0.016 260);
+  --text-disabled:   oklch(0.72 0.012 260);
+  --text-inverse:    oklch(0.99 0.004 250);
+  --text-link:       oklch(0.50 0.13 245);
+
+  --border-subtle:   oklch(0.92 0.008 250);
+  --border-default:  oklch(0.88 0.012 250);
+  --border-strong:   oklch(0.80 0.016 250);
+
+  --focus-ring:      oklch(0.50 0.13 245);
+  --selection-bg:    oklch(0.85 0.08 245);
+
+  --brand:           oklch(0.50 0.13 245);
+  --brand-hover:     oklch(0.45 0.13 245);
+  --brand-active:    oklch(0.40 0.11 245);
+  --brand-soft:      oklch(0.94 0.04 245);
+  --brand-contrast:  oklch(0.99 0.004 250);
+  --secondary-action: oklch(0.62 0.12 225);
+
+  --chart-1:        oklch(0.50 0.13 245);
+  --chart-2:        oklch(0.62 0.12 225);
+  --chart-3:        oklch(0.65 0.14 280);
+  --chart-4:        oklch(0.68 0.16 195);
+  --chart-5:        oklch(0.60 0.18 340);
+  --chart-grid:     oklch(0.88 0.010 250);
+  --chart-axis:     oklch(0.46 0.020 260);
+}
+
+:root[data-palette="midnight"].dark {
+  --canvas:            oklch(0.13 0.025 260);
+  --canvas-subtle:     oklch(0.16 0.028 260);
+  --surface-1:         oklch(0.185 0.030 262);
+  --surface-2:         oklch(0.21 0.032 264);
+  --surface-3:         oklch(0.24 0.034 266);
+  --surface-elevated:  oklch(0.225 0.032 264);
+  --surface-overlay:   oklch(0.17 0.028 262);
+  --surface-inset:     oklch(0.11 0.022 260);
+
+  --text-strong:     oklch(0.96 0.006 250);
+  --text-default:    oklch(0.93 0.006 250);
+  --text-secondary:  oklch(0.72 0.018 250);
+  --text-muted:      oklch(0.58 0.016 250);
+  --text-disabled:   oklch(0.42 0.012 250);
+  --text-inverse:    oklch(0.13 0.025 260);
+  --text-link:       oklch(0.78 0.13 230);
+
+  --border-subtle:   oklch(1 0 0 / 6%);
+  --border-default:  oklch(1 0 0 / 10%);
+  --border-strong:   oklch(1 0 0 / 18%);
+
+  --focus-ring:      oklch(0.78 0.12 230);
+  --selection-bg:    oklch(0.40 0.12 245);
+
+  --brand:           oklch(0.74 0.10 230);
+  --brand-hover:     oklch(0.80 0.10 230);
+  --brand-active:    oklch(0.85 0.08 230);
+  --brand-soft:      oklch(0.30 0.06 230);
+  --brand-contrast:  oklch(0.13 0.025 260);
+  --secondary-action: oklch(0.70 0.13 215);
+
+  --chart-1:        oklch(0.74 0.10 230);
+  --chart-2:        oklch(0.72 0.13 215);
+  --chart-3:        oklch(0.72 0.16 280);
+  --chart-4:        oklch(0.76 0.16 195);
+  --chart-5:        oklch(0.72 0.18 340);
+  --chart-grid:     oklch(1 0 0 / 8%);
+  --chart-axis:     oklch(0.72 0.018 250);
+  --chart-tooltip:  oklch(0.96 0.006 250);
+}
+
+/* ============================================================
+   9. Sunset — warm orange/pink/purple gradient vibes
+   Light: warm cream. Dark: deep purple-brown with
+   orange/pink accents. Cozy and inviting.
+   ============================================================ */
+:root[data-palette="sunset"] {
+  --canvas:            oklch(0.97 0.018 70);
+  --canvas-subtle:     oklch(0.95 0.022 70);
+  --surface-1:         oklch(0.99 0.012 75);
+  --surface-2:         oklch(0.985 0.014 75);
+  --surface-3:         oklch(0.97 0.018 75);
+  --surface-elevated:  oklch(1 0.008 80);
+  --surface-overlay:   oklch(0.99 0.010 80);
+  --surface-inset:     oklch(0.96 0.022 70);
+
+  --text-strong:     oklch(0.22 0.035 30);
+  --text-default:    oklch(0.27 0.030 35);
+  --text-secondary:  oklch(0.48 0.028 40);
+  --text-muted:      oklch(0.60 0.022 50);
+  --text-disabled:   oklch(0.72 0.016 60);
+  --text-inverse:    oklch(0.99 0.012 70);
+  --text-link:       oklch(0.55 0.18 30);
+
+  --border-subtle:   oklch(0.92 0.014 70);
+  --border-default:  oklch(0.88 0.018 70);
+  --border-strong:   oklch(0.80 0.022 65);
+
+  --focus-ring:      oklch(0.65 0.18 35);
+  --selection-bg:    oklch(0.86 0.10 30);
+
+  --brand:           oklch(0.65 0.18 35);
+  --brand-hover:     oklch(0.60 0.18 35);
+  --brand-active:    oklch(0.55 0.16 35);
+  --brand-soft:      oklch(0.94 0.05 35);
+  --brand-contrast:  oklch(0.99 0.012 70);
+  --secondary-action: oklch(0.60 0.18 340);
+
+  --chart-1:        oklch(0.65 0.18 35);
+  --chart-2:        oklch(0.60 0.18 340);
+  --chart-3:        oklch(0.70 0.20 15);
+  --chart-4:        oklch(0.62 0.20 290);
+  --chart-5:        oklch(0.68 0.18 60);
+  --chart-grid:     oklch(0.88 0.014 70);
+  --chart-axis:     oklch(0.46 0.028 40);
+}
+
+:root[data-palette="sunset"].dark {
+  --canvas:            oklch(0.16 0.025 320);
+  --canvas-subtle:     oklch(0.19 0.028 322);
+  --surface-1:         oklch(0.21 0.030 325);
+  --surface-2:         oklch(0.235 0.032 328);
+  --surface-3:         oklch(0.265 0.034 330);
+  --surface-elevated:  oklch(0.25 0.032 328);
+  --surface-overlay:   oklch(0.195 0.028 325);
+  --surface-inset:     oklch(0.14 0.022 320);
+
+  --text-strong:     oklch(0.94 0.015 70);
+  --text-default:    oklch(0.91 0.015 70);
+  --text-secondary:  oklch(0.72 0.022 60);
+  --text-muted:      oklch(0.58 0.020 50);
+  --text-disabled:   oklch(0.42 0.016 40);
+  --text-inverse:    oklch(0.16 0.025 320);
+  --text-link:       oklch(0.78 0.16 30);
+
+  --border-subtle:   oklch(1 0 0 / 6%);
+  --border-default:  oklch(1 0 0 / 10%);
+  --border-strong:   oklch(1 0 0 / 18%);
+
+  --focus-ring:      oklch(0.76 0.18 35);
+  --selection-bg:    oklch(0.40 0.14 30);
+
+  --brand:           oklch(0.72 0.18 35);
+  --brand-hover:     oklch(0.78 0.18 35);
+  --brand-active:    oklch(0.82 0.15 35);
+  --brand-soft:      oklch(0.32 0.10 35);
+  --brand-contrast:  oklch(0.13 0.025 320);
+  --secondary-action: oklch(0.72 0.18 340);
+
+  --chart-1:        oklch(0.72 0.18 35);
+  --chart-2:        oklch(0.74 0.18 340);
+  --chart-3:        oklch(0.74 0.20 15);
+  --chart-4:        oklch(0.74 0.16 290);
+  --chart-5:        oklch(0.76 0.16 60);
+  --chart-grid:     oklch(1 0 0 / 8%);
+  --chart-axis:     oklch(0.72 0.020 60);
+  --chart-tooltip:  oklch(0.94 0.015 70);
+}
+
+/* ============================================================
+   10. Nord — classic Nord: frost blue + snow storm + polar night
+   Light: Nord snow storm (#ECEFF4). Dark: polar night
+   (#2E3440) with frost blue (#88C0D0) accents.
+   ============================================================ */
+:root[data-palette="nord"] {
+  --canvas:            oklch(0.95 0.005 250);
+  --canvas-subtle:     oklch(0.93 0.006 250);
+  --surface-1:         oklch(0.97 0.004 250);
+  --surface-2:         oklch(0.96 0.005 250);
+  --surface-3:         oklch(0.94 0.006 250);
+  --surface-elevated:  oklch(0.98 0.003 250);
+  --surface-overlay:   oklch(0.975 0.004 250);
+  --surface-inset:     oklch(0.93 0.008 250);
+
+  --text-strong:     oklch(0.25 0.020 265);
+  --text-default:    oklch(0.30 0.020 265);
+  --text-secondary:  oklch(0.50 0.018 265);
+  --text-muted:      oklch(0.62 0.015 265);
+  --text-disabled:   oklch(0.74 0.012 265);
+  --text-inverse:    oklch(0.95 0.005 250);
+  --text-link:       oklch(0.55 0.10 250);
+
+  --border-subtle:   oklch(0.88 0.006 250);
+  --border-default:  oklch(0.84 0.008 250);
+  --border-strong:   oklch(0.74 0.012 250);
+
+  --focus-ring:      oklch(0.55 0.10 250);
+  --selection-bg:    oklch(0.80 0.06 250);
+
+  --brand:           oklch(0.55 0.10 250);
+  --brand-hover:     oklch(0.50 0.10 250);
+  --brand-active:    oklch(0.45 0.09 250);
+  --brand-soft:      oklch(0.92 0.03 250);
+  --brand-contrast:  oklch(0.95 0.005 250);
+  --secondary-action: oklch(0.72 0.10 215);
+
+  --chart-1:        oklch(0.55 0.10 250);
+  --chart-2:        oklch(0.72 0.10 215);
+  --chart-3:        oklch(0.74 0.08 125);
+  --chart-4:        oklch(0.65 0.12 40);
+  --chart-5:        oklch(0.60 0.10 325);
+  --chart-grid:     oklch(0.86 0.008 250);
+  --chart-axis:     oklch(0.50 0.018 265);
+}
+
+:root[data-palette="nord"].dark {
+  --canvas:            oklch(0.22 0.018 265);
+  --canvas-subtle:     oklch(0.25 0.018 265);
+  --surface-1:         oklch(0.28 0.020 265);
+  --surface-2:         oklch(0.32 0.022 265);
+  --surface-3:         oklch(0.36 0.022 265);
+  --surface-elevated:  oklch(0.34 0.022 265);
+  --surface-overlay:   oklch(0.26 0.020 265);
+  --surface-inset:     oklch(0.19 0.016 265);
+
+  --text-strong:     oklch(0.95 0.005 250);
+  --text-default:    oklch(0.92 0.005 250);
+  --text-secondary:  oklch(0.80 0.008 250);
+  --text-muted:      oklch(0.68 0.010 250);
+  --text-disabled:   oklch(0.52 0.012 265);
+  --text-inverse:    oklch(0.22 0.018 265);
+  --text-link:       oklch(0.78 0.10 215);
+
+  --border-subtle:   oklch(1 0 0 / 8%);
+  --border-default:  oklch(1 0 0 / 14%);
+  --border-strong:   oklch(1 0 0 / 22%);
+
+  --focus-ring:      oklch(0.72 0.10 215);
+  --selection-bg:    oklch(0.45 0.10 215);
+
+  --brand:           oklch(0.72 0.10 215);
+  --brand-hover:     oklch(0.78 0.10 215);
+  --brand-active:    oklch(0.82 0.08 215);
+  --brand-soft:      oklch(0.35 0.06 215);
+  --brand-contrast:  oklch(0.22 0.018 265);
+  --secondary-action: oklch(0.62 0.13 250);
+
+  --chart-1:        oklch(0.72 0.10 215);
+  --chart-2:        oklch(0.62 0.13 250);
+  --chart-3:        oklch(0.74 0.08 125);
+  --chart-4:        oklch(0.65 0.12 40);
+  --chart-5:        oklch(0.60 0.10 325);
+  --chart-grid:     oklch(1 0 0 / 8%);
+  --chart-axis:     oklch(0.80 0.008 250);
+  --chart-tooltip:  oklch(0.95 0.005 250);
+}
+
+/* ============================================================
+   11. Catppuccin — popular Catppuccin Latte (light) / Mocha (dark)
+   Light: #EFF1F5 base, #4C4F69 text, #8839EF mauve.
+   Dark: #1E1E2E base, #CDD6F4 text, #CBA6F7 mauve.
+   ============================================================ */
+:root[data-palette="catppuccin"] {
+  --canvas:            oklch(0.94 0.005 290);
+  --canvas-subtle:     oklch(0.92 0.006 290);
+  --surface-1:         oklch(0.96 0.004 290);
+  --surface-2:         oklch(0.95 0.005 290);
+  --surface-3:         oklch(0.93 0.006 290);
+  --surface-elevated:  oklch(0.97 0.003 290);
+  --surface-overlay:   oklch(0.965 0.004 290);
+  --surface-inset:     oklch(0.92 0.008 290);
+
+  --text-strong:     oklch(0.30 0.025 290);
+  --text-default:    oklch(0.35 0.022 290);
+  --text-secondary:  oklch(0.52 0.020 290);
+  --text-muted:      oklch(0.62 0.016 290);
+  --text-disabled:   oklch(0.74 0.012 290);
+  --text-inverse:    oklch(0.94 0.005 290);
+  --text-link:       oklch(0.55 0.20 250);
+
+  --border-subtle:   oklch(0.88 0.008 290);
+  --border-default:  oklch(0.84 0.010 290);
+  --border-strong:   oklch(0.74 0.014 290);
+
+  --focus-ring:      oklch(0.55 0.22 305);
+  --selection-bg:    oklch(0.85 0.10 305);
+
+  --brand:           oklch(0.55 0.22 305);
+  --brand-hover:     oklch(0.50 0.22 305);
+  --brand-active:    oklch(0.45 0.20 305);
+  --brand-soft:      oklch(0.92 0.05 305);
+  --brand-contrast:  oklch(0.99 0.004 290);
+  --secondary-action: oklch(0.55 0.20 250);
+
+  --chart-1:        oklch(0.55 0.22 305);
+  --chart-2:        oklch(0.55 0.20 250);
+  --chart-3:        oklch(0.65 0.20 145);
+  --chart-4:        oklch(0.70 0.18 40);
+  --chart-5:        oklch(0.62 0.22 340);
+  --chart-grid:     oklch(0.86 0.010 290);
+  --chart-axis:     oklch(0.52 0.020 290);
+}
+
+:root[data-palette="catppuccin"].dark {
+  --canvas:            oklch(0.20 0.018 290);
+  --canvas-subtle:     oklch(0.23 0.020 290);
+  --surface-1:         oklch(0.27 0.020 290);
+  --surface-2:         oklch(0.32 0.020 290);
+  --surface-3:         oklch(0.37 0.018 290);
+  --surface-elevated:  oklch(0.35 0.020 290);
+  --surface-overlay:   oklch(0.24 0.020 290);
+  --surface-inset:     oklch(0.17 0.014 290);
+
+  --text-strong:     oklch(0.92 0.015 250);
+  --text-default:    oklch(0.89 0.015 250);
+  --text-secondary:  oklch(0.76 0.018 250);
+  --text-muted:      oklch(0.64 0.018 290);
+  --text-disabled:   oklch(0.48 0.014 290);
+  --text-inverse:    oklch(0.20 0.018 290);
+  --text-link:       oklch(0.78 0.16 250);
+
+  --border-subtle:   oklch(1 0 0 / 8%);
+  --border-default:  oklch(1 0 0 / 12%);
+  --border-strong:   oklch(1 0 0 / 20%);
+
+  --focus-ring:      oklch(0.72 0.16 305);
+  --selection-bg:    oklch(0.40 0.16 305);
+
+  --brand:           oklch(0.72 0.16 305);
+  --brand-hover:     oklch(0.78 0.16 305);
+  --brand-active:    oklch(0.82 0.14 305);
+  --brand-soft:      oklch(0.32 0.08 305);
+  --brand-contrast:  oklch(0.18 0.018 290);
+  --secondary-action: oklch(0.72 0.14 245);
+
+  --chart-1:        oklch(0.72 0.16 305);
+  --chart-2:        oklch(0.72 0.14 245);
+  --chart-3:        oklch(0.78 0.16 145);
+  --chart-4:        oklch(0.80 0.16 40);
+  --chart-5:        oklch(0.74 0.18 340);
+  --chart-grid:     oklch(1 0 0 / 8%);
+  --chart-axis:     oklch(0.76 0.018 250);
+  --chart-tooltip:  oklch(0.92 0.015 250);
+}
+
+/* ============================================================
+   12. Dracula — the famous Dracula theme
+   Light: soft cream with dark purple. Dark: #282A36 bg,
+   #F8F8F2 text, #BD93F9 purple, #FF79C6 pink, #50FA7B green.
+   ============================================================ */
+:root[data-palette="dracula"] {
+  --canvas:            oklch(0.96 0.012 90);
+  --canvas-subtle:     oklch(0.94 0.014 90);
+  --surface-1:         oklch(0.99 0.008 90);
+  --surface-2:         oklch(0.98 0.010 90);
+  --surface-3:         oklch(0.96 0.014 90);
+  --surface-elevated:  oklch(1 0.006 90);
+  --surface-overlay:   oklch(0.99 0.008 90);
+  --surface-inset:     oklch(0.95 0.016 90);
+
+  --text-strong:     oklch(0.25 0.06 290);
+  --text-default:    oklch(0.30 0.05 290);
+  --text-secondary:  oklch(0.50 0.04 290);
+  --text-muted:      oklch(0.62 0.03 290);
+  --text-disabled:   oklch(0.74 0.02 290);
+  --text-inverse:    oklch(0.96 0.012 90);
+  --text-link:       oklch(0.55 0.18 290);
+
+  --border-subtle:   oklch(0.90 0.010 90);
+  --border-default:  oklch(0.86 0.014 90);
+  --border-strong:   oklch(0.78 0.020 290);
+
+  --focus-ring:      oklch(0.60 0.18 290);
+  --selection-bg:    oklch(0.85 0.10 290);
+
+  --brand:           oklch(0.60 0.18 290);
+  --brand-hover:     oklch(0.55 0.18 290);
+  --brand-active:    oklch(0.50 0.16 290);
+  --brand-soft:      oklch(0.93 0.05 290);
+  --brand-contrast:  oklch(0.99 0.008 90);
+  --secondary-action: oklch(0.65 0.22 340);
+
+  --chart-1:        oklch(0.60 0.18 290);
+  --chart-2:        oklch(0.65 0.22 340);
+  --chart-3:        oklch(0.78 0.20 145);
+  --chart-4:        oklch(0.72 0.16 195);
+  --chart-5:        oklch(0.72 0.18 40);
+  --chart-grid:     oklch(0.88 0.012 90);
+  --chart-axis:     oklch(0.50 0.04 290);
+}
+
+:root[data-palette="dracula"].dark {
+  --canvas:            oklch(0.22 0.015 280);
+  --canvas-subtle:     oklch(0.25 0.015 280);
+  --surface-1:         oklch(0.28 0.015 280);
+  --surface-2:         oklch(0.30 0.015 280);
+  --surface-3:         oklch(0.33 0.015 280);
+  --surface-elevated:  oklch(0.31 0.015 280);
+  --surface-overlay:   oklch(0.26 0.015 280);
+  --surface-inset:     oklch(0.19 0.012 280);
+
+  --text-strong:     oklch(0.97 0.005 90);
+  --text-default:    oklch(0.94 0.005 90);
+  --text-secondary:  oklch(0.65 0.030 250);
+  --text-muted:      oklch(0.55 0.030 250);
+  --text-disabled:   oklch(0.42 0.020 250);
+  --text-inverse:    oklch(0.22 0.015 280);
+  --text-link:       oklch(0.78 0.16 290);
+
+  --border-subtle:   oklch(1 0 0 / 8%);
+  --border-default:  oklch(1 0 0 / 12%);
+  --border-strong:   oklch(1 0 0 / 20%);
+
+  --focus-ring:      oklch(0.72 0.18 290);
+  --selection-bg:    oklch(0.40 0.16 290);
+
+  --brand:           oklch(0.72 0.18 290);
+  --brand-hover:     oklch(0.78 0.18 290);
+  --brand-active:    oklch(0.82 0.15 290);
+  --brand-soft:      oklch(0.32 0.10 290);
+  --brand-contrast:  oklch(0.22 0.015 280);
+  --secondary-action: oklch(0.70 0.22 340);
+
+  --chart-1:        oklch(0.72 0.18 290);
+  --chart-2:        oklch(0.70 0.22 340);
+  --chart-3:        oklch(0.82 0.20 145);
+  --chart-4:        oklch(0.74 0.16 195);
+  --chart-5:        oklch(0.76 0.18 40);
+  --chart-grid:     oklch(1 0 0 / 8%);
+  --chart-axis:     oklch(0.65 0.030 250);
+  --chart-tooltip:  oklch(0.97 0.005 90);
+}
+
+/* ============================================================
+   13. GitHub Dark — GitHub's light + dark default themes
+   Light: #FFFFFF bg, #1F2328 text, #0969DA blue.
+   Dark: #0D1117 bg, #E6EDF3 text, #2F81F7 blue, #3FB950 green,
+   #F85149 red.
+   ============================================================ */
+:root[data-palette="github-dark"] {
+  --canvas:            oklch(1 0 0);
+  --canvas-subtle:     oklch(0.97 0.004 250);
+  --surface-1:         oklch(0.99 0.003 250);
+  --surface-2:         oklch(0.98 0.004 250);
+  --surface-3:         oklch(0.96 0.006 250);
+  --surface-elevated:  oklch(1 0 0);
+  --surface-overlay:   oklch(0.99 0.003 250);
+  --surface-inset:     oklch(0.95 0.008 250);
+
+  --text-strong:     oklch(0.22 0.020 260);
+  --text-default:    oklch(0.27 0.018 260);
+  --text-secondary:  oklch(0.50 0.015 260);
+  --text-muted:      oklch(0.60 0.012 260);
+  --text-disabled:   oklch(0.72 0.010 260);
+  --text-inverse:    oklch(1 0 0);
+  --text-link:       oklch(0.55 0.20 250);
+
+  --border-subtle:   oklch(0.92 0.006 250);
+  --border-default:  oklch(0.88 0.008 250);
+  --border-strong:   oklch(0.80 0.012 250);
+
+  --focus-ring:      oklch(0.55 0.20 250);
+  --selection-bg:    oklch(0.85 0.10 250);
+
+  --brand:           oklch(0.55 0.20 250);
+  --brand-hover:     oklch(0.50 0.20 250);
+  --brand-active:    oklch(0.45 0.18 250);
+  --brand-soft:      oklch(0.94 0.04 250);
+  --brand-contrast:  oklch(1 0 0);
+  --secondary-action: oklch(0.52 0.16 145);
+
+  --chart-1:        oklch(0.55 0.20 250);
+  --chart-2:        oklch(0.52 0.16 145);
+  --chart-3:        oklch(0.70 0.18 40);
+  --chart-4:        oklch(0.62 0.22 340);
+  --chart-5:        oklch(0.60 0.18 290);
+  --chart-grid:     oklch(0.88 0.008 250);
+  --chart-axis:     oklch(0.50 0.015 260);
+}
+
+:root[data-palette="github-dark"].dark {
+  --canvas:            oklch(0.14 0.015 260);
+  --canvas-subtle:     oklch(0.18 0.015 260);
+  --surface-1:         oklch(0.21 0.015 260);
+  --surface-2:         oklch(0.23 0.015 260);
+  --surface-3:         oklch(0.26 0.015 260);
+  --surface-elevated:  oklch(0.24 0.015 260);
+  --surface-overlay:   oklch(0.19 0.015 260);
+  --surface-inset:     oklch(0.12 0.012 260);
+
+  --text-strong:     oklch(0.94 0.003 250);
+  --text-default:    oklch(0.91 0.003 250);
+  --text-secondary:  oklch(0.65 0.012 260);
+  --text-muted:      oklch(0.55 0.012 260);
+  --text-disabled:   oklch(0.42 0.010 260);
+  --text-inverse:    oklch(0.14 0.015 260);
+  --text-link:       oklch(0.72 0.16 250);
+
+  --border-subtle:   oklch(1 0 0 / 8%);
+  --border-default:  oklch(1 0 0 / 12%);
+  --border-strong:   oklch(1 0 0 / 20%);
+
+  --focus-ring:      oklch(0.65 0.18 250);
+  --selection-bg:    oklch(0.40 0.14 250);
+
+  --brand:           oklch(0.65 0.18 250);
+  --brand-hover:     oklch(0.72 0.18 250);
+  --brand-active:    oklch(0.78 0.16 250);
+  --brand-soft:      oklch(0.30 0.08 250);
+  --brand-contrast:  oklch(0.14 0.015 260);
+  --secondary-action: oklch(0.72 0.17 145);
+
+  --chart-1:        oklch(0.65 0.18 250);
+  --chart-2:        oklch(0.72 0.17 145);
+  --chart-3:        oklch(0.78 0.18 40);
+  --chart-4:        oklch(0.70 0.22 340);
+  --chart-5:        oklch(0.68 0.18 290);
+  --chart-grid:     oklch(1 0 0 / 8%);
+  --chart-axis:     oklch(0.65 0.012 260);
+  --chart-tooltip:  oklch(0.94 0.003 250);
+}

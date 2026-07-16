@@ -133,7 +133,10 @@ export function CommandPalette() {
         </div>
         <Command.List className="max-h-[50vh] overflow-y-auto p-1">
           <Command.Empty className="py-6 text-center text-sm text-muted-foreground">
-            No results found.
+            <span className="block">No results found.</span>
+            <span className="mt-1 block text-xs text-muted-foreground/70">
+              Try a different term, or press <kbd className="rounded border border-border bg-muted px-1 py-0.5 text-[10px] font-mono">?</kbd> to see all shortcuts.
+            </span>
           </Command.Empty>
           {Object.entries(grouped).map(([group, groupItems]) => (
             <Command.Group key={group} heading={groupLabels[group]} className="text-xs text-muted-foreground">
@@ -153,7 +156,7 @@ export function CommandPalette() {
           ))}
         </Command.List>
         <div className="border-t border-border px-3 py-1.5 text-[10px] text-muted-foreground flex items-center justify-between">
-          <span>↑↓ to navigate · Enter to select · Esc to close</span>
+          <span>↑↓ navigate · Enter select · Esc close · <kbd className="rounded border border-border bg-muted px-1 font-mono">/</kbd> opens search</span>
           <span className="font-mono">⌘K</span>
         </div>
       </Command>

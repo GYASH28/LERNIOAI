@@ -37,6 +37,7 @@ import {
 } from 'react'
 import {
   DEFAULT_THEME_PREFS,
+  PALETTES,
   THEME_STORAGE_KEYS,
   type Appearance,
   type MotionLevel,
@@ -162,8 +163,9 @@ function effectiveMotionFor(userMotion: MotionLevel, osReducedMotion: boolean): 
 function isValidAppearance(v: unknown): v is Appearance {
   return v === 'light' || v === 'dark' || v === 'system'
 }
+const VALID_PALETTE_IDS = new Set<string>(PALETTES.map((palette) => palette.id))
 function isValidPalette(v: unknown): boolean {
-  return v === 'aurora' || v === 'nexus' || v === 'paper' || v === 'ocean' || v === 'forest' || v === 'sakura'
+  return typeof v === 'string' && VALID_PALETTE_IDS.has(v)
 }
 function isValidContrast(v: unknown): boolean { return v === 'normal' || v === 'high' }
 function isValidDensity(v: unknown): boolean { return v === 'comfortable' || v === 'compact' }

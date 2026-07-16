@@ -66,6 +66,14 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
   const [newlyUnlockedId, setNewlyUnlockedId] = useState<string | null>(null)
   const previousUnlockedRef = useRef<Set<string> | null>(null)
   const [activity, setActivity] = useState<{ xpByDay: number[]; activeDays: string[]; minutesToday: number; dailyGoalMins: number } | null>(initialData?.activity ?? null)
+  // Micro-improvement: recently-viewed lessons/subjects — surfaced on the
+  // dashboard so users can jump back to what they were reading with one tap.
+  const [recentlyViewed, setRecentlyViewed] = useState<Array<{ id: string; title: string; href: string; resourceType: string; viewedAt: string }>>([])
+  // Hydration guard: date-derived values (today's tasks, days-to-exam,
+  // greeting, relative timestamps) must only be computed on the client to
+  // avoid server/client mismatches across timezones.
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => { setMounted(true) }, [])
 
   useEffect(() => {
     if (initialData) return
@@ -90,6 +98,18 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
       }
       if (act.ok) setActivity(act.data)
     })
+
+    // Micro-improvement: fetch recently-viewed resources so we can surface
+    // a "jump back in" strip on the dashboard. Failures are swallowed —
+    // the strip simply doesn't render if the API is unavailable.
+    fetch('/api/recently-viewed')
+      .then((r) => r.json())
+      .then((json) => {
+        if (json.ok && Array.isArray(json.data)) {
+          setRecentlyViewed(json.data.slice(0, 6))
+        }
+      })
+      .catch(() => { /* silent — recently-viewed is a nice-to-have */ })
 
     // I-4: fetch daily quests separately (the legacy DailyQuestsCard used to
     // self-fetch; the premium presentational variant needs the data passed in).
@@ -130,9 +150,17 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
   const completedLessons = data?.lessonCompletions?.filter((l) => l.completedAt) || []
   const masteryRecords = data?.mastery || []
   const weakTopics = masteryRecords.filter((m: any) => m.state === 'weak' || m.state === 'learning').slice(0, 3)
-  const todayTasks = tasks.filter((t) => t.scheduledDate === new Date().toISOString().slice(0, 10) || !t.scheduledDate).slice(0, 4)
+  // Compute today's date string on the client only — server (UTC) and
+  // client (local) can differ across the midnight boundary, which would
+  // cause a hydration mismatch in the task list.
+  const todayStr = mounted ? new Date().toISOString().slice(0, 10) : ''
+  const todayTasks = mounted
+    ? tasks.filter((t) => t.scheduledDate === todayStr || !t.scheduledDate).slice(0, 4)
+    : []
   const examDate = user?.examDate ? new Date(user.examDate) : null
-  const daysToExam = examDate ? Math.ceil((examDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24)) : null
+  const daysToExam = mounted && examDate
+    ? Math.ceil((examDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24))
+    : null
   const goToView = (nextView: ViewKey) => {
     setView(nextView)
     router.push(routeForView(nextView))
@@ -266,7 +294,7 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
               <h1 className="text-xl md:text-2xl font-bold">
-                <span className="text-gradient">{greeting()}</span>
+                <span className="text-gradient" suppressHydrationWarning>{greeting()}</span>
                 <span className="text-foreground">, {user?.name?.split(' ')[0] || 'Student'}!</span>
               </h1>
               {(user?.streak || 0) > 0 && (
@@ -301,6 +329,28 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
           </div>
         </div>
       </motion.div>
+
+      {/* Micro-improvement: Recently Viewed strip — a compact horizontal
+          scroller of the user's last-opened lessons/subjects so they can
+          jump back in with one tap. Only renders when there's data. */}
+      {recentlyViewed.length > 0 && (
+        <div className="flex items-center gap-2 overflow-x-auto pb-1 -mx-1 px-1" aria-label="Recently viewed">
+          <span className="shrink-0 text-xs font-semibold text-muted-foreground flex items-center gap-1">
+            <Clock className="h-3 w-3" aria-hidden="true" />
+            Recent
+          </span>
+          {recentlyViewed.map((rv) => (
+            <a
+              key={`${rv.resourceType}-${rv.id}`}
+              href={rv.href}
+              className="shrink-0 inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-foreground transition-colors hover:border-primary/40 hover:bg-primary/5"
+            >
+              <BookOpen className="h-3 w-3 text-muted-foreground" aria-hidden="true" />
+              <span className="max-w-[12rem] truncate">{rv.title}</span>
+            </a>
+          ))}
+        </div>
+      )}
 
       {/* Insights row: Weekly XP + Daily Goal Ring + Streak Heatmap */}
       <div className="dashboard-grid dashboard-grid--insights">
@@ -516,9 +566,9 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
           <CardContent>
             {daysToExam !== null ? (
               <div className="text-center py-1">
-                <p className="text-3xl font-bold text-red-500">{daysToExam}</p>
+                <p className="text-3xl font-bold text-red-500" suppressHydrationWarning>{daysToExam}</p>
                 <p className="text-xs text-muted-foreground">days remaining</p>
-                <p className="text-meta text-muted-foreground mt-1">{examDate?.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
+                <p className="text-meta text-muted-foreground mt-1" suppressHydrationWarning>{examDate?.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
               </div>
             ) : (
               <p className="text-xs text-muted-foreground py-3 text-center">Set your exam date in Profile</p>
@@ -629,14 +679,14 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
                   <div key={a.id} className="flex items-center gap-2 text-xs">
                     {a.isCorrect ? <CheckCircle2 className="h-3 w-3 text-success" /> : <X className="h-3 w-3 text-destructive" />}
                     <span className="truncate flex-1 text-muted-foreground">Answered a question</span>
-                    <span className="text-meta text-muted-foreground">{timeAgo(a.createdAt)}</span>
+                    <span className="text-meta text-muted-foreground" suppressHydrationWarning>{timeAgo(a.createdAt)}</span>
                   </div>
                 ))}
                 {completedLessons.slice(0, 3).map((l: any) => (
                   <div key={l.id} className="flex items-center gap-2 text-xs">
                     <BookOpen className="h-3 w-3 text-primary" />
                     <span className="truncate flex-1 text-muted-foreground">Completed: {l.lesson?.title || 'Lesson'}</span>
-                    <span className="text-meta text-muted-foreground">{timeAgo(l.completedAt)}</span>
+                    <span className="text-meta text-muted-foreground" suppressHydrationWarning>{timeAgo(l.completedAt)}</span>
                   </div>
                 ))}
                 {(data?.questionAttempts || []).length === 0 && completedLessons.length === 0 && (

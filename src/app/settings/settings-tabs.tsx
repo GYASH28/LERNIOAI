@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { User, Bell, Palette, Shield, Download, HelpCircle } from 'lucide-react'
 import { usePrefs } from '@/components/theme-provider'
+import { PALETTES } from '@/lib/theme-types'
 
 interface SettingsTabsProps {
   initialUser: {
@@ -104,18 +105,18 @@ export function SettingsTabs({ initialUser }: SettingsTabsProps) {
             </div>
             <div>
               <label className="text-xs font-medium text-muted-foreground">Color Palette</label>
-              <div className="mt-2 grid grid-cols-3 gap-2 sm:grid-cols-6">
-                {(['aurora', 'nexus', 'paper', 'ocean', 'forest', 'sakura'] as const).map((p) => (
+              <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-3">
+                {PALETTES.map((palette) => (
                   <button
-                    key={p}
-                    onClick={() => setPref({ palette: p })}
-                    className={`rounded-md border px-2 py-2 text-xs font-medium capitalize transition-colors ${
-                      pref.palette === p
+                    key={palette.id}
+                    onClick={() => setPref({ palette: palette.id })}
+                    className={`rounded-md border px-2 py-2 text-xs font-medium transition-colors ${
+                      pref.palette === palette.id
                         ? 'border-primary bg-primary/10 text-primary'
                         : 'border-border text-muted-foreground hover:bg-accent'
                     }`}
                   >
-                    {p}
+                    {palette.name}
                   </button>
                 ))}
               </div>

@@ -3,7 +3,21 @@ import type { ThemePreferences } from './theme-types'
 
 const preferenceSchema = z.object({
   appearance: z.enum(['light', 'dark', 'system']).optional(),
-  palette: z.enum(['aurora', 'nexus', 'paper', 'ocean', 'forest', 'sakura']).optional(),
+  palette: z.enum([
+    'aurora',
+    'nexus',
+    'paper',
+    'ocean',
+    'forest',
+    'sakura',
+    'amoled',
+    'midnight',
+    'sunset',
+    'nord',
+    'catppuccin',
+    'dracula',
+    'github-dark',
+  ]).optional(),
   contrast: z.enum(['normal', 'high']).optional(),
   density: z.enum(['comfortable', 'compact']).optional(),
   surfaceStyle: z.enum(['flat', 'soft', 'glass']).optional(),

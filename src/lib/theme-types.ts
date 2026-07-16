@@ -24,7 +24,20 @@
  */
 
 export type Appearance = 'light' | 'dark' | 'system'
-export type Palette = 'aurora' | 'nexus' | 'paper' | 'ocean' | 'forest' | 'sakura'
+export type Palette =
+  | 'aurora'
+  | 'nexus'
+  | 'paper'
+  | 'ocean'
+  | 'forest'
+  | 'sakura'
+  | 'amoled'
+  | 'midnight'
+  | 'sunset'
+  | 'nord'
+  | 'catppuccin'
+  | 'dracula'
+  | 'github-dark'
 export type Contrast = 'normal' | 'high'
 export type Density = 'comfortable' | 'compact'
 export type SurfaceStyle = 'flat' | 'soft' | 'glass'
@@ -34,7 +47,7 @@ export type MotionLevel = 'full' | 'reduced' | 'none'
 export interface ThemePreferences {
   /** Light / dark / follow-OS. */
   appearance: Appearance
-  /** One of the 6 palette families. */
+  /** One of the 13 palette families. */
   palette: Palette
   /** Normal or high-contrast override (works across ALL palettes). */
   contrast: Contrast
@@ -167,6 +180,87 @@ export const PALETTES: readonly PaletteMeta[] = [
       surface: 'oklch(0.998 0.004 350)',
       brand: 'oklch(0.55 0.18 340)',
       accent: 'oklch(0.60 0.12 290)',
+    },
+  },
+  {
+    id: 'amoled',
+    name: 'AMOLED Black',
+    description: 'Pure-black OLED-friendly canvas with vivid neon accents',
+    darkFirst: true,
+    swatches: {
+      canvas: 'oklch(0 0 0)',
+      surface: 'oklch(0.08 0 0)',
+      brand: 'oklch(0.75 0.22 250)',
+      accent: 'oklch(0.70 0.25 290)',
+    },
+  },
+  {
+    id: 'midnight',
+    name: 'Midnight Sky',
+    description: 'Deep navy night-sky calm with silver-blue accents',
+    darkFirst: true,
+    swatches: {
+      canvas: 'oklch(0.13 0.025 260)',
+      surface: 'oklch(0.21 0.032 264)',
+      brand: 'oklch(0.74 0.10 230)',
+      accent: 'oklch(0.70 0.13 215)',
+    },
+  },
+  {
+    id: 'sunset',
+    name: 'Sunset Glow',
+    description: 'Warm orange, pink, and purple gradient vibes',
+    swatches: {
+      canvas: 'oklch(0.97 0.018 70)',
+      surface: 'oklch(0.99 0.012 75)',
+      brand: 'oklch(0.65 0.18 35)',
+      accent: 'oklch(0.60 0.18 340)',
+    },
+  },
+  {
+    id: 'nord',
+    name: 'Nord Polar',
+    description: 'Classic Nord: frost blue, snow storm, polar night',
+    swatches: {
+      canvas: 'oklch(0.95 0.005 250)',
+      surface: 'oklch(0.97 0.004 250)',
+      brand: 'oklch(0.55 0.10 250)',
+      accent: 'oklch(0.72 0.10 215)',
+    },
+  },
+  {
+    id: 'catppuccin',
+    name: 'Catppuccin',
+    description: 'Popular Catppuccin Latte/Mocha with soft mauve accents',
+    swatches: {
+      canvas: 'oklch(0.94 0.005 290)',
+      surface: 'oklch(0.96 0.004 290)',
+      brand: 'oklch(0.55 0.22 305)',
+      accent: 'oklch(0.55 0.20 250)',
+    },
+  },
+  {
+    id: 'dracula',
+    name: 'Dracula',
+    description: 'Famous Dracula: dark purple, pink, green, and cyan',
+    darkFirst: true,
+    swatches: {
+      canvas: 'oklch(0.22 0.015 280)',
+      surface: 'oklch(0.30 0.015 280)',
+      brand: 'oklch(0.72 0.18 290)',
+      accent: 'oklch(0.70 0.22 340)',
+    },
+  },
+  {
+    id: 'github-dark',
+    name: 'GitHub Dark',
+    description: "GitHub's light + dark default with signature blue accents",
+    darkFirst: true,
+    swatches: {
+      canvas: 'oklch(0.14 0.015 260)',
+      surface: 'oklch(0.23 0.015 260)',
+      brand: 'oklch(0.65 0.18 250)',
+      accent: 'oklch(0.72 0.17 145)',
     },
   },
 ] as const
