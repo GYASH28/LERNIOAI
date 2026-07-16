@@ -1,0 +1,481 @@
+{
+  "subjectCode": "R23CI2603",
+  "subjectName": "Digital Techniques & Microcontroller",
+  "semester": 3,
+  "credits": 4,
+  "units": [
+    {
+      "number": 1,
+      "title": "Number Systems and Codes",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "number-systems",
+          "title": "Number Systems",
+          "durationMin": 15,
+          "difficulty": "medium",
+          "overview": "Number systems are the foundation of digital electronics. This lesson covers binary, octal, decimal, and hexadecimal number systems, their conversions, and arithmetic operations.",
+          "keyConcepts": [
+            "Decimal: Base-10, digits 0-9, used in everyday life",
+            "Binary: Base-2, digits 0-1, used in computers",
+            "Hexadecimal: Base-16, digits 0-9 and A-F, used in memory addressing",
+            "Octal: Base-8, digits 0-7, used in Unix file permissions"
+          ],
+          "formulas": [],
+          "tables": [],
+          "commonMistakes": [
+            "Confusing MSB (Most Significant Bit) with LSB — MSB is leftmost, LSB is rightmost"
+          ],
+          "examTips": [
+            "Practice conversions daily — they appear in every exam",
+            "For binary to hex, group from RIGHT to LEFT in groups of 4"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is the binary equivalent of decimal 25?",
+              "options": [
+                "11001",
+                "10011",
+                "11010",
+                "10101"
+              ],
+              "answer": 0,
+              "explanation": "25÷2=12 R1, 12÷2=6 R0, 6÷2=3 R0, 3÷2=1 R1, 1÷2=0 R1. Reading bottom-up: 11001"
+            }
+          ],
+          "objectives": [
+            "Understand the key concepts of Number Systems",
+            "Apply Number Systems principles in practical scenarios",
+            "Prepare for exam questions on Number Systems"
+          ],
+          "prerequisites": [
+            "Basic understanding of computer systems"
+          ],
+          "theory": "## Introduction\n\nA number system is a mathematical notation for representing numbers using a set of digits. In digital electronics, we use different number systems to represent and process information.\n\n## Types of Number Systems\n\n1. **Decimal (Base-10)**: Uses digits 0-9. Example: 254 = 2×10² + 5×10¹ + 4×10⁰\n2. **Binary (Base-2)**: Uses digits 0 and 1. Example: 1011 = 1×2³ + 0×2² + 1×2¹ + 1×2⁰ = 11\n3. **Octal (Base-8)**: Uses digits 0-7. Example: 17 = 1×8¹ + 7×8⁰ = 15\n4. **Hexadecimal (Base-16)**: Uses digits 0-9 and A-F. Example: 2F = 2×16¹ + 15×16⁰ = 47\n\n## Conversions\n\n**Decimal to Binary**: Divide by 2, collect remainders in reverse order.\nExample: 25 ÷ 2 = 12 R1, 12 ÷ 2 = 6 R0, 6 ÷ 2 = 3 R0, 3 ÷ 2 = 1 R1, 1 ÷ 2 = 0 R1 → 11001\n\n**Binary to Hexadecimal**: Group binary digits in groups of 4 from right, convert each group.\nExample: 11001011 → 1100 1011 → C B → CB",
+          "analogies": [],
+          "flowcharts": [],
+          "mindMaps": [],
+          "complexity": null,
+          "workedExamples": [
+            {
+              "title": "Decimal to Hexadecimal",
+              "problem": "Convert 255 to hexadecimal.",
+              "solution": "255 ÷ 16 = 15 remainder 15. 15 ÷ 16 = 0 remainder 15. Reading bottom-up: FF",
+              "explanation": "15 in hex is F, so 255 decimal = FF hexadecimal."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "What is the base of hexadecimal number system?",
+              "modelAnswer": "Base-16. It uses 16 digits: 0-9 and A-F where A=10, B=11, C=12, D=13, E=14, F=15."
+            }
+          ],
+          "interviewQuestions": [],
+          "examQuestions": [],
+          "revisionSummary": "## Introduction\n\nA number system is a mathematical notation for representing numbers using a set of digits. In digital electronics, we use different number systems to represent and process information...",
+          "cheatSheet": [
+            "Decimal",
+            "Binary",
+            "Hexadecimal",
+            "Octal"
+          ],
+          "mnemonics": [],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always verify conversions by converting back to the original base."
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "Convert 42 to binary.",
+              "back": "101010. 42÷2=21 R0, 21÷2=10 R1, 10÷2=5 R0, 5÷2=2 R1, 2÷2=1 R0, 1÷2=0 R1. Read remainders bottom-up: 101010",
+              "hint": "Divide by 2 repeatedly"
+            }
+          ],
+          "aiSummaries": [],
+          "recommendedNextLessons": []
+        },
+        {
+          "slug": "logic-gates",
+          "title": "Logic Gates",
+          "durationMin": 15,
+          "difficulty": "medium",
+          "overview": "Logic gates are the building blocks of digital circuits. This lesson covers AND, OR, NOT, NAND, NOR, XOR, and XNOR gates, their truth tables, and applications.",
+          "keyConcepts": [
+            "AND: Output 1 only if ALL inputs are 1",
+            "OR: Output 1 if ANY input is 1",
+            "NOT: Inverts the input (0→1, 1→0)",
+            "NAND: Universal gate — AND + NOT, output 0 only if all inputs 1",
+            "XOR: Output 1 if inputs are different — used in adders"
+          ],
+          "formulas": [],
+          "tables": [],
+          "commonMistakes": [
+            "Forgetting that XOR of two 1s gives 0, not 1"
+          ],
+          "examTips": [
+            "Memorize truth tables for all 7 gates — they appear in every exam",
+            "NAND is the most commonly used gate in IC fabrication"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which gate outputs 1 only when all inputs are 1?",
+              "options": [
+                "OR",
+                "AND",
+                "NOT",
+                "XOR"
+              ],
+              "answer": 1,
+              "explanation": "AND gate outputs 1 only when ALL inputs are 1. Otherwise output is 0."
+            }
+          ],
+          "objectives": [
+            "Understand the key concepts of Logic Gates",
+            "Apply Logic Gates principles in practical scenarios",
+            "Prepare for exam questions on Logic Gates"
+          ],
+          "prerequisites": [
+            "Basic understanding of computer systems"
+          ],
+          "theory": "## Introduction\n\nLogic gates are electronic circuits that perform boolean operations on one or more binary inputs to produce a single binary output.\n\n## Basic Logic Gates\n\n1. **AND Gate**: Output is 1 only when ALL inputs are 1. Symbol: ·\n   - Truth table: 0·0=0, 0·1=0, 1·0=0, 1·1=1\n\n2. **OR Gate**: Output is 1 when ANY input is 1. Symbol: +\n   - Truth table: 0+0=0, 0+1=1, 1+0=1, 1+1=1\n\n3. **NOT Gate (Inverter)**: Output is the complement of input. Symbol: ‾\n   - Truth table: 0→1, 1→0\n\n## Universal Gates\n\n4. **NAND Gate**: AND followed by NOT. Output is 0 only when ALL inputs are 1.\n5. **NOR Gate**: OR followed by NOT. Output is 1 only when ALL inputs are 0.\n\nNAND and NOR are called universal gates because any logic function can be implemented using only NAND or only NOR gates.\n\n## Derived Gates\n\n6. **XOR (Exclusive OR)**: Output is 1 when inputs are different. Used in adders and parity checks.\n7. **XNOR (Exclusive NOR)**: Output is 1 when inputs are same. Used in comparators.",
+          "analogies": [],
+          "flowcharts": [],
+          "mindMaps": [],
+          "complexity": null,
+          "workedExamples": [
+            {
+              "title": "Implementing NOT using NAND",
+              "problem": "Implement a NOT gate using only NAND gates.",
+              "solution": "Connect both inputs of a NAND gate together. NAND(A, A) = NOT(A AND A) = NOT(A).",
+              "explanation": "When both inputs are the same, AND gives the input itself, and NAND inverts it."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "What is the difference between XOR and OR gate?",
+              "modelAnswer": "OR gate outputs 1 when any input is 1 (including both). XOR outputs 1 only when inputs are different — when both inputs are 1, XOR outputs 0 but OR outputs 1."
+            }
+          ],
+          "interviewQuestions": [],
+          "examQuestions": [],
+          "revisionSummary": "## Introduction\n\nLogic gates are electronic circuits that perform boolean operations on one or more binary inputs to produce a single binary output.\n\n## Basic Logic Gates\n\n1. **AND Gate**: Output is 1...",
+          "cheatSheet": [
+            "AND",
+            "OR",
+            "NOT",
+            "NAND",
+            "XOR"
+          ],
+          "mnemonics": [],
+          "callouts": [
+            {
+              "type": "note",
+              "content": "NAND and NOR gates are called universal gates because any boolean function can be implemented using only NAND or only NOR gates."
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is a universal gate?",
+              "back": "A gate that can implement any logic function. NAND and NOR are universal gates.",
+              "hint": "Think: which gates can build ALL other gates?"
+            }
+          ],
+          "aiSummaries": [],
+          "recommendedNextLessons": []
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Combinational and Sequential Circuits",
+      "weightage": 25,
+      "lessons": [
+        {
+          "slug": "combinational-circuits",
+          "title": "Combinational Circuits",
+          "durationMin": 18,
+          "difficulty": "hard",
+          "overview": "Combinational circuits produce outputs based only on current inputs. This lesson covers adders, subtractors, multiplexers, demultiplexers, encoders, and decoders.",
+          "keyConcepts": [
+            "Half Adder: Sum = A⊕B, Carry = A·B",
+            "Full Adder: Adds 3 bits (A, B, Cin) — Sum = A⊕B⊕Cin",
+            "Multiplexer: Data selector — routes 1 of N inputs to output",
+            "Decoder: Converts binary code to 2^n output lines",
+            "Encoder: Opposite of decoder — converts 2^n inputs to n-bit code"
+          ],
+          "formulas": [],
+          "tables": [],
+          "commonMistakes": [
+            "Confusing encoder with decoder — encoder has many inputs few outputs, decoder has few inputs many outputs"
+          ],
+          "examTips": [
+            "Remember: MUX = many inputs, one output. DEMUX = one input, many outputs",
+            "Full adder truth table has 8 rows (3 inputs)"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "How many select lines does a 8:1 multiplexer need?",
+              "options": [
+                "2",
+                "3",
+                "4",
+                "8"
+              ],
+              "answer": 1,
+              "explanation": "A MUX needs log₂(N) select lines. For 8 inputs: log₂(8) = 3 select lines."
+            }
+          ],
+          "objectives": [
+            "Understand the key concepts of Combinational Circuits",
+            "Apply Combinational Circuits principles in practical scenarios",
+            "Prepare for exam questions on Combinational Circuits"
+          ],
+          "prerequisites": [
+            "Basic understanding of computer systems"
+          ],
+          "theory": "## Introduction\n\nCombinational circuits are digital circuits whose output depends only on the current input, not on any previous inputs. They have no memory.\n\n## Types of Combinational Circuits\n\n1. **Half Adder**: Adds two 1-bit numbers. Outputs: Sum = A XOR B, Carry = A AND B\n\n2. **Full Adder**: Adds three 1-bit numbers (A, B, Carry-in). Outputs: Sum = A XOR B XOR Cin, Carry = (A AND B) OR (Cin AND (A XOR B))\n\n3. **Multiplexer (MUX)**: Selects one of many inputs and routes it to a single output. A 4:1 MUX has 4 inputs, 2 select lines, 1 output.\n\n4. **Demultiplexer (DEMUX)**: Routes a single input to one of many outputs. Reverse of MUX.\n\n5. **Encoder**: Converts 2ⁿ input lines to n output lines. Priority encoder assigns priority to inputs.\n\n6. **Decoder**: Converts n input lines to 2ⁿ output lines. Used in memory address decoding.\n\n## Applications\n- Adders: Arithmetic circuits, ALU\n- MUX: Data routing, parallel-to-serial conversion\n- Decoder: Memory addressing, display driving (BCD to 7-segment)",
+          "analogies": [],
+          "flowcharts": [],
+          "mindMaps": [],
+          "complexity": null,
+          "workedExamples": [
+            {
+              "title": "4-bit Adder Design",
+              "problem": "Design a 4-bit adder using full adders.",
+              "solution": "Cascade 4 full adders. Connect A0-A3 and B0-B3 as inputs. Carry-out of each FA connects to Carry-in of the next. C0=0, C1=FA0 carry, C2=FA1 carry, C3=FA2 carry, C4=FA3 carry. Sum = S0-S3.",
+              "explanation": "This is called a ripple carry adder. The carry ripples from LSB to MSB. For faster addition, use a carry-lookahead adder."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 3,
+              "question": "Explain the working of a 4:1 multiplexer.",
+              "modelAnswer": "A 4:1 MUX has 4 data inputs (I0-I3), 2 select lines (S0, S1), and 1 output. The select lines choose which input appears at the output. When S1S0=00, output=I0. When S1S0=01, output=I1. When S1S0=10, output=I2. When S1S0=11, output=I3."
+            }
+          ],
+          "interviewQuestions": [],
+          "examQuestions": [],
+          "revisionSummary": "## Introduction\n\nCombinational circuits are digital circuits whose output depends only on the current input, not on any previous inputs. They have no memory.\n\n## Types of Combinational Circuits\n\n1. **...",
+          "cheatSheet": [
+            "Half Adder",
+            "Full Adder",
+            "Multiplexer",
+            "Decoder",
+            "Encoder"
+          ],
+          "mnemonics": [],
+          "callouts": [
+            {
+              "type": "tip",
+              "content": "A multiplexer is also called a \"data selector\" — it selects which input to route to the output."
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is the difference between a half adder and a full adder?",
+              "back": "Half adder adds 2 bits (A, B) producing Sum and Carry. Full adder adds 3 bits (A, B, Carry-in) producing Sum and Carry-out. Full adders are cascaded to build multi-bit adders.",
+              "hint": "Think about carry propagation"
+            }
+          ],
+          "aiSummaries": [],
+          "recommendedNextLessons": []
+        },
+        {
+          "slug": "flip-flops",
+          "title": "Flip-Flops and Counters",
+          "durationMin": 18,
+          "difficulty": "hard",
+          "overview": "Flip-flops are the basic memory elements in digital circuits. This lesson covers SR, JK, D, and T flip-flops, registers, and counters.",
+          "keyConcepts": [
+            "SR Flip-Flop: Set (S=1) and Reset (R=1). Invalid when S=R=1",
+            "JK Flip-Flop: J=Set, K=Reset, J=K=1 toggles. No invalid state",
+            "D Flip-Flop: Output follows D on clock edge — used for data storage",
+            "T Flip-Flop: Toggles output on clock edge — used in counters",
+            "Counter: Counts clock pulses — ripple (async) or synchronous"
+          ],
+          "formulas": [],
+          "tables": [],
+          "commonMistakes": [
+            "Forgetting that JK flip-flop when J=K=1 TOGGLES (not invalid like SR)"
+          ],
+          "examTips": [
+            "For Mod-N counter, use ⌈log₂(N)⌉ flip-flops",
+            "D flip-flop is the most commonly used in digital design"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "How many flip-flops are needed for a Mod-10 counter?",
+              "options": [
+                "3",
+                "4",
+                "5",
+                "10"
+              ],
+              "answer": 1,
+              "explanation": "A Mod-N counter needs ⌈log₂(N)⌉ flip-flops. For Mod-10: ⌈log₂(10)⌉ = 4 flip-flops."
+            }
+          ],
+          "objectives": [
+            "Understand the key concepts of Flip-Flops and Counters",
+            "Apply Flip-Flops and Counters principles in practical scenarios",
+            "Prepare for exam questions on Flip-Flops and Counters"
+          ],
+          "prerequisites": [
+            "Basic understanding of computer systems"
+          ],
+          "theory": "## Introduction\n\nFlip-flops are sequential circuits that store 1 bit of information. They have two stable states (SET and RESET) and can change state based on clock signals.\n\n## Types of Flip-Flops\n\n1. **SR Flip-Flop**: Set-Reset. S=1 sets output to 1, R=1 resets to 0. S=R=1 is invalid.\n\n2. **JK Flip-Flop**: Improved SR. J=K=1 toggles the output (no invalid state). J is set, K is reset.\n\n3. **D Flip-Flop (Data/Delay)**: Output follows input D on clock edge. Used for data storage.\n\n4. **T Flip-Flop (Toggle)**: T=1 toggles output on clock edge. Used in counters.\n\n## Registers\nA register is a group of flip-flops used to store multi-bit data.\n- **Shift Register**: Shifts data left or right on each clock pulse.\n- **Parallel Register**: Loads all bits simultaneously.\n\n## Counters\nCounters are sequential circuits that count clock pulses.\n- **Asynchronous (Ripple) Counter**: Each flip-flop triggers the next. Simple but slow.\n- **Synchronous Counter**: All flip-flops share the same clock. Fast but complex.\n- **Up Counter**: Counts 0,1,2,...,N-1,0\n- **Down Counter**: Counts N-1,N-2,...,1,0,N-1\n- **Modulo-N Counter**: Counts 0 to N-1 (a 3-bit counter is Mod-8).",
+          "analogies": [],
+          "flowcharts": [],
+          "mindMaps": [],
+          "complexity": null,
+          "workedExamples": [
+            {
+              "title": "Mod-5 Counter Design",
+              "problem": "Design a Mod-5 counter using JK flip-flops.",
+              "solution": "Need 3 JK flip-flops (2³=8 ≥ 5). Count 0-4 (000 to 100) then reset. Use NAND gate to detect state 101 (binary 5) and clear all flip-flops. When count reaches 5 (101), NAND(Q0, Q2) = 0 triggers CLR on all FFs, resetting to 000.",
+              "explanation": "This is a ripple counter with asynchronous clear. The counter counts 0,1,2,3,4,0,1,... — a Mod-5 counter."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 3,
+              "question": "Explain the difference between synchronous and asynchronous counters.",
+              "modelAnswer": "Asynchronous (ripple) counters have each flip-flop clocked by the previous flip-flop output — simple but slow due to ripple delay. Synchronous counters have all flip-flops share the same clock — faster but requires more logic gates."
+            }
+          ],
+          "interviewQuestions": [],
+          "examQuestions": [],
+          "revisionSummary": "## Introduction\n\nFlip-flops are sequential circuits that store 1 bit of information. They have two stable states (SET and RESET) and can change state based on clock signals.\n\n## Types of Flip-Flops\n\n1...",
+          "cheatSheet": [
+            "SR Flip-Flop",
+            "JK Flip-Flop",
+            "D Flip-Flop",
+            "T Flip-Flop",
+            "Counter"
+          ],
+          "mnemonics": [],
+          "callouts": [
+            {
+              "type": "warning",
+              "content": "SR flip-flop has an invalid state when S=R=1. JK flip-flop solves this by toggling instead."
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is the race-around condition in JK flip-flop?",
+              "back": "When J=K=1 and the clock is high (level-triggered), the output toggles continuously as long as the clock stays high. Solved by edge-triggering or Master-Slave configuration.",
+              "hint": "Think about what happens when clock stays HIGH for a long time"
+            }
+          ],
+          "aiSummaries": [],
+          "recommendedNextLessons": []
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Microcontroller Architecture",
+      "weightage": 25,
+      "lessons": [
+        {
+          "slug": "8051-architecture",
+          "title": "8051 Microcontroller Architecture",
+          "durationMin": 20,
+          "difficulty": "hard",
+          "overview": "The 8051 is an 8-bit microcontroller with a simple but powerful architecture. This lesson covers its CPU, memory organization, I/O ports, and special function registers.",
+          "keyConcepts": [
+            "8051 is 8-bit Harvard architecture microcontroller",
+            "4KB ROM, 128 bytes RAM, 4 I/O ports (32 pins)",
+            "4 register banks (R0-R7) at 00H-1FH, selected by PSW bits RS0/RS1",
+            "SFRs at 80H-FFH: Acc, B, PSW, P0-P3, TCON, TMOD, etc.",
+            "Port 0 needs external pull-ups, Port 3 has special functions (RXD, TXD, INT0, INT1)"
+          ],
+          "formulas": [],
+          "tables": [],
+          "commonMistakes": [
+            "Confusing ROM (program memory) with RAM (data memory) — 8051 has Harvard architecture, they are separate"
+          ],
+          "examTips": [
+            "Remember: 8051 machine cycle = 12 clock periods",
+            "PSW register contains flags: CY (carry), AC (aux carry), OV (overflow), P (parity)"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "How many register banks are available in 8051?",
+              "options": [
+                "2",
+                "4",
+                "8",
+                "16"
+              ],
+              "answer": 1,
+              "explanation": "8051 has 4 register banks (Bank 0-3), each containing R0-R7 (8 registers). Banks are at addresses 00H-1FH. Selected by RS0 and RS1 bits in PSW."
+            }
+          ],
+          "objectives": [
+            "Understand the key concepts of 8051 Microcontroller Architecture",
+            "Apply 8051 Microcontroller Architecture principles in practical scenarios",
+            "Prepare for exam questions on 8051 Microcontroller Architecture"
+          ],
+          "prerequisites": [
+            "Basic understanding of computer systems"
+          ],
+          "theory": "## Introduction\n\nThe 8051 microcontroller, introduced by Intel in 1980, is one of the most popular microcontrollers. It is an 8-bit microcontroller with 4KB of ROM, 128 bytes of RAM, 4 I/O ports, 2 timers, and 1 serial port.\n\n## Architecture\n\n### CPU\n- 8-bit ALU (Arithmetic Logic Unit)\n- Program Counter (PC): 16-bit, addresses up to 64KB\n- Accumulator (A): 8-bit, used for all arithmetic and logic operations\n- B register: 8-bit, used in multiplication and division\n- PSW (Program Status Word): Contains flags (CY, AC, OV, P, F0, F1, RS0, RS1)\n\n### Memory Organization\n- **Harvard Architecture**: Separate program memory and data memory\n- **Program Memory (ROM)**: 4KB internal, expandable to 64KB external\n- **Data Memory (RAM)**: 128 bytes internal (00H-7FH), expandable to 64KB external\n- **Register Banks**: 4 banks of R0-R7 (8 bytes each) at 00H-1FH\n- **Bit-addressable RAM**: 16 bytes (20H-2FH) — 128 individually addressable bits\n- **SFR (Special Function Registers)**: 21 registers at 80H-FFH (Acc, B, PSW, P0-P3, TCON, TMOD, TH0, TL0, etc.)\n\n### I/O Ports\n- 4 ports × 8 pins = 32 I/O pins\n- Port 0: Multiplexed address/data bus (needs pull-up resistors)\n- Port 1: General purpose I/O\n- Port 2: High byte of external address bus\n- Port 3: Special functions (RXD, TXD, INT0, INT1, T0, T1, WR, RD)\n\n### Timers\n- Two 16-bit timers (Timer 0 and Timer 1)\n- Modes: 13-bit, 16-bit, 8-bit auto-reload, split timer\n\n### Serial Port\n- Full duplex UART\n- 4 modes of operation",
+          "analogies": [],
+          "flowcharts": [],
+          "mindMaps": [],
+          "complexity": null,
+          "workedExamples": [
+            {
+              "title": "Calculate Timer Delay",
+              "problem": "Calculate the delay generated by Timer 0 in Mode 1 (16-bit) with TH0=0, TL0=0 if the crystal frequency is 11.0592 MHz.",
+              "solution": "Machine cycle = 12 / 11.0592 MHz = 1.085 µs. Timer counts 65536 (0000 to FFFF) machine cycles. Delay = 65536 × 1.085 µs = 71.1 ms.",
+              "explanation": "In Mode 1, the timer is 16-bit. Starting from 0000H, it counts up to FFFFH (65536 counts) before overflowing. Each count takes 1 machine cycle = 12 clock periods."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 3,
+              "question": "Explain the memory organization of 8051 microcontroller.",
+              "modelAnswer": "8051 has Harvard architecture with separate program and data memory. Internal RAM (128 bytes) is divided into: Register Banks (00H-1FH: 4 banks of R0-R7), Bit-addressable RAM (20H-2FH: 128 bits), and General purpose RAM (30H-7FH). SFRs occupy 80H-FFH (Acc, B, PSW, P0-P3, TCON, TMOD, etc.). Program memory is 4KB internal ROM, expandable to 64KB."
+            }
+          ],
+          "interviewQuestions": [],
+          "examQuestions": [],
+          "revisionSummary": "## Introduction\n\nThe 8051 microcontroller, introduced by Intel in 1980, is one of the most popular microcontrollers. It is an 8-bit microcontroller with 4KB of ROM, 128 bytes of RAM, 4 I/O ports, 2 ti...",
+          "cheatSheet": [
+            "8051 is 8-bit Harvard architecture microcontroller",
+            "4KB ROM, 128 bytes RAM, 4 I/O ports (32 pins)",
+            "4 register banks (R0-R7) at 00H-1FH, selected by PSW bits RS0/RS1",
+            "SFRs at 80H-FFH",
+            "Port 0 needs external pull-ups, Port 3 has special functions (RXD, TXD, INT0, INT1)"
+          ],
+          "mnemonics": [],
+          "callouts": [
+            {
+              "type": "note",
+              "content": "8051 uses Harvard architecture — program memory and data memory are separate, allowing simultaneous access."
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is the difference between microprocessor and microcontroller?",
+              "back": "Microprocessor has only CPU on a single chip (needs external RAM, ROM, I/O). Microcontroller has CPU + RAM + ROM + I/O + timers all on a single chip.",
+              "hint": "Think: all-in-one vs just-the-brain"
+            }
+          ],
+          "aiSummaries": [],
+          "recommendedNextLessons": []
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "Key concepts for Digital Techniques & Microcontroller: See individual lesson summaries.",
+  "interviewBank": [],
+  "vivaBank": [],
+  "pyqBank": []
+}

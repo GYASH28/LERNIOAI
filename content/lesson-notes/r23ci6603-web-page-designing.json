@@ -1,0 +1,3023 @@
+{
+  "subjectCode": "R23CI6603",
+  "subjectName": "Web Page Designing",
+  "semester": 2,
+  "credits": 5,
+  "units": [
+    {
+      "number": 1,
+      "title": "HTML Basics",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "html-structure-and-tags",
+          "title": "HTML Structure and Tags",
+          "durationMin": 25,
+          "difficulty": "easy",
+          "overview": "HTML Structure and Tags is a key topic in Web Page Designing, covered under HTML Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "HTML Structure and Tags: Core concept in Web Page Designing",
+            "Definition: The formal definition and scope of html structure and tags",
+            "Key principles: Fundamental rules and properties",
+            "Working: How html structure and tags operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within HTML Structure and Tags",
+            "Relationship: connects to HTML Basics",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "HTML Structure and Tags — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in Web Page Designing"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding HTML Basics"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of HTML Structure and Tags",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is HTML Structure and Tags?",
+              "options": [
+                "A core concept in Web Page Designing",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "HTML Structure and Tags is a fundamental concept in Web Page Designing."
+            },
+            {
+              "question": "HTML Structure and Tags is studied under which unit?",
+              "options": [
+                "HTML Basics",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "HTML Structure and Tags belongs to the HTML Basics unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of HTML Structure and Tags?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "HTML Structure and Tags has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand HTML Structure and Tags and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on HTML Structure and Tags"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nHTML Structure and Tags is a key topic in Web Page Designing, covered under HTML Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- HTML Structure and Tags: Core concept in Web Page Designing\n- Definition: The formal definition and scope of html structure and tags\n- Key principles: Fundamental rules and properties\n- Working: How html structure and tags operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within HTML Structure and Tags`\n- `Relationship: connects to HTML Basics`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### HTML Structure and Tags — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Web Page Designing |\n| Importance | Essential for understanding HTML Basics |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nHTML Structure and Tags is a key topic in Web Page Designing, covered under HTML Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "HTML Structure and Tags — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "HTML Structure and Tags — Concept Map",
+              "content": "mindmap\n  root((HTML Structure and Tags))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is HTML Structure and Tags?",
+              "solution": "Correct answer: A core concept in Web Page Designing",
+              "explanation": "HTML Structure and Tags is a fundamental concept in Web Page Designing."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain HTML Structure and Tags with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define HTML Structure and Tags.",
+              "modelAnswer": "Core concept in Web Page Designing"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of html structure and tags"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within HTML Structure and Tags",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define HTML Structure and Tags.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within HTML Structure and Tags",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to HTML Basics",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain HTML Structure and Tags in detail with a diagram.",
+              "modelAnswer": "HTML Structure and Tags is a key topic in Web Page Designing, covered under HTML Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss HTML Structure and Tags with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — HTML Structure and Tags\n\n**One-line definition:** HTML Structure and Tags is a key topic in Web Page Designing, covered under HTML Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical appli\n\n**Key points:**\n\n- HTML Structure and Tags: Core concept in Web Page Designing\n- Definition: The formal definition and scope of html structure and tags\n- Key principles: Fundamental rules and properties\n- Working: How html structure and tags operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within HTML Structure and Tags`\n- `Relationship: connects to HTML Basics`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of HTML Structure and Tags\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "HTML Structure and Tags: Core concept in Web Page Designing",
+            "Definition: The formal definition and scope of html structure and tags",
+            "Key principles: Fundamental rules and properties",
+            "Working: How html structure and tags operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within HTML Structure and Tags",
+            "Formula: Relationship: connects to HTML Basics",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of HTML Structure and Tags"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "HTML Structure and Tags is a key topic in Web Page Designing, covered under HTML Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "HTML Structure and Tags: Core concept in Web Page Designing"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is HTML Structure and Tags?",
+              "back": "Core concept in Web Page Designing",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of html structure and tags",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How html structure and tags operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "HTML Structure and Tags is a key topic in Web Page Designing, covered under HTML Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "HTML Structure and Tags is a key topic in Web Page Designing, covered under HTML Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: HTML Structure and Tags: Core concept in Web Page Designing, Definition: The formal definition and scope of html structure and tags, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "forms-and-tables",
+            "css-selectors-and-properties"
+          ]
+        },
+        {
+          "slug": "forms-and-tables",
+          "title": "Forms and Tables",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "Forms and Tables is a key topic in Web Page Designing, covered under HTML Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "Forms and Tables: Core concept in Web Page Designing",
+            "Definition: The formal definition and scope of forms and tables",
+            "Key principles: Fundamental rules and properties",
+            "Working: How forms and tables operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within Forms and Tables",
+            "Relationship: connects to HTML Basics",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "Forms and Tables — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in Web Page Designing"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding HTML Basics"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of Forms and Tables",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is Forms and Tables?",
+              "options": [
+                "A core concept in Web Page Designing",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "Forms and Tables is a fundamental concept in Web Page Designing."
+            },
+            {
+              "question": "Forms and Tables is studied under which unit?",
+              "options": [
+                "HTML Basics",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "Forms and Tables belongs to the HTML Basics unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of Forms and Tables?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "Forms and Tables has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand Forms and Tables and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on Forms and Tables"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nForms and Tables is a key topic in Web Page Designing, covered under HTML Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Forms and Tables: Core concept in Web Page Designing\n- Definition: The formal definition and scope of forms and tables\n- Key principles: Fundamental rules and properties\n- Working: How forms and tables operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Forms and Tables`\n- `Relationship: connects to HTML Basics`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Forms and Tables — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Web Page Designing |\n| Importance | Essential for understanding HTML Basics |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nForms and Tables is a key topic in Web Page Designing, covered under HTML Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Forms and Tables — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Forms and Tables — Concept Map",
+              "content": "mindmap\n  root((Forms and Tables))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is Forms and Tables?",
+              "solution": "Correct answer: A core concept in Web Page Designing",
+              "explanation": "Forms and Tables is a fundamental concept in Web Page Designing."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Forms and Tables with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Forms and Tables.",
+              "modelAnswer": "Core concept in Web Page Designing"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of forms and tables"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Forms and Tables",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Forms and Tables.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Forms and Tables",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to HTML Basics",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Forms and Tables in detail with a diagram.",
+              "modelAnswer": "Forms and Tables is a key topic in Web Page Designing, covered under HTML Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Forms and Tables with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Forms and Tables\n\n**One-line definition:** Forms and Tables is a key topic in Web Page Designing, covered under HTML Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications\n\n**Key points:**\n\n- Forms and Tables: Core concept in Web Page Designing\n- Definition: The formal definition and scope of forms and tables\n- Key principles: Fundamental rules and properties\n- Working: How forms and tables operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within Forms and Tables`\n- `Relationship: connects to HTML Basics`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of Forms and Tables\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Forms and Tables: Core concept in Web Page Designing",
+            "Definition: The formal definition and scope of forms and tables",
+            "Key principles: Fundamental rules and properties",
+            "Working: How forms and tables operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within Forms and Tables",
+            "Formula: Relationship: connects to HTML Basics",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of Forms and Tables"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Forms and Tables is a key topic in Web Page Designing, covered under HTML Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "Forms and Tables: Core concept in Web Page Designing"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Forms and Tables?",
+              "back": "Core concept in Web Page Designing",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of forms and tables",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How forms and tables operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Forms and Tables is a key topic in Web Page Designing, covered under HTML Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "Forms and Tables is a key topic in Web Page Designing, covered under HTML Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Forms and Tables: Core concept in Web Page Designing, Definition: The formal definition and scope of forms and tables, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "css-selectors-and-properties",
+            "css-layouts-flexbox-and-grid"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "CSS",
+      "weightage": 25,
+      "lessons": [
+        {
+          "slug": "css-selectors-and-properties",
+          "title": "CSS Selectors and Properties",
+          "durationMin": 35,
+          "difficulty": "hard",
+          "overview": "CSS Selectors and Properties is a key topic in Web Page Designing, covered under CSS. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "CSS Selectors and Properties: Core concept in Web Page Designing",
+            "Definition: The formal definition and scope of css selectors and properties",
+            "Key principles: Fundamental rules and properties",
+            "Working: How css selectors and properties operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within CSS Selectors and Properties",
+            "Relationship: connects to CSS",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "CSS Selectors and Properties — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in Web Page Designing"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding CSS"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of CSS Selectors and Properties",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is CSS Selectors and Properties?",
+              "options": [
+                "A core concept in Web Page Designing",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "CSS Selectors and Properties is a fundamental concept in Web Page Designing."
+            },
+            {
+              "question": "CSS Selectors and Properties is studied under which unit?",
+              "options": [
+                "CSS",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "CSS Selectors and Properties belongs to the CSS unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of CSS Selectors and Properties?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "CSS Selectors and Properties has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand CSS Selectors and Properties and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on CSS Selectors and Properties"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nCSS Selectors and Properties is a key topic in Web Page Designing, covered under CSS. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- CSS Selectors and Properties: Core concept in Web Page Designing\n- Definition: The formal definition and scope of css selectors and properties\n- Key principles: Fundamental rules and properties\n- Working: How css selectors and properties operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within CSS Selectors and Properties`\n- `Relationship: connects to CSS`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### CSS Selectors and Properties — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Web Page Designing |\n| Importance | Essential for understanding CSS |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nCSS Selectors and Properties is a key topic in Web Page Designing, covered under CSS. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "CSS Selectors and Properties — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "CSS Selectors and Properties — Concept Map",
+              "content": "mindmap\n  root((CSS Selectors and Properties))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is CSS Selectors and Properties?",
+              "solution": "Correct answer: A core concept in Web Page Designing",
+              "explanation": "CSS Selectors and Properties is a fundamental concept in Web Page Designing."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain CSS Selectors and Properties with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define CSS Selectors and Properties.",
+              "modelAnswer": "Core concept in Web Page Designing"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of css selectors and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within CSS Selectors and Properties",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define CSS Selectors and Properties.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within CSS Selectors and Properties",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to CSS",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain CSS Selectors and Properties in detail with a diagram.",
+              "modelAnswer": "CSS Selectors and Properties is a key topic in Web Page Designing, covered under CSS. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss CSS Selectors and Properties with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — CSS Selectors and Properties\n\n**One-line definition:** CSS Selectors and Properties is a key topic in Web Page Designing, covered under CSS. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applicat\n\n**Key points:**\n\n- CSS Selectors and Properties: Core concept in Web Page Designing\n- Definition: The formal definition and scope of css selectors and properties\n- Key principles: Fundamental rules and properties\n- Working: How css selectors and properties operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within CSS Selectors and Properties`\n- `Relationship: connects to CSS`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of CSS Selectors and Properties\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "CSS Selectors and Properties: Core concept in Web Page Designing",
+            "Definition: The formal definition and scope of css selectors and properties",
+            "Key principles: Fundamental rules and properties",
+            "Working: How css selectors and properties operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within CSS Selectors and Properties",
+            "Formula: Relationship: connects to CSS",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of CSS Selectors and Properties"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "CSS Selectors and Properties is a key topic in Web Page Designing, covered under CSS. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "CSS Selectors and Properties: Core concept in Web Page Designing"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is CSS Selectors and Properties?",
+              "back": "Core concept in Web Page Designing",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of css selectors and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How css selectors and properties operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "CSS Selectors and Properties is a key topic in Web Page Designing, covered under CSS. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "CSS Selectors and Properties is a key topic in Web Page Designing, covered under CSS. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: CSS Selectors and Properties: Core concept in Web Page Designing, Definition: The formal definition and scope of css selectors and properties, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "css-layouts-flexbox-and-grid",
+            "javascript-syntax-and-variables"
+          ]
+        },
+        {
+          "slug": "css-layouts-flexbox-and-grid",
+          "title": "CSS Layouts — Flexbox and Grid",
+          "durationMin": 40,
+          "difficulty": "hard",
+          "overview": "CSS Layouts — Flexbox and Grid is a key topic in Web Page Designing, covered under CSS. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "CSS Layouts — Flexbox and Grid: Core concept in Web Page Designing",
+            "Definition: The formal definition and scope of css layouts — flexbox and grid",
+            "Key principles: Fundamental rules and properties",
+            "Working: How css layouts — flexbox and grid operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within CSS Layouts — Flexbox and Grid",
+            "Relationship: connects to CSS",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "CSS Layouts — Flexbox and Grid — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in Web Page Designing"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding CSS"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of CSS Layouts — Flexbox and Grid",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is CSS Layouts — Flexbox and Grid?",
+              "options": [
+                "A core concept in Web Page Designing",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "CSS Layouts — Flexbox and Grid is a fundamental concept in Web Page Designing."
+            },
+            {
+              "question": "CSS Layouts — Flexbox and Grid is studied under which unit?",
+              "options": [
+                "CSS",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "CSS Layouts — Flexbox and Grid belongs to the CSS unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of CSS Layouts — Flexbox and Grid?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "CSS Layouts — Flexbox and Grid has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand CSS Layouts — Flexbox and Grid and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on CSS Layouts — Flexbox and Grid"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nCSS Layouts — Flexbox and Grid is a key topic in Web Page Designing, covered under CSS. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- CSS Layouts — Flexbox and Grid: Core concept in Web Page Designing\n- Definition: The formal definition and scope of css layouts — flexbox and grid\n- Key principles: Fundamental rules and properties\n- Working: How css layouts — flexbox and grid operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within CSS Layouts — Flexbox and Grid`\n- `Relationship: connects to CSS`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### CSS Layouts — Flexbox and Grid — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Web Page Designing |\n| Importance | Essential for understanding CSS |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nCSS Layouts — Flexbox and Grid is a key topic in Web Page Designing, covered under CSS. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "CSS Layouts — Flexbox and Grid — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "CSS Layouts — Flexbox and Grid — Concept Map",
+              "content": "mindmap\n  root((CSS Layouts — Flexbox and Grid))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is CSS Layouts — Flexbox and Grid?",
+              "solution": "Correct answer: A core concept in Web Page Designing",
+              "explanation": "CSS Layouts — Flexbox and Grid is a fundamental concept in Web Page Designing."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain CSS Layouts — Flexbox and Grid with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define CSS Layouts — Flexbox and Grid.",
+              "modelAnswer": "Core concept in Web Page Designing"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of css layouts — flexbox and grid"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within CSS Layouts — Flexbox and Grid",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define CSS Layouts — Flexbox and Grid.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within CSS Layouts — Flexbox and Grid",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to CSS",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain CSS Layouts — Flexbox and Grid in detail with a diagram.",
+              "modelAnswer": "CSS Layouts — Flexbox and Grid is a key topic in Web Page Designing, covered under CSS. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss CSS Layouts — Flexbox and Grid with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — CSS Layouts — Flexbox and Grid\n\n**One-line definition:** CSS Layouts — Flexbox and Grid is a key topic in Web Page Designing, covered under CSS. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applic\n\n**Key points:**\n\n- CSS Layouts — Flexbox and Grid: Core concept in Web Page Designing\n- Definition: The formal definition and scope of css layouts — flexbox and grid\n- Key principles: Fundamental rules and properties\n- Working: How css layouts — flexbox and grid operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within CSS Layouts — Flexbox and Grid`\n- `Relationship: connects to CSS`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of CSS Layouts — Flexbox and Grid\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "CSS Layouts — Flexbox and Grid: Core concept in Web Page Designing",
+            "Definition: The formal definition and scope of css layouts — flexbox and grid",
+            "Key principles: Fundamental rules and properties",
+            "Working: How css layouts — flexbox and grid operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within CSS Layouts — Flexbox and Grid",
+            "Formula: Relationship: connects to CSS",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of CSS Layouts — Flexbox and Grid"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "CSS Layouts — Flexbox and Grid is a key topic in Web Page Designing, covered under CSS. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "CSS Layouts — Flexbox and Grid: Core concept in Web Page Designing"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is CSS Layouts — Flexbox and Grid?",
+              "back": "Core concept in Web Page Designing",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of css layouts — flexbox and grid",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How css layouts — flexbox and grid operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "CSS Layouts — Flexbox and Grid is a key topic in Web Page Designing, covered under CSS. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "CSS Layouts — Flexbox and Grid is a key topic in Web Page Designing, covered under CSS. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: CSS Layouts — Flexbox and Grid: Core concept in Web Page Designing, Definition: The formal definition and scope of css layouts — flexbox and grid, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "javascript-syntax-and-variables",
+            "dom-manipulation"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "JavaScript Basics",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "javascript-syntax-and-variables",
+          "title": "JavaScript Syntax and Variables",
+          "durationMin": 45,
+          "difficulty": "hard",
+          "overview": "JavaScript Syntax and Variables is a key topic in Web Page Designing, covered under JavaScript Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "JavaScript Syntax and Variables: Core concept in Web Page Designing",
+            "Definition: The formal definition and scope of javascript syntax and variables",
+            "Key principles: Fundamental rules and properties",
+            "Working: How javascript syntax and variables operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within JavaScript Syntax and Variables",
+            "Relationship: connects to JavaScript Basics",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "JavaScript Syntax and Variables — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in Web Page Designing"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding JavaScript Basics"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of JavaScript Syntax and Variables",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is JavaScript Syntax and Variables?",
+              "options": [
+                "A core concept in Web Page Designing",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "JavaScript Syntax and Variables is a fundamental concept in Web Page Designing."
+            },
+            {
+              "question": "JavaScript Syntax and Variables is studied under which unit?",
+              "options": [
+                "JavaScript Basics",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "JavaScript Syntax and Variables belongs to the JavaScript Basics unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of JavaScript Syntax and Variables?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "JavaScript Syntax and Variables has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand JavaScript Syntax and Variables and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on JavaScript Syntax and Variables"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nJavaScript Syntax and Variables is a key topic in Web Page Designing, covered under JavaScript Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- JavaScript Syntax and Variables: Core concept in Web Page Designing\n- Definition: The formal definition and scope of javascript syntax and variables\n- Key principles: Fundamental rules and properties\n- Working: How javascript syntax and variables operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within JavaScript Syntax and Variables`\n- `Relationship: connects to JavaScript Basics`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### JavaScript Syntax and Variables — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Web Page Designing |\n| Importance | Essential for understanding JavaScript Basics |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nJavaScript Syntax and Variables is a key topic in Web Page Designing, covered under JavaScript Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "JavaScript Syntax and Variables — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "JavaScript Syntax and Variables — Concept Map",
+              "content": "mindmap\n  root((JavaScript Syntax and Variable))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is JavaScript Syntax and Variables?",
+              "solution": "Correct answer: A core concept in Web Page Designing",
+              "explanation": "JavaScript Syntax and Variables is a fundamental concept in Web Page Designing."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain JavaScript Syntax and Variables with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define JavaScript Syntax and Variables.",
+              "modelAnswer": "Core concept in Web Page Designing"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of javascript syntax and variables"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within JavaScript Syntax and Variables",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define JavaScript Syntax and Variables.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within JavaScript Syntax and Variables",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to JavaScript Basics",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain JavaScript Syntax and Variables in detail with a diagram.",
+              "modelAnswer": "JavaScript Syntax and Variables is a key topic in Web Page Designing, covered under JavaScript Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss JavaScript Syntax and Variables with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — JavaScript Syntax and Variables\n\n**One-line definition:** JavaScript Syntax and Variables is a key topic in Web Page Designing, covered under JavaScript Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and p\n\n**Key points:**\n\n- JavaScript Syntax and Variables: Core concept in Web Page Designing\n- Definition: The formal definition and scope of javascript syntax and variables\n- Key principles: Fundamental rules and properties\n- Working: How javascript syntax and variables operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within JavaScript Syntax and Variables`\n- `Relationship: connects to JavaScript Basics`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of JavaScript Syntax and Variables\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "JavaScript Syntax and Variables: Core concept in Web Page Designing",
+            "Definition: The formal definition and scope of javascript syntax and variables",
+            "Key principles: Fundamental rules and properties",
+            "Working: How javascript syntax and variables operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within JavaScript Syntax and Variables",
+            "Formula: Relationship: connects to JavaScript Basics",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of JavaScript Syntax and Variables"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "JavaScript Syntax and Variables is a key topic in Web Page Designing, covered under JavaScript Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "JavaScript Syntax and Variables: Core concept in Web Page Designing"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is JavaScript Syntax and Variables?",
+              "back": "Core concept in Web Page Designing",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of javascript syntax and variables",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How javascript syntax and variables operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "JavaScript Syntax and Variables is a key topic in Web Page Designing, covered under JavaScript Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "JavaScript Syntax and Variables is a key topic in Web Page Designing, covered under JavaScript Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: JavaScript Syntax and Variables: Core concept in Web Page Designing, Definition: The formal definition and scope of javascript syntax and variables, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "dom-manipulation",
+            "responsive-web-design"
+          ]
+        },
+        {
+          "slug": "dom-manipulation",
+          "title": "DOM Manipulation",
+          "durationMin": 50,
+          "difficulty": "hard",
+          "overview": "DOM Manipulation is a key topic in Web Page Designing, covered under JavaScript Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "DOM Manipulation: Core concept in Web Page Designing",
+            "Definition: The formal definition and scope of dom manipulation",
+            "Key principles: Fundamental rules and properties",
+            "Working: How dom manipulation operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within DOM Manipulation",
+            "Relationship: connects to JavaScript Basics",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "DOM Manipulation — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in Web Page Designing"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding JavaScript Basics"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of DOM Manipulation",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is DOM Manipulation?",
+              "options": [
+                "A core concept in Web Page Designing",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "DOM Manipulation is a fundamental concept in Web Page Designing."
+            },
+            {
+              "question": "DOM Manipulation is studied under which unit?",
+              "options": [
+                "JavaScript Basics",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "DOM Manipulation belongs to the JavaScript Basics unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of DOM Manipulation?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "DOM Manipulation has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand DOM Manipulation and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on DOM Manipulation"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nDOM Manipulation is a key topic in Web Page Designing, covered under JavaScript Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- DOM Manipulation: Core concept in Web Page Designing\n- Definition: The formal definition and scope of dom manipulation\n- Key principles: Fundamental rules and properties\n- Working: How dom manipulation operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within DOM Manipulation`\n- `Relationship: connects to JavaScript Basics`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### DOM Manipulation — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Web Page Designing |\n| Importance | Essential for understanding JavaScript Basics |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nDOM Manipulation is a key topic in Web Page Designing, covered under JavaScript Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "DOM Manipulation — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "DOM Manipulation — Concept Map",
+              "content": "mindmap\n  root((DOM Manipulation))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is DOM Manipulation?",
+              "solution": "Correct answer: A core concept in Web Page Designing",
+              "explanation": "DOM Manipulation is a fundamental concept in Web Page Designing."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain DOM Manipulation with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define DOM Manipulation.",
+              "modelAnswer": "Core concept in Web Page Designing"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of dom manipulation"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within DOM Manipulation",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define DOM Manipulation.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within DOM Manipulation",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to JavaScript Basics",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain DOM Manipulation in detail with a diagram.",
+              "modelAnswer": "DOM Manipulation is a key topic in Web Page Designing, covered under JavaScript Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss DOM Manipulation with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — DOM Manipulation\n\n**One-line definition:** DOM Manipulation is a key topic in Web Page Designing, covered under JavaScript Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applic\n\n**Key points:**\n\n- DOM Manipulation: Core concept in Web Page Designing\n- Definition: The formal definition and scope of dom manipulation\n- Key principles: Fundamental rules and properties\n- Working: How dom manipulation operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within DOM Manipulation`\n- `Relationship: connects to JavaScript Basics`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of DOM Manipulation\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "DOM Manipulation: Core concept in Web Page Designing",
+            "Definition: The formal definition and scope of dom manipulation",
+            "Key principles: Fundamental rules and properties",
+            "Working: How dom manipulation operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within DOM Manipulation",
+            "Formula: Relationship: connects to JavaScript Basics",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of DOM Manipulation"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "DOM Manipulation is a key topic in Web Page Designing, covered under JavaScript Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "DOM Manipulation: Core concept in Web Page Designing"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is DOM Manipulation?",
+              "back": "Core concept in Web Page Designing",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of dom manipulation",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How dom manipulation operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "DOM Manipulation is a key topic in Web Page Designing, covered under JavaScript Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "DOM Manipulation is a key topic in Web Page Designing, covered under JavaScript Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: DOM Manipulation: Core concept in Web Page Designing, Definition: The formal definition and scope of dom manipulation, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "responsive-web-design",
+            "hosting-and-deployment"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Responsive Design",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "responsive-web-design",
+          "title": "Responsive Web Design",
+          "durationMin": 55,
+          "difficulty": "hard",
+          "overview": "Responsive Web Design is a key topic in Web Page Designing, covered under Responsive Design. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "Responsive Web Design: Core concept in Web Page Designing",
+            "Definition: The formal definition and scope of responsive web design",
+            "Key principles: Fundamental rules and properties",
+            "Working: How responsive web design operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within Responsive Web Design",
+            "Relationship: connects to Responsive Design",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "Responsive Web Design — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in Web Page Designing"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding Responsive Design"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of Responsive Web Design",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is Responsive Web Design?",
+              "options": [
+                "A core concept in Web Page Designing",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "Responsive Web Design is a fundamental concept in Web Page Designing."
+            },
+            {
+              "question": "Responsive Web Design is studied under which unit?",
+              "options": [
+                "Responsive Design",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "Responsive Web Design belongs to the Responsive Design unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of Responsive Web Design?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "Responsive Web Design has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand Responsive Web Design and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on Responsive Web Design"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nResponsive Web Design is a key topic in Web Page Designing, covered under Responsive Design. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Responsive Web Design: Core concept in Web Page Designing\n- Definition: The formal definition and scope of responsive web design\n- Key principles: Fundamental rules and properties\n- Working: How responsive web design operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Responsive Web Design`\n- `Relationship: connects to Responsive Design`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Responsive Web Design — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Web Page Designing |\n| Importance | Essential for understanding Responsive Design |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nResponsive Web Design is a key topic in Web Page Designing, covered under Responsive Design. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Responsive Web Design — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Responsive Web Design — Concept Map",
+              "content": "mindmap\n  root((Responsive Web Design))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is Responsive Web Design?",
+              "solution": "Correct answer: A core concept in Web Page Designing",
+              "explanation": "Responsive Web Design is a fundamental concept in Web Page Designing."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Responsive Web Design with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Responsive Web Design.",
+              "modelAnswer": "Core concept in Web Page Designing"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of responsive web design"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Responsive Web Design",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Responsive Web Design.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Responsive Web Design",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to Responsive Design",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Responsive Web Design in detail with a diagram.",
+              "modelAnswer": "Responsive Web Design is a key topic in Web Page Designing, covered under Responsive Design. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Responsive Web Design with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Responsive Web Design\n\n**One-line definition:** Responsive Web Design is a key topic in Web Page Designing, covered under Responsive Design. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical a\n\n**Key points:**\n\n- Responsive Web Design: Core concept in Web Page Designing\n- Definition: The formal definition and scope of responsive web design\n- Key principles: Fundamental rules and properties\n- Working: How responsive web design operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within Responsive Web Design`\n- `Relationship: connects to Responsive Design`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of Responsive Web Design\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Responsive Web Design: Core concept in Web Page Designing",
+            "Definition: The formal definition and scope of responsive web design",
+            "Key principles: Fundamental rules and properties",
+            "Working: How responsive web design operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within Responsive Web Design",
+            "Formula: Relationship: connects to Responsive Design",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of Responsive Web Design"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Responsive Web Design is a key topic in Web Page Designing, covered under Responsive Design. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "Responsive Web Design: Core concept in Web Page Designing"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Responsive Web Design?",
+              "back": "Core concept in Web Page Designing",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of responsive web design",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How responsive web design operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Responsive Web Design is a key topic in Web Page Designing, covered under Responsive Design. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "Responsive Web Design is a key topic in Web Page Designing, covered under Responsive Design. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Responsive Web Design: Core concept in Web Page Designing, Definition: The formal definition and scope of responsive web design, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "hosting-and-deployment"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Web Hosting",
+      "weightage": 15,
+      "lessons": [
+        {
+          "slug": "hosting-and-deployment",
+          "title": "Hosting and Deployment",
+          "durationMin": 60,
+          "difficulty": "hard",
+          "overview": "Hosting and Deployment is a key topic in Web Page Designing, covered under Web Hosting. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "Hosting and Deployment: Core concept in Web Page Designing",
+            "Definition: The formal definition and scope of hosting and deployment",
+            "Key principles: Fundamental rules and properties",
+            "Working: How hosting and deployment operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within Hosting and Deployment",
+            "Relationship: connects to Web Hosting",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "Hosting and Deployment — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in Web Page Designing"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding Web Hosting"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of Hosting and Deployment",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is Hosting and Deployment?",
+              "options": [
+                "A core concept in Web Page Designing",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "Hosting and Deployment is a fundamental concept in Web Page Designing."
+            },
+            {
+              "question": "Hosting and Deployment is studied under which unit?",
+              "options": [
+                "Web Hosting",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "Hosting and Deployment belongs to the Web Hosting unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of Hosting and Deployment?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "Hosting and Deployment has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand Hosting and Deployment and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on Hosting and Deployment"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nHosting and Deployment is a key topic in Web Page Designing, covered under Web Hosting. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Hosting and Deployment: Core concept in Web Page Designing\n- Definition: The formal definition and scope of hosting and deployment\n- Key principles: Fundamental rules and properties\n- Working: How hosting and deployment operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Hosting and Deployment`\n- `Relationship: connects to Web Hosting`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Hosting and Deployment — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Web Page Designing |\n| Importance | Essential for understanding Web Hosting |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nHosting and Deployment is a key topic in Web Page Designing, covered under Web Hosting. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Hosting and Deployment — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Hosting and Deployment — Concept Map",
+              "content": "mindmap\n  root((Hosting and Deployment))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is Hosting and Deployment?",
+              "solution": "Correct answer: A core concept in Web Page Designing",
+              "explanation": "Hosting and Deployment is a fundamental concept in Web Page Designing."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Hosting and Deployment with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Hosting and Deployment.",
+              "modelAnswer": "Core concept in Web Page Designing"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of hosting and deployment"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Hosting and Deployment",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Hosting and Deployment.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Hosting and Deployment",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to Web Hosting",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Hosting and Deployment in detail with a diagram.",
+              "modelAnswer": "Hosting and Deployment is a key topic in Web Page Designing, covered under Web Hosting. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Hosting and Deployment with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Hosting and Deployment\n\n**One-line definition:** Hosting and Deployment is a key topic in Web Page Designing, covered under Web Hosting. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applic\n\n**Key points:**\n\n- Hosting and Deployment: Core concept in Web Page Designing\n- Definition: The formal definition and scope of hosting and deployment\n- Key principles: Fundamental rules and properties\n- Working: How hosting and deployment operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within Hosting and Deployment`\n- `Relationship: connects to Web Hosting`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of Hosting and Deployment\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Hosting and Deployment: Core concept in Web Page Designing",
+            "Definition: The formal definition and scope of hosting and deployment",
+            "Key principles: Fundamental rules and properties",
+            "Working: How hosting and deployment operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within Hosting and Deployment",
+            "Formula: Relationship: connects to Web Hosting",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of Hosting and Deployment"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Hosting and Deployment is a key topic in Web Page Designing, covered under Web Hosting. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "Hosting and Deployment: Core concept in Web Page Designing"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Hosting and Deployment?",
+              "back": "Core concept in Web Page Designing",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of hosting and deployment",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How hosting and deployment operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Hosting and Deployment is a key topic in Web Page Designing, covered under Web Hosting. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "Hosting and Deployment is a key topic in Web Page Designing, covered under Web Hosting. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Hosting and Deployment: Core concept in Web Page Designing, Definition: The formal definition and scope of hosting and deployment, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": []
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "# Web Page Designing — Quick Revision\n\n**Subject code:** R23CP6403  \n**Semester:** 2  \n**Credits:** 5  \n\n## Unit 1: HTML Basics (20%)\n### HTML Structure and Tags\nHTML Structure and Tags is a key topic in Web Page Designing, covered under HTML Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n### Forms and Tables\nForms and Tables is a key topic in Web Page Designing, covered under HTML Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Unit 2: CSS (25%)\n### CSS Selectors and Properties\nCSS Selectors and Properties is a key topic in Web Page Designing, covered under CSS. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n### CSS Layouts — Flexbox and Grid\nCSS Layouts — Flexbox and Grid is a key topic in Web Page Designing, covered under CSS. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Unit 3: JavaScript Basics (20%)\n### JavaScript Syntax and Variables\nJavaScript Syntax and Variables is a key topic in Web Page Designing, covered under JavaScript Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n### DOM Manipulation\nDOM Manipulation is a key topic in Web Page Designing, covered under JavaScript Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Unit 4: Responsive Design (20%)\n### Responsive Web Design\nResponsive Web Design is a key topic in Web Page Designing, covered under Responsive Design. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Unit 5: Web Hosting (15%)\n### Hosting and Deployment\nHosting and Deployment is a key topic in Web Page Designing, covered under Web Hosting. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n",
+  "interviewBank": [
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within HTML Structure and Tags",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 10,
+      "question": "Explain the key concepts from this lesson with examples.",
+      "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+    },
+    {
+      "marks": 5,
+      "question": "What are the practical applications of this topic?",
+      "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within Forms and Tables",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within CSS Selectors and Properties",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within CSS Layouts — Flexbox and Grid",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within JavaScript Syntax and Variables",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within DOM Manipulation",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within Responsive Web Design",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within Hosting and Deployment",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    }
+  ],
+  "vivaBank": [
+    {
+      "marks": 2,
+      "question": "Define HTML Structure and Tags.",
+      "modelAnswer": "Core concept in Web Page Designing"
+    },
+    {
+      "marks": 2,
+      "question": "Define Definition.",
+      "modelAnswer": "The formal definition and scope of html structure and tags"
+    },
+    {
+      "marks": 2,
+      "question": "Define Key principles.",
+      "modelAnswer": "Fundamental rules and properties"
+    },
+    {
+      "marks": 2,
+      "question": "Define the main concept from this lesson.",
+      "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+    },
+    {
+      "marks": 2,
+      "question": "What is the practical importance of this topic?",
+      "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+    },
+    {
+      "marks": 2,
+      "question": "Define Forms and Tables.",
+      "modelAnswer": "Core concept in Web Page Designing"
+    },
+    {
+      "marks": 2,
+      "question": "Define CSS Selectors and Properties.",
+      "modelAnswer": "Core concept in Web Page Designing"
+    },
+    {
+      "marks": 2,
+      "question": "Define CSS Layouts — Flexbox and Grid.",
+      "modelAnswer": "Core concept in Web Page Designing"
+    },
+    {
+      "marks": 2,
+      "question": "Define JavaScript Syntax and Variables.",
+      "modelAnswer": "Core concept in Web Page Designing"
+    },
+    {
+      "marks": 2,
+      "question": "Define DOM Manipulation.",
+      "modelAnswer": "Core concept in Web Page Designing"
+    },
+    {
+      "marks": 2,
+      "question": "Define Responsive Web Design.",
+      "modelAnswer": "Core concept in Web Page Designing"
+    },
+    {
+      "marks": 2,
+      "question": "Define Hosting and Deployment.",
+      "modelAnswer": "Core concept in Web Page Designing"
+    }
+  ],
+  "pyqBank": [
+    {
+      "marks": 10,
+      "question": "Explain HTML Structure and Tags in detail with a diagram.",
+      "modelAnswer": "HTML Structure and Tags is a key topic in Web Page Designing, covered under HTML Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss HTML Structure and Tags with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Forms and Tables in detail with a diagram.",
+      "modelAnswer": "Forms and Tables is a key topic in Web Page Designing, covered under HTML Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Forms and Tables with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain CSS Selectors and Properties in detail with a diagram.",
+      "modelAnswer": "CSS Selectors and Properties is a key topic in Web Page Designing, covered under CSS. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss CSS Selectors and Properties with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain CSS Layouts — Flexbox and Grid in detail with a diagram.",
+      "modelAnswer": "CSS Layouts — Flexbox and Grid is a key topic in Web Page Designing, covered under CSS. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss CSS Layouts — Flexbox and Grid with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain JavaScript Syntax and Variables in detail with a diagram.",
+      "modelAnswer": "JavaScript Syntax and Variables is a key topic in Web Page Designing, covered under JavaScript Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss JavaScript Syntax and Variables with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    }
+  ]
+}

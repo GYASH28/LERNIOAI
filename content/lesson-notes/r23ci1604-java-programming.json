@@ -1,0 +1,2026 @@
+{
+  "subjectCode": "R23CI1604",
+  "subjectName": "Java Programming",
+  "semester": 4,
+  "credits": 4,
+  "units": [
+    {
+      "number": 1,
+      "title": "Java Basics",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "introduction-to-java",
+          "title": "Introduction to Java",
+          "durationMin": 25,
+          "difficulty": "easy",
+          "overview": "Java is a high-level, class-based, object-oriented programming language designed to have as few implementation dependencies as possible. Developed by James Gosling at Sun Microsystems in 1995, it follows the 'Write Once, Run Anywhere' (WORA) principle — compiled Java bytecode runs on any JVM.",
+          "keyConcepts": [
+            "Java: High-level, OOP, platform-independent language",
+            "JVM: Java Virtual Machine — runs bytecode",
+            "JRE: Java Runtime Environment (JVM + libraries)",
+            "JDK: Java Development Kit (JRE + compiler + tools)",
+            "Bytecode: Intermediate compiled code (.class files)",
+            "WORA: Write Once, Run Anywhere — JVM portability",
+            "Garbage Collector: Automatic memory management",
+            "Strongly typed: All variables have declared types"
+          ],
+          "formulas": [
+            "Source (.java) → javac → Bytecode (.class) → JVM → Execution",
+            "JDK = JRE + Development Tools (javac, jdb, etc.)",
+            "JRE = JVM + Core Libraries"
+          ],
+          "tables": [
+            {
+              "title": "JDK vs JRE vs JVM",
+              "headers": [
+                "Component",
+                "Contains",
+                "Purpose"
+              ],
+              "rows": [
+                [
+                  "JDK",
+                  "JRE + compiler + tools",
+                  "Development"
+                ],
+                [
+                  "JRE",
+                  "JVM + libraries",
+                  "Running Java apps"
+                ],
+                [
+                  "JVM",
+                  "Runtime engine",
+                  "Executes bytecode"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Confusing JDK (development) with JRE (runtime only)",
+            "Forgetting that Java is case-sensitive (String ≠ string)",
+            "Saving public class in a file with a different name",
+            "Missing the main() method signature exactly: public static void main(String[] args)"
+          ],
+          "examTips": [
+            "Always draw the source → bytecode → JVM pipeline",
+            "Mention WORA when asked about Java's key feature",
+            "State the exact main() signature if asked"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What does WORA stand for?",
+              "options": [
+                "Write Once Run Anywhere",
+                "Write Once Read Always",
+                "Work Once Rest Always",
+                "Write Organised Readable Apps"
+              ],
+              "answer": 0,
+              "explanation": "WORA — Write Once, Run Anywhere. Java bytecode runs on any platform with a JVM."
+            },
+            {
+              "question": "Which component executes Java bytecode?",
+              "options": [
+                "JDK",
+                "JRE",
+                "JVM",
+                "javac"
+              ],
+              "answer": 2,
+              "explanation": "JVM (Java Virtual Machine) executes the bytecode. JRE contains JVM + libraries."
+            },
+            {
+              "question": "What is the correct main() signature?",
+              "options": [
+                "public void main()",
+                "public static void main(String[] args)",
+                "static main()",
+                "public main(String args)"
+              ],
+              "answer": 1,
+              "explanation": "The exact signature is public static void main(String[] args)."
+            },
+            {
+              "question": "What does the garbage collector do?",
+              "options": [
+                "Cleans the screen",
+                "Frees unused memory automatically",
+                "Compiles code",
+                "Sorts objects"
+              ],
+              "answer": 1,
+              "explanation": "Garbage collector automatically frees memory occupied by objects no longer in use."
+            }
+          ],
+          "objectives": [
+            "Understand Java and explain its significance",
+            "Understand JVM and explain its significance",
+            "Understand JRE and explain its significance",
+            "Understand JDK and explain its significance",
+            "Understand Bytecode and explain its significance",
+            "Attempt the practice quiz and viva questions on Introduction to Java"
+          ],
+          "prerequisites": [
+            "Basic understanding of programming (loops, conditionals)",
+            "Familiarity with OOP concepts (class, object)",
+            "Knowledge of C/C++ syntax is helpful"
+          ],
+          "theory": "## Introduction\n\nJava is a high-level, class-based, object-oriented programming language designed to have as few implementation dependencies as possible. Developed by James Gosling at Sun Microsystems in 1995, it follows the 'Write Once, Run Anywhere' (WORA) principle — compiled Java bytecode runs on any JVM.\n## Key Concepts\n\n- Java: High-level, OOP, platform-independent language\n- JVM: Java Virtual Machine — runs bytecode\n- JRE: Java Runtime Environment (JVM + libraries)\n- JDK: Java Development Kit (JRE + compiler + tools)\n- Bytecode: Intermediate compiled code (.class files)\n- WORA: Write Once, Run Anywhere — JVM portability\n- Garbage Collector: Automatic memory management\n- Strongly typed: All variables have declared types\n\n## Important Formulas\n\n- `Source (.java) → javac → Bytecode (.class) → JVM → Execution`\n- `JDK = JRE + Development Tools (javac, jdb, etc.)`\n- `JRE = JVM + Core Libraries`\n\n## Comparison Tables\n\n### JDK vs JRE vs JVM\n\n| Component | Contains | Purpose |\n| --- | --- | --- |\n| JDK | JRE + compiler + tools | Development |\n| JRE | JVM + libraries | Running Java apps |\n| JVM | Runtime engine | Executes bytecode |\n\n\n## Summary\n\nJava is a high-level, class-based, object-oriented programming language designed to have as few implementation dependencies as possible. Developed by James Gosling at Sun Microsystems in 1995, it follows the 'Write Once, Run Anywhere' (WORA) principle — compiled Java bytecode runs on any JVM.",
+          "analogies": [
+            {
+              "scenario": "JVM like a universal translator",
+              "mapping": "Bytecode = Esperanto (universal intermediate language), JVM = local translator. Write code once, compile to bytecode, run on any OS that has a JVM."
+            },
+            {
+              "scenario": "Class like a cookie cutter",
+              "mapping": "Class = cookie cutter (the shape), Object = the cookie (an instance), new = the act of pressing the cutter into dough. One cutter, many cookies."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Introduction to Java — Process Flow",
+              "content": "flowchart LR\n    A[.java Source] -->|javac| B[.class Bytecode]\n    B -->|JVM| C[Native Code]\n    C --> D[Output]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Introduction to Java — Concept Map",
+              "content": "mindmap\n  root((Introduction to Java))\n    Basics\n      Syntax\n      Types\n      Operators\n    OOP\n      Class\n      Inheritance\n      Polymorphism\n    Collections\n      List\n      Set\n      Map\n    Advanced\n      Threads\n      Exceptions"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) primitive ops, O(n) for collections traversal",
+            "space": "O(1) for scalars, O(n) for collections"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What does WORA stand for?",
+              "solution": "Correct answer: Write Once Run Anywhere",
+              "explanation": "WORA — Write Once, Run Anywhere. Java bytecode runs on any platform with a JVM."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Introduction to Java with reference to the key concepts.",
+              "solution": "Always draw the source → bytecode → JVM pipeline → Mention WORA when asked about Java's key feature → State the exact main() signature if asked",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Java.",
+              "modelAnswer": "High-level, OOP, platform-independent language"
+            },
+            {
+              "marks": 2,
+              "question": "Define JVM.",
+              "modelAnswer": "Java Virtual Machine — runs bytecode"
+            },
+            {
+              "marks": 2,
+              "question": "Define JRE.",
+              "modelAnswer": "Java Runtime Environment (JVM + libraries)"
+            },
+            {
+              "marks": 2,
+              "question": "What is JVM?",
+              "modelAnswer": "Java Virtual Machine — the runtime engine that executes Java bytecode. It's what makes Java platform-independent."
+            },
+            {
+              "marks": 2,
+              "question": "Define a class in Java.",
+              "modelAnswer": "A class is a blueprint that defines the properties (fields) and behaviours (methods) of objects. Syntax: access class Name { ... }"
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Source (.java) → javac → Bytecode (.class) → JVM → Execution",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "What is the difference between abstract class and interface in Java 8+?",
+              "modelAnswer": "Abstract class: single inheritance, can have constructors, instance fields, concrete methods. Interface: multiple inheritance, no constructors (until Java 8), static constants, abstract + default + static methods. Use abstract class for 'is-a' with shared state, interface for 'can-do' contract."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between == and .equals()?",
+              "modelAnswer": "== compares references (memory addresses). .equals() compares contents (when overridden). For String: == may return false for two strings with the same content if they're different objects. Always use .equals() for value comparison."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Java.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define JVM.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Source (.java) → javac → Bytecode (.class) → JVM → Execution",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: JDK = JRE + Development Tools (javac, jdb, etc.)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Introduction to Java in detail with a diagram.",
+              "modelAnswer": "Java is a high-level, class-based, object-oriented programming language designed to have as few implementation dependencies as possible. Developed by James Gosling at Sun Microsystems in 1995, it follows the 'Write Once, Run Anywhere' (WORA) principle — compiled Java bytecode runs on any JVM."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Introduction to Java with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Introduction to Java\n\n**One-line definition:** Java is a high-level, class-based, object-oriented programming language designed to have as few implementation dependencies as possible. Developed by James Gosling at Sun Microsystems in 1995, it foll\n\n**Key points:**\n\n- Java: High-level, OOP, platform-independent language\n- JVM: Java Virtual Machine — runs bytecode\n- JRE: Java Runtime Environment (JVM + libraries)\n- JDK: Java Development Kit (JRE + compiler + tools)\n- Bytecode: Intermediate compiled code (.class files)\n\n**Important formulas:**\n\n- `Source (.java) → javac → Bytecode (.class) → JVM → Execution`\n- `JDK = JRE + Development Tools (javac, jdb, etc.)`\n- `JRE = JVM + Core Libraries`\n\n**Common mistake to avoid:** Confusing JDK (development) with JRE (runtime only)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Java: High-level, OOP, platform-independent language",
+            "JVM: Java Virtual Machine — runs bytecode",
+            "JRE: Java Runtime Environment (JVM + libraries)",
+            "JDK: Java Development Kit (JRE + compiler + tools)",
+            "Bytecode: Intermediate compiled code (.class files)",
+            "Formula: Source (.java) → javac → Bytecode (.class) → JVM → Execution",
+            "Formula: JDK = JRE + Development Tools (javac, jdb, etc.)",
+            "Formula: JRE = JVM + Core Libraries",
+            "public static void main(String[] args)",
+            "System.out.println();",
+            "List<T> list = new ArrayList<>();"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "JDK > JRE > JVM",
+              "expansion": "JDK contains JRE, JRE contains JVM",
+              "meaning": "The nesting: JDK = JRE + dev tools, JRE = JVM + libraries."
+            },
+            {
+              "phrase": "PIEA",
+              "expansion": "Polymorphism, Inheritance, Encapsulation, Abstraction",
+              "meaning": "The four OOP pillars."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always draw the source → bytecode → JVM pipeline"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Mention WORA when asked about Java's key feature"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing JDK (development) with JRE (runtime only)"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting that Java is case-sensitive (String ≠ string)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Java is a high-level, class-based, object-oriented programming language designed to have as few implementation dependencies as possible. Developed by James Gosling at Sun Microsystems in 1995, it follows the 'Write Once, Run Anywhere' (WORA) principle — compiled Java bytecode runs on any JVM."
+            },
+            {
+              "type": "definition",
+              "content": "Java: High-level, OOP, platform-independent language"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Java?",
+              "back": "High-level, OOP, platform-independent language",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is JVM?",
+              "back": "Java Virtual Machine — runs bytecode",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is JRE?",
+              "back": "Java Runtime Environment (JVM + libraries)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is JDK?",
+              "back": "Java Development Kit (JRE + compiler + tools)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Bytecode?",
+              "back": "Intermediate compiled code (.class files)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is WORA?",
+              "back": "Write Once, Run Anywhere — JVM portability",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Garbage Collector?",
+              "back": "Automatic memory management",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Strongly typed?",
+              "back": "All variables have declared types",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Java is a high-level, class-based, object-oriented programming language designed to have as few implementation dependencies as possible. Developed by James Gosling at Sun Microsystems in 1995, it follows the 'Write Once, Run Anywhere' (WORA) principle — compiled Java bytecode runs on any JVM."
+            },
+            {
+              "style": "detailed",
+              "content": "Java is a high-level, class-based, object-oriented programming language designed to have as few implementation dependencies as possible. Developed by James Gosling at Sun Microsystems in 1995, it follows the 'Write Once, Run Anywhere' (WORA) principle — compiled Java bytecode runs on any JVM.\n\nKey concepts: Java: High-level, OOP, platform-independent language, JVM: Java Virtual Machine — runs bytecode, JRE: Java Runtime Environment (JVM + libraries)."
+            }
+          ],
+          "recommendedNextLessons": [
+            "java-oop",
+            "exceptions-in-java"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "OOP in Java",
+      "weightage": 25,
+      "lessons": [
+        {
+          "slug": "java-oop",
+          "title": "Classes, Objects, and Inheritance",
+          "durationMin": 35,
+          "difficulty": "medium",
+          "overview": "Java is purely object-oriented (almost everything is an object). Classes are blueprints; objects are instances. Java supports single inheritance with classes and multiple inheritance with interfaces. The four OOP pillars — encapsulation, inheritance, polymorphism, abstraction — are first-class in Java.",
+          "keyConcepts": [
+            "Class: blueprint — class Dog { ... }",
+            "Object: instance — Dog d = new Dog();",
+            "Encapsulation: private fields + public getters/setters",
+            "Inheritance: class Dog extends Animal { ... }",
+            "Polymorphism: same method name, different behaviour (overriding/overloading)",
+            "Abstraction: abstract class or interface",
+            "Interface: contract — interface Drawable { void draw(); }",
+            "Access modifiers: public, protected, default (package), private"
+          ],
+          "formulas": [
+            "Class: [access] class Name [extends Parent] [implements Iface]",
+            "Constructor: same name as class, no return type",
+            "Override: @Override annotation (optional but recommended)",
+            "Interface: interface Name { abstract methods; default methods; }"
+          ],
+          "tables": [
+            {
+              "title": "Access modifiers",
+              "headers": [
+                "Modifier",
+                "Class",
+                "Package",
+                "Subclass",
+                "World"
+              ],
+              "rows": [
+                [
+                  "public",
+                  "✓",
+                  "✓",
+                  "✓",
+                  "✓"
+                ],
+                [
+                  "protected",
+                  "✓",
+                  "✓",
+                  "✓",
+                  "✗"
+                ],
+                [
+                  "default",
+                  "✓",
+                  "✓",
+                  "✗",
+                  "✗"
+                ],
+                [
+                  "private",
+                  "✓",
+                  "✗",
+                  "✗",
+                  "✗"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Forgetting that Java doesn't support multiple class inheritance (use interfaces)",
+            "Confusing overloading (same name, different params) with overriding (same signature in subclass)",
+            "Not calling super() explicitly when needed",
+            "Using == for object equality instead of .equals()"
+          ],
+          "examTips": [
+            "Always draw the class hierarchy when explaining inheritance",
+            "Mention that interfaces support multiple inheritance",
+            "Show @Override annotation in code examples"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which keyword implements inheritance?",
+              "options": [
+                "implements",
+                "extends",
+                "inherits",
+                "super"
+              ],
+              "answer": 1,
+              "explanation": "'extends' is used for class inheritance. 'implements' is for interfaces."
+            },
+            {
+              "question": "Which is NOT an OOP pillar?",
+              "options": [
+                "Encapsulation",
+                "Inheritance",
+                "Compilation",
+                "Polymorphism"
+              ],
+              "answer": 2,
+              "explanation": "The four OOP pillars are Encapsulation, Inheritance, Polymorphism, Abstraction. Compilation is separate."
+            },
+            {
+              "question": "Can a Java class extend multiple classes?",
+              "options": [
+                "Yes, always",
+                "No, only one",
+                "Yes, with interface",
+                "Only abstract classes"
+              ],
+              "answer": 1,
+              "explanation": "Java supports single class inheritance only. Multiple inheritance is via interfaces."
+            },
+            {
+              "question": "What does .equals() do?",
+              "options": [
+                "Compares references",
+                "Compares values",
+                "Compares types",
+                "Nothing"
+              ],
+              "answer": 1,
+              "explanation": ".equals() compares object contents (when overridden). == compares references."
+            }
+          ],
+          "objectives": [
+            "Understand Class and explain its significance",
+            "Understand Object and explain its significance",
+            "Understand Encapsulation and explain its significance",
+            "Understand Inheritance and explain its significance",
+            "Understand Polymorphism and explain its significance",
+            "Attempt the practice quiz and viva questions on Classes, Objects, and Inheritance"
+          ],
+          "prerequisites": [
+            "Basic understanding of programming (loops, conditionals)",
+            "Familiarity with OOP concepts (class, object)",
+            "Knowledge of C/C++ syntax is helpful",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nJava is purely object-oriented (almost everything is an object). Classes are blueprints; objects are instances. Java supports single inheritance with classes and multiple inheritance with interfaces. The four OOP pillars — encapsulation, inheritance, polymorphism, abstraction — are first-class in Java.\n## Key Concepts\n\n- Class: blueprint — class Dog { ... }\n- Object: instance — Dog d = new Dog();\n- Encapsulation: private fields + public getters/setters\n- Inheritance: class Dog extends Animal { ... }\n- Polymorphism: same method name, different behaviour (overriding/overloading)\n- Abstraction: abstract class or interface\n- Interface: contract — interface Drawable { void draw(); }\n- Access modifiers: public, protected, default (package), private\n\n## Important Formulas\n\n- `Class: [access] class Name [extends Parent] [implements Iface]`\n- `Constructor: same name as class, no return type`\n- `Override: @Override annotation (optional but recommended)`\n- `Interface: interface Name { abstract methods; default methods; }`\n\n## Comparison Tables\n\n### Access modifiers\n\n| Modifier | Class | Package | Subclass | World |\n| --- | --- | --- | --- | --- |\n| public | ✓ | ✓ | ✓ | ✓ |\n| protected | ✓ | ✓ | ✓ | ✗ |\n| default | ✓ | ✓ | ✗ | ✗ |\n| private | ✓ | ✗ | ✗ | ✗ |\n\n\n## Summary\n\nJava is purely object-oriented (almost everything is an object). Classes are blueprints; objects are instances. Java supports single inheritance with classes and multiple inheritance with interfaces. The four OOP pillars — encapsulation, inheritance, polymorphism, abstraction — are first-class in Java.",
+          "analogies": [
+            {
+              "scenario": "JVM like a universal translator",
+              "mapping": "Bytecode = Esperanto (universal intermediate language), JVM = local translator. Write code once, compile to bytecode, run on any OS that has a JVM."
+            },
+            {
+              "scenario": "Class like a cookie cutter",
+              "mapping": "Class = cookie cutter (the shape), Object = the cookie (an instance), new = the act of pressing the cutter into dough. One cutter, many cookies."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Classes, Objects, and Inheritance — Process Flow",
+              "content": "flowchart LR\n    A[.java Source] -->|javac| B[.class Bytecode]\n    B -->|JVM| C[Native Code]\n    C --> D[Output]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Classes, Objects, and Inheritance — Concept Map",
+              "content": "mindmap\n  root((Classes, Objects, and Inherita))\n    Basics\n      Syntax\n      Types\n      Operators\n    OOP\n      Class\n      Inheritance\n      Polymorphism\n    Collections\n      List\n      Set\n      Map\n    Advanced\n      Threads\n      Exceptions"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) primitive ops, O(n) for collections traversal",
+            "space": "O(1) for scalars, O(n) for collections"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "Which keyword implements inheritance?",
+              "solution": "Correct answer: extends",
+              "explanation": "'extends' is used for class inheritance. 'implements' is for interfaces."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Classes, Objects, and Inheritance with reference to the key concepts.",
+              "solution": "Always draw the class hierarchy when explaining inheritance → Mention that interfaces support multiple inheritance → Show @Override annotation in code examples",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Class.",
+              "modelAnswer": "blueprint — class Dog { ... }"
+            },
+            {
+              "marks": 2,
+              "question": "Define Object.",
+              "modelAnswer": "instance — Dog d = new Dog();"
+            },
+            {
+              "marks": 2,
+              "question": "Define Encapsulation.",
+              "modelAnswer": "private fields + public getters/setters"
+            },
+            {
+              "marks": 2,
+              "question": "What is JVM?",
+              "modelAnswer": "Java Virtual Machine — the runtime engine that executes Java bytecode. It's what makes Java platform-independent."
+            },
+            {
+              "marks": 2,
+              "question": "Define a class in Java.",
+              "modelAnswer": "A class is a blueprint that defines the properties (fields) and behaviours (methods) of objects. Syntax: access class Name { ... }"
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Class: [access] class Name [extends Parent] [implements Iface]",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "What is the difference between abstract class and interface in Java 8+?",
+              "modelAnswer": "Abstract class: single inheritance, can have constructors, instance fields, concrete methods. Interface: multiple inheritance, no constructors (until Java 8), static constants, abstract + default + static methods. Use abstract class for 'is-a' with shared state, interface for 'can-do' contract."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between == and .equals()?",
+              "modelAnswer": "== compares references (memory addresses). .equals() compares contents (when overridden). For String: == may return false for two strings with the same content if they're different objects. Always use .equals() for value comparison."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Class.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Object.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Class: [access] class Name [extends Parent] [implements Iface]",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Constructor: same name as class, no return type",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Classes, Objects, and Inheritance in detail with a diagram.",
+              "modelAnswer": "Java is purely object-oriented (almost everything is an object). Classes are blueprints; objects are instances. Java supports single inheritance with classes and multiple inheritance with interfaces. The four OOP pillars — encapsulation, inheritance, polymorphism, abstraction — are first-class in Java."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Classes, Objects, and Inheritance with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Classes, Objects, and Inheritance\n\n**One-line definition:** Java is purely object-oriented (almost everything is an object). Classes are blueprints; objects are instances. Java supports single inheritance with classes and multiple inheritance with interfaces. \n\n**Key points:**\n\n- Class: blueprint — class Dog { ... }\n- Object: instance — Dog d = new Dog();\n- Encapsulation: private fields + public getters/setters\n- Inheritance: class Dog extends Animal { ... }\n- Polymorphism: same method name, different behaviour (overriding/overloading)\n\n**Important formulas:**\n\n- `Class: [access] class Name [extends Parent] [implements Iface]`\n- `Constructor: same name as class, no return type`\n- `Override: @Override annotation (optional but recommended)`\n- `Interface: interface Name { abstract methods; default methods; }`\n\n**Common mistake to avoid:** Forgetting that Java doesn't support multiple class inheritance (use interfaces)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Class: blueprint — class Dog { ... }",
+            "Object: instance — Dog d = new Dog();",
+            "Encapsulation: private fields + public getters/setters",
+            "Inheritance: class Dog extends Animal { ... }",
+            "Polymorphism: same method name, different behaviour (overriding/overloading)",
+            "Formula: Class: [access] class Name [extends Parent] [implements Iface]",
+            "Formula: Constructor: same name as class, no return type",
+            "Formula: Override: @Override annotation (optional but recommended)",
+            "Formula: Interface: interface Name { abstract methods; default methods; }",
+            "public static void main(String[] args)",
+            "System.out.println();",
+            "List<T> list = new ArrayList<>();"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "JDK > JRE > JVM",
+              "expansion": "JDK contains JRE, JRE contains JVM",
+              "meaning": "The nesting: JDK = JRE + dev tools, JRE = JVM + libraries."
+            },
+            {
+              "phrase": "PIEA",
+              "expansion": "Polymorphism, Inheritance, Encapsulation, Abstraction",
+              "meaning": "The four OOP pillars."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always draw the class hierarchy when explaining inheritance"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Mention that interfaces support multiple inheritance"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting that Java doesn't support multiple class inheritance (use interfaces)"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing overloading (same name, different params) with overriding (same signature in subclass)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Java is purely object-oriented (almost everything is an object). Classes are blueprints; objects are instances. Java supports single inheritance with classes and multiple inheritance with interfaces. The four OOP pillars — encapsulation, inheritance, polymorphism, abstraction — are first-class in Ja..."
+            },
+            {
+              "type": "definition",
+              "content": "Class: blueprint — class Dog { ... }"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Class?",
+              "back": "blueprint — class Dog { ... }",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Object?",
+              "back": "instance — Dog d = new Dog();",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Encapsulation?",
+              "back": "private fields + public getters/setters",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Inheritance?",
+              "back": "class Dog extends Animal { ... }",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Polymorphism?",
+              "back": "same method name, different behaviour (overriding/overloading)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Abstraction?",
+              "back": "abstract class or interface",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Interface?",
+              "back": "contract — interface Drawable { void draw(); }",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Access modifiers?",
+              "back": "public, protected, default (package), private",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Java is purely object-oriented (almost everything is an object). Classes are blueprints; objects are instances. Java supports single inheritance with classes and multiple inheritance with interfaces. The four OOP pillars — encapsulation, inheritance, polymorphism, abstraction — are first-class in Ja"
+            },
+            {
+              "style": "detailed",
+              "content": "Java is purely object-oriented (almost everything is an object). Classes are blueprints; objects are instances. Java supports single inheritance with classes and multiple inheritance with interfaces. The four OOP pillars — encapsulation, inheritance, polymorphism, abstraction — are first-class in Java.\n\nKey concepts: Class: blueprint — class Dog { ... }, Object: instance — Dog d = new Dog();, Encapsulation: private fields + public getters/setters."
+            }
+          ],
+          "recommendedNextLessons": [
+            "exceptions-in-java",
+            "collections-framework"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Exception Handling",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "exceptions-in-java",
+          "title": "Exception Handling",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "Java exceptions are objects representing abnormal conditions during execution. The try/catch/finally construct handles them. Exceptions form a hierarchy: Throwable → Error (unchecked) / Exception → RuntimeException (unchecked) + others (checked).",
+          "keyConcepts": [
+            "Throwable: root of all errors and exceptions",
+            "Error: serious problems (OutOfMemoryError) — don't catch",
+            "Checked Exception: must be caught or declared (IOException)",
+            "Unchecked Exception: RuntimeException — not required to catch",
+            "try/catch/finally: standard handling pattern",
+            "throw: explicitly throw — throw new Exception()",
+            "throws: declare that a method may throw — void f() throws IOException",
+            "try-with-resources: auto-close AutoCloseable resources (Java 7+)"
+          ],
+          "formulas": [
+            "try { ... } catch (Type e) { ... } finally { ... }",
+            "throw new ExceptionType('message');",
+            "void method() throws ExceptionType { ... }",
+            "try (Resource r = ...) { ... } // auto-close"
+          ],
+          "tables": [
+            {
+              "title": "Checked vs Unchecked",
+              "headers": [
+                "Aspect",
+                "Checked",
+                "Unchecked"
+              ],
+              "rows": [
+                [
+                  "Extends",
+                  "Exception (not RuntimeException)",
+                  "RuntimeException"
+                ],
+                [
+                  "Checked at",
+                  "Compile time",
+                  "Runtime"
+                ],
+                [
+                  "Must catch?",
+                  "Yes (or declare)",
+                  "No"
+                ],
+                [
+                  "Example",
+                  "IOException, SQLException",
+                  "NullPointerException, ArithmeticException"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Catching Exception too broadly (hides bugs)",
+            "Swallowing exceptions (empty catch block)",
+            "Forgetting finally for resource cleanup (or use try-with-resources)",
+            "Throwing RuntimeException instead of specific types"
+          ],
+          "examTips": [
+            "Always classify an exception as checked or unchecked",
+            "Mention try-with-resources for AutoCloseable",
+            "Show the exception hierarchy: Throwable → Error/Exception"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which is a CHECKED exception?",
+              "options": [
+                "NullPointerException",
+                "IOException",
+                "ArithmeticException",
+                "ArrayIndexOutOfBoundsException"
+              ],
+              "answer": 1,
+              "explanation": "IOException is checked (must be caught or declared). The others extend RuntimeException."
+            },
+            {
+              "question": "What does the finally block do?",
+              "options": [
+                "Runs only on exception",
+                "Runs only on success",
+                "Always runs",
+                "Runs before try"
+              ],
+              "answer": 2,
+              "explanation": "finally always runs (even if return or exception)."
+            },
+            {
+              "question": "Which keyword declares that a method throws?",
+              "options": [
+                "throw",
+                "throws",
+                "catch",
+                "exception"
+              ],
+              "answer": 1,
+              "explanation": "'throws' declares exceptions in the method signature. 'throw' actually throws."
+            },
+            {
+              "question": "What is try-with-resources?",
+              "options": [
+                "A loop",
+                "Auto-closes AutoCloseable resources",
+                "Imports a class",
+                "A type of catch"
+              ],
+              "answer": 1,
+              "explanation": "try-with-resources (Java 7+) automatically closes any AutoCloseable resource declared in the try header."
+            }
+          ],
+          "objectives": [
+            "Understand Throwable and explain its significance",
+            "Understand Error and explain its significance",
+            "Understand Checked Exception and explain its significance",
+            "Understand Unchecked Exception and explain its significance",
+            "Understand try/catch/finally and explain its significance",
+            "Attempt the practice quiz and viva questions on Exception Handling"
+          ],
+          "prerequisites": [
+            "Basic understanding of programming (loops, conditionals)",
+            "Familiarity with OOP concepts (class, object)",
+            "Knowledge of C/C++ syntax is helpful",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nJava exceptions are objects representing abnormal conditions during execution. The try/catch/finally construct handles them. Exceptions form a hierarchy: Throwable → Error (unchecked) / Exception → RuntimeException (unchecked) + others (checked).\n## Key Concepts\n\n- Throwable: root of all errors and exceptions\n- Error: serious problems (OutOfMemoryError) — don't catch\n- Checked Exception: must be caught or declared (IOException)\n- Unchecked Exception: RuntimeException — not required to catch\n- try/catch/finally: standard handling pattern\n- throw: explicitly throw — throw new Exception()\n- throws: declare that a method may throw — void f() throws IOException\n- try-with-resources: auto-close AutoCloseable resources (Java 7+)\n\n## Important Formulas\n\n- `try { ... } catch (Type e) { ... } finally { ... }`\n- `throw new ExceptionType('message');`\n- `void method() throws ExceptionType { ... }`\n- `try (Resource r = ...) { ... } // auto-close`\n\n## Comparison Tables\n\n### Checked vs Unchecked\n\n| Aspect | Checked | Unchecked |\n| --- | --- | --- |\n| Extends | Exception (not RuntimeException) | RuntimeException |\n| Checked at | Compile time | Runtime |\n| Must catch? | Yes (or declare) | No |\n| Example | IOException, SQLException | NullPointerException, ArithmeticException |\n\n\n## Summary\n\nJava exceptions are objects representing abnormal conditions during execution. The try/catch/finally construct handles them. Exceptions form a hierarchy: Throwable → Error (unchecked) / Exception → RuntimeException (unchecked) + others (checked).",
+          "analogies": [
+            {
+              "scenario": "JVM like a universal translator",
+              "mapping": "Bytecode = Esperanto (universal intermediate language), JVM = local translator. Write code once, compile to bytecode, run on any OS that has a JVM."
+            },
+            {
+              "scenario": "Class like a cookie cutter",
+              "mapping": "Class = cookie cutter (the shape), Object = the cookie (an instance), new = the act of pressing the cutter into dough. One cutter, many cookies."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Exception Handling — Process Flow",
+              "content": "flowchart LR\n    A[.java Source] -->|javac| B[.class Bytecode]\n    B -->|JVM| C[Native Code]\n    C --> D[Output]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Exception Handling — Concept Map",
+              "content": "mindmap\n  root((Exception Handling))\n    Basics\n      Syntax\n      Types\n      Operators\n    OOP\n      Class\n      Inheritance\n      Polymorphism\n    Collections\n      List\n      Set\n      Map\n    Advanced\n      Threads\n      Exceptions"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) primitive ops, O(n) for collections traversal",
+            "space": "O(1) for scalars, O(n) for collections"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "Which is a CHECKED exception?",
+              "solution": "Correct answer: IOException",
+              "explanation": "IOException is checked (must be caught or declared). The others extend RuntimeException."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Exception Handling with reference to the key concepts.",
+              "solution": "Always classify an exception as checked or unchecked → Mention try-with-resources for AutoCloseable → Show the exception hierarchy: Throwable → Error/Exception",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Throwable.",
+              "modelAnswer": "root of all errors and exceptions"
+            },
+            {
+              "marks": 2,
+              "question": "Define Error.",
+              "modelAnswer": "serious problems (OutOfMemoryError) — don't catch"
+            },
+            {
+              "marks": 2,
+              "question": "Define Checked Exception.",
+              "modelAnswer": "must be caught or declared (IOException)"
+            },
+            {
+              "marks": 2,
+              "question": "What is JVM?",
+              "modelAnswer": "Java Virtual Machine — the runtime engine that executes Java bytecode. It's what makes Java platform-independent."
+            },
+            {
+              "marks": 2,
+              "question": "Define a class in Java.",
+              "modelAnswer": "A class is a blueprint that defines the properties (fields) and behaviours (methods) of objects. Syntax: access class Name { ... }"
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: try { ... } catch (Type e) { ... } finally { ... }",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "What is the difference between abstract class and interface in Java 8+?",
+              "modelAnswer": "Abstract class: single inheritance, can have constructors, instance fields, concrete methods. Interface: multiple inheritance, no constructors (until Java 8), static constants, abstract + default + static methods. Use abstract class for 'is-a' with shared state, interface for 'can-do' contract."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between == and .equals()?",
+              "modelAnswer": "== compares references (memory addresses). .equals() compares contents (when overridden). For String: == may return false for two strings with the same content if they're different objects. Always use .equals() for value comparison."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Throwable.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Error.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: try { ... } catch (Type e) { ... } finally { ... }",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: throw new ExceptionType('message');",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Exception Handling in detail with a diagram.",
+              "modelAnswer": "Java exceptions are objects representing abnormal conditions during execution. The try/catch/finally construct handles them. Exceptions form a hierarchy: Throwable → Error (unchecked) / Exception → RuntimeException (unchecked) + others (checked)."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Exception Handling with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Exception Handling\n\n**One-line definition:** Java exceptions are objects representing abnormal conditions during execution. The try/catch/finally construct handles them. Exceptions form a hierarchy: Throwable → Error (unchecked) / Exception → Ru\n\n**Key points:**\n\n- Throwable: root of all errors and exceptions\n- Error: serious problems (OutOfMemoryError) — don't catch\n- Checked Exception: must be caught or declared (IOException)\n- Unchecked Exception: RuntimeException — not required to catch\n- try/catch/finally: standard handling pattern\n\n**Important formulas:**\n\n- `try { ... } catch (Type e) { ... } finally { ... }`\n- `throw new ExceptionType('message');`\n- `void method() throws ExceptionType { ... }`\n- `try (Resource r = ...) { ... } // auto-close`\n\n**Common mistake to avoid:** Catching Exception too broadly (hides bugs)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Throwable: root of all errors and exceptions",
+            "Error: serious problems (OutOfMemoryError) — don't catch",
+            "Checked Exception: must be caught or declared (IOException)",
+            "Unchecked Exception: RuntimeException — not required to catch",
+            "try/catch/finally: standard handling pattern",
+            "Formula: try { ... } catch (Type e) { ... } finally { ... }",
+            "Formula: throw new ExceptionType('message');",
+            "Formula: void method() throws ExceptionType { ... }",
+            "Formula: try (Resource r = ...) { ... } // auto-close",
+            "public static void main(String[] args)",
+            "System.out.println();",
+            "List<T> list = new ArrayList<>();"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "JDK > JRE > JVM",
+              "expansion": "JDK contains JRE, JRE contains JVM",
+              "meaning": "The nesting: JDK = JRE + dev tools, JRE = JVM + libraries."
+            },
+            {
+              "phrase": "PIEA",
+              "expansion": "Polymorphism, Inheritance, Encapsulation, Abstraction",
+              "meaning": "The four OOP pillars."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always classify an exception as checked or unchecked"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Mention try-with-resources for AutoCloseable"
+            },
+            {
+              "type": "warning",
+              "content": "Catching Exception too broadly (hides bugs)"
+            },
+            {
+              "type": "warning",
+              "content": "Swallowing exceptions (empty catch block)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Java exceptions are objects representing abnormal conditions during execution. The try/catch/finally construct handles them. Exceptions form a hierarchy: Throwable → Error (unchecked) / Exception → RuntimeException (unchecked) + others (checked)."
+            },
+            {
+              "type": "definition",
+              "content": "Throwable: root of all errors and exceptions"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Throwable?",
+              "back": "root of all errors and exceptions",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Error?",
+              "back": "serious problems (OutOfMemoryError) — don't catch",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Checked Exception?",
+              "back": "must be caught or declared (IOException)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Unchecked Exception?",
+              "back": "RuntimeException — not required to catch",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is try/catch/finally?",
+              "back": "standard handling pattern",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is throw?",
+              "back": "explicitly throw — throw new Exception()",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is throws?",
+              "back": "declare that a method may throw — void f() throws IOException",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is try-with-resources?",
+              "back": "auto-close AutoCloseable resources (Java 7+)",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Java exceptions are objects representing abnormal conditions during execution. The try/catch/finally construct handles them. Exceptions form a hierarchy: Throwable → Error (unchecked) / Exception → RuntimeException (unchecked) + others (checked)."
+            },
+            {
+              "style": "detailed",
+              "content": "Java exceptions are objects representing abnormal conditions during execution. The try/catch/finally construct handles them. Exceptions form a hierarchy: Throwable → Error (unchecked) / Exception → RuntimeException (unchecked) + others (checked).\n\nKey concepts: Throwable: root of all errors and exceptions, Error: serious problems (OutOfMemoryError) — don't catch, Checked Exception: must be caught or declared (IOException)."
+            }
+          ],
+          "recommendedNextLessons": [
+            "collections-framework",
+            "multithreading-io"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Collections and Generics",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "collections-framework",
+          "title": "Collections Framework",
+          "durationMin": 35,
+          "difficulty": "hard",
+          "overview": "The Java Collections Framework (JCF) is a unified architecture for storing and manipulating groups of objects. Core interfaces: List (ArrayList, LinkedList), Set (HashSet, TreeSet), Map (HashMap, TreeMap), Queue (PriorityQueue). Generics enable type-safe collections.",
+          "keyConcepts": [
+            "Collection interface: root of the collection hierarchy",
+            "List: ordered, allows duplicates — ArrayList, LinkedList",
+            "Set: no duplicates — HashSet (unordered), TreeSet (sorted)",
+            "Map: key-value pairs — HashMap, TreeMap",
+            "Queue: FIFO — LinkedList, PriorityQueue",
+            "Generics: List<String> — type-safe, no casting",
+            "Iterator: traverse collections — iterator.hasNext(), iterator.next()",
+            "Comparable/Comparator: custom sorting"
+          ],
+          "formulas": [
+            "List<String> list = new ArrayList<>();",
+            "Map<K, V> map = new HashMap<>();",
+            "Diamond operator: new ArrayList<>(); (Java 7+)",
+            "for (Type x : collection) { ... } // enhanced for"
+          ],
+          "tables": [
+            {
+              "title": "Collection types",
+              "headers": [
+                "Interface",
+                "Implementations",
+                "Allows duplicates",
+                "Ordered"
+              ],
+              "rows": [
+                [
+                  "List",
+                  "ArrayList, LinkedList, Vector",
+                  "Yes",
+                  "Yes"
+                ],
+                [
+                  "Set",
+                  "HashSet, TreeSet, LinkedHashSet",
+                  "No",
+                  "No / Sorted / Insertion"
+                ],
+                [
+                  "Map",
+                  "HashMap, TreeMap, LinkedHashMap",
+                  "Keys: No",
+                  "No / Sorted / Insertion"
+                ],
+                [
+                  "Queue",
+                  "PriorityQueue, LinkedList",
+                  "Yes",
+                  "FIFO / Priority"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Using raw types (List instead of List<String>) — loses type safety",
+            "Modifying a collection while iterating (ConcurrentModificationException)",
+            "Confusing .equals() (contents) with == (reference)",
+            "Forgetting that TreeMap/TreeSet require Comparable elements"
+          ],
+          "examTips": [
+            "Always use generics for type safety",
+            "Draw the collection hierarchy (Collection → List/Set/Queue, Map separately)",
+            "Mention that Map is NOT part of the Collection interface"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which collection does NOT allow duplicates?",
+              "options": [
+                "ArrayList",
+                "LinkedList",
+                "HashSet",
+                "Vector"
+              ],
+              "answer": 2,
+              "explanation": "Set implementations (HashSet, TreeSet) don't allow duplicates."
+            },
+            {
+              "question": "What does generics provide?",
+              "options": [
+                "Type safety",
+                "Faster code",
+                "Smaller files",
+                "Better I/O"
+              ],
+              "answer": 0,
+              "explanation": "Generics (e.g., List<String>) provide compile-time type safety — no casting, no ClassCastException."
+            },
+            {
+              "question": "Which is part of the Collection interface?",
+              "options": [
+                "Map",
+                "HashMap",
+                "List",
+                "TreeMap"
+              ],
+              "answer": 2,
+              "explanation": "List extends Collection. Map is a separate root interface."
+            },
+            {
+              "question": "What is the diamond operator?",
+              "options": [
+                "<>",
+                "()",
+                "[]",
+                "{}"
+              ],
+              "answer": 0,
+              "explanation": "<> (Java 7+) lets the compiler infer the generic type from context."
+            }
+          ],
+          "objectives": [
+            "Understand Collection interface and explain its significance",
+            "Understand List and explain its significance",
+            "Understand Set and explain its significance",
+            "Understand Map and explain its significance",
+            "Understand Queue and explain its significance",
+            "Attempt the practice quiz and viva questions on Collections Framework"
+          ],
+          "prerequisites": [
+            "Basic understanding of programming (loops, conditionals)",
+            "Familiarity with OOP concepts (class, object)",
+            "Knowledge of C/C++ syntax is helpful",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nThe Java Collections Framework (JCF) is a unified architecture for storing and manipulating groups of objects. Core interfaces: List (ArrayList, LinkedList), Set (HashSet, TreeSet), Map (HashMap, TreeMap), Queue (PriorityQueue). Generics enable type-safe collections.\n## Key Concepts\n\n- Collection interface: root of the collection hierarchy\n- List: ordered, allows duplicates — ArrayList, LinkedList\n- Set: no duplicates — HashSet (unordered), TreeSet (sorted)\n- Map: key-value pairs — HashMap, TreeMap\n- Queue: FIFO — LinkedList, PriorityQueue\n- Generics: List<String> — type-safe, no casting\n- Iterator: traverse collections — iterator.hasNext(), iterator.next()\n- Comparable/Comparator: custom sorting\n\n## Important Formulas\n\n- `List<String> list = new ArrayList<>();`\n- `Map<K, V> map = new HashMap<>();`\n- `Diamond operator: new ArrayList<>(); (Java 7+)`\n- `for (Type x : collection) { ... } // enhanced for`\n\n## Comparison Tables\n\n### Collection types\n\n| Interface | Implementations | Allows duplicates | Ordered |\n| --- | --- | --- | --- |\n| List | ArrayList, LinkedList, Vector | Yes | Yes |\n| Set | HashSet, TreeSet, LinkedHashSet | No | No / Sorted / Insertion |\n| Map | HashMap, TreeMap, LinkedHashMap | Keys: No | No / Sorted / Insertion |\n| Queue | PriorityQueue, LinkedList | Yes | FIFO / Priority |\n\n\n## Summary\n\nThe Java Collections Framework (JCF) is a unified architecture for storing and manipulating groups of objects. Core interfaces: List (ArrayList, LinkedList), Set (HashSet, TreeSet), Map (HashMap, TreeMap), Queue (PriorityQueue). Generics enable type-safe collections.",
+          "analogies": [
+            {
+              "scenario": "JVM like a universal translator",
+              "mapping": "Bytecode = Esperanto (universal intermediate language), JVM = local translator. Write code once, compile to bytecode, run on any OS that has a JVM."
+            },
+            {
+              "scenario": "Class like a cookie cutter",
+              "mapping": "Class = cookie cutter (the shape), Object = the cookie (an instance), new = the act of pressing the cutter into dough. One cutter, many cookies."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Collections Framework — Process Flow",
+              "content": "flowchart LR\n    A[.java Source] -->|javac| B[.class Bytecode]\n    B -->|JVM| C[Native Code]\n    C --> D[Output]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Collections Framework — Concept Map",
+              "content": "mindmap\n  root((Collections Framework))\n    Basics\n      Syntax\n      Types\n      Operators\n    OOP\n      Class\n      Inheritance\n      Polymorphism\n    Collections\n      List\n      Set\n      Map\n    Advanced\n      Threads\n      Exceptions"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) primitive ops, O(n) for collections traversal",
+            "space": "O(1) for scalars, O(n) for collections"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "Which collection does NOT allow duplicates?",
+              "solution": "Correct answer: HashSet",
+              "explanation": "Set implementations (HashSet, TreeSet) don't allow duplicates."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Collections Framework with reference to the key concepts.",
+              "solution": "Always use generics for type safety → Draw the collection hierarchy (Collection → List/Set/Queue, Map separately) → Mention that Map is NOT part of the Collection interface",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Collection interface.",
+              "modelAnswer": "root of the collection hierarchy"
+            },
+            {
+              "marks": 2,
+              "question": "Define List.",
+              "modelAnswer": "ordered, allows duplicates — ArrayList, LinkedList"
+            },
+            {
+              "marks": 2,
+              "question": "Define Set.",
+              "modelAnswer": "no duplicates — HashSet (unordered), TreeSet (sorted)"
+            },
+            {
+              "marks": 2,
+              "question": "What is JVM?",
+              "modelAnswer": "Java Virtual Machine — the runtime engine that executes Java bytecode. It's what makes Java platform-independent."
+            },
+            {
+              "marks": 2,
+              "question": "Define a class in Java.",
+              "modelAnswer": "A class is a blueprint that defines the properties (fields) and behaviours (methods) of objects. Syntax: access class Name { ... }"
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: List<String> list = new ArrayList<>();",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "What is the difference between abstract class and interface in Java 8+?",
+              "modelAnswer": "Abstract class: single inheritance, can have constructors, instance fields, concrete methods. Interface: multiple inheritance, no constructors (until Java 8), static constants, abstract + default + static methods. Use abstract class for 'is-a' with shared state, interface for 'can-do' contract."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between == and .equals()?",
+              "modelAnswer": "== compares references (memory addresses). .equals() compares contents (when overridden). For String: == may return false for two strings with the same content if they're different objects. Always use .equals() for value comparison."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Collection interface.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define List.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: List<String> list = new ArrayList<>();",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Map<K, V> map = new HashMap<>();",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Collections Framework in detail with a diagram.",
+              "modelAnswer": "The Java Collections Framework (JCF) is a unified architecture for storing and manipulating groups of objects. Core interfaces: List (ArrayList, LinkedList), Set (HashSet, TreeSet), Map (HashMap, TreeMap), Queue (PriorityQueue). Generics enable type-safe collections."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Collections Framework with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Collections Framework\n\n**One-line definition:** The Java Collections Framework (JCF) is a unified architecture for storing and manipulating groups of objects. Core interfaces: List (ArrayList, LinkedList), Set (HashSet, TreeSet), Map (HashMap, Tree\n\n**Key points:**\n\n- Collection interface: root of the collection hierarchy\n- List: ordered, allows duplicates — ArrayList, LinkedList\n- Set: no duplicates — HashSet (unordered), TreeSet (sorted)\n- Map: key-value pairs — HashMap, TreeMap\n- Queue: FIFO — LinkedList, PriorityQueue\n\n**Important formulas:**\n\n- `List<String> list = new ArrayList<>();`\n- `Map<K, V> map = new HashMap<>();`\n- `Diamond operator: new ArrayList<>(); (Java 7+)`\n- `for (Type x : collection) { ... } // enhanced for`\n\n**Common mistake to avoid:** Using raw types (List instead of List<String>) — loses type safety\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Collection interface: root of the collection hierarchy",
+            "List: ordered, allows duplicates — ArrayList, LinkedList",
+            "Set: no duplicates — HashSet (unordered), TreeSet (sorted)",
+            "Map: key-value pairs — HashMap, TreeMap",
+            "Queue: FIFO — LinkedList, PriorityQueue",
+            "Formula: List<String> list = new ArrayList<>();",
+            "Formula: Map<K, V> map = new HashMap<>();",
+            "Formula: Diamond operator: new ArrayList<>(); (Java 7+)",
+            "Formula: for (Type x : collection) { ... } // enhanced for",
+            "public static void main(String[] args)",
+            "System.out.println();",
+            "List<T> list = new ArrayList<>();"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "JDK > JRE > JVM",
+              "expansion": "JDK contains JRE, JRE contains JVM",
+              "meaning": "The nesting: JDK = JRE + dev tools, JRE = JVM + libraries."
+            },
+            {
+              "phrase": "PIEA",
+              "expansion": "Polymorphism, Inheritance, Encapsulation, Abstraction",
+              "meaning": "The four OOP pillars."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always use generics for type safety"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw the collection hierarchy (Collection → List/Set/Queue, Map separately)"
+            },
+            {
+              "type": "warning",
+              "content": "Using raw types (List instead of List<String>) — loses type safety"
+            },
+            {
+              "type": "warning",
+              "content": "Modifying a collection while iterating (ConcurrentModificationException)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "The Java Collections Framework (JCF) is a unified architecture for storing and manipulating groups of objects. Core interfaces: List (ArrayList, LinkedList), Set (HashSet, TreeSet), Map (HashMap, TreeMap), Queue (PriorityQueue). Generics enable type-safe collections."
+            },
+            {
+              "type": "definition",
+              "content": "Collection interface: root of the collection hierarchy"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Collection interface?",
+              "back": "root of the collection hierarchy",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is List?",
+              "back": "ordered, allows duplicates — ArrayList, LinkedList",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Set?",
+              "back": "no duplicates — HashSet (unordered), TreeSet (sorted)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Map?",
+              "back": "key-value pairs — HashMap, TreeMap",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Queue?",
+              "back": "FIFO — LinkedList, PriorityQueue",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Generics?",
+              "back": "List<String> — type-safe, no casting",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Iterator?",
+              "back": "traverse collections — iterator.hasNext(), iterator.next()",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Comparable/Comparator?",
+              "back": "custom sorting",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "The Java Collections Framework (JCF) is a unified architecture for storing and manipulating groups of objects. Core interfaces: List (ArrayList, LinkedList), Set (HashSet, TreeSet), Map (HashMap, TreeMap), Queue (PriorityQueue). Generics enable type-safe collections."
+            },
+            {
+              "style": "detailed",
+              "content": "The Java Collections Framework (JCF) is a unified architecture for storing and manipulating groups of objects. Core interfaces: List (ArrayList, LinkedList), Set (HashSet, TreeSet), Map (HashMap, TreeMap), Queue (PriorityQueue). Generics enable type-safe collections.\n\nKey concepts: Collection interface: root of the collection hierarchy, List: ordered, allows duplicates — ArrayList, LinkedList, Set: no duplicates — HashSet (unordered), TreeSet (sorted)."
+            }
+          ],
+          "recommendedNextLessons": [
+            "multithreading-io"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Multithreading and I/O",
+      "weightage": 15,
+      "lessons": [
+        {
+          "slug": "multithreading-io",
+          "title": "Multithreading and I/O",
+          "durationMin": 35,
+          "difficulty": "hard",
+          "overview": "Java supports multithreading at the language level via the Thread class and Runnable interface. The java.io and java.nio packages provide file and stream I/O. Synchronization is achieved via synchronized blocks/methods.",
+          "keyConcepts": [
+            "Thread: lightweight process — class MyThread extends Thread",
+            "Runnable: functional interface — class MyTask implements Runnable",
+            "Thread lifecycle: New → Runnable → Running → Blocked → Dead",
+            "synchronized: only one thread can execute the block at a time",
+            "wait()/notify()/notifyAll(): inter-thread communication",
+            "InputStream/OutputStream: byte-based I/O",
+            "Reader/Writer: character-based I/O",
+            "BufferedReader/BufferedWriter: buffered for performance"
+          ],
+          "formulas": [
+            "Thread t = new Thread(runnable); t.start();",
+            "synchronized (lock) { ... } // mutual exclusion",
+            "public synchronized void method() { ... }",
+            "BufferedReader br = new BufferedReader(new FileReader('f.txt'));"
+          ],
+          "tables": [
+            {
+              "title": "Thread states",
+              "headers": [
+                "State",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "NEW",
+                  "Created but not started"
+                ],
+                [
+                  "RUNNABLE",
+                  "Started, eligible to run"
+                ],
+                [
+                  "BLOCKED",
+                  "Waiting for monitor lock"
+                ],
+                [
+                  "WAITING",
+                  "Waiting indefinitely for another thread"
+                ],
+                [
+                  "TIMED_WAITING",
+                  "Waiting for a specified time"
+                ],
+                [
+                  "TERMINATED",
+                  "Finished execution"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Calling run() instead of start() (run() runs in current thread)",
+            "Forgetting to synchronize shared mutable state",
+            "Catching InterruptedException without restoring the flag (Thread.currentThread().interrupt())",
+            "Not closing I/O streams (use try-with-resources)"
+          ],
+          "examTips": [
+            "Mention both ways to create a thread (extends Thread / implements Runnable)",
+            "Draw the thread lifecycle states",
+            "Show try-with-resources for I/O"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which method starts a thread?",
+              "options": [
+                "run()",
+                "start()",
+                "execute()",
+                "begin()"
+              ],
+              "answer": 1,
+              "explanation": "start() creates a new thread and calls run(). Calling run() directly runs in the current thread."
+            },
+            {
+              "question": "What does synchronized do?",
+              "options": [
+                "Speeds up code",
+                "Mutual exclusion",
+                "Creates a thread",
+                "Stops a thread"
+              ],
+              "answer": 1,
+              "explanation": "synchronized ensures only one thread executes the block/method at a time."
+            },
+            {
+              "question": "Which interface does Thread use for tasks?",
+              "options": [
+                "Callable",
+                "Runnable",
+                "Comparable",
+                "Serializable"
+              ],
+              "answer": 1,
+              "explanation": "Runnable is the standard functional interface for thread tasks. Callable (with Future) returns a value."
+            },
+            {
+              "question": "What is BufferedReader for?",
+              "options": [
+                "Binary I/O",
+                "Buffered character I/O for performance",
+                "Multithreading",
+                "Network I/O"
+              ],
+              "answer": 1,
+              "explanation": "BufferedReader wraps a Reader and buffers input, reducing I/O operations and improving performance."
+            }
+          ],
+          "objectives": [
+            "Understand Thread and explain its significance",
+            "Understand Runnable and explain its significance",
+            "Understand Thread lifecycle and explain its significance",
+            "Understand synchronized and explain its significance",
+            "Understand wait()/notify()/notifyAll() and explain its significance",
+            "Attempt the practice quiz and viva questions on Multithreading and I/O"
+          ],
+          "prerequisites": [
+            "Basic understanding of programming (loops, conditionals)",
+            "Familiarity with OOP concepts (class, object)",
+            "Knowledge of C/C++ syntax is helpful",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nJava supports multithreading at the language level via the Thread class and Runnable interface. The java.io and java.nio packages provide file and stream I/O. Synchronization is achieved via synchronized blocks/methods.\n## Key Concepts\n\n- Thread: lightweight process — class MyThread extends Thread\n- Runnable: functional interface — class MyTask implements Runnable\n- Thread lifecycle: New → Runnable → Running → Blocked → Dead\n- synchronized: only one thread can execute the block at a time\n- wait()/notify()/notifyAll(): inter-thread communication\n- InputStream/OutputStream: byte-based I/O\n- Reader/Writer: character-based I/O\n- BufferedReader/BufferedWriter: buffered for performance\n\n## Important Formulas\n\n- `Thread t = new Thread(runnable); t.start();`\n- `synchronized (lock) { ... } // mutual exclusion`\n- `public synchronized void method() { ... }`\n- `BufferedReader br = new BufferedReader(new FileReader('f.txt'));`\n\n## Comparison Tables\n\n### Thread states\n\n| State | Description |\n| --- | --- |\n| NEW | Created but not started |\n| RUNNABLE | Started, eligible to run |\n| BLOCKED | Waiting for monitor lock |\n| WAITING | Waiting indefinitely for another thread |\n| TIMED_WAITING | Waiting for a specified time |\n| TERMINATED | Finished execution |\n\n\n## Summary\n\nJava supports multithreading at the language level via the Thread class and Runnable interface. The java.io and java.nio packages provide file and stream I/O. Synchronization is achieved via synchronized blocks/methods.",
+          "analogies": [
+            {
+              "scenario": "JVM like a universal translator",
+              "mapping": "Bytecode = Esperanto (universal intermediate language), JVM = local translator. Write code once, compile to bytecode, run on any OS that has a JVM."
+            },
+            {
+              "scenario": "Class like a cookie cutter",
+              "mapping": "Class = cookie cutter (the shape), Object = the cookie (an instance), new = the act of pressing the cutter into dough. One cutter, many cookies."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Multithreading and I/O — Process Flow",
+              "content": "flowchart LR\n    A[.java Source] -->|javac| B[.class Bytecode]\n    B -->|JVM| C[Native Code]\n    C --> D[Output]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Multithreading and I/O — Concept Map",
+              "content": "mindmap\n  root((Multithreading and I/O))\n    Basics\n      Syntax\n      Types\n      Operators\n    OOP\n      Class\n      Inheritance\n      Polymorphism\n    Collections\n      List\n      Set\n      Map\n    Advanced\n      Threads\n      Exceptions"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) primitive ops, O(n) for collections traversal",
+            "space": "O(1) for scalars, O(n) for collections"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "Which method starts a thread?",
+              "solution": "Correct answer: start()",
+              "explanation": "start() creates a new thread and calls run(). Calling run() directly runs in the current thread."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Multithreading and I/O with reference to the key concepts.",
+              "solution": "Mention both ways to create a thread (extends Thread / implements Runnable) → Draw the thread lifecycle states → Show try-with-resources for I/O",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Thread.",
+              "modelAnswer": "lightweight process — class MyThread extends Thread"
+            },
+            {
+              "marks": 2,
+              "question": "Define Runnable.",
+              "modelAnswer": "functional interface — class MyTask implements Runnable"
+            },
+            {
+              "marks": 2,
+              "question": "Define Thread lifecycle.",
+              "modelAnswer": "New → Runnable → Running → Blocked → Dead"
+            },
+            {
+              "marks": 2,
+              "question": "What is JVM?",
+              "modelAnswer": "Java Virtual Machine — the runtime engine that executes Java bytecode. It's what makes Java platform-independent."
+            },
+            {
+              "marks": 2,
+              "question": "Define a class in Java.",
+              "modelAnswer": "A class is a blueprint that defines the properties (fields) and behaviours (methods) of objects. Syntax: access class Name { ... }"
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Thread t = new Thread(runnable); t.start();",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "What is the difference between abstract class and interface in Java 8+?",
+              "modelAnswer": "Abstract class: single inheritance, can have constructors, instance fields, concrete methods. Interface: multiple inheritance, no constructors (until Java 8), static constants, abstract + default + static methods. Use abstract class for 'is-a' with shared state, interface for 'can-do' contract."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between == and .equals()?",
+              "modelAnswer": "== compares references (memory addresses). .equals() compares contents (when overridden). For String: == may return false for two strings with the same content if they're different objects. Always use .equals() for value comparison."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Thread.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Runnable.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Thread t = new Thread(runnable); t.start();",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: synchronized (lock) { ... } // mutual exclusion",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Multithreading and I/O in detail with a diagram.",
+              "modelAnswer": "Java supports multithreading at the language level via the Thread class and Runnable interface. The java.io and java.nio packages provide file and stream I/O. Synchronization is achieved via synchronized blocks/methods."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Multithreading and I/O with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Multithreading and I/O\n\n**One-line definition:** Java supports multithreading at the language level via the Thread class and Runnable interface. The java.io and java.nio packages provide file and stream I/O. Synchronization is achieved via synchroni\n\n**Key points:**\n\n- Thread: lightweight process — class MyThread extends Thread\n- Runnable: functional interface — class MyTask implements Runnable\n- Thread lifecycle: New → Runnable → Running → Blocked → Dead\n- synchronized: only one thread can execute the block at a time\n- wait()/notify()/notifyAll(): inter-thread communication\n\n**Important formulas:**\n\n- `Thread t = new Thread(runnable); t.start();`\n- `synchronized (lock) { ... } // mutual exclusion`\n- `public synchronized void method() { ... }`\n- `BufferedReader br = new BufferedReader(new FileReader('f.txt'));`\n\n**Common mistake to avoid:** Calling run() instead of start() (run() runs in current thread)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Thread: lightweight process — class MyThread extends Thread",
+            "Runnable: functional interface — class MyTask implements Runnable",
+            "Thread lifecycle: New → Runnable → Running → Blocked → Dead",
+            "synchronized: only one thread can execute the block at a time",
+            "wait()/notify()/notifyAll(): inter-thread communication",
+            "Formula: Thread t = new Thread(runnable); t.start();",
+            "Formula: synchronized (lock) { ... } // mutual exclusion",
+            "Formula: public synchronized void method() { ... }",
+            "Formula: BufferedReader br = new BufferedReader(new FileReader('f.txt'));",
+            "public static void main(String[] args)",
+            "System.out.println();",
+            "List<T> list = new ArrayList<>();"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "JDK > JRE > JVM",
+              "expansion": "JDK contains JRE, JRE contains JVM",
+              "meaning": "The nesting: JDK = JRE + dev tools, JRE = JVM + libraries."
+            },
+            {
+              "phrase": "PIEA",
+              "expansion": "Polymorphism, Inheritance, Encapsulation, Abstraction",
+              "meaning": "The four OOP pillars."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Mention both ways to create a thread (extends Thread / implements Runnable)"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw the thread lifecycle states"
+            },
+            {
+              "type": "warning",
+              "content": "Calling run() instead of start() (run() runs in current thread)"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting to synchronize shared mutable state"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Java supports multithreading at the language level via the Thread class and Runnable interface. The java.io and java.nio packages provide file and stream I/O. Synchronization is achieved via synchronized blocks/methods."
+            },
+            {
+              "type": "definition",
+              "content": "Thread: lightweight process — class MyThread extends Thread"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Thread?",
+              "back": "lightweight process — class MyThread extends Thread",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Runnable?",
+              "back": "functional interface — class MyTask implements Runnable",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Thread lifecycle?",
+              "back": "New → Runnable → Running → Blocked → Dead",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is synchronized?",
+              "back": "only one thread can execute the block at a time",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is wait()/notify()/notifyAll()?",
+              "back": "inter-thread communication",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is InputStream/OutputStream?",
+              "back": "byte-based I/O",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Reader/Writer?",
+              "back": "character-based I/O",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is BufferedReader/BufferedWriter?",
+              "back": "buffered for performance",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Java supports multithreading at the language level via the Thread class and Runnable interface. The java.io and java.nio packages provide file and stream I/O. Synchronization is achieved via synchronized blocks/methods."
+            },
+            {
+              "style": "detailed",
+              "content": "Java supports multithreading at the language level via the Thread class and Runnable interface. The java.io and java.nio packages provide file and stream I/O. Synchronization is achieved via synchronized blocks/methods.\n\nKey concepts: Thread: lightweight process — class MyThread extends Thread, Runnable: functional interface — class MyTask implements Runnable, Thread lifecycle: New → Runnable → Running → Blocked → Dead."
+            }
+          ],
+          "recommendedNextLessons": []
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "# Java Programming — Quick Revision\n\n**Subject code:** R23CP1404  \n**Semester:** 4  \n**Credits:** 4  \n\n## Unit 1: Java Basics (20%)\n### Introduction to Java\nJava is a high-level, class-based, object-oriented programming language designed to have as few implementation dependencies as possible. Developed by James Gosling at Sun Microsystems in 1995, it follows the 'Write Once, Run Anywhere' (WORA) principle — compiled Java bytecode run...\n\n**Formulas:**\n- `Source (.java) → javac → Bytecode (.class) → JVM → Execution`\n- `JDK = JRE + Development Tools (javac, jdb, etc.)`\n- `JRE = JVM + Core Libraries`\n\n## Unit 2: OOP in Java (25%)\n### Classes, Objects, and Inheritance\nJava is purely object-oriented (almost everything is an object). Classes are blueprints; objects are instances. Java supports single inheritance with classes and multiple inheritance with interfaces. The four OOP pillars — encapsulation, inheritance, polymorphism, abstraction — a...\n\n**Formulas:**\n- `Class: [access] class Name [extends Parent] [implements Iface]`\n- `Constructor: same name as class, no return type`\n- `Override: @Override annotation (optional but recommended)`\n\n## Unit 3: Exception Handling (20%)\n### Exception Handling\nJava exceptions are objects representing abnormal conditions during execution. The try/catch/finally construct handles them. Exceptions form a hierarchy: Throwable → Error (unchecked) / Exception → RuntimeException (unchecked) + others (checked).\n\n**Formulas:**\n- `try { ... } catch (Type e) { ... } finally { ... }`\n- `throw new ExceptionType('message');`\n- `void method() throws ExceptionType { ... }`\n\n## Unit 4: Collections and Generics (20%)\n### Collections Framework\nThe Java Collections Framework (JCF) is a unified architecture for storing and manipulating groups of objects. Core interfaces: List (ArrayList, LinkedList), Set (HashSet, TreeSet), Map (HashMap, TreeMap), Queue (PriorityQueue). Generics enable type-safe collections.\n\n**Formulas:**\n- `List<String> list = new ArrayList<>();`\n- `Map<K, V> map = new HashMap<>();`\n- `Diamond operator: new ArrayList<>(); (Java 7+)`\n\n## Unit 5: Multithreading and I/O (15%)\n### Multithreading and I/O\nJava supports multithreading at the language level via the Thread class and Runnable interface. The java.io and java.nio packages provide file and stream I/O. Synchronization is achieved via synchronized blocks/methods.\n\n**Formulas:**\n- `Thread t = new Thread(runnable); t.start();`\n- `synchronized (lock) { ... } // mutual exclusion`\n- `public synchronized void method() { ... }`\n",
+  "interviewBank": [
+    {
+      "marks": 5,
+      "question": "Explain the formula: Source (.java) → javac → Bytecode (.class) → JVM → Execution",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 10,
+      "question": "What is the difference between abstract class and interface in Java 8+?",
+      "modelAnswer": "Abstract class: single inheritance, can have constructors, instance fields, concrete methods. Interface: multiple inheritance, no constructors (until Java 8), static constants, abstract + default + static methods. Use abstract class for 'is-a' with shared state, interface for 'can-do' contract."
+    },
+    {
+      "marks": 5,
+      "question": "What is the difference between == and .equals()?",
+      "modelAnswer": "== compares references (memory addresses). .equals() compares contents (when overridden). For String: == may return false for two strings with the same content if they're different objects. Always use .equals() for value comparison."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: Class: [access] class Name [extends Parent] [implements Iface]",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: try { ... } catch (Type e) { ... } finally { ... }",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: List<String> list = new ArrayList<>();",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: Thread t = new Thread(runnable); t.start();",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    }
+  ],
+  "vivaBank": [
+    {
+      "marks": 2,
+      "question": "Define Java.",
+      "modelAnswer": "High-level, OOP, platform-independent language"
+    },
+    {
+      "marks": 2,
+      "question": "Define JVM.",
+      "modelAnswer": "Java Virtual Machine — runs bytecode"
+    },
+    {
+      "marks": 2,
+      "question": "Define JRE.",
+      "modelAnswer": "Java Runtime Environment (JVM + libraries)"
+    },
+    {
+      "marks": 2,
+      "question": "What is JVM?",
+      "modelAnswer": "Java Virtual Machine — the runtime engine that executes Java bytecode. It's what makes Java platform-independent."
+    },
+    {
+      "marks": 2,
+      "question": "Define a class in Java.",
+      "modelAnswer": "A class is a blueprint that defines the properties (fields) and behaviours (methods) of objects. Syntax: access class Name { ... }"
+    },
+    {
+      "marks": 2,
+      "question": "Define Class.",
+      "modelAnswer": "blueprint — class Dog { ... }"
+    },
+    {
+      "marks": 2,
+      "question": "Define Object.",
+      "modelAnswer": "instance — Dog d = new Dog();"
+    },
+    {
+      "marks": 2,
+      "question": "Define Encapsulation.",
+      "modelAnswer": "private fields + public getters/setters"
+    },
+    {
+      "marks": 2,
+      "question": "Define Throwable.",
+      "modelAnswer": "root of all errors and exceptions"
+    },
+    {
+      "marks": 2,
+      "question": "Define Error.",
+      "modelAnswer": "serious problems (OutOfMemoryError) — don't catch"
+    },
+    {
+      "marks": 2,
+      "question": "Define Checked Exception.",
+      "modelAnswer": "must be caught or declared (IOException)"
+    },
+    {
+      "marks": 2,
+      "question": "Define Collection interface.",
+      "modelAnswer": "root of the collection hierarchy"
+    }
+  ],
+  "pyqBank": [
+    {
+      "marks": 10,
+      "question": "Explain Introduction to Java in detail with a diagram.",
+      "modelAnswer": "Java is a high-level, class-based, object-oriented programming language designed to have as few implementation dependencies as possible. Developed by James Gosling at Sun Microsystems in 1995, it follows the 'Write Once, Run Anywhere' (WORA) principle — compiled Java bytecode runs on any JVM."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Introduction to Java with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Classes, Objects, and Inheritance in detail with a diagram.",
+      "modelAnswer": "Java is purely object-oriented (almost everything is an object). Classes are blueprints; objects are instances. Java supports single inheritance with classes and multiple inheritance with interfaces. The four OOP pillars — encapsulation, inheritance, polymorphism, abstraction — are first-class in Java."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Classes, Objects, and Inheritance with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Exception Handling in detail with a diagram.",
+      "modelAnswer": "Java exceptions are objects representing abnormal conditions during execution. The try/catch/finally construct handles them. Exceptions form a hierarchy: Throwable → Error (unchecked) / Exception → RuntimeException (unchecked) + others (checked)."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Exception Handling with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Collections Framework in detail with a diagram.",
+      "modelAnswer": "The Java Collections Framework (JCF) is a unified architecture for storing and manipulating groups of objects. Core interfaces: List (ArrayList, LinkedList), Set (HashSet, TreeSet), Map (HashMap, TreeMap), Queue (PriorityQueue). Generics enable type-safe collections."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Collections Framework with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Multithreading and I/O in detail with a diagram.",
+      "modelAnswer": "Java supports multithreading at the language level via the Thread class and Runnable interface. The java.io and java.nio packages provide file and stream I/O. Synchronization is achieved via synchronized blocks/methods."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Multithreading and I/O with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    }
+  ]
+}

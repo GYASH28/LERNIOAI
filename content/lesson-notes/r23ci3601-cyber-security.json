@@ -1,0 +1,109 @@
+{
+  "subjectCode": "R23CI3601",
+  "subjectName": "Cyber Security",
+  "semester": 5,
+  "credits": 2,
+  "units": [
+    {
+      "number": 1,
+      "title": "Cyber Security Fundamentals",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "cybersecurity-basics",
+          "title": "Cyber Security Fundamentals",
+          "durationMin": 15,
+          "difficulty": "easy",
+          "overview": "Cyber security protects systems, networks, and data from digital attacks. This lesson covers the CIA triad, threat types, attack vectors, and defense mechanisms.",
+          "keyConcepts": [
+            "CIA Triad: Confidentiality (encryption), Integrity (hashing), Availability (redundancy)",
+            "Malware: Virus, worm, trojan, ransomware, spyware",
+            "Phishing: Fake emails/websites that steal credentials",
+            "DDoS: Overwhelm server with traffic from multiple sources",
+            "Authentication = who are you? Authorization = what can you do?"
+          ],
+          "formulas": [],
+          "tables": [],
+          "commonMistakes": [
+            "Confusing authentication with authorization — authentication verifies WHO you are, authorization decides WHAT you can do"
+          ],
+          "examTips": [
+            "Remember CIA: Confidentiality, Integrity, Availability — the three pillars",
+            "Authentication = identity (who), Authorization = permissions (what)"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which attack overwhelms a server with traffic from multiple sources?",
+              "options": [
+                "Phishing",
+                "DDoS",
+                "SQL Injection",
+                "MITM"
+              ],
+              "answer": 1,
+              "explanation": "DDoS (Distributed Denial of Service) uses multiple compromised systems (botnet) to flood a target server with traffic, making it unavailable to legitimate users."
+            }
+          ],
+          "objectives": [
+            "Understand the key concepts of Cyber Security Fundamentals",
+            "Apply Cyber Security Fundamentals principles in practical scenarios",
+            "Prepare for exam questions on Cyber Security Fundamentals"
+          ],
+          "prerequisites": [
+            "Basic understanding of computer systems"
+          ],
+          "theory": "## What is Cyber Security?\n\nCyber security is the practice of protecting systems, networks, and programs from digital attacks aimed at accessing, changing, or destroying sensitive information.\n\n## The CIA Triad\n\n1. **Confidentiality**: Information is accessible only to authorized users. Example: Encryption, access control.\n2. **Integrity**: Information is accurate and unaltered. Example: Hashing, digital signatures.\n3. **Availability**: Information is accessible when needed. Example: Redundancy, DDoS protection.\n\n## Types of Cyber Attacks\n\n1. **Malware**: Malicious software (virus, worm, trojan, ransomware, spyware)\n2. **Phishing**: Fraudulent emails/websites that trick users into revealing credentials\n3. **Man-in-the-Middle (MITM)**: Attacker intercepts communication between two parties\n4. **SQL Injection**: Malicious SQL code inserted into input fields\n5. **DDoS (Distributed Denial of Service)**: Overwhelm a server with traffic from multiple sources\n6. **Social Engineering**: Manipulating people into revealing information\n7. **Zero-Day Attack**: Exploits unknown vulnerabilities before patches exist\n\n## Defense Mechanisms\n\n1. **Firewall**: Filters network traffic based on rules\n2. **Antivirus**: Detects and removes malware\n3. **Encryption**: Protects data confidentiality (AES, RSA)\n4. **Authentication**: Verifies identity (passwords, biometrics, MFA)\n5. **Intrusion Detection System (IDS)**: Monitors for suspicious activity\n6. **VPN**: Encrypts internet connection\n7. **Security Awareness Training**: Educate users about threats\n\n## Authentication vs Authorization\n- **Authentication**: Who are you? (verify identity — password, fingerprint)\n- **Authorization**: What can you do? (permissions — read, write, execute)",
+          "analogies": [],
+          "flowcharts": [],
+          "mindMaps": [],
+          "complexity": null,
+          "workedExamples": [
+            {
+              "title": "SQL Injection Prevention",
+              "problem": "A login form uses: SELECT * FROM users WHERE username=\"${user}\" AND password=\"${pass}\". How can this be exploited and prevented?",
+              "solution": "Exploit: Enter username as admin\" OR \"1\"=\"1 — the query becomes SELECT * FROM users WHERE username=\"admin\" OR \"1\"=\"1\" -- which is always true, bypassing login. Prevention: Use parameterized queries (prepared statements) — never concatenate user input into SQL.",
+              "explanation": "Parameterized queries separate SQL code from user input, making injection impossible. In Node.js: db.query(\"SELECT * FROM users WHERE username=? AND password=?\", [user, pass])"
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 3,
+              "question": "Explain the CIA triad with examples.",
+              "modelAnswer": "Confidentiality: Only authorized users can read data. Achieved by encryption (AES), access control (RBAC), MFA. Example: Password-protected file. Integrity: Data is not altered. Achieved by hashing (SHA-256), digital signatures. Example: Download checksum verification. Availability: Data is accessible when needed. Achieved by redundancy, backups, DDoS protection. Example: 99.9% uptime SLA."
+            }
+          ],
+          "interviewQuestions": [],
+          "examQuestions": [],
+          "revisionSummary": "## What is Cyber Security?\n\nCyber security is the practice of protecting systems, networks, and programs from digital attacks aimed at accessing, changing, or destroying sensitive information.\n\n## The...",
+          "cheatSheet": [
+            "CIA Triad",
+            "Malware",
+            "Phishing",
+            "DDoS",
+            "Authentication = who are you? Authorization = what can you do?"
+          ],
+          "mnemonics": [],
+          "callouts": [
+            {
+              "type": "warning",
+              "content": "Ransomware (like WannaCry) encrypts your files and demands payment. Always maintain offline backups — paying the ransom does not guarantee file recovery."
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is the CIA triad in cyber security?",
+              "back": "Confidentiality (data hidden from unauthorized users), Integrity (data not tampered with), Availability (data accessible when needed). These are the three pillars of information security.",
+              "hint": "C-I-A = three goals of security"
+            }
+          ],
+          "aiSummaries": [],
+          "recommendedNextLessons": []
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "Key concepts for Cyber Security: See individual lesson summaries.",
+  "interviewBank": [],
+  "vivaBank": [],
+  "pyqBank": []
+}

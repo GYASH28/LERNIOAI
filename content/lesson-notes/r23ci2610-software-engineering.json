@@ -1,0 +1,2029 @@
+{
+  "subjectCode": "R23CI2610",
+  "subjectName": "Software Engineering",
+  "semester": 5,
+  "credits": 4,
+  "units": [
+    {
+      "number": 1,
+      "title": "Software Engineering Fundamentals",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "se-introduction",
+          "title": "Introduction to Software Engineering",
+          "durationMin": 25,
+          "difficulty": "easy",
+          "overview": "Software Engineering is the systematic application of engineering principles to the development of software. It addresses the 'software crisis' — cost overruns, missed deadlines, poor quality — through processes, methodologies, tools, and best practices. IEEE defines it as 'the application of a systematic, disciplined, quantifiable approach to the development, operation, and maintenance of software.'",
+          "keyConcepts": [
+            "Software Engineering: systematic approach to software development",
+            "Software Crisis: projects over budget, late, low quality (1968 NATO conference)",
+            "SDLC: Software Development Life Cycle — phases from requirement to maintenance",
+            "Process: a set of activities and their relationships",
+            "Methodology: a specific process framework (Waterfall, Agile, etc.)",
+            "CACM: Computer-Aided Software Engineering tools",
+            "Software vs Program: software = programs + data + documentation",
+            "Characteristics: maintainability, dependability, efficiency, usability"
+          ],
+          "formulas": [
+            "Software = Programs + Data + Documentation",
+            "SDLC phases: Requirement → Design → Coding → Testing → Maintenance",
+            "Cost of fixing a bug grows ~10x per phase later it's found"
+          ],
+          "tables": [
+            {
+              "title": "Software vs Program",
+              "headers": [
+                "Aspect",
+                "Program",
+                "Software"
+              ],
+              "rows": [
+                [
+                  "Size",
+                  "Small",
+                  "Large"
+                ],
+                [
+                  "Author",
+                  "Single developer",
+                  "Team"
+                ],
+                [
+                  "Documentation",
+                  "Minimal",
+                  "Comprehensive"
+                ],
+                [
+                  "Lifecycle",
+                  "Write-and-run",
+                  "Multi-phase SDLC"
+                ],
+                [
+                  "Maintenance",
+                  "Rare",
+                  "Ongoing"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Confusing software (system) with program (code)",
+            "Forgetting that maintenance is the longest and most expensive phase",
+            "Thinking Software Engineering is just 'writing code with discipline'",
+            "Skipping requirements phase (leads to building the wrong thing)"
+          ],
+          "examTips": [
+            "Always mention the IEEE definition when asked what SE is",
+            "List the SDLC phases in order when asked about the lifecycle",
+            "Mention the 1968 NATO conference as the birth of SE"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which conference is considered the birth of software engineering?",
+              "options": [
+                "1968 NATO",
+                "1969 UN",
+                "1970 ACM",
+                "1972 IEEE"
+              ],
+              "answer": 0,
+              "explanation": "The 1968 NATO Software Engineering Conference in Garmisch, Germany is considered the formal start of SE as a discipline."
+            },
+            {
+              "question": "What does SDLC stand for?",
+              "options": [
+                "Software Design Life Cycle",
+                "Software Development Life Cycle",
+                "System Design Life Cycle",
+                "Standard Development Lifecycle"
+              ],
+              "answer": 1,
+              "explanation": "SDLC = Software Development Life Cycle — phases from requirements through maintenance."
+            },
+            {
+              "question": "Software = Programs + ?",
+              "options": [
+                "Hardware",
+                "Data + Documentation",
+                "Algorithms",
+                "Testing"
+              ],
+              "answer": 1,
+              "explanation": "Software = Programs + Data + Documentation. Programs alone are just code."
+            },
+            {
+              "question": "Which is the most expensive phase of SDLC?",
+              "options": [
+                "Design",
+                "Coding",
+                "Testing",
+                "Maintenance"
+              ],
+              "answer": 3,
+              "explanation": "Maintenance accounts for 60-80% of total software cost over its lifetime."
+            }
+          ],
+          "objectives": [
+            "Understand Software Engineering and explain its significance",
+            "Understand Software Crisis and explain its significance",
+            "Understand SDLC and explain its significance",
+            "Understand Process and explain its significance",
+            "Understand Methodology and explain its significance",
+            "Attempt the practice quiz and viva questions on Introduction to Software Engineering"
+          ],
+          "prerequisites": [
+            "Basic programming experience",
+            "Understanding of software development",
+            "Familiarity with team projects"
+          ],
+          "theory": "## Introduction\n\nSoftware Engineering is the systematic application of engineering principles to the development of software. It addresses the 'software crisis' — cost overruns, missed deadlines, poor quality — through processes, methodologies, tools, and best practices. IEEE defines it as 'the application of a systematic, disciplined, quantifiable approach to the development, operation, and maintenance of software.'\n## Key Concepts\n\n- Software Engineering: systematic approach to software development\n- Software Crisis: projects over budget, late, low quality (1968 NATO conference)\n- SDLC: Software Development Life Cycle — phases from requirement to maintenance\n- Process: a set of activities and their relationships\n- Methodology: a specific process framework (Waterfall, Agile, etc.)\n- CACM: Computer-Aided Software Engineering tools\n- Software vs Program: software = programs + data + documentation\n- Characteristics: maintainability, dependability, efficiency, usability\n\n## Important Formulas\n\n- `Software = Programs + Data + Documentation`\n- `SDLC phases: Requirement → Design → Coding → Testing → Maintenance`\n- `Cost of fixing a bug grows ~10x per phase later it's found`\n\n## Comparison Tables\n\n### Software vs Program\n\n| Aspect | Program | Software |\n| --- | --- | --- |\n| Size | Small | Large |\n| Author | Single developer | Team |\n| Documentation | Minimal | Comprehensive |\n| Lifecycle | Write-and-run | Multi-phase SDLC |\n| Maintenance | Rare | Ongoing |\n\n\n## Summary\n\nSoftware Engineering is the systematic application of engineering principles to the development of software. It addresses the 'software crisis' — cost overruns, missed deadlines, poor quality — through processes, methodologies, tools, and best practices. IEEE defines it as 'the application of a systematic, disciplined, quantifiable approach to the development, operation, and maintenance of software.'",
+          "analogies": [
+            {
+              "scenario": "SDLC like building a house",
+              "mapping": "Requirements = architect's brief, Design = blueprint, Coding = construction, Testing = inspection, Maintenance = ongoing repairs. Skipping any phase leads to a shoddy house."
+            },
+            {
+              "scenario": "Waterfall like a waterfall",
+              "mapping": "Water only flows down — once you've passed a phase, you don't go back. Suitable when the path is well-known, terrible when requirements shift."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Introduction to Software Engineering — Process Flow",
+              "content": "flowchart TD\n    A[Requirements] --> B[Design]\n    B --> C[Coding]\n    C --> D[Testing]\n    D --> E[Deployment]\n    E --> F[Maintenance]\n    F -.-> A"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Introduction to Software Engineering — Concept Map",
+              "content": "mindmap\n  root((Introduction to Software Engin))\n    Process\n      Waterfall\n      Agile\n      Spiral\n    Requirements\n      FR\n      NFR\n      SRS\n    Design\n      HLD\n      LLD\n      Cohesion\n    Testing\n      Unit\n      Integration\n      System\n    Management\n      COCOMO\n      CMMI\n      Risk"
+            }
+          ],
+          "complexity": {
+            "time": "N/A — process model, not algorithm",
+            "space": "N/A"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "Which conference is considered the birth of software engineering?",
+              "solution": "Correct answer: 1968 NATO",
+              "explanation": "The 1968 NATO Software Engineering Conference in Garmisch, Germany is considered the formal start of SE as a discipline."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Introduction to Software Engineering with reference to the key concepts.",
+              "solution": "Always mention the IEEE definition when asked what SE is → List the SDLC phases in order when asked about the lifecycle → Mention the 1968 NATO conference as the birth of SE",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Software Engineering.",
+              "modelAnswer": "systematic approach to software development"
+            },
+            {
+              "marks": 2,
+              "question": "Define Software Crisis.",
+              "modelAnswer": "projects over budget, late, low quality (1968 NATO conference)"
+            },
+            {
+              "marks": 2,
+              "question": "Define SDLC.",
+              "modelAnswer": "Software Development Life Cycle — phases from requirement to maintenance"
+            },
+            {
+              "marks": 2,
+              "question": "What is SDLC?",
+              "modelAnswer": "Software Development Life Cycle — the phases a software project goes through: Requirements, Design, Coding, Testing, Maintenance."
+            },
+            {
+              "marks": 2,
+              "question": "Define cohesion.",
+              "modelAnswer": "Cohesion measures how focused a module is on a single task. High cohesion (one task per module) is desirable."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Software = Programs + Data + Documentation",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Compare Waterfall and Agile. When would you choose each?",
+              "modelAnswer": "Waterfall: linear, sequential, heavy documentation, requires stable requirements — use for regulated/mission-critical systems (aerospace, medical). Agile: iterative, adaptive, customer-focused, embraces change — use for product development where requirements evolve. Choose Waterfall when the cost of change is high; Agile when customer feedback shapes the product."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between verification and validation?",
+              "modelAnswer": "Verification: 'Are we building the product right?' — checks if the software meets the spec (reviews, inspections). Validation: 'Are we building the right product?' — checks if the software meets user needs (acceptance testing). Verification is process-oriented; validation is product-oriented."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Software Engineering.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Software Crisis.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Software = Programs + Data + Documentation",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: SDLC phases: Requirement → Design → Coding → Testing → Maintenance",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Introduction to Software Engineering in detail with a diagram.",
+              "modelAnswer": "Software Engineering is the systematic application of engineering principles to the development of software. It addresses the 'software crisis' — cost overruns, missed deadlines, poor quality — through processes, methodologies, tools, and best practices. IEEE defines it as 'the application of a systematic, disciplined, quantifiable approach to the development, operation, and maintenance of software.'"
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Introduction to Software Engineering with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Introduction to Software Engineering\n\n**One-line definition:** Software Engineering is the systematic application of engineering principles to the development of software. It addresses the 'software crisis' — cost overruns, missed deadlines, poor quality — throug\n\n**Key points:**\n\n- Software Engineering: systematic approach to software development\n- Software Crisis: projects over budget, late, low quality (1968 NATO conference)\n- SDLC: Software Development Life Cycle — phases from requirement to maintenance\n- Process: a set of activities and their relationships\n- Methodology: a specific process framework (Waterfall, Agile, etc.)\n\n**Important formulas:**\n\n- `Software = Programs + Data + Documentation`\n- `SDLC phases: Requirement → Design → Coding → Testing → Maintenance`\n- `Cost of fixing a bug grows ~10x per phase later it's found`\n\n**Common mistake to avoid:** Confusing software (system) with program (code)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Software Engineering: systematic approach to software development",
+            "Software Crisis: projects over budget, late, low quality (1968 NATO conference)",
+            "SDLC: Software Development Life Cycle — phases from requirement to maintenance",
+            "Process: a set of activities and their relationships",
+            "Methodology: a specific process framework (Waterfall, Agile, etc.)",
+            "Formula: Software = Programs + Data + Documentation",
+            "Formula: SDLC phases: Requirement → Design → Coding → Testing → Maintenance",
+            "Formula: Cost of fixing a bug grows ~10x per phase later it's found",
+            "SDLC: RDCTM phases",
+            "HCLC: High Cohesion, Low Coupling",
+            "Testing levels: Unit → Integration → System → Acceptance"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "RDCTM",
+              "expansion": "Requirements, Design, Coding, Testing, Maintenance",
+              "meaning": "The 5 SDLC phases in order."
+            },
+            {
+              "phrase": "HCLC",
+              "expansion": "High Cohesion, Low Coupling",
+              "meaning": "The golden rule of software design."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always mention the IEEE definition when asked what SE is"
+            },
+            {
+              "type": "exam-tip",
+              "content": "List the SDLC phases in order when asked about the lifecycle"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing software (system) with program (code)"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting that maintenance is the longest and most expensive phase"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Software Engineering is the systematic application of engineering principles to the development of software. It addresses the 'software crisis' — cost overruns, missed deadlines, poor quality — through processes, methodologies, tools, and best practices. IEEE defines it as 'the application of a syst..."
+            },
+            {
+              "type": "definition",
+              "content": "Software Engineering: systematic approach to software development"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Software Engineering?",
+              "back": "systematic approach to software development",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Software Crisis?",
+              "back": "projects over budget, late, low quality (1968 NATO conference)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is SDLC?",
+              "back": "Software Development Life Cycle — phases from requirement to maintenance",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Process?",
+              "back": "a set of activities and their relationships",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Methodology?",
+              "back": "a specific process framework (Waterfall, Agile, etc.)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is CACM?",
+              "back": "Computer-Aided Software Engineering tools",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Software vs Program?",
+              "back": "software = programs + data + documentation",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Characteristics?",
+              "back": "maintainability, dependability, efficiency, usability",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Software Engineering is the systematic application of engineering principles to the development of software. It addresses the 'software crisis' — cost overruns, missed deadlines, poor quality — through processes, methodologies, tools, and best practices. IEEE defines it as 'the application of a syst"
+            },
+            {
+              "style": "detailed",
+              "content": "Software Engineering is the systematic application of engineering principles to the development of software. It addresses the 'software crisis' — cost overruns, missed deadlines, poor quality — through processes, methodologies, tools, and best practices. IEEE defines it as 'the application of a systematic, disciplined, quantifiable approach to the development, operation, and maintenance of software.'\n\nKey concepts: Software Engineering: systematic approach to software development, Software Crisis: projects over budget, late, low quality (1968 NATO conference), SDLC: Software Development Life Cycle — phases from requirement to maintenance."
+            }
+          ],
+          "recommendedNextLessons": [
+            "process-models",
+            "requirements-engineering"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Software Process Models",
+      "weightage": 25,
+      "lessons": [
+        {
+          "slug": "process-models",
+          "title": "Software Process Models",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "A software process model is a simplified representation of a software process. Common models: Waterfall (linear, sequential), Incremental (build in pieces), Spiral (risk-driven iterations), Prototyping (build early sample), Agile (adaptive, iterative). Each model has different cost, risk, and flexibility trade-offs.",
+          "keyConcepts": [
+            "Waterfall: linear, sequential — requirements → design → code → test → deploy",
+            "Incremental: build in working increments",
+            "Spiral: iterative with risk analysis at each loop (Boehm)",
+            "Prototyping: build a quick sample to clarify requirements",
+            "Agile: iterative, adaptive, customer-focused (Scrum, XP, Kanban)",
+            "V-Model: extension of Waterfall with testing at each level",
+            "RAD: Rapid Application Development — minimal planning, max dev speed",
+            "Iterative: repeat the cycle, refining each time"
+          ],
+          "formulas": [
+            "Waterfall phases: Requirements → Design → Implementation → Testing → Maintenance",
+            "Spiral sectors: Planning → Risk Analysis → Engineering → Evaluation",
+            "Agile manifesto: Individuals & interactions > Processes & tools"
+          ],
+          "tables": [
+            {
+              "title": "Process model comparison",
+              "headers": [
+                "Model",
+                "When to use",
+                "Risk"
+              ],
+              "rows": [
+                [
+                  "Waterfall",
+                  "Stable requirements",
+                  "High — late defect discovery"
+                ],
+                [
+                  "Incremental",
+                  "Need early delivery",
+                  "Medium"
+                ],
+                [
+                  "Spiral",
+                  "High-risk, large projects",
+                  "Low (risk-focused)"
+                ],
+                [
+                  "Prototyping",
+                  "Unclear requirements",
+                  "Medium — prototype discarded"
+                ],
+                [
+                  "Agile",
+                  "Changing requirements",
+                  "Low — frequent feedback"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Choosing Waterfall for projects with changing requirements",
+            "Forgetting that Spiral includes risk analysis at each iteration",
+            "Confusing incremental (add features) with iterative (refine same product)",
+            "Thinking Agile means 'no documentation' — it means 'just enough'"
+          ],
+          "examTips": [
+            "Always compare 2-3 models when asked which to use",
+            "Draw the Spiral model with its 4 sectors (Planning, Risk, Engineering, Eval)",
+            "Mention the Agile Manifesto's 4 values"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which model is best for changing requirements?",
+              "options": [
+                "Waterfall",
+                "Agile",
+                "V-Model",
+                "Big Bang"
+              ],
+              "answer": 1,
+              "explanation": "Agile embraces change through short iterations and frequent feedback."
+            },
+            {
+              "question": "Which model emphasises risk analysis?",
+              "options": [
+                "Waterfall",
+                "Spiral",
+                "Incremental",
+                "Prototyping"
+              ],
+              "answer": 1,
+              "explanation": "Spiral model (Boehm) explicitly includes risk analysis at each iteration."
+            },
+            {
+              "question": "Waterfall is best suited for:",
+              "options": [
+                "Changing requirements",
+                "Stable, well-understood requirements",
+                "High-risk projects",
+                "Small prototypes"
+              ],
+              "answer": 1,
+              "explanation": "Waterfall works when requirements are stable and well-understood — it doesn't handle change well."
+            },
+            {
+              "question": "What does RAD stand for?",
+              "options": [
+                "Rapid App Design",
+                "Rapid Application Development",
+                "Random App Development",
+                "Reusable App Design"
+              ],
+              "answer": 1,
+              "explanation": "RAD = Rapid Application Development — emphasises speed, minimal planning, reusable components."
+            }
+          ],
+          "objectives": [
+            "Understand Waterfall and explain its significance",
+            "Understand Incremental and explain its significance",
+            "Understand Spiral and explain its significance",
+            "Understand Prototyping and explain its significance",
+            "Understand Agile and explain its significance",
+            "Attempt the practice quiz and viva questions on Software Process Models"
+          ],
+          "prerequisites": [
+            "Basic programming experience",
+            "Understanding of software development",
+            "Familiarity with team projects",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nA software process model is a simplified representation of a software process. Common models: Waterfall (linear, sequential), Incremental (build in pieces), Spiral (risk-driven iterations), Prototyping (build early sample), Agile (adaptive, iterative). Each model has different cost, risk, and flexibility trade-offs.\n## Key Concepts\n\n- Waterfall: linear, sequential — requirements → design → code → test → deploy\n- Incremental: build in working increments\n- Spiral: iterative with risk analysis at each loop (Boehm)\n- Prototyping: build a quick sample to clarify requirements\n- Agile: iterative, adaptive, customer-focused (Scrum, XP, Kanban)\n- V-Model: extension of Waterfall with testing at each level\n- RAD: Rapid Application Development — minimal planning, max dev speed\n- Iterative: repeat the cycle, refining each time\n\n## Important Formulas\n\n- `Waterfall phases: Requirements → Design → Implementation → Testing → Maintenance`\n- `Spiral sectors: Planning → Risk Analysis → Engineering → Evaluation`\n- `Agile manifesto: Individuals & interactions > Processes & tools`\n\n## Comparison Tables\n\n### Process model comparison\n\n| Model | When to use | Risk |\n| --- | --- | --- |\n| Waterfall | Stable requirements | High — late defect discovery |\n| Incremental | Need early delivery | Medium |\n| Spiral | High-risk, large projects | Low (risk-focused) |\n| Prototyping | Unclear requirements | Medium — prototype discarded |\n| Agile | Changing requirements | Low — frequent feedback |\n\n\n## Summary\n\nA software process model is a simplified representation of a software process. Common models: Waterfall (linear, sequential), Incremental (build in pieces), Spiral (risk-driven iterations), Prototyping (build early sample), Agile (adaptive, iterative). Each model has different cost, risk, and flexibility trade-offs.",
+          "analogies": [
+            {
+              "scenario": "SDLC like building a house",
+              "mapping": "Requirements = architect's brief, Design = blueprint, Coding = construction, Testing = inspection, Maintenance = ongoing repairs. Skipping any phase leads to a shoddy house."
+            },
+            {
+              "scenario": "Waterfall like a waterfall",
+              "mapping": "Water only flows down — once you've passed a phase, you don't go back. Suitable when the path is well-known, terrible when requirements shift."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Software Process Models — Process Flow",
+              "content": "flowchart TD\n    A[Requirements] --> B[Design]\n    B --> C[Coding]\n    C --> D[Testing]\n    D --> E[Deployment]\n    E --> F[Maintenance]\n    F -.-> A"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Software Process Models — Concept Map",
+              "content": "mindmap\n  root((Software Process Models))\n    Process\n      Waterfall\n      Agile\n      Spiral\n    Requirements\n      FR\n      NFR\n      SRS\n    Design\n      HLD\n      LLD\n      Cohesion\n    Testing\n      Unit\n      Integration\n      System\n    Management\n      COCOMO\n      CMMI\n      Risk"
+            }
+          ],
+          "complexity": {
+            "time": "N/A — process model, not algorithm",
+            "space": "N/A"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "Which model is best for changing requirements?",
+              "solution": "Correct answer: Agile",
+              "explanation": "Agile embraces change through short iterations and frequent feedback."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Software Process Models with reference to the key concepts.",
+              "solution": "Always compare 2-3 models when asked which to use → Draw the Spiral model with its 4 sectors (Planning, Risk, Engineering, Eval) → Mention the Agile Manifesto's 4 values",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Waterfall.",
+              "modelAnswer": "linear, sequential — requirements → design → code → test → deploy"
+            },
+            {
+              "marks": 2,
+              "question": "Define Incremental.",
+              "modelAnswer": "build in working increments"
+            },
+            {
+              "marks": 2,
+              "question": "Define Spiral.",
+              "modelAnswer": "iterative with risk analysis at each loop (Boehm)"
+            },
+            {
+              "marks": 2,
+              "question": "What is SDLC?",
+              "modelAnswer": "Software Development Life Cycle — the phases a software project goes through: Requirements, Design, Coding, Testing, Maintenance."
+            },
+            {
+              "marks": 2,
+              "question": "Define cohesion.",
+              "modelAnswer": "Cohesion measures how focused a module is on a single task. High cohesion (one task per module) is desirable."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Waterfall phases: Requirements → Design → Implementation → Testing → Maintenance",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Compare Waterfall and Agile. When would you choose each?",
+              "modelAnswer": "Waterfall: linear, sequential, heavy documentation, requires stable requirements — use for regulated/mission-critical systems (aerospace, medical). Agile: iterative, adaptive, customer-focused, embraces change — use for product development where requirements evolve. Choose Waterfall when the cost of change is high; Agile when customer feedback shapes the product."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between verification and validation?",
+              "modelAnswer": "Verification: 'Are we building the product right?' — checks if the software meets the spec (reviews, inspections). Validation: 'Are we building the right product?' — checks if the software meets user needs (acceptance testing). Verification is process-oriented; validation is product-oriented."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Waterfall.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Incremental.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Waterfall phases: Requirements → Design → Implementation → Testing → Maintenance",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Spiral sectors: Planning → Risk Analysis → Engineering → Evaluation",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Software Process Models in detail with a diagram.",
+              "modelAnswer": "A software process model is a simplified representation of a software process. Common models: Waterfall (linear, sequential), Incremental (build in pieces), Spiral (risk-driven iterations), Prototyping (build early sample), Agile (adaptive, iterative). Each model has different cost, risk, and flexibility trade-offs."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Software Process Models with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Software Process Models\n\n**One-line definition:** A software process model is a simplified representation of a software process. Common models: Waterfall (linear, sequential), Incremental (build in pieces), Spiral (risk-driven iterations), Prototypin\n\n**Key points:**\n\n- Waterfall: linear, sequential — requirements → design → code → test → deploy\n- Incremental: build in working increments\n- Spiral: iterative with risk analysis at each loop (Boehm)\n- Prototyping: build a quick sample to clarify requirements\n- Agile: iterative, adaptive, customer-focused (Scrum, XP, Kanban)\n\n**Important formulas:**\n\n- `Waterfall phases: Requirements → Design → Implementation → Testing → Maintenance`\n- `Spiral sectors: Planning → Risk Analysis → Engineering → Evaluation`\n- `Agile manifesto: Individuals & interactions > Processes & tools`\n\n**Common mistake to avoid:** Choosing Waterfall for projects with changing requirements\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Waterfall: linear, sequential — requirements → design → code → test → deploy",
+            "Incremental: build in working increments",
+            "Spiral: iterative with risk analysis at each loop (Boehm)",
+            "Prototyping: build a quick sample to clarify requirements",
+            "Agile: iterative, adaptive, customer-focused (Scrum, XP, Kanban)",
+            "Formula: Waterfall phases: Requirements → Design → Implementation → Testing → Maintenance",
+            "Formula: Spiral sectors: Planning → Risk Analysis → Engineering → Evaluation",
+            "Formula: Agile manifesto: Individuals & interactions > Processes & tools",
+            "SDLC: RDCTM phases",
+            "HCLC: High Cohesion, Low Coupling",
+            "Testing levels: Unit → Integration → System → Acceptance"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "RDCTM",
+              "expansion": "Requirements, Design, Coding, Testing, Maintenance",
+              "meaning": "The 5 SDLC phases in order."
+            },
+            {
+              "phrase": "HCLC",
+              "expansion": "High Cohesion, Low Coupling",
+              "meaning": "The golden rule of software design."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always compare 2-3 models when asked which to use"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw the Spiral model with its 4 sectors (Planning, Risk, Engineering, Eval)"
+            },
+            {
+              "type": "warning",
+              "content": "Choosing Waterfall for projects with changing requirements"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting that Spiral includes risk analysis at each iteration"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "A software process model is a simplified representation of a software process. Common models: Waterfall (linear, sequential), Incremental (build in pieces), Spiral (risk-driven iterations), Prototyping (build early sample), Agile (adaptive, iterative). Each model has different cost, risk, and flexib..."
+            },
+            {
+              "type": "definition",
+              "content": "Waterfall: linear, sequential — requirements → design → code → test → deploy"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Waterfall?",
+              "back": "linear, sequential — requirements → design → code → test → deploy",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Incremental?",
+              "back": "build in working increments",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Spiral?",
+              "back": "iterative with risk analysis at each loop (Boehm)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Prototyping?",
+              "back": "build a quick sample to clarify requirements",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Agile?",
+              "back": "iterative, adaptive, customer-focused (Scrum, XP, Kanban)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is V-Model?",
+              "back": "extension of Waterfall with testing at each level",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is RAD?",
+              "back": "Rapid Application Development — minimal planning, max dev speed",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Iterative?",
+              "back": "repeat the cycle, refining each time",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "A software process model is a simplified representation of a software process. Common models: Waterfall (linear, sequential), Incremental (build in pieces), Spiral (risk-driven iterations), Prototyping (build early sample), Agile (adaptive, iterative). Each model has different cost, risk, and flexib"
+            },
+            {
+              "style": "detailed",
+              "content": "A software process model is a simplified representation of a software process. Common models: Waterfall (linear, sequential), Incremental (build in pieces), Spiral (risk-driven iterations), Prototyping (build early sample), Agile (adaptive, iterative). Each model has different cost, risk, and flexibility trade-offs.\n\nKey concepts: Waterfall: linear, sequential — requirements → design → code → test → deploy, Incremental: build in working increments, Spiral: iterative with risk analysis at each loop (Boehm)."
+            }
+          ],
+          "recommendedNextLessons": [
+            "requirements-engineering",
+            "design-and-testing"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Requirements Engineering",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "requirements-engineering",
+          "title": "Requirements Engineering",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "Requirements engineering is the process of defining, documenting, and maintaining software requirements. It includes elicitation (gathering), analysis, specification (SRS document), validation, and management. Requirements are classified as functional (what the system does) and non-functional (how well it does it).",
+          "keyConcepts": [
+            "Functional Requirement (FR): what the system must do (e.g., 'user can login')",
+            "Non-Functional Requirement (NFR): quality attributes (performance, security)",
+            "SRS: Software Requirements Specification — formal document",
+            "Elicitation: gathering requirements from stakeholders",
+            "Analysis: resolving conflicts, prioritising",
+            "Validation: ensuring requirements are correct and complete",
+            "User requirement: high-level, in natural language",
+            "System requirement: detailed, may use formal notation"
+          ],
+          "formulas": [
+            "Requirements engineering: Elicitation → Analysis → Specification → Validation → Management",
+            "FR examples: 'system shall allow user to upload a file'",
+            "NFR examples: 'response time < 2 seconds', 'availability 99.9%'"
+          ],
+          "tables": [
+            {
+              "title": "FR vs NFR",
+              "headers": [
+                "Aspect",
+                "Functional",
+                "Non-Functional"
+              ],
+              "rows": [
+                [
+                  "Defines",
+                  "What system does",
+                  "How well it does it"
+                ],
+                [
+                  "Example",
+                  "User can login",
+                  "Login < 2 seconds"
+                ],
+                [
+                  "Testability",
+                  "Direct (pass/fail)",
+                  "Often metric-based"
+                ],
+                [
+                  "Categories",
+                  "Features",
+                  "Performance, security, usability, reliability"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Mixing FRs with NFRs in the same section",
+            "Writing vague NFRs ('fast', 'secure') without metrics",
+            "Not involving all stakeholders during elicitation",
+            "Skipping validation (assuming SRS is correct)"
+          ],
+          "examTips": [
+            "Always give a metric for NFRs (e.g., 'response < 2s' not 'fast response')",
+            "List the 5 RE activities when asked about the process",
+            "Distinguish user (high-level) from system (detailed) requirements"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which is a NON-functional requirement?",
+              "options": [
+                "User can upload files",
+                "Response time < 2 seconds",
+                "User can reset password",
+                "System sends email alerts"
+              ],
+              "answer": 1,
+              "explanation": "Response time is a performance NFR. The others are functional (what the system does)."
+            },
+            {
+              "question": "What does SRS stand for?",
+              "options": [
+                "Software Requirement System",
+                "Software Requirements Specification",
+                "Standard Requirement Sheet",
+                "System Requirement Standard"
+              ],
+              "answer": 1,
+              "explanation": "SRS = Software Requirements Specification — the formal document of all requirements."
+            },
+            {
+              "question": "Which is the FIRST activity in requirements engineering?",
+              "options": [
+                "Validation",
+                "Analysis",
+                "Elicitation",
+                "Specification"
+              ],
+              "answer": 2,
+              "explanation": "Elicitation (gathering requirements from stakeholders) is the first activity."
+            },
+            {
+              "question": "Which is NOT an NFR category?",
+              "options": [
+                "Performance",
+                "Security",
+                "Login",
+                "Usability"
+              ],
+              "answer": 2,
+              "explanation": "Login is a functional feature. Performance, security, usability are non-functional quality attributes."
+            }
+          ],
+          "objectives": [
+            "Understand Functional Requirement (FR) and explain its significance",
+            "Understand Non-Functional Requirement (NFR) and explain its significance",
+            "Understand SRS and explain its significance",
+            "Understand Elicitation and explain its significance",
+            "Understand Analysis and explain its significance",
+            "Attempt the practice quiz and viva questions on Requirements Engineering"
+          ],
+          "prerequisites": [
+            "Basic programming experience",
+            "Understanding of software development",
+            "Familiarity with team projects",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nRequirements engineering is the process of defining, documenting, and maintaining software requirements. It includes elicitation (gathering), analysis, specification (SRS document), validation, and management. Requirements are classified as functional (what the system does) and non-functional (how well it does it).\n## Key Concepts\n\n- Functional Requirement (FR): what the system must do (e.g., 'user can login')\n- Non-Functional Requirement (NFR): quality attributes (performance, security)\n- SRS: Software Requirements Specification — formal document\n- Elicitation: gathering requirements from stakeholders\n- Analysis: resolving conflicts, prioritising\n- Validation: ensuring requirements are correct and complete\n- User requirement: high-level, in natural language\n- System requirement: detailed, may use formal notation\n\n## Important Formulas\n\n- `Requirements engineering: Elicitation → Analysis → Specification → Validation → Management`\n- `FR examples: 'system shall allow user to upload a file'`\n- `NFR examples: 'response time < 2 seconds', 'availability 99.9%'`\n\n## Comparison Tables\n\n### FR vs NFR\n\n| Aspect | Functional | Non-Functional |\n| --- | --- | --- |\n| Defines | What system does | How well it does it |\n| Example | User can login | Login < 2 seconds |\n| Testability | Direct (pass/fail) | Often metric-based |\n| Categories | Features | Performance, security, usability, reliability |\n\n\n## Summary\n\nRequirements engineering is the process of defining, documenting, and maintaining software requirements. It includes elicitation (gathering), analysis, specification (SRS document), validation, and management. Requirements are classified as functional (what the system does) and non-functional (how well it does it).",
+          "analogies": [
+            {
+              "scenario": "SDLC like building a house",
+              "mapping": "Requirements = architect's brief, Design = blueprint, Coding = construction, Testing = inspection, Maintenance = ongoing repairs. Skipping any phase leads to a shoddy house."
+            },
+            {
+              "scenario": "Waterfall like a waterfall",
+              "mapping": "Water only flows down — once you've passed a phase, you don't go back. Suitable when the path is well-known, terrible when requirements shift."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Requirements Engineering — Process Flow",
+              "content": "flowchart TD\n    A[Requirements] --> B[Design]\n    B --> C[Coding]\n    C --> D[Testing]\n    D --> E[Deployment]\n    E --> F[Maintenance]\n    F -.-> A"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Requirements Engineering — Concept Map",
+              "content": "mindmap\n  root((Requirements Engineering))\n    Process\n      Waterfall\n      Agile\n      Spiral\n    Requirements\n      FR\n      NFR\n      SRS\n    Design\n      HLD\n      LLD\n      Cohesion\n    Testing\n      Unit\n      Integration\n      System\n    Management\n      COCOMO\n      CMMI\n      Risk"
+            }
+          ],
+          "complexity": {
+            "time": "N/A — process model, not algorithm",
+            "space": "N/A"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "Which is a NON-functional requirement?",
+              "solution": "Correct answer: Response time < 2 seconds",
+              "explanation": "Response time is a performance NFR. The others are functional (what the system does)."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Requirements Engineering with reference to the key concepts.",
+              "solution": "Always give a metric for NFRs (e.g., 'response < 2s' not 'fast response') → List the 5 RE activities when asked about the process → Distinguish user (high-level) from system (detailed) requirements",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Functional Requirement (FR).",
+              "modelAnswer": "what the system must do (e.g., 'user can login')"
+            },
+            {
+              "marks": 2,
+              "question": "Define Non-Functional Requirement (NFR).",
+              "modelAnswer": "quality attributes (performance, security)"
+            },
+            {
+              "marks": 2,
+              "question": "Define SRS.",
+              "modelAnswer": "Software Requirements Specification — formal document"
+            },
+            {
+              "marks": 2,
+              "question": "What is SDLC?",
+              "modelAnswer": "Software Development Life Cycle — the phases a software project goes through: Requirements, Design, Coding, Testing, Maintenance."
+            },
+            {
+              "marks": 2,
+              "question": "Define cohesion.",
+              "modelAnswer": "Cohesion measures how focused a module is on a single task. High cohesion (one task per module) is desirable."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Requirements engineering: Elicitation → Analysis → Specification → Validation → Management",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Compare Waterfall and Agile. When would you choose each?",
+              "modelAnswer": "Waterfall: linear, sequential, heavy documentation, requires stable requirements — use for regulated/mission-critical systems (aerospace, medical). Agile: iterative, adaptive, customer-focused, embraces change — use for product development where requirements evolve. Choose Waterfall when the cost of change is high; Agile when customer feedback shapes the product."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between verification and validation?",
+              "modelAnswer": "Verification: 'Are we building the product right?' — checks if the software meets the spec (reviews, inspections). Validation: 'Are we building the right product?' — checks if the software meets user needs (acceptance testing). Verification is process-oriented; validation is product-oriented."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Functional Requirement (FR).",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Non-Functional Requirement (NFR).",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Requirements engineering: Elicitation → Analysis → Specification → Validation → Management",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: FR examples: 'system shall allow user to upload a file'",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Requirements Engineering in detail with a diagram.",
+              "modelAnswer": "Requirements engineering is the process of defining, documenting, and maintaining software requirements. It includes elicitation (gathering), analysis, specification (SRS document), validation, and management. Requirements are classified as functional (what the system does) and non-functional (how well it does it)."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Requirements Engineering with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Requirements Engineering\n\n**One-line definition:** Requirements engineering is the process of defining, documenting, and maintaining software requirements. It includes elicitation (gathering), analysis, specification (SRS document), validation, and ma\n\n**Key points:**\n\n- Functional Requirement (FR): what the system must do (e.g., 'user can login')\n- Non-Functional Requirement (NFR): quality attributes (performance, security)\n- SRS: Software Requirements Specification — formal document\n- Elicitation: gathering requirements from stakeholders\n- Analysis: resolving conflicts, prioritising\n\n**Important formulas:**\n\n- `Requirements engineering: Elicitation → Analysis → Specification → Validation → Management`\n- `FR examples: 'system shall allow user to upload a file'`\n- `NFR examples: 'response time < 2 seconds', 'availability 99.9%'`\n\n**Common mistake to avoid:** Mixing FRs with NFRs in the same section\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Functional Requirement (FR): what the system must do (e.g., 'user can login')",
+            "Non-Functional Requirement (NFR): quality attributes (performance, security)",
+            "SRS: Software Requirements Specification — formal document",
+            "Elicitation: gathering requirements from stakeholders",
+            "Analysis: resolving conflicts, prioritising",
+            "Formula: Requirements engineering: Elicitation → Analysis → Specification → Validation → Management",
+            "Formula: FR examples: 'system shall allow user to upload a file'",
+            "Formula: NFR examples: 'response time < 2 seconds', 'availability 99.9%'",
+            "SDLC: RDCTM phases",
+            "HCLC: High Cohesion, Low Coupling",
+            "Testing levels: Unit → Integration → System → Acceptance"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "RDCTM",
+              "expansion": "Requirements, Design, Coding, Testing, Maintenance",
+              "meaning": "The 5 SDLC phases in order."
+            },
+            {
+              "phrase": "HCLC",
+              "expansion": "High Cohesion, Low Coupling",
+              "meaning": "The golden rule of software design."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always give a metric for NFRs (e.g., 'response < 2s' not 'fast response')"
+            },
+            {
+              "type": "exam-tip",
+              "content": "List the 5 RE activities when asked about the process"
+            },
+            {
+              "type": "warning",
+              "content": "Mixing FRs with NFRs in the same section"
+            },
+            {
+              "type": "warning",
+              "content": "Writing vague NFRs ('fast', 'secure') without metrics"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Requirements engineering is the process of defining, documenting, and maintaining software requirements. It includes elicitation (gathering), analysis, specification (SRS document), validation, and management. Requirements are classified as functional (what the system does) and non-functional (how w..."
+            },
+            {
+              "type": "definition",
+              "content": "Functional Requirement (FR): what the system must do (e.g., 'user can login')"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Functional Requirement (FR)?",
+              "back": "what the system must do (e.g., 'user can login')",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Non-Functional Requirement (NFR)?",
+              "back": "quality attributes (performance, security)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is SRS?",
+              "back": "Software Requirements Specification — formal document",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Elicitation?",
+              "back": "gathering requirements from stakeholders",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Analysis?",
+              "back": "resolving conflicts, prioritising",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Validation?",
+              "back": "ensuring requirements are correct and complete",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is User requirement?",
+              "back": "high-level, in natural language",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is System requirement?",
+              "back": "detailed, may use formal notation",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Requirements engineering is the process of defining, documenting, and maintaining software requirements. It includes elicitation (gathering), analysis, specification (SRS document), validation, and management. Requirements are classified as functional (what the system does) and non-functional (how w"
+            },
+            {
+              "style": "detailed",
+              "content": "Requirements engineering is the process of defining, documenting, and maintaining software requirements. It includes elicitation (gathering), analysis, specification (SRS document), validation, and management. Requirements are classified as functional (what the system does) and non-functional (how well it does it).\n\nKey concepts: Functional Requirement (FR): what the system must do (e.g., 'user can login'), Non-Functional Requirement (NFR): quality attributes (performance, security), SRS: Software Requirements Specification — formal document."
+            }
+          ],
+          "recommendedNextLessons": [
+            "design-and-testing",
+            "project-management"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Software Design and Testing",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "design-and-testing",
+          "title": "Software Design and Testing",
+          "durationMin": 35,
+          "difficulty": "hard",
+          "overview": "Software design transforms requirements into a structure that can be implemented. It includes architectural design (high-level), high-level design (modules), and detailed design (classes/algorithms). Testing verifies the software meets requirements — unit testing (individual modules), integration testing (combined modules), system testing (whole system), and acceptance testing (user confirms).",
+          "keyConcepts": [
+            "Architectural Design: high-level structure (client-server, MVC, microservices)",
+            "High-Level Design (HLD): module breakdown and interfaces",
+            "Low-Level Design (LLD): detailed class and algorithm design",
+            "Cohesion: how focused a module is (high = good)",
+            "Coupling: how dependent modules are (low = good)",
+            "Unit Testing: test individual units (functions, classes)",
+            "Integration Testing: test combined modules (top-down, bottom-up)",
+            "System Testing: test the whole system against SRS"
+          ],
+          "formulas": [
+            "Design principle: High Cohesion, Low Coupling",
+            "Testing levels: Unit → Integration → System → Acceptance",
+            "Black box: test via inputs/outputs (no code knowledge)",
+            "White box: test via internal structure (path, branch coverage)"
+          ],
+          "tables": [
+            {
+              "title": "Testing levels",
+              "headers": [
+                "Level",
+                "Scope",
+                "By"
+              ],
+              "rows": [
+                [
+                  "Unit",
+                  "Single function/class",
+                  "Developer"
+                ],
+                [
+                  "Integration",
+                  "Module combinations",
+                  "Developer / QA"
+                ],
+                [
+                  "System",
+                  "Whole system vs SRS",
+                  "QA"
+                ],
+                [
+                  "Acceptance",
+                  "User confirms requirements met",
+                  "Customer / User"
+                ],
+                [
+                  "Regression",
+                  "Re-test after change",
+                  "QA"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Designing before requirements are stable",
+            "High coupling between modules (changes cascade)",
+            "Skipping unit tests (only doing system testing)",
+            "Confusing verification (did we build it right?) with validation (did we build the right thing?)"
+          ],
+          "examTips": [
+            "Always mention 'high cohesion, low coupling' when discussing design quality",
+            "Distinguish black box (spec-based) from white box (code-based) testing",
+            "List the 4 testing levels in order"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is the goal of high cohesion?",
+              "options": [
+                "More modules",
+                "Focused, single-purpose modules",
+                "Faster code",
+                "Less testing"
+              ],
+              "answer": 1,
+              "explanation": "High cohesion means each module does one thing well — focused and single-purpose."
+            },
+            {
+              "question": "Which testing checks individual functions?",
+              "options": [
+                "System",
+                "Integration",
+                "Unit",
+                "Acceptance"
+              ],
+              "answer": 2,
+              "explanation": "Unit testing tests individual units (functions, classes) in isolation."
+            },
+            {
+              "question": "Black box testing is based on:",
+              "options": [
+                "Code structure",
+                "Inputs and outputs",
+                "Internal logic",
+                "Branch coverage"
+              ],
+              "answer": 1,
+              "explanation": "Black box testing treats the system as a 'black box' — only inputs and outputs matter, not internal code."
+            },
+            {
+              "question": "Verification answers:",
+              "options": [
+                "Did we build the right thing?",
+                "Did we build it right?",
+                "Is the user happy?",
+                "Is it fast?"
+              ],
+              "answer": 1,
+              "explanation": "Verification = 'Did we build it right?' (matches spec). Validation = 'Did we build the right thing?' (meets user needs)."
+            }
+          ],
+          "objectives": [
+            "Understand Architectural Design and explain its significance",
+            "Understand High-Level Design (HLD) and explain its significance",
+            "Understand Low-Level Design (LLD) and explain its significance",
+            "Understand Cohesion and explain its significance",
+            "Understand Coupling and explain its significance",
+            "Attempt the practice quiz and viva questions on Software Design and Testing"
+          ],
+          "prerequisites": [
+            "Basic programming experience",
+            "Understanding of software development",
+            "Familiarity with team projects",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nSoftware design transforms requirements into a structure that can be implemented. It includes architectural design (high-level), high-level design (modules), and detailed design (classes/algorithms). Testing verifies the software meets requirements — unit testing (individual modules), integration testing (combined modules), system testing (whole system), and acceptance testing (user confirms).\n## Key Concepts\n\n- Architectural Design: high-level structure (client-server, MVC, microservices)\n- High-Level Design (HLD): module breakdown and interfaces\n- Low-Level Design (LLD): detailed class and algorithm design\n- Cohesion: how focused a module is (high = good)\n- Coupling: how dependent modules are (low = good)\n- Unit Testing: test individual units (functions, classes)\n- Integration Testing: test combined modules (top-down, bottom-up)\n- System Testing: test the whole system against SRS\n\n## Important Formulas\n\n- `Design principle: High Cohesion, Low Coupling`\n- `Testing levels: Unit → Integration → System → Acceptance`\n- `Black box: test via inputs/outputs (no code knowledge)`\n- `White box: test via internal structure (path, branch coverage)`\n\n## Comparison Tables\n\n### Testing levels\n\n| Level | Scope | By |\n| --- | --- | --- |\n| Unit | Single function/class | Developer |\n| Integration | Module combinations | Developer / QA |\n| System | Whole system vs SRS | QA |\n| Acceptance | User confirms requirements met | Customer / User |\n| Regression | Re-test after change | QA |\n\n\n## Summary\n\nSoftware design transforms requirements into a structure that can be implemented. It includes architectural design (high-level), high-level design (modules), and detailed design (classes/algorithms). Testing verifies the software meets requirements — unit testing (individual modules), integration testing (combined modules), system testing (whole system), and acceptance testing (user confirms).",
+          "analogies": [
+            {
+              "scenario": "SDLC like building a house",
+              "mapping": "Requirements = architect's brief, Design = blueprint, Coding = construction, Testing = inspection, Maintenance = ongoing repairs. Skipping any phase leads to a shoddy house."
+            },
+            {
+              "scenario": "Waterfall like a waterfall",
+              "mapping": "Water only flows down — once you've passed a phase, you don't go back. Suitable when the path is well-known, terrible when requirements shift."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Software Design and Testing — Process Flow",
+              "content": "flowchart TD\n    A[Requirements] --> B[Design]\n    B --> C[Coding]\n    C --> D[Testing]\n    D --> E[Deployment]\n    E --> F[Maintenance]\n    F -.-> A"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Software Design and Testing — Concept Map",
+              "content": "mindmap\n  root((Software Design and Testing))\n    Process\n      Waterfall\n      Agile\n      Spiral\n    Requirements\n      FR\n      NFR\n      SRS\n    Design\n      HLD\n      LLD\n      Cohesion\n    Testing\n      Unit\n      Integration\n      System\n    Management\n      COCOMO\n      CMMI\n      Risk"
+            }
+          ],
+          "complexity": {
+            "time": "N/A — process model, not algorithm",
+            "space": "N/A"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is the goal of high cohesion?",
+              "solution": "Correct answer: Focused, single-purpose modules",
+              "explanation": "High cohesion means each module does one thing well — focused and single-purpose."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Software Design and Testing with reference to the key concepts.",
+              "solution": "Always mention 'high cohesion, low coupling' when discussing design quality → Distinguish black box (spec-based) from white box (code-based) testing → List the 4 testing levels in order",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Architectural Design.",
+              "modelAnswer": "high-level structure (client-server, MVC, microservices)"
+            },
+            {
+              "marks": 2,
+              "question": "Define High-Level Design (HLD).",
+              "modelAnswer": "module breakdown and interfaces"
+            },
+            {
+              "marks": 2,
+              "question": "Define Low-Level Design (LLD).",
+              "modelAnswer": "detailed class and algorithm design"
+            },
+            {
+              "marks": 2,
+              "question": "What is SDLC?",
+              "modelAnswer": "Software Development Life Cycle — the phases a software project goes through: Requirements, Design, Coding, Testing, Maintenance."
+            },
+            {
+              "marks": 2,
+              "question": "Define cohesion.",
+              "modelAnswer": "Cohesion measures how focused a module is on a single task. High cohesion (one task per module) is desirable."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Design principle: High Cohesion, Low Coupling",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Compare Waterfall and Agile. When would you choose each?",
+              "modelAnswer": "Waterfall: linear, sequential, heavy documentation, requires stable requirements — use for regulated/mission-critical systems (aerospace, medical). Agile: iterative, adaptive, customer-focused, embraces change — use for product development where requirements evolve. Choose Waterfall when the cost of change is high; Agile when customer feedback shapes the product."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between verification and validation?",
+              "modelAnswer": "Verification: 'Are we building the product right?' — checks if the software meets the spec (reviews, inspections). Validation: 'Are we building the right product?' — checks if the software meets user needs (acceptance testing). Verification is process-oriented; validation is product-oriented."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Architectural Design.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define High-Level Design (HLD).",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Design principle: High Cohesion, Low Coupling",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Testing levels: Unit → Integration → System → Acceptance",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Software Design and Testing in detail with a diagram.",
+              "modelAnswer": "Software design transforms requirements into a structure that can be implemented. It includes architectural design (high-level), high-level design (modules), and detailed design (classes/algorithms). Testing verifies the software meets requirements — unit testing (individual modules), integration testing (combined modules), system testing (whole system), and acceptance testing (user confirms)."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Software Design and Testing with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Software Design and Testing\n\n**One-line definition:** Software design transforms requirements into a structure that can be implemented. It includes architectural design (high-level), high-level design (modules), and detailed design (classes/algorithms). \n\n**Key points:**\n\n- Architectural Design: high-level structure (client-server, MVC, microservices)\n- High-Level Design (HLD): module breakdown and interfaces\n- Low-Level Design (LLD): detailed class and algorithm design\n- Cohesion: how focused a module is (high = good)\n- Coupling: how dependent modules are (low = good)\n\n**Important formulas:**\n\n- `Design principle: High Cohesion, Low Coupling`\n- `Testing levels: Unit → Integration → System → Acceptance`\n- `Black box: test via inputs/outputs (no code knowledge)`\n- `White box: test via internal structure (path, branch coverage)`\n\n**Common mistake to avoid:** Designing before requirements are stable\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Architectural Design: high-level structure (client-server, MVC, microservices)",
+            "High-Level Design (HLD): module breakdown and interfaces",
+            "Low-Level Design (LLD): detailed class and algorithm design",
+            "Cohesion: how focused a module is (high = good)",
+            "Coupling: how dependent modules are (low = good)",
+            "Formula: Design principle: High Cohesion, Low Coupling",
+            "Formula: Testing levels: Unit → Integration → System → Acceptance",
+            "Formula: Black box: test via inputs/outputs (no code knowledge)",
+            "Formula: White box: test via internal structure (path, branch coverage)",
+            "SDLC: RDCTM phases",
+            "HCLC: High Cohesion, Low Coupling",
+            "Testing levels: Unit → Integration → System → Acceptance"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "RDCTM",
+              "expansion": "Requirements, Design, Coding, Testing, Maintenance",
+              "meaning": "The 5 SDLC phases in order."
+            },
+            {
+              "phrase": "HCLC",
+              "expansion": "High Cohesion, Low Coupling",
+              "meaning": "The golden rule of software design."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always mention 'high cohesion, low coupling' when discussing design quality"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Distinguish black box (spec-based) from white box (code-based) testing"
+            },
+            {
+              "type": "warning",
+              "content": "Designing before requirements are stable"
+            },
+            {
+              "type": "warning",
+              "content": "High coupling between modules (changes cascade)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Software design transforms requirements into a structure that can be implemented. It includes architectural design (high-level), high-level design (modules), and detailed design (classes/algorithms). Testing verifies the software meets requirements — unit testing (individual modules), integration te..."
+            },
+            {
+              "type": "definition",
+              "content": "Architectural Design: high-level structure (client-server, MVC, microservices)"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Architectural Design?",
+              "back": "high-level structure (client-server, MVC, microservices)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is High-Level Design (HLD)?",
+              "back": "module breakdown and interfaces",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Low-Level Design (LLD)?",
+              "back": "detailed class and algorithm design",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Cohesion?",
+              "back": "how focused a module is (high = good)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Coupling?",
+              "back": "how dependent modules are (low = good)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Unit Testing?",
+              "back": "test individual units (functions, classes)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Integration Testing?",
+              "back": "test combined modules (top-down, bottom-up)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is System Testing?",
+              "back": "test the whole system against SRS",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Software design transforms requirements into a structure that can be implemented. It includes architectural design (high-level), high-level design (modules), and detailed design (classes/algorithms). Testing verifies the software meets requirements — unit testing (individual modules), integration te"
+            },
+            {
+              "style": "detailed",
+              "content": "Software design transforms requirements into a structure that can be implemented. It includes architectural design (high-level), high-level design (modules), and detailed design (classes/algorithms). Testing verifies the software meets requirements — unit testing (individual modules), integration testing (combined modules), system testing (whole system), and acceptance testing (user confirms).\n\nKey concepts: Architectural Design: high-level structure (client-server, MVC, microservices), High-Level Design (HLD): module breakdown and interfaces, Low-Level Design (LLD): detailed class and algorithm design."
+            }
+          ],
+          "recommendedNextLessons": [
+            "project-management"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Project Management and Quality",
+      "weightage": 15,
+      "lessons": [
+        {
+          "slug": "project-management",
+          "title": "Project Management and Quality Assurance",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "Software project management involves planning, scheduling, estimating, risk management, and team coordination. Key metrics: LOC (lines of code), function points, COCOMO (Constructive Cost Model). Quality assurance includes reviews, inspections, standards (ISO 9001, CMMI), and metrics (defect density, MTTR).",
+          "keyConcepts": [
+            "Project triangle: scope, time, cost (quality in the middle)",
+            "COCOMO: Constructive Cost Model — estimates effort from LOC",
+            "Function Points: measure functionality from user perspective",
+            "LOC: Lines of Code — simple size metric",
+            "Gantt chart: visual project schedule",
+            "PERT/CPM: critical path method for scheduling",
+            "Risk management: identify, analyse, mitigate, monitor",
+            "CMMI: Capability Maturity Model Integration — 5 levels of process maturity"
+          ],
+          "formulas": [
+            "COCOMO basic: Effort = a × (KLOC)^b (person-months)",
+            "Function points: UFP × (0.65 + 0.01 × VAF) = FP",
+            "Defect density = defects / KLOC",
+            "MTTR = Mean Time To Repair"
+          ],
+          "tables": [
+            {
+              "title": "CMMI Maturity Levels",
+              "headers": [
+                "Level",
+                "Name",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "1",
+                  "Initial",
+                  "Ad-hoc, chaotic"
+                ],
+                [
+                  "2",
+                  "Repeatable",
+                  "Basic project management"
+                ],
+                [
+                  "3",
+                  "Defined",
+                  "Standard process across org"
+                ],
+                [
+                  "4",
+                  "Managed",
+                  "Quantitative metrics"
+                ],
+                [
+                  "5",
+                  "Optimising",
+                  "Continuous improvement"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Underestimating project time (planning fallacy)",
+            "Not tracking defects by category",
+            "Confusing effort (person-months) with duration (calendar months)",
+            "Ignoring risk management until risks materialise"
+          ],
+          "examTips": [
+            "Mention the project triangle (scope, time, cost, quality) when discussing PM",
+            "List the 5 CMMI levels when asked about process maturity",
+            "Differentiate COCOMO (LOC-based) from function points (user-facing)"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What does COCOMO estimate?",
+              "options": [
+                "Quality",
+                "Effort from KLOC",
+                "Risk",
+                "Team size"
+              ],
+              "answer": 1,
+              "explanation": "COCOMO (Constructive Cost Model) estimates effort in person-months based on KLOC."
+            },
+            {
+              "question": "How many CMMI maturity levels are there?",
+              "options": [
+                "3",
+                "4",
+                "5",
+                "6"
+              ],
+              "answer": 2,
+              "explanation": "5 levels: Initial, Repeatable, Defined, Managed, Optimising."
+            },
+            {
+              "question": "Which is NOT part of the project triangle?",
+              "options": [
+                "Scope",
+                "Time",
+                "Cost",
+                "Code"
+              ],
+              "answer": 3,
+              "explanation": "The project triangle is Scope, Time, Cost (with Quality in the middle)."
+            },
+            {
+              "question": "Defect density is measured as:",
+              "options": [
+                "Defects / month",
+                "Defects / KLOC",
+                "Bugs / developer",
+                "Time / defect"
+              ],
+              "answer": 1,
+              "explanation": "Defect density = number of defects per KLOC (thousand lines of code)."
+            }
+          ],
+          "objectives": [
+            "Understand Project triangle and explain its significance",
+            "Understand COCOMO and explain its significance",
+            "Understand Function Points and explain its significance",
+            "Understand LOC and explain its significance",
+            "Understand Gantt chart and explain its significance",
+            "Attempt the practice quiz and viva questions on Project Management and Quality Assurance"
+          ],
+          "prerequisites": [
+            "Basic programming experience",
+            "Understanding of software development",
+            "Familiarity with team projects",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nSoftware project management involves planning, scheduling, estimating, risk management, and team coordination. Key metrics: LOC (lines of code), function points, COCOMO (Constructive Cost Model). Quality assurance includes reviews, inspections, standards (ISO 9001, CMMI), and metrics (defect density, MTTR).\n## Key Concepts\n\n- Project triangle: scope, time, cost (quality in the middle)\n- COCOMO: Constructive Cost Model — estimates effort from LOC\n- Function Points: measure functionality from user perspective\n- LOC: Lines of Code — simple size metric\n- Gantt chart: visual project schedule\n- PERT/CPM: critical path method for scheduling\n- Risk management: identify, analyse, mitigate, monitor\n- CMMI: Capability Maturity Model Integration — 5 levels of process maturity\n\n## Important Formulas\n\n- `COCOMO basic: Effort = a × (KLOC)^b (person-months)`\n- `Function points: UFP × (0.65 + 0.01 × VAF) = FP`\n- `Defect density = defects / KLOC`\n- `MTTR = Mean Time To Repair`\n\n## Comparison Tables\n\n### CMMI Maturity Levels\n\n| Level | Name | Description |\n| --- | --- | --- |\n| 1 | Initial | Ad-hoc, chaotic |\n| 2 | Repeatable | Basic project management |\n| 3 | Defined | Standard process across org |\n| 4 | Managed | Quantitative metrics |\n| 5 | Optimising | Continuous improvement |\n\n\n## Summary\n\nSoftware project management involves planning, scheduling, estimating, risk management, and team coordination. Key metrics: LOC (lines of code), function points, COCOMO (Constructive Cost Model). Quality assurance includes reviews, inspections, standards (ISO 9001, CMMI), and metrics (defect density, MTTR).",
+          "analogies": [
+            {
+              "scenario": "SDLC like building a house",
+              "mapping": "Requirements = architect's brief, Design = blueprint, Coding = construction, Testing = inspection, Maintenance = ongoing repairs. Skipping any phase leads to a shoddy house."
+            },
+            {
+              "scenario": "Waterfall like a waterfall",
+              "mapping": "Water only flows down — once you've passed a phase, you don't go back. Suitable when the path is well-known, terrible when requirements shift."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Project Management and Quality Assurance — Process Flow",
+              "content": "flowchart TD\n    A[Requirements] --> B[Design]\n    B --> C[Coding]\n    C --> D[Testing]\n    D --> E[Deployment]\n    E --> F[Maintenance]\n    F -.-> A"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Project Management and Quality Assurance — Concept Map",
+              "content": "mindmap\n  root((Project Management and Quality))\n    Process\n      Waterfall\n      Agile\n      Spiral\n    Requirements\n      FR\n      NFR\n      SRS\n    Design\n      HLD\n      LLD\n      Cohesion\n    Testing\n      Unit\n      Integration\n      System\n    Management\n      COCOMO\n      CMMI\n      Risk"
+            }
+          ],
+          "complexity": {
+            "time": "N/A — process model, not algorithm",
+            "space": "N/A"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What does COCOMO estimate?",
+              "solution": "Correct answer: Effort from KLOC",
+              "explanation": "COCOMO (Constructive Cost Model) estimates effort in person-months based on KLOC."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Project Management and Quality Assurance with reference to the key concepts.",
+              "solution": "Mention the project triangle (scope, time, cost, quality) when discussing PM → List the 5 CMMI levels when asked about process maturity → Differentiate COCOMO (LOC-based) from function points (user-facing)",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Project triangle.",
+              "modelAnswer": "scope, time, cost (quality in the middle)"
+            },
+            {
+              "marks": 2,
+              "question": "Define COCOMO.",
+              "modelAnswer": "Constructive Cost Model — estimates effort from LOC"
+            },
+            {
+              "marks": 2,
+              "question": "Define Function Points.",
+              "modelAnswer": "measure functionality from user perspective"
+            },
+            {
+              "marks": 2,
+              "question": "What is SDLC?",
+              "modelAnswer": "Software Development Life Cycle — the phases a software project goes through: Requirements, Design, Coding, Testing, Maintenance."
+            },
+            {
+              "marks": 2,
+              "question": "Define cohesion.",
+              "modelAnswer": "Cohesion measures how focused a module is on a single task. High cohesion (one task per module) is desirable."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: COCOMO basic: Effort = a × (KLOC)^b (person-months)",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Compare Waterfall and Agile. When would you choose each?",
+              "modelAnswer": "Waterfall: linear, sequential, heavy documentation, requires stable requirements — use for regulated/mission-critical systems (aerospace, medical). Agile: iterative, adaptive, customer-focused, embraces change — use for product development where requirements evolve. Choose Waterfall when the cost of change is high; Agile when customer feedback shapes the product."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between verification and validation?",
+              "modelAnswer": "Verification: 'Are we building the product right?' — checks if the software meets the spec (reviews, inspections). Validation: 'Are we building the right product?' — checks if the software meets user needs (acceptance testing). Verification is process-oriented; validation is product-oriented."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Project triangle.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define COCOMO.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: COCOMO basic: Effort = a × (KLOC)^b (person-months)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Function points: UFP × (0.65 + 0.01 × VAF) = FP",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Project Management and Quality Assurance in detail with a diagram.",
+              "modelAnswer": "Software project management involves planning, scheduling, estimating, risk management, and team coordination. Key metrics: LOC (lines of code), function points, COCOMO (Constructive Cost Model). Quality assurance includes reviews, inspections, standards (ISO 9001, CMMI), and metrics (defect density, MTTR)."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Project Management and Quality Assurance with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Project Management and Quality Assurance\n\n**One-line definition:** Software project management involves planning, scheduling, estimating, risk management, and team coordination. Key metrics: LOC (lines of code), function points, COCOMO (Constructive Cost Model). Qual\n\n**Key points:**\n\n- Project triangle: scope, time, cost (quality in the middle)\n- COCOMO: Constructive Cost Model — estimates effort from LOC\n- Function Points: measure functionality from user perspective\n- LOC: Lines of Code — simple size metric\n- Gantt chart: visual project schedule\n\n**Important formulas:**\n\n- `COCOMO basic: Effort = a × (KLOC)^b (person-months)`\n- `Function points: UFP × (0.65 + 0.01 × VAF) = FP`\n- `Defect density = defects / KLOC`\n- `MTTR = Mean Time To Repair`\n\n**Common mistake to avoid:** Underestimating project time (planning fallacy)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Project triangle: scope, time, cost (quality in the middle)",
+            "COCOMO: Constructive Cost Model — estimates effort from LOC",
+            "Function Points: measure functionality from user perspective",
+            "LOC: Lines of Code — simple size metric",
+            "Gantt chart: visual project schedule",
+            "Formula: COCOMO basic: Effort = a × (KLOC)^b (person-months)",
+            "Formula: Function points: UFP × (0.65 + 0.01 × VAF) = FP",
+            "Formula: Defect density = defects / KLOC",
+            "Formula: MTTR = Mean Time To Repair",
+            "SDLC: RDCTM phases",
+            "HCLC: High Cohesion, Low Coupling",
+            "Testing levels: Unit → Integration → System → Acceptance"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "RDCTM",
+              "expansion": "Requirements, Design, Coding, Testing, Maintenance",
+              "meaning": "The 5 SDLC phases in order."
+            },
+            {
+              "phrase": "HCLC",
+              "expansion": "High Cohesion, Low Coupling",
+              "meaning": "The golden rule of software design."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Mention the project triangle (scope, time, cost, quality) when discussing PM"
+            },
+            {
+              "type": "exam-tip",
+              "content": "List the 5 CMMI levels when asked about process maturity"
+            },
+            {
+              "type": "warning",
+              "content": "Underestimating project time (planning fallacy)"
+            },
+            {
+              "type": "warning",
+              "content": "Not tracking defects by category"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Software project management involves planning, scheduling, estimating, risk management, and team coordination. Key metrics: LOC (lines of code), function points, COCOMO (Constructive Cost Model). Quality assurance includes reviews, inspections, standards (ISO 9001, CMMI), and metrics (defect density..."
+            },
+            {
+              "type": "definition",
+              "content": "Project triangle: scope, time, cost (quality in the middle)"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Project triangle?",
+              "back": "scope, time, cost (quality in the middle)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is COCOMO?",
+              "back": "Constructive Cost Model — estimates effort from LOC",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Function Points?",
+              "back": "measure functionality from user perspective",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is LOC?",
+              "back": "Lines of Code — simple size metric",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Gantt chart?",
+              "back": "visual project schedule",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is PERT/CPM?",
+              "back": "critical path method for scheduling",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Risk management?",
+              "back": "identify, analyse, mitigate, monitor",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is CMMI?",
+              "back": "Capability Maturity Model Integration — 5 levels of process maturity",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Software project management involves planning, scheduling, estimating, risk management, and team coordination. Key metrics: LOC (lines of code), function points, COCOMO (Constructive Cost Model). Quality assurance includes reviews, inspections, standards (ISO 9001, CMMI), and metrics (defect density"
+            },
+            {
+              "style": "detailed",
+              "content": "Software project management involves planning, scheduling, estimating, risk management, and team coordination. Key metrics: LOC (lines of code), function points, COCOMO (Constructive Cost Model). Quality assurance includes reviews, inspections, standards (ISO 9001, CMMI), and metrics (defect density, MTTR).\n\nKey concepts: Project triangle: scope, time, cost (quality in the middle), COCOMO: Constructive Cost Model — estimates effort from LOC, Function Points: measure functionality from user perspective."
+            }
+          ],
+          "recommendedNextLessons": []
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "# Software Engineering — Quick Revision\n\n**Subject code:** R23CP2409  \n**Semester:** 5  \n**Credits:** 4  \n\n## Unit 1: Software Engineering Fundamentals (20%)\n### Introduction to Software Engineering\nSoftware Engineering is the systematic application of engineering principles to the development of software. It addresses the 'software crisis' — cost overruns, missed deadlines, poor quality — through processes, methodologies, tools, and best practices. IEEE defines it as 'the a...\n\n**Formulas:**\n- `Software = Programs + Data + Documentation`\n- `SDLC phases: Requirement → Design → Coding → Testing → Maintenance`\n- `Cost of fixing a bug grows ~10x per phase later it's found`\n\n## Unit 2: Software Process Models (25%)\n### Software Process Models\nA software process model is a simplified representation of a software process. Common models: Waterfall (linear, sequential), Incremental (build in pieces), Spiral (risk-driven iterations), Prototyping (build early sample), Agile (adaptive, iterative). Each model has different co...\n\n**Formulas:**\n- `Waterfall phases: Requirements → Design → Implementation → Testing → Maintenance`\n- `Spiral sectors: Planning → Risk Analysis → Engineering → Evaluation`\n- `Agile manifesto: Individuals & interactions > Processes & tools`\n\n## Unit 3: Requirements Engineering (20%)\n### Requirements Engineering\nRequirements engineering is the process of defining, documenting, and maintaining software requirements. It includes elicitation (gathering), analysis, specification (SRS document), validation, and management. Requirements are classified as functional (what the system does) and n...\n\n**Formulas:**\n- `Requirements engineering: Elicitation → Analysis → Specification → Validation → Management`\n- `FR examples: 'system shall allow user to upload a file'`\n- `NFR examples: 'response time < 2 seconds', 'availability 99.9%'`\n\n## Unit 4: Software Design and Testing (20%)\n### Software Design and Testing\nSoftware design transforms requirements into a structure that can be implemented. It includes architectural design (high-level), high-level design (modules), and detailed design (classes/algorithms). Testing verifies the software meets requirements — unit testing (individual modu...\n\n**Formulas:**\n- `Design principle: High Cohesion, Low Coupling`\n- `Testing levels: Unit → Integration → System → Acceptance`\n- `Black box: test via inputs/outputs (no code knowledge)`\n\n## Unit 5: Project Management and Quality (15%)\n### Project Management and Quality Assurance\nSoftware project management involves planning, scheduling, estimating, risk management, and team coordination. Key metrics: LOC (lines of code), function points, COCOMO (Constructive Cost Model). Quality assurance includes reviews, inspections, standards (ISO 9001, CMMI), and met...\n\n**Formulas:**\n- `COCOMO basic: Effort = a × (KLOC)^b (person-months)`\n- `Function points: UFP × (0.65 + 0.01 × VAF) = FP`\n- `Defect density = defects / KLOC`\n",
+  "interviewBank": [
+    {
+      "marks": 5,
+      "question": "Explain the formula: Software = Programs + Data + Documentation",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 10,
+      "question": "Compare Waterfall and Agile. When would you choose each?",
+      "modelAnswer": "Waterfall: linear, sequential, heavy documentation, requires stable requirements — use for regulated/mission-critical systems (aerospace, medical). Agile: iterative, adaptive, customer-focused, embraces change — use for product development where requirements evolve. Choose Waterfall when the cost of change is high; Agile when customer feedback shapes the product."
+    },
+    {
+      "marks": 5,
+      "question": "What is the difference between verification and validation?",
+      "modelAnswer": "Verification: 'Are we building the product right?' — checks if the software meets the spec (reviews, inspections). Validation: 'Are we building the right product?' — checks if the software meets user needs (acceptance testing). Verification is process-oriented; validation is product-oriented."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: Waterfall phases: Requirements → Design → Implementation → Testing → Maintenance",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: Requirements engineering: Elicitation → Analysis → Specification → Validation → Management",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: Design principle: High Cohesion, Low Coupling",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: COCOMO basic: Effort = a × (KLOC)^b (person-months)",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    }
+  ],
+  "vivaBank": [
+    {
+      "marks": 2,
+      "question": "Define Software Engineering.",
+      "modelAnswer": "systematic approach to software development"
+    },
+    {
+      "marks": 2,
+      "question": "Define Software Crisis.",
+      "modelAnswer": "projects over budget, late, low quality (1968 NATO conference)"
+    },
+    {
+      "marks": 2,
+      "question": "Define SDLC.",
+      "modelAnswer": "Software Development Life Cycle — phases from requirement to maintenance"
+    },
+    {
+      "marks": 2,
+      "question": "What is SDLC?",
+      "modelAnswer": "Software Development Life Cycle — the phases a software project goes through: Requirements, Design, Coding, Testing, Maintenance."
+    },
+    {
+      "marks": 2,
+      "question": "Define cohesion.",
+      "modelAnswer": "Cohesion measures how focused a module is on a single task. High cohesion (one task per module) is desirable."
+    },
+    {
+      "marks": 2,
+      "question": "Define Waterfall.",
+      "modelAnswer": "linear, sequential — requirements → design → code → test → deploy"
+    },
+    {
+      "marks": 2,
+      "question": "Define Incremental.",
+      "modelAnswer": "build in working increments"
+    },
+    {
+      "marks": 2,
+      "question": "Define Spiral.",
+      "modelAnswer": "iterative with risk analysis at each loop (Boehm)"
+    },
+    {
+      "marks": 2,
+      "question": "Define Functional Requirement (FR).",
+      "modelAnswer": "what the system must do (e.g., 'user can login')"
+    },
+    {
+      "marks": 2,
+      "question": "Define Non-Functional Requirement (NFR).",
+      "modelAnswer": "quality attributes (performance, security)"
+    },
+    {
+      "marks": 2,
+      "question": "Define SRS.",
+      "modelAnswer": "Software Requirements Specification — formal document"
+    },
+    {
+      "marks": 2,
+      "question": "Define Architectural Design.",
+      "modelAnswer": "high-level structure (client-server, MVC, microservices)"
+    }
+  ],
+  "pyqBank": [
+    {
+      "marks": 10,
+      "question": "Explain Introduction to Software Engineering in detail with a diagram.",
+      "modelAnswer": "Software Engineering is the systematic application of engineering principles to the development of software. It addresses the 'software crisis' — cost overruns, missed deadlines, poor quality — through processes, methodologies, tools, and best practices. IEEE defines it as 'the application of a systematic, disciplined, quantifiable approach to the development, operation, and maintenance of software.'"
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Introduction to Software Engineering with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Software Process Models in detail with a diagram.",
+      "modelAnswer": "A software process model is a simplified representation of a software process. Common models: Waterfall (linear, sequential), Incremental (build in pieces), Spiral (risk-driven iterations), Prototyping (build early sample), Agile (adaptive, iterative). Each model has different cost, risk, and flexibility trade-offs."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Software Process Models with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Requirements Engineering in detail with a diagram.",
+      "modelAnswer": "Requirements engineering is the process of defining, documenting, and maintaining software requirements. It includes elicitation (gathering), analysis, specification (SRS document), validation, and management. Requirements are classified as functional (what the system does) and non-functional (how well it does it)."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Requirements Engineering with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Software Design and Testing in detail with a diagram.",
+      "modelAnswer": "Software design transforms requirements into a structure that can be implemented. It includes architectural design (high-level), high-level design (modules), and detailed design (classes/algorithms). Testing verifies the software meets requirements — unit testing (individual modules), integration testing (combined modules), system testing (whole system), and acceptance testing (user confirms)."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Software Design and Testing with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Project Management and Quality Assurance in detail with a diagram.",
+      "modelAnswer": "Software project management involves planning, scheduling, estimating, risk management, and team coordination. Key metrics: LOC (lines of code), function points, COCOMO (Constructive Cost Model). Quality assurance includes reviews, inspections, standards (ISO 9001, CMMI), and metrics (defect density, MTTR)."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Project Management and Quality Assurance with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    }
+  ]
+}

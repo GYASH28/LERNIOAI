@@ -1,0 +1,1331 @@
+{
+  "subjectCode": "R23CI2608",
+  "subjectName": "Computer Networks",
+  "semester": 3,
+  "credits": 4,
+  "units": [
+    {
+      "number": 1,
+      "title": "Introduction to Computer Networks",
+      "weightage": 12,
+      "lessons": [
+        {
+          "slug": "network-introduction",
+          "title": "Introduction to Computer Networks",
+          "durationMin": 25,
+          "difficulty": "easy",
+          "overview": "A computer network is a collection of interconnected devices (computers, servers, routers, switches) that can communicate and share resources. Networks are classified by size (LAN, MAN, WAN), topology (bus, star, ring, mesh), and protocol. Understanding network architecture is essential for any IT professional.",
+          "keyConcepts": [
+            "Network: A group of connected devices that share data and resources",
+            "LAN (Local Area Network): Small geographic area (office, building) — Ethernet, Wi-Fi",
+            "MAN (Metropolitan Area Network): City-wide — cable TV network",
+            "WAN (Wide Area Network): Large geographic area — Internet",
+            "PAN (Personal Area Network): Very small (Bluetooth, USB)",
+            "Topology: Physical or logical arrangement of devices (Bus, Star, Ring, Mesh, Tree)",
+            "Protocol: Set of rules governing communication (TCP, IP, HTTP, FTP)",
+            "Node: Any device on the network (computer, printer, router)",
+            "Bandwidth: Maximum data transfer rate (measured in bps, Kbps, Mbps, Gbps)",
+            "Latency: Time for data to travel from source to destination"
+          ],
+          "formulas": [
+            "Throughput = (Frames Successfully Transmitted / Total Time)",
+            "Efficiency = (Useful Data / Total Data Transmitted) × 100%",
+            "Propagation Delay = Distance / Speed of Signal",
+            "Transmission Delay = Packet Size / Bandwidth"
+          ],
+          "tables": [
+            {
+              "headers": [
+                "Topology",
+                "Advantages",
+                "Disadvantages"
+              ],
+              "rows": [
+                [
+                  "Bus",
+                  "Simple, cheap, easy to install",
+                  "Single point of failure, limited length"
+                ],
+                [
+                  "Star",
+                  "Easy to manage, fault isolation",
+                  "Central hub is a bottleneck"
+                ],
+                [
+                  "Ring",
+                  "Equal access, no collisions",
+                  "Break in ring stops all communication"
+                ],
+                [
+                  "Mesh",
+                  "High redundancy, reliable",
+                  "Expensive, complex wiring"
+                ],
+                [
+                  "Tree",
+                  "Hierarchical, scalable",
+                  "Root failure affects all"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Confusing LAN with WAN — LAN is local (building), WAN is wide (Internet)",
+            "Mixing up bandwidth (capacity) with latency (speed)",
+            "Forgetting that protocols define rules, not physical connections"
+          ],
+          "examTips": [
+            "Draw each topology diagram clearly with labels",
+            "List advantages and disadvantages of each topology",
+            "Know the 4 network types by size: PAN < LAN < MAN < WAN",
+            "Define bandwidth, latency, throughput, and efficiency"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is a computer network? List its advantages.",
+              "options": [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+              ],
+              "answer": 0,
+              "explanation": "Refer to the theory section above for the correct answer."
+            },
+            {
+              "question": "Differentiate between LAN, MAN, and WAN.",
+              "options": [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+              ],
+              "answer": 0,
+              "explanation": "Refer to the theory section above for the correct answer."
+            },
+            {
+              "question": "Explain 5 network topologies with diagrams.",
+              "options": [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+              ],
+              "answer": 0,
+              "explanation": "Refer to the theory section above for the correct answer."
+            },
+            {
+              "question": "What is a protocol? Give 5 examples.",
+              "options": [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+              ],
+              "answer": 0,
+              "explanation": "Refer to the theory section above for the correct answer."
+            }
+          ],
+          "objectives": [
+            "Understand Network and explain its significance",
+            "Understand LAN (Local Area Network) and explain its significance",
+            "Understand MAN (Metropolitan Area Network) and explain its significance",
+            "Understand WAN (Wide Area Network) and explain its significance",
+            "Understand PAN (Personal Area Network) and explain its significance",
+            "Attempt the practice quiz and viva questions on Introduction to Computer Networks"
+          ],
+          "prerequisites": [
+            "Basic understanding of what a computer network is",
+            "Familiarity with the concept of client and server",
+            "Elementary knowledge of binary numbers and addressing"
+          ],
+          "theory": "## Introduction\n\nA computer network is a collection of interconnected devices (computers, servers, routers, switches) that can communicate and share resources. Networks are classified by size (LAN, MAN, WAN), topology (bus, star, ring, mesh), and protocol. Understanding network architecture is essential for any IT professional.\n## Key Concepts\n\n- Network: A group of connected devices that share data and resources\n- LAN (Local Area Network): Small geographic area (office, building) — Ethernet, Wi-Fi\n- MAN (Metropolitan Area Network): City-wide — cable TV network\n- WAN (Wide Area Network): Large geographic area — Internet\n- PAN (Personal Area Network): Very small (Bluetooth, USB)\n- Topology: Physical or logical arrangement of devices (Bus, Star, Ring, Mesh, Tree)\n- Protocol: Set of rules governing communication (TCP, IP, HTTP, FTP)\n- Node: Any device on the network (computer, printer, router)\n- Bandwidth: Maximum data transfer rate (measured in bps, Kbps, Mbps, Gbps)\n- Latency: Time for data to travel from source to destination\n\n## Important Formulas\n\n- `Throughput = (Frames Successfully Transmitted / Total Time)`\n- `Efficiency = (Useful Data / Total Data Transmitted) × 100%`\n- `Propagation Delay = Distance / Speed of Signal`\n- `Transmission Delay = Packet Size / Bandwidth`\n\n## Comparison Tables\n\n| Topology | Advantages | Disadvantages |\n| --- | --- | --- |\n| Bus | Simple, cheap, easy to install | Single point of failure, limited length |\n| Star | Easy to manage, fault isolation | Central hub is a bottleneck |\n| Ring | Equal access, no collisions | Break in ring stops all communication |\n| Mesh | High redundancy, reliable | Expensive, complex wiring |\n| Tree | Hierarchical, scalable | Root failure affects all |\n\n\n## Summary\n\nA computer network is a collection of interconnected devices (computers, servers, routers, switches) that can communicate and share resources. Networks are classified by size (LAN, MAN, WAN), topology (bus, star, ring, mesh), and protocol. Understanding network architecture is essential for any IT professional.",
+          "analogies": [
+            {
+              "scenario": "OSI model like sending a postal letter",
+              "mapping": "Application = writing the letter, Presentation = translating, Session = opening a conversation, Transport = registered post, Network = addressing, Data Link = local sorting, Physical = the actual truck/road."
+            },
+            {
+              "scenario": "IP address like a postal address",
+              "mapping": "Network portion = city + street, Host portion = house number. Subnet mask tells the postman which part is the street vs the house. Default gateway = local post office."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Introduction to Computer Networks — Process Flow",
+              "content": "flowchart LR\n    A[Sender] -->|Application Layer| B[Data]\n    B -->|Transport: +Port| C[Segment]\n    C -->|Network: +IP| D[Packet]\n    D -->|Data Link: +MAC| E[Frame]\n    E -->|Physical: bits| F[Receiver]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Introduction to Computer Networks — Concept Map",
+              "content": "mindmap\n  root((Introduction to Computer Netwo))\n    OSI Layers\n      Physical\n      Data Link\n      Network\n      Transport\n      Session\n      Presentation\n      Application\n    Protocols\n      TCP\n      UDP\n      IP\n      HTTP"
+            }
+          ],
+          "complexity": {
+            "time": "O(n) for routing table lookup, O(1) for switching",
+            "space": "O(n) routing table + O(b) buffer per flow"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example",
+              "problem": "What is a computer network? List its advantages.",
+              "solution": "Refer to the theory section above and the key concepts. Structure your answer as: definition → explanation → example → conclusion.",
+              "explanation": "This is a sample answer outline. Expand each section with details from the lesson."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Introduction to Computer Networks with reference to the key concepts.",
+              "solution": "Draw each topology diagram clearly with labels → List advantages and disadvantages of each topology → Know the 4 network types by size: PAN < LAN < MAN < WAN",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Network.",
+              "modelAnswer": "A group of connected devices that share data and resources"
+            },
+            {
+              "marks": 2,
+              "question": "Define LAN (Local Area Network).",
+              "modelAnswer": "Small geographic area (office, building) — Ethernet, Wi-Fi"
+            },
+            {
+              "marks": 2,
+              "question": "Define MAN (Metropolitan Area Network).",
+              "modelAnswer": "City-wide — cable TV network"
+            },
+            {
+              "marks": 2,
+              "question": "What is the default subnet mask for Class C?",
+              "modelAnswer": "255.255.255.0 (or /24)."
+            },
+            {
+              "marks": 2,
+              "question": "Define a protocol.",
+              "modelAnswer": "A protocol is a set of rules governing the format and timing of communication between two devices."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Throughput = (Frames Successfully Transmitted / Total Time)",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Compare TCP and UDP. When would you use each?",
+              "modelAnswer": "TCP is reliable, connection-oriented, with flow/congestion control — use for HTTP, email, file transfer. UDP is unreliable, connectionless, low overhead — use for DNS, video streaming, online gaming where speed > reliability."
+            },
+            {
+              "marks": 5,
+              "question": "What is the three-way handshake?",
+              "modelAnswer": "TCP connection setup: client sends SYN, server replies SYN-ACK, client sends ACK. After these three packets, the connection is established."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Network.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define LAN (Local Area Network).",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Throughput = (Frames Successfully Transmitted / Total Time)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Efficiency = (Useful Data / Total Data Transmitted) × 100%",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Introduction to Computer Networks in detail with a diagram.",
+              "modelAnswer": "A computer network is a collection of interconnected devices (computers, servers, routers, switches) that can communicate and share resources. Networks are classified by size (LAN, MAN, WAN), topology (bus, star, ring, mesh), and protocol. Understanding network architecture is essential for any IT professional."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Introduction to Computer Networks with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Introduction to Computer Networks\n\n**One-line definition:** A computer network is a collection of interconnected devices (computers, servers, routers, switches) that can communicate and share resources. Networks are classified by size (LAN, MAN, WAN), topology\n\n**Key points:**\n\n- Network: A group of connected devices that share data and resources\n- LAN (Local Area Network): Small geographic area (office, building) — Ethernet, Wi-Fi\n- MAN (Metropolitan Area Network): City-wide — cable TV network\n- WAN (Wide Area Network): Large geographic area — Internet\n- PAN (Personal Area Network): Very small (Bluetooth, USB)\n\n**Important formulas:**\n\n- `Throughput = (Frames Successfully Transmitted / Total Time)`\n- `Efficiency = (Useful Data / Total Data Transmitted) × 100%`\n- `Propagation Delay = Distance / Speed of Signal`\n- `Transmission Delay = Packet Size / Bandwidth`\n\n**Common mistake to avoid:** Confusing LAN with WAN — LAN is local (building), WAN is wide (Internet)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Network: A group of connected devices that share data and resources",
+            "LAN (Local Area Network): Small geographic area (office, building) — Ethernet, Wi-Fi",
+            "MAN (Metropolitan Area Network): City-wide — cable TV network",
+            "WAN (Wide Area Network): Large geographic area — Internet",
+            "PAN (Personal Area Network): Very small (Bluetooth, USB)",
+            "Formula: Throughput = (Frames Successfully Transmitted / Total Time)",
+            "Formula: Efficiency = (Useful Data / Total Data Transmitted) × 100%",
+            "Formula: Propagation Delay = Distance / Speed of Signal",
+            "Formula: Transmission Delay = Packet Size / Bandwidth",
+            "OSI layers (bottom→top): Physical, Data Link, Network, Transport, Session, Presentation, Application",
+            "TCP: reliable, connection-oriented. UDP: fast, connectionless.",
+            "Class A: 1-126, Class B: 128-191, Class C: 192-223"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "Please Do Not Throw Sausage Pizza Away",
+              "expansion": "Physical, Data Link, Network, Transport, Session, Presentation, Application",
+              "meaning": "The 7 OSI layers from bottom to top."
+            },
+            {
+              "phrase": "All People Seem To Need Data Processing",
+              "expansion": "Application, Presentation, Session, Transport, Network, Data Link, Physical",
+              "meaning": "The 7 OSI layers from top to bottom."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Draw each topology diagram clearly with labels"
+            },
+            {
+              "type": "exam-tip",
+              "content": "List advantages and disadvantages of each topology"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing LAN with WAN — LAN is local (building), WAN is wide (Internet)"
+            },
+            {
+              "type": "warning",
+              "content": "Mixing up bandwidth (capacity) with latency (speed)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "A computer network is a collection of interconnected devices (computers, servers, routers, switches) that can communicate and share resources. Networks are classified by size (LAN, MAN, WAN), topology (bus, star, ring, mesh), and protocol. Understanding network architecture is essential for any IT p..."
+            },
+            {
+              "type": "definition",
+              "content": "Network: A group of connected devices that share data and resources"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Network?",
+              "back": "A group of connected devices that share data and resources",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is LAN (Local Area Network)?",
+              "back": "Small geographic area (office, building) — Ethernet, Wi-Fi",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is MAN (Metropolitan Area Network)?",
+              "back": "City-wide — cable TV network",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is WAN (Wide Area Network)?",
+              "back": "Large geographic area — Internet",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is PAN (Personal Area Network)?",
+              "back": "Very small (Bluetooth, USB)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Topology?",
+              "back": "Physical or logical arrangement of devices (Bus, Star, Ring, Mesh, Tree)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Protocol?",
+              "back": "Set of rules governing communication (TCP, IP, HTTP, FTP)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Node?",
+              "back": "Any device on the network (computer, printer, router)",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "A computer network is a collection of interconnected devices (computers, servers, routers, switches) that can communicate and share resources. Networks are classified by size (LAN, MAN, WAN), topology (bus, star, ring, mesh), and protocol. Understanding network architecture is essential for any IT p"
+            },
+            {
+              "style": "detailed",
+              "content": "A computer network is a collection of interconnected devices (computers, servers, routers, switches) that can communicate and share resources. Networks are classified by size (LAN, MAN, WAN), topology (bus, star, ring, mesh), and protocol. Understanding network architecture is essential for any IT professional.\n\nKey concepts: Network: A group of connected devices that share data and resources, LAN (Local Area Network): Small geographic area (office, building) — Ethernet, W, MAN (Metropolitan Area Network): City-wide — cable TV network."
+            }
+          ],
+          "recommendedNextLessons": [
+            "osi-model",
+            "ip-addressing"
+          ]
+        },
+        {
+          "slug": "osi-model",
+          "title": "OSI and TCP/IP Models",
+          "durationMin": 40,
+          "difficulty": "medium",
+          "overview": "The OSI (Open Systems Interconnection) model is a 7-layer conceptual framework that standardizes network communication. Each layer has specific functions and protocols. The TCP/IP model is a simpler 4-layer model used in practice (the Internet runs on TCP/IP). Understanding these models is critical for network troubleshooting and design.",
+          "keyConcepts": [
+            "OSI Model: 7 layers — Physical, Data Link, Network, Transport, Session, Presentation, Application",
+            "TCP/IP Model: 4 layers — Network Access, Internet, Transport, Application",
+            "Encapsulation: Each layer adds its own header to the data (PDU = Protocol Data Unit)",
+            "Physical Layer: Transmits raw bits over a medium (cables, wireless)",
+            "Data Link Layer: Node-to-node delivery, error detection (MAC addressing, switches)",
+            "Network Layer: Host-to-host delivery, routing (IP addressing, routers)",
+            "Transport Layer: End-to-end delivery, reliability (TCP, UDP, port numbers)",
+            "Session Layer: Establishes, manages, terminates sessions",
+            "Presentation Layer: Data translation, encryption, compression",
+            "Application Layer: User interface (HTTP, FTP, SMTP, DNS)"
+          ],
+          "formulas": [
+            "OSI Layers (bottom to top): Please Do Not Throw Sausage Pizza Away",
+            "TCP/IP = OSI layers 1+2 → Network Access, Layer 3 → Internet, Layer 4 → Transport, Layers 5+6+7 → Application",
+            "PDU per layer: Bits (1) → Frames (2) → Packets (3) → Segments (4) → Data (5-7)"
+          ],
+          "tables": [
+            {
+              "headers": [
+                "Layer",
+                "OSI",
+                "TCP/IP",
+                "Function",
+                "Protocol",
+                "Device"
+              ],
+              "rows": [
+                [
+                  "1",
+                  "Physical",
+                  "Network Access",
+                  "Bit transmission",
+                  "Ethernet, RS-232",
+                  "Hub, Repeater"
+                ],
+                [
+                  "2",
+                  "Data Link",
+                  "Network Access",
+                  "Frame delivery, error check",
+                  "PPP, HDLC",
+                  "Switch, Bridge"
+                ],
+                [
+                  "3",
+                  "Network",
+                  "Internet",
+                  "Packet routing",
+                  "IP, ICMP",
+                  "Router"
+                ],
+                [
+                  "4",
+                  "Transport",
+                  "Transport",
+                  "End-to-end delivery",
+                  "TCP, UDP",
+                  "Gateway"
+                ],
+                [
+                  "5",
+                  "Session",
+                  "—",
+                  "Session management",
+                  "NetBIOS, RPC",
+                  "—"
+                ],
+                [
+                  "6",
+                  "Presentation",
+                  "—",
+                  "Data format, encryption",
+                  "SSL, JPEG",
+                  "—"
+                ],
+                [
+                  "7",
+                  "Application",
+                  "Application",
+                  "User interface",
+                  "HTTP, FTP, DNS",
+                  "PC, Phone"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Confusing the order of OSI layers (Physical is bottom, Application is top)",
+            "Mixing up which devices operate at which layer (switch = Layer 2, router = Layer 3)",
+            "Forgetting that TCP is reliable (connection-oriented) and UDP is unreliable (connectionless)"
+          ],
+          "examTips": [
+            "Use the mnemonic: Please Do Not Throw Sausage Pizza Away (Physical → Application)",
+            "Draw the OSI model with all 7 layers, protocols, and devices",
+            "Compare TCP vs UDP: TCP = reliable, ordered, 3-way handshake; UDP = fast, no guarantee",
+            "Show how data is encapsulated as it moves down the layers"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Explain the OSI model with all 7 layers and their functions.",
+              "options": [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+              ],
+              "answer": 0,
+              "explanation": "Refer to the theory section above for the correct answer."
+            },
+            {
+              "question": "Compare the OSI and TCP/IP models.",
+              "options": [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+              ],
+              "answer": 0,
+              "explanation": "Refer to the theory section above for the correct answer."
+            },
+            {
+              "question": "What is the difference between TCP and UDP?",
+              "options": [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+              ],
+              "answer": 0,
+              "explanation": "Refer to the theory section above for the correct answer."
+            },
+            {
+              "question": "Which devices operate at Layer 2 and Layer 3? Give examples.",
+              "options": [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+              ],
+              "answer": 0,
+              "explanation": "Refer to the theory section above for the correct answer."
+            },
+            {
+              "question": "Explain the process of data encapsulation in the OSI model.",
+              "options": [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+              ],
+              "answer": 0,
+              "explanation": "Refer to the theory section above for the correct answer."
+            }
+          ],
+          "objectives": [
+            "Understand OSI Model and explain its significance",
+            "Understand TCP/IP Model and explain its significance",
+            "Understand Encapsulation and explain its significance",
+            "Understand Physical Layer and explain its significance",
+            "Understand Data Link Layer and explain its significance",
+            "Attempt the practice quiz and viva questions on OSI and TCP/IP Models"
+          ],
+          "prerequisites": [
+            "Basic understanding of what a computer network is",
+            "Familiarity with the concept of client and server",
+            "Elementary knowledge of binary numbers and addressing",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nThe OSI (Open Systems Interconnection) model is a 7-layer conceptual framework that standardizes network communication. Each layer has specific functions and protocols. The TCP/IP model is a simpler 4-layer model used in practice (the Internet runs on TCP/IP). Understanding these models is critical for network troubleshooting and design.\n## Key Concepts\n\n- OSI Model: 7 layers — Physical, Data Link, Network, Transport, Session, Presentation, Application\n- TCP/IP Model: 4 layers — Network Access, Internet, Transport, Application\n- Encapsulation: Each layer adds its own header to the data (PDU = Protocol Data Unit)\n- Physical Layer: Transmits raw bits over a medium (cables, wireless)\n- Data Link Layer: Node-to-node delivery, error detection (MAC addressing, switches)\n- Network Layer: Host-to-host delivery, routing (IP addressing, routers)\n- Transport Layer: End-to-end delivery, reliability (TCP, UDP, port numbers)\n- Session Layer: Establishes, manages, terminates sessions\n- Presentation Layer: Data translation, encryption, compression\n- Application Layer: User interface (HTTP, FTP, SMTP, DNS)\n\n## Important Formulas\n\n- `OSI Layers (bottom to top): Please Do Not Throw Sausage Pizza Away`\n- `TCP/IP = OSI layers 1+2 → Network Access, Layer 3 → Internet, Layer 4 → Transport, Layers 5+6+7 → Application`\n- `PDU per layer: Bits (1) → Frames (2) → Packets (3) → Segments (4) → Data (5-7)`\n\n## Comparison Tables\n\n| Layer | OSI | TCP/IP | Function | Protocol | Device |\n| --- | --- | --- | --- | --- | --- |\n| 1 | Physical | Network Access | Bit transmission | Ethernet, RS-232 | Hub, Repeater |\n| 2 | Data Link | Network Access | Frame delivery, error check | PPP, HDLC | Switch, Bridge |\n| 3 | Network | Internet | Packet routing | IP, ICMP | Router |\n| 4 | Transport | Transport | End-to-end delivery | TCP, UDP | Gateway |\n| 5 | Session | — | Session management | NetBIOS, RPC | — |\n| 6 | Presentation | — | Data format, encryption | SSL, JPEG | — |\n| 7 | Application | Application | User interface | HTTP, FTP, DNS | PC, Phone |\n\n\n## Summary\n\nThe OSI (Open Systems Interconnection) model is a 7-layer conceptual framework that standardizes network communication. Each layer has specific functions and protocols. The TCP/IP model is a simpler 4-layer model used in practice (the Internet runs on TCP/IP). Understanding these models is critical for network troubleshooting and design.",
+          "analogies": [
+            {
+              "scenario": "OSI model like sending a postal letter",
+              "mapping": "Application = writing the letter, Presentation = translating, Session = opening a conversation, Transport = registered post, Network = addressing, Data Link = local sorting, Physical = the actual truck/road."
+            },
+            {
+              "scenario": "IP address like a postal address",
+              "mapping": "Network portion = city + street, Host portion = house number. Subnet mask tells the postman which part is the street vs the house. Default gateway = local post office."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "OSI and TCP/IP Models — Process Flow",
+              "content": "flowchart LR\n    A[Sender] -->|Application Layer| B[Data]\n    B -->|Transport: +Port| C[Segment]\n    C -->|Network: +IP| D[Packet]\n    D -->|Data Link: +MAC| E[Frame]\n    E -->|Physical: bits| F[Receiver]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "OSI and TCP/IP Models — Concept Map",
+              "content": "mindmap\n  root((OSI and TCP/IP Models))\n    OSI Layers\n      Physical\n      Data Link\n      Network\n      Transport\n      Session\n      Presentation\n      Application\n    Protocols\n      TCP\n      UDP\n      IP\n      HTTP"
+            }
+          ],
+          "complexity": {
+            "time": "O(n) for routing table lookup, O(1) for switching",
+            "space": "O(n) routing table + O(b) buffer per flow"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example",
+              "problem": "Explain the OSI model with all 7 layers and their functions.",
+              "solution": "Refer to the theory section above and the key concepts. Structure your answer as: definition → explanation → example → conclusion.",
+              "explanation": "This is a sample answer outline. Expand each section with details from the lesson."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain OSI and TCP/IP Models with reference to the key concepts.",
+              "solution": "Use the mnemonic: Please Do Not Throw Sausage Pizza Away (Physical → Application) → Draw the OSI model with all 7 layers, protocols, and devices → Compare TCP vs UDP: TCP = reliable, ordered, 3-way handshake; UDP = fast, no guarantee",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define OSI Model.",
+              "modelAnswer": "7 layers — Physical, Data Link, Network, Transport, Session, Presentation, Application"
+            },
+            {
+              "marks": 2,
+              "question": "Define TCP/IP Model.",
+              "modelAnswer": "4 layers — Network Access, Internet, Transport, Application"
+            },
+            {
+              "marks": 2,
+              "question": "Define Encapsulation.",
+              "modelAnswer": "Each layer adds its own header to the data (PDU = Protocol Data Unit)"
+            },
+            {
+              "marks": 2,
+              "question": "What is the default subnet mask for Class C?",
+              "modelAnswer": "255.255.255.0 (or /24)."
+            },
+            {
+              "marks": 2,
+              "question": "Define a protocol.",
+              "modelAnswer": "A protocol is a set of rules governing the format and timing of communication between two devices."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: OSI Layers (bottom to top): Please Do Not Throw Sausage Pizza Away",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Compare TCP and UDP. When would you use each?",
+              "modelAnswer": "TCP is reliable, connection-oriented, with flow/congestion control — use for HTTP, email, file transfer. UDP is unreliable, connectionless, low overhead — use for DNS, video streaming, online gaming where speed > reliability."
+            },
+            {
+              "marks": 5,
+              "question": "What is the three-way handshake?",
+              "modelAnswer": "TCP connection setup: client sends SYN, server replies SYN-ACK, client sends ACK. After these three packets, the connection is established."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define OSI Model.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define TCP/IP Model.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: OSI Layers (bottom to top): Please Do Not Throw Sausage Pizza Away",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: TCP/IP = OSI layers 1+2 → Network Access, Layer 3 → Internet, Layer 4 → Transport, Layers 5+6+7 → Application",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain OSI and TCP/IP Models in detail with a diagram.",
+              "modelAnswer": "The OSI (Open Systems Interconnection) model is a 7-layer conceptual framework that standardizes network communication. Each layer has specific functions and protocols. The TCP/IP model is a simpler 4-layer model used in practice (the Internet runs on TCP/IP). Understanding these models is critical for network troubleshooting and design."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss OSI and TCP/IP Models with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — OSI and TCP/IP Models\n\n**One-line definition:** The OSI (Open Systems Interconnection) model is a 7-layer conceptual framework that standardizes network communication. Each layer has specific functions and protocols. The TCP/IP model is a simpler 4\n\n**Key points:**\n\n- OSI Model: 7 layers — Physical, Data Link, Network, Transport, Session, Presentation, Application\n- TCP/IP Model: 4 layers — Network Access, Internet, Transport, Application\n- Encapsulation: Each layer adds its own header to the data (PDU = Protocol Data Unit)\n- Physical Layer: Transmits raw bits over a medium (cables, wireless)\n- Data Link Layer: Node-to-node delivery, error detection (MAC addressing, switches)\n\n**Important formulas:**\n\n- `OSI Layers (bottom to top): Please Do Not Throw Sausage Pizza Away`\n- `TCP/IP = OSI layers 1+2 → Network Access, Layer 3 → Internet, Layer 4 → Transport, Layers 5+6+7 → Application`\n- `PDU per layer: Bits (1) → Frames (2) → Packets (3) → Segments (4) → Data (5-7)`\n\n**Common mistake to avoid:** Confusing the order of OSI layers (Physical is bottom, Application is top)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "OSI Model: 7 layers — Physical, Data Link, Network, Transport, Session, Presentation, Application",
+            "TCP/IP Model: 4 layers — Network Access, Internet, Transport, Application",
+            "Encapsulation: Each layer adds its own header to the data (PDU = Protocol Data Unit)",
+            "Physical Layer: Transmits raw bits over a medium (cables, wireless)",
+            "Data Link Layer: Node-to-node delivery, error detection (MAC addressing, switches)",
+            "Formula: OSI Layers (bottom to top): Please Do Not Throw Sausage Pizza Away",
+            "Formula: TCP/IP = OSI layers 1+2 → Network Access, Layer 3 → Internet, Layer 4 → Transport, Layers 5+6+7 → Application",
+            "Formula: PDU per layer: Bits (1) → Frames (2) → Packets (3) → Segments (4) → Data (5-7)",
+            "OSI layers (bottom→top): Physical, Data Link, Network, Transport, Session, Presentation, Application",
+            "TCP: reliable, connection-oriented. UDP: fast, connectionless.",
+            "Class A: 1-126, Class B: 128-191, Class C: 192-223"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "Please Do Not Throw Sausage Pizza Away",
+              "expansion": "Physical, Data Link, Network, Transport, Session, Presentation, Application",
+              "meaning": "The 7 OSI layers from bottom to top."
+            },
+            {
+              "phrase": "All People Seem To Need Data Processing",
+              "expansion": "Application, Presentation, Session, Transport, Network, Data Link, Physical",
+              "meaning": "The 7 OSI layers from top to bottom."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Use the mnemonic: Please Do Not Throw Sausage Pizza Away (Physical → Application)"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw the OSI model with all 7 layers, protocols, and devices"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing the order of OSI layers (Physical is bottom, Application is top)"
+            },
+            {
+              "type": "warning",
+              "content": "Mixing up which devices operate at which layer (switch = Layer 2, router = Layer 3)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "The OSI (Open Systems Interconnection) model is a 7-layer conceptual framework that standardizes network communication. Each layer has specific functions and protocols. The TCP/IP model is a simpler 4-layer model used in practice (the Internet runs on TCP/IP). Understanding these models is critical ..."
+            },
+            {
+              "type": "definition",
+              "content": "OSI Model: 7 layers — Physical, Data Link, Network, Transport, Session, Presentation, Application"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is OSI Model?",
+              "back": "7 layers — Physical, Data Link, Network, Transport, Session, Presentation, Application",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is TCP/IP Model?",
+              "back": "4 layers — Network Access, Internet, Transport, Application",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Encapsulation?",
+              "back": "Each layer adds its own header to the data (PDU = Protocol Data Unit)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Physical Layer?",
+              "back": "Transmits raw bits over a medium (cables, wireless)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Data Link Layer?",
+              "back": "Node-to-node delivery, error detection (MAC addressing, switches)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Network Layer?",
+              "back": "Host-to-host delivery, routing (IP addressing, routers)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Transport Layer?",
+              "back": "End-to-end delivery, reliability (TCP, UDP, port numbers)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Session Layer?",
+              "back": "Establishes, manages, terminates sessions",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "The OSI (Open Systems Interconnection) model is a 7-layer conceptual framework that standardizes network communication. Each layer has specific functions and protocols. The TCP/IP model is a simpler 4-layer model used in practice (the Internet runs on TCP/IP). Understanding these models is critical "
+            },
+            {
+              "style": "detailed",
+              "content": "The OSI (Open Systems Interconnection) model is a 7-layer conceptual framework that standardizes network communication. Each layer has specific functions and protocols. The TCP/IP model is a simpler 4-layer model used in practice (the Internet runs on TCP/IP). Understanding these models is critical for network troubleshooting and design.\n\nKey concepts: OSI Model: 7 layers — Physical, Data Link, Network, Transport, Session, Presenta, TCP/IP Model: 4 layers — Network Access, Internet, Transport, Application, Encapsulation: Each layer adds its own header to the data (PDU = Protocol Data U."
+            }
+          ],
+          "recommendedNextLessons": [
+            "ip-addressing"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "IP Addressing and Routing",
+      "weightage": 18,
+      "lessons": [
+        {
+          "slug": "ip-addressing",
+          "title": "IP Addressing and Subnetting",
+          "durationMin": 35,
+          "difficulty": "hard",
+          "overview": "An IP (Internet Protocol) address is a unique identifier assigned to each device on a network. IPv4 uses 32-bit addresses (4 billion addresses), while IPv6 uses 128-bit addresses. IP addresses are divided into classes (A, B, C, D, E), and subnetting allows networks to be divided into smaller sub-networks for efficient address utilization.",
+          "keyConcepts": [
+            "IPv4: 32-bit address written as 4 octets (e.g., 192.168.1.1)",
+            "IPv6: 128-bit address written as 8 groups of hex digits (e.g., 2001:0db8:85a3::)",
+            "IP Classes: A (1-126), B (128-191), C (192-223), D (multicast), E (experimental)",
+            "Subnet Mask: Defines network and host portions (e.g., 255.255.255.0 = /24)",
+            "Subnetting: Dividing a large network into smaller sub-networks",
+            "CIDR: Classless Inter-Domain Routing (e.g., 192.168.1.0/24)",
+            "Private IP Ranges: 10.x.x.x, 172.16-31.x.x, 192.168.x.x (not routable on Internet)",
+            "NAT: Network Address Translation — maps private IPs to public IPs",
+            "DHCP: Dynamic Host Configuration Protocol — assigns IP addresses automatically",
+            "DNS: Domain Name System — maps domain names to IP addresses"
+          ],
+          "formulas": [
+            "Network Address = IP AND Subnet Mask",
+            "Broadcast Address = Network Address OR NOT(Subnet Mask)",
+            "Number of Subnets = 2^n (n = bits borrowed for subnetting)",
+            "Number of Hosts per Subnet = 2^h - 2 (h = host bits, -2 for network and broadcast)",
+            "CIDR: /n means n bits for network, (32-n) bits for hosts"
+          ],
+          "tables": [
+            {
+              "headers": [
+                "Class",
+                "First Octet",
+                "Network Bits",
+                "Host Bits",
+                "Max Networks",
+                "Max Hosts/Network"
+              ],
+              "rows": [
+                [
+                  "A",
+                  "1-126",
+                  "8",
+                  "24",
+                  "126",
+                  "16,777,214"
+                ],
+                [
+                  "B",
+                  "128-191",
+                  "16",
+                  "16",
+                  "16,384",
+                  "65,534"
+                ],
+                [
+                  "C",
+                  "192-223",
+                  "24",
+                  "8",
+                  "2,097,152",
+                  "254"
+                ],
+                [
+                  "D",
+                  "224-239",
+                  "—",
+                  "—",
+                  "—",
+                  "Multicast"
+                ],
+                [
+                  "E",
+                  "240-255",
+                  "—",
+                  "—",
+                  "—",
+                  "Experimental"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Forgetting to subtract 2 from the host count (network + broadcast addresses)",
+            "Confusing network address with first usable host address",
+            "Not understanding that 127.x.x.x is loopback (localhost), not Class A"
+          ],
+          "examTips": [
+            "Memorize the class ranges: A (1-126), B (128-191), C (192-223)",
+            "For subnetting: identify borrowed bits, then use 2^n for subnets and 2^h-2 for hosts",
+            "Practice converting between decimal and binary for subnet masks",
+            "Know private IP ranges and what NAT does"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is an IP address? Explain IPv4 vs IPv6.",
+              "options": [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+              ],
+              "answer": 0,
+              "explanation": "Refer to the theory section above for the correct answer."
+            },
+            {
+              "question": "List the IP address classes with their ranges.",
+              "options": [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+              ],
+              "answer": 0,
+              "explanation": "Refer to the theory section above for the correct answer."
+            },
+            {
+              "question": "Given 192.168.1.0/26, find: number of subnets, hosts per subnet, network and broadcast addresses.",
+              "options": [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+              ],
+              "answer": 0,
+              "explanation": "Refer to the theory section above for the correct answer."
+            },
+            {
+              "question": "What is subnetting? Why is it used?",
+              "options": [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+              ],
+              "answer": 0,
+              "explanation": "Refer to the theory section above for the correct answer."
+            },
+            {
+              "question": "Explain NAT and DHCP with their purposes.",
+              "options": [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+              ],
+              "answer": 0,
+              "explanation": "Refer to the theory section above for the correct answer."
+            }
+          ],
+          "objectives": [
+            "Understand IPv4 and explain its significance",
+            "Understand IPv6 and explain its significance",
+            "Understand IP Classes and explain its significance",
+            "Understand Subnet Mask and explain its significance",
+            "Understand Subnetting and explain its significance",
+            "Attempt the practice quiz and viva questions on IP Addressing and Subnetting"
+          ],
+          "prerequisites": [
+            "Basic understanding of what a computer network is",
+            "Familiarity with the concept of client and server",
+            "Elementary knowledge of binary numbers and addressing",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nAn IP (Internet Protocol) address is a unique identifier assigned to each device on a network. IPv4 uses 32-bit addresses (4 billion addresses), while IPv6 uses 128-bit addresses. IP addresses are divided into classes (A, B, C, D, E), and subnetting allows networks to be divided into smaller sub-networks for efficient address utilization.\n## Key Concepts\n\n- IPv4: 32-bit address written as 4 octets (e.g., 192.168.1.1)\n- IPv6: 128-bit address written as 8 groups of hex digits (e.g., 2001:0db8:85a3::)\n- IP Classes: A (1-126), B (128-191), C (192-223), D (multicast), E (experimental)\n- Subnet Mask: Defines network and host portions (e.g., 255.255.255.0 = /24)\n- Subnetting: Dividing a large network into smaller sub-networks\n- CIDR: Classless Inter-Domain Routing (e.g., 192.168.1.0/24)\n- Private IP Ranges: 10.x.x.x, 172.16-31.x.x, 192.168.x.x (not routable on Internet)\n- NAT: Network Address Translation — maps private IPs to public IPs\n- DHCP: Dynamic Host Configuration Protocol — assigns IP addresses automatically\n- DNS: Domain Name System — maps domain names to IP addresses\n\n## Important Formulas\n\n- `Network Address = IP AND Subnet Mask`\n- `Broadcast Address = Network Address OR NOT(Subnet Mask)`\n- `Number of Subnets = 2^n (n = bits borrowed for subnetting)`\n- `Number of Hosts per Subnet = 2^h - 2 (h = host bits, -2 for network and broadcast)`\n- `CIDR: /n means n bits for network, (32-n) bits for hosts`\n\n## Comparison Tables\n\n| Class | First Octet | Network Bits | Host Bits | Max Networks | Max Hosts/Network |\n| --- | --- | --- | --- | --- | --- |\n| A | 1-126 | 8 | 24 | 126 | 16,777,214 |\n| B | 128-191 | 16 | 16 | 16,384 | 65,534 |\n| C | 192-223 | 24 | 8 | 2,097,152 | 254 |\n| D | 224-239 | — | — | — | Multicast |\n| E | 240-255 | — | — | — | Experimental |\n\n\n## Summary\n\nAn IP (Internet Protocol) address is a unique identifier assigned to each device on a network. IPv4 uses 32-bit addresses (4 billion addresses), while IPv6 uses 128-bit addresses. IP addresses are divided into classes (A, B, C, D, E), and subnetting allows networks to be divided into smaller sub-networks for efficient address utilization.",
+          "analogies": [
+            {
+              "scenario": "OSI model like sending a postal letter",
+              "mapping": "Application = writing the letter, Presentation = translating, Session = opening a conversation, Transport = registered post, Network = addressing, Data Link = local sorting, Physical = the actual truck/road."
+            },
+            {
+              "scenario": "IP address like a postal address",
+              "mapping": "Network portion = city + street, Host portion = house number. Subnet mask tells the postman which part is the street vs the house. Default gateway = local post office."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "IP Addressing and Subnetting — Process Flow",
+              "content": "flowchart LR\n    A[Sender] -->|Application Layer| B[Data]\n    B -->|Transport: +Port| C[Segment]\n    C -->|Network: +IP| D[Packet]\n    D -->|Data Link: +MAC| E[Frame]\n    E -->|Physical: bits| F[Receiver]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "IP Addressing and Subnetting — Concept Map",
+              "content": "mindmap\n  root((IP Addressing and Subnetting))\n    OSI Layers\n      Physical\n      Data Link\n      Network\n      Transport\n      Session\n      Presentation\n      Application\n    Protocols\n      TCP\n      UDP\n      IP\n      HTTP"
+            }
+          ],
+          "complexity": {
+            "time": "O(n) for routing table lookup, O(1) for switching",
+            "space": "O(n) routing table + O(b) buffer per flow"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example",
+              "problem": "What is an IP address? Explain IPv4 vs IPv6.",
+              "solution": "Refer to the theory section above and the key concepts. Structure your answer as: definition → explanation → example → conclusion.",
+              "explanation": "This is a sample answer outline. Expand each section with details from the lesson."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain IP Addressing and Subnetting with reference to the key concepts.",
+              "solution": "Memorize the class ranges: A (1-126), B (128-191), C (192-223) → For subnetting: identify borrowed bits, then use 2^n for subnets and 2^h-2 for hosts → Practice converting between decimal and binary for subnet masks",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define IPv4.",
+              "modelAnswer": "32-bit address written as 4 octets (e.g., 192.168.1.1)"
+            },
+            {
+              "marks": 2,
+              "question": "Define IPv6.",
+              "modelAnswer": "128-bit address written as 8 groups of hex digits (e.g., 2001:0db8:85a3::)"
+            },
+            {
+              "marks": 2,
+              "question": "Define IP Classes.",
+              "modelAnswer": "A (1-126), B (128-191), C (192-223), D (multicast), E (experimental)"
+            },
+            {
+              "marks": 2,
+              "question": "What is the default subnet mask for Class C?",
+              "modelAnswer": "255.255.255.0 (or /24)."
+            },
+            {
+              "marks": 2,
+              "question": "Define a protocol.",
+              "modelAnswer": "A protocol is a set of rules governing the format and timing of communication between two devices."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Network Address = IP AND Subnet Mask",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Compare TCP and UDP. When would you use each?",
+              "modelAnswer": "TCP is reliable, connection-oriented, with flow/congestion control — use for HTTP, email, file transfer. UDP is unreliable, connectionless, low overhead — use for DNS, video streaming, online gaming where speed > reliability."
+            },
+            {
+              "marks": 5,
+              "question": "What is the three-way handshake?",
+              "modelAnswer": "TCP connection setup: client sends SYN, server replies SYN-ACK, client sends ACK. After these three packets, the connection is established."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define IPv4.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define IPv6.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Network Address = IP AND Subnet Mask",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Broadcast Address = Network Address OR NOT(Subnet Mask)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain IP Addressing and Subnetting in detail with a diagram.",
+              "modelAnswer": "An IP (Internet Protocol) address is a unique identifier assigned to each device on a network. IPv4 uses 32-bit addresses (4 billion addresses), while IPv6 uses 128-bit addresses. IP addresses are divided into classes (A, B, C, D, E), and subnetting allows networks to be divided into smaller sub-networks for efficient address utilization."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss IP Addressing and Subnetting with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — IP Addressing and Subnetting\n\n**One-line definition:** An IP (Internet Protocol) address is a unique identifier assigned to each device on a network. IPv4 uses 32-bit addresses (4 billion addresses), while IPv6 uses 128-bit addresses. IP addresses are div\n\n**Key points:**\n\n- IPv4: 32-bit address written as 4 octets (e.g., 192.168.1.1)\n- IPv6: 128-bit address written as 8 groups of hex digits (e.g., 2001:0db8:85a3::)\n- IP Classes: A (1-126), B (128-191), C (192-223), D (multicast), E (experimental)\n- Subnet Mask: Defines network and host portions (e.g., 255.255.255.0 = /24)\n- Subnetting: Dividing a large network into smaller sub-networks\n\n**Important formulas:**\n\n- `Network Address = IP AND Subnet Mask`\n- `Broadcast Address = Network Address OR NOT(Subnet Mask)`\n- `Number of Subnets = 2^n (n = bits borrowed for subnetting)`\n- `Number of Hosts per Subnet = 2^h - 2 (h = host bits, -2 for network and broadcast)`\n- `CIDR: /n means n bits for network, (32-n) bits for hosts`\n\n**Common mistake to avoid:** Forgetting to subtract 2 from the host count (network + broadcast addresses)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "IPv4: 32-bit address written as 4 octets (e.g., 192.168.1.1)",
+            "IPv6: 128-bit address written as 8 groups of hex digits (e.g., 2001:0db8:85a3::)",
+            "IP Classes: A (1-126), B (128-191), C (192-223), D (multicast), E (experimental)",
+            "Subnet Mask: Defines network and host portions (e.g., 255.255.255.0 = /24)",
+            "Subnetting: Dividing a large network into smaller sub-networks",
+            "Formula: Network Address = IP AND Subnet Mask",
+            "Formula: Broadcast Address = Network Address OR NOT(Subnet Mask)",
+            "Formula: Number of Subnets = 2^n (n = bits borrowed for subnetting)",
+            "Formula: Number of Hosts per Subnet = 2^h - 2 (h = host bits, -2 for network and broadcast)",
+            "Formula: CIDR: /n means n bits for network, (32-n) bits for hosts",
+            "OSI layers (bottom→top): Physical, Data Link, Network, Transport, Session, Presentation, Application",
+            "TCP: reliable, connection-oriented. UDP: fast, connectionless.",
+            "Class A: 1-126, Class B: 128-191, Class C: 192-223"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "Please Do Not Throw Sausage Pizza Away",
+              "expansion": "Physical, Data Link, Network, Transport, Session, Presentation, Application",
+              "meaning": "The 7 OSI layers from bottom to top."
+            },
+            {
+              "phrase": "All People Seem To Need Data Processing",
+              "expansion": "Application, Presentation, Session, Transport, Network, Data Link, Physical",
+              "meaning": "The 7 OSI layers from top to bottom."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Memorize the class ranges: A (1-126), B (128-191), C (192-223)"
+            },
+            {
+              "type": "exam-tip",
+              "content": "For subnetting: identify borrowed bits, then use 2^n for subnets and 2^h-2 for hosts"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting to subtract 2 from the host count (network + broadcast addresses)"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing network address with first usable host address"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "An IP (Internet Protocol) address is a unique identifier assigned to each device on a network. IPv4 uses 32-bit addresses (4 billion addresses), while IPv6 uses 128-bit addresses. IP addresses are divided into classes (A, B, C, D, E), and subnetting allows networks to be divided into smaller sub-net..."
+            },
+            {
+              "type": "definition",
+              "content": "IPv4: 32-bit address written as 4 octets (e.g., 192.168.1.1)"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is IPv4?",
+              "back": "32-bit address written as 4 octets (e.g., 192.168.1.1)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is IPv6?",
+              "back": "128-bit address written as 8 groups of hex digits (e.g., 2001:0db8:85a3::)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is IP Classes?",
+              "back": "A (1-126), B (128-191), C (192-223), D (multicast), E (experimental)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Subnet Mask?",
+              "back": "Defines network and host portions (e.g., 255.255.255.0 = /24)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Subnetting?",
+              "back": "Dividing a large network into smaller sub-networks",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is CIDR?",
+              "back": "Classless Inter-Domain Routing (e.g., 192.168.1.0/24)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Private IP Ranges?",
+              "back": "10.x.x.x, 172.16-31.x.x, 192.168.x.x (not routable on Internet)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is NAT?",
+              "back": "Network Address Translation — maps private IPs to public IPs",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "An IP (Internet Protocol) address is a unique identifier assigned to each device on a network. IPv4 uses 32-bit addresses (4 billion addresses), while IPv6 uses 128-bit addresses. IP addresses are divided into classes (A, B, C, D, E), and subnetting allows networks to be divided into smaller sub-net"
+            },
+            {
+              "style": "detailed",
+              "content": "An IP (Internet Protocol) address is a unique identifier assigned to each device on a network. IPv4 uses 32-bit addresses (4 billion addresses), while IPv6 uses 128-bit addresses. IP addresses are divided into classes (A, B, C, D, E), and subnetting allows networks to be divided into smaller sub-networks for efficient address utilization.\n\nKey concepts: IPv4: 32-bit address written as 4 octets (e.g., 192.168.1.1), IPv6: 128-bit address written as 8 groups of hex digits (e.g., 2001:0db8:85a3::), IP Classes: A (1-126), B (128-191), C (192-223), D (multicast), E (experimental)."
+            }
+          ],
+          "recommendedNextLessons": []
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "# Computer Networks — Quick Revision\n\n**Subject code:** R23CP2408  \n**Semester:** 3  \n**Credits:** 4  \n\n## Unit 1: Introduction to Computer Networks (12%)\n### Introduction to Computer Networks\nA computer network is a collection of interconnected devices (computers, servers, routers, switches) that can communicate and share resources. Networks are classified by size (LAN, MAN, WAN), topology (bus, star, ring, mesh), and protocol. Understanding network architecture is es...\n\n**Formulas:**\n- `Throughput = (Frames Successfully Transmitted / Total Time)`\n- `Efficiency = (Useful Data / Total Data Transmitted) × 100%`\n- `Propagation Delay = Distance / Speed of Signal`\n\n### OSI and TCP/IP Models\nThe OSI (Open Systems Interconnection) model is a 7-layer conceptual framework that standardizes network communication. Each layer has specific functions and protocols. The TCP/IP model is a simpler 4-layer model used in practice (the Internet runs on TCP/IP). Understanding these...\n\n**Formulas:**\n- `OSI Layers (bottom to top): Please Do Not Throw Sausage Pizza Away`\n- `TCP/IP = OSI layers 1+2 → Network Access, Layer 3 → Internet, Layer 4 → Transport, Layers 5+6+7 → Application`\n- `PDU per layer: Bits (1) → Frames (2) → Packets (3) → Segments (4) → Data (5-7)`\n\n## Unit 2: IP Addressing and Routing (18%)\n### IP Addressing and Subnetting\nAn IP (Internet Protocol) address is a unique identifier assigned to each device on a network. IPv4 uses 32-bit addresses (4 billion addresses), while IPv6 uses 128-bit addresses. IP addresses are divided into classes (A, B, C, D, E), and subnetting allows networks to be divided ...\n\n**Formulas:**\n- `Network Address = IP AND Subnet Mask`\n- `Broadcast Address = Network Address OR NOT(Subnet Mask)`\n- `Number of Subnets = 2^n (n = bits borrowed for subnetting)`\n",
+  "interviewBank": [
+    {
+      "marks": 5,
+      "question": "Explain the formula: Throughput = (Frames Successfully Transmitted / Total Time)",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 10,
+      "question": "Compare TCP and UDP. When would you use each?",
+      "modelAnswer": "TCP is reliable, connection-oriented, with flow/congestion control — use for HTTP, email, file transfer. UDP is unreliable, connectionless, low overhead — use for DNS, video streaming, online gaming where speed > reliability."
+    },
+    {
+      "marks": 5,
+      "question": "What is the three-way handshake?",
+      "modelAnswer": "TCP connection setup: client sends SYN, server replies SYN-ACK, client sends ACK. After these three packets, the connection is established."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: OSI Layers (bottom to top): Please Do Not Throw Sausage Pizza Away",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: Network Address = IP AND Subnet Mask",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    }
+  ],
+  "vivaBank": [
+    {
+      "marks": 2,
+      "question": "Define Network.",
+      "modelAnswer": "A group of connected devices that share data and resources"
+    },
+    {
+      "marks": 2,
+      "question": "Define LAN (Local Area Network).",
+      "modelAnswer": "Small geographic area (office, building) — Ethernet, Wi-Fi"
+    },
+    {
+      "marks": 2,
+      "question": "Define MAN (Metropolitan Area Network).",
+      "modelAnswer": "City-wide — cable TV network"
+    },
+    {
+      "marks": 2,
+      "question": "What is the default subnet mask for Class C?",
+      "modelAnswer": "255.255.255.0 (or /24)."
+    },
+    {
+      "marks": 2,
+      "question": "Define a protocol.",
+      "modelAnswer": "A protocol is a set of rules governing the format and timing of communication between two devices."
+    },
+    {
+      "marks": 2,
+      "question": "Define OSI Model.",
+      "modelAnswer": "7 layers — Physical, Data Link, Network, Transport, Session, Presentation, Application"
+    },
+    {
+      "marks": 2,
+      "question": "Define TCP/IP Model.",
+      "modelAnswer": "4 layers — Network Access, Internet, Transport, Application"
+    },
+    {
+      "marks": 2,
+      "question": "Define Encapsulation.",
+      "modelAnswer": "Each layer adds its own header to the data (PDU = Protocol Data Unit)"
+    },
+    {
+      "marks": 2,
+      "question": "Define IPv4.",
+      "modelAnswer": "32-bit address written as 4 octets (e.g., 192.168.1.1)"
+    },
+    {
+      "marks": 2,
+      "question": "Define IPv6.",
+      "modelAnswer": "128-bit address written as 8 groups of hex digits (e.g., 2001:0db8:85a3::)"
+    },
+    {
+      "marks": 2,
+      "question": "Define IP Classes.",
+      "modelAnswer": "A (1-126), B (128-191), C (192-223), D (multicast), E (experimental)"
+    }
+  ],
+  "pyqBank": [
+    {
+      "marks": 10,
+      "question": "Explain Introduction to Computer Networks in detail with a diagram.",
+      "modelAnswer": "A computer network is a collection of interconnected devices (computers, servers, routers, switches) that can communicate and share resources. Networks are classified by size (LAN, MAN, WAN), topology (bus, star, ring, mesh), and protocol. Understanding network architecture is essential for any IT professional."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Introduction to Computer Networks with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain OSI and TCP/IP Models in detail with a diagram.",
+      "modelAnswer": "The OSI (Open Systems Interconnection) model is a 7-layer conceptual framework that standardizes network communication. Each layer has specific functions and protocols. The TCP/IP model is a simpler 4-layer model used in practice (the Internet runs on TCP/IP). Understanding these models is critical for network troubleshooting and design."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss OSI and TCP/IP Models with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain IP Addressing and Subnetting in detail with a diagram.",
+      "modelAnswer": "An IP (Internet Protocol) address is a unique identifier assigned to each device on a network. IPv4 uses 32-bit addresses (4 billion addresses), while IPv6 uses 128-bit addresses. IP addresses are divided into classes (A, B, C, D, E), and subnetting allows networks to be divided into smaller sub-networks for efficient address utilization."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss IP Addressing and Subnetting with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 15,
+      "question": "Explain the architecture of Computer Networks with a neat diagram. List its advantages and limitations.",
+      "modelAnswer": "Draw the architecture diagram, label each component, explain data/control flow, then list 3 advantages and 2 limitations."
+    },
+    {
+      "marks": 10,
+      "question": "Compare any two major concepts from Computer Networks in tabular form.",
+      "modelAnswer": "Pick the two most important concepts (see lesson notes), build a 6-row comparison table covering meaning, working, advantages, limitations, complexity, and use case."
+    }
+  ]
+}

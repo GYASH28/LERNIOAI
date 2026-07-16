@@ -1,0 +1,206 @@
+{
+  "subjectCode": "R23CI2604",
+  "subjectName": "Internet of Things and Applications (IoTA)",
+  "semester": 3,
+  "credits": 3,
+  "units": [
+    {
+      "number": 1,
+      "title": "IoT Fundamentals",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "iot-introduction",
+          "title": "Introduction to IoT",
+          "durationMin": 15,
+          "difficulty": "easy",
+          "overview": "The Internet of Things (IoT) connects physical devices to the internet to collect, exchange, and act on data. This lesson covers IoT definition, architecture, applications, and enabling technologies.",
+          "keyConcepts": [
+            "IoT: Network of physical objects with sensors + connectivity that exchange data",
+            "4-layer architecture: Sensing → Network → Data Processing → Application",
+            "Sensors collect data, actuators act on the physical world",
+            "Communication protocols: Wi-Fi, Bluetooth, Zigbee, LoRa, 4G/5G",
+            "Applications: smart home, smart city, healthcare, agriculture, IIoT"
+          ],
+          "formulas": [],
+          "tables": [],
+          "commonMistakes": [
+            "Confusing IoT with Internet — IoT specifically connects physical objects/things, not just computers"
+          ],
+          "examTips": [
+            "Memorize the 4-layer IoT architecture — it appears in every exam",
+            "Remember: sensor = input (reads), actuator = output (acts)"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which IoT layer contains sensors and actuators?",
+              "options": [
+                "Application",
+                "Network",
+                "Sensing",
+                "Data Processing"
+              ],
+              "answer": 2,
+              "explanation": "The Sensing Layer contains sensors (which collect data) and actuators (which act on the physical world)."
+            }
+          ],
+          "objectives": [
+            "Understand the key concepts of Introduction to IoT",
+            "Apply Introduction to IoT principles in practical scenarios",
+            "Prepare for exam questions on Introduction to IoT"
+          ],
+          "prerequisites": [
+            "Basic understanding of computer systems"
+          ],
+          "theory": "## What is IoT?\n\nThe Internet of Things (IoT) is a network of physical objects (\"things\") embedded with sensors, software, and connectivity that enables them to collect and exchange data over the internet.\n\n## IoT Architecture (4 Layers)\n\n1. **Sensing Layer**: Sensors and actuators that collect data from the physical world. Examples: temperature sensor, motion detector, GPS.\n\n2. **Network Layer**: Connects devices to the internet using Wi-Fi, Bluetooth, Zigbee, LoRa, cellular (4G/5G). Gateways aggregate data from multiple sensors.\n\n3. **Data Processing Layer**: Processes and analyzes the collected data. Uses cloud computing, edge computing, or fog computing. Includes data storage, analytics, and machine learning.\n\n4. **Application Layer**: Delivers services to users. Examples: smart home, industrial monitoring, healthcare, agriculture.\n\n## IoT Enabling Technologies\n- **Wireless Sensor Networks (WSN)**: Self-organizing networks of sensors\n- **Cloud Computing**: On-demand computing resources over the internet\n- **Big Data Analytics**: Processing massive volumes of IoT data\n- **Machine Learning**: Pattern recognition and predictive analytics\n- **Embedded Systems**: Small computers inside IoT devices\n\n## Real-World Applications\n- **Smart Home**: Thermostat, lights, security cameras controlled remotely\n- **Smart City**: Traffic management, waste management, air quality monitoring\n- **Healthcare**: Remote patient monitoring, wearable health devices\n- **Agriculture**: Soil moisture sensors, automated irrigation, crop monitoring\n- **Industrial IoT (IIoT)**: Predictive maintenance, supply chain tracking",
+          "analogies": [],
+          "flowcharts": [],
+          "mindMaps": [],
+          "complexity": null,
+          "workedExamples": [
+            {
+              "title": "IoT Smart Agriculture System",
+              "problem": "Design an IoT system for smart agriculture.",
+              "solution": "Sensors: Soil moisture, temperature, humidity, pH. Communication: LoRa (long range, low power). Processing: Cloud-based crop analytics. Application: Mobile app showing real-time data + automated irrigation control. When soil moisture < threshold, automatically trigger irrigation.",
+              "explanation": "LoRa is chosen for its long range (up to 15km in rural areas) and low power consumption, ideal for large farms."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "What is the difference between sensor and actuator?",
+              "modelAnswer": "A sensor collects data from the physical world (input device — e.g., temperature sensor reads temperature). An actuator acts on the physical world (output device — e.g., motor turns, valve opens). Sensors sense, actuators act."
+            }
+          ],
+          "interviewQuestions": [],
+          "examQuestions": [],
+          "revisionSummary": "## What is IoT?\n\nThe Internet of Things (IoT) is a network of physical objects (\"things\") embedded with sensors, software, and connectivity that enables them to collect and exchange data over the inte...",
+          "cheatSheet": [
+            "IoT",
+            "4-layer architecture",
+            "Sensors collect data, actuators act on the physical world",
+            "Communication protocols",
+            "Applications"
+          ],
+          "mnemonics": [],
+          "callouts": [
+            {
+              "type": "example",
+              "content": "Smart thermostat (Nest): Temperature sensor (sensing) → Wi-Fi (network) → Cloud analytics (processing) → Mobile app (application). This is a complete 4-layer IoT system."
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What are the four layers of IoT architecture?",
+              "back": "1. Sensing Layer (sensors/actuators) 2. Network Layer (connectivity) 3. Data Processing Layer (cloud/edge) 4. Application Layer (services)",
+              "hint": "Think: collect → connect → process → serve"
+            }
+          ],
+          "aiSummaries": [],
+          "recommendedNextLessons": []
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "IoT Protocols and Communication",
+      "weightage": 25,
+      "lessons": [
+        {
+          "slug": "iot-protocols",
+          "title": "IoT Communication Protocols",
+          "durationMin": 18,
+          "difficulty": "medium",
+          "overview": "IoT devices use various communication protocols to exchange data. This lesson covers MQTT, CoAP, HTTP, WebSocket, and short-range protocols like Wi-Fi, Bluetooth, Zigbee, and LoRa.",
+          "keyConcepts": [
+            "MQTT: Publish/subscribe, lightweight, uses broker. QoS 0/1/2. Port 1883",
+            "CoAP: RESTful for constrained devices, uses UDP. Port 5683",
+            "Wi-Fi: High speed, high power, ~100m range",
+            "Zigbee: Low power, mesh network, ~100m. Smart home standard",
+            "LoRa: Long range (2-15km), low power, low data rate. Agriculture/industrial"
+          ],
+          "formulas": [],
+          "tables": [],
+          "commonMistakes": [
+            "Confusing publish/subscribe with request/response — MQTT is pub/sub, HTTP is req/res"
+          ],
+          "examTips": [
+            "Remember: MQTT = TCP (reliable), CoAP = UDP (fast but unreliable)",
+            "LoRa = Long Range — the name tells you the key feature"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which protocol is best for a smart agriculture system covering 10km?",
+              "options": [
+                "Wi-Fi",
+                "Bluetooth",
+                "LoRa",
+                "Zigbee"
+              ],
+              "answer": 2,
+              "explanation": "LoRa has a range of 2-15km with low power consumption, making it ideal for large-scale agriculture IoT."
+            }
+          ],
+          "objectives": [
+            "Understand the key concepts of IoT Communication Protocols",
+            "Apply IoT Communication Protocols principles in practical scenarios",
+            "Prepare for exam questions on IoT Communication Protocols"
+          ],
+          "prerequisites": [
+            "Basic understanding of computer systems"
+          ],
+          "theory": "## IoT Protocol Layers\n\n### Application Layer Protocols\n1. **MQTT (Message Queuing Telemetry Transport)**: Lightweight publish/subscribe protocol. Uses a broker. Ideal for low-bandwidth, unreliable networks. Port 1883 (TCP).\n   - Topics: hierarchical (e.g., home/livingroom/temperature)\n   - QoS levels: 0 (at most once), 1 (at least once), 2 (exactly once)\n\n2. **CoAP (Constrained Application Protocol)**: RESTful protocol for constrained devices. Uses UDP. Similar to HTTP but lightweight. Port 5683.\n\n3. **HTTP**: Standard web protocol. Heavier than MQTT/CoAP but widely supported.\n\n### Network/Transport Layer\n- **TCP**: Reliable, connection-oriented. Used by MQTT, HTTP.\n- **UDP**: Fast, connectionless. Used by CoAP.\n\n### Physical/Data Link Layer\n1. **Wi-Fi (802.11)**: High speed, high power. Range: ~100m. Good for home/office IoT.\n2. **Bluetooth/BLE**: Short range (~10m), low power. BLE is ideal for wearables.\n3. **Zigbee (802.15.4)**: Low power, mesh network. Range: ~100m. Used in smart home.\n4. **LoRa (Long Range)**: Long range (2-15km), low power, low data rate. Ideal for agriculture/industrial IoT.\n5. **Cellular (4G/5G/NB-IoT)**: Wide area coverage. Higher power but ubiquitous.\n\n## Protocol Selection Criteria\n- **Range**: Wi-Fi (100m) < Zigbee (100m) < LoRa (15km) < Cellular (10km+)\n- **Power**: BLE < LoRa < Zigbee < Wi-Fi\n- **Data rate**: LoRa (kbps) < BLE (1Mbps) < Zigbee (250kbps) < Wi-Fi (100Mbps+)",
+          "analogies": [],
+          "flowcharts": [],
+          "mindMaps": [],
+          "complexity": null,
+          "workedExamples": [
+            {
+              "title": "MQTT Smart Home System",
+              "problem": "Design a smart home lighting system using MQTT.",
+              "solution": "Broker: Mosquitto on Raspberry Pi. Topics: home/livingroom/light (status), home/livingroom/light/set (command). Publisher: Mobile app publishes \"ON\" to home/livingroom/light/set. Subscriber: ESP8266 with relay subscribes to home/livingroom/light/set, turns relay ON. ESP8266 publishes \"ON\" to home/livingroom/light (status confirmation).",
+              "explanation": "Publish/subscribe decouples the app from the device. The app does not need to know the device IP — it just publishes to a topic."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 3,
+              "question": "Compare MQTT and CoAP for IoT applications.",
+              "modelAnswer": "MQTT: TCP-based, publish/subscribe, broker architecture, higher overhead but reliable. Good for many-to-many communication. CoAP: UDP-based, request/response (like HTTP), lighter, supports multicast. Good for constrained devices with direct communication. MQTT is better for large-scale deployments with many devices; CoAP is better for resource-constrained device-to-device communication."
+            }
+          ],
+          "interviewQuestions": [],
+          "examQuestions": [],
+          "revisionSummary": "## IoT Protocol Layers\n\n### Application Layer Protocols\n1. **MQTT (Message Queuing Telemetry Transport)**: Lightweight publish/subscribe protocol. Uses a broker. Ideal for low-bandwidth, unreliable ne...",
+          "cheatSheet": [
+            "MQTT",
+            "CoAP",
+            "Wi-Fi",
+            "Zigbee",
+            "LoRa"
+          ],
+          "mnemonics": [],
+          "callouts": [
+            {
+              "type": "tip",
+              "content": "MQTT uses publish/subscribe pattern — devices publish to topics, subscribers receive messages on topics they subscribe to. This decouples sender and receiver."
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "Why is MQTT preferred over HTTP for IoT?",
+              "back": "MQTT is lighter (smaller header), uses publish/subscribe (efficient for many devices), supports QoS levels, and works better on unreliable networks. HTTP is heavier and request/response (less efficient for IoT).",
+              "hint": "Think about header size and communication pattern"
+            }
+          ],
+          "aiSummaries": [],
+          "recommendedNextLessons": []
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "Key concepts for Internet of Things and Applications (IoTA): See individual lesson summaries.",
+  "interviewBank": [],
+  "vivaBank": [],
+  "pyqBank": []
+}

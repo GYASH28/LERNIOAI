@@ -1,0 +1,199 @@
+{
+  "subjectCode": "R23CI1605",
+  "subjectName": "Seminar and Capstone Initiation",
+  "semester": 5,
+  "credits": 2,
+  "units": [
+    {
+      "number": 1,
+      "title": "Seminar and Project Initiation",
+      "weightage": 30,
+      "lessons": [
+        {
+          "slug": "seminar-presentation",
+          "title": "Seminar Presentation Skills",
+          "durationMin": 12,
+          "difficulty": "easy",
+          "overview": "A seminar is an oral presentation on a technical topic. This lesson covers how to prepare, structure, and deliver an effective technical seminar.",
+          "keyConcepts": [
+            "Seminar: Oral presentation on a technical topic + Q&A",
+            "Structure: Title → Intro → Outline → Content → Applications → Conclusion → References",
+            "10-20-30 rule: 10 slides, 20 minutes, 30pt font minimum",
+            "One idea per slide — use visuals, not walls of text",
+            "Evaluation: Content 30%, Presentation 25%, Slides 20%, Q&A 15%, Time 10%"
+          ],
+          "formulas": [],
+          "tables": [],
+          "commonMistakes": [
+            "Reading from slides — the audience can read faster than you can speak. Use slides as cues, not scripts"
+          ],
+          "examTips": [
+            "Practice 3+ times — going over time loses marks",
+            "One idea per slide — use visuals, not text walls"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What percentage of seminar evaluation is typically for presentation skills?",
+              "options": [
+                "10%",
+                "15%",
+                "25%",
+                "50%"
+              ],
+              "answer": 2,
+              "explanation": "Presentation skills typically carry 25% of the evaluation weight — includes eye contact, clarity, confidence, and engagement."
+            }
+          ],
+          "objectives": [
+            "Understand the key concepts of Seminar Presentation Skills",
+            "Apply Seminar Presentation Skills principles in practical scenarios",
+            "Prepare for exam questions on Seminar Presentation Skills"
+          ],
+          "prerequisites": [
+            "Basic understanding of computer systems"
+          ],
+          "theory": "## What is a Seminar?\n\nA seminar is a form of academic instruction where a student presents a topic to an audience (classmates and faculty) followed by a discussion.\n\n## Seminar Structure\n\n1. **Title Slide**: Topic, name, roll number, guide name\n2. **Introduction**: Background, why the topic matters\n3. **Outline**: What you will cover (agenda)\n4. **Main Content**: 8-12 slides covering the topic\n5. **Applications**: Real-world uses\n6. **Advantages/Disadvantages**: Balanced view\n7. **Conclusion**: Summary and future scope\n8. **References**: Sources cited\n9. **Q&A**: Audience questions\n\n## Presentation Tips\n- **10-20-30 Rule**: 10 slides, 20 minutes, 30pt font minimum\n- **One idea per slide**: Do not cram\n- **Use visuals**: Diagrams, charts, images (not walls of text)\n- **Practice timing**: 1-2 minutes per slide\n- **Eye contact**: Look at audience, not slides\n- **Speak clearly**: Moderate pace, audible volume\n\n## Seminar Evaluation Criteria\n- Content depth and accuracy (30%)\n- Presentation skills (25%)\n- Slide quality (20%)\n- Q&A handling (15%)\n- Time management (10%)",
+          "analogies": [],
+          "flowcharts": [],
+          "mindMaps": [],
+          "complexity": null,
+          "workedExamples": [
+            {
+              "title": "IoT Seminar Structure",
+              "problem": "Structure a 15-minute seminar on \"IoT in Healthcare\".",
+              "solution": "1. Title (30s) 2. Introduction: What is IoT + healthcare context (2min) 3. Architecture: 4-layer IoT in healthcare (3min) 4. Applications: Remote monitoring, smart hospitals, wearables (4min) 5. Case study: Remote patient monitoring system (2min) 6. Challenges: Privacy, security, reliability (2min) 7. Conclusion + Future scope (1min) 8. Q&A (remaining time)",
+              "explanation": "15 minutes ÷ 8 sections = ~2 min per section. The case study makes the seminar practical and interesting."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "What are the key elements of an effective technical seminar?",
+              "modelAnswer": "Key elements: (1) Clear structure (intro → content → conclusion) (2) Visual slides with minimal text (3) Practice and timing (4) Eye contact with audience (5) Clear, audible speech (6) Good Q&A handling — admit if you do not know, do not make up answers (7) Time management (8) Confidence and body language."
+            }
+          ],
+          "interviewQuestions": [],
+          "examQuestions": [],
+          "revisionSummary": "## What is a Seminar?\n\nA seminar is a form of academic instruction where a student presents a topic to an audience (classmates and faculty) followed by a discussion.\n\n## Seminar Structure\n\n1. **Title ...",
+          "cheatSheet": [
+            "Seminar",
+            "Structure",
+            "10-20-30 rule",
+            "One idea per slide — use visuals, not walls of text",
+            "Evaluation"
+          ],
+          "mnemonics": [],
+          "callouts": [
+            {
+              "type": "tip",
+              "content": "Practice your seminar at least 3 times before the actual presentation. Time yourself — going over time is worse than going under."
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is the 10-20-30 rule for presentations?",
+              "back": "10 slides maximum, 20 minutes maximum, 30 point font minimum. Created by Guy Kawasaki to keep presentations concise and readable.",
+              "hint": "Think: 10, 20, 30"
+            }
+          ],
+          "aiSummaries": [],
+          "recommendedNextLessons": []
+        },
+        {
+          "slug": "capstone-project",
+          "title": "Capstone Project Initiation",
+          "durationMin": 12,
+          "difficulty": "easy",
+          "overview": "A capstone project is a final-year project that demonstrates the knowledge and skills acquired during the diploma program. This lesson covers project selection, planning, and execution.",
+          "keyConcepts": [
+            "Capstone: Culminating project integrating all learning",
+            "Good project criteria: Feasible, Relevant, Innovative, Scoped, Interesting",
+            "Proposal: Title, Problem Statement, Objectives, Methodology, Timeline, Resources, Outcomes",
+            "4 phases: Literature review → Design → Implementation → Documentation",
+            "Report: 40-60 pages IEEE format + source code + presentation + demo"
+          ],
+          "formulas": [],
+          "tables": [],
+          "commonMistakes": [
+            "Choosing a project that is too ambitious — \"I will build a self-driving car\" is not feasible in 6 months with limited budget"
+          ],
+          "examTips": [
+            "Choose a project you are interested in — you will spend 4-6 months on it",
+            "Document EVERYTHING from day 1 — writing the report at the end is 10x harder"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is the first phase of a capstone project?",
+              "options": [
+                "Implementation",
+                "Literature review",
+                "Testing",
+                "Documentation"
+              ],
+              "answer": 1,
+              "explanation": "Phase 1 is literature review and requirement analysis — understanding what exists and what is needed before designing anything."
+            }
+          ],
+          "objectives": [
+            "Understand the key concepts of Capstone Project Initiation",
+            "Apply Capstone Project Initiation principles in practical scenarios",
+            "Prepare for exam questions on Capstone Project Initiation"
+          ],
+          "prerequisites": [
+            "Basic understanding of computer systems"
+          ],
+          "theory": "## What is a Capstone Project?\n\nA capstone project is a multifaceted assignment that serves as a culminating academic experience for students at the end of their diploma program. It integrates and applies the knowledge gained across multiple courses.\n\n## Project Selection\n\n### Criteria for Good Project\n1. **Feasible**: Can be completed in the given time with available resources\n2. **Relevant**: Related to your field of study\n3. **Innovative**: Solves a real problem in a new way\n4. **Scoped**: Not too simple, not too complex\n5. **Interesting**: You are motivated to work on it\n\n### Project Types\n1. **Application Development**: Web app, mobile app, desktop software\n2. **IoT System**: Sensor network + cloud + dashboard\n3. **AI/ML Project**: Prediction, classification, NLP\n4. **Hardware Project**: Embedded system, robotics\n5. **Research Project**: Survey + analysis on a topic\n\n## Project Planning\n\n### Project Proposal\n1. **Title**: Clear, concise, descriptive\n2. **Problem Statement**: What problem are you solving?\n3. **Objectives**: What will the project achieve?\n4. **Methodology**: How will you build it?\n5. **Timeline**: Gantt chart with milestones\n6. **Resources**: Hardware, software, data needed\n7. **Expected Outcomes**: What will be delivered?\n\n### Project Phases\n1. **Phase 1 (Week 1-4)**: Literature review, requirement analysis\n2. **Phase 2 (Week 5-8)**: Design, architecture\n3. **Phase 3 (Week 9-16)**: Implementation, testing\n4. **Phase 4 (Week 17-20)**: Documentation, presentation\n\n## Documentation\n- **Project Report**: 40-60 pages (IEEE format)\n- **Source Code**: Well-commented, on GitHub\n- **Presentation**: 15-20 slides\n- **Demo**: Working prototype demonstration",
+          "analogies": [],
+          "flowcharts": [],
+          "mindMaps": [],
+          "complexity": null,
+          "workedExamples": [
+            {
+              "title": "IoT Smart Parking Capstone",
+              "problem": "Outline a capstone project for \"IoT-Based Smart Parking System\".",
+              "solution": "Problem: Finding parking in busy areas wastes time and fuel. Objectives: Detect available parking slots, display on mobile app, reserve slots. Methodology: IR sensors in each slot → ESP8266 → MQTT → Cloud → Mobile app. Timeline: 4 weeks research, 4 weeks design, 8 weeks implementation, 4 weeks documentation. Resources: 10 ESP8266, 10 IR sensors, Raspberry Pi (cloud), Android Studio. Outcomes: Working prototype + app + report.",
+              "explanation": "This project is feasible (common sensors), innovative (solves real problem), scoped (1 parking lot, not entire city), and interesting (IoT + mobile + cloud)."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "What criteria should you consider when selecting a capstone project?",
+              "modelAnswer": "1. Feasible — can be completed in given time with available resources. 2. Relevant — related to your field (computer/IoT engineering). 3. Innovative — solves a real problem in a new way. 4. Scoped — not too simple (trivial) or too complex (impossible). 5. Interesting — you are motivated to work on it for 4-6 months. 6. Cost — within your budget for hardware/software."
+            }
+          ],
+          "interviewQuestions": [],
+          "examQuestions": [],
+          "revisionSummary": "## What is a Capstone Project?\n\nA capstone project is a multifaceted assignment that serves as a culminating academic experience for students at the end of their diploma program. It integrates and app...",
+          "cheatSheet": [
+            "Capstone",
+            "Good project criteria",
+            "Proposal",
+            "4 phases",
+            "Report"
+          ],
+          "mnemonics": [],
+          "callouts": [
+            {
+              "type": "important",
+              "content": "Choose a project you are genuinely interested in — you will spend 4-6 months on it. A boring project will lead to procrastination and poor results."
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What should a project proposal include?",
+              "back": "Title, Problem Statement (what problem), Objectives (what to achieve), Methodology (how to build), Timeline (Gantt chart), Resources (hardware/software/data), Expected Outcomes (deliverables).",
+              "hint": "Think: what, why, how, when, with what, what result"
+            }
+          ],
+          "aiSummaries": [],
+          "recommendedNextLessons": []
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "Key concepts for Seminar and Capstone Initiation: See individual lesson summaries.",
+  "interviewBank": [],
+  "vivaBank": [],
+  "pyqBank": []
+}

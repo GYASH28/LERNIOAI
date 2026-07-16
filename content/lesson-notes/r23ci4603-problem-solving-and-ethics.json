@@ -1,0 +1,109 @@
+{
+  "subjectCode": "R23CI4603",
+  "subjectName": "Problem-Solving and Ethics",
+  "semester": 4,
+  "credits": 2,
+  "units": [
+    {
+      "number": 1,
+      "title": "Problem-Solving Techniques",
+      "weightage": 25,
+      "lessons": [
+        {
+          "slug": "problem-solving-approaches",
+          "title": "Problem-Solving Approaches",
+          "durationMin": 15,
+          "difficulty": "easy",
+          "overview": "Problem-solving is the process of finding solutions to difficult or complex issues. This lesson covers structured problem-solving techniques, algorithms, and ethical considerations.",
+          "keyConcepts": [
+            "Problem-solving steps: Understand → Plan → Execute → Evaluate",
+            "Divide and Conquer: Break large problems into smaller sub-problems",
+            "Dynamic Programming: Overlapping sub-problems + memoization",
+            "Engineering ethics: Honesty, integrity, responsibility, privacy, safety",
+            "ACM and IEEE have professional codes of ethics for engineers"
+          ],
+          "formulas": [],
+          "tables": [],
+          "commonMistakes": [
+            "Confusing greedy with DP — greedy makes ONE choice and never revisits, DP considers ALL choices"
+          ],
+          "examTips": [
+            "Remember: DP = overlapping sub-problems + memoization. D&C = independent sub-problems",
+            "Ethics = doing the right thing even when no one is watching"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which problem-solving technique stores results of sub-problems to avoid recomputation?",
+              "options": [
+                "Greedy",
+                "Brute Force",
+                "Dynamic Programming",
+                "Backtracking"
+              ],
+              "answer": 2,
+              "explanation": "Dynamic Programming stores results of overlapping sub-problems (memoization/tabulation) to avoid recomputation. Example: Fibonacci with memoization reduces from O(2^n) to O(n)."
+            }
+          ],
+          "objectives": [
+            "Understand the key concepts of Problem-Solving Approaches",
+            "Apply Problem-Solving Approaches principles in practical scenarios",
+            "Prepare for exam questions on Problem-Solving Approaches"
+          ],
+          "prerequisites": [
+            "Basic understanding of computer systems"
+          ],
+          "theory": "## What is Problem-Solving?\n\nProblem-solving is the process of identifying a problem, analyzing it, developing a solution, and evaluating the results.\n\n## Problem-Solving Steps\n1. **Understand the Problem**: Define the problem clearly\n2. **Plan a Solution**: Develop an algorithm or strategy\n3. **Execute the Plan**: Implement the solution\n4. **Evaluate the Result**: Verify the solution works\n\n## Problem-Solving Techniques\n\n1. **Divide and Conquer**: Break large problems into smaller sub-problems. Example: Merge sort.\n2. **Greedy Approach**: Make locally optimal choices at each step. Example: Dijkstra algorithm.\n3. **Dynamic Programming**: Break into overlapping sub-problems, store results. Example: Fibonacci.\n4. **Backtracking**: Try solutions, backtrack on failure. Example: N-Queens.\n5. **Brute Force**: Try all possibilities. Example: Linear search.\n\n## Ethics in Engineering\n\n### Ethical Principles\n1. **Honesty**: Do not falsify data or results\n2. **Integrity**: Act consistently with moral principles\n3. **Responsibility**: Be accountable for your work\n4. **Respect for Intellectual Property**: Do not plagiarize\n5. **Privacy**: Protect user data\n6. **Safety**: Ensure products do not harm users\n\n### Ethical Dilemmas in Technology\n- **AI Bias**: Ensuring AI systems are fair and unbiased\n- **Data Privacy**: Balancing data collection with user privacy\n- **Autonomous Systems**: Who is responsible when AI makes errors?\n- **Open Source vs Proprietary**: Sharing knowledge vs protecting IP\n\n### Professional Ethics Codes\n- **ACM Code of Ethics**: Association for Computing Machinery\n- **IEEE Code of Ethics**: Institute of Electrical and Electronics Engineers\n- **ACM/IEEE Software Engineering Code of Ethics**",
+          "analogies": [],
+          "flowcharts": [],
+          "mindMaps": [],
+          "complexity": null,
+          "workedExamples": [
+            {
+              "title": "Ethical Dilemma: Autonomous Vehicle",
+              "problem": "An autonomous vehicle must choose between hitting a pedestrian or swerving into a wall (killing the passenger). What ethical framework applies?",
+              "solution": "This is the \"Trolley Problem\" applied to AI. Utilitarian approach: Minimize total harm (1 death vs 1 death — equal). Deontological approach: The car should not actively kill (swerving is an action, hitting pedestrian is also an action). In practice: Manufacturers should prioritize not hitting pedestrians (who are unprotected) over passengers (who have airbags).",
+              "explanation": "This is an unsolved ethical dilemma. The key is TRANSPARENCY — manufacturers must disclose how their AI makes such decisions, and regulators must set standards."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "What is the difference between dynamic programming and divide and conquer?",
+              "modelAnswer": "Divide and conquer breaks problems into INDEPENDENT sub-problems (e.g., merge sort — halves are sorted independently). Dynamic programming breaks problems into OVERLAPPING sub-problems and stores results to avoid recomputation (e.g., Fibonacci — fib(5) needs fib(4) and fib(3), but fib(4) also needs fib(3), so store fib(3) once)."
+            }
+          ],
+          "interviewQuestions": [],
+          "examQuestions": [],
+          "revisionSummary": "## What is Problem-Solving?\n\nProblem-solving is the process of identifying a problem, analyzing it, developing a solution, and evaluating the results.\n\n## Problem-Solving Steps\n1. **Understand the Pro...",
+          "cheatSheet": [
+            "Problem-solving steps",
+            "Divide and Conquer",
+            "Dynamic Programming",
+            "Engineering ethics",
+            "ACM and IEEE have professional codes of ethics for engineers"
+          ],
+          "mnemonics": [],
+          "callouts": [
+            {
+              "type": "note",
+              "content": "Professional ethics codes (ACM, IEEE) are not laws but professional standards. Violating them can result in losing certification or membership, but not jail time (unless laws are also broken)."
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is the divide and conquer problem-solving technique?",
+              "back": "Divide: Break the problem into smaller sub-problems. Conquer: Solve each sub-problem recursively. Combine: Merge the solutions. Example: Merge sort divides array, sorts halves, merges.",
+              "hint": "Think: split → solve → merge"
+            }
+          ],
+          "aiSummaries": [],
+          "recommendedNextLessons": []
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "Key concepts for Problem-Solving and Ethics: See individual lesson summaries.",
+  "interviewBank": [],
+  "vivaBank": [],
+  "pyqBank": []
+}

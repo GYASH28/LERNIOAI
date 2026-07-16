@@ -1,0 +1,2039 @@
+{
+  "subjectCode": "R23CI1701",
+  "subjectName": "Basic Mathematics",
+  "semester": 1,
+  "credits": 4,
+  "units": [
+    {
+      "number": 1,
+      "title": "Algebra",
+      "weightage": 25,
+      "lessons": [
+        {
+          "slug": "logarithms-and-progressions",
+          "title": "Logarithms and Progressions",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "Logarithms are the inverse of exponentiation — they answer 'to what power must the base be raised to get this number?'. Progressions (sequences) are ordered lists following a pattern: arithmetic (AP) has constant difference, geometric (GP) has constant ratio.",
+          "keyConcepts": [
+            "Logarithm: log_b(x) = y means b^y = x",
+            "Common log: log_10 (base 10)",
+            "Natural log: ln (base e ≈ 2.718)",
+            "Laws of logs: log(xy)=log(x)+log(y), log(x/y)=log(x)-log(y), log(x^n)=n·log(x)",
+            "Arithmetic Progression (AP): a, a+d, a+2d, ... (constant difference d)",
+            "Geometric Progression (GP): a, ar, ar^2, ... (constant ratio r)",
+            "AP nth term: T_n = a + (n-1)d",
+            "GP nth term: T_n = a · r^(n-1)"
+          ],
+          "formulas": [
+            "log_b(x) = y ⟺ b^y = x",
+            "log(xy) = log(x) + log(y)",
+            "log(x/y) = log(x) - log(y)",
+            "log(x^n) = n · log(x)",
+            "AP: T_n = a + (n-1)d, S_n = n/2 · [2a + (n-1)d]",
+            "GP: T_n = a · r^(n-1), S_n = a · (r^n - 1) / (r - 1) for r≠1",
+            "GP infinite (|r|<1): S_∞ = a / (1 - r)"
+          ],
+          "tables": [
+            {
+              "title": "AP vs GP",
+              "headers": [
+                "Aspect",
+                "AP",
+                "GP"
+              ],
+              "rows": [
+                [
+                  "Pattern",
+                  "Add constant d",
+                  "Multiply by r"
+                ],
+                [
+                  "nth term",
+                  "a + (n-1)d",
+                  "a · r^(n-1)"
+                ],
+                [
+                  "Example",
+                  "2,5,8,11 (d=3)",
+                  "3,6,12,24 (r=2)"
+                ],
+                [
+                  "Sum (n terms)",
+                  "n/2 · [2a+(n-1)d]",
+                  "a(r^n-1)/(r-1)"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Confusing log_b(x) = y with b^x = y (it's b^y = x)",
+            "Forgetting that log(1) = 0 and log(b) = 1 for any base b",
+            "Mixing up AP (addition) with GP (multiplication)",
+            "Applying finite GP sum formula to infinite GP (must use S_∞ = a/(1-r))"
+          ],
+          "examTips": [
+            "Always state the laws of logs before solving",
+            "For AP/GP, write a, d (or r), n explicitly before substituting",
+            "Verify GP infinite sum requires |r| < 1"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "log_2(8) = ?",
+              "options": [
+                "2",
+                "3",
+                "4",
+                "8"
+              ],
+              "answer": 1,
+              "explanation": "2^3 = 8, so log_2(8) = 3."
+            },
+            {
+              "question": "log(xy) = ?",
+              "options": [
+                "log(x)·log(y)",
+                "log(x)+log(y)",
+                "log(x)-log(y)",
+                "log(x)/log(y)"
+              ],
+              "answer": 1,
+              "explanation": "log of a product = sum of logs."
+            },
+            {
+              "question": "5th term of AP: 2, 5, 8, ...?",
+              "options": [
+                "11",
+                "14",
+                "17",
+                "20"
+              ],
+              "answer": 1,
+              "explanation": "a=2, d=3. T_5 = 2 + 4·3 = 14."
+            },
+            {
+              "question": "3rd term of GP: 3, 6, ...?",
+              "options": [
+                "9",
+                "12",
+                "15",
+                "24"
+              ],
+              "answer": 1,
+              "explanation": "a=3, r=2. T_3 = 3 · 2^2 = 12."
+            }
+          ],
+          "objectives": [
+            "Understand Logarithm and explain its significance",
+            "Understand Common log and explain its significance",
+            "Understand Natural log and explain its significance",
+            "Understand Laws of logs and explain its significance",
+            "Understand Arithmetic Progression (AP) and explain its significance",
+            "Attempt the practice quiz and viva questions on Logarithms and Progressions"
+          ],
+          "prerequisites": [
+            "Basic arithmetic (addition, multiplication, fractions)",
+            "Algebra (solving equations)",
+            "Familiarity with exponents and roots"
+          ],
+          "theory": "## Introduction\n\nLogarithms are the inverse of exponentiation — they answer 'to what power must the base be raised to get this number?'. Progressions (sequences) are ordered lists following a pattern: arithmetic (AP) has constant difference, geometric (GP) has constant ratio.\n## Key Concepts\n\n- Logarithm: log_b(x) = y means b^y = x\n- Common log: log_10 (base 10)\n- Natural log: ln (base e ≈ 2.718)\n- Laws of logs: log(xy)=log(x)+log(y), log(x/y)=log(x)-log(y), log(x^n)=n·log(x)\n- Arithmetic Progression (AP): a, a+d, a+2d, ... (constant difference d)\n- Geometric Progression (GP): a, ar, ar^2, ... (constant ratio r)\n- AP nth term: T_n = a + (n-1)d\n- GP nth term: T_n = a · r^(n-1)\n\n## Important Formulas\n\n- `log_b(x) = y ⟺ b^y = x`\n- `log(xy) = log(x) + log(y)`\n- `log(x/y) = log(x) - log(y)`\n- `log(x^n) = n · log(x)`\n- `AP: T_n = a + (n-1)d, S_n = n/2 · [2a + (n-1)d]`\n- `GP: T_n = a · r^(n-1), S_n = a · (r^n - 1) / (r - 1) for r≠1`\n- `GP infinite (|r|<1): S_∞ = a / (1 - r)`\n\n## Comparison Tables\n\n### AP vs GP\n\n| Aspect | AP | GP |\n| --- | --- | --- |\n| Pattern | Add constant d | Multiply by r |\n| nth term | a + (n-1)d | a · r^(n-1) |\n| Example | 2,5,8,11 (d=3) | 3,6,12,24 (r=2) |\n| Sum (n terms) | n/2 · [2a+(n-1)d] | a(r^n-1)/(r-1) |\n\n\n## Summary\n\nLogarithms are the inverse of exponentiation — they answer 'to what power must the base be raised to get this number?'. Progressions (sequences) are ordered lists following a pattern: arithmetic (AP) has constant difference, geometric (GP) has constant ratio.",
+          "analogies": [
+            {
+              "scenario": "Logarithm like counting digits",
+              "mapping": "log_10(1000) = 3 because 1000 has 3 digits (in base 10). Logs compress huge numbers into manageable scales (earthquake Richter, pH, decibels)."
+            },
+            {
+              "scenario": "Derivative like speedometer",
+              "mapping": "Position → derivative → speed. Speed → derivative → acceleration. Each derivative shows the rate of change of the previous."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Logarithms and Progressions — Process Flow",
+              "content": "flowchart LR\n    A[Function f(x)] -->|Differentiate| B[f'(x)]\n    B -->|Solve f'=0| C[Critical points]\n    C --> D[Max/Min]\n    A -->|Integrate| E[F(x)+C]\n    E -->|Bounds| F[Area]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Logarithms and Progressions — Concept Map",
+              "content": "mindmap\n  root((Logarithms and Progressions))\n    Algebra\n      Logs\n      AP\n      GP\n    Trig\n      Ratios\n      Identities\n    Geometry\n      Slope\n      Lines\n    Calculus\n      Differentiation\n      Integration"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) for each arithmetic operation",
+            "space": "O(1)"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "log_2(8) = ?",
+              "solution": "Correct answer: 3",
+              "explanation": "2^3 = 8, so log_2(8) = 3."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Logarithms and Progressions with reference to the key concepts.",
+              "solution": "Always state the laws of logs before solving → For AP/GP, write a, d (or r), n explicitly before substituting → Verify GP infinite sum requires |r| < 1",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Logarithm.",
+              "modelAnswer": "log_b(x) = y means b^y = x"
+            },
+            {
+              "marks": 2,
+              "question": "Define Common log.",
+              "modelAnswer": "log_10 (base 10)"
+            },
+            {
+              "marks": 2,
+              "question": "Define Natural log.",
+              "modelAnswer": "ln (base e ≈ 2.718)"
+            },
+            {
+              "marks": 2,
+              "question": "Define logarithm.",
+              "modelAnswer": "log_b(x) = y means b^y = x. The logarithm is the inverse of exponentiation."
+            },
+            {
+              "marks": 2,
+              "question": "State the Pythagorean identity.",
+              "modelAnswer": "sin²θ + cos²θ = 1."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: log_b(x) = y ⟺ b^y = x",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the relationship between differentiation and integration.",
+              "modelAnswer": "They are inverse operations. The Fundamental Theorem of Calculus states that if F(x) = ∫f(x)dx, then F'(x) = f(x). Differentiation finds rate of change; integration accumulates change. Differentiating position gives velocity; integrating velocity gives position."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between AP and GP?",
+              "modelAnswer": "Arithmetic Progression: each term differs from the previous by a constant (d). General term: a + (n-1)d. Geometric Progression: each term is the previous multiplied by a constant (r). General term: a·r^(n-1). AP adds; GP multiplies."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Logarithm.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Common log.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: log_b(x) = y ⟺ b^y = x",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: log(xy) = log(x) + log(y)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Logarithms and Progressions in detail with a diagram.",
+              "modelAnswer": "Logarithms are the inverse of exponentiation — they answer 'to what power must the base be raised to get this number?'. Progressions (sequences) are ordered lists following a pattern: arithmetic (AP) has constant difference, geometric (GP) has constant ratio."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Logarithms and Progressions with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Logarithms and Progressions\n\n**One-line definition:** Logarithms are the inverse of exponentiation — they answer 'to what power must the base be raised to get this number?'. Progressions (sequences) are ordered lists following a pattern: arithmetic (AP) \n\n**Key points:**\n\n- Logarithm: log_b(x) = y means b^y = x\n- Common log: log_10 (base 10)\n- Natural log: ln (base e ≈ 2.718)\n- Laws of logs: log(xy)=log(x)+log(y), log(x/y)=log(x)-log(y), log(x^n)=n·log(x)\n- Arithmetic Progression (AP): a, a+d, a+2d, ... (constant difference d)\n\n**Important formulas:**\n\n- `log_b(x) = y ⟺ b^y = x`\n- `log(xy) = log(x) + log(y)`\n- `log(x/y) = log(x) - log(y)`\n- `log(x^n) = n · log(x)`\n- `AP: T_n = a + (n-1)d, S_n = n/2 · [2a + (n-1)d]`\n- `GP: T_n = a · r^(n-1), S_n = a · (r^n - 1) / (r - 1) for r≠1`\n- `GP infinite (|r|<1): S_∞ = a / (1 - r)`\n\n**Common mistake to avoid:** Confusing log_b(x) = y with b^x = y (it's b^y = x)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Logarithm: log_b(x) = y means b^y = x",
+            "Common log: log_10 (base 10)",
+            "Natural log: ln (base e ≈ 2.718)",
+            "Laws of logs: log(xy)=log(x)+log(y), log(x/y)=log(x)-log(y), log(x^n)=n·log(x)",
+            "Arithmetic Progression (AP): a, a+d, a+2d, ... (constant difference d)",
+            "Formula: log_b(x) = y ⟺ b^y = x",
+            "Formula: log(xy) = log(x) + log(y)",
+            "Formula: log(x/y) = log(x) - log(y)",
+            "Formula: log(x^n) = n · log(x)",
+            "Formula: AP: T_n = a + (n-1)d, S_n = n/2 · [2a + (n-1)d]",
+            "Formula: GP: T_n = a · r^(n-1), S_n = a · (r^n - 1) / (r - 1) for r≠1",
+            "Formula: GP infinite (|r|<1): S_∞ = a / (1 - r)",
+            "log(xy)=log x+log y, log(x/y)=log x−log y",
+            "AP: T_n=a+(n−1)d, S_n=n/2[2a+(n−1)d]",
+            "GP: T_n=a·r^(n−1), S_∞=a/(1−r)"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "SOH-CAH-TOA",
+              "expansion": "Sin=Opp/Hyp, Cos=Adj/Hyp, Tan=Opp/Adj",
+              "meaning": "The trig ratios in a right triangle."
+            },
+            {
+              "phrase": "LCD",
+              "expansion": "Logs Cut Down (exponents)",
+              "meaning": "Logs bring exponents down to coefficients: log(x^n) = n·log(x)."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always state the laws of logs before solving"
+            },
+            {
+              "type": "exam-tip",
+              "content": "For AP/GP, write a, d (or r), n explicitly before substituting"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing log_b(x) = y with b^x = y (it's b^y = x)"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting that log(1) = 0 and log(b) = 1 for any base b"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Logarithms are the inverse of exponentiation — they answer 'to what power must the base be raised to get this number?'. Progressions (sequences) are ordered lists following a pattern: arithmetic (AP) has constant difference, geometric (GP) has constant ratio."
+            },
+            {
+              "type": "definition",
+              "content": "Logarithm: log_b(x) = y means b^y = x"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Logarithm?",
+              "back": "log_b(x) = y means b^y = x",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Common log?",
+              "back": "log_10 (base 10)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Natural log?",
+              "back": "ln (base e ≈ 2.718)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Laws of logs?",
+              "back": "log(xy)=log(x)+log(y), log(x/y)=log(x)-log(y), log(x^n)=n·log(x)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Arithmetic Progression (AP)?",
+              "back": "a, a+d, a+2d, ... (constant difference d)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Geometric Progression (GP)?",
+              "back": "a, ar, ar^2, ... (constant ratio r)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is AP nth term?",
+              "back": "T_n = a + (n-1)d",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is GP nth term?",
+              "back": "T_n = a · r^(n-1)",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Logarithms are the inverse of exponentiation — they answer 'to what power must the base be raised to get this number?'. Progressions (sequences) are ordered lists following a pattern: arithmetic (AP) has constant difference, geometric (GP) has constant ratio."
+            },
+            {
+              "style": "detailed",
+              "content": "Logarithms are the inverse of exponentiation — they answer 'to what power must the base be raised to get this number?'. Progressions (sequences) are ordered lists following a pattern: arithmetic (AP) has constant difference, geometric (GP) has constant ratio.\n\nKey concepts: Logarithm: log_b(x) = y means b^y = x, Common log: log_10 (base 10), Natural log: ln (base e ≈ 2.718)."
+            }
+          ],
+          "recommendedNextLessons": [
+            "trigonometric-ratios",
+            "straight-lines"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Trigonometry",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "trigonometric-ratios",
+          "title": "Trigonometric Ratios and Identities",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "Trigonometry relates angles to side ratios in right triangles. The six trig ratios — sin, cos, tan, cosec, sec, cot — are defined for angle θ. Identities like sin²θ + cos²θ = 1 are used to simplify expressions and solve equations.",
+          "keyConcepts": [
+            "sin θ = opposite/hypotenuse",
+            "cos θ = adjacent/hypotenuse",
+            "tan θ = opposite/adjacent = sin θ / cos θ",
+            "cosec θ = 1/sin θ, sec θ = 1/cos θ, cot θ = 1/tan θ",
+            "Pythagorean identity: sin²θ + cos²θ = 1",
+            "1 + tan²θ = sec²θ",
+            "1 + cot²θ = cosec²θ",
+            "Complementary: sin(90°-θ) = cos θ, cos(90°-θ) = sin θ"
+          ],
+          "formulas": [
+            "sin²θ + cos²θ = 1",
+            "1 + tan²θ = sec²θ",
+            "1 + cot²θ = cosec²θ",
+            "sin(90°-θ) = cos θ",
+            "cos(90°-θ) = sin θ",
+            "sin(2θ) = 2 sin θ cos θ",
+            "cos(2θ) = cos²θ - sin²θ"
+          ],
+          "tables": [
+            {
+              "title": "Trig values at standard angles",
+              "headers": [
+                "θ",
+                "sin",
+                "cos",
+                "tan"
+              ],
+              "rows": [
+                [
+                  "0°",
+                  "0",
+                  "1",
+                  "0"
+                ],
+                [
+                  "30°",
+                  "1/2",
+                  "√3/2",
+                  "1/√3"
+                ],
+                [
+                  "45°",
+                  "1/√2",
+                  "1/√2",
+                  "1"
+                ],
+                [
+                  "60°",
+                  "√3/2",
+                  "1/2",
+                  "√3"
+                ],
+                [
+                  "90°",
+                  "1",
+                  "0",
+                  "∞"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Confusing sin/cos/tan ratios (memorise SOH-CAH-TOA)",
+            "Forgetting that tan(90°) is undefined (cos 90° = 0)",
+            "Mixing up radians and degrees (calculator must be in correct mode)",
+            "Not squaring sin/cos in Pythagorean identity"
+          ],
+          "examTips": [
+            "Memorise the standard angle table (0, 30, 45, 60, 90)",
+            "State the identity before substituting values",
+            "Check calculator mode (DEG vs RAD)"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "sin(30°) = ?",
+              "options": [
+                "0",
+                "1/2",
+                "√3/2",
+                "1"
+              ],
+              "answer": 1,
+              "explanation": "sin(30°) = 1/2 (standard value)."
+            },
+            {
+              "question": "sin²θ + cos²θ = ?",
+              "options": [
+                "0",
+                "1",
+                "2",
+                "θ"
+              ],
+              "answer": 1,
+              "explanation": "Pythagorean identity: sin²θ + cos²θ = 1."
+            },
+            {
+              "question": "tan(45°) = ?",
+              "options": [
+                "0",
+                "1/2",
+                "1",
+                "√3"
+              ],
+              "answer": 2,
+              "explanation": "tan(45°) = sin45°/cos45° = (1/√2)/(1/√2) = 1."
+            },
+            {
+              "question": "1 + tan²θ = ?",
+              "options": [
+                "sin²θ",
+                "cos²θ",
+                "sec²θ",
+                "cosec²θ"
+              ],
+              "answer": 2,
+              "explanation": "1 + tan²θ = sec²θ (Pythagorean identity)."
+            }
+          ],
+          "objectives": [
+            "Understand this concept and explain its significance",
+            "Understand this concept and explain its significance",
+            "Understand this concept and explain its significance",
+            "Understand this concept and explain its significance",
+            "Understand Pythagorean identity and explain its significance",
+            "Attempt the practice quiz and viva questions on Trigonometric Ratios and Identities"
+          ],
+          "prerequisites": [
+            "Basic arithmetic (addition, multiplication, fractions)",
+            "Algebra (solving equations)",
+            "Familiarity with exponents and roots",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nTrigonometry relates angles to side ratios in right triangles. The six trig ratios — sin, cos, tan, cosec, sec, cot — are defined for angle θ. Identities like sin²θ + cos²θ = 1 are used to simplify expressions and solve equations.\n## Key Concepts\n\n- sin θ = opposite/hypotenuse\n- cos θ = adjacent/hypotenuse\n- tan θ = opposite/adjacent = sin θ / cos θ\n- cosec θ = 1/sin θ, sec θ = 1/cos θ, cot θ = 1/tan θ\n- Pythagorean identity: sin²θ + cos²θ = 1\n- 1 + tan²θ = sec²θ\n- 1 + cot²θ = cosec²θ\n- Complementary: sin(90°-θ) = cos θ, cos(90°-θ) = sin θ\n\n## Important Formulas\n\n- `sin²θ + cos²θ = 1`\n- `1 + tan²θ = sec²θ`\n- `1 + cot²θ = cosec²θ`\n- `sin(90°-θ) = cos θ`\n- `cos(90°-θ) = sin θ`\n- `sin(2θ) = 2 sin θ cos θ`\n- `cos(2θ) = cos²θ - sin²θ`\n\n## Comparison Tables\n\n### Trig values at standard angles\n\n| θ | sin | cos | tan |\n| --- | --- | --- | --- |\n| 0° | 0 | 1 | 0 |\n| 30° | 1/2 | √3/2 | 1/√3 |\n| 45° | 1/√2 | 1/√2 | 1 |\n| 60° | √3/2 | 1/2 | √3 |\n| 90° | 1 | 0 | ∞ |\n\n\n## Summary\n\nTrigonometry relates angles to side ratios in right triangles. The six trig ratios — sin, cos, tan, cosec, sec, cot — are defined for angle θ. Identities like sin²θ + cos²θ = 1 are used to simplify expressions and solve equations.",
+          "analogies": [
+            {
+              "scenario": "Logarithm like counting digits",
+              "mapping": "log_10(1000) = 3 because 1000 has 3 digits (in base 10). Logs compress huge numbers into manageable scales (earthquake Richter, pH, decibels)."
+            },
+            {
+              "scenario": "Derivative like speedometer",
+              "mapping": "Position → derivative → speed. Speed → derivative → acceleration. Each derivative shows the rate of change of the previous."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Trigonometric Ratios and Identities — Process Flow",
+              "content": "flowchart LR\n    A[Function f(x)] -->|Differentiate| B[f'(x)]\n    B -->|Solve f'=0| C[Critical points]\n    C --> D[Max/Min]\n    A -->|Integrate| E[F(x)+C]\n    E -->|Bounds| F[Area]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Trigonometric Ratios and Identities — Concept Map",
+              "content": "mindmap\n  root((Trigonometric Ratios and Ident))\n    Algebra\n      Logs\n      AP\n      GP\n    Trig\n      Ratios\n      Identities\n    Geometry\n      Slope\n      Lines\n    Calculus\n      Differentiation\n      Integration"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) for each arithmetic operation",
+            "space": "O(1)"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "sin(30°) = ?",
+              "solution": "Correct answer: 1/2",
+              "explanation": "sin(30°) = 1/2 (standard value)."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Trigonometric Ratios and Identities with reference to the key concepts.",
+              "solution": "Memorise the standard angle table (0, 30, 45, 60, 90) → State the identity before substituting values → Check calculator mode (DEG vs RAD)",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define logarithm.",
+              "modelAnswer": "log_b(x) = y means b^y = x. The logarithm is the inverse of exponentiation."
+            },
+            {
+              "marks": 2,
+              "question": "State the Pythagorean identity.",
+              "modelAnswer": "sin²θ + cos²θ = 1."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: sin²θ + cos²θ = 1",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the relationship between differentiation and integration.",
+              "modelAnswer": "They are inverse operations. The Fundamental Theorem of Calculus states that if F(x) = ∫f(x)dx, then F'(x) = f(x). Differentiation finds rate of change; integration accumulates change. Differentiating position gives velocity; integrating velocity gives position."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between AP and GP?",
+              "modelAnswer": "Arithmetic Progression: each term differs from the previous by a constant (d). General term: a + (n-1)d. Geometric Progression: each term is the previous multiplied by a constant (r). General term: a·r^(n-1). AP adds; GP multiplies."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: sin²θ + cos²θ = 1",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: 1 + tan²θ = sec²θ",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Trigonometric Ratios and Identities in detail with a diagram.",
+              "modelAnswer": "Trigonometry relates angles to side ratios in right triangles. The six trig ratios — sin, cos, tan, cosec, sec, cot — are defined for angle θ. Identities like sin²θ + cos²θ = 1 are used to simplify expressions and solve equations."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Trigonometric Ratios and Identities with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Trigonometric Ratios and Identities\n\n**One-line definition:** Trigonometry relates angles to side ratios in right triangles. The six trig ratios — sin, cos, tan, cosec, sec, cot — are defined for angle θ. Identities like sin²θ + cos²θ = 1 are used to simplify ex\n\n**Key points:**\n\n- sin θ = opposite/hypotenuse\n- cos θ = adjacent/hypotenuse\n- tan θ = opposite/adjacent = sin θ / cos θ\n- cosec θ = 1/sin θ, sec θ = 1/cos θ, cot θ = 1/tan θ\n- Pythagorean identity: sin²θ + cos²θ = 1\n\n**Important formulas:**\n\n- `sin²θ + cos²θ = 1`\n- `1 + tan²θ = sec²θ`\n- `1 + cot²θ = cosec²θ`\n- `sin(90°-θ) = cos θ`\n- `cos(90°-θ) = sin θ`\n- `sin(2θ) = 2 sin θ cos θ`\n- `cos(2θ) = cos²θ - sin²θ`\n\n**Common mistake to avoid:** Confusing sin/cos/tan ratios (memorise SOH-CAH-TOA)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "sin θ = opposite/hypotenuse",
+            "cos θ = adjacent/hypotenuse",
+            "tan θ = opposite/adjacent = sin θ / cos θ",
+            "cosec θ = 1/sin θ, sec θ = 1/cos θ, cot θ = 1/tan θ",
+            "Pythagorean identity: sin²θ + cos²θ = 1",
+            "Formula: sin²θ + cos²θ = 1",
+            "Formula: 1 + tan²θ = sec²θ",
+            "Formula: 1 + cot²θ = cosec²θ",
+            "Formula: sin(90°-θ) = cos θ",
+            "Formula: cos(90°-θ) = sin θ",
+            "Formula: sin(2θ) = 2 sin θ cos θ",
+            "Formula: cos(2θ) = cos²θ - sin²θ",
+            "log(xy)=log x+log y, log(x/y)=log x−log y",
+            "AP: T_n=a+(n−1)d, S_n=n/2[2a+(n−1)d]",
+            "GP: T_n=a·r^(n−1), S_∞=a/(1−r)"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "SOH-CAH-TOA",
+              "expansion": "Sin=Opp/Hyp, Cos=Adj/Hyp, Tan=Opp/Adj",
+              "meaning": "The trig ratios in a right triangle."
+            },
+            {
+              "phrase": "LCD",
+              "expansion": "Logs Cut Down (exponents)",
+              "meaning": "Logs bring exponents down to coefficients: log(x^n) = n·log(x)."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Memorise the standard angle table (0, 30, 45, 60, 90)"
+            },
+            {
+              "type": "exam-tip",
+              "content": "State the identity before substituting values"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing sin/cos/tan ratios (memorise SOH-CAH-TOA)"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting that tan(90°) is undefined (cos 90° = 0)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Trigonometry relates angles to side ratios in right triangles. The six trig ratios — sin, cos, tan, cosec, sec, cot — are defined for angle θ. Identities like sin²θ + cos²θ = 1 are used to simplify expressions and solve equations."
+            },
+            {
+              "type": "definition",
+              "content": "sin θ = opposite/hypotenuse"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Pythagorean identity?",
+              "back": "sin²θ + cos²θ = 1",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Complementary?",
+              "back": "sin(90°-θ) = cos θ, cos(90°-θ) = sin θ",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What does the formula `sin²θ + cos²θ` represent?",
+              "back": "1",
+              "hint": "Look at the formulas section."
+            },
+            {
+              "front": "What does the formula `1 + tan²θ` represent?",
+              "back": "sec²θ",
+              "hint": "Look at the formulas section."
+            },
+            {
+              "front": "What does the formula `1 + cot²θ` represent?",
+              "back": "cosec²θ",
+              "hint": "Look at the formulas section."
+            },
+            {
+              "front": "What does the formula `sin(90°-θ)` represent?",
+              "back": "cos θ",
+              "hint": "Look at the formulas section."
+            },
+            {
+              "front": "What does the formula `cos(90°-θ)` represent?",
+              "back": "sin θ",
+              "hint": "Look at the formulas section."
+            },
+            {
+              "front": "What does the formula `sin(2θ)` represent?",
+              "back": "2 sin θ cos θ",
+              "hint": "Look at the formulas section."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Trigonometry relates angles to side ratios in right triangles. The six trig ratios — sin, cos, tan, cosec, sec, cot — are defined for angle θ. Identities like sin²θ + cos²θ = 1 are used to simplify expressions and solve equations."
+            },
+            {
+              "style": "detailed",
+              "content": "Trigonometry relates angles to side ratios in right triangles. The six trig ratios — sin, cos, tan, cosec, sec, cot — are defined for angle θ. Identities like sin²θ + cos²θ = 1 are used to simplify expressions and solve equations.\n\nKey concepts: sin θ = opposite/hypotenuse, cos θ = adjacent/hypotenuse, tan θ = opposite/adjacent = sin θ / cos θ."
+            }
+          ],
+          "recommendedNextLessons": [
+            "straight-lines",
+            "differentiation"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Coordinate Geometry",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "straight-lines",
+          "title": "Straight Lines",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "Coordinate geometry places geometric shapes in a coordinate plane, allowing algebraic analysis. A straight line is defined by its slope (m) and a point. Key forms: slope-intercept (y = mx + c), point-slope (y - y1 = m(x - x1)), and two-point form.",
+          "keyConcepts": [
+            "Slope (m): steepness — m = (y2 - y1) / (x2 - x1)",
+            "Slope-intercept: y = mx + c (c = y-intercept)",
+            "Point-slope: y - y1 = m(x - x1)",
+            "Two-point: (y - y1) / (y2 - y1) = (x - x1) / (x2 - x1)",
+            "General form: Ax + By + C = 0",
+            "Parallel lines: same slope (m1 = m2)",
+            "Perpendicular: m1 × m2 = -1",
+            "Distance between points: √((x2-x1)² + (y2-y1)²)"
+          ],
+          "formulas": [
+            "Slope: m = (y2 - y1) / (x2 - x1)",
+            "Distance: d = √((x2-x1)² + (y2-y1)²)",
+            "Midpoint: M = ((x1+x2)/2, (y1+y2)/2)",
+            "Slope-intercept: y = mx + c",
+            "Point-slope: y - y1 = m(x - x1)",
+            "Parallel: m1 = m2",
+            "Perpendicular: m1 · m2 = -1"
+          ],
+          "tables": [
+            {
+              "title": "Line forms",
+              "headers": [
+                "Form",
+                "Equation",
+                "When to use"
+              ],
+              "rows": [
+                [
+                  "Slope-intercept",
+                  "y = mx + c",
+                  "Know slope + y-intercept"
+                ],
+                [
+                  "Point-slope",
+                  "y - y1 = m(x - x1)",
+                  "Know slope + 1 point"
+                ],
+                [
+                  "Two-point",
+                  "(y-y1)/(y2-y1)=(x-x1)/(x2-x1)",
+                  "Know 2 points"
+                ],
+                [
+                  "General",
+                  "Ax + By + C = 0",
+                  "Standard algebraic form"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Confusing slope formula (y2-y1)/(x2-x1) with (x2-x1)/(y2-y1)",
+            "Forgetting that vertical lines have undefined slope (not zero)",
+            "Mixing up parallel (m1=m2) with perpendicular (m1·m2=-1)",
+            "Sign error in distance formula (squared, so always positive)"
+          ],
+          "examTips": [
+            "Always sketch the line before solving",
+            "State which form you're using (slope-intercept vs point-slope)",
+            "Verify perpendicularity with m1·m2 = -1"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Slope of line through (1,2) and (3,6)?",
+              "options": [
+                "1",
+                "2",
+                "3",
+                "4"
+              ],
+              "answer": 1,
+              "explanation": "m = (6-2)/(3-1) = 4/2 = 2."
+            },
+            {
+              "question": "Two lines with slopes 2 and -1/2 are:",
+              "options": [
+                "Parallel",
+                "Perpendicular",
+                "Same line",
+                "Neither"
+              ],
+              "answer": 1,
+              "explanation": "2 × (-1/2) = -1 → perpendicular."
+            },
+            {
+              "question": "Distance between (0,0) and (3,4)?",
+              "options": [
+                "5",
+                "6",
+                "7",
+                "25"
+              ],
+              "answer": 0,
+              "explanation": "√(3²+4²) = √25 = 5 (3-4-5 triangle)."
+            },
+            {
+              "question": "y-intercept of y = 3x - 5?",
+              "options": [
+                "3",
+                "-5",
+                "5",
+                "-3"
+              ],
+              "answer": 1,
+              "explanation": "In y = mx + c, c = -5 is the y-intercept."
+            }
+          ],
+          "objectives": [
+            "Understand Slope (m) and explain its significance",
+            "Understand Slope-intercept and explain its significance",
+            "Understand Point-slope and explain its significance",
+            "Understand Two-point and explain its significance",
+            "Understand General form and explain its significance",
+            "Attempt the practice quiz and viva questions on Straight Lines"
+          ],
+          "prerequisites": [
+            "Basic arithmetic (addition, multiplication, fractions)",
+            "Algebra (solving equations)",
+            "Familiarity with exponents and roots",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nCoordinate geometry places geometric shapes in a coordinate plane, allowing algebraic analysis. A straight line is defined by its slope (m) and a point. Key forms: slope-intercept (y = mx + c), point-slope (y - y1 = m(x - x1)), and two-point form.\n## Key Concepts\n\n- Slope (m): steepness — m = (y2 - y1) / (x2 - x1)\n- Slope-intercept: y = mx + c (c = y-intercept)\n- Point-slope: y - y1 = m(x - x1)\n- Two-point: (y - y1) / (y2 - y1) = (x - x1) / (x2 - x1)\n- General form: Ax + By + C = 0\n- Parallel lines: same slope (m1 = m2)\n- Perpendicular: m1 × m2 = -1\n- Distance between points: √((x2-x1)² + (y2-y1)²)\n\n## Important Formulas\n\n- `Slope: m = (y2 - y1) / (x2 - x1)`\n- `Distance: d = √((x2-x1)² + (y2-y1)²)`\n- `Midpoint: M = ((x1+x2)/2, (y1+y2)/2)`\n- `Slope-intercept: y = mx + c`\n- `Point-slope: y - y1 = m(x - x1)`\n- `Parallel: m1 = m2`\n- `Perpendicular: m1 · m2 = -1`\n\n## Comparison Tables\n\n### Line forms\n\n| Form | Equation | When to use |\n| --- | --- | --- |\n| Slope-intercept | y = mx + c | Know slope + y-intercept |\n| Point-slope | y - y1 = m(x - x1) | Know slope + 1 point |\n| Two-point | (y-y1)/(y2-y1)=(x-x1)/(x2-x1) | Know 2 points |\n| General | Ax + By + C = 0 | Standard algebraic form |\n\n\n## Summary\n\nCoordinate geometry places geometric shapes in a coordinate plane, allowing algebraic analysis. A straight line is defined by its slope (m) and a point. Key forms: slope-intercept (y = mx + c), point-slope (y - y1 = m(x - x1)), and two-point form.",
+          "analogies": [
+            {
+              "scenario": "Logarithm like counting digits",
+              "mapping": "log_10(1000) = 3 because 1000 has 3 digits (in base 10). Logs compress huge numbers into manageable scales (earthquake Richter, pH, decibels)."
+            },
+            {
+              "scenario": "Derivative like speedometer",
+              "mapping": "Position → derivative → speed. Speed → derivative → acceleration. Each derivative shows the rate of change of the previous."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Straight Lines — Process Flow",
+              "content": "flowchart LR\n    A[Function f(x)] -->|Differentiate| B[f'(x)]\n    B -->|Solve f'=0| C[Critical points]\n    C --> D[Max/Min]\n    A -->|Integrate| E[F(x)+C]\n    E -->|Bounds| F[Area]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Straight Lines — Concept Map",
+              "content": "mindmap\n  root((Straight Lines))\n    Algebra\n      Logs\n      AP\n      GP\n    Trig\n      Ratios\n      Identities\n    Geometry\n      Slope\n      Lines\n    Calculus\n      Differentiation\n      Integration"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) for each arithmetic operation",
+            "space": "O(1)"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "Slope of line through (1,2) and (3,6)?",
+              "solution": "Correct answer: 2",
+              "explanation": "m = (6-2)/(3-1) = 4/2 = 2."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Straight Lines with reference to the key concepts.",
+              "solution": "Always sketch the line before solving → State which form you're using (slope-intercept vs point-slope) → Verify perpendicularity with m1·m2 = -1",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Slope (m).",
+              "modelAnswer": "steepness — m = (y2 - y1) / (x2 - x1)"
+            },
+            {
+              "marks": 2,
+              "question": "Define Slope-intercept.",
+              "modelAnswer": "y = mx + c (c = y-intercept)"
+            },
+            {
+              "marks": 2,
+              "question": "Define Point-slope.",
+              "modelAnswer": "y - y1 = m(x - x1)"
+            },
+            {
+              "marks": 2,
+              "question": "Define logarithm.",
+              "modelAnswer": "log_b(x) = y means b^y = x. The logarithm is the inverse of exponentiation."
+            },
+            {
+              "marks": 2,
+              "question": "State the Pythagorean identity.",
+              "modelAnswer": "sin²θ + cos²θ = 1."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Slope: m = (y2 - y1) / (x2 - x1)",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the relationship between differentiation and integration.",
+              "modelAnswer": "They are inverse operations. The Fundamental Theorem of Calculus states that if F(x) = ∫f(x)dx, then F'(x) = f(x). Differentiation finds rate of change; integration accumulates change. Differentiating position gives velocity; integrating velocity gives position."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between AP and GP?",
+              "modelAnswer": "Arithmetic Progression: each term differs from the previous by a constant (d). General term: a + (n-1)d. Geometric Progression: each term is the previous multiplied by a constant (r). General term: a·r^(n-1). AP adds; GP multiplies."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Slope (m).",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Slope-intercept.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Slope: m = (y2 - y1) / (x2 - x1)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Distance: d = √((x2-x1)² + (y2-y1)²)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Straight Lines in detail with a diagram.",
+              "modelAnswer": "Coordinate geometry places geometric shapes in a coordinate plane, allowing algebraic analysis. A straight line is defined by its slope (m) and a point. Key forms: slope-intercept (y = mx + c), point-slope (y - y1 = m(x - x1)), and two-point form."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Straight Lines with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Straight Lines\n\n**One-line definition:** Coordinate geometry places geometric shapes in a coordinate plane, allowing algebraic analysis. A straight line is defined by its slope (m) and a point. Key forms: slope-intercept (y = mx + c), point-\n\n**Key points:**\n\n- Slope (m): steepness — m = (y2 - y1) / (x2 - x1)\n- Slope-intercept: y = mx + c (c = y-intercept)\n- Point-slope: y - y1 = m(x - x1)\n- Two-point: (y - y1) / (y2 - y1) = (x - x1) / (x2 - x1)\n- General form: Ax + By + C = 0\n\n**Important formulas:**\n\n- `Slope: m = (y2 - y1) / (x2 - x1)`\n- `Distance: d = √((x2-x1)² + (y2-y1)²)`\n- `Midpoint: M = ((x1+x2)/2, (y1+y2)/2)`\n- `Slope-intercept: y = mx + c`\n- `Point-slope: y - y1 = m(x - x1)`\n- `Parallel: m1 = m2`\n- `Perpendicular: m1 · m2 = -1`\n\n**Common mistake to avoid:** Confusing slope formula (y2-y1)/(x2-x1) with (x2-x1)/(y2-y1)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Slope (m): steepness — m = (y2 - y1) / (x2 - x1)",
+            "Slope-intercept: y = mx + c (c = y-intercept)",
+            "Point-slope: y - y1 = m(x - x1)",
+            "Two-point: (y - y1) / (y2 - y1) = (x - x1) / (x2 - x1)",
+            "General form: Ax + By + C = 0",
+            "Formula: Slope: m = (y2 - y1) / (x2 - x1)",
+            "Formula: Distance: d = √((x2-x1)² + (y2-y1)²)",
+            "Formula: Midpoint: M = ((x1+x2)/2, (y1+y2)/2)",
+            "Formula: Slope-intercept: y = mx + c",
+            "Formula: Point-slope: y - y1 = m(x - x1)",
+            "Formula: Parallel: m1 = m2",
+            "Formula: Perpendicular: m1 · m2 = -1",
+            "log(xy)=log x+log y, log(x/y)=log x−log y",
+            "AP: T_n=a+(n−1)d, S_n=n/2[2a+(n−1)d]",
+            "GP: T_n=a·r^(n−1), S_∞=a/(1−r)"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "SOH-CAH-TOA",
+              "expansion": "Sin=Opp/Hyp, Cos=Adj/Hyp, Tan=Opp/Adj",
+              "meaning": "The trig ratios in a right triangle."
+            },
+            {
+              "phrase": "LCD",
+              "expansion": "Logs Cut Down (exponents)",
+              "meaning": "Logs bring exponents down to coefficients: log(x^n) = n·log(x)."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always sketch the line before solving"
+            },
+            {
+              "type": "exam-tip",
+              "content": "State which form you're using (slope-intercept vs point-slope)"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing slope formula (y2-y1)/(x2-x1) with (x2-x1)/(y2-y1)"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting that vertical lines have undefined slope (not zero)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Coordinate geometry places geometric shapes in a coordinate plane, allowing algebraic analysis. A straight line is defined by its slope (m) and a point. Key forms: slope-intercept (y = mx + c), point-slope (y - y1 = m(x - x1)), and two-point form."
+            },
+            {
+              "type": "definition",
+              "content": "Slope (m): steepness — m = (y2 - y1) / (x2 - x1)"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Slope (m)?",
+              "back": "steepness — m = (y2 - y1) / (x2 - x1)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Slope-intercept?",
+              "back": "y = mx + c (c = y-intercept)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Point-slope?",
+              "back": "y - y1 = m(x - x1)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Two-point?",
+              "back": "(y - y1) / (y2 - y1) = (x - x1) / (x2 - x1)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is General form?",
+              "back": "Ax + By + C = 0",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Parallel lines?",
+              "back": "same slope (m1 = m2)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Perpendicular?",
+              "back": "m1 × m2 = -1",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Distance between points?",
+              "back": "√((x2-x1)² + (y2-y1)²)",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Coordinate geometry places geometric shapes in a coordinate plane, allowing algebraic analysis. A straight line is defined by its slope (m) and a point. Key forms: slope-intercept (y = mx + c), point-slope (y - y1 = m(x - x1)), and two-point form."
+            },
+            {
+              "style": "detailed",
+              "content": "Coordinate geometry places geometric shapes in a coordinate plane, allowing algebraic analysis. A straight line is defined by its slope (m) and a point. Key forms: slope-intercept (y = mx + c), point-slope (y - y1 = m(x - x1)), and two-point form.\n\nKey concepts: Slope (m): steepness — m = (y2 - y1) / (x2 - x1), Slope-intercept: y = mx + c (c = y-intercept), Point-slope: y - y1 = m(x - x1)."
+            }
+          ],
+          "recommendedNextLessons": [
+            "differentiation",
+            "integration"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Differential Calculus",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "differentiation",
+          "title": "Differentiation and Applications",
+          "durationMin": 35,
+          "difficulty": "hard",
+          "overview": "Differentiation finds the rate of change of a function. The derivative dy/dx is the slope of the tangent at a point. Standard rules: power rule (d/dx x^n = n·x^(n-1)), product rule, quotient rule, chain rule. Applications include finding maxima/minima and rates of change.",
+          "keyConcepts": [
+            "Derivative: dy/dx = lim(h→0) [f(x+h) - f(x)] / h",
+            "Power rule: d/dx (x^n) = n · x^(n-1)",
+            "Constant rule: d/dx (c) = 0",
+            "Sum rule: d/dx (u + v) = du/dx + dv/dx",
+            "Product rule: d/dx (uv) = u·dv/dx + v·du/dx",
+            "Quotient rule: d/dx (u/v) = (v·du/dx - u·dv/dx) / v²",
+            "Chain rule: d/dx f(g(x)) = f'(g(x)) · g'(x)",
+            "Application: maxima/minima at dy/dx = 0"
+          ],
+          "formulas": [
+            "d/dx (x^n) = n · x^(n-1)",
+            "d/dx (sin x) = cos x",
+            "d/dx (cos x) = -sin x",
+            "d/dx (e^x) = e^x",
+            "d/dx (ln x) = 1/x",
+            "Product: (uv)' = u'v + uv'",
+            "Quotient: (u/v)' = (u'v - uv') / v²",
+            "Chain: dy/dx = (dy/du) · (du/dx)"
+          ],
+          "tables": [
+            {
+              "title": "Standard derivatives",
+              "headers": [
+                "f(x)",
+                "f'(x)"
+              ],
+              "rows": [
+                [
+                  "x^n",
+                  "n·x^(n-1)"
+                ],
+                [
+                  "sin x",
+                  "cos x"
+                ],
+                [
+                  "cos x",
+                  "-sin x"
+                ],
+                [
+                  "tan x",
+                  "sec² x"
+                ],
+                [
+                  "e^x",
+                  "e^x"
+                ],
+                [
+                  "ln x",
+                  "1/x"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Forgetting to subtract 1 from the power in power rule",
+            "Sign error in derivative of cos x (it's -sin x)",
+            "Mixing up product rule (u'v + uv') with quotient rule",
+            "Not applying chain rule for composite functions"
+          ],
+          "examTips": [
+            "State the rule you're using before applying it",
+            "For maxima/minima: set dy/dx = 0, solve, then check 2nd derivative",
+            "Show all working — partial credit for correct rules even if arithmetic fails"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "d/dx (x^3) = ?",
+              "options": [
+                "x^2",
+                "3x^2",
+                "3x^3",
+                "x^3/3"
+              ],
+              "answer": 1,
+              "explanation": "Power rule: n·x^(n-1) = 3·x^2."
+            },
+            {
+              "question": "d/dx (sin x) = ?",
+              "options": [
+                "-cos x",
+                "cos x",
+                "sin x",
+                "-sin x"
+              ],
+              "answer": 1,
+              "explanation": "Derivative of sin x is cos x."
+            },
+            {
+              "question": "d/dx (e^x) = ?",
+              "options": [
+                "x·e^(x-1)",
+                "e^x",
+                "1/x",
+                "x^e"
+              ],
+              "answer": 1,
+              "explanation": "e^x is its own derivative."
+            },
+            {
+              "question": "At maximum/minimum, dy/dx = ?",
+              "options": [
+                "1",
+                "0",
+                "∞",
+                "-1"
+              ],
+              "answer": 1,
+              "explanation": "At turning points, the tangent is horizontal → slope = 0."
+            }
+          ],
+          "objectives": [
+            "Understand Derivative and explain its significance",
+            "Understand Power rule and explain its significance",
+            "Understand Constant rule and explain its significance",
+            "Understand Sum rule and explain its significance",
+            "Understand Product rule and explain its significance",
+            "Attempt the practice quiz and viva questions on Differentiation and Applications"
+          ],
+          "prerequisites": [
+            "Basic arithmetic (addition, multiplication, fractions)",
+            "Algebra (solving equations)",
+            "Familiarity with exponents and roots",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nDifferentiation finds the rate of change of a function. The derivative dy/dx is the slope of the tangent at a point. Standard rules: power rule (d/dx x^n = n·x^(n-1)), product rule, quotient rule, chain rule. Applications include finding maxima/minima and rates of change.\n## Key Concepts\n\n- Derivative: dy/dx = lim(h→0) [f(x+h) - f(x)] / h\n- Power rule: d/dx (x^n) = n · x^(n-1)\n- Constant rule: d/dx (c) = 0\n- Sum rule: d/dx (u + v) = du/dx + dv/dx\n- Product rule: d/dx (uv) = u·dv/dx + v·du/dx\n- Quotient rule: d/dx (u/v) = (v·du/dx - u·dv/dx) / v²\n- Chain rule: d/dx f(g(x)) = f'(g(x)) · g'(x)\n- Application: maxima/minima at dy/dx = 0\n\n## Important Formulas\n\n- `d/dx (x^n) = n · x^(n-1)`\n- `d/dx (sin x) = cos x`\n- `d/dx (cos x) = -sin x`\n- `d/dx (e^x) = e^x`\n- `d/dx (ln x) = 1/x`\n- `Product: (uv)' = u'v + uv'`\n- `Quotient: (u/v)' = (u'v - uv') / v²`\n- `Chain: dy/dx = (dy/du) · (du/dx)`\n\n## Comparison Tables\n\n### Standard derivatives\n\n| f(x) | f'(x) |\n| --- | --- |\n| x^n | n·x^(n-1) |\n| sin x | cos x |\n| cos x | -sin x |\n| tan x | sec² x |\n| e^x | e^x |\n| ln x | 1/x |\n\n\n## Summary\n\nDifferentiation finds the rate of change of a function. The derivative dy/dx is the slope of the tangent at a point. Standard rules: power rule (d/dx x^n = n·x^(n-1)), product rule, quotient rule, chain rule. Applications include finding maxima/minima and rates of change.",
+          "analogies": [
+            {
+              "scenario": "Logarithm like counting digits",
+              "mapping": "log_10(1000) = 3 because 1000 has 3 digits (in base 10). Logs compress huge numbers into manageable scales (earthquake Richter, pH, decibels)."
+            },
+            {
+              "scenario": "Derivative like speedometer",
+              "mapping": "Position → derivative → speed. Speed → derivative → acceleration. Each derivative shows the rate of change of the previous."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Differentiation and Applications — Process Flow",
+              "content": "flowchart LR\n    A[Function f(x)] -->|Differentiate| B[f'(x)]\n    B -->|Solve f'=0| C[Critical points]\n    C --> D[Max/Min]\n    A -->|Integrate| E[F(x)+C]\n    E -->|Bounds| F[Area]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Differentiation and Applications — Concept Map",
+              "content": "mindmap\n  root((Differentiation and Applicatio))\n    Algebra\n      Logs\n      AP\n      GP\n    Trig\n      Ratios\n      Identities\n    Geometry\n      Slope\n      Lines\n    Calculus\n      Differentiation\n      Integration"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) for each arithmetic operation",
+            "space": "O(1)"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "d/dx (x^3) = ?",
+              "solution": "Correct answer: 3x^2",
+              "explanation": "Power rule: n·x^(n-1) = 3·x^2."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Differentiation and Applications with reference to the key concepts.",
+              "solution": "State the rule you're using before applying it → For maxima/minima: set dy/dx = 0, solve, then check 2nd derivative → Show all working — partial credit for correct rules even if arithmetic fails",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Derivative.",
+              "modelAnswer": "dy/dx = lim(h→0) [f(x+h) - f(x)] / h"
+            },
+            {
+              "marks": 2,
+              "question": "Define Power rule.",
+              "modelAnswer": "d/dx (x^n) = n · x^(n-1)"
+            },
+            {
+              "marks": 2,
+              "question": "Define Constant rule.",
+              "modelAnswer": "d/dx (c) = 0"
+            },
+            {
+              "marks": 2,
+              "question": "Define logarithm.",
+              "modelAnswer": "log_b(x) = y means b^y = x. The logarithm is the inverse of exponentiation."
+            },
+            {
+              "marks": 2,
+              "question": "State the Pythagorean identity.",
+              "modelAnswer": "sin²θ + cos²θ = 1."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: d/dx (x^n) = n · x^(n-1)",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the relationship between differentiation and integration.",
+              "modelAnswer": "They are inverse operations. The Fundamental Theorem of Calculus states that if F(x) = ∫f(x)dx, then F'(x) = f(x). Differentiation finds rate of change; integration accumulates change. Differentiating position gives velocity; integrating velocity gives position."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between AP and GP?",
+              "modelAnswer": "Arithmetic Progression: each term differs from the previous by a constant (d). General term: a + (n-1)d. Geometric Progression: each term is the previous multiplied by a constant (r). General term: a·r^(n-1). AP adds; GP multiplies."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Derivative.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Power rule.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: d/dx (x^n) = n · x^(n-1)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: d/dx (sin x) = cos x",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Differentiation and Applications in detail with a diagram.",
+              "modelAnswer": "Differentiation finds the rate of change of a function. The derivative dy/dx is the slope of the tangent at a point. Standard rules: power rule (d/dx x^n = n·x^(n-1)), product rule, quotient rule, chain rule. Applications include finding maxima/minima and rates of change."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Differentiation and Applications with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Differentiation and Applications\n\n**One-line definition:** Differentiation finds the rate of change of a function. The derivative dy/dx is the slope of the tangent at a point. Standard rules: power rule (d/dx x^n = n·x^(n-1)), product rule, quotient rule, cha\n\n**Key points:**\n\n- Derivative: dy/dx = lim(h→0) [f(x+h) - f(x)] / h\n- Power rule: d/dx (x^n) = n · x^(n-1)\n- Constant rule: d/dx (c) = 0\n- Sum rule: d/dx (u + v) = du/dx + dv/dx\n- Product rule: d/dx (uv) = u·dv/dx + v·du/dx\n\n**Important formulas:**\n\n- `d/dx (x^n) = n · x^(n-1)`\n- `d/dx (sin x) = cos x`\n- `d/dx (cos x) = -sin x`\n- `d/dx (e^x) = e^x`\n- `d/dx (ln x) = 1/x`\n- `Product: (uv)' = u'v + uv'`\n- `Quotient: (u/v)' = (u'v - uv') / v²`\n- `Chain: dy/dx = (dy/du) · (du/dx)`\n\n**Common mistake to avoid:** Forgetting to subtract 1 from the power in power rule\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Derivative: dy/dx = lim(h→0) [f(x+h) - f(x)] / h",
+            "Power rule: d/dx (x^n) = n · x^(n-1)",
+            "Constant rule: d/dx (c) = 0",
+            "Sum rule: d/dx (u + v) = du/dx + dv/dx",
+            "Product rule: d/dx (uv) = u·dv/dx + v·du/dx",
+            "Formula: d/dx (x^n) = n · x^(n-1)",
+            "Formula: d/dx (sin x) = cos x",
+            "Formula: d/dx (cos x) = -sin x",
+            "Formula: d/dx (e^x) = e^x",
+            "Formula: d/dx (ln x) = 1/x",
+            "Formula: Product: (uv)' = u'v + uv'",
+            "Formula: Quotient: (u/v)' = (u'v - uv') / v²",
+            "Formula: Chain: dy/dx = (dy/du) · (du/dx)",
+            "log(xy)=log x+log y, log(x/y)=log x−log y",
+            "AP: T_n=a+(n−1)d, S_n=n/2[2a+(n−1)d]",
+            "GP: T_n=a·r^(n−1), S_∞=a/(1−r)"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "SOH-CAH-TOA",
+              "expansion": "Sin=Opp/Hyp, Cos=Adj/Hyp, Tan=Opp/Adj",
+              "meaning": "The trig ratios in a right triangle."
+            },
+            {
+              "phrase": "LCD",
+              "expansion": "Logs Cut Down (exponents)",
+              "meaning": "Logs bring exponents down to coefficients: log(x^n) = n·log(x)."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "State the rule you're using before applying it"
+            },
+            {
+              "type": "exam-tip",
+              "content": "For maxima/minima: set dy/dx = 0, solve, then check 2nd derivative"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting to subtract 1 from the power in power rule"
+            },
+            {
+              "type": "warning",
+              "content": "Sign error in derivative of cos x (it's -sin x)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Differentiation finds the rate of change of a function. The derivative dy/dx is the slope of the tangent at a point. Standard rules: power rule (d/dx x^n = n·x^(n-1)), product rule, quotient rule, chain rule. Applications include finding maxima/minima and rates of change."
+            },
+            {
+              "type": "definition",
+              "content": "Derivative: dy/dx = lim(h→0) [f(x+h) - f(x)] / h"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Derivative?",
+              "back": "dy/dx = lim(h→0) [f(x+h) - f(x)] / h",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Power rule?",
+              "back": "d/dx (x^n) = n · x^(n-1)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Constant rule?",
+              "back": "d/dx (c) = 0",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Sum rule?",
+              "back": "d/dx (u + v) = du/dx + dv/dx",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Product rule?",
+              "back": "d/dx (uv) = u·dv/dx + v·du/dx",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Quotient rule?",
+              "back": "d/dx (u/v) = (v·du/dx - u·dv/dx) / v²",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Chain rule?",
+              "back": "d/dx f(g(x)) = f'(g(x)) · g'(x)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Application?",
+              "back": "maxima/minima at dy/dx = 0",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Differentiation finds the rate of change of a function. The derivative dy/dx is the slope of the tangent at a point. Standard rules: power rule (d/dx x^n = n·x^(n-1)), product rule, quotient rule, chain rule. Applications include finding maxima/minima and rates of change."
+            },
+            {
+              "style": "detailed",
+              "content": "Differentiation finds the rate of change of a function. The derivative dy/dx is the slope of the tangent at a point. Standard rules: power rule (d/dx x^n = n·x^(n-1)), product rule, quotient rule, chain rule. Applications include finding maxima/minima and rates of change.\n\nKey concepts: Derivative: dy/dx = lim(h→0) [f(x+h) - f(x)] / h, Power rule: d/dx (x^n) = n · x^(n-1), Constant rule: d/dx (c) = 0."
+            }
+          ],
+          "recommendedNextLessons": [
+            "integration"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Integration",
+      "weightage": 15,
+      "lessons": [
+        {
+          "slug": "integration",
+          "title": "Integration and Applications",
+          "durationMin": 30,
+          "difficulty": "hard",
+          "overview": "Integration is the reverse of differentiation. Indefinite integral ∫f(x)dx gives a family of functions (with +C). Definite integral ∫[a to b] f(x)dx gives the area under the curve from a to b. Standard rules: ∫x^n dx = x^(n+1)/(n+1) + C (for n ≠ -1).",
+          "keyConcepts": [
+            "Indefinite integral: ∫f(x)dx = F(x) + C (reverse of derivative)",
+            "Definite integral: ∫[a to b] f(x)dx = F(b) - F(a) (area under curve)",
+            "Power rule: ∫x^n dx = x^(n+1)/(n+1) + C (n ≠ -1)",
+            "Constant rule: ∫k dx = kx + C",
+            "Sum rule: ∫(u + v) dx = ∫u dx + ∫v dx",
+            "∫(1/x) dx = ln|x| + C",
+            "∫e^x dx = e^x + C",
+            "∫sin x dx = -cos x + C, ∫cos x dx = sin x + C"
+          ],
+          "formulas": [
+            "∫x^n dx = x^(n+1)/(n+1) + C  (n ≠ -1)",
+            "∫(1/x) dx = ln|x| + C",
+            "∫e^x dx = e^x + C",
+            "∫sin x dx = -cos x + C",
+            "∫cos x dx = sin x + C",
+            "Definite: ∫[a to b] f(x)dx = F(b) - F(a)",
+            "Area under curve = ∫[a to b] f(x)dx"
+          ],
+          "tables": [
+            {
+              "title": "Standard integrals",
+              "headers": [
+                "f(x)",
+                "∫f(x)dx"
+              ],
+              "rows": [
+                [
+                  "x^n (n≠-1)",
+                  "x^(n+1)/(n+1) + C"
+                ],
+                [
+                  "1/x",
+                  "ln|x| + C"
+                ],
+                [
+                  "e^x",
+                  "e^x + C"
+                ],
+                [
+                  "sin x",
+                  "-cos x + C"
+                ],
+                [
+                  "cos x",
+                  "sin x + C"
+                ],
+                [
+                  "sec² x",
+                  "tan x + C"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Forgetting the +C in indefinite integrals",
+            "Sign error in ∫sin x dx (result is -cos x, not cos x)",
+            "Applying power rule to 1/x (n=-1 is the exception — use ln)",
+            "Mixing up indefinite (with +C) and definite (numerical) integrals"
+          ],
+          "examTips": [
+            "Always add +C to indefinite integrals",
+            "For definite integrals, evaluate F(b) - F(a) clearly",
+            "Verify by differentiating your answer — should get back f(x)"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "∫x^2 dx = ?",
+              "options": [
+                "x^3/3 + C",
+                "2x + C",
+                "x^3 + C",
+                "x^2/2 + C"
+              ],
+              "answer": 0,
+              "explanation": "Power rule: x^(2+1)/(2+1) = x^3/3 + C."
+            },
+            {
+              "question": "∫(1/x) dx = ?",
+              "options": [
+                "x^2/2 + C",
+                "ln|x| + C",
+                "1/x^2 + C",
+                "-1/x^2 + C"
+              ],
+              "answer": 1,
+              "explanation": "1/x is the exception to power rule → ∫(1/x)dx = ln|x| + C."
+            },
+            {
+              "question": "∫sin x dx = ?",
+              "options": [
+                "cos x + C",
+                "-cos x + C",
+                "sin x + C",
+                "-sin x + C"
+              ],
+              "answer": 1,
+              "explanation": "Integral of sin x is -cos x + C (derivative of -cos is sin)."
+            },
+            {
+              "question": "∫[0 to 1] x dx = ?",
+              "options": [
+                "0",
+                "1/2",
+                "1",
+                "2"
+              ],
+              "answer": 1,
+              "explanation": "[x^2/2] from 0 to 1 = 1/2 - 0 = 1/2."
+            }
+          ],
+          "objectives": [
+            "Understand Indefinite integral and explain its significance",
+            "Understand Definite integral and explain its significance",
+            "Understand Power rule and explain its significance",
+            "Understand Constant rule and explain its significance",
+            "Understand Sum rule and explain its significance",
+            "Attempt the practice quiz and viva questions on Integration and Applications"
+          ],
+          "prerequisites": [
+            "Basic arithmetic (addition, multiplication, fractions)",
+            "Algebra (solving equations)",
+            "Familiarity with exponents and roots",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nIntegration is the reverse of differentiation. Indefinite integral ∫f(x)dx gives a family of functions (with +C). Definite integral ∫[a to b] f(x)dx gives the area under the curve from a to b. Standard rules: ∫x^n dx = x^(n+1)/(n+1) + C (for n ≠ -1).\n## Key Concepts\n\n- Indefinite integral: ∫f(x)dx = F(x) + C (reverse of derivative)\n- Definite integral: ∫[a to b] f(x)dx = F(b) - F(a) (area under curve)\n- Power rule: ∫x^n dx = x^(n+1)/(n+1) + C (n ≠ -1)\n- Constant rule: ∫k dx = kx + C\n- Sum rule: ∫(u + v) dx = ∫u dx + ∫v dx\n- ∫(1/x) dx = ln|x| + C\n- ∫e^x dx = e^x + C\n- ∫sin x dx = -cos x + C, ∫cos x dx = sin x + C\n\n## Important Formulas\n\n- `∫x^n dx = x^(n+1)/(n+1) + C  (n ≠ -1)`\n- `∫(1/x) dx = ln|x| + C`\n- `∫e^x dx = e^x + C`\n- `∫sin x dx = -cos x + C`\n- `∫cos x dx = sin x + C`\n- `Definite: ∫[a to b] f(x)dx = F(b) - F(a)`\n- `Area under curve = ∫[a to b] f(x)dx`\n\n## Comparison Tables\n\n### Standard integrals\n\n| f(x) | ∫f(x)dx |\n| --- | --- |\n| x^n (n≠-1) | x^(n+1)/(n+1) + C |\n| 1/x | ln|x| + C |\n| e^x | e^x + C |\n| sin x | -cos x + C |\n| cos x | sin x + C |\n| sec² x | tan x + C |\n\n\n## Summary\n\nIntegration is the reverse of differentiation. Indefinite integral ∫f(x)dx gives a family of functions (with +C). Definite integral ∫[a to b] f(x)dx gives the area under the curve from a to b. Standard rules: ∫x^n dx = x^(n+1)/(n+1) + C (for n ≠ -1).",
+          "analogies": [
+            {
+              "scenario": "Logarithm like counting digits",
+              "mapping": "log_10(1000) = 3 because 1000 has 3 digits (in base 10). Logs compress huge numbers into manageable scales (earthquake Richter, pH, decibels)."
+            },
+            {
+              "scenario": "Derivative like speedometer",
+              "mapping": "Position → derivative → speed. Speed → derivative → acceleration. Each derivative shows the rate of change of the previous."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Integration and Applications — Process Flow",
+              "content": "flowchart LR\n    A[Function f(x)] -->|Differentiate| B[f'(x)]\n    B -->|Solve f'=0| C[Critical points]\n    C --> D[Max/Min]\n    A -->|Integrate| E[F(x)+C]\n    E -->|Bounds| F[Area]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Integration and Applications — Concept Map",
+              "content": "mindmap\n  root((Integration and Applications))\n    Algebra\n      Logs\n      AP\n      GP\n    Trig\n      Ratios\n      Identities\n    Geometry\n      Slope\n      Lines\n    Calculus\n      Differentiation\n      Integration"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) for each arithmetic operation",
+            "space": "O(1)"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "∫x^2 dx = ?",
+              "solution": "Correct answer: x^3/3 + C",
+              "explanation": "Power rule: x^(2+1)/(2+1) = x^3/3 + C."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Integration and Applications with reference to the key concepts.",
+              "solution": "Always add +C to indefinite integrals → For definite integrals, evaluate F(b) - F(a) clearly → Verify by differentiating your answer — should get back f(x)",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Indefinite integral.",
+              "modelAnswer": "∫f(x)dx = F(x) + C (reverse of derivative)"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definite integral.",
+              "modelAnswer": "∫[a to b] f(x)dx = F(b) - F(a) (area under curve)"
+            },
+            {
+              "marks": 2,
+              "question": "Define Power rule.",
+              "modelAnswer": "∫x^n dx = x^(n+1)/(n+1) + C (n ≠ -1)"
+            },
+            {
+              "marks": 2,
+              "question": "Define logarithm.",
+              "modelAnswer": "log_b(x) = y means b^y = x. The logarithm is the inverse of exponentiation."
+            },
+            {
+              "marks": 2,
+              "question": "State the Pythagorean identity.",
+              "modelAnswer": "sin²θ + cos²θ = 1."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: ∫x^n dx = x^(n+1)/(n+1) + C  (n ≠ -1)",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the relationship between differentiation and integration.",
+              "modelAnswer": "They are inverse operations. The Fundamental Theorem of Calculus states that if F(x) = ∫f(x)dx, then F'(x) = f(x). Differentiation finds rate of change; integration accumulates change. Differentiating position gives velocity; integrating velocity gives position."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between AP and GP?",
+              "modelAnswer": "Arithmetic Progression: each term differs from the previous by a constant (d). General term: a + (n-1)d. Geometric Progression: each term is the previous multiplied by a constant (r). General term: a·r^(n-1). AP adds; GP multiplies."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Indefinite integral.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definite integral.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: ∫x^n dx = x^(n+1)/(n+1) + C  (n ≠ -1)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: ∫(1/x) dx = ln|x| + C",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Integration and Applications in detail with a diagram.",
+              "modelAnswer": "Integration is the reverse of differentiation. Indefinite integral ∫f(x)dx gives a family of functions (with +C). Definite integral ∫[a to b] f(x)dx gives the area under the curve from a to b. Standard rules: ∫x^n dx = x^(n+1)/(n+1) + C (for n ≠ -1)."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Integration and Applications with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Integration and Applications\n\n**One-line definition:** Integration is the reverse of differentiation. Indefinite integral ∫f(x)dx gives a family of functions (with +C). Definite integral ∫[a to b] f(x)dx gives the area under the curve from a to b. Standar\n\n**Key points:**\n\n- Indefinite integral: ∫f(x)dx = F(x) + C (reverse of derivative)\n- Definite integral: ∫[a to b] f(x)dx = F(b) - F(a) (area under curve)\n- Power rule: ∫x^n dx = x^(n+1)/(n+1) + C (n ≠ -1)\n- Constant rule: ∫k dx = kx + C\n- Sum rule: ∫(u + v) dx = ∫u dx + ∫v dx\n\n**Important formulas:**\n\n- `∫x^n dx = x^(n+1)/(n+1) + C  (n ≠ -1)`\n- `∫(1/x) dx = ln|x| + C`\n- `∫e^x dx = e^x + C`\n- `∫sin x dx = -cos x + C`\n- `∫cos x dx = sin x + C`\n- `Definite: ∫[a to b] f(x)dx = F(b) - F(a)`\n- `Area under curve = ∫[a to b] f(x)dx`\n\n**Common mistake to avoid:** Forgetting the +C in indefinite integrals\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Indefinite integral: ∫f(x)dx = F(x) + C (reverse of derivative)",
+            "Definite integral: ∫[a to b] f(x)dx = F(b) - F(a) (area under curve)",
+            "Power rule: ∫x^n dx = x^(n+1)/(n+1) + C (n ≠ -1)",
+            "Constant rule: ∫k dx = kx + C",
+            "Sum rule: ∫(u + v) dx = ∫u dx + ∫v dx",
+            "Formula: ∫x^n dx = x^(n+1)/(n+1) + C  (n ≠ -1)",
+            "Formula: ∫(1/x) dx = ln|x| + C",
+            "Formula: ∫e^x dx = e^x + C",
+            "Formula: ∫sin x dx = -cos x + C",
+            "Formula: ∫cos x dx = sin x + C",
+            "Formula: Definite: ∫[a to b] f(x)dx = F(b) - F(a)",
+            "Formula: Area under curve = ∫[a to b] f(x)dx",
+            "log(xy)=log x+log y, log(x/y)=log x−log y",
+            "AP: T_n=a+(n−1)d, S_n=n/2[2a+(n−1)d]",
+            "GP: T_n=a·r^(n−1), S_∞=a/(1−r)"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "SOH-CAH-TOA",
+              "expansion": "Sin=Opp/Hyp, Cos=Adj/Hyp, Tan=Opp/Adj",
+              "meaning": "The trig ratios in a right triangle."
+            },
+            {
+              "phrase": "LCD",
+              "expansion": "Logs Cut Down (exponents)",
+              "meaning": "Logs bring exponents down to coefficients: log(x^n) = n·log(x)."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always add +C to indefinite integrals"
+            },
+            {
+              "type": "exam-tip",
+              "content": "For definite integrals, evaluate F(b) - F(a) clearly"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting the +C in indefinite integrals"
+            },
+            {
+              "type": "warning",
+              "content": "Sign error in ∫sin x dx (result is -cos x, not cos x)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Integration is the reverse of differentiation. Indefinite integral ∫f(x)dx gives a family of functions (with +C). Definite integral ∫[a to b] f(x)dx gives the area under the curve from a to b. Standard rules: ∫x^n dx = x^(n+1)/(n+1) + C (for n ≠ -1)."
+            },
+            {
+              "type": "definition",
+              "content": "Indefinite integral: ∫f(x)dx = F(x) + C (reverse of derivative)"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Indefinite integral?",
+              "back": "∫f(x)dx = F(x) + C (reverse of derivative)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Definite integral?",
+              "back": "∫[a to b] f(x)dx = F(b) - F(a) (area under curve)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Power rule?",
+              "back": "∫x^n dx = x^(n+1)/(n+1) + C (n ≠ -1)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Constant rule?",
+              "back": "∫k dx = kx + C",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Sum rule?",
+              "back": "∫(u + v) dx = ∫u dx + ∫v dx",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What does the formula `∫x^n dx` represent?",
+              "back": "x^(n+1)/(n+1) + C  (n ≠ -1)",
+              "hint": "Look at the formulas section."
+            },
+            {
+              "front": "What does the formula `∫(1/x) dx` represent?",
+              "back": "ln|x| + C",
+              "hint": "Look at the formulas section."
+            },
+            {
+              "front": "What does the formula `∫e^x dx` represent?",
+              "back": "e^x + C",
+              "hint": "Look at the formulas section."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Integration is the reverse of differentiation. Indefinite integral ∫f(x)dx gives a family of functions (with +C). Definite integral ∫[a to b] f(x)dx gives the area under the curve from a to b. Standard rules: ∫x^n dx = x^(n+1)/(n+1) + C (for n ≠ -1)."
+            },
+            {
+              "style": "detailed",
+              "content": "Integration is the reverse of differentiation. Indefinite integral ∫f(x)dx gives a family of functions (with +C). Definite integral ∫[a to b] f(x)dx gives the area under the curve from a to b. Standard rules: ∫x^n dx = x^(n+1)/(n+1) + C (for n ≠ -1).\n\nKey concepts: Indefinite integral: ∫f(x)dx = F(x) + C (reverse of derivative), Definite integral: ∫[a to b] f(x)dx = F(b) - F(a) (area under curve), Power rule: ∫x^n dx = x^(n+1)/(n+1) + C (n ≠ -1)."
+            }
+          ],
+          "recommendedNextLessons": []
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "# Basic Mathematics — Quick Revision\n\n**Subject code:** R23CP1701  \n**Semester:** 1  \n**Credits:** 4  \n\n## Unit 1: Algebra (25%)\n### Logarithms and Progressions\nLogarithms are the inverse of exponentiation — they answer 'to what power must the base be raised to get this number?'. Progressions (sequences) are ordered lists following a pattern: arithmetic (AP) has constant difference, geometric (GP) has constant ratio.\n\n**Formulas:**\n- `log_b(x) = y ⟺ b^y = x`\n- `log(xy) = log(x) + log(y)`\n- `log(x/y) = log(x) - log(y)`\n\n## Unit 2: Trigonometry (20%)\n### Trigonometric Ratios and Identities\nTrigonometry relates angles to side ratios in right triangles. The six trig ratios — sin, cos, tan, cosec, sec, cot — are defined for angle θ. Identities like sin²θ + cos²θ = 1 are used to simplify expressions and solve equations.\n\n**Formulas:**\n- `sin²θ + cos²θ = 1`\n- `1 + tan²θ = sec²θ`\n- `1 + cot²θ = cosec²θ`\n\n## Unit 3: Coordinate Geometry (20%)\n### Straight Lines\nCoordinate geometry places geometric shapes in a coordinate plane, allowing algebraic analysis. A straight line is defined by its slope (m) and a point. Key forms: slope-intercept (y = mx + c), point-slope (y - y1 = m(x - x1)), and two-point form.\n\n**Formulas:**\n- `Slope: m = (y2 - y1) / (x2 - x1)`\n- `Distance: d = √((x2-x1)² + (y2-y1)²)`\n- `Midpoint: M = ((x1+x2)/2, (y1+y2)/2)`\n\n## Unit 4: Differential Calculus (20%)\n### Differentiation and Applications\nDifferentiation finds the rate of change of a function. The derivative dy/dx is the slope of the tangent at a point. Standard rules: power rule (d/dx x^n = n·x^(n-1)), product rule, quotient rule, chain rule. Applications include finding maxima/minima and rates of change.\n\n**Formulas:**\n- `d/dx (x^n) = n · x^(n-1)`\n- `d/dx (sin x) = cos x`\n- `d/dx (cos x) = -sin x`\n\n## Unit 5: Integration (15%)\n### Integration and Applications\nIntegration is the reverse of differentiation. Indefinite integral ∫f(x)dx gives a family of functions (with +C). Definite integral ∫[a to b] f(x)dx gives the area under the curve from a to b. Standard rules: ∫x^n dx = x^(n+1)/(n+1) + C (for n ≠ -1).\n\n**Formulas:**\n- `∫x^n dx = x^(n+1)/(n+1) + C  (n ≠ -1)`\n- `∫(1/x) dx = ln|x| + C`\n- `∫e^x dx = e^x + C`\n",
+  "interviewBank": [
+    {
+      "marks": 5,
+      "question": "Explain the formula: log_b(x) = y ⟺ b^y = x",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 10,
+      "question": "Explain the relationship between differentiation and integration.",
+      "modelAnswer": "They are inverse operations. The Fundamental Theorem of Calculus states that if F(x) = ∫f(x)dx, then F'(x) = f(x). Differentiation finds rate of change; integration accumulates change. Differentiating position gives velocity; integrating velocity gives position."
+    },
+    {
+      "marks": 5,
+      "question": "What is the difference between AP and GP?",
+      "modelAnswer": "Arithmetic Progression: each term differs from the previous by a constant (d). General term: a + (n-1)d. Geometric Progression: each term is the previous multiplied by a constant (r). General term: a·r^(n-1). AP adds; GP multiplies."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: sin²θ + cos²θ = 1",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: Slope: m = (y2 - y1) / (x2 - x1)",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: d/dx (x^n) = n · x^(n-1)",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: ∫x^n dx = x^(n+1)/(n+1) + C  (n ≠ -1)",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    }
+  ],
+  "vivaBank": [
+    {
+      "marks": 2,
+      "question": "Define Logarithm.",
+      "modelAnswer": "log_b(x) = y means b^y = x"
+    },
+    {
+      "marks": 2,
+      "question": "Define Common log.",
+      "modelAnswer": "log_10 (base 10)"
+    },
+    {
+      "marks": 2,
+      "question": "Define Natural log.",
+      "modelAnswer": "ln (base e ≈ 2.718)"
+    },
+    {
+      "marks": 2,
+      "question": "Define logarithm.",
+      "modelAnswer": "log_b(x) = y means b^y = x. The logarithm is the inverse of exponentiation."
+    },
+    {
+      "marks": 2,
+      "question": "State the Pythagorean identity.",
+      "modelAnswer": "sin²θ + cos²θ = 1."
+    },
+    {
+      "marks": 2,
+      "question": "Define Slope (m).",
+      "modelAnswer": "steepness — m = (y2 - y1) / (x2 - x1)"
+    },
+    {
+      "marks": 2,
+      "question": "Define Slope-intercept.",
+      "modelAnswer": "y = mx + c (c = y-intercept)"
+    },
+    {
+      "marks": 2,
+      "question": "Define Point-slope.",
+      "modelAnswer": "y - y1 = m(x - x1)"
+    },
+    {
+      "marks": 2,
+      "question": "Define Derivative.",
+      "modelAnswer": "dy/dx = lim(h→0) [f(x+h) - f(x)] / h"
+    },
+    {
+      "marks": 2,
+      "question": "Define Power rule.",
+      "modelAnswer": "d/dx (x^n) = n · x^(n-1)"
+    },
+    {
+      "marks": 2,
+      "question": "Define Constant rule.",
+      "modelAnswer": "d/dx (c) = 0"
+    },
+    {
+      "marks": 2,
+      "question": "Define Indefinite integral.",
+      "modelAnswer": "∫f(x)dx = F(x) + C (reverse of derivative)"
+    }
+  ],
+  "pyqBank": [
+    {
+      "marks": 10,
+      "question": "Explain Logarithms and Progressions in detail with a diagram.",
+      "modelAnswer": "Logarithms are the inverse of exponentiation — they answer 'to what power must the base be raised to get this number?'. Progressions (sequences) are ordered lists following a pattern: arithmetic (AP) has constant difference, geometric (GP) has constant ratio."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Logarithms and Progressions with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Trigonometric Ratios and Identities in detail with a diagram.",
+      "modelAnswer": "Trigonometry relates angles to side ratios in right triangles. The six trig ratios — sin, cos, tan, cosec, sec, cot — are defined for angle θ. Identities like sin²θ + cos²θ = 1 are used to simplify expressions and solve equations."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Trigonometric Ratios and Identities with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Straight Lines in detail with a diagram.",
+      "modelAnswer": "Coordinate geometry places geometric shapes in a coordinate plane, allowing algebraic analysis. A straight line is defined by its slope (m) and a point. Key forms: slope-intercept (y = mx + c), point-slope (y - y1 = m(x - x1)), and two-point form."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Straight Lines with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Differentiation and Applications in detail with a diagram.",
+      "modelAnswer": "Differentiation finds the rate of change of a function. The derivative dy/dx is the slope of the tangent at a point. Standard rules: power rule (d/dx x^n = n·x^(n-1)), product rule, quotient rule, chain rule. Applications include finding maxima/minima and rates of change."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Differentiation and Applications with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Integration and Applications in detail with a diagram.",
+      "modelAnswer": "Integration is the reverse of differentiation. Indefinite integral ∫f(x)dx gives a family of functions (with +C). Definite integral ∫[a to b] f(x)dx gives the area under the curve from a to b. Standard rules: ∫x^n dx = x^(n+1)/(n+1) + C (for n ≠ -1)."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Integration and Applications with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    }
+  ]
+}

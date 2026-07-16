@@ -1,0 +1,109 @@
+{
+  "subjectCode": "R23CI2612",
+  "subjectName": "Iot In Robotics",
+  "semester": 5,
+  "credits": 4,
+  "units": [
+    {
+      "number": 1,
+      "title": "IoT-Enabled Robotics",
+      "weightage": 30,
+      "lessons": [
+        {
+          "slug": "iot-robotics-integration",
+          "title": "IoT and Robotics Integration",
+          "durationMin": 18,
+          "difficulty": "medium",
+          "overview": "IoT-enabled robotics combines Internet of Things with robotics to create cloud-connected robots that share data, learn collaboratively, and operate remotely.",
+          "keyConcepts": [
+            "IoRT (Internet of Robotics Things): IoT + Robotics = cloud-connected robots",
+            "Cloud robotics offloads heavy computation to cloud — robots can be smaller/lighter",
+            "Fleet management: Monitor and coordinate multiple robots centrally",
+            "ROS (Robot Operating System): Open-source framework for robot software",
+            "5G enables real-time remote robot control with ultra-low latency"
+          ],
+          "formulas": [],
+          "tables": [],
+          "commonMistakes": [
+            "Confusing ROS with a real OS (Linux) — ROS runs ON Linux, it is a middleware framework"
+          ],
+          "examTips": [
+            "ROS is not an OS — it is a framework for writing robot software",
+            "Cloud robotics = robot brain in the cloud, sensors/actuators on the robot"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What protocol is commonly used for robot-to-cloud communication?",
+              "options": [
+                "FTP",
+                "MQTT",
+                "SNMP",
+                "BGP"
+              ],
+              "answer": 1,
+              "explanation": "MQTT is lightweight, uses publish/subscribe, and works well on unreliable networks — ideal for robot-to-cloud communication."
+            }
+          ],
+          "objectives": [
+            "Understand the key concepts of IoT and Robotics Integration",
+            "Apply IoT and Robotics Integration principles in practical scenarios",
+            "Prepare for exam questions on IoT and Robotics Integration"
+          ],
+          "prerequisites": [
+            "Basic understanding of computer systems"
+          ],
+          "theory": "## IoT in Robotics\n\nIoT-enabled robotics (also called Cloud Robotics or Internet of Robotics Things — IoRT) combines IoT sensors, cloud computing, and robotic systems to create intelligent, connected robots.\n\n## Architecture\n1. **Robot Layer**: Physical robots with sensors, actuators, microcontrollers\n2. **Communication Layer**: Wi-Fi, 5G, Bluetooth for robot-to-cloud communication\n3. **Cloud Layer**: Data storage, ML training, path planning, fleet management\n4. **Application Layer**: Remote monitoring, control dashboard, analytics\n\n## Benefits of IoT in Robotics\n- **Cloud Computing**: Offload heavy computation (ML, path planning) to cloud\n- **Fleet Management**: Monitor and coordinate multiple robots\n- **Collaborative Learning**: Robots share experiences to learn faster\n- **Remote Control**: Operate robots from anywhere via internet\n- **Predictive Maintenance**: Sensor data predicts robot failures\n\n## Applications\n- **Industrial**: Smart factory robots with real-time monitoring\n- **Healthcare**: Telemedicine robots, surgical robots\n- **Agriculture**: Autonomous tractors, harvesting robots\n- **Logistics**: Warehouse robots (Amazon Kiva), delivery drones\n- **Home**: Vacuum robots (Roomba) with smartphone control\n\n## Key Technologies\n- **ROS (Robot Operating System)**: Open-source robotics framework\n- **MQTT**: Lightweight protocol for robot-to-cloud communication\n- **Computer Vision**: Object detection, navigation\n- **SLAM**: Simultaneous Localization and Mapping\n- **5G**: Ultra-low latency for real-time robot control",
+          "analogies": [],
+          "flowcharts": [],
+          "mindMaps": [],
+          "complexity": null,
+          "workedExamples": [
+            {
+              "title": "IoT Robot Arm Monitoring",
+              "problem": "Design an IoT system for monitoring a factory robot arm.",
+              "solution": "Sensors: Joint angle encoders, motor current sensors, temperature, vibration. Communication: Wi-Fi to factory gateway. Cloud: AWS IoT Core with MQTT. Processing: Real-time anomaly detection (ML model), predictive maintenance (vibration analysis). Dashboard: Web app showing robot status, alerts for anomalies, maintenance schedule.",
+              "explanation": "Vibration analysis can detect bearing wear BEFORE failure — this is predictive maintenance, a key IoT robotics application."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 3,
+              "question": "Explain the benefits of integrating IoT with robotics.",
+              "modelAnswer": "IoT + Robotics benefits: (1) Cloud computing — offload heavy ML/path planning, robots can be smaller. (2) Fleet management — coordinate multiple robots. (3) Collaborative learning — robots share experiences to learn faster. (4) Remote monitoring/control — operate from anywhere. (5) Predictive maintenance — sensor data predicts failures before they happen. (6) Real-time data — continuous monitoring of robot health and performance."
+            }
+          ],
+          "interviewQuestions": [],
+          "examQuestions": [],
+          "revisionSummary": "## IoT in Robotics\n\nIoT-enabled robotics (also called Cloud Robotics or Internet of Robotics Things — IoRT) combines IoT sensors, cloud computing, and robotic systems to create intelligent, connected ...",
+          "cheatSheet": [
+            "IoRT (Internet of Robotics Things)",
+            "Cloud robotics offloads heavy computation to cloud — robots can be smaller/lighter",
+            "Fleet management",
+            "ROS (Robot Operating System)",
+            "5G enables real-time remote robot control with ultra-low latency"
+          ],
+          "mnemonics": [],
+          "callouts": [
+            {
+              "type": "example",
+              "content": "Amazon warehouse robots (Kiva/Amazon Robotics): Hundreds of robots move shelves to workers. IoT sensors track each robot position, cloud algorithms plan optimal paths to avoid collisions, and fleet management software coordinates all robots."
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is cloud robotics?",
+              "back": "Cloud robotics uses cloud computing to offload heavy computation (ML, path planning, data processing) from robots to the cloud. Benefits: robots can be smaller, cheaper, and access unlimited computing power.",
+              "hint": "Think: where does the computation happen?"
+            }
+          ],
+          "aiSummaries": [],
+          "recommendedNextLessons": []
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "Key concepts for Iot In Robotics: See individual lesson summaries.",
+  "interviewBank": [],
+  "vivaBank": [],
+  "pyqBank": []
+}

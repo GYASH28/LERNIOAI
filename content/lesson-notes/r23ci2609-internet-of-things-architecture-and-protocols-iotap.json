@@ -1,0 +1,109 @@
+{
+  "subjectCode": "R23CI2609",
+  "subjectName": "Internet of Things Architecture and Protocols (IoTAP)",
+  "semester": 5,
+  "credits": 3,
+  "units": [
+    {
+      "number": 1,
+      "title": "IoT Architecture Models",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "iot-architecture-models",
+          "title": "IoT Architecture Models",
+          "durationMin": 18,
+          "difficulty": "medium",
+          "overview": "IoT architecture defines how devices, networks, and applications are organized. This lesson covers the 4-layer, 5-layer, 7-layer (IoT-A), and SOA-based IoT architectures.",
+          "keyConcepts": [
+            "4-layer: Sensing → Network → Service → Interface",
+            "5-layer adds Business Layer for analytics/management",
+            "IoT-A: 7-layer European reference model (most detailed)",
+            "Edge computing: Process near source (low latency, saves bandwidth)",
+            "Fog computing: Intermediate between edge and cloud"
+          ],
+          "formulas": [],
+          "tables": [],
+          "commonMistakes": [
+            "Confusing edge with fog — edge is ON the device/gateway, fog is a separate intermediate layer"
+          ],
+          "examTips": [
+            "Edge = near source (low latency). Cloud = centralized (high power). Fog = in between",
+            "IoT-A 7-layer is the most comprehensive reference model"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which computing model processes data near the data source?",
+              "options": [
+                "Cloud computing",
+                "Edge computing",
+                "Grid computing",
+                "Quantum computing"
+              ],
+              "answer": 1,
+              "explanation": "Edge computing processes data at or near the source (device/gateway), reducing latency and bandwidth usage compared to cloud computing."
+            }
+          ],
+          "objectives": [
+            "Understand the key concepts of IoT Architecture Models",
+            "Apply IoT Architecture Models principles in practical scenarios",
+            "Prepare for exam questions on IoT Architecture Models"
+          ],
+          "prerequisites": [
+            "Basic understanding of computer systems"
+          ],
+          "theory": "## IoT Architecture Models\n\n### 1. Basic 4-Layer Architecture\n1. **Sensing Layer**: Sensors and actuators\n2. **Network Layer**: Gateways, communication protocols\n3. **Service Layer**: Data processing, storage, analytics\n4. **Interface Layer**: User applications, dashboards\n\n### 2. 5-Layer Architecture (Extended)\n1. **Perception Layer**: Physical sensors/actuators\n2. **Network Layer**: Data transmission\n3. **Processing Layer**: Cloud/edge computing\n4. **Application Layer**: Business logic\n5. **Business Layer**: Analytics, reporting, management\n\n### 3. IoT-A Reference Architecture\nThe European IoT-A project defines a 7-layer model:\n1. Physical Device Layer\n2. Communication Layer\n3. IoT Service Layer\n4. Virtual Entity Layer\n5. IoT Process Management Layer\n6. Application Layer\n7. Business Layer\n\n### 4. SOA (Service-Oriented Architecture) for IoT\nDivides IoT into 4 service layers:\n1. **Sensing Layer**: Data acquisition\n2. **Access Layer**: Data aggregation and filtering\n3. **Middleware Layer**: Service management, data storage\n4. **Application Layer**: End-user services\n\n## Edge vs Cloud Computing in IoT\n- **Edge Computing**: Process data near the source (on gateway/device). Reduces latency, saves bandwidth.\n- **Cloud Computing**: Process data in centralized cloud. More computing power, historical analysis.\n- **Fog Computing**: Intermediate layer between edge and cloud.",
+          "analogies": [],
+          "flowcharts": [],
+          "mindMaps": [],
+          "complexity": null,
+          "workedExamples": [
+            {
+              "title": "Smart Traffic Management Architecture",
+              "problem": "Design a 5-layer IoT architecture for smart traffic management.",
+              "solution": "Perception: Traffic sensors, cameras at intersections. Network: 4G/5G to send data. Processing: Edge gateway analyzes video for vehicle count. Application: Adaptive traffic light control. Business: City-wide traffic analytics dashboard.",
+              "explanation": "Edge processing is critical here — video analysis must happen locally (low latency) rather than sending raw video to the cloud."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 3,
+              "question": "Explain the need for edge computing in IoT.",
+              "modelAnswer": "Edge computing processes data near the source instead of the cloud. Benefits: (1) Low latency — critical for real-time applications like autonomous vehicles. (2) Bandwidth efficiency — reduces data sent to cloud. (3) Offline capability — works without internet. (4) Privacy — sensitive data stays local. (5) Cost — reduces cloud computing costs."
+            }
+          ],
+          "interviewQuestions": [],
+          "examQuestions": [],
+          "revisionSummary": "## IoT Architecture Models\n\n### 1. Basic 4-Layer Architecture\n1. **Sensing Layer**: Sensors and actuators\n2. **Network Layer**: Gateways, communication protocols\n3. **Service Layer**: Data processing,...",
+          "cheatSheet": [
+            "4-layer",
+            "5-layer adds Business Layer for analytics/management",
+            "IoT-A",
+            "Edge computing",
+            "Fog computing"
+          ],
+          "mnemonics": [],
+          "callouts": [
+            {
+              "type": "note",
+              "content": "Fog computing (coined by Cisco) is an intermediate layer between edge and cloud — it processes data at the network edge but with more computing power than individual devices."
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is edge computing in IoT?",
+              "back": "Edge computing processes data near the source (on gateway or device) instead of sending everything to the cloud. Benefits: lower latency, reduced bandwidth, works offline.",
+              "hint": "Think: where does processing happen?"
+            }
+          ],
+          "aiSummaries": [],
+          "recommendedNextLessons": []
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "Key concepts for Internet of Things Architecture and Protocols (IoTAP): See individual lesson summaries.",
+  "interviewBank": [],
+  "vivaBank": [],
+  "pyqBank": []
+}

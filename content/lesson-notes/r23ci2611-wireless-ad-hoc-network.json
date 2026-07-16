@@ -1,0 +1,109 @@
+{
+  "subjectCode": "R23CI2611",
+  "subjectName": "Wireless Ad-Hoc Network",
+  "semester": 5,
+  "credits": 2,
+  "units": [
+    {
+      "number": 1,
+      "title": "Ad-Hoc Network Fundamentals",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "manet-basics",
+          "title": "Mobile Ad-Hoc Networks (MANET)",
+          "durationMin": 18,
+          "difficulty": "medium",
+          "overview": "A Mobile Ad-Hoc Network (MANET) is a self-configuring network of mobile devices connected without infrastructure. This lesson covers MANET characteristics, routing protocols, and applications.",
+          "keyConcepts": [
+            "MANET: Self-configuring network of mobile nodes, no infrastructure",
+            "Nodes act as both hosts AND routers (multi-hop)",
+            "Proactive routing: Pre-compute all routes (DSDV, OLSR) — low latency, high overhead",
+            "Reactive routing: Discover routes on demand (AODV, DSR) — low overhead, high latency",
+            "VANET: Vehicles, FANET: Drones, WSN: Sensors — all are ad-hoc network types"
+          ],
+          "formulas": [],
+          "tables": [],
+          "commonMistakes": [
+            "Confusing MANET with WLAN — WLAN has access points (infrastructure), MANET has none"
+          ],
+          "examTips": [
+            "AODV = Ad-Hoc On-Demand Distance Vector — the name tells you: on-demand (reactive)",
+            "In MANET, every node is both a host AND a router"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which routing protocol discovers routes only when needed?",
+              "options": [
+                "DSDV",
+                "OLSR",
+                "AODV",
+                "DREAM"
+              ],
+              "answer": 2,
+              "explanation": "AODV (Ad-Hoc On-Demand Distance Vector) is a reactive protocol — it discovers routes only when a node needs to send data, using Route Request (RREQ) messages."
+            }
+          ],
+          "objectives": [
+            "Understand the key concepts of Mobile Ad-Hoc Networks (MANET)",
+            "Apply Mobile Ad-Hoc Networks (MANET) principles in practical scenarios",
+            "Prepare for exam questions on Mobile Ad-Hoc Networks (MANET)"
+          ],
+          "prerequisites": [
+            "Basic understanding of computer systems"
+          ],
+          "theory": "## What is a MANET?\n\nA Mobile Ad-Hoc Network (MANET) is a collection of wireless mobile nodes that dynamically form a temporary network without the need for any pre-existing infrastructure (no routers, no access points).\n\n## Characteristics\n- **No fixed infrastructure**: Nodes themselves act as routers\n- **Dynamic topology**: Nodes move freely, changing network topology\n- **Multi-hop routing**: Data may pass through multiple intermediate nodes\n- **Self-configuring**: Nodes automatically join/leave the network\n- **Energy constrained**: Typically battery-powered devices\n- **Limited bandwidth**: Wireless communication\n\n## Types of Ad-Hoc Networks\n1. **MANET (Mobile Ad-Hoc Network)**: Mobile nodes, vehicular\n2. **WSN (Wireless Sensor Network)**: Stationary sensors, low power\n3. **VANET (Vehicular Ad-Hoc Network)**: Vehicles, high mobility\n4. **FANET (Flying Ad-Hoc Network)**: UAVs/drones\n\n## Routing Protocols\n\n### Proactive (Table-Driven)\n- Nodes maintain routing tables with routes to ALL nodes\n- Updates propagated when topology changes\n- Examples: DSDV, OLSR, DREAM\n- **Pros**: Low latency (routes pre-computed)\n- **Cons**: High overhead (control messages)\n\n### Reactive (On-Demand)\n- Routes discovered only when needed\n- Route discovery: flood network with RREQ\n- Examples: AODV, DSR, TORA\n- **Pros**: Low overhead (only when needed)\n- **Cons**: High latency for first packet\n\n### Hybrid\n- Combines proactive and reactive\n- Examples: ZRP (Zone Routing Protocol)\n- Proactive within zone, reactive outside zone",
+          "analogies": [],
+          "flowcharts": [],
+          "mindMaps": [],
+          "complexity": null,
+          "workedExamples": [
+            {
+              "title": "AODV Route Discovery",
+              "problem": "Explain how AODV discovers a route from node A to node E in a 5-node network (A-B-C-D-E).",
+              "solution": "1. A broadcasts RREQ (Route Request) to neighbors B. 2. B forwards RREQ to C. 3. C forwards to D. 4. D forwards to E. 5. E recognizes itself as destination, sends RREP (Route Reply) back via D→C→B→A. 6. A now has route: A→B→C→D→E. Reverse path established during RREP.",
+              "explanation": "AODV uses broadcast for route discovery (RREQ) and unicast for route reply (RREP). The reverse path is established because each node records who sent the RREQ."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 3,
+              "question": "Explain the challenges of routing in MANET.",
+              "modelAnswer": "MANET routing challenges: (1) Dynamic topology — nodes move, routes break frequently. (2) Limited bandwidth — wireless links have lower capacity. (3) Energy constrained — battery-powered nodes, routing must be energy-efficient. (4) No central control — distributed algorithms needed. (5) Security — wireless medium is vulnerable to attacks. (6) Hidden terminal problem — nodes out of range cause collisions."
+            }
+          ],
+          "interviewQuestions": [],
+          "examQuestions": [],
+          "revisionSummary": "## What is a MANET?\n\nA Mobile Ad-Hoc Network (MANET) is a collection of wireless mobile nodes that dynamically form a temporary network without the need for any pre-existing infrastructure (no routers...",
+          "cheatSheet": [
+            "MANET",
+            "Nodes act as both hosts AND routers (multi-hop)",
+            "Proactive routing",
+            "Reactive routing",
+            "VANET"
+          ],
+          "mnemonics": [],
+          "callouts": [
+            {
+              "type": "example",
+              "content": "Military battlefield: Soldiers with mobile devices form a MANET. No cell towers available. Each soldier device acts as a router, relaying messages to other soldiers through multiple hops."
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is the difference between proactive and reactive routing in MANET?",
+              "back": "Proactive (table-driven): Maintains routes to ALL nodes at all times (DSDV, OLSR). Low latency, high overhead. Reactive (on-demand): Discovers routes only when needed (AODV, DSR). Low overhead, higher latency for first packet.",
+              "hint": "Think: pre-computed vs on-demand"
+            }
+          ],
+          "aiSummaries": [],
+          "recommendedNextLessons": []
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "Key concepts for Wireless Ad-Hoc Network: See individual lesson summaries.",
+  "interviewBank": [],
+  "vivaBank": [],
+  "pyqBank": []
+}

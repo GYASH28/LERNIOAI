@@ -1,0 +1,1946 @@
+{
+  "subjectCode": "R23CI6606",
+  "subjectName": "AI Tools and Techniques",
+  "semester": 6,
+  "credits": 4,
+  "units": [
+    {
+      "number": 1,
+      "title": "AI Fundamentals",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "ai-overview",
+          "title": "AI Overview",
+          "durationMin": 25,
+          "difficulty": "easy",
+          "overview": "AI Overview is a key topic in AI Tools and Techniques, covered under AI Fundamentals. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "AI Overview: Core concept in AI Tools and Techniques",
+            "Definition: The formal definition and scope of ai overview",
+            "Key principles: Fundamental rules and properties",
+            "Working: How ai overview operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within AI Overview",
+            "Relationship: connects to AI Fundamentals",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "AI Overview — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in AI Tools and Techniques"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding AI Fundamentals"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of AI Overview",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is AI Overview?",
+              "options": [
+                "A core concept in AI Tools and Techniques",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "AI Overview is a fundamental concept in AI Tools and Techniques."
+            },
+            {
+              "question": "AI Overview is studied under which unit?",
+              "options": [
+                "AI Fundamentals",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "AI Overview belongs to the AI Fundamentals unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of AI Overview?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "AI Overview has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand AI Overview and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on AI Overview"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nAI Overview is a key topic in AI Tools and Techniques, covered under AI Fundamentals. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- AI Overview: Core concept in AI Tools and Techniques\n- Definition: The formal definition and scope of ai overview\n- Key principles: Fundamental rules and properties\n- Working: How ai overview operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within AI Overview`\n- `Relationship: connects to AI Fundamentals`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### AI Overview — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in AI Tools and Techniques |\n| Importance | Essential for understanding AI Fundamentals |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nAI Overview is a key topic in AI Tools and Techniques, covered under AI Fundamentals. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "AI Overview — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "AI Overview — Concept Map",
+              "content": "mindmap\n  root((AI Overview))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is AI Overview?",
+              "solution": "Correct answer: A core concept in AI Tools and Techniques",
+              "explanation": "AI Overview is a fundamental concept in AI Tools and Techniques."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain AI Overview with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define AI Overview.",
+              "modelAnswer": "Core concept in AI Tools and Techniques"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of ai overview"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within AI Overview",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define AI Overview.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within AI Overview",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to AI Fundamentals",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain AI Overview in detail with a diagram.",
+              "modelAnswer": "AI Overview is a key topic in AI Tools and Techniques, covered under AI Fundamentals. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss AI Overview with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — AI Overview\n\n**One-line definition:** AI Overview is a key topic in AI Tools and Techniques, covered under AI Fundamentals. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applicat\n\n**Key points:**\n\n- AI Overview: Core concept in AI Tools and Techniques\n- Definition: The formal definition and scope of ai overview\n- Key principles: Fundamental rules and properties\n- Working: How ai overview operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within AI Overview`\n- `Relationship: connects to AI Fundamentals`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of AI Overview\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "AI Overview: Core concept in AI Tools and Techniques",
+            "Definition: The formal definition and scope of ai overview",
+            "Key principles: Fundamental rules and properties",
+            "Working: How ai overview operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within AI Overview",
+            "Formula: Relationship: connects to AI Fundamentals",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of AI Overview"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "AI Overview is a key topic in AI Tools and Techniques, covered under AI Fundamentals. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "AI Overview: Core concept in AI Tools and Techniques"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is AI Overview?",
+              "back": "Core concept in AI Tools and Techniques",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of ai overview",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How ai overview operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "AI Overview is a key topic in AI Tools and Techniques, covered under AI Fundamentals. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "AI Overview is a key topic in AI Tools and Techniques, covered under AI Fundamentals. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: AI Overview: Core concept in AI Tools and Techniques, Definition: The formal definition and scope of ai overview, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "search-and-optimization",
+            "knowledge-representation"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Search Algorithms",
+      "weightage": 25,
+      "lessons": [
+        {
+          "slug": "search-and-optimization",
+          "title": "Search and Optimization",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "Search and Optimization is a key topic in AI Tools and Techniques, covered under Search Algorithms. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "Search and Optimization: Core concept in AI Tools and Techniques",
+            "Definition: The formal definition and scope of search and optimization",
+            "Key principles: Fundamental rules and properties",
+            "Working: How search and optimization operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within Search and Optimization",
+            "Relationship: connects to Search Algorithms",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "Search and Optimization — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in AI Tools and Techniques"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding Search Algorithms"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of Search and Optimization",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is Search and Optimization?",
+              "options": [
+                "A core concept in AI Tools and Techniques",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "Search and Optimization is a fundamental concept in AI Tools and Techniques."
+            },
+            {
+              "question": "Search and Optimization is studied under which unit?",
+              "options": [
+                "Search Algorithms",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "Search and Optimization belongs to the Search Algorithms unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of Search and Optimization?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "Search and Optimization has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand Search and Optimization and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on Search and Optimization"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nSearch and Optimization is a key topic in AI Tools and Techniques, covered under Search Algorithms. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Search and Optimization: Core concept in AI Tools and Techniques\n- Definition: The formal definition and scope of search and optimization\n- Key principles: Fundamental rules and properties\n- Working: How search and optimization operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Search and Optimization`\n- `Relationship: connects to Search Algorithms`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Search and Optimization — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in AI Tools and Techniques |\n| Importance | Essential for understanding Search Algorithms |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nSearch and Optimization is a key topic in AI Tools and Techniques, covered under Search Algorithms. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Search and Optimization — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Search and Optimization — Concept Map",
+              "content": "mindmap\n  root((Search and Optimization))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is Search and Optimization?",
+              "solution": "Correct answer: A core concept in AI Tools and Techniques",
+              "explanation": "Search and Optimization is a fundamental concept in AI Tools and Techniques."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Search and Optimization with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Search and Optimization.",
+              "modelAnswer": "Core concept in AI Tools and Techniques"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of search and optimization"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Search and Optimization",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Search and Optimization.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Search and Optimization",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to Search Algorithms",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Search and Optimization in detail with a diagram.",
+              "modelAnswer": "Search and Optimization is a key topic in AI Tools and Techniques, covered under Search Algorithms. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Search and Optimization with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Search and Optimization\n\n**One-line definition:** Search and Optimization is a key topic in AI Tools and Techniques, covered under Search Algorithms. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and prac\n\n**Key points:**\n\n- Search and Optimization: Core concept in AI Tools and Techniques\n- Definition: The formal definition and scope of search and optimization\n- Key principles: Fundamental rules and properties\n- Working: How search and optimization operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within Search and Optimization`\n- `Relationship: connects to Search Algorithms`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of Search and Optimization\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Search and Optimization: Core concept in AI Tools and Techniques",
+            "Definition: The formal definition and scope of search and optimization",
+            "Key principles: Fundamental rules and properties",
+            "Working: How search and optimization operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within Search and Optimization",
+            "Formula: Relationship: connects to Search Algorithms",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of Search and Optimization"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Search and Optimization is a key topic in AI Tools and Techniques, covered under Search Algorithms. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "Search and Optimization: Core concept in AI Tools and Techniques"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Search and Optimization?",
+              "back": "Core concept in AI Tools and Techniques",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of search and optimization",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How search and optimization operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Search and Optimization is a key topic in AI Tools and Techniques, covered under Search Algorithms. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "Search and Optimization is a key topic in AI Tools and Techniques, covered under Search Algorithms. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Search and Optimization: Core concept in AI Tools and Techniques, Definition: The formal definition and scope of search and optimization, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "knowledge-representation",
+            "deep-learning-tools"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Knowledge Representation",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "knowledge-representation",
+          "title": "Knowledge Representation",
+          "durationMin": 35,
+          "difficulty": "hard",
+          "overview": "Knowledge Representation is a key topic in AI Tools and Techniques, covered under Knowledge Representation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "Knowledge Representation: Core concept in AI Tools and Techniques",
+            "Definition: The formal definition and scope of knowledge representation",
+            "Key principles: Fundamental rules and properties",
+            "Working: How knowledge representation operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within Knowledge Representation",
+            "Relationship: connects to Knowledge Representation",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "Knowledge Representation — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in AI Tools and Techniques"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding Knowledge Representation"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of Knowledge Representation",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is Knowledge Representation?",
+              "options": [
+                "A core concept in AI Tools and Techniques",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "Knowledge Representation is a fundamental concept in AI Tools and Techniques."
+            },
+            {
+              "question": "Knowledge Representation is studied under which unit?",
+              "options": [
+                "Knowledge Representation",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "Knowledge Representation belongs to the Knowledge Representation unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of Knowledge Representation?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "Knowledge Representation has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand Knowledge Representation and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on Knowledge Representation"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nKnowledge Representation is a key topic in AI Tools and Techniques, covered under Knowledge Representation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Knowledge Representation: Core concept in AI Tools and Techniques\n- Definition: The formal definition and scope of knowledge representation\n- Key principles: Fundamental rules and properties\n- Working: How knowledge representation operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Knowledge Representation`\n- `Relationship: connects to Knowledge Representation`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Knowledge Representation — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in AI Tools and Techniques |\n| Importance | Essential for understanding Knowledge Representation |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nKnowledge Representation is a key topic in AI Tools and Techniques, covered under Knowledge Representation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Knowledge Representation — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Knowledge Representation — Concept Map",
+              "content": "mindmap\n  root((Knowledge Representation))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is Knowledge Representation?",
+              "solution": "Correct answer: A core concept in AI Tools and Techniques",
+              "explanation": "Knowledge Representation is a fundamental concept in AI Tools and Techniques."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Knowledge Representation with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Knowledge Representation.",
+              "modelAnswer": "Core concept in AI Tools and Techniques"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of knowledge representation"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Knowledge Representation",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Knowledge Representation.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Knowledge Representation",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to Knowledge Representation",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Knowledge Representation in detail with a diagram.",
+              "modelAnswer": "Knowledge Representation is a key topic in AI Tools and Techniques, covered under Knowledge Representation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Knowledge Representation with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Knowledge Representation\n\n**One-line definition:** Knowledge Representation is a key topic in AI Tools and Techniques, covered under Knowledge Representation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, \n\n**Key points:**\n\n- Knowledge Representation: Core concept in AI Tools and Techniques\n- Definition: The formal definition and scope of knowledge representation\n- Key principles: Fundamental rules and properties\n- Working: How knowledge representation operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within Knowledge Representation`\n- `Relationship: connects to Knowledge Representation`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of Knowledge Representation\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Knowledge Representation: Core concept in AI Tools and Techniques",
+            "Definition: The formal definition and scope of knowledge representation",
+            "Key principles: Fundamental rules and properties",
+            "Working: How knowledge representation operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within Knowledge Representation",
+            "Formula: Relationship: connects to Knowledge Representation",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of Knowledge Representation"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Knowledge Representation is a key topic in AI Tools and Techniques, covered under Knowledge Representation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "Knowledge Representation: Core concept in AI Tools and Techniques"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Knowledge Representation?",
+              "back": "Core concept in AI Tools and Techniques",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of knowledge representation",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How knowledge representation operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Knowledge Representation is a key topic in AI Tools and Techniques, covered under Knowledge Representation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "Knowledge Representation is a key topic in AI Tools and Techniques, covered under Knowledge Representation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Knowledge Representation: Core concept in AI Tools and Techniques, Definition: The formal definition and scope of knowledge representation, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "deep-learning-tools",
+            "tensorflow-and-pytorch"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Neural Networks",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "deep-learning-tools",
+          "title": "Deep Learning Tools",
+          "durationMin": 40,
+          "difficulty": "hard",
+          "overview": "Deep Learning Tools is a key topic in AI Tools and Techniques, covered under Neural Networks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "Deep Learning Tools: Core concept in AI Tools and Techniques",
+            "Definition: The formal definition and scope of deep learning tools",
+            "Key principles: Fundamental rules and properties",
+            "Working: How deep learning tools operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within Deep Learning Tools",
+            "Relationship: connects to Neural Networks",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "Deep Learning Tools — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in AI Tools and Techniques"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding Neural Networks"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of Deep Learning Tools",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is Deep Learning Tools?",
+              "options": [
+                "A core concept in AI Tools and Techniques",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "Deep Learning Tools is a fundamental concept in AI Tools and Techniques."
+            },
+            {
+              "question": "Deep Learning Tools is studied under which unit?",
+              "options": [
+                "Neural Networks",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "Deep Learning Tools belongs to the Neural Networks unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of Deep Learning Tools?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "Deep Learning Tools has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand Deep Learning Tools and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on Deep Learning Tools"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nDeep Learning Tools is a key topic in AI Tools and Techniques, covered under Neural Networks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Deep Learning Tools: Core concept in AI Tools and Techniques\n- Definition: The formal definition and scope of deep learning tools\n- Key principles: Fundamental rules and properties\n- Working: How deep learning tools operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Deep Learning Tools`\n- `Relationship: connects to Neural Networks`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Deep Learning Tools — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in AI Tools and Techniques |\n| Importance | Essential for understanding Neural Networks |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nDeep Learning Tools is a key topic in AI Tools and Techniques, covered under Neural Networks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Deep Learning Tools — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Deep Learning Tools — Concept Map",
+              "content": "mindmap\n  root((Deep Learning Tools))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is Deep Learning Tools?",
+              "solution": "Correct answer: A core concept in AI Tools and Techniques",
+              "explanation": "Deep Learning Tools is a fundamental concept in AI Tools and Techniques."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Deep Learning Tools with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Deep Learning Tools.",
+              "modelAnswer": "Core concept in AI Tools and Techniques"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of deep learning tools"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Deep Learning Tools",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Deep Learning Tools.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Deep Learning Tools",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to Neural Networks",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Deep Learning Tools in detail with a diagram.",
+              "modelAnswer": "Deep Learning Tools is a key topic in AI Tools and Techniques, covered under Neural Networks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Deep Learning Tools with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Deep Learning Tools\n\n**One-line definition:** Deep Learning Tools is a key topic in AI Tools and Techniques, covered under Neural Networks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical \n\n**Key points:**\n\n- Deep Learning Tools: Core concept in AI Tools and Techniques\n- Definition: The formal definition and scope of deep learning tools\n- Key principles: Fundamental rules and properties\n- Working: How deep learning tools operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within Deep Learning Tools`\n- `Relationship: connects to Neural Networks`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of Deep Learning Tools\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Deep Learning Tools: Core concept in AI Tools and Techniques",
+            "Definition: The formal definition and scope of deep learning tools",
+            "Key principles: Fundamental rules and properties",
+            "Working: How deep learning tools operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within Deep Learning Tools",
+            "Formula: Relationship: connects to Neural Networks",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of Deep Learning Tools"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Deep Learning Tools is a key topic in AI Tools and Techniques, covered under Neural Networks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "Deep Learning Tools: Core concept in AI Tools and Techniques"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Deep Learning Tools?",
+              "back": "Core concept in AI Tools and Techniques",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of deep learning tools",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How deep learning tools operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Deep Learning Tools is a key topic in AI Tools and Techniques, covered under Neural Networks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "Deep Learning Tools is a key topic in AI Tools and Techniques, covered under Neural Networks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Deep Learning Tools: Core concept in AI Tools and Techniques, Definition: The formal definition and scope of deep learning tools, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "tensorflow-and-pytorch"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "AI Tools",
+      "weightage": 15,
+      "lessons": [
+        {
+          "slug": "tensorflow-and-pytorch",
+          "title": "TensorFlow and PyTorch",
+          "durationMin": 45,
+          "difficulty": "hard",
+          "overview": "TensorFlow and PyTorch is a key topic in AI Tools and Techniques, covered under AI Tools. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "TensorFlow and PyTorch: Core concept in AI Tools and Techniques",
+            "Definition: The formal definition and scope of tensorflow and pytorch",
+            "Key principles: Fundamental rules and properties",
+            "Working: How tensorflow and pytorch operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within TensorFlow and PyTorch",
+            "Relationship: connects to AI Tools",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "TensorFlow and PyTorch — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in AI Tools and Techniques"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding AI Tools"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of TensorFlow and PyTorch",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is TensorFlow and PyTorch?",
+              "options": [
+                "A core concept in AI Tools and Techniques",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "TensorFlow and PyTorch is a fundamental concept in AI Tools and Techniques."
+            },
+            {
+              "question": "TensorFlow and PyTorch is studied under which unit?",
+              "options": [
+                "AI Tools",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "TensorFlow and PyTorch belongs to the AI Tools unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of TensorFlow and PyTorch?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "TensorFlow and PyTorch has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand TensorFlow and PyTorch and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on TensorFlow and PyTorch"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nTensorFlow and PyTorch is a key topic in AI Tools and Techniques, covered under AI Tools. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- TensorFlow and PyTorch: Core concept in AI Tools and Techniques\n- Definition: The formal definition and scope of tensorflow and pytorch\n- Key principles: Fundamental rules and properties\n- Working: How tensorflow and pytorch operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within TensorFlow and PyTorch`\n- `Relationship: connects to AI Tools`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### TensorFlow and PyTorch — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in AI Tools and Techniques |\n| Importance | Essential for understanding AI Tools |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nTensorFlow and PyTorch is a key topic in AI Tools and Techniques, covered under AI Tools. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "TensorFlow and PyTorch — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "TensorFlow and PyTorch — Concept Map",
+              "content": "mindmap\n  root((TensorFlow and PyTorch))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is TensorFlow and PyTorch?",
+              "solution": "Correct answer: A core concept in AI Tools and Techniques",
+              "explanation": "TensorFlow and PyTorch is a fundamental concept in AI Tools and Techniques."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain TensorFlow and PyTorch with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define TensorFlow and PyTorch.",
+              "modelAnswer": "Core concept in AI Tools and Techniques"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of tensorflow and pytorch"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within TensorFlow and PyTorch",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define TensorFlow and PyTorch.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within TensorFlow and PyTorch",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to AI Tools",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain TensorFlow and PyTorch in detail with a diagram.",
+              "modelAnswer": "TensorFlow and PyTorch is a key topic in AI Tools and Techniques, covered under AI Tools. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss TensorFlow and PyTorch with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — TensorFlow and PyTorch\n\n**One-line definition:** TensorFlow and PyTorch is a key topic in AI Tools and Techniques, covered under AI Tools. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical appl\n\n**Key points:**\n\n- TensorFlow and PyTorch: Core concept in AI Tools and Techniques\n- Definition: The formal definition and scope of tensorflow and pytorch\n- Key principles: Fundamental rules and properties\n- Working: How tensorflow and pytorch operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within TensorFlow and PyTorch`\n- `Relationship: connects to AI Tools`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of TensorFlow and PyTorch\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "TensorFlow and PyTorch: Core concept in AI Tools and Techniques",
+            "Definition: The formal definition and scope of tensorflow and pytorch",
+            "Key principles: Fundamental rules and properties",
+            "Working: How tensorflow and pytorch operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within TensorFlow and PyTorch",
+            "Formula: Relationship: connects to AI Tools",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of TensorFlow and PyTorch"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "TensorFlow and PyTorch is a key topic in AI Tools and Techniques, covered under AI Tools. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "TensorFlow and PyTorch: Core concept in AI Tools and Techniques"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is TensorFlow and PyTorch?",
+              "back": "Core concept in AI Tools and Techniques",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of tensorflow and pytorch",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How tensorflow and pytorch operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "TensorFlow and PyTorch is a key topic in AI Tools and Techniques, covered under AI Tools. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "TensorFlow and PyTorch is a key topic in AI Tools and Techniques, covered under AI Tools. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: TensorFlow and PyTorch: Core concept in AI Tools and Techniques, Definition: The formal definition and scope of tensorflow and pytorch, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": []
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "# AI Tools and Techniques — Quick Revision\n\n**Subject code:** R23CP6406  \n**Semester:** 6  \n**Credits:** 4  \n\n## Unit 1: AI Fundamentals (20%)\n### AI Overview\nAI Overview is a key topic in AI Tools and Techniques, covered under AI Fundamentals. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Unit 2: Search Algorithms (25%)\n### Search and Optimization\nSearch and Optimization is a key topic in AI Tools and Techniques, covered under Search Algorithms. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Unit 3: Knowledge Representation (20%)\n### Knowledge Representation\nKnowledge Representation is a key topic in AI Tools and Techniques, covered under Knowledge Representation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Unit 4: Neural Networks (20%)\n### Deep Learning Tools\nDeep Learning Tools is a key topic in AI Tools and Techniques, covered under Neural Networks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Unit 5: AI Tools (15%)\n### TensorFlow and PyTorch\nTensorFlow and PyTorch is a key topic in AI Tools and Techniques, covered under AI Tools. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n",
+  "interviewBank": [
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within AI Overview",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 10,
+      "question": "Explain the key concepts from this lesson with examples.",
+      "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+    },
+    {
+      "marks": 5,
+      "question": "What are the practical applications of this topic?",
+      "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within Search and Optimization",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within Knowledge Representation",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within Deep Learning Tools",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within TensorFlow and PyTorch",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    }
+  ],
+  "vivaBank": [
+    {
+      "marks": 2,
+      "question": "Define AI Overview.",
+      "modelAnswer": "Core concept in AI Tools and Techniques"
+    },
+    {
+      "marks": 2,
+      "question": "Define Definition.",
+      "modelAnswer": "The formal definition and scope of ai overview"
+    },
+    {
+      "marks": 2,
+      "question": "Define Key principles.",
+      "modelAnswer": "Fundamental rules and properties"
+    },
+    {
+      "marks": 2,
+      "question": "Define the main concept from this lesson.",
+      "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+    },
+    {
+      "marks": 2,
+      "question": "What is the practical importance of this topic?",
+      "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+    },
+    {
+      "marks": 2,
+      "question": "Define Search and Optimization.",
+      "modelAnswer": "Core concept in AI Tools and Techniques"
+    },
+    {
+      "marks": 2,
+      "question": "Define Knowledge Representation.",
+      "modelAnswer": "Core concept in AI Tools and Techniques"
+    },
+    {
+      "marks": 2,
+      "question": "Define Deep Learning Tools.",
+      "modelAnswer": "Core concept in AI Tools and Techniques"
+    },
+    {
+      "marks": 2,
+      "question": "Define TensorFlow and PyTorch.",
+      "modelAnswer": "Core concept in AI Tools and Techniques"
+    }
+  ],
+  "pyqBank": [
+    {
+      "marks": 10,
+      "question": "Explain AI Overview in detail with a diagram.",
+      "modelAnswer": "AI Overview is a key topic in AI Tools and Techniques, covered under AI Fundamentals. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss AI Overview with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Search and Optimization in detail with a diagram.",
+      "modelAnswer": "Search and Optimization is a key topic in AI Tools and Techniques, covered under Search Algorithms. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Search and Optimization with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Knowledge Representation in detail with a diagram.",
+      "modelAnswer": "Knowledge Representation is a key topic in AI Tools and Techniques, covered under Knowledge Representation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Knowledge Representation with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Deep Learning Tools in detail with a diagram.",
+      "modelAnswer": "Deep Learning Tools is a key topic in AI Tools and Techniques, covered under Neural Networks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Deep Learning Tools with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain TensorFlow and PyTorch in detail with a diagram.",
+      "modelAnswer": "TensorFlow and PyTorch is a key topic in AI Tools and Techniques, covered under AI Tools. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss TensorFlow and PyTorch with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    }
+  ]
+}

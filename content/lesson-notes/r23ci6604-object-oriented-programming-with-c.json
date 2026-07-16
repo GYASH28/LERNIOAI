@@ -1,0 +1,1652 @@
+{
+  "subjectCode": "R23CI6604",
+  "subjectName": "Object Oriented Programming with C++",
+  "semester": 3,
+  "credits": 5,
+  "units": [
+    {
+      "number": 1,
+      "title": "Introduction to OOP and C++",
+      "weightage": 15,
+      "lessons": [
+        {
+          "slug": "oop-concepts",
+          "title": "OOP Concepts and Principles",
+          "durationMin": 25,
+          "difficulty": "easy",
+          "overview": "Object-Oriented Programming (OOP) is a programming paradigm based on the concept of 'objects' that contain data (attributes) and code (methods). C++ supports OOP through classes, objects, encapsulation, inheritance, and polymorphism. OOP makes code more modular, reusable, and easier to maintain.",
+          "keyConcepts": [
+            "Class: A blueprint/template that defines the structure (data members) and behavior (member functions) of objects",
+            "Object: An instance of a class — a concrete entity created from the class blueprint",
+            "Encapsulation: Bundling data and methods together, hiding internal details using access specifiers (private, public, protected)",
+            "Inheritance: A class (child/derived) can inherit properties and methods from another class (parent/base), enabling code reuse",
+            "Polymorphism: Same interface, different behavior — achieved through function overloading, operator overloading, and virtual functions",
+            "Abstraction: Hiding complex implementation details and showing only essential features",
+            "Procedural vs OOP: Procedural focuses on functions and steps. OOP focuses on objects and their interactions."
+          ],
+          "formulas": [
+            "Access specifiers: public (accessible anywhere), private (class only), protected (class + derived classes)",
+            "Class definition: class ClassName { access: members; };  (note the semicolon)",
+            "Object creation: ClassName obj; or ClassName obj(params);"
+          ],
+          "tables": [
+            {
+              "title": "Procedural vs Object-Oriented Programming",
+              "headers": [
+                "Feature",
+                "Procedural (C)",
+                "OOP (C++)"
+              ],
+              "rows": [
+                [
+                  "Focus",
+                  "Functions and procedures",
+                  "Objects and classes"
+                ],
+                [
+                  "Data",
+                  "Global/local variables",
+                  "Encapsulated in objects"
+                ],
+                [
+                  "Reusability",
+                  "Function libraries",
+                  "Inheritance + composition"
+                ],
+                [
+                  "Security",
+                  "Data is often global",
+                  "Private/protected access control"
+                ],
+                [
+                  "Example",
+                  "C, Pascal",
+                  "C++, Java, Python"
+                ],
+                [
+                  "Approach",
+                  "Top-down",
+                  "Bottom-up"
+                ]
+              ],
+              "note": "OOP provides better data security and code reuse than procedural programming."
+            }
+          ],
+          "diagrams": [
+            {
+              "type": "ascii",
+              "title": "Class vs Object",
+              "content": "CLASS (Blueprint)              OBJECTS (Instances)\n┌──────────────────┐         ┌──────────────────┐\n│  class Car       │         │  car1: Car       │\n│  ─────────────   │         │  brand = \"Honda\" │\n│  + brand: string │   →     │  model = \"City\"  │\n│  + model: string │         │  year = 2024     │\n│  + year: int     │         └──────────────────┘\n│  + start()       │         ┌──────────────────┐\n│  + stop()        │         │  car2: Car       │\n└──────────────────┘         │  brand = \"Tesla\" │\n                             │  model = \"M3\"    │\n                             │  year = 2025     │\n                             └──────────────────┘"
+            }
+          ],
+          "codeExamples": [
+            {
+              "language": "cpp",
+              "title": "Defining a Class and Creating Objects",
+              "code": "#include <iostream>\n#include <string>\nusing namespace std;\n\n// Class definition\nclass Student {\nprivate:\n    string name;\n    int rollNo;\n    float marks;\n\npublic:\n    // Member function to set data\n    void setData(string n, int r, float m) {\n        name = n;\n        rollNo = r;\n        marks = m;\n    }\n\n    // Member function to display data\n    void display() {\n        cout << \"Name: \" << name << endl;\n        cout << \"Roll No: \" << rollNo << endl;\n        cout << \"Marks: \" << marks << endl;\n    }\n};\n\nint main() {\n    // Create objects\n    Student s1, s2;\n\n    s1.setData(\"Yash\", 101, 85.5);\n    s2.setData(\"Riya\", 102, 92.0);\n\n    s1.display();\n    cout << \"---\" << endl;\n    s2.display();\n\n    return 0;\n}",
+              "explanation": "The class Student has private data members (name, rollNo, marks) and public member functions (setData, display). Objects s1 and s2 are instances of Student, each with their own copy of the data."
+            }
+          ],
+          "commonMistakes": [
+            "Forgetting the semicolon after the class definition: class Car { ... }; ← the ; is required",
+            "Accessing private members directly from outside the class — use public getter/setter functions instead",
+            "Not using access specifiers — by default, members in a class are private (unlike struct where they're public)",
+            "Confusing the class (blueprint) with objects (instances)"
+          ],
+          "examTips": [
+            "Always end a class definition with a semicolon: }; ",
+            "Remember the 4 pillars: Encapsulation, Inheritance, Polymorphism, Abstraction",
+            "By default, class members are private. struct members are public.",
+            "Know the difference between class (blueprint) and object (instance)"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which of the following is NOT one of the four pillars of OOP?",
+              "options": [
+                "Encapsulation",
+                "Inheritance",
+                "Compilation",
+                "Polymorphism"
+              ],
+              "answer": 2,
+              "explanation": "The four pillars are: Encapsulation, Inheritance, Polymorphism, and Abstraction. Compilation is a process, not an OOP principle."
+            },
+            {
+              "question": "What is the default access specifier for members in a C++ class?",
+              "options": [
+                "public",
+                "private",
+                "protected",
+                "friend"
+              ],
+              "answer": 1,
+              "explanation": "In C++, class members are private by default. In a struct, members are public by default. This is the key difference between class and struct in C++."
+            },
+            {
+              "question": "What is the concept of hiding internal implementation details called?",
+              "options": [
+                "Inheritance",
+                "Polymorphism",
+                "Encapsulation",
+                "Compilation"
+              ],
+              "answer": 2,
+              "explanation": "Encapsulation bundles data and methods together and hides internal details using access specifiers (private, protected). The user only sees the public interface."
+            }
+          ],
+          "objectives": [
+            "Understand Class and explain its significance",
+            "Understand Object and explain its significance",
+            "Understand Encapsulation and explain its significance",
+            "Understand Inheritance and explain its significance",
+            "Understand Polymorphism and explain its significance",
+            "Attempt the practice quiz and viva questions on OOP Concepts and Principles"
+          ],
+          "prerequisites": [
+            "Working knowledge of C (functions, pointers, structs)",
+            "Understanding of what a data type is",
+            "Familiarity with the compile-run workflow"
+          ],
+          "theory": "## Introduction\n\nObject-Oriented Programming (OOP) is a programming paradigm based on the concept of 'objects' that contain data (attributes) and code (methods). C++ supports OOP through classes, objects, encapsulation, inheritance, and polymorphism. OOP makes code more modular, reusable, and easier to maintain.\n## Key Concepts\n\n- Class: A blueprint/template that defines the structure (data members) and behavior (member functions) of objects\n- Object: An instance of a class — a concrete entity created from the class blueprint\n- Encapsulation: Bundling data and methods together, hiding internal details using access specifiers (private, public, protected)\n- Inheritance: A class (child/derived) can inherit properties and methods from another class (parent/base), enabling code reuse\n- Polymorphism: Same interface, different behavior — achieved through function overloading, operator overloading, and virtual functions\n- Abstraction: Hiding complex implementation details and showing only essential features\n- Procedural vs OOP: Procedural focuses on functions and steps. OOP focuses on objects and their interactions.\n\n## Important Formulas\n\n- `Access specifiers: public (accessible anywhere), private (class only), protected (class + derived classes)`\n- `Class definition: class ClassName { access: members; };  (note the semicolon)`\n- `Object creation: ClassName obj; or ClassName obj(params);`\n\n## Comparison Tables\n\n### Procedural vs Object-Oriented Programming\n\n| Feature | Procedural (C) | OOP (C++) |\n| --- | --- | --- |\n| Focus | Functions and procedures | Objects and classes |\n| Data | Global/local variables | Encapsulated in objects |\n| Reusability | Function libraries | Inheritance + composition |\n| Security | Data is often global | Private/protected access control |\n| Example | C, Pascal | C++, Java, Python |\n| Approach | Top-down | Bottom-up |\n\n> OOP provides better data security and code reuse than procedural programming.\n\n## Code Examples\n\n### Defining a Class and Creating Objects\n\n```cpp\n#include <iostream>\n#include <string>\nusing namespace std;\n\n// Class definition\nclass Student {\nprivate:\n    string name;\n    int rollNo;\n    float marks;\n\npublic:\n    // Member function to set data\n    void setData(string n, int r, float m) {\n        name = n;\n        rollNo = r;\n        marks = m;\n    }\n\n    // Member function to display data\n    void display() {\n        cout << \"Name: \" << name << endl;\n        cout << \"Roll No: \" << rollNo << endl;\n        cout << \"Marks: \" << marks << endl;\n    }\n};\n\nint main() {\n    // Create objects\n    Student s1, s2;\n\n    s1.setData(\"Yash\", 101, 85.5);\n    s2.setData(\"Riya\", 102, 92.0);\n\n    s1.display();\n    cout << \"---\" << endl;\n    s2.display();\n\n    return 0;\n}\n```\n\nThe class Student has private data members (name, rollNo, marks) and public member functions (setData, display). Objects s1 and s2 are instances of Student, each with their own copy of the data.\n\n\n## Summary\n\nObject-Oriented Programming (OOP) is a programming paradigm based on the concept of 'objects' that contain data (attributes) and code (methods). C++ supports OOP through classes, objects, encapsulation, inheritance, and polymorphism. OOP makes code more modular, reusable, and easier to maintain.",
+          "analogies": [
+            {
+              "scenario": "Class vs Object like Blueprint vs House",
+              "mapping": "Class = blueprint (defines structure, doesn't occupy land). Object = actual house built from the blueprint (occupies memory). One blueprint, many houses."
+            },
+            {
+              "scenario": "Inheritance like parent-child genetics",
+              "mapping": "Parent class = your parents' traits, Child class = inherits those traits + adds new ones. Single inheritance = one parent, Multiple inheritance = two parents, Multilevel = grandparent → parent → child."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "OOP Concepts and Principles — Process Flow",
+              "content": "flowchart TD\n    A[Define Class] --> B[Declare Members]\n    B --> C{Access Specifier}\n    C -->|private| D[Hidden]\n    C -->|public| E[Accessible]\n    C -->|protected| F[Subclass only]\n    E --> G[Create Object]\n    G --> H[Call Methods]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "OOP Concepts and Principles — Concept Map",
+              "content": "mindmap\n  root((OOP Concepts and Principles))\n    OOP Pillars\n      Encapsulation\n      Inheritance\n      Polymorphism\n      Abstraction\n    Class Members\n      Attributes\n      Methods\n      Constructors\n      Destructors"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) method dispatch (virtual: vtable lookup)",
+            "space": "O(n) for n objects + vtable per class"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "Which of the following is NOT one of the four pillars of OOP?",
+              "solution": "Correct answer: Compilation",
+              "explanation": "The four pillars are: Encapsulation, Inheritance, Polymorphism, and Abstraction. Compilation is a process, not an OOP principle."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain OOP Concepts and Principles with reference to the key concepts.",
+              "solution": "Always end a class definition with a semicolon: };  → Remember the 4 pillars: Encapsulation, Inheritance, Polymorphism, Abstraction → By default, class members are private. struct members are public.",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Class.",
+              "modelAnswer": "A blueprint/template that defines the structure (data members) and behavior (member functions) of objects"
+            },
+            {
+              "marks": 2,
+              "question": "Define Object.",
+              "modelAnswer": "An instance of a class — a concrete entity created from the class blueprint"
+            },
+            {
+              "marks": 2,
+              "question": "Define Encapsulation.",
+              "modelAnswer": "Bundling data and methods together, hiding internal details using access specifiers (private, public, protected)"
+            },
+            {
+              "marks": 2,
+              "question": "What is a constructor?",
+              "modelAnswer": "A constructor is a special method automatically called when an object is created, used to initialise its members."
+            },
+            {
+              "marks": 2,
+              "question": "Define encapsulation.",
+              "modelAnswer": "Encapsulation is bundling data and methods that operate on that data into a single unit (class), and restricting direct access to internal state."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Access specifiers: public (accessible anywhere), private (class only), protected (class + derived classes)",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "What is the difference between overloading and overriding?",
+              "modelAnswer": "Overloading: same method name, different parameters, in the same class — compile-time polymorphism. Overriding: subclass redefines a parent method with the same signature — runtime polymorphism via virtual functions."
+            },
+            {
+              "marks": 5,
+              "question": "Why use virtual destructors?",
+              "modelAnswer": "When deleting a derived object through a base pointer, a virtual destructor ensures the derived destructor runs first, preventing resource leaks."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Class.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Object.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Access specifiers: public (accessible anywhere), private (class only), protected (class + derived classes)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Class definition: class ClassName { access: members; };  (note the semicolon)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain OOP Concepts and Principles in detail with a diagram.",
+              "modelAnswer": "Object-Oriented Programming (OOP) is a programming paradigm based on the concept of 'objects' that contain data (attributes) and code (methods). C++ supports OOP through classes, objects, encapsulation, inheritance, and polymorphism. OOP makes code more modular, reusable, and easier to maintain."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss OOP Concepts and Principles with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — OOP Concepts and Principles\n\n**One-line definition:** Object-Oriented Programming (OOP) is a programming paradigm based on the concept of 'objects' that contain data (attributes) and code (methods). C++ supports OOP through classes, objects, encapsulatio\n\n**Key points:**\n\n- Class: A blueprint/template that defines the structure (data members) and behavior (member functions) of objects\n- Object: An instance of a class — a concrete entity created from the class blueprint\n- Encapsulation: Bundling data and methods together, hiding internal details using access specifiers (private, public, protected)\n- Inheritance: A class (child/derived) can inherit properties and methods from another class (parent/base), enabling code reuse\n- Polymorphism: Same interface, different behavior — achieved through function overloading, operator overloading, and virtual functions\n\n**Important formulas:**\n\n- `Access specifiers: public (accessible anywhere), private (class only), protected (class + derived classes)`\n- `Class definition: class ClassName { access: members; };  (note the semicolon)`\n- `Object creation: ClassName obj; or ClassName obj(params);`\n\n**Common mistake to avoid:** Forgetting the semicolon after the class definition: class Car { ... }; ← the ; is required\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Class: A blueprint/template that defines the structure (data members) and behavior (member functions) of objects",
+            "Object: An instance of a class — a concrete entity created from the class blueprint",
+            "Encapsulation: Bundling data and methods together, hiding internal details using access specifiers (private, public, protected)",
+            "Inheritance: A class (child/derived) can inherit properties and methods from another class (parent/base), enabling code reuse",
+            "Polymorphism: Same interface, different behavior — achieved through function overloading, operator overloading, and virtual functions",
+            "Formula: Access specifiers: public (accessible anywhere), private (class only), protected (class + derived classes)",
+            "Formula: Class definition: class ClassName { access: members; };  (note the semicolon)",
+            "Formula: Object creation: ClassName obj; or ClassName obj(params);",
+            "Access specifiers: public, private, protected",
+            "Inheritance types: single, multiple, multilevel, hierarchical, hybrid",
+            "Polymorphism: compile-time (overloading), runtime (overriding)"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "PIEA",
+              "expansion": "Polymorphism, Inheritance, Encapsulation, Abstraction",
+              "meaning": "The four pillars of Object-Oriented Programming."
+            },
+            {
+              "phrase": "SOLID",
+              "expansion": "Single Responsibility, Open-Closed, Liskov Substitution, Interface Segregation, Dependency Inversion",
+              "meaning": "Five design principles for maintainable OOP code."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always end a class definition with a semicolon: }; "
+            },
+            {
+              "type": "exam-tip",
+              "content": "Remember the 4 pillars: Encapsulation, Inheritance, Polymorphism, Abstraction"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting the semicolon after the class definition: class Car { ... }; ← the ; is required"
+            },
+            {
+              "type": "warning",
+              "content": "Accessing private members directly from outside the class — use public getter/setter functions instead"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Object-Oriented Programming (OOP) is a programming paradigm based on the concept of 'objects' that contain data (attributes) and code (methods). C++ supports OOP through classes, objects, encapsulation, inheritance, and polymorphism. OOP makes code more modular, reusable, and easier to maintain."
+            },
+            {
+              "type": "definition",
+              "content": "Class: A blueprint/template that defines the structure (data members) and behavior (member functions) of objects"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Class?",
+              "back": "A blueprint/template that defines the structure (data members) and behavior (member functions) of objects",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Object?",
+              "back": "An instance of a class — a concrete entity created from the class blueprint",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Encapsulation?",
+              "back": "Bundling data and methods together, hiding internal details using access specifiers (private, public, protected)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Inheritance?",
+              "back": "A class (child/derived) can inherit properties and methods from another class (parent/base), enabling code reuse",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Polymorphism?",
+              "back": "Same interface, different behavior — achieved through function overloading, operator overloading, and virtual functions",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Abstraction?",
+              "back": "Hiding complex implementation details and showing only essential features",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Procedural vs OOP?",
+              "back": "Procedural focuses on functions and steps. OOP focuses on objects and their interactions.",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "Tip for this lesson",
+              "back": "Always end a class definition with a semicolon: }; "
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Object-Oriented Programming (OOP) is a programming paradigm based on the concept of 'objects' that contain data (attributes) and code (methods). C++ supports OOP through classes, objects, encapsulation, inheritance, and polymorphism. OOP makes code more modular, reusable, and easier to maintain."
+            },
+            {
+              "style": "detailed",
+              "content": "Object-Oriented Programming (OOP) is a programming paradigm based on the concept of 'objects' that contain data (attributes) and code (methods). C++ supports OOP through classes, objects, encapsulation, inheritance, and polymorphism. OOP makes code more modular, reusable, and easier to maintain.\n\nKey concepts: Class: A blueprint/template that defines the structure (data members) and behavi, Object: An instance of a class — a concrete entity created from the class bluepr, Encapsulation: Bundling data and methods together, hiding internal details using."
+            }
+          ],
+          "recommendedNextLessons": [
+            "constructors-and-destructors",
+            "inheritance"
+          ]
+        },
+        {
+          "slug": "constructors-and-destructors",
+          "title": "Constructors and Destructors",
+          "durationMin": 25,
+          "difficulty": "medium",
+          "overview": "A constructor is a special member function that is automatically called when an object is created. It initializes the object's data members. A destructor is called automatically when an object is destroyed (goes out of scope). Constructors have the same name as the class; destructors have a ~ prefix.",
+          "keyConcepts": [
+            "Constructor: same name as the class, no return type (not even void), called automatically when object is created",
+            "Default constructor: takes no parameters — initializes members with default values",
+            "Parameterized constructor: takes parameters to initialize members with specific values",
+            "Copy constructor: initializes an object by copying another object of the same class",
+            "Destructor: name starts with ~, called automatically when object is destroyed, used for cleanup (freeing memory, closing files)",
+            "Constructor overloading: multiple constructors with different parameter lists",
+            "Only ONE destructor per class — cannot be overloaded"
+          ],
+          "formulas": [
+            "Constructor: ClassName() { /* init */ }",
+            "Parameterized: ClassName(type param) { /* init */ }",
+            "Copy: ClassName(const ClassName& other) { /* copy */ }",
+            "Destructor: ~ClassName() { /* cleanup */ }"
+          ],
+          "tables": [
+            {
+              "title": "Constructor vs Destructor",
+              "headers": [
+                "Feature",
+                "Constructor",
+                "Destructor"
+              ],
+              "rows": [
+                [
+                  "When called",
+                  "Object creation",
+                  "Object destruction"
+                ],
+                [
+                  "Name",
+                  "Same as class name",
+                  "~ + class name"
+                ],
+                [
+                  "Return type",
+                  "None (not even void)",
+                  "None"
+                ],
+                [
+                  "Parameters",
+                  "Can have parameters",
+                  "No parameters"
+                ],
+                [
+                  "Overloading",
+                  "Yes (multiple)",
+                  "No (only one)"
+                ],
+                [
+                  "Purpose",
+                  "Initialize members",
+                  "Cleanup resources"
+                ]
+              ],
+              "note": "Both are called automatically — you never call them directly."
+            }
+          ],
+          "codeExamples": [
+            {
+              "language": "cpp",
+              "title": "All Types of Constructors + Destructor",
+              "code": "#include <iostream>\nusing namespace std;\n\nclass Rectangle {\nprivate:\n    int length, width;\n\npublic:\n    // 1. Default constructor\n    Rectangle() {\n        length = 0;\n        width = 0;\n        cout << \"Default constructor called\" << endl;\n    }\n\n    // 2. Parameterized constructor\n    Rectangle(int l, int w) {\n        length = l;\n        width = w;\n        cout << \"Parameterized constructor called\" << endl;\n    }\n\n    // 3. Copy constructor\n    Rectangle(const Rectangle& other) {\n        length = other.length;\n        width = other.width;\n        cout << \"Copy constructor called\" << endl;\n    }\n\n    // Destructor\n    ~Rectangle() {\n        cout << \"Destructor called for (\" << length << \", \" << width << \")\" << endl;\n    }\n\n    int area() { return length * width; }\n};\n\nint main() {\n    Rectangle r1;           // default constructor\n    Rectangle r2(5, 3);     // parameterized constructor\n    Rectangle r3 = r2;      // copy constructor\n\n    cout << \"r1 area: \" << r1.area() << endl;  // 0\n    cout << \"r2 area: \" << r2.area() << endl;  // 15\n    cout << \"r3 area: \" << r3.area() << endl;  // 15\n\n    // Destructors called in reverse order: r3, r2, r1\n    return 0;\n}",
+              "explanation": "Three constructors are demonstrated. The destructor is called automatically when each object goes out of scope at the end of main(). Objects are destroyed in reverse order of creation (LIFO)."
+            }
+          ],
+          "commonMistakes": [
+            "Giving a constructor a return type (even void) — this makes it a regular function, not a constructor",
+            "Forgetting the ~ in the destructor name",
+            "Trying to call a constructor directly — it's called automatically",
+            "Not initializing all members in the constructor (uninitialized members have garbage values)",
+            "Confusing the copy constructor with the assignment operator (=)"
+          ],
+          "examTips": [
+            "Constructors have NO return type — not even void",
+            "Destructors are called in reverse order of construction (LIFO)",
+            "If you don't define any constructor, the compiler provides a default constructor",
+            "If you define a parameterized constructor, the compiler does NOT provide a default constructor",
+            "Know the three types: default, parameterized, copy"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is the name of a destructor for class 'Car'?",
+              "options": [
+                "Car()",
+                "~Car()",
+                "destroy()",
+                "Car~"
+              ],
+              "answer": 1,
+              "explanation": "A destructor is named with a tilde (~) prefix followed by the class name: ~Car(). It takes no parameters and has no return type."
+            },
+            {
+              "question": "What happens if you define a parameterized constructor but no default constructor?",
+              "options": [
+                "Compiler provides a default constructor automatically",
+                "You cannot create objects without parameters",
+                "Compiler gives an error",
+                "Objects are created with null values"
+              ],
+              "answer": 1,
+              "explanation": "If you define any constructor, the compiler does NOT provide a default constructor. So you can only create objects using the parameterized constructor. To create objects without parameters, you must explicitly define a default constructor."
+            },
+            {
+              "question": "In what order are destructors called when multiple objects go out of scope?",
+              "options": [
+                "Same order as construction",
+                "Reverse order of construction",
+                "Random order",
+                "Alphabetical order"
+              ],
+              "answer": 1,
+              "explanation": "Destructors are called in reverse order of construction (LIFO — Last In, First Out). If objects were created as r1, r2, r3, destructors are called as r3, r2, r1."
+            }
+          ],
+          "objectives": [
+            "Understand Constructor and explain its significance",
+            "Understand Default constructor and explain its significance",
+            "Understand Parameterized constructor and explain its significance",
+            "Understand Copy constructor and explain its significance",
+            "Understand Destructor and explain its significance",
+            "Attempt the practice quiz and viva questions on Constructors and Destructors"
+          ],
+          "prerequisites": [
+            "Working knowledge of C (functions, pointers, structs)",
+            "Understanding of what a data type is",
+            "Familiarity with the compile-run workflow",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nA constructor is a special member function that is automatically called when an object is created. It initializes the object's data members. A destructor is called automatically when an object is destroyed (goes out of scope). Constructors have the same name as the class; destructors have a ~ prefix.\n## Key Concepts\n\n- Constructor: same name as the class, no return type (not even void), called automatically when object is created\n- Default constructor: takes no parameters — initializes members with default values\n- Parameterized constructor: takes parameters to initialize members with specific values\n- Copy constructor: initializes an object by copying another object of the same class\n- Destructor: name starts with ~, called automatically when object is destroyed, used for cleanup (freeing memory, closing files)\n- Constructor overloading: multiple constructors with different parameter lists\n- Only ONE destructor per class — cannot be overloaded\n\n## Important Formulas\n\n- `Constructor: ClassName() { /* init */ }`\n- `Parameterized: ClassName(type param) { /* init */ }`\n- `Copy: ClassName(const ClassName& other) { /* copy */ }`\n- `Destructor: ~ClassName() { /* cleanup */ }`\n\n## Comparison Tables\n\n### Constructor vs Destructor\n\n| Feature | Constructor | Destructor |\n| --- | --- | --- |\n| When called | Object creation | Object destruction |\n| Name | Same as class name | ~ + class name |\n| Return type | None (not even void) | None |\n| Parameters | Can have parameters | No parameters |\n| Overloading | Yes (multiple) | No (only one) |\n| Purpose | Initialize members | Cleanup resources |\n\n> Both are called automatically — you never call them directly.\n\n## Code Examples\n\n### All Types of Constructors + Destructor\n\n```cpp\n#include <iostream>\nusing namespace std;\n\nclass Rectangle {\nprivate:\n    int length, width;\n\npublic:\n    // 1. Default constructor\n    Rectangle() {\n        length = 0;\n        width = 0;\n        cout << \"Default constructor called\" << endl;\n    }\n\n    // 2. Parameterized constructor\n    Rectangle(int l, int w) {\n        length = l;\n        width = w;\n        cout << \"Parameterized constructor called\" << endl;\n    }\n\n    // 3. Copy constructor\n    Rectangle(const Rectangle& other) {\n        length = other.length;\n        width = other.width;\n        cout << \"Copy constructor called\" << endl;\n    }\n\n    // Destructor\n    ~Rectangle() {\n        cout << \"Destructor called for (\" << length << \", \" << width << \")\" << endl;\n    }\n\n    int area() { return length * width; }\n};\n\nint main() {\n    Rectangle r1;           // default constructor\n    Rectangle r2(5, 3);     // parameterized constructor\n    Rectangle r3 = r2;      // copy constructor\n\n    cout << \"r1 area: \" << r1.area() << endl;  // 0\n    cout << \"r2 area: \" << r2.area() << endl;  // 15\n    cout << \"r3 area: \" << r3.area() << endl;  // 15\n\n    // Destructors called in reverse order: r3, r2, r1\n    return 0;\n}\n```\n\nThree constructors are demonstrated. The destructor is called automatically when each object goes out of scope at the end of main(). Objects are destroyed in reverse order of creation (LIFO).\n\n\n## Summary\n\nA constructor is a special member function that is automatically called when an object is created. It initializes the object's data members. A destructor is called automatically when an object is destroyed (goes out of scope). Constructors have the same name as the class; destructors have a ~ prefix.",
+          "analogies": [
+            {
+              "scenario": "Class vs Object like Blueprint vs House",
+              "mapping": "Class = blueprint (defines structure, doesn't occupy land). Object = actual house built from the blueprint (occupies memory). One blueprint, many houses."
+            },
+            {
+              "scenario": "Inheritance like parent-child genetics",
+              "mapping": "Parent class = your parents' traits, Child class = inherits those traits + adds new ones. Single inheritance = one parent, Multiple inheritance = two parents, Multilevel = grandparent → parent → child."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Constructors and Destructors — Process Flow",
+              "content": "flowchart TD\n    A[Define Class] --> B[Declare Members]\n    B --> C{Access Specifier}\n    C -->|private| D[Hidden]\n    C -->|public| E[Accessible]\n    C -->|protected| F[Subclass only]\n    E --> G[Create Object]\n    G --> H[Call Methods]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Constructors and Destructors — Concept Map",
+              "content": "mindmap\n  root((Constructors and Destructors))\n    OOP Pillars\n      Encapsulation\n      Inheritance\n      Polymorphism\n      Abstraction\n    Class Members\n      Attributes\n      Methods\n      Constructors\n      Destructors"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) method dispatch (virtual: vtable lookup)",
+            "space": "O(n) for n objects + vtable per class"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is the name of a destructor for class 'Car'?",
+              "solution": "Correct answer: ~Car()",
+              "explanation": "A destructor is named with a tilde (~) prefix followed by the class name: ~Car(). It takes no parameters and has no return type."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Constructors and Destructors with reference to the key concepts.",
+              "solution": "Constructors have NO return type — not even void → Destructors are called in reverse order of construction (LIFO) → If you don't define any constructor, the compiler provides a default constructor",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Constructor.",
+              "modelAnswer": "same name as the class, no return type (not even void), called automatically when object is created"
+            },
+            {
+              "marks": 2,
+              "question": "Define Default constructor.",
+              "modelAnswer": "takes no parameters — initializes members with default values"
+            },
+            {
+              "marks": 2,
+              "question": "Define Parameterized constructor.",
+              "modelAnswer": "takes parameters to initialize members with specific values"
+            },
+            {
+              "marks": 2,
+              "question": "What is a constructor?",
+              "modelAnswer": "A constructor is a special method automatically called when an object is created, used to initialise its members."
+            },
+            {
+              "marks": 2,
+              "question": "Define encapsulation.",
+              "modelAnswer": "Encapsulation is bundling data and methods that operate on that data into a single unit (class), and restricting direct access to internal state."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Constructor: ClassName() { /* init */ }",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "What is the difference between overloading and overriding?",
+              "modelAnswer": "Overloading: same method name, different parameters, in the same class — compile-time polymorphism. Overriding: subclass redefines a parent method with the same signature — runtime polymorphism via virtual functions."
+            },
+            {
+              "marks": 5,
+              "question": "Why use virtual destructors?",
+              "modelAnswer": "When deleting a derived object through a base pointer, a virtual destructor ensures the derived destructor runs first, preventing resource leaks."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Constructor.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Default constructor.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Constructor: ClassName() { /* init */ }",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Parameterized: ClassName(type param) { /* init */ }",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Constructors and Destructors in detail with a diagram.",
+              "modelAnswer": "A constructor is a special member function that is automatically called when an object is created. It initializes the object's data members. A destructor is called automatically when an object is destroyed (goes out of scope). Constructors have the same name as the class; destructors have a ~ prefix."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Constructors and Destructors with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Constructors and Destructors\n\n**One-line definition:** A constructor is a special member function that is automatically called when an object is created. It initializes the object's data members. A destructor is called automatically when an object is dest\n\n**Key points:**\n\n- Constructor: same name as the class, no return type (not even void), called automatically when object is created\n- Default constructor: takes no parameters — initializes members with default values\n- Parameterized constructor: takes parameters to initialize members with specific values\n- Copy constructor: initializes an object by copying another object of the same class\n- Destructor: name starts with ~, called automatically when object is destroyed, used for cleanup (freeing memory, closing files)\n\n**Important formulas:**\n\n- `Constructor: ClassName() { /* init */ }`\n- `Parameterized: ClassName(type param) { /* init */ }`\n- `Copy: ClassName(const ClassName& other) { /* copy */ }`\n- `Destructor: ~ClassName() { /* cleanup */ }`\n\n**Common mistake to avoid:** Giving a constructor a return type (even void) — this makes it a regular function, not a constructor\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Constructor: same name as the class, no return type (not even void), called automatically when object is created",
+            "Default constructor: takes no parameters — initializes members with default values",
+            "Parameterized constructor: takes parameters to initialize members with specific values",
+            "Copy constructor: initializes an object by copying another object of the same class",
+            "Destructor: name starts with ~, called automatically when object is destroyed, used for cleanup (freeing memory, closing files)",
+            "Formula: Constructor: ClassName() { /* init */ }",
+            "Formula: Parameterized: ClassName(type param) { /* init */ }",
+            "Formula: Copy: ClassName(const ClassName& other) { /* copy */ }",
+            "Formula: Destructor: ~ClassName() { /* cleanup */ }",
+            "Access specifiers: public, private, protected",
+            "Inheritance types: single, multiple, multilevel, hierarchical, hybrid",
+            "Polymorphism: compile-time (overloading), runtime (overriding)"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "PIEA",
+              "expansion": "Polymorphism, Inheritance, Encapsulation, Abstraction",
+              "meaning": "The four pillars of Object-Oriented Programming."
+            },
+            {
+              "phrase": "SOLID",
+              "expansion": "Single Responsibility, Open-Closed, Liskov Substitution, Interface Segregation, Dependency Inversion",
+              "meaning": "Five design principles for maintainable OOP code."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Constructors have NO return type — not even void"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Destructors are called in reverse order of construction (LIFO)"
+            },
+            {
+              "type": "warning",
+              "content": "Giving a constructor a return type (even void) — this makes it a regular function, not a constructor"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting the ~ in the destructor name"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "A constructor is a special member function that is automatically called when an object is created. It initializes the object's data members. A destructor is called automatically when an object is destroyed (goes out of scope). Constructors have the same name as the class; destructors have a ~ prefix..."
+            },
+            {
+              "type": "definition",
+              "content": "Constructor: same name as the class, no return type (not even void), called automatically when object is created"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Constructor?",
+              "back": "same name as the class, no return type (not even void), called automatically when object is created",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Default constructor?",
+              "back": "takes no parameters — initializes members with default values",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Parameterized constructor?",
+              "back": "takes parameters to initialize members with specific values",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Copy constructor?",
+              "back": "initializes an object by copying another object of the same class",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Destructor?",
+              "back": "name starts with ~, called automatically when object is destroyed, used for cleanup (freeing memory, closing files)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Constructor overloading?",
+              "back": "multiple constructors with different parameter lists",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Only ONE destructor per class?",
+              "back": "cannot be overloaded",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "Tip for this lesson",
+              "back": "Constructors have NO return type — not even void"
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "A constructor is a special member function that is automatically called when an object is created. It initializes the object's data members. A destructor is called automatically when an object is destroyed (goes out of scope). Constructors have the same name as the class; destructors have a ~ prefix"
+            },
+            {
+              "style": "detailed",
+              "content": "A constructor is a special member function that is automatically called when an object is created. It initializes the object's data members. A destructor is called automatically when an object is destroyed (goes out of scope). Constructors have the same name as the class; destructors have a ~ prefix.\n\nKey concepts: Constructor: same name as the class, no return type (not even void), called auto, Default constructor: takes no parameters — initializes members with default valu, Parameterized constructor: takes parameters to initialize members with specific ."
+            }
+          ],
+          "recommendedNextLessons": [
+            "inheritance",
+            "polymorphism"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Inheritance and Polymorphism",
+      "weightage": 25,
+      "lessons": [
+        {
+          "slug": "inheritance",
+          "title": "Inheritance — Code Reuse and Hierarchy",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "Inheritance is a mechanism where a new class (derived/child class) acquires the properties and behaviors of an existing class (base/parent class). It enables code reuse, hierarchical classification, and extensibility. The derived class can add new members or override existing ones.",
+          "keyConcepts": [
+            "Base class (parent): the class being inherited from",
+            "Derived class (child): the class that inherits from the base class",
+            "Single inheritance: one base class, one derived class",
+            "Multiple inheritance: a class inherits from multiple base classes",
+            "Multilevel inheritance: A → B → C (chain of inheritance)",
+            "Hierarchical inheritance: multiple classes inherit from one base class",
+            "Access modes: public inheritance (public members stay public), protected inheritance, private inheritance",
+            "The derived class has access to public and protected members of the base class, but NOT private members"
+          ],
+          "formulas": [
+            "Syntax: class Derived : access_mode Base { /* ... */ };",
+            "Public inheritance: class Student : public Person { };",
+            "Constructor call order: Base constructor → Derived constructor",
+            "Destructor call order: Derived destructor → Base destructor"
+          ],
+          "tables": [
+            {
+              "title": "Inheritance Access Modes",
+              "headers": [
+                "Base Member",
+                "Public Inheritance",
+                "Protected Inheritance",
+                "Private Inheritance"
+              ],
+              "rows": [
+                [
+                  "public",
+                  "public in derived",
+                  "protected in derived",
+                  "private in derived"
+                ],
+                [
+                  "protected",
+                  "protected in derived",
+                  "protected in derived",
+                  "private in derived"
+                ],
+                [
+                  "private",
+                  "NOT accessible",
+                  "NOT accessible",
+                  "NOT accessible"
+                ]
+              ],
+              "note": "Private members of the base class are NEVER directly accessible in the derived class, regardless of inheritance mode."
+            }
+          ],
+          "diagrams": [
+            {
+              "type": "ascii",
+              "title": "Types of Inheritance",
+              "content": "Single:        Multiple:        Multilevel:        Hierarchical:\n\n  A              A   B              A                    A\n  ↑              ↑                 ↓                  ↙   ↘\n  B              B                 B                  B     C\n                                   ↑\n                                   C\n\nA = Base class, B/C = Derived class"
+            }
+          ],
+          "codeExamples": [
+            {
+              "language": "cpp",
+              "title": "Single Inheritance — Person → Student",
+              "code": "#include <iostream>\n#include <string>\nusing namespace std;\n\n// Base class\nclass Person {\nprotected:  // accessible in derived classes\n    string name;\n    int age;\n\npublic:\n    void setPerson(string n, int a) {\n        name = n;\n        age = a;\n    }\n    void displayPerson() {\n        cout << \"Name: \" << name << \", Age: \" << age;\n    }\n};\n\n// Derived class — inherits from Person\nclass Student : public Person {\nprivate:\n    int rollNo;\n    float marks;\n\npublic:\n    void setStudent(string n, int a, int r, float m) {\n        setPerson(n, a);  // call base class method\n        rollNo = r;\n        marks = m;\n    }\n\n    void displayStudent() {\n        displayPerson();  // call base class method\n        cout << \", Roll: \" << rollNo << \", Marks: \" << marks << endl;\n    }\n};\n\nint main() {\n    Student s;\n    s.setStudent(\"Yash\", 20, 101, 85.5);\n    s.displayStudent();\n    // Output: Name: Yash, Age: 20, Roll: 101, Marks: 85.5\n    return 0;\n}",
+              "explanation": "Student inherits from Person. It can access the protected members (name, age) and public methods (setPerson, displayPerson) of Person. Student adds its own members (rollNo, marks) and methods (setStudent, displayStudent)."
+            }
+          ],
+          "commonMistakes": [
+            "Forgetting the access mode: class B : A defaults to private inheritance in C++",
+            "Trying to access private members of the base class directly — use protected instead",
+            "Forgetting to call the base class constructor in the derived class constructor's initializer list",
+            "Confusing 'is-a' (inheritance) with 'has-a' (composition) relationships"
+          ],
+          "examTips": [
+            "Use 'protected' for members that should be accessible in derived classes but not outside",
+            "Constructor order: Base first, then Derived. Destructor order: Derived first, then Base.",
+            "Know the 5 types of inheritance: single, multiple, multilevel, hierarchical, hybrid",
+            "Private members are NEVER directly accessible in derived classes — use protected"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "If class B inherits from class A privately, what happens to A's public members in B?",
+              "options": [
+                "They remain public in B",
+                "They become private in B",
+                "They become protected in B",
+                "They are not accessible at all"
+              ],
+              "answer": 1,
+              "explanation": "With private inheritance, all public and protected members of A become private in B. This means they're accessible inside B's methods but not from outside or in further derived classes."
+            },
+            {
+              "question": "What is the order of constructor calls in inheritance?",
+              "options": [
+                "Derived → Base",
+                "Base → Derived",
+                "Random",
+                "Only Derived constructor is called"
+              ],
+              "answer": 1,
+              "explanation": "The base class constructor is called first (to initialize the base part), then the derived class constructor is called (to initialize the derived part). Think of it as building the foundation before the house."
+            },
+            {
+              "question": "Which access specifier allows members to be accessed in derived classes but not from outside?",
+              "options": [
+                "public",
+                "private",
+                "protected",
+                "friend"
+              ],
+              "answer": 2,
+              "explanation": "Protected members are accessible within the class and in derived classes, but NOT from outside the class. This is specifically designed for inheritance scenarios."
+            }
+          ],
+          "objectives": [
+            "Understand Base class (parent) and explain its significance",
+            "Understand Derived class (child) and explain its significance",
+            "Understand Single inheritance and explain its significance",
+            "Understand Multiple inheritance and explain its significance",
+            "Understand Multilevel inheritance and explain its significance",
+            "Attempt the practice quiz and viva questions on Inheritance — Code Reuse and Hierarchy"
+          ],
+          "prerequisites": [
+            "Working knowledge of C (functions, pointers, structs)",
+            "Understanding of what a data type is",
+            "Familiarity with the compile-run workflow",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nInheritance is a mechanism where a new class (derived/child class) acquires the properties and behaviors of an existing class (base/parent class). It enables code reuse, hierarchical classification, and extensibility. The derived class can add new members or override existing ones.\n## Key Concepts\n\n- Base class (parent): the class being inherited from\n- Derived class (child): the class that inherits from the base class\n- Single inheritance: one base class, one derived class\n- Multiple inheritance: a class inherits from multiple base classes\n- Multilevel inheritance: A → B → C (chain of inheritance)\n- Hierarchical inheritance: multiple classes inherit from one base class\n- Access modes: public inheritance (public members stay public), protected inheritance, private inheritance\n- The derived class has access to public and protected members of the base class, but NOT private members\n\n## Important Formulas\n\n- `Syntax: class Derived : access_mode Base { /* ... */ };`\n- `Public inheritance: class Student : public Person { };`\n- `Constructor call order: Base constructor → Derived constructor`\n- `Destructor call order: Derived destructor → Base destructor`\n\n## Comparison Tables\n\n### Inheritance Access Modes\n\n| Base Member | Public Inheritance | Protected Inheritance | Private Inheritance |\n| --- | --- | --- | --- |\n| public | public in derived | protected in derived | private in derived |\n| protected | protected in derived | protected in derived | private in derived |\n| private | NOT accessible | NOT accessible | NOT accessible |\n\n> Private members of the base class are NEVER directly accessible in the derived class, regardless of inheritance mode.\n\n## Code Examples\n\n### Single Inheritance — Person → Student\n\n```cpp\n#include <iostream>\n#include <string>\nusing namespace std;\n\n// Base class\nclass Person {\nprotected:  // accessible in derived classes\n    string name;\n    int age;\n\npublic:\n    void setPerson(string n, int a) {\n        name = n;\n        age = a;\n    }\n    void displayPerson() {\n        cout << \"Name: \" << name << \", Age: \" << age;\n    }\n};\n\n// Derived class — inherits from Person\nclass Student : public Person {\nprivate:\n    int rollNo;\n    float marks;\n\npublic:\n    void setStudent(string n, int a, int r, float m) {\n        setPerson(n, a);  // call base class method\n        rollNo = r;\n        marks = m;\n    }\n\n    void displayStudent() {\n        displayPerson();  // call base class method\n        cout << \", Roll: \" << rollNo << \", Marks: \" << marks << endl;\n    }\n};\n\nint main() {\n    Student s;\n    s.setStudent(\"Yash\", 20, 101, 85.5);\n    s.displayStudent();\n    // Output: Name: Yash, Age: 20, Roll: 101, Marks: 85.5\n    return 0;\n}\n```\n\nStudent inherits from Person. It can access the protected members (name, age) and public methods (setPerson, displayPerson) of Person. Student adds its own members (rollNo, marks) and methods (setStudent, displayStudent).\n\n\n## Summary\n\nInheritance is a mechanism where a new class (derived/child class) acquires the properties and behaviors of an existing class (base/parent class). It enables code reuse, hierarchical classification, and extensibility. The derived class can add new members or override existing ones.",
+          "analogies": [
+            {
+              "scenario": "Class vs Object like Blueprint vs House",
+              "mapping": "Class = blueprint (defines structure, doesn't occupy land). Object = actual house built from the blueprint (occupies memory). One blueprint, many houses."
+            },
+            {
+              "scenario": "Inheritance like parent-child genetics",
+              "mapping": "Parent class = your parents' traits, Child class = inherits those traits + adds new ones. Single inheritance = one parent, Multiple inheritance = two parents, Multilevel = grandparent → parent → child."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Inheritance — Code Reuse and Hierarchy — Process Flow",
+              "content": "flowchart TD\n    A[Define Class] --> B[Declare Members]\n    B --> C{Access Specifier}\n    C -->|private| D[Hidden]\n    C -->|public| E[Accessible]\n    C -->|protected| F[Subclass only]\n    E --> G[Create Object]\n    G --> H[Call Methods]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Inheritance — Code Reuse and Hierarchy — Concept Map",
+              "content": "mindmap\n  root((Inheritance — Code Reuse and H))\n    OOP Pillars\n      Encapsulation\n      Inheritance\n      Polymorphism\n      Abstraction\n    Class Members\n      Attributes\n      Methods\n      Constructors\n      Destructors"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) method dispatch (virtual: vtable lookup)",
+            "space": "O(n) for n objects + vtable per class"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "If class B inherits from class A privately, what happens to A's public members in B?",
+              "solution": "Correct answer: They become private in B",
+              "explanation": "With private inheritance, all public and protected members of A become private in B. This means they're accessible inside B's methods but not from outside or in further derived classes."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Inheritance — Code Reuse and Hierarchy with reference to the key concepts.",
+              "solution": "Use 'protected' for members that should be accessible in derived classes but not outside → Constructor order: Base first, then Derived. Destructor order: Derived first, then Base. → Know the 5 types of inheritance: single, multiple, multilevel, hierarchical, hybrid",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Base class (parent).",
+              "modelAnswer": "the class being inherited from"
+            },
+            {
+              "marks": 2,
+              "question": "Define Derived class (child).",
+              "modelAnswer": "the class that inherits from the base class"
+            },
+            {
+              "marks": 2,
+              "question": "Define Single inheritance.",
+              "modelAnswer": "one base class, one derived class"
+            },
+            {
+              "marks": 2,
+              "question": "What is a constructor?",
+              "modelAnswer": "A constructor is a special method automatically called when an object is created, used to initialise its members."
+            },
+            {
+              "marks": 2,
+              "question": "Define encapsulation.",
+              "modelAnswer": "Encapsulation is bundling data and methods that operate on that data into a single unit (class), and restricting direct access to internal state."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Syntax: class Derived : access_mode Base { /* ... */ };",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "What is the difference between overloading and overriding?",
+              "modelAnswer": "Overloading: same method name, different parameters, in the same class — compile-time polymorphism. Overriding: subclass redefines a parent method with the same signature — runtime polymorphism via virtual functions."
+            },
+            {
+              "marks": 5,
+              "question": "Why use virtual destructors?",
+              "modelAnswer": "When deleting a derived object through a base pointer, a virtual destructor ensures the derived destructor runs first, preventing resource leaks."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Base class (parent).",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Derived class (child).",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Syntax: class Derived : access_mode Base { /* ... */ };",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Public inheritance: class Student : public Person { };",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Inheritance — Code Reuse and Hierarchy in detail with a diagram.",
+              "modelAnswer": "Inheritance is a mechanism where a new class (derived/child class) acquires the properties and behaviors of an existing class (base/parent class). It enables code reuse, hierarchical classification, and extensibility. The derived class can add new members or override existing ones."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Inheritance — Code Reuse and Hierarchy with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Inheritance — Code Reuse and Hierarchy\n\n**One-line definition:** Inheritance is a mechanism where a new class (derived/child class) acquires the properties and behaviors of an existing class (base/parent class). It enables code reuse, hierarchical classification, a\n\n**Key points:**\n\n- Base class (parent): the class being inherited from\n- Derived class (child): the class that inherits from the base class\n- Single inheritance: one base class, one derived class\n- Multiple inheritance: a class inherits from multiple base classes\n- Multilevel inheritance: A → B → C (chain of inheritance)\n\n**Important formulas:**\n\n- `Syntax: class Derived : access_mode Base { /* ... */ };`\n- `Public inheritance: class Student : public Person { };`\n- `Constructor call order: Base constructor → Derived constructor`\n- `Destructor call order: Derived destructor → Base destructor`\n\n**Common mistake to avoid:** Forgetting the access mode: class B : A defaults to private inheritance in C++\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Base class (parent): the class being inherited from",
+            "Derived class (child): the class that inherits from the base class",
+            "Single inheritance: one base class, one derived class",
+            "Multiple inheritance: a class inherits from multiple base classes",
+            "Multilevel inheritance: A → B → C (chain of inheritance)",
+            "Formula: Syntax: class Derived : access_mode Base { /* ... */ };",
+            "Formula: Public inheritance: class Student : public Person { };",
+            "Formula: Constructor call order: Base constructor → Derived constructor",
+            "Formula: Destructor call order: Derived destructor → Base destructor",
+            "Access specifiers: public, private, protected",
+            "Inheritance types: single, multiple, multilevel, hierarchical, hybrid",
+            "Polymorphism: compile-time (overloading), runtime (overriding)"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "PIEA",
+              "expansion": "Polymorphism, Inheritance, Encapsulation, Abstraction",
+              "meaning": "The four pillars of Object-Oriented Programming."
+            },
+            {
+              "phrase": "SOLID",
+              "expansion": "Single Responsibility, Open-Closed, Liskov Substitution, Interface Segregation, Dependency Inversion",
+              "meaning": "Five design principles for maintainable OOP code."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Use 'protected' for members that should be accessible in derived classes but not outside"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Constructor order: Base first, then Derived. Destructor order: Derived first, then Base."
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting the access mode: class B : A defaults to private inheritance in C++"
+            },
+            {
+              "type": "warning",
+              "content": "Trying to access private members of the base class directly — use protected instead"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Inheritance is a mechanism where a new class (derived/child class) acquires the properties and behaviors of an existing class (base/parent class). It enables code reuse, hierarchical classification, and extensibility. The derived class can add new members or override existing ones."
+            },
+            {
+              "type": "definition",
+              "content": "Base class (parent): the class being inherited from"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Base class (parent)?",
+              "back": "the class being inherited from",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Derived class (child)?",
+              "back": "the class that inherits from the base class",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Single inheritance?",
+              "back": "one base class, one derived class",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Multiple inheritance?",
+              "back": "a class inherits from multiple base classes",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Multilevel inheritance?",
+              "back": "A → B → C (chain of inheritance)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Hierarchical inheritance?",
+              "back": "multiple classes inherit from one base class",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Access modes?",
+              "back": "public inheritance (public members stay public), protected inheritance, private inheritance",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "Tip for this lesson",
+              "back": "Use 'protected' for members that should be accessible in derived classes but not outside"
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Inheritance is a mechanism where a new class (derived/child class) acquires the properties and behaviors of an existing class (base/parent class). It enables code reuse, hierarchical classification, and extensibility. The derived class can add new members or override existing ones."
+            },
+            {
+              "style": "detailed",
+              "content": "Inheritance is a mechanism where a new class (derived/child class) acquires the properties and behaviors of an existing class (base/parent class). It enables code reuse, hierarchical classification, and extensibility. The derived class can add new members or override existing ones.\n\nKey concepts: Base class (parent): the class being inherited from, Derived class (child): the class that inherits from the base class, Single inheritance: one base class, one derived class."
+            }
+          ],
+          "recommendedNextLessons": [
+            "polymorphism"
+          ]
+        },
+        {
+          "slug": "polymorphism",
+          "title": "Polymorphism — Function Overloading and Virtual Functions",
+          "durationMin": 30,
+          "difficulty": "hard",
+          "overview": "Polymorphism means 'many forms' — the same function name or operator can behave differently depending on the context. In C++, polymorphism is achieved through function overloading (compile-time), operator overloading (compile-time), and virtual functions (runtime). Runtime polymorphism uses a base class pointer to call derived class methods.",
+          "keyConcepts": [
+            "Compile-time polymorphism: resolved at compile time — function overloading and operator overloading",
+            "Runtime polymorphism: resolved at runtime — virtual functions and overriding",
+            "Function Overloading: same function name, different parameter lists (number, type, or order)",
+            "Operator Overloading: redefine what an operator (+, -, [], etc.) does for user-defined types",
+            "Virtual Function: declared with 'virtual' keyword in base class, overridden in derived class",
+            "Override: derived class provides its own implementation of a virtual function",
+            "Base class pointer + virtual function = runtime polymorphism (dynamic dispatch)",
+            "Pure Virtual Function: virtual void func() = 0; — makes the class abstract (cannot be instantiated)"
+          ],
+          "formulas": [
+            "Virtual: virtual returnType funcName(params) { }",
+            "Pure virtual: virtual returnType funcName(params) = 0;",
+            "Function overloading: void print(int); void print(float); void print(string);"
+          ],
+          "tables": [
+            {
+              "title": "Compile-time vs Runtime Polymorphism",
+              "headers": [
+                "Feature",
+                "Compile-time",
+                "Runtime"
+              ],
+              "rows": [
+                [
+                  "Mechanism",
+                  "Function/operator overloading",
+                  "Virtual functions"
+                ],
+                [
+                  "Binding",
+                  "Early binding (at compile)",
+                  "Late binding (at runtime)"
+                ],
+                [
+                  "Speed",
+                  "Faster (resolved at compile)",
+                  "Slightly slower (vtable lookup)"
+                ],
+                [
+                  "Flexibility",
+                  "Less flexible",
+                  "More flexible"
+                ],
+                [
+                  "Example",
+                  "void print(int), void print(char)",
+                  "virtual void draw()"
+                ]
+              ],
+              "note": "Runtime polymorphism uses a vtable (virtual table) to look up the correct function at runtime."
+            }
+          ],
+          "codeExamples": [
+            {
+              "language": "cpp",
+              "title": "Runtime Polymorphism with Virtual Functions",
+              "code": "#include <iostream>\nusing namespace std;\n\n// Base class\nclass Shape {\npublic:\n    virtual void draw() {  // virtual function\n        cout << \"Drawing a generic shape\" << endl;\n    }\n    virtual double area() = 0;  // pure virtual — abstract class\n};\n\nclass Circle : public Shape {\n    double radius;\npublic:\n    Circle(double r) : radius(r) {}\n    void draw() override {  // override base class virtual\n        cout << \"Drawing a circle\" << endl;\n    }\n    double area() override {\n        return 3.14159 * radius * radius;\n    }\n};\n\nclass Rectangle : public Shape {\n    double length, width;\npublic:\n    Rectangle(double l, double w) : length(l), width(w) {}\n    void draw() override {\n        cout << \"Drawing a rectangle\" << endl;\n    }\n    double area() override {\n        return length * width;\n    }\n};\n\nint main() {\n    // Base class pointers pointing to derived class objects\n    Shape* s1 = new Circle(5.0);\n    Shape* s2 = new Rectangle(4.0, 6.0);\n\n    s1->draw();  // Output: Drawing a circle (runtime dispatch!)\n    cout << \"Area: \" << s1->area() << endl;  // 78.54\n\n    s2->draw();  // Output: Drawing a rectangle\n    cout << \"Area: \" << s2->area() << endl;  // 24.0\n\n    delete s1;\n    delete s2;\n    return 0;\n}",
+              "explanation": "Even though s1 and s2 are Shape pointers, the correct draw() and area() methods of Circle and Rectangle are called at runtime because they are declared virtual. This is runtime polymorphism. Shape is abstract (has a pure virtual function area()=0), so you can't create a Shape object directly."
+            }
+          ],
+          "commonMistakes": [
+            "Forgetting the 'virtual' keyword in the base class — without it, the base class method is called even for derived objects",
+            "Not making the base class destructor virtual — when deleting through a base pointer, the derived destructor won't be called",
+            "Confusing overloading (same name, different params) with overriding (same name, same params, different class)",
+            "Trying to instantiate an abstract class (one with pure virtual functions)"
+          ],
+          "examTips": [
+            "Virtual functions enable runtime polymorphism — always use 'virtual' in the base class",
+            "Pure virtual function (= 0) makes the class abstract — cannot be instantiated",
+            "Function overloading is compile-time; virtual functions are runtime",
+            "Always make the base class destructor virtual if you use inheritance + dynamic allocation",
+            "Know the difference: overloading (same name, different params) vs overriding (same name, same params, derived class)"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What keyword is used to achieve runtime polymorphism in C++?",
+              "options": [
+                "static",
+                "virtual",
+                "override",
+                "inline"
+              ],
+              "answer": 1,
+              "explanation": "The 'virtual' keyword tells the compiler to use dynamic dispatch (vtable lookup) at runtime. Without it, the base class method is called based on the pointer type, not the actual object type."
+            },
+            {
+              "question": "What is a pure virtual function?",
+              "options": [
+                "A function with no parameters",
+                "A function declared with = 0, making the class abstract",
+                "A function that returns 0",
+                "A function that cannot be overridden"
+              ],
+              "answer": 1,
+              "explanation": "A pure virtual function is declared with '= 0' syntax: virtual void func() = 0;. It has no implementation in the base class and must be overridden in derived classes. A class with at least one pure virtual function is abstract and cannot be instantiated."
+            },
+            {
+              "question": "What is function overloading?",
+              "options": [
+                "Redefining a function in a derived class",
+                "Having multiple functions with the same name but different parameters",
+                "Making a function virtual",
+                "Calling a function from another function"
+              ],
+              "answer": 1,
+              "explanation": "Function overloading is having multiple functions with the same name but different parameter lists (different number, type, or order of parameters). The compiler decides which version to call based on the arguments. This is compile-time polymorphism."
+            }
+          ],
+          "objectives": [
+            "Understand Compile-time polymorphism and explain its significance",
+            "Understand Runtime polymorphism and explain its significance",
+            "Understand Function Overloading and explain its significance",
+            "Understand Operator Overloading and explain its significance",
+            "Understand Virtual Function and explain its significance",
+            "Attempt the practice quiz and viva questions on Polymorphism — Function Overloading and Virtual Functions"
+          ],
+          "prerequisites": [
+            "Working knowledge of C (functions, pointers, structs)",
+            "Understanding of what a data type is",
+            "Familiarity with the compile-run workflow",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nPolymorphism means 'many forms' — the same function name or operator can behave differently depending on the context. In C++, polymorphism is achieved through function overloading (compile-time), operator overloading (compile-time), and virtual functions (runtime). Runtime polymorphism uses a base class pointer to call derived class methods.\n## Key Concepts\n\n- Compile-time polymorphism: resolved at compile time — function overloading and operator overloading\n- Runtime polymorphism: resolved at runtime — virtual functions and overriding\n- Function Overloading: same function name, different parameter lists (number, type, or order)\n- Operator Overloading: redefine what an operator (+, -, [], etc.) does for user-defined types\n- Virtual Function: declared with 'virtual' keyword in base class, overridden in derived class\n- Override: derived class provides its own implementation of a virtual function\n- Base class pointer + virtual function = runtime polymorphism (dynamic dispatch)\n- Pure Virtual Function: virtual void func() = 0; — makes the class abstract (cannot be instantiated)\n\n## Important Formulas\n\n- `Virtual: virtual returnType funcName(params) { }`\n- `Pure virtual: virtual returnType funcName(params) = 0;`\n- `Function overloading: void print(int); void print(float); void print(string);`\n\n## Comparison Tables\n\n### Compile-time vs Runtime Polymorphism\n\n| Feature | Compile-time | Runtime |\n| --- | --- | --- |\n| Mechanism | Function/operator overloading | Virtual functions |\n| Binding | Early binding (at compile) | Late binding (at runtime) |\n| Speed | Faster (resolved at compile) | Slightly slower (vtable lookup) |\n| Flexibility | Less flexible | More flexible |\n| Example | void print(int), void print(char) | virtual void draw() |\n\n> Runtime polymorphism uses a vtable (virtual table) to look up the correct function at runtime.\n\n## Code Examples\n\n### Runtime Polymorphism with Virtual Functions\n\n```cpp\n#include <iostream>\nusing namespace std;\n\n// Base class\nclass Shape {\npublic:\n    virtual void draw() {  // virtual function\n        cout << \"Drawing a generic shape\" << endl;\n    }\n    virtual double area() = 0;  // pure virtual — abstract class\n};\n\nclass Circle : public Shape {\n    double radius;\npublic:\n    Circle(double r) : radius(r) {}\n    void draw() override {  // override base class virtual\n        cout << \"Drawing a circle\" << endl;\n    }\n    double area() override {\n        return 3.14159 * radius * radius;\n    }\n};\n\nclass Rectangle : public Shape {\n    double length, width;\npublic:\n    Rectangle(double l, double w) : length(l), width(w) {}\n    void draw() override {\n        cout << \"Drawing a rectangle\" << endl;\n    }\n    double area() override {\n        return length * width;\n    }\n};\n\nint main() {\n    // Base class pointers pointing to derived class objects\n    Shape* s1 = new Circle(5.0);\n    Shape* s2 = new Rectangle(4.0, 6.0);\n\n    s1->draw();  // Output: Drawing a circle (runtime dispatch!)\n    cout << \"Area: \" << s1->area() << endl;  // 78.54\n\n    s2->draw();  // Output: Drawing a rectangle\n    cout << \"Area: \" << s2->area() << endl;  // 24.0\n\n    delete s1;\n    delete s2;\n    return 0;\n}\n```\n\nEven though s1 and s2 are Shape pointers, the correct draw() and area() methods of Circle and Rectangle are called at runtime because they are declared virtual. This is runtime polymorphism. Shape is abstract (has a pure virtual function area()=0), so you can't create a Shape object directly.\n\n\n## Summary\n\nPolymorphism means 'many forms' — the same function name or operator can behave differently depending on the context. In C++, polymorphism is achieved through function overloading (compile-time), operator overloading (compile-time), and virtual functions (runtime). Runtime polymorphism uses a base class pointer to call derived class methods.",
+          "analogies": [
+            {
+              "scenario": "Class vs Object like Blueprint vs House",
+              "mapping": "Class = blueprint (defines structure, doesn't occupy land). Object = actual house built from the blueprint (occupies memory). One blueprint, many houses."
+            },
+            {
+              "scenario": "Inheritance like parent-child genetics",
+              "mapping": "Parent class = your parents' traits, Child class = inherits those traits + adds new ones. Single inheritance = one parent, Multiple inheritance = two parents, Multilevel = grandparent → parent → child."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Polymorphism — Function Overloading and Virtual Functions — Process Flow",
+              "content": "flowchart TD\n    A[Define Class] --> B[Declare Members]\n    B --> C{Access Specifier}\n    C -->|private| D[Hidden]\n    C -->|public| E[Accessible]\n    C -->|protected| F[Subclass only]\n    E --> G[Create Object]\n    G --> H[Call Methods]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Polymorphism — Function Overloading and Virtual Functions — Concept Map",
+              "content": "mindmap\n  root((Polymorphism — Function Overlo))\n    OOP Pillars\n      Encapsulation\n      Inheritance\n      Polymorphism\n      Abstraction\n    Class Members\n      Attributes\n      Methods\n      Constructors\n      Destructors"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) method dispatch (virtual: vtable lookup)",
+            "space": "O(n) for n objects + vtable per class"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What keyword is used to achieve runtime polymorphism in C++?",
+              "solution": "Correct answer: virtual",
+              "explanation": "The 'virtual' keyword tells the compiler to use dynamic dispatch (vtable lookup) at runtime. Without it, the base class method is called based on the pointer type, not the actual object type."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Polymorphism — Function Overloading and Virtual Functions with reference to the key concepts.",
+              "solution": "Virtual functions enable runtime polymorphism — always use 'virtual' in the base class → Pure virtual function (= 0) makes the class abstract — cannot be instantiated → Function overloading is compile-time; virtual functions are runtime",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Compile-time polymorphism.",
+              "modelAnswer": "resolved at compile time — function overloading and operator overloading"
+            },
+            {
+              "marks": 2,
+              "question": "Define Runtime polymorphism.",
+              "modelAnswer": "resolved at runtime — virtual functions and overriding"
+            },
+            {
+              "marks": 2,
+              "question": "Define Function Overloading.",
+              "modelAnswer": "same function name, different parameter lists (number, type, or order)"
+            },
+            {
+              "marks": 2,
+              "question": "What is a constructor?",
+              "modelAnswer": "A constructor is a special method automatically called when an object is created, used to initialise its members."
+            },
+            {
+              "marks": 2,
+              "question": "Define encapsulation.",
+              "modelAnswer": "Encapsulation is bundling data and methods that operate on that data into a single unit (class), and restricting direct access to internal state."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Virtual: virtual returnType funcName(params) { }",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "What is the difference between overloading and overriding?",
+              "modelAnswer": "Overloading: same method name, different parameters, in the same class — compile-time polymorphism. Overriding: subclass redefines a parent method with the same signature — runtime polymorphism via virtual functions."
+            },
+            {
+              "marks": 5,
+              "question": "Why use virtual destructors?",
+              "modelAnswer": "When deleting a derived object through a base pointer, a virtual destructor ensures the derived destructor runs first, preventing resource leaks."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Compile-time polymorphism.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Runtime polymorphism.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Virtual: virtual returnType funcName(params) { }",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Pure virtual: virtual returnType funcName(params) = 0;",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Polymorphism — Function Overloading and Virtual Functions in detail with a diagram.",
+              "modelAnswer": "Polymorphism means 'many forms' — the same function name or operator can behave differently depending on the context. In C++, polymorphism is achieved through function overloading (compile-time), operator overloading (compile-time), and virtual functions (runtime). Runtime polymorphism uses a base class pointer to call derived class methods."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Polymorphism — Function Overloading and Virtual Functions with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Polymorphism — Function Overloading and Virtual Functions\n\n**One-line definition:** Polymorphism means 'many forms' — the same function name or operator can behave differently depending on the context. In C++, polymorphism is achieved through function overloading (compile-time), oper\n\n**Key points:**\n\n- Compile-time polymorphism: resolved at compile time — function overloading and operator overloading\n- Runtime polymorphism: resolved at runtime — virtual functions and overriding\n- Function Overloading: same function name, different parameter lists (number, type, or order)\n- Operator Overloading: redefine what an operator (+, -, [], etc.) does for user-defined types\n- Virtual Function: declared with 'virtual' keyword in base class, overridden in derived class\n\n**Important formulas:**\n\n- `Virtual: virtual returnType funcName(params) { }`\n- `Pure virtual: virtual returnType funcName(params) = 0;`\n- `Function overloading: void print(int); void print(float); void print(string);`\n\n**Common mistake to avoid:** Forgetting the 'virtual' keyword in the base class — without it, the base class method is called even for derived objects\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Compile-time polymorphism: resolved at compile time — function overloading and operator overloading",
+            "Runtime polymorphism: resolved at runtime — virtual functions and overriding",
+            "Function Overloading: same function name, different parameter lists (number, type, or order)",
+            "Operator Overloading: redefine what an operator (+, -, [], etc.) does for user-defined types",
+            "Virtual Function: declared with 'virtual' keyword in base class, overridden in derived class",
+            "Formula: Virtual: virtual returnType funcName(params) { }",
+            "Formula: Pure virtual: virtual returnType funcName(params) = 0;",
+            "Formula: Function overloading: void print(int); void print(float); void print(string);",
+            "Access specifiers: public, private, protected",
+            "Inheritance types: single, multiple, multilevel, hierarchical, hybrid",
+            "Polymorphism: compile-time (overloading), runtime (overriding)"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "PIEA",
+              "expansion": "Polymorphism, Inheritance, Encapsulation, Abstraction",
+              "meaning": "The four pillars of Object-Oriented Programming."
+            },
+            {
+              "phrase": "SOLID",
+              "expansion": "Single Responsibility, Open-Closed, Liskov Substitution, Interface Segregation, Dependency Inversion",
+              "meaning": "Five design principles for maintainable OOP code."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Virtual functions enable runtime polymorphism — always use 'virtual' in the base class"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Pure virtual function (= 0) makes the class abstract — cannot be instantiated"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting the 'virtual' keyword in the base class — without it, the base class method is called even for derived objects"
+            },
+            {
+              "type": "warning",
+              "content": "Not making the base class destructor virtual — when deleting through a base pointer, the derived destructor won't be called"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Polymorphism means 'many forms' — the same function name or operator can behave differently depending on the context. In C++, polymorphism is achieved through function overloading (compile-time), operator overloading (compile-time), and virtual functions (runtime). Runtime polymorphism uses a base c..."
+            },
+            {
+              "type": "definition",
+              "content": "Compile-time polymorphism: resolved at compile time — function overloading and operator overloading"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Compile-time polymorphism?",
+              "back": "resolved at compile time — function overloading and operator overloading",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Runtime polymorphism?",
+              "back": "resolved at runtime — virtual functions and overriding",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Function Overloading?",
+              "back": "same function name, different parameter lists (number, type, or order)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Operator Overloading?",
+              "back": "redefine what an operator (+, -, [], etc.) does for user-defined types",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Virtual Function?",
+              "back": "declared with 'virtual' keyword in base class, overridden in derived class",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Override?",
+              "back": "derived class provides its own implementation of a virtual function",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Pure Virtual Function?",
+              "back": "virtual void func() = 0; — makes the class abstract (cannot be instantiated)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What does the formula `Pure virtual: virtual returnType funcName(params)` represent?",
+              "back": "0;",
+              "hint": "Look at the formulas section."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Polymorphism means 'many forms' — the same function name or operator can behave differently depending on the context. In C++, polymorphism is achieved through function overloading (compile-time), operator overloading (compile-time), and virtual functions (runtime). Runtime polymorphism uses a base c"
+            },
+            {
+              "style": "detailed",
+              "content": "Polymorphism means 'many forms' — the same function name or operator can behave differently depending on the context. In C++, polymorphism is achieved through function overloading (compile-time), operator overloading (compile-time), and virtual functions (runtime). Runtime polymorphism uses a base class pointer to call derived class methods.\n\nKey concepts: Compile-time polymorphism: resolved at compile time — function overloading and o, Runtime polymorphism: resolved at runtime — virtual functions and overriding, Function Overloading: same function name, different parameter lists (number, typ."
+            }
+          ],
+          "recommendedNextLessons": []
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "# Object Oriented Programming with C++ — Quick Revision\n\n**Subject code:** R23CP6404  \n**Semester:** 3  \n**Credits:** 5  \n\n## Unit 1: Introduction to OOP and C++ (15%)\n### OOP Concepts and Principles\nObject-Oriented Programming (OOP) is a programming paradigm based on the concept of 'objects' that contain data (attributes) and code (methods). C++ supports OOP through classes, objects, encapsulation, inheritance, and polymorphism. OOP makes code more modular, reusable, and eas...\n\n**Formulas:**\n- `Access specifiers: public (accessible anywhere), private (class only), protected (class + derived classes)`\n- `Class definition: class ClassName { access: members; };  (note the semicolon)`\n- `Object creation: ClassName obj; or ClassName obj(params);`\n\n### Constructors and Destructors\nA constructor is a special member function that is automatically called when an object is created. It initializes the object's data members. A destructor is called automatically when an object is destroyed (goes out of scope). Constructors have the same name as the class; destruc...\n\n**Formulas:**\n- `Constructor: ClassName() { /* init */ }`\n- `Parameterized: ClassName(type param) { /* init */ }`\n- `Copy: ClassName(const ClassName& other) { /* copy */ }`\n\n## Unit 2: Inheritance and Polymorphism (25%)\n### Inheritance — Code Reuse and Hierarchy\nInheritance is a mechanism where a new class (derived/child class) acquires the properties and behaviors of an existing class (base/parent class). It enables code reuse, hierarchical classification, and extensibility. The derived class can add new members or override existing one...\n\n**Formulas:**\n- `Syntax: class Derived : access_mode Base { /* ... */ };`\n- `Public inheritance: class Student : public Person { };`\n- `Constructor call order: Base constructor → Derived constructor`\n\n### Polymorphism — Function Overloading and Virtual Functions\nPolymorphism means 'many forms' — the same function name or operator can behave differently depending on the context. In C++, polymorphism is achieved through function overloading (compile-time), operator overloading (compile-time), and virtual functions (runtime). Runtime polymo...\n\n**Formulas:**\n- `Virtual: virtual returnType funcName(params) { }`\n- `Pure virtual: virtual returnType funcName(params) = 0;`\n- `Function overloading: void print(int); void print(float); void print(string);`\n",
+  "interviewBank": [
+    {
+      "marks": 5,
+      "question": "Explain the formula: Access specifiers: public (accessible anywhere), private (class only), protected (class + derived classes)",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 10,
+      "question": "What is the difference between overloading and overriding?",
+      "modelAnswer": "Overloading: same method name, different parameters, in the same class — compile-time polymorphism. Overriding: subclass redefines a parent method with the same signature — runtime polymorphism via virtual functions."
+    },
+    {
+      "marks": 5,
+      "question": "Why use virtual destructors?",
+      "modelAnswer": "When deleting a derived object through a base pointer, a virtual destructor ensures the derived destructor runs first, preventing resource leaks."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: Constructor: ClassName() { /* init */ }",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: Syntax: class Derived : access_mode Base { /* ... */ };",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: Virtual: virtual returnType funcName(params) { }",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    }
+  ],
+  "vivaBank": [
+    {
+      "marks": 2,
+      "question": "Define Class.",
+      "modelAnswer": "A blueprint/template that defines the structure (data members) and behavior (member functions) of objects"
+    },
+    {
+      "marks": 2,
+      "question": "Define Object.",
+      "modelAnswer": "An instance of a class — a concrete entity created from the class blueprint"
+    },
+    {
+      "marks": 2,
+      "question": "Define Encapsulation.",
+      "modelAnswer": "Bundling data and methods together, hiding internal details using access specifiers (private, public, protected)"
+    },
+    {
+      "marks": 2,
+      "question": "What is a constructor?",
+      "modelAnswer": "A constructor is a special method automatically called when an object is created, used to initialise its members."
+    },
+    {
+      "marks": 2,
+      "question": "Define encapsulation.",
+      "modelAnswer": "Encapsulation is bundling data and methods that operate on that data into a single unit (class), and restricting direct access to internal state."
+    },
+    {
+      "marks": 2,
+      "question": "Define Constructor.",
+      "modelAnswer": "same name as the class, no return type (not even void), called automatically when object is created"
+    },
+    {
+      "marks": 2,
+      "question": "Define Default constructor.",
+      "modelAnswer": "takes no parameters — initializes members with default values"
+    },
+    {
+      "marks": 2,
+      "question": "Define Parameterized constructor.",
+      "modelAnswer": "takes parameters to initialize members with specific values"
+    },
+    {
+      "marks": 2,
+      "question": "Define Base class (parent).",
+      "modelAnswer": "the class being inherited from"
+    },
+    {
+      "marks": 2,
+      "question": "Define Derived class (child).",
+      "modelAnswer": "the class that inherits from the base class"
+    },
+    {
+      "marks": 2,
+      "question": "Define Single inheritance.",
+      "modelAnswer": "one base class, one derived class"
+    },
+    {
+      "marks": 2,
+      "question": "Define Compile-time polymorphism.",
+      "modelAnswer": "resolved at compile time — function overloading and operator overloading"
+    }
+  ],
+  "pyqBank": [
+    {
+      "marks": 10,
+      "question": "Explain OOP Concepts and Principles in detail with a diagram.",
+      "modelAnswer": "Object-Oriented Programming (OOP) is a programming paradigm based on the concept of 'objects' that contain data (attributes) and code (methods). C++ supports OOP through classes, objects, encapsulation, inheritance, and polymorphism. OOP makes code more modular, reusable, and easier to maintain."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss OOP Concepts and Principles with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Constructors and Destructors in detail with a diagram.",
+      "modelAnswer": "A constructor is a special member function that is automatically called when an object is created. It initializes the object's data members. A destructor is called automatically when an object is destroyed (goes out of scope). Constructors have the same name as the class; destructors have a ~ prefix."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Constructors and Destructors with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Inheritance — Code Reuse and Hierarchy in detail with a diagram.",
+      "modelAnswer": "Inheritance is a mechanism where a new class (derived/child class) acquires the properties and behaviors of an existing class (base/parent class). It enables code reuse, hierarchical classification, and extensibility. The derived class can add new members or override existing ones."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Inheritance — Code Reuse and Hierarchy with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Polymorphism — Function Overloading and Virtual Functions in detail with a diagram.",
+      "modelAnswer": "Polymorphism means 'many forms' — the same function name or operator can behave differently depending on the context. In C++, polymorphism is achieved through function overloading (compile-time), operator overloading (compile-time), and virtual functions (runtime). Runtime polymorphism uses a base class pointer to call derived class methods."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Polymorphism — Function Overloading and Virtual Functions with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 15,
+      "question": "Explain the architecture of Object Oriented Programming with C++ with a neat diagram. List its advantages and limitations.",
+      "modelAnswer": "Draw the architecture diagram, label each component, explain data/control flow, then list 3 advantages and 2 limitations."
+    },
+    {
+      "marks": 10,
+      "question": "Compare any two major concepts from Object Oriented Programming with C++ in tabular form.",
+      "modelAnswer": "Pick the two most important concepts (see lesson notes), build a 6-row comparison table covering meaning, working, advantages, limitations, complexity, and use case."
+    }
+  ]
+}
