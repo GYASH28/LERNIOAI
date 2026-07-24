@@ -1427,9 +1427,93 @@
 }
 .leo-studio__styles::-webkit-scrollbar { display: none; }
 
+/* On small screens the 6 style pills overflow horizontally. They are
+   collapsed into a compact dropdown trigger (`.leo-styles-mobile-toggle`)
+   rendered in the JSX, leaving room for the mascot, title, voice toggle
+   and context-panel toggle. */
 @media (max-width: 768px) {
   .leo-studio__styles {
-    justify-content: flex-start;
+    display: none;
+  }
+}
+
+/* Mobile-only compact trigger for the teaching-style dropdown. Hidden on
+   ≥769px where the inline pill row is shown instead. */
+.leo-styles-mobile-toggle {
+  display: none;
+}
+@media (max-width: 768px) {
+  .leo-styles-mobile-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.4375rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+    border: 1px solid var(--border-default);
+    background: var(--surface-1);
+    color: var(--text-default);
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-left: auto;
+    transition: all 180ms ease;
+  }
+  .leo-styles-mobile-toggle:hover {
+    border-color: var(--brand);
+    color: var(--text-strong);
+    background: color-mix(in oklch, var(--brand) 6%, var(--surface-1));
+  }
+  .leo-styles-mobile-toggle[data-state="open"] {
+    border-color: var(--brand);
+    color: var(--brand);
+  }
+}
+
+/* Mobile-only items rendered inside the teaching-style dropdown. */
+.leo-styles-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-default);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+}
+.leo-styles-menu-item[data-active="true"] {
+  background: color-mix(in oklch, var(--brand) 12%, transparent);
+  color: var(--brand);
+  font-weight: 600;
+}
+.leo-styles-menu-item__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  background: color-mix(in oklch, var(--brand) 10%, transparent);
+  color: var(--brand);
+  flex-shrink: 0;
+}
+.leo-styles-menu-item__check {
+  margin-left: auto;
+  color: var(--brand);
+}
+
+/* Utility: hide non-essential icon button on mobile (used for the
+   "clear conversation" action which is reachable via the styles
+   dropdown overflow on small screens). */
+@media (max-width: 768px) {
+  .leo-icon-btn--hide-mobile {
+    display: none;
   }
 }
 
@@ -1555,6 +1639,8 @@
   font-size: 0.9375rem;
   line-height: 1.6;
   box-shadow: 0 1px 2px oklch(0 0 0 / 0.08);
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 .leo-bubble-user p { margin: 0; }
 .leo-bubble-user strong { font-weight: 600; }
@@ -1567,6 +1653,8 @@
   border: 1px solid var(--border-subtle);
   box-shadow: 0 1px 3px oklch(0 0 0 / 0.04);
   position: relative;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 @media (max-width: 640px) {
   .leo-bubble-user { max-width: 88%; }
@@ -1589,7 +1677,7 @@
   color: var(--text-default);
   letter-spacing: -0.002em;
 }
-.leo-bubble-leo__content p { margin: 0 0 0.75rem; }
+.leo-bubble-leo__content p { margin: 0 0 0.75rem; word-break: break-word; overflow-wrap: anywhere; }
 .leo-bubble-leo__content p:last-child { margin-bottom: 0; }
 .leo-bubble-leo__content h2 {
   font-size: 1.0625rem;
@@ -1636,12 +1724,15 @@
   overflow-x: auto;
   margin: 0.75rem 0;
   border: 1px solid var(--border-subtle);
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
 }
 .leo-bubble-leo__content pre code {
   background: transparent;
   color: var(--text-default);
   padding: 0;
   font-size: 0.8125rem;
+  white-space: pre;
 }
 .leo-bubble-leo__content blockquote {
   border-left: 3px solid var(--brand);
@@ -1650,13 +1741,22 @@
   color: var(--text-secondary);
   font-style: italic;
 }
+
+/* Horizontal-scroll wrapper for markdown tables. The ReactMarkdown
+   `table` renderer wraps every <table> in a `<div class="leo-table-wrap">`
+   so wide tables scroll horizontally without overflowing the bubble. */
+.leo-table-wrap {
+  margin: 0.75rem 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+  max-width: 100%;
+}
 .leo-bubble-leo__content table {
   width: 100%;
   border-collapse: collapse;
-  margin: 0.75rem 0;
   font-size: 0.875rem;
-  border-radius: 8px;
-  overflow: hidden;
 }
 .leo-bubble-leo__content th,
 .leo-bubble-leo__content td {
@@ -1796,6 +1896,18 @@
   border-radius: 6px;
   border-left: 2px solid var(--brand);
 }
+/* On narrow viewports the popover can spill past the right edge of the
+   bubble (and the screen). Pin both edges and cap to viewport width so
+   it stays inside the chat column. */
+@media (max-width: 640px) {
+  .leo-citation-popover {
+    left: 0;
+    right: 0;
+    max-width: calc(100vw - 2rem);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
 
 /* ── Typing indicator ──────────────────────────────────────── */
 .leo-typing {
@@ -1819,6 +1931,24 @@
   30% { transform: translateY(-4px); opacity: 1; }
 }
 
+/* Tip line shown beneath the typing dots while LEO is thinking.
+   The tip rotates every 4s; reserving min-height keeps the bubble
+   from collapsing/reflowing on each rotation. */
+.leo-typing__tip {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: 1.4;
+  max-width: 400px;
+  min-height: 2.5rem;
+}
+@media (max-width: 640px) {
+  .leo-typing__tip {
+    min-height: 2.25rem;
+  }
+}
+
 /* Streaming cursor */
 .leo-streaming-cursor {
   display: inline-block;
@@ -1840,10 +1970,14 @@
   position: sticky;
   bottom: 0;
   padding: 0.75rem 1.25rem 1rem;
+  /* Reserve space for iOS safe-area so the keyboard never covers the
+     composer when the viewport uses dynamic toolbars. */
+  padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
   background: color-mix(in oklch, var(--surface-1) 85%, transparent);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
   border-top: 1px solid var(--border-subtle);
+  z-index: 20;
 }
 
 .leo-input-wrapper {
@@ -2084,6 +2218,15 @@
   width: 100%;
   max-width: 640px;
 }
+/* On small screens collapse to a tighter 160px minimum so cards stay
+   readable and don't shrink into unusable slivers. At ≤375px this
+   yields a 2-column grid; on slightly wider phones it stays 2 or 3. */
+@media (max-width: 640px) {
+  .leo-mode-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 0.5rem;
+  }
+}
 
 .leo-mode-card {
   padding: 1rem;
@@ -2173,6 +2316,14 @@
   color: var(--brand-contrast, var(--text-inverse));
   border-color: var(--brand);
   transform: translateY(-2px);
+}
+/* On mobile the sticky input area is taller (extra safe-area padding +
+   the meta line) — bump the scroll button so it never overlaps the
+   composer. */
+@media (max-width: 640px) {
+  .leo-scroll-btn {
+    bottom: 6.5rem;
+  }
 }
 
 /* ── Confidence badge ──────────────────────────────────────── */

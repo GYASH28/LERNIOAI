@@ -49,7 +49,8 @@ export async function POST(req: NextRequest) {
 
     // Rate limit: 5 enhancements per hour per user
     const limiter = await checkRateLimit({
-      key: `enhance:${user.id}`,
+      action: 'materials_enhance',
+      identifier: user.id,
       limit: 5,
       windowMs: 60 * 60 * 1000,
     })

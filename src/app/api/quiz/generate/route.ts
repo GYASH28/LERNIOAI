@@ -1,6 +1,7 @@
 import { NextRequest } from 'next/server'
 import { readFileSync, readdirSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
+import { requireUser, withApi, ApiError } from '@/lib/auth'
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
@@ -190,72 +191,77 @@ const PRESETS: Record<string, number> = {
 }
 
 export async function GET(request: NextRequest) {
-  const url = new URL(request.url)
-  const subjectCode = url.searchParams.get('subject')
-  const subjectName = url.searchParams.get('name') ?? subjectCode ?? ''
-  const coverage = url.searchParams.get('coverage') ?? ''
-  const preset = url.searchParams.get('preset') // quick|short|medium|long|full|marathon
-  const countParam = url.searchParams.get('count')
+  return withApi(async () => {
+    // Auth gate — the question bank is an authenticated student feature.
+    await requireUser()
 
-  // Determine count from preset or direct param
-  let count: number
-  if (preset && PRESETS[preset]) {
-    count = PRESETS[preset]
-  } else {
-    count = Math.min(parseInt(countParam ?? '10'), 100)
-  }
+    const url = new URL(request.url)
+    const subjectCode = url.searchParams.get('subject')
+    const subjectName = url.searchParams.get('name') ?? subjectCode ?? ''
+    const coverage = url.searchParams.get('coverage') ?? ''
+    const preset = url.searchParams.get('preset') // quick|short|medium|long|full|marathon
+    const countParam = url.searchParams.get('count')
 
-  if (!subjectCode) {
-    return Response.json({ error: 'Missing subject parameter' }, { status: 400 })
-  }
+    // Determine count from preset or direct param
+    let count: number
+    if (preset && PRESETS[preset]) {
+      count = PRESETS[preset]
+    } else {
+      count = Math.min(parseInt(countParam ?? '10'), 100)
+    }
 
-  // Load detailed notes
-  const allNotes = loadAllNotes()
-  const notes = allNotes.get(subjectCode)
+    if (!subjectCode) {
+      throw new ApiError('BAD_REQUEST', 'Missing subject parameter', 400, false)
+    }
 
-  let questions: (PracticeQuestion & { lessonTitle?: string })[] = []
+    // Load detailed notes
+    const allNotes = loadAllNotes()
+    const notes = allNotes.get(subjectCode)
 
-  if (notes) {
-    for (const unit of notes.units) {
-      for (const lesson of unit.lessons) {
-        for (const q of lesson.practiceQuestions) {
-          questions.push({ ...q, lessonTitle: lesson.title })
+    let questions: (PracticeQuestion & { lessonTitle?: string })[] = []
+
+    if (notes) {
+      for (const unit of notes.units) {
+        for (const lesson of unit.lessons) {
+          for (const q of lesson.practiceQuestions) {
+            questions.push({ ...q, lessonTitle: lesson.title })
+          }
         }
       }
     }
-  }
 
-  // Always generate additional questions from coverage focus
-  const generated = generateQuestionPool(subjectName || subjectCode, coverage || 'the core concepts of this subject', subjectCode)
-  questions = [...questions, ...generated]
+    // Always generate additional questions from coverage focus
+    const generated = generateQuestionPool(subjectName || subjectCode, coverage || 'the core concepts of this subject', subjectCode)
+    questions = [...questions, ...generated]
 
-  if (questions.length === 0) {
-    return Response.json({ error: 'No quiz questions found' }, { status: 404 })
-  }
-
-  // Shuffle ALL questions randomly
-  const shuffled = shuffle(questions)
-
-  // If we need more questions than available, repeat with shuffled copies
-  let selected = shuffled
-  if (count > selected.length) {
-    while (selected.length < count) {
-      selected = [...selected, ...shuffled.map(q => ({ ...q, options: shuffle(q.options), answer: q.answer }))]
+    if (questions.length === 0) {
+      throw new ApiError('NOT_FOUND', 'No quiz questions found', 404, false)
     }
-  }
 
-  // Take exactly the requested count
-  selected = selected.slice(0, count)
+    // Shuffle ALL questions randomly
+    const shuffled = shuffle(questions)
 
-  // Shuffle each question's options independently
-  selected = selected.map(q => shuffleOptions(q))
+    // If we need more questions than available, repeat with shuffled copies
+    let selected = shuffled
+    if (count > selected.length) {
+      while (selected.length < count) {
+        selected = [...selected, ...shuffled.map(q => ({ ...q, options: shuffle(q.options), answer: q.answer }))]
+      }
+    }
 
-  return Response.json({
-    subject: notes?.subjectName ?? subjectName,
-    subjectCode,
-    totalAvailable: questions.length,
-    requested: count,
-    preset: preset ?? 'custom',
-    questions: selected,
+    // Take exactly the requested count
+    selected = selected.slice(0, count)
+
+    // Shuffle each question's options independently
+    selected = selected.map(q => shuffleOptions(q))
+
+    return Response.json({
+      subject: notes?.subjectName ?? subjectName,
+      subjectCode,
+      totalAvailable: questions.length,
+      requested: count,
+      preset: preset ?? 'custom',
+      questions: selected,
+    })
   })
 }

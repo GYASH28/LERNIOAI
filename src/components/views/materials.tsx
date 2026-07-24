@@ -154,15 +154,15 @@ export function MaterialsView() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center gap-3">
-        <Mascot mascot="leo" state="explaining" size={48} />
-        <div className="flex-1">
+      <div className="flex items-center gap-3 flex-wrap">
+        <Mascot mascot="leo" state="explaining" size={48} className="shrink-0" />
+        <div className="flex-1 min-w-0">
           <h2 className="text-lg font-bold">Materials Library</h2>
           <p className="text-sm text-muted-foreground">Notes, question papers, lab manuals, and more.</p>
         </div>
         <Dialog open={contribOpen} onOpenChange={setContribOpen}>
           <DialogTrigger asChild>
-            <Button className="gap-2"><Upload className="h-4 w-4" /> Contribute</Button>
+            <Button className="gap-2 min-h-[44px] shrink-0"><Upload className="h-4 w-4" /> Contribute</Button>
           </DialogTrigger>
           <DialogContent className="max-h-[90vh] overflow-y-auto">
             <ContributeForm
@@ -396,10 +396,10 @@ function MaterialCard({ material, subjects, onPreview }: {
           </div>
         </div>
         <div className="flex gap-2 mt-3">
-          <Button variant="outline" size="sm" className="flex-1 gap-1.5 text-xs" onClick={onPreview}>
+          <Button variant="outline" size="sm" className="flex-1 gap-1.5 text-xs min-h-[40px]" onClick={onPreview}>
             <Eye className="h-3 w-3" /> Preview
           </Button>
-          <Button variant="outline" size="sm" className="flex-1 gap-1.5 text-xs" onClick={handleDownload}>
+          <Button variant="outline" size="sm" className="flex-1 gap-1.5 text-xs min-h-[40px]" onClick={handleDownload}>
             <Download className="h-3 w-3" /> Download
           </Button>
         </div>
@@ -578,7 +578,7 @@ function ContributeForm({ subjects, onSaved, initial }: {
         <Label className="text-xs">Title</Label>
         <Input value={title} onChange={(e) => setTitle(e.target.value)} className="mt-1" placeholder="e.g. Data Structures Unit 3 Notes" />
       </div>
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
           <Label className="text-xs">Type</Label>
           <Select value={type} onValueChange={handleTypeChange}>
@@ -641,7 +641,7 @@ function ContributeForm({ subjects, onSaved, initial }: {
         </span>
       </label>
 
-      <Button onClick={submit} disabled={!canSubmit || saving} className="w-full gap-2">
+      <Button onClick={submit} disabled={!canSubmit || saving} className="w-full gap-2 min-h-[44px]">
         {saving ? 'Submitting…' : <><Send className="h-4 w-4" /> Submit for Review</>}
       </Button>
       <p className="text-meta text-muted-foreground text-center">
@@ -755,12 +755,12 @@ function MyContributions() {
                         </p>
                       )}
                     </div>
-                    <div className="flex gap-2 shrink-0">
+                    <div className="flex gap-2 shrink-0 flex-wrap">
                       {editable && (
                         <Button
                           variant="outline"
                           size="sm"
-                          className="gap-1.5 text-xs"
+                          className="gap-1.5 text-xs min-h-[40px]"
                           onClick={() => setEditing(c)}
                           disabled={busyId === c.id}
                         >
@@ -771,7 +771,7 @@ function MyContributions() {
                         <Button
                           variant="outline"
                           size="sm"
-                          className="gap-1.5 text-xs"
+                          className="gap-1.5 text-xs min-h-[40px]"
                           onClick={() => patch(c.id, { submit: true })}
                           disabled={busyId === c.id}
                         >
@@ -781,7 +781,7 @@ function MyContributions() {
                       <Button
                         variant="outline"
                         size="sm"
-                        className="gap-1.5 text-xs text-destructive"
+                        className="gap-1.5 text-xs text-destructive min-h-[40px]"
                         onClick={() => patch(c.id, { withdraw: true })}
                         disabled={busyId === c.id}
                       >
@@ -910,7 +910,7 @@ function EditContributionForm({ contribution, onSaved }: {
           <Textarea value={content} onChange={(e) => setContent(e.target.value)} className="mt-1 min-h-40 font-mono text-xs" />
         </div>
       )}
-      <Button onClick={save} disabled={saving} className="w-full">
+      <Button onClick={save} disabled={saving} className="w-full min-h-[44px]">
         {saving ? 'Saving…' : 'Save Changes'}
       </Button>
     </div>

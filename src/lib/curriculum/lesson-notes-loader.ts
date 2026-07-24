@@ -37,6 +37,37 @@ export interface Diagram {
   content: string
 }
 
+/**
+ * A marked question with marks + optional model answer + tips.
+ * Used by interview / viva / PYQ banks at both the lesson and subject level.
+ */
+export interface MarkedQuestion {
+  marks: number
+  question: string
+  modelAnswer?: string
+  tips?: string[]
+}
+
+/**
+ * A mnemonic phrase that helps students remember a list of items.
+ * Used by the `mnemonics` field on `Lesson`.
+ */
+export interface Mnemonic {
+  phrase: string
+  expansion: string
+  meaning: string
+}
+
+/**
+ * A single flashcard (front / back / optional hint).
+ * Used by the `flashcards` field on `Lesson` and subject-level banks.
+ */
+export interface Flashcard {
+  front: string
+  back: string
+  hint?: string
+}
+
 export interface Lesson {
   slug: string
   title: string
@@ -60,14 +91,14 @@ export interface Lesson {
   mindMaps?: Diagram[]
   complexity?: { time: string; space: string; explanation?: string }
   workedExamples?: Array<{ title: string; problem: string; solution: string; explanation?: string }>
-  vivaQuestions?: Array<{ marks: number; question: string; modelAnswer?: string }>
-  interviewQuestions?: Array<{ marks: number; question: string; modelAnswer?: string }>
-  examQuestions?: Array<{ marks: number; question: string; modelAnswer?: string; tips?: string[] }>
+  vivaQuestions?: MarkedQuestion[]
+  interviewQuestions?: MarkedQuestion[]
+  examQuestions?: MarkedQuestion[]
   revisionSummary?: string
   cheatSheet?: string[]
-  mnemonics?: Array<{ phrase: string; expansion: string; meaning: string }>
+  mnemonics?: Mnemonic[]
   callouts?: Array<{ type: string; title?: string; content: string }>
-  flashcards?: Array<{ front: string; back: string; hint?: string }>
+  flashcards?: Flashcard[]
   aiSummaries?: Array<{ style: string; content: string }>
   recommendedNextLessons?: string[]
 }
@@ -85,6 +116,11 @@ export interface SubjectNotes {
   semester: number
   credits: number
   units: Unit[]
+  // V3 optional subject-level banks (may not exist in all JSON files)
+  revisionNotes?: string
+  interviewBank?: MarkedQuestion[]
+  vivaBank?: MarkedQuestion[]
+  pyqBank?: MarkedQuestion[]
 }
 
 function loadAllNotes(): Map<string, SubjectNotes> {
@@ -134,17 +170,28 @@ export function findLessonBySlug(
 ): { lesson: Lesson; unit: Unit; subject: SubjectNotes } | null {
   const subject = getSubjectNotes(subjectCode)
   if (!subject) return null
+
+  // First pass: exact match only (fixes the bug where substring matching
+  // caused the first lesson to match when its slug was a substring of the
+  // requested slug, e.g. "introduction" matching "introduction-to-os")
   for (const unit of subject.units) {
     for (const lesson of unit.lessons) {
-      if (
-        lesson.slug === lessonSlug ||
-        lesson.slug.includes(lessonSlug) ||
-        lessonSlug.includes(lesson.slug)
-      ) {
+      if (lesson.slug === lessonSlug) {
         return { lesson, unit, subject }
       }
     }
   }
+
+  // Second pass: case-insensitive exact match (handles URL case variations)
+  const lowerSlug = lessonSlug.toLowerCase()
+  for (const unit of subject.units) {
+    for (const lesson of unit.lessons) {
+      if (lesson.slug.toLowerCase() === lowerSlug) {
+        return { lesson, unit, subject }
+      }
+    }
+  }
+
   return null
 }
 

@@ -148,12 +148,12 @@ export function LabsView() {
             variant="outline"
             size="sm"
             onClick={() => setActiveLab(null)}
-            className="gap-1.5"
+            className="gap-1.5 min-h-[40px]"
           >
             <ArrowLeft className="h-4 w-4" />
             All Labs
           </Button>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <Badge variant="outline" className="gap-1 text-meta">
               <Clock className="h-3 w-3" />
               {meta.duration}
@@ -289,7 +289,7 @@ function LabsHub({
                   </span>
                   <Button
                     size="sm"
-                    className="gap-1.5 group-hover:gap-2 transition-all"
+                    className="gap-1.5 group-hover:gap-2 transition-all min-h-[40px]"
                     style={{ backgroundColor: lab.accent, color: 'white' }}
                     onClick={(e) => {
                       e.stopPropagation()
@@ -375,7 +375,7 @@ function OfficialPracticalsPanel({ state }: { state: OfficialLabsState }) {
                 <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{experiment.objective}</p>
               ) : null}
               <div className="mt-3 flex flex-wrap gap-2">
-                <Button asChild size="sm" variant="outline">
+                <Button asChild size="sm" variant="outline" className="min-h-[40px]">
                   <a href={experiment.unitHref ?? experiment.subjectHref}>
                     Open curriculum
                     <ExternalLink className="h-3.5 w-3.5" />

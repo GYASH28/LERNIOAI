@@ -149,18 +149,18 @@ export function PlannerView() {
   return (
     <div className="space-y-6">
       {/* Header — premium hero */}
-      <div className="flex items-center gap-3 p-4 rounded-2xl bg-gradient-to-br from-emerald-500/10 via-cyan-500/5 to-transparent border border-emerald-500/15 shadow-soft">
+      <div className="flex items-center gap-3 p-4 rounded-2xl bg-gradient-to-br from-emerald-500/10 via-cyan-500/5 to-transparent border border-emerald-500/15 shadow-soft flex-wrap">
         <div className="h-12 w-12 rounded-xl bg-card/60 backdrop-blur flex items-center justify-center shrink-0">
           <Mascot mascot="leo" state="greeting" size={40} />
         </div>
-        <div className="flex-1">
+        <div className="flex-1 min-w-0">
           <h2 className="text-lg font-bold">
             <span className="text-gradient">Study Planner</span>
           </h2>
           <p className="text-sm text-muted-foreground">{new Date().toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long' })}</p>
         </div>
         {daysToExam !== null && (
-          <div className="text-center px-4 py-2 rounded-xl bg-rose-500/10 border border-rose-500/20">
+          <div className="text-center px-3 py-2 rounded-xl bg-rose-500/10 border border-rose-500/20 shrink-0">
             <p className="text-2xl font-bold text-rose-500 tabular-nums leading-none">{daysToExam}</p>
             <p className="text-meta text-muted-foreground mt-0.5">days to exam</p>
           </div>
@@ -186,7 +186,7 @@ export function PlannerView() {
       <div className="flex gap-2">
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogTrigger asChild>
-            <Button className="gap-2 flex-1 shadow-soft" disabled={generating}>
+            <Button className="gap-2 flex-1 shadow-soft min-h-[44px]" disabled={generating}>
               <Plus className="h-4 w-4" /> Add Task
             </Button>
           </DialogTrigger>
@@ -196,7 +196,7 @@ export function PlannerView() {
         </Dialog>
         <Button
           variant="outline"
-          className="gap-2 hover-soft"
+          className="gap-2 hover-soft min-h-[44px]"
           onClick={handleAutoGenerateClick}
           disabled={generating}
         >
@@ -215,12 +215,12 @@ export function PlannerView() {
               Completed tasks are preserved. This cannot be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel disabled={generating}>Cancel</AlertDialogCancel>
+          <AlertDialogFooter className="flex-col sm:flex-row gap-2">
+            <AlertDialogCancel disabled={generating} className="min-h-[44px]">Cancel</AlertDialogCancel>
             <AlertDialogAction
               onClick={() => { void generatePlan(true) }}
               disabled={generating}
-              className="gap-2"
+              className="gap-2 min-h-[44px]"
             >
               {generating ? <><Loader2 className="h-4 w-4 animate-spin" /> Generating…</> : 'Regenerate Plan'}
             </AlertDialogAction>
@@ -324,7 +324,7 @@ function TaskItem({ task, onToggle, onDelete }: { task: PlannerTask; onToggle: (
     <motion.div layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       <Card className={cn('transition-opacity', task.completed && 'opacity-60')}>
         <CardContent className="p-3 flex items-center gap-3">
-          <button onClick={onToggle} className="shrink-0">
+          <button onClick={onToggle} className="shrink-0 min-w-[44px] min-h-[44px] flex items-center justify-center" aria-label={task.completed ? 'Mark task incomplete' : 'Mark task complete'}>
             {task.completed ? <CheckCircle2 className="h-5 w-5 text-success" /> : <Circle className="h-5 w-5 text-muted-foreground" />}
           </button>
           <div className={cn('h-8 w-8 rounded-lg flex items-center justify-center shrink-0', cfg.color)}>
@@ -332,25 +332,25 @@ function TaskItem({ task, onToggle, onDelete }: { task: PlannerTask; onToggle: (
           </div>
           <div className="flex-1 min-w-0">
             <p className={cn('text-sm font-medium truncate', task.completed && 'line-through')}>{task.title}</p>
-            <div className="flex items-center gap-2 mt-0.5">
+            <div className="flex items-center gap-2 mt-0.5 flex-wrap">
               <span className="text-meta text-muted-foreground flex items-center gap-0.5"><Clock className="h-2.5 w-2.5" />{task.durationMins}m</span>
               {task.scheduledDate && <span className="text-meta text-muted-foreground">{new Date(task.scheduledDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}</span>}
               {task.priority >= 3 && <Badge variant="secondary" className="text-meta">Urgent</Badge>}
             </div>
             {task.sourceReason ? (
-              <p className="mt-1 text-xs text-muted-foreground">{task.sourceReason}</p>
+              <p className="mt-1 text-xs text-muted-foreground truncate">{task.sourceReason}</p>
             ) : null}
           </div>
           {task.canonicalUrl ? (
             <Link
               href={task.canonicalUrl}
-              className="inline-flex h-8 shrink-0 items-center justify-center gap-1 rounded-md border border-border px-2 text-xs font-medium hover:bg-muted"
+              className="inline-flex h-9 min-h-[40px] shrink-0 items-center justify-center gap-1 rounded-md border border-border px-2 text-xs font-medium hover:bg-muted"
             >
               Open
               <ArrowUpRight className="h-3 w-3" />
             </Link>
           ) : null}
-          <Button variant="ghost" size="sm" onClick={onDelete} className="shrink-0 text-muted-foreground hover:text-destructive">
+          <Button variant="ghost" size="sm" onClick={onDelete} className="shrink-0 text-muted-foreground hover:text-destructive min-h-[40px] min-w-[40px]">
             <Trash2 className="h-3.5 w-3.5" />
           </Button>
         </CardContent>
@@ -420,7 +420,7 @@ function AddTaskForm({ subjects, onSaved }: { subjects: any[]; onSaved: () => vo
           </SelectContent>
         </Select>
       </div>
-      <Button onClick={save} disabled={!title} className="w-full">Add Task</Button>
+      <Button onClick={save} disabled={!title} className="w-full min-h-[44px]">Add Task</Button>
     </div>
   )
 }

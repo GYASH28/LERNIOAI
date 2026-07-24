@@ -248,17 +248,17 @@ export function AnalyticsView() {
                 <button
                   key={m.id}
                   onClick={() => { setLearnContext({ subjectId: m.topic.unit.subject.id }); goToPractice() }}
-                  className="w-full flex items-center gap-3 p-2.5 rounded-lg border border-border hover-soft text-left focus-ring"
+                  className="w-full flex min-h-[44px] items-center gap-2 sm:gap-3 p-2.5 rounded-lg border border-border hover-soft text-left focus-ring"
                 >
                   <div className="h-9 w-9 rounded-lg bg-rose-500/10 flex items-center justify-center shrink-0">
                     <Target className="h-4 w-4 text-rose-500" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium truncate">{m.topic.title}</p>
-                    <p className="text-meta text-muted-foreground font-mono">{m.topic.unit.subject.code} · {m.state}</p>
+                    <p className="text-meta text-muted-foreground font-mono truncate">{m.topic.unit.subject.code} · {m.state}</p>
                   </div>
-                  <div className="w-24"><Progress value={m.score} className="h-1.5" /></div>
-                  <span className="text-xs font-medium w-8 text-right tabular-nums">{Math.round(m.score)}%</span>
+                  <div className="w-16 sm:w-24 shrink-0"><Progress value={m.score} className="h-1.5" /></div>
+                  <span className="text-xs font-medium w-8 text-right tabular-nums shrink-0">{Math.round(m.score)}%</span>
                   <ChevronRight className="h-4 w-4 text-muted-foreground shrink-0" />
                 </button>
               ))}

@@ -41,7 +41,7 @@ html {
 
 /* ─── Touch optimization: remove tap highlight + 300ms tap delay ─── */
 @media (max-width: 768px) {
-  button, a {
+  button, a, [role="button"] {
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
   }
@@ -59,6 +59,14 @@ html {
     padding-left: max(0.75rem, env(safe-area-inset-left));
     padding-right: max(0.75rem, env(safe-area-inset-right));
   }
+
+  /* Bottom safe-area: apply to mobile bottom nav + fixed footers so they clear
+     the iOS home-indicator bar without overlapping it. */
+  nav.fixed.bottom-0,
+  .mobile-drawer,
+  [data-mobile-nav] {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
 }
 
 /* ─── Prevent horizontal scroll on mobile (overflow-x only, never overflow-y) ─── */
@@ -70,5 +78,46 @@ html, body {
 @media (max-width: 768px) {
   .mobile-drawer {
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+/* ─── Word-break long URLs / unbreakable strings inside cards & badges ─── */
+@media (max-width: 640px) {
+  .card-lift p,
+  [data-break-words-mobile] {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+}
+
+/* ─── Recharts: ensure charts can shrink to fit narrow mobile containers ─── */
+.recharts-responsive-container {
+  width: 100% !important;
+}
+
+.recharts-wrapper {
+  width: 100% !important;
+}
+
+/* ─── Scrollbars on mobile: thin + subtle (Webkit) ─── */
+@media (max-width: 768px) {
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: color-mix(in oklch, var(--muted-foreground, currentColor) 30%, transparent);
+    border-radius: 3px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+/* ─── Dialog: keep within safe-area on mobile, max-height clamped ─── */
+@media (max-width: 640px) {
+  [role="dialog"] {
+    max-height: calc(100vh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    margin: env(safe-area-inset-top, 0px) auto env(safe-area-inset-bottom, 0px);
   }
 }

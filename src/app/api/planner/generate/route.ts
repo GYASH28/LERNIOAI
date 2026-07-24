@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { requireUser, withApi, ApiError } from '@/lib/auth'
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
@@ -18,12 +19,16 @@ const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
  * the student's subjects, credits, and coverage focus.
  */
 export async function POST(req: NextRequest) {
-  try {
+  return withApi(async () => {
+    // Auth gate — this endpoint burns Groq tokens; require a signed-in user
+    // to prevent anonymous abuse.
+    await requireUser()
+
     const body = await req.json().catch(() => ({}))
     const subjects: SubjectInput[] = body.subjects || []
 
     if (!subjects.length) {
-      return NextResponse.json({ ok: false, error: 'No subjects provided' }, { status: 400 })
+      throw new ApiError('BAD_REQUEST', 'No subjects provided', 400, false)
     }
 
     // Try AI generation with Groq
@@ -111,9 +116,7 @@ Example format:
     }
 
     return NextResponse.json({ ok: true, tasks: validTasks })
-  } catch {
-    return NextResponse.json({ ok: true, tasks: [] })
-  }
+  })
 }
 
 function generateFallbackPlan(subjects: SubjectInput[]) {

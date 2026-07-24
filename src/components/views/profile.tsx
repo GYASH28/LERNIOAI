@@ -163,21 +163,21 @@ export function ProfileView() {
           <div className="absolute inset-0 bg-grid opacity-25" />
           <div className="absolute -bottom-2 -right-2 h-32 w-32 rounded-full bg-card/30 blur-2xl" />
         </div>
-        <CardContent className="p-5 -mt-14 relative">
-          <div className="flex items-end gap-4">
+        <CardContent className="p-4 sm:p-5 -mt-14 relative">
+          <div className="flex items-end gap-3 sm:gap-4">
             <div className="relative shrink-0">
               {/* Gradient ring around avatar */}
               <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-primary via-fuchsia-500 to-violet-500 blur-sm opacity-60" />
-              <div className="relative h-20 w-20 rounded-2xl bg-gradient-to-br from-primary to-violet-600 flex items-center justify-center text-2xl font-bold text-primary-foreground border-4 border-background">
+              <div className="relative h-16 w-16 sm:h-20 sm:w-20 rounded-2xl bg-gradient-to-br from-primary to-violet-600 flex items-center justify-center text-xl sm:text-2xl font-bold text-primary-foreground border-4 border-background">
                 {user?.name?.charAt(0) || 'S'}
               </div>
               <div className="absolute -bottom-1.5 -right-1.5 h-7 w-7 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 border-2 border-background flex items-center justify-center text-meta font-bold text-white shadow-soft">
                 {level}
               </div>
             </div>
-            <div className="flex-1 mb-1">
-              <h2 className="text-lg font-bold">{user?.name}</h2>
-              <p className="text-sm text-muted-foreground">{user?.email}</p>
+            <div className="flex-1 min-w-0 mb-1">
+              <h2 className="text-lg font-bold truncate">{user?.name}</h2>
+              <p className="text-sm text-muted-foreground truncate">{user?.email}</p>
               <div className="flex items-center gap-2 mt-1 flex-wrap">
                 <Badge className="bg-primary/10 text-primary border-primary/20 gap-1">
                   <Sparkles className="h-3 w-3" /> Level {level}
@@ -215,12 +215,12 @@ export function ProfileView() {
 
       <Tabs defaultValue="profile">
         <TabsList className="grid w-full grid-cols-3 sm:grid-cols-6">
-          <TabsTrigger value="profile" className="gap-1.5"><UserIcon className="h-3.5 w-3.5" /> Profile</TabsTrigger>
-          <TabsTrigger value="theme" className="gap-1.5"><Palette className="h-3.5 w-3.5" /> Theme</TabsTrigger>
-          <TabsTrigger value="prefs" className="gap-1.5"><Settings className="h-3.5 w-3.5" /> Prefs</TabsTrigger>
-          <TabsTrigger value="departments" className="gap-1.5"><GraduationCap className="h-3.5 w-3.5" /> Departments</TabsTrigger>
-          <TabsTrigger value="mascots" className="gap-1.5"><Sparkles className="h-3.5 w-3.5" /> Mascots</TabsTrigger>
-          <TabsTrigger value="about" className="gap-1.5"><Info className="h-3.5 w-3.5" /> About</TabsTrigger>
+          <TabsTrigger value="profile" className="gap-1.5 text-xs sm:text-sm"><UserIcon className="h-3.5 w-3.5" /> <span className="truncate">Profile</span></TabsTrigger>
+          <TabsTrigger value="theme" className="gap-1.5 text-xs sm:text-sm"><Palette className="h-3.5 w-3.5" /> <span className="truncate">Theme</span></TabsTrigger>
+          <TabsTrigger value="prefs" className="gap-1.5 text-xs sm:text-sm"><Settings className="h-3.5 w-3.5" /> <span className="truncate">Prefs</span></TabsTrigger>
+          <TabsTrigger value="departments" className="gap-1.5 text-xs sm:text-sm"><GraduationCap className="h-3.5 w-3.5" /> <span className="truncate">Departments</span></TabsTrigger>
+          <TabsTrigger value="mascots" className="gap-1.5 text-xs sm:text-sm"><Sparkles className="h-3.5 w-3.5" /> <span className="truncate">Mascots</span></TabsTrigger>
+          <TabsTrigger value="about" className="gap-1.5 text-xs sm:text-sm"><Info className="h-3.5 w-3.5" /> <span className="truncate">About</span></TabsTrigger>
         </TabsList>
 
         {/* PROFILE */}
@@ -232,10 +232,10 @@ export function ProfileView() {
                 <Label className="text-xs">Full Name</Label>
                 <Input value={name} onChange={(e) => setName(e.target.value)} className="mt-1" />
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <Label className="text-xs">Institution</Label>
-                  <Input value="Cusrow Wadia Institute of Technology (CWIT)" disabled className="mt-1 bg-muted/50" />
+                  <Input value="Cusrow Wadia Institute of Technology (CWIT)" disabled className="mt-1 bg-muted/50 text-xs sm:text-sm" />
                 </div>
                 <div>
                   <Label className="text-xs">Semester</Label>
@@ -244,13 +244,13 @@ export function ProfileView() {
               </div>
               <div>
                 <Label className="text-xs">Preferred Language</Label>
-                <RadioGroup value={preferredLang} onValueChange={setPreferredLang} className="flex gap-4 mt-1">
-                  <label className="flex items-center gap-1.5 text-sm"><RadioGroupItem value="en" /> English</label>
-                  <label className="flex items-center gap-1.5 text-sm"><RadioGroupItem value="hi" /> Hindi</label>
-                  <label className="flex items-center gap-1.5 text-sm"><RadioGroupItem value="mr" /> Marathi</label>
+                <RadioGroup value={preferredLang} onValueChange={setPreferredLang} className="flex flex-wrap gap-4 mt-1">
+                  <label className="flex items-center gap-1.5 text-sm min-h-[40px]"><RadioGroupItem value="en" /> English</label>
+                  <label className="flex items-center gap-1.5 text-sm min-h-[40px]"><RadioGroupItem value="hi" /> Hindi</label>
+                  <label className="flex items-center gap-1.5 text-sm min-h-[40px]"><RadioGroupItem value="mr" /> Marathi</label>
                 </RadioGroup>
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <Label className="text-xs">Exam Date</Label>
                   <Input type="date" value={examDate} onChange={(e) => setExamDate(e.target.value)} className="mt-1" />
@@ -260,7 +260,7 @@ export function ProfileView() {
                   <Slider value={[dailyMins]} onValueChange={([v]) => setDailyMins(v)} min={30} max={480} step={30} className="mt-3" />
                 </div>
               </div>
-              <Button onClick={save} disabled={saving} className="w-full">{saving ? 'Saving...' : 'Save Profile'}</Button>
+              <Button onClick={save} disabled={saving} className="w-full min-h-[44px]">{saving ? 'Saving...' : 'Save Profile'}</Button>
             </CardContent>
           </Card>
 
@@ -651,7 +651,7 @@ export function ProfileView() {
             <CardContent className="space-y-2">
               <Button
                 variant="outline"
-                className="w-full justify-start gap-2"
+                className="w-full justify-start gap-2 min-h-[44px]"
                 onClick={exportData}
                 disabled={exporting}
               >
@@ -667,7 +667,7 @@ export function ProfileView() {
 
               <Button
                 variant="outline"
-                className="w-full justify-start gap-2 text-destructive"
+                className="w-full justify-start gap-2 text-destructive min-h-[44px]"
                 onClick={() => setDeleteOpen(true)}
               >
                 <Trash2 className="h-4 w-4" /> Delete Account
@@ -716,15 +716,15 @@ export function ProfileView() {
               autoComplete="off"
             />
           </div>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => { setDeleteOpen(false); setDeleteConfirmText('') }}>
+          <DialogFooter className="flex-col sm:flex-row gap-2">
+            <Button variant="outline" onClick={() => { setDeleteOpen(false); setDeleteConfirmText('') }} className="min-h-[44px]">
               Cancel
             </Button>
             <Button
               variant="destructive"
               onClick={deleteAccount}
               disabled={deleteConfirmText !== 'DELETE' || deleting}
-              className="gap-2"
+              className="gap-2 min-h-[44px]"
             >
               {deleting ? (
                 <><Trash2 className="h-4 w-4 animate-pulse" /> Deleting…</>
@@ -747,10 +747,10 @@ function PrefRow({ icon, title, desc, checked, onChange }: {
   onChange: (v: boolean) => void
 }) {
   return (
-    <div className="flex items-center justify-between">
-      <div className="flex items-center gap-2">
-        <div className="h-8 w-8 rounded-lg bg-muted flex items-center justify-center text-muted-foreground">{icon}</div>
-        <div>
+    <div className="flex min-h-[44px] items-center justify-between gap-2">
+      <div className="flex items-center gap-2 min-w-0">
+        <div className="h-8 w-8 rounded-lg bg-muted flex items-center justify-center text-muted-foreground shrink-0">{icon}</div>
+        <div className="min-w-0">
           <p className="text-sm font-medium">{title}</p>
           <p className="text-meta text-muted-foreground">{desc}</p>
         </div>

@@ -89,6 +89,7 @@ export function Sidebar() {
           'fixed top-0 z-50 flex h-screen w-72 shrink-0 flex-col border-r border-sidebar-border bg-sidebar transition-[transform,width] duration-300 md:sticky md:z-30 md:w-[var(--sidebar-collapsed)] xl:w-[var(--sidebar-expanded)]',
           sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0',
         )}
+        style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
       >
         <div className="relative flex items-center justify-start gap-3 overflow-hidden border-b border-sidebar-border p-4 md:justify-center xl:justify-start">
           <div
@@ -107,7 +108,7 @@ export function Sidebar() {
           <Button
             variant="ghost"
             size="icon"
-            className="h-8 w-8 md:hidden"
+            className="h-9 w-9 md:hidden"
             onClick={() => setSidebarOpen(false)}
             aria-label="Close sidebar"
           >
@@ -191,7 +192,7 @@ export function Sidebar() {
                 onClick={() => setSidebarOpen(false)}
                 title={AUTHORITY_ROUTES[user.role].label}
                 className={cn(
-                  'focus-ring group relative flex w-full items-center justify-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all xl:justify-start',
+                  'focus-ring group relative flex min-h-[44px] w-full items-center justify-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all xl:justify-start',
                   isActivePath(pathname, AUTHORITY_ROUTES[user.role].href)
                     ? 'bg-sidebar-primary text-sidebar-primary-foreground shadow-soft'
                     : 'text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',
@@ -216,7 +217,7 @@ export function Sidebar() {
                 }),
               )
             }}
-            className="group flex w-full items-center justify-center gap-2 rounded-lg px-2 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground xl:justify-between"
+            className="group flex min-h-[44px] w-full items-center justify-center gap-2 rounded-lg px-2 py-2 text-sm text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground xl:justify-between"
             aria-label="Quick search"
             title="Quick search"
           >
@@ -232,7 +233,7 @@ export function Sidebar() {
           <Link
             href={routeForView('profile')}
             onClick={() => setSidebarOpen(false)}
-            className="flex w-full items-center justify-center gap-2 rounded-lg px-2 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground xl:justify-start"
+            className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded-lg px-2 py-2 text-sm text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground xl:justify-start"
             title="Settings and preferences"
           >
             <Settings className="h-4 w-4" />
@@ -241,7 +242,7 @@ export function Sidebar() {
           <Link
             href="/feedback"
             onClick={() => setSidebarOpen(false)}
-            className="flex w-full items-center justify-center gap-2 rounded-lg px-2 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground xl:justify-start"
+            className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded-lg px-2 py-2 text-sm text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground xl:justify-start"
             title="Send feedback"
           >
             <MessageSquare className="h-4 w-4" />
@@ -252,7 +253,7 @@ export function Sidebar() {
             <button
               type="button"
               onClick={() => signOut({ callbackUrl: '/sign-in' })}
-              className="flex w-full items-center justify-center gap-2 rounded-lg px-2 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground xl:justify-start"
+              className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded-lg px-2 py-2 text-sm text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground xl:justify-start"
               title="Sign out"
             >
               <LogOut className="h-4 w-4" />
@@ -286,7 +287,7 @@ function NavItem({
       }}
       title={item.label}
       className={cn(
-        'focus-ring group relative flex w-full items-center justify-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all xl:justify-start',
+        'focus-ring group relative flex min-h-[44px] w-full items-center justify-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all xl:justify-start',
         active
           ? 'bg-sidebar-primary text-sidebar-primary-foreground shadow-soft'
           : 'text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',
@@ -320,7 +321,7 @@ export function MobileNav() {
   const items = NAV_ITEMS.filter((i) => MOBILE_PRIMARY.includes(i.key))
 
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 md:hidden">
+    <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 md:hidden" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
       <div className="flex h-16 items-center justify-around px-2">
         {items.map((item) => {
           const Icon = item.icon
@@ -332,7 +333,7 @@ export function MobileNav() {
               prefetch={true}
               onClick={() => useAppStore.getState().setView(item.key)}
               className={cn(
-                'flex min-w-[56px] flex-col items-center gap-0.5 rounded-lg px-3 py-1.5 transition-colors',
+                'flex min-h-[44px] min-w-[56px] flex-col items-center justify-center gap-0.5 rounded-lg px-2 py-1.5 transition-colors',
                 active ? 'text-primary' : 'text-muted-foreground',
               )}
               aria-current={active ? 'page' : undefined}
@@ -345,7 +346,7 @@ export function MobileNav() {
         <button
           type="button"
           onClick={() => useAppStore.getState().setSidebarOpen(true)}
-          className="flex min-w-[56px] flex-col items-center gap-0.5 rounded-lg px-3 py-1.5 text-muted-foreground"
+          className="flex min-h-[44px] min-w-[56px] flex-col items-center justify-center gap-0.5 rounded-lg px-2 py-1.5 text-muted-foreground"
           aria-label="Open full navigation"
         >
           <Menu className="h-5 w-5" />
@@ -367,7 +368,7 @@ function ThemeToggleSidebar() {
     <button
       type="button"
       onClick={() => setPref({ appearance: isDark ? 'light' : 'dark' })}
-      className="flex w-full items-center justify-center gap-2 rounded-lg px-2 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground xl:justify-start"
+      className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded-lg px-2 py-2 text-sm text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground xl:justify-start"
       title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
     >

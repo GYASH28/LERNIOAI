@@ -639,19 +639,19 @@ export function RevisionView() {
     return (
       <div className="max-w-2xl mx-auto space-y-4">
         {/* Top bar */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <Button
             variant="ghost"
             size="sm"
             onClick={exitSession}
-            className="gap-1.5 shrink-0"
+            className="gap-1.5 shrink-0 min-h-[40px]"
           >
             <X className="h-4 w-4" /> Exit
           </Button>
           <div className="flex-1 min-w-0">
             <Progress value={progressPct} className="h-1.5" />
           </div>
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             <Badge variant="secondary" className="tabular-nums">
               {session.idx + 1} / {session.items.length}
             </Badge>
@@ -762,7 +762,7 @@ export function RevisionView() {
               exit={{ opacity: 0, height: 0 }}
               className="flex items-center justify-between gap-3"
             >
-              <Button variant="ghost" size="sm" onClick={showHint} className="gap-1.5 text-muted-foreground">
+              <Button variant="ghost" size="sm" onClick={showHint} className="gap-1.5 text-muted-foreground min-h-[40px]">
                 <Lightbulb className="h-3.5 w-3.5" /> Stuck? Show hint
               </Button>
               <span className="text-meta text-muted-foreground italic">−10% interval</span>
@@ -789,7 +789,7 @@ export function RevisionView() {
                   disabled={disabled}
                   className={cn(
                     cls,
-                    'rounded-xl px-3 py-3 text-center transition-all flex flex-col items-center gap-1',
+                    'min-h-[44px] rounded-xl px-3 py-3 text-center transition-all flex flex-col items-center gap-1',
                     disabled && 'opacity-40 cursor-not-allowed',
                   )}
                   aria-label={`${preset.label} — ${preset.description}`}
@@ -814,7 +814,7 @@ export function RevisionView() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -8 }}
                 onClick={undoLastRating}
-                className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+                className="inline-flex min-h-[40px] items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
               >
                 <Undo2 className="h-3.5 w-3.5" />
                 Undo last rating ({undoRemaining}s)
@@ -1020,7 +1020,7 @@ export function RevisionView() {
                       return (
                         <button
                           key={state}
-                          className={cn('rounded-lg px-3 py-1.5 text-xs font-medium capitalize hover-soft focus-ring', STATE_COLORS[state])}
+                          className={cn('rounded-lg min-h-[36px] px-3 py-1.5 text-xs font-medium capitalize hover-soft focus-ring', STATE_COLORS[state])}
                         >
                           {state}: <span className="tabular-nums">{items.length}</span>
                         </button>
@@ -1154,7 +1154,7 @@ function RevisionItemRow({
 
   if (snoozed) return null
   return (
-    <div className="flex items-center gap-3 p-2.5 rounded-lg border border-border hover-soft card-lift">
+    <div className="flex min-h-[44px] items-center gap-3 p-2.5 rounded-lg border border-border hover-soft card-lift">
       <div className={cn('h-9 w-9 rounded-lg flex items-center justify-center shrink-0', STATE_COLORS[item.state] || STATE_COLORS.new)}>
         <Layers className="h-4 w-4" />
       </div>
@@ -1163,20 +1163,20 @@ function RevisionItemRow({
         {sourceLesson?.canonicalUrl ? (
           <Link
             href={sourceLesson.canonicalUrl}
-            className="mt-0.5 inline-flex items-center gap-1 text-xs font-medium text-primary"
+            className="mt-0.5 inline-flex items-center gap-1 text-xs font-medium text-primary truncate max-w-full"
           >
-            {sourceLesson.title}
-            <ArrowUpRight className="h-3 w-3" />
+            <span className="truncate">{sourceLesson.title}</span>
+            <ArrowUpRight className="h-3 w-3 shrink-0" />
           </Link>
         ) : null}
-        <p className="text-meta text-muted-foreground font-mono">
+        <p className="text-meta text-muted-foreground font-mono truncate">
           {subject?.code} · Unit {topic.unit?.number} · next {describeInterval(intervalDays)}
         </p>
       </div>
-      <Badge variant="outline" className={cn('text-meta capitalize', STATE_COLORS[item.state] || STATE_COLORS.new)}>
+      <Badge variant="outline" className={cn('text-meta capitalize shrink-0', STATE_COLORS[item.state] || STATE_COLORS.new)}>
         {item.state}
       </Badge>
-      <Button variant="ghost" size="sm" onClick={snooze} className="text-xs hover-soft shrink-0">Snooze</Button>
+      <Button variant="ghost" size="sm" onClick={snooze} className="text-xs hover-soft shrink-0 min-h-[40px]">Snooze</Button>
     </div>
   )
 }

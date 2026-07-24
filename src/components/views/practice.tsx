@@ -328,9 +328,9 @@ export function PracticeView() {
 
         <Tabs value={mode} onValueChange={(v) => setMode(v as Mode)}>
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="quick" className="gap-1.5"><Zap className="h-3.5 w-3.5" /> Quick</TabsTrigger>
-            <TabsTrigger value="adaptive" className="gap-1.5"><Brain className="h-3.5 w-3.5" /> Adaptive</TabsTrigger>
-            <TabsTrigger value="weak" className="gap-1.5"><TrendingDown className="h-3.5 w-3.5" /> Weak Topics</TabsTrigger>
+            <TabsTrigger value="quick" className="gap-1.5 text-xs sm:text-sm"><Zap className="h-3.5 w-3.5" /> Quick</TabsTrigger>
+            <TabsTrigger value="adaptive" className="gap-1.5 text-xs sm:text-sm"><Brain className="h-3.5 w-3.5" /> Adaptive</TabsTrigger>
+            <TabsTrigger value="weak" className="gap-1.5 text-xs sm:text-sm"><TrendingDown className="h-3.5 w-3.5" /> Weak</TabsTrigger>
           </TabsList>
 
           {(['quick', 'adaptive', 'weak'] as const).map((m) => (
@@ -433,7 +433,7 @@ export function PracticeView() {
                   <Button
                     onClick={m === 'weak' ? startWeakPractice : startPractice}
                     disabled={!subjectId || submitting}
-                    className="w-full gap-2"
+                    className="w-full gap-2 min-h-[44px]"
                   >
                     Start Practice <ChevronRight className="h-4 w-4" />
                   </Button>
@@ -459,13 +459,13 @@ export function PracticeView() {
 
     return (
       <div className="space-y-4 max-w-3xl mx-auto">
-        <div className="flex items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <Badge variant="secondary">Question {currentIdx + 1} of {questions.length}</Badge>
             {mode === 'adaptive' && <Badge className="bg-primary text-primary-foreground capitalize">{adaptiveDifficulty}</Badge>}
             <Badge variant="outline" className="capitalize">{currentQuestion.difficulty}</Badge>
           </div>
-          <Button variant="ghost" size="sm" onClick={() => setPhase('setup')}>Exit</Button>
+          <Button variant="ghost" size="sm" onClick={() => setPhase('setup')} className="min-h-[40px]">Exit</Button>
         </div>
         <Progress value={progress} className="h-1.5" />
 
@@ -484,7 +484,7 @@ export function PracticeView() {
                     onClick={() => !selectedAnswer && submitAnswer(String(i))}
                     disabled={!!selectedAnswer}
                     className={cn(
-                      'w-full text-left p-3 rounded-lg border-2 transition-all flex items-center gap-3',
+                      'w-full min-h-[52px] text-left p-3 rounded-lg border-2 transition-all flex items-center gap-3',
                       !selectedAnswer && 'hover:border-primary/40 hover:bg-muted/50 cursor-pointer',
                       isSelected && isCorrectOpt && 'border-success bg-success/10',
                       isSelected && !isCorrectOpt && 'border-destructive bg-destructive/10',
@@ -534,7 +534,7 @@ export function PracticeView() {
             {!showExplanation && (
               <div className="mt-4 flex items-center gap-2">
                 {!showHint ? (
-                  <Button variant="outline" size="sm" onClick={() => setShowHint(true)} className="gap-1.5">
+                  <Button variant="outline" size="sm" onClick={() => setShowHint(true)} className="gap-1.5 min-h-[40px]">
                     <Lightbulb className="h-3.5 w-3.5" /> Show Hint
                   </Button>
                 ) : (
@@ -580,7 +580,7 @@ export function PracticeView() {
                       </p>
                     )}
                   </div>
-                  <Button onClick={nextQuestion} disabled={submitting} className="w-full gap-2">
+                  <Button onClick={nextQuestion} disabled={submitting} className="w-full gap-2 min-h-[44px]">
                     {currentIdx + 1 >= questions.length ? 'See Results' : 'Next Question'}
                     <ChevronRight className="h-4 w-4" />
                   </Button>
@@ -681,8 +681,8 @@ export function PracticeView() {
         </div>
 
         <div className="flex gap-3">
-          <Button variant="outline" className="flex-1" onClick={() => setPhase('setup')}>Back to Setup</Button>
-          <Button className="flex-1 gap-2" onClick={() => setPhase('setup')}>
+          <Button variant="outline" className="flex-1 min-h-[44px]" onClick={() => setPhase('setup')}>Back to Setup</Button>
+          <Button className="flex-1 gap-2 min-h-[44px]" onClick={() => setPhase('setup')}>
             <RotateCw className="h-4 w-4" /> Practice Again
           </Button>
         </div>

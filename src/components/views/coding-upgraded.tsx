@@ -482,7 +482,7 @@ export function CodingView() {
                 {[1, 2, 3].map((item) => <div key={item} className="h-24 animate-pulse rounded-xl bg-muted" />)}
               </div>
             ) : (
-              <ScrollArea className="h-[620px] pr-3">
+              <ScrollArea className="h-[400px] xl:h-[620px] pr-3">
                 <div className="space-y-2">
                   {challenges.map((challenge) => (
                     <button
@@ -490,7 +490,7 @@ export function CodingView() {
                       type="button"
                       onClick={() => chooseChallenge(challenge)}
                       className={cn(
-                        'w-full rounded-xl border p-3 text-left transition hover:border-amber-500/40 hover:bg-amber-500/5',
+                        'w-full min-h-[44px] rounded-xl border p-3 text-left transition hover:border-amber-500/40 hover:bg-amber-500/5',
                         selectedId === challenge.id && 'border-amber-500/50 bg-amber-500/8 shadow-sm',
                       )}
                     >
@@ -520,7 +520,7 @@ export function CodingView() {
               <CardContent className="grid gap-3 sm:grid-cols-3">
                 <div className="rounded-lg border bg-muted/25 p-3 text-xs">
                   <p className="font-semibold">Category</p>
-                  <p className="mt-1 text-muted-foreground">{selected.category}</p>
+                  <p className="mt-1 text-muted-foreground break-words">{selected.category}</p>
                 </div>
                 <div className="rounded-lg border bg-muted/25 p-3 text-xs">
                   <p className="font-semibold">Time limit target</p>
@@ -534,8 +534,8 @@ export function CodingView() {
                   <div className="sm:col-span-3 rounded-lg border bg-muted/25 p-3 text-xs">
                     <p className="font-semibold">Example</p>
                     <div className="mt-2 grid gap-3 sm:grid-cols-2">
-                      <pre className="overflow-auto rounded bg-background p-2">Input: {selected.example.input}</pre>
-                      <pre className="overflow-auto rounded bg-background p-2">Output: {selected.example.output}</pre>
+                      <pre className="overflow-x-auto rounded bg-background p-2 whitespace-pre-wrap break-words">Input: {selected.example.input}</pre>
+                      <pre className="overflow-x-auto rounded bg-background p-2 whitespace-pre-wrap break-words">Output: {selected.example.output}</pre>
                     </div>
                   </div>
                 ) : null}
@@ -545,23 +545,23 @@ export function CodingView() {
 
           <Card className="overflow-hidden">
             <div className="flex flex-wrap items-center justify-between gap-2 border-b bg-muted/30 px-3 py-2">
-              <div className="flex items-center gap-2">
-                <Badge className="bg-zinc-900 font-mono text-zinc-100 hover:bg-zinc-900">main.cpp</Badge>
-                <span className="text-xs text-muted-foreground">{code.split('\n').length} lines · {code.length} chars</span>
-                {localSaved ? <span className="text-xs font-semibold text-emerald-600">Saved</span> : null}
+              <div className="flex items-center gap-2 min-w-0">
+                <Badge className="bg-zinc-900 font-mono text-zinc-100 hover:bg-zinc-900 shrink-0">main.cpp</Badge>
+                <span className="text-xs text-muted-foreground truncate">{code.split('\n').length} lines · {code.length} chars</span>
+                {localSaved ? <span className="text-xs font-semibold text-emerald-600 shrink-0">Saved</span> : null}
               </div>
               <div className="flex flex-wrap items-center gap-1">
-                <Button size="sm" variant="ghost" className="h-8 gap-1" onClick={() => void copyCode()}>
+                <Button size="sm" variant="ghost" className="h-9 gap-1 min-h-[40px]" onClick={() => void copyCode()}>
                   {copied ? <Check className="h-3.5 w-3.5" /> : <Clipboard className="h-3.5 w-3.5" />}
                   Copy
                 </Button>
-                <Button size="sm" variant="ghost" className="h-8 gap-1" onClick={() => setCode(formatCpp(code))}>
+                <Button size="sm" variant="ghost" className="h-9 gap-1 min-h-[40px]" onClick={() => setCode(formatCpp(code))}>
                   <AlignLeft className="h-3.5 w-3.5" /> Format
                 </Button>
-                <Button size="sm" variant="ghost" className="h-8 gap-1" onClick={resetCode} disabled={!selected}>
+                <Button size="sm" variant="ghost" className="h-9 gap-1 min-h-[40px]" onClick={resetCode} disabled={!selected}>
                   <RotateCcw className="h-3.5 w-3.5" /> Reset
                 </Button>
-                <Button size="sm" variant="ghost" className="h-8 gap-1" onClick={saveLocal} disabled={!selected}>
+                <Button size="sm" variant="ghost" className="h-9 gap-1 min-h-[40px]" onClick={saveLocal} disabled={!selected}>
                   <Save className="h-3.5 w-3.5" /> Save local
                 </Button>
               </div>
@@ -570,19 +570,19 @@ export function CodingView() {
               value={code}
               onChange={(event) => setCode(event.target.value)}
               spellCheck={false}
-              className="min-h-[430px] resize-y rounded-none border-0 bg-zinc-950 p-4 font-mono text-xs leading-6 text-zinc-100 focus-visible:ring-0"
+              className="min-h-[320px] sm:min-h-[430px] resize-y rounded-none border-0 bg-zinc-950 p-3 sm:p-4 font-mono text-xs leading-6 text-zinc-100 focus-visible:ring-0"
               placeholder="// Write C++ here"
             />
             <div className="flex flex-wrap items-center justify-between gap-2 border-t bg-zinc-900 px-3 py-2">
-              <span className="text-xs text-zinc-400">
+              <span className="text-xs text-zinc-400 truncate">
                 {result.status === 'checking' ? 'Working…' : result.status === 'issues' ? `${result.issues.length} structural issue(s)` : result.status === 'ok' ? 'Structure looks consistent' : result.status === 'saved' ? 'Draft saved' : 'Ready'}
               </span>
               <div className="flex gap-2">
-                <Button size="sm" variant="outline" className="gap-1.5 border-amber-500/40 text-amber-500" onClick={() => void syntaxPreview()} disabled={busy}>
+                <Button size="sm" variant="outline" className="gap-1.5 border-amber-500/40 text-amber-500 min-h-[40px]" onClick={() => void syntaxPreview()} disabled={busy}>
                   {busy ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Play className="h-3.5 w-3.5" />}
                   Syntax preview
                 </Button>
-                <Button size="sm" className="gap-1.5 bg-amber-500 text-white hover:bg-amber-600" onClick={() => void saveServerDraft()} disabled={busy || !selected}>
+                <Button size="sm" className="gap-1.5 bg-amber-500 text-white hover:bg-amber-600 min-h-[40px]" onClick={() => void saveServerDraft()} disabled={busy || !selected}>
                   <Send className="h-3.5 w-3.5" /> Submit code
                 </Button>
               </div>
@@ -650,14 +650,14 @@ export function CodingView() {
                   </CardDescription>
                 </div>
                 {codaMode ? (
-                  <Button size="sm" variant="destructive" className="gap-1.5" onClick={stopCoda}>
+                  <Button size="sm" variant="destructive" className="gap-1.5 min-h-[40px]" onClick={stopCoda}>
                     <Square className="h-3.5 w-3.5" /> Stop
                   </Button>
                 ) : null}
               </div>
             </CardHeader>
             <CardContent>
-              <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="grid gap-2 grid-cols-2 sm:grid-cols-2 lg:grid-cols-4">
                 {(Object.keys(MODE_CONFIG) as CodaMode[]).map((mode) => {
                   const config = MODE_CONFIG[mode]
                   const Icon = config.icon
@@ -665,12 +665,12 @@ export function CodingView() {
                     <Button
                       key={mode}
                       variant="outline"
-                      className="h-auto justify-start gap-2 py-2.5"
+                      className="h-auto min-h-[44px] justify-start gap-2 py-2.5"
                       onClick={() => void askCoda(mode)}
                       disabled={Boolean(codaMode)}
                     >
                       {codaMode === mode ? <Loader2 className="h-4 w-4 animate-spin text-primary" /> : <Icon className="h-4 w-4 text-primary" />}
-                      {config.label}
+                      <span className="text-left text-xs sm:text-sm">{config.label}</span>
                     </Button>
                   )
                 })}
@@ -711,7 +711,7 @@ export function CodingView() {
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="ml-auto h-7 gap-1 text-xs"
+                    className="ml-auto h-8 gap-1 text-xs"
                     onClick={() => codaAnswer && navigator.clipboard.writeText(codaAnswer)}
                     disabled={!codaAnswer}
                   >
@@ -724,7 +724,7 @@ export function CodingView() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="mt-3 gap-1.5"
+                  className="mt-3 gap-1.5 min-h-[40px]"
                   onClick={() => void askCoda('explain_code')}
                 >
                   <RefreshCcw className="h-3.5 w-3.5" /> Retry code review

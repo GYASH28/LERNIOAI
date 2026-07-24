@@ -97,10 +97,10 @@ export function TopBar() {
     return (
       <button
         onClick={toggleHidden}
-        className="fixed top-2 left-1/2 z-50 -translate-x-1/2 rounded-full border border-border bg-background/95 px-3 py-1.5 text-xs text-muted-foreground shadow-md backdrop-blur transition-colors hover:bg-accent"
+        className="fixed top-2 left-1/2 z-50 -translate-x-1/2 rounded-full border border-border bg-background/95 px-4 py-2 text-xs text-muted-foreground shadow-md backdrop-blur transition-colors hover:bg-accent min-h-[40px]"
         aria-label="Show top bar"
       >
-        <ChevronDown className="h-3 w-3 inline mr-1" />
+        <ChevronDown className="h-3.5 w-3.5 inline mr-1" />
         Show menu
       </button>
     )
@@ -109,8 +109,8 @@ export function TopBar() {
   return (
     <>
       {/* Desktop top bar */}
-      <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
-        <div className="flex h-14 items-center gap-3 px-3 sm:px-4">
+      <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80" style={{ paddingTop: 'env(safe-area-inset-top)' }}>
+        <div className="flex h-14 items-center gap-2 px-3 sm:gap-3 sm:px-4">
           {/* Logo + collapse */}
           <Link href="/dashboard" className="flex shrink-0 items-center gap-2">
             <LernioLogoTile className="h-7 w-7" />
@@ -129,7 +129,7 @@ export function TopBar() {
                   prefetch={true}
                   onClick={() => useAppStore.getState().setView(item.key)}
                   className={cn(
-                    'flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors',
+                    'flex min-h-[40px] items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors',
                     active
                       ? 'bg-primary/10 text-primary'
                       : 'text-muted-foreground hover:bg-accent hover:text-foreground',
@@ -159,16 +159,16 @@ export function TopBar() {
                 aria-expanded={moreOpen}
                 aria-haspopup="true"
                 className={cn(
-                  'flex items-center gap-1 rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors',
+                  'flex min-h-[40px] items-center gap-1 rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors',
                   moreOpen ? 'bg-accent text-foreground' : 'text-muted-foreground hover:bg-accent hover:text-foreground',
                 )}
               >
                 <span className="hidden lg:inline">More</span>
-                <ChevronDown className={cn('h-3 w-3 transition-transform', moreOpen && 'rotate-180')} />
+                <ChevronDown className={cn('h-3.5 w-3.5 transition-transform', moreOpen && 'rotate-180')} />
               </button>
               {moreOpen && (
                 <div
-                  className="absolute right-0 top-full z-50 min-w-[180px] rounded-lg border border-border bg-popover py-1 shadow-lg"
+                  className="absolute right-0 top-full z-50 min-w-[200px] max-w-[calc(100vw-1.5rem)] rounded-lg border border-border bg-popover py-1 shadow-lg"
                   onMouseLeave={() => setMoreOpen(false)}
                 >
                   {moreItems.map((item) => {
@@ -184,7 +184,7 @@ export function TopBar() {
                           setMoreOpen(false)
                         }}
                         className={cn(
-                          'flex items-center gap-2 px-3 py-2 text-sm transition-colors',
+                          'flex min-h-[44px] items-center gap-2 px-3 py-2 text-sm transition-colors',
                           active ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:bg-accent hover:text-foreground',
                         )}
                       >
@@ -205,7 +205,7 @@ export function TopBar() {
                 const isMac = navigator.platform.includes('Mac')
                 window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: isMac, ctrlKey: !isMac }))
               }}
-              className="hidden items-center gap-1.5 rounded-md border border-border px-2.5 py-1.5 text-xs text-muted-foreground transition-colors hover:bg-accent sm:flex"
+              className="hidden items-center gap-1.5 rounded-md border border-border px-2.5 py-1.5 text-xs text-muted-foreground transition-colors hover:bg-accent sm:flex min-h-[36px]"
               aria-label="Quick search"
             >
               <Search className="h-3.5 w-3.5" />
@@ -230,7 +230,7 @@ export function TopBar() {
             {/* Dark mode toggle */}
             <button
               onClick={() => setPref({ appearance: isDark ? 'light' : 'dark' })}
-              className="flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+              className="flex h-9 w-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground min-h-[40px] min-w-[40px]"
               aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
             >
               {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
@@ -242,7 +242,7 @@ export function TopBar() {
             {/* Hide bar button */}
             <button
               onClick={toggleHidden}
-              className="hidden h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground lg:flex"
+              className="hidden h-9 w-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground lg:flex min-h-[40px] min-w-[40px]"
               aria-label="Hide top bar"
             >
               <ChevronUp className="h-4 w-4" />
@@ -251,7 +251,7 @@ export function TopBar() {
             {/* Mobile menu button */}
             <button
               onClick={toggleMobile}
-              className="flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground md:hidden"
+              className="flex h-9 w-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground md:hidden min-h-[40px] min-w-[40px]"
               aria-label="Open menu"
             >
               {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -266,13 +266,14 @@ export function TopBar() {
           <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
           <div
             className="absolute right-0 top-0 h-full w-72 max-w-[85vw] overflow-y-auto border-l border-border bg-background p-4 shadow-xl"
+            style={{ paddingBottom: 'calc(1rem + env(safe-area-inset-bottom))' }}
             onClick={(e) => e.stopPropagation()}
           >
             {/* User card */}
             {user && (
               <div className="mb-4 rounded-lg border border-border bg-card p-3">
-                <p className="text-sm font-semibold">{user.name}</p>
-                <p className="text-xs text-muted-foreground">{user.email}</p>
+                <p className="text-sm font-semibold truncate">{user.name}</p>
+                <p className="text-xs text-muted-foreground truncate">{user.email}</p>
                 <div className="mt-2 flex gap-2">
                   <span className="rounded bg-orange-500/10 px-1.5 py-0.5 text-[10px] font-medium text-orange-600">
                     🔥 {streak} day streak
@@ -299,7 +300,7 @@ export function TopBar() {
                       setMobileOpen(false)
                     }}
                     className={cn(
-                      'flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors',
+                      'flex min-h-[44px] items-center gap-2.5 rounded-md px-3 py-2.5 text-sm font-medium transition-colors',
                       active ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:bg-accent hover:text-foreground',
                     )}
                   >
@@ -316,7 +317,7 @@ export function TopBar() {
             {/* Extra links */}
             <div className="space-y-0.5">
               {EXTRA_LINKS.map((link) => (
-                <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)} className="flex items-center gap-2.5 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground">
+                <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)} className="flex min-h-[44px] items-center gap-2.5 rounded-md px-3 py-2.5 text-sm text-muted-foreground hover:bg-accent hover:text-foreground">
                   <link.icon className="h-4 w-4" />
                   {link.label}
                 </Link>
@@ -328,7 +329,7 @@ export function TopBar() {
               <Link
                 href="/settings"
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center gap-2.5 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground"
+                className="flex min-h-[44px] items-center gap-2.5 rounded-md px-3 py-2.5 text-sm text-muted-foreground hover:bg-accent hover:text-foreground"
               >
                 <Settings className="h-4 w-4" />
                 Settings
@@ -336,14 +337,14 @@ export function TopBar() {
               <Link
                 href="/feedback"
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center gap-2.5 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground"
+                className="flex min-h-[44px] items-center gap-2.5 rounded-md px-3 py-2.5 text-sm text-muted-foreground hover:bg-accent hover:text-foreground"
               >
                 <MessageSquare className="h-4 w-4" />
                 Send feedback
               </Link>
               <button
                 onClick={() => setPref({ appearance: isDark ? 'light' : 'dark' })}
-                className="flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground"
+                className="flex min-h-[44px] w-full items-center gap-2.5 rounded-md px-3 py-2.5 text-sm text-muted-foreground hover:bg-accent hover:text-foreground"
               >
                 {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
                 {isDark ? 'Light mode' : 'Dark mode'}
@@ -351,7 +352,7 @@ export function TopBar() {
               {user && (
                 <button
                   onClick={() => signOut({ callbackUrl: '/sign-in' })}
-                  className="flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground"
+                  className="flex min-h-[44px] w-full items-center gap-2.5 rounded-md px-3 py-2.5 text-sm text-muted-foreground hover:bg-accent hover:text-foreground"
                 >
                   <LogOut className="h-4 w-4" />
                   Sign out
@@ -389,17 +390,17 @@ function UserMenu({ user, isDark, setPref }: { user: { name: string; email: stri
     <div className="relative" ref={ref}>
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-1.5 rounded-md px-1.5 py-1 transition-colors hover:bg-accent"
+        className="flex min-h-[40px] items-center gap-1.5 rounded-md px-1.5 py-1 transition-colors hover:bg-accent"
         aria-label="User menu"
       >
-        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
+        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
           {initials}
         </span>
-        <ChevronDown className="hidden h-3 w-3 text-muted-foreground sm:block" />
+        <ChevronDown className="hidden h-3.5 w-3.5 text-muted-foreground sm:block" />
       </button>
 
       {open && (
-        <div className="absolute right-0 top-10 z-50 w-56 rounded-lg border border-border bg-popover shadow-lg">
+        <div className="absolute right-0 top-12 z-50 w-56 max-w-[calc(100vw-1.5rem)] rounded-lg border border-border bg-popover shadow-lg">
           {/* User info */}
           <div className="border-b border-border p-3">
             <p className="text-sm font-semibold truncate">{user.name}</p>
@@ -408,19 +409,19 @@ function UserMenu({ user, isDark, setPref }: { user: { name: string; email: stri
 
           {/* Menu items */}
           <div className="p-1.5 space-y-0.5">
-            <Link href="/profile" onClick={() => setOpen(false)} className="flex items-center gap-2.5 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-colors">
+            <Link href="/profile" onClick={() => setOpen(false)} className="flex min-h-[44px] items-center gap-2.5 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-colors">
               <User className="h-4 w-4" />
               Profile
             </Link>
-            <Link href="/settings" onClick={() => setOpen(false)} className="flex items-center gap-2.5 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-colors">
+            <Link href="/settings" onClick={() => setOpen(false)} className="flex min-h-[44px] items-center gap-2.5 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-colors">
               <Settings className="h-4 w-4" />
               Settings
             </Link>
-            <Link href="/feedback" onClick={() => setOpen(false)} className="flex items-center gap-2.5 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-colors">
+            <Link href="/feedback" onClick={() => setOpen(false)} className="flex min-h-[44px] items-center gap-2.5 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-colors">
               <MessageSquare className="h-4 w-4" />
               Send Feedback
             </Link>
-            <Link href="/help" onClick={() => setOpen(false)} className="flex items-center gap-2.5 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-colors">
+            <Link href="/help" onClick={() => setOpen(false)} className="flex min-h-[44px] items-center gap-2.5 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-colors">
               <HelpCircle className="h-4 w-4" />
               Help Center
             </Link>
@@ -431,7 +432,7 @@ function UserMenu({ user, isDark, setPref }: { user: { name: string; email: stri
             {/* Logout */}
             <button
               onClick={() => signOut({ callbackUrl: '/sign-in' })}
-              className="flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-sm text-red-600 hover:bg-red-500/10 transition-colors"
+              className="flex min-h-[44px] w-full items-center gap-2.5 rounded-md px-3 py-2 text-sm text-red-600 hover:bg-red-500/10 transition-colors"
             >
               <LogOut className="h-4 w-4" />
               Sign Out

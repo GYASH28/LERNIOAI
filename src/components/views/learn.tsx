@@ -551,12 +551,12 @@ function UnitTopicBrowser({ subject }: { subject: Subject }) {
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="font-medium text-sm truncate">{unit.title}</p>
-                          <div className="flex items-center gap-2 mt-0.5">
+                          <div className="flex items-center gap-2 mt-0.5 flex-wrap">
                             <Badge variant="outline" className="text-meta">{unit.weightage}% weight</Badge>
                             <span className="text-meta text-muted-foreground">{unit.topics.length} topics</span>
                           </div>
                         </div>
-                        <div className="hidden sm:flex items-center gap-2 w-32" onClick={(e) => e.stopPropagation()}>
+                        <div className="hidden sm:flex items-center gap-2 w-32 shrink-0" onClick={(e) => e.stopPropagation()}>
                           <Progress
                             value={unitPct}
                             className="h-1.5"
@@ -582,7 +582,7 @@ function UnitTopicBrowser({ subject }: { subject: Subject }) {
                               onClick={() => handleTopicClick(unit, topic)}
                               disabled={!hasLesson}
                               className={cn(
-                                'group flex items-start gap-3 rounded-lg border p-3 text-left transition-all',
+                                'group flex min-h-[44px] items-start gap-3 rounded-lg border p-3 text-left transition-all',
                                 hasLesson
                                   ? 'hover:border-primary/40 hover:shadow-sm cursor-pointer'
                                   : 'opacity-60 cursor-not-allowed bg-muted/30'
@@ -1112,7 +1112,7 @@ function LessonBreadcrumb({
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbPage className="truncate max-w-[180px] sm:max-w-xs">{topic.title}</BreadcrumbPage>
+          <BreadcrumbPage className="truncate max-w-[140px] sm:max-w-xs">{topic.title}</BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
@@ -1167,7 +1167,7 @@ function ModeSwitcher({
               onClick={() => onChange(m.key)}
               aria-pressed={isActive}
               className={cn(
-                'group relative flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-all',
+                'group relative flex min-h-[44px] items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-all',
                 isActive ? 'text-white shadow-sm' : 'hover:bg-muted text-muted-foreground'
               )}
               style={

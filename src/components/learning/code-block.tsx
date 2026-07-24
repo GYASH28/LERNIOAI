@@ -1,6 +1,6 @@
 'use client'
-import { useState, useRef } from 'react'
-import { Check, Copy } from 'lucide-react'
+import { useState, useRef, useMemo } from 'react'
+import { Check, Copy, ChevronDown } from 'lucide-react'
 import hljs from 'highlight.js/lib/core'
 import c from 'highlight.js/lib/languages/c'
 import cpp from 'highlight.js/lib/languages/cpp'
@@ -30,14 +30,43 @@ const ALIASES: Record<string, string> = {
   sql:'sql',json:'json',plaintext:'plaintext',text:'plaintext','':'plaintext',
 }
 
-export function CodeBlock({ code, language='plaintext', title, showLineNumbers=true }: {
-  code: string; language?: string; title?: string; showLineNumbers?: boolean
-}) {
+interface CodeBlockProps {
+  code: string
+  language?: string
+  title?: string
+  showLineNumbers?: boolean
+  /**
+   * When true and the code exceeds `collapseThreshold` lines, the block
+   * renders collapsed with a "Show N lines" toggle. Defaults to false
+   * (never collapse) so existing call sites keep their current behaviour.
+   */
+  collapsible?: boolean
+  /** Line count above which a collapsible block is initially collapsed. */
+  collapseThreshold?: number
+}
+
+export function CodeBlock({
+  code,
+  language = 'plaintext',
+  title,
+  showLineNumbers = true,
+  collapsible = false,
+  collapseThreshold = 15,
+}: CodeBlockProps) {
   const [copied, setCopied] = useState(false)
+  const [expanded, setExpanded] = useState(false)
+  const preRef = useRef<HTMLPreElement>(null)
   const lang = ALIASES[language.toLowerCase()] ?? 'plaintext'
+
+  const lineCount = useMemo(() => code.split('\n').length, [code])
+  const shouldCollapse = collapsible && !expanded && lineCount > collapseThreshold
+  const visibleCode = shouldCollapse
+    ? code.split('\n').slice(0, collapseThreshold).join('\n')
+    : code
+
   let highlighted: string
-  try { highlighted = hljs.highlight(code, { language: lang }).value }
-  catch { highlighted = code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') }
+  try { highlighted = hljs.highlight(visibleCode, { language: lang }).value }
+  catch { highlighted = visibleCode.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') }
   const copy = async () => { try { await navigator.clipboard.writeText(code); setCopied(true); setTimeout(()=>setCopied(false),1500) } catch {} }
   return (
     <div
@@ -104,6 +133,7 @@ export function CodeBlock({ code, language='plaintext', title, showLineNumbers=t
       </div>
       <div className="overflow-x-auto">
         <pre
+          ref={preRef}
           className="m-0 p-3 text-xs leading-relaxed font-mono"
           style={{ color: 'var(--text-default)' }}
         >
@@ -113,6 +143,23 @@ export function CodeBlock({ code, language='plaintext', title, showLineNumbers=t
           />
         </pre>
       </div>
+      {shouldCollapse && (
+        <button
+          type="button"
+          onClick={() => setExpanded(true)}
+          className="flex w-full items-center justify-center gap-1.5 border-t px-3 py-2 text-xs font-medium transition-colors"
+          style={{
+            borderColor: 'var(--border-subtle)',
+            backgroundColor: 'var(--surface-2)',
+            color: 'var(--text-muted)',
+          }}
+          aria-expanded={false}
+          aria-label={`Show all ${lineCount} lines`}
+        >
+          <ChevronDown className="h-3.5 w-3.5" />
+          Show all {lineCount} lines
+        </button>
+      )}
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { requireUser, withApi, ApiError } from '@/lib/auth'
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
@@ -22,12 +23,16 @@ const WANDBOX_COMPILERS: Record<string, string> = {
 }
 
 export async function POST(req: NextRequest) {
-  try {
+  return withApi(async () => {
+    // Auth gate — the code runner is an authenticated student feature.
+    // Without this, the endpoint becomes an open code-execution proxy.
+    await requireUser()
+
     const body = await req.json().catch(() => ({}))
     const { code, language, stdin } = body
 
     if (!code || typeof code !== 'string') {
-      return NextResponse.json({ error: 'Missing code' }, { status: 400 })
+      throw new ApiError('BAD_REQUEST', 'Missing code', 400, false)
     }
 
     const langKey = (language || 'c').toLowerCase()
@@ -41,24 +46,35 @@ export async function POST(req: NextRequest) {
           executed: false,
         })
       }
-      return NextResponse.json(
-        { error: `Unsupported language: ${language}` },
-        { status: 400 },
-      )
+      throw new ApiError('BAD_REQUEST', `Unsupported language: ${language}`, 400, false)
     }
 
     // Call Wandbox API — free, unlimited, no key needed
-    const wandboxResponse = await fetch('https://wandbox.org/api/compile.json', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        code,
-        compiler,
-        stdin: stdin || '',
-        runtime: true,
-      }),
-      signal: AbortSignal.timeout(20000),
-    })
+    let wandboxResponse: Response
+    try {
+      wandboxResponse = await fetch('https://wandbox.org/api/compile.json', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          code,
+          compiler,
+          stdin: stdin || '',
+          runtime: true,
+        }),
+        signal: AbortSignal.timeout(20000),
+      })
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Unknown error'
+      if (message.includes('timeout') || message.includes('abort')) {
+        throw new ApiError(
+          'CODE_TIMEOUT',
+          'Code execution timed out (20 second limit). Check for infinite loops.',
+          504,
+          true,
+        )
+      }
+      throw new ApiError('CODE_EXEC_FAILED', `Failed to execute code: ${message}`, 500, true)
+    }
 
     if (!wandboxResponse.ok) {
       const errorText = await wandboxResponse.text().catch(() => 'Unknown error')
@@ -105,17 +121,5 @@ export async function POST(req: NextRequest) {
       language: langKey,
       executed: true,
     })
-  } catch (err) {
-    const message = err instanceof Error ? err.message : 'Unknown error'
-    if (message.includes('timeout') || message.includes('abort')) {
-      return NextResponse.json(
-        { error: 'Code execution timed out (20 second limit). Check for infinite loops.' },
-        { status: 504 },
-      )
-    }
-    return NextResponse.json(
-      { error: `Failed to execute code: ${message}` },
-      { status: 500 },
-    )
-  }
+  })
 }

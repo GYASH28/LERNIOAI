@@ -141,8 +141,8 @@ export function ExamsView() {
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">
-        <Mascot mascot="leo" state="explaining" size={48} />
-        <div>
+        <Mascot mascot="leo" state="explaining" size={48} className="shrink-0" />
+        <div className="min-w-0">
           <h2 className="text-lg font-bold">Exam Preparation</h2>
           <p className="text-sm text-muted-foreground">
             Server-scored chapter tests, full mock exams, and AI answer evaluation.
@@ -151,10 +151,10 @@ export function ExamsView() {
       </div>
       <Tabs defaultValue="chapter">
         <TabsList className="grid w-full grid-cols-2 md:grid-cols-4">
-          <TabsTrigger value="chapter" className="gap-1.5"><FileText className="h-3.5 w-3.5" /> Chapter Test</TabsTrigger>
-          <TabsTrigger value="mock" className="gap-1.5"><Clock className="h-3.5 w-3.5" /> Mock Exam</TabsTrigger>
-          <TabsTrigger value="analysis" className="gap-1.5"><BarChart3 className="h-3.5 w-3.5" /> Analysis</TabsTrigger>
-          <TabsTrigger value="evaluate" className="gap-1.5"><PenLine className="h-3.5 w-3.5" /> Evaluate</TabsTrigger>
+          <TabsTrigger value="chapter" className="gap-1.5 text-xs sm:text-sm"><FileText className="h-3.5 w-3.5" /> <span className="truncate">Chapter Test</span></TabsTrigger>
+          <TabsTrigger value="mock" className="gap-1.5 text-xs sm:text-sm"><Clock className="h-3.5 w-3.5" /> <span className="truncate">Mock Exam</span></TabsTrigger>
+          <TabsTrigger value="analysis" className="gap-1.5 text-xs sm:text-sm"><BarChart3 className="h-3.5 w-3.5" /> Analysis</TabsTrigger>
+          <TabsTrigger value="evaluate" className="gap-1.5 text-xs sm:text-sm"><PenLine className="h-3.5 w-3.5" /> Evaluate</TabsTrigger>
         </TabsList>
         <TabsContent value="chapter"><ChapterTest /></TabsContent>
         <TabsContent value="mock"><MockExam /></TabsContent>
@@ -414,8 +414,8 @@ function ExamShell({
     <div className="fixed inset-0 z-50 bg-background overflow-y-auto">
       <div className="max-w-3xl mx-auto p-4 sm:p-6 space-y-4">
         {/* Top bar */}
-        <div className="flex items-center justify-between gap-2 sticky top-0 bg-background/95 backdrop-blur py-2 z-10">
-          <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center justify-between gap-2 sticky top-0 bg-background/95 backdrop-blur py-2 z-10">
+          <div className="flex items-center gap-2 flex-wrap">
             <Badge variant="secondary">{currentIdx + 1} / {questions.length}</Badge>
             <Badge variant="outline">{answeredCount} answered</Badge>
           </div>
@@ -426,7 +426,7 @@ function ExamShell({
             <Clock className="h-4 w-4" />
             {String(mins).padStart(2, '0')}:{String(secs).padStart(2, '0')}
           </div>
-          <Button variant="outline" size="sm" onClick={() => setConfirmOpen(true)}>
+          <Button variant="outline" size="sm" onClick={() => setConfirmOpen(true)} className="min-h-[40px]">
             Submit
           </Button>
         </div>
@@ -439,7 +439,7 @@ function ExamShell({
               key={qq.id}
               onClick={() => setCurrentIdx(i)}
               className={cn(
-                'h-8 w-8 rounded text-xs font-medium border-2 transition-all',
+                'h-10 w-10 min-h-[40px] min-w-[40px] rounded text-xs font-medium border-2 transition-all',
                 i === currentIdx && 'border-primary bg-primary text-primary-foreground',
                 answers[qq.id] && i !== currentIdx && 'border-success/40 bg-success/10',
                 flagged.has(qq.id) && 'border-amber-500',
@@ -457,9 +457,9 @@ function ExamShell({
           <Card>
             <CardContent className="p-5">
               <div className="flex items-start justify-between gap-2 mb-3">
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <p className="text-base font-medium leading-relaxed">{q.question}</p>
-                  <div className="flex gap-2 mt-2">
+                  <div className="flex gap-2 mt-2 flex-wrap">
                     <Badge variant="outline" className="text-meta capitalize">{q.difficulty}</Badge>
                     <Badge variant="outline" className="text-meta">{q.marks} marks</Badge>
                     {q.negativeMark > 0 && (
@@ -475,7 +475,7 @@ function ExamShell({
                     if (f.has(q.id)) f.delete(q.id); else f.add(q.id)
                     setFlagged(f)
                   }}
-                  className={cn('gap-1 shrink-0', flagged.has(q.id) && 'text-amber-500')}
+                  className={cn('gap-1 shrink-0 min-h-[40px]', flagged.has(q.id) && 'text-amber-500')}
                 >
                   <Flag className="h-3.5 w-3.5" /> {flagged.has(q.id) ? 'Flagged' : 'Flag'}
                 </Button>
@@ -486,15 +486,15 @@ function ExamShell({
                     key={i}
                     onClick={() => setAnswers({ ...answers, [q.id]: String(i) })}
                     className={cn(
-                      'w-full text-left p-3 rounded-lg border-2 transition-all flex items-center gap-3',
+                      'w-full min-h-[52px] text-left p-3 rounded-lg border-2 transition-all flex items-center gap-3',
                       answers[q.id] === String(i) ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/30',
                     )}
                   >
                     <span className={cn(
-                      'h-7 w-7 rounded-full flex items-center justify-center text-xs font-bold',
+                      'h-7 w-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0',
                       answers[q.id] === String(i) ? 'bg-primary text-primary-foreground' : 'bg-muted',
                     )}>{String.fromCharCode(65 + i)}</span>
-                    <span className="text-sm">{opt}</span>
+                    <span className="text-sm break-words min-w-0 flex-1">{opt}</span>
                   </button>
                 ))}
               </div>
@@ -504,11 +504,11 @@ function ExamShell({
 
         {/* Nav */}
         <div className="flex gap-2">
-          <Button variant="outline" disabled={currentIdx === 0} onClick={() => setCurrentIdx((i) => i - 1)} className="flex-1">Previous</Button>
+          <Button variant="outline" disabled={currentIdx === 0} onClick={() => setCurrentIdx((i) => i - 1)} className="flex-1 min-h-[44px]">Previous</Button>
           {currentIdx + 1 < questions.length ? (
-            <Button onClick={() => setCurrentIdx((i) => i + 1)} className="flex-1">Next</Button>
+            <Button onClick={() => setCurrentIdx((i) => i + 1)} className="flex-1 min-h-[44px]">Next</Button>
           ) : (
-            <Button onClick={() => setConfirmOpen(true)} className="flex-1 gap-2">
+            <Button onClick={() => setConfirmOpen(true)} className="flex-1 gap-2 min-h-[44px]">
               <CheckCircle2 className="h-4 w-4" /> Submit
             </Button>
           )}
@@ -532,12 +532,12 @@ function ExamShell({
               {' '}This cannot be undone.
             </DialogDescription>
           </DialogHeader>
-          <DialogFooter>
-            <Button variant="ghost" onClick={() => { clearAutosave(); onExit() }}>
+          <DialogFooter className="flex-col sm:flex-row gap-2">
+            <Button variant="ghost" onClick={() => { clearAutosave(); onExit() }} className="min-h-[44px]">
               Exit without submitting
             </Button>
-            <Button variant="outline" onClick={() => setConfirmOpen(false)}>Keep Working</Button>
-            <Button onClick={() => { setConfirmOpen(false); submitExam() }} disabled={submitting} className="gap-2">
+            <Button variant="outline" onClick={() => setConfirmOpen(false)} className="min-h-[44px]">Keep Working</Button>
+            <Button onClick={() => { setConfirmOpen(false); submitExam() }} disabled={submitting} className="gap-2 min-h-[44px]">
               {submitting ? 'Submitting…' : <>Submit Now <ChevronRight className="h-4 w-4" /></>}
             </Button>
           </DialogFooter>
@@ -660,7 +660,7 @@ function ExamResults({ result, onBack }: { result: ExamSubmitResponse; onBack: (
         </CardContent>
       </Card>
 
-      <Button variant="outline" className="w-full" onClick={onBack}>Back to Setup</Button>
+      <Button variant="outline" className="w-full min-h-[44px]" onClick={onBack}>Back to Setup</Button>
     </div>
   )
 }
@@ -884,7 +884,7 @@ function ChapterTest() {
         <Button
           onClick={start}
           disabled={!subjectId || selectedUnits.length === 0 || loading}
-          className="w-full gap-2"
+          className="w-full gap-2 min-h-[44px]"
         >
           {loading ? 'Loading…' : <>Start Chapter Test <ChevronRight className="h-4 w-4" /></>}
         </Button>
@@ -1067,14 +1067,14 @@ function MockExam() {
             <Label className="text-xs">Available Question Papers</Label>
             {papers.map((p) => (
               <div key={p.id} className="flex items-center gap-3 p-3 rounded-lg border hover:bg-muted/50">
-                <FileText className="h-5 w-5 text-primary" />
-                <div className="flex-1">
-                  <p className="text-sm font-medium">{p.title}</p>
+                <FileText className="h-5 w-5 text-primary shrink-0" />
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium truncate">{p.title}</p>
                   <p className="text-xs text-muted-foreground">
                     {p.year ?? '—'} · {p.duration} min · {p.totalMarks} marks
                   </p>
                 </div>
-                <Button size="sm" onClick={() => startMock(p)} disabled={loading}>
+                <Button size="sm" onClick={() => startMock(p)} disabled={loading} className="min-h-[40px] shrink-0">
                   {loading ? 'Loading…' : 'Start'}
                 </Button>
               </div>
@@ -1367,7 +1367,7 @@ function AnswerEvaluator() {
           <Button
             onClick={evaluate}
             disabled={!answer.trim() || !questionId || evaluating}
-            className="w-full gap-2"
+            className="w-full gap-2 min-h-[44px]"
           >
             {evaluating ? (
               <><Mascot mascot="leo" state="thinking" size={20} animated /> Evaluating…</>

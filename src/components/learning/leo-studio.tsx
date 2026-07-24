@@ -3,7 +3,8 @@
 /* ============================================================
    LeoStudio — the premium AI learning studio.
    ------------------------------------------------------------
-   Task L-4. Replaces `tutor-v3.tsx` as the Learnio AI tutor view.
+   Task L-4. The premium Learnio AI tutor view (replaces the legacy
+   tutor-v3.tsx, which has been deleted).
 
    Layout: 2-column grid (chat + context panel) collapsing to a
    single column on mobile. Every visual surface is rendered with
@@ -77,6 +78,12 @@ import { getRandomTip, type LearningTip } from '@/lib/ai/learning-tips'
 import { useTtsPlayer } from '@/hooks/use-tts-player'
 import { useVoiceRecorder } from '@/hooks/use-voice-recorder'
 import { cn } from '@/lib/utils'
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from '@/components/ui/dropdown-menu'
 
 /* -------------------------------------------------------------------------- */
 /* Types                                                                       */
@@ -747,7 +754,7 @@ export function LeoStudio() {
             </div>
           </div>
 
-          {/* Teaching-style pills (centered, horizontal scroll on mobile) */}
+          {/* Teaching-style pills (centered, horizontal scroll on tablet+) */}
           <div
             className="leo-studio__styles"
             role="group"
@@ -772,6 +779,57 @@ export function LeoStudio() {
             })}
           </div>
 
+          {/* Mobile-only compact teaching-style dropdown.
+              Renders the same 6 styles as the pill row but in a popover
+              so the header doesn't overflow on small screens. */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                type="button"
+                className="leo-styles-mobile-toggle"
+                aria-label={`Teaching style: ${TEACHING_STYLES.find((s) => s.id === teachingStyle)?.label ?? 'Standard'}. Change style.`}
+              >
+                {(() => {
+                  const current = TEACHING_STYLES.find((s) => s.id === teachingStyle) ?? TEACHING_STYLES[1]
+                  const Icon = current.icon
+                  return <Icon className="h-3 w-3" aria-hidden />
+                })()}
+                {TEACHING_STYLES.find((s) => s.id === teachingStyle)?.label ?? 'Standard'}
+                <ChevronDown className="h-3 w-3 opacity-60" aria-hidden />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              align="end"
+              sideOffset={6}
+              className="min-w-[12rem]"
+            >
+              {TEACHING_STYLES.map((s) => {
+                const Icon = s.icon
+                const active = teachingStyle === s.id
+                return (
+                  <DropdownMenuItem
+                    key={s.id}
+                    onSelect={() => setTeachingStyle(s.id)}
+                    aria-checked={active}
+                    role="menuitemradio"
+                    className="!p-0"
+                  >
+                    <span
+                      className="leo-styles-menu-item"
+                      data-active={active ? 'true' : 'false'}
+                    >
+                      <span className="leo-styles-menu-item__icon" aria-hidden>
+                        <Icon className="h-3 w-3" />
+                      </span>
+                      <span>{s.label}</span>
+                      {active && <Check className="leo-styles-menu-item__check h-3 w-3" aria-hidden />}
+                    </span>
+                  </DropdownMenuItem>
+                )
+              })}
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           {/* Header actions */}
           <div className="leo-studio__header-actions">
             {/* TTS toggle */}
@@ -786,12 +844,16 @@ export function LeoStudio() {
               {ttsEnabled ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
             </button>
 
-            {/* Clear chat */}
+            {/* Clear chat — hidden on mobile (≤768px) to keep the header
+                down to mascot + title + voice + context-toggle per the
+                responsive spec. Reachable via the styles dropdown? No —
+                the conversation can also be cleared from the mobile
+                context drawer. Keeping the action button on tablet+. */}
             <button
               type="button"
               onClick={onClearChat}
               disabled={isStreaming || messages.length === 0}
-              className="leo-icon-btn"
+              className="leo-icon-btn leo-icon-btn--hide-mobile"
               aria-label="Clear conversation"
               title="Clear conversation"
             >
@@ -1308,18 +1370,9 @@ function TypingIndicator() {
         <span className="leo-typing__dot" />
         <span className="leo-typing__dot" />
       </div>
-      <p
-        style={{
-          marginTop: '0.5rem',
-          fontSize: '0.75rem',
-          color: 'var(--text-muted)',
-          fontStyle: 'italic',
-          lineHeight: 1.4,
-          maxWidth: '400px',
-        }}
-      >
-        {tip.emoji} {tip.text}
-      </p>
+      {/* Reserve min-height via the `.leo-typing__tip` class so the
+          rotating tip text never reflows the bubble layout. */}
+      <p className="leo-typing__tip">{tip.emoji} {tip.text}</p>
     </div>
   )
 }
@@ -1454,10 +1507,15 @@ function MarkdownContent({ content, streaming }: { content: string; streaming: b
             return <blockquote>{children}</blockquote>
           },
 
-          // Premium-styled tables — .leo-bubble-leo__content table
-          // already handles the visual; we just ensure it renders.
+          // Premium-styled tables — wrap in a `.leo-table-wrap` so wide
+          // tables scroll horizontally inside the bubble without
+          // overflowing on mobile (see premium-enhancements.css).
           table({ children }) {
-            return <table>{children}</table>
+            return (
+              <div className="leo-table-wrap">
+                <table>{children}</table>
+              </div>
+            )
           },
 
           // Citation chip: when react-markdown renders a `text` node

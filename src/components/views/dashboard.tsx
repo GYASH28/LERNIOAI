@@ -283,11 +283,11 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary/10 via-violet-500/5 to-transparent border border-primary/20 p-5 md:p-6 shadow-soft"
+        className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary/10 via-violet-500/5 to-transparent border border-primary/20 p-4 sm:p-5 md:p-6 shadow-soft"
       >
         <div className="absolute inset-0 bg-grid opacity-30 pointer-events-none" />
         <div className="absolute -top-12 -right-12 h-40 w-40 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
-        <div className="relative flex items-start gap-4">
+        <div className="relative flex items-start gap-3 sm:gap-4">
           <div className="shrink-0 rounded-2xl bg-card/60 backdrop-blur p-1.5 -ml-1">
             <Mascot mascot="leo" state="greeting" size={64} />
           </div>
@@ -598,7 +598,7 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
                 <button
                   key={m.id}
                   onClick={() => { setLearnContext({ subjectId: m.topic.unit.subject.id }); goToView('practice') }}
-                  className="text-left flex items-center gap-2 p-2.5 rounded-lg border border-border hover-soft focus-ring"
+                  className="text-left flex min-h-[44px] items-center gap-2 p-2.5 rounded-lg border border-border hover-soft focus-ring"
                 >
                   <AlertCircle className="h-4 w-4 text-orange-500 shrink-0" />
                   <div className="flex-1 min-w-0">
@@ -704,7 +704,7 @@ export function DashboardView({ initialData = null }: { initialData?: DashboardS
 function SubjectCard({ subject, lessonPct, masteryPct, onClick }: { subject: Subject; lessonPct: number; masteryPct: number; onClick: () => void }) {
   const mascot = subject.mascotKey || 'leo'
   return (
-    <Card className="cursor-pointer card-lift group focus-ring" onClick={onClick} tabIndex={0}
+    <Card className="cursor-pointer card-lift group focus-ring min-h-[180px]" onClick={onClick} tabIndex={0}
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick() } }}
     >
       <CardContent className="p-4">
@@ -736,7 +736,7 @@ function QuickAction({ icon: Icon, label, color, onClick }: { icon: any; label: 
   return (
     <button
       onClick={onClick}
-      className="flex flex-col items-center gap-2 rounded-xl border border-border bg-card p-3 hover:shadow-soft hover:border-primary/30 transition-all group focus-ring"
+      className="flex min-h-[88px] flex-col items-center justify-center gap-2 rounded-xl border border-border bg-card p-3 hover:shadow-soft hover:border-primary/30 transition-all group focus-ring"
     >
       <div className={cn('h-10 w-10 rounded-lg bg-muted flex items-center justify-center group-hover:scale-110 transition-transform', color)}>
         <Icon className="h-5 w-5" />
