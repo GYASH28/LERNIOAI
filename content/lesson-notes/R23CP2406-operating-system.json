@@ -541,6 +541,16 @@
               "type": "mermaid",
               "title": "Process Management and Scheduling — Process Flow",
               "content": "flowchart TD\n    A[New Process] --> B[Ready Queue]\n    B --> C{Scheduler Picks}\n    C --> D[Running]\n    D -->|I/O or wait| E[Blocked]\n    E -->|I/O done| B\n    D -->|Quantum expires| B\n    D -->|Completes| F[Terminated]"
+            },
+            {
+              "type": "flowchart",
+              "title": "Process State Diagram (5-state model)",
+              "content": "New -> Ready -> Running -> Terminated\nRunning -> Waiting -> Ready\nRunning -> Ready (preemption / quantum expiry)\nWaiting -> Ready (I/O or event complete)"
+            },
+            {
+              "type": "flowchart",
+              "title": "CPU Scheduling Algorithms — Decision Flowchart",
+              "content": "Arrival of process -> Ready Queue\nReady Queue -> Scheduler selects algorithm\nScheduler -> FCFS ( FIFO order, no preemption )\nScheduler -> SJF ( shortest burst first, optimal avg wait )\nScheduler -> Round Robin ( time quantum 2-10ms, preemptive )\nScheduler -> Priority ( higher priority first, may starve )\nFCFS -> CPU assigned -> process runs to completion\nSJF -> CPU assigned -> process runs to completion\nRound Robin -> CPU assigned -> quantum expires -> Ready Queue\nPriority -> CPU assigned -> preempted if higher priority arrives"
             }
           ],
           "mindMaps": [
@@ -934,6 +944,11 @@
               "type": "mermaid",
               "title": "Memory Management and Paging — Concept Map",
               "content": "mindmap\n  root((Memory Management and Paging))\n    Process Management\n      PCB\n      Scheduling\n      IPC\n    Memory Management\n      Paging\n      Segmentation\n      Virtual Memory\n    File System\n      Directories\n      Permissions"
+            },
+            {
+              "type": "mindmap",
+              "title": "Memory Management Hierarchy — Concept Map",
+              "content": "Memory Management\n├── Partitioning\n│   ├── Fixed (equal-sized blocks, internal fragmentation)\n│   └── Variable (dynamic, external fragmentation)\n├── Paging (non-contiguous)\n│   ├── Pages (process) -> Frames (memory)\n│   ├── Page table maps page -> frame\n│   └── No external fragmentation; small internal\n├── Segmentation (logical units)\n│   ├── Code / Data / Stack segments\n│   └── Segment table: base + limit\n├── Virtual Memory\n│   ├── Demand paging (page loaded on first access)\n│   ├── Page replacement (FIFO, LRU, Optimal)\n│   ├── Thrashing (excessive paging)\n│   └── Belady anomaly (FIFO can increase faults)\n└── Allocation policies\n        ├── First fit (first hole large enough)\n        ├── Best fit (smallest hole that fits)\n        └── Worst fit (largest hole)"
             }
           ],
           "complexity": {

@@ -101,6 +101,39 @@ export interface Lesson {
   flashcards?: Flashcard[]
   aiSummaries?: Array<{ style: string; content: string }>
   recommendedNextLessons?: string[]
+  // V4 learning path + interactive + assessment fields (optional — may not
+  // exist on every JSON file yet; populated by the enhance-lesson-notes script
+  // or by future content authoring). All fields are optional so that loaders
+  // can safely read older JSON files without crashing.
+  learningPath?: {
+    estimatedTime: number // minutes
+    difficulty: 'easy' | 'medium' | 'hard'
+    prerequisites: string[]
+    learningObjectives: string[]
+    relatedConcepts: string[]
+    nextLessonRecommendation?: string
+  }
+  interactiveElements?: {
+    hasCodePlayground?: boolean
+    hasFormulaCalculator?: boolean
+    hasInteractiveDiagram?: boolean
+    hasStepByStepAnimation?: boolean
+  }
+  assessments?: {
+    knowledgeChecks?: Array<{ question: string; answer: string; section: string }>
+    miniQuiz?: Array<{
+      question: string
+      options: string[]
+      answer: number
+      explanation: string
+    }>
+    finalAssessment?: Array<{
+      question: string
+      type: 'mcq' | 'short' | 'long'
+      answer: string
+      marks: number
+    }>
+  }
 }
 
 export interface Unit {

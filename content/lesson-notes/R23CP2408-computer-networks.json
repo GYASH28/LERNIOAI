@@ -162,6 +162,11 @@
               "type": "mermaid",
               "title": "Introduction to Computer Networks — Concept Map",
               "content": "mindmap\n  root((Introduction to Computer Netwo))\n    OSI Layers\n      Physical\n      Data Link\n      Network\n      Transport\n      Session\n      Presentation\n      Application\n    Protocols\n      TCP\n      UDP\n      IP\n      HTTP"
+            },
+            {
+              "type": "mindmap",
+              "title": "TCP vs UDP — Comparison Mind Map",
+              "content": "Transport Protocols\n├── TCP (Transmission Control Protocol)\n│   ├── Connection-oriented (3-way handshake: SYN/SYN-ACK/ACK)\n│   ├── Reliable (acknowledgements, retransmission)\n│   ├── Ordered delivery (sequence numbers)\n│   ├── Flow control (sliding window)\n│   ├── Congestion control (slow start, AIMD)\n│   ├── Header size: 20-60 bytes\n│   ├── Speed: slower (overhead)\n│   └── Applications\n│       ├── HTTP/HTTPS (web)\n│       ├── FTP (file transfer)\n│       ├── SMTP/POP3/IMAP (email)\n│       └── SSH (secure shell)\n└── UDP (User Datagram Protocol)\n        ├── Connectionless (no handshake)\n        ├── Unreliable (no ACK, no retransmit)\n        ├── Unordered delivery\n        ├── No flow / congestion control\n        ├── Header size: 8 bytes (fixed)\n        ├── Speed: faster (low overhead)\n        └── Applications\n            ├── DNS (lookup)\n            ├── DHCP (IP assignment)\n            ├── Video streaming / VoIP (live)\n            ├── Online gaming (real-time)\n            └── SNMP (network management)"
             }
           ],
           "complexity": {
@@ -565,6 +570,11 @@
               "type": "mermaid",
               "title": "OSI and TCP/IP Models — Process Flow",
               "content": "flowchart LR\n    A[Sender] -->|Application Layer| B[Data]\n    B -->|Transport: +Port| C[Segment]\n    C -->|Network: +IP| D[Packet]\n    D -->|Data Link: +MAC| E[Frame]\n    E -->|Physical: bits| F[Receiver]"
+            },
+            {
+              "type": "flowchart",
+              "title": "OSI Model — 7 Layers (Top to Bottom)",
+              "content": "Application (HTTP, FTP, SMTP, DNS) -> user interface\nApplication -> Presentation (encryption, compression, encoding)\nPresentation -> Session (establish/manage/terminate sessions)\nSession -> Transport (end-to-end reliability, TCP/UDP, ports)\nTransport -> Network (routing, IP addresses, packets)\nNetwork -> Data Link (framing, MAC addresses, switches)\nData Link -> Physical (bits over wire/fiber, hubs)\nMnemonic (top to bottom): All People Seem To Need Data Processing\nMnemonic (bottom to top): Please Do Not Throw Sausage Pizza Away"
             }
           ],
           "mindMaps": [
@@ -966,6 +976,11 @@
               "type": "mermaid",
               "title": "IP Addressing and Subnetting — Process Flow",
               "content": "flowchart LR\n    A[Sender] -->|Application Layer| B[Data]\n    B -->|Transport: +Port| C[Segment]\n    C -->|Network: +IP| D[Packet]\n    D -->|Data Link: +MAC| E[Frame]\n    E -->|Physical: bits| F[Receiver]"
+            },
+            {
+              "type": "flowchart",
+              "title": "IP Addressing Classes (IPv4) — Decision Flowchart",
+              "content": "Examine first octet of 32-bit IPv4 address\n0-127 -> Class A (subnet mask 255.0.0.0, /8)\n128-191 -> Class B (subnet mask 255.255.0.0, /16)\n192-223 -> Class C (subnet mask 255.255.255.0, /24)\n224-239 -> Class D (multicast, no host bits)\n240-255 -> Class E (reserved, experimental)\nClass A -> first bit 0 -> 7 network bits + 24 host bits -> 16M hosts/net\nClass B -> first two bits 10 -> 14 network + 16 host -> 65K hosts/net\nClass C -> first three bits 110 -> 21 network + 8 host -> 254 hosts/net\nSpecial: 127.x.x.x -> loopback, 169.254.x.x -> APIPA, 10/172.16/192.168 -> private"
             }
           ],
           "mindMaps": [

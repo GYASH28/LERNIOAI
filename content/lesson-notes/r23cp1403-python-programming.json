@@ -158,6 +158,11 @@
               "type": "mermaid",
               "title": "Introduction to Python — Process Flow",
               "content": "flowchart LR\n    A[.py Source] -->|Compiler| B[.pyc Bytecode]\n    B -->|PVM| C[Execution]\n    C --> D[Output]"
+            },
+            {
+              "type": "flowchart",
+              "title": "Python Control Flow Structures",
+              "content": "Start program -> sequential statements (line by line)\nNeed decision ? -> if / elif / else (branching)\nNeed to iterate a fixed count ? -> for loop (over iterable)\nNeed to iterate until condition ? -> while loop (with guard)\nLoop must exit early ? -> break (terminates loop)\nLoop must skip iteration ? -> continue (next iteration)\nFunction call ? -> def name(args): -> return value\nException possible ? -> try / except / else / finally\nNeed clean resource handling ? -> with statement (context manager)"
             }
           ],
           "mindMaps": [
@@ -536,6 +541,11 @@
               "type": "mermaid",
               "title": "Lists, Tuples, and Dictionaries — Concept Map",
               "content": "mindmap\n  root((Lists, Tuples, and Dictionarie))\n    Basics\n      Syntax\n      Variables\n      Operators\n    Data\n      List\n      Tuple\n      Dict\n      Set\n    OOP\n      Class\n      Inheritance\n    Advanced\n      Decorators\n      Exceptions"
+            },
+            {
+              "type": "mindmap",
+              "title": "Python Data Types — Concept Map",
+              "content": "Python Data Types\n├── Numeric\n│   ├── int (arbitrary precision)\n│   ├── float (IEEE-754 double)\n│   └── complex (real + imag)\n├── Sequence\n│   ├── str (immutable, Unicode)\n│   ├── list [a, b, c] (mutable, ordered)\n│   ├── tuple (a, b, c) (immutable, ordered)\n│   └── range(start, stop, step)\n├── Mapping\n│   └── dict {key: value} (mutable, insertion-ordered 3.7+)\n├── Set Types\n│   ├── set {1, 2, 3} (mutable, unordered, unique)\n│   └── frozenset (immutable set)\n├── Boolean\n│   └── bool (True/False, subclass of int)\n├── Binary\n│   ├── bytes (immutable)\n│   └── bytearray (mutable)\n└── NoneType\n        └── None (null / nil sentinel)"
             }
           ],
           "complexity": {
@@ -903,6 +913,11 @@
               "type": "mermaid",
               "title": "Functions and Object-Oriented Programming — Concept Map",
               "content": "mindmap\n  root((Functions and Object-Oriented ))\n    Basics\n      Syntax\n      Variables\n      Operators\n    Data\n      List\n      Tuple\n      Dict\n      Set\n    OOP\n      Class\n      Inheritance\n    Advanced\n      Decorators\n      Exceptions"
+            },
+            {
+              "type": "mindmap",
+              "title": "Python OOP Concepts — Mind Map",
+              "content": "Object-Oriented Programming (Python)\n├── Class & Object\n│   ├── class keyword -> blueprint\n│   ├── __init__(self, ...) -> constructor\n│   ├── self -> instance reference\n│   └── object = ClassName(args)\n├── Four Pillars\n│   ├── Encapsulation\n│   │   ├── private: __name (name-mangled)\n│   │   ├── protected: _name (convention)\n│   │   └── @property + @setter for controlled access\n│   ├── Inheritance\n│   │   ├── Single (Child(Parent))\n│   │   ├── Multiple (Child(P1, P2))\n│   │   ├── Multilevel (C(B), B(A))\n│   │   ├── Hierarchical (B(A), C(A))\n│   │   └── super() -> call parent methods\n│   ├── Polymorphism\n│   │   ├── Method overriding (same name in child)\n│   │   ├── Duck typing (\"if it walks like a duck...\")\n│   │   └── Operator overloading (__add__, __eq__)\n│   └── Abstraction\n│       ├── Abstract class (abc.ABC + @abstractmethod)\n│       └── Interface (all methods abstract)\n├── Magic / Dunder Methods\n│   ├── __init__ , __new__ , __del__\n│   ├── __str__ , __repr__\n│   ├── __len__ , __getitem__ , __iter__\n│   └── __eq__ , __lt__ , __add__\n└── Advanced\n            ├── @classmethod (cls) -> factory\n            ├── @staticmethod (no self/cls) -> utility\n            └── @dataclass -> auto __init__/__repr__"
             }
           ],
           "complexity": {

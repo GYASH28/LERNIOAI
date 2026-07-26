@@ -739,7 +739,9 @@ export function LeoStudio() {
         {/* ---- Sticky header ---- */}
         <header className="leo-studio__header" role="banner">
           <div className="leo-studio__header-info">
-            <LeoPremium state={leoState} size="md" withFloat={false} ariaLabel="" />
+            <span className="leo-studio__header-mascot">
+              <LeoPremium state={leoState} size="md" withFloat={false} ariaLabel="" />
+            </span>
             <div className="min-w-0">
               <h1 className="leo-studio__header-title">
                 LEO
@@ -1047,6 +1049,7 @@ export function LeoStudio() {
               }}
             />
             <motion.aside
+              className="leo-studio__context-drawer"
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
@@ -1057,12 +1060,14 @@ export function LeoStudio() {
                 right: 0,
                 bottom: 0,
                 width: '85%',
-                maxWidth: 340,
+                maxWidth: '100%',
                 background: 'var(--surface-1)',
                 borderLeft: '1px solid var(--border-subtle)',
                 zIndex: 41,
                 overflowY: 'auto',
+                overflowX: 'hidden',
                 padding: '1.25rem 1rem',
+                WebkitOverflowScrolling: 'touch',
               }}
               aria-label="Context panel"
             >
@@ -1132,23 +1137,26 @@ function EmptyState({
 
       {pinnedLesson && (
         <div
-          className="mt-2 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs"
+          className="leo-empty__pinned mt-2 inline-flex max-w-full items-center gap-2 overflow-hidden rounded-full border px-3 py-1.5 text-xs"
           style={{
             borderColor: 'var(--border-subtle)',
             background: 'var(--surface-inset)',
             color: 'var(--text-secondary)',
           }}
         >
-          <Pin className="h-3 w-3" aria-hidden style={{ color: 'var(--brand)' }} />
-          <span style={{ color: 'var(--text-strong)', fontWeight: 600 }}>
+          <Pin className="h-3 w-3 shrink-0" aria-hidden style={{ color: 'var(--brand)' }} />
+          <span
+            className="min-w-0 shrink truncate"
+            style={{ color: 'var(--text-strong)', fontWeight: 600 }}
+          >
             {pinnedLesson.title}
           </span>
-          <span>·</span>
-          <span>{pinnedLesson.subject}</span>
+          <span className="shrink-0">·</span>
+          <span className="min-w-0 shrink truncate">{pinnedLesson.subject}</span>
           <button
             type="button"
             onClick={onUnpin}
-            className="ml-1 rounded-full px-1.5 text-[10px] font-semibold uppercase"
+            className="ml-1 shrink-0 rounded-full px-1.5 text-[10px] font-semibold uppercase"
             style={{ color: 'var(--text-muted)' }}
             aria-label="Remove pinned lesson"
           >
@@ -1399,7 +1407,7 @@ function CitationPopover({
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -4, scale: 0.96 }}
       transition={{ duration: 0.18, ease: 'easeOut' }}
-      style={{ top: '100%', left: 0, marginTop: '6px' }}
+      style={{ top: '100%', marginTop: '6px' }}
     >
       <div className="leo-citation-popover__title">Source {idx + 1}</div>
       <div className="leo-citation-popover__source">{citation.title}</div>
@@ -1549,11 +1557,11 @@ function MarkdownContent({ content, streaming }: { content: string; streaming: b
       {/* Visual suggestion — keep markdown by default, optionally render
           the table as a ComparisonTableVisual for better scanning. */}
       {showVisualHint && !streaming && visualData && (
-        <div className="mt-3">
+        <div className="leo-visual-hint mt-3 min-w-0">
           <button
             type="button"
             onClick={() => setShowVisual((v) => !v)}
-            className="inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-[11px] font-semibold transition-colors"
+            className="inline-flex max-w-full items-center gap-1.5 rounded-md border px-2.5 py-1 text-[11px] font-semibold transition-colors"
             style={{
               borderColor: 'var(--border-default)',
               color: 'var(--brand)',
@@ -1561,10 +1569,12 @@ function MarkdownContent({ content, streaming }: { content: string; streaming: b
             }}
             aria-expanded={showVisual}
           >
-            <GitCompare className="h-3 w-3" aria-hidden />
-            {showVisual ? 'Hide visual' : 'View as comparison'}
+            <GitCompare className="h-3 w-3 shrink-0" aria-hidden />
+            <span className="truncate">
+              {showVisual ? 'Hide visual' : 'View as comparison'}
+            </span>
             <ChevronDown
-              className={cn('h-3 w-3 transition-transform', showVisual && 'rotate-180')}
+              className={cn('h-3 w-3 shrink-0 transition-transform', showVisual && 'rotate-180')}
               aria-hidden
             />
           </button>
@@ -1575,7 +1585,7 @@ function MarkdownContent({ content, streaming }: { content: string; streaming: b
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.2 }}
-                className="mt-2 overflow-hidden"
+                className="mt-2 min-w-0 overflow-hidden"
               >
                 <VisualRenderer data={visualData} />
               </motion.div>

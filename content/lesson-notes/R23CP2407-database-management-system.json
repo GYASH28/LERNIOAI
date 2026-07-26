@@ -481,6 +481,11 @@
               "type": "mermaid",
               "title": "DBMS Architecture and Data Models — Process Flow",
               "content": "flowchart TD\n    A[User Request] --> B[Query Parser]\n    B --> C[Query Optimizer]\n    C --> D[Execution Engine]\n    D --> E[(Storage Manager)]\n    E --> F[Result Set]\n    F --> G[User]"
+            },
+            {
+              "type": "flowchart",
+              "title": "Database Architecture — Three-Schema (ANSI-SPARC) Layers",
+              "content": "External Level (user views) -> Logical Level (schema) -> Internal Level (physical storage)\nExternal Level -> view of data seen by individual users / applications\nLogical Level -> what data is stored + relationships (tables, constraints)\nInternal Level -> how data is physically stored (files, indexes, pages)\nExternal/Logical mapping -> view definition (CREATE VIEW)\nLogical/Internal mapping -> storage schema (indexes, partitions)\nLogical data independence -> change logical schema without affecting external views\nPhysical data independence -> change internal schema without affecting logical schema"
             }
           ],
           "mindMaps": [
@@ -1228,6 +1233,11 @@
               "type": "mermaid",
               "title": "Normalization — Process Flow",
               "content": "flowchart TD\n    A[User Request] --> B[Query Parser]\n    B --> C[Query Optimizer]\n    C --> D[Execution Engine]\n    D --> E[(Storage Manager)]\n    E --> F[Result Set]\n    F --> G[User]"
+            },
+            {
+              "type": "flowchart",
+              "title": "Normalization Steps — 1NF to BCNF",
+              "content": "Unnormalized relation (UNF)\nUNF -> apply atomic values -> 1NF (no repeating groups, each cell single-valued)\n1NF -> remove partial dependencies -> 2NF (all non-key attrs fully depend on whole PK)\n2NF -> remove transitive dependencies -> 3NF (non-key attrs depend only on PK, nothing else)\n3NF -> every determinant is a candidate key -> BCNF (stronger 3NF, no overlaps)\nBCNF -> (optional) preserve dependencies -> 4NF (multi-valued dependencies)\nRule of thumb: 1NF=atomic, 2NF=full PK dep, 3NF=only PK dep, BCNF=every determinant is key"
             }
           ],
           "mindMaps": [
@@ -1588,6 +1598,11 @@
               "type": "mermaid",
               "title": "SQL — DDL, DML, and Queries — Concept Map",
               "content": "mindmap\n  root((SQL — DDL, DML, and Queries))\n    Definition\n      Meaning\n      Purpose\n    Components\n      Schema\n      Instance\n      Metadata\n    Properties\n      ACID\n      Data Independence"
+            },
+            {
+              "type": "mindmap",
+              "title": "SQL Command Types — DDL / DML / DCL / TCL",
+              "content": "SQL Commands\n├── DDL (Data Definition Language)\n│   ├── CREATE (database, table, index, view)\n│   ├── ALTER (add/modify/drop columns)\n│   ├── DROP (delete table/database entirely)\n│   ├── TRUNCATE (empty table, keep structure, fast)\n│   └── RENAME (rename table/column)\n├── DML (Data Manipulation Language)\n│   ├── SELECT (retrieve rows)\n│   ├── INSERT (add rows)\n│   ├── UPDATE (modify rows)\n│   └── DELETE (remove rows, log each, slower)\n├── DCL (Data Control Language)\n│   ├── GRANT (give privileges)\n│   └── REVOKE (withdraw privileges)\n└── TCL (Transaction Control Language)\n        ├── COMMIT (save changes permanently)\n        ├── ROLLBACK (undo uncommitted changes)\n        ├── SAVEPOINT (mark a point in transaction)\n        └── SET TRANSACTION (set isolation level)"
             }
           ],
           "complexity": {

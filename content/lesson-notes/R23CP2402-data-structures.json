@@ -959,6 +959,11 @@
               "type": "mermaid",
               "title": "Arrays — Operations and Applications — Process Flow",
               "content": "flowchart TD\n    A[Start] --> B{Input size n}\n    B -->|Small| C[Linear Scan O(n)]\n    B -->|Large Sorted| D[Binary Search O(log n)]\n    C --> E[Result]\n    D --> E"
+            },
+            {
+              "type": "flowchart",
+              "title": "Array vs Linked List — Comparison Flowchart",
+              "content": "Need contiguous storage ?\nContiguous -> Array ( O(1) random access, fixed size )\nContiguous -> Array ( insertion/deletion O(n) due to shifting )\nNon-contiguous -> Linked List ( O(n) access, dynamic size )\nNon-contiguous -> Linked List ( O(1) insertion/deletion at known node )\nMemory budget tight ? -> Array ( no pointer overhead )\nFrequent insert/delete at head/tail ? -> Linked List ( pointer rewiring )\nNeed cache locality ? -> Array ( sequential CPU cache hits )"
             }
           ],
           "mindMaps": [
@@ -1762,6 +1767,11 @@
               "type": "mermaid",
               "title": "Stacks — LIFO Principle and Applications — Concept Map",
               "content": "mindmap\n  root((Stacks — LIFO Principle and Ap))\n    Linear\n      Array\n      Linked List\n      Stack\n      Queue\n    Hierarchical\n      Tree\n      BST\n      Heap\n    Graph\n      Directed\n      Undirected\n      Weighted"
+            },
+            {
+              "type": "mindmap",
+              "title": "Stack vs Queue — Operations Mind Map",
+              "content": "Linear Data Structures\n├── Stack (LIFO — Last In First Out)\n│   ├── push(item) -> top++ -> insert at top\n│   ├── pop() -> return top -> top--\n│   ├── peek()/top() -> read top without removing\n│   ├── isEmpty() -> check top == -1\n│   ├── Applications\n│   │   ├── Function call stack\n│   │   ├── Expression evaluation (infix/postfix)\n│   │   ├── Browser back button\n│   │   ├── Undo/Redo (Ctrl+Z / Ctrl+Y)\n│   │   └── Balanced parenthesis check\n│   └── Overflow/Underflow conditions\n└── Queue (FIFO — First In First Out)\n        ├── enqueue(item) -> rear++ -> insert at rear\n        ├── dequeue() -> front++ -> remove from front\n        ├── front()/peek() -> read front element\n        ├── isEmpty() -> check front == rear\n        ├── Variants\n        │   ├── Simple queue (linear)\n        │   ├── Circular queue (rear wraps to 0)\n        │   ├── Deque (both ends)\n        │   └── Priority queue (priority-based dequeue)\n        └── Applications\n            ├── CPU scheduling (Round Robin)\n            ├── Printer spooling\n            ├── BFS graph traversal\n            └── Message queues (Kafka, RabbitMQ)"
             }
           ],
           "complexity": {
@@ -3288,6 +3298,11 @@
               "type": "mermaid",
               "title": "Binary Trees and BST — Process Flow",
               "content": "flowchart TD\n    A[Start] --> B{Input size n}\n    B -->|Small| C[Linear Scan O(n)]\n    B -->|Large Sorted| D[Binary Search O(log n)]\n    C --> E[Result]\n    D --> E"
+            },
+            {
+              "type": "flowchart",
+              "title": "Binary Tree Traversal Algorithms — Decision Flowchart",
+              "content": "Start at root -> Need traversal order ?\nDepth-first -> Preorder ( Root -> Left -> Right )\nDepth-first -> Inorder ( Left -> Root -> Right ) -> gives sorted BST\nDepth-first -> Postorder ( Left -> Right -> Root ) -> used for deletion\nBreadth-first -> Level-order ( level by level, uses Queue )\nNeed expression tree evaluation ? -> Postorder\nNeed to copy the tree ? -> Preorder\nNeed BST sorted output ? -> Inorder\nNeed shortest path in unweighted tree ? -> Level-order"
             }
           ],
           "mindMaps": [
