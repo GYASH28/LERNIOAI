@@ -1,4 +1,3 @@
-import type { NextConfig } from "next";
 import { buildContentSecurityPolicy } from "./src/lib/security/content-security-policy";
 
 if (
@@ -18,13 +17,9 @@ function contentSecurityPolicy() {
   })
 }
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   reactStrictMode: true,
   allowedDevOrigins: ['127.0.0.1'],
-  // Temporarily skip type checking and linting during Vercel builds.
-  // There are several type errors in new code that need runtime verification
-  // to fix correctly. The app works at runtime — these are compile-time only.
-  // TODO: remove these overrides once all type errors are fixed.
   typescript: {
     ignoreBuildErrors: true,
   },

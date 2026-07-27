@@ -873,6 +873,9 @@ model Lesson {
 
   @@index([status, updatedAt])
   @@index([createdById])
+  // Session-wise lesson structure back-relations
+  sessions               LessonSession[]
+  flashcards             Flashcard[]
 }
 
 model LessonResource {
@@ -1136,6 +1139,17 @@ model User {
   verifiedClassMemberships    ClassMembership[]       @relation("ClassMembershipVerifiedBy")
   auditEventsAuthored         AuditEvent[]            @relation("AuditEventActor")
   auditEventsTargeted         AuditEvent[]            @relation("AuditEventTargetUser")
+  // Community back-relations
+  communityPosts         CommunityPost[]
+  communityComments      CommunityComment[]
+  communityVotes         CommunityVote[]
+  communityGroupsCreated CommunityGroup[]
+  communityMemberships   CommunityGroupMembership[]
+  communityReports       CommunityReport[]
+  // Flashcard progress back-relation
+  flashcardProgress      FlashcardProgress[]
+  // Session progress back-relation
+  sessionProgress        SessionProgress[]
 }
 
 model InviteCode {
@@ -2095,4 +2109,242 @@ model Feedback {
 
   @@index([userId, createdAt])
   @@index([status, createdAt])
+}
+
+// ============================================================
+// YOUTUBE PLAYLIST INTELLIGENCE (§2-3)
+// ============================================================
+
+model YouTubePlaylist {
+  id            String   @id @default(cuid())
+  playlistId    String   @unique // YouTube's playlist ID
+  title         String
+  channelName   String?
+  itemCount     Int      @default(0)
+  lastSyncedAt  DateTime?
+  syncStatus    String   @default("pending") // pending | synced | partial | failed
+  subjectId     String?  // link to subject context
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  items         PlaylistVideoItem[]
+
+  @@index([subjectId])
+  @@index([syncStatus])
+}
+
+model PlaylistVideoItem {
+  id                  String   @id @default(cuid())
+  playlistId          String   // FK to YouTubePlaylist
+  playlist            YouTubePlaylist @relation(fields: [playlistId], references: [id], onDelete: Cascade)
+  videoId             String   // YouTube video ID
+  title               String
+  thumbnailUrl        String?
+  durationSeconds     Int?
+  description         String?
+  playlistPosition    Int      // order within the playlist
+  resourceId          String?  // link to Resource once promoted
+  classificationStatus String  @default("unclassified") // unclassified | classified | flagged_low_confidence | rejected
+  matchedLessonId     String?  // FK to Lesson (nullable until classified)
+  confidenceScore     Float?   // 0.0 - 1.0 from AI classification
+  classificationRationale String? // AI's reasoning for reviewer use
+  classifiedAt        DateTime?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@unique([playlistId, videoId])
+  @@index([playlistId, playlistPosition])
+  @@index([classificationStatus])
+  @@index([matchedLessonId])
+}
+
+// ============================================================
+// SESSION-WISE LESSON STRUCTURE (§5)
+// ============================================================
+
+model LessonSession {
+  id              String   @id @default(cuid())
+  lessonId        String
+  lesson          Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  sessionType     String   // introduction | concept | examples | visualization | practice | summary | revision | quiz
+  order           Int      @default(0)
+  title           String
+  content         String   // rich structured content (markdown/JSON)
+  estimatedMinutes Int     @default(10)
+  generationStatus String  @default("draft") // draft | ready_for_review | approved | published
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  sessionProgress   SessionProgress[]
+
+  @@unique([lessonId, sessionType])
+  @@index([lessonId, order])
+  @@index([generationStatus])
+}
+
+// ============================================================
+// FLASHCARDS + MULTI-TRACK PROGRESS (§7)
+// ============================================================
+
+model Flashcard {
+  id              String   @id @default(cuid())
+  lessonId        String
+  lesson          Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  front           String
+  back            String
+  hint            String?
+  order           Int      @default(0)
+  generationStatus String  @default("draft") // draft | ready_for_review | approved | published
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  progress        FlashcardProgress[]
+
+  @@index([lessonId, order])
+  @@index([generationStatus])
+}
+
+model FlashcardProgress {
+  id            String   @id @default(cuid())
+  flashcardId   String
+  flashcard     Flashcard @relation(fields: [flashcardId], references: [id], onDelete: Cascade)
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lastReviewed  DateTime?
+  nextDue       DateTime?
+  reviewCount   Int      @default(0)
+  easeFactor    Float    @default(2.5)
+  intervalDays  Int      @default(1)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@unique([flashcardId, userId])
+  @@index([userId, nextDue])
+}
+
+model SessionProgress {
+  id            String   @id @default(cuid())
+  sessionId     String
+  session       LessonSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  completed     Boolean  @default(false)
+  completedAt   DateTime?
+  timeSpentSec  Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@unique([sessionId, userId])
+  @@index([userId, completed])
+}
+
+// ============================================================
+// COMMUNITY (§2 schema)
+// ============================================================
+
+model CommunityPost {
+  id              String   @id @default(cuid())
+  authorId        String
+  author          User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  section         String   // discussion | feed | group
+  groupId         String?  // FK to CommunityGroup (only for group posts)
+  group           CommunityGroup? @relation(fields: [groupId], references: [id], onDelete: SetNull)
+  subjectId       String?
+  topicId         String?
+  title           String?
+  body            String
+  postType        String   @default("freeform") // question | answer_context | milestone | freeform
+  status          String   @default("published") // draft | published | under_review | hidden | removed
+  reports         Int      @default(0)
+  moderatorNote   String?
+  reviewerId      String?
+  aiFlagged       Boolean  @default(false)
+  aiFlagReason    String?
+  bestAnswerId    String?  // self-relation to CommunityComment
+  comments        CommunityComment[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([section, status, createdAt])
+  @@index([authorId, createdAt])
+  @@index([subjectId, status])
+  @@index([groupId, status])
+}
+
+model CommunityComment {
+  id              String   @id @default(cuid())
+  postId          String
+  post            CommunityPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  authorId        String
+  author          User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  body            String
+  status          String   @default("published") // published | hidden | removed
+  reports         Int      @default(0)
+  moderatorNote   String?
+  upvotes         Int      @default(0)
+  isBestAnswer    Boolean  @default(false)
+  votes           CommunityVote[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([postId, status, createdAt])
+  @@index([authorId, createdAt])
+}
+
+model CommunityVote {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  commentId     String
+  comment       CommunityComment @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  value         Int      @default(1) // +1 only, no downvotes for v1
+  createdAt     DateTime @default(now())
+
+  @@unique([userId, commentId])
+  @@index([commentId])
+}
+
+model CommunityGroup {
+  id            String   @id @default(cuid())
+  subjectId     String?
+  semesterNumber Int?
+  name          String
+  description   String?
+  createdById   String
+  createdBy     User     @relation(fields: [createdById], references: [id], onDelete: Cascade)
+  visibility    String   @default("open") // open | request_to_join
+  posts         CommunityPost[]
+  memberships   CommunityGroupMembership[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([subjectId, semesterNumber])
+  @@index([visibility])
+}
+
+model CommunityGroupMembership {
+  id            String   @id @default(cuid())
+  groupId       String
+  group         CommunityGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role          String   @default("member") // member | owner
+  joinedAt      DateTime @default(now())
+
+  @@unique([groupId, userId])
+  @@index([userId])
+}
+
+model CommunityReport {
+  id            String   @id @default(cuid())
+  postId        String?
+  commentId     String?
+  reporterId    String
+  reporter      User     @relation(fields: [reporterId], references: [id], onDelete: Cascade)
+  reason        String
+  createdAt     DateTime @default(now())
+
+  @@index([postId, createdAt])
+  @@index([commentId, createdAt])
+  @@index([reporterId, createdAt])
 }
