@@ -28,6 +28,9 @@ import { LessonVisitRecorder } from '@/features/learning/components/lesson/lesso
 import { LessonVideoPlayer } from '@/features/learning/components/lesson/lesson-video-player'
 import { getManifestSubject, type ManifestSubject } from '@/lib/curriculum/manifest-data'
 import { generateLessonNotes } from '@/lib/curriculum/lesson-notes/notes-generator'
+import { getSubjectNotes, findLessonBySlug, getAdjacentLessons } from '@/lib/curriculum/lesson-notes-loader'
+import { LessonNotesRenderer } from '@/components/learning/lesson-notes-renderer'
+import { InteractiveNotesRenderer } from '@/components/learning/interactive-notes-renderer'
 import { YouTubePlayer } from '@/components/learning/youtube-player-lazy'
 import { BookmarkButton } from '@/components/learning/bookmark-button'
 import { RecentlyViewedTracker } from '@/components/learning/recently-viewed-tracker'
@@ -69,18 +72,19 @@ export default async function LessonStudioPage({
   if (!studio) {
     const manifestSubject = getManifestSubject(programmeCode, semester, subjectCode)
     if (manifestSubject) {
-      const expectedSlug = manifestSubject.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80)
-      if (lessonSlug === expectedSlug || lessonSlug.includes(expectedSlug) || expectedSlug.includes(lessonSlug)) {
-        return (
-          <ManifestLessonView
-            programmeCode={programmeCode}
-            semesterNumber={semester}
-            subjectCode={subjectCode}
-            lessonSlug={lessonSlug}
-            subject={manifestSubject}
-          />
-        )
-      }
+      // Accept ANY lesson slug for a valid subject — the ManifestLessonView
+      // will try to find a specific V3 lesson match, and if none, will show
+      // the whole-subject accordion. This way lesson links from the materials
+      // page and unit map always work (no 404s).
+      return (
+        <ManifestLessonView
+          programmeCode={programmeCode}
+          semesterNumber={semester}
+          subjectCode={subjectCode}
+          lessonSlug={lessonSlug}
+          subject={manifestSubject}
+        />
+      )
     }
     notFound()
   }
@@ -111,7 +115,7 @@ export default async function LessonStudioPage({
     <main className="min-h-screen bg-background text-foreground">
       <LessonVisitRecorder lessonId={studio.lesson.id} />
       <section className="border-b border-border/70 bg-muted/30">
-        <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-6 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col gap-6 px-5 py-6 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
             <Link href={subjectHref} className="inline-flex items-center gap-2 font-medium hover:text-foreground">
               <ArrowLeft className="h-4 w-4" />
@@ -159,7 +163,7 @@ export default async function LessonStudioPage({
       </section>
 
       <section className="mx-auto grid max-w-7xl gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[280px_minmax(0,1fr)_320px] lg:px-8">
-        <aside className="h-fit rounded-lg border border-border bg-card p-4 lg:sticky lg:top-6">
+        <aside className="rounded-lg border border-border bg-card p-4 lg:sticky lg:top-20 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Curriculum</h2>
           <div className="mt-3 grid gap-4">
             {studio.navigation.units.map((unit) => (
@@ -350,8 +354,34 @@ export default async function LessonStudioPage({
           <section className="grid gap-4 rounded-lg border border-border bg-card p-4">
             <div className="flex items-center gap-2">
               <FileText className="h-5 w-5 text-primary" />
-              <h2 className="text-lg font-semibold tracking-normal">Lesson Notes</h2>
+              <h2 className="text-lg font-semibold tracking-normal">Interactive Study Notes</h2>
             </div>
+
+            {/* V3 Interactive Notes — render the SPECIFIC lesson if found */}
+            {(() => {
+              const subjectNotes = getSubjectNotes(studio.subject.code)
+              if (!subjectNotes) return null
+
+              // Try to find the specific lesson by slug
+              const match = findLessonBySlug(studio.subject.code, lessonSlug)
+              if (match) {
+                const { prev, next } = getAdjacentLessons(studio.subject.code, lessonSlug)
+                const lessonBaseHref = `/learn/${studio.programme.code}/semester/${studio.semester.number}/subject/${studio.subject.code}/lesson`
+                return (
+                  <InteractiveNotesRenderer
+                    lesson={match.lesson}
+                    subject={subjectNotes}
+                    prevHref={prev ? `${lessonBaseHref}/${prev.slug}` : null}
+                    nextHref={next ? `${lessonBaseHref}/${next.slug}` : null}
+                  />
+                )
+              }
+
+              // Fallback: show all units/lessons as collapsible accordion
+              return <LessonNotesRenderer notes={subjectNotes} />
+            })()}
+
+            {/* DB-generated documents */}
             {studio.generatedDocuments.length > 0 || studio.resources.notes.length > 0 ? (
               <div className="grid gap-3">
                 {studio.generatedDocuments.map((document) => (
@@ -390,11 +420,27 @@ export default async function LessonStudioPage({
                   <ResourceLink key={resource.lessonResourceId} resource={resource} />
                 ))}
               </div>
-            ) : (
-              <p className="text-sm text-muted-foreground">
-                Approved lesson notes are not attached yet.
-              </p>
-            )}
+            ) : !getSubjectNotes(studio.subject.code) ? (
+              <div className="rounded-lg border border-dashed border-border bg-background/50 p-4 text-center">
+                <FileText className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
+                <p className="text-sm font-medium">Detailed notes coming soon</p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  We&apos;re writing comprehensive study notes for this subject. Check back soon!
+                </p>
+                {/* PDF fallback — link to the subject's PDF if it exists */}
+                {(() => {
+                  const pdfUrl = `/lesson-notes/${studio.subject.code.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${studio.subject.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.pdf`
+                  return (
+                    <a
+                      href={`/lesson-notes/${studio.subject.code.toLowerCase()}-${studio.subject.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.pdf`}
+                      className="mt-3 inline-flex items-center gap-2 rounded-md border border-border bg-card px-3 py-1.5 text-xs font-medium hover:bg-accent/50"
+                    >
+                      <FileText className="h-3.5 w-3.5" /> Download PDF Summary
+                    </a>
+                  )
+                })()}
+              </div>
+            ) : null}
           </section>
 
           <div className="grid gap-3 sm:grid-cols-2">
@@ -419,7 +465,7 @@ export default async function LessonStudioPage({
           </div>
         </div>
 
-        <aside className="grid h-fit gap-4 lg:sticky lg:top-6">
+        <aside className="grid gap-4 lg:sticky lg:top-20 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto">
           <section className="rounded-lg border border-border bg-card p-4">
             <div className="flex items-center gap-2">
               <ListChecks className="h-5 w-5 text-primary" />
@@ -713,6 +759,19 @@ function ManifestLessonView({
     subject.resources.map((r) => ({ title: r.title, channel: r.channel, url: r.url, role: r.role, description: r.description })),
   )
 
+  // ─── V3 Interactive Notes lookup ─────────────────────────────────────────
+  // Try to find rich notes for this subject. The subject code in the URL may
+  // be the DCIOT variant — resolve to the COMP alternate code if applicable.
+  const resolvedSubjectCode = programmeCode === 'DCIOT' && subject.alternateCode
+    ? subject.alternateCode
+    : subjectCode
+  const subjectNotes = getSubjectNotes(resolvedSubjectCode)
+  // Try to find the SPECIFIC lesson by slug — if found, render that lesson's
+  // premium interactive notes; else fall back to the whole-subject accordion.
+  const lessonMatch = subjectNotes ? findLessonBySlug(resolvedSubjectCode, lessonSlug) : null
+  const { prev, next } = subjectNotes ? getAdjacentLessons(resolvedSubjectCode, lessonSlug) : { prev: null, next: null }
+  const lessonBaseHref = `/learn/${programmeCode}/semester/${semesterNumber}/subject/${subjectCode}/lesson`
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <RecentlyViewedTracker
@@ -747,7 +806,7 @@ function ManifestLessonView({
         </div>
       </section>
 
-      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-5 py-6 sm:px-6 lg:px-8">
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
           {/* Main content: video player */}
           <div className="space-y-6">
@@ -814,21 +873,61 @@ function ManifestLessonView({
               </div>
             </div>
 
-            {/* Generated lesson notes */}
-            <div className="space-y-4">
-              {lessonNotes.sections.map((section, i) => (
-                <div key={i} className="rounded-lg border border-border bg-card p-5">
-                  <h2 className="text-lg font-semibold">{section.title}</h2>
-                  <div className="mt-3 text-sm text-muted-foreground">
-                    {section.content.split('\n').map((line, j) => (
-                      <p key={j} className={line.startsWith('•') || /^\d+\./.test(line) ? 'mt-1' : 'mt-2'}>
-                        {line || '\u00A0'}
-                      </p>
-                    ))}
-                  </div>
+            {/* ─── Concise Lesson Summary (revision-focused, NOT full textbook) ─── */}
+            {subjectNotes && lessonMatch ? (
+              <section className="rounded-lg border border-primary/30 bg-card p-5">
+                <div className="mb-3 flex items-center gap-2">
+                  <FileText className="h-5 w-5 text-primary" aria-hidden="true" />
+                  <h2 className="text-lg font-semibold">Lesson Summary — {lessonMatch.lesson.title}</h2>
                 </div>
-              ))}
-            </div>
+                <div className="space-y-4">
+                  {lessonMatch.lesson.overview && (
+                    <div>
+                      <h3 className="mb-1 text-xs font-semibold uppercase text-muted-foreground">Overview</h3>
+                      <p className="text-sm text-foreground leading-relaxed">{lessonMatch.lesson.overview}</p>
+                    </div>
+                  )}
+                  {lessonMatch.lesson.keyConcepts?.length ? (
+                    <div>
+                      <h3 className="mb-1.5 text-xs font-semibold uppercase text-muted-foreground">Key Concepts</h3>
+                      <ul className="space-y-1">
+                        {lessonMatch.lesson.keyConcepts.slice(0, 5).map((c, i) => (
+                          <li key={i} className="text-sm text-foreground flex gap-2">
+                            <span className="text-primary shrink-0">•</span>
+                            <span>{c}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
+                  {lessonMatch.lesson.formulas?.length ? (
+                    <div>
+                      <h3 className="mb-1.5 text-xs font-semibold uppercase text-muted-foreground">Key Formulas</h3>
+                      <div className="space-y-1">
+                        {lessonMatch.lesson.formulas.slice(0, 3).map((f, i) => (
+                          <p key={i} className="rounded-md border-l-2 border-primary bg-primary/5 px-3 py-1.5 font-mono text-sm">{f}</p>
+                        ))}
+                      </div>
+                    </div>
+                  ) : null}
+                </div>
+              </section>
+            ) : (
+              <div className="space-y-4">
+                {lessonNotes.sections.map((section, i) => (
+                  <div key={i} className="rounded-lg border border-border bg-card p-5">
+                    <h2 className="text-lg font-semibold">{section.title}</h2>
+                    <div className="mt-3 text-sm text-muted-foreground">
+                      {section.content.split('\n').map((line, j) => (
+                        <p key={j} className={line.startsWith('•') || /^\d+\./.test(line) ? 'mt-1' : 'mt-2'}>
+                          {line || '\u00A0'}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Sidebar */}

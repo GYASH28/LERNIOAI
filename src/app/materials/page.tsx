@@ -1,9 +1,10 @@
 import { redirect } from 'next/navigation'
 import { getCurrentUser } from '@/lib/auth'
-import { db } from '@/lib/db'
 import Link from 'next/link'
 import { BookOpen, Download, ArrowLeft, FileText, Star } from 'lucide-react'
 import { MaterialsList } from './materials-list'
+import { TopBar } from '@/components/layout/top-bar'
+import { Footer } from '@/components/layout/footer'
 
 export const dynamic = 'force-dynamic'
 
@@ -21,7 +22,9 @@ export default async function MaterialsPage() {
   if (!user) redirect('/sign-in?callbackUrl=/materials')
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen flex flex-col bg-background text-foreground">
+      <TopBar />
+      <main className="flex-1 page-wipe bg-background text-foreground">
       <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:px-8">
         <Link href="/dashboard" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-3"><ArrowLeft className="h-4 w-4" />Dashboard</Link>
         <h1 className="text-2xl font-bold">Materials</h1>
@@ -37,7 +40,7 @@ export default async function MaterialsPage() {
                   <div className="min-w-0 flex-1"><p className="text-[10px] font-semibold uppercase text-muted-foreground">{p.code}</p><h3 className="mt-1 text-sm font-medium leading-tight">{p.name}</h3></div>
                   <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-amber-500/10"><FileText className="h-4 w-4 text-amber-600" /></div>
                 </div>
-                <div className="mt-3 flex items-center gap-1.5 text-xs text-primary opacity-0 group-hover:opacity-100"><Download className="h-3 w-3" />Download</div>
+                <div className="mt-3 flex items-center gap-1.5 text-xs text-primary font-semibold"><Download className="h-3 w-3" />Download PDF</div>
               </a>
             ))}
           </div>
@@ -51,6 +54,8 @@ export default async function MaterialsPage() {
         </section>
       </div>
     </main>
+      <Footer />
+    </div>
   )
 }
 

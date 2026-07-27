@@ -1,0 +1,1946 @@
+{
+  "subjectCode": "R23CP6407",
+  "subjectName": "Software Testing Tools and Automation",
+  "semester": 6,
+  "credits": 5,
+  "units": [
+    {
+      "number": 1,
+      "title": "Testing Fundamentals",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "software-testing-basics",
+          "title": "Software Testing Basics",
+          "durationMin": 25,
+          "difficulty": "easy",
+          "overview": "Software Testing Basics is a key topic in Software Testing Tools and Automation, covered under Testing Fundamentals. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "Software Testing Basics: Core concept in Software Testing Tools and Automation",
+            "Definition: The formal definition and scope of software testing basics",
+            "Key principles: Fundamental rules and properties",
+            "Working: How software testing basics operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within Software Testing Basics",
+            "Relationship: connects to Testing Fundamentals",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "Software Testing Basics — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in Software Testing Tools and Automation"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding Testing Fundamentals"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of Software Testing Basics",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is Software Testing Basics?",
+              "options": [
+                "A core concept in Software Testing Tools and Automation",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "Software Testing Basics is a fundamental concept in Software Testing Tools and Automation."
+            },
+            {
+              "question": "Software Testing Basics is studied under which unit?",
+              "options": [
+                "Testing Fundamentals",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "Software Testing Basics belongs to the Testing Fundamentals unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of Software Testing Basics?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "Software Testing Basics has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand Software Testing Basics and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on Software Testing Basics"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nSoftware Testing Basics is a key topic in Software Testing Tools and Automation, covered under Testing Fundamentals. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Software Testing Basics: Core concept in Software Testing Tools and Automation\n- Definition: The formal definition and scope of software testing basics\n- Key principles: Fundamental rules and properties\n- Working: How software testing basics operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Software Testing Basics`\n- `Relationship: connects to Testing Fundamentals`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Software Testing Basics — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Software Testing Tools and Automation |\n| Importance | Essential for understanding Testing Fundamentals |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nSoftware Testing Basics is a key topic in Software Testing Tools and Automation, covered under Testing Fundamentals. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Software Testing Basics — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Software Testing Basics — Concept Map",
+              "content": "mindmap\n  root((Software Testing Basics))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is Software Testing Basics?",
+              "solution": "Correct answer: A core concept in Software Testing Tools and Automation",
+              "explanation": "Software Testing Basics is a fundamental concept in Software Testing Tools and Automation."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Software Testing Basics with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Software Testing Basics.",
+              "modelAnswer": "Core concept in Software Testing Tools and Automation"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of software testing basics"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Software Testing Basics",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Software Testing Basics.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Software Testing Basics",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to Testing Fundamentals",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Software Testing Basics in detail with a diagram.",
+              "modelAnswer": "Software Testing Basics is a key topic in Software Testing Tools and Automation, covered under Testing Fundamentals. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Software Testing Basics with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Software Testing Basics\n\n**One-line definition:** Software Testing Basics is a key topic in Software Testing Tools and Automation, covered under Testing Fundamentals. This lesson provides a comprehensive understanding of the fundamental concepts, pri\n\n**Key points:**\n\n- Software Testing Basics: Core concept in Software Testing Tools and Automation\n- Definition: The formal definition and scope of software testing basics\n- Key principles: Fundamental rules and properties\n- Working: How software testing basics operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within Software Testing Basics`\n- `Relationship: connects to Testing Fundamentals`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of Software Testing Basics\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Software Testing Basics: Core concept in Software Testing Tools and Automation",
+            "Definition: The formal definition and scope of software testing basics",
+            "Key principles: Fundamental rules and properties",
+            "Working: How software testing basics operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within Software Testing Basics",
+            "Formula: Relationship: connects to Testing Fundamentals",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of Software Testing Basics"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Software Testing Basics is a key topic in Software Testing Tools and Automation, covered under Testing Fundamentals. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "Software Testing Basics: Core concept in Software Testing Tools and Automation"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Software Testing Basics?",
+              "back": "Core concept in Software Testing Tools and Automation",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of software testing basics",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How software testing basics operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Software Testing Basics is a key topic in Software Testing Tools and Automation, covered under Testing Fundamentals. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "Software Testing Basics is a key topic in Software Testing Tools and Automation, covered under Testing Fundamentals. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Software Testing Basics: Core concept in Software Testing Tools and Automation, Definition: The formal definition and scope of software testing basics, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "test-case-design",
+            "test-automation"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Test Design",
+      "weightage": 25,
+      "lessons": [
+        {
+          "slug": "test-case-design",
+          "title": "Test Case Design",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "Test Case Design is a key topic in Software Testing Tools and Automation, covered under Test Design. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "Test Case Design: Core concept in Software Testing Tools and Automation",
+            "Definition: The formal definition and scope of test case design",
+            "Key principles: Fundamental rules and properties",
+            "Working: How test case design operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within Test Case Design",
+            "Relationship: connects to Test Design",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "Test Case Design — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in Software Testing Tools and Automation"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding Test Design"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of Test Case Design",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is Test Case Design?",
+              "options": [
+                "A core concept in Software Testing Tools and Automation",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "Test Case Design is a fundamental concept in Software Testing Tools and Automation."
+            },
+            {
+              "question": "Test Case Design is studied under which unit?",
+              "options": [
+                "Test Design",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "Test Case Design belongs to the Test Design unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of Test Case Design?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "Test Case Design has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand Test Case Design and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on Test Case Design"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nTest Case Design is a key topic in Software Testing Tools and Automation, covered under Test Design. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Test Case Design: Core concept in Software Testing Tools and Automation\n- Definition: The formal definition and scope of test case design\n- Key principles: Fundamental rules and properties\n- Working: How test case design operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Test Case Design`\n- `Relationship: connects to Test Design`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Test Case Design — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Software Testing Tools and Automation |\n| Importance | Essential for understanding Test Design |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nTest Case Design is a key topic in Software Testing Tools and Automation, covered under Test Design. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Test Case Design — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Test Case Design — Concept Map",
+              "content": "mindmap\n  root((Test Case Design))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is Test Case Design?",
+              "solution": "Correct answer: A core concept in Software Testing Tools and Automation",
+              "explanation": "Test Case Design is a fundamental concept in Software Testing Tools and Automation."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Test Case Design with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Test Case Design.",
+              "modelAnswer": "Core concept in Software Testing Tools and Automation"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of test case design"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Test Case Design",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Test Case Design.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Test Case Design",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to Test Design",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Test Case Design in detail with a diagram.",
+              "modelAnswer": "Test Case Design is a key topic in Software Testing Tools and Automation, covered under Test Design. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Test Case Design with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Test Case Design\n\n**One-line definition:** Test Case Design is a key topic in Software Testing Tools and Automation, covered under Test Design. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and pra\n\n**Key points:**\n\n- Test Case Design: Core concept in Software Testing Tools and Automation\n- Definition: The formal definition and scope of test case design\n- Key principles: Fundamental rules and properties\n- Working: How test case design operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within Test Case Design`\n- `Relationship: connects to Test Design`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of Test Case Design\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Test Case Design: Core concept in Software Testing Tools and Automation",
+            "Definition: The formal definition and scope of test case design",
+            "Key principles: Fundamental rules and properties",
+            "Working: How test case design operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within Test Case Design",
+            "Formula: Relationship: connects to Test Design",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of Test Case Design"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Test Case Design is a key topic in Software Testing Tools and Automation, covered under Test Design. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "Test Case Design: Core concept in Software Testing Tools and Automation"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Test Case Design?",
+              "back": "Core concept in Software Testing Tools and Automation",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of test case design",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How test case design operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Test Case Design is a key topic in Software Testing Tools and Automation, covered under Test Design. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "Test Case Design is a key topic in Software Testing Tools and Automation, covered under Test Design. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Test Case Design: Core concept in Software Testing Tools and Automation, Definition: The formal definition and scope of test case design, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "test-automation",
+            "selenium-and-junit"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Automation",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "test-automation",
+          "title": "Test Automation",
+          "durationMin": 35,
+          "difficulty": "hard",
+          "overview": "Test Automation is a key topic in Software Testing Tools and Automation, covered under Automation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "Test Automation: Core concept in Software Testing Tools and Automation",
+            "Definition: The formal definition and scope of test automation",
+            "Key principles: Fundamental rules and properties",
+            "Working: How test automation operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within Test Automation",
+            "Relationship: connects to Automation",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "Test Automation — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in Software Testing Tools and Automation"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding Automation"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of Test Automation",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is Test Automation?",
+              "options": [
+                "A core concept in Software Testing Tools and Automation",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "Test Automation is a fundamental concept in Software Testing Tools and Automation."
+            },
+            {
+              "question": "Test Automation is studied under which unit?",
+              "options": [
+                "Automation",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "Test Automation belongs to the Automation unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of Test Automation?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "Test Automation has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand Test Automation and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on Test Automation"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nTest Automation is a key topic in Software Testing Tools and Automation, covered under Automation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Test Automation: Core concept in Software Testing Tools and Automation\n- Definition: The formal definition and scope of test automation\n- Key principles: Fundamental rules and properties\n- Working: How test automation operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Test Automation`\n- `Relationship: connects to Automation`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Test Automation — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Software Testing Tools and Automation |\n| Importance | Essential for understanding Automation |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nTest Automation is a key topic in Software Testing Tools and Automation, covered under Automation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Test Automation — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Test Automation — Concept Map",
+              "content": "mindmap\n  root((Test Automation))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is Test Automation?",
+              "solution": "Correct answer: A core concept in Software Testing Tools and Automation",
+              "explanation": "Test Automation is a fundamental concept in Software Testing Tools and Automation."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Test Automation with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Test Automation.",
+              "modelAnswer": "Core concept in Software Testing Tools and Automation"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of test automation"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Test Automation",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Test Automation.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Test Automation",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to Automation",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Test Automation in detail with a diagram.",
+              "modelAnswer": "Test Automation is a key topic in Software Testing Tools and Automation, covered under Automation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Test Automation with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Test Automation\n\n**One-line definition:** Test Automation is a key topic in Software Testing Tools and Automation, covered under Automation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and pract\n\n**Key points:**\n\n- Test Automation: Core concept in Software Testing Tools and Automation\n- Definition: The formal definition and scope of test automation\n- Key principles: Fundamental rules and properties\n- Working: How test automation operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within Test Automation`\n- `Relationship: connects to Automation`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of Test Automation\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Test Automation: Core concept in Software Testing Tools and Automation",
+            "Definition: The formal definition and scope of test automation",
+            "Key principles: Fundamental rules and properties",
+            "Working: How test automation operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within Test Automation",
+            "Formula: Relationship: connects to Automation",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of Test Automation"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Test Automation is a key topic in Software Testing Tools and Automation, covered under Automation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "Test Automation: Core concept in Software Testing Tools and Automation"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Test Automation?",
+              "back": "Core concept in Software Testing Tools and Automation",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of test automation",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How test automation operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Test Automation is a key topic in Software Testing Tools and Automation, covered under Automation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "Test Automation is a key topic in Software Testing Tools and Automation, covered under Automation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Test Automation: Core concept in Software Testing Tools and Automation, Definition: The formal definition and scope of test automation, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "selenium-and-junit",
+            "performance-and-load-testing"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Tools",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "selenium-and-junit",
+          "title": "Selenium and JUnit",
+          "durationMin": 40,
+          "difficulty": "hard",
+          "overview": "Selenium and JUnit is a key topic in Software Testing Tools and Automation, covered under Tools. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "Selenium and JUnit: Core concept in Software Testing Tools and Automation",
+            "Definition: The formal definition and scope of selenium and junit",
+            "Key principles: Fundamental rules and properties",
+            "Working: How selenium and junit operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within Selenium and JUnit",
+            "Relationship: connects to Tools",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "Selenium and JUnit — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in Software Testing Tools and Automation"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding Tools"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of Selenium and JUnit",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is Selenium and JUnit?",
+              "options": [
+                "A core concept in Software Testing Tools and Automation",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "Selenium and JUnit is a fundamental concept in Software Testing Tools and Automation."
+            },
+            {
+              "question": "Selenium and JUnit is studied under which unit?",
+              "options": [
+                "Tools",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "Selenium and JUnit belongs to the Tools unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of Selenium and JUnit?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "Selenium and JUnit has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand Selenium and JUnit and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on Selenium and JUnit"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nSelenium and JUnit is a key topic in Software Testing Tools and Automation, covered under Tools. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Selenium and JUnit: Core concept in Software Testing Tools and Automation\n- Definition: The formal definition and scope of selenium and junit\n- Key principles: Fundamental rules and properties\n- Working: How selenium and junit operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Selenium and JUnit`\n- `Relationship: connects to Tools`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Selenium and JUnit — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Software Testing Tools and Automation |\n| Importance | Essential for understanding Tools |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nSelenium and JUnit is a key topic in Software Testing Tools and Automation, covered under Tools. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Selenium and JUnit — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Selenium and JUnit — Concept Map",
+              "content": "mindmap\n  root((Selenium and JUnit))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is Selenium and JUnit?",
+              "solution": "Correct answer: A core concept in Software Testing Tools and Automation",
+              "explanation": "Selenium and JUnit is a fundamental concept in Software Testing Tools and Automation."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Selenium and JUnit with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Selenium and JUnit.",
+              "modelAnswer": "Core concept in Software Testing Tools and Automation"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of selenium and junit"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Selenium and JUnit",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Selenium and JUnit.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Selenium and JUnit",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to Tools",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Selenium and JUnit in detail with a diagram.",
+              "modelAnswer": "Selenium and JUnit is a key topic in Software Testing Tools and Automation, covered under Tools. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Selenium and JUnit with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Selenium and JUnit\n\n**One-line definition:** Selenium and JUnit is a key topic in Software Testing Tools and Automation, covered under Tools. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practic\n\n**Key points:**\n\n- Selenium and JUnit: Core concept in Software Testing Tools and Automation\n- Definition: The formal definition and scope of selenium and junit\n- Key principles: Fundamental rules and properties\n- Working: How selenium and junit operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within Selenium and JUnit`\n- `Relationship: connects to Tools`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of Selenium and JUnit\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Selenium and JUnit: Core concept in Software Testing Tools and Automation",
+            "Definition: The formal definition and scope of selenium and junit",
+            "Key principles: Fundamental rules and properties",
+            "Working: How selenium and junit operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within Selenium and JUnit",
+            "Formula: Relationship: connects to Tools",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of Selenium and JUnit"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Selenium and JUnit is a key topic in Software Testing Tools and Automation, covered under Tools. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "Selenium and JUnit: Core concept in Software Testing Tools and Automation"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Selenium and JUnit?",
+              "back": "Core concept in Software Testing Tools and Automation",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of selenium and junit",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How selenium and junit operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Selenium and JUnit is a key topic in Software Testing Tools and Automation, covered under Tools. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "Selenium and JUnit is a key topic in Software Testing Tools and Automation, covered under Tools. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Selenium and JUnit: Core concept in Software Testing Tools and Automation, Definition: The formal definition and scope of selenium and junit, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "performance-and-load-testing"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Performance Testing",
+      "weightage": 15,
+      "lessons": [
+        {
+          "slug": "performance-and-load-testing",
+          "title": "Performance and Load Testing",
+          "durationMin": 45,
+          "difficulty": "hard",
+          "overview": "Performance and Load Testing is a key topic in Software Testing Tools and Automation, covered under Performance Testing. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "Performance and Load Testing: Core concept in Software Testing Tools and Automation",
+            "Definition: The formal definition and scope of performance and load testing",
+            "Key principles: Fundamental rules and properties",
+            "Working: How performance and load testing operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within Performance and Load Testing",
+            "Relationship: connects to Performance Testing",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "Performance and Load Testing — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in Software Testing Tools and Automation"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding Performance Testing"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of Performance and Load Testing",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is Performance and Load Testing?",
+              "options": [
+                "A core concept in Software Testing Tools and Automation",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "Performance and Load Testing is a fundamental concept in Software Testing Tools and Automation."
+            },
+            {
+              "question": "Performance and Load Testing is studied under which unit?",
+              "options": [
+                "Performance Testing",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "Performance and Load Testing belongs to the Performance Testing unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of Performance and Load Testing?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "Performance and Load Testing has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand Performance and Load Testing and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on Performance and Load Testing"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nPerformance and Load Testing is a key topic in Software Testing Tools and Automation, covered under Performance Testing. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Performance and Load Testing: Core concept in Software Testing Tools and Automation\n- Definition: The formal definition and scope of performance and load testing\n- Key principles: Fundamental rules and properties\n- Working: How performance and load testing operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Performance and Load Testing`\n- `Relationship: connects to Performance Testing`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Performance and Load Testing — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Software Testing Tools and Automation |\n| Importance | Essential for understanding Performance Testing |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nPerformance and Load Testing is a key topic in Software Testing Tools and Automation, covered under Performance Testing. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Performance and Load Testing — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Performance and Load Testing — Concept Map",
+              "content": "mindmap\n  root((Performance and Load Testing))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is Performance and Load Testing?",
+              "solution": "Correct answer: A core concept in Software Testing Tools and Automation",
+              "explanation": "Performance and Load Testing is a fundamental concept in Software Testing Tools and Automation."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Performance and Load Testing with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Performance and Load Testing.",
+              "modelAnswer": "Core concept in Software Testing Tools and Automation"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of performance and load testing"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Performance and Load Testing",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Performance and Load Testing.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Performance and Load Testing",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to Performance Testing",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Performance and Load Testing in detail with a diagram.",
+              "modelAnswer": "Performance and Load Testing is a key topic in Software Testing Tools and Automation, covered under Performance Testing. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Performance and Load Testing with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Performance and Load Testing\n\n**One-line definition:** Performance and Load Testing is a key topic in Software Testing Tools and Automation, covered under Performance Testing. This lesson provides a comprehensive understanding of the fundamental concepts,\n\n**Key points:**\n\n- Performance and Load Testing: Core concept in Software Testing Tools and Automation\n- Definition: The formal definition and scope of performance and load testing\n- Key principles: Fundamental rules and properties\n- Working: How performance and load testing operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within Performance and Load Testing`\n- `Relationship: connects to Performance Testing`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of Performance and Load Testing\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Performance and Load Testing: Core concept in Software Testing Tools and Automation",
+            "Definition: The formal definition and scope of performance and load testing",
+            "Key principles: Fundamental rules and properties",
+            "Working: How performance and load testing operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within Performance and Load Testing",
+            "Formula: Relationship: connects to Performance Testing",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of Performance and Load Testing"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Performance and Load Testing is a key topic in Software Testing Tools and Automation, covered under Performance Testing. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "Performance and Load Testing: Core concept in Software Testing Tools and Automation"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Performance and Load Testing?",
+              "back": "Core concept in Software Testing Tools and Automation",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of performance and load testing",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How performance and load testing operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Performance and Load Testing is a key topic in Software Testing Tools and Automation, covered under Performance Testing. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "Performance and Load Testing is a key topic in Software Testing Tools and Automation, covered under Performance Testing. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Performance and Load Testing: Core concept in Software Testing Tools and Automat, Definition: The formal definition and scope of performance and load testing, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": []
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "# Software Testing Tools and Automation — Quick Revision\n\n**Subject code:** R23CP6407  \n**Semester:** 6  \n**Credits:** 5  \n\n## Unit 1: Testing Fundamentals (20%)\n### Software Testing Basics\nSoftware Testing Basics is a key topic in Software Testing Tools and Automation, covered under Testing Fundamentals. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Unit 2: Test Design (25%)\n### Test Case Design\nTest Case Design is a key topic in Software Testing Tools and Automation, covered under Test Design. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Unit 3: Automation (20%)\n### Test Automation\nTest Automation is a key topic in Software Testing Tools and Automation, covered under Automation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Unit 4: Tools (20%)\n### Selenium and JUnit\nSelenium and JUnit is a key topic in Software Testing Tools and Automation, covered under Tools. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Unit 5: Performance Testing (15%)\n### Performance and Load Testing\nPerformance and Load Testing is a key topic in Software Testing Tools and Automation, covered under Performance Testing. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students...\n",
+  "interviewBank": [
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within Software Testing Basics",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 10,
+      "question": "Explain the key concepts from this lesson with examples.",
+      "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+    },
+    {
+      "marks": 5,
+      "question": "What are the practical applications of this topic?",
+      "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within Test Case Design",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within Test Automation",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within Selenium and JUnit",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within Performance and Load Testing",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    }
+  ],
+  "vivaBank": [
+    {
+      "marks": 2,
+      "question": "Define Software Testing Basics.",
+      "modelAnswer": "Core concept in Software Testing Tools and Automation"
+    },
+    {
+      "marks": 2,
+      "question": "Define Definition.",
+      "modelAnswer": "The formal definition and scope of software testing basics"
+    },
+    {
+      "marks": 2,
+      "question": "Define Key principles.",
+      "modelAnswer": "Fundamental rules and properties"
+    },
+    {
+      "marks": 2,
+      "question": "Define the main concept from this lesson.",
+      "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+    },
+    {
+      "marks": 2,
+      "question": "What is the practical importance of this topic?",
+      "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+    },
+    {
+      "marks": 2,
+      "question": "Define Test Case Design.",
+      "modelAnswer": "Core concept in Software Testing Tools and Automation"
+    },
+    {
+      "marks": 2,
+      "question": "Define Test Automation.",
+      "modelAnswer": "Core concept in Software Testing Tools and Automation"
+    },
+    {
+      "marks": 2,
+      "question": "Define Selenium and JUnit.",
+      "modelAnswer": "Core concept in Software Testing Tools and Automation"
+    },
+    {
+      "marks": 2,
+      "question": "Define Performance and Load Testing.",
+      "modelAnswer": "Core concept in Software Testing Tools and Automation"
+    }
+  ],
+  "pyqBank": [
+    {
+      "marks": 10,
+      "question": "Explain Software Testing Basics in detail with a diagram.",
+      "modelAnswer": "Software Testing Basics is a key topic in Software Testing Tools and Automation, covered under Testing Fundamentals. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Software Testing Basics with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Test Case Design in detail with a diagram.",
+      "modelAnswer": "Test Case Design is a key topic in Software Testing Tools and Automation, covered under Test Design. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Test Case Design with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Test Automation in detail with a diagram.",
+      "modelAnswer": "Test Automation is a key topic in Software Testing Tools and Automation, covered under Automation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Test Automation with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Selenium and JUnit in detail with a diagram.",
+      "modelAnswer": "Selenium and JUnit is a key topic in Software Testing Tools and Automation, covered under Tools. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Selenium and JUnit with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Performance and Load Testing in detail with a diagram.",
+      "modelAnswer": "Performance and Load Testing is a key topic in Software Testing Tools and Automation, covered under Performance Testing. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Performance and Load Testing with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    }
+  ]
+}

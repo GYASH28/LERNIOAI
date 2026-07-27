@@ -1,0 +1,1946 @@
+{
+  "subjectCode": "R23CP3404",
+  "subjectName": "Network and Information Security",
+  "semester": 6,
+  "credits": 4,
+  "units": [
+    {
+      "number": 1,
+      "title": "Security Basics",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "security-fundamentals",
+          "title": "Security Fundamentals",
+          "durationMin": 25,
+          "difficulty": "easy",
+          "overview": "Security Fundamentals is a key topic in Network and Information Security, covered under Security Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "Security Fundamentals: Core concept in Network and Information Security",
+            "Definition: The formal definition and scope of security fundamentals",
+            "Key principles: Fundamental rules and properties",
+            "Working: How security fundamentals operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within Security Fundamentals",
+            "Relationship: connects to Security Basics",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "Security Fundamentals — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in Network and Information Security"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding Security Basics"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of Security Fundamentals",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is Security Fundamentals?",
+              "options": [
+                "A core concept in Network and Information Security",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "Security Fundamentals is a fundamental concept in Network and Information Security."
+            },
+            {
+              "question": "Security Fundamentals is studied under which unit?",
+              "options": [
+                "Security Basics",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "Security Fundamentals belongs to the Security Basics unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of Security Fundamentals?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "Security Fundamentals has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand Security Fundamentals and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on Security Fundamentals"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nSecurity Fundamentals is a key topic in Network and Information Security, covered under Security Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Security Fundamentals: Core concept in Network and Information Security\n- Definition: The formal definition and scope of security fundamentals\n- Key principles: Fundamental rules and properties\n- Working: How security fundamentals operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Security Fundamentals`\n- `Relationship: connects to Security Basics`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Security Fundamentals — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Network and Information Security |\n| Importance | Essential for understanding Security Basics |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nSecurity Fundamentals is a key topic in Network and Information Security, covered under Security Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Security Fundamentals — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Security Fundamentals — Concept Map",
+              "content": "mindmap\n  root((Security Fundamentals))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is Security Fundamentals?",
+              "solution": "Correct answer: A core concept in Network and Information Security",
+              "explanation": "Security Fundamentals is a fundamental concept in Network and Information Security."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Security Fundamentals with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Security Fundamentals.",
+              "modelAnswer": "Core concept in Network and Information Security"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of security fundamentals"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Security Fundamentals",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Security Fundamentals.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Security Fundamentals",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to Security Basics",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Security Fundamentals in detail with a diagram.",
+              "modelAnswer": "Security Fundamentals is a key topic in Network and Information Security, covered under Security Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Security Fundamentals with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Security Fundamentals\n\n**One-line definition:** Security Fundamentals is a key topic in Network and Information Security, covered under Security Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and\n\n**Key points:**\n\n- Security Fundamentals: Core concept in Network and Information Security\n- Definition: The formal definition and scope of security fundamentals\n- Key principles: Fundamental rules and properties\n- Working: How security fundamentals operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within Security Fundamentals`\n- `Relationship: connects to Security Basics`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of Security Fundamentals\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Security Fundamentals: Core concept in Network and Information Security",
+            "Definition: The formal definition and scope of security fundamentals",
+            "Key principles: Fundamental rules and properties",
+            "Working: How security fundamentals operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within Security Fundamentals",
+            "Formula: Relationship: connects to Security Basics",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of Security Fundamentals"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Security Fundamentals is a key topic in Network and Information Security, covered under Security Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "Security Fundamentals: Core concept in Network and Information Security"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Security Fundamentals?",
+              "back": "Core concept in Network and Information Security",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of security fundamentals",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How security fundamentals operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Security Fundamentals is a key topic in Network and Information Security, covered under Security Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "Security Fundamentals is a key topic in Network and Information Security, covered under Security Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Security Fundamentals: Core concept in Network and Information Security, Definition: The formal definition and scope of security fundamentals, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "cryptography-and-encryption",
+            "firewalls-and-ids"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Cryptography",
+      "weightage": 25,
+      "lessons": [
+        {
+          "slug": "cryptography-and-encryption",
+          "title": "Cryptography and Encryption",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "Cryptography and Encryption is a key topic in Network and Information Security, covered under Cryptography. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "Cryptography and Encryption: Core concept in Network and Information Security",
+            "Definition: The formal definition and scope of cryptography and encryption",
+            "Key principles: Fundamental rules and properties",
+            "Working: How cryptography and encryption operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within Cryptography and Encryption",
+            "Relationship: connects to Cryptography",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "Cryptography and Encryption — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in Network and Information Security"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding Cryptography"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of Cryptography and Encryption",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is Cryptography and Encryption?",
+              "options": [
+                "A core concept in Network and Information Security",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "Cryptography and Encryption is a fundamental concept in Network and Information Security."
+            },
+            {
+              "question": "Cryptography and Encryption is studied under which unit?",
+              "options": [
+                "Cryptography",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "Cryptography and Encryption belongs to the Cryptography unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of Cryptography and Encryption?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "Cryptography and Encryption has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand Cryptography and Encryption and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on Cryptography and Encryption"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nCryptography and Encryption is a key topic in Network and Information Security, covered under Cryptography. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Cryptography and Encryption: Core concept in Network and Information Security\n- Definition: The formal definition and scope of cryptography and encryption\n- Key principles: Fundamental rules and properties\n- Working: How cryptography and encryption operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Cryptography and Encryption`\n- `Relationship: connects to Cryptography`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Cryptography and Encryption — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Network and Information Security |\n| Importance | Essential for understanding Cryptography |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nCryptography and Encryption is a key topic in Network and Information Security, covered under Cryptography. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Cryptography and Encryption — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Cryptography and Encryption — Concept Map",
+              "content": "mindmap\n  root((Cryptography and Encryption))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is Cryptography and Encryption?",
+              "solution": "Correct answer: A core concept in Network and Information Security",
+              "explanation": "Cryptography and Encryption is a fundamental concept in Network and Information Security."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Cryptography and Encryption with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Cryptography and Encryption.",
+              "modelAnswer": "Core concept in Network and Information Security"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of cryptography and encryption"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Cryptography and Encryption",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Cryptography and Encryption.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Cryptography and Encryption",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to Cryptography",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Cryptography and Encryption in detail with a diagram.",
+              "modelAnswer": "Cryptography and Encryption is a key topic in Network and Information Security, covered under Cryptography. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Cryptography and Encryption with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Cryptography and Encryption\n\n**One-line definition:** Cryptography and Encryption is a key topic in Network and Information Security, covered under Cryptography. This lesson provides a comprehensive understanding of the fundamental concepts, principles, \n\n**Key points:**\n\n- Cryptography and Encryption: Core concept in Network and Information Security\n- Definition: The formal definition and scope of cryptography and encryption\n- Key principles: Fundamental rules and properties\n- Working: How cryptography and encryption operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within Cryptography and Encryption`\n- `Relationship: connects to Cryptography`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of Cryptography and Encryption\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Cryptography and Encryption: Core concept in Network and Information Security",
+            "Definition: The formal definition and scope of cryptography and encryption",
+            "Key principles: Fundamental rules and properties",
+            "Working: How cryptography and encryption operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within Cryptography and Encryption",
+            "Formula: Relationship: connects to Cryptography",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of Cryptography and Encryption"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Cryptography and Encryption is a key topic in Network and Information Security, covered under Cryptography. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "Cryptography and Encryption: Core concept in Network and Information Security"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Cryptography and Encryption?",
+              "back": "Core concept in Network and Information Security",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of cryptography and encryption",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How cryptography and encryption operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Cryptography and Encryption is a key topic in Network and Information Security, covered under Cryptography. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "Cryptography and Encryption is a key topic in Network and Information Security, covered under Cryptography. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Cryptography and Encryption: Core concept in Network and Information Security, Definition: The formal definition and scope of cryptography and encryption, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "firewalls-and-ids",
+            "web-application-security"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Network Security",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "firewalls-and-ids",
+          "title": "Firewalls and IDS",
+          "durationMin": 35,
+          "difficulty": "hard",
+          "overview": "Firewalls and IDS is a key topic in Network and Information Security, covered under Network Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "Firewalls and IDS: Core concept in Network and Information Security",
+            "Definition: The formal definition and scope of firewalls and ids",
+            "Key principles: Fundamental rules and properties",
+            "Working: How firewalls and ids operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within Firewalls and IDS",
+            "Relationship: connects to Network Security",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "Firewalls and IDS — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in Network and Information Security"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding Network Security"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of Firewalls and IDS",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is Firewalls and IDS?",
+              "options": [
+                "A core concept in Network and Information Security",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "Firewalls and IDS is a fundamental concept in Network and Information Security."
+            },
+            {
+              "question": "Firewalls and IDS is studied under which unit?",
+              "options": [
+                "Network Security",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "Firewalls and IDS belongs to the Network Security unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of Firewalls and IDS?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "Firewalls and IDS has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand Firewalls and IDS and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on Firewalls and IDS"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nFirewalls and IDS is a key topic in Network and Information Security, covered under Network Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Firewalls and IDS: Core concept in Network and Information Security\n- Definition: The formal definition and scope of firewalls and ids\n- Key principles: Fundamental rules and properties\n- Working: How firewalls and ids operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Firewalls and IDS`\n- `Relationship: connects to Network Security`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Firewalls and IDS — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Network and Information Security |\n| Importance | Essential for understanding Network Security |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nFirewalls and IDS is a key topic in Network and Information Security, covered under Network Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Firewalls and IDS — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Firewalls and IDS — Concept Map",
+              "content": "mindmap\n  root((Firewalls and IDS))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is Firewalls and IDS?",
+              "solution": "Correct answer: A core concept in Network and Information Security",
+              "explanation": "Firewalls and IDS is a fundamental concept in Network and Information Security."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Firewalls and IDS with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Firewalls and IDS.",
+              "modelAnswer": "Core concept in Network and Information Security"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of firewalls and ids"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Firewalls and IDS",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Firewalls and IDS.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Firewalls and IDS",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to Network Security",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Firewalls and IDS in detail with a diagram.",
+              "modelAnswer": "Firewalls and IDS is a key topic in Network and Information Security, covered under Network Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Firewalls and IDS with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Firewalls and IDS\n\n**One-line definition:** Firewalls and IDS is a key topic in Network and Information Security, covered under Network Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and pr\n\n**Key points:**\n\n- Firewalls and IDS: Core concept in Network and Information Security\n- Definition: The formal definition and scope of firewalls and ids\n- Key principles: Fundamental rules and properties\n- Working: How firewalls and ids operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within Firewalls and IDS`\n- `Relationship: connects to Network Security`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of Firewalls and IDS\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Firewalls and IDS: Core concept in Network and Information Security",
+            "Definition: The formal definition and scope of firewalls and ids",
+            "Key principles: Fundamental rules and properties",
+            "Working: How firewalls and ids operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within Firewalls and IDS",
+            "Formula: Relationship: connects to Network Security",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of Firewalls and IDS"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Firewalls and IDS is a key topic in Network and Information Security, covered under Network Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "Firewalls and IDS: Core concept in Network and Information Security"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Firewalls and IDS?",
+              "back": "Core concept in Network and Information Security",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of firewalls and ids",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How firewalls and ids operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Firewalls and IDS is a key topic in Network and Information Security, covered under Network Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "Firewalls and IDS is a key topic in Network and Information Security, covered under Network Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Firewalls and IDS: Core concept in Network and Information Security, Definition: The formal definition and scope of firewalls and ids, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "web-application-security",
+            "ethical-hacking-basics"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Application Security",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "web-application-security",
+          "title": "Web Application Security",
+          "durationMin": 40,
+          "difficulty": "hard",
+          "overview": "Web Application Security is a key topic in Network and Information Security, covered under Application Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "Web Application Security: Core concept in Network and Information Security",
+            "Definition: The formal definition and scope of web application security",
+            "Key principles: Fundamental rules and properties",
+            "Working: How web application security operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within Web Application Security",
+            "Relationship: connects to Application Security",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "Web Application Security — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in Network and Information Security"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding Application Security"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of Web Application Security",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is Web Application Security?",
+              "options": [
+                "A core concept in Network and Information Security",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "Web Application Security is a fundamental concept in Network and Information Security."
+            },
+            {
+              "question": "Web Application Security is studied under which unit?",
+              "options": [
+                "Application Security",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "Web Application Security belongs to the Application Security unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of Web Application Security?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "Web Application Security has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand Web Application Security and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on Web Application Security"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nWeb Application Security is a key topic in Network and Information Security, covered under Application Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Web Application Security: Core concept in Network and Information Security\n- Definition: The formal definition and scope of web application security\n- Key principles: Fundamental rules and properties\n- Working: How web application security operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Web Application Security`\n- `Relationship: connects to Application Security`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Web Application Security — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Network and Information Security |\n| Importance | Essential for understanding Application Security |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nWeb Application Security is a key topic in Network and Information Security, covered under Application Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Web Application Security — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Web Application Security — Concept Map",
+              "content": "mindmap\n  root((Web Application Security))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is Web Application Security?",
+              "solution": "Correct answer: A core concept in Network and Information Security",
+              "explanation": "Web Application Security is a fundamental concept in Network and Information Security."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Web Application Security with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Web Application Security.",
+              "modelAnswer": "Core concept in Network and Information Security"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of web application security"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Web Application Security",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Web Application Security.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Web Application Security",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to Application Security",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Web Application Security in detail with a diagram.",
+              "modelAnswer": "Web Application Security is a key topic in Network and Information Security, covered under Application Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Web Application Security with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Web Application Security\n\n**One-line definition:** Web Application Security is a key topic in Network and Information Security, covered under Application Security. This lesson provides a comprehensive understanding of the fundamental concepts, princip\n\n**Key points:**\n\n- Web Application Security: Core concept in Network and Information Security\n- Definition: The formal definition and scope of web application security\n- Key principles: Fundamental rules and properties\n- Working: How web application security operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within Web Application Security`\n- `Relationship: connects to Application Security`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of Web Application Security\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Web Application Security: Core concept in Network and Information Security",
+            "Definition: The formal definition and scope of web application security",
+            "Key principles: Fundamental rules and properties",
+            "Working: How web application security operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within Web Application Security",
+            "Formula: Relationship: connects to Application Security",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of Web Application Security"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Web Application Security is a key topic in Network and Information Security, covered under Application Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "Web Application Security: Core concept in Network and Information Security"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Web Application Security?",
+              "back": "Core concept in Network and Information Security",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of web application security",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How web application security operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Web Application Security is a key topic in Network and Information Security, covered under Application Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "Web Application Security is a key topic in Network and Information Security, covered under Application Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Web Application Security: Core concept in Network and Information Security, Definition: The formal definition and scope of web application security, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "ethical-hacking-basics"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Ethical Hacking",
+      "weightage": 15,
+      "lessons": [
+        {
+          "slug": "ethical-hacking-basics",
+          "title": "Ethical Hacking Basics",
+          "durationMin": 45,
+          "difficulty": "hard",
+          "overview": "Ethical Hacking Basics is a key topic in Network and Information Security, covered under Ethical Hacking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "Ethical Hacking Basics: Core concept in Network and Information Security",
+            "Definition: The formal definition and scope of ethical hacking basics",
+            "Key principles: Fundamental rules and properties",
+            "Working: How ethical hacking basics operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within Ethical Hacking Basics",
+            "Relationship: connects to Ethical Hacking",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "Ethical Hacking Basics — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in Network and Information Security"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding Ethical Hacking"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of Ethical Hacking Basics",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is Ethical Hacking Basics?",
+              "options": [
+                "A core concept in Network and Information Security",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "Ethical Hacking Basics is a fundamental concept in Network and Information Security."
+            },
+            {
+              "question": "Ethical Hacking Basics is studied under which unit?",
+              "options": [
+                "Ethical Hacking",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "Ethical Hacking Basics belongs to the Ethical Hacking unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of Ethical Hacking Basics?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "Ethical Hacking Basics has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand Ethical Hacking Basics and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on Ethical Hacking Basics"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nEthical Hacking Basics is a key topic in Network and Information Security, covered under Ethical Hacking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Ethical Hacking Basics: Core concept in Network and Information Security\n- Definition: The formal definition and scope of ethical hacking basics\n- Key principles: Fundamental rules and properties\n- Working: How ethical hacking basics operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Ethical Hacking Basics`\n- `Relationship: connects to Ethical Hacking`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Ethical Hacking Basics — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Network and Information Security |\n| Importance | Essential for understanding Ethical Hacking |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nEthical Hacking Basics is a key topic in Network and Information Security, covered under Ethical Hacking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Ethical Hacking Basics — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Ethical Hacking Basics — Concept Map",
+              "content": "mindmap\n  root((Ethical Hacking Basics))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is Ethical Hacking Basics?",
+              "solution": "Correct answer: A core concept in Network and Information Security",
+              "explanation": "Ethical Hacking Basics is a fundamental concept in Network and Information Security."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Ethical Hacking Basics with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Ethical Hacking Basics.",
+              "modelAnswer": "Core concept in Network and Information Security"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of ethical hacking basics"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Ethical Hacking Basics",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Ethical Hacking Basics.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Ethical Hacking Basics",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to Ethical Hacking",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Ethical Hacking Basics in detail with a diagram.",
+              "modelAnswer": "Ethical Hacking Basics is a key topic in Network and Information Security, covered under Ethical Hacking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Ethical Hacking Basics with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Ethical Hacking Basics\n\n**One-line definition:** Ethical Hacking Basics is a key topic in Network and Information Security, covered under Ethical Hacking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, an\n\n**Key points:**\n\n- Ethical Hacking Basics: Core concept in Network and Information Security\n- Definition: The formal definition and scope of ethical hacking basics\n- Key principles: Fundamental rules and properties\n- Working: How ethical hacking basics operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within Ethical Hacking Basics`\n- `Relationship: connects to Ethical Hacking`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of Ethical Hacking Basics\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Ethical Hacking Basics: Core concept in Network and Information Security",
+            "Definition: The formal definition and scope of ethical hacking basics",
+            "Key principles: Fundamental rules and properties",
+            "Working: How ethical hacking basics operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within Ethical Hacking Basics",
+            "Formula: Relationship: connects to Ethical Hacking",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of Ethical Hacking Basics"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Ethical Hacking Basics is a key topic in Network and Information Security, covered under Ethical Hacking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "Ethical Hacking Basics: Core concept in Network and Information Security"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Ethical Hacking Basics?",
+              "back": "Core concept in Network and Information Security",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of ethical hacking basics",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How ethical hacking basics operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Ethical Hacking Basics is a key topic in Network and Information Security, covered under Ethical Hacking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "Ethical Hacking Basics is a key topic in Network and Information Security, covered under Ethical Hacking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Ethical Hacking Basics: Core concept in Network and Information Security, Definition: The formal definition and scope of ethical hacking basics, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": []
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "# Network and Information Security — Quick Revision\n\n**Subject code:** R23CP3404  \n**Semester:** 6  \n**Credits:** 4  \n\n## Unit 1: Security Basics (20%)\n### Security Fundamentals\nSecurity Fundamentals is a key topic in Network and Information Security, covered under Security Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Unit 2: Cryptography (25%)\n### Cryptography and Encryption\nCryptography and Encryption is a key topic in Network and Information Security, covered under Cryptography. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Unit 3: Network Security (20%)\n### Firewalls and IDS\nFirewalls and IDS is a key topic in Network and Information Security, covered under Network Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Unit 4: Application Security (20%)\n### Web Application Security\nWeb Application Security is a key topic in Network and Information Security, covered under Application Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Unit 5: Ethical Hacking (15%)\n### Ethical Hacking Basics\nEthical Hacking Basics is a key topic in Network and Information Security, covered under Ethical Hacking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n",
+  "interviewBank": [
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within Security Fundamentals",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 10,
+      "question": "Explain the key concepts from this lesson with examples.",
+      "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+    },
+    {
+      "marks": 5,
+      "question": "What are the practical applications of this topic?",
+      "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within Cryptography and Encryption",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within Firewalls and IDS",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within Web Application Security",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within Ethical Hacking Basics",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    }
+  ],
+  "vivaBank": [
+    {
+      "marks": 2,
+      "question": "Define Security Fundamentals.",
+      "modelAnswer": "Core concept in Network and Information Security"
+    },
+    {
+      "marks": 2,
+      "question": "Define Definition.",
+      "modelAnswer": "The formal definition and scope of security fundamentals"
+    },
+    {
+      "marks": 2,
+      "question": "Define Key principles.",
+      "modelAnswer": "Fundamental rules and properties"
+    },
+    {
+      "marks": 2,
+      "question": "Define the main concept from this lesson.",
+      "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+    },
+    {
+      "marks": 2,
+      "question": "What is the practical importance of this topic?",
+      "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+    },
+    {
+      "marks": 2,
+      "question": "Define Cryptography and Encryption.",
+      "modelAnswer": "Core concept in Network and Information Security"
+    },
+    {
+      "marks": 2,
+      "question": "Define Firewalls and IDS.",
+      "modelAnswer": "Core concept in Network and Information Security"
+    },
+    {
+      "marks": 2,
+      "question": "Define Web Application Security.",
+      "modelAnswer": "Core concept in Network and Information Security"
+    },
+    {
+      "marks": 2,
+      "question": "Define Ethical Hacking Basics.",
+      "modelAnswer": "Core concept in Network and Information Security"
+    }
+  ],
+  "pyqBank": [
+    {
+      "marks": 10,
+      "question": "Explain Security Fundamentals in detail with a diagram.",
+      "modelAnswer": "Security Fundamentals is a key topic in Network and Information Security, covered under Security Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Security Fundamentals with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Cryptography and Encryption in detail with a diagram.",
+      "modelAnswer": "Cryptography and Encryption is a key topic in Network and Information Security, covered under Cryptography. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Cryptography and Encryption with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Firewalls and IDS in detail with a diagram.",
+      "modelAnswer": "Firewalls and IDS is a key topic in Network and Information Security, covered under Network Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Firewalls and IDS with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Web Application Security in detail with a diagram.",
+      "modelAnswer": "Web Application Security is a key topic in Network and Information Security, covered under Application Security. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Web Application Security with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Ethical Hacking Basics in detail with a diagram.",
+      "modelAnswer": "Ethical Hacking Basics is a key topic in Network and Information Security, covered under Ethical Hacking. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Ethical Hacking Basics with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    }
+  ]
+}

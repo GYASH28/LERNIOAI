@@ -1,0 +1,1946 @@
+{
+  "subjectCode": "R23CP1406",
+  "subjectName": "PHP Programming",
+  "semester": 5,
+  "credits": 5,
+  "units": [
+    {
+      "number": 1,
+      "title": "PHP Basics",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "php-syntax-and-variables",
+          "title": "PHP Syntax and Variables",
+          "durationMin": 25,
+          "difficulty": "easy",
+          "overview": "PHP Syntax and Variables is a key topic in PHP Programming, covered under PHP Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "PHP Syntax and Variables: Core concept in PHP Programming",
+            "Definition: The formal definition and scope of php syntax and variables",
+            "Key principles: Fundamental rules and properties",
+            "Working: How php syntax and variables operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within PHP Syntax and Variables",
+            "Relationship: connects to PHP Basics",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "PHP Syntax and Variables — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in PHP Programming"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding PHP Basics"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of PHP Syntax and Variables",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is PHP Syntax and Variables?",
+              "options": [
+                "A core concept in PHP Programming",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "PHP Syntax and Variables is a fundamental concept in PHP Programming."
+            },
+            {
+              "question": "PHP Syntax and Variables is studied under which unit?",
+              "options": [
+                "PHP Basics",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "PHP Syntax and Variables belongs to the PHP Basics unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of PHP Syntax and Variables?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "PHP Syntax and Variables has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand PHP Syntax and Variables and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on PHP Syntax and Variables"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nPHP Syntax and Variables is a key topic in PHP Programming, covered under PHP Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- PHP Syntax and Variables: Core concept in PHP Programming\n- Definition: The formal definition and scope of php syntax and variables\n- Key principles: Fundamental rules and properties\n- Working: How php syntax and variables operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within PHP Syntax and Variables`\n- `Relationship: connects to PHP Basics`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### PHP Syntax and Variables — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in PHP Programming |\n| Importance | Essential for understanding PHP Basics |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nPHP Syntax and Variables is a key topic in PHP Programming, covered under PHP Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "PHP Syntax and Variables — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "PHP Syntax and Variables — Concept Map",
+              "content": "mindmap\n  root((PHP Syntax and Variables))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is PHP Syntax and Variables?",
+              "solution": "Correct answer: A core concept in PHP Programming",
+              "explanation": "PHP Syntax and Variables is a fundamental concept in PHP Programming."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain PHP Syntax and Variables with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define PHP Syntax and Variables.",
+              "modelAnswer": "Core concept in PHP Programming"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of php syntax and variables"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within PHP Syntax and Variables",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define PHP Syntax and Variables.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within PHP Syntax and Variables",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to PHP Basics",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain PHP Syntax and Variables in detail with a diagram.",
+              "modelAnswer": "PHP Syntax and Variables is a key topic in PHP Programming, covered under PHP Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss PHP Syntax and Variables with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — PHP Syntax and Variables\n\n**One-line definition:** PHP Syntax and Variables is a key topic in PHP Programming, covered under PHP Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applicat\n\n**Key points:**\n\n- PHP Syntax and Variables: Core concept in PHP Programming\n- Definition: The formal definition and scope of php syntax and variables\n- Key principles: Fundamental rules and properties\n- Working: How php syntax and variables operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within PHP Syntax and Variables`\n- `Relationship: connects to PHP Basics`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of PHP Syntax and Variables\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "PHP Syntax and Variables: Core concept in PHP Programming",
+            "Definition: The formal definition and scope of php syntax and variables",
+            "Key principles: Fundamental rules and properties",
+            "Working: How php syntax and variables operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within PHP Syntax and Variables",
+            "Formula: Relationship: connects to PHP Basics",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of PHP Syntax and Variables"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "PHP Syntax and Variables is a key topic in PHP Programming, covered under PHP Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "PHP Syntax and Variables: Core concept in PHP Programming"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is PHP Syntax and Variables?",
+              "back": "Core concept in PHP Programming",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of php syntax and variables",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How php syntax and variables operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "PHP Syntax and Variables is a key topic in PHP Programming, covered under PHP Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "PHP Syntax and Variables is a key topic in PHP Programming, covered under PHP Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: PHP Syntax and Variables: Core concept in PHP Programming, Definition: The formal definition and scope of php syntax and variables, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "forms-sessions-and-cookies",
+            "php-and-mysql"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Forms and Sessions",
+      "weightage": 25,
+      "lessons": [
+        {
+          "slug": "forms-sessions-and-cookies",
+          "title": "Forms, Sessions and Cookies",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "Forms, Sessions and Cookies is a key topic in PHP Programming, covered under Forms and Sessions. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "Forms, Sessions and Cookies: Core concept in PHP Programming",
+            "Definition: The formal definition and scope of forms, sessions and cookies",
+            "Key principles: Fundamental rules and properties",
+            "Working: How forms, sessions and cookies operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within Forms, Sessions and Cookies",
+            "Relationship: connects to Forms and Sessions",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "Forms, Sessions and Cookies — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in PHP Programming"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding Forms and Sessions"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of Forms, Sessions and Cookies",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is Forms, Sessions and Cookies?",
+              "options": [
+                "A core concept in PHP Programming",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "Forms, Sessions and Cookies is a fundamental concept in PHP Programming."
+            },
+            {
+              "question": "Forms, Sessions and Cookies is studied under which unit?",
+              "options": [
+                "Forms and Sessions",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "Forms, Sessions and Cookies belongs to the Forms and Sessions unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of Forms, Sessions and Cookies?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "Forms, Sessions and Cookies has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand Forms, Sessions and Cookies and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on Forms, Sessions and Cookies"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nForms, Sessions and Cookies is a key topic in PHP Programming, covered under Forms and Sessions. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Forms, Sessions and Cookies: Core concept in PHP Programming\n- Definition: The formal definition and scope of forms, sessions and cookies\n- Key principles: Fundamental rules and properties\n- Working: How forms, sessions and cookies operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Forms, Sessions and Cookies`\n- `Relationship: connects to Forms and Sessions`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Forms, Sessions and Cookies — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in PHP Programming |\n| Importance | Essential for understanding Forms and Sessions |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nForms, Sessions and Cookies is a key topic in PHP Programming, covered under Forms and Sessions. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Forms, Sessions and Cookies — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Forms, Sessions and Cookies — Concept Map",
+              "content": "mindmap\n  root((Forms, Sessions and Cookies))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is Forms, Sessions and Cookies?",
+              "solution": "Correct answer: A core concept in PHP Programming",
+              "explanation": "Forms, Sessions and Cookies is a fundamental concept in PHP Programming."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Forms, Sessions and Cookies with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Forms, Sessions and Cookies.",
+              "modelAnswer": "Core concept in PHP Programming"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of forms, sessions and cookies"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Forms, Sessions and Cookies",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Forms, Sessions and Cookies.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Forms, Sessions and Cookies",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to Forms and Sessions",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Forms, Sessions and Cookies in detail with a diagram.",
+              "modelAnswer": "Forms, Sessions and Cookies is a key topic in PHP Programming, covered under Forms and Sessions. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Forms, Sessions and Cookies with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Forms, Sessions and Cookies\n\n**One-line definition:** Forms, Sessions and Cookies is a key topic in PHP Programming, covered under Forms and Sessions. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practic\n\n**Key points:**\n\n- Forms, Sessions and Cookies: Core concept in PHP Programming\n- Definition: The formal definition and scope of forms, sessions and cookies\n- Key principles: Fundamental rules and properties\n- Working: How forms, sessions and cookies operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within Forms, Sessions and Cookies`\n- `Relationship: connects to Forms and Sessions`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of Forms, Sessions and Cookies\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Forms, Sessions and Cookies: Core concept in PHP Programming",
+            "Definition: The formal definition and scope of forms, sessions and cookies",
+            "Key principles: Fundamental rules and properties",
+            "Working: How forms, sessions and cookies operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within Forms, Sessions and Cookies",
+            "Formula: Relationship: connects to Forms and Sessions",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of Forms, Sessions and Cookies"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Forms, Sessions and Cookies is a key topic in PHP Programming, covered under Forms and Sessions. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "Forms, Sessions and Cookies: Core concept in PHP Programming"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Forms, Sessions and Cookies?",
+              "back": "Core concept in PHP Programming",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of forms, sessions and cookies",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How forms, sessions and cookies operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Forms, Sessions and Cookies is a key topic in PHP Programming, covered under Forms and Sessions. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "Forms, Sessions and Cookies is a key topic in PHP Programming, covered under Forms and Sessions. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Forms, Sessions and Cookies: Core concept in PHP Programming, Definition: The formal definition and scope of forms, sessions and cookies, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "php-and-mysql",
+            "file-operations-in-php"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Database",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "php-and-mysql",
+          "title": "PHP and MySQL",
+          "durationMin": 35,
+          "difficulty": "hard",
+          "overview": "PHP and MySQL is a key topic in PHP Programming, covered under Database. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "PHP and MySQL: Core concept in PHP Programming",
+            "Definition: The formal definition and scope of php and mysql",
+            "Key principles: Fundamental rules and properties",
+            "Working: How php and mysql operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within PHP and MySQL",
+            "Relationship: connects to Database",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "PHP and MySQL — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in PHP Programming"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding Database"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of PHP and MySQL",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is PHP and MySQL?",
+              "options": [
+                "A core concept in PHP Programming",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "PHP and MySQL is a fundamental concept in PHP Programming."
+            },
+            {
+              "question": "PHP and MySQL is studied under which unit?",
+              "options": [
+                "Database",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "PHP and MySQL belongs to the Database unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of PHP and MySQL?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "PHP and MySQL has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand PHP and MySQL and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on PHP and MySQL"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nPHP and MySQL is a key topic in PHP Programming, covered under Database. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- PHP and MySQL: Core concept in PHP Programming\n- Definition: The formal definition and scope of php and mysql\n- Key principles: Fundamental rules and properties\n- Working: How php and mysql operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within PHP and MySQL`\n- `Relationship: connects to Database`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### PHP and MySQL — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in PHP Programming |\n| Importance | Essential for understanding Database |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nPHP and MySQL is a key topic in PHP Programming, covered under Database. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "PHP and MySQL — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "PHP and MySQL — Concept Map",
+              "content": "mindmap\n  root((PHP and MySQL))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is PHP and MySQL?",
+              "solution": "Correct answer: A core concept in PHP Programming",
+              "explanation": "PHP and MySQL is a fundamental concept in PHP Programming."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain PHP and MySQL with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define PHP and MySQL.",
+              "modelAnswer": "Core concept in PHP Programming"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of php and mysql"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within PHP and MySQL",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define PHP and MySQL.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within PHP and MySQL",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to Database",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain PHP and MySQL in detail with a diagram.",
+              "modelAnswer": "PHP and MySQL is a key topic in PHP Programming, covered under Database. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss PHP and MySQL with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — PHP and MySQL\n\n**One-line definition:** PHP and MySQL is a key topic in PHP Programming, covered under Database. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant\n\n**Key points:**\n\n- PHP and MySQL: Core concept in PHP Programming\n- Definition: The formal definition and scope of php and mysql\n- Key principles: Fundamental rules and properties\n- Working: How php and mysql operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within PHP and MySQL`\n- `Relationship: connects to Database`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of PHP and MySQL\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "PHP and MySQL: Core concept in PHP Programming",
+            "Definition: The formal definition and scope of php and mysql",
+            "Key principles: Fundamental rules and properties",
+            "Working: How php and mysql operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within PHP and MySQL",
+            "Formula: Relationship: connects to Database",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of PHP and MySQL"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "PHP and MySQL is a key topic in PHP Programming, covered under Database. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "PHP and MySQL: Core concept in PHP Programming"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is PHP and MySQL?",
+              "back": "Core concept in PHP Programming",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of php and mysql",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How php and mysql operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "PHP and MySQL is a key topic in PHP Programming, covered under Database. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "PHP and MySQL is a key topic in PHP Programming, covered under Database. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: PHP and MySQL: Core concept in PHP Programming, Definition: The formal definition and scope of php and mysql, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "file-operations-in-php",
+            "introduction-to-laravel"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "File Handling",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "file-operations-in-php",
+          "title": "File Operations in PHP",
+          "durationMin": 40,
+          "difficulty": "hard",
+          "overview": "File Operations in PHP is a key topic in PHP Programming, covered under File Handling. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "File Operations in PHP: Core concept in PHP Programming",
+            "Definition: The formal definition and scope of file operations in php",
+            "Key principles: Fundamental rules and properties",
+            "Working: How file operations in php operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within File Operations in PHP",
+            "Relationship: connects to File Handling",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "File Operations in PHP — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in PHP Programming"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding File Handling"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of File Operations in PHP",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is File Operations in PHP?",
+              "options": [
+                "A core concept in PHP Programming",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "File Operations in PHP is a fundamental concept in PHP Programming."
+            },
+            {
+              "question": "File Operations in PHP is studied under which unit?",
+              "options": [
+                "File Handling",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "File Operations in PHP belongs to the File Handling unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of File Operations in PHP?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "File Operations in PHP has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand File Operations in PHP and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on File Operations in PHP"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nFile Operations in PHP is a key topic in PHP Programming, covered under File Handling. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- File Operations in PHP: Core concept in PHP Programming\n- Definition: The formal definition and scope of file operations in php\n- Key principles: Fundamental rules and properties\n- Working: How file operations in php operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within File Operations in PHP`\n- `Relationship: connects to File Handling`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### File Operations in PHP — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in PHP Programming |\n| Importance | Essential for understanding File Handling |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nFile Operations in PHP is a key topic in PHP Programming, covered under File Handling. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "File Operations in PHP — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "File Operations in PHP — Concept Map",
+              "content": "mindmap\n  root((File Operations in PHP))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is File Operations in PHP?",
+              "solution": "Correct answer: A core concept in PHP Programming",
+              "explanation": "File Operations in PHP is a fundamental concept in PHP Programming."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain File Operations in PHP with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define File Operations in PHP.",
+              "modelAnswer": "Core concept in PHP Programming"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of file operations in php"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within File Operations in PHP",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define File Operations in PHP.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within File Operations in PHP",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to File Handling",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain File Operations in PHP in detail with a diagram.",
+              "modelAnswer": "File Operations in PHP is a key topic in PHP Programming, covered under File Handling. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss File Operations in PHP with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — File Operations in PHP\n\n**One-line definition:** File Operations in PHP is a key topic in PHP Programming, covered under File Handling. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applica\n\n**Key points:**\n\n- File Operations in PHP: Core concept in PHP Programming\n- Definition: The formal definition and scope of file operations in php\n- Key principles: Fundamental rules and properties\n- Working: How file operations in php operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within File Operations in PHP`\n- `Relationship: connects to File Handling`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of File Operations in PHP\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "File Operations in PHP: Core concept in PHP Programming",
+            "Definition: The formal definition and scope of file operations in php",
+            "Key principles: Fundamental rules and properties",
+            "Working: How file operations in php operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within File Operations in PHP",
+            "Formula: Relationship: connects to File Handling",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of File Operations in PHP"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "File Operations in PHP is a key topic in PHP Programming, covered under File Handling. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "File Operations in PHP: Core concept in PHP Programming"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is File Operations in PHP?",
+              "back": "Core concept in PHP Programming",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of file operations in php",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How file operations in php operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "File Operations in PHP is a key topic in PHP Programming, covered under File Handling. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "File Operations in PHP is a key topic in PHP Programming, covered under File Handling. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: File Operations in PHP: Core concept in PHP Programming, Definition: The formal definition and scope of file operations in php, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": [
+            "introduction-to-laravel"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "PHP Frameworks",
+      "weightage": 15,
+      "lessons": [
+        {
+          "slug": "introduction-to-laravel",
+          "title": "Introduction to Laravel",
+          "durationMin": 45,
+          "difficulty": "hard",
+          "overview": "Introduction to Laravel is a key topic in PHP Programming, covered under PHP Frameworks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "keyConcepts": [
+            "Introduction to Laravel: Core concept in PHP Programming",
+            "Definition: The formal definition and scope of introduction to laravel",
+            "Key principles: Fundamental rules and properties",
+            "Working: How introduction to laravel operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Advantages: Benefits of using this approach",
+            "Limitations: Constraints and drawbacks",
+            "Exam relevance: Important for university examinations"
+          ],
+          "formulas": [
+            "Core formula: depends on specific topic within Introduction to Laravel",
+            "Relationship: connects to PHP Frameworks",
+            "Result: output depends on input parameters"
+          ],
+          "tables": [
+            {
+              "title": "Introduction to Laravel — Key Aspects",
+              "headers": [
+                "Aspect",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "Fundamental concept in PHP Programming"
+                ],
+                [
+                  "Importance",
+                  "Essential for understanding PHP Frameworks"
+                ],
+                [
+                  "Application",
+                  "Used in real-world engineering scenarios"
+                ],
+                [
+                  "Exam Weight",
+                  "Frequently asked in diploma examinations"
+                ],
+                [
+                  "Difficulty",
+                  "Medium — requires conceptual understanding"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Not understanding the basic definition of Introduction to Laravel",
+            "Confusing related concepts with each other",
+            "Forgetting to state assumptions before solving",
+            "Not drawing diagrams where required"
+          ],
+          "examTips": [
+            "Always start with a clear definition",
+            "Draw a labelled diagram where applicable",
+            "Give at least one real-world example",
+            "End with a brief summary of key points"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is Introduction to Laravel?",
+              "options": [
+                "A core concept in PHP Programming",
+                "A type of hardware",
+                "A programming language",
+                "A network protocol"
+              ],
+              "answer": 0,
+              "explanation": "Introduction to Laravel is a fundamental concept in PHP Programming."
+            },
+            {
+              "question": "Introduction to Laravel is studied under which unit?",
+              "options": [
+                "PHP Frameworks",
+                "Not applicable",
+                "All units",
+                "None"
+              ],
+              "answer": 0,
+              "explanation": "Introduction to Laravel belongs to the PHP Frameworks unit."
+            },
+            {
+              "question": "Which is MOST important when answering exam questions?",
+              "options": [
+                "Writing only the final answer",
+                "Starting with a clear definition",
+                "Using only bullet points",
+                "Writing as much as possible"
+              ],
+              "answer": 1,
+              "explanation": "Always start with a clear definition for maximum marks."
+            },
+            {
+              "question": "Real-world application of Introduction to Laravel?",
+              "options": [
+                "Used in engineering practice",
+                "Only theoretical",
+                "Not used anywhere",
+                "Only in research"
+              ],
+              "answer": 0,
+              "explanation": "Introduction to Laravel has practical applications in engineering."
+            }
+          ],
+          "objectives": [
+            "Understand Introduction to Laravel and explain its significance",
+            "Understand Definition and explain its significance",
+            "Understand Key principles and explain its significance",
+            "Understand Working and explain its significance",
+            "Understand Applications and explain its significance",
+            "Attempt the practice quiz and viva questions on Introduction to Laravel"
+          ],
+          "prerequisites": [
+            "Basic understanding of the subject prerequisites",
+            "Familiarity with fundamental concepts",
+            "Study of previous unit material"
+          ],
+          "theory": "## Introduction\n\nIntroduction to Laravel is a key topic in PHP Programming, covered under PHP Frameworks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Introduction to Laravel: Core concept in PHP Programming\n- Definition: The formal definition and scope of introduction to laravel\n- Key principles: Fundamental rules and properties\n- Working: How introduction to laravel operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Introduction to Laravel`\n- `Relationship: connects to PHP Frameworks`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Introduction to Laravel — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in PHP Programming |\n| Importance | Essential for understanding PHP Frameworks |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nIntroduction to Laravel is a key topic in PHP Programming, covered under PHP Frameworks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "analogies": [
+            {
+              "scenario": "Concept like building blocks",
+              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Introduction to Laravel — Process Flow",
+              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Introduction to Laravel — Concept Map",
+              "content": "mindmap\n  root((Introduction to Laravel))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) to O(n) depending on operation",
+            "space": "O(1) to O(n) depending on data"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is Introduction to Laravel?",
+              "solution": "Correct answer: A core concept in PHP Programming",
+              "explanation": "Introduction to Laravel is a fundamental concept in PHP Programming."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Introduction to Laravel with reference to the key concepts.",
+              "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
+              "explanation": "Use these tips to structure your answer."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Introduction to Laravel.",
+              "modelAnswer": "Core concept in PHP Programming"
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "The formal definition and scope of introduction to laravel"
+            },
+            {
+              "marks": 2,
+              "question": "Define Key principles.",
+              "modelAnswer": "Fundamental rules and properties"
+            },
+            {
+              "marks": 2,
+              "question": "Define the main concept from this lesson.",
+              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+            },
+            {
+              "marks": 2,
+              "question": "What is the practical importance of this topic?",
+              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Introduction to Laravel",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the key concepts from this lesson with examples.",
+              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+            },
+            {
+              "marks": 5,
+              "question": "What are the practical applications of this topic?",
+              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Introduction to Laravel.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Core formula: depends on specific topic within Introduction to Laravel",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Relationship: connects to PHP Frameworks",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Introduction to Laravel in detail with a diagram.",
+              "modelAnswer": "Introduction to Laravel is a key topic in PHP Programming, covered under PHP Frameworks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Introduction to Laravel with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use examples",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Introduction to Laravel\n\n**One-line definition:** Introduction to Laravel is a key topic in PHP Programming, covered under PHP Frameworks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical appli\n\n**Key points:**\n\n- Introduction to Laravel: Core concept in PHP Programming\n- Definition: The formal definition and scope of introduction to laravel\n- Key principles: Fundamental rules and properties\n- Working: How introduction to laravel operates in practice\n- Applications: Real-world uses in engineering and technology\n\n**Important formulas:**\n\n- `Core formula: depends on specific topic within Introduction to Laravel`\n- `Relationship: connects to PHP Frameworks`\n- `Result: output depends on input parameters`\n\n**Common mistake to avoid:** Not understanding the basic definition of Introduction to Laravel\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Introduction to Laravel: Core concept in PHP Programming",
+            "Definition: The formal definition and scope of introduction to laravel",
+            "Key principles: Fundamental rules and properties",
+            "Working: How introduction to laravel operates in practice",
+            "Applications: Real-world uses in engineering and technology",
+            "Formula: Core formula: depends on specific topic within Introduction to Laravel",
+            "Formula: Relationship: connects to PHP Frameworks",
+            "Formula: Result: output depends on input parameters",
+            "Definition is crucial",
+            "Draw diagrams",
+            "Give examples",
+            "State assumptions"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Avoid duplication in both code and study notes."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always start with a clear definition"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw a labelled diagram where applicable"
+            },
+            {
+              "type": "warning",
+              "content": "Not understanding the basic definition of Introduction to Laravel"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing related concepts with each other"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Introduction to Laravel is a key topic in PHP Programming, covered under PHP Frameworks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "type": "definition",
+              "content": "Introduction to Laravel: Core concept in PHP Programming"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Introduction to Laravel?",
+              "back": "Core concept in PHP Programming",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Definition?",
+              "back": "The formal definition and scope of introduction to laravel",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Key principles?",
+              "back": "Fundamental rules and properties",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Working?",
+              "back": "How introduction to laravel operates in practice",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Applications?",
+              "back": "Real-world uses in engineering and technology",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Advantages?",
+              "back": "Benefits of using this approach",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Limitations?",
+              "back": "Constraints and drawbacks",
+              "hint": "Refer to key concepts."
+            },
+            {
+              "front": "What is Exam relevance?",
+              "back": "Important for university examinations",
+              "hint": "Refer to key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Introduction to Laravel is a key topic in PHP Programming, covered under PHP Frameworks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+            },
+            {
+              "style": "detailed",
+              "content": "Introduction to Laravel is a key topic in PHP Programming, covered under PHP Frameworks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Introduction to Laravel: Core concept in PHP Programming, Definition: The formal definition and scope of introduction to laravel, Key principles: Fundamental rules and properties."
+            }
+          ],
+          "recommendedNextLessons": []
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "# PHP Programming — Quick Revision\n\n**Subject code:** R23CP1406  \n**Semester:** 5  \n**Credits:** 5  \n\n## Unit 1: PHP Basics (20%)\n### PHP Syntax and Variables\nPHP Syntax and Variables is a key topic in PHP Programming, covered under PHP Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Unit 2: Forms and Sessions (25%)\n### Forms, Sessions and Cookies\nForms, Sessions and Cookies is a key topic in PHP Programming, covered under Forms and Sessions. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Unit 3: Database (20%)\n### PHP and MySQL\nPHP and MySQL is a key topic in PHP Programming, covered under Database. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Unit 4: File Handling (20%)\n### File Operations in PHP\nFile Operations in PHP is a key topic in PHP Programming, covered under File Handling. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Unit 5: PHP Frameworks (15%)\n### Introduction to Laravel\nIntroduction to Laravel is a key topic in PHP Programming, covered under PHP Frameworks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n",
+  "interviewBank": [
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within PHP Syntax and Variables",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 10,
+      "question": "Explain the key concepts from this lesson with examples.",
+      "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
+    },
+    {
+      "marks": 5,
+      "question": "What are the practical applications of this topic?",
+      "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within Forms, Sessions and Cookies",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within PHP and MySQL",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within File Operations in PHP",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    },
+    {
+      "marks": 5,
+      "question": "Explain: Core formula: depends on specific topic within Introduction to Laravel",
+      "modelAnswer": "Define each term, give an example, and state when it is used."
+    }
+  ],
+  "vivaBank": [
+    {
+      "marks": 2,
+      "question": "Define PHP Syntax and Variables.",
+      "modelAnswer": "Core concept in PHP Programming"
+    },
+    {
+      "marks": 2,
+      "question": "Define Definition.",
+      "modelAnswer": "The formal definition and scope of php syntax and variables"
+    },
+    {
+      "marks": 2,
+      "question": "Define Key principles.",
+      "modelAnswer": "Fundamental rules and properties"
+    },
+    {
+      "marks": 2,
+      "question": "Define the main concept from this lesson.",
+      "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
+    },
+    {
+      "marks": 2,
+      "question": "What is the practical importance of this topic?",
+      "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+    },
+    {
+      "marks": 2,
+      "question": "Define Forms, Sessions and Cookies.",
+      "modelAnswer": "Core concept in PHP Programming"
+    },
+    {
+      "marks": 2,
+      "question": "Define PHP and MySQL.",
+      "modelAnswer": "Core concept in PHP Programming"
+    },
+    {
+      "marks": 2,
+      "question": "Define File Operations in PHP.",
+      "modelAnswer": "Core concept in PHP Programming"
+    },
+    {
+      "marks": 2,
+      "question": "Define Introduction to Laravel.",
+      "modelAnswer": "Core concept in PHP Programming"
+    }
+  ],
+  "pyqBank": [
+    {
+      "marks": 10,
+      "question": "Explain PHP Syntax and Variables in detail with a diagram.",
+      "modelAnswer": "PHP Syntax and Variables is a key topic in PHP Programming, covered under PHP Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss PHP Syntax and Variables with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Forms, Sessions and Cookies in detail with a diagram.",
+      "modelAnswer": "Forms, Sessions and Cookies is a key topic in PHP Programming, covered under Forms and Sessions. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Forms, Sessions and Cookies with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain PHP and MySQL in detail with a diagram.",
+      "modelAnswer": "PHP and MySQL is a key topic in PHP Programming, covered under Database. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss PHP and MySQL with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain File Operations in PHP in detail with a diagram.",
+      "modelAnswer": "File Operations in PHP is a key topic in PHP Programming, covered under File Handling. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss File Operations in PHP with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Introduction to Laravel in detail with a diagram.",
+      "modelAnswer": "Introduction to Laravel is a key topic in PHP Programming, covered under PHP Frameworks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Introduction to Laravel with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use examples",
+        "Mention real-world use case"
+      ]
+    }
+  ]
+}

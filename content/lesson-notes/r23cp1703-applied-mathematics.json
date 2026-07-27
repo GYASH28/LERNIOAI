@@ -1,0 +1,2042 @@
+{
+  "subjectCode": "R23CP1703",
+  "subjectName": "Applied Mathematics",
+  "semester": 2,
+  "credits": 4,
+  "units": [
+    {
+      "number": 1,
+      "title": "Complex Numbers",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "complex-numbers",
+          "title": "Complex Numbers",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "Complex numbers extend real numbers to solve equations like x² + 1 = 0. A complex number is z = a + ib where i = √(-1). They have modulus |z| = √(a²+b²), argument arg(z) = tan⁻¹(b/a), and can be represented in rectangular (a+ib) or polar (r·e^(iθ)) form.",
+          "keyConcepts": [
+            "Complex number: z = a + ib, where i = √(-1)",
+            "Real part: Re(z) = a; Imaginary part: Im(z) = b",
+            "Modulus: |z| = √(a² + b²)",
+            "Argument: arg(z) = tan⁻¹(b/a)",
+            "Conjugate: z̄ = a - ib",
+            "Polar form: z = r(cos θ + i sin θ) = r·e^(iθ)",
+            "Euler's formula: e^(iθ) = cos θ + i sin θ",
+            "i² = -1, i³ = -i, i⁴ = 1"
+          ],
+          "formulas": [
+            "z = a + ib, i² = -1",
+            "|z| = √(a² + b²)",
+            "arg(z) = tan⁻¹(b/a)",
+            "Conjugate: z̄ = a - ib",
+            "Polar: z = r·e^(iθ), r = |z|",
+            "Euler: e^(iθ) = cos θ + i sin θ",
+            "z₁ · z₂ = r₁r₂ · e^(i(θ₁+θ₂))",
+            "z₁ / z₂ = (r₁/r₂) · e^(i(θ₁-θ₂))"
+          ],
+          "tables": [
+            {
+              "title": "Powers of i",
+              "headers": [
+                "Power",
+                "Value"
+              ],
+              "rows": [
+                [
+                  "i¹",
+                  "i"
+                ],
+                [
+                  "i²",
+                  "-1"
+                ],
+                [
+                  "i³",
+                  "-i"
+                ],
+                [
+                  "i⁴",
+                  "1"
+                ],
+                [
+                  "i⁵",
+                  "i (cycle repeats)"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Forgetting i² = -1 (not 1)",
+            "Mixing up real and imaginary parts",
+            "Confusing modulus (always positive) with the number itself",
+            "Not using radians for argument in Euler form"
+          ],
+          "examTips": [
+            "Always write complex numbers as a + ib form",
+            "Show the polar form conversion: r = |z|, θ = arg(z)",
+            "Memorise i, i², i³, i⁴ cycle"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "i² = ?",
+              "options": [
+                "1",
+                "-1",
+                "i",
+                "-i"
+              ],
+              "answer": 1,
+              "explanation": "i = √(-1), so i² = -1."
+            },
+            {
+              "question": "Modulus of z = 3 + 4i?",
+              "options": [
+                "5",
+                "7",
+                "25",
+                "1"
+              ],
+              "answer": 0,
+              "explanation": "|z| = √(3²+4²) = √25 = 5."
+            },
+            {
+              "question": "Conjugate of 2 + 3i?",
+              "options": [
+                "2 - 3i",
+                "-2 + 3i",
+                "3 + 2i",
+                "-2 - 3i"
+              ],
+              "answer": 0,
+              "explanation": "Conjugate flips sign of imaginary part: 2 + 3i → 2 - 3i."
+            },
+            {
+              "question": "e^(iπ) = ?",
+              "options": [
+                "1",
+                "-1",
+                "i",
+                "0"
+              ],
+              "answer": 1,
+              "explanation": "Euler's identity: e^(iπ) = cos π + i sin π = -1."
+            }
+          ],
+          "objectives": [
+            "Understand Complex number and explain its significance",
+            "Understand Real part and explain its significance",
+            "Understand Modulus and explain its significance",
+            "Understand Argument and explain its significance",
+            "Understand Conjugate and explain its significance",
+            "Attempt the practice quiz and viva questions on Complex Numbers"
+          ],
+          "prerequisites": [
+            "Basic Mathematics (Sem 1)",
+            "Algebra and trigonometry",
+            "Familiarity with calculus concepts"
+          ],
+          "theory": "## Introduction\n\nComplex numbers extend real numbers to solve equations like x² + 1 = 0. A complex number is z = a + ib where i = √(-1). They have modulus |z| = √(a²+b²), argument arg(z) = tan⁻¹(b/a), and can be represented in rectangular (a+ib) or polar (r·e^(iθ)) form.\n## Key Concepts\n\n- Complex number: z = a + ib, where i = √(-1)\n- Real part: Re(z) = a; Imaginary part: Im(z) = b\n- Modulus: |z| = √(a² + b²)\n- Argument: arg(z) = tan⁻¹(b/a)\n- Conjugate: z̄ = a - ib\n- Polar form: z = r(cos θ + i sin θ) = r·e^(iθ)\n- Euler's formula: e^(iθ) = cos θ + i sin θ\n- i² = -1, i³ = -i, i⁴ = 1\n\n## Important Formulas\n\n- `z = a + ib, i² = -1`\n- `|z| = √(a² + b²)`\n- `arg(z) = tan⁻¹(b/a)`\n- `Conjugate: z̄ = a - ib`\n- `Polar: z = r·e^(iθ), r = |z|`\n- `Euler: e^(iθ) = cos θ + i sin θ`\n- `z₁ · z₂ = r₁r₂ · e^(i(θ₁+θ₂))`\n- `z₁ / z₂ = (r₁/r₂) · e^(i(θ₁-θ₂))`\n\n## Comparison Tables\n\n### Powers of i\n\n| Power | Value |\n| --- | --- |\n| i¹ | i |\n| i² | -1 |\n| i³ | -i |\n| i⁴ | 1 |\n| i⁵ | i (cycle repeats) |\n\n\n## Summary\n\nComplex numbers extend real numbers to solve equations like x² + 1 = 0. A complex number is z = a + ib where i = √(-1). They have modulus |z| = √(a²+b²), argument arg(z) = tan⁻¹(b/a), and can be represented in rectangular (a+ib) or polar (r·e^(iθ)) form.",
+          "analogies": [
+            {
+              "scenario": "Matrix like a spreadsheet",
+              "mapping": "Rows = records, Columns = fields. Matrix multiplication = combining two tables where the column count of the first matches the row count of the second."
+            },
+            {
+              "scenario": "Probability like rolling dice",
+              "mapping": "Sample space = all outcomes {1,2,3,4,5,6}. Event = subset (e.g., 'even' = {2,4,6}). Probability = 3/6 = 1/2."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Complex Numbers — Process Flow",
+              "content": "flowchart TD\n    A[Problem] --> B{Solvable analytically?}\n    B -->|Yes| C[Exact solution]\n    B -->|No| D[Numerical method]\n    D --> E[Iterate]\n    E --> F{Converged?}\n    F -->|No| E\n    F -->|Yes| G[Approximate solution]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Complex Numbers — Concept Map",
+              "content": "mindmap\n  root((Complex Numbers))\n    Complex Numbers\n      Modulus\n      Argument\n      Euler\n    Matrices\n      Operations\n      Determinant\n      Inverse\n    Probability\n      Events\n      Mean\n      Std Dev\n    Vectors\n      Dot\n      Cross\n    Numerical\n      Bisection\n      Newton"
+            }
+          ],
+          "complexity": {
+            "time": "O(n³) for matrix multiplication, O(n) for vector ops",
+            "space": "O(n²) for matrices"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "i² = ?",
+              "solution": "Correct answer: -1",
+              "explanation": "i = √(-1), so i² = -1."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Complex Numbers with reference to the key concepts.",
+              "solution": "Always write complex numbers as a + ib form → Show the polar form conversion: r = |z|, θ = arg(z) → Memorise i, i², i³, i⁴ cycle",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Complex number.",
+              "modelAnswer": "z = a + ib, where i = √(-1)"
+            },
+            {
+              "marks": 2,
+              "question": "Define Real part.",
+              "modelAnswer": "Re(z) = a; Imaginary part: Im(z) = b"
+            },
+            {
+              "marks": 2,
+              "question": "Define Modulus.",
+              "modelAnswer": "|z| = √(a² + b²)"
+            },
+            {
+              "marks": 2,
+              "question": "Define a complex number.",
+              "modelAnswer": "A number of the form z = a + ib where a, b are real and i = √(-1). a = real part, b = imaginary part."
+            },
+            {
+              "marks": 2,
+              "question": "What is the determinant of a matrix?",
+              "modelAnswer": "A scalar value computed from a square matrix. If det ≠ 0, the matrix is invertible. For 2×2 [[a,b],[c,d]], det = ad - bc."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: z = a + ib, i² = -1",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the difference between dot product and cross product of vectors.",
+              "modelAnswer": "Dot product (a·b) gives a SCALAR = |a||b|cos θ — measures projection, finds angles. Cross product (a×b) gives a VECTOR perpendicular to both = |a||b|sin θ n̂ — measures area of parallelogram. Dot is defined in any dimension; cross only in 3D. Dot = 0 → perpendicular; cross = 0 → parallel."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between mean, median, and mode?",
+              "modelAnswer": "Mean: arithmetic average (sum/count). Median: middle value when sorted. Mode: most frequent value. For {1,2,2,3,4}: mean = 2.4, median = 2, mode = 2. Mean is sensitive to outliers; median is robust; mode works for categorical data."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Complex number.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Real part.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: z = a + ib, i² = -1",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: |z| = √(a² + b²)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Complex Numbers in detail with a diagram.",
+              "modelAnswer": "Complex numbers extend real numbers to solve equations like x² + 1 = 0. A complex number is z = a + ib where i = √(-1). They have modulus |z| = √(a²+b²), argument arg(z) = tan⁻¹(b/a), and can be represented in rectangular (a+ib) or polar (r·e^(iθ)) form."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Complex Numbers with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Complex Numbers\n\n**One-line definition:** Complex numbers extend real numbers to solve equations like x² + 1 = 0. A complex number is z = a + ib where i = √(-1). They have modulus |z| = √(a²+b²), argument arg(z) = tan⁻¹(b/a), and can be repre\n\n**Key points:**\n\n- Complex number: z = a + ib, where i = √(-1)\n- Real part: Re(z) = a; Imaginary part: Im(z) = b\n- Modulus: |z| = √(a² + b²)\n- Argument: arg(z) = tan⁻¹(b/a)\n- Conjugate: z̄ = a - ib\n\n**Important formulas:**\n\n- `z = a + ib, i² = -1`\n- `|z| = √(a² + b²)`\n- `arg(z) = tan⁻¹(b/a)`\n- `Conjugate: z̄ = a - ib`\n- `Polar: z = r·e^(iθ), r = |z|`\n- `Euler: e^(iθ) = cos θ + i sin θ`\n- `z₁ · z₂ = r₁r₂ · e^(i(θ₁+θ₂))`\n- `z₁ / z₂ = (r₁/r₂) · e^(i(θ₁-θ₂))`\n\n**Common mistake to avoid:** Forgetting i² = -1 (not 1)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Complex number: z = a + ib, where i = √(-1)",
+            "Real part: Re(z) = a; Imaginary part: Im(z) = b",
+            "Modulus: |z| = √(a² + b²)",
+            "Argument: arg(z) = tan⁻¹(b/a)",
+            "Conjugate: z̄ = a - ib",
+            "Formula: z = a + ib, i² = -1",
+            "Formula: |z| = √(a² + b²)",
+            "Formula: arg(z) = tan⁻¹(b/a)",
+            "Formula: Conjugate: z̄ = a - ib",
+            "Formula: Polar: z = r·e^(iθ), r = |z|",
+            "Formula: Euler: e^(iθ) = cos θ + i sin θ",
+            "Formula: z₁ · z₂ = r₁r₂ · e^(i(θ₁+θ₂))",
+            "Formula: z₁ / z₂ = (r₁/r₂) · e^(i(θ₁-θ₂))",
+            "z = a + ib, |z| = √(a²+b²)",
+            "|A| = ad - bc (2×2)",
+            "P(A∪B) = P(A) + P(B) - P(A∩B)"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "FOIL",
+              "expansion": "First, Outer, Inner, Last",
+              "meaning": "For multiplying two binomials: (a+b)(c+d) = ac + ad + bc + bd."
+            },
+            {
+              "phrase": "PEMDAS",
+              "expansion": "Parentheses, Exponents, Multiply, Divide, Add, Subtract",
+              "meaning": "Order of operations in arithmetic."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always write complex numbers as a + ib form"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Show the polar form conversion: r = |z|, θ = arg(z)"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting i² = -1 (not 1)"
+            },
+            {
+              "type": "warning",
+              "content": "Mixing up real and imaginary parts"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Complex numbers extend real numbers to solve equations like x² + 1 = 0. A complex number is z = a + ib where i = √(-1). They have modulus |z| = √(a²+b²), argument arg(z) = tan⁻¹(b/a), and can be represented in rectangular (a+ib) or polar (r·e^(iθ)) form."
+            },
+            {
+              "type": "definition",
+              "content": "Complex number: z = a + ib, where i = √(-1)"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Complex number?",
+              "back": "z = a + ib, where i = √(-1)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Real part?",
+              "back": "Re(z) = a; Imaginary part: Im(z) = b",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Modulus?",
+              "back": "|z| = √(a² + b²)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Argument?",
+              "back": "arg(z) = tan⁻¹(b/a)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Conjugate?",
+              "back": "z̄ = a - ib",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Polar form?",
+              "back": "z = r(cos θ + i sin θ) = r·e^(iθ)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Euler's formula?",
+              "back": "e^(iθ) = cos θ + i sin θ",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What does the formula `z` represent?",
+              "back": "a + ib, i² = -1",
+              "hint": "Look at the formulas section."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Complex numbers extend real numbers to solve equations like x² + 1 = 0. A complex number is z = a + ib where i = √(-1). They have modulus |z| = √(a²+b²), argument arg(z) = tan⁻¹(b/a), and can be represented in rectangular (a+ib) or polar (r·e^(iθ)) form."
+            },
+            {
+              "style": "detailed",
+              "content": "Complex numbers extend real numbers to solve equations like x² + 1 = 0. A complex number is z = a + ib where i = √(-1). They have modulus |z| = √(a²+b²), argument arg(z) = tan⁻¹(b/a), and can be represented in rectangular (a+ib) or polar (r·e^(iθ)) form.\n\nKey concepts: Complex number: z = a + ib, where i = √(-1), Real part: Re(z) = a; Imaginary part: Im(z) = b, Modulus: |z| = √(a² + b²)."
+            }
+          ],
+          "recommendedNextLessons": [
+            "matrices",
+            "probability"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Matrices and Determinants",
+      "weightage": 25,
+      "lessons": [
+        {
+          "slug": "matrices",
+          "title": "Matrices and Determinants",
+          "durationMin": 35,
+          "difficulty": "medium",
+          "overview": "A matrix is a rectangular array of numbers. Operations include addition (same size), multiplication (cols of A = rows of B), and finding the determinant (only square matrices). Determinants indicate if a matrix is invertible (det ≠ 0). Used in solving linear systems via Cramer's rule.",
+          "keyConcepts": [
+            "Matrix: rectangular array of numbers — rows × columns",
+            "Order: m × n (m rows, n columns)",
+            "Square matrix: m = n",
+            "Matrix addition: same order, element-wise",
+            "Matrix multiplication: AB is defined if cols(A) = rows(B)",
+            "Determinant: only for square matrices, denoted |A|",
+            "Identity matrix I: 1s on diagonal, 0s elsewhere",
+            "Inverse: A⁻¹ exists iff |A| ≠ 0"
+          ],
+          "formulas": [
+            "A_(m×n) · B_(n×p) = C_(m×p)",
+            "Determinant 2×2: |A| = ad - bc for A = [[a,b],[c,d]]",
+            "Inverse 2×2: A⁻¹ = (1/|A|) · [[d,-b],[-c,a]]",
+            "Cramer's rule: x = |A_x| / |A|",
+            "(AB)ᵀ = BᵀAᵀ",
+            "(AB)⁻¹ = B⁻¹A⁻¹"
+          ],
+          "tables": [
+            {
+              "title": "Matrix operations",
+              "headers": [
+                "Operation",
+                "Condition",
+                "Result order"
+              ],
+              "rows": [
+                [
+                  "A + B",
+                  "Same order",
+                  "Same as A"
+                ],
+                [
+                  "A · B",
+                  "cols(A) = rows(B)",
+                  "rows(A) × cols(B)"
+                ],
+                [
+                  "Aᵀ (transpose)",
+                  "Any",
+                  "n × m (swapped)"
+                ],
+                [
+                  "A⁻¹ (inverse)",
+                  "Square + |A|≠0",
+                  "Same as A"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Multiplying matrices in wrong order (AB ≠ BA in general)",
+            "Forgetting that matrix multiplication is NOT commutative",
+            "Computing determinant of a non-square matrix (undefined)",
+            "Sign errors in 3×3 determinant expansion"
+          ],
+          "examTips": [
+            "Always check matrix orders before multiplying",
+            "For 2×2 determinant: ad - bc (positive-negative)",
+            "Mention Cramer's rule for solving linear systems"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Determinant of [[3,1],[2,4]]?",
+              "options": [
+                "10",
+                "12",
+                "14",
+                "5"
+              ],
+              "answer": 0,
+              "explanation": "ad - bc = 3·4 - 1·2 = 12 - 2 = 10."
+            },
+            {
+              "question": "When does A⁻¹ exist?",
+              "options": [
+                "Always",
+                "When |A| ≠ 0",
+                "When A is square",
+                "Never"
+              ],
+              "answer": 1,
+              "explanation": "Inverse exists only when determinant is non-zero."
+            },
+            {
+              "question": "For A_(2×3) and B_(3×4), AB is?",
+              "options": [
+                "2×4",
+                "3×3",
+                "2×3",
+                "Undefined"
+              ],
+              "answer": 0,
+              "explanation": "AB has order rows(A) × cols(B) = 2 × 4."
+            },
+            {
+              "question": "Identity matrix has:",
+              "options": [
+                "0s everywhere",
+                "1s on diagonal",
+                "1s everywhere",
+                "0s on diagonal"
+              ],
+              "answer": 1,
+              "explanation": "Identity matrix has 1s on the main diagonal and 0s elsewhere."
+            }
+          ],
+          "objectives": [
+            "Understand Matrix and explain its significance",
+            "Understand Order and explain its significance",
+            "Understand Square matrix and explain its significance",
+            "Understand Matrix addition and explain its significance",
+            "Understand Matrix multiplication and explain its significance",
+            "Attempt the practice quiz and viva questions on Matrices and Determinants"
+          ],
+          "prerequisites": [
+            "Basic Mathematics (Sem 1)",
+            "Algebra and trigonometry",
+            "Familiarity with calculus concepts",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nA matrix is a rectangular array of numbers. Operations include addition (same size), multiplication (cols of A = rows of B), and finding the determinant (only square matrices). Determinants indicate if a matrix is invertible (det ≠ 0). Used in solving linear systems via Cramer's rule.\n## Key Concepts\n\n- Matrix: rectangular array of numbers — rows × columns\n- Order: m × n (m rows, n columns)\n- Square matrix: m = n\n- Matrix addition: same order, element-wise\n- Matrix multiplication: AB is defined if cols(A) = rows(B)\n- Determinant: only for square matrices, denoted |A|\n- Identity matrix I: 1s on diagonal, 0s elsewhere\n- Inverse: A⁻¹ exists iff |A| ≠ 0\n\n## Important Formulas\n\n- `A_(m×n) · B_(n×p) = C_(m×p)`\n- `Determinant 2×2: |A| = ad - bc for A = [[a,b],[c,d]]`\n- `Inverse 2×2: A⁻¹ = (1/|A|) · [[d,-b],[-c,a]]`\n- `Cramer's rule: x = |A_x| / |A|`\n- `(AB)ᵀ = BᵀAᵀ`\n- `(AB)⁻¹ = B⁻¹A⁻¹`\n\n## Comparison Tables\n\n### Matrix operations\n\n| Operation | Condition | Result order |\n| --- | --- | --- |\n| A + B | Same order | Same as A |\n| A · B | cols(A) = rows(B) | rows(A) × cols(B) |\n| Aᵀ (transpose) | Any | n × m (swapped) |\n| A⁻¹ (inverse) | Square + |A|≠0 | Same as A |\n\n\n## Summary\n\nA matrix is a rectangular array of numbers. Operations include addition (same size), multiplication (cols of A = rows of B), and finding the determinant (only square matrices). Determinants indicate if a matrix is invertible (det ≠ 0). Used in solving linear systems via Cramer's rule.",
+          "analogies": [
+            {
+              "scenario": "Matrix like a spreadsheet",
+              "mapping": "Rows = records, Columns = fields. Matrix multiplication = combining two tables where the column count of the first matches the row count of the second."
+            },
+            {
+              "scenario": "Probability like rolling dice",
+              "mapping": "Sample space = all outcomes {1,2,3,4,5,6}. Event = subset (e.g., 'even' = {2,4,6}). Probability = 3/6 = 1/2."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Matrices and Determinants — Process Flow",
+              "content": "flowchart TD\n    A[Problem] --> B{Solvable analytically?}\n    B -->|Yes| C[Exact solution]\n    B -->|No| D[Numerical method]\n    D --> E[Iterate]\n    E --> F{Converged?}\n    F -->|No| E\n    F -->|Yes| G[Approximate solution]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Matrices and Determinants — Concept Map",
+              "content": "mindmap\n  root((Matrices and Determinants))\n    Complex Numbers\n      Modulus\n      Argument\n      Euler\n    Matrices\n      Operations\n      Determinant\n      Inverse\n    Probability\n      Events\n      Mean\n      Std Dev\n    Vectors\n      Dot\n      Cross\n    Numerical\n      Bisection\n      Newton"
+            }
+          ],
+          "complexity": {
+            "time": "O(n³) for matrix multiplication, O(n) for vector ops",
+            "space": "O(n²) for matrices"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "Determinant of [[3,1],[2,4]]?",
+              "solution": "Correct answer: 10",
+              "explanation": "ad - bc = 3·4 - 1·2 = 12 - 2 = 10."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Matrices and Determinants with reference to the key concepts.",
+              "solution": "Always check matrix orders before multiplying → For 2×2 determinant: ad - bc (positive-negative) → Mention Cramer's rule for solving linear systems",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Matrix.",
+              "modelAnswer": "rectangular array of numbers — rows × columns"
+            },
+            {
+              "marks": 2,
+              "question": "Define Order.",
+              "modelAnswer": "m × n (m rows, n columns)"
+            },
+            {
+              "marks": 2,
+              "question": "Define Square matrix.",
+              "modelAnswer": "m = n"
+            },
+            {
+              "marks": 2,
+              "question": "Define a complex number.",
+              "modelAnswer": "A number of the form z = a + ib where a, b are real and i = √(-1). a = real part, b = imaginary part."
+            },
+            {
+              "marks": 2,
+              "question": "What is the determinant of a matrix?",
+              "modelAnswer": "A scalar value computed from a square matrix. If det ≠ 0, the matrix is invertible. For 2×2 [[a,b],[c,d]], det = ad - bc."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: A_(m×n) · B_(n×p) = C_(m×p)",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the difference between dot product and cross product of vectors.",
+              "modelAnswer": "Dot product (a·b) gives a SCALAR = |a||b|cos θ — measures projection, finds angles. Cross product (a×b) gives a VECTOR perpendicular to both = |a||b|sin θ n̂ — measures area of parallelogram. Dot is defined in any dimension; cross only in 3D. Dot = 0 → perpendicular; cross = 0 → parallel."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between mean, median, and mode?",
+              "modelAnswer": "Mean: arithmetic average (sum/count). Median: middle value when sorted. Mode: most frequent value. For {1,2,2,3,4}: mean = 2.4, median = 2, mode = 2. Mean is sensitive to outliers; median is robust; mode works for categorical data."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Matrix.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Order.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: A_(m×n) · B_(n×p) = C_(m×p)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Determinant 2×2: |A| = ad - bc for A = [[a,b],[c,d]]",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Matrices and Determinants in detail with a diagram.",
+              "modelAnswer": "A matrix is a rectangular array of numbers. Operations include addition (same size), multiplication (cols of A = rows of B), and finding the determinant (only square matrices). Determinants indicate if a matrix is invertible (det ≠ 0). Used in solving linear systems via Cramer's rule."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Matrices and Determinants with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Matrices and Determinants\n\n**One-line definition:** A matrix is a rectangular array of numbers. Operations include addition (same size), multiplication (cols of A = rows of B), and finding the determinant (only square matrices). Determinants indicate i\n\n**Key points:**\n\n- Matrix: rectangular array of numbers — rows × columns\n- Order: m × n (m rows, n columns)\n- Square matrix: m = n\n- Matrix addition: same order, element-wise\n- Matrix multiplication: AB is defined if cols(A) = rows(B)\n\n**Important formulas:**\n\n- `A_(m×n) · B_(n×p) = C_(m×p)`\n- `Determinant 2×2: |A| = ad - bc for A = [[a,b],[c,d]]`\n- `Inverse 2×2: A⁻¹ = (1/|A|) · [[d,-b],[-c,a]]`\n- `Cramer's rule: x = |A_x| / |A|`\n- `(AB)ᵀ = BᵀAᵀ`\n- `(AB)⁻¹ = B⁻¹A⁻¹`\n\n**Common mistake to avoid:** Multiplying matrices in wrong order (AB ≠ BA in general)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Matrix: rectangular array of numbers — rows × columns",
+            "Order: m × n (m rows, n columns)",
+            "Square matrix: m = n",
+            "Matrix addition: same order, element-wise",
+            "Matrix multiplication: AB is defined if cols(A) = rows(B)",
+            "Formula: A_(m×n) · B_(n×p) = C_(m×p)",
+            "Formula: Determinant 2×2: |A| = ad - bc for A = [[a,b],[c,d]]",
+            "Formula: Inverse 2×2: A⁻¹ = (1/|A|) · [[d,-b],[-c,a]]",
+            "Formula: Cramer's rule: x = |A_x| / |A|",
+            "Formula: (AB)ᵀ = BᵀAᵀ",
+            "Formula: (AB)⁻¹ = B⁻¹A⁻¹",
+            "z = a + ib, |z| = √(a²+b²)",
+            "|A| = ad - bc (2×2)",
+            "P(A∪B) = P(A) + P(B) - P(A∩B)"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "FOIL",
+              "expansion": "First, Outer, Inner, Last",
+              "meaning": "For multiplying two binomials: (a+b)(c+d) = ac + ad + bc + bd."
+            },
+            {
+              "phrase": "PEMDAS",
+              "expansion": "Parentheses, Exponents, Multiply, Divide, Add, Subtract",
+              "meaning": "Order of operations in arithmetic."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always check matrix orders before multiplying"
+            },
+            {
+              "type": "exam-tip",
+              "content": "For 2×2 determinant: ad - bc (positive-negative)"
+            },
+            {
+              "type": "warning",
+              "content": "Multiplying matrices in wrong order (AB ≠ BA in general)"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting that matrix multiplication is NOT commutative"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "A matrix is a rectangular array of numbers. Operations include addition (same size), multiplication (cols of A = rows of B), and finding the determinant (only square matrices). Determinants indicate if a matrix is invertible (det ≠ 0). Used in solving linear systems via Cramer's rule."
+            },
+            {
+              "type": "definition",
+              "content": "Matrix: rectangular array of numbers — rows × columns"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Matrix?",
+              "back": "rectangular array of numbers — rows × columns",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Order?",
+              "back": "m × n (m rows, n columns)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Square matrix?",
+              "back": "m = n",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Matrix addition?",
+              "back": "same order, element-wise",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Matrix multiplication?",
+              "back": "AB is defined if cols(A) = rows(B)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Determinant?",
+              "back": "only for square matrices, denoted |A|",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Identity matrix I?",
+              "back": "1s on diagonal, 0s elsewhere",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Inverse?",
+              "back": "A⁻¹ exists iff |A| ≠ 0",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "A matrix is a rectangular array of numbers. Operations include addition (same size), multiplication (cols of A = rows of B), and finding the determinant (only square matrices). Determinants indicate if a matrix is invertible (det ≠ 0). Used in solving linear systems via Cramer's rule."
+            },
+            {
+              "style": "detailed",
+              "content": "A matrix is a rectangular array of numbers. Operations include addition (same size), multiplication (cols of A = rows of B), and finding the determinant (only square matrices). Determinants indicate if a matrix is invertible (det ≠ 0). Used in solving linear systems via Cramer's rule.\n\nKey concepts: Matrix: rectangular array of numbers — rows × columns, Order: m × n (m rows, n columns), Square matrix: m = n."
+            }
+          ],
+          "recommendedNextLessons": [
+            "probability",
+            "vectors"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Probability and Statistics",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "probability",
+          "title": "Probability and Statistics",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "Probability measures the likelihood of an event, ranging from 0 (impossible) to 1 (certain). Statistics collects, analyses, and interprets data. Key measures: mean (average), median (middle), mode (most frequent), standard deviation (spread).",
+          "keyConcepts": [
+            "Probability: P(E) = favorable / total outcomes, 0 ≤ P ≤ 1",
+            "Sample space S: all possible outcomes",
+            "Event E: subset of sample space",
+            "P(not E) = 1 - P(E)",
+            "P(A or B) = P(A) + P(B) - P(A and B)",
+            "P(A and B) = P(A) · P(B) if independent",
+            "Mean (μ): sum / count",
+            "Standard deviation (σ): √(variance)"
+          ],
+          "formulas": [
+            "P(E) = n(E) / n(S)",
+            "P(A ∪ B) = P(A) + P(B) - P(A ∩ B)",
+            "P(A ∩ B) = P(A) · P(B)  (independent)",
+            "Mean: μ = Σx / n",
+            "Variance: σ² = Σ(x - μ)² / n",
+            "Standard deviation: σ = √(variance)",
+            "Median: middle value of sorted data"
+          ],
+          "tables": [
+            {
+              "title": "Measures of central tendency",
+              "headers": [
+                "Measure",
+                "Definition",
+                "Example for {1,2,2,3,4}"
+              ],
+              "rows": [
+                [
+                  "Mean",
+                  "Sum / count",
+                  "(1+2+2+3+4)/5 = 2.4"
+                ],
+                [
+                  "Median",
+                  "Middle value",
+                  "2 (sorted middle)"
+                ],
+                [
+                  "Mode",
+                  "Most frequent",
+                  "2 (appears twice)"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Forgetting to subtract P(A∩B) in P(A∪B) (double-counting)",
+            "Confusing independent events (P(A∩B)=P(A)·P(B)) with mutually exclusive (P(A∩B)=0)",
+            "Mixing up mean, median, mode",
+            "Forgetting to take √ for standard deviation"
+          ],
+          "examTips": [
+            "Always verify probability is between 0 and 1",
+            "Show the sample space for probability problems",
+            "Distinguish mean (average) from median (middle)"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Probability of rolling a 6 on a die?",
+              "options": [
+                "1/3",
+                "1/6",
+                "1/2",
+                "5/6"
+              ],
+              "answer": 1,
+              "explanation": "1 favorable / 6 total = 1/6."
+            },
+            {
+              "question": "Mean of {2, 4, 6, 8}?",
+              "options": [
+                "4",
+                "5",
+                "6",
+                "8"
+              ],
+              "answer": 1,
+              "explanation": "(2+4+6+8)/4 = 20/4 = 5."
+            },
+            {
+              "question": "P(A)=0.3, P(B)=0.4, independent. P(A∩B)=?",
+              "options": [
+                "0.7",
+                "0.12",
+                "0.1",
+                "0.5"
+              ],
+              "answer": 1,
+              "explanation": "Independent: P(A∩B) = 0.3 × 0.4 = 0.12."
+            },
+            {
+              "question": "Median of {3, 1, 4, 1, 5}?",
+              "options": [
+                "1",
+                "3",
+                "4",
+                "5"
+              ],
+              "answer": 1,
+              "explanation": "Sorted: 1,1,3,4,5. Middle (3rd) = 3."
+            }
+          ],
+          "objectives": [
+            "Understand Probability and explain its significance",
+            "Understand Sample space S and explain its significance",
+            "Understand Event E and explain its significance",
+            "Understand P(not E) = 1 and explain its significance",
+            "Understand P(A or B) = P(A) + P(B) and explain its significance",
+            "Attempt the practice quiz and viva questions on Probability and Statistics"
+          ],
+          "prerequisites": [
+            "Basic Mathematics (Sem 1)",
+            "Algebra and trigonometry",
+            "Familiarity with calculus concepts",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nProbability measures the likelihood of an event, ranging from 0 (impossible) to 1 (certain). Statistics collects, analyses, and interprets data. Key measures: mean (average), median (middle), mode (most frequent), standard deviation (spread).\n## Key Concepts\n\n- Probability: P(E) = favorable / total outcomes, 0 ≤ P ≤ 1\n- Sample space S: all possible outcomes\n- Event E: subset of sample space\n- P(not E) = 1 - P(E)\n- P(A or B) = P(A) + P(B) - P(A and B)\n- P(A and B) = P(A) · P(B) if independent\n- Mean (μ): sum / count\n- Standard deviation (σ): √(variance)\n\n## Important Formulas\n\n- `P(E) = n(E) / n(S)`\n- `P(A ∪ B) = P(A) + P(B) - P(A ∩ B)`\n- `P(A ∩ B) = P(A) · P(B)  (independent)`\n- `Mean: μ = Σx / n`\n- `Variance: σ² = Σ(x - μ)² / n`\n- `Standard deviation: σ = √(variance)`\n- `Median: middle value of sorted data`\n\n## Comparison Tables\n\n### Measures of central tendency\n\n| Measure | Definition | Example for {1,2,2,3,4} |\n| --- | --- | --- |\n| Mean | Sum / count | (1+2+2+3+4)/5 = 2.4 |\n| Median | Middle value | 2 (sorted middle) |\n| Mode | Most frequent | 2 (appears twice) |\n\n\n## Summary\n\nProbability measures the likelihood of an event, ranging from 0 (impossible) to 1 (certain). Statistics collects, analyses, and interprets data. Key measures: mean (average), median (middle), mode (most frequent), standard deviation (spread).",
+          "analogies": [
+            {
+              "scenario": "Matrix like a spreadsheet",
+              "mapping": "Rows = records, Columns = fields. Matrix multiplication = combining two tables where the column count of the first matches the row count of the second."
+            },
+            {
+              "scenario": "Probability like rolling dice",
+              "mapping": "Sample space = all outcomes {1,2,3,4,5,6}. Event = subset (e.g., 'even' = {2,4,6}). Probability = 3/6 = 1/2."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Probability and Statistics — Process Flow",
+              "content": "flowchart TD\n    A[Problem] --> B{Solvable analytically?}\n    B -->|Yes| C[Exact solution]\n    B -->|No| D[Numerical method]\n    D --> E[Iterate]\n    E --> F{Converged?}\n    F -->|No| E\n    F -->|Yes| G[Approximate solution]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Probability and Statistics — Concept Map",
+              "content": "mindmap\n  root((Probability and Statistics))\n    Complex Numbers\n      Modulus\n      Argument\n      Euler\n    Matrices\n      Operations\n      Determinant\n      Inverse\n    Probability\n      Events\n      Mean\n      Std Dev\n    Vectors\n      Dot\n      Cross\n    Numerical\n      Bisection\n      Newton"
+            }
+          ],
+          "complexity": {
+            "time": "O(n³) for matrix multiplication, O(n) for vector ops",
+            "space": "O(n²) for matrices"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "Probability of rolling a 6 on a die?",
+              "solution": "Correct answer: 1/6",
+              "explanation": "1 favorable / 6 total = 1/6."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Probability and Statistics with reference to the key concepts.",
+              "solution": "Always verify probability is between 0 and 1 → Show the sample space for probability problems → Distinguish mean (average) from median (middle)",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Probability.",
+              "modelAnswer": "P(E) = favorable / total outcomes, 0 ≤ P ≤ 1"
+            },
+            {
+              "marks": 2,
+              "question": "Define Sample space S.",
+              "modelAnswer": "all possible outcomes"
+            },
+            {
+              "marks": 2,
+              "question": "Define Event E.",
+              "modelAnswer": "subset of sample space"
+            },
+            {
+              "marks": 2,
+              "question": "Define a complex number.",
+              "modelAnswer": "A number of the form z = a + ib where a, b are real and i = √(-1). a = real part, b = imaginary part."
+            },
+            {
+              "marks": 2,
+              "question": "What is the determinant of a matrix?",
+              "modelAnswer": "A scalar value computed from a square matrix. If det ≠ 0, the matrix is invertible. For 2×2 [[a,b],[c,d]], det = ad - bc."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: P(E) = n(E) / n(S)",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the difference between dot product and cross product of vectors.",
+              "modelAnswer": "Dot product (a·b) gives a SCALAR = |a||b|cos θ — measures projection, finds angles. Cross product (a×b) gives a VECTOR perpendicular to both = |a||b|sin θ n̂ — measures area of parallelogram. Dot is defined in any dimension; cross only in 3D. Dot = 0 → perpendicular; cross = 0 → parallel."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between mean, median, and mode?",
+              "modelAnswer": "Mean: arithmetic average (sum/count). Median: middle value when sorted. Mode: most frequent value. For {1,2,2,3,4}: mean = 2.4, median = 2, mode = 2. Mean is sensitive to outliers; median is robust; mode works for categorical data."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Probability.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Sample space S.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: P(E) = n(E) / n(S)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: P(A ∪ B) = P(A) + P(B) - P(A ∩ B)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Probability and Statistics in detail with a diagram.",
+              "modelAnswer": "Probability measures the likelihood of an event, ranging from 0 (impossible) to 1 (certain). Statistics collects, analyses, and interprets data. Key measures: mean (average), median (middle), mode (most frequent), standard deviation (spread)."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Probability and Statistics with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Probability and Statistics\n\n**One-line definition:** Probability measures the likelihood of an event, ranging from 0 (impossible) to 1 (certain). Statistics collects, analyses, and interprets data. Key measures: mean (average), median (middle), mode (mo\n\n**Key points:**\n\n- Probability: P(E) = favorable / total outcomes, 0 ≤ P ≤ 1\n- Sample space S: all possible outcomes\n- Event E: subset of sample space\n- P(not E) = 1 - P(E)\n- P(A or B) = P(A) + P(B) - P(A and B)\n\n**Important formulas:**\n\n- `P(E) = n(E) / n(S)`\n- `P(A ∪ B) = P(A) + P(B) - P(A ∩ B)`\n- `P(A ∩ B) = P(A) · P(B)  (independent)`\n- `Mean: μ = Σx / n`\n- `Variance: σ² = Σ(x - μ)² / n`\n- `Standard deviation: σ = √(variance)`\n- `Median: middle value of sorted data`\n\n**Common mistake to avoid:** Forgetting to subtract P(A∩B) in P(A∪B) (double-counting)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Probability: P(E) = favorable / total outcomes, 0 ≤ P ≤ 1",
+            "Sample space S: all possible outcomes",
+            "Event E: subset of sample space",
+            "P(not E) = 1 - P(E)",
+            "P(A or B) = P(A) + P(B) - P(A and B)",
+            "Formula: P(E) = n(E) / n(S)",
+            "Formula: P(A ∪ B) = P(A) + P(B) - P(A ∩ B)",
+            "Formula: P(A ∩ B) = P(A) · P(B)  (independent)",
+            "Formula: Mean: μ = Σx / n",
+            "Formula: Variance: σ² = Σ(x - μ)² / n",
+            "Formula: Standard deviation: σ = √(variance)",
+            "Formula: Median: middle value of sorted data",
+            "z = a + ib, |z| = √(a²+b²)",
+            "|A| = ad - bc (2×2)",
+            "P(A∪B) = P(A) + P(B) - P(A∩B)"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "FOIL",
+              "expansion": "First, Outer, Inner, Last",
+              "meaning": "For multiplying two binomials: (a+b)(c+d) = ac + ad + bc + bd."
+            },
+            {
+              "phrase": "PEMDAS",
+              "expansion": "Parentheses, Exponents, Multiply, Divide, Add, Subtract",
+              "meaning": "Order of operations in arithmetic."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always verify probability is between 0 and 1"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Show the sample space for probability problems"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting to subtract P(A∩B) in P(A∪B) (double-counting)"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing independent events (P(A∩B)=P(A)·P(B)) with mutually exclusive (P(A∩B)=0)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Probability measures the likelihood of an event, ranging from 0 (impossible) to 1 (certain). Statistics collects, analyses, and interprets data. Key measures: mean (average), median (middle), mode (most frequent), standard deviation (spread)."
+            },
+            {
+              "type": "definition",
+              "content": "Probability: P(E) = favorable / total outcomes, 0 ≤ P ≤ 1"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Probability?",
+              "back": "P(E) = favorable / total outcomes, 0 ≤ P ≤ 1",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Sample space S?",
+              "back": "all possible outcomes",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Event E?",
+              "back": "subset of sample space",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is P(not E) = 1?",
+              "back": "P(E)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is P(A or B) = P(A) + P(B)?",
+              "back": "P(A and B)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Mean (μ)?",
+              "back": "sum / count",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Standard deviation (σ)?",
+              "back": "√(variance)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What does the formula `P(E)` represent?",
+              "back": "n(E) / n(S)",
+              "hint": "Look at the formulas section."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Probability measures the likelihood of an event, ranging from 0 (impossible) to 1 (certain). Statistics collects, analyses, and interprets data. Key measures: mean (average), median (middle), mode (most frequent), standard deviation (spread)."
+            },
+            {
+              "style": "detailed",
+              "content": "Probability measures the likelihood of an event, ranging from 0 (impossible) to 1 (certain). Statistics collects, analyses, and interprets data. Key measures: mean (average), median (middle), mode (most frequent), standard deviation (spread).\n\nKey concepts: Probability: P(E) = favorable / total outcomes, 0 ≤ P ≤ 1, Sample space S: all possible outcomes, Event E: subset of sample space."
+            }
+          ],
+          "recommendedNextLessons": [
+            "vectors",
+            "numerical-methods"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Vectors",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "vectors",
+          "title": "Vectors",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "A vector has magnitude (size) and direction. Operations: addition (parallelogram law), scalar multiplication, dot product (scalar result, finds angles), cross product (vector result, finds area). Used in physics for force, velocity, displacement.",
+          "keyConcepts": [
+            "Vector: quantity with magnitude AND direction",
+            "Scalar: quantity with magnitude only",
+            "Unit vector: magnitude 1 — â = a / |a|",
+            "Dot product: a·b = |a||b|cos θ (scalar)",
+            "Cross product: a×b = |a||b|sin θ n̂ (vector, perpendicular to both)",
+            "Magnitude: |a| = √(a₁² + a₂² + a₃²)",
+            "Parallel: a×b = 0",
+            "Perpendicular: a·b = 0"
+          ],
+          "formulas": [
+            "Magnitude: |a| = √(a₁² + a₂² + a₃²)",
+            "Dot: a·b = a₁b₁ + a₂b₂ + a₃b₃ = |a||b|cos θ",
+            "Cross: a×b = |a||b|sin θ · n̂",
+            "Unit vector: â = a / |a|",
+            "Perpendicular: a·b = 0",
+            "Parallel: a×b = 0",
+            "Angle: cos θ = (a·b) / (|a||b|)"
+          ],
+          "tables": [
+            {
+              "title": "Dot vs Cross product",
+              "headers": [
+                "Aspect",
+                "Dot (·)",
+                "Cross (×)"
+              ],
+              "rows": [
+                [
+                  "Result",
+                  "Scalar",
+                  "Vector"
+                ],
+                [
+                  "Formula",
+                  "|a||b|cos θ",
+                  "|a||b|sin θ n̂"
+                ],
+                [
+                  "Perpendicular",
+                  "= 0",
+                  "Maximum"
+                ],
+                [
+                  "Parallel",
+                  "Maximum",
+                  "= 0"
+                ],
+                [
+                  "Dimension",
+                  "Any",
+                  "3D only"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Confusing dot (scalar) with cross (vector) product",
+            "Forgetting that cross product is only defined in 3D",
+            "Sign error in cross product determinant expansion",
+            "Mixing up parallel (cross = 0) with perpendicular (dot = 0)"
+          ],
+          "examTips": [
+            "State whether the result is scalar or vector",
+            "Show the dot product formula before substituting",
+            "For perpendicular: a·b = 0; for parallel: a×b = 0"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Dot product of (1,2,3) and (4,5,6)?",
+              "options": [
+                "20",
+                "28",
+                "32",
+                "6"
+              ],
+              "answer": 2,
+              "explanation": "1·4 + 2·5 + 3·6 = 4+10+18 = 32."
+            },
+            {
+              "question": "If a·b = 0, vectors are:",
+              "options": [
+                "Parallel",
+                "Perpendicular",
+                "Equal",
+                "Zero"
+              ],
+              "answer": 1,
+              "explanation": "Dot product = 0 means cos θ = 0 → θ = 90° → perpendicular."
+            },
+            {
+              "question": "Magnitude of (3, 4)?",
+              "options": [
+                "5",
+                "7",
+                "12",
+                "25"
+              ],
+              "answer": 0,
+              "explanation": "√(9 + 16) = √25 = 5 (3-4-5 triangle)."
+            },
+            {
+              "question": "Cross product result is a:",
+              "options": [
+                "Scalar",
+                "Vector",
+                "Matrix",
+                "Number"
+              ],
+              "answer": 1,
+              "explanation": "Cross product gives a vector perpendicular to both inputs."
+            }
+          ],
+          "objectives": [
+            "Understand Vector and explain its significance",
+            "Understand Scalar and explain its significance",
+            "Understand Unit vector and explain its significance",
+            "Understand Dot product and explain its significance",
+            "Understand Cross product and explain its significance",
+            "Attempt the practice quiz and viva questions on Vectors"
+          ],
+          "prerequisites": [
+            "Basic Mathematics (Sem 1)",
+            "Algebra and trigonometry",
+            "Familiarity with calculus concepts",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nA vector has magnitude (size) and direction. Operations: addition (parallelogram law), scalar multiplication, dot product (scalar result, finds angles), cross product (vector result, finds area). Used in physics for force, velocity, displacement.\n## Key Concepts\n\n- Vector: quantity with magnitude AND direction\n- Scalar: quantity with magnitude only\n- Unit vector: magnitude 1 — â = a / |a|\n- Dot product: a·b = |a||b|cos θ (scalar)\n- Cross product: a×b = |a||b|sin θ n̂ (vector, perpendicular to both)\n- Magnitude: |a| = √(a₁² + a₂² + a₃²)\n- Parallel: a×b = 0\n- Perpendicular: a·b = 0\n\n## Important Formulas\n\n- `Magnitude: |a| = √(a₁² + a₂² + a₃²)`\n- `Dot: a·b = a₁b₁ + a₂b₂ + a₃b₃ = |a||b|cos θ`\n- `Cross: a×b = |a||b|sin θ · n̂`\n- `Unit vector: â = a / |a|`\n- `Perpendicular: a·b = 0`\n- `Parallel: a×b = 0`\n- `Angle: cos θ = (a·b) / (|a||b|)`\n\n## Comparison Tables\n\n### Dot vs Cross product\n\n| Aspect | Dot (·) | Cross (×) |\n| --- | --- | --- |\n| Result | Scalar | Vector |\n| Formula | |a||b|cos θ | |a||b|sin θ n̂ |\n| Perpendicular | = 0 | Maximum |\n| Parallel | Maximum | = 0 |\n| Dimension | Any | 3D only |\n\n\n## Summary\n\nA vector has magnitude (size) and direction. Operations: addition (parallelogram law), scalar multiplication, dot product (scalar result, finds angles), cross product (vector result, finds area). Used in physics for force, velocity, displacement.",
+          "analogies": [
+            {
+              "scenario": "Matrix like a spreadsheet",
+              "mapping": "Rows = records, Columns = fields. Matrix multiplication = combining two tables where the column count of the first matches the row count of the second."
+            },
+            {
+              "scenario": "Probability like rolling dice",
+              "mapping": "Sample space = all outcomes {1,2,3,4,5,6}. Event = subset (e.g., 'even' = {2,4,6}). Probability = 3/6 = 1/2."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Vectors — Process Flow",
+              "content": "flowchart TD\n    A[Problem] --> B{Solvable analytically?}\n    B -->|Yes| C[Exact solution]\n    B -->|No| D[Numerical method]\n    D --> E[Iterate]\n    E --> F{Converged?}\n    F -->|No| E\n    F -->|Yes| G[Approximate solution]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Vectors — Concept Map",
+              "content": "mindmap\n  root((Vectors))\n    Complex Numbers\n      Modulus\n      Argument\n      Euler\n    Matrices\n      Operations\n      Determinant\n      Inverse\n    Probability\n      Events\n      Mean\n      Std Dev\n    Vectors\n      Dot\n      Cross\n    Numerical\n      Bisection\n      Newton"
+            }
+          ],
+          "complexity": {
+            "time": "O(n³) for matrix multiplication, O(n) for vector ops",
+            "space": "O(n²) for matrices"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "Dot product of (1,2,3) and (4,5,6)?",
+              "solution": "Correct answer: 32",
+              "explanation": "1·4 + 2·5 + 3·6 = 4+10+18 = 32."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Vectors with reference to the key concepts.",
+              "solution": "State whether the result is scalar or vector → Show the dot product formula before substituting → For perpendicular: a·b = 0; for parallel: a×b = 0",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Vector.",
+              "modelAnswer": "quantity with magnitude AND direction"
+            },
+            {
+              "marks": 2,
+              "question": "Define Scalar.",
+              "modelAnswer": "quantity with magnitude only"
+            },
+            {
+              "marks": 2,
+              "question": "Define Unit vector.",
+              "modelAnswer": "magnitude 1 — â = a / |a|"
+            },
+            {
+              "marks": 2,
+              "question": "Define a complex number.",
+              "modelAnswer": "A number of the form z = a + ib where a, b are real and i = √(-1). a = real part, b = imaginary part."
+            },
+            {
+              "marks": 2,
+              "question": "What is the determinant of a matrix?",
+              "modelAnswer": "A scalar value computed from a square matrix. If det ≠ 0, the matrix is invertible. For 2×2 [[a,b],[c,d]], det = ad - bc."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Magnitude: |a| = √(a₁² + a₂² + a₃²)",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the difference between dot product and cross product of vectors.",
+              "modelAnswer": "Dot product (a·b) gives a SCALAR = |a||b|cos θ — measures projection, finds angles. Cross product (a×b) gives a VECTOR perpendicular to both = |a||b|sin θ n̂ — measures area of parallelogram. Dot is defined in any dimension; cross only in 3D. Dot = 0 → perpendicular; cross = 0 → parallel."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between mean, median, and mode?",
+              "modelAnswer": "Mean: arithmetic average (sum/count). Median: middle value when sorted. Mode: most frequent value. For {1,2,2,3,4}: mean = 2.4, median = 2, mode = 2. Mean is sensitive to outliers; median is robust; mode works for categorical data."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Vector.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Scalar.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Magnitude: |a| = √(a₁² + a₂² + a₃²)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Dot: a·b = a₁b₁ + a₂b₂ + a₃b₃ = |a||b|cos θ",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Vectors in detail with a diagram.",
+              "modelAnswer": "A vector has magnitude (size) and direction. Operations: addition (parallelogram law), scalar multiplication, dot product (scalar result, finds angles), cross product (vector result, finds area). Used in physics for force, velocity, displacement."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Vectors with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Vectors\n\n**One-line definition:** A vector has magnitude (size) and direction. Operations: addition (parallelogram law), scalar multiplication, dot product (scalar result, finds angles), cross product (vector result, finds area). Used\n\n**Key points:**\n\n- Vector: quantity with magnitude AND direction\n- Scalar: quantity with magnitude only\n- Unit vector: magnitude 1 — â = a / |a|\n- Dot product: a·b = |a||b|cos θ (scalar)\n- Cross product: a×b = |a||b|sin θ n̂ (vector, perpendicular to both)\n\n**Important formulas:**\n\n- `Magnitude: |a| = √(a₁² + a₂² + a₃²)`\n- `Dot: a·b = a₁b₁ + a₂b₂ + a₃b₃ = |a||b|cos θ`\n- `Cross: a×b = |a||b|sin θ · n̂`\n- `Unit vector: â = a / |a|`\n- `Perpendicular: a·b = 0`\n- `Parallel: a×b = 0`\n- `Angle: cos θ = (a·b) / (|a||b|)`\n\n**Common mistake to avoid:** Confusing dot (scalar) with cross (vector) product\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Vector: quantity with magnitude AND direction",
+            "Scalar: quantity with magnitude only",
+            "Unit vector: magnitude 1 — â = a / |a|",
+            "Dot product: a·b = |a||b|cos θ (scalar)",
+            "Cross product: a×b = |a||b|sin θ n̂ (vector, perpendicular to both)",
+            "Formula: Magnitude: |a| = √(a₁² + a₂² + a₃²)",
+            "Formula: Dot: a·b = a₁b₁ + a₂b₂ + a₃b₃ = |a||b|cos θ",
+            "Formula: Cross: a×b = |a||b|sin θ · n̂",
+            "Formula: Unit vector: â = a / |a|",
+            "Formula: Perpendicular: a·b = 0",
+            "Formula: Parallel: a×b = 0",
+            "Formula: Angle: cos θ = (a·b) / (|a||b|)",
+            "z = a + ib, |z| = √(a²+b²)",
+            "|A| = ad - bc (2×2)",
+            "P(A∪B) = P(A) + P(B) - P(A∩B)"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "FOIL",
+              "expansion": "First, Outer, Inner, Last",
+              "meaning": "For multiplying two binomials: (a+b)(c+d) = ac + ad + bc + bd."
+            },
+            {
+              "phrase": "PEMDAS",
+              "expansion": "Parentheses, Exponents, Multiply, Divide, Add, Subtract",
+              "meaning": "Order of operations in arithmetic."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "State whether the result is scalar or vector"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Show the dot product formula before substituting"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing dot (scalar) with cross (vector) product"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting that cross product is only defined in 3D"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "A vector has magnitude (size) and direction. Operations: addition (parallelogram law), scalar multiplication, dot product (scalar result, finds angles), cross product (vector result, finds area). Used in physics for force, velocity, displacement."
+            },
+            {
+              "type": "definition",
+              "content": "Vector: quantity with magnitude AND direction"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Vector?",
+              "back": "quantity with magnitude AND direction",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Scalar?",
+              "back": "quantity with magnitude only",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Unit vector?",
+              "back": "magnitude 1 — â = a / |a|",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Dot product?",
+              "back": "a·b = |a||b|cos θ (scalar)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Cross product?",
+              "back": "a×b = |a||b|sin θ n̂ (vector, perpendicular to both)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Magnitude?",
+              "back": "|a| = √(a₁² + a₂² + a₃²)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Parallel?",
+              "back": "a×b = 0",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Perpendicular?",
+              "back": "a·b = 0",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "A vector has magnitude (size) and direction. Operations: addition (parallelogram law), scalar multiplication, dot product (scalar result, finds angles), cross product (vector result, finds area). Used in physics for force, velocity, displacement."
+            },
+            {
+              "style": "detailed",
+              "content": "A vector has magnitude (size) and direction. Operations: addition (parallelogram law), scalar multiplication, dot product (scalar result, finds angles), cross product (vector result, finds area). Used in physics for force, velocity, displacement.\n\nKey concepts: Vector: quantity with magnitude AND direction, Scalar: quantity with magnitude only, Unit vector: magnitude 1 — â = a / |a|."
+            }
+          ],
+          "recommendedNextLessons": [
+            "numerical-methods"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Numerical Methods",
+      "weightage": 15,
+      "lessons": [
+        {
+          "slug": "numerical-methods",
+          "title": "Numerical Methods",
+          "durationMin": 30,
+          "difficulty": "hard",
+          "overview": "Numerical methods approximate solutions to mathematical problems that can't be solved analytically. Key methods: Bisection (root-finding by halving interval), Newton-Raphson (iterative root-finding using derivative), Trapezoidal rule (numerical integration), Simpson's rule (more accurate integration).",
+          "keyConcepts": [
+            "Bisection method: halve interval, keep sign change",
+            "Newton-Raphson: x_(n+1) = x_n - f(x_n)/f'(x_n)",
+            "Trapezoidal rule: ∫f(x)dx ≈ (h/2)[y₀ + 2y₁ + ... + yₙ]",
+            "Simpson's rule: ∫f(x)dx ≈ (h/3)[y₀ + 4y₁ + 2y₂ + 4y₃ + ... + yₙ]",
+            "Iteration: repeat until convergence",
+            "Error: |x_(n+1) - x_n| < tolerance",
+            "Convergence: solution approaches true value",
+            "Tolerance: acceptable error margin"
+          ],
+          "formulas": [
+            "Bisection: c = (a + b) / 2",
+            "Newton-Raphson: x_(n+1) = x_n - f(x_n) / f'(x_n)",
+            "Trapezoidal: ∫ ≈ (h/2) · [y₀ + 2Σy_i + yₙ]",
+            "Simpson (1/3): ∫ ≈ (h/3) · [y₀ + 4(y₁+y₃+...) + 2(y₂+y₄+...) + yₙ]",
+            "Step size: h = (b - a) / n",
+            "Error: |x_(n+1) - x_n| < ε"
+          ],
+          "tables": [
+            {
+              "title": "Numerical methods",
+              "headers": [
+                "Method",
+                "Purpose",
+                "Convergence"
+              ],
+              "rows": [
+                [
+                  "Bisection",
+                  "Find root",
+                  "Slow but guaranteed"
+                ],
+                [
+                  "Newton-Raphson",
+                  "Find root",
+                  "Fast (if derivative exists)"
+                ],
+                [
+                  "Trapezoidal",
+                  "Integration",
+                  "O(h²) error"
+                ],
+                [
+                  "Simpson's 1/3",
+                  "Integration",
+                  "O(h⁴) error (better)"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Forgetting to check sign change for bisection (f(a)·f(b) < 0)",
+            "Newton-Raphson fails when f'(x_n) = 0 (division by zero)",
+            "Using Trapezoidal when Simpson's is more accurate",
+            "Not iterating until convergence"
+          ],
+          "examTips": [
+            "Always check sign change before bisection",
+            "Show at least 2-3 iterations for Newton-Raphson",
+            "State the error formula when iterating"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Bisection requires:",
+              "options": [
+                "f'(x) exists",
+                "f(a)·f(b) < 0 (sign change)",
+                "f is linear",
+                "f is polynomial"
+              ],
+              "answer": 1,
+              "explanation": "Bisection needs a sign change between endpoints to bracket the root."
+            },
+            {
+              "question": "Newton-Raphson formula?",
+              "options": [
+                "x_(n+1) = x_n + f/f'",
+                "x_(n+1) = x_n - f/f'",
+                "x_(n+1) = x_n · f",
+                "x_(n+1) = f(x_n)"
+              ],
+              "answer": 1,
+              "explanation": "x_(n+1) = x_n - f(x_n)/f'(x_n)."
+            },
+            {
+              "question": "Which integration method is MORE accurate?",
+              "options": [
+                "Trapezoidal",
+                "Simpson's 1/3",
+                "Both same",
+                "Depends"
+              ],
+              "answer": 1,
+              "explanation": "Simpson's 1/3 has O(h⁴) error vs Trapezoidal's O(h²) — more accurate."
+            },
+            {
+              "question": "In Newton-Raphson, if f'(x_n) = 0:",
+              "options": [
+                "Converges instantly",
+                "Method fails (division by zero)",
+                "Use bisection instead",
+                "Skip iteration"
+              ],
+              "answer": 1,
+              "explanation": "f'(x_n) = 0 means division by zero — method fails. Restart with different initial guess."
+            }
+          ],
+          "objectives": [
+            "Understand Bisection method and explain its significance",
+            "Understand Newton-Raphson and explain its significance",
+            "Understand Trapezoidal rule and explain its significance",
+            "Understand Simpson's rule and explain its significance",
+            "Understand Iteration and explain its significance",
+            "Attempt the practice quiz and viva questions on Numerical Methods"
+          ],
+          "prerequisites": [
+            "Basic Mathematics (Sem 1)",
+            "Algebra and trigonometry",
+            "Familiarity with calculus concepts",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nNumerical methods approximate solutions to mathematical problems that can't be solved analytically. Key methods: Bisection (root-finding by halving interval), Newton-Raphson (iterative root-finding using derivative), Trapezoidal rule (numerical integration), Simpson's rule (more accurate integration).\n## Key Concepts\n\n- Bisection method: halve interval, keep sign change\n- Newton-Raphson: x_(n+1) = x_n - f(x_n)/f'(x_n)\n- Trapezoidal rule: ∫f(x)dx ≈ (h/2)[y₀ + 2y₁ + ... + yₙ]\n- Simpson's rule: ∫f(x)dx ≈ (h/3)[y₀ + 4y₁ + 2y₂ + 4y₃ + ... + yₙ]\n- Iteration: repeat until convergence\n- Error: |x_(n+1) - x_n| < tolerance\n- Convergence: solution approaches true value\n- Tolerance: acceptable error margin\n\n## Important Formulas\n\n- `Bisection: c = (a + b) / 2`\n- `Newton-Raphson: x_(n+1) = x_n - f(x_n) / f'(x_n)`\n- `Trapezoidal: ∫ ≈ (h/2) · [y₀ + 2Σy_i + yₙ]`\n- `Simpson (1/3): ∫ ≈ (h/3) · [y₀ + 4(y₁+y₃+...) + 2(y₂+y₄+...) + yₙ]`\n- `Step size: h = (b - a) / n`\n- `Error: |x_(n+1) - x_n| < ε`\n\n## Comparison Tables\n\n### Numerical methods\n\n| Method | Purpose | Convergence |\n| --- | --- | --- |\n| Bisection | Find root | Slow but guaranteed |\n| Newton-Raphson | Find root | Fast (if derivative exists) |\n| Trapezoidal | Integration | O(h²) error |\n| Simpson's 1/3 | Integration | O(h⁴) error (better) |\n\n\n## Summary\n\nNumerical methods approximate solutions to mathematical problems that can't be solved analytically. Key methods: Bisection (root-finding by halving interval), Newton-Raphson (iterative root-finding using derivative), Trapezoidal rule (numerical integration), Simpson's rule (more accurate integration).",
+          "analogies": [
+            {
+              "scenario": "Matrix like a spreadsheet",
+              "mapping": "Rows = records, Columns = fields. Matrix multiplication = combining two tables where the column count of the first matches the row count of the second."
+            },
+            {
+              "scenario": "Probability like rolling dice",
+              "mapping": "Sample space = all outcomes {1,2,3,4,5,6}. Event = subset (e.g., 'even' = {2,4,6}). Probability = 3/6 = 1/2."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Numerical Methods — Process Flow",
+              "content": "flowchart TD\n    A[Problem] --> B{Solvable analytically?}\n    B -->|Yes| C[Exact solution]\n    B -->|No| D[Numerical method]\n    D --> E[Iterate]\n    E --> F{Converged?}\n    F -->|No| E\n    F -->|Yes| G[Approximate solution]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Numerical Methods — Concept Map",
+              "content": "mindmap\n  root((Numerical Methods))\n    Complex Numbers\n      Modulus\n      Argument\n      Euler\n    Matrices\n      Operations\n      Determinant\n      Inverse\n    Probability\n      Events\n      Mean\n      Std Dev\n    Vectors\n      Dot\n      Cross\n    Numerical\n      Bisection\n      Newton"
+            }
+          ],
+          "complexity": {
+            "time": "O(n³) for matrix multiplication, O(n) for vector ops",
+            "space": "O(n²) for matrices"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "Bisection requires:",
+              "solution": "Correct answer: f(a)·f(b) < 0 (sign change)",
+              "explanation": "Bisection needs a sign change between endpoints to bracket the root."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Numerical Methods with reference to the key concepts.",
+              "solution": "Always check sign change before bisection → Show at least 2-3 iterations for Newton-Raphson → State the error formula when iterating",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Bisection method.",
+              "modelAnswer": "halve interval, keep sign change"
+            },
+            {
+              "marks": 2,
+              "question": "Define Newton-Raphson.",
+              "modelAnswer": "x_(n+1) = x_n - f(x_n)/f'(x_n)"
+            },
+            {
+              "marks": 2,
+              "question": "Define Trapezoidal rule.",
+              "modelAnswer": "∫f(x)dx ≈ (h/2)[y₀ + 2y₁ + ... + yₙ]"
+            },
+            {
+              "marks": 2,
+              "question": "Define a complex number.",
+              "modelAnswer": "A number of the form z = a + ib where a, b are real and i = √(-1). a = real part, b = imaginary part."
+            },
+            {
+              "marks": 2,
+              "question": "What is the determinant of a matrix?",
+              "modelAnswer": "A scalar value computed from a square matrix. If det ≠ 0, the matrix is invertible. For 2×2 [[a,b],[c,d]], det = ad - bc."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Bisection: c = (a + b) / 2",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the difference between dot product and cross product of vectors.",
+              "modelAnswer": "Dot product (a·b) gives a SCALAR = |a||b|cos θ — measures projection, finds angles. Cross product (a×b) gives a VECTOR perpendicular to both = |a||b|sin θ n̂ — measures area of parallelogram. Dot is defined in any dimension; cross only in 3D. Dot = 0 → perpendicular; cross = 0 → parallel."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between mean, median, and mode?",
+              "modelAnswer": "Mean: arithmetic average (sum/count). Median: middle value when sorted. Mode: most frequent value. For {1,2,2,3,4}: mean = 2.4, median = 2, mode = 2. Mean is sensitive to outliers; median is robust; mode works for categorical data."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Bisection method.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Newton-Raphson.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Bisection: c = (a + b) / 2",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Newton-Raphson: x_(n+1) = x_n - f(x_n) / f'(x_n)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Numerical Methods in detail with a diagram.",
+              "modelAnswer": "Numerical methods approximate solutions to mathematical problems that can't be solved analytically. Key methods: Bisection (root-finding by halving interval), Newton-Raphson (iterative root-finding using derivative), Trapezoidal rule (numerical integration), Simpson's rule (more accurate integration)."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Numerical Methods with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Numerical Methods\n\n**One-line definition:** Numerical methods approximate solutions to mathematical problems that can't be solved analytically. Key methods: Bisection (root-finding by halving interval), Newton-Raphson (iterative root-finding us\n\n**Key points:**\n\n- Bisection method: halve interval, keep sign change\n- Newton-Raphson: x_(n+1) = x_n - f(x_n)/f'(x_n)\n- Trapezoidal rule: ∫f(x)dx ≈ (h/2)[y₀ + 2y₁ + ... + yₙ]\n- Simpson's rule: ∫f(x)dx ≈ (h/3)[y₀ + 4y₁ + 2y₂ + 4y₃ + ... + yₙ]\n- Iteration: repeat until convergence\n\n**Important formulas:**\n\n- `Bisection: c = (a + b) / 2`\n- `Newton-Raphson: x_(n+1) = x_n - f(x_n) / f'(x_n)`\n- `Trapezoidal: ∫ ≈ (h/2) · [y₀ + 2Σy_i + yₙ]`\n- `Simpson (1/3): ∫ ≈ (h/3) · [y₀ + 4(y₁+y₃+...) + 2(y₂+y₄+...) + yₙ]`\n- `Step size: h = (b - a) / n`\n- `Error: |x_(n+1) - x_n| < ε`\n\n**Common mistake to avoid:** Forgetting to check sign change for bisection (f(a)·f(b) < 0)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Bisection method: halve interval, keep sign change",
+            "Newton-Raphson: x_(n+1) = x_n - f(x_n)/f'(x_n)",
+            "Trapezoidal rule: ∫f(x)dx ≈ (h/2)[y₀ + 2y₁ + ... + yₙ]",
+            "Simpson's rule: ∫f(x)dx ≈ (h/3)[y₀ + 4y₁ + 2y₂ + 4y₃ + ... + yₙ]",
+            "Iteration: repeat until convergence",
+            "Formula: Bisection: c = (a + b) / 2",
+            "Formula: Newton-Raphson: x_(n+1) = x_n - f(x_n) / f'(x_n)",
+            "Formula: Trapezoidal: ∫ ≈ (h/2) · [y₀ + 2Σy_i + yₙ]",
+            "Formula: Simpson (1/3): ∫ ≈ (h/3) · [y₀ + 4(y₁+y₃+...) + 2(y₂+y₄+...) + yₙ]",
+            "Formula: Step size: h = (b - a) / n",
+            "Formula: Error: |x_(n+1) - x_n| < ε",
+            "z = a + ib, |z| = √(a²+b²)",
+            "|A| = ad - bc (2×2)",
+            "P(A∪B) = P(A) + P(B) - P(A∩B)"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "FOIL",
+              "expansion": "First, Outer, Inner, Last",
+              "meaning": "For multiplying two binomials: (a+b)(c+d) = ac + ad + bc + bd."
+            },
+            {
+              "phrase": "PEMDAS",
+              "expansion": "Parentheses, Exponents, Multiply, Divide, Add, Subtract",
+              "meaning": "Order of operations in arithmetic."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always check sign change before bisection"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Show at least 2-3 iterations for Newton-Raphson"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting to check sign change for bisection (f(a)·f(b) < 0)"
+            },
+            {
+              "type": "warning",
+              "content": "Newton-Raphson fails when f'(x_n) = 0 (division by zero)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Numerical methods approximate solutions to mathematical problems that can't be solved analytically. Key methods: Bisection (root-finding by halving interval), Newton-Raphson (iterative root-finding using derivative), Trapezoidal rule (numerical integration), Simpson's rule (more accurate integration..."
+            },
+            {
+              "type": "definition",
+              "content": "Bisection method: halve interval, keep sign change"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Bisection method?",
+              "back": "halve interval, keep sign change",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Newton-Raphson?",
+              "back": "x_(n+1) = x_n - f(x_n)/f'(x_n)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Trapezoidal rule?",
+              "back": "∫f(x)dx ≈ (h/2)[y₀ + 2y₁ + ... + yₙ]",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Simpson's rule?",
+              "back": "∫f(x)dx ≈ (h/3)[y₀ + 4y₁ + 2y₂ + 4y₃ + ... + yₙ]",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Iteration?",
+              "back": "repeat until convergence",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Error?",
+              "back": "|x_(n+1) - x_n| < tolerance",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Convergence?",
+              "back": "solution approaches true value",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Tolerance?",
+              "back": "acceptable error margin",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Numerical methods approximate solutions to mathematical problems that can't be solved analytically. Key methods: Bisection (root-finding by halving interval), Newton-Raphson (iterative root-finding using derivative), Trapezoidal rule (numerical integration), Simpson's rule (more accurate integration"
+            },
+            {
+              "style": "detailed",
+              "content": "Numerical methods approximate solutions to mathematical problems that can't be solved analytically. Key methods: Bisection (root-finding by halving interval), Newton-Raphson (iterative root-finding using derivative), Trapezoidal rule (numerical integration), Simpson's rule (more accurate integration).\n\nKey concepts: Bisection method: halve interval, keep sign change, Newton-Raphson: x_(n+1) = x_n - f(x_n)/f'(x_n), Trapezoidal rule: ∫f(x)dx ≈ (h/2)[y₀ + 2y₁ + ... + yₙ]."
+            }
+          ],
+          "recommendedNextLessons": []
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "# Applied Mathematics — Quick Revision\n\n**Subject code:** R23CP1703  \n**Semester:** 2  \n**Credits:** 4  \n\n## Unit 1: Complex Numbers (20%)\n### Complex Numbers\nComplex numbers extend real numbers to solve equations like x² + 1 = 0. A complex number is z = a + ib where i = √(-1). They have modulus |z| = √(a²+b²), argument arg(z) = tan⁻¹(b/a), and can be represented in rectangular (a+ib) or polar (r·e^(iθ)) form.\n\n**Formulas:**\n- `z = a + ib, i² = -1`\n- `|z| = √(a² + b²)`\n- `arg(z) = tan⁻¹(b/a)`\n\n## Unit 2: Matrices and Determinants (25%)\n### Matrices and Determinants\nA matrix is a rectangular array of numbers. Operations include addition (same size), multiplication (cols of A = rows of B), and finding the determinant (only square matrices). Determinants indicate if a matrix is invertible (det ≠ 0). Used in solving linear systems via Cramer's ...\n\n**Formulas:**\n- `A_(m×n) · B_(n×p) = C_(m×p)`\n- `Determinant 2×2: |A| = ad - bc for A = [[a,b],[c,d]]`\n- `Inverse 2×2: A⁻¹ = (1/|A|) · [[d,-b],[-c,a]]`\n\n## Unit 3: Probability and Statistics (20%)\n### Probability and Statistics\nProbability measures the likelihood of an event, ranging from 0 (impossible) to 1 (certain). Statistics collects, analyses, and interprets data. Key measures: mean (average), median (middle), mode (most frequent), standard deviation (spread).\n\n**Formulas:**\n- `P(E) = n(E) / n(S)`\n- `P(A ∪ B) = P(A) + P(B) - P(A ∩ B)`\n- `P(A ∩ B) = P(A) · P(B)  (independent)`\n\n## Unit 4: Vectors (20%)\n### Vectors\nA vector has magnitude (size) and direction. Operations: addition (parallelogram law), scalar multiplication, dot product (scalar result, finds angles), cross product (vector result, finds area). Used in physics for force, velocity, displacement.\n\n**Formulas:**\n- `Magnitude: |a| = √(a₁² + a₂² + a₃²)`\n- `Dot: a·b = a₁b₁ + a₂b₂ + a₃b₃ = |a||b|cos θ`\n- `Cross: a×b = |a||b|sin θ · n̂`\n\n## Unit 5: Numerical Methods (15%)\n### Numerical Methods\nNumerical methods approximate solutions to mathematical problems that can't be solved analytically. Key methods: Bisection (root-finding by halving interval), Newton-Raphson (iterative root-finding using derivative), Trapezoidal rule (numerical integration), Simpson's rule (more ...\n\n**Formulas:**\n- `Bisection: c = (a + b) / 2`\n- `Newton-Raphson: x_(n+1) = x_n - f(x_n) / f'(x_n)`\n- `Trapezoidal: ∫ ≈ (h/2) · [y₀ + 2Σy_i + yₙ]`\n",
+  "interviewBank": [
+    {
+      "marks": 5,
+      "question": "Explain the formula: z = a + ib, i² = -1",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 10,
+      "question": "Explain the difference between dot product and cross product of vectors.",
+      "modelAnswer": "Dot product (a·b) gives a SCALAR = |a||b|cos θ — measures projection, finds angles. Cross product (a×b) gives a VECTOR perpendicular to both = |a||b|sin θ n̂ — measures area of parallelogram. Dot is defined in any dimension; cross only in 3D. Dot = 0 → perpendicular; cross = 0 → parallel."
+    },
+    {
+      "marks": 5,
+      "question": "What is the difference between mean, median, and mode?",
+      "modelAnswer": "Mean: arithmetic average (sum/count). Median: middle value when sorted. Mode: most frequent value. For {1,2,2,3,4}: mean = 2.4, median = 2, mode = 2. Mean is sensitive to outliers; median is robust; mode works for categorical data."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: A_(m×n) · B_(n×p) = C_(m×p)",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: P(E) = n(E) / n(S)",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: Magnitude: |a| = √(a₁² + a₂² + a₃²)",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: Bisection: c = (a + b) / 2",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    }
+  ],
+  "vivaBank": [
+    {
+      "marks": 2,
+      "question": "Define Complex number.",
+      "modelAnswer": "z = a + ib, where i = √(-1)"
+    },
+    {
+      "marks": 2,
+      "question": "Define Real part.",
+      "modelAnswer": "Re(z) = a; Imaginary part: Im(z) = b"
+    },
+    {
+      "marks": 2,
+      "question": "Define Modulus.",
+      "modelAnswer": "|z| = √(a² + b²)"
+    },
+    {
+      "marks": 2,
+      "question": "Define a complex number.",
+      "modelAnswer": "A number of the form z = a + ib where a, b are real and i = √(-1). a = real part, b = imaginary part."
+    },
+    {
+      "marks": 2,
+      "question": "What is the determinant of a matrix?",
+      "modelAnswer": "A scalar value computed from a square matrix. If det ≠ 0, the matrix is invertible. For 2×2 [[a,b],[c,d]], det = ad - bc."
+    },
+    {
+      "marks": 2,
+      "question": "Define Matrix.",
+      "modelAnswer": "rectangular array of numbers — rows × columns"
+    },
+    {
+      "marks": 2,
+      "question": "Define Order.",
+      "modelAnswer": "m × n (m rows, n columns)"
+    },
+    {
+      "marks": 2,
+      "question": "Define Square matrix.",
+      "modelAnswer": "m = n"
+    },
+    {
+      "marks": 2,
+      "question": "Define Probability.",
+      "modelAnswer": "P(E) = favorable / total outcomes, 0 ≤ P ≤ 1"
+    },
+    {
+      "marks": 2,
+      "question": "Define Sample space S.",
+      "modelAnswer": "all possible outcomes"
+    },
+    {
+      "marks": 2,
+      "question": "Define Event E.",
+      "modelAnswer": "subset of sample space"
+    },
+    {
+      "marks": 2,
+      "question": "Define Vector.",
+      "modelAnswer": "quantity with magnitude AND direction"
+    }
+  ],
+  "pyqBank": [
+    {
+      "marks": 10,
+      "question": "Explain Complex Numbers in detail with a diagram.",
+      "modelAnswer": "Complex numbers extend real numbers to solve equations like x² + 1 = 0. A complex number is z = a + ib where i = √(-1). They have modulus |z| = √(a²+b²), argument arg(z) = tan⁻¹(b/a), and can be represented in rectangular (a+ib) or polar (r·e^(iθ)) form."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Complex Numbers with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Matrices and Determinants in detail with a diagram.",
+      "modelAnswer": "A matrix is a rectangular array of numbers. Operations include addition (same size), multiplication (cols of A = rows of B), and finding the determinant (only square matrices). Determinants indicate if a matrix is invertible (det ≠ 0). Used in solving linear systems via Cramer's rule."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Matrices and Determinants with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Probability and Statistics in detail with a diagram.",
+      "modelAnswer": "Probability measures the likelihood of an event, ranging from 0 (impossible) to 1 (certain). Statistics collects, analyses, and interprets data. Key measures: mean (average), median (middle), mode (most frequent), standard deviation (spread)."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Probability and Statistics with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Vectors in detail with a diagram.",
+      "modelAnswer": "A vector has magnitude (size) and direction. Operations: addition (parallelogram law), scalar multiplication, dot product (scalar result, finds angles), cross product (vector result, finds area). Used in physics for force, velocity, displacement."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Vectors with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Numerical Methods in detail with a diagram.",
+      "modelAnswer": "Numerical methods approximate solutions to mathematical problems that can't be solved analytically. Key methods: Bisection (root-finding by halving interval), Newton-Raphson (iterative root-finding using derivative), Trapezoidal rule (numerical integration), Simpson's rule (more accurate integration)."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Numerical Methods with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    }
+  ]
+}

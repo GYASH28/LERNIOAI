@@ -71,7 +71,20 @@ function loadManifests(): Manifest[] {
     const files = readdirSync(MANIFEST_DIR).filter((f) => f.endsWith('.json'))
     cachedManifests = files.map((f) => {
       const raw = readFileSync(join(MANIFEST_DIR, f), 'utf-8')
-      return JSON.parse(raw) as Manifest
+      const parsed = JSON.parse(raw) as Manifest
+      // Normalise: the JSON manifests use `officialSubjectCode` but our
+      // ManifestSubject interface expects `code`. Map it so downstream
+      // lookups (getSubjectNotes(subject.code) etc.) actually work.
+      for (const sem of parsed.semesters ?? []) {
+        for (const subj of sem.subjects ?? []) {
+          if (!subj.code && (subj as { officialSubjectCode?: string }).officialSubjectCode) {
+            subj.code = (subj as { officialSubjectCode?: string }).officialSubjectCode as string
+          }
+          // Ensure alternateCode is null (not undefined) for type safety.
+          if (subj.alternateCode === undefined) subj.alternateCode = null
+        }
+      }
+      return parsed
     })
     return cachedManifests
   } catch {

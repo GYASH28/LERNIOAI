@@ -18,9 +18,10 @@ export function NotificationBell() {
   const [open, setOpen] = useState(false)
   const [notifications, setNotifications] = useState<Notification[]>([])
   const [unreadCount, setUnreadCount] = useState(0)
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   const fetchNotifications = useCallback(async () => {
+    setLoading(true)
     try {
       const res = await fetch('/api/notifications?limit=10')
       if (!res.ok) return
@@ -29,6 +30,8 @@ export function NotificationBell() {
       setUnreadCount(data.unreadCount ?? 0)
     } catch {
       // silent fail
+    } finally {
+      setLoading(false)
     }
   }, [])
 
@@ -68,7 +71,7 @@ export function NotificationBell() {
           setOpen((p) => !p)
           if (!open) fetchNotifications()
         }}
-        className="relative flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+        className={`relative flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-accent hover:text-foreground ${unreadCount > 0 ? 'pulse-glow' : ''}`}
         aria-label={`Notifications${unreadCount > 0 ? ` (${unreadCount} unread)` : ''}`}
       >
         <Bell className="h-4 w-4" />
@@ -99,7 +102,11 @@ export function NotificationBell() {
               {loading ? (
                 <p className="p-4 text-center text-sm text-muted-foreground">Loading...</p>
               ) : notifications.length === 0 ? (
-                <p className="p-4 text-center text-sm text-muted-foreground">No notifications yet</p>
+                <div className="flex flex-col items-center p-6 text-center">
+                  <div className="mb-2 text-3xl">☕</div>
+                  <p className="text-sm font-medium">You're all caught up!</p>
+                  <p className="text-xs text-muted-foreground">No new notifications right now.</p>
+                </div>
               ) : (
                 notifications.map((n) => (
                   <button

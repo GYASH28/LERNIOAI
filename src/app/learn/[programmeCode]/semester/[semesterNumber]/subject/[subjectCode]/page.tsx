@@ -1,4 +1,6 @@
 import Link from 'next/link'
+export const dynamic = 'force-dynamic'
+
 import { notFound, redirect } from 'next/navigation'
 import {
   ArrowLeft,
@@ -19,7 +21,7 @@ import { getManifestSubject, type ManifestSubject } from '@/lib/curriculum/manif
 import { enhanceSubject } from '@/lib/curriculum/enhanced-manifest'
 import { getSubjectNotes } from '@/lib/curriculum/lesson-notes-loader'
 import { YouTubePlayer } from '@/components/learning/youtube-player-lazy'
-import { LessonNotesRenderer } from '@/components/learning/lesson-notes-renderer'
+import { QuickRevisionHub } from '@/components/learning/quick-revision-hub'
 
 
 export default async function SubjectLearningPage({
@@ -45,15 +47,23 @@ export default async function SubjectLearningPage({
   const lessonSlug = subject.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80)
   const lessonHref = `/learn/${programmeCode}/semester/${semesterNumber}/subject/${subjectCodeResolved}/lesson/${lessonSlug}`
 
+  // ─── V3 Notes lookup ─────────────────────────────────────────────────────
+  // If we have rich notes for this subject, use them to drive the unit map
+  // (real lesson titles + slugs) instead of the synthetic enhanced-manifest
+  // lessons. Falls back to the synthetic units if no notes exist.
+  const subjectNotes = getSubjectNotes(subjectCodeResolved)
+
   const primaryVideos = subject.resources.filter((r) => r.role === 'primary_video')
   const alternateVideos = subject.resources.filter((r) => r.role !== 'primary_video')
-  const totalLessons = subject.units.reduce((sum, u) => sum + u.lessons.length, 0)
+  const totalLessons = subjectNotes
+    ? subjectNotes.units.reduce((sum, u) => sum + u.lessons.length, 0)
+    : subject.units.reduce((sum, u) => sum + u.lessons.length, 0)
 
   return (
     <main className="min-h-screen bg-background text-foreground">
       {/* ─── Hero ─── */}
       <section className="border-b border-border/70 bg-muted/30">
-        <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl px-5 py-6 sm:px-6 lg:px-8">
           <Link href={semesterHref} className="inline-flex w-fit items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
             <ArrowLeft className="h-4 w-4" />
             <span className="hidden sm:inline">Semester {semesterNumber}</span>
@@ -82,7 +92,7 @@ export default async function SubjectLearningPage({
         </div>
       </section>
 
-      <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8 space-y-8">
+      <div className="mx-auto max-w-6xl px-5 py-6 sm:px-6 lg:px-8 space-y-8">
         {/* ─── Course Outcomes ─── */}
         <section>
           <div className="mb-4 flex items-center gap-2">
@@ -157,35 +167,97 @@ export default async function SubjectLearningPage({
             <span className="text-xs text-muted-foreground">{totalLessons} lessons</span>
           </div>
           <div className="grid gap-3">
-            {subject.units.map((unit) => (
-              <div key={unit.number} className="rounded-lg border border-border bg-card p-4">
-                <div className="flex items-start justify-between gap-3">
-                  <div className="min-w-0">
-                    <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Unit {unit.number}</p>
-                    <h3 className="mt-1 text-sm font-semibold sm:text-base">{unit.title}</h3>
-                    <p className="mt-1 text-xs text-muted-foreground">{unit.description}</p>
+            {/* Use V3 notes units when available; else fall back to enhanced-manifest units */}
+            {(subjectNotes ? subjectNotes.units : subject.units).map((unit) => {
+              // Type narrow: V3 notes units have weightage + lessons with slug+title+durationMin+difficulty
+              const u = unit as {
+                number: number
+                title: string
+                weightage?: number
+                description?: string
+                lessons: Array<{ slug: string; title: string; durationMin?: number; difficulty?: string }>
+              }
+              return (
+                <div key={u.number} className="rounded-lg border border-border bg-card p-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Unit {u.number}</p>
+                      <h3 className="mt-1 text-sm font-semibold sm:text-base">{u.title}</h3>
+                      {u.description && (
+                        <p className="mt-1 text-xs text-muted-foreground">{u.description}</p>
+                      )}
+                    </div>
+                    {u.weightage !== undefined && (
+                      <span className="shrink-0 rounded bg-primary/10 px-2 py-1 text-xs font-bold text-primary">
+                        {u.weightage}%
+                      </span>
+                    )}
                   </div>
-                  <span className="shrink-0 rounded bg-primary/10 px-2 py-1 text-xs font-bold text-primary">
-                    {unit.weightage}%
-                  </span>
+                  {u.lessons.length > 0 && (
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {u.lessons.map((lesson) => {
+                        // If we have V3 notes, link to the specific lesson page
+                        // using the lesson's real slug. Otherwise, link to the
+                        // generic subject-level lesson page.
+                        const href = subjectNotes
+                          ? `/learn/${programmeCode}/semester/${semesterNumber}/subject/${subjectCode}/lesson/${lesson.slug}`
+                          : lessonHref
+                        return (
+                          <Link
+                            key={lesson.slug}
+                            href={href}
+                            className="rounded-md bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
+                          >
+                            {lesson.title}
+                            {lesson.durationMin && (
+                              <span className="ml-1 text-[10px] text-muted-foreground/70">· {lesson.durationMin}m</span>
+                            )}
+                          </Link>
+                        )
+                      })}
+                    </div>
+                  )}
                 </div>
-                {unit.lessons.length > 0 && (
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {unit.lessons.map((lesson) => (
-                      <Link
-                        key={lesson.slug}
-                        href={lessonHref}
-                        className="rounded-md bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
-                      >
-                        {lesson.title}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
+              )
+            })}
           </div>
         </section>
+
+        {/* ─── Quick Revision Hub (moved above videos for faster access) ─── */}
+        {(() => {
+          const notes = getSubjectNotes(subjectCodeResolved)
+          if (notes) return <QuickRevisionHub notes={notes} />
+          // No V3 notes yet — show a friendly "coming soon" card with PDF link
+          return (
+            <section>
+              <div className="mb-4 flex items-center gap-2">
+                <NotebookPen className="h-5 w-5 text-primary" aria-hidden="true" />
+                <h2 className="text-lg font-semibold">Quick Revision Hub</h2>
+              </div>
+              <div className="rounded-lg border border-dashed border-border bg-card p-6 text-center">
+                <FileText className="h-10 w-10 mx-auto mb-3 text-muted-foreground" />
+                <p className="text-sm font-semibold">Revision notes coming soon for this subject</p>
+                <p className="mt-1 text-xs text-muted-foreground max-w-md mx-auto">
+                  We&apos;re preparing concise revision material with formulas, key concepts, viva &amp; interview questions, and PYQs.
+                </p>
+                {(() => {
+                  const safeName = subject.name.toLowerCase().replace(/&/g, 'and').replace(/\//g, '-').replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-').replace(/^-+|-+$/g, '')
+                  const pdfUrl = `/lesson-notes/${subjectCodeResolved.toLowerCase()}-${safeName}.pdf`
+                  return (
+                    <a
+                      href={pdfUrl}
+                      download
+                      className="mt-4 inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+                    >
+                      <FileText className="h-4 w-4" />
+                      Download PDF Summary
+                    </a>
+                  )
+                })()}
+              </div>
+            </section>
+          )
+        })()}
 
         {/* ─── Primary Video Lectures ─── */}
         {primaryVideos.length > 0 && (
@@ -234,24 +306,6 @@ export default async function SubjectLearningPage({
             </div>
           </section>
         )}
-
-        {/* ─── Lesson Notes (from JSON data) ─── */}
-        {(() => {
-          const notes = getSubjectNotes(subjectCodeResolved)
-          if (!notes) return null
-          return (
-            <section>
-              <div className="mb-4 flex items-center gap-2">
-                <NotebookPen className="h-5 w-5 text-primary" aria-hidden="true" />
-                <h2 className="text-lg font-semibold">Detailed Lesson Notes & Quizzes</h2>
-              </div>
-              <p className="mb-4 text-sm text-muted-foreground">
-                Expand each unit to access detailed notes with concepts, formulas, tables, diagrams, code examples, and practice quizzes.
-              </p>
-              <LessonNotesRenderer notes={notes} />
-            </section>
-          )
-        })()}
 
         {/* ─── Start Lesson CTA ─── */}
         <section>

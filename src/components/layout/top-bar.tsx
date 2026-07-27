@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { signOut } from 'next-auth/react'
@@ -58,7 +58,6 @@ const NAV_ITEMS: { key: ViewKey; label: string; icon: typeof BookOpen }[] = [
 
 const EXTRA_LINKS: { href: string; label: string; icon: typeof BookOpen }[] = [
   { href: '/leaderboard', label: 'Leaderboard', icon: Trophy },
-  { href: '/teacher-dashboard', label: 'Teacher Dashboard', icon: GraduationCap },
   { href: '/feedback', label: 'Feedback', icon: MessageSquare },
   { href: '/help', label: 'Help Center', icon: HelpCircle },
 ]
@@ -79,6 +78,7 @@ export function TopBar() {
   const [hidden, setHidden] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [mobileMoreOpen, setMobileMoreOpen] = useState(false)
+  const [moreOpen, setMoreOpen] = useState(false)
 
   const user = useAppStore((s) => s.user)
   const xp = useAppStore((s) => s.xp)
@@ -142,33 +142,59 @@ export function TopBar() {
               )
             })}
 
-            {/* More dropdown for secondary items */}
-            <div className="group relative">
-              <button className="flex items-center gap-1 rounded-md px-2.5 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">
+            {/* More dropdown for secondary items — click + keyboard accessible */}
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setMoreOpen((v) => !v)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Escape') setMoreOpen(false)
+                }}
+                onBlur={(e) => {
+                  // Close when focus leaves the dropdown container
+                  if (!e.currentTarget.parentElement?.contains(e.relatedTarget as Node)) {
+                    setMoreOpen(false)
+                  }
+                }}
+                aria-expanded={moreOpen}
+                aria-haspopup="true"
+                className={cn(
+                  'flex items-center gap-1 rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors',
+                  moreOpen ? 'bg-accent text-foreground' : 'text-muted-foreground hover:bg-accent hover:text-foreground',
+                )}
+              >
                 <span className="hidden lg:inline">More</span>
-                <ChevronDown className="h-3 w-3" />
+                <ChevronDown className={cn('h-3 w-3 transition-transform', moreOpen && 'rotate-180')} />
               </button>
-              <div className="absolute right-0 top-full hidden min-w-[180px] rounded-lg border border-border bg-popover py-1 shadow-lg group-hover:block">
-                {moreItems.map((item) => {
-                  const href = routeForView(item.key)
-                  const active = isActivePath(pathname, href)
-                  return (
-                    <Link
-                      key={item.key}
-                      href={href}
-                      prefetch={true}
-                      onClick={() => useAppStore.getState().setView(item.key)}
-                      className={cn(
-                        'flex items-center gap-2 px-3 py-2 text-sm transition-colors',
-                        active ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:bg-accent hover:text-foreground',
-                      )}
-                    >
-                      <item.icon className="h-4 w-4" />
-                      {item.label}
-                    </Link>
-                  )
-                })}
-              </div>
+              {moreOpen && (
+                <div
+                  className="absolute right-0 top-full z-50 min-w-[180px] rounded-lg border border-border bg-popover py-1 shadow-lg"
+                  onMouseLeave={() => setMoreOpen(false)}
+                >
+                  {moreItems.map((item) => {
+                    const href = routeForView(item.key)
+                    const active = isActivePath(pathname, href)
+                    return (
+                      <Link
+                        key={item.key}
+                        href={href}
+                        prefetch={true}
+                        onClick={() => {
+                          useAppStore.getState().setView(item.key)
+                          setMoreOpen(false)
+                        }}
+                        className={cn(
+                          'flex items-center gap-2 px-3 py-2 text-sm transition-colors',
+                          active ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:bg-accent hover:text-foreground',
+                        )}
+                      >
+                        <item.icon className="h-4 w-4" />
+                        {item.label}
+                      </Link>
+                    )
+                  })}
+                </div>
+              )}
             </div>
           </nav>
 
@@ -176,14 +202,15 @@ export function TopBar() {
           <div className="flex flex-1 items-center justify-end gap-1.5 md:flex-none">
             <button
               onClick={() => {
-                window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true }))
+                const isMac = navigator.platform.includes('Mac')
+                window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: isMac, ctrlKey: !isMac }))
               }}
               className="hidden items-center gap-1.5 rounded-md border border-border px-2.5 py-1.5 text-xs text-muted-foreground transition-colors hover:bg-accent sm:flex"
               aria-label="Quick search"
             >
               <Search className="h-3.5 w-3.5" />
               <span className="hidden lg:inline">Search</span>
-              <kbd className="hidden rounded border border-border px-1 font-mono text-[10px] lg:inline">⌘K</kbd>
+              <kbd className="hidden rounded border border-border px-1 font-mono text-[10px] lg:inline">{typeof navigator !== 'undefined' && navigator.platform.includes('Mac') ? '⌘K' : 'Ctrl K'}</kbd>
             </button>
 
             <NotificationBell />
@@ -340,14 +367,11 @@ export function TopBar() {
 
 // ─── User Menu (desktop dropdown with profile, settings, logout) ─────────────
 
-import { useState as useState2, useRef as useRef2, useEffect as useEffect2 } from 'react'
-import { ChevronDown as ChevronDown2 } from 'lucide-react'
+function UserMenu({ user, isDark, setPref }: { user: { name: string; email: string } | null; isDark: boolean; setPref: (p: any) => void }) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
 
-function UserMenu({ user, isDark, setPref }: { user: { name: string; email: string } | null; isDark: boolean; setPref: (p: { appearance: string }) => void }) {
-  const [open, setOpen] = useState2(false)
-  const ref = useRef2<HTMLDivElement>(null)
-
-  useEffect2(() => {
+  useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (ref.current && !ref.current.contains(e.target as Node)) {
         setOpen(false)
@@ -371,7 +395,7 @@ function UserMenu({ user, isDark, setPref }: { user: { name: string; email: stri
         <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
           {initials}
         </span>
-        <ChevronDown2 className="hidden h-3 w-3 text-muted-foreground sm:block" />
+        <ChevronDown className="hidden h-3 w-3 text-muted-foreground sm:block" />
       </button>
 
       {open && (

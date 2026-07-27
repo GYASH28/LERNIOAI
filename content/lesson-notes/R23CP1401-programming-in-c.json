@@ -32,14 +32,42 @@
           "tables": [
             {
               "title": "Common printf/scanf Format Specifiers",
-              "headers": ["Specifier", "Data Type", "Example"],
+              "headers": [
+                "Specifier",
+                "Data Type",
+                "Example"
+              ],
               "rows": [
-                ["%d", "int", "printf(\"%d\", 42);"],
-                ["%f", "float", "printf(\"%f\", 3.14);"],
-                ["%c", "char", "printf(\"%c\", 'A');"],
-                ["%s", "string (char array)", "printf(\"%s\", name);"],
-                ["%lf", "double", "printf(\"%lf\", 3.14159);"],
-                ["%%", "literal %", "printf(\"100%%\");"]
+                [
+                  "%d",
+                  "int",
+                  "printf(\"%d\", 42);"
+                ],
+                [
+                  "%f",
+                  "float",
+                  "printf(\"%f\", 3.14);"
+                ],
+                [
+                  "%c",
+                  "char",
+                  "printf(\"%c\", 'A');"
+                ],
+                [
+                  "%s",
+                  "string (char array)",
+                  "printf(\"%s\", name);"
+                ],
+                [
+                  "%lf",
+                  "double",
+                  "printf(\"%lf\", 3.14159);"
+                ],
+                [
+                  "%%",
+                  "literal %",
+                  "printf(\"100%%\");"
+                ]
               ],
               "note": "Forgetting the & in scanf is a common error: scanf(\"%d\", &num), NOT scanf(\"%d\", num)."
             }
@@ -67,22 +95,271 @@
           "practiceQuestions": [
             {
               "question": "Which function is the entry point of a C program?",
-              "options": ["start()", "begin()", "main()", "init()"],
+              "options": [
+                "start()",
+                "begin()",
+                "main()",
+                "init()"
+              ],
               "answer": 2,
               "explanation": "main() is the entry point. Execution begins at the first statement inside main(). Every C program must have exactly one main() function."
             },
             {
               "question": "What is wrong with: scanf(\"%d\", num); where num is an int?",
-              "options": ["Nothing — it's correct", "Missing & before num", "Should use %f instead of %d", "Missing semicolon"],
+              "options": [
+                "Nothing — it's correct",
+                "Missing & before num",
+                "Should use %f instead of %d",
+                "Missing semicolon"
+              ],
               "answer": 1,
               "explanation": "scanf needs the ADDRESS of the variable, not its value. For int variables, you must use &num: scanf(\"%d\", &num). The & is the 'address-of' operator. Arrays (strings) are exceptions because the array name is already an address."
             },
             {
               "question": "Which format specifier is used to print a float value?",
-              "options": ["%d", "%f", "%c", "%s"],
+              "options": [
+                "%d",
+                "%f",
+                "%c",
+                "%s"
+              ],
               "answer": 1,
               "explanation": "%f is used for float and double. %d is for int, %c is for char, %s is for string (char array)."
             }
+          ],
+          "objectives": [
+            "Understand Preprocessor directives and explain its significance",
+            "Understand main() function and explain its significance",
+            "Understand Statements and explain its significance",
+            "Understand this concept and explain its significance",
+            "Understand this concept and explain its significance",
+            "Attempt the practice quiz and viva questions on Structure of a C Program"
+          ],
+          "prerequisites": [
+            "Basic computer literacy",
+            "Understanding of what a program is (a set of instructions)",
+            "Familiarity with simple algebra"
+          ],
+          "theory": "## Introduction\n\nA C program consists of preprocessor directives, global declarations, and functions. Every C program must have a main() function — that's where execution begins. Understanding the structure is the first step to writing C programs.\n## Key Concepts\n\n- Preprocessor directives: #include <stdio.h> includes the standard I/O library\n- main() function: the entry point of every C program — execution starts here\n- Statements: each statement ends with a semicolon (;)\n- Curly braces { } define blocks of code\n- return 0; indicates successful program termination\n- printf() prints output to the screen; scanf() reads input from the keyboard\n- Comments: // single line, /* multi line */ — ignored by the compiler\n\n## Important Formulas\n\n- `Program structure: #include → global vars → functions → main()`\n- `printf format: printf(\"format string\", variables);`\n- `scanf format: scanf(\"format string\", &variables);  (note the & for address)`\n\n## Comparison Tables\n\n### Common printf/scanf Format Specifiers\n\n| Specifier | Data Type | Example |\n| --- | --- | --- |\n| %d | int | printf(\"%d\", 42); |\n| %f | float | printf(\"%f\", 3.14); |\n| %c | char | printf(\"%c\", 'A'); |\n| %s | string (char array) | printf(\"%s\", name); |\n| %lf | double | printf(\"%lf\", 3.14159); |\n| %% | literal % | printf(\"100%%\"); |\n\n> Forgetting the & in scanf is a common error: scanf(\"%d\", &num), NOT scanf(\"%d\", num).\n\n## Code Examples\n\n### Your First C Program — Hello World with Input\n\n```c\n#include <stdio.h>  // preprocessor directive\n\nint main() {\n    // Variable declaration\n    int age;\n    char name[50];\n\n    // Input\n    printf(\"Enter your name: \");\n    scanf(\"%s\", name);  // no & needed for strings (array name is already an address)\n\n    printf(\"Enter your age: \");\n    scanf(\"%d\", &age);  // & needed for int\n\n    // Output\n    printf(\"\\nHello, %s!\\n\", name);\n    printf(\"You are %d years old.\\n\", age);\n\n    return 0;  // success\n}\n```\n\nThis program asks for the user's name and age, then prints a greeting. Note: scanf needs & for int but not for string (array name is already a pointer). The \\n creates a new line.\n\n\n## Summary\n\nA C program consists of preprocessor directives, global declarations, and functions. Every C program must have a main() function — that's where execution begins. Understanding the structure is the first step to writing C programs.",
+          "analogies": [
+            {
+              "scenario": "Variables like labelled boxes",
+              "mapping": "int x = 5; means a box labelled x containing the integer 5. Different types = different-shaped boxes. Pointer = a slip of paper with the address of another box."
+            },
+            {
+              "scenario": "Function like a recipe",
+              "mapping": "Inputs = ingredients, Function body = steps, Return value = finished dish. Call = handing the recipe to a cook with the ingredients."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Structure of a C Program — Process Flow",
+              "content": "flowchart TD\n    A[#includestdio.h] --> B[main function]\n    B --> C[Variable Declarations]\n    C --> D[Statements]\n    D --> E[return 0;]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Structure of a C Program — Concept Map",
+              "content": "mindmap\n  root((Structure of a C Program))\n    Basics\n      Variables\n      Data Types\n      Operators\n    Control\n      if-else\n      switch\n      loops\n    Functions\n      Declaration\n      Definition\n      Recursion"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) for primitive ops, O(n) for array traversal",
+            "space": "O(1) for scalar vars, O(n) for arrays"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "Which function is the entry point of a C program?",
+              "solution": "Correct answer: main()",
+              "explanation": "main() is the entry point. Execution begins at the first statement inside main(). Every C program must have exactly one main() function."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Structure of a C Program with reference to the key concepts.",
+              "solution": "Every C program MUST have a main() function → Remember the & in scanf for int, float, char — but NOT for string arrays → Format specifiers: %d=int, %f=float, %c=char, %s=string",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Preprocessor directives.",
+              "modelAnswer": "#include <stdio.h> includes the standard I/O library"
+            },
+            {
+              "marks": 2,
+              "question": "Define main() function.",
+              "modelAnswer": "the entry point of every C program — execution starts here"
+            },
+            {
+              "marks": 2,
+              "question": "Define Statements.",
+              "modelAnswer": "each statement ends with a semicolon (;)"
+            },
+            {
+              "marks": 2,
+              "question": "What is the size of int in C?",
+              "modelAnswer": "Typically 4 bytes on modern systems (implementation-defined, minimum 2 bytes)."
+            },
+            {
+              "marks": 2,
+              "question": "Define a pointer.",
+              "modelAnswer": "A pointer is a variable that stores the memory address of another variable."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Program structure: #include → global vars → functions → main()",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Difference between pointer and array in C?",
+              "modelAnswer": "An array is a fixed-size block of contiguous memory; sizeof(array) returns the total size. A pointer is a variable holding an address; sizeof(pointer) returns pointer size (4 or 8 bytes). Array name decays to a pointer when passed to a function."
+            },
+            {
+              "marks": 5,
+              "question": "What is a null pointer?",
+              "modelAnswer": "A null pointer is a pointer that explicitly points to nothing — usually assigned NULL or 0. Dereferencing it causes undefined behaviour (typically a segfault)."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Preprocessor directives.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define main() function.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Program structure: #include → global vars → functions → main()",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: printf format: printf(\"format string\", variables);",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Structure of a C Program in detail with a diagram.",
+              "modelAnswer": "A C program consists of preprocessor directives, global declarations, and functions. Every C program must have a main() function — that's where execution begins. Understanding the structure is the first step to writing C programs."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Structure of a C Program with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Structure of a C Program\n\n**One-line definition:** A C program consists of preprocessor directives, global declarations, and functions. Every C program must have a main() function — that's where execution begins. Understanding the structure is the fir\n\n**Key points:**\n\n- Preprocessor directives: #include <stdio.h> includes the standard I/O library\n- main() function: the entry point of every C program — execution starts here\n- Statements: each statement ends with a semicolon (;)\n- Curly braces { } define blocks of code\n- return 0; indicates successful program termination\n\n**Important formulas:**\n\n- `Program structure: #include → global vars → functions → main()`\n- `printf format: printf(\"format string\", variables);`\n- `scanf format: scanf(\"format string\", &variables);  (note the & for address)`\n\n**Common mistake to avoid:** Forgetting the & in scanf for non-array variables: scanf(\"%d\", &num) not scanf(\"%d\", num)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Preprocessor directives: #include <stdio.h> includes the standard I/O library",
+            "main() function: the entry point of every C program — execution starts here",
+            "Statements: each statement ends with a semicolon (;)",
+            "Curly braces { } define blocks of code",
+            "return 0; indicates successful program termination",
+            "Formula: Program structure: #include → global vars → functions → main()",
+            "Formula: printf format: printf(\"format string\", variables);",
+            "Formula: scanf format: scanf(\"format string\", &variables);  (note the & for address)",
+            "Format specifiers: %d int, %f float, %c char, %s string, %p pointer",
+            "Loop types: for (count), while (check first), do-while (check last)",
+            "Storage classes: auto, register, static, extern"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "SAO",
+              "expansion": "Sequence, Alternation (if/switch), Iteration (loops)",
+              "meaning": "The three control structures in structured programming."
+            },
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Use functions to avoid duplicating code."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Every C program MUST have a main() function"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Remember the & in scanf for int, float, char — but NOT for string arrays"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting the & in scanf for non-array variables: scanf(\"%d\", &num) not scanf(\"%d\", num)"
+            },
+            {
+              "type": "warning",
+              "content": "Missing semicolons at the end of statements"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "A C program consists of preprocessor directives, global declarations, and functions. Every C program must have a main() function — that's where execution begins. Understanding the structure is the first step to writing C programs."
+            },
+            {
+              "type": "definition",
+              "content": "Preprocessor directives: #include <stdio.h> includes the standard I/O library"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Preprocessor directives?",
+              "back": "#include <stdio.h> includes the standard I/O library",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is main() function?",
+              "back": "the entry point of every C program — execution starts here",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Statements?",
+              "back": "each statement ends with a semicolon (;)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Comments?",
+              "back": "// single line, /* multi line */ — ignored by the compiler",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "Tip for this lesson",
+              "back": "Every C program MUST have a main() function"
+            },
+            {
+              "front": "Tip for this lesson",
+              "back": "Remember the & in scanf for int, float, char — but NOT for string arrays"
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "A C program consists of preprocessor directives, global declarations, and functions. Every C program must have a main() function — that's where execution begins. Understanding the structure is the first step to writing C programs."
+            },
+            {
+              "style": "detailed",
+              "content": "A C program consists of preprocessor directives, global declarations, and functions. Every C program must have a main() function — that's where execution begins. Understanding the structure is the first step to writing C programs.\n\nKey concepts: Preprocessor directives: #include <stdio.h> includes the standard I/O library, main() function: the entry point of every C program — execution starts here, Statements: each statement ends with a semicolon (;)."
+            }
+          ],
+          "recommendedNextLessons": [
+            "data-types-and-operators",
+            "if-else-and-switch"
           ]
         },
         {
@@ -110,30 +387,106 @@
           "tables": [
             {
               "title": "C Data Types",
-              "headers": ["Type", "Size (bytes)", "Range", "Format Specifier"],
+              "headers": [
+                "Type",
+                "Size (bytes)",
+                "Range",
+                "Format Specifier"
+              ],
               "rows": [
-                ["int", "4", "-2,147,483,648 to 2,147,483,647", "%d"],
-                ["unsigned int", "4", "0 to 4,294,967,295", "%u"],
-                ["short", "2", "-32,768 to 32,767", "%hd"],
-                ["long", "4 or 8", "platform-dependent", "%ld"],
-                ["float", "4", "±3.4×10³⁸ (~7 digits)", "%f"],
-                ["double", "8", "±1.7×10³⁰⁸ (~15 digits)", "%lf"],
-                ["char", "1", "-128 to 127 (or 0-255 unsigned)", "%c"]
+                [
+                  "int",
+                  "4",
+                  "-2,147,483,648 to 2,147,483,647",
+                  "%d"
+                ],
+                [
+                  "unsigned int",
+                  "4",
+                  "0 to 4,294,967,295",
+                  "%u"
+                ],
+                [
+                  "short",
+                  "2",
+                  "-32,768 to 32,767",
+                  "%hd"
+                ],
+                [
+                  "long",
+                  "4 or 8",
+                  "platform-dependent",
+                  "%ld"
+                ],
+                [
+                  "float",
+                  "4",
+                  "±3.4×10³⁸ (~7 digits)",
+                  "%f"
+                ],
+                [
+                  "double",
+                  "8",
+                  "±1.7×10³⁰⁸ (~15 digits)",
+                  "%lf"
+                ],
+                [
+                  "char",
+                  "1",
+                  "-128 to 127 (or 0-255 unsigned)",
+                  "%c"
+                ]
               ],
               "note": "Sizes may vary by platform. Use sizeof(type) to check on your system."
             },
             {
               "title": "Operator Precedence (high to low)",
-              "headers": ["Operator", "Description", "Associativity"],
+              "headers": [
+                "Operator",
+                "Description",
+                "Associativity"
+              ],
               "rows": [
-                ["() [] -> .", "Function call, array, member", "Left to right"],
-                ["! ++ -- - (type)", "Unary operators", "Right to left"],
-                ["* / %", "Multiplication, division, modulo", "Left to right"],
-                ["+ -", "Addition, subtraction", "Left to right"],
-                ["< <= > >= == !=", "Relational", "Left to right"],
-                ["&&", "Logical AND", "Left to right"],
-                ["||", "Logical OR", "Left to right"],
-                ["= += -= etc.", "Assignment", "Right to left"]
+                [
+                  "() [] -> .",
+                  "Function call, array, member",
+                  "Left to right"
+                ],
+                [
+                  "! ++ -- - (type)",
+                  "Unary operators",
+                  "Right to left"
+                ],
+                [
+                  "* / %",
+                  "Multiplication, division, modulo",
+                  "Left to right"
+                ],
+                [
+                  "+ -",
+                  "Addition, subtraction",
+                  "Left to right"
+                ],
+                [
+                  "< <= > >= == !=",
+                  "Relational",
+                  "Left to right"
+                ],
+                [
+                  "&&",
+                  "Logical AND",
+                  "Left to right"
+                ],
+                [
+                  "||",
+                  "Logical OR",
+                  "Left to right"
+                ],
+                [
+                  "= += -= etc.",
+                  "Assignment",
+                  "Right to left"
+                ]
               ],
               "note": "Higher precedence operators are evaluated first. Use parentheses to override."
             }
@@ -169,7 +522,12 @@
           "practiceQuestions": [
             {
               "question": "What is the output of: int a = 7, b = 2; printf(\"%d\", a / b);",
-              "options": ["3", "3.5", "4", "3.0"],
+              "options": [
+                "3",
+                "3.5",
+                "4",
+                "3.0"
+              ],
               "answer": 0,
               "explanation": "Since both a and b are int, integer division is performed. 7/2 = 3 (the decimal part is truncated, not rounded). To get 3.5, you'd need: (float)7/2."
             },
@@ -186,10 +544,263 @@
             },
             {
               "question": "What does the expression (5 > 3) && (2 < 1) evaluate to?",
-              "options": ["1 (true)", "0 (false)", "Error", "5"],
+              "options": [
+                "1 (true)",
+                "0 (false)",
+                "Error",
+                "5"
+              ],
               "answer": 1,
               "explanation": "(5 > 3) is true (1). (2 < 1) is false (0). 1 && 0 = 0 (false). The AND operator requires BOTH conditions to be true."
             }
+          ],
+          "objectives": [
+            "Understand int and explain its significance",
+            "Understand float and explain its significance",
+            "Understand char and explain its significance",
+            "Understand Arithmetic operators and explain its significance",
+            "Understand Relational operators and explain its significance",
+            "Attempt the practice quiz and viva questions on Data Types, Variables, and Operators"
+          ],
+          "prerequisites": [
+            "Basic computer literacy",
+            "Understanding of what a program is (a set of instructions)",
+            "Familiarity with simple algebra",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nC has several built-in data types for storing different kinds of data: int for integers, float for decimals, char for characters, and more. Operators perform operations on variables and values — arithmetic, relational, logical, and assignment operators.\n## Key Concepts\n\n- int: whole numbers (4 bytes, range -2³¹ to 2³¹-1). Modifiers: short, long, unsigned.\n- float: single-precision decimal (4 bytes, ~7 digits). double: double-precision (8 bytes, ~15 digits).\n- char: single character (1 byte). Stored as ASCII integer internally.\n- Arithmetic operators: +, -, *, /, % (modulo — remainder of division)\n- Relational operators: ==, !=, <, >, <=, >= (return 1 for true, 0 for false)\n- Logical operators: && (AND), || (OR), ! (NOT)\n- Assignment operators: =, +=, -=, *=, /=, %=\n- Increment/decrement: ++ (add 1), -- (subtract 1). Pre: ++x (increment then use). Post: x++ (use then increment).\n\n## Important Formulas\n\n- `Size: int=4 bytes, float=4 bytes, double=8 bytes, char=1 byte`\n- `Integer division: 7/2 = 3 (not 3.5!) — both operands are int, so result is int`\n- `Modulo: 7 % 2 = 1 (remainder of 7÷2)`\n- `Type casting: (float)7/2 = 3.5 — cast one operand to float before division`\n\n## Comparison Tables\n\n### C Data Types\n\n| Type | Size (bytes) | Range | Format Specifier |\n| --- | --- | --- | --- |\n| int | 4 | -2,147,483,648 to 2,147,483,647 | %d |\n| unsigned int | 4 | 0 to 4,294,967,295 | %u |\n| short | 2 | -32,768 to 32,767 | %hd |\n| long | 4 or 8 | platform-dependent | %ld |\n| float | 4 | ±3.4×10³⁸ (~7 digits) | %f |\n| double | 8 | ±1.7×10³⁰⁸ (~15 digits) | %lf |\n| char | 1 | -128 to 127 (or 0-255 unsigned) | %c |\n\n> Sizes may vary by platform. Use sizeof(type) to check on your system.\n### Operator Precedence (high to low)\n\n| Operator | Description | Associativity |\n| --- | --- | --- |\n| () [] -> . | Function call, array, member | Left to right |\n| ! ++ -- - (type) | Unary operators | Right to left |\n| * / % | Multiplication, division, modulo | Left to right |\n| + - | Addition, subtraction | Left to right |\n| < <= > >= == != | Relational | Left to right |\n| && | Logical AND | Left to right |\n| || | Logical OR | Left to right |\n| = += -= etc. | Assignment | Right to left |\n\n> Higher precedence operators are evaluated first. Use parentheses to override.\n\n## Code Examples\n\n### Operators in Action\n\n```c\n#include <stdio.h>\n\nint main() {\n    int a = 10, b = 3;\n\n    // Arithmetic\n    printf(\"a + b = %d\\n\", a + b);   // 13\n    printf(\"a - b = %d\\n\", a - b);   // 7\n    printf(\"a * b = %d\\n\", a * b);   // 30\n    printf(\"a / b = %d\\n\", a / b);   // 3 (integer division!)\n    printf(\"a %% b = %d\\n\", a % b);  // 1 (remainder)\n\n    // Type casting\n    printf(\"(float)a / b = %f\\n\", (float)a / b);  // 3.333333\n\n    // Relational (return 1 or 0)\n    printf(\"a > b: %d\\n\", a > b);    // 1 (true)\n    printf(\"a == b: %d\\n\", a == b);  // 0 (false)\n\n    // Logical\n    printf(\"(a > 5) && (b < 5): %d\\n\", (a > 5) && (b < 5));  // 1 (both true)\n    printf(\"(a < 5) || (b < 5): %d\\n\", (a < 5) || (b < 5));  // 1 (one is true)\n\n    // Increment/decrement\n    int x = 5;\n    printf(\"x++ = %d\\n\", x++);  // 5 (print then increment)\n    printf(\"x = %d\\n\", x);      // 6 (now incremented)\n    printf(\"++x = %d\\n\", ++x);  // 7 (increment then print)\n\n    return 0;\n}\n```\n\nNote that 10/3 = 3 (integer division — the decimal part is truncated). To get a decimal result, cast one operand to float: (float)10/3 = 3.33. Also note the difference between x++ (post) and ++x (pre).\n\n\n## Summary\n\nC has several built-in data types for storing different kinds of data: int for integers, float for decimals, char for characters, and more. Operators perform operations on variables and values — arithmetic, relational, logical, and assignment operators.",
+          "analogies": [
+            {
+              "scenario": "Variables like labelled boxes",
+              "mapping": "int x = 5; means a box labelled x containing the integer 5. Different types = different-shaped boxes. Pointer = a slip of paper with the address of another box."
+            },
+            {
+              "scenario": "Function like a recipe",
+              "mapping": "Inputs = ingredients, Function body = steps, Return value = finished dish. Call = handing the recipe to a cook with the ingredients."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Data Types, Variables, and Operators — Process Flow",
+              "content": "flowchart TD\n    A[#includestdio.h] --> B[main function]\n    B --> C[Variable Declarations]\n    C --> D[Statements]\n    D --> E[return 0;]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Data Types, Variables, and Operators — Concept Map",
+              "content": "mindmap\n  root((Data Types, Variables, and Ope))\n    Basics\n      Variables\n      Data Types\n      Operators\n    Control\n      if-else\n      switch\n      loops\n    Functions\n      Declaration\n      Definition\n      Recursion"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) for primitive ops, O(n) for array traversal",
+            "space": "O(1) for scalar vars, O(n) for arrays"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is the output of: int a = 7, b = 2; printf(\"%d\", a / b);",
+              "solution": "Correct answer: 3",
+              "explanation": "Since both a and b are int, integer division is performed. 7/2 = 3 (the decimal part is truncated, not rounded). To get 3.5, you'd need: (float)7/2."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Data Types, Variables, and Operators with reference to the key concepts.",
+              "solution": "Integer division: 7/2 = 3 (not 3.5). Cast to float: (float)7/2 = 3.5 → = is assignment, == is comparison. This is a very common exam question! → Pre-increment (++x): change then use. Post-increment (x++): use then change.",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define int.",
+              "modelAnswer": "whole numbers (4 bytes, range -2³¹ to 2³¹-1). Modifiers: short, long, unsigned."
+            },
+            {
+              "marks": 2,
+              "question": "Define float.",
+              "modelAnswer": "single-precision decimal (4 bytes, ~7 digits). double: double-precision (8 bytes, ~15 digits)."
+            },
+            {
+              "marks": 2,
+              "question": "Define char.",
+              "modelAnswer": "single character (1 byte). Stored as ASCII integer internally."
+            },
+            {
+              "marks": 2,
+              "question": "What is the size of int in C?",
+              "modelAnswer": "Typically 4 bytes on modern systems (implementation-defined, minimum 2 bytes)."
+            },
+            {
+              "marks": 2,
+              "question": "Define a pointer.",
+              "modelAnswer": "A pointer is a variable that stores the memory address of another variable."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Size: int=4 bytes, float=4 bytes, double=8 bytes, char=1 byte",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Difference between pointer and array in C?",
+              "modelAnswer": "An array is a fixed-size block of contiguous memory; sizeof(array) returns the total size. A pointer is a variable holding an address; sizeof(pointer) returns pointer size (4 or 8 bytes). Array name decays to a pointer when passed to a function."
+            },
+            {
+              "marks": 5,
+              "question": "What is a null pointer?",
+              "modelAnswer": "A null pointer is a pointer that explicitly points to nothing — usually assigned NULL or 0. Dereferencing it causes undefined behaviour (typically a segfault)."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define int.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define float.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Size: int=4 bytes, float=4 bytes, double=8 bytes, char=1 byte",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Integer division: 7/2 = 3 (not 3.5!) — both operands are int, so result is int",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Data Types, Variables, and Operators in detail with a diagram.",
+              "modelAnswer": "C has several built-in data types for storing different kinds of data: int for integers, float for decimals, char for characters, and more. Operators perform operations on variables and values — arithmetic, relational, logical, and assignment operators."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Data Types, Variables, and Operators with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Data Types, Variables, and Operators\n\n**One-line definition:** C has several built-in data types for storing different kinds of data: int for integers, float for decimals, char for characters, and more. Operators perform operations on variables and values — arith\n\n**Key points:**\n\n- int: whole numbers (4 bytes, range -2³¹ to 2³¹-1). Modifiers: short, long, unsigned.\n- float: single-precision decimal (4 bytes, ~7 digits). double: double-precision (8 bytes, ~15 digits).\n- char: single character (1 byte). Stored as ASCII integer internally.\n- Arithmetic operators: +, -, *, /, % (modulo — remainder of division)\n- Relational operators: ==, !=, <, >, <=, >= (return 1 for true, 0 for false)\n\n**Important formulas:**\n\n- `Size: int=4 bytes, float=4 bytes, double=8 bytes, char=1 byte`\n- `Integer division: 7/2 = 3 (not 3.5!) — both operands are int, so result is int`\n- `Modulo: 7 % 2 = 1 (remainder of 7÷2)`\n- `Type casting: (float)7/2 = 3.5 — cast one operand to float before division`\n\n**Common mistake to avoid:** Using / for integer division expecting a decimal result: 7/2 = 3, not 3.5\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "int: whole numbers (4 bytes, range -2³¹ to 2³¹-1). Modifiers: short, long, unsigned.",
+            "float: single-precision decimal (4 bytes, ~7 digits). double: double-precision (8 bytes, ~15 digits).",
+            "char: single character (1 byte). Stored as ASCII integer internally.",
+            "Arithmetic operators: +, -, *, /, % (modulo — remainder of division)",
+            "Relational operators: ==, !=, <, >, <=, >= (return 1 for true, 0 for false)",
+            "Formula: Size: int=4 bytes, float=4 bytes, double=8 bytes, char=1 byte",
+            "Formula: Integer division: 7/2 = 3 (not 3.5!) — both operands are int, so result is int",
+            "Formula: Modulo: 7 % 2 = 1 (remainder of 7÷2)",
+            "Formula: Type casting: (float)7/2 = 3.5 — cast one operand to float before division",
+            "Format specifiers: %d int, %f float, %c char, %s string, %p pointer",
+            "Loop types: for (count), while (check first), do-while (check last)",
+            "Storage classes: auto, register, static, extern"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "SAO",
+              "expansion": "Sequence, Alternation (if/switch), Iteration (loops)",
+              "meaning": "The three control structures in structured programming."
+            },
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Use functions to avoid duplicating code."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Integer division: 7/2 = 3 (not 3.5). Cast to float: (float)7/2 = 3.5"
+            },
+            {
+              "type": "exam-tip",
+              "content": "= is assignment, == is comparison. This is a very common exam question!"
+            },
+            {
+              "type": "warning",
+              "content": "Using / for integer division expecting a decimal result: 7/2 = 3, not 3.5"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing = (assignment) with == (comparison): if (x = 5) assigns 5 to x, it doesn't compare!"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "C has several built-in data types for storing different kinds of data: int for integers, float for decimals, char for characters, and more. Operators perform operations on variables and values — arithmetic, relational, logical, and assignment operators."
+            },
+            {
+              "type": "definition",
+              "content": "int: whole numbers (4 bytes, range -2³¹ to 2³¹-1). Modifiers: short, long, unsigned."
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is int?",
+              "back": "whole numbers (4 bytes, range -2³¹ to 2³¹-1). Modifiers: short, long, unsigned.",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is float?",
+              "back": "single-precision decimal (4 bytes, ~7 digits). double: double-precision (8 bytes, ~15 digits).",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is char?",
+              "back": "single character (1 byte). Stored as ASCII integer internally.",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Arithmetic operators?",
+              "back": "+, -, *, /, % (modulo — remainder of division)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Relational operators?",
+              "back": "==, !=, <, >, <=, >= (return 1 for true, 0 for false)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Logical operators?",
+              "back": "&& (AND), || (OR), ! (NOT)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Assignment operators?",
+              "back": "=, +=, -=, *=, /=, %=",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Increment/decrement?",
+              "back": "++ (add 1), -- (subtract 1). Pre: ++x (increment then use). Post: x++ (use then increment).",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "C has several built-in data types for storing different kinds of data: int for integers, float for decimals, char for characters, and more. Operators perform operations on variables and values — arithmetic, relational, logical, and assignment operators."
+            },
+            {
+              "style": "detailed",
+              "content": "C has several built-in data types for storing different kinds of data: int for integers, float for decimals, char for characters, and more. Operators perform operations on variables and values — arithmetic, relational, logical, and assignment operators.\n\nKey concepts: int: whole numbers (4 bytes, range -2³¹ to 2³¹-1). Modifiers: short, long, unsig, float: single-precision decimal (4 bytes, ~7 digits). double: double-precision (, char: single character (1 byte). Stored as ASCII integer internally.."
+            }
+          ],
+          "recommendedNextLessons": [
+            "if-else-and-switch",
+            "loops"
           ]
         }
       ]
@@ -223,13 +834,37 @@
           "tables": [
             {
               "title": "if-else vs switch",
-              "headers": ["Feature", "if-else", "switch"],
+              "headers": [
+                "Feature",
+                "if-else",
+                "switch"
+              ],
               "rows": [
-                ["Condition type", "Any expression (>, <, ==, &&, ||)", "Equality only (== with int/char)"],
-                ["Data types", "int, float, char, etc.", "int and char only (not float or string)"],
-                ["Range checking", "Yes (if (x >= 0 && x <= 100))", "No (each case is a single value)"],
-                ["Fall-through", "No", "Yes (if break is missing)"],
-                ["Best for", "Complex conditions, ranges", "Many discrete values (menus, grades)"]
+                [
+                  "Condition type",
+                  "Any expression (>, <, ==, &&, ||)",
+                  "Equality only (== with int/char)"
+                ],
+                [
+                  "Data types",
+                  "int, float, char, etc.",
+                  "int and char only (not float or string)"
+                ],
+                [
+                  "Range checking",
+                  "Yes (if (x >= 0 && x <= 100))",
+                  "No (each case is a single value)"
+                ],
+                [
+                  "Fall-through",
+                  "No",
+                  "Yes (if break is missing)"
+                ],
+                [
+                  "Best for",
+                  "Complex conditions, ranges",
+                  "Many discrete values (menus, grades)"
+                ]
               ],
               "note": "Use switch for menu-driven programs. Use if-else for complex conditions and ranges."
             }
@@ -263,22 +898,285 @@
           "practiceQuestions": [
             {
               "question": "What happens if you forget 'break' in a switch case?",
-              "options": ["Compile error", "Execution falls through to the next case", "The program crashes", "Nothing — break is optional"],
+              "options": [
+                "Compile error",
+                "Execution falls through to the next case",
+                "The program crashes",
+                "Nothing — break is optional"
+              ],
               "answer": 1,
               "explanation": "Without break, execution falls through to the next case's code, even if that case doesn't match. This is called 'fall-through'. Sometimes it's intentional, but usually it's a bug."
             },
             {
               "question": "What is the value of x after: int x = 5; if (x = 10) { x++; }",
-              "options": ["5", "6", "11", "10"],
+              "options": [
+                "5",
+                "6",
+                "11",
+                "10"
+              ],
               "answer": 2,
               "explanation": "x = 10 is an ASSIGNMENT, not a comparison! It assigns 10 to x and evaluates to 10 (non-zero = true). So the if block executes: x becomes 11. This is a classic bug — use == for comparison."
             },
             {
               "question": "Which data type can NOT be used in a switch statement?",
-              "options": ["int", "char", "float", "short"],
+              "options": [
+                "int",
+                "char",
+                "float",
+                "short"
+              ],
               "answer": 2,
               "explanation": "switch only works with integer types (int, char, short, long). float and double cannot be used because switch tests exact equality, which is unreliable with floating-point numbers."
             }
+          ],
+          "objectives": [
+            "Understand if and explain its significance",
+            "Understand if-else and explain its significance",
+            "Understand if-else if-else and explain its significance",
+            "Understand switch and explain its significance",
+            "Understand break in switch and explain its significance",
+            "Attempt the practice quiz and viva questions on Decision Making — if-else and switch"
+          ],
+          "prerequisites": [
+            "Basic computer literacy",
+            "Understanding of what a program is (a set of instructions)",
+            "Familiarity with simple algebra",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nControl structures allow a program to make decisions and repeat actions. The if-else statement executes different code based on a condition. The switch statement selects one of many code blocks based on a value. These are the building blocks of logic in C.\n## Key Concepts\n\n- if: execute code only if a condition is true\n- if-else: execute one block if true, another if false\n- if-else if-else: check multiple conditions in order\n- switch: select one of many blocks based on a single value (int or char only)\n- break in switch: exits the switch — without it, execution falls through to the next case\n- default in switch: executed if no case matches\n- Ternary operator: condition ? value_if_true : value_if_false (shorthand for if-else)\n\n## Important Formulas\n\n- `if: if (condition) { /* code */ }`\n- `if-else: if (condition) { /* A */ } else { /* B */ }`\n- `switch: switch (var) { case 1: ...; break; case 2: ...; break; default: ...; }`\n- `Ternary: result = (a > b) ? a : b;`\n\n## Comparison Tables\n\n### if-else vs switch\n\n| Feature | if-else | switch |\n| --- | --- | --- |\n| Condition type | Any expression (>, <, ==, &&, ||) | Equality only (== with int/char) |\n| Data types | int, float, char, etc. | int and char only (not float or string) |\n| Range checking | Yes (if (x >= 0 && x <= 100)) | No (each case is a single value) |\n| Fall-through | No | Yes (if break is missing) |\n| Best for | Complex conditions, ranges | Many discrete values (menus, grades) |\n\n> Use switch for menu-driven programs. Use if-else for complex conditions and ranges.\n\n## Code Examples\n\n### Grade Calculator using if-else if\n\n```c\n#include <stdio.h>\n\nint main() {\n    int marks;\n    printf(\"Enter your marks (0-100): \");\n    scanf(\"%d\", &marks);\n\n    if (marks >= 90) {\n        printf(\"Grade: A+\\n\");\n    } else if (marks >= 80) {\n        printf(\"Grade: A\\n\");\n    } else if (marks >= 70) {\n        printf(\"Grade: B\\n\");\n    } else if (marks >= 60) {\n        printf(\"Grade: C\\n\");\n    } else if (marks >= 50) {\n        printf(\"Grade: D\\n\");\n    } else {\n        printf(\"Grade: F (Fail)\\n\");\n    }\n\n    return 0;\n}\n```\n\nThe conditions are checked top to bottom. The first true condition's block is executed, and the rest are skipped. The final 'else' is the fallback when no condition matches.\n\n### Simple Calculator using switch\n\n```c\n#include <stdio.h>\n\nint main() {\n    char operator;\n    float a, b;\n\n    printf(\"Enter expression (e.g., 5 + 3): \");\n    scanf(\"%f %c %f\", &a, &operator, &b);\n\n    switch (operator) {\n        case '+':\n            printf(\"%.2f + %.2f = %.2f\\n\", a, b, a + b);\n            break;\n        case '-':\n            printf(\"%.2f - %.2f = %.2f\\n\", a, b, a - b);\n            break;\n        case '*':\n            printf(\"%.2f * %.2f = %.2f\\n\", a, b, a * b);\n            break;\n        case '/':\n            if (b != 0)\n                printf(\"%.2f / %.2f = %.2f\\n\", a, b, a / b);\n            else\n                printf(\"Error: Division by zero!\\n\");\n            break;\n        default:\n            printf(\"Invalid operator!\\n\");\n    }\n\n    return 0;\n}\n```\n\nswitch checks the operator character. Each case handles one operator. break prevents fall-through. default handles invalid operators. Note the division-by-zero check inside the '/' case.\n\n\n## Summary\n\nControl structures allow a program to make decisions and repeat actions. The if-else statement executes different code based on a condition. The switch statement selects one of many code blocks based on a value. These are the building blocks of logic in C.",
+          "analogies": [
+            {
+              "scenario": "Variables like labelled boxes",
+              "mapping": "int x = 5; means a box labelled x containing the integer 5. Different types = different-shaped boxes. Pointer = a slip of paper with the address of another box."
+            },
+            {
+              "scenario": "Function like a recipe",
+              "mapping": "Inputs = ingredients, Function body = steps, Return value = finished dish. Call = handing the recipe to a cook with the ingredients."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Decision Making — if-else and switch — Process Flow",
+              "content": "flowchart TD\n    A[#includestdio.h] --> B[main function]\n    B --> C[Variable Declarations]\n    C --> D[Statements]\n    D --> E[return 0;]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Decision Making — if-else and switch — Concept Map",
+              "content": "mindmap\n  root((Decision Making — if-else and ))\n    Basics\n      Variables\n      Data Types\n      Operators\n    Control\n      if-else\n      switch\n      loops\n    Functions\n      Declaration\n      Definition\n      Recursion"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) for primitive ops, O(n) for array traversal",
+            "space": "O(1) for scalar vars, O(n) for arrays"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What happens if you forget 'break' in a switch case?",
+              "solution": "Correct answer: Execution falls through to the next case",
+              "explanation": "Without break, execution falls through to the next case's code, even if that case doesn't match. This is called 'fall-through'. Sometimes it's intentional, but usually it's a bug."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Decision Making — if-else and switch with reference to the key concepts.",
+              "solution": "ALWAYS use == for comparison, not =. if (x == 5) compares, if (x = 5) assigns. → Don't forget break in switch cases! Without it, execution falls through. → switch can only test equality with int and char — not float, not ranges",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define if.",
+              "modelAnswer": "execute code only if a condition is true"
+            },
+            {
+              "marks": 2,
+              "question": "Define if-else.",
+              "modelAnswer": "execute one block if true, another if false"
+            },
+            {
+              "marks": 2,
+              "question": "Define if-else if-else.",
+              "modelAnswer": "check multiple conditions in order"
+            },
+            {
+              "marks": 2,
+              "question": "What is the size of int in C?",
+              "modelAnswer": "Typically 4 bytes on modern systems (implementation-defined, minimum 2 bytes)."
+            },
+            {
+              "marks": 2,
+              "question": "Define a pointer.",
+              "modelAnswer": "A pointer is a variable that stores the memory address of another variable."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: if: if (condition) { /* code */ }",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Difference between pointer and array in C?",
+              "modelAnswer": "An array is a fixed-size block of contiguous memory; sizeof(array) returns the total size. A pointer is a variable holding an address; sizeof(pointer) returns pointer size (4 or 8 bytes). Array name decays to a pointer when passed to a function."
+            },
+            {
+              "marks": 5,
+              "question": "What is a null pointer?",
+              "modelAnswer": "A null pointer is a pointer that explicitly points to nothing — usually assigned NULL or 0. Dereferencing it causes undefined behaviour (typically a segfault)."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define if.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define if-else.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: if: if (condition) { /* code */ }",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: if-else: if (condition) { /* A */ } else { /* B */ }",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Decision Making — if-else and switch in detail with a diagram.",
+              "modelAnswer": "Control structures allow a program to make decisions and repeat actions. The if-else statement executes different code based on a condition. The switch statement selects one of many code blocks based on a value. These are the building blocks of logic in C."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Decision Making — if-else and switch with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Decision Making — if-else and switch\n\n**One-line definition:** Control structures allow a program to make decisions and repeat actions. The if-else statement executes different code based on a condition. The switch statement selects one of many code blocks based \n\n**Key points:**\n\n- if: execute code only if a condition is true\n- if-else: execute one block if true, another if false\n- if-else if-else: check multiple conditions in order\n- switch: select one of many blocks based on a single value (int or char only)\n- break in switch: exits the switch — without it, execution falls through to the next case\n\n**Important formulas:**\n\n- `if: if (condition) { /* code */ }`\n- `if-else: if (condition) { /* A */ } else { /* B */ }`\n- `switch: switch (var) { case 1: ...; break; case 2: ...; break; default: ...; }`\n- `Ternary: result = (a > b) ? a : b;`\n\n**Common mistake to avoid:** Using = instead of == in conditions: if (x = 5) assigns 5 to x (always true!)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "if: execute code only if a condition is true",
+            "if-else: execute one block if true, another if false",
+            "if-else if-else: check multiple conditions in order",
+            "switch: select one of many blocks based on a single value (int or char only)",
+            "break in switch: exits the switch — without it, execution falls through to the next case",
+            "Formula: if: if (condition) { /* code */ }",
+            "Formula: if-else: if (condition) { /* A */ } else { /* B */ }",
+            "Formula: switch: switch (var) { case 1: ...; break; case 2: ...; break; default: ...; }",
+            "Formula: Ternary: result = (a > b) ? a : b;",
+            "Format specifiers: %d int, %f float, %c char, %s string, %p pointer",
+            "Loop types: for (count), while (check first), do-while (check last)",
+            "Storage classes: auto, register, static, extern"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "SAO",
+              "expansion": "Sequence, Alternation (if/switch), Iteration (loops)",
+              "meaning": "The three control structures in structured programming."
+            },
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Use functions to avoid duplicating code."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "ALWAYS use == for comparison, not =. if (x == 5) compares, if (x = 5) assigns."
+            },
+            {
+              "type": "exam-tip",
+              "content": "Don't forget break in switch cases! Without it, execution falls through."
+            },
+            {
+              "type": "warning",
+              "content": "Using = instead of == in conditions: if (x = 5) assigns 5 to x (always true!)"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting break in switch — causes fall-through to the next case"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Control structures allow a program to make decisions and repeat actions. The if-else statement executes different code based on a condition. The switch statement selects one of many code blocks based on a value. These are the building blocks of logic in C."
+            },
+            {
+              "type": "definition",
+              "content": "if: execute code only if a condition is true"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is if?",
+              "back": "execute code only if a condition is true",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is if-else?",
+              "back": "execute one block if true, another if false",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is if-else if-else?",
+              "back": "check multiple conditions in order",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is switch?",
+              "back": "select one of many blocks based on a single value (int or char only)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is break in switch?",
+              "back": "exits the switch — without it, execution falls through to the next case",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is default in switch?",
+              "back": "executed if no case matches",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Ternary operator?",
+              "back": "condition ? value_if_true : value_if_false (shorthand for if-else)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What does the formula `Ternary: result` represent?",
+              "back": "(a > b) ? a : b;",
+              "hint": "Look at the formulas section."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Control structures allow a program to make decisions and repeat actions. The if-else statement executes different code based on a condition. The switch statement selects one of many code blocks based on a value. These are the building blocks of logic in C."
+            },
+            {
+              "style": "detailed",
+              "content": "Control structures allow a program to make decisions and repeat actions. The if-else statement executes different code based on a condition. The switch statement selects one of many code blocks based on a value. These are the building blocks of logic in C.\n\nKey concepts: if: execute code only if a condition is true, if-else: execute one block if true, another if false, if-else if-else: check multiple conditions in order."
+            }
+          ],
+          "recommendedNextLessons": [
+            "loops",
+            "functions"
           ]
         },
         {
@@ -305,13 +1203,43 @@
           "tables": [
             {
               "title": "Comparison of Loop Types",
-              "headers": ["Feature", "for", "while", "do-while"],
+              "headers": [
+                "Feature",
+                "for",
+                "while",
+                "do-while"
+              ],
               "rows": [
-                ["When to use", "Known count", "Unknown count, check first", "Unknown count, run at least once"],
-                ["Condition check", "Before each iteration", "Before each iteration", "After each iteration"],
-                ["Min executions", "0", "0", "1"],
-                ["Syntax", "for(init;cond;update){}", "while(cond){}", "do{}while(cond);"],
-                ["Best example", "Array traversal", "Reading until sentinel", "Menu display"]
+                [
+                  "When to use",
+                  "Known count",
+                  "Unknown count, check first",
+                  "Unknown count, run at least once"
+                ],
+                [
+                  "Condition check",
+                  "Before each iteration",
+                  "Before each iteration",
+                  "After each iteration"
+                ],
+                [
+                  "Min executions",
+                  "0",
+                  "0",
+                  "1"
+                ],
+                [
+                  "Syntax",
+                  "for(init;cond;update){}",
+                  "while(cond){}",
+                  "do{}while(cond);"
+                ],
+                [
+                  "Best example",
+                  "Array traversal",
+                  "Reading until sentinel",
+                  "Menu display"
+                ]
               ],
               "note": "All three loops can be converted to each other, but each has its most natural use case."
             }
@@ -353,22 +1281,284 @@
           "practiceQuestions": [
             {
               "question": "How many times does this loop run?\nfor (int i = 0; i < 10; i++) { }",
-              "options": ["9", "10", "11", "Infinite"],
+              "options": [
+                "9",
+                "10",
+                "11",
+                "Infinite"
+              ],
               "answer": 1,
               "explanation": "i goes from 0, 1, 2, ..., 9. That's 10 values (0 through 9). The condition i < 10 is true for i=0..9, false when i=10. So the loop body executes 10 times."
             },
             {
               "question": "What is the minimum number of times a do-while loop executes?",
-              "options": ["0", "1", "Depends on condition", "Infinite"],
+              "options": [
+                "0",
+                "1",
+                "Depends on condition",
+                "Infinite"
+              ],
               "answer": 1,
               "explanation": "do-while checks the condition AFTER executing the body. So even if the condition is false initially, the body runs at least once. This is the key difference from while (which can run 0 times)."
             },
             {
               "question": "What does 'continue' do inside a loop?",
-              "options": ["Exits the loop completely", "Skips the rest of the current iteration and goes to the next", "Restarts the loop from the beginning", "Pauses the loop"],
+              "options": [
+                "Exits the loop completely",
+                "Skips the rest of the current iteration and goes to the next",
+                "Restarts the loop from the beginning",
+                "Pauses the loop"
+              ],
               "answer": 1,
               "explanation": "continue skips the remaining code in the current iteration and jumps to the next iteration. break exits the loop entirely. For example: for(i=0;i<5;i++){if(i==2)continue;printf(\"%d\",i);} prints 0134 (skips 2)."
             }
+          ],
+          "objectives": [
+            "Understand for loop and explain its significance",
+            "Understand while loop and explain its significance",
+            "Understand do-while loop and explain its significance",
+            "Understand break and explain its significance",
+            "Understand continue and explain its significance",
+            "Attempt the practice quiz and viva questions on Loops — for, while, and do-while"
+          ],
+          "prerequisites": [
+            "Basic computer literacy",
+            "Understanding of what a program is (a set of instructions)",
+            "Familiarity with simple algebra",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nLoops repeat a block of code multiple times. The 'for' loop is used when you know the number of iterations. The 'while' loop checks the condition BEFORE executing (may run 0 times). The 'do-while' loop checks AFTER executing (runs at least once). Loops are essential for processing arrays, generating patterns, and repeating calculations.\n## Key Concepts\n\n- for loop: for (init; condition; update) { } — used when count is known\n- while loop: while (condition) { } — checks BEFORE, may not execute at all\n- do-while loop: do { } while (condition) — checks AFTER, runs at least once\n- break: exits the loop immediately\n- continue: skips the rest of the current iteration, goes to the next\n- Nested loops: a loop inside another loop — used for 2D patterns, matrix operations\n- Infinite loop: condition is always true — use break to exit\n\n## Important Formulas\n\n- `for: for (int i = 0; i < n; i++) { /* runs n times */ }`\n- `while: while (condition) { /* runs while true */ }`\n- `do-while: do { /* runs at least once */ } while (condition);`\n- `Nested loop iterations: outer × inner = total iterations`\n\n## Comparison Tables\n\n### Comparison of Loop Types\n\n| Feature | for | while | do-while |\n| --- | --- | --- | --- |\n| When to use | Known count | Unknown count, check first | Unknown count, run at least once |\n| Condition check | Before each iteration | Before each iteration | After each iteration |\n| Min executions | 0 | 0 | 1 |\n| Syntax | for(init;cond;update){} | while(cond){} | do{}while(cond); |\n| Best example | Array traversal | Reading until sentinel | Menu display |\n\n> All three loops can be converted to each other, but each has its most natural use case.\n\n## Code Examples\n\n### Three Loops — Same Task (Print 1 to 5)\n\n```c\n// Using for loop (when count is known)\nfor (int i = 1; i <= 5; i++) {\n    printf(\"%d \", i);  // 1 2 3 4 5\n}\n\n// Using while loop (check before)\nint i = 1;\nwhile (i <= 5) {\n    printf(\"%d \", i);  // 1 2 3 4 5\n    i++;\n}\n\n// Using do-while loop (check after, runs at least once)\nint j = 1;\ndo {\n    printf(\"%d \", j);  // 1 2 3 4 5\n    j++;\n} while (j <= 5);\n```\n\nAll three produce the same output. The for loop is the most compact. The while loop separates initialization, condition, and update. The do-while guarantees at least one execution even if the condition is false initially.\n\n### Star Pattern using Nested Loops\n\n```c\n#include <stdio.h>\n\nint main() {\n    int n = 5;\n\n    // Print a right-angle triangle of stars\n    for (int i = 1; i <= n; i++) {       // outer: rows\n        for (int j = 1; j <= i; j++) {   // inner: columns\n            printf(\"* \");\n        }\n        printf(\"\\n\");  // new line after each row\n    }\n\n    return 0;\n}\n\n/* Output:\n*\n* *\n* * *\n* * * *\n* * * * *\n*/\n```\n\nThe outer loop controls rows (1 to 5). The inner loop controls columns (1 to i). In row 1, print 1 star. In row 2, print 2 stars. And so on. The inner loop's limit depends on the outer loop variable — this is the key to triangular patterns.\n\n\n## Summary\n\nLoops repeat a block of code multiple times. The 'for' loop is used when you know the number of iterations. The 'while' loop checks the condition BEFORE executing (may run 0 times). The 'do-while' loop checks AFTER executing (runs at least once). Loops are essential for processing arrays, generating patterns, and repeating calculations.",
+          "analogies": [
+            {
+              "scenario": "Variables like labelled boxes",
+              "mapping": "int x = 5; means a box labelled x containing the integer 5. Different types = different-shaped boxes. Pointer = a slip of paper with the address of another box."
+            },
+            {
+              "scenario": "Function like a recipe",
+              "mapping": "Inputs = ingredients, Function body = steps, Return value = finished dish. Call = handing the recipe to a cook with the ingredients."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Loops — for, while, and do-while — Process Flow",
+              "content": "flowchart TD\n    A[#includestdio.h] --> B[main function]\n    B --> C[Variable Declarations]\n    C --> D[Statements]\n    D --> E[return 0;]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Loops — for, while, and do-while — Concept Map",
+              "content": "mindmap\n  root((Loops — for, while, and do-whi))\n    Basics\n      Variables\n      Data Types\n      Operators\n    Control\n      if-else\n      switch\n      loops\n    Functions\n      Declaration\n      Definition\n      Recursion"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) for primitive ops, O(n) for array traversal",
+            "space": "O(1) for scalar vars, O(n) for arrays"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "How many times does this loop run?\nfor (int i = 0; i < 10; i++) { }",
+              "solution": "Correct answer: 10",
+              "explanation": "i goes from 0, 1, 2, ..., 9. That's 10 values (0 through 9). The condition i < 10 is true for i=0..9, false when i=10. So the loop body executes 10 times."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Loops — for, while, and do-while with reference to the key concepts.",
+              "solution": "for loop: use when you know the exact number of iterations → while: check before, may run 0 times. do-while: check after, runs at least once. → Don't forget the semicolon after while in do-while: } while (cond);",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define for loop.",
+              "modelAnswer": "for (init; condition; update) { } — used when count is known"
+            },
+            {
+              "marks": 2,
+              "question": "Define while loop.",
+              "modelAnswer": "while (condition) { } — checks BEFORE, may not execute at all"
+            },
+            {
+              "marks": 2,
+              "question": "Define do-while loop.",
+              "modelAnswer": "do { } while (condition) — checks AFTER, runs at least once"
+            },
+            {
+              "marks": 2,
+              "question": "What is the size of int in C?",
+              "modelAnswer": "Typically 4 bytes on modern systems (implementation-defined, minimum 2 bytes)."
+            },
+            {
+              "marks": 2,
+              "question": "Define a pointer.",
+              "modelAnswer": "A pointer is a variable that stores the memory address of another variable."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: for: for (int i = 0; i < n; i++) { /* runs n times */ }",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Difference between pointer and array in C?",
+              "modelAnswer": "An array is a fixed-size block of contiguous memory; sizeof(array) returns the total size. A pointer is a variable holding an address; sizeof(pointer) returns pointer size (4 or 8 bytes). Array name decays to a pointer when passed to a function."
+            },
+            {
+              "marks": 5,
+              "question": "What is a null pointer?",
+              "modelAnswer": "A null pointer is a pointer that explicitly points to nothing — usually assigned NULL or 0. Dereferencing it causes undefined behaviour (typically a segfault)."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define for loop.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define while loop.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: for: for (int i = 0; i < n; i++) { /* runs n times */ }",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: while: while (condition) { /* runs while true */ }",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Loops — for, while, and do-while in detail with a diagram.",
+              "modelAnswer": "Loops repeat a block of code multiple times. The 'for' loop is used when you know the number of iterations. The 'while' loop checks the condition BEFORE executing (may run 0 times). The 'do-while' loop checks AFTER executing (runs at least once). Loops are essential for processing arrays, generating patterns, and repeating calculations."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Loops — for, while, and do-while with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Loops — for, while, and do-while\n\n**One-line definition:** Loops repeat a block of code multiple times. The 'for' loop is used when you know the number of iterations. The 'while' loop checks the condition BEFORE executing (may run 0 times). The 'do-while' loo\n\n**Key points:**\n\n- for loop: for (init; condition; update) { } — used when count is known\n- while loop: while (condition) { } — checks BEFORE, may not execute at all\n- do-while loop: do { } while (condition) — checks AFTER, runs at least once\n- break: exits the loop immediately\n- continue: skips the rest of the current iteration, goes to the next\n\n**Important formulas:**\n\n- `for: for (int i = 0; i < n; i++) { /* runs n times */ }`\n- `while: while (condition) { /* runs while true */ }`\n- `do-while: do { /* runs at least once */ } while (condition);`\n- `Nested loop iterations: outer × inner = total iterations`\n\n**Common mistake to avoid:** Forgetting to update the loop variable in while/do-while — causes infinite loop\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "for loop: for (init; condition; update) { } — used when count is known",
+            "while loop: while (condition) { } — checks BEFORE, may not execute at all",
+            "do-while loop: do { } while (condition) — checks AFTER, runs at least once",
+            "break: exits the loop immediately",
+            "continue: skips the rest of the current iteration, goes to the next",
+            "Formula: for: for (int i = 0; i < n; i++) { /* runs n times */ }",
+            "Formula: while: while (condition) { /* runs while true */ }",
+            "Formula: do-while: do { /* runs at least once */ } while (condition);",
+            "Formula: Nested loop iterations: outer × inner = total iterations",
+            "Format specifiers: %d int, %f float, %c char, %s string, %p pointer",
+            "Loop types: for (count), while (check first), do-while (check last)",
+            "Storage classes: auto, register, static, extern"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "SAO",
+              "expansion": "Sequence, Alternation (if/switch), Iteration (loops)",
+              "meaning": "The three control structures in structured programming."
+            },
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Use functions to avoid duplicating code."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "for loop: use when you know the exact number of iterations"
+            },
+            {
+              "type": "exam-tip",
+              "content": "while: check before, may run 0 times. do-while: check after, runs at least once."
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting to update the loop variable in while/do-while — causes infinite loop"
+            },
+            {
+              "type": "warning",
+              "content": "Off-by-one error: for (i = 0; i <= n; i++) runs n+1 times, not n. Use i < n."
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Loops repeat a block of code multiple times. The 'for' loop is used when you know the number of iterations. The 'while' loop checks the condition BEFORE executing (may run 0 times). The 'do-while' loop checks AFTER executing (runs at least once). Loops are essential for processing arrays, generating..."
+            },
+            {
+              "type": "definition",
+              "content": "for loop: for (init; condition; update) { } — used when count is known"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is for loop?",
+              "back": "for (init; condition; update) { } — used when count is known",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is while loop?",
+              "back": "while (condition) { } — checks BEFORE, may not execute at all",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is do-while loop?",
+              "back": "do { } while (condition) — checks AFTER, runs at least once",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is break?",
+              "back": "exits the loop immediately",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is continue?",
+              "back": "skips the rest of the current iteration, goes to the next",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Nested loops?",
+              "back": "a loop inside another loop — used for 2D patterns, matrix operations",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Infinite loop?",
+              "back": "condition is always true — use break to exit",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What does the formula `for: for (int i` represent?",
+              "back": "0; i < n; i++) { /* runs n times */ }",
+              "hint": "Look at the formulas section."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Loops repeat a block of code multiple times. The 'for' loop is used when you know the number of iterations. The 'while' loop checks the condition BEFORE executing (may run 0 times). The 'do-while' loop checks AFTER executing (runs at least once). Loops are essential for processing arrays, generating"
+            },
+            {
+              "style": "detailed",
+              "content": "Loops repeat a block of code multiple times. The 'for' loop is used when you know the number of iterations. The 'while' loop checks the condition BEFORE executing (may run 0 times). The 'do-while' loop checks AFTER executing (runs at least once). Loops are essential for processing arrays, generating patterns, and repeating calculations.\n\nKey concepts: for loop: for (init; condition; update) { } — used when count is known, while loop: while (condition) { } — checks BEFORE, may not execute at all, do-while loop: do { } while (condition) — checks AFTER, runs at least once."
+            }
+          ],
+          "recommendedNextLessons": [
+            "functions"
           ]
         }
       ]
@@ -405,13 +1595,37 @@
           "tables": [
             {
               "title": "Call by Value vs Call by Reference",
-              "headers": ["Feature", "Call by Value", "Call by Reference"],
+              "headers": [
+                "Feature",
+                "Call by Value",
+                "Call by Reference"
+              ],
               "rows": [
-                ["What is passed", "Copy of the value", "Address of the variable"],
-                ["Syntax", "func(x)", "func(&x) — func(int *x)"],
-                ["Changes affect original?", "No", "Yes"],
-                ["Memory", "Separate copy created", "No copy — same memory"],
-                ["Use case", "When you don't want to modify the original", "When you want to modify the original or pass large data"]
+                [
+                  "What is passed",
+                  "Copy of the value",
+                  "Address of the variable"
+                ],
+                [
+                  "Syntax",
+                  "func(x)",
+                  "func(&x) — func(int *x)"
+                ],
+                [
+                  "Changes affect original?",
+                  "No",
+                  "Yes"
+                ],
+                [
+                  "Memory",
+                  "Separate copy created",
+                  "No copy — same memory"
+                ],
+                [
+                  "Use case",
+                  "When you don't want to modify the original",
+                  "When you want to modify the original or pass large data"
+                ]
               ],
               "note": "Arrays are ALWAYS passed by reference in C (the array name decays to a pointer)."
             }
@@ -446,24 +1660,462 @@
           "practiceQuestions": [
             {
               "question": "In call by value, what happens to the original variable?",
-              "options": ["It is modified", "It remains unchanged", "It is deleted", "It is copied to a new variable"],
+              "options": [
+                "It is modified",
+                "It remains unchanged",
+                "It is deleted",
+                "It is copied to a new variable"
+              ],
               "answer": 1,
               "explanation": "Call by value passes a COPY of the argument. Any changes made inside the function affect only the copy, not the original variable. The original remains unchanged."
             },
             {
               "question": "What is required to prevent infinite recursion?",
-              "options": ["A loop", "A base case", "A return statement", "A break statement"],
+              "options": [
+                "A loop",
+                "A base case",
+                "A return statement",
+                "A break statement"
+              ],
               "answer": 1,
               "explanation": "A base case is a condition that stops the recursion (e.g., if (n <= 1) return 1;). Without it, the function calls itself forever, eventually causing a stack overflow."
             },
             {
               "question": "How are arrays passed to functions in C?",
-              "options": ["By value (copy)", "By reference (address)", "By default by value", "Cannot be passed"],
+              "options": [
+                "By value (copy)",
+                "By reference (address)",
+                "By default by value",
+                "Cannot be passed"
+              ],
               "answer": 1,
               "explanation": "Arrays are always passed by reference in C. When you pass an array name, it decays to a pointer to the first element. Changes made inside the function affect the original array."
             }
-          ]
+          ],
+          "objectives": [
+            "Understand Function declaration (prototype) and explain its significance",
+            "Understand Function definition and explain its significance",
+            "Understand Function call and explain its significance",
+            "Understand Return type and explain its significance",
+            "Understand Parameters (formal) and explain its significance",
+            "Attempt the practice quiz and viva questions on Functions — Definition, Declaration, and Call"
+          ],
+          "prerequisites": [
+            "Basic computer literacy",
+            "Understanding of what a program is (a set of instructions)",
+            "Familiarity with simple algebra",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nA function is a reusable block of code that performs a specific task. Functions help organize code, avoid repetition, and make programs modular. C programs are collections of functions that call each other. The main() function is where execution starts.\n## Key Concepts\n\n- Function declaration (prototype): tells the compiler about the function's name, return type, and parameters\n- Function definition: the actual implementation — contains the code that runs\n- Function call: invokes the function, passing arguments\n- Return type: the type of value the function returns (int, float, void, etc.)\n- Parameters (formal): variables in the function definition that receive values\n- Arguments (actual): values passed to the function when calling it\n- Call by value: a COPY of the argument is passed — changes inside the function don't affect the original\n- Call by reference: the ADDRESS of the argument is passed — changes inside the function DO affect the original\n- Recursion: a function that calls itself — needs a base case to stop\n\n## Important Formulas\n\n- `Declaration: returnType functionName(paramType param);`\n- `Definition: returnType functionName(paramType param) { /* code */ return value; }`\n- `Call: functionName(arguments);`\n- `Call by value: void func(int x) — x is a copy`\n- `Call by reference: void func(int *x) — x is the address`\n\n## Comparison Tables\n\n### Call by Value vs Call by Reference\n\n| Feature | Call by Value | Call by Reference |\n| --- | --- | --- |\n| What is passed | Copy of the value | Address of the variable |\n| Syntax | func(x) | func(&x) — func(int *x) |\n| Changes affect original? | No | Yes |\n| Memory | Separate copy created | No copy — same memory |\n| Use case | When you don't want to modify the original | When you want to modify the original or pass large data |\n\n> Arrays are ALWAYS passed by reference in C (the array name decays to a pointer).\n\n## Code Examples\n\n### Call by Value vs Call by Reference\n\n```c\n#include <stdio.h>\n\n// Call by value — changes don't affect original\nvoid swapByValue(int a, int b) {\n    int temp = a;\n    a = b;\n    b = temp;\n    // Only local copies are swapped — original unchanged\n}\n\n// Call by reference — changes DO affect original\nvoid swapByReference(int *a, int *b) {\n    int temp = *a;\n    *a = *b;\n    *b = temp;\n    // Original values are swapped via pointers\n}\n\nint main() {\n    int x = 10, y = 20;\n\n    printf(\"Before: x=%d, y=%d\\n\", x, y);  // 10, 20\n\n    swapByValue(x, y);\n    printf(\"After swapByValue: x=%d, y=%d\\n\", x, y);  // 10, 20 (unchanged!)\n\n    swapByReference(&x, &y);  // pass addresses\n    printf(\"After swapByReference: x=%d, y=%d\\n\", x, y);  // 20, 10 (swapped!)\n\n    return 0;\n}\n```\n\nswapByValue receives copies of x and y — swapping the copies doesn't affect the originals. swapByReference receives the addresses (&x, &y) and swaps the values at those addresses — the originals ARE changed.\n\n### Recursion — Factorial\n\n```c\n#include <stdio.h>\n\n// Recursive factorial: n! = n × (n-1)!\nint factorial(int n) {\n    if (n <= 1) return 1;       // base case: 0! = 1, 1! = 1\n    return n * factorial(n - 1); // recursive call\n}\n\n/*  Call trace for factorial(4):\n    factorial(4)\n    = 4 * factorial(3)\n    = 4 * 3 * factorial(2)\n    = 4 * 3 * 2 * factorial(1)\n    = 4 * 3 * 2 * 1\n    = 24\n*/\n\nint main() {\n    int n = 4;\n    printf(\"%d! = %d\\n\", n, factorial(n));  // 4! = 24\n    return 0;\n}\n```\n\nRecursion has two parts: (1) the base case (n <= 1 → return 1) that stops the recursion, and (2) the recursive case (n * factorial(n-1)) that reduces the problem. Without a base case, recursion never stops — stack overflow!\n\n\n## Summary\n\nA function is a reusable block of code that performs a specific task. Functions help organize code, avoid repetition, and make programs modular. C programs are collections of functions that call each other. The main() function is where execution starts.",
+          "analogies": [
+            {
+              "scenario": "Variables like labelled boxes",
+              "mapping": "int x = 5; means a box labelled x containing the integer 5. Different types = different-shaped boxes. Pointer = a slip of paper with the address of another box."
+            },
+            {
+              "scenario": "Function like a recipe",
+              "mapping": "Inputs = ingredients, Function body = steps, Return value = finished dish. Call = handing the recipe to a cook with the ingredients."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Functions — Definition, Declaration, and Call — Process Flow",
+              "content": "flowchart TD\n    A[#includestdio.h] --> B[main function]\n    B --> C[Variable Declarations]\n    C --> D[Statements]\n    D --> E[return 0;]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Functions — Definition, Declaration, and Call — Concept Map",
+              "content": "mindmap\n  root((Functions — Definition, Declar))\n    Basics\n      Variables\n      Data Types\n      Operators\n    Control\n      if-else\n      switch\n      loops\n    Functions\n      Declaration\n      Definition\n      Recursion"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) for primitive ops, O(n) for array traversal",
+            "space": "O(1) for scalar vars, O(n) for arrays"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "In call by value, what happens to the original variable?",
+              "solution": "Correct answer: It remains unchanged",
+              "explanation": "Call by value passes a COPY of the argument. Any changes made inside the function affect only the copy, not the original variable. The original remains unchanged."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Functions — Definition, Declaration, and Call with reference to the key concepts.",
+              "solution": "Call by value: changes DON'T affect the original. Call by reference: changes DO. → Arrays are always passed by reference in C (array name = pointer to first element) → Recursion needs a base case — without it, infinite recursion → stack overflow",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Function declaration (prototype).",
+              "modelAnswer": "tells the compiler about the function's name, return type, and parameters"
+            },
+            {
+              "marks": 2,
+              "question": "Define Function definition.",
+              "modelAnswer": "the actual implementation — contains the code that runs"
+            },
+            {
+              "marks": 2,
+              "question": "Define Function call.",
+              "modelAnswer": "invokes the function, passing arguments"
+            },
+            {
+              "marks": 2,
+              "question": "What is the size of int in C?",
+              "modelAnswer": "Typically 4 bytes on modern systems (implementation-defined, minimum 2 bytes)."
+            },
+            {
+              "marks": 2,
+              "question": "Define a pointer.",
+              "modelAnswer": "A pointer is a variable that stores the memory address of another variable."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Declaration: returnType functionName(paramType param);",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Difference between pointer and array in C?",
+              "modelAnswer": "An array is a fixed-size block of contiguous memory; sizeof(array) returns the total size. A pointer is a variable holding an address; sizeof(pointer) returns pointer size (4 or 8 bytes). Array name decays to a pointer when passed to a function."
+            },
+            {
+              "marks": 5,
+              "question": "What is a null pointer?",
+              "modelAnswer": "A null pointer is a pointer that explicitly points to nothing — usually assigned NULL or 0. Dereferencing it causes undefined behaviour (typically a segfault)."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Function declaration (prototype).",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Function definition.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Declaration: returnType functionName(paramType param);",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Definition: returnType functionName(paramType param) { /* code */ return value; }",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Functions — Definition, Declaration, and Call in detail with a diagram.",
+              "modelAnswer": "A function is a reusable block of code that performs a specific task. Functions help organize code, avoid repetition, and make programs modular. C programs are collections of functions that call each other. The main() function is where execution starts."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Functions — Definition, Declaration, and Call with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Functions — Definition, Declaration, and Call\n\n**One-line definition:** A function is a reusable block of code that performs a specific task. Functions help organize code, avoid repetition, and make programs modular. C programs are collections of functions that call each \n\n**Key points:**\n\n- Function declaration (prototype): tells the compiler about the function's name, return type, and parameters\n- Function definition: the actual implementation — contains the code that runs\n- Function call: invokes the function, passing arguments\n- Return type: the type of value the function returns (int, float, void, etc.)\n- Parameters (formal): variables in the function definition that receive values\n\n**Important formulas:**\n\n- `Declaration: returnType functionName(paramType param);`\n- `Definition: returnType functionName(paramType param) { /* code */ return value; }`\n- `Call: functionName(arguments);`\n- `Call by value: void func(int x) — x is a copy`\n- `Call by reference: void func(int *x) — x is the address`\n\n**Common mistake to avoid:** Forgetting the function prototype (declaration) before main() if the function is defined after main()\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Function declaration (prototype): tells the compiler about the function's name, return type, and parameters",
+            "Function definition: the actual implementation — contains the code that runs",
+            "Function call: invokes the function, passing arguments",
+            "Return type: the type of value the function returns (int, float, void, etc.)",
+            "Parameters (formal): variables in the function definition that receive values",
+            "Formula: Declaration: returnType functionName(paramType param);",
+            "Formula: Definition: returnType functionName(paramType param) { /* code */ return value; }",
+            "Formula: Call: functionName(arguments);",
+            "Formula: Call by value: void func(int x) — x is a copy",
+            "Formula: Call by reference: void func(int *x) — x is the address",
+            "Format specifiers: %d int, %f float, %c char, %s string, %p pointer",
+            "Loop types: for (count), while (check first), do-while (check last)",
+            "Storage classes: auto, register, static, extern"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "SAO",
+              "expansion": "Sequence, Alternation (if/switch), Iteration (loops)",
+              "meaning": "The three control structures in structured programming."
+            },
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Use functions to avoid duplicating code."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Call by value: changes DON'T affect the original. Call by reference: changes DO."
+            },
+            {
+              "type": "exam-tip",
+              "content": "Arrays are always passed by reference in C (array name = pointer to first element)"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting the function prototype (declaration) before main() if the function is defined after main()"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting the & when calling by reference: func(&x), not func(x)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "A function is a reusable block of code that performs a specific task. Functions help organize code, avoid repetition, and make programs modular. C programs are collections of functions that call each other. The main() function is where execution starts."
+            },
+            {
+              "type": "definition",
+              "content": "Function declaration (prototype): tells the compiler about the function's name, return type, and parameters"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Function declaration (prototype)?",
+              "back": "tells the compiler about the function's name, return type, and parameters",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Function definition?",
+              "back": "the actual implementation — contains the code that runs",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Function call?",
+              "back": "invokes the function, passing arguments",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Return type?",
+              "back": "the type of value the function returns (int, float, void, etc.)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Parameters (formal)?",
+              "back": "variables in the function definition that receive values",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Arguments (actual)?",
+              "back": "values passed to the function when calling it",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Call by value?",
+              "back": "a COPY of the argument is passed — changes inside the function don't affect the original",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Call by reference?",
+              "back": "the ADDRESS of the argument is passed — changes inside the function DO affect the original",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "A function is a reusable block of code that performs a specific task. Functions help organize code, avoid repetition, and make programs modular. C programs are collections of functions that call each other. The main() function is where execution starts."
+            },
+            {
+              "style": "detailed",
+              "content": "A function is a reusable block of code that performs a specific task. Functions help organize code, avoid repetition, and make programs modular. C programs are collections of functions that call each other. The main() function is where execution starts.\n\nKey concepts: Function declaration (prototype): tells the compiler about the function's name, , Function definition: the actual implementation — contains the code that runs, Function call: invokes the function, passing arguments."
+            }
+          ],
+          "recommendedNextLessons": []
         }
+      ]
+    }
+  ],
+  "revisionNotes": "# Programming in C — Quick Revision\n\n**Subject code:** R23CP1401  \n**Semester:** 2  \n**Credits:** 5  \n\n## Unit 1: C Basics and Program Structure (15%)\n### Structure of a C Program\nA C program consists of preprocessor directives, global declarations, and functions. Every C program must have a main() function — that's where execution begins. Understanding the structure is the first step to writing C programs.\n\n**Formulas:**\n- `Program structure: #include → global vars → functions → main()`\n- `printf format: printf(\"format string\", variables);`\n- `scanf format: scanf(\"format string\", &variables);  (note the & for address)`\n\n### Data Types, Variables, and Operators\nC has several built-in data types for storing different kinds of data: int for integers, float for decimals, char for characters, and more. Operators perform operations on variables and values — arithmetic, relational, logical, and assignment operators.\n\n**Formulas:**\n- `Size: int=4 bytes, float=4 bytes, double=8 bytes, char=1 byte`\n- `Integer division: 7/2 = 3 (not 3.5!) — both operands are int, so result is int`\n- `Modulo: 7 % 2 = 1 (remainder of 7÷2)`\n\n## Unit 2: Control Structures (20%)\n### Decision Making — if-else and switch\nControl structures allow a program to make decisions and repeat actions. The if-else statement executes different code based on a condition. The switch statement selects one of many code blocks based on a value. These are the building blocks of logic in C.\n\n**Formulas:**\n- `if: if (condition) { /* code */ }`\n- `if-else: if (condition) { /* A */ } else { /* B */ }`\n- `switch: switch (var) { case 1: ...; break; case 2: ...; break; default: ...; }`\n\n### Loops — for, while, and do-while\nLoops repeat a block of code multiple times. The 'for' loop is used when you know the number of iterations. The 'while' loop checks the condition BEFORE executing (may run 0 times). The 'do-while' loop checks AFTER executing (runs at least once). Loops are essential for processin...\n\n**Formulas:**\n- `for: for (int i = 0; i < n; i++) { /* runs n times */ }`\n- `while: while (condition) { /* runs while true */ }`\n- `do-while: do { /* runs at least once */ } while (condition);`\n\n## Unit 3: Functions and Arrays (25%)\n### Functions — Definition, Declaration, and Call\nA function is a reusable block of code that performs a specific task. Functions help organize code, avoid repetition, and make programs modular. C programs are collections of functions that call each other. The main() function is where execution starts.\n\n**Formulas:**\n- `Declaration: returnType functionName(paramType param);`\n- `Definition: returnType functionName(paramType param) { /* code */ return value; }`\n- `Call: functionName(arguments);`\n",
+  "interviewBank": [
+    {
+      "marks": 5,
+      "question": "Explain the formula: Program structure: #include → global vars → functions → main()",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 10,
+      "question": "Difference between pointer and array in C?",
+      "modelAnswer": "An array is a fixed-size block of contiguous memory; sizeof(array) returns the total size. A pointer is a variable holding an address; sizeof(pointer) returns pointer size (4 or 8 bytes). Array name decays to a pointer when passed to a function."
+    },
+    {
+      "marks": 5,
+      "question": "What is a null pointer?",
+      "modelAnswer": "A null pointer is a pointer that explicitly points to nothing — usually assigned NULL or 0. Dereferencing it causes undefined behaviour (typically a segfault)."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: Size: int=4 bytes, float=4 bytes, double=8 bytes, char=1 byte",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: if: if (condition) { /* code */ }",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: for: for (int i = 0; i < n; i++) { /* runs n times */ }",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: Declaration: returnType functionName(paramType param);",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    }
+  ],
+  "vivaBank": [
+    {
+      "marks": 2,
+      "question": "Define Preprocessor directives.",
+      "modelAnswer": "#include <stdio.h> includes the standard I/O library"
+    },
+    {
+      "marks": 2,
+      "question": "Define main() function.",
+      "modelAnswer": "the entry point of every C program — execution starts here"
+    },
+    {
+      "marks": 2,
+      "question": "Define Statements.",
+      "modelAnswer": "each statement ends with a semicolon (;)"
+    },
+    {
+      "marks": 2,
+      "question": "What is the size of int in C?",
+      "modelAnswer": "Typically 4 bytes on modern systems (implementation-defined, minimum 2 bytes)."
+    },
+    {
+      "marks": 2,
+      "question": "Define a pointer.",
+      "modelAnswer": "A pointer is a variable that stores the memory address of another variable."
+    },
+    {
+      "marks": 2,
+      "question": "Define int.",
+      "modelAnswer": "whole numbers (4 bytes, range -2³¹ to 2³¹-1). Modifiers: short, long, unsigned."
+    },
+    {
+      "marks": 2,
+      "question": "Define float.",
+      "modelAnswer": "single-precision decimal (4 bytes, ~7 digits). double: double-precision (8 bytes, ~15 digits)."
+    },
+    {
+      "marks": 2,
+      "question": "Define char.",
+      "modelAnswer": "single character (1 byte). Stored as ASCII integer internally."
+    },
+    {
+      "marks": 2,
+      "question": "Define if.",
+      "modelAnswer": "execute code only if a condition is true"
+    },
+    {
+      "marks": 2,
+      "question": "Define if-else.",
+      "modelAnswer": "execute one block if true, another if false"
+    },
+    {
+      "marks": 2,
+      "question": "Define if-else if-else.",
+      "modelAnswer": "check multiple conditions in order"
+    },
+    {
+      "marks": 2,
+      "question": "Define for loop.",
+      "modelAnswer": "for (init; condition; update) { } — used when count is known"
+    }
+  ],
+  "pyqBank": [
+    {
+      "marks": 10,
+      "question": "Explain Structure of a C Program in detail with a diagram.",
+      "modelAnswer": "A C program consists of preprocessor directives, global declarations, and functions. Every C program must have a main() function — that's where execution begins. Understanding the structure is the first step to writing C programs."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Structure of a C Program with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Data Types, Variables, and Operators in detail with a diagram.",
+      "modelAnswer": "C has several built-in data types for storing different kinds of data: int for integers, float for decimals, char for characters, and more. Operators perform operations on variables and values — arithmetic, relational, logical, and assignment operators."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Data Types, Variables, and Operators with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Decision Making — if-else and switch in detail with a diagram.",
+      "modelAnswer": "Control structures allow a program to make decisions and repeat actions. The if-else statement executes different code based on a condition. The switch statement selects one of many code blocks based on a value. These are the building blocks of logic in C."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Decision Making — if-else and switch with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Loops — for, while, and do-while in detail with a diagram.",
+      "modelAnswer": "Loops repeat a block of code multiple times. The 'for' loop is used when you know the number of iterations. The 'while' loop checks the condition BEFORE executing (may run 0 times). The 'do-while' loop checks AFTER executing (runs at least once). Loops are essential for processing arrays, generating patterns, and repeating calculations."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Loops — for, while, and do-while with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Functions — Definition, Declaration, and Call in detail with a diagram.",
+      "modelAnswer": "A function is a reusable block of code that performs a specific task. Functions help organize code, avoid repetition, and make programs modular. C programs are collections of functions that call each other. The main() function is where execution starts."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Functions — Definition, Declaration, and Call with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
       ]
     }
   ]

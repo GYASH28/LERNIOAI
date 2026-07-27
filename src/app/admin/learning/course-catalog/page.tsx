@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+export const dynamic = 'force-dynamic'
+
 import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import type { LucideIcon } from 'lucide-react'

@@ -1,0 +1,1293 @@
+{
+  "subjectCode": "R23CP2406",
+  "subjectName": "Operating System",
+  "semester": 3,
+  "credits": 4,
+  "units": [
+    {
+      "number": 1,
+      "title": "Introduction to Operating Systems",
+      "weightage": 12,
+      "lessons": [
+        {
+          "slug": "os-introduction",
+          "title": "Introduction to Operating Systems",
+          "durationMin": 25,
+          "difficulty": "easy",
+          "overview": "An Operating System (OS) is system software that manages computer hardware and software resources, and provides common services for computer programs. It acts as an intermediary between users and hardware, managing CPU, memory, storage, and I/O devices. Examples include Windows, Linux, macOS, and Android.",
+          "keyConcepts": [
+            "Operating System: A program that manages hardware and provides services to applications",
+            "Kernel: The core of the OS — runs in privileged mode, manages CPU, memory, I/O",
+            "System Call: Interface between user programs and the kernel (open(), read(), write(), fork())",
+            "User Mode vs Kernel Mode: User mode = restricted access, Kernel mode = full access",
+            "Batch OS: Jobs processed in batches, no user interaction",
+            "Time-Sharing OS: Multiple users share CPU time (multitasking)",
+            "Real-Time OS: Strict timing constraints (RTLinux, VxWorks)",
+            "Distributed OS: Multiple computers work as one system"
+          ],
+          "formulas": [
+            "CPU Utilization = (Busy Time / Total Time) × 100%",
+            "Throughput = Number of processes completed per unit time",
+            "Turnaround Time = Completion Time - Arrival Time",
+            "Waiting Time = Turnaround Time - Burst Time",
+            "Response Time = First CPU allocation - Arrival Time"
+          ],
+          "tables": [
+            {
+              "headers": [
+                "OS Type",
+                "Characteristic",
+                "Example"
+              ],
+              "rows": [
+                [
+                  "Batch",
+                  "Jobs processed sequentially, no interaction",
+                  "Early IBM mainframes"
+                ],
+                [
+                  "Time-Sharing",
+                  "Multiple users, quick response",
+                  "Unix, Linux"
+                ],
+                [
+                  "Real-Time",
+                  "Guaranteed response time",
+                  "VxWorks, RTLinux"
+                ],
+                [
+                  "Distributed",
+                  "Multiple networked computers",
+                  "Amoeba, LOCUS"
+                ],
+                [
+                  "Mobile",
+                  "Touch interface, power management",
+                  "Android, iOS"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Confusing OS with kernel — kernel is a part of the OS",
+            "Forgetting that system calls are the ONLY way user programs access hardware",
+            "Mixing up throughput and turnaround time"
+          ],
+          "examTips": [
+            "Always define OS as 'system software that manages hardware and provides services'",
+            "List 5 OS services: Process management, Memory management, File management, I/O management, Security",
+            "Draw the OS architecture: Hardware → Kernel → System Calls → User Applications",
+            "Know the 5 scheduling metrics: CPU utilization, throughput, turnaround time, waiting time, response time"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is an operating system? List its main functions.",
+              "options": [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+              ],
+              "answer": 0,
+              "explanation": "Refer to the theory section above for the correct answer."
+            },
+            {
+              "question": "Explain the difference between user mode and kernel mode.",
+              "options": [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+              ],
+              "answer": 0,
+              "explanation": "Refer to the theory section above for the correct answer."
+            },
+            {
+              "question": "What is a system call? Give 5 examples.",
+              "options": [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+              ],
+              "answer": 0,
+              "explanation": "Refer to the theory section above for the correct answer."
+            },
+            {
+              "question": "List different types of operating systems with examples.",
+              "options": [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+              ],
+              "answer": 0,
+              "explanation": "Refer to the theory section above for the correct answer."
+            }
+          ],
+          "objectives": [
+            "Understand Operating System and explain its significance",
+            "Understand Kernel and explain its significance",
+            "Understand System Call and explain its significance",
+            "Understand User Mode vs Kernel Mode and explain its significance",
+            "Understand Batch OS and explain its significance",
+            "Attempt the practice quiz and viva questions on Introduction to Operating Systems"
+          ],
+          "prerequisites": [
+            "Basic understanding of computer architecture (CPU, memory, I/O)",
+            "Familiarity with what a program/process is",
+            "Concept of concurrent vs sequential execution"
+          ],
+          "theory": "## Introduction\n\nAn Operating System (OS) is system software that manages computer hardware and software resources, and provides common services for computer programs. It acts as an intermediary between users and hardware, managing CPU, memory, storage, and I/O devices. Examples include Windows, Linux, macOS, and Android.\n## Key Concepts\n\n- Operating System: A program that manages hardware and provides services to applications\n- Kernel: The core of the OS — runs in privileged mode, manages CPU, memory, I/O\n- System Call: Interface between user programs and the kernel (open(), read(), write(), fork())\n- User Mode vs Kernel Mode: User mode = restricted access, Kernel mode = full access\n- Batch OS: Jobs processed in batches, no user interaction\n- Time-Sharing OS: Multiple users share CPU time (multitasking)\n- Real-Time OS: Strict timing constraints (RTLinux, VxWorks)\n- Distributed OS: Multiple computers work as one system\n\n## Important Formulas\n\n- `CPU Utilization = (Busy Time / Total Time) × 100%`\n- `Throughput = Number of processes completed per unit time`\n- `Turnaround Time = Completion Time - Arrival Time`\n- `Waiting Time = Turnaround Time - Burst Time`\n- `Response Time = First CPU allocation - Arrival Time`\n\n## Comparison Tables\n\n| OS Type | Characteristic | Example |\n| --- | --- | --- |\n| Batch | Jobs processed sequentially, no interaction | Early IBM mainframes |\n| Time-Sharing | Multiple users, quick response | Unix, Linux |\n| Real-Time | Guaranteed response time | VxWorks, RTLinux |\n| Distributed | Multiple networked computers | Amoeba, LOCUS |\n| Mobile | Touch interface, power management | Android, iOS |\n\n\n## Summary\n\nAn Operating System (OS) is system software that manages computer hardware and software resources, and provides common services for computer programs. It acts as an intermediary between users and hardware, managing CPU, memory, storage, and I/O devices. Examples include Windows, Linux, macOS, and Android.",
+          "analogies": [
+            {
+              "scenario": "OS as a restaurant manager",
+              "mapping": "Customers = processes, Waiters = system calls, Kitchen = CPU, Tables = memory. The manager (OS) schedules which customer gets served next, allocates tables, and resolves disputes."
+            },
+            {
+              "scenario": "Memory management like a hotel",
+              "mapping": "Guests = processes, Rooms = memory frames, Receptionist = memory manager. Fixed partitioning = rooms of one size; paging = uniform room blocks; virtual memory = overbooking."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Introduction to Operating Systems — Process Flow",
+              "content": "flowchart TD\n    A[New Process] --> B[Ready Queue]\n    B --> C{Scheduler Picks}\n    C --> D[Running]\n    D -->|I/O or wait| E[Blocked]\n    E -->|I/O done| B\n    D -->|Quantum expires| B\n    D -->|Completes| F[Terminated]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Introduction to Operating Systems — Concept Map",
+              "content": "mindmap\n  root((Introduction to Operating Syst))\n    Process Management\n      PCB\n      Scheduling\n      IPC\n    Memory Management\n      Paging\n      Segmentation\n      Virtual Memory\n    File System\n      Directories\n      Permissions"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) context switch, O(n) scheduling decisions",
+            "space": "O(n) PCB table + O(1) per-process kernel stack"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example",
+              "problem": "What is an operating system? List its main functions.",
+              "solution": "Refer to the theory section above and the key concepts. Structure your answer as: definition → explanation → example → conclusion.",
+              "explanation": "This is a sample answer outline. Expand each section with details from the lesson."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Introduction to Operating Systems with reference to the key concepts.",
+              "solution": "Always define OS as 'system software that manages hardware and provides services' → List 5 OS services: Process management, Memory management, File management, I/O management, Security → Draw the OS architecture: Hardware → Kernel → System Calls → User Applications",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Operating System.",
+              "modelAnswer": "A program that manages hardware and provides services to applications"
+            },
+            {
+              "marks": 2,
+              "question": "Define Kernel.",
+              "modelAnswer": "The core of the OS — runs in privileged mode, manages CPU, memory, I/O"
+            },
+            {
+              "marks": 2,
+              "question": "Define System Call.",
+              "modelAnswer": "Interface between user programs and the kernel (open(), read(), write(), fork())"
+            },
+            {
+              "marks": 2,
+              "question": "What is a context switch?",
+              "modelAnswer": "A context switch is the OS saving the state of a running process and loading the state of the next one to run."
+            },
+            {
+              "marks": 2,
+              "question": "Define virtual memory.",
+              "modelAnswer": "Virtual memory is a technique where the OS uses disk space to extend physical RAM, allowing processes to use more memory than physically available."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: CPU Utilization = (Busy Time / Total Time) × 100%",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "What is a deadlock? List the four necessary conditions.",
+              "modelAnswer": "A deadlock is a state where two or more processes are stuck waiting for each other forever. The four Coffman conditions: Mutual Exclusion, Hold and Wait, No Preemption, Circular Wait. Breaking any one prevents deadlock."
+            },
+            {
+              "marks": 5,
+              "question": "Difference between process and thread?",
+              "modelAnswer": "A process has its own memory space; threads within a process share memory. Threads are lighter to create/switch. Processes are isolated; threads can stomp on each other's data without synchronisation."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Operating System.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Kernel.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: CPU Utilization = (Busy Time / Total Time) × 100%",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Throughput = Number of processes completed per unit time",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Introduction to Operating Systems in detail with a diagram.",
+              "modelAnswer": "An Operating System (OS) is system software that manages computer hardware and software resources, and provides common services for computer programs. It acts as an intermediary between users and hardware, managing CPU, memory, storage, and I/O devices. Examples include Windows, Linux, macOS, and Android."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Introduction to Operating Systems with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Introduction to Operating Systems\n\n**One-line definition:** An Operating System (OS) is system software that manages computer hardware and software resources, and provides common services for computer programs. It acts as an intermediary between users and hard\n\n**Key points:**\n\n- Operating System: A program that manages hardware and provides services to applications\n- Kernel: The core of the OS — runs in privileged mode, manages CPU, memory, I/O\n- System Call: Interface between user programs and the kernel (open(), read(), write(), fork())\n- User Mode vs Kernel Mode: User mode = restricted access, Kernel mode = full access\n- Batch OS: Jobs processed in batches, no user interaction\n\n**Important formulas:**\n\n- `CPU Utilization = (Busy Time / Total Time) × 100%`\n- `Throughput = Number of processes completed per unit time`\n- `Turnaround Time = Completion Time - Arrival Time`\n- `Waiting Time = Turnaround Time - Burst Time`\n- `Response Time = First CPU allocation - Arrival Time`\n\n**Common mistake to avoid:** Confusing OS with kernel — kernel is a part of the OS\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Operating System: A program that manages hardware and provides services to applications",
+            "Kernel: The core of the OS — runs in privileged mode, manages CPU, memory, I/O",
+            "System Call: Interface between user programs and the kernel (open(), read(), write(), fork())",
+            "User Mode vs Kernel Mode: User mode = restricted access, Kernel mode = full access",
+            "Batch OS: Jobs processed in batches, no user interaction",
+            "Formula: CPU Utilization = (Busy Time / Total Time) × 100%",
+            "Formula: Throughput = Number of processes completed per unit time",
+            "Formula: Turnaround Time = Completion Time - Arrival Time",
+            "Formula: Waiting Time = Turnaround Time - Burst Time",
+            "Formula: Response Time = First CPU allocation - Arrival Time",
+            "Process states: New → Ready → Running → Blocked → Terminated",
+            "Scheduling: FCFS, SJF, Round Robin, Priority",
+            "Page replacement: FIFO, LRU, Optimal"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "FCFS",
+              "expansion": "First Come First Served",
+              "meaning": "Simplest scheduling algorithm — processes run in arrival order."
+            },
+            {
+              "phrase": "LRU",
+              "expansion": "Least Recently Used",
+              "meaning": "Page replacement algorithm that evicts the page not used for the longest time."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always define OS as 'system software that manages hardware and provides services'"
+            },
+            {
+              "type": "exam-tip",
+              "content": "List 5 OS services: Process management, Memory management, File management, I/O management, Security"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing OS with kernel — kernel is a part of the OS"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting that system calls are the ONLY way user programs access hardware"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "An Operating System (OS) is system software that manages computer hardware and software resources, and provides common services for computer programs. It acts as an intermediary between users and hardware, managing CPU, memory, storage, and I/O devices. Examples include Windows, Linux, macOS, and An..."
+            },
+            {
+              "type": "definition",
+              "content": "Operating System: A program that manages hardware and provides services to applications"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Operating System?",
+              "back": "A program that manages hardware and provides services to applications",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Kernel?",
+              "back": "The core of the OS — runs in privileged mode, manages CPU, memory, I/O",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is System Call?",
+              "back": "Interface between user programs and the kernel (open(), read(), write(), fork())",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is User Mode vs Kernel Mode?",
+              "back": "User mode = restricted access, Kernel mode = full access",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Batch OS?",
+              "back": "Jobs processed in batches, no user interaction",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Time-Sharing OS?",
+              "back": "Multiple users share CPU time (multitasking)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Real-Time OS?",
+              "back": "Strict timing constraints (RTLinux, VxWorks)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Distributed OS?",
+              "back": "Multiple computers work as one system",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "An Operating System (OS) is system software that manages computer hardware and software resources, and provides common services for computer programs. It acts as an intermediary between users and hardware, managing CPU, memory, storage, and I/O devices. Examples include Windows, Linux, macOS, and An"
+            },
+            {
+              "style": "detailed",
+              "content": "An Operating System (OS) is system software that manages computer hardware and software resources, and provides common services for computer programs. It acts as an intermediary between users and hardware, managing CPU, memory, storage, and I/O devices. Examples include Windows, Linux, macOS, and Android.\n\nKey concepts: Operating System: A program that manages hardware and provides services to appli, Kernel: The core of the OS — runs in privileged mode, manages CPU, memory, I/O, System Call: Interface between user programs and the kernel (open(), read(), wri."
+            }
+          ],
+          "recommendedNextLessons": [
+            "process-management",
+            "memory-management"
+          ]
+        },
+        {
+          "slug": "process-management",
+          "title": "Process Management and Scheduling",
+          "durationMin": 35,
+          "difficulty": "medium",
+          "overview": "A process is a program in execution. Process management involves creating, scheduling, suspending, and terminating processes. The OS uses scheduling algorithms to decide which process gets the CPU and for how long. Key concepts include process states, the PCB (Process Control Block), context switching, and various CPU scheduling algorithms.",
+          "keyConcepts": [
+            "Process: A program in execution (active entity, has PCB)",
+            "Program: A set of instructions on disk (passive entity)",
+            "PCB (Process Control Block): Data structure storing process info (PID, state, PC, registers, memory info)",
+            "Process States: New → Ready → Running → Waiting → Terminated",
+            "Context Switch: Saving the state of one process and loading another",
+            "Preemptive Scheduling: OS can force a running process to give up CPU",
+            "Non-Preemptive Scheduling: Process keeps CPU until it finishes or blocks",
+            "FCFS: First Come First Serve — simple but may cause convoy effect",
+            "SJF: Shortest Job First — optimal but needs future knowledge",
+            "Round Robin: Each process gets a time quantum, then preempted",
+            "Priority Scheduling: Highest priority process runs first"
+          ],
+          "formulas": [
+            "FCFS: Avg Waiting Time = (Σ Waiting Time) / n",
+            "SJF (non-preemptive): Sort by burst time, then schedule",
+            "Round Robin: Time Quantum = q; if burst > q, preempt and add to ready queue",
+            "Turnaround Time = Completion Time - Arrival Time",
+            "Waiting Time = Turnaround Time - Burst Time"
+          ],
+          "tables": [
+            {
+              "headers": [
+                "Algorithm",
+                "Type",
+                "Pros",
+                "Cons"
+              ],
+              "rows": [
+                [
+                  "FCFS",
+                  "Non-preemptive",
+                  "Simple, fair",
+                  "Convoy effect, poor avg wait"
+                ],
+                [
+                  "SJF",
+                  "Non-preemptive",
+                  "Optimal avg wait",
+                  "Starvation for long jobs"
+                ],
+                [
+                  "Round Robin",
+                  "Preemptive",
+                  "Fair, good response time",
+                  "High context switch overhead"
+                ],
+                [
+                  "Priority",
+                  "Both",
+                  "Important jobs first",
+                  "Starvation (solve with aging)"
+                ]
+              ]
+            }
+          ],
+          "codeExamples": [
+            {
+              "language": "c",
+              "code": "// Process Control Block structure\nstruct PCB {\n  int pid;            // Process ID\n  int state;          // NEW, READY, RUNNING, WAITING, TERMINATED\n  int program_counter; // Next instruction address\n  int registers[16];   // CPU registers\n  int priority;        // Scheduling priority\n  int burst_time;      // CPU time needed\n  int arrival_time;    // When process arrived\n  struct PCB *next;    // Next PCB in ready queue\n};"
+            }
+          ],
+          "commonMistakes": [
+            "Forgetting to sort by arrival time before applying FCFS",
+            "In SJF, choosing the shortest remaining time at each preemption point (SRTF is preemptive SJF)",
+            "In Round Robin, not adding the preempted process to the END of the queue",
+            "Confusing waiting time with response time"
+          ],
+          "examTips": [
+            "Draw the Gantt chart for each scheduling algorithm",
+            "Calculate: Completion Time → Turnaround Time → Waiting Time → Average",
+            "For Round Robin, show the ready queue at each time quantum",
+            "For SJF, always pick the shortest burst among arrived processes"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is a PCB? What information does it contain?",
+              "options": [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+              ],
+              "answer": 0,
+              "explanation": "Refer to the theory section above for the correct answer."
+            },
+            {
+              "question": "Draw and explain the 5-state process model.",
+              "options": [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+              ],
+              "answer": 0,
+              "explanation": "Refer to the theory section above for the correct answer."
+            },
+            {
+              "question": "Solve: P1(0,5), P2(1,3), P3(2,1) using FCFS, SJF, and Round Robin (q=2).",
+              "options": [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+              ],
+              "answer": 0,
+              "explanation": "Refer to the theory section above for the correct answer."
+            },
+            {
+              "question": "What is the convoy effect? Which algorithm suffers from it?",
+              "options": [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+              ],
+              "answer": 0,
+              "explanation": "Refer to the theory section above for the correct answer."
+            },
+            {
+              "question": "Explain the difference between preemptive and non-preemptive scheduling.",
+              "options": [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+              ],
+              "answer": 0,
+              "explanation": "Refer to the theory section above for the correct answer."
+            }
+          ],
+          "objectives": [
+            "Understand Process and explain its significance",
+            "Understand Program and explain its significance",
+            "Understand PCB (Process Control Block) and explain its significance",
+            "Understand Process States and explain its significance",
+            "Understand Context Switch and explain its significance",
+            "Attempt the practice quiz and viva questions on Process Management and Scheduling"
+          ],
+          "prerequisites": [
+            "Basic understanding of computer architecture (CPU, memory, I/O)",
+            "Familiarity with what a program/process is",
+            "Concept of concurrent vs sequential execution",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nA process is a program in execution. Process management involves creating, scheduling, suspending, and terminating processes. The OS uses scheduling algorithms to decide which process gets the CPU and for how long. Key concepts include process states, the PCB (Process Control Block), context switching, and various CPU scheduling algorithms.\n## Key Concepts\n\n- Process: A program in execution (active entity, has PCB)\n- Program: A set of instructions on disk (passive entity)\n- PCB (Process Control Block): Data structure storing process info (PID, state, PC, registers, memory info)\n- Process States: New → Ready → Running → Waiting → Terminated\n- Context Switch: Saving the state of one process and loading another\n- Preemptive Scheduling: OS can force a running process to give up CPU\n- Non-Preemptive Scheduling: Process keeps CPU until it finishes or blocks\n- FCFS: First Come First Serve — simple but may cause convoy effect\n- SJF: Shortest Job First — optimal but needs future knowledge\n- Round Robin: Each process gets a time quantum, then preempted\n- Priority Scheduling: Highest priority process runs first\n\n## Important Formulas\n\n- `FCFS: Avg Waiting Time = (Σ Waiting Time) / n`\n- `SJF (non-preemptive): Sort by burst time, then schedule`\n- `Round Robin: Time Quantum = q; if burst > q, preempt and add to ready queue`\n- `Turnaround Time = Completion Time - Arrival Time`\n- `Waiting Time = Turnaround Time - Burst Time`\n\n## Comparison Tables\n\n| Algorithm | Type | Pros | Cons |\n| --- | --- | --- | --- |\n| FCFS | Non-preemptive | Simple, fair | Convoy effect, poor avg wait |\n| SJF | Non-preemptive | Optimal avg wait | Starvation for long jobs |\n| Round Robin | Preemptive | Fair, good response time | High context switch overhead |\n| Priority | Both | Important jobs first | Starvation (solve with aging) |\n\n\n## Code Examples\n\n### Example\n\n```c\n// Process Control Block structure\nstruct PCB {\n  int pid;            // Process ID\n  int state;          // NEW, READY, RUNNING, WAITING, TERMINATED\n  int program_counter; // Next instruction address\n  int registers[16];   // CPU registers\n  int priority;        // Scheduling priority\n  int burst_time;      // CPU time needed\n  int arrival_time;    // When process arrived\n  struct PCB *next;    // Next PCB in ready queue\n};\n```\n\n## Summary\n\nA process is a program in execution. Process management involves creating, scheduling, suspending, and terminating processes. The OS uses scheduling algorithms to decide which process gets the CPU and for how long. Key concepts include process states, the PCB (Process Control Block), context switching, and various CPU scheduling algorithms.",
+          "analogies": [
+            {
+              "scenario": "OS as a restaurant manager",
+              "mapping": "Customers = processes, Waiters = system calls, Kitchen = CPU, Tables = memory. The manager (OS) schedules which customer gets served next, allocates tables, and resolves disputes."
+            },
+            {
+              "scenario": "Memory management like a hotel",
+              "mapping": "Guests = processes, Rooms = memory frames, Receptionist = memory manager. Fixed partitioning = rooms of one size; paging = uniform room blocks; virtual memory = overbooking."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Process Management and Scheduling — Process Flow",
+              "content": "flowchart TD\n    A[New Process] --> B[Ready Queue]\n    B --> C{Scheduler Picks}\n    C --> D[Running]\n    D -->|I/O or wait| E[Blocked]\n    E -->|I/O done| B\n    D -->|Quantum expires| B\n    D -->|Completes| F[Terminated]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Process Management and Scheduling — Concept Map",
+              "content": "mindmap\n  root((Process Management and Schedul))\n    Process Management\n      PCB\n      Scheduling\n      IPC\n    Memory Management\n      Paging\n      Segmentation\n      Virtual Memory\n    File System\n      Directories\n      Permissions"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) context switch, O(n) scheduling decisions",
+            "space": "O(n) PCB table + O(1) per-process kernel stack"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example",
+              "problem": "What is a PCB? What information does it contain?",
+              "solution": "Refer to the theory section above and the key concepts. Structure your answer as: definition → explanation → example → conclusion.",
+              "explanation": "This is a sample answer outline. Expand each section with details from the lesson."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Process Management and Scheduling with reference to the key concepts.",
+              "solution": "Draw the Gantt chart for each scheduling algorithm → Calculate: Completion Time → Turnaround Time → Waiting Time → Average → For Round Robin, show the ready queue at each time quantum",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Process.",
+              "modelAnswer": "A program in execution (active entity, has PCB)"
+            },
+            {
+              "marks": 2,
+              "question": "Define Program.",
+              "modelAnswer": "A set of instructions on disk (passive entity)"
+            },
+            {
+              "marks": 2,
+              "question": "Define PCB (Process Control Block).",
+              "modelAnswer": "Data structure storing process info (PID, state, PC, registers, memory info)"
+            },
+            {
+              "marks": 2,
+              "question": "What is a context switch?",
+              "modelAnswer": "A context switch is the OS saving the state of a running process and loading the state of the next one to run."
+            },
+            {
+              "marks": 2,
+              "question": "Define virtual memory.",
+              "modelAnswer": "Virtual memory is a technique where the OS uses disk space to extend physical RAM, allowing processes to use more memory than physically available."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: FCFS: Avg Waiting Time = (Σ Waiting Time) / n",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "What is a deadlock? List the four necessary conditions.",
+              "modelAnswer": "A deadlock is a state where two or more processes are stuck waiting for each other forever. The four Coffman conditions: Mutual Exclusion, Hold and Wait, No Preemption, Circular Wait. Breaking any one prevents deadlock."
+            },
+            {
+              "marks": 5,
+              "question": "Difference between process and thread?",
+              "modelAnswer": "A process has its own memory space; threads within a process share memory. Threads are lighter to create/switch. Processes are isolated; threads can stomp on each other's data without synchronisation."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Process.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Program.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: FCFS: Avg Waiting Time = (Σ Waiting Time) / n",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: SJF (non-preemptive): Sort by burst time, then schedule",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Process Management and Scheduling in detail with a diagram.",
+              "modelAnswer": "A process is a program in execution. Process management involves creating, scheduling, suspending, and terminating processes. The OS uses scheduling algorithms to decide which process gets the CPU and for how long. Key concepts include process states, the PCB (Process Control Block), context switching, and various CPU scheduling algorithms."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Process Management and Scheduling with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Process Management and Scheduling\n\n**One-line definition:** A process is a program in execution. Process management involves creating, scheduling, suspending, and terminating processes. The OS uses scheduling algorithms to decide which process gets the CPU and\n\n**Key points:**\n\n- Process: A program in execution (active entity, has PCB)\n- Program: A set of instructions on disk (passive entity)\n- PCB (Process Control Block): Data structure storing process info (PID, state, PC, registers, memory info)\n- Process States: New → Ready → Running → Waiting → Terminated\n- Context Switch: Saving the state of one process and loading another\n\n**Important formulas:**\n\n- `FCFS: Avg Waiting Time = (Σ Waiting Time) / n`\n- `SJF (non-preemptive): Sort by burst time, then schedule`\n- `Round Robin: Time Quantum = q; if burst > q, preempt and add to ready queue`\n- `Turnaround Time = Completion Time - Arrival Time`\n- `Waiting Time = Turnaround Time - Burst Time`\n\n**Common mistake to avoid:** Forgetting to sort by arrival time before applying FCFS\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Process: A program in execution (active entity, has PCB)",
+            "Program: A set of instructions on disk (passive entity)",
+            "PCB (Process Control Block): Data structure storing process info (PID, state, PC, registers, memory info)",
+            "Process States: New → Ready → Running → Waiting → Terminated",
+            "Context Switch: Saving the state of one process and loading another",
+            "Formula: FCFS: Avg Waiting Time = (Σ Waiting Time) / n",
+            "Formula: SJF (non-preemptive): Sort by burst time, then schedule",
+            "Formula: Round Robin: Time Quantum = q; if burst > q, preempt and add to ready queue",
+            "Formula: Turnaround Time = Completion Time - Arrival Time",
+            "Formula: Waiting Time = Turnaround Time - Burst Time",
+            "Process states: New → Ready → Running → Blocked → Terminated",
+            "Scheduling: FCFS, SJF, Round Robin, Priority",
+            "Page replacement: FIFO, LRU, Optimal"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "FCFS",
+              "expansion": "First Come First Served",
+              "meaning": "Simplest scheduling algorithm — processes run in arrival order."
+            },
+            {
+              "phrase": "LRU",
+              "expansion": "Least Recently Used",
+              "meaning": "Page replacement algorithm that evicts the page not used for the longest time."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Draw the Gantt chart for each scheduling algorithm"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Calculate: Completion Time → Turnaround Time → Waiting Time → Average"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting to sort by arrival time before applying FCFS"
+            },
+            {
+              "type": "warning",
+              "content": "In SJF, choosing the shortest remaining time at each preemption point (SRTF is preemptive SJF)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "A process is a program in execution. Process management involves creating, scheduling, suspending, and terminating processes. The OS uses scheduling algorithms to decide which process gets the CPU and for how long. Key concepts include process states, the PCB (Process Control Block), context switchi..."
+            },
+            {
+              "type": "definition",
+              "content": "Process: A program in execution (active entity, has PCB)"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Process?",
+              "back": "A program in execution (active entity, has PCB)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Program?",
+              "back": "A set of instructions on disk (passive entity)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is PCB (Process Control Block)?",
+              "back": "Data structure storing process info (PID, state, PC, registers, memory info)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Process States?",
+              "back": "New → Ready → Running → Waiting → Terminated",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Context Switch?",
+              "back": "Saving the state of one process and loading another",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Preemptive Scheduling?",
+              "back": "OS can force a running process to give up CPU",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Non-Preemptive Scheduling?",
+              "back": "Process keeps CPU until it finishes or blocks",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is FCFS?",
+              "back": "First Come First Serve — simple but may cause convoy effect",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "A process is a program in execution. Process management involves creating, scheduling, suspending, and terminating processes. The OS uses scheduling algorithms to decide which process gets the CPU and for how long. Key concepts include process states, the PCB (Process Control Block), context switchi"
+            },
+            {
+              "style": "detailed",
+              "content": "A process is a program in execution. Process management involves creating, scheduling, suspending, and terminating processes. The OS uses scheduling algorithms to decide which process gets the CPU and for how long. Key concepts include process states, the PCB (Process Control Block), context switching, and various CPU scheduling algorithms.\n\nKey concepts: Process: A program in execution (active entity, has PCB), Program: A set of instructions on disk (passive entity), PCB (Process Control Block): Data structure storing process info (PID, state, PC."
+            }
+          ],
+          "recommendedNextLessons": [
+            "memory-management"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Memory Management",
+      "weightage": 15,
+      "lessons": [
+        {
+          "slug": "memory-management",
+          "title": "Memory Management and Paging",
+          "durationMin": 35,
+          "difficulty": "hard",
+          "overview": "Memory management is the process of controlling and coordinating computer memory, assigning portions called blocks to various running programs, and optimizing system performance. Key concepts include contiguous allocation, paging, segmentation, and virtual memory. Paging eliminates external fragmentation by dividing memory into fixed-size frames.",
+          "keyConcepts": [
+            "Logical Address: Address generated by the CPU (virtual address)",
+            "Physical Address: Address in RAM (actual address)",
+            "MMU (Memory Management Unit): Hardware that maps logical to physical addresses",
+            "Contiguous Allocation: Each process gets a single contiguous block of memory",
+            "Fragmentation: External (free space between allocated blocks) and Internal (wasted space within a block)",
+            "Paging: Divide logical memory into pages and physical memory into frames (same size)",
+            "Page Table: Maps page numbers to frame numbers",
+            "Segmentation: Memory divided into segments of variable size (based on program structure)",
+            "Virtual Memory: Uses disk as extension of RAM — enables running programs larger than RAM",
+            "Page Fault: Occurs when a referenced page is not in RAM (must be fetched from disk)"
+          ],
+          "formulas": [
+            "Page Number = Logical Address / Page Size",
+            "Offset = Logical Address % Page Size",
+            "Physical Address = Frame Number × Page Size + Offset",
+            "Page Size = 2^n (typically 4KB = 2^12)",
+            "Number of Pages = Process Size / Page Size",
+            "TLB Hit Ratio = TLB Hits / Total Accesses"
+          ],
+          "tables": [
+            {
+              "headers": [
+                "Concept",
+                "Paging",
+                "Segmentation"
+              ],
+              "rows": [
+                [
+                  "Block Size",
+                  "Fixed (page size)",
+                  "Variable (segment size)"
+                ],
+                [
+                  "Fragmentation",
+                  "Internal only",
+                  "External only"
+                ],
+                [
+                  "Address Space",
+                  "One-dimensional",
+                  "Two-dimensional (segment, offset)"
+                ],
+                [
+                  "Visibility",
+                  "Invisible to user",
+                  "Visible to user"
+                ],
+                [
+                  "Table",
+                  "Page table",
+                  "Segment table"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Forgetting that page size = frame size (they must be the same)",
+            "Confusing internal fragmentation (within allocated block) with external (between blocks)",
+            "Not computing the physical address correctly: Frame × PageSize + Offset"
+          ],
+          "examTips": [
+            "Always compute: Page# = Address / PageSize, Offset = Address % PageSize",
+            "Draw the page table with page number → frame number mapping",
+            "For virtual memory, explain page fault handling steps",
+            "Compare paging vs segmentation in a table"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is the difference between logical and physical addresses?",
+              "options": [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+              ],
+              "answer": 0,
+              "explanation": "Refer to the theory section above for the correct answer."
+            },
+            {
+              "question": "Explain paging with an example. How is a physical address computed?",
+              "options": [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+              ],
+              "answer": 0,
+              "explanation": "Refer to the theory section above for the correct answer."
+            },
+            {
+              "question": "What is virtual memory? How does it work?",
+              "options": [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+              ],
+              "answer": 0,
+              "explanation": "Refer to the theory section above for the correct answer."
+            },
+            {
+              "question": "What is a page fault? Explain the steps to handle it.",
+              "options": [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+              ],
+              "answer": 0,
+              "explanation": "Refer to the theory section above for the correct answer."
+            },
+            {
+              "question": "Differentiate between internal and external fragmentation.",
+              "options": [
+                "Option A",
+                "Option B",
+                "Option C",
+                "Option D"
+              ],
+              "answer": 0,
+              "explanation": "Refer to the theory section above for the correct answer."
+            }
+          ],
+          "objectives": [
+            "Understand Logical Address and explain its significance",
+            "Understand Physical Address and explain its significance",
+            "Understand MMU (Memory Management Unit) and explain its significance",
+            "Understand Contiguous Allocation and explain its significance",
+            "Understand Fragmentation and explain its significance",
+            "Attempt the practice quiz and viva questions on Memory Management and Paging"
+          ],
+          "prerequisites": [
+            "Basic understanding of computer architecture (CPU, memory, I/O)",
+            "Familiarity with what a program/process is",
+            "Concept of concurrent vs sequential execution",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nMemory management is the process of controlling and coordinating computer memory, assigning portions called blocks to various running programs, and optimizing system performance. Key concepts include contiguous allocation, paging, segmentation, and virtual memory. Paging eliminates external fragmentation by dividing memory into fixed-size frames.\n## Key Concepts\n\n- Logical Address: Address generated by the CPU (virtual address)\n- Physical Address: Address in RAM (actual address)\n- MMU (Memory Management Unit): Hardware that maps logical to physical addresses\n- Contiguous Allocation: Each process gets a single contiguous block of memory\n- Fragmentation: External (free space between allocated blocks) and Internal (wasted space within a block)\n- Paging: Divide logical memory into pages and physical memory into frames (same size)\n- Page Table: Maps page numbers to frame numbers\n- Segmentation: Memory divided into segments of variable size (based on program structure)\n- Virtual Memory: Uses disk as extension of RAM — enables running programs larger than RAM\n- Page Fault: Occurs when a referenced page is not in RAM (must be fetched from disk)\n\n## Important Formulas\n\n- `Page Number = Logical Address / Page Size`\n- `Offset = Logical Address % Page Size`\n- `Physical Address = Frame Number × Page Size + Offset`\n- `Page Size = 2^n (typically 4KB = 2^12)`\n- `Number of Pages = Process Size / Page Size`\n- `TLB Hit Ratio = TLB Hits / Total Accesses`\n\n## Comparison Tables\n\n| Concept | Paging | Segmentation |\n| --- | --- | --- |\n| Block Size | Fixed (page size) | Variable (segment size) |\n| Fragmentation | Internal only | External only |\n| Address Space | One-dimensional | Two-dimensional (segment, offset) |\n| Visibility | Invisible to user | Visible to user |\n| Table | Page table | Segment table |\n\n\n## Summary\n\nMemory management is the process of controlling and coordinating computer memory, assigning portions called blocks to various running programs, and optimizing system performance. Key concepts include contiguous allocation, paging, segmentation, and virtual memory. Paging eliminates external fragmentation by dividing memory into fixed-size frames.",
+          "analogies": [
+            {
+              "scenario": "OS as a restaurant manager",
+              "mapping": "Customers = processes, Waiters = system calls, Kitchen = CPU, Tables = memory. The manager (OS) schedules which customer gets served next, allocates tables, and resolves disputes."
+            },
+            {
+              "scenario": "Memory management like a hotel",
+              "mapping": "Guests = processes, Rooms = memory frames, Receptionist = memory manager. Fixed partitioning = rooms of one size; paging = uniform room blocks; virtual memory = overbooking."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Memory Management and Paging — Process Flow",
+              "content": "flowchart TD\n    A[New Process] --> B[Ready Queue]\n    B --> C{Scheduler Picks}\n    C --> D[Running]\n    D -->|I/O or wait| E[Blocked]\n    E -->|I/O done| B\n    D -->|Quantum expires| B\n    D -->|Completes| F[Terminated]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Memory Management and Paging — Concept Map",
+              "content": "mindmap\n  root((Memory Management and Paging))\n    Process Management\n      PCB\n      Scheduling\n      IPC\n    Memory Management\n      Paging\n      Segmentation\n      Virtual Memory\n    File System\n      Directories\n      Permissions"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) context switch, O(n) scheduling decisions",
+            "space": "O(n) PCB table + O(1) per-process kernel stack"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example",
+              "problem": "What is the difference between logical and physical addresses?",
+              "solution": "Refer to the theory section above and the key concepts. Structure your answer as: definition → explanation → example → conclusion.",
+              "explanation": "This is a sample answer outline. Expand each section with details from the lesson."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Memory Management and Paging with reference to the key concepts.",
+              "solution": "Always compute: Page# = Address / PageSize, Offset = Address % PageSize → Draw the page table with page number → frame number mapping → For virtual memory, explain page fault handling steps",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Logical Address.",
+              "modelAnswer": "Address generated by the CPU (virtual address)"
+            },
+            {
+              "marks": 2,
+              "question": "Define Physical Address.",
+              "modelAnswer": "Address in RAM (actual address)"
+            },
+            {
+              "marks": 2,
+              "question": "Define MMU (Memory Management Unit).",
+              "modelAnswer": "Hardware that maps logical to physical addresses"
+            },
+            {
+              "marks": 2,
+              "question": "What is a context switch?",
+              "modelAnswer": "A context switch is the OS saving the state of a running process and loading the state of the next one to run."
+            },
+            {
+              "marks": 2,
+              "question": "Define virtual memory.",
+              "modelAnswer": "Virtual memory is a technique where the OS uses disk space to extend physical RAM, allowing processes to use more memory than physically available."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Page Number = Logical Address / Page Size",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "What is a deadlock? List the four necessary conditions.",
+              "modelAnswer": "A deadlock is a state where two or more processes are stuck waiting for each other forever. The four Coffman conditions: Mutual Exclusion, Hold and Wait, No Preemption, Circular Wait. Breaking any one prevents deadlock."
+            },
+            {
+              "marks": 5,
+              "question": "Difference between process and thread?",
+              "modelAnswer": "A process has its own memory space; threads within a process share memory. Threads are lighter to create/switch. Processes are isolated; threads can stomp on each other's data without synchronisation."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Logical Address.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Physical Address.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Page Number = Logical Address / Page Size",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Offset = Logical Address % Page Size",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Memory Management and Paging in detail with a diagram.",
+              "modelAnswer": "Memory management is the process of controlling and coordinating computer memory, assigning portions called blocks to various running programs, and optimizing system performance. Key concepts include contiguous allocation, paging, segmentation, and virtual memory. Paging eliminates external fragmentation by dividing memory into fixed-size frames."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Memory Management and Paging with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Memory Management and Paging\n\n**One-line definition:** Memory management is the process of controlling and coordinating computer memory, assigning portions called blocks to various running programs, and optimizing system performance. Key concepts include \n\n**Key points:**\n\n- Logical Address: Address generated by the CPU (virtual address)\n- Physical Address: Address in RAM (actual address)\n- MMU (Memory Management Unit): Hardware that maps logical to physical addresses\n- Contiguous Allocation: Each process gets a single contiguous block of memory\n- Fragmentation: External (free space between allocated blocks) and Internal (wasted space within a block)\n\n**Important formulas:**\n\n- `Page Number = Logical Address / Page Size`\n- `Offset = Logical Address % Page Size`\n- `Physical Address = Frame Number × Page Size + Offset`\n- `Page Size = 2^n (typically 4KB = 2^12)`\n- `Number of Pages = Process Size / Page Size`\n- `TLB Hit Ratio = TLB Hits / Total Accesses`\n\n**Common mistake to avoid:** Forgetting that page size = frame size (they must be the same)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Logical Address: Address generated by the CPU (virtual address)",
+            "Physical Address: Address in RAM (actual address)",
+            "MMU (Memory Management Unit): Hardware that maps logical to physical addresses",
+            "Contiguous Allocation: Each process gets a single contiguous block of memory",
+            "Fragmentation: External (free space between allocated blocks) and Internal (wasted space within a block)",
+            "Formula: Page Number = Logical Address / Page Size",
+            "Formula: Offset = Logical Address % Page Size",
+            "Formula: Physical Address = Frame Number × Page Size + Offset",
+            "Formula: Page Size = 2^n (typically 4KB = 2^12)",
+            "Formula: Number of Pages = Process Size / Page Size",
+            "Formula: TLB Hit Ratio = TLB Hits / Total Accesses",
+            "Process states: New → Ready → Running → Blocked → Terminated",
+            "Scheduling: FCFS, SJF, Round Robin, Priority",
+            "Page replacement: FIFO, LRU, Optimal"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "FCFS",
+              "expansion": "First Come First Served",
+              "meaning": "Simplest scheduling algorithm — processes run in arrival order."
+            },
+            {
+              "phrase": "LRU",
+              "expansion": "Least Recently Used",
+              "meaning": "Page replacement algorithm that evicts the page not used for the longest time."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always compute: Page# = Address / PageSize, Offset = Address % PageSize"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw the page table with page number → frame number mapping"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting that page size = frame size (they must be the same)"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing internal fragmentation (within allocated block) with external (between blocks)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Memory management is the process of controlling and coordinating computer memory, assigning portions called blocks to various running programs, and optimizing system performance. Key concepts include contiguous allocation, paging, segmentation, and virtual memory. Paging eliminates external fragment..."
+            },
+            {
+              "type": "definition",
+              "content": "Logical Address: Address generated by the CPU (virtual address)"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Logical Address?",
+              "back": "Address generated by the CPU (virtual address)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Physical Address?",
+              "back": "Address in RAM (actual address)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is MMU (Memory Management Unit)?",
+              "back": "Hardware that maps logical to physical addresses",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Contiguous Allocation?",
+              "back": "Each process gets a single contiguous block of memory",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Fragmentation?",
+              "back": "External (free space between allocated blocks) and Internal (wasted space within a block)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Paging?",
+              "back": "Divide logical memory into pages and physical memory into frames (same size)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Page Table?",
+              "back": "Maps page numbers to frame numbers",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Segmentation?",
+              "back": "Memory divided into segments of variable size (based on program structure)",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Memory management is the process of controlling and coordinating computer memory, assigning portions called blocks to various running programs, and optimizing system performance. Key concepts include contiguous allocation, paging, segmentation, and virtual memory. Paging eliminates external fragment"
+            },
+            {
+              "style": "detailed",
+              "content": "Memory management is the process of controlling and coordinating computer memory, assigning portions called blocks to various running programs, and optimizing system performance. Key concepts include contiguous allocation, paging, segmentation, and virtual memory. Paging eliminates external fragmentation by dividing memory into fixed-size frames.\n\nKey concepts: Logical Address: Address generated by the CPU (virtual address), Physical Address: Address in RAM (actual address), MMU (Memory Management Unit): Hardware that maps logical to physical addresses."
+            }
+          ],
+          "recommendedNextLessons": []
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "# Operating System — Quick Revision\n\n**Subject code:** R23CP2406  \n**Semester:** 3  \n**Credits:** 4  \n\n## Unit 1: Introduction to Operating Systems (12%)\n### Introduction to Operating Systems\nAn Operating System (OS) is system software that manages computer hardware and software resources, and provides common services for computer programs. It acts as an intermediary between users and hardware, managing CPU, memory, storage, and I/O devices. Examples include Windows, ...\n\n**Formulas:**\n- `CPU Utilization = (Busy Time / Total Time) × 100%`\n- `Throughput = Number of processes completed per unit time`\n- `Turnaround Time = Completion Time - Arrival Time`\n\n### Process Management and Scheduling\nA process is a program in execution. Process management involves creating, scheduling, suspending, and terminating processes. The OS uses scheduling algorithms to decide which process gets the CPU and for how long. Key concepts include process states, the PCB (Process Control Blo...\n\n**Formulas:**\n- `FCFS: Avg Waiting Time = (Σ Waiting Time) / n`\n- `SJF (non-preemptive): Sort by burst time, then schedule`\n- `Round Robin: Time Quantum = q; if burst > q, preempt and add to ready queue`\n\n## Unit 2: Memory Management (15%)\n### Memory Management and Paging\nMemory management is the process of controlling and coordinating computer memory, assigning portions called blocks to various running programs, and optimizing system performance. Key concepts include contiguous allocation, paging, segmentation, and virtual memory. Paging eliminat...\n\n**Formulas:**\n- `Page Number = Logical Address / Page Size`\n- `Offset = Logical Address % Page Size`\n- `Physical Address = Frame Number × Page Size + Offset`\n",
+  "interviewBank": [
+    {
+      "marks": 5,
+      "question": "Explain the formula: CPU Utilization = (Busy Time / Total Time) × 100%",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 10,
+      "question": "What is a deadlock? List the four necessary conditions.",
+      "modelAnswer": "A deadlock is a state where two or more processes are stuck waiting for each other forever. The four Coffman conditions: Mutual Exclusion, Hold and Wait, No Preemption, Circular Wait. Breaking any one prevents deadlock."
+    },
+    {
+      "marks": 5,
+      "question": "Difference between process and thread?",
+      "modelAnswer": "A process has its own memory space; threads within a process share memory. Threads are lighter to create/switch. Processes are isolated; threads can stomp on each other's data without synchronisation."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: FCFS: Avg Waiting Time = (Σ Waiting Time) / n",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: Page Number = Logical Address / Page Size",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    }
+  ],
+  "vivaBank": [
+    {
+      "marks": 2,
+      "question": "Define Operating System.",
+      "modelAnswer": "A program that manages hardware and provides services to applications"
+    },
+    {
+      "marks": 2,
+      "question": "Define Kernel.",
+      "modelAnswer": "The core of the OS — runs in privileged mode, manages CPU, memory, I/O"
+    },
+    {
+      "marks": 2,
+      "question": "Define System Call.",
+      "modelAnswer": "Interface between user programs and the kernel (open(), read(), write(), fork())"
+    },
+    {
+      "marks": 2,
+      "question": "What is a context switch?",
+      "modelAnswer": "A context switch is the OS saving the state of a running process and loading the state of the next one to run."
+    },
+    {
+      "marks": 2,
+      "question": "Define virtual memory.",
+      "modelAnswer": "Virtual memory is a technique where the OS uses disk space to extend physical RAM, allowing processes to use more memory than physically available."
+    },
+    {
+      "marks": 2,
+      "question": "Define Process.",
+      "modelAnswer": "A program in execution (active entity, has PCB)"
+    },
+    {
+      "marks": 2,
+      "question": "Define Program.",
+      "modelAnswer": "A set of instructions on disk (passive entity)"
+    },
+    {
+      "marks": 2,
+      "question": "Define PCB (Process Control Block).",
+      "modelAnswer": "Data structure storing process info (PID, state, PC, registers, memory info)"
+    },
+    {
+      "marks": 2,
+      "question": "Define Logical Address.",
+      "modelAnswer": "Address generated by the CPU (virtual address)"
+    },
+    {
+      "marks": 2,
+      "question": "Define Physical Address.",
+      "modelAnswer": "Address in RAM (actual address)"
+    },
+    {
+      "marks": 2,
+      "question": "Define MMU (Memory Management Unit).",
+      "modelAnswer": "Hardware that maps logical to physical addresses"
+    }
+  ],
+  "pyqBank": [
+    {
+      "marks": 10,
+      "question": "Explain Introduction to Operating Systems in detail with a diagram.",
+      "modelAnswer": "An Operating System (OS) is system software that manages computer hardware and software resources, and provides common services for computer programs. It acts as an intermediary between users and hardware, managing CPU, memory, storage, and I/O devices. Examples include Windows, Linux, macOS, and Android."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Introduction to Operating Systems with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Process Management and Scheduling in detail with a diagram.",
+      "modelAnswer": "A process is a program in execution. Process management involves creating, scheduling, suspending, and terminating processes. The OS uses scheduling algorithms to decide which process gets the CPU and for how long. Key concepts include process states, the PCB (Process Control Block), context switching, and various CPU scheduling algorithms."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Process Management and Scheduling with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Memory Management and Paging in detail with a diagram.",
+      "modelAnswer": "Memory management is the process of controlling and coordinating computer memory, assigning portions called blocks to various running programs, and optimizing system performance. Key concepts include contiguous allocation, paging, segmentation, and virtual memory. Paging eliminates external fragmentation by dividing memory into fixed-size frames."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Memory Management and Paging with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 15,
+      "question": "Explain the architecture of Operating System with a neat diagram. List its advantages and limitations.",
+      "modelAnswer": "Draw the architecture diagram, label each component, explain data/control flow, then list 3 advantages and 2 limitations."
+    },
+    {
+      "marks": 10,
+      "question": "Compare any two major concepts from Operating System in tabular form.",
+      "modelAnswer": "Pick the two most important concepts (see lesson notes), build a 6-row comparison table covering meaning, working, advantages, limitations, complexity, and use case."
+    }
+  ]
+}

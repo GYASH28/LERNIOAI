@@ -15,7 +15,7 @@ export const ACADEMIC_OS_STATS = [
   { value: '6', label: 'diploma branches', detail: 'CWIT engineering catalogue' },
   { value: '36', label: 'semester views', detail: 'one reusable dashboard engine' },
   { value: '5', label: 'OS layers', detail: 'catalogue to intelligence' },
-  { value: '6', label: 'core roles', detail: 'student, CR, teacher, HOD, admin, super admin' },
+  { value: '3', label: 'core roles', detail: 'student, CR, admin' },
 ] as const
 
 export const ACADEMIC_OS_LAYERS = [
@@ -37,7 +37,7 @@ export const ACADEMIC_OS_LAYERS = [
   {
     key: 'D',
     title: 'Role workspaces',
-    body: 'Admin, HOD, teacher, CR and student views show only the work that role needs.',
+    body: 'Admin, CR and student views show only the work that role needs.',
   },
   {
     key: 'E',
@@ -48,30 +48,22 @@ export const ACADEMIC_OS_LAYERS = [
 
 export const CORE_ROLE_WORKSPACES = [
   {
-    role: 'Academic Admin',
-    work: 'Start academic year, import rosters, import timetable and resolve exceptions.',
+    role: 'Admin',
+    work: 'Manage users, create CR invite codes, oversee classes and take attendance.',
   },
   {
-    role: 'HOD / Coordinator',
-    work: 'Review branch coverage, faculty mapping, provisional subjects and department health.',
-  },
-  {
-    role: 'Teacher',
-    work: 'See assigned subjects, prepare lessons, publish resources and read class insights.',
-  },
-  {
-    role: 'CR',
-    work: 'Manage class notices, collect issues, request resources and escalate blockers.',
+    role: 'CR (Class Representative)',
+    work: 'Take attendance, post class announcements, manage classmates and escalate issues.',
   },
   {
     role: 'Student',
-    work: 'Open today plan, continue subjects, practise weak topics and ask LEO with context.',
+    work: 'Open today plan, continue subjects, practise weak topics, track attendance and ask LEO.',
   },
 ] as const
 
 export const CAPABILITY_REPLACEMENTS = [
-  'review syllabus',
-  'review resources',
-  'review questions',
-  'moderate content',
+  'take attendance',
+  'post announcements',
+  'view classmates',
+  'track progress',
 ] as const

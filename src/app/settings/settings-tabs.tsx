@@ -105,7 +105,7 @@ export function SettingsTabs({ initialUser }: SettingsTabsProps) {
             <div>
               <label className="text-xs font-medium text-muted-foreground">Color Palette</label>
               <div className="mt-2 grid grid-cols-3 gap-2 sm:grid-cols-6">
-                {['aurora', 'nexus', 'paper', 'ocean', 'forest', 'sakura'].map((p) => (
+                {(['aurora', 'nexus', 'paper', 'ocean', 'forest', 'sakura'] as const).map((p) => (
                   <button
                     key={p}
                     onClick={() => setPref({ palette: p })}

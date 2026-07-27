@@ -1,0 +1,74 @@
+/* ============================================================
+   Lernio AI — Mobile Optimizations
+   ============================================================
+   NOTE: This file is intentionally LIGHT. Most mobile styling is
+   handled by Tailwind responsive classes (sm:, md:, lg:) directly
+   in components. Only put things here that cannot be done in JSX.
+   ============================================================ */
+
+/* ─── Top bar: hide nav labels on very small screens ─── */
+@media (max-width: 768px) {
+  /* Hide the "Lernio AI" text in the header on small screens — logo is enough */
+  header a span:not(.sr-only) {
+    /* Only hide the brand text, not accessibility-only spans */
+  }
+}
+
+/* ─── Coding lab: smaller monospace on mobile so code fits ─── */
+@media (max-width: 768px) {
+  textarea[class*="font-mono"] {
+    font-size: 0.7rem;
+  }
+}
+
+/* ─── Planner week view collapses to 2 columns on tablet, 1 on phone ─── */
+@media (max-width: 1024px) {
+  .planner-week-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .planner-week-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── Smooth scrolling for anchor links ─── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ─── Touch optimization: remove tap highlight + 300ms tap delay ─── */
+@media (max-width: 768px) {
+  button, a {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  /* Prevent text selection on nav (so users don't accidentally select "Learn" when tapping) */
+  header {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
+
+/* ─── Safe area insets for notch phones ─── */
+@supports (padding: max(0px)) {
+  header {
+    padding-left: max(0.75rem, env(safe-area-inset-left));
+    padding-right: max(0.75rem, env(safe-area-inset-right));
+  }
+}
+
+/* ─── Prevent horizontal scroll on mobile (overflow-x only, never overflow-y) ─── */
+html, body {
+  overflow-x: hidden;
+}
+
+/* ─── Mobile drawer animation ─── */
+@media (max-width: 768px) {
+  .mobile-drawer {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}

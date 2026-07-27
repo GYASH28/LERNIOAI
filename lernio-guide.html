@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Lernio AI — User Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 20mm 15mm 20mm 15mm;
+    }
+    @page cover-page {
+      margin: 0 !important;
+    }
+    
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: #0F172A;
+      color: #F8FAFC;
+      margin: 0;
+      padding: 0;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    
+    /* Cover Page */
+    .cover {
+      page: cover-page;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      text-align: center;
+      background: radial-gradient(circle at 50% 30%, #1e293b 0%, #0F172A 70%);
+      page-break-after: always;
+      break-after: page;
+    }
+    
+    .cover-logo {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 30px;
+      border-radius: 20px;
+      background: #10131c;
+      padding: 10px;
+      border: 1px solid #334155;
+      box-shadow: 0 10px 25px rgba(226, 52, 151, 0.2);
+    }
+    
+    .cover-title {
+      font-size: 42px;
+      font-weight: 800;
+      margin: 0 0 10px 0;
+      letter-spacing: -0.03em;
+      color: #F8FAFC;
+    }
+    
+    .cover-subtitle {
+      font-size: 18px;
+      font-weight: 500;
+      color: #38BDF8;
+      margin: 0 0 40px 0;
+      max-width: 500px;
+      line-height: 1.4;
+    }
+    
+    .cover-divider {
+      width: 80px;
+      height: 4px;
+      background-color: #E23497;
+      margin-bottom: 40px;
+      border-radius: 2px;
+    }
+    
+    .cover-meta {
+      margin-top: 60px;
+      font-size: 13px;
+      color: #94A3B8;
+      background: rgba(30, 41, 59, 0.5);
+      padding: 20px 40px;
+      border-radius: 12px;
+      border: 1px solid #334155;
+    }
+    
+    .cover-meta p {
+      margin: 6px 0;
+    }
+    
+    .cover-meta strong {
+      color: #F8FAFC;
+    }
+    
+    /* Table of Contents */
+    .toc {
+      padding: 20px 10px;
+      page-break-after: always;
+      break-after: page;
+    }
+    
+    .toc-title {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #334155;
+      padding-bottom: 10px;
+      color: #F8FAFC;
+    }
+    
+    .toc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+    
+    .toc-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1E293B;
+      padding: 10px 15px;
+      border-radius: 8px;
+      border: 1px solid #334155;
+      text-decoration: none;
+      color: #F8FAFC;
+    }
+    
+    .toc-item span.ch {
+      font-weight: 600;
+      font-size: 12px;
+      color: #E23497;
+      margin-right: 8px;
+    }
+    
+    .toc-item span.name {
+      flex: 1;
+      font-size: 13px;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .toc-item span.page {
+      font-size: 12px;
+      color: #38BDF8;
+      font-weight: 600;
+      margin-left: 10px;
+    }
+    
+    /* Chapter Layout */
+    .chapter {
+      page-break-before: always;
+      break-before: page;
+      padding: 10px 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    
+    .chapter-header {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #E23497;
+      margin: 0 0 5px 0;
+    }
+    
+    .chapter-title {
+      font-size: 24px;
+      font-weight: 800;
+      margin: 0 0 15px 0;
+      color: #F8FAFC;
+      border-bottom: 1px solid #334155;
+      padding-bottom: 10px;
+    }
+    
+    .screenshot-container {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    
+    .screenshot {
+      max-width: 100%;
+      max-height: 380px;
+      object-fit: contain;
+      border-radius: 8px;
+      border: 1px solid #334155;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+    
+    .caption {
+      font-size: 11px;
+      font-style: italic;
+      color: #94A3B8;
+      margin-top: 6px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    
+    .steps-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #38BDF8;
+      margin-bottom: 8px;
+    }
+    
+    ol.steps {
+      margin: 0 0 15px 0;
+      padding-left: 20px;
+    }
+    
+    ol.steps li {
+      margin-bottom: 6px;
+      color: #E2E8F0;
+      padding-left: 5px;
+    }
+    
+    ol.steps li::marker {
+      color: #38BDF8;
+      font-weight: 700;
+    }
+    
+    /* Notion-like Callout Box */
+    .callout {
+      background-color: #1E293B;
+      border: 1px solid #334155;
+      border-left: 4px solid #E23497;
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-top: auto;
+    }
+    
+    .callout-icon {
+      font-size: 18px;
+      line-height: 1;
+    }
+    
+    .callout-text {
+      font-size: 12px;
+      color: #CBD5E1;
+      margin: 0;
+    }
+    
+    /* Footer */
+    .chapter-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #334155;
+      padding-top: 10px;
+      margin-top: 20px;
+      font-size: 11px;
+      color: #64748B;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cover Page -->
+  <div class="cover">
+    <img class="cover-logo" src="public/brand/lernio-logo-symbol.png" alt="Lernio Logo">
+    <h1 class="cover-title">LERNIO AI</h1>
+    <div class="cover-subtitle">User Guide &amp; Operations Manual for the Personalised Learning OS</div>
+    <div class="cover-divider"></div>
+    <div class="cover-meta">
+      <p>Prepared for Student Workspace Authentication</p>
+      <p>Authorized Credentials: <strong>yash.k.ganesh@gmail.com</strong></p>
+      <p>Institution: <strong>Cusrow Wadia Institute of Technology</strong></p>
+      <p>Syllabus Scheme: <strong>G Scheme 2023 (Semester 3)</strong></p>
+      <p style="margin-top:15px; font-size:11px; color:#64748B;">Generated: July 2026 · Confidential &amp; Proprietary</p>
+    </div>
+  </div>
+
+  <!-- Table of Contents -->
+  <div class="toc">
+    <h1 class="toc-title">Table of Contents</h1>
+    <div class="toc-grid">
+      <a href="#ch1" class="toc-item">
+        <span class="ch">CH 1</span>
+        <span class="name">Cinematic Landing Page</span>
+        <span class="page">Page 3</span>
+      </a>
+      <a href="#ch2" class="toc-item">
+        <span class="ch">CH 2</span>
+        <span class="name">Creating Your Profile</span>
+        <span class="page">Page 4</span>
+      </a>
+      <a href="#ch3" class="toc-item">
+        <span class="ch">CH 3</span>
+        <span class="name">Secure Authentication</span>
+        <span class="page">Page 5</span>
+      </a>
+      <a href="#ch4" class="toc-item">
+        <span class="ch">CH 4</span>
+        <span class="name">Student Command Center</span>
+        <span class="page">Page 6</span>
+      </a>
+      <a href="#ch5" class="toc-item">
+        <span class="ch">CH 5</span>
+        <span class="name">Learn - Semester Browser</span>
+        <span class="page">Page 7</span>
+      </a>
+      <a href="#ch6" class="toc-item">
+        <span class="ch">CH 6</span>
+        <span class="name">Subject Syllabus Explorer</span>
+        <span class="page">Page 8</span>
+      </a>
+      <a href="#ch7" class="toc-item">
+        <span class="ch">CH 7</span>
+        <span class="name">Intelligent Practice</span>
+        <span class="page">Page 9</span>
+      </a>
+      <a href="#ch8" class="toc-item">
+        <span class="ch">CH 8</span>
+        <span class="name">Exam Prep Center</span>
+        <span class="page">Page 10</span>
+      </a>
+      <a href="#ch9" class="toc-item">
+        <span class="ch">CH 9</span>
+        <span class="name">AI Academic Tutor</span>
+        <span class="page">Page 11</span>
+      </a>
+      <a href="#ch10" class="toc-item">
+        <span class="ch">CH 10</span>
+        <span class="name">Labs & Practical Portal</span>
+        <span class="page">Page 12</span>
+      </a>
+      <a href="#ch11" class="toc-item">
+        <span class="ch">CH 11</span>
+        <span class="name">Interactive Coding Lab</span>
+        <span class="page">Page 13</span>
+      </a>
+      <a href="#ch12" class="toc-item">
+        <span class="ch">CH 12</span>
+        <span class="name">Curated Study Materials</span>
+        <span class="page">Page 14</span>
+      </a>
+      <a href="#ch13" class="toc-item">
+        <span class="ch">CH 13</span>
+        <span class="name">Spaced Repetition Revision</span>
+        <span class="page">Page 15</span>
+      </a>
+      <a href="#ch14" class="toc-item">
+        <span class="ch">CH 14</span>
+        <span class="name">Calendar Study Planner</span>
+        <span class="page">Page 16</span>
+      </a>
+      <a href="#ch15" class="toc-item">
+        <span class="ch">CH 15</span>
+        <span class="name">Performance Analytics</span>
+        <span class="page">Page 17</span>
+      </a>
+      <a href="#ch16" class="toc-item">
+        <span class="ch">CH 16</span>
+        <span class="name">Campus Leaderboard</span>
+        <span class="page">Page 18</span>
+      </a>
+      <a href="#ch17" class="toc-item">
+        <span class="ch">CH 17</span>
+        <span class="name">Personal Student Profile</span>
+        <span class="page">Page 19</span>
+      </a>
+      <a href="#ch18" class="toc-item">
+        <span class="ch">CH 18</span>
+        <span class="name">Account Settings & Customisation</span>
+        <span class="page">Page 20</span>
+      </a>
+      <a href="#ch19" class="toc-item">
+        <span class="ch">CH 19</span>
+        <span class="name">Campus Notifications</span>
+        <span class="page">Page 21</span>
+      </a>
+      <a href="#ch20" class="toc-item">
+        <span class="ch">CH 20</span>
+        <span class="name">Help & Feedback Center</span>
+        <span class="page">Page 22</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Chapters -->
+  <div class="chapter" id="ch1">
+    <div>
+      <div class="chapter-header">Chapter 1</div>
+      <h2 class="chapter-title">Cinematic Landing Page</h2>
+      
+      <div class="screenshot-container">
+        <img class="screenshot" src="images/01-landing.png" alt="Cinematic Landing Page">
+        <div class="caption">Figure 1.1: The main landing page showcasing the Cinematic Intro and public platform entrance.</div>
+      </div>
+      
+      <div class="steps-title">Usage &amp; Operations Steps</div>
+      <ol class="steps">
+      <li>Access the Lernio home platform via your web browser.</li>
+      <li>Watch the immersive cinematic intro or click the skip button to proceed to the main details.</li>
+      <li>Scroll down to explore Lernio's academic framework or click the 'Sign In' button in the header.</li>
+      </ol>
+    </div>
+    
+    <div class="callout">
+      <span class="callout-icon">💡</span>
+      <p class="callout-text"><strong>Pro-Tip:</strong> The landing page is designed to adapt to your preferred theme and motion settings immediately upon loading.</p>
+    </div>
+    
+    <div class="chapter-footer">
+      <span>Lernio AI User Guide</span>
+      <span>Page 3</span>
+    </div>
+  </div>
+
+  <div class="chapter" id="ch2">
+    <div>
+      <div class="chapter-header">Chapter 2</div>
+      <h2 class="chapter-title">Creating Your Profile</h2>
+      
+      <div class="screenshot-container">
+        <img class="screenshot" src="images/02-signup.png" alt="Creating Your Profile">
+        <div class="caption">Figure 2.1: The signup registration page for new students.</div>
+      </div>
+      
+      <div class="steps-title">Usage &amp; Operations Steps</div>
+      <ol class="steps">
+      <li>Navigate to the registration portal by clicking 'Create a profile'.</li>
+      <li>Fill in your full name, email address, password, roll number, and academic details.</li>
+      <li>Click 'Create profile' to initialize your student record in the database.</li>
+      </ol>
+    </div>
+    
+    <div class="callout">
+      <span class="callout-icon">💡</span>
+      <p class="callout-text"><strong>Pro-Tip:</strong> Make sure your email matches the one provided by your institution if you want to automatically link to your official curriculum.</p>
+    </div>
+    
+    <div class="chapter-footer">
+      <span>Lernio AI User Guide</span>
+      <span>Page 4</span>
+    </div>
+  </div>
+
+  <div class="chapter" id="ch3">
+    <div>
+      <div class="chapter-header">Chapter 3</div>
+      <h2 class="chapter-title">Secure Authentication</h2>
+      
+      <div class="screenshot-container">
+        <img class="screenshot" src="images/03-signin.png" alt="Secure Authentication">
+        <div class="caption">Figure 3.1: The secure login portal supporting local credentials and Google OAuth.</div>
+      </div>
+      
+      <div class="steps-title">Usage &amp; Operations Steps</div>
+      <ol class="steps">
+      <li>Open the sign-in form from the landing page header.</li>
+      <li>Enter your registered email address and password, or select 'Continue with Google'.</li>
+      <li>Click 'Sign in' to authenticate and redirect to your personal learning dashboard.</li>
+      </ol>
+    </div>
+    
+    <div class="callout">
+      <span class="callout-icon">💡</span>
+      <p class="callout-text"><strong>Pro-Tip:</strong> NextAuth secures your session with JWT. If you log in from a new device, your previous active sessions remain safe.</p>
+    </div>
+    
+    <div class="chapter-footer">
+      <span>Lernio AI User Guide</span>
+      <span>Page 5</span>
+    </div>
+  </div>
+
+  <div class="chapter" id="ch4">
+    <div>
+      <div class="chapter-header">Chapter 4</div>
+      <h2 class="chapter-title">Student Command Center</h2>
+      
+      <div class="screenshot-container">
+        <img class="screenshot" src="images/04-dashboard.png" alt="Student Command Center">
+        <div class="caption">Figure 4.1: The personalised student dashboard showcasing daily metrics and quick access hubs.</div>
+      </div>
+      
+      <div class="steps-title">Usage &amp; Operations Steps</div>
+      <ol class="steps">
+      <li>View your daily XP progress, level status, and active streak count in the top metrics bar.</li>
+      <li>Check your active tasks, planned study slots, or recently viewed subjects.</li>
+      <li>Click on any quick access card to jump directly to learning or practice modules.</li>
+      </ol>
+    </div>
+    
+    <div class="callout">
+      <span class="callout-icon">💡</span>
+      <p class="callout-text"><strong>Pro-Tip:</strong> Completing your daily learning target keeps your streak alive and grants you XP multipliers!</p>
+    </div>
+    
+    <div class="chapter-footer">
+      <span>Lernio AI User Guide</span>
+      <span>Page 6</span>
+    </div>
+  </div>
+
+  <div class="chapter" id="ch5">
+    <div>
+      <div class="chapter-header">Chapter 5</div>
+      <h2 class="chapter-title">Learn - Semester Browser</h2>
+      
+      <div class="screenshot-container">
+        <img class="screenshot" src="images/05-learn.png" alt="Learn - Semester Browser">
+        <div class="caption">Figure 5.1: The semester subject browser displaying active courses and credit weights.</div>
+      </div>
+      
+      <div class="steps-title">Usage &amp; Operations Steps</div>
+      <ol class="steps">
+      <li>Access the 'Learn' tab from the sidebar to view all subjects in your current semester.</li>
+      <li>Inspect the credit distribution and total lectures available for each course.</li>
+      <li>Select any subject card to dive into its detailed unit-by-unit syllabus.</li>
+      </ol>
+    </div>
+    
+    <div class="callout">
+      <span class="callout-icon">💡</span>
+      <p class="callout-text"><strong>Pro-Tip:</strong> Subjects are automatically loaded based on your institution's official scheme (e.g., G-Scheme 2023).</p>
+    </div>
+    
+    <div class="chapter-footer">
+      <span>Lernio AI User Guide</span>
+      <span>Page 7</span>
+    </div>
+  </div>
+
+  <div class="chapter" id="ch6">
+    <div>
+      <div class="chapter-header">Chapter 6</div>
+      <h2 class="chapter-title">Subject Syllabus Explorer</h2>
+      
+      <div class="screenshot-container">
+        <img class="screenshot" src="images/06-subject.png" alt="Subject Syllabus Explorer">
+        <div class="caption">Figure 6.1: Detailed syllabus explorer showing units, topics, and progress tracking.</div>
+      </div>
+      
+      <div class="steps-title">Usage &amp; Operations Steps</div>
+      <ol class="steps">
+      <li>Open a specific subject to see the list of academic units.</li>
+      <li>Expand any unit to view the list of topics and their examination weightage.</li>
+      <li>Click on any topic to launch the learning interface with adaptive modes.</li>
+      </ol>
+    </div>
+    
+    <div class="callout">
+      <span class="callout-icon">💡</span>
+      <p class="callout-text"><strong>Pro-Tip:</strong> Critical topics are highlighted in red to ensure you focus on high-yield exam sections first.</p>
+    </div>
+    
+    <div class="chapter-footer">
+      <span>Lernio AI User Guide</span>
+      <span>Page 8</span>
+    </div>
+  </div>
+
+  <div class="chapter" id="ch7">
+    <div>
+      <div class="chapter-header">Chapter 7</div>
+      <h2 class="chapter-title">Intelligent Practice</h2>
+      
+      <div class="screenshot-container">
+        <img class="screenshot" src="images/07-practice.png" alt="Intelligent Practice">
+        <div class="caption">Figure 7.1: The practice module showing adaptive mock question cards.</div>
+      </div>
+      
+      <div class="steps-title">Usage &amp; Operations Steps</div>
+      <ol class="steps">
+      <li>Open the 'Practice' section to view generated question sets for your subjects.</li>
+      <li>Select a difficulty level (Easy, Medium, Hard) matching your current mastery.</li>
+      <li>Start solving MCQs or descriptive questions with instant verification and detailed solutions.</li>
+      </ol>
+    </div>
+    
+    <div class="callout">
+      <span class="callout-icon">💡</span>
+      <p class="callout-text"><strong>Pro-Tip:</strong> The system adjusts the difficulty dynamically based on your previous correct and incorrect attempts.</p>
+    </div>
+    
+    <div class="chapter-footer">
+      <span>Lernio AI User Guide</span>
+      <span>Page 9</span>
+    </div>
+  </div>
+
+  <div class="chapter" id="ch8">
+    <div>
+      <div class="chapter-header">Chapter 8</div>
+      <h2 class="chapter-title">Exam Prep Center</h2>
+      
+      <div class="screenshot-container">
+        <img class="screenshot" src="images/08-exams.png" alt="Exam Prep Center">
+        <div class="caption">Figure 8.1: The examination module offering board-level question papers.</div>
+      </div>
+      
+      <div class="steps-title">Usage &amp; Operations Steps</div>
+      <ol class="steps">
+      <li>Go to the 'Exams' page to access official board papers and model answer guides.</li>
+      <li>Select a question paper and start a timed practice session to simulate real exam conditions.</li>
+      <li>Submit your answers to receive a detailed breakdown of your performance.</li>
+      </ol>
+    </div>
+    
+    <div class="callout">
+      <span class="callout-icon">💡</span>
+      <p class="callout-text"><strong>Pro-Tip:</strong> Solve past board papers to familiarise yourself with recurring question patterns and time management.</p>
+    </div>
+    
+    <div class="chapter-footer">
+      <span>Lernio AI User Guide</span>
+      <span>Page 10</span>
+    </div>
+  </div>
+
+  <div class="chapter" id="ch9">
+    <div>
+      <div class="chapter-header">Chapter 9</div>
+      <h2 class="chapter-title">AI Academic Tutor</h2>
+      
+      <div class="screenshot-container">
+        <img class="screenshot" src="images/09-tutor.png" alt="AI Academic Tutor">
+        <div class="caption">Figure 9.1: The interactive AI Tutor interface for clarifying concepts and asking questions.</div>
+      </div>
+      
+      <div class="steps-title">Usage &amp; Operations Steps</div>
+      <ol class="steps">
+      <li>Navigate to the 'AI Tutor' chat interface from the sidebar.</li>
+      <li>Type in any question regarding your syllabus or paste a difficult code snippet.</li>
+      <li>Receive structured, easy-to-understand explanations with visual aids or step-by-step proofs.</li>
+      </ol>
+    </div>
+    
+    <div class="callout">
+      <span class="callout-icon">💡</span>
+      <p class="callout-text"><strong>Pro-Tip:</strong> The AI Tutor is context-aware and uses your active syllabus to ground all of its explanations.</p>
+    </div>
+    
+    <div class="chapter-footer">
+      <span>Lernio AI User Guide</span>
+      <span>Page 11</span>
+    </div>
+  </div>
+
+  <div class="chapter" id="ch10">
+    <div>
+      <div class="chapter-header">Chapter 10</div>
+      <h2 class="chapter-title">Labs & Practical Portal</h2>
+      
+      <div class="screenshot-container">
+        <img class="screenshot" src="images/10-labs.png" alt="Labs & Practical Portal">
+        <div class="caption">Figure 10.1: The labs portal showing practical experiments and submission tracking.</div>
+      </div>
+      
+      <div class="steps-title">Usage &amp; Operations Steps</div>
+      <ol class="steps">
+      <li>Open the 'Labs' tab to view experiments assigned for the current semester.</li>
+      <li>Review the list of practical assignments, aim, apparatus, and step-by-step procedures.</li>
+      <li>Track your lab completion status and review history.</li>
+      </ol>
+    </div>
+    
+    <div class="callout">
+      <span class="callout-icon">💡</span>
+      <p class="callout-text"><strong>Pro-Tip:</strong> Each lab is mapped to the corresponding subject code, helping you sync theory and practical studies.</p>
+    </div>
+    
+    <div class="chapter-footer">
+      <span>Lernio AI User Guide</span>
+      <span>Page 12</span>
+    </div>
+  </div>
+
+  <div class="chapter" id="ch11">
+    <div>
+      <div class="chapter-header">Chapter 11</div>
+      <h2 class="chapter-title">Interactive Coding Lab</h2>
+      
+      <div class="screenshot-container">
+        <img class="screenshot" src="images/11-coding.png" alt="Interactive Coding Lab">
+        <div class="caption">Figure 11.1: The inline code editor and compiler for programming exercises.</div>
+      </div>
+      
+      <div class="steps-title">Usage &amp; Operations Steps</div>
+      <ol class="steps">
+      <li>Launch any programming challenge from the Labs or Syllabus page.</li>
+      <li>Read the problem statement, constraints, and sample inputs/outputs.</li>
+      <li>Write your solution in the built-in editor and click 'Run Code' to execute tests.</li>
+      </ol>
+    </div>
+    
+    <div class="callout">
+      <span class="callout-icon">💡</span>
+      <p class="callout-text"><strong>Pro-Tip:</strong> The IDE supports compilation for C, C++, Java, and Python with live execution statistics.</p>
+    </div>
+    
+    <div class="chapter-footer">
+      <span>Lernio AI User Guide</span>
+      <span>Page 13</span>
+    </div>
+  </div>
+
+  <div class="chapter" id="ch12">
+    <div>
+      <div class="chapter-header">Chapter 12</div>
+      <h2 class="chapter-title">Curated Study Materials</h2>
+      
+      <div class="screenshot-container">
+        <img class="screenshot" src="images/12-materials.png" alt="Curated Study Materials">
+        <div class="caption">Figure 12.1: The study materials repository with downloadable guides and notes.</div>
+      </div>
+      
+      <div class="steps-title">Usage &amp; Operations Steps</div>
+      <ol class="steps">
+      <li>Access the 'Materials' tab to find textbooks, reference guides, and PDF notes.</li>
+      <li>Search or filter resources by subject code or specific unit.</li>
+      <li>Download resources directly to your device for offline study.</li>
+      </ol>
+    </div>
+    
+    <div class="callout">
+      <span class="callout-icon">💡</span>
+      <p class="callout-text"><strong>Pro-Tip:</strong> Use the peer-reviewed notes generated by instructors to get concise summaries before examinations.</p>
+    </div>
+    
+    <div class="chapter-footer">
+      <span>Lernio AI User Guide</span>
+      <span>Page 14</span>
+    </div>
+  </div>
+
+  <div class="chapter" id="ch13">
+    <div>
+      <div class="chapter-header">Chapter 13</div>
+      <h2 class="chapter-title">Spaced Repetition Revision</h2>
+      
+      <div class="screenshot-container">
+        <img class="screenshot" src="images/13-revision.png" alt="Spaced Repetition Revision">
+        <div class="caption">Figure 13.1: The revision dashboard managing flashcards and spacing schedules.</div>
+      </div>
+      
+      <div class="steps-title">Usage &amp; Operations Steps</div>
+      <ol class="steps">
+      <li>Open the 'Revision' tab to see active flashcards that are due for review.</li>
+      <li>Review each card and rate your recall difficulty (Easy, Medium, Hard).</li>
+      <li>Let the system reschedule the card's next review date according to SuperMemo algorithm.</li>
+      </ol>
+    </div>
+    
+    <div class="callout">
+      <span class="callout-icon">💡</span>
+      <p class="callout-text"><strong>Pro-Tip:</strong> Reviewing flashcards daily shifts knowledge from short-term memory to long-term retention.</p>
+    </div>
+    
+    <div class="chapter-footer">
+      <span>Lernio AI User Guide</span>
+      <span>Page 15</span>
+    </div>
+  </div>
+
+  <div class="chapter" id="ch14">
+    <div>
+      <div class="chapter-header">Chapter 14</div>
+      <h2 class="chapter-title">Calendar Study Planner</h2>
+      
+      <div class="screenshot-container">
+        <img class="screenshot" src="images/14-planner.png" alt="Calendar Study Planner">
+        <div class="caption">Figure 14.1: The calendar planner for managing daily study routines and tasks.</div>
+      </div>
+      
+      <div class="steps-title">Usage &amp; Operations Steps</div>
+      <ol class="steps">
+      <li>Navigate to the 'Planner' page to view your weekly or monthly calendar.</li>
+      <li>Drag and drop subjects to schedule dedicated study slots.</li>
+      <li>Set reminders for exam dates, project submissions, or homework deadlines.</li>
+      </ol>
+    </div>
+    
+    <div class="callout">
+      <span class="callout-icon">💡</span>
+      <p class="callout-text"><strong>Pro-Tip:</strong> Sync your planner with your daily learning goals to build a consistent study routine.</p>
+    </div>
+    
+    <div class="chapter-footer">
+      <span>Lernio AI User Guide</span>
+      <span>Page 16</span>
+    </div>
+  </div>
+
+  <div class="chapter" id="ch15">
+    <div>
+      <div class="chapter-header">Chapter 15</div>
+      <h2 class="chapter-title">Performance Analytics</h2>
+      
+      <div class="screenshot-container">
+        <img class="screenshot" src="images/15-analytics.png" alt="Performance Analytics">
+        <div class="caption">Figure 15.1: The analytics page presenting study time graphs and subject mastery levels.</div>
+      </div>
+      
+      <div class="steps-title">Usage &amp; Operations Steps</div>
+      <ol class="steps">
+      <li>Open the 'Analytics' tab to view your detailed learning statistics.</li>
+      <li>Analyze the weekly focus chart to see how much time you spent on each subject.</li>
+      <li>Check the subject mastery gauge to identify which topics need immediate revision.</li>
+      </ol>
+    </div>
+    
+    <div class="callout">
+      <span class="callout-icon">💡</span>
+      <p class="callout-text"><strong>Pro-Tip:</strong> Regularly check your analytics to identify study trends and adjust your calendar planner accordingly.</p>
+    </div>
+    
+    <div class="chapter-footer">
+      <span>Lernio AI User Guide</span>
+      <span>Page 17</span>
+    </div>
+  </div>
+
+  <div class="chapter" id="ch16">
+    <div>
+      <div class="chapter-header">Chapter 16</div>
+      <h2 class="chapter-title">Campus Leaderboard</h2>
+      
+      <div class="screenshot-container">
+        <img class="screenshot" src="images/16-leaderboard.png" alt="Campus Leaderboard">
+        <div class="caption">Figure 16.1: The leaderboard page displaying top students and friendly competition rankings.</div>
+      </div>
+      
+      <div class="steps-title">Usage &amp; Operations Steps</div>
+      <ol class="steps">
+      <li>Go to the 'Leaderboard' page to view rankings across your department or institution.</li>
+      <li>Check your current position and compare XP points with your peers.</li>
+      <li>View weekly, monthly, or all-time top learners to find motivation.</li>
+      </ol>
+    </div>
+    
+    <div class="callout">
+      <span class="callout-icon">💡</span>
+      <p class="callout-text"><strong>Pro-Tip:</strong> Leaderboards encourage healthy competition. Learn consistently to climb to the top ranks!</p>
+    </div>
+    
+    <div class="chapter-footer">
+      <span>Lernio AI User Guide</span>
+      <span>Page 18</span>
+    </div>
+  </div>
+
+  <div class="chapter" id="ch17">
+    <div>
+      <div class="chapter-header">Chapter 17</div>
+      <h2 class="chapter-title">Personal Student Profile</h2>
+      
+      <div class="screenshot-container">
+        <img class="screenshot" src="images/17-profile.png" alt="Personal Student Profile">
+        <div class="caption">Figure 17.1: The student profile page displaying earned achievements and details.</div>
+      </div>
+      
+      <div class="steps-title">Usage &amp; Operations Steps</div>
+      <ol class="steps">
+      <li>Access your profile from the sidebar to view your student details and avatar.</li>
+      <li>Inspect your level progress ring, total XP, and active streak counts.</li>
+      <li>Explore your trophy cabinet containing unlocked and locked badges.</li>
+      </ol>
+    </div>
+    
+    <div class="callout">
+      <span class="callout-icon">💡</span>
+      <p class="callout-text"><strong>Pro-Tip:</strong> Share your profile link or showcase your trophies to display your learning milestones!</p>
+    </div>
+    
+    <div class="chapter-footer">
+      <span>Lernio AI User Guide</span>
+      <span>Page 19</span>
+    </div>
+  </div>
+
+  <div class="chapter" id="ch18">
+    <div>
+      <div class="chapter-header">Chapter 18</div>
+      <h2 class="chapter-title">Account Settings & Customisation</h2>
+      
+      <div class="screenshot-container">
+        <img class="screenshot" src="images/18-settings.png" alt="Account Settings & Customisation">
+        <div class="caption">Figure 18.1: The settings page allowing profile edits and appearance adjustments.</div>
+      </div>
+      
+      <div class="steps-title">Usage &amp; Operations Steps</div>
+      <ol class="steps">
+      <li>Navigate to 'Settings' to update your username, preferred language, or email.</li>
+      <li>Adjust your appearance theme (Dark, Light, System) and contrast levels.</li>
+      <li>Toggle animations and motion settings to save system power or improve accessibility.</li>
+      </ol>
+    </div>
+    
+    <div class="callout">
+      <span class="callout-icon">💡</span>
+      <p class="callout-text"><strong>Pro-Tip:</strong> Select 'Hindi' or 'Marathi' as your preferred language to translate syllabus descriptions.</p>
+    </div>
+    
+    <div class="chapter-footer">
+      <span>Lernio AI User Guide</span>
+      <span>Page 20</span>
+    </div>
+  </div>
+
+  <div class="chapter" id="ch19">
+    <div>
+      <div class="chapter-header">Chapter 19</div>
+      <h2 class="chapter-title">Campus Notifications</h2>
+      
+      <div class="screenshot-container">
+        <img class="screenshot" src="images/19-notifications.png" alt="Campus Notifications">
+        <div class="caption">Figure 19.1: The notifications panel showcasing announcements and alerts.</div>
+      </div>
+      
+      <div class="steps-title">Usage &amp; Operations Steps</div>
+      <ol class="steps">
+      <li>Click on the notification bell or go to the 'Notifications' tab.</li>
+      <li>Read announcements regarding exam schedules, timetable shifts, or system updates.</li>
+      <li>Mark notifications as read or clear them from your inbox.</li>
+      </ol>
+    </div>
+    
+    <div class="callout">
+      <span class="callout-icon">💡</span>
+      <p class="callout-text"><strong>Pro-Tip:</strong> Stay alert to CR (Class Representative) notices which are pinned at the top of your inbox.</p>
+    </div>
+    
+    <div class="chapter-footer">
+      <span>Lernio AI User Guide</span>
+      <span>Page 21</span>
+    </div>
+  </div>
+
+  <div class="chapter" id="ch20">
+    <div>
+      <div class="chapter-header">Chapter 20</div>
+      <h2 class="chapter-title">Help & Feedback Center</h2>
+      
+      <div class="screenshot-container">
+        <img class="screenshot" src="images/20-help.png" alt="Help & Feedback Center">
+        <div class="caption">Figure 20.1: The help center offering FAQs and bug report submissions.</div>
+      </div>
+      
+      <div class="steps-title">Usage &amp; Operations Steps</div>
+      <ol class="steps">
+      <li>Go to the 'Help' tab to search the knowledge base for platform features.</li>
+      <li>Read articles about managing your profile, flashcards, or compiling code.</li>
+      <li>Fill in the feedback form to report bugs or request new features from developers.</li>
+      </ol>
+    </div>
+    
+    <div class="callout">
+      <span class="callout-icon">💡</span>
+      <p class="callout-text"><strong>Pro-Tip:</strong> Reporting a bug directly from the interface automatically attaches relevant session logs.</p>
+    </div>
+    
+    <div class="chapter-footer">
+      <span>Lernio AI User Guide</span>
+      <span>Page 22</span>
+    </div>
+  </div>
+
+</body>
+</html>
