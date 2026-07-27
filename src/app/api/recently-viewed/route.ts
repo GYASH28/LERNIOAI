@@ -1,6 +1,6 @@
 import { z } from 'zod'
 import { db } from '@/lib/db'
-import { getCurrentUser, withApi, okResponse } from '@/lib/auth'
+import { requireUser, withApi, okResponse } from '@/lib/auth'
 import { parseBody } from '@/lib/schemas'
 
 export const dynamic = 'force-dynamic'
@@ -16,7 +16,7 @@ const trackViewSchema = z.object({
 
 export function GET() {
   return withApi(async () => {
-    const user = await getCurrentUser()
+    const user = await requireUser()
     const recent = await db.recentlyViewed.findMany({
       where: { userId: user.id },
       orderBy: { viewedAt: 'desc' },
@@ -28,7 +28,7 @@ export function GET() {
 
 export function POST(request: Request) {
   return withApi(async () => {
-    const user = await getCurrentUser()
+    const user = await requireUser()
     const body = await parseBody(request, trackViewSchema)
     const recent = await db.recentlyViewed.upsert({
       where: {

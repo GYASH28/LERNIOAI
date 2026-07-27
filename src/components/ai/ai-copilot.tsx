@@ -187,7 +187,7 @@ export function AiCopilot() {
     <>
       <button
         type="button"
-        className="fixed bottom-20 right-4 z-40 inline-flex min-h-12 items-center gap-2 rounded-full border border-primary/25 bg-background/90 px-4 py-2 text-sm font-bold text-foreground shadow-lg backdrop-blur transition hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-xl md:bottom-5"
+        className="fixed bottom-5 right-4 z-40 inline-flex min-h-12 items-center gap-2 rounded-full border border-primary/25 bg-background/90 px-4 py-2 text-sm font-bold text-foreground shadow-lg backdrop-blur transition hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-xl"
         onClick={() => setOpen(true)}
         aria-label="Open LEO copilot"
       >

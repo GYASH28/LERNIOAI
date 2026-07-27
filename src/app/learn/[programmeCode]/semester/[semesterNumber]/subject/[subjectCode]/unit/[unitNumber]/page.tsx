@@ -35,7 +35,7 @@ export default async function UnitLearningPage({
   return (
     <main className="min-h-screen bg-background text-foreground">
       <section className="border-b border-border/70 bg-muted/30">
-        <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-6xl flex-col gap-6 px-5 py-8 sm:px-6 lg:px-8">
           <Link
             href={subjectHref}
             className="inline-flex w-fit items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
@@ -64,7 +64,7 @@ export default async function UnitLearningPage({
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+      <section className="mx-auto max-w-6xl px-5 py-8 sm:px-6 lg:px-8">
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
           <div className="grid gap-3">
             {overview.unit.lessons.length > 0 ? (

@@ -51,6 +51,7 @@ export interface LessonStudioResource {
   startSeconds: number | null
   endSeconds: number | null
   coveragePercentage: number | null
+  curricularReviewStatus: string | null
   chapters: Array<{
     id: string
     title: string
@@ -134,6 +135,7 @@ export interface LessonStudio {
   resources: {
     primaryVideo: LessonStudioResource | null
     primaryVideoFallbackReason: string | null
+    pendingCurricularReview: boolean
     alternateVideos: LessonStudioResource[]
     notes: LessonStudioResource[]
     supporting: LessonStudioResource[]
@@ -253,6 +255,7 @@ export async function getLessonStudio(
           startSeconds: true,
           endSeconds: true,
           coveragePercentage: true,
+          curricularReviewStatus: true,
           resource: {
             select: {
               id: true,
@@ -410,6 +413,7 @@ export async function getLessonStudio(
     resources: {
       primaryVideo: videoSelection.primaryVideo,
       primaryVideoFallbackReason: videoSelection.fallbackReason,
+      pendingCurricularReview: videoSelection.pendingCurricularReview,
       alternateVideos: videoSelection.alternateVideos,
       notes: resources.filter((resource) =>
         ['lesson_notes', 'transcript', 'worksheet', 'formula_sheet'].includes(resource.role),
@@ -583,6 +587,7 @@ function mapLessonResource(item: {
   startSeconds: number | null
   endSeconds: number | null
   coveragePercentage: number | null
+  curricularReviewStatus: string | null
   resource: {
     id: string
     title: string
@@ -637,6 +642,7 @@ function mapLessonResource(item: {
     startSeconds: item.startSeconds,
     endSeconds: item.endSeconds,
     coveragePercentage: item.coveragePercentage,
+    curricularReviewStatus: item.curricularReviewStatus,
     chapters: item.resource.videoChapters,
   }
 }

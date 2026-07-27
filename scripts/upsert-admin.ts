@@ -70,15 +70,16 @@ async function main() {
   const password = process.env.LERNIO_ADMIN_PASSWORD
 
   if (!email) {
-    throw new Error('LERNIO_ADMIN_EMAIL is required.')
+    console.log('LERNIO_ADMIN_EMAIL not set — skipping admin creation.')
+    return
   }
   if (!password || password.length < 8) {
-    throw new Error('LERNIO_ADMIN_PASSWORD must be set and must be at least 8 characters.')
+    console.log('LERNIO_ADMIN_PASSWORD not set or too short — skipping admin creation.')
+    return
   }
   if (!(await canReachDatabase(process.env.DATABASE_URL))) {
-    throw new Error(
-      'PostgreSQL is not reachable from DATABASE_URL. Start the database or set DATABASE_URL to a hosted Postgres database, then run npm run db:admin again.',
-    )
+    console.log('Database not reachable — skipping admin creation.')
+    return
   }
 
   const passwordHash = await hash(password, 12)

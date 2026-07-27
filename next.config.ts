@@ -23,9 +23,9 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  // eslint key is not in the NextConfig type for Next.js 16 but is still
+  // respected at runtime by Vercel. Cast to bypass the type error.
+  ...(({ eslint: { ignoreDuringBuilds: true } }) as Partial<NextConfig>),
   experimental: {
     // Audit fix #24 (CVSS 2.5): expanded from 4 libs to cover all heavy barrel-import
     // packages. Each omitted lib was adding 3-8 KB to chunks that use only one symbol.
@@ -117,9 +117,6 @@ const nextConfig = {
         ],
       },
     ]
-  },
-  turbopack: {
-    root: process.cwd(),
   },
   devIndicators: false,
 };

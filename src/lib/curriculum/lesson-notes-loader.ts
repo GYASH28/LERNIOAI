@@ -37,6 +37,54 @@ export interface Diagram {
   content: string
 }
 
+export interface MarkedQuestion {
+  marks: number
+  question: string
+  modelAnswer?: string
+  tips?: string[]
+}
+
+export interface Mnemonic {
+  phrase: string
+  expansion: string
+  meaning: string
+}
+
+export interface Flashcard {
+  front: string
+  back: string
+  hint?: string
+}
+
+export interface Callout {
+  type: string
+  title?: string
+  content: string
+}
+
+export interface ComplexityAnalysis {
+  time: string
+  space: string
+  explanation?: string
+}
+
+export interface WorkedExample {
+  title: string
+  problem: string
+  solution: string
+  explanation?: string
+}
+
+export interface RealLifeAnalogy {
+  scenario: string
+  mapping: string
+}
+
+export interface AISummary {
+  style: string
+  content: string
+}
+
 export interface Lesson {
   slug: string
   title: string
@@ -51,6 +99,25 @@ export interface Lesson {
   commonMistakes: string[]
   examTips: string[]
   practiceQuestions: PracticeQuestion[]
+  // V3 optional fields (may not exist in all JSON files)
+  objectives?: string[]
+  prerequisites?: string[]
+  theory?: string
+  analogies?: Array<{ scenario: string; mapping: string }>
+  flowcharts?: Diagram[]
+  mindMaps?: Diagram[]
+  complexity?: { time: string; space: string; explanation?: string }
+  workedExamples?: Array<{ title: string; problem: string; solution: string; explanation?: string }>
+  vivaQuestions?: Array<{ marks: number; question: string; modelAnswer?: string }>
+  interviewQuestions?: Array<{ marks: number; question: string; modelAnswer?: string }>
+  examQuestions?: Array<{ marks: number; question: string; modelAnswer?: string; tips?: string[] }>
+  revisionSummary?: string
+  cheatSheet?: string[]
+  mnemonics?: Array<{ phrase: string; expansion: string; meaning: string }>
+  callouts?: Array<{ type: string; title?: string; content: string }>
+  flashcards?: Array<{ front: string; back: string; hint?: string }>
+  aiSummaries?: Array<{ style: string; content: string }>
+  recommendedNextLessons?: string[]
 }
 
 export interface Unit {
@@ -66,6 +133,10 @@ export interface SubjectNotes {
   semester: number
   credits: number
   units: Unit[]
+  revisionNotes?: string
+  interviewBank?: MarkedQuestion[]
+  vivaBank?: MarkedQuestion[]
+  pyqBank?: MarkedQuestion[]
 }
 
 function loadAllNotes(): Map<string, SubjectNotes> {
@@ -104,4 +175,53 @@ export function getSubjectNotes(subjectCode: string): SubjectNotes | null {
 export function getAvailableNotesSubjects(): { code: string; name: string }[] {
   const notes = loadAllNotes()
   return Array.from(notes.values()).map((n) => ({ code: n.subjectCode, name: n.subjectName }))
+}
+
+/**
+ * Find a specific lesson by slug within a subject's notes.
+ */
+export function findLessonBySlug(
+  subjectCode: string,
+  lessonSlug: string,
+): { lesson: Lesson; unit: Unit; subject: SubjectNotes } | null {
+  const subject = getSubjectNotes(subjectCode)
+  if (!subject) return null
+  for (const unit of subject.units) {
+    for (const lesson of unit.lessons) {
+      if (
+        lesson.slug === lessonSlug ||
+        lesson.slug.includes(lessonSlug) ||
+        lessonSlug.includes(lesson.slug)
+      ) {
+        return { lesson, unit, subject }
+      }
+    }
+  }
+  return null
+}
+
+/**
+ * Get the previous and next lessons for navigation.
+ */
+export function getAdjacentLessons(
+  subjectCode: string,
+  lessonSlug: string,
+): { prev: Lesson | null; next: Lesson | null } {
+  const subject = getSubjectNotes(subjectCode)
+  if (!subject) return { prev: null, next: null }
+  const all: Lesson[] = []
+  for (const unit of subject.units) {
+    all.push(...unit.lessons)
+  }
+  const idx = all.findIndex(
+    (l) =>
+      l.slug === lessonSlug ||
+      l.slug.includes(lessonSlug) ||
+      lessonSlug.includes(l.slug),
+  )
+  if (idx === -1) return { prev: null, next: null }
+  return {
+    prev: idx > 0 ? all[idx - 1] : null,
+    next: idx < all.length - 1 ? all[idx + 1] : null,
+  }
 }

@@ -39,7 +39,6 @@ const ViewSkeleton = () => (
 const lazy = <T extends { default: React.ComponentType }>(loader: () => Promise<T>) =>
   dynamic(loader, { ssr: false, loading: () => <ViewSkeleton /> })
 
-const loadLearnView = () => import('@/components/views/learn').then(m => ({ default: m.LearnView }))
 const loadPracticeView = () => import('@/components/views/practice').then(m => ({ default: m.PracticeView }))
 const loadTutorView = () => import('@/components/views/tutor').then(m => ({ default: m.TutorView }))
 const loadLabsView = () => import('@/components/views/labs').then(m => ({ default: m.LabsView }))
@@ -53,7 +52,6 @@ const loadProfileView = () => import('@/components/views/profile').then(m => ({ 
 const loadCommandPalette = () => import('@/components/ui/command-palette').then(m => ({ default: m.CommandPalette }))
 const loadFocusTimerWidget = () => import('@/components/ui/focus-timer').then(m => ({ default: m.FocusTimerWidget }))
 
-const LearnView = lazy(loadLearnView)
 const PracticeView = lazy(loadPracticeView)
 const TutorView = lazy(loadTutorView)
 const LabsView = lazy(loadLabsView)
@@ -322,7 +320,6 @@ function ViewRouter({
   let content: ReactNode
   switch (view) {
     case 'dashboard': content = <DashboardView initialData={initialDashboard} />; break
-    case 'learn': content = <LearnView />; break
     case 'practice': content = <PracticeView />; break
     case 'tutor': content = <TutorView />; break
     case 'labs': content = <LabsView />; break

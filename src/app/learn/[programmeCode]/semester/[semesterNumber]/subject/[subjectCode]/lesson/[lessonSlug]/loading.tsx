@@ -11,7 +11,7 @@ export default function LessonLoading() {
         </div>
       </div>
       {/* Main content + sidebar grid */}
-      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-5 py-6 sm:px-6 lg:px-8">
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
           {/* Left: video player + content */}
           <div className="space-y-4">

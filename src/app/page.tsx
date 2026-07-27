@@ -19,6 +19,8 @@ import { PublicFooter } from '@/components/marketing/public-footer'
 
 const SITE_URL = process.env.NEXTAUTH_URL?.replace(/\/$/, '') || 'https://lernioai.vercel.app'
 
+// Landing page — force-dynamic is safer for client components (CinematicIntro
+// uses sessionStorage/window). The page is fast enough without static caching.
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
@@ -49,8 +51,9 @@ const softwareApplicationLd = {
 }
 
 export default async function LandingPage() {
-  const currentUser = await getCurrentUser().catch(() => null)
-  const isAuthenticated = Boolean(currentUser)
+  // Check if user is authenticated to show personalized CTA
+  const authUser = await getCurrentUser().catch(() => null)
+  const isAuthenticated = !!authUser
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">

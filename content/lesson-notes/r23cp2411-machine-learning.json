@@ -1,0 +1,2005 @@
+{
+  "subjectCode": "R23CP2411",
+  "subjectName": "Machine Learning",
+  "semester": 6,
+  "credits": 4,
+  "units": [
+    {
+      "number": 1,
+      "title": "ML Fundamentals",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "ml-introduction",
+          "title": "Introduction to Machine Learning",
+          "durationMin": 25,
+          "difficulty": "easy",
+          "overview": "Machine Learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed. Arthur Samuel (1959) defined it as 'the field of study that gives computers the ability to learn without being explicitly programmed.' Tom Mitchell formalised it: a program learns from experience E on task T measured by P if performance on T improves with E.",
+          "keyConcepts": [
+            "ML: systems that learn from data instead of explicit rules",
+            "Arthur Samuel: coined 'machine learning' in 1959",
+            "Tom Mitchell's definition: T, E, P formalisation",
+            "Training data: examples used to learn",
+            "Features: measurable properties used as input",
+            "Labels: target output (in supervised learning)",
+            "Model: the learned function that maps inputs to outputs",
+            "Inference: using the trained model on new data"
+          ],
+          "formulas": [
+            "Mitchell: Performance on T improves with E, measured by P",
+            "Model: f(x) → y, learned from training data",
+            "Loss = difference between prediction and actual",
+            "Goal: minimise expected loss on unseen data"
+          ],
+          "tables": [
+            {
+              "title": "AI vs ML vs DL",
+              "headers": [
+                "Field",
+                "Scope",
+                "Technique"
+              ],
+              "rows": [
+                [
+                  "AI",
+                  "Machines simulating intelligence",
+                  "Rule-based, search, logic"
+                ],
+                [
+                  "ML",
+                  "AI subset — learns from data",
+                  "Statistical, algorithms"
+                ],
+                [
+                  "DL",
+                  "ML subset — uses neural nets",
+                  "Multi-layer neural networks"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Confusing AI (broader) with ML (subset)",
+            "Thinking ML = neural networks (NNs are just one technique)",
+            "Forgetting to split data into train/test (leads to overfitting evaluation)",
+            "Treating ML as magic — it needs good data and clear problem framing"
+          ],
+          "examTips": [
+            "Always cite Mitchell's T, E, P definition when asked what ML is",
+            "Distinguish AI > ML > DL hierarchy",
+            "Mention the train/test split when explaining ML workflow"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Who coined the term 'machine learning'?",
+              "options": [
+                "Tom Mitchell",
+                "Arthur Samuel",
+                "Alan Turing",
+                "Geoffrey Hinton"
+              ],
+              "answer": 1,
+              "explanation": "Arthur Samuel coined 'machine learning' in 1959. Tom Mitchell later formalised the definition."
+            },
+            {
+              "question": "Which is the BROADEST field?",
+              "options": [
+                "AI",
+                "ML",
+                "DL",
+                "NN"
+              ],
+              "answer": 0,
+              "explanation": "AI is broadest. ML is a subset of AI. DL is a subset of ML."
+            },
+            {
+              "question": "Mitchell's definition uses T, E, P. What is E?",
+              "options": [
+                "Task",
+                "Experience",
+                "Performance",
+                "Error"
+              ],
+              "answer": 1,
+              "explanation": "T = Task, E = Experience, P = Performance measure."
+            },
+            {
+              "question": "What does a model do?",
+              "options": [
+                "Stores data",
+                "Maps inputs to outputs",
+                "Visualises data",
+                "Saves memory"
+              ],
+              "answer": 1,
+              "explanation": "A model is the learned function f(x) → y that maps inputs to predicted outputs."
+            }
+          ],
+          "objectives": [
+            "Understand ML and explain its significance",
+            "Understand Arthur Samuel and explain its significance",
+            "Understand Tom Mitchell's definition and explain its significance",
+            "Understand Training data and explain its significance",
+            "Understand Features and explain its significance",
+            "Attempt the practice quiz and viva questions on Introduction to Machine Learning"
+          ],
+          "prerequisites": [
+            "Basic Python programming",
+            "Linear algebra (vectors, matrices)",
+            "Statistics (mean, variance, probability)",
+            "Calculus (derivatives for gradient descent)"
+          ],
+          "theory": "## Introduction\n\nMachine Learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed. Arthur Samuel (1959) defined it as 'the field of study that gives computers the ability to learn without being explicitly programmed.' Tom Mitchell formalised it: a program learns from experience E on task T measured by P if performance on T improves with E.\n## Key Concepts\n\n- ML: systems that learn from data instead of explicit rules\n- Arthur Samuel: coined 'machine learning' in 1959\n- Tom Mitchell's definition: T, E, P formalisation\n- Training data: examples used to learn\n- Features: measurable properties used as input\n- Labels: target output (in supervised learning)\n- Model: the learned function that maps inputs to outputs\n- Inference: using the trained model on new data\n\n## Important Formulas\n\n- `Mitchell: Performance on T improves with E, measured by P`\n- `Model: f(x) → y, learned from training data`\n- `Loss = difference between prediction and actual`\n- `Goal: minimise expected loss on unseen data`\n\n## Comparison Tables\n\n### AI vs ML vs DL\n\n| Field | Scope | Technique |\n| --- | --- | --- |\n| AI | Machines simulating intelligence | Rule-based, search, logic |\n| ML | AI subset — learns from data | Statistical, algorithms |\n| DL | ML subset — uses neural nets | Multi-layer neural networks |\n\n\n## Summary\n\nMachine Learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed. Arthur Samuel (1959) defined it as 'the field of study that gives computers the ability to learn without being explicitly programmed.' Tom Mitchell formalised it: a program learns from experience E on task T measured by P if performance on T improves with E.",
+          "analogies": [
+            {
+              "scenario": "ML like teaching a child",
+              "mapping": "Training data = flash cards, Labels = correct answers, Model = child's brain, Loss = how wrong the answer is, Training = repeated practice, Inference = quiz on new cards."
+            },
+            {
+              "scenario": "Neural network like a factory assembly line",
+              "mapping": "Inputs = raw materials, Weights = station settings, Hidden layers = processing stations, Activations = quality checks, Output = finished product. Backprop = adjusting each station based on defects found."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Introduction to Machine Learning — Process Flow",
+              "content": "flowchart LR\n    A[Data] --> B[Preprocess]\n    B --> C[Split Train/Test]\n    C --> D[Train Model]\n    D --> E[Evaluate]\n    E --> F{Good enough?}\n    F -->|No| D\n    F -->|Yes| G[Deploy]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Introduction to Machine Learning — Concept Map",
+              "content": "mindmap\n  root((Introduction to Machine Learni))\n    Supervised\n      Classification\n      Regression\n      Linear\n      KNN\n    Unsupervised\n      Clustering\n      PCA\n      K-Means\n    Neural Nets\n      Layers\n      Activations\n      Backprop\n    Evaluation\n      Accuracy\n      Precision\n      Recall\n      F1"
+            }
+          ],
+          "complexity": {
+            "time": "Training: O(n × d × epochs). Inference: O(d) per sample.",
+            "space": "O(weights) = O(layers × neurons)"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "Who coined the term 'machine learning'?",
+              "solution": "Correct answer: Arthur Samuel",
+              "explanation": "Arthur Samuel coined 'machine learning' in 1959. Tom Mitchell later formalised the definition."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Introduction to Machine Learning with reference to the key concepts.",
+              "solution": "Always cite Mitchell's T, E, P definition when asked what ML is → Distinguish AI > ML > DL hierarchy → Mention the train/test split when explaining ML workflow",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define ML.",
+              "modelAnswer": "systems that learn from data instead of explicit rules"
+            },
+            {
+              "marks": 2,
+              "question": "Define Arthur Samuel.",
+              "modelAnswer": "coined 'machine learning' in 1959"
+            },
+            {
+              "marks": 2,
+              "question": "Define Tom Mitchell's definition.",
+              "modelAnswer": "T, E, P formalisation"
+            },
+            {
+              "marks": 2,
+              "question": "What is supervised learning?",
+              "modelAnswer": "A type of ML where the model is trained on labelled data — input-output pairs — to predict outputs for new inputs."
+            },
+            {
+              "marks": 2,
+              "question": "Define overfitting.",
+              "modelAnswer": "Overfitting occurs when a model learns the training data too well (including noise) and fails to generalise to unseen data."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Mitchell: Performance on T improves with E, measured by P",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain overfitting and how to prevent it.",
+              "modelAnswer": "Overfitting: model fits training data (including noise) too well, fails on new data. Prevention: 1) More training data, 2) Regularisation (L1/L2), 3) Dropout (in neural nets), 4) Early stopping, 5) Cross-validation, 6) Simpler model, 7) Data augmentation."
+            },
+            {
+              "marks": 5,
+              "question": "What is the bias-variance trade-off?",
+              "modelAnswer": "Bias: error from wrong assumptions (underfitting — high bias, too simple). Variance: error from sensitivity to training data (overfitting — high variance, too complex). Trade-off: decreasing bias increases variance. Goal: find the sweet spot that minimises total error."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define ML.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Arthur Samuel.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Mitchell: Performance on T improves with E, measured by P",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Model: f(x) → y, learned from training data",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Introduction to Machine Learning in detail with a diagram.",
+              "modelAnswer": "Machine Learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed. Arthur Samuel (1959) defined it as 'the field of study that gives computers the ability to learn without being explicitly programmed.' Tom Mitchell formalised it: a program learns from experience E on task T measured by P if performance on T improves with E."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Introduction to Machine Learning with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Introduction to Machine Learning\n\n**One-line definition:** Machine Learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed. Arthur Samuel (1959) defined it as 'the field of \n\n**Key points:**\n\n- ML: systems that learn from data instead of explicit rules\n- Arthur Samuel: coined 'machine learning' in 1959\n- Tom Mitchell's definition: T, E, P formalisation\n- Training data: examples used to learn\n- Features: measurable properties used as input\n\n**Important formulas:**\n\n- `Mitchell: Performance on T improves with E, measured by P`\n- `Model: f(x) → y, learned from training data`\n- `Loss = difference between prediction and actual`\n- `Goal: minimise expected loss on unseen data`\n\n**Common mistake to avoid:** Confusing AI (broader) with ML (subset)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "ML: systems that learn from data instead of explicit rules",
+            "Arthur Samuel: coined 'machine learning' in 1959",
+            "Tom Mitchell's definition: T, E, P formalisation",
+            "Training data: examples used to learn",
+            "Features: measurable properties used as input",
+            "Formula: Mitchell: Performance on T improves with E, measured by P",
+            "Formula: Model: f(x) → y, learned from training data",
+            "Formula: Loss = difference between prediction and actual",
+            "Formula: Goal: minimise expected loss on unseen data",
+            "Mitchell: T, E, P",
+            "Linear: y = wx + b",
+            "Logistic: σ(z) = 1 / (1 + e^-z)"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "TP FP TN FN",
+              "expansion": "True Positive, False Positive, True Negative, False Negative",
+              "meaning": "The 4 outcomes in a confusion matrix."
+            },
+            {
+              "phrase": "PRF1",
+              "expansion": "Precision, Recall, F1",
+              "meaning": "The 3 key classification metrics. F1 = harmonic mean of P and R."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always cite Mitchell's T, E, P definition when asked what ML is"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Distinguish AI > ML > DL hierarchy"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing AI (broader) with ML (subset)"
+            },
+            {
+              "type": "warning",
+              "content": "Thinking ML = neural networks (NNs are just one technique)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Machine Learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed. Arthur Samuel (1959) defined it as 'the field of study that gives computers the ability to learn without being explicitly programmed.' Tom Mitchell f..."
+            },
+            {
+              "type": "definition",
+              "content": "ML: systems that learn from data instead of explicit rules"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is ML?",
+              "back": "systems that learn from data instead of explicit rules",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Arthur Samuel?",
+              "back": "coined 'machine learning' in 1959",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Tom Mitchell's definition?",
+              "back": "T, E, P formalisation",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Training data?",
+              "back": "examples used to learn",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Features?",
+              "back": "measurable properties used as input",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Labels?",
+              "back": "target output (in supervised learning)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Model?",
+              "back": "the learned function that maps inputs to outputs",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Inference?",
+              "back": "using the trained model on new data",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Machine Learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed. Arthur Samuel (1959) defined it as 'the field of study that gives computers the ability to learn without being explicitly programmed.' Tom Mitchell f"
+            },
+            {
+              "style": "detailed",
+              "content": "Machine Learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed. Arthur Samuel (1959) defined it as 'the field of study that gives computers the ability to learn without being explicitly programmed.' Tom Mitchell formalised it: a program learns from experience E on task T measured by P if performance on T improves with E.\n\nKey concepts: ML: systems that learn from data instead of explicit rules, Arthur Samuel: coined 'machine learning' in 1959, Tom Mitchell's definition: T, E, P formalisation."
+            }
+          ],
+          "recommendedNextLessons": [
+            "supervised-learning",
+            "unsupervised-learning"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Supervised Learning",
+      "weightage": 25,
+      "lessons": [
+        {
+          "slug": "supervised-learning",
+          "title": "Supervised Learning Algorithms",
+          "durationMin": 35,
+          "difficulty": "medium",
+          "overview": "Supervised learning trains on labelled data (input-output pairs) to predict outputs for new inputs. Two main tasks: classification (discrete labels — spam/not spam) and regression (continuous values — house price). Algorithms include Linear Regression, Logistic Regression, Decision Trees, KNN, Naive Bayes, and SVM.",
+          "keyConcepts": [
+            "Supervised learning: trained on labelled (x, y) pairs",
+            "Classification: predict discrete class (spam / not spam)",
+            "Regression: predict continuous value (house price)",
+            "Linear Regression: y = wx + b — minimise MSE",
+            "Logistic Regression: classification via sigmoid — p = 1 / (1 + e^-z)",
+            "Decision Tree: splits data by feature thresholds",
+            "KNN (K-Nearest Neighbours): classify by majority vote of K nearest",
+            "Naive Bayes: probabilistic, assumes feature independence"
+          ],
+          "formulas": [
+            "Linear regression: y = wx + b, minimise Σ(y - ŷ)^2",
+            "Logistic: p = 1 / (1 + e^-(wx + b))",
+            "KNN: y = majority vote of K nearest neighbours",
+            "Naive Bayes: P(y|x) ∝ P(y) × Π P(xi | y)"
+          ],
+          "tables": [
+            {
+              "title": "Classification vs Regression",
+              "headers": [
+                "Aspect",
+                "Classification",
+                "Regression"
+              ],
+              "rows": [
+                [
+                  "Output",
+                  "Discrete class",
+                  "Continuous value"
+                ],
+                [
+                  "Example",
+                  "Spam / not spam",
+                  "House price"
+                ],
+                [
+                  "Algorithms",
+                  "Logistic, KNN, SVM, DT",
+                  "Linear, Polynomial, SVR"
+                ],
+                [
+                  "Metric",
+                  "Accuracy, F1",
+                  "MSE, MAE, R^2"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Confusing classification (discrete) with regression (continuous)",
+            "Not normalising features (KNN and gradient-based methods are sensitive)",
+            "Forgetting to split train/test (overfitting)",
+            "Treating logistic regression as a regression (it's classification!)"
+          ],
+          "examTips": [
+            "Always state whether the problem is classification or regression",
+            "Show the linear regression equation and MSE",
+            "Mention that logistic regression uses sigmoid for binary classification"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which is a REGRESSION task?",
+              "options": [
+                "Spam detection",
+                "House price prediction",
+                "Image classification",
+                "Disease diagnosis"
+              ],
+              "answer": 1,
+              "explanation": "House price is a continuous value — regression. Others are classification."
+            },
+            {
+              "question": "Which algorithm uses sigmoid?",
+              "options": [
+                "Linear regression",
+                "Logistic regression",
+                "KNN",
+                "Decision tree"
+              ],
+              "answer": 1,
+              "explanation": "Logistic regression uses sigmoid to output probabilities for classification."
+            },
+            {
+              "question": "KNN classifies by:",
+              "options": [
+                "Distance to hyperplane",
+                "Majority vote of K nearest",
+                "Tree splits",
+                "Probabilities"
+              ],
+              "answer": 1,
+              "explanation": "KNN finds the K nearest training examples and takes a majority vote."
+            },
+            {
+              "question": "Naive Bayes assumes:",
+              "options": [
+                "Features are correlated",
+                "Features are independent",
+                "Data is linear",
+                "Data is normalised"
+              ],
+              "answer": 1,
+              "explanation": "Naive Bayes assumes feature independence (the 'naive' part), simplifying computation."
+            }
+          ],
+          "objectives": [
+            "Understand Supervised learning and explain its significance",
+            "Understand Classification and explain its significance",
+            "Understand Regression and explain its significance",
+            "Understand Linear Regression and explain its significance",
+            "Understand Logistic Regression and explain its significance",
+            "Attempt the practice quiz and viva questions on Supervised Learning Algorithms"
+          ],
+          "prerequisites": [
+            "Basic Python programming",
+            "Linear algebra (vectors, matrices)",
+            "Statistics (mean, variance, probability)",
+            "Calculus (derivatives for gradient descent)"
+          ],
+          "theory": "## Introduction\n\nSupervised learning trains on labelled data (input-output pairs) to predict outputs for new inputs. Two main tasks: classification (discrete labels — spam/not spam) and regression (continuous values — house price). Algorithms include Linear Regression, Logistic Regression, Decision Trees, KNN, Naive Bayes, and SVM.\n## Key Concepts\n\n- Supervised learning: trained on labelled (x, y) pairs\n- Classification: predict discrete class (spam / not spam)\n- Regression: predict continuous value (house price)\n- Linear Regression: y = wx + b — minimise MSE\n- Logistic Regression: classification via sigmoid — p = 1 / (1 + e^-z)\n- Decision Tree: splits data by feature thresholds\n- KNN (K-Nearest Neighbours): classify by majority vote of K nearest\n- Naive Bayes: probabilistic, assumes feature independence\n\n## Important Formulas\n\n- `Linear regression: y = wx + b, minimise Σ(y - ŷ)^2`\n- `Logistic: p = 1 / (1 + e^-(wx + b))`\n- `KNN: y = majority vote of K nearest neighbours`\n- `Naive Bayes: P(y|x) ∝ P(y) × Π P(xi | y)`\n\n## Comparison Tables\n\n### Classification vs Regression\n\n| Aspect | Classification | Regression |\n| --- | --- | --- |\n| Output | Discrete class | Continuous value |\n| Example | Spam / not spam | House price |\n| Algorithms | Logistic, KNN, SVM, DT | Linear, Polynomial, SVR |\n| Metric | Accuracy, F1 | MSE, MAE, R^2 |\n\n\n## Summary\n\nSupervised learning trains on labelled data (input-output pairs) to predict outputs for new inputs. Two main tasks: classification (discrete labels — spam/not spam) and regression (continuous values — house price). Algorithms include Linear Regression, Logistic Regression, Decision Trees, KNN, Naive Bayes, and SVM.",
+          "analogies": [
+            {
+              "scenario": "ML like teaching a child",
+              "mapping": "Training data = flash cards, Labels = correct answers, Model = child's brain, Loss = how wrong the answer is, Training = repeated practice, Inference = quiz on new cards."
+            },
+            {
+              "scenario": "Neural network like a factory assembly line",
+              "mapping": "Inputs = raw materials, Weights = station settings, Hidden layers = processing stations, Activations = quality checks, Output = finished product. Backprop = adjusting each station based on defects found."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Supervised Learning Algorithms — Process Flow",
+              "content": "flowchart LR\n    A[Data] --> B[Preprocess]\n    B --> C[Split Train/Test]\n    C --> D[Train Model]\n    D --> E[Evaluate]\n    E --> F{Good enough?}\n    F -->|No| D\n    F -->|Yes| G[Deploy]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Supervised Learning Algorithms — Concept Map",
+              "content": "mindmap\n  root((Supervised Learning Algorithms))\n    Supervised\n      Classification\n      Regression\n      Linear\n      KNN\n    Unsupervised\n      Clustering\n      PCA\n      K-Means\n    Neural Nets\n      Layers\n      Activations\n      Backprop\n    Evaluation\n      Accuracy\n      Precision\n      Recall\n      F1"
+            }
+          ],
+          "complexity": {
+            "time": "Training: O(n × d × epochs). Inference: O(d) per sample.",
+            "space": "O(weights) = O(layers × neurons)"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "Which is a REGRESSION task?",
+              "solution": "Correct answer: House price prediction",
+              "explanation": "House price is a continuous value — regression. Others are classification."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Supervised Learning Algorithms with reference to the key concepts.",
+              "solution": "Always state whether the problem is classification or regression → Show the linear regression equation and MSE → Mention that logistic regression uses sigmoid for binary classification",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Supervised learning.",
+              "modelAnswer": "trained on labelled (x, y) pairs"
+            },
+            {
+              "marks": 2,
+              "question": "Define Classification.",
+              "modelAnswer": "predict discrete class (spam / not spam)"
+            },
+            {
+              "marks": 2,
+              "question": "Define Regression.",
+              "modelAnswer": "predict continuous value (house price)"
+            },
+            {
+              "marks": 2,
+              "question": "What is supervised learning?",
+              "modelAnswer": "A type of ML where the model is trained on labelled data — input-output pairs — to predict outputs for new inputs."
+            },
+            {
+              "marks": 2,
+              "question": "Define overfitting.",
+              "modelAnswer": "Overfitting occurs when a model learns the training data too well (including noise) and fails to generalise to unseen data."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Linear regression: y = wx + b, minimise Σ(y - ŷ)^2",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain overfitting and how to prevent it.",
+              "modelAnswer": "Overfitting: model fits training data (including noise) too well, fails on new data. Prevention: 1) More training data, 2) Regularisation (L1/L2), 3) Dropout (in neural nets), 4) Early stopping, 5) Cross-validation, 6) Simpler model, 7) Data augmentation."
+            },
+            {
+              "marks": 5,
+              "question": "What is the bias-variance trade-off?",
+              "modelAnswer": "Bias: error from wrong assumptions (underfitting — high bias, too simple). Variance: error from sensitivity to training data (overfitting — high variance, too complex). Trade-off: decreasing bias increases variance. Goal: find the sweet spot that minimises total error."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Supervised learning.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Classification.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Linear regression: y = wx + b, minimise Σ(y - ŷ)^2",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Logistic: p = 1 / (1 + e^-(wx + b))",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Supervised Learning Algorithms in detail with a diagram.",
+              "modelAnswer": "Supervised learning trains on labelled data (input-output pairs) to predict outputs for new inputs. Two main tasks: classification (discrete labels — spam/not spam) and regression (continuous values — house price). Algorithms include Linear Regression, Logistic Regression, Decision Trees, KNN, Naive Bayes, and SVM."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Supervised Learning Algorithms with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Supervised Learning Algorithms\n\n**One-line definition:** Supervised learning trains on labelled data (input-output pairs) to predict outputs for new inputs. Two main tasks: classification (discrete labels — spam/not spam) and regression (continuous values —\n\n**Key points:**\n\n- Supervised learning: trained on labelled (x, y) pairs\n- Classification: predict discrete class (spam / not spam)\n- Regression: predict continuous value (house price)\n- Linear Regression: y = wx + b — minimise MSE\n- Logistic Regression: classification via sigmoid — p = 1 / (1 + e^-z)\n\n**Important formulas:**\n\n- `Linear regression: y = wx + b, minimise Σ(y - ŷ)^2`\n- `Logistic: p = 1 / (1 + e^-(wx + b))`\n- `KNN: y = majority vote of K nearest neighbours`\n- `Naive Bayes: P(y|x) ∝ P(y) × Π P(xi | y)`\n\n**Common mistake to avoid:** Confusing classification (discrete) with regression (continuous)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Supervised learning: trained on labelled (x, y) pairs",
+            "Classification: predict discrete class (spam / not spam)",
+            "Regression: predict continuous value (house price)",
+            "Linear Regression: y = wx + b — minimise MSE",
+            "Logistic Regression: classification via sigmoid — p = 1 / (1 + e^-z)",
+            "Formula: Linear regression: y = wx + b, minimise Σ(y - ŷ)^2",
+            "Formula: Logistic: p = 1 / (1 + e^-(wx + b))",
+            "Formula: KNN: y = majority vote of K nearest neighbours",
+            "Formula: Naive Bayes: P(y|x) ∝ P(y) × Π P(xi | y)",
+            "Mitchell: T, E, P",
+            "Linear: y = wx + b",
+            "Logistic: σ(z) = 1 / (1 + e^-z)"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "TP FP TN FN",
+              "expansion": "True Positive, False Positive, True Negative, False Negative",
+              "meaning": "The 4 outcomes in a confusion matrix."
+            },
+            {
+              "phrase": "PRF1",
+              "expansion": "Precision, Recall, F1",
+              "meaning": "The 3 key classification metrics. F1 = harmonic mean of P and R."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always state whether the problem is classification or regression"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Show the linear regression equation and MSE"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing classification (discrete) with regression (continuous)"
+            },
+            {
+              "type": "warning",
+              "content": "Not normalising features (KNN and gradient-based methods are sensitive)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Supervised learning trains on labelled data (input-output pairs) to predict outputs for new inputs. Two main tasks: classification (discrete labels — spam/not spam) and regression (continuous values — house price). Algorithms include Linear Regression, Logistic Regression, Decision Trees, KNN, Naive..."
+            },
+            {
+              "type": "definition",
+              "content": "Supervised learning: trained on labelled (x, y) pairs"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Supervised learning?",
+              "back": "trained on labelled (x, y) pairs",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Classification?",
+              "back": "predict discrete class (spam / not spam)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Regression?",
+              "back": "predict continuous value (house price)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Linear Regression?",
+              "back": "y = wx + b — minimise MSE",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Logistic Regression?",
+              "back": "classification via sigmoid — p = 1 / (1 + e^-z)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Decision Tree?",
+              "back": "splits data by feature thresholds",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is KNN (K-Nearest Neighbours)?",
+              "back": "classify by majority vote of K nearest",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Naive Bayes?",
+              "back": "probabilistic, assumes feature independence",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Supervised learning trains on labelled data (input-output pairs) to predict outputs for new inputs. Two main tasks: classification (discrete labels — spam/not spam) and regression (continuous values — house price). Algorithms include Linear Regression, Logistic Regression, Decision Trees, KNN, Naive"
+            },
+            {
+              "style": "detailed",
+              "content": "Supervised learning trains on labelled data (input-output pairs) to predict outputs for new inputs. Two main tasks: classification (discrete labels — spam/not spam) and regression (continuous values — house price). Algorithms include Linear Regression, Logistic Regression, Decision Trees, KNN, Naive Bayes, and SVM.\n\nKey concepts: Supervised learning: trained on labelled (x, y) pairs, Classification: predict discrete class (spam / not spam), Regression: predict continuous value (house price)."
+            }
+          ],
+          "recommendedNextLessons": [
+            "unsupervised-learning",
+            "neural-networks"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Unsupervised Learning",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "unsupervised-learning",
+          "title": "Unsupervised Learning and Clustering",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "Unsupervised learning finds patterns in unlabelled data. Main tasks: clustering (group similar items) and dimensionality reduction (compress features). Algorithms: K-Means clustering, Hierarchical clustering, DBSCAN, PCA (Principal Component Analysis), and t-SNE.",
+          "keyConcepts": [
+            "Unsupervised: NO labels — find structure in data",
+            "Clustering: group similar items (K-Means, Hierarchical, DBSCAN)",
+            "K-Means: partition into K clusters, minimise within-cluster variance",
+            "Hierarchical: build a tree of clusters (dendrogram)",
+            "DBSCAN: density-based — finds clusters of arbitrary shape",
+            "Dimensionality reduction: PCA, t-SNE",
+            "PCA: project data onto principal components (max variance)",
+            "Elbow method: find optimal K for K-Means"
+          ],
+          "formulas": [
+            "K-Means: minimise Σ Σ ||x - μ_k||^2",
+            "PCA: project onto eigenvectors of covariance matrix",
+            "Elbow: plot inertia vs K, pick the 'elbow'",
+            "Silhouette score: measures cluster quality (-1 to 1)"
+          ],
+          "tables": [
+            {
+              "title": "Supervised vs Unsupervised",
+              "headers": [
+                "Aspect",
+                "Supervised",
+                "Unsupervised"
+              ],
+              "rows": [
+                [
+                  "Data",
+                  "Labelled (x, y)",
+                  "Unlabelled (x only)"
+                ],
+                [
+                  "Goal",
+                  "Predict y",
+                  "Find structure"
+                ],
+                [
+                  "Tasks",
+                  "Classification, Regression",
+                  "Clustering, Dim. Reduction"
+                ],
+                [
+                  "Algorithms",
+                  "Linear, KNN, SVM",
+                  "K-Means, PCA, DBSCAN"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Choosing K without elbow method or silhouette score",
+            "Forgetting to normalise features before clustering",
+            "Confusing clustering (no labels) with classification (labels)",
+            "Not handling outliers (DBSCAN handles them, K-Means doesn't)"
+          ],
+          "examTips": [
+            "Always mention the elbow method when discussing K-Means",
+            "Distinguish clustering (unsupervised) from classification (supervised)",
+            "List PCA as the standard dimensionality reduction technique"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which is UNSUPERVISED?",
+              "options": [
+                "Spam detection",
+                "House price",
+                "Customer segmentation",
+                "Disease diagnosis"
+              ],
+              "answer": 2,
+              "explanation": "Customer segmentation is clustering (no labels) — unsupervised. Others have labelled outputs."
+            },
+            {
+              "question": "K-Means requires:",
+              "options": [
+                "Labels",
+                "Number of clusters K",
+                "A neural network",
+                "PCA"
+              ],
+              "answer": 1,
+              "explanation": "K-Means requires K (number of clusters) to be specified upfront."
+            },
+            {
+              "question": "PCA is used for:",
+              "options": [
+                "Clustering",
+                "Dimensionality reduction",
+                "Classification",
+                "Regression"
+              ],
+              "answer": 1,
+              "explanation": "PCA (Principal Component Analysis) reduces dimensionality by projecting onto principal components."
+            },
+            {
+              "question": "Which is BEST for arbitrary-shaped clusters?",
+              "options": [
+                "K-Means",
+                "DBSCAN",
+                "Linear regression",
+                "Logistic regression"
+              ],
+              "answer": 1,
+              "explanation": "DBSCAN is density-based and can find clusters of arbitrary shape. K-Means assumes spherical clusters."
+            }
+          ],
+          "objectives": [
+            "Understand Unsupervised and explain its significance",
+            "Understand Clustering and explain its significance",
+            "Understand K-Means and explain its significance",
+            "Understand Hierarchical and explain its significance",
+            "Understand DBSCAN and explain its significance",
+            "Attempt the practice quiz and viva questions on Unsupervised Learning and Clustering"
+          ],
+          "prerequisites": [
+            "Basic Python programming",
+            "Linear algebra (vectors, matrices)",
+            "Statistics (mean, variance, probability)",
+            "Calculus (derivatives for gradient descent)"
+          ],
+          "theory": "## Introduction\n\nUnsupervised learning finds patterns in unlabelled data. Main tasks: clustering (group similar items) and dimensionality reduction (compress features). Algorithms: K-Means clustering, Hierarchical clustering, DBSCAN, PCA (Principal Component Analysis), and t-SNE.\n## Key Concepts\n\n- Unsupervised: NO labels — find structure in data\n- Clustering: group similar items (K-Means, Hierarchical, DBSCAN)\n- K-Means: partition into K clusters, minimise within-cluster variance\n- Hierarchical: build a tree of clusters (dendrogram)\n- DBSCAN: density-based — finds clusters of arbitrary shape\n- Dimensionality reduction: PCA, t-SNE\n- PCA: project data onto principal components (max variance)\n- Elbow method: find optimal K for K-Means\n\n## Important Formulas\n\n- `K-Means: minimise Σ Σ ||x - μ_k||^2`\n- `PCA: project onto eigenvectors of covariance matrix`\n- `Elbow: plot inertia vs K, pick the 'elbow'`\n- `Silhouette score: measures cluster quality (-1 to 1)`\n\n## Comparison Tables\n\n### Supervised vs Unsupervised\n\n| Aspect | Supervised | Unsupervised |\n| --- | --- | --- |\n| Data | Labelled (x, y) | Unlabelled (x only) |\n| Goal | Predict y | Find structure |\n| Tasks | Classification, Regression | Clustering, Dim. Reduction |\n| Algorithms | Linear, KNN, SVM | K-Means, PCA, DBSCAN |\n\n\n## Summary\n\nUnsupervised learning finds patterns in unlabelled data. Main tasks: clustering (group similar items) and dimensionality reduction (compress features). Algorithms: K-Means clustering, Hierarchical clustering, DBSCAN, PCA (Principal Component Analysis), and t-SNE.",
+          "analogies": [
+            {
+              "scenario": "ML like teaching a child",
+              "mapping": "Training data = flash cards, Labels = correct answers, Model = child's brain, Loss = how wrong the answer is, Training = repeated practice, Inference = quiz on new cards."
+            },
+            {
+              "scenario": "Neural network like a factory assembly line",
+              "mapping": "Inputs = raw materials, Weights = station settings, Hidden layers = processing stations, Activations = quality checks, Output = finished product. Backprop = adjusting each station based on defects found."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Unsupervised Learning and Clustering — Process Flow",
+              "content": "flowchart LR\n    A[Data] --> B[Preprocess]\n    B --> C[Split Train/Test]\n    C --> D[Train Model]\n    D --> E[Evaluate]\n    E --> F{Good enough?}\n    F -->|No| D\n    F -->|Yes| G[Deploy]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Unsupervised Learning and Clustering — Concept Map",
+              "content": "mindmap\n  root((Unsupervised Learning and Clus))\n    Supervised\n      Classification\n      Regression\n      Linear\n      KNN\n    Unsupervised\n      Clustering\n      PCA\n      K-Means\n    Neural Nets\n      Layers\n      Activations\n      Backprop\n    Evaluation\n      Accuracy\n      Precision\n      Recall\n      F1"
+            }
+          ],
+          "complexity": {
+            "time": "Training: O(n × d × epochs). Inference: O(d) per sample.",
+            "space": "O(weights) = O(layers × neurons)"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "Which is UNSUPERVISED?",
+              "solution": "Correct answer: Customer segmentation",
+              "explanation": "Customer segmentation is clustering (no labels) — unsupervised. Others have labelled outputs."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Unsupervised Learning and Clustering with reference to the key concepts.",
+              "solution": "Always mention the elbow method when discussing K-Means → Distinguish clustering (unsupervised) from classification (supervised) → List PCA as the standard dimensionality reduction technique",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Unsupervised.",
+              "modelAnswer": "NO labels — find structure in data"
+            },
+            {
+              "marks": 2,
+              "question": "Define Clustering.",
+              "modelAnswer": "group similar items (K-Means, Hierarchical, DBSCAN)"
+            },
+            {
+              "marks": 2,
+              "question": "Define K-Means.",
+              "modelAnswer": "partition into K clusters, minimise within-cluster variance"
+            },
+            {
+              "marks": 2,
+              "question": "What is supervised learning?",
+              "modelAnswer": "A type of ML where the model is trained on labelled data — input-output pairs — to predict outputs for new inputs."
+            },
+            {
+              "marks": 2,
+              "question": "Define overfitting.",
+              "modelAnswer": "Overfitting occurs when a model learns the training data too well (including noise) and fails to generalise to unseen data."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: K-Means: minimise Σ Σ ||x - μ_k||^2",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain overfitting and how to prevent it.",
+              "modelAnswer": "Overfitting: model fits training data (including noise) too well, fails on new data. Prevention: 1) More training data, 2) Regularisation (L1/L2), 3) Dropout (in neural nets), 4) Early stopping, 5) Cross-validation, 6) Simpler model, 7) Data augmentation."
+            },
+            {
+              "marks": 5,
+              "question": "What is the bias-variance trade-off?",
+              "modelAnswer": "Bias: error from wrong assumptions (underfitting — high bias, too simple). Variance: error from sensitivity to training data (overfitting — high variance, too complex). Trade-off: decreasing bias increases variance. Goal: find the sweet spot that minimises total error."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Unsupervised.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Clustering.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: K-Means: minimise Σ Σ ||x - μ_k||^2",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: PCA: project onto eigenvectors of covariance matrix",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Unsupervised Learning and Clustering in detail with a diagram.",
+              "modelAnswer": "Unsupervised learning finds patterns in unlabelled data. Main tasks: clustering (group similar items) and dimensionality reduction (compress features). Algorithms: K-Means clustering, Hierarchical clustering, DBSCAN, PCA (Principal Component Analysis), and t-SNE."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Unsupervised Learning and Clustering with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Unsupervised Learning and Clustering\n\n**One-line definition:** Unsupervised learning finds patterns in unlabelled data. Main tasks: clustering (group similar items) and dimensionality reduction (compress features). Algorithms: K-Means clustering, Hierarchical clu\n\n**Key points:**\n\n- Unsupervised: NO labels — find structure in data\n- Clustering: group similar items (K-Means, Hierarchical, DBSCAN)\n- K-Means: partition into K clusters, minimise within-cluster variance\n- Hierarchical: build a tree of clusters (dendrogram)\n- DBSCAN: density-based — finds clusters of arbitrary shape\n\n**Important formulas:**\n\n- `K-Means: minimise Σ Σ ||x - μ_k||^2`\n- `PCA: project onto eigenvectors of covariance matrix`\n- `Elbow: plot inertia vs K, pick the 'elbow'`\n- `Silhouette score: measures cluster quality (-1 to 1)`\n\n**Common mistake to avoid:** Choosing K without elbow method or silhouette score\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Unsupervised: NO labels — find structure in data",
+            "Clustering: group similar items (K-Means, Hierarchical, DBSCAN)",
+            "K-Means: partition into K clusters, minimise within-cluster variance",
+            "Hierarchical: build a tree of clusters (dendrogram)",
+            "DBSCAN: density-based — finds clusters of arbitrary shape",
+            "Formula: K-Means: minimise Σ Σ ||x - μ_k||^2",
+            "Formula: PCA: project onto eigenvectors of covariance matrix",
+            "Formula: Elbow: plot inertia vs K, pick the 'elbow'",
+            "Formula: Silhouette score: measures cluster quality (-1 to 1)",
+            "Mitchell: T, E, P",
+            "Linear: y = wx + b",
+            "Logistic: σ(z) = 1 / (1 + e^-z)"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "TP FP TN FN",
+              "expansion": "True Positive, False Positive, True Negative, False Negative",
+              "meaning": "The 4 outcomes in a confusion matrix."
+            },
+            {
+              "phrase": "PRF1",
+              "expansion": "Precision, Recall, F1",
+              "meaning": "The 3 key classification metrics. F1 = harmonic mean of P and R."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always mention the elbow method when discussing K-Means"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Distinguish clustering (unsupervised) from classification (supervised)"
+            },
+            {
+              "type": "warning",
+              "content": "Choosing K without elbow method or silhouette score"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting to normalise features before clustering"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Unsupervised learning finds patterns in unlabelled data. Main tasks: clustering (group similar items) and dimensionality reduction (compress features). Algorithms: K-Means clustering, Hierarchical clustering, DBSCAN, PCA (Principal Component Analysis), and t-SNE."
+            },
+            {
+              "type": "definition",
+              "content": "Unsupervised: NO labels — find structure in data"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Unsupervised?",
+              "back": "NO labels — find structure in data",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Clustering?",
+              "back": "group similar items (K-Means, Hierarchical, DBSCAN)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is K-Means?",
+              "back": "partition into K clusters, minimise within-cluster variance",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Hierarchical?",
+              "back": "build a tree of clusters (dendrogram)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is DBSCAN?",
+              "back": "density-based — finds clusters of arbitrary shape",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Dimensionality reduction?",
+              "back": "PCA, t-SNE",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is PCA?",
+              "back": "project data onto principal components (max variance)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Elbow method?",
+              "back": "find optimal K for K-Means",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Unsupervised learning finds patterns in unlabelled data. Main tasks: clustering (group similar items) and dimensionality reduction (compress features). Algorithms: K-Means clustering, Hierarchical clustering, DBSCAN, PCA (Principal Component Analysis), and t-SNE."
+            },
+            {
+              "style": "detailed",
+              "content": "Unsupervised learning finds patterns in unlabelled data. Main tasks: clustering (group similar items) and dimensionality reduction (compress features). Algorithms: K-Means clustering, Hierarchical clustering, DBSCAN, PCA (Principal Component Analysis), and t-SNE.\n\nKey concepts: Unsupervised: NO labels — find structure in data, Clustering: group similar items (K-Means, Hierarchical, DBSCAN), K-Means: partition into K clusters, minimise within-cluster variance."
+            }
+          ],
+          "recommendedNextLessons": [
+            "neural-networks",
+            "ml-evaluation"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Neural Networks",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "neural-networks",
+          "title": "Neural Networks and Deep Learning",
+          "durationMin": 35,
+          "difficulty": "hard",
+          "overview": "Artificial Neural Networks (ANNs) are inspired by the human brain. A neural network consists of layers of neurons: input layer, hidden layers, and output layer. Each connection has a weight, each neuron applies an activation function (ReLU, sigmoid, tanh). Deep Learning uses networks with many hidden layers. Training uses backpropagation with gradient descent.",
+          "keyConcepts": [
+            "Neuron: computes weighted sum + bias, applies activation",
+            "Perceptron: simplest neural network (single neuron)",
+            "Layers: input, hidden, output",
+            "Weights (w) and bias (b): learned parameters",
+            "Activation function: introduces non-linearity (ReLU, sigmoid, tanh)",
+            "Forward pass: input → hidden → output",
+            "Backpropagation: compute gradients, update weights",
+            "Gradient Descent: minimise loss by following negative gradient"
+          ],
+          "formulas": [
+            "Neuron output: y = f(wx + b)",
+            "Sigmoid: σ(z) = 1 / (1 + e^-z)",
+            "ReLU: max(0, z)",
+            "Loss (MSE): L = (1/n) Σ (y - ŷ)^2",
+            "Gradient descent: w ← w - η × ∂L/∂w"
+          ],
+          "tables": [
+            {
+              "title": "Activation functions",
+              "headers": [
+                "Function",
+                "Formula",
+                "Use"
+              ],
+              "rows": [
+                [
+                  "Sigmoid",
+                  "1 / (1 + e^-z)",
+                  "Binary classification output"
+                ],
+                [
+                  "Tanh",
+                  "(e^z - e^-z) / (e^z + e^-z)",
+                  "Hidden layers (zero-centred)"
+                ],
+                [
+                  "ReLU",
+                  "max(0, z)",
+                  "Hidden layers (default for deep nets)"
+                ],
+                [
+                  "Softmax",
+                  "e^zi / Σ e^zj",
+                  "Multi-class output"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Forgetting activation functions (network becomes linear)",
+            "Using sigmoid everywhere (vanishing gradient in deep nets)",
+            "Not normalising inputs (training fails or is slow)",
+            "Setting learning rate too high (divergence) or too low (slow)"
+          ],
+          "examTips": [
+            "Draw the neuron diagram (inputs, weights, sum, activation, output)",
+            "Mention ReLU as the default activation for hidden layers",
+            "Explain backpropagation as 'chain rule for gradients'"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What does an activation function do?",
+              "options": [
+                "Adds noise",
+                "Introduces non-linearity",
+                "Reduces size",
+                "Adds bias"
+              ],
+              "answer": 1,
+              "explanation": "Activation functions (ReLU, sigmoid) introduce non-linearity — without them, the network is just linear regression."
+            },
+            {
+              "question": "Which is the DEFAULT activation for hidden layers?",
+              "options": [
+                "Sigmoid",
+                "Tanh",
+                "ReLU",
+                "Softmax"
+              ],
+              "answer": 2,
+              "explanation": "ReLU is the default for hidden layers (avoids vanishing gradient, computationally cheap)."
+            },
+            {
+              "question": "Backpropagation is used for:",
+              "options": [
+                "Forward pass",
+                "Computing gradients",
+                "Activation",
+                "Initialisation"
+              ],
+              "answer": 1,
+              "explanation": "Backpropagation computes gradients of the loss with respect to weights using the chain rule."
+            },
+            {
+              "question": "Gradient descent update rule is:",
+              "options": [
+                "w ← w + η ∂L/∂w",
+                "w ← w - η ∂L/∂w",
+                "w ← w × η",
+                "w ← η"
+              ],
+              "answer": 1,
+              "explanation": "Gradient descent moves opposite to the gradient: w ← w - η × ∂L/∂w (η = learning rate)."
+            }
+          ],
+          "objectives": [
+            "Understand Neuron and explain its significance",
+            "Understand Perceptron and explain its significance",
+            "Understand Layers and explain its significance",
+            "Understand Weights (w) and bias (b) and explain its significance",
+            "Understand Activation function and explain its significance",
+            "Attempt the practice quiz and viva questions on Neural Networks and Deep Learning"
+          ],
+          "prerequisites": [
+            "Basic Python programming",
+            "Linear algebra (vectors, matrices)",
+            "Statistics (mean, variance, probability)",
+            "Calculus (derivatives for gradient descent)"
+          ],
+          "theory": "## Introduction\n\nArtificial Neural Networks (ANNs) are inspired by the human brain. A neural network consists of layers of neurons: input layer, hidden layers, and output layer. Each connection has a weight, each neuron applies an activation function (ReLU, sigmoid, tanh). Deep Learning uses networks with many hidden layers. Training uses backpropagation with gradient descent.\n## Key Concepts\n\n- Neuron: computes weighted sum + bias, applies activation\n- Perceptron: simplest neural network (single neuron)\n- Layers: input, hidden, output\n- Weights (w) and bias (b): learned parameters\n- Activation function: introduces non-linearity (ReLU, sigmoid, tanh)\n- Forward pass: input → hidden → output\n- Backpropagation: compute gradients, update weights\n- Gradient Descent: minimise loss by following negative gradient\n\n## Important Formulas\n\n- `Neuron output: y = f(wx + b)`\n- `Sigmoid: σ(z) = 1 / (1 + e^-z)`\n- `ReLU: max(0, z)`\n- `Loss (MSE): L = (1/n) Σ (y - ŷ)^2`\n- `Gradient descent: w ← w - η × ∂L/∂w`\n\n## Comparison Tables\n\n### Activation functions\n\n| Function | Formula | Use |\n| --- | --- | --- |\n| Sigmoid | 1 / (1 + e^-z) | Binary classification output |\n| Tanh | (e^z - e^-z) / (e^z + e^-z) | Hidden layers (zero-centred) |\n| ReLU | max(0, z) | Hidden layers (default for deep nets) |\n| Softmax | e^zi / Σ e^zj | Multi-class output |\n\n\n## Summary\n\nArtificial Neural Networks (ANNs) are inspired by the human brain. A neural network consists of layers of neurons: input layer, hidden layers, and output layer. Each connection has a weight, each neuron applies an activation function (ReLU, sigmoid, tanh). Deep Learning uses networks with many hidden layers. Training uses backpropagation with gradient descent.",
+          "analogies": [
+            {
+              "scenario": "ML like teaching a child",
+              "mapping": "Training data = flash cards, Labels = correct answers, Model = child's brain, Loss = how wrong the answer is, Training = repeated practice, Inference = quiz on new cards."
+            },
+            {
+              "scenario": "Neural network like a factory assembly line",
+              "mapping": "Inputs = raw materials, Weights = station settings, Hidden layers = processing stations, Activations = quality checks, Output = finished product. Backprop = adjusting each station based on defects found."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Neural Networks and Deep Learning — Process Flow",
+              "content": "flowchart LR\n    A[Data] --> B[Preprocess]\n    B --> C[Split Train/Test]\n    C --> D[Train Model]\n    D --> E[Evaluate]\n    E --> F{Good enough?}\n    F -->|No| D\n    F -->|Yes| G[Deploy]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Neural Networks and Deep Learning — Concept Map",
+              "content": "mindmap\n  root((Neural Networks and Deep Learn))\n    Supervised\n      Classification\n      Regression\n      Linear\n      KNN\n    Unsupervised\n      Clustering\n      PCA\n      K-Means\n    Neural Nets\n      Layers\n      Activations\n      Backprop\n    Evaluation\n      Accuracy\n      Precision\n      Recall\n      F1"
+            }
+          ],
+          "complexity": {
+            "time": "Training: O(n × d × epochs). Inference: O(d) per sample.",
+            "space": "O(weights) = O(layers × neurons)"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What does an activation function do?",
+              "solution": "Correct answer: Introduces non-linearity",
+              "explanation": "Activation functions (ReLU, sigmoid) introduce non-linearity — without them, the network is just linear regression."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Neural Networks and Deep Learning with reference to the key concepts.",
+              "solution": "Draw the neuron diagram (inputs, weights, sum, activation, output) → Mention ReLU as the default activation for hidden layers → Explain backpropagation as 'chain rule for gradients'",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Neuron.",
+              "modelAnswer": "computes weighted sum + bias, applies activation"
+            },
+            {
+              "marks": 2,
+              "question": "Define Perceptron.",
+              "modelAnswer": "simplest neural network (single neuron)"
+            },
+            {
+              "marks": 2,
+              "question": "Define Layers.",
+              "modelAnswer": "input, hidden, output"
+            },
+            {
+              "marks": 2,
+              "question": "What is supervised learning?",
+              "modelAnswer": "A type of ML where the model is trained on labelled data — input-output pairs — to predict outputs for new inputs."
+            },
+            {
+              "marks": 2,
+              "question": "Define overfitting.",
+              "modelAnswer": "Overfitting occurs when a model learns the training data too well (including noise) and fails to generalise to unseen data."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Neuron output: y = f(wx + b)",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain overfitting and how to prevent it.",
+              "modelAnswer": "Overfitting: model fits training data (including noise) too well, fails on new data. Prevention: 1) More training data, 2) Regularisation (L1/L2), 3) Dropout (in neural nets), 4) Early stopping, 5) Cross-validation, 6) Simpler model, 7) Data augmentation."
+            },
+            {
+              "marks": 5,
+              "question": "What is the bias-variance trade-off?",
+              "modelAnswer": "Bias: error from wrong assumptions (underfitting — high bias, too simple). Variance: error from sensitivity to training data (overfitting — high variance, too complex). Trade-off: decreasing bias increases variance. Goal: find the sweet spot that minimises total error."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Neuron.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Perceptron.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Neuron output: y = f(wx + b)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Sigmoid: σ(z) = 1 / (1 + e^-z)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Neural Networks and Deep Learning in detail with a diagram.",
+              "modelAnswer": "Artificial Neural Networks (ANNs) are inspired by the human brain. A neural network consists of layers of neurons: input layer, hidden layers, and output layer. Each connection has a weight, each neuron applies an activation function (ReLU, sigmoid, tanh). Deep Learning uses networks with many hidden layers. Training uses backpropagation with gradient descent."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Neural Networks and Deep Learning with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Neural Networks and Deep Learning\n\n**One-line definition:** Artificial Neural Networks (ANNs) are inspired by the human brain. A neural network consists of layers of neurons: input layer, hidden layers, and output layer. Each connection has a weight, each neur\n\n**Key points:**\n\n- Neuron: computes weighted sum + bias, applies activation\n- Perceptron: simplest neural network (single neuron)\n- Layers: input, hidden, output\n- Weights (w) and bias (b): learned parameters\n- Activation function: introduces non-linearity (ReLU, sigmoid, tanh)\n\n**Important formulas:**\n\n- `Neuron output: y = f(wx + b)`\n- `Sigmoid: σ(z) = 1 / (1 + e^-z)`\n- `ReLU: max(0, z)`\n- `Loss (MSE): L = (1/n) Σ (y - ŷ)^2`\n- `Gradient descent: w ← w - η × ∂L/∂w`\n\n**Common mistake to avoid:** Forgetting activation functions (network becomes linear)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Neuron: computes weighted sum + bias, applies activation",
+            "Perceptron: simplest neural network (single neuron)",
+            "Layers: input, hidden, output",
+            "Weights (w) and bias (b): learned parameters",
+            "Activation function: introduces non-linearity (ReLU, sigmoid, tanh)",
+            "Formula: Neuron output: y = f(wx + b)",
+            "Formula: Sigmoid: σ(z) = 1 / (1 + e^-z)",
+            "Formula: ReLU: max(0, z)",
+            "Formula: Loss (MSE): L = (1/n) Σ (y - ŷ)^2",
+            "Formula: Gradient descent: w ← w - η × ∂L/∂w",
+            "Mitchell: T, E, P",
+            "Linear: y = wx + b",
+            "Logistic: σ(z) = 1 / (1 + e^-z)"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "TP FP TN FN",
+              "expansion": "True Positive, False Positive, True Negative, False Negative",
+              "meaning": "The 4 outcomes in a confusion matrix."
+            },
+            {
+              "phrase": "PRF1",
+              "expansion": "Precision, Recall, F1",
+              "meaning": "The 3 key classification metrics. F1 = harmonic mean of P and R."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Draw the neuron diagram (inputs, weights, sum, activation, output)"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Mention ReLU as the default activation for hidden layers"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting activation functions (network becomes linear)"
+            },
+            {
+              "type": "warning",
+              "content": "Using sigmoid everywhere (vanishing gradient in deep nets)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Artificial Neural Networks (ANNs) are inspired by the human brain. A neural network consists of layers of neurons: input layer, hidden layers, and output layer. Each connection has a weight, each neuron applies an activation function (ReLU, sigmoid, tanh). Deep Learning uses networks with many hidde..."
+            },
+            {
+              "type": "definition",
+              "content": "Neuron: computes weighted sum + bias, applies activation"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Neuron?",
+              "back": "computes weighted sum + bias, applies activation",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Perceptron?",
+              "back": "simplest neural network (single neuron)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Layers?",
+              "back": "input, hidden, output",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Weights (w) and bias (b)?",
+              "back": "learned parameters",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Activation function?",
+              "back": "introduces non-linearity (ReLU, sigmoid, tanh)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Forward pass?",
+              "back": "input → hidden → output",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Backpropagation?",
+              "back": "compute gradients, update weights",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Gradient Descent?",
+              "back": "minimise loss by following negative gradient",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Artificial Neural Networks (ANNs) are inspired by the human brain. A neural network consists of layers of neurons: input layer, hidden layers, and output layer. Each connection has a weight, each neuron applies an activation function (ReLU, sigmoid, tanh). Deep Learning uses networks with many hidde"
+            },
+            {
+              "style": "detailed",
+              "content": "Artificial Neural Networks (ANNs) are inspired by the human brain. A neural network consists of layers of neurons: input layer, hidden layers, and output layer. Each connection has a weight, each neuron applies an activation function (ReLU, sigmoid, tanh). Deep Learning uses networks with many hidden layers. Training uses backpropagation with gradient descent.\n\nKey concepts: Neuron: computes weighted sum + bias, applies activation, Perceptron: simplest neural network (single neuron), Layers: input, hidden, output."
+            }
+          ],
+          "recommendedNextLessons": [
+            "ml-evaluation"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Evaluation and Applications",
+      "weightage": 15,
+      "lessons": [
+        {
+          "slug": "ml-evaluation",
+          "title": "Model Evaluation and Real-world Applications",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "Evaluating ML models uses metrics that depend on the task: classification (accuracy, precision, recall, F1, ROC-AUC), regression (MSE, MAE, R²). Cross-validation (k-fold) gives robust estimates. Real-world applications span healthcare (disease prediction), finance (fraud detection), recommendation systems (Netflix, Amazon), NLP (translation, chatbots), and computer vision (face recognition, self-driving cars).",
+          "keyConcepts": [
+            "Accuracy: (TP + TN) / Total — fraction correct",
+            "Precision: TP / (TP + FP) — quality of positive predictions",
+            "Recall: TP / (TP + FN) — coverage of actual positives",
+            "F1 Score: 2 × (P × R) / (P + R) — harmonic mean",
+            "Confusion Matrix: TP, FP, TN, FN table",
+            "ROC-AUC: area under ROC curve (TPR vs FPR)",
+            "Cross-validation: k-fold — split data k times, average",
+            "Overfitting: model memorises training, fails on test"
+          ],
+          "formulas": [
+            "Accuracy = (TP + TN) / (TP + TN + FP + FN)",
+            "Precision = TP / (TP + FP)",
+            "Recall = TP / (TP + FN)",
+            "F1 = 2 × P × R / (P + R)",
+            "MSE = (1/n) Σ (y - ŷ)^2"
+          ],
+          "tables": [
+            {
+              "title": "Confusion Matrix",
+              "headers": [
+                "",
+                "Pred +",
+                "Pred -"
+              ],
+              "rows": [
+                [
+                  "Actual +",
+                  "TP (true positive)",
+                  "FN (false negative)"
+                ],
+                [
+                  "Actual -",
+                  "FP (false positive)",
+                  "TN (true negative)"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Using accuracy on imbalanced data (use precision/recall/F1 instead)",
+            "Not using cross-validation (single train/test split is noisy)",
+            "Confusing precision (quality) with recall (coverage)",
+            "Reporting training accuracy as 'the accuracy' (always report test)"
+          ],
+          "examTips": [
+            "Always draw the confusion matrix when explaining metrics",
+            "Mention F1 is the harmonic mean (penalises imbalance between P and R)",
+            "List real-world applications to show understanding"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which metric is BEST for IMBALANCED data?",
+              "options": [
+                "Accuracy",
+                "F1 Score",
+                "Training loss",
+                "R^2"
+              ],
+              "answer": 1,
+              "explanation": "F1 (harmonic mean of precision and recall) is better for imbalanced data, where accuracy can be misleading."
+            },
+            {
+              "question": "Precision = ?",
+              "options": [
+                "TP / (TP + FP)",
+                "TP / (TP + FN)",
+                "(TP + TN) / Total",
+                "2PR / (P + R)"
+              ],
+              "answer": 0,
+              "explanation": "Precision = TP / (TP + FP) — of all predicted positives, how many were actually positive."
+            },
+            {
+              "question": "What does cross-validation do?",
+              "options": [
+                "Trains faster",
+                "Gives robust evaluation by averaging k splits",
+                "Reduces model size",
+                "Increases accuracy"
+              ],
+              "answer": 1,
+              "explanation": "k-fold cross-validation splits data k times, trains on k-1 folds and tests on 1, averaging results for a robust estimate."
+            },
+            {
+              "question": "Overfitting means:",
+              "options": [
+                "Model is too simple",
+                "Model memorises training, fails on test",
+                "Data is too small",
+                "Training is slow"
+              ],
+              "answer": 1,
+              "explanation": "Overfitting: the model fits training data too well (including noise) and fails to generalise to new data."
+            }
+          ],
+          "objectives": [
+            "Understand Accuracy and explain its significance",
+            "Understand Precision and explain its significance",
+            "Understand Recall and explain its significance",
+            "Understand F1 Score and explain its significance",
+            "Understand Confusion Matrix and explain its significance",
+            "Attempt the practice quiz and viva questions on Model Evaluation and Real-world Applications"
+          ],
+          "prerequisites": [
+            "Basic Python programming",
+            "Linear algebra (vectors, matrices)",
+            "Statistics (mean, variance, probability)",
+            "Calculus (derivatives for gradient descent)"
+          ],
+          "theory": "## Introduction\n\nEvaluating ML models uses metrics that depend on the task: classification (accuracy, precision, recall, F1, ROC-AUC), regression (MSE, MAE, R²). Cross-validation (k-fold) gives robust estimates. Real-world applications span healthcare (disease prediction), finance (fraud detection), recommendation systems (Netflix, Amazon), NLP (translation, chatbots), and computer vision (face recognition, self-driving cars).\n## Key Concepts\n\n- Accuracy: (TP + TN) / Total — fraction correct\n- Precision: TP / (TP + FP) — quality of positive predictions\n- Recall: TP / (TP + FN) — coverage of actual positives\n- F1 Score: 2 × (P × R) / (P + R) — harmonic mean\n- Confusion Matrix: TP, FP, TN, FN table\n- ROC-AUC: area under ROC curve (TPR vs FPR)\n- Cross-validation: k-fold — split data k times, average\n- Overfitting: model memorises training, fails on test\n\n## Important Formulas\n\n- `Accuracy = (TP + TN) / (TP + TN + FP + FN)`\n- `Precision = TP / (TP + FP)`\n- `Recall = TP / (TP + FN)`\n- `F1 = 2 × P × R / (P + R)`\n- `MSE = (1/n) Σ (y - ŷ)^2`\n\n## Comparison Tables\n\n### Confusion Matrix\n\n|  | Pred + | Pred - |\n| --- | --- | --- |\n| Actual + | TP (true positive) | FN (false negative) |\n| Actual - | FP (false positive) | TN (true negative) |\n\n\n## Summary\n\nEvaluating ML models uses metrics that depend on the task: classification (accuracy, precision, recall, F1, ROC-AUC), regression (MSE, MAE, R²). Cross-validation (k-fold) gives robust estimates. Real-world applications span healthcare (disease prediction), finance (fraud detection), recommendation systems (Netflix, Amazon), NLP (translation, chatbots), and computer vision (face recognition, self-driving cars).",
+          "analogies": [
+            {
+              "scenario": "ML like teaching a child",
+              "mapping": "Training data = flash cards, Labels = correct answers, Model = child's brain, Loss = how wrong the answer is, Training = repeated practice, Inference = quiz on new cards."
+            },
+            {
+              "scenario": "Neural network like a factory assembly line",
+              "mapping": "Inputs = raw materials, Weights = station settings, Hidden layers = processing stations, Activations = quality checks, Output = finished product. Backprop = adjusting each station based on defects found."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Model Evaluation and Real-world Applications — Process Flow",
+              "content": "flowchart LR\n    A[Data] --> B[Preprocess]\n    B --> C[Split Train/Test]\n    C --> D[Train Model]\n    D --> E[Evaluate]\n    E --> F{Good enough?}\n    F -->|No| D\n    F -->|Yes| G[Deploy]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Model Evaluation and Real-world Applications — Concept Map",
+              "content": "mindmap\n  root((Model Evaluation and Real-worl))\n    Supervised\n      Classification\n      Regression\n      Linear\n      KNN\n    Unsupervised\n      Clustering\n      PCA\n      K-Means\n    Neural Nets\n      Layers\n      Activations\n      Backprop\n    Evaluation\n      Accuracy\n      Precision\n      Recall\n      F1"
+            }
+          ],
+          "complexity": {
+            "time": "Training: O(n × d × epochs). Inference: O(d) per sample.",
+            "space": "O(weights) = O(layers × neurons)"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "Which metric is BEST for IMBALANCED data?",
+              "solution": "Correct answer: F1 Score",
+              "explanation": "F1 (harmonic mean of precision and recall) is better for imbalanced data, where accuracy can be misleading."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Model Evaluation and Real-world Applications with reference to the key concepts.",
+              "solution": "Always draw the confusion matrix when explaining metrics → Mention F1 is the harmonic mean (penalises imbalance between P and R) → List real-world applications to show understanding",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Accuracy.",
+              "modelAnswer": "(TP + TN) / Total — fraction correct"
+            },
+            {
+              "marks": 2,
+              "question": "Define Precision.",
+              "modelAnswer": "TP / (TP + FP) — quality of positive predictions"
+            },
+            {
+              "marks": 2,
+              "question": "Define Recall.",
+              "modelAnswer": "TP / (TP + FN) — coverage of actual positives"
+            },
+            {
+              "marks": 2,
+              "question": "What is supervised learning?",
+              "modelAnswer": "A type of ML where the model is trained on labelled data — input-output pairs — to predict outputs for new inputs."
+            },
+            {
+              "marks": 2,
+              "question": "Define overfitting.",
+              "modelAnswer": "Overfitting occurs when a model learns the training data too well (including noise) and fails to generalise to unseen data."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Accuracy = (TP + TN) / (TP + TN + FP + FN)",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain overfitting and how to prevent it.",
+              "modelAnswer": "Overfitting: model fits training data (including noise) too well, fails on new data. Prevention: 1) More training data, 2) Regularisation (L1/L2), 3) Dropout (in neural nets), 4) Early stopping, 5) Cross-validation, 6) Simpler model, 7) Data augmentation."
+            },
+            {
+              "marks": 5,
+              "question": "What is the bias-variance trade-off?",
+              "modelAnswer": "Bias: error from wrong assumptions (underfitting — high bias, too simple). Variance: error from sensitivity to training data (overfitting — high variance, too complex). Trade-off: decreasing bias increases variance. Goal: find the sweet spot that minimises total error."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Accuracy.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Precision.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Accuracy = (TP + TN) / (TP + TN + FP + FN)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Precision = TP / (TP + FP)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Model Evaluation and Real-world Applications in detail with a diagram.",
+              "modelAnswer": "Evaluating ML models uses metrics that depend on the task: classification (accuracy, precision, recall, F1, ROC-AUC), regression (MSE, MAE, R²). Cross-validation (k-fold) gives robust estimates. Real-world applications span healthcare (disease prediction), finance (fraud detection), recommendation systems (Netflix, Amazon), NLP (translation, chatbots), and computer vision (face recognition, self-driving cars)."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Model Evaluation and Real-world Applications with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Model Evaluation and Real-world Applications\n\n**One-line definition:** Evaluating ML models uses metrics that depend on the task: classification (accuracy, precision, recall, F1, ROC-AUC), regression (MSE, MAE, R²). Cross-validation (k-fold) gives robust estimates. Real-\n\n**Key points:**\n\n- Accuracy: (TP + TN) / Total — fraction correct\n- Precision: TP / (TP + FP) — quality of positive predictions\n- Recall: TP / (TP + FN) — coverage of actual positives\n- F1 Score: 2 × (P × R) / (P + R) — harmonic mean\n- Confusion Matrix: TP, FP, TN, FN table\n\n**Important formulas:**\n\n- `Accuracy = (TP + TN) / (TP + TN + FP + FN)`\n- `Precision = TP / (TP + FP)`\n- `Recall = TP / (TP + FN)`\n- `F1 = 2 × P × R / (P + R)`\n- `MSE = (1/n) Σ (y - ŷ)^2`\n\n**Common mistake to avoid:** Using accuracy on imbalanced data (use precision/recall/F1 instead)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Accuracy: (TP + TN) / Total — fraction correct",
+            "Precision: TP / (TP + FP) — quality of positive predictions",
+            "Recall: TP / (TP + FN) — coverage of actual positives",
+            "F1 Score: 2 × (P × R) / (P + R) — harmonic mean",
+            "Confusion Matrix: TP, FP, TN, FN table",
+            "Formula: Accuracy = (TP + TN) / (TP + TN + FP + FN)",
+            "Formula: Precision = TP / (TP + FP)",
+            "Formula: Recall = TP / (TP + FN)",
+            "Formula: F1 = 2 × P × R / (P + R)",
+            "Formula: MSE = (1/n) Σ (y - ŷ)^2",
+            "Mitchell: T, E, P",
+            "Linear: y = wx + b",
+            "Logistic: σ(z) = 1 / (1 + e^-z)"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "TP FP TN FN",
+              "expansion": "True Positive, False Positive, True Negative, False Negative",
+              "meaning": "The 4 outcomes in a confusion matrix."
+            },
+            {
+              "phrase": "PRF1",
+              "expansion": "Precision, Recall, F1",
+              "meaning": "The 3 key classification metrics. F1 = harmonic mean of P and R."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always draw the confusion matrix when explaining metrics"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Mention F1 is the harmonic mean (penalises imbalance between P and R)"
+            },
+            {
+              "type": "warning",
+              "content": "Using accuracy on imbalanced data (use precision/recall/F1 instead)"
+            },
+            {
+              "type": "warning",
+              "content": "Not using cross-validation (single train/test split is noisy)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Evaluating ML models uses metrics that depend on the task: classification (accuracy, precision, recall, F1, ROC-AUC), regression (MSE, MAE, R²). Cross-validation (k-fold) gives robust estimates. Real-world applications span healthcare (disease prediction), finance (fraud detection), recommendation s..."
+            },
+            {
+              "type": "definition",
+              "content": "Accuracy: (TP + TN) / Total — fraction correct"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Accuracy?",
+              "back": "(TP + TN) / Total — fraction correct",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Precision?",
+              "back": "TP / (TP + FP) — quality of positive predictions",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Recall?",
+              "back": "TP / (TP + FN) — coverage of actual positives",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is F1 Score?",
+              "back": "2 × (P × R) / (P + R) — harmonic mean",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Confusion Matrix?",
+              "back": "TP, FP, TN, FN table",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is ROC-AUC?",
+              "back": "area under ROC curve (TPR vs FPR)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Cross-validation?",
+              "back": "k-fold — split data k times, average",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Overfitting?",
+              "back": "model memorises training, fails on test",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Evaluating ML models uses metrics that depend on the task: classification (accuracy, precision, recall, F1, ROC-AUC), regression (MSE, MAE, R²). Cross-validation (k-fold) gives robust estimates. Real-world applications span healthcare (disease prediction), finance (fraud detection), recommendation s"
+            },
+            {
+              "style": "detailed",
+              "content": "Evaluating ML models uses metrics that depend on the task: classification (accuracy, precision, recall, F1, ROC-AUC), regression (MSE, MAE, R²). Cross-validation (k-fold) gives robust estimates. Real-world applications span healthcare (disease prediction), finance (fraud detection), recommendation systems (Netflix, Amazon), NLP (translation, chatbots), and computer vision (face recognition, self-driving cars).\n\nKey concepts: Accuracy: (TP + TN) / Total — fraction correct, Precision: TP / (TP + FP) — quality of positive predictions, Recall: TP / (TP + FN) — coverage of actual positives."
+            }
+          ],
+          "recommendedNextLessons": []
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "# Machine Learning — Quick Revision\n\n**Subject code:** R23CP2411  \n**Semester:** 6  \n**Credits:** 4  \n\n## Unit 1: ML Fundamentals (20%)\n### Introduction to Machine Learning\nMachine Learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed. Arthur Samuel (1959) defined it as 'the field of study that gives computers the ability to learn without being explicitly program...\n\n**Formulas:**\n- `Mitchell: Performance on T improves with E, measured by P`\n- `Model: f(x) → y, learned from training data`\n- `Loss = difference between prediction and actual`\n\n## Unit 2: Supervised Learning (25%)\n### Supervised Learning Algorithms\nSupervised learning trains on labelled data (input-output pairs) to predict outputs for new inputs. Two main tasks: classification (discrete labels — spam/not spam) and regression (continuous values — house price). Algorithms include Linear Regression, Logistic Regression, Decisi...\n\n**Formulas:**\n- `Linear regression: y = wx + b, minimise Σ(y - ŷ)^2`\n- `Logistic: p = 1 / (1 + e^-(wx + b))`\n- `KNN: y = majority vote of K nearest neighbours`\n\n## Unit 3: Unsupervised Learning (20%)\n### Unsupervised Learning and Clustering\nUnsupervised learning finds patterns in unlabelled data. Main tasks: clustering (group similar items) and dimensionality reduction (compress features). Algorithms: K-Means clustering, Hierarchical clustering, DBSCAN, PCA (Principal Component Analysis), and t-SNE.\n\n**Formulas:**\n- `K-Means: minimise Σ Σ ||x - μ_k||^2`\n- `PCA: project onto eigenvectors of covariance matrix`\n- `Elbow: plot inertia vs K, pick the 'elbow'`\n\n## Unit 4: Neural Networks (20%)\n### Neural Networks and Deep Learning\nArtificial Neural Networks (ANNs) are inspired by the human brain. A neural network consists of layers of neurons: input layer, hidden layers, and output layer. Each connection has a weight, each neuron applies an activation function (ReLU, sigmoid, tanh). Deep Learning uses netw...\n\n**Formulas:**\n- `Neuron output: y = f(wx + b)`\n- `Sigmoid: σ(z) = 1 / (1 + e^-z)`\n- `ReLU: max(0, z)`\n\n## Unit 5: Evaluation and Applications (15%)\n### Model Evaluation and Real-world Applications\nEvaluating ML models uses metrics that depend on the task: classification (accuracy, precision, recall, F1, ROC-AUC), regression (MSE, MAE, R²). Cross-validation (k-fold) gives robust estimates. Real-world applications span healthcare (disease prediction), finance (fraud detectio...\n\n**Formulas:**\n- `Accuracy = (TP + TN) / (TP + TN + FP + FN)`\n- `Precision = TP / (TP + FP)`\n- `Recall = TP / (TP + FN)`\n",
+  "interviewBank": [
+    {
+      "marks": 5,
+      "question": "Explain the formula: Mitchell: Performance on T improves with E, measured by P",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 10,
+      "question": "Explain overfitting and how to prevent it.",
+      "modelAnswer": "Overfitting: model fits training data (including noise) too well, fails on new data. Prevention: 1) More training data, 2) Regularisation (L1/L2), 3) Dropout (in neural nets), 4) Early stopping, 5) Cross-validation, 6) Simpler model, 7) Data augmentation."
+    },
+    {
+      "marks": 5,
+      "question": "What is the bias-variance trade-off?",
+      "modelAnswer": "Bias: error from wrong assumptions (underfitting — high bias, too simple). Variance: error from sensitivity to training data (overfitting — high variance, too complex). Trade-off: decreasing bias increases variance. Goal: find the sweet spot that minimises total error."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: Linear regression: y = wx + b, minimise Σ(y - ŷ)^2",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: K-Means: minimise Σ Σ ||x - μ_k||^2",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: Neuron output: y = f(wx + b)",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: Accuracy = (TP + TN) / (TP + TN + FP + FN)",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    }
+  ],
+  "vivaBank": [
+    {
+      "marks": 2,
+      "question": "Define ML.",
+      "modelAnswer": "systems that learn from data instead of explicit rules"
+    },
+    {
+      "marks": 2,
+      "question": "Define Arthur Samuel.",
+      "modelAnswer": "coined 'machine learning' in 1959"
+    },
+    {
+      "marks": 2,
+      "question": "Define Tom Mitchell's definition.",
+      "modelAnswer": "T, E, P formalisation"
+    },
+    {
+      "marks": 2,
+      "question": "What is supervised learning?",
+      "modelAnswer": "A type of ML where the model is trained on labelled data — input-output pairs — to predict outputs for new inputs."
+    },
+    {
+      "marks": 2,
+      "question": "Define overfitting.",
+      "modelAnswer": "Overfitting occurs when a model learns the training data too well (including noise) and fails to generalise to unseen data."
+    },
+    {
+      "marks": 2,
+      "question": "Define Supervised learning.",
+      "modelAnswer": "trained on labelled (x, y) pairs"
+    },
+    {
+      "marks": 2,
+      "question": "Define Classification.",
+      "modelAnswer": "predict discrete class (spam / not spam)"
+    },
+    {
+      "marks": 2,
+      "question": "Define Regression.",
+      "modelAnswer": "predict continuous value (house price)"
+    },
+    {
+      "marks": 2,
+      "question": "Define Unsupervised.",
+      "modelAnswer": "NO labels — find structure in data"
+    },
+    {
+      "marks": 2,
+      "question": "Define Clustering.",
+      "modelAnswer": "group similar items (K-Means, Hierarchical, DBSCAN)"
+    },
+    {
+      "marks": 2,
+      "question": "Define K-Means.",
+      "modelAnswer": "partition into K clusters, minimise within-cluster variance"
+    },
+    {
+      "marks": 2,
+      "question": "Define Neuron.",
+      "modelAnswer": "computes weighted sum + bias, applies activation"
+    }
+  ],
+  "pyqBank": [
+    {
+      "marks": 10,
+      "question": "Explain Introduction to Machine Learning in detail with a diagram.",
+      "modelAnswer": "Machine Learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed. Arthur Samuel (1959) defined it as 'the field of study that gives computers the ability to learn without being explicitly programmed.' Tom Mitchell formalised it: a program learns from experience E on task T measured by P if performance on T improves with E."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Introduction to Machine Learning with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Supervised Learning Algorithms in detail with a diagram.",
+      "modelAnswer": "Supervised learning trains on labelled data (input-output pairs) to predict outputs for new inputs. Two main tasks: classification (discrete labels — spam/not spam) and regression (continuous values — house price). Algorithms include Linear Regression, Logistic Regression, Decision Trees, KNN, Naive Bayes, and SVM."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Supervised Learning Algorithms with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Unsupervised Learning and Clustering in detail with a diagram.",
+      "modelAnswer": "Unsupervised learning finds patterns in unlabelled data. Main tasks: clustering (group similar items) and dimensionality reduction (compress features). Algorithms: K-Means clustering, Hierarchical clustering, DBSCAN, PCA (Principal Component Analysis), and t-SNE."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Unsupervised Learning and Clustering with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Neural Networks and Deep Learning in detail with a diagram.",
+      "modelAnswer": "Artificial Neural Networks (ANNs) are inspired by the human brain. A neural network consists of layers of neurons: input layer, hidden layers, and output layer. Each connection has a weight, each neuron applies an activation function (ReLU, sigmoid, tanh). Deep Learning uses networks with many hidden layers. Training uses backpropagation with gradient descent."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Neural Networks and Deep Learning with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Model Evaluation and Real-world Applications in detail with a diagram.",
+      "modelAnswer": "Evaluating ML models uses metrics that depend on the task: classification (accuracy, precision, recall, F1, ROC-AUC), regression (MSE, MAE, R²). Cross-validation (k-fold) gives robust estimates. Real-world applications span healthcare (disease prediction), finance (fraud detection), recommendation systems (Netflix, Amazon), NLP (translation, chatbots), and computer vision (face recognition, self-driving cars)."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Model Evaluation and Real-world Applications with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    }
+  ]
+}

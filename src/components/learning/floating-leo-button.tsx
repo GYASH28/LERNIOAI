@@ -19,11 +19,12 @@ export function FloatingLeoButton({ subjectCode }: { subjectCode?: string }) {
   return (
     <Link
       href={href}
-      className="fixed bottom-4 right-4 z-30 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-2xl transition-transform hover:scale-110 md:hidden"
+      className="fixed right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-2xl transition-transform hover:scale-110 md:hidden"
+      style={{ bottom: 'max(5rem, env(safe-area-inset-bottom))' }}
       aria-label="Ask LEO - AI Tutor"
     >
       <Bot className="h-6 w-6" />
-      <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-green-500 text-[9px] font-bold text-white">
+      <span aria-hidden="true" className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-green-500 text-[9px] font-bold text-white">
         AI
       </span>
     </Link>

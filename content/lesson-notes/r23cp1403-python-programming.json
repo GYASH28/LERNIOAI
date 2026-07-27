@@ -1,0 +1,2026 @@
+{
+  "subjectCode": "R23CP1403",
+  "subjectName": "Python Programming",
+  "semester": 4,
+  "credits": 4,
+  "units": [
+    {
+      "number": 1,
+      "title": "Python Basics",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "introduction-to-python",
+          "title": "Introduction to Python",
+          "durationMin": 25,
+          "difficulty": "easy",
+          "overview": "Python is a high-level, interpreted, general-purpose programming language. Created by Guido van Rossum in 1991, it emphasises code readability using significant indentation. Python is dynamically typed and garbage-collected, supporting multiple paradigms including procedural, object-oriented, and functional programming.",
+          "keyConcepts": [
+            "Python: High-level, interpreted language with dynamic typing",
+            "Interpreter: Executes code line-by-line without compilation",
+            "Bytecode: Python source compiles to .pyc bytecode which the VM runs",
+            "REPL: Read-Eval-Print Loop — interactive Python shell",
+            "PEP 8: Python Enhancement Proposal 8 — the official style guide",
+            "Dynamic Typing: Variable type is determined at runtime",
+            "Indentation: Python uses whitespace (not braces) to define blocks",
+            "Zen of Python: 19 guiding principles (import this)"
+          ],
+          "formulas": [
+            "Python 3.x is the current major version (Python 2 EOL: 2020)",
+            "Source (.py) → Bytecode (.pyc) → Python Virtual Machine",
+            "PEP 8: 4 spaces per indentation level"
+          ],
+          "tables": [
+            {
+              "title": "Python vs C",
+              "headers": [
+                "Aspect",
+                "Python",
+                "C"
+              ],
+              "rows": [
+                [
+                  "Typing",
+                  "Dynamic",
+                  "Static"
+                ],
+                [
+                  "Compilation",
+                  "Interpreted (bytecode)",
+                  "Compiled to native"
+                ],
+                [
+                  "Syntax",
+                  "Indentation-based",
+                  "Brace-based"
+                ],
+                [
+                  "Memory",
+                  "Garbage-collected",
+                  "Manual (malloc/free)"
+                ],
+                [
+                  "Speed",
+                  "Slower (~10x)",
+                  "Fast"
+                ],
+                [
+                  "Use case",
+                  "Scripting, AI, Web",
+                  "Systems, embedded"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Using tabs instead of spaces for indentation (PEP 8 mandates 4 spaces)",
+            "Confusing == (equality) with = (assignment)",
+            "Forgetting colons at the end of if/for/while/def/class lines",
+            "Mixing Python 2 print syntax (print x) with Python 3 (print(x))"
+          ],
+          "examTips": [
+            "Always mention Python is interpreted AND dynamically typed",
+            "Draw the source → bytecode → PVM pipeline if asked how Python runs",
+            "Mention PEP 8 when asked about Python style"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What does PEP 8 define?",
+              "options": [
+                "The Python interpreter",
+                "The official style guide",
+                "The Python version",
+                "The standard library"
+              ],
+              "answer": 1,
+              "explanation": "PEP 8 is Python's official style guide covering indentation, naming, line length, etc."
+            },
+            {
+              "question": "Python is which type of language?",
+              "options": [
+                "Compiled only",
+                "Interpreted only",
+                "Both compiled to bytecode then interpreted",
+                "Assembly"
+              ],
+              "answer": 2,
+              "explanation": "Python source compiles to bytecode (.pyc) which the Python VM interprets."
+            },
+            {
+              "question": "Which symbol is used for assignment in Python?",
+              "options": [
+                "==",
+                "=",
+                ":=",
+                "->"
+              ],
+              "answer": 1,
+              "explanation": "= is assignment. == is equality comparison."
+            },
+            {
+              "question": "How is a code block defined in Python?",
+              "options": [
+                "Using braces {}",
+                "Using indentation",
+                "Using parentheses ()",
+                "Using semicolons ;"
+              ],
+              "answer": 1,
+              "explanation": "Python uses indentation (typically 4 spaces) to define blocks."
+            }
+          ],
+          "objectives": [
+            "Understand Python and explain its significance",
+            "Understand Interpreter and explain its significance",
+            "Understand Bytecode and explain its significance",
+            "Understand REPL and explain its significance",
+            "Understand PEP 8 and explain its significance",
+            "Attempt the practice quiz and viva questions on Introduction to Python"
+          ],
+          "prerequisites": [
+            "Basic computer literacy",
+            "Familiarity with programming concepts (variables, loops, conditionals)",
+            "Understanding of what an algorithm is"
+          ],
+          "theory": "## Introduction\n\nPython is a high-level, interpreted, general-purpose programming language. Created by Guido van Rossum in 1991, it emphasises code readability using significant indentation. Python is dynamically typed and garbage-collected, supporting multiple paradigms including procedural, object-oriented, and functional programming.\n## Key Concepts\n\n- Python: High-level, interpreted language with dynamic typing\n- Interpreter: Executes code line-by-line without compilation\n- Bytecode: Python source compiles to .pyc bytecode which the VM runs\n- REPL: Read-Eval-Print Loop — interactive Python shell\n- PEP 8: Python Enhancement Proposal 8 — the official style guide\n- Dynamic Typing: Variable type is determined at runtime\n- Indentation: Python uses whitespace (not braces) to define blocks\n- Zen of Python: 19 guiding principles (import this)\n\n## Important Formulas\n\n- `Python 3.x is the current major version (Python 2 EOL: 2020)`\n- `Source (.py) → Bytecode (.pyc) → Python Virtual Machine`\n- `PEP 8: 4 spaces per indentation level`\n\n## Comparison Tables\n\n### Python vs C\n\n| Aspect | Python | C |\n| --- | --- | --- |\n| Typing | Dynamic | Static |\n| Compilation | Interpreted (bytecode) | Compiled to native |\n| Syntax | Indentation-based | Brace-based |\n| Memory | Garbage-collected | Manual (malloc/free) |\n| Speed | Slower (~10x) | Fast |\n| Use case | Scripting, AI, Web | Systems, embedded |\n\n\n## Summary\n\nPython is a high-level, interpreted, general-purpose programming language. Created by Guido van Rossum in 1991, it emphasises code readability using significant indentation. Python is dynamically typed and garbage-collected, supporting multiple paradigms including procedural, object-oriented, and functional programming.",
+          "analogies": [
+            {
+              "scenario": "Python interpreter like a translator",
+              "mapping": "Source code = original text, Bytecode = intermediate notes, PVM = the speaker reading notes. The translator (interpreter) processes each line at runtime, unlike C which translates everything up-front."
+            },
+            {
+              "scenario": "List like a shopping list",
+              "mapping": "List = paper, Items = entries, Append = add at end, Slice = tear off a section. Mutable: you can cross out and rewrite items."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Introduction to Python — Process Flow",
+              "content": "flowchart LR\n    A[.py Source] -->|Compiler| B[.pyc Bytecode]\n    B -->|PVM| C[Execution]\n    C --> D[Output]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Introduction to Python — Concept Map",
+              "content": "mindmap\n  root((Introduction to Python))\n    Basics\n      Syntax\n      Variables\n      Operators\n    Data\n      List\n      Tuple\n      Dict\n      Set\n    OOP\n      Class\n      Inheritance\n    Advanced\n      Decorators\n      Exceptions"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) primitive ops, O(n) for sequence traversal",
+            "space": "O(1) for scalars, O(n) for collections"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What does PEP 8 define?",
+              "solution": "Correct answer: The official style guide",
+              "explanation": "PEP 8 is Python's official style guide covering indentation, naming, line length, etc."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Introduction to Python with reference to the key concepts.",
+              "solution": "Always mention Python is interpreted AND dynamically typed → Draw the source → bytecode → PVM pipeline if asked how Python runs → Mention PEP 8 when asked about Python style",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Python.",
+              "modelAnswer": "High-level, interpreted language with dynamic typing"
+            },
+            {
+              "marks": 2,
+              "question": "Define Interpreter.",
+              "modelAnswer": "Executes code line-by-line without compilation"
+            },
+            {
+              "marks": 2,
+              "question": "Define Bytecode.",
+              "modelAnswer": "Python source compiles to .pyc bytecode which the VM runs"
+            },
+            {
+              "marks": 2,
+              "question": "What is the Zen of Python?",
+              "modelAnswer": "A set of 19 guiding principles for Python's design, accessible via 'import this'. Includes 'Beautiful is better than ugly' and 'Readability counts.'"
+            },
+            {
+              "marks": 2,
+              "question": "Define a decorator.",
+              "modelAnswer": "A decorator is a function that takes another function and extends its behaviour without modifying it, using the @decorator syntax."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Python 3.x is the current major version (Python 2 EOL: 2020)",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the difference between deep and shallow copy in Python.",
+              "modelAnswer": "Shallow copy (copy.copy / list.copy()) creates a new container but references the same elements. Deep copy (copy.deepcopy()) recursively copies all nested objects. Modify a nested list in a shallow copy → both see the change. With deep copy → only the copy changes."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between @staticmethod and @classmethod?",
+              "modelAnswer": "@staticmethod: no implicit first arg. @classmethod: receives the class (cls) as first arg. Use @classmethod for factory methods, @staticmethod for utility functions that don't need class/instance access."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define Python.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Interpreter.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Python 3.x is the current major version (Python 2 EOL: 2020)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Source (.py) → Bytecode (.pyc) → Python Virtual Machine",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Introduction to Python in detail with a diagram.",
+              "modelAnswer": "Python is a high-level, interpreted, general-purpose programming language. Created by Guido van Rossum in 1991, it emphasises code readability using significant indentation. Python is dynamically typed and garbage-collected, supporting multiple paradigms including procedural, object-oriented, and functional programming."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Introduction to Python with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Introduction to Python\n\n**One-line definition:** Python is a high-level, interpreted, general-purpose programming language. Created by Guido van Rossum in 1991, it emphasises code readability using significant indentation. Python is dynamically type\n\n**Key points:**\n\n- Python: High-level, interpreted language with dynamic typing\n- Interpreter: Executes code line-by-line without compilation\n- Bytecode: Python source compiles to .pyc bytecode which the VM runs\n- REPL: Read-Eval-Print Loop — interactive Python shell\n- PEP 8: Python Enhancement Proposal 8 — the official style guide\n\n**Important formulas:**\n\n- `Python 3.x is the current major version (Python 2 EOL: 2020)`\n- `Source (.py) → Bytecode (.pyc) → Python Virtual Machine`\n- `PEP 8: 4 spaces per indentation level`\n\n**Common mistake to avoid:** Using tabs instead of spaces for indentation (PEP 8 mandates 4 spaces)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "Python: High-level, interpreted language with dynamic typing",
+            "Interpreter: Executes code line-by-line without compilation",
+            "Bytecode: Python source compiles to .pyc bytecode which the VM runs",
+            "REPL: Read-Eval-Print Loop — interactive Python shell",
+            "PEP 8: Python Enhancement Proposal 8 — the official style guide",
+            "Formula: Python 3.x is the current major version (Python 2 EOL: 2020)",
+            "Formula: Source (.py) → Bytecode (.pyc) → Python Virtual Machine",
+            "Formula: PEP 8: 4 spaces per indentation level",
+            "print(*objects, sep=' ', end='\\n')",
+            "range(start, stop, step) — stop exclusive",
+            "List comp: [x for x in iter if cond]"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Use functions and modules to avoid duplicating code."
+            },
+            {
+              "phrase": "PEP",
+              "expansion": "Python Enhancement Proposal",
+              "meaning": "PEP 8 is the style guide; PEP 20 is the Zen of Python."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always mention Python is interpreted AND dynamically typed"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Draw the source → bytecode → PVM pipeline if asked how Python runs"
+            },
+            {
+              "type": "warning",
+              "content": "Using tabs instead of spaces for indentation (PEP 8 mandates 4 spaces)"
+            },
+            {
+              "type": "warning",
+              "content": "Confusing == (equality) with = (assignment)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Python is a high-level, interpreted, general-purpose programming language. Created by Guido van Rossum in 1991, it emphasises code readability using significant indentation. Python is dynamically typed and garbage-collected, supporting multiple paradigms including procedural, object-oriented, and fu..."
+            },
+            {
+              "type": "definition",
+              "content": "Python: High-level, interpreted language with dynamic typing"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is Python?",
+              "back": "High-level, interpreted language with dynamic typing",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Interpreter?",
+              "back": "Executes code line-by-line without compilation",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Bytecode?",
+              "back": "Python source compiles to .pyc bytecode which the VM runs",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is REPL?",
+              "back": "Read-Eval-Print Loop — interactive Python shell",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is PEP 8?",
+              "back": "Python Enhancement Proposal 8 — the official style guide",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Dynamic Typing?",
+              "back": "Variable type is determined at runtime",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Indentation?",
+              "back": "Python uses whitespace (not braces) to define blocks",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Zen of Python?",
+              "back": "19 guiding principles (import this)",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Python is a high-level, interpreted, general-purpose programming language. Created by Guido van Rossum in 1991, it emphasises code readability using significant indentation. Python is dynamically typed and garbage-collected, supporting multiple paradigms including procedural, object-oriented, and fu"
+            },
+            {
+              "style": "detailed",
+              "content": "Python is a high-level, interpreted, general-purpose programming language. Created by Guido van Rossum in 1991, it emphasises code readability using significant indentation. Python is dynamically typed and garbage-collected, supporting multiple paradigms including procedural, object-oriented, and functional programming.\n\nKey concepts: Python: High-level, interpreted language with dynamic typing, Interpreter: Executes code line-by-line without compilation, Bytecode: Python source compiles to .pyc bytecode which the VM runs."
+            }
+          ],
+          "recommendedNextLessons": [
+            "lists-tuples-dicts",
+            "functions-and-oop"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Data Structures in Python",
+      "weightage": 25,
+      "lessons": [
+        {
+          "slug": "lists-tuples-dicts",
+          "title": "Lists, Tuples, and Dictionaries",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "Python has four built-in data structures: list (ordered, mutable), tuple (ordered, immutable), dict (key-value, mutable), and set (unordered, unique). Each has unique use cases and performance characteristics.",
+          "keyConcepts": [
+            "List: Ordered, mutable, allows duplicates — [1, 2, 3]",
+            "Tuple: Ordered, immutable, allows duplicates — (1, 2, 3)",
+            "Dict: Key-value pairs, mutable, keys unique — {'a': 1}",
+            "Set: Unordered, unique elements — {1, 2, 3}",
+            "List comprehension: [x*2 for x in range(10)]",
+            "Slicing: list[start:stop:step] — start inclusive, stop exclusive",
+            "Mutable vs Immutable: lists/dicts/sets mutable; tuples/strings/ints immutable",
+            "Hashable: Only hashable objects (immutable) can be dict keys or set members"
+          ],
+          "formulas": [
+            "List access: O(1) by index, O(n) by value",
+            "Dict lookup: O(1) average (hash table)",
+            "Set membership: O(1) average",
+            "Tuple is immutable → hashable → can be a dict key"
+          ],
+          "tables": [
+            {
+              "title": "Built-in Data Structures",
+              "headers": [
+                "Structure",
+                "Syntax",
+                "Mutable",
+                "Ordered"
+              ],
+              "rows": [
+                [
+                  "List",
+                  "[1,2,3]",
+                  "Yes",
+                  "Yes"
+                ],
+                [
+                  "Tuple",
+                  "(1,2,3)",
+                  "No",
+                  "Yes"
+                ],
+                [
+                  "Dict",
+                  "{'a':1}",
+                  "Yes",
+                  "Yes (3.7+)"
+                ],
+                [
+                  "Set",
+                  "{1,2,3}",
+                  "Yes",
+                  "No"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Using a list as a dict key (TypeError: unhashable type)",
+            "Forgetting that tuple immutability is shallow (mutable elements can still change)",
+            "Modifying a list while iterating over it (use list comprehension instead)",
+            "Confusing list.copy() (shallow) with copy.deepcopy()"
+          ],
+          "examTips": [
+            "Always state whether a structure is mutable AND ordered",
+            "Mention time complexity when comparing structures",
+            "Show a list comprehension example for extra marks"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which data structure does NOT allow duplicate elements?",
+              "options": [
+                "List",
+                "Tuple",
+                "Set",
+                "Dict (values)"
+              ],
+              "answer": 2,
+              "explanation": "Sets only store unique elements. Dict keys are also unique, but dict values can duplicate."
+            },
+            {
+              "question": "What is the time complexity of dict lookup?",
+              "options": [
+                "O(n)",
+                "O(log n)",
+                "O(1) average",
+                "O(n^2)"
+              ],
+              "answer": 2,
+              "explanation": "Dicts use a hash table, giving O(1) average lookup."
+            },
+            {
+              "question": "Which is immutable?",
+              "options": [
+                "list",
+                "dict",
+                "set",
+                "tuple"
+              ],
+              "answer": 3,
+              "explanation": "Tuples are immutable. Lists, dicts, and sets are mutable."
+            },
+            {
+              "question": "What does list[::-1] return?",
+              "options": [
+                "The last element",
+                "A reversed copy of the list",
+                "An error",
+                "The first element"
+              ],
+              "answer": 1,
+              "explanation": "Slicing with step -1 reverses the list."
+            }
+          ],
+          "objectives": [
+            "Understand List and explain its significance",
+            "Understand Tuple and explain its significance",
+            "Understand Dict and explain its significance",
+            "Understand Set and explain its significance",
+            "Understand List comprehension and explain its significance",
+            "Attempt the practice quiz and viva questions on Lists, Tuples, and Dictionaries"
+          ],
+          "prerequisites": [
+            "Basic computer literacy",
+            "Familiarity with programming concepts (variables, loops, conditionals)",
+            "Understanding of what an algorithm is",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nPython has four built-in data structures: list (ordered, mutable), tuple (ordered, immutable), dict (key-value, mutable), and set (unordered, unique). Each has unique use cases and performance characteristics.\n## Key Concepts\n\n- List: Ordered, mutable, allows duplicates — [1, 2, 3]\n- Tuple: Ordered, immutable, allows duplicates — (1, 2, 3)\n- Dict: Key-value pairs, mutable, keys unique — {'a': 1}\n- Set: Unordered, unique elements — {1, 2, 3}\n- List comprehension: [x*2 for x in range(10)]\n- Slicing: list[start:stop:step] — start inclusive, stop exclusive\n- Mutable vs Immutable: lists/dicts/sets mutable; tuples/strings/ints immutable\n- Hashable: Only hashable objects (immutable) can be dict keys or set members\n\n## Important Formulas\n\n- `List access: O(1) by index, O(n) by value`\n- `Dict lookup: O(1) average (hash table)`\n- `Set membership: O(1) average`\n- `Tuple is immutable → hashable → can be a dict key`\n\n## Comparison Tables\n\n### Built-in Data Structures\n\n| Structure | Syntax | Mutable | Ordered |\n| --- | --- | --- | --- |\n| List | [1,2,3] | Yes | Yes |\n| Tuple | (1,2,3) | No | Yes |\n| Dict | {'a':1} | Yes | Yes (3.7+) |\n| Set | {1,2,3} | Yes | No |\n\n\n## Summary\n\nPython has four built-in data structures: list (ordered, mutable), tuple (ordered, immutable), dict (key-value, mutable), and set (unordered, unique). Each has unique use cases and performance characteristics.",
+          "analogies": [
+            {
+              "scenario": "Python interpreter like a translator",
+              "mapping": "Source code = original text, Bytecode = intermediate notes, PVM = the speaker reading notes. The translator (interpreter) processes each line at runtime, unlike C which translates everything up-front."
+            },
+            {
+              "scenario": "List like a shopping list",
+              "mapping": "List = paper, Items = entries, Append = add at end, Slice = tear off a section. Mutable: you can cross out and rewrite items."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Lists, Tuples, and Dictionaries — Process Flow",
+              "content": "flowchart LR\n    A[.py Source] -->|Compiler| B[.pyc Bytecode]\n    B -->|PVM| C[Execution]\n    C --> D[Output]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Lists, Tuples, and Dictionaries — Concept Map",
+              "content": "mindmap\n  root((Lists, Tuples, and Dictionarie))\n    Basics\n      Syntax\n      Variables\n      Operators\n    Data\n      List\n      Tuple\n      Dict\n      Set\n    OOP\n      Class\n      Inheritance\n    Advanced\n      Decorators\n      Exceptions"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) primitive ops, O(n) for sequence traversal",
+            "space": "O(1) for scalars, O(n) for collections"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "Which data structure does NOT allow duplicate elements?",
+              "solution": "Correct answer: Set",
+              "explanation": "Sets only store unique elements. Dict keys are also unique, but dict values can duplicate."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Lists, Tuples, and Dictionaries with reference to the key concepts.",
+              "solution": "Always state whether a structure is mutable AND ordered → Mention time complexity when comparing structures → Show a list comprehension example for extra marks",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define List.",
+              "modelAnswer": "Ordered, mutable, allows duplicates — [1, 2, 3]"
+            },
+            {
+              "marks": 2,
+              "question": "Define Tuple.",
+              "modelAnswer": "Ordered, immutable, allows duplicates — (1, 2, 3)"
+            },
+            {
+              "marks": 2,
+              "question": "Define Dict.",
+              "modelAnswer": "Key-value pairs, mutable, keys unique — {'a': 1}"
+            },
+            {
+              "marks": 2,
+              "question": "What is the Zen of Python?",
+              "modelAnswer": "A set of 19 guiding principles for Python's design, accessible via 'import this'. Includes 'Beautiful is better than ugly' and 'Readability counts.'"
+            },
+            {
+              "marks": 2,
+              "question": "Define a decorator.",
+              "modelAnswer": "A decorator is a function that takes another function and extends its behaviour without modifying it, using the @decorator syntax."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: List access: O(1) by index, O(n) by value",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the difference between deep and shallow copy in Python.",
+              "modelAnswer": "Shallow copy (copy.copy / list.copy()) creates a new container but references the same elements. Deep copy (copy.deepcopy()) recursively copies all nested objects. Modify a nested list in a shallow copy → both see the change. With deep copy → only the copy changes."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between @staticmethod and @classmethod?",
+              "modelAnswer": "@staticmethod: no implicit first arg. @classmethod: receives the class (cls) as first arg. Use @classmethod for factory methods, @staticmethod for utility functions that don't need class/instance access."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define List.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Tuple.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: List access: O(1) by index, O(n) by value",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Dict lookup: O(1) average (hash table)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Lists, Tuples, and Dictionaries in detail with a diagram.",
+              "modelAnswer": "Python has four built-in data structures: list (ordered, mutable), tuple (ordered, immutable), dict (key-value, mutable), and set (unordered, unique). Each has unique use cases and performance characteristics."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Lists, Tuples, and Dictionaries with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Lists, Tuples, and Dictionaries\n\n**One-line definition:** Python has four built-in data structures: list (ordered, mutable), tuple (ordered, immutable), dict (key-value, mutable), and set (unordered, unique). Each has unique use cases and performance charact\n\n**Key points:**\n\n- List: Ordered, mutable, allows duplicates — [1, 2, 3]\n- Tuple: Ordered, immutable, allows duplicates — (1, 2, 3)\n- Dict: Key-value pairs, mutable, keys unique — {'a': 1}\n- Set: Unordered, unique elements — {1, 2, 3}\n- List comprehension: [x*2 for x in range(10)]\n\n**Important formulas:**\n\n- `List access: O(1) by index, O(n) by value`\n- `Dict lookup: O(1) average (hash table)`\n- `Set membership: O(1) average`\n- `Tuple is immutable → hashable → can be a dict key`\n\n**Common mistake to avoid:** Using a list as a dict key (TypeError: unhashable type)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "List: Ordered, mutable, allows duplicates — [1, 2, 3]",
+            "Tuple: Ordered, immutable, allows duplicates — (1, 2, 3)",
+            "Dict: Key-value pairs, mutable, keys unique — {'a': 1}",
+            "Set: Unordered, unique elements — {1, 2, 3}",
+            "List comprehension: [x*2 for x in range(10)]",
+            "Formula: List access: O(1) by index, O(n) by value",
+            "Formula: Dict lookup: O(1) average (hash table)",
+            "Formula: Set membership: O(1) average",
+            "Formula: Tuple is immutable → hashable → can be a dict key",
+            "print(*objects, sep=' ', end='\\n')",
+            "range(start, stop, step) — stop exclusive",
+            "List comp: [x for x in iter if cond]"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Use functions and modules to avoid duplicating code."
+            },
+            {
+              "phrase": "PEP",
+              "expansion": "Python Enhancement Proposal",
+              "meaning": "PEP 8 is the style guide; PEP 20 is the Zen of Python."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always state whether a structure is mutable AND ordered"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Mention time complexity when comparing structures"
+            },
+            {
+              "type": "warning",
+              "content": "Using a list as a dict key (TypeError: unhashable type)"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting that tuple immutability is shallow (mutable elements can still change)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Python has four built-in data structures: list (ordered, mutable), tuple (ordered, immutable), dict (key-value, mutable), and set (unordered, unique). Each has unique use cases and performance characteristics."
+            },
+            {
+              "type": "definition",
+              "content": "List: Ordered, mutable, allows duplicates — [1, 2, 3]"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is List?",
+              "back": "Ordered, mutable, allows duplicates — [1, 2, 3]",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Tuple?",
+              "back": "Ordered, immutable, allows duplicates — (1, 2, 3)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Dict?",
+              "back": "Key-value pairs, mutable, keys unique — {'a': 1}",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Set?",
+              "back": "Unordered, unique elements — {1, 2, 3}",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is List comprehension?",
+              "back": "[x*2 for x in range(10)]",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Slicing?",
+              "back": "list[start:stop:step] — start inclusive, stop exclusive",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Mutable vs Immutable?",
+              "back": "lists/dicts/sets mutable; tuples/strings/ints immutable",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Hashable?",
+              "back": "Only hashable objects (immutable) can be dict keys or set members",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Python has four built-in data structures: list (ordered, mutable), tuple (ordered, immutable), dict (key-value, mutable), and set (unordered, unique). Each has unique use cases and performance characteristics."
+            },
+            {
+              "style": "detailed",
+              "content": "Python has four built-in data structures: list (ordered, mutable), tuple (ordered, immutable), dict (key-value, mutable), and set (unordered, unique). Each has unique use cases and performance characteristics.\n\nKey concepts: List: Ordered, mutable, allows duplicates — [1, 2, 3], Tuple: Ordered, immutable, allows duplicates — (1, 2, 3), Dict: Key-value pairs, mutable, keys unique — {'a': 1}."
+            }
+          ],
+          "recommendedNextLessons": [
+            "functions-and-oop",
+            "files-and-modules"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Functions and OOP in Python",
+      "weightage": 25,
+      "lessons": [
+        {
+          "slug": "functions-and-oop",
+          "title": "Functions and Object-Oriented Programming",
+          "durationMin": 35,
+          "difficulty": "medium",
+          "overview": "Python functions are first-class objects — they can be assigned to variables, passed as arguments, and returned from other functions. Python supports OOP with classes, inheritance, polymorphism, and encapsulation via access conventions (_protected, __private).",
+          "keyConcepts": [
+            "def: keyword to define a function",
+            "Lambda: anonymous one-line function — lambda x: x*2",
+            "*args: variable positional arguments (tuple)",
+            "**kwargs: variable keyword arguments (dict)",
+            "Class: blueprint with attributes and methods — class Dog:",
+            "__init__: constructor method",
+            "self: reference to the instance (like 'this' in Java)",
+            "Inheritance: class Dog(Animal) — Dog inherits from Animal"
+          ],
+          "formulas": [
+            "Function definition: def name(params): body",
+            "Lambda: lambda params: expression",
+            "Class: class ClassName(BaseClass):",
+            "Constructor: def __init__(self, args):"
+          ],
+          "tables": [
+            {
+              "title": "Access conventions",
+              "headers": [
+                "Prefix",
+                "Meaning",
+                "Example"
+              ],
+              "rows": [
+                [
+                  "(none)",
+                  "Public",
+                  "self.name"
+                ],
+                [
+                  "_",
+                  "Protected (convention only)",
+                  "self._name"
+                ],
+                [
+                  "__",
+                  "Private (name-mangled)",
+                  "self.__name"
+                ],
+                [
+                  "__x__",
+                  "Dunder (magic method)",
+                  "self.__init__()"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Forgetting self as the first parameter of instance methods",
+            "Using mutable default arguments (def f(x=[]) — the list is shared across calls!)",
+            "Confusing class attributes with instance attributes",
+            "Not calling super().__init__() when overriding"
+          ],
+          "examTips": [
+            "Always mention that Python uses name-mangling for __private (not true privacy)",
+            "Show a lambda example alongside a regular def to contrast",
+            "Mention first-class functions when asked about Python's flexibility"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What is the first parameter of an instance method?",
+              "options": [
+                "this",
+                "self",
+                "instance",
+                "obj"
+              ],
+              "answer": 1,
+              "explanation": "By convention, the first parameter is 'self' (a reference to the instance)."
+            },
+            {
+              "question": "What does *args collect?",
+              "options": [
+                "A dict of keyword args",
+                "A tuple of positional args",
+                "A list of args",
+                "Nothing"
+              ],
+              "answer": 1,
+              "explanation": "*args collects extra positional arguments as a tuple."
+            },
+            {
+              "question": "What is a lambda in Python?",
+              "options": [
+                "A loop construct",
+                "An anonymous function",
+                "A class type",
+                "A module"
+              ],
+              "answer": 1,
+              "explanation": "lambda creates a small anonymous function in a single expression."
+            },
+            {
+              "question": "Which prefix makes an attribute 'private' in Python?",
+              "options": [
+                "_",
+                "__",
+                "private",
+                "static"
+              ],
+              "answer": 1,
+              "explanation": "Double underscore __ triggers name-mangling, providing a form of privacy."
+            }
+          ],
+          "objectives": [
+            "Understand def and explain its significance",
+            "Understand Lambda and explain its significance",
+            "Understand *args and explain its significance",
+            "Understand **kwargs and explain its significance",
+            "Understand Class and explain its significance",
+            "Attempt the practice quiz and viva questions on Functions and Object-Oriented Programming"
+          ],
+          "prerequisites": [
+            "Basic computer literacy",
+            "Familiarity with programming concepts (variables, loops, conditionals)",
+            "Understanding of what an algorithm is",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nPython functions are first-class objects — they can be assigned to variables, passed as arguments, and returned from other functions. Python supports OOP with classes, inheritance, polymorphism, and encapsulation via access conventions (_protected, __private).\n## Key Concepts\n\n- def: keyword to define a function\n- Lambda: anonymous one-line function — lambda x: x*2\n- *args: variable positional arguments (tuple)\n- **kwargs: variable keyword arguments (dict)\n- Class: blueprint with attributes and methods — class Dog:\n- __init__: constructor method\n- self: reference to the instance (like 'this' in Java)\n- Inheritance: class Dog(Animal) — Dog inherits from Animal\n\n## Important Formulas\n\n- `Function definition: def name(params): body`\n- `Lambda: lambda params: expression`\n- `Class: class ClassName(BaseClass):`\n- `Constructor: def __init__(self, args):`\n\n## Comparison Tables\n\n### Access conventions\n\n| Prefix | Meaning | Example |\n| --- | --- | --- |\n| (none) | Public | self.name |\n| _ | Protected (convention only) | self._name |\n| __ | Private (name-mangled) | self.__name |\n| __x__ | Dunder (magic method) | self.__init__() |\n\n\n## Summary\n\nPython functions are first-class objects — they can be assigned to variables, passed as arguments, and returned from other functions. Python supports OOP with classes, inheritance, polymorphism, and encapsulation via access conventions (_protected, __private).",
+          "analogies": [
+            {
+              "scenario": "Python interpreter like a translator",
+              "mapping": "Source code = original text, Bytecode = intermediate notes, PVM = the speaker reading notes. The translator (interpreter) processes each line at runtime, unlike C which translates everything up-front."
+            },
+            {
+              "scenario": "List like a shopping list",
+              "mapping": "List = paper, Items = entries, Append = add at end, Slice = tear off a section. Mutable: you can cross out and rewrite items."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Functions and Object-Oriented Programming — Process Flow",
+              "content": "flowchart LR\n    A[.py Source] -->|Compiler| B[.pyc Bytecode]\n    B -->|PVM| C[Execution]\n    C --> D[Output]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Functions and Object-Oriented Programming — Concept Map",
+              "content": "mindmap\n  root((Functions and Object-Oriented ))\n    Basics\n      Syntax\n      Variables\n      Operators\n    Data\n      List\n      Tuple\n      Dict\n      Set\n    OOP\n      Class\n      Inheritance\n    Advanced\n      Decorators\n      Exceptions"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) primitive ops, O(n) for sequence traversal",
+            "space": "O(1) for scalars, O(n) for collections"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What is the first parameter of an instance method?",
+              "solution": "Correct answer: self",
+              "explanation": "By convention, the first parameter is 'self' (a reference to the instance)."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Functions and Object-Oriented Programming with reference to the key concepts.",
+              "solution": "Always mention that Python uses name-mangling for __private (not true privacy) → Show a lambda example alongside a regular def to contrast → Mention first-class functions when asked about Python's flexibility",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define def.",
+              "modelAnswer": "keyword to define a function"
+            },
+            {
+              "marks": 2,
+              "question": "Define Lambda.",
+              "modelAnswer": "anonymous one-line function — lambda x: x*2"
+            },
+            {
+              "marks": 2,
+              "question": "Define *args.",
+              "modelAnswer": "variable positional arguments (tuple)"
+            },
+            {
+              "marks": 2,
+              "question": "What is the Zen of Python?",
+              "modelAnswer": "A set of 19 guiding principles for Python's design, accessible via 'import this'. Includes 'Beautiful is better than ugly' and 'Readability counts.'"
+            },
+            {
+              "marks": 2,
+              "question": "Define a decorator.",
+              "modelAnswer": "A decorator is a function that takes another function and extends its behaviour without modifying it, using the @decorator syntax."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: Function definition: def name(params): body",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the difference between deep and shallow copy in Python.",
+              "modelAnswer": "Shallow copy (copy.copy / list.copy()) creates a new container but references the same elements. Deep copy (copy.deepcopy()) recursively copies all nested objects. Modify a nested list in a shallow copy → both see the change. With deep copy → only the copy changes."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between @staticmethod and @classmethod?",
+              "modelAnswer": "@staticmethod: no implicit first arg. @classmethod: receives the class (cls) as first arg. Use @classmethod for factory methods, @staticmethod for utility functions that don't need class/instance access."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define def.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Lambda.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Function definition: def name(params): body",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: Lambda: lambda params: expression",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Functions and Object-Oriented Programming in detail with a diagram.",
+              "modelAnswer": "Python functions are first-class objects — they can be assigned to variables, passed as arguments, and returned from other functions. Python supports OOP with classes, inheritance, polymorphism, and encapsulation via access conventions (_protected, __private)."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Functions and Object-Oriented Programming with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Functions and Object-Oriented Programming\n\n**One-line definition:** Python functions are first-class objects — they can be assigned to variables, passed as arguments, and returned from other functions. Python supports OOP with classes, inheritance, polymorphism, and e\n\n**Key points:**\n\n- def: keyword to define a function\n- Lambda: anonymous one-line function — lambda x: x*2\n- *args: variable positional arguments (tuple)\n- **kwargs: variable keyword arguments (dict)\n- Class: blueprint with attributes and methods — class Dog:\n\n**Important formulas:**\n\n- `Function definition: def name(params): body`\n- `Lambda: lambda params: expression`\n- `Class: class ClassName(BaseClass):`\n- `Constructor: def __init__(self, args):`\n\n**Common mistake to avoid:** Forgetting self as the first parameter of instance methods\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "def: keyword to define a function",
+            "Lambda: anonymous one-line function — lambda x: x*2",
+            "*args: variable positional arguments (tuple)",
+            "**kwargs: variable keyword arguments (dict)",
+            "Class: blueprint with attributes and methods — class Dog:",
+            "Formula: Function definition: def name(params): body",
+            "Formula: Lambda: lambda params: expression",
+            "Formula: Class: class ClassName(BaseClass):",
+            "Formula: Constructor: def __init__(self, args):",
+            "print(*objects, sep=' ', end='\\n')",
+            "range(start, stop, step) — stop exclusive",
+            "List comp: [x for x in iter if cond]"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Use functions and modules to avoid duplicating code."
+            },
+            {
+              "phrase": "PEP",
+              "expansion": "Python Enhancement Proposal",
+              "meaning": "PEP 8 is the style guide; PEP 20 is the Zen of Python."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always mention that Python uses name-mangling for __private (not true privacy)"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Show a lambda example alongside a regular def to contrast"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting self as the first parameter of instance methods"
+            },
+            {
+              "type": "warning",
+              "content": "Using mutable default arguments (def f(x=[]) — the list is shared across calls!)"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Python functions are first-class objects — they can be assigned to variables, passed as arguments, and returned from other functions. Python supports OOP with classes, inheritance, polymorphism, and encapsulation via access conventions (_protected, __private)."
+            },
+            {
+              "type": "definition",
+              "content": "def: keyword to define a function"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is def?",
+              "back": "keyword to define a function",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Lambda?",
+              "back": "anonymous one-line function — lambda x: x*2",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is *args?",
+              "back": "variable positional arguments (tuple)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is **kwargs?",
+              "back": "variable keyword arguments (dict)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Class?",
+              "back": "blueprint with attributes and methods — class Dog:",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is __init__?",
+              "back": "constructor method",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is self?",
+              "back": "reference to the instance (like 'this' in Java)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Inheritance?",
+              "back": "class Dog(Animal) — Dog inherits from Animal",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Python functions are first-class objects — they can be assigned to variables, passed as arguments, and returned from other functions. Python supports OOP with classes, inheritance, polymorphism, and encapsulation via access conventions (_protected, __private)."
+            },
+            {
+              "style": "detailed",
+              "content": "Python functions are first-class objects — they can be assigned to variables, passed as arguments, and returned from other functions. Python supports OOP with classes, inheritance, polymorphism, and encapsulation via access conventions (_protected, __private).\n\nKey concepts: def: keyword to define a function, Lambda: anonymous one-line function — lambda x: x*2, *args: variable positional arguments (tuple)."
+            }
+          ],
+          "recommendedNextLessons": [
+            "files-and-modules",
+            "exceptions-and-decorators"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "File Handling and Modules",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "files-and-modules",
+          "title": "File Handling and Modules",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "Python provides built-in functions for file I/O (open, read, write, close) and a module system for code organisation. The 'with' statement ensures resources are cleaned up. Modules are .py files importable via the import statement; packages are directories with __init__.py.",
+          "keyConcepts": [
+            "open(): opens a file — open('f.txt', 'r')",
+            "Modes: 'r' read, 'w' write (truncate), 'a' append, 'b' binary, '+' read+write",
+            "with statement: context manager, auto-closes file",
+            "Module: a .py file — import mymodule",
+            "Package: a directory with __init__.py",
+            "from x import y: imports specific name",
+            "if __name__ == '__main__': runs only when file is executed directly",
+            "pip: Python package installer"
+          ],
+          "formulas": [
+            "open(file, mode) returns a file object",
+            "with open('f') as f: auto-closes",
+            "import module; from module import name"
+          ],
+          "tables": [
+            {
+              "title": "File modes",
+              "headers": [
+                "Mode",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "r",
+                  "Read (default) — file must exist"
+                ],
+                [
+                  "w",
+                  "Write — truncates if exists, creates if not"
+                ],
+                [
+                  "a",
+                  "Append — creates if not exists"
+                ],
+                [
+                  "r+",
+                  "Read and write — file must exist"
+                ],
+                [
+                  "b",
+                  "Binary mode (combined with above)"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Forgetting to close files (use 'with' to avoid)",
+            "Not handling FileNotFoundError when reading",
+            "Confusing 'w' (truncate) with 'a' (append)",
+            "Using relative imports incorrectly in packages"
+          ],
+          "examTips": [
+            "Always recommend 'with open()' over manual open/close",
+            "Mention pip and PyPI when asked about the Python ecosystem",
+            "Explain __name__ == '__main__' as the Python idiom for script entry"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which mode opens a file for writing and truncates it?",
+              "options": [
+                "'r'",
+                "'w'",
+                "'a'",
+                "'r+'"
+              ],
+              "answer": 1,
+              "explanation": "'w' opens for writing and truncates the file if it exists."
+            },
+            {
+              "question": "What does the 'with' statement do?",
+              "options": [
+                "Loops over a file",
+                "Ensures file is closed automatically",
+                "Imports a module",
+                "Reads all lines"
+              ],
+              "answer": 1,
+              "explanation": "'with' is a context manager that ensures the file is closed even if an exception occurs."
+            },
+            {
+              "question": "What is a Python package?",
+              "options": [
+                "A .py file",
+                "A directory with __init__.py",
+                "A built-in module",
+                "A compiled library"
+              ],
+              "answer": 1,
+              "explanation": "A package is a directory containing an __init__.py file (which can be empty)."
+            },
+            {
+              "question": "What does pip do?",
+              "options": [
+                "Runs Python code",
+                "Installs Python packages from PyPI",
+                "Compiles Python to bytecode",
+                "Tests Python code"
+              ],
+              "answer": 1,
+              "explanation": "pip is the Python package installer — it fetches packages from PyPI (Python Package Index)."
+            }
+          ],
+          "objectives": [
+            "Understand open() and explain its significance",
+            "Understand Modes and explain its significance",
+            "Understand with statement and explain its significance",
+            "Understand Module and explain its significance",
+            "Understand Package and explain its significance",
+            "Attempt the practice quiz and viva questions on File Handling and Modules"
+          ],
+          "prerequisites": [
+            "Basic computer literacy",
+            "Familiarity with programming concepts (variables, loops, conditionals)",
+            "Understanding of what an algorithm is",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nPython provides built-in functions for file I/O (open, read, write, close) and a module system for code organisation. The 'with' statement ensures resources are cleaned up. Modules are .py files importable via the import statement; packages are directories with __init__.py.\n## Key Concepts\n\n- open(): opens a file — open('f.txt', 'r')\n- Modes: 'r' read, 'w' write (truncate), 'a' append, 'b' binary, '+' read+write\n- with statement: context manager, auto-closes file\n- Module: a .py file — import mymodule\n- Package: a directory with __init__.py\n- from x import y: imports specific name\n- if __name__ == '__main__': runs only when file is executed directly\n- pip: Python package installer\n\n## Important Formulas\n\n- `open(file, mode) returns a file object`\n- `with open('f') as f: auto-closes`\n- `import module; from module import name`\n\n## Comparison Tables\n\n### File modes\n\n| Mode | Description |\n| --- | --- |\n| r | Read (default) — file must exist |\n| w | Write — truncates if exists, creates if not |\n| a | Append — creates if not exists |\n| r+ | Read and write — file must exist |\n| b | Binary mode (combined with above) |\n\n\n## Summary\n\nPython provides built-in functions for file I/O (open, read, write, close) and a module system for code organisation. The 'with' statement ensures resources are cleaned up. Modules are .py files importable via the import statement; packages are directories with __init__.py.",
+          "analogies": [
+            {
+              "scenario": "Python interpreter like a translator",
+              "mapping": "Source code = original text, Bytecode = intermediate notes, PVM = the speaker reading notes. The translator (interpreter) processes each line at runtime, unlike C which translates everything up-front."
+            },
+            {
+              "scenario": "List like a shopping list",
+              "mapping": "List = paper, Items = entries, Append = add at end, Slice = tear off a section. Mutable: you can cross out and rewrite items."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "File Handling and Modules — Process Flow",
+              "content": "flowchart LR\n    A[.py Source] -->|Compiler| B[.pyc Bytecode]\n    B -->|PVM| C[Execution]\n    C --> D[Output]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "File Handling and Modules — Concept Map",
+              "content": "mindmap\n  root((File Handling and Modules))\n    Basics\n      Syntax\n      Variables\n      Operators\n    Data\n      List\n      Tuple\n      Dict\n      Set\n    OOP\n      Class\n      Inheritance\n    Advanced\n      Decorators\n      Exceptions"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) primitive ops, O(n) for sequence traversal",
+            "space": "O(1) for scalars, O(n) for collections"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "Which mode opens a file for writing and truncates it?",
+              "solution": "Correct answer: 'w'",
+              "explanation": "'w' opens for writing and truncates the file if it exists."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain File Handling and Modules with reference to the key concepts.",
+              "solution": "Always recommend 'with open()' over manual open/close → Mention pip and PyPI when asked about the Python ecosystem → Explain __name__ == '__main__' as the Python idiom for script entry",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define open().",
+              "modelAnswer": "opens a file — open('f.txt', 'r')"
+            },
+            {
+              "marks": 2,
+              "question": "Define Modes.",
+              "modelAnswer": "'r' read, 'w' write (truncate), 'a' append, 'b' binary, '+' read+write"
+            },
+            {
+              "marks": 2,
+              "question": "Define with statement.",
+              "modelAnswer": "context manager, auto-closes file"
+            },
+            {
+              "marks": 2,
+              "question": "What is the Zen of Python?",
+              "modelAnswer": "A set of 19 guiding principles for Python's design, accessible via 'import this'. Includes 'Beautiful is better than ugly' and 'Readability counts.'"
+            },
+            {
+              "marks": 2,
+              "question": "Define a decorator.",
+              "modelAnswer": "A decorator is a function that takes another function and extends its behaviour without modifying it, using the @decorator syntax."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: open(file, mode) returns a file object",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the difference between deep and shallow copy in Python.",
+              "modelAnswer": "Shallow copy (copy.copy / list.copy()) creates a new container but references the same elements. Deep copy (copy.deepcopy()) recursively copies all nested objects. Modify a nested list in a shallow copy → both see the change. With deep copy → only the copy changes."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between @staticmethod and @classmethod?",
+              "modelAnswer": "@staticmethod: no implicit first arg. @classmethod: receives the class (cls) as first arg. Use @classmethod for factory methods, @staticmethod for utility functions that don't need class/instance access."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define open().",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define Modes.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: open(file, mode) returns a file object",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: with open('f') as f: auto-closes",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain File Handling and Modules in detail with a diagram.",
+              "modelAnswer": "Python provides built-in functions for file I/O (open, read, write, close) and a module system for code organisation. The 'with' statement ensures resources are cleaned up. Modules are .py files importable via the import statement; packages are directories with __init__.py."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss File Handling and Modules with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — File Handling and Modules\n\n**One-line definition:** Python provides built-in functions for file I/O (open, read, write, close) and a module system for code organisation. The 'with' statement ensures resources are cleaned up. Modules are .py files impor\n\n**Key points:**\n\n- open(): opens a file — open('f.txt', 'r')\n- Modes: 'r' read, 'w' write (truncate), 'a' append, 'b' binary, '+' read+write\n- with statement: context manager, auto-closes file\n- Module: a .py file — import mymodule\n- Package: a directory with __init__.py\n\n**Important formulas:**\n\n- `open(file, mode) returns a file object`\n- `with open('f') as f: auto-closes`\n- `import module; from module import name`\n\n**Common mistake to avoid:** Forgetting to close files (use 'with' to avoid)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "open(): opens a file — open('f.txt', 'r')",
+            "Modes: 'r' read, 'w' write (truncate), 'a' append, 'b' binary, '+' read+write",
+            "with statement: context manager, auto-closes file",
+            "Module: a .py file — import mymodule",
+            "Package: a directory with __init__.py",
+            "Formula: open(file, mode) returns a file object",
+            "Formula: with open('f') as f: auto-closes",
+            "Formula: import module; from module import name",
+            "print(*objects, sep=' ', end='\\n')",
+            "range(start, stop, step) — stop exclusive",
+            "List comp: [x for x in iter if cond]"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Use functions and modules to avoid duplicating code."
+            },
+            {
+              "phrase": "PEP",
+              "expansion": "Python Enhancement Proposal",
+              "meaning": "PEP 8 is the style guide; PEP 20 is the Zen of Python."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always recommend 'with open()' over manual open/close"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Mention pip and PyPI when asked about the Python ecosystem"
+            },
+            {
+              "type": "warning",
+              "content": "Forgetting to close files (use 'with' to avoid)"
+            },
+            {
+              "type": "warning",
+              "content": "Not handling FileNotFoundError when reading"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Python provides built-in functions for file I/O (open, read, write, close) and a module system for code organisation. The 'with' statement ensures resources are cleaned up. Modules are .py files importable via the import statement; packages are directories with __init__.py."
+            },
+            {
+              "type": "definition",
+              "content": "open(): opens a file — open('f.txt', 'r')"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is open()?",
+              "back": "opens a file — open('f.txt', 'r')",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Modes?",
+              "back": "'r' read, 'w' write (truncate), 'a' append, 'b' binary, '+' read+write",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is with statement?",
+              "back": "context manager, auto-closes file",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Module?",
+              "back": "a .py file — import mymodule",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Package?",
+              "back": "a directory with __init__.py",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is from x import y?",
+              "back": "imports specific name",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is if __name__ == '__main__'?",
+              "back": "runs only when file is executed directly",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is pip?",
+              "back": "Python package installer",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Python provides built-in functions for file I/O (open, read, write, close) and a module system for code organisation. The 'with' statement ensures resources are cleaned up. Modules are .py files importable via the import statement; packages are directories with __init__.py."
+            },
+            {
+              "style": "detailed",
+              "content": "Python provides built-in functions for file I/O (open, read, write, close) and a module system for code organisation. The 'with' statement ensures resources are cleaned up. Modules are .py files importable via the import statement; packages are directories with __init__.py.\n\nKey concepts: open(): opens a file — open('f.txt', 'r'), Modes: 'r' read, 'w' write (truncate), 'a' append, 'b' binary, '+' read+write, with statement: context manager, auto-closes file."
+            }
+          ],
+          "recommendedNextLessons": [
+            "exceptions-and-decorators"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Advanced Python",
+      "weightage": 10,
+      "lessons": [
+        {
+          "slug": "exceptions-and-decorators",
+          "title": "Exceptions and Decorators",
+          "durationMin": 30,
+          "difficulty": "hard",
+          "overview": "Python uses try/except/else/finally for exception handling. Custom exceptions inherit from Exception. Decorators are functions that wrap other functions to add behaviour — they use the @decorator syntax. Common built-in decorators include @property, @staticmethod, @classmethod.",
+          "keyConcepts": [
+            "try/except: catch exceptions",
+            "finally: always runs (cleanup)",
+            "else: runs if no exception in try",
+            "raise: throw an exception — raise ValueError('msg')",
+            "Custom exception: class MyError(Exception):",
+            "Decorator: @my_decorator above a function — wraps it",
+            "@property: turns a method into a read-only attribute",
+            "@staticmethod / @classmethod: methods without/with class binding"
+          ],
+          "formulas": [
+            "try: ... except Exception as e: ...",
+            "@decorator def f(): ... ≡ f = decorator(f)",
+            "class MyError(Exception): pass"
+          ],
+          "tables": [
+            {
+              "title": "Common built-in exceptions",
+              "headers": [
+                "Exception",
+                "Cause"
+              ],
+              "rows": [
+                [
+                  "ValueError",
+                  "Right type, wrong value (int('abc'))"
+                ],
+                [
+                  "TypeError",
+                  "Wrong type (1 + 'a')"
+                ],
+                [
+                  "IndexError",
+                  "List index out of range"
+                ],
+                [
+                  "KeyError",
+                  "Dict key not found"
+                ],
+                [
+                  "AttributeError",
+                  "Attribute access on None/wrong type"
+                ],
+                [
+                  "FileNotFoundError",
+                  "open() on missing file"
+                ]
+              ]
+            }
+          ],
+          "commonMistakes": [
+            "Catching Exception too broadly (hides bugs)",
+            "Not using finally for resource cleanup",
+            "Forgetting that decorators run at definition time, not call time",
+            "Raising generic Exception instead of specific types"
+          ],
+          "examTips": [
+            "Always list specific exceptions before generic ones",
+            "Show a try/except/else/finally block to demonstrate full flow",
+            "Mention @property as the Pythonic way to do getters/setters"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "What does the finally block do?",
+              "options": [
+                "Runs only on exception",
+                "Runs only on success",
+                "Always runs",
+                "Runs only if no exception"
+              ],
+              "answer": 2,
+              "explanation": "finally always runs, regardless of whether an exception occurred."
+            },
+            {
+              "question": "How do you raise an exception?",
+              "options": [
+                "throw Exception",
+                "raise Exception",
+                "error Exception",
+                "exit Exception"
+              ],
+              "answer": 1,
+              "explanation": "Python uses 'raise' (not 'throw' like Java)."
+            },
+            {
+              "question": "What does @property do?",
+              "options": [
+                "Makes a class",
+                "Turns a method into an attribute",
+                "Creates a static method",
+                "Imports a module"
+              ],
+              "answer": 1,
+              "explanation": "@property lets you access a method like an attribute (no parentheses needed)."
+            },
+            {
+              "question": "Which catches ALL exceptions?",
+              "options": [
+                "except:",
+                "except Exception:",
+                "except Error:",
+                "catch:"
+              ],
+              "answer": 1,
+              "explanation": "'except Exception:' catches all non-exit exceptions. Bare 'except:' also catches SystemExit/KeyboardInterrupt — usually undesirable."
+            }
+          ],
+          "objectives": [
+            "Understand try/except and explain its significance",
+            "Understand finally and explain its significance",
+            "Understand else and explain its significance",
+            "Understand raise and explain its significance",
+            "Understand Custom exception and explain its significance",
+            "Attempt the practice quiz and viva questions on Exceptions and Decorators"
+          ],
+          "prerequisites": [
+            "Basic computer literacy",
+            "Familiarity with programming concepts (variables, loops, conditionals)",
+            "Understanding of what an algorithm is",
+            "Completion of the previous lesson in this unit"
+          ],
+          "theory": "## Introduction\n\nPython uses try/except/else/finally for exception handling. Custom exceptions inherit from Exception. Decorators are functions that wrap other functions to add behaviour — they use the @decorator syntax. Common built-in decorators include @property, @staticmethod, @classmethod.\n## Key Concepts\n\n- try/except: catch exceptions\n- finally: always runs (cleanup)\n- else: runs if no exception in try\n- raise: throw an exception — raise ValueError('msg')\n- Custom exception: class MyError(Exception):\n- Decorator: @my_decorator above a function — wraps it\n- @property: turns a method into a read-only attribute\n- @staticmethod / @classmethod: methods without/with class binding\n\n## Important Formulas\n\n- `try: ... except Exception as e: ...`\n- `@decorator def f(): ... ≡ f = decorator(f)`\n- `class MyError(Exception): pass`\n\n## Comparison Tables\n\n### Common built-in exceptions\n\n| Exception | Cause |\n| --- | --- |\n| ValueError | Right type, wrong value (int('abc')) |\n| TypeError | Wrong type (1 + 'a') |\n| IndexError | List index out of range |\n| KeyError | Dict key not found |\n| AttributeError | Attribute access on None/wrong type |\n| FileNotFoundError | open() on missing file |\n\n\n## Summary\n\nPython uses try/except/else/finally for exception handling. Custom exceptions inherit from Exception. Decorators are functions that wrap other functions to add behaviour — they use the @decorator syntax. Common built-in decorators include @property, @staticmethod, @classmethod.",
+          "analogies": [
+            {
+              "scenario": "Python interpreter like a translator",
+              "mapping": "Source code = original text, Bytecode = intermediate notes, PVM = the speaker reading notes. The translator (interpreter) processes each line at runtime, unlike C which translates everything up-front."
+            },
+            {
+              "scenario": "List like a shopping list",
+              "mapping": "List = paper, Items = entries, Append = add at end, Slice = tear off a section. Mutable: you can cross out and rewrite items."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Exceptions and Decorators — Process Flow",
+              "content": "flowchart LR\n    A[.py Source] -->|Compiler| B[.pyc Bytecode]\n    B -->|PVM| C[Execution]\n    C --> D[Output]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "Exceptions and Decorators — Concept Map",
+              "content": "mindmap\n  root((Exceptions and Decorators))\n    Basics\n      Syntax\n      Variables\n      Operators\n    Data\n      List\n      Tuple\n      Dict\n      Set\n    OOP\n      Class\n      Inheritance\n    Advanced\n      Decorators\n      Exceptions"
+            }
+          ],
+          "complexity": {
+            "time": "O(1) primitive ops, O(n) for sequence traversal",
+            "space": "O(1) for scalars, O(n) for collections"
+          },
+          "workedExamples": [
+            {
+              "title": "Worked example: MCQ walkthrough",
+              "problem": "What does the finally block do?",
+              "solution": "Correct answer: Always runs",
+              "explanation": "finally always runs, regardless of whether an exception occurred."
+            },
+            {
+              "title": "Exam-style worked example",
+              "problem": "Explain Exceptions and Decorators with reference to the key concepts.",
+              "solution": "Always list specific exceptions before generic ones → Show a try/except/else/finally block to demonstrate full flow → Mention @property as the Pythonic way to do getters/setters",
+              "explanation": "Use these tips to structure your written answer for maximum marks."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Define try/except.",
+              "modelAnswer": "catch exceptions"
+            },
+            {
+              "marks": 2,
+              "question": "Define finally.",
+              "modelAnswer": "always runs (cleanup)"
+            },
+            {
+              "marks": 2,
+              "question": "Define else.",
+              "modelAnswer": "runs if no exception in try"
+            },
+            {
+              "marks": 2,
+              "question": "What is the Zen of Python?",
+              "modelAnswer": "A set of 19 guiding principles for Python's design, accessible via 'import this'. Includes 'Beautiful is better than ugly' and 'Readability counts.'"
+            },
+            {
+              "marks": 2,
+              "question": "Define a decorator.",
+              "modelAnswer": "A decorator is a function that takes another function and extends its behaviour without modifying it, using the @decorator syntax."
+            }
+          ],
+          "interviewQuestions": [
+            {
+              "marks": 5,
+              "question": "Explain the formula: try: ... except Exception as e: ...",
+              "modelAnswer": "Break down each term, explain when to use it, and give one example."
+            },
+            {
+              "marks": 10,
+              "question": "Explain the difference between deep and shallow copy in Python.",
+              "modelAnswer": "Shallow copy (copy.copy / list.copy()) creates a new container but references the same elements. Deep copy (copy.deepcopy()) recursively copies all nested objects. Modify a nested list in a shallow copy → both see the change. With deep copy → only the copy changes."
+            },
+            {
+              "marks": 5,
+              "question": "What is the difference between @staticmethod and @classmethod?",
+              "modelAnswer": "@staticmethod: no implicit first arg. @classmethod: receives the class (cls) as first arg. Use @classmethod for factory methods, @staticmethod for utility functions that don't need class/instance access."
+            }
+          ],
+          "examQuestions": [
+            {
+              "marks": 2,
+              "question": "Define try/except.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 2,
+              "question": "Define finally.",
+              "modelAnswer": "See key concepts section."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: try: ... except Exception as e: ...",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 5,
+              "question": "Explain: @decorator def f(): ... ≡ f = decorator(f)",
+              "modelAnswer": "Define each term, give an example, and state when it is used."
+            },
+            {
+              "marks": 10,
+              "question": "Explain Exceptions and Decorators in detail with a diagram.",
+              "modelAnswer": "Python uses try/except/else/finally for exception handling. Custom exceptions inherit from Exception. Decorators are functions that wrap other functions to add behaviour — they use the @decorator syntax. Common built-in decorators include @property, @staticmethod, @classmethod."
+            },
+            {
+              "marks": 15,
+              "question": "Discuss Exceptions and Decorators with examples, advantages, and applications.",
+              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+              "tips": [
+                "Draw a diagram",
+                "Use at least one code example",
+                "Mention real-world use case"
+              ]
+            }
+          ],
+          "revisionSummary": "# Revision Summary — Exceptions and Decorators\n\n**One-line definition:** Python uses try/except/else/finally for exception handling. Custom exceptions inherit from Exception. Decorators are functions that wrap other functions to add behaviour — they use the @decorator synt\n\n**Key points:**\n\n- try/except: catch exceptions\n- finally: always runs (cleanup)\n- else: runs if no exception in try\n- raise: throw an exception — raise ValueError('msg')\n- Custom exception: class MyError(Exception):\n\n**Important formulas:**\n\n- `try: ... except Exception as e: ...`\n- `@decorator def f(): ... ≡ f = decorator(f)`\n- `class MyError(Exception): pass`\n\n**Common mistake to avoid:** Catching Exception too broadly (hides bugs)\n\n**Memory hook:** Recall the three pillars — definition, working, example.",
+          "cheatSheet": [
+            "try/except: catch exceptions",
+            "finally: always runs (cleanup)",
+            "else: runs if no exception in try",
+            "raise: throw an exception — raise ValueError('msg')",
+            "Custom exception: class MyError(Exception):",
+            "Formula: try: ... except Exception as e: ...",
+            "Formula: @decorator def f(): ... ≡ f = decorator(f)",
+            "Formula: class MyError(Exception): pass",
+            "print(*objects, sep=' ', end='\\n')",
+            "range(start, stop, step) — stop exclusive",
+            "List comp: [x for x in iter if cond]"
+          ],
+          "mnemonics": [
+            {
+              "phrase": "DRY",
+              "expansion": "Don't Repeat Yourself",
+              "meaning": "Use functions and modules to avoid duplicating code."
+            },
+            {
+              "phrase": "PEP",
+              "expansion": "Python Enhancement Proposal",
+              "meaning": "PEP 8 is the style guide; PEP 20 is the Zen of Python."
+            }
+          ],
+          "callouts": [
+            {
+              "type": "exam-tip",
+              "content": "Always list specific exceptions before generic ones"
+            },
+            {
+              "type": "exam-tip",
+              "content": "Show a try/except/else/finally block to demonstrate full flow"
+            },
+            {
+              "type": "warning",
+              "content": "Catching Exception too broadly (hides bugs)"
+            },
+            {
+              "type": "warning",
+              "content": "Not using finally for resource cleanup"
+            },
+            {
+              "type": "info",
+              "title": "Why this matters",
+              "content": "Python uses try/except/else/finally for exception handling. Custom exceptions inherit from Exception. Decorators are functions that wrap other functions to add behaviour — they use the @decorator syntax. Common built-in decorators include @property, @staticmethod, @classmethod."
+            },
+            {
+              "type": "definition",
+              "content": "try/except: catch exceptions"
+            }
+          ],
+          "flashcards": [
+            {
+              "front": "What is try/except?",
+              "back": "catch exceptions",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is finally?",
+              "back": "always runs (cleanup)",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is else?",
+              "back": "runs if no exception in try",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is raise?",
+              "back": "throw an exception — raise ValueError('msg')",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Custom exception?",
+              "back": "class MyError(Exception):",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is Decorator?",
+              "back": "@my_decorator above a function — wraps it",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is @property?",
+              "back": "turns a method into a read-only attribute",
+              "hint": "Refer to the definition in key concepts."
+            },
+            {
+              "front": "What is @staticmethod / @classmethod?",
+              "back": "methods without/with class binding",
+              "hint": "Refer to the definition in key concepts."
+            }
+          ],
+          "aiSummaries": [
+            {
+              "style": "short",
+              "content": "Python uses try/except/else/finally for exception handling. Custom exceptions inherit from Exception. Decorators are functions that wrap other functions to add behaviour — they use the @decorator syntax. Common built-in decorators include @property, @staticmethod, @classmethod."
+            },
+            {
+              "style": "detailed",
+              "content": "Python uses try/except/else/finally for exception handling. Custom exceptions inherit from Exception. Decorators are functions that wrap other functions to add behaviour — they use the @decorator syntax. Common built-in decorators include @property, @staticmethod, @classmethod.\n\nKey concepts: try/except: catch exceptions, finally: always runs (cleanup), else: runs if no exception in try."
+            }
+          ],
+          "recommendedNextLessons": []
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "# Python Programming — Quick Revision\n\n**Subject code:** R23CP1403  \n**Semester:** 4  \n**Credits:** 4  \n\n## Unit 1: Python Basics (20%)\n### Introduction to Python\nPython is a high-level, interpreted, general-purpose programming language. Created by Guido van Rossum in 1991, it emphasises code readability using significant indentation. Python is dynamically typed and garbage-collected, supporting multiple paradigms including procedural, obj...\n\n**Formulas:**\n- `Python 3.x is the current major version (Python 2 EOL: 2020)`\n- `Source (.py) → Bytecode (.pyc) → Python Virtual Machine`\n- `PEP 8: 4 spaces per indentation level`\n\n## Unit 2: Data Structures in Python (25%)\n### Lists, Tuples, and Dictionaries\nPython has four built-in data structures: list (ordered, mutable), tuple (ordered, immutable), dict (key-value, mutable), and set (unordered, unique). Each has unique use cases and performance characteristics.\n\n**Formulas:**\n- `List access: O(1) by index, O(n) by value`\n- `Dict lookup: O(1) average (hash table)`\n- `Set membership: O(1) average`\n\n## Unit 3: Functions and OOP in Python (25%)\n### Functions and Object-Oriented Programming\nPython functions are first-class objects — they can be assigned to variables, passed as arguments, and returned from other functions. Python supports OOP with classes, inheritance, polymorphism, and encapsulation via access conventions (_protected, __private).\n\n**Formulas:**\n- `Function definition: def name(params): body`\n- `Lambda: lambda params: expression`\n- `Class: class ClassName(BaseClass):`\n\n## Unit 4: File Handling and Modules (20%)\n### File Handling and Modules\nPython provides built-in functions for file I/O (open, read, write, close) and a module system for code organisation. The 'with' statement ensures resources are cleaned up. Modules are .py files importable via the import statement; packages are directories with __init__.py.\n\n**Formulas:**\n- `open(file, mode) returns a file object`\n- `with open('f') as f: auto-closes`\n- `import module; from module import name`\n\n## Unit 5: Advanced Python (10%)\n### Exceptions and Decorators\nPython uses try/except/else/finally for exception handling. Custom exceptions inherit from Exception. Decorators are functions that wrap other functions to add behaviour — they use the @decorator syntax. Common built-in decorators include @property, @staticmethod, @classmethod.\n\n**Formulas:**\n- `try: ... except Exception as e: ...`\n- `@decorator def f(): ... ≡ f = decorator(f)`\n- `class MyError(Exception): pass`\n",
+  "interviewBank": [
+    {
+      "marks": 5,
+      "question": "Explain the formula: Python 3.x is the current major version (Python 2 EOL: 2020)",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 10,
+      "question": "Explain the difference between deep and shallow copy in Python.",
+      "modelAnswer": "Shallow copy (copy.copy / list.copy()) creates a new container but references the same elements. Deep copy (copy.deepcopy()) recursively copies all nested objects. Modify a nested list in a shallow copy → both see the change. With deep copy → only the copy changes."
+    },
+    {
+      "marks": 5,
+      "question": "What is the difference between @staticmethod and @classmethod?",
+      "modelAnswer": "@staticmethod: no implicit first arg. @classmethod: receives the class (cls) as first arg. Use @classmethod for factory methods, @staticmethod for utility functions that don't need class/instance access."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: List access: O(1) by index, O(n) by value",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: Function definition: def name(params): body",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: open(file, mode) returns a file object",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    },
+    {
+      "marks": 5,
+      "question": "Explain the formula: try: ... except Exception as e: ...",
+      "modelAnswer": "Break down each term, explain when to use it, and give one example."
+    }
+  ],
+  "vivaBank": [
+    {
+      "marks": 2,
+      "question": "Define Python.",
+      "modelAnswer": "High-level, interpreted language with dynamic typing"
+    },
+    {
+      "marks": 2,
+      "question": "Define Interpreter.",
+      "modelAnswer": "Executes code line-by-line without compilation"
+    },
+    {
+      "marks": 2,
+      "question": "Define Bytecode.",
+      "modelAnswer": "Python source compiles to .pyc bytecode which the VM runs"
+    },
+    {
+      "marks": 2,
+      "question": "What is the Zen of Python?",
+      "modelAnswer": "A set of 19 guiding principles for Python's design, accessible via 'import this'. Includes 'Beautiful is better than ugly' and 'Readability counts.'"
+    },
+    {
+      "marks": 2,
+      "question": "Define a decorator.",
+      "modelAnswer": "A decorator is a function that takes another function and extends its behaviour without modifying it, using the @decorator syntax."
+    },
+    {
+      "marks": 2,
+      "question": "Define List.",
+      "modelAnswer": "Ordered, mutable, allows duplicates — [1, 2, 3]"
+    },
+    {
+      "marks": 2,
+      "question": "Define Tuple.",
+      "modelAnswer": "Ordered, immutable, allows duplicates — (1, 2, 3)"
+    },
+    {
+      "marks": 2,
+      "question": "Define Dict.",
+      "modelAnswer": "Key-value pairs, mutable, keys unique — {'a': 1}"
+    },
+    {
+      "marks": 2,
+      "question": "Define def.",
+      "modelAnswer": "keyword to define a function"
+    },
+    {
+      "marks": 2,
+      "question": "Define Lambda.",
+      "modelAnswer": "anonymous one-line function — lambda x: x*2"
+    },
+    {
+      "marks": 2,
+      "question": "Define *args.",
+      "modelAnswer": "variable positional arguments (tuple)"
+    },
+    {
+      "marks": 2,
+      "question": "Define open().",
+      "modelAnswer": "opens a file — open('f.txt', 'r')"
+    }
+  ],
+  "pyqBank": [
+    {
+      "marks": 10,
+      "question": "Explain Introduction to Python in detail with a diagram.",
+      "modelAnswer": "Python is a high-level, interpreted, general-purpose programming language. Created by Guido van Rossum in 1991, it emphasises code readability using significant indentation. Python is dynamically typed and garbage-collected, supporting multiple paradigms including procedural, object-oriented, and functional programming."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Introduction to Python with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Lists, Tuples, and Dictionaries in detail with a diagram.",
+      "modelAnswer": "Python has four built-in data structures: list (ordered, mutable), tuple (ordered, immutable), dict (key-value, mutable), and set (unordered, unique). Each has unique use cases and performance characteristics."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Lists, Tuples, and Dictionaries with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Functions and Object-Oriented Programming in detail with a diagram.",
+      "modelAnswer": "Python functions are first-class objects — they can be assigned to variables, passed as arguments, and returned from other functions. Python supports OOP with classes, inheritance, polymorphism, and encapsulation via access conventions (_protected, __private)."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Functions and Object-Oriented Programming with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain File Handling and Modules in detail with a diagram.",
+      "modelAnswer": "Python provides built-in functions for file I/O (open, read, write, close) and a module system for code organisation. The 'with' statement ensures resources are cleaned up. Modules are .py files importable via the import statement; packages are directories with __init__.py."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss File Handling and Modules with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    },
+    {
+      "marks": 10,
+      "question": "Explain Exceptions and Decorators in detail with a diagram.",
+      "modelAnswer": "Python uses try/except/else/finally for exception handling. Custom exceptions inherit from Exception. Decorators are functions that wrap other functions to add behaviour — they use the @decorator syntax. Common built-in decorators include @property, @staticmethod, @classmethod."
+    },
+    {
+      "marks": 15,
+      "question": "Discuss Exceptions and Decorators with examples, advantages, and applications.",
+      "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
+      "tips": [
+        "Draw a diagram",
+        "Use at least one code example",
+        "Mention real-world use case"
+      ]
+    }
+  ]
+}

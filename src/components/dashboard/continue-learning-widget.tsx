@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { BookOpen, Clock, ArrowRight, RotateCw } from 'lucide-react'
+import { BookOpen, ArrowRight, RotateCw } from 'lucide-react'
 import { Skeleton } from '@/components/ui/skeleton'
 import { EmptyState } from '@/components/ui/empty-state'
 
@@ -47,7 +47,7 @@ export function ContinueLearningWidget() {
         <p className="text-sm font-semibold">Continue Learning</p>
         <div className="mt-3">
           <EmptyState
-            icon={BookOpen}
+            icon={<BookOpen className="h-5 w-5" />}
             title="No lessons visited yet"
             description="Start learning to see your recent activity here."
             action={{ label: 'Browse lessons', href: '/learn' }}

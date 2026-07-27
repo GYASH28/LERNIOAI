@@ -1,12 +1,12 @@
 import { db } from '@/lib/db'
-import { getCurrentUser, withApi, okResponse, ApiError } from '@/lib/auth'
+import { requireUser, withApi, okResponse, ApiError } from '@/lib/auth'
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
 
 export function DELETE(request: Request) {
   return withApi(async () => {
-    const user = await getCurrentUser()
+    const user = await requireUser()
     const { pathname } = new URL(request.url)
     const id = pathname.split('/').pop()!
     const bookmark = await db.bookmark.findUnique({ where: { id } })

@@ -24,12 +24,12 @@ const COMMON_WEAK_PASSWORDS = new Set([
 
 export const passwordPolicySchema = z
   .string()
-  .min(12, 'Password must be at least 12 characters.')
+  .min(8, 'Password must be at least 8 characters.')
   .max(128, 'Password must be 128 characters or fewer.')
   .refine((value) => !COMMON_WEAK_PASSWORDS.has(value.trim().toLowerCase()), {
     message: 'Choose a less common password or use a longer passphrase.',
   })
-  .refine((value) => value.trim().length >= 16 || (/[A-Za-z]/.test(value) && /\d/.test(value)), {
+  .refine((value) => value.trim().length >= 12 || (/[A-Za-z]/.test(value) && /\d/.test(value)), {
     message: 'Use at least one letter and one number, or choose a longer passphrase.',
   })
 

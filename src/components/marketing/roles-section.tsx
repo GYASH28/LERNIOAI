@@ -11,16 +11,16 @@ export function RolesSection() {
       <div className="marketing-container max-w-5xl">
         <p className="marketing-eyebrow">
           <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
-          Staff &amp; campus roles
+          Student &amp; campus roles
         </p>
         <h2 id="roles-heading" className="marketing-h2 mt-3">
-          Core roles stay simple. Extra powers become scoped capabilities.
+          Built for students and CRs. Admin keeps it all running.
         </h2>
         <p className="marketing-lede mt-4">
-          Students never need an invite. CRs, teachers, HODs and academic
-          admins receive guarded access through the authority system. Review
-          and moderation are treated as capability grants inside the right
-          academic scope, not as permanent primary workspaces.
+          Students sign up directly with their email. CRs receive a guarded
+          invite code from the admin. That&apos;s it &mdash; no teachers, no
+          coordinators, no unnecessary hierarchy. Just students, their class
+          representative, and the admin who keeps the system running.
         </p>
 
         <div className="mt-8 grid gap-3 sm:grid-cols-2">
