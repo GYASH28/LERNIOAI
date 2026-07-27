@@ -2,6 +2,8 @@ import { redirect } from 'next/navigation'
 import { getCurrentUser } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { Users, BookOpen, TrendingUp, AlertCircle } from 'lucide-react'
+import { TopBar } from '@/components/layout/top-bar'
+import { Footer } from '@/components/layout/footer'
 
 export const dynamic = 'force-dynamic'
 
@@ -19,7 +21,9 @@ export default async function TeacherDashboardPage() {
   } catch {}
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen flex flex-col bg-background text-foreground">
+      <TopBar />
+      <main className="flex-1 page-wipe">
       <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:px-8">
         <h1 className="text-2xl font-bold mb-1">Teacher Dashboard</h1>
         <p className="text-sm text-muted-foreground mb-6">Overview of student progress and engagement</p>
@@ -40,6 +44,8 @@ export default async function TeacherDashboardPage() {
           ) : <p className="text-sm text-muted-foreground">No student data available.</p>}
         </div>
       </div>
-    </main>
+      </main>
+      <Footer />
+    </div>
   )
 }

@@ -1,3 +1,4 @@
+import type { NextConfig } from "next";
 import { buildContentSecurityPolicy } from "./src/lib/security/content-security-policy";
 
 if (
@@ -17,7 +18,7 @@ function contentSecurityPolicy() {
   })
 }
 
-const nextConfig = {
+const nextConfig: NextConfig = {
   reactStrictMode: true,
   allowedDevOrigins: ['127.0.0.1'],
   typescript: {

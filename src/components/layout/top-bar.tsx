@@ -28,6 +28,7 @@ import {
   Search,
   LogOut,
   MessageSquare,
+  MessageCircle,
   Sun,
   Moon,
   ChevronDown,
@@ -57,6 +58,7 @@ const NAV_ITEMS: { key: ViewKey; label: string; icon: typeof BookOpen }[] = [
 ]
 
 const EXTRA_LINKS: { href: string; label: string; icon: typeof BookOpen }[] = [
+  { href: '/community', label: 'Community', icon: MessageCircle },
   { href: '/leaderboard', label: 'Leaderboard', icon: Trophy },
   { href: '/feedback', label: 'Feedback', icon: MessageSquare },
   { href: '/help', label: 'Help Center', icon: HelpCircle },
