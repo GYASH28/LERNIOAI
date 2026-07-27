@@ -459,10 +459,10 @@ export function TutorView() {
           : ''
 
   return (
-    <div className="mx-auto grid w-full max-w-[1500px] gap-4 xl:grid-cols-[300px_minmax(0,1fr)]">
+    <div className="mx-auto grid h-[calc(100dvh-8rem)] w-full max-w-[1500px] gap-4 lg:grid-cols-[280px_minmax(0,1fr)]">
       <Card
         className={cn(
-          'fixed inset-y-0 left-0 z-50 w-[min(310px,86vw)] overflow-hidden rounded-none border-y-0 p-3 shadow-2xl transition-transform xl:static xl:z-auto xl:min-h-[760px] xl:w-auto xl:translate-x-0 xl:rounded-xl xl:border-y',
+          'fixed inset-y-0 left-0 z-50 w-[min(310px,86vw)] overflow-hidden rounded-none border-y-0 p-3 shadow-2xl transition-transform lg:static lg:z-auto lg:h-full lg:w-auto lg:translate-x-0 lg:rounded-xl lg:border-y',
           sessionsOpen ? 'translate-x-0' : '-translate-x-full',
         )}
       >
@@ -532,7 +532,7 @@ export function TutorView() {
         />
       ) : null}
 
-      <Card className="flex min-h-[760px] min-w-0 flex-col overflow-hidden border-primary/10 shadow-lg">
+      <Card className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden border-primary/10 shadow-lg">
         <div className="relative overflow-hidden border-b bg-gradient-to-br from-primary/12 via-background to-violet-500/10 p-4 sm:p-5">
           <div className="absolute -right-16 -top-20 h-52 w-52 rounded-full bg-primary/10 blur-3xl" />
           <div className="relative flex flex-wrap items-center gap-3">

@@ -49,7 +49,6 @@ const loadMaterialsView = () => import('@/components/views/materials').then(m =>
 const loadPlannerView = () => import('@/components/views/planner').then(m => ({ default: m.PlannerView }))
 const loadAnalyticsView = () => import('@/components/views/analytics').then(m => ({ default: m.AnalyticsView }))
 const loadProfileView = () => import('@/components/views/profile').then(m => ({ default: m.ProfileView }))
-const loadCommandPalette = () => import('@/components/ui/command-palette').then(m => ({ default: m.CommandPalette }))
 const loadFocusTimerWidget = () => import('@/components/ui/focus-timer').then(m => ({ default: m.FocusTimerWidget }))
 
 const PracticeView = lazy(loadPracticeView)
@@ -62,7 +61,6 @@ const MaterialsView = lazy(loadMaterialsView)
 const PlannerView = lazy(loadPlannerView)
 const AnalyticsView = lazy(loadAnalyticsView)
 const ProfileView = lazy(loadProfileView)
-const CommandPalette = dynamic(loadCommandPalette, { ssr: false })
 const FocusTimerWidget = dynamic(loadFocusTimerWidget, { ssr: false })
 
 async function fetchJsonWithTimeout(url: string, timeoutMs = 1500) {
@@ -167,7 +165,6 @@ export function LearningApp({
         <Footer />
       </main>
       <MascotToastContainer />
-      <CommandPalette />
       <FocusTimerWidget />
     </div>
   )
@@ -313,6 +310,8 @@ function ViewRouter({
       dashboard: 'Dashboard', learn: 'Learn', practice: 'Practice', tutor: 'AI Tutor',
       labs: 'Interactive Labs', coding: 'Coding Lab', exams: 'Exams', revision: 'Smart Revision',
       materials: 'Materials', planner: 'Study Planner', analytics: 'Analytics', profile: 'Profile',
+      community: 'Community', leaderboard: 'Leaderboard', achievements: 'Achievements',
+      notifications: 'Notifications', attendance: 'Attendance', class: 'My Class',
     }
     return <MotionPage viewKey="locked"><LockedFeatureView featureName={titles[view] || 'This feature'} /></MotionPage>
   }
@@ -345,6 +344,8 @@ function TopBar({ onMenuClick }: { onMenuClick: () => void }) {
     dashboard: 'Dashboard', learn: 'Learn', practice: 'Practice', tutor: 'AI Tutor',
     labs: 'Interactive Labs', coding: 'Coding Lab', exams: 'Exams', revision: 'Smart Revision',
     materials: 'Materials', planner: 'Study Planner', analytics: 'Analytics', profile: 'Profile',
+    community: 'Community', leaderboard: 'Leaderboard', achievements: 'Achievements',
+    notifications: 'Notifications', attendance: 'Attendance', class: 'My Class',
   }
   const level = Math.floor((xp || user?.xp || 0) / 200) + 1
   const xpInLevel = (xp || user?.xp || 0) % 200

@@ -81,6 +81,25 @@ const ACTIONS: Record<Exclude<ViewKey, 'tutor'>, CopilotAction[]> = {
     { label: 'Choose daily time', prompt: 'Recommend a realistic daily study-time target and a simple routine.' },
     { label: 'Study preferences', prompt: 'Help me define study preferences that make Lernio more useful for me.' },
   ],
+  community: [
+    { label: 'Suggest an answer', prompt: 'Help me write a helpful answer to a classmate\'s question about this topic.' },
+    { label: 'Formulate a question', prompt: 'Help me phrase a clear question I can post in the community discussions.' },
+  ],
+  leaderboard: [
+    { label: 'Study motivation', prompt: 'Give me a short motivational tip to climb the leaderboard this week.' },
+  ],
+  achievements: [
+    { label: 'Next badge', prompt: 'Suggest one achievable learning goal that could unlock my next badge.' },
+  ],
+  notifications: [
+    { label: 'Catch up', prompt: 'Summarise what I might have missed and what to prioritise today.' },
+  ],
+  attendance: [
+    { label: 'Attendance tips', prompt: 'Give me tips to maintain good attendance while balancing studies.' },
+  ],
+  class: [
+    { label: 'Class activity', prompt: 'Suggest a collaborative study activity I can do with my classmates.' },
+  ],
 }
 
 export function AiCopilot() {

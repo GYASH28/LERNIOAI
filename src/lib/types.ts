@@ -13,6 +13,12 @@ export type ViewKey =
   | 'planner'
   | 'analytics'
   | 'profile'
+  | 'community'
+  | 'leaderboard'
+  | 'achievements'
+  | 'notifications'
+  | 'attendance'
+  | 'class'
 
 export type LearningMode = 'learn' | 'simplify' | 'visualise' | 'practise' | 'revise'
 

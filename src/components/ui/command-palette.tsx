@@ -12,7 +12,7 @@ import {
   LayoutDashboard, BookOpen, PenTool, Bot, FlaskConical, Code2,
   FileText, RotateCw, Library, CalendarCheck, BarChart3, User,
   Search, CornerDownLeft, ArrowUp, ArrowDown, Sun, Moon, Sparkles,
-  Layers, PlayCircle,
+  Layers, PlayCircle, MessageCircle, Trophy, Award, Bell, Users, ClipboardList,
 } from 'lucide-react'
 import { usePrefs } from '@/components/theme-provider'
 import type { ApiResult, ViewKey } from '@/lib/types'
@@ -42,6 +42,12 @@ const NAV_ITEMS: { key: ViewKey; label: string; icon: React.ComponentType<{ clas
   { key: 'materials', label: 'Materials', icon: Library, hint: 'Notes & PDFs' },
   { key: 'planner', label: 'Study Planner', icon: CalendarCheck, hint: 'Daily tasks' },
   { key: 'analytics', label: 'Analytics', icon: BarChart3, hint: 'Progress charts' },
+  { key: 'community', label: 'Community', icon: MessageCircle, hint: 'Q&A and discussions' },
+  { key: 'leaderboard', label: 'Leaderboard', icon: Trophy, hint: 'XP rankings' },
+  { key: 'achievements', label: 'Achievements', icon: Award, hint: 'Badges & milestones' },
+  { key: 'class', label: 'My Class', icon: Users, hint: 'Classmates & timetable' },
+  { key: 'attendance', label: 'Attendance', icon: ClipboardList, hint: 'Attendance records' },
+  { key: 'notifications', label: 'Notifications', icon: Bell, hint: 'Inbox' },
   { key: 'profile', label: 'Profile', icon: User, hint: 'Account & prefs' },
 ]
 

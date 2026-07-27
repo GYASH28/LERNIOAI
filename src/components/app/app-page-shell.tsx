@@ -24,6 +24,12 @@ const VARIANT_BY_VIEW: Record<ViewKey, AppPageShellVariant> = {
   planner: 'dashboard',
   analytics: 'analytics',
   profile: 'profile',
+  community: 'fullWidth',
+  leaderboard: 'fullWidth',
+  achievements: 'fullWidth',
+  notifications: 'fullWidth',
+  attendance: 'fullWidth',
+  class: 'fullWidth',
 }
 
 export function shellVariantForView(view: ViewKey): AppPageShellVariant {

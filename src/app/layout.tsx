@@ -5,12 +5,12 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { LernioMotionProvider } from "@/components/motion";
 import { GlobalExperienceRuntime } from "@/components/app/global-experience-runtime";
-import { CommandPalette } from "@/components/cmdk/command-palette";
 import { RouteLoadingBar } from "@/components/app/route-loading-bar";
 import { RegisterSW } from "@/components/app/register-sw";
 import { KeyboardShortcuts } from "@/components/app/keyboard-shortcuts";
 import { AnimatedBackground } from "@/components/ui/animated-background";
 import { CustomCursor } from "@/components/ui/custom-cursor";
+import { CommandPalette } from "@/components/ui/command-palette";
 
 // ──────────────────────────────────────────────────────────────────────────
 // WHITE-SCREEN FLASH FIX

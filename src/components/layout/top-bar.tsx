@@ -36,6 +36,10 @@ import {
   Trophy,
   GraduationCap,
   HelpCircle,
+  Award,
+  Bell,
+  Users,
+  ClipboardList,
 } from 'lucide-react'
 import type { ViewKey } from '@/lib/types'
 import { routeForView } from '@/lib/routes'
@@ -54,12 +58,16 @@ const NAV_ITEMS: { key: ViewKey; label: string; icon: typeof BookOpen }[] = [
   { key: 'materials', label: 'Materials', icon: Library },
   { key: 'planner', label: 'Planner', icon: CalendarCheck },
   { key: 'analytics', label: 'Analytics', icon: BarChart3 },
+  { key: 'community', label: 'Community', icon: MessageCircle },
+  { key: 'leaderboard', label: 'Leaderboard', icon: Trophy },
+  { key: 'achievements', label: 'Achievements', icon: Award },
+  { key: 'class', label: 'My Class', icon: Users },
+  { key: 'attendance', label: 'Attendance', icon: ClipboardList },
+  { key: 'notifications', label: 'Notifications', icon: Bell },
   { key: 'profile', label: 'Profile', icon: User },
 ]
 
 const EXTRA_LINKS: { href: string; label: string; icon: typeof BookOpen }[] = [
-  { href: '/community', label: 'Community', icon: MessageCircle },
-  { href: '/leaderboard', label: 'Leaderboard', icon: Trophy },
   { href: '/feedback', label: 'Feedback', icon: MessageSquare },
   { href: '/help', label: 'Help Center', icon: HelpCircle },
 ]

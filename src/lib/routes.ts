@@ -13,6 +13,12 @@ const VIEW_ROUTES: Record<ViewKey, string> = {
   planner: '/planner',
   analytics: '/analytics',
   profile: '/profile',
+  community: '/community',
+  leaderboard: '/leaderboard',
+  achievements: '/achievements',
+  notifications: '/notifications',
+  attendance: '/attendance',
+  class: '/class',
 }
 
 export function routeForView(view: ViewKey): string {
