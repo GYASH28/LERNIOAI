@@ -37,6 +37,54 @@ export interface Diagram {
   content: string
 }
 
+export interface MarkedQuestion {
+  marks: number
+  question: string
+  modelAnswer?: string
+  tips?: string[]
+}
+
+export interface Mnemonic {
+  phrase: string
+  expansion: string
+  meaning: string
+}
+
+export interface Flashcard {
+  front: string
+  back: string
+  hint?: string
+}
+
+export interface Callout {
+  type: string
+  title?: string
+  content: string
+}
+
+export interface ComplexityAnalysis {
+  time: string
+  space: string
+  explanation?: string
+}
+
+export interface WorkedExample {
+  title: string
+  problem: string
+  solution: string
+  explanation?: string
+}
+
+export interface RealLifeAnalogy {
+  scenario: string
+  mapping: string
+}
+
+export interface AISummary {
+  style: string
+  content: string
+}
+
 export interface Lesson {
   slug: string
   title: string
@@ -85,6 +133,10 @@ export interface SubjectNotes {
   semester: number
   credits: number
   units: Unit[]
+  revisionNotes?: string
+  interviewBank?: MarkedQuestion[]
+  vivaBank?: MarkedQuestion[]
+  pyqBank?: MarkedQuestion[]
 }
 
 function loadAllNotes(): Map<string, SubjectNotes> {

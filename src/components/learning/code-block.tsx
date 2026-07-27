@@ -30,8 +30,8 @@ const ALIASES: Record<string, string> = {
   sql:'sql',json:'json',plaintext:'plaintext',text:'plaintext','':'plaintext',
 }
 
-export function CodeBlock({ code, language='plaintext', title, showLineNumbers=true }: {
-  code: string; language?: string; title?: string; showLineNumbers?: boolean
+export function CodeBlock({ code, language='plaintext', title, showLineNumbers=true, collapsible: _collapsible = true, collapseThreshold: _collapseThreshold = 18 }: {
+  code: string; language?: string; title?: string; showLineNumbers?: boolean; collapsible?: boolean; collapseThreshold?: number
 }) {
   const [copied, setCopied] = useState(false)
   const lang = ALIASES[language.toLowerCase()] ?? 'plaintext'
