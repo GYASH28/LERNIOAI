@@ -179,6 +179,21 @@ function safeApiMessage(payload: unknown, fallback: string) {
   return fallback
 }
 
+/**
+ * Returns true when the API response indicates the code runner is not
+ * configured on the deployment. Used to surface an honest, admin-actionable
+ * banner instead of a generic "syntax preview failed" error.
+ */
+function isRunnerNotConfiguredError(payload: unknown): boolean {
+  if (!payload || typeof payload !== 'object') return false
+  const error = (payload as { error?: unknown }).error
+  if (error && typeof error === 'object') {
+    const code = (error as { code?: unknown }).code
+    if (typeof code === 'string' && code === 'CODE_RUNNER_NOT_CONFIGURED') return true
+  }
+  return false
+}
+
 function createCodaPrompt(
   mode: CodaMode,
   challenge: Challenge | null,
@@ -220,6 +235,7 @@ export function CodingView() {
   const [codaError, setCodaError] = useState('')
   const [codaFirstTokenMs, setCodaFirstTokenMs] = useState<number | null>(null)
   const [codaTotalMs, setCodaTotalMs] = useState<number | null>(null)
+  const [runnerNotConfigured, setRunnerNotConfigured] = useState(false)
   const codaAbortRef = useRef<AbortController | null>(null)
 
   const selected = useMemo(
@@ -295,7 +311,17 @@ export function CodingView() {
         body: JSON.stringify({ code, language: 'cpp' }),
       })
       const payload = await response.json()
+      if (isRunnerNotConfiguredError(payload)) {
+        setRunnerNotConfigured(true)
+        setResult({
+          status: 'error',
+          message: "Code execution isn't available right now — an administrator needs to configure it.",
+          issues: [],
+        })
+        return
+      }
       if (!response.ok || !payload?.ok) throw new Error(safeApiMessage(payload, 'Syntax preview failed.'))
+      setRunnerNotConfigured(false)
       const issues = Array.isArray(payload.data?.syntax?.issues)
         ? payload.data.syntax.issues.filter((item: unknown): item is string => typeof item === 'string')
         : []
@@ -334,7 +360,17 @@ export function CodingView() {
         body: JSON.stringify({ challengeId: selected.id, code, language: 'cpp' }),
       })
       const payload = await response.json()
+      if (isRunnerNotConfiguredError(payload)) {
+        setRunnerNotConfigured(true)
+        setResult({
+          status: 'error',
+          message: "Code execution isn't available right now — an administrator needs to configure it.",
+          issues: [],
+        })
+        return
+      }
       if (!response.ok || !payload?.ok) throw new Error(safeApiMessage(payload, 'Could not save draft.'))
+      setRunnerNotConfigured(false)
       const data = payload.data
       const resultStatus: SyntaxResult['status'] = data.status === 'executed'
         ? data.passed
@@ -543,6 +579,22 @@ export function CodingView() {
             </Card>
           ) : null}
 
+          {runnerNotConfigured ? (
+            <div
+              role="alert"
+              className="flex items-start gap-3 rounded-xl border border-rose-500/30 bg-rose-500/10 px-4 py-3"
+            >
+              <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-rose-600 dark:text-rose-400" />
+              <div className="text-xs leading-5 text-rose-900 dark:text-rose-100">
+                <p className="font-semibold">Code execution isn&apos;t available right now.</p>
+                <p className="mt-1">
+                  An administrator needs to configure the code runner. You can still read, write, format,
+                  copy and locally save your code &mdash; only execution and graded submission are disabled.
+                </p>
+              </div>
+            </div>
+          ) : null}
+
           <Card className="overflow-hidden">
             <div className="flex flex-wrap items-center justify-between gap-2 border-b bg-muted/30 px-3 py-2">
               <div className="flex items-center gap-2 min-w-0">
@@ -578,11 +630,24 @@ export function CodingView() {
                 {result.status === 'checking' ? 'Working…' : result.status === 'issues' ? `${result.issues.length} structural issue(s)` : result.status === 'ok' ? 'Structure looks consistent' : result.status === 'saved' ? 'Draft saved' : 'Ready'}
               </span>
               <div className="flex gap-2">
-                <Button size="sm" variant="outline" className="gap-1.5 border-amber-500/40 text-amber-500 min-h-[40px]" onClick={() => void syntaxPreview()} disabled={busy}>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="gap-1.5 border-amber-500/40 text-amber-500 min-h-[40px]"
+                  onClick={() => void syntaxPreview()}
+                  disabled={busy || runnerNotConfigured}
+                  aria-disabled={runnerNotConfigured}
+                >
                   {busy ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Play className="h-3.5 w-3.5" />}
                   Syntax preview
                 </Button>
-                <Button size="sm" className="gap-1.5 bg-amber-500 text-white hover:bg-amber-600 min-h-[40px]" onClick={() => void saveServerDraft()} disabled={busy || !selected}>
+                <Button
+                  size="sm"
+                  className="gap-1.5 bg-amber-500 text-white hover:bg-amber-600 min-h-[40px]"
+                  onClick={() => void saveServerDraft()}
+                  disabled={busy || !selected || runnerNotConfigured}
+                  aria-disabled={runnerNotConfigured}
+                >
                   <Send className="h-3.5 w-3.5" /> Submit code
                 </Button>
               </div>

@@ -1,3 +1,5 @@
+> **⚠️ SUPERSEDED** — This document describes problems that were fixed in subsequent releases. See `docs/AUDIT_REPORT.md` and the current codebase for the actual state. Do not treat the findings here as open action items.
+
 # Lernio Learning OS Current-State Audit
 
 Date: 2026-06-28

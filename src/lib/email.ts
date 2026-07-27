@@ -48,6 +48,21 @@ export async function sendPasswordResetEmail(email: string, token: string): Prom
   })
 }
 
+/**
+ * Returns true only when the email provider is fully configured — i.e. both
+ * `RESEND_API_KEY` and `EMAIL_FROM` are set. Use this to surface operational
+ * status to admins (e.g. the deployment-health panel) and to gate cron jobs
+ * that should no-op instead of silently failing.
+ *
+ * This does NOT change the student-facing contract for auth flows (password
+ * reset, email verification) — those remain enumeration-safe and silently
+ * no-op when the provider is unconfigured, so we never leak account-existence
+ * or block registration on a misconfigured email provider.
+ */
+export function isEmailConfigured(): boolean {
+  return Boolean(process.env.RESEND_API_KEY?.trim() && process.env.EMAIL_FROM?.trim())
+}
+
 export async function sendTransactionalEmail(payload: EmailPayload): Promise<void> {
   const apiKey = process.env.RESEND_API_KEY?.trim()
   const from = process.env.EMAIL_FROM?.trim()

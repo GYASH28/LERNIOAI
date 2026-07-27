@@ -46,9 +46,9 @@ export function LessonNotesRenderer({ notes }: { notes: SubjectNotes }) {
         <div className="notes-empty__icon">
           <BookOpen className="h-7 w-7" />
         </div>
-        <p className="notes-empty__title">Lesson notes coming soon</p>
+        <p className="notes-empty__title">No notes available for this lesson</p>
         <p className="notes-empty__desc">
-          We&apos;re writing comprehensive notes for this subject. Check back soon!
+          Browse the subject materials or ask LEO for help with this topic.
         </p>
       </div>
     )

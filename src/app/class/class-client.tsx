@@ -399,7 +399,7 @@ export function ClassClient({ userRole, userId }: { userRole: string; userId: st
             </div>
           )}
           <p className="mt-3 text-[10px] text-muted-foreground">
-            Full weekly timetable editing is coming soon. For now, today&apos;s schedule is shown.
+            Today&apos;s schedule is shown above. Full weekly timetable editing is not yet available.
           </p>
         </div>
       )}

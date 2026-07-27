@@ -103,7 +103,7 @@ describe('GET /api/learning/notes/[documentId]', () => {
     await expect(GET(
       new NextRequest('http://localhost/api/learning/notes/doc_1?format=html'),
       { params: Promise.resolve({ documentId: 'doc_1' }) },
-    )).rejects.toThrow('Generated note storage is not configured.')
+    )).rejects.toThrow('Lesson note downloads require storage to be configured.')
   })
 
   it('returns not found when the learning scope is unresolved', async () => {

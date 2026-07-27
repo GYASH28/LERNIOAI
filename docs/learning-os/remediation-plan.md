@@ -1,3 +1,5 @@
+> **⚠️ SUPERSEDED** — This document describes a remediation plan for problems that were fixed in subsequent releases. See `docs/AUDIT_REPORT.md` and the current codebase for the actual state.
+
 # Learning OS Remediation Plan
 
 Date: 2026-06-29

@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server'
 import { db } from '@/lib/db'
 import { ApiError, requireUser, withApi } from '@/lib/auth'
-import { buildSignedObjectUrl } from '@/lib/storage/signed-object-url'
+import { buildSignedObjectUrl, isStorageConfigured } from '@/lib/storage/signed-object-url'
 import { studentGeneratedDocumentWhere } from '@/lib/resources/student-publication-policy'
 import {
   getStudentLearningScope,
@@ -49,6 +49,14 @@ export async function GET(
 
     const objectKey = format === 'pdf' ? document.storageObjectKey : document.htmlObjectKey
     if (objectKey) {
+      if (!isStorageConfigured()) {
+        throw new ApiError(
+          'STORAGE_NOT_CONFIGURED',
+          'Lesson note downloads require storage to be configured. An administrator needs to set STORAGE_PUBLIC_BASE_URL and STORAGE_SIGNING_SECRET.',
+          503,
+          false,
+        )
+      }
       const signedUrl = buildSignedObjectUrl({
         objectKey,
         disposition: format === 'pdf' ? 'attachment' : 'inline',

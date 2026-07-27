@@ -10,6 +10,24 @@ export interface SignedObjectUrlInput {
   env?: Record<string, string | undefined>
 }
 
+/**
+ * Returns true only when the storage backend is fully configured to serve
+ * signed download URLs — i.e. both `STORAGE_PUBLIC_BASE_URL` (the CDN/origin
+ * base) and `STORAGE_SIGNING_SECRET` (the HMAC secret used to sign URLs in
+ * production) are set.
+ *
+ * Callers that need to redirect to a signed object URL should check this
+ * BEFORE calling `buildSignedObjectUrl`, so they can return a clear,
+ * admin-actionable error to the user instead of letting the underlying
+ * `STORAGE_SIGNING_SECRET is required in production.` throw surface as a
+ * raw 500.
+ */
+export function isStorageConfigured(env: Record<string, string | undefined> = process.env): boolean {
+  const base = env.STORAGE_PUBLIC_BASE_URL?.trim()
+  const secret = env.STORAGE_SIGNING_SECRET?.trim()
+  return Boolean(base && secret)
+}
+
 export function buildSignedObjectUrl({
   objectKey,
   disposition = 'inline',

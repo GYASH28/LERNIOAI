@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import {
   ClipboardList, Megaphone, Users, AlertTriangle, MessageSquare,
   Clock, Crown, Loader2, BookOpen, PlayCircle, Target, GraduationCap,
-  Database, RotateCw, BarChart3,
+  Database, RotateCw, BarChart3, ArrowRight,
 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -229,9 +229,11 @@ export function CrDashboardClient({ userRole, userId, classInfo, userClass }: Cr
             <MessageSquare className="h-4 w-4 text-primary" /> Messages
           </h3>
           <p className="mt-2 text-xs text-muted-foreground">
-            Message the admin directly for escalations, academic concerns, or scheduling issues.
+            Direct messaging with admin is not yet available. Use the Feedback page to reach the team.
           </p>
-          <p className="mt-3 text-xs text-muted-foreground">Coming soon — direct messaging with admin.</p>
+          <a href="/feedback" className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline">
+            Go to Feedback <ArrowRight className="h-3 w-3" />
+          </a>
         </div>
       )}
     </div>

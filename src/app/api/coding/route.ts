@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireUser, withApi, ApiError } from '@/lib/auth'
+import { getCodeRunnerConfig } from '@/lib/coding/code-runner'
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
@@ -27,6 +28,25 @@ export async function POST(req: NextRequest) {
     // Auth gate — the code runner is an authenticated student feature.
     // Without this, the endpoint becomes an open code-execution proxy.
     await requireUser()
+
+    // Surface an unconfigured code runner honestly instead of silently
+    // falling through to the public Wandbox fallback (which is fine for
+    // local dev but must not masquerade as a working production backend).
+    // In non-production, getCodeRunnerConfig() falls back to the public
+    // Judge0 CE instance so the route stays usable for local development.
+    const runnerConfig = getCodeRunnerConfig()
+    if (!runnerConfig.configured) {
+      return NextResponse.json(
+        {
+          ok: false,
+          error: {
+            code: 'CODE_RUNNER_NOT_CONFIGURED',
+            message: 'Code execution is not available. An administrator needs to configure the code runner.',
+          },
+        },
+        { status: 503 },
+      )
+    }
 
     const body = await req.json().catch(() => ({}))
     const { code, language, stdin } = body
