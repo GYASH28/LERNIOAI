@@ -594,7 +594,7 @@ function ExamResults({ result, onBack }: { result: ExamSubmitResponse; onBack: (
           </p>
         </div>
         <CardContent className="p-5">
-          <div className="grid grid-cols-4 gap-2 text-center">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
             <Stat label="Correct" value={correct} color="text-success" />
             <Stat label="Wrong" value={wrong} color="text-destructive" />
             <Stat label="Skipped" value={skipped} color="text-muted-foreground" />

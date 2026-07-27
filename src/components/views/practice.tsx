@@ -499,7 +499,7 @@ export function PracticeView() {
                       isSelected && !isCorrectOpt && 'bg-destructive text-white',
                       selectedAnswer && isCorrectOpt && !isSelected && 'bg-success/20 text-success',
                     )}>{String.fromCharCode(65 + i)}</span>
-                    <span className="text-sm flex-1">{opt}</span>
+                    <span className="text-sm flex-1 min-w-0 break-words">{opt}</span>
                     {selectedAnswer && isCorrectOpt && <CheckCircle2 className="h-4 w-4 text-success" />}
                     {isSelected && !isCorrectOpt && <XCircle className="h-4 w-4 text-destructive" />}
                   </button>

@@ -28,13 +28,17 @@ export function RecentlyViewedTracker({
       body: JSON.stringify({ resourceType, resourceId, title, href, scrollPos: 0 }),
     }).catch(() => {})
 
-    // Track scroll position before unload
+    // Track scroll position before unload — sendBeacon with explicit
+    // Content-Type: application/json so the server-side req.json() parser
+    // accepts the payload (sendBeacon defaults to text/plain which would
+    // cause a 400 "Invalid request body" from parseBody()).
     const handleBeforeUnload = () => {
       const scrollPos = window.scrollY
-      navigator.sendBeacon(
-        '/api/recently-viewed',
-        JSON.stringify({ resourceType, resourceId, title, href, scrollPos }),
+      const blob = new Blob(
+        [JSON.stringify({ resourceType, resourceId, title, href, scrollPos })],
+        { type: 'application/json' },
       )
+      navigator.sendBeacon('/api/recently-viewed', blob)
     }
 
     window.addEventListener('beforeunload', handleBeforeUnload)

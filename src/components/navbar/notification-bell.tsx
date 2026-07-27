@@ -85,7 +85,7 @@ export function NotificationBell() {
       {open && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
-          <div className="absolute right-0 top-11 z-50 w-80 rounded-lg border border-border bg-popover shadow-lg">
+          <div className="absolute right-0 top-11 z-50 w-[min(20rem,calc(100vw-1.5rem))] rounded-lg border border-border bg-popover shadow-lg">
             <div className="flex items-center justify-between border-b border-border p-3">
               <h3 className="text-sm font-semibold">Notifications</h3>
               {unreadCount > 0 && (

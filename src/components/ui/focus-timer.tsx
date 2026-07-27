@@ -399,7 +399,7 @@ export function FocusTimerWidget() {
 
           {/* Custom duration sliders */}
           {state.presetIdx === 3 && (
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className="text-xs text-muted-foreground">
                   Focus: {state.focusMins} min
@@ -440,7 +440,7 @@ export function FocusTimerWidget() {
           )}
 
           {/* Activity + subject */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className="text-xs text-muted-foreground">Activity</label>
               <Select
