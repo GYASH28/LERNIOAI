@@ -3,6 +3,7 @@ import { notFound, redirect } from 'next/navigation'
 import {
   ArrowLeft,
   BookOpen,
+  Bot,
   CheckCircle2,
   Clock3,
   ExternalLink,
@@ -200,14 +201,34 @@ export default async function LessonStudioPage({
                 chapters={studio.resources.primaryVideo.chapters}
                 initialLastSecond={primaryVideoProgress?.lastSecond ?? 0}
               />
+            ) : studio.resources.pendingCurricularReview ? (
+              <div className="grid aspect-video place-items-center bg-muted px-6 text-center">
+                <div>
+                  <Video className="mx-auto h-8 w-8 text-amber-500" />
+                  <h2 className="mt-3 text-lg font-semibold tracking-normal">Video for this lesson is being reviewed</h2>
+                  <p className="mt-2 max-w-md text-sm text-muted-foreground">
+                    We found a video but haven&apos;t verified it teaches the right topic at the right level yet. Try the AI tutor or lesson notes below while we review it.
+                  </p>
+                  <div className="mt-4 flex flex-wrap justify-center gap-2">
+                    <a href={tutorHref} className="inline-flex items-center gap-1.5 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">
+                      <Bot className="h-4 w-4" /> Ask LEO about this lesson
+                    </a>
+                  </div>
+                </div>
+              </div>
             ) : (
               <div className="grid aspect-video place-items-center bg-muted px-6 text-center">
                 <div>
                   <Video className="mx-auto h-8 w-8 text-muted-foreground" />
-                  <h2 className="mt-3 text-lg font-semibold tracking-normal">Primary lecture pending review</h2>
+                  <h2 className="mt-3 text-lg font-semibold tracking-normal">No verified video yet</h2>
                   <p className="mt-2 max-w-md text-sm text-muted-foreground">
-                    No approved embeddable lecture is attached to this lesson yet.
+                    No curricularly-reviewed video is attached to this lesson yet. Use the AI tutor or lesson notes below.
                   </p>
+                  <div className="mt-4 flex flex-wrap justify-center gap-2">
+                    <a href={tutorHref} className="inline-flex items-center gap-1.5 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">
+                      <Bot className="h-4 w-4" /> Ask LEO
+                    </a>
+                  </div>
                 </div>
               </div>
             )}
@@ -232,6 +253,72 @@ export default async function LessonStudioPage({
               </div>
             ) : null}
           </section>
+
+          {/* Alternate lectures — let students pick a different explanation */}
+          {studio.resources.alternateVideos.length > 0 && (
+            <section className="rounded-lg border border-border bg-card p-4">
+              <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold">
+                <Video className="h-4 w-4 text-muted-foreground" />
+                Alternate Lectures
+                <span className="text-xs text-muted-foreground">({studio.resources.alternateVideos.length})</span>
+              </h2>
+              <p className="mb-3 text-xs text-muted-foreground">Not clicking with the primary video? Try a different explanation.</p>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {studio.resources.alternateVideos.map((video) => (
+                  <a
+                    key={video.lessonResourceId}
+                    href={video.url ?? '#'}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-3 rounded-md border border-border bg-background p-3 hover:border-primary/40 hover:bg-accent/5 transition-colors"
+                  >
+                    {video.thumbnailUrl ? (
+                      <img src={video.thumbnailUrl} alt="" className="h-12 w-20 shrink-0 rounded object-cover" />
+                    ) : (
+                      <div className="flex h-12 w-20 shrink-0 items-center justify-center rounded bg-muted">
+                        <Video className="h-4 w-4 text-muted-foreground" />
+                      </div>
+                    )}
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-xs font-medium">{video.title}</p>
+                      <p className="text-[10px] text-muted-foreground">{video.creator ?? 'Unknown'}</p>
+                    </div>
+                    <PlayCircle className="h-4 w-4 shrink-0 text-primary" />
+                  </a>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Notes, transcripts, and materials in one place */}
+          {(studio.resources.notes.length > 0 || studio.resources.supporting.length > 0) && (
+            <section className="rounded-lg border border-border bg-card p-4">
+              <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold">
+                <FileText className="h-4 w-4 text-primary" />
+                Lesson Materials
+              </h2>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {[...studio.resources.notes, ...studio.resources.supporting].map((resource) => (
+                  <a
+                    key={resource.lessonResourceId}
+                    href={resource.url ?? '#'}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-3 rounded-md border border-border bg-background p-3 hover:border-primary/40 hover:bg-accent/5 transition-colors"
+                  >
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded bg-primary/10">
+                      <FileText className="h-4 w-4 text-primary" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-xs font-medium">{resource.title}</p>
+                      <p className="text-[10px] capitalize text-muted-foreground">{resource.role.replace(/_/g, ' ')}</p>
+                    </div>
+                    <ExternalLink className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+                  </a>
+                ))}
+              </div>
+            </section>
+          )}
 
           <section className="rounded-lg border border-border bg-card p-4">
             <div className="flex flex-wrap gap-2">

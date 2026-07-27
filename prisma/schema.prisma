@@ -876,27 +876,31 @@ model Lesson {
 }
 
 model LessonResource {
-  id                 String   @id @default(cuid())
-  lessonId           String
-  lesson             Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
-  resourceId         String
-  resource           Resource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
-  role               String // primary_video | alternate_video | lesson_notes | transcript | infographic | worksheet | formula_sheet | lab_demo | reference
-  sortOrder          Int      @default(0)
-  isPrimary          Boolean  @default(false)
-  isRequired         Boolean  @default(false)
-  startSeconds       Int?
-  endSeconds         Int?
-  coveragePercentage Int?
-  verificationStatus String   @default("pending")
-  status             String   @default("draft")
-  sourceEvidence     String?
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+  id                     String   @id @default(cuid())
+  lessonId               String
+  lesson                 Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  resourceId             String
+  resource               Resource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  role                   String // primary_video | alternate_video | lesson_notes | transcript | infographic | worksheet | formula_sheet | lab_demo | reference
+  sortOrder              Int      @default(0)
+  isPrimary              Boolean  @default(false)
+  isRequired             Boolean  @default(false)
+  startSeconds           Int?
+  endSeconds             Int?
+  coveragePercentage     Int?
+  verificationStatus     String   @default("pending")
+  status                 String   @default("draft")
+  curricularReviewStatus String   @default("unreviewed") // unreviewed | correct | wrong_topic | wrong_level | wrong_language | low_quality
+  curricularReviewedAt   DateTime?
+  curricularReviewedBy   String?
+  sourceEvidence         String?
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
 
   @@unique([lessonId, resourceId, role])
   @@index([lessonId, role, status])
   @@index([resourceId])
+  @@index([curricularReviewStatus])
 }
 
 model VideoChapter {

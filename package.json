@@ -126,7 +126,7 @@
     "@types/node": "^26.0.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@vitejs/plugin-react": "^6.0.3",
+    "@vitejs/plugin-react": "^6.0.4",
     "axe-core": "^4.12.1",
     "eslint": "^9",
     "eslint-config-next": "^16.1.1",
@@ -135,7 +135,7 @@
     "tsx": "^4.22.4",
     "tw-animate-css": "^1.3.5",
     "typescript": "^5",
-    "vitest": "^4.1.9"
+    "vitest": "^4.1.10"
   },
   "overrides": {
     "cookie": "0.7.2",
