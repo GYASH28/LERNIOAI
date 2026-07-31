@@ -46,6 +46,10 @@ import { routeForView } from '@/lib/routes'
 import { usePrefs } from '@/components/theme-provider'
 import { NotificationBell } from '@/components/navbar/notification-bell'
 
+// NOTE: NAV_ITEMS is defined here AND in sidebar.tsx. The canonical route
+// registry is in src/lib/routes.ts (ROUTES array). These local arrays exist
+// because they use ViewKey (a union type) which the canonical registry
+// cannot enforce at runtime. Future refactoring should unify these.
 const NAV_ITEMS: { key: ViewKey; label: string; icon: typeof BookOpen }[] = [
   { key: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { key: 'learn', label: 'Learn', icon: BookOpen },

@@ -113,3 +113,9 @@ const VIEW_ROUTES: Record<ViewKey, string> = {
 export function routeForView(view: ViewKey): string {
   return VIEW_ROUTES[view] || '/dashboard'
 }
+
+// NOTE: NAV_ITEMS arrays exist locally in top-bar.tsx and sidebar.tsx
+// because they use ViewKey (a union type) for type-safe client-side view
+// switching. The canonical ROUTES array above is the source of truth for
+// path/label/icon/group/metadata. Future refactoring should unify these
+// by making ViewKey derive from ROUTES.
