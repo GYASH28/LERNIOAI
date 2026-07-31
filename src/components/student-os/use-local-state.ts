@@ -25,7 +25,13 @@ interface StateApiResponse<T> {
   data?: SyncedStateEnvelope<T> | null
 }
 
+interface LocalStateChangeDetail<T = unknown> {
+  key: string
+  value: T
+}
+
 const SYNC_DEBOUNCE_MS = 900
+const LOCAL_STATE_CHANGE_EVENT = 'lernio:local-state-change'
 
 /**
  * Local-first state with authenticated cloud reconciliation.
@@ -86,6 +92,41 @@ export function useLocalState<T>(key: string, fallback: T) {
 
   useEffect(() => {
     if (!hydrated) return
+
+    const onLocalStateChange = (event: Event) => {
+      const detail = (event as CustomEvent<LocalStateChangeDetail<T>>).detail
+      if (!detail || detail.key !== key) return
+      valueRef.current = detail.value
+      localFoundRef.current = true
+      dirtyRef.current = Boolean(readMeta(key)?.dirty)
+      setValueState(detail.value)
+      setSyncRevision((current) => current + 1)
+    }
+
+    const onStorage = (event: StorageEvent) => {
+      if (event.key !== key || event.newValue === null) return
+      try {
+        const parsed = JSON.parse(event.newValue) as T
+        valueRef.current = parsed
+        localFoundRef.current = true
+        dirtyRef.current = Boolean(readMeta(key)?.dirty)
+        setValueState(parsed)
+        setSyncRevision((current) => current + 1)
+      } catch {
+        // Ignore malformed cross-tab updates.
+      }
+    }
+
+    window.addEventListener(LOCAL_STATE_CHANGE_EVENT, onLocalStateChange)
+    window.addEventListener('storage', onStorage)
+    return () => {
+      window.removeEventListener(LOCAL_STATE_CHANGE_EVENT, onLocalStateChange)
+      window.removeEventListener('storage', onStorage)
+    }
+  }, [hydrated, key])
+
+  useEffect(() => {
+    if (!hydrated) return
     let cancelled = false
     const controller = new AbortController()
 
@@ -112,9 +153,6 @@ export function useLocalState<T>(key: string, fallback: T) {
           return
         }
 
-        // A local dirty flag represents a real unsynchronised edit and wins even
-        // when the device clock is behind the server clock. This avoids losing
-        // notebook or progress changes because of clock skew.
         const hasUnsynchronisedLocalEdit =
           localFoundRef.current && Boolean(localMeta?.dirty)
 
@@ -201,6 +239,40 @@ export function useLocalState<T>(key: string, fallback: T) {
   }, [key])
 
   return [value, setValue, hydrated] as const
+}
+
+/**
+ * Safely updates a Student OS state bucket from a different page or feature.
+ * The owning hook receives the event immediately and the existing sync layer
+ * uploads the dirty value when authenticated and online.
+ */
+export function updateLocalStudentState<T>(
+  key: string,
+  fallback: T,
+  updater: (current: T) => T,
+): T {
+  let current = fallback
+  try {
+    const stored = window.localStorage.getItem(key)
+    if (stored !== null) current = JSON.parse(stored) as T
+  } catch {
+    // Use the supplied safe fallback.
+  }
+
+  const next = updater(current)
+  const updatedAt = new Date().toISOString()
+  try {
+    window.localStorage.setItem(key, JSON.stringify(next))
+    writeMeta(key, { updatedAt, dirty: true })
+  } catch {
+    // The caller still receives the in-memory next value.
+  }
+
+  window.dispatchEvent(new CustomEvent<LocalStateChangeDetail<T>>(
+    LOCAL_STATE_CHANGE_EVENT,
+    { detail: { key, value: next } },
+  ))
+  return next
 }
 
 function metaKey(key: string) {
