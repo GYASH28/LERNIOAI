@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lernio Opening Sequence</title>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #050713; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+    body { color: #fff; }
+    .stage { position: relative; width: 100vw; height: 100vh; overflow: hidden; background: radial-gradient(circle at 18% 12%, rgba(6,182,212,.22), transparent 33%), radial-gradient(circle at 82% 82%, rgba(139,92,246,.22), transparent 38%), #050713; }
+    .grid { position:absolute; inset:0; opacity:.3; background-image:linear-gradient(rgba(103,232,249,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(103,232,249,.07) 1px,transparent 1px); background-size:54px 54px; mask-image:radial-gradient(circle at center,#000,transparent 78%); animation:gridMove 3.4s linear both; }
+    .beam { position:absolute; inset:-20% 47%; width:7%; transform:rotate(20deg); background:linear-gradient(180deg,transparent,rgba(255,255,255,.15),transparent); filter:blur(12px); animation:beam 3.4s cubic-bezier(.2,.8,.2,1) both; }
+    .scene { position:absolute; inset:0; display:grid; place-items:center; text-align:center; opacity:0; padding:48px; }
+    .scene.signal { animation:signal 3.4s cubic-bezier(.2,.8,.2,1) both; }
+    .scene.system { animation:system 3.4s cubic-bezier(.2,.8,.2,1) both; }
+    .scene.wordmark { animation:wordmark 3.4s cubic-bezier(.2,.8,.2,1) both; }
+    .eyebrow { margin:0; font-size:12px; font-weight:900; letter-spacing:.34em; text-transform:uppercase; color:#67e8f9; opacity:.82; }
+    .signal-core { position:relative; width:260px; height:260px; margin:32px auto 0; }
+    .ring { position:absolute; inset:0; margin:auto; border-radius:999px; border:1px solid rgba(103,232,249,.4); }
+    .ring.one { width:100%; height:100%; animation:ring 1.6s ease-out infinite; }
+    .ring.two { width:76%; height:76%; animation:ring 1.5s .12s ease-out infinite; }
+    .ring.three { width:52%; height:52%; border-color:rgba(196,181,253,.6); animation:pulse 1.3s ease-in-out infinite; }
+    .logo { position:absolute; inset:0; margin:auto; width:112px; height:112px; border-radius:30px; display:grid; place-items:center; background:linear-gradient(145deg,#0ea5e9,#7c3aed); border:1px solid rgba(255,255,255,.25); box-shadow:0 30px 80px rgba(6,182,212,.25); font-size:48px; font-weight:1000; animation:logoIn 1.1s cubic-bezier(.2,.8,.2,1) both; }
+    .system h2 { margin:16px 0 0; font-size:clamp(36px,5vw,74px); letter-spacing:-.055em; line-height:1; }
+    .cards { width:min(900px,88vw); margin:48px auto 0; display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+    .card { padding:24px; border-radius:22px; text-align:left; border:1px solid rgba(255,255,255,.13); background:rgba(255,255,255,.07); backdrop-filter:blur(18px); box-shadow:0 24px 70px rgba(0,0,0,.22); opacity:0; transform:translateY(24px) scale(.95); animation:cardIn .75s cubic-bezier(.2,.8,.2,1) forwards; }
+    .card:nth-child(1){animation-delay:1.18s}.card:nth-child(2){animation-delay:1.27s}.card:nth-child(3){animation-delay:1.36s}.card:nth-child(4){animation-delay:1.45s}
+    .icon { width:44px; height:44px; display:grid; place-items:center; border-radius:14px; background:rgba(255,255,255,.1); color:#a5f3fc; font-weight:900; }
+    .card strong { display:block; margin-top:18px; font-size:18px; }
+    .card span { display:block; margin-top:6px; font-size:13px; color:#94a3b8; }
+    .wordmark .logo { position:relative; width:126px; height:126px; font-size:54px; animation:lockup .8s 2.45s cubic-bezier(.2,.8,.2,1) both; }
+    .wordmark h1 { margin:28px 0 0; font-size:clamp(74px,10vw,150px); letter-spacing:-.075em; line-height:.86; }
+    .wordmark .sub { margin:22px 0 0; font-size:16px; font-weight:900; letter-spacing:.28em; text-transform:uppercase; color:#67e8f9; }
+    .wordmark .tagline { margin:18px auto 0; max-width:660px; font-size:20px; line-height:1.55; color:#cbd5e1; }
+    .progress { position:absolute; left:8vw; right:8vw; bottom:6vh; height:4px; border-radius:999px; background:rgba(255,255,255,.1); overflow:hidden; }
+    .progress::after { content:""; display:block; width:100%; height:100%; transform-origin:left; background:linear-gradient(90deg,#67e8f9,#a78bfa,#f0abfc); animation:progress 3.4s linear both; }
+    @keyframes signal { 0%{opacity:0;transform:scale(.94)} 8%{opacity:1;transform:scale(1)} 31%{opacity:1} 41%{opacity:0;transform:scale(1.04)} 100%{opacity:0} }
+    @keyframes system { 0%,30%{opacity:0;transform:translateY(20px)} 42%{opacity:1;transform:translateY(0)} 69%{opacity:1} 78%{opacity:0;transform:translateY(-12px)} 100%{opacity:0} }
+    @keyframes wordmark { 0%,68%{opacity:0;transform:scale(.97)} 80%{opacity:1;transform:scale(1)} 94%{opacity:1} 100%{opacity:0;transform:scale(1.015)} }
+    @keyframes logoIn { 0%{opacity:0;transform:scale(.7) rotate(-8deg)} 70%{opacity:1;transform:scale(1.04) rotate(1deg)} 100%{opacity:1;transform:scale(1)} }
+    @keyframes lockup { from{opacity:0;transform:scale(.7) rotate(-8deg)} to{opacity:1;transform:scale(1)} }
+    @keyframes ring { 0%{opacity:0;transform:scale(.55)} 35%{opacity:.8} 100%{opacity:0;transform:scale(1.14)} }
+    @keyframes pulse { 0%,100%{opacity:.45;transform:scale(.92)} 50%{opacity:1;transform:scale(1.05)} }
+    @keyframes cardIn { to{opacity:1;transform:translateY(0) scale(1)} }
+    @keyframes progress { from{transform:scaleX(0)} to{transform:scaleX(1)} }
+    @keyframes beam { 0%{transform:translateX(-45vw) rotate(20deg);opacity:0} 18%{opacity:1} 100%{transform:translateX(48vw) rotate(20deg);opacity:0} }
+    @keyframes gridMove { 0%{opacity:0;transform:scale(1.05)} 20%{opacity:.3} 100%{opacity:.12;transform:scale(1)} }
+    @media (max-width:760px){.cards{grid-template-columns:repeat(2,1fr);gap:12px;margin-top:30px}.card{padding:18px}.scene{padding:24px}.signal-core{width:210px;height:210px}}
+  </style>
+</head>
+<body>
+  <main class="stage">
+    <div class="grid"></div>
+    <div class="beam"></div>
+
+    <section class="scene signal">
+      <div>
+        <p class="eyebrow">Your academic workspace is waking up</p>
+        <div class="signal-core">
+          <div class="ring one"></div><div class="ring two"></div><div class="ring three"></div>
+          <div class="logo">L</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene system">
+      <div>
+        <p class="eyebrow">One connected learning system</p>
+        <h2>Learn → practise → revise → understand</h2>
+        <div class="cards">
+          <div class="card"><div class="icon">01</div><strong>Learn</strong><span>One clear lesson</span></div>
+          <div class="card"><div class="icon">02</div><strong>Practise</strong><span>Find the gap</span></div>
+          <div class="card"><div class="icon">03</div><strong>Revise</strong><span>Recall on time</span></div>
+          <div class="card"><div class="icon">04</div><strong>Ask LEO</strong><span>Explain differently</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene wordmark">
+      <div>
+        <div class="logo">L</div>
+        <h1>LERNIO</h1>
+        <p class="sub">Learning OS for diploma students</p>
+        <p class="tagline">A calmer path through lessons, practice, revision and exams.</p>
+      </div>
+    </section>
+
+    <div class="progress"></div>
+  </main>
+</body>
+</html>
