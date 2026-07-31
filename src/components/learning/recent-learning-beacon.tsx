@@ -46,7 +46,20 @@ export function RecentLearningBeacon({
       })
     }
 
-    save()
+    const resumePosition = readResumePosition()
+    let initialSaveTimer = 0
+    let restoreTimer = 0
+
+    if (resumePosition > 0) {
+      restoreTimer = window.setTimeout(() => {
+        window.scrollTo({ top: resumePosition, behavior: 'auto' })
+        removeResumeParameter()
+        initialSaveTimer = window.setTimeout(() => save(), 250)
+      }, 300)
+    } else {
+      initialSaveTimer = window.setTimeout(() => save(), 0)
+    }
+
     const interval = window.setInterval(() => save(), SAVE_INTERVAL_MS)
     const onPageHide = () => save(true)
     const onVisibilityChange = () => {
@@ -56,6 +69,8 @@ export function RecentLearningBeacon({
     window.addEventListener('pagehide', onPageHide)
     document.addEventListener('visibilitychange', onVisibilityChange)
     return () => {
+      window.clearTimeout(initialSaveTimer)
+      window.clearTimeout(restoreTimer)
       window.clearInterval(interval)
       window.removeEventListener('pagehide', onPageHide)
       document.removeEventListener('visibilitychange', onVisibilityChange)
@@ -64,4 +79,19 @@ export function RecentLearningBeacon({
   }, [fallbackTitle, href, resourceId])
 
   return null
+}
+
+function readResumePosition() {
+  const raw = new URLSearchParams(window.location.search).get('resume')
+  if (!raw) return 0
+  const value = Number(raw)
+  if (!Number.isFinite(value) || value <= 0 || value > 10_000_000) return 0
+  return Math.round(value)
+}
+
+function removeResumeParameter() {
+  const url = new URL(window.location.href)
+  url.searchParams.delete('resume')
+  const cleanUrl = `${url.pathname}${url.search}${url.hash}`
+  window.history.replaceState(window.history.state, '', cleanUrl)
 }
