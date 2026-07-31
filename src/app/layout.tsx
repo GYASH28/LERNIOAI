@@ -4,31 +4,10 @@ import { headers } from "next/headers";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { LernioMotionProvider } from "@/components/motion";
-import { GlobalExperienceRuntime } from "@/components/app/global-experience-runtime";
 import { RouteLoadingBar } from "@/components/app/route-loading-bar";
-import { RegisterSW } from "@/components/app/register-sw";
-import { KeyboardShortcuts } from "@/components/app/keyboard-shortcuts";
-import { CommandPalette } from "@/components/ui/command-palette";
-import { StudentOSLauncher } from "@/components/student-os/student-os-launcher";
-import { StudentMobileDock } from "@/components/student-os/student-mobile-dock";
-import { SelectionLearningTools } from "@/components/student-os/selection-learning-tools";
+import { GlobalClientRuntime } from "@/components/app/global-client-runtime";
 
-// ──────────────────────────────────────────────────────────────────────────
-// WHITE-SCREEN FLASH FIX
-// ──────────────────────────────────────────────────────────────────────────
-// Previously this script was loaded via <script src="/theme-no-flash.js" />
-// which is a render-blocking EXTERNAL fetch. The browser had to:
-//   1. Download the HTML
-//   2. Hit the <script src> tag
-//   3. BLOCK parsing to fetch the JS file over the network
-//   4. Execute the script
-//   5. Continue parsing + painting
-// During step 3 the page showed a white screen.
-//
-// The fix: inline the script directly into the HTML head so it runs
-// synchronously with ZERO network round-trip. This is the standard
-// pattern used by next-themes and every theme library.
-// ──────────────────────────────────────────────────────────────────────────
+// Inline the theme bootstrap so appearance is resolved before first paint.
 const themeNoFlashScript = `(function(){try{var p=null;var m=document.cookie.match(/(?:^|;\\s*)lernio-theme=([^;]+)/);if(m){p=JSON.parse(decodeURIComponent(m[1]));}if(!p&&window.localStorage){var s=localStorage.getItem('lernio-theme-prefs');if(s){p=JSON.parse(s);}}if(!p&&window.localStorage){var lg=localStorage.getItem('lernio-prefs');if(lg){var lp=JSON.parse(lg);p={};if(lp.theme==='light'||lp.theme==='dark'||lp.theme==='system'){p.appearance=lp.theme;}if(typeof lp.reducedMotion==='boolean'){p.motion=lp.reducedMotion?'reduced':'full';}if(typeof lp.lowPower==='boolean'){p.lowPower=lp.lowPower;}}}p=p||{};var app=p.appearance||'system';var pal=p.palette||'aurora';var con=p.contrast||'normal';var den=p.density||'comfortable';var sur=p.surfaceStyle||'soft';var sti=p.subjectTint||'subtle';var mot=p.motion||'full';var lpw=!!p.lowPower;var osRed=window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(osRed&&mot!=='none'){mot='reduced';}var dark=app==='dark'||(app==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches);var r=document.documentElement;r.classList.toggle('dark',dark);r.classList.toggle('reduce-motion',mot!=='full');r.setAttribute('data-appearance',app);r.setAttribute('data-palette',pal);r.setAttribute('data-contrast',con);r.setAttribute('data-density',den);r.setAttribute('data-surface',sur);r.setAttribute('data-subject-tint',sti);r.setAttribute('data-motion',mot);r.setAttribute('data-low-power',String(lpw));}catch(e){}})();`;
 
 const geistSans = Geist({
@@ -103,13 +82,6 @@ export const metadata: Metadata = {
   },
 };
 
-// ──────────────────────────────────────────────────────────────────────────
-// VIEWPORT — full-screen mobile experience
-// ──────────────────────────────────────────────────────────────────────────
-// viewport-fit=cover lets content extend into the notch/Dynamic Island area
-// on iPhone, so the app truly uses the full screen. maximumScale=5 prevents
-// iOS auto-zoom on input focus while still allowing user zoom for a11y.
-// ──────────────────────────────────────────────────────────────────────────
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -127,11 +99,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Read the CSP nonce from the middleware-set header so Next.js can apply
-  // it to inline scripts (RSC stream + theme-no-flash). Without this, the
-  // browser blocks the inline RSC scripts and React never hydrates — which
-  // is why forms submit via GET, buttons don't fire onClick, and the page
-  // feels "stuck" / unscrollable on the deployed site.
   const nonce = (await headers()).get("x-nonce") ?? undefined;
 
   return (
@@ -148,9 +115,6 @@ export default async function RootLayout({
       data-low-power="false"
     >
       <head>
-        {/* Inline theme-no-flash script — runs synchronously before paint.
-            nonce is required by the CSP middleware so this inline script
-            is allowed to execute. */}
         <script
           nonce={nonce}
           dangerouslySetInnerHTML={{ __html: themeNoFlashScript }}
@@ -163,13 +127,7 @@ export default async function RootLayout({
           <LernioMotionProvider>
             <RouteLoadingBar />
             {children}
-            <StudentOSLauncher />
-            <StudentMobileDock />
-            <SelectionLearningTools />
-            <GlobalExperienceRuntime />
-            <CommandPalette />
-            <KeyboardShortcuts />
-            <RegisterSW />
+            <GlobalClientRuntime />
           </LernioMotionProvider>
         </ThemeProvider>
       </body>
