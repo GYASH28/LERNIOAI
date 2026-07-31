@@ -2,13 +2,7 @@
 
 import dynamic from 'next/dynamic'
 import { usePathname } from 'next/navigation'
-
-// Lazy-load only the essential runtime components.
-// Removed: LernioCursor (causes jank on every mouse move)
-// Removed: ThemeAtmosphere (heavy animation layer, causes re-renders)
-// Kept: AchievementUnlockToaster (lightweight, only renders on unlock)
-// Kept: SonnerToaster (needed for toast notifications)
-// Kept: DevOverlayCleanup (lightweight DOM cleanup)
+import { RouteVisualLayer } from '@/components/app/route-visual-layer'
 
 const AchievementUnlockToaster = dynamic(
   () => import('@/components/ui/achievement-unlock-toaster').then((module) => module.AchievementUnlockToaster),
@@ -20,6 +14,10 @@ const SonnerToaster = dynamic(
 )
 const DevOverlayCleanup = dynamic(
   () => import('@/components/dev-overlay-cleanup').then((module) => module.DevOverlayCleanup),
+  { ssr: false },
+)
+const PageTransitionStory = dynamic(
+  () => import('@/components/app/page-transition-story').then((module) => module.PageTransitionStory),
   { ssr: false },
 )
 
@@ -50,6 +48,8 @@ export function GlobalExperienceRuntime() {
 
   return (
     <>
+      <RouteVisualLayer />
+      <PageTransitionStory />
       <AchievementUnlockToaster />
       <SonnerToaster position="top-right" richColors />
       <DevOverlayCleanup />
