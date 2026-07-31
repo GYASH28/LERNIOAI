@@ -5,6 +5,10 @@ const HOME_WIDTHS = [
   1440, 1536, 1920,
 ] as const
 
+// Alignment checks run without an authenticated storage state, so this list
+// intentionally contains public pages only. Protected-route behaviour is
+// validated by the routing/authentication suites instead of measuring an
+// indeterminate redirect document.
 const CORE_ROUTES = [
   '/',
   '/sign-in',
@@ -14,21 +18,12 @@ const CORE_ROUTES = [
   '/privacy',
   '/terms',
   '/support',
-  '/dashboard',
 ] as const
 
 const CORE_WIDTHS = [320, 768, 1024, 1180, 1366] as const
 
 async function openStable(page: Page, route: string) {
   await page.goto(route, { waitUntil: 'domcontentloaded' })
-
-  // Protected routes intentionally redirect anonymous visitors. Wait for the
-  // final document before evaluating geometry, otherwise the execution
-  // context can disappear while the redirect is completing.
-  if (route === '/dashboard') {
-    await expect(page).toHaveURL(/\/sign-in\?callbackUrl=%2Fdashboard|\/sign-in\?callbackUrl=\/dashboard/)
-  }
-
   await page.waitForLoadState('networkidle')
   await page.addStyleTag({
     content: `
