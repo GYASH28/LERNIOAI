@@ -109,17 +109,26 @@ export function RevisionView() {
                     <Layers className="h-8 w-8 text-primary mb-2" />
                     <p className="text-sm text-muted-foreground mb-3">Flashcard · Front</p>
                     <p className="text-lg font-medium">{topic?.title}</p>
-                    <p className="text-xs text-muted-foreground mt-1">Click to reveal the answer</p>
+                    {showFront ? (
+                      <p className="text-xs text-muted-foreground mt-1">Click to reveal the answer</p>
+                    ) : null}
                   </div>
                   {!showFront ? (
                     <div className="mt-3 rounded-xl bg-muted/50 p-4 text-center">
                       <p className="text-sm">{topic?.description || `Review the key concepts of ${topic?.title}.`}</p>
                     </div>
                   ) : null}
-                  <Button onClick={() => { setShowFront(false); setSession({ ...session, phase: 'rate' }) }} className="w-full mt-3 gap-2">
-                    {showFront ? 'Reveal Answer' : 'Show Rating'}
-                    <ChevronRight className="h-4 w-4" />
-                  </Button>
+                  {showFront ? (
+                    <Button onClick={() => setShowFront(false)} className="w-full mt-3 gap-2">
+                      Reveal Answer
+                      <ChevronRight className="h-4 w-4" />
+                    </Button>
+                  ) : (
+                    <Button onClick={() => setSession({ ...session, phase: 'rate' })} className="w-full mt-3 gap-2">
+                      Show Rating
+                      <ChevronRight className="h-4 w-4" />
+                    </Button>
+                  )}
                 </motion.div>
               )}
 
@@ -290,12 +299,12 @@ function RevisionItem({ item }: { item: any }) {
   const topic = item.topic
   const subject = topic?.unit?.subject
   const sourceLesson = item.sourceLesson
-  const snooze = async () => {
-    await fetch('/api/revision/due', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ scheduleId: item.id, quality: 2, topicId: item.topicId }),
-    })
+  const snooze = () => {
+    // Snooze is a client-side temporary dismissal — it does NOT call the
+    // revision API or send a quality rating. Sending quality=2 would
+    // lapse the SM-2 schedule and damage the ease factor, which is the
+    // wrong behavior for a snooze (the student hasn't reviewed the card,
+    // they just want to see it later).
     setSnoozed(true)
   }
   if (snoozed) return null
