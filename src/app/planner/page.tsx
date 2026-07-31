@@ -2,7 +2,9 @@ import { redirect } from 'next/navigation'
 import { getCurrentUser } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { getManifestSubjectsForSemester } from '@/lib/curriculum/manifest-data'
+import { getCurrentLearningContext } from '@/lib/learning/current-learning-context'
 import { AuthenticatedPageShell } from '@/components/app/authenticated-page-shell'
+import { CurrentLearningContextCard } from '@/components/app/current-learning-context-card'
 import { PlannerClient } from './planner-client'
 
 export const dynamic = 'force-dynamic'
@@ -19,6 +21,10 @@ export default async function PlannerPage() {
   const programmeCode = profile?.departmentCode === 'DCIOT' ? 'DCIOT' : 'DCOMP'
   const semesterNumber = normalizeSemester(profile?.semesterNumber)
   const subjects = getManifestSubjectsForSemester(programmeCode, semesterNumber)
+  const context = await getCurrentLearningContext(user.id, {
+    programme: programmeCode,
+    semester: semesterNumber,
+  })
 
   return (
     <AuthenticatedPageShell current="planner" maxWidth="5xl">
@@ -31,6 +37,9 @@ export default async function PlannerPage() {
           Convert unfinished lessons, weak topics and revision due dates into a realistic week.
         </p>
       </header>
+      <div className="mt-5">
+        <CurrentLearningContextCard context={context} compact />
+      </div>
       <div className="mt-6">
         <PlannerClient
           subjects={subjects.map((subject) => ({
