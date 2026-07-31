@@ -1,8 +1,6 @@
 import { redirect } from 'next/navigation'
 import { getCurrentUser } from '@/lib/auth'
 import { db } from '@/lib/db'
-import { TopBar } from '@/components/layout/top-bar'
-import { Footer } from '@/components/layout/footer'
 import {
   LearningOSHomeClient,
   type LearningOSSemesterSummary,
@@ -30,7 +28,7 @@ export default async function LearnPage() {
   }).catch(() => null)
 
   const programme = profile?.departmentCode === 'DCIOT' ? 'DCIOT' : 'DCOMP'
-  const currentSemester = profile?.semesterNumber || 3
+  const currentSemester = normalizeSemester(profile?.semesterNumber)
   const today = new Date()
   const weekEnd = new Date(today)
   weekEnd.setDate(weekEnd.getDate() + 7)
@@ -76,24 +74,24 @@ export default async function LearnPage() {
   }))
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <TopBar />
-      <main className="page-wipe">
-        <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 sm:py-7 lg:px-8">
-          <LearningOSHomeClient
-            userName={profile?.name || user.name}
-            programme={programme}
-            currentSemester={currentSemester}
-            dailyMinutes={profile?.dailyMins || 90}
-            xp={profile?.xp || 0}
-            streak={profile?.streak || 0}
-            revisionDue={revisionDue}
-            plannedLessons={plannedLessons}
-            semesters={semesters}
-          />
-        </div>
-      </main>
-      <Footer />
+    <div className="page-wipe mx-auto w-full max-w-7xl px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
+      <LearningOSHomeClient
+        userName={profile?.name || user.name}
+        programme={programme}
+        currentSemester={currentSemester}
+        dailyMinutes={profile?.dailyMins || 90}
+        xp={profile?.xp || 0}
+        streak={profile?.streak || 0}
+        revisionDue={revisionDue}
+        plannedLessons={plannedLessons}
+        semesters={semesters}
+      />
     </div>
   )
+}
+
+function normalizeSemester(value: number | null | undefined) {
+  return Number.isInteger(value) && Number(value) >= 1 && Number(value) <= 6
+    ? Number(value)
+    : 3
 }
