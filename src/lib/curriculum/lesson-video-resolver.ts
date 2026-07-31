@@ -1,4 +1,5 @@
 import type { Lesson } from '@/lib/curriculum/lesson-notes-loader'
+import { getReviewedLessonVideoMappings } from '@/lib/curriculum/lesson-video-catalog'
 import {
   buildYouTubeThumbnailUrl,
   extractYouTubePlaylistId,
@@ -15,7 +16,7 @@ export interface LessonVideoSelection {
   embedUrl: string
   thumbnailUrl: string
   score: number
-  mappingReason: 'title_match' | 'concept_match' | 'ordered_subject_fallback'
+  mappingReason: 'reviewed_catalog' | 'title_match' | 'concept_match' | 'ordered_subject_fallback'
 }
 
 const STOP_WORDS = new Set([
@@ -70,22 +71,50 @@ function scoreCandidate(subject: ManifestSubject, lesson: Lesson, resource: Mani
 /**
  * Produces a one-to-one lesson→video assignment for a subject.
  *
- * Important guarantees:
- * - playlists are never returned;
- * - a video is never repeated across two lessons;
- * - strong title/concept matches are assigned first;
- * - remaining direct videos are distributed in curriculum order, never by
- *   reusing the same subject-level player on every lesson.
+ * Guarantees:
+ * - a playlist URL is never returned as the lesson player;
+ * - reviewed playlist-expanded mappings take priority;
+ * - a direct video is never repeated across two lessons;
+ * - unmatched lessons remain honestly video-less instead of receiving a
+ *   duplicated subject player.
  */
 export function buildManifestLessonVideoAssignments(
   subject: ManifestSubject,
   lessons: Lesson[],
 ): Map<string, LessonVideoSelection> {
-  const directVideos = directVideoResources(subject)
   const assignments = new Map<string, LessonVideoSelection>()
-  if (lessons.length === 0 || directVideos.length === 0) return assignments
+  if (lessons.length === 0) return assignments
 
-  const pairs = lessons.flatMap((lesson, lessonIndex) =>
+  const lessonBySlug = new Map(lessons.map((lesson) => [lesson.slug, lesson]))
+  const usedVideoIds = new Set<string>()
+  const reviewedMappings = getReviewedLessonVideoMappings(
+    [subject.code, subject.alternateCode ?? ''].filter(Boolean),
+  )
+
+  for (const mapping of reviewedMappings) {
+    const lesson = lessonBySlug.get(mapping.lessonSlug)
+    if (!lesson || usedVideoIds.has(mapping.videoId) || assignments.has(lesson.slug)) continue
+    const resource: ManifestResource = {
+      title: mapping.title,
+      channel: mapping.channel,
+      language: mapping.language,
+      role: 'primary_video',
+      url: `https://www.youtube.com/watch?v=${mapping.videoId}`,
+      playlistId: null,
+      videoId: mapping.videoId,
+      description: mapping.description,
+      sourcePdf: mapping.sourcePdf,
+      sourcePage: mapping.sourcePage,
+    }
+    assignments.set(lesson.slug, toSelection(lesson, resource, mapping.videoId, mapping.confidence * 100, 'reviewed_catalog'))
+    usedVideoIds.add(mapping.videoId)
+  }
+
+  const directVideos = directVideoResources(subject).filter((candidate) => !usedVideoIds.has(candidate.videoId))
+  const remainingLessons = lessons.filter((lesson) => !assignments.has(lesson.slug))
+  if (directVideos.length === 0 || remainingLessons.length === 0) return assignments
+
+  const pairs = remainingLessons.flatMap((lesson, lessonIndex) =>
     directVideos.map((candidate, resourceIndex) => {
       const score = scoreCandidate(subject, lesson, candidate.resource)
       return { lesson, lessonIndex, candidate, resourceIndex, ...score }
@@ -100,12 +129,9 @@ export function buildManifestLessonVideoAssignments(
     a.resourceIndex - b.resourceIndex,
   )
 
-  const usedLessons = new Set<string>()
-  const usedVideoIds = new Set<string>()
-
   for (const pair of pairs) {
     if (pair.total < 4) continue
-    if (usedLessons.has(pair.lesson.slug) || usedVideoIds.has(pair.candidate.videoId)) continue
+    if (assignments.has(pair.lesson.slug) || usedVideoIds.has(pair.candidate.videoId)) continue
     assignments.set(pair.lesson.slug, toSelection(
       pair.lesson,
       pair.candidate.resource,
@@ -113,17 +139,16 @@ export function buildManifestLessonVideoAssignments(
       pair.total,
       pair.title > 0 ? 'title_match' : 'concept_match',
     ))
-    usedLessons.add(pair.lesson.slug)
     usedVideoIds.add(pair.candidate.videoId)
   }
 
-  const remainingLessons = lessons.filter((lesson) => !usedLessons.has(lesson.slug))
-  const remainingVideos = directVideos.filter((candidate) => !usedVideoIds.has(candidate.videoId))
-  const fallbackCount = Math.min(remainingLessons.length, remainingVideos.length)
+  const stillUnassigned = lessons.filter((lesson) => !assignments.has(lesson.slug))
+  const unusedVideos = directVideos.filter((candidate) => !usedVideoIds.has(candidate.videoId))
+  const fallbackCount = Math.min(stillUnassigned.length, unusedVideos.length)
 
   for (let index = 0; index < fallbackCount; index += 1) {
-    const lesson = remainingLessons[index]
-    const candidate = remainingVideos[index]
+    const lesson = stillUnassigned[index]
+    const candidate = unusedVideos[index]
     assignments.set(lesson.slug, toSelection(
       lesson,
       candidate.resource,
@@ -131,6 +156,7 @@ export function buildManifestLessonVideoAssignments(
       0,
       'ordered_subject_fallback',
     ))
+    usedVideoIds.add(candidate.videoId)
   }
 
   return assignments
