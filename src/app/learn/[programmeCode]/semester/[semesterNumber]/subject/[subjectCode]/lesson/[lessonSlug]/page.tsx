@@ -4,6 +4,7 @@ import { getLessonStudio } from '@/features/learning/server/get-lesson-studio'
 import { getManifestSubject } from '@/lib/curriculum/manifest-data'
 import { DbLessonStudio } from '@/components/learning/db-lesson-studio'
 import { ManifestLessonStudio } from '@/components/learning/manifest-lesson-studio'
+import { RecentLearningBeacon } from '@/components/learning/recent-learning-beacon'
 
 export const dynamic = 'force-dynamic'
 
@@ -25,6 +26,14 @@ export default async function LessonStudioPage({
   const semester = Number.parseInt(semesterNumber, 10)
   if (!Number.isInteger(semester) || semester < 1 || semester > 6) notFound()
 
+  const recentBeacon = (
+    <RecentLearningBeacon
+      href={callbackUrl}
+      resourceId={`${programmeCode}:${semester}:${subjectCode}:${lessonSlug}`}
+      fallbackTitle={titleFromSlug(lessonSlug)}
+    />
+  )
+
   const studio = await getLessonStudio(authUser.id, {
     programmeCode,
     semesterNumber: semester,
@@ -34,19 +43,35 @@ export default async function LessonStudioPage({
 
   if (studio) {
     if (studio.needsCanonicalRedirect) redirect(studio.canonicalPath)
-    return <DbLessonStudio studio={studio} lessonSlug={lessonSlug} />
+    return (
+      <>
+        {recentBeacon}
+        <DbLessonStudio studio={studio} lessonSlug={lessonSlug} />
+      </>
+    )
   }
 
   const manifestSubject = getManifestSubject(programmeCode, semester, subjectCode)
   if (!manifestSubject) notFound()
 
   return (
-    <ManifestLessonStudio
-      programmeCode={programmeCode}
-      semesterNumber={semester}
-      subjectCode={subjectCode}
-      lessonSlug={lessonSlug}
-      subject={manifestSubject}
-    />
+    <>
+      {recentBeacon}
+      <ManifestLessonStudio
+        programmeCode={programmeCode}
+        semesterNumber={semester}
+        subjectCode={subjectCode}
+        lessonSlug={lessonSlug}
+        subject={manifestSubject}
+      />
+    </>
   )
+}
+
+function titleFromSlug(value: string) {
+  return value
+    .split('-')
+    .filter(Boolean)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
 }
