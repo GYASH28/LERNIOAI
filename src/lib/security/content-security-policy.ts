@@ -23,7 +23,7 @@ export function buildContentSecurityPolicy({
   const imageSources = ["'self'", 'data:', 'blob:', 'https://i.ytimg.com']
   const connectSources = ["'self'"]
   const mediaSources = ["'self'", 'blob:', 'data:']
-  const frameSources = ['https://www.youtube-nocookie.com', 'https://www.youtube.com']
+  const frameSources = ["'self'", 'https://www.youtube-nocookie.com', 'https://www.youtube.com']
 
   if (storageOrigin) {
     imageSources.push(storageOrigin)
