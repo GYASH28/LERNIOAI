@@ -77,9 +77,7 @@ for (const { file, path } of routes) {
     if (rawHref.includes('${') || rawHref.includes('{') || rawHref.includes('[')) continue
     const pathname = rawHref.split(/[?#]/)[0] || '/'
     const exists = routeMatchers.some((candidate) => candidate.regex.test(pathname))
-    if (!exists) {
-      failures.push(`${display}: internal link ${rawHref} does not match an App Router page.`)
-    }
+    if (!exists) failures.push(`${display}: internal link ${rawHref} does not match an App Router page.`)
   }
 
   if (path.startsWith('/learn/') && path !== '/learn/current') {
@@ -103,9 +101,7 @@ if (!existsSync(learnLayout) || !source(learnLayout).includes('LearnShell')) {
 if (existsSync(learnHome) && /<TopBar\b|<Footer\b/.test(source(learnHome))) {
   failures.push('src/app/learn/page.tsx mounts duplicate navigation chrome.')
 }
-if (!existsSync(learnError)) {
-  failures.push('src/app/learn/error.tsx is required for recoverable Learn failures.')
-}
+if (!existsSync(learnError)) failures.push('src/app/learn/error.tsx is required for recoverable Learn failures.')
 if (existsSync(rootLayout)) {
   const text = source(rootLayout)
   if (!text.includes('GlobalClientRuntime')) {
@@ -119,33 +115,47 @@ if (existsSync(rootLayout)) {
   }
 }
 
-const compositionPaths = [
-  resolve(root, 'motion/hyperframes/lernio-opening.html'),
-  resolve(root, 'public/hyperframes/lernio-opening/index.html'),
-]
-for (const compositionPath of compositionPaths) {
+const compositionSource = resolve(root, 'motion/hyperframes/lernio-opening.html')
+const compositionRuntime = resolve(root, 'public/hyperframes/lernio-opening/index.html')
+
+for (const compositionPath of [compositionSource, compositionRuntime]) {
   const display = repoPath(compositionPath)
   if (!existsSync(compositionPath)) {
     failures.push(`${display}: missing HyperFrames composition.`)
     continue
   }
   const text = source(compositionPath)
-  const required = [
+  const sharedMarkers = [
     'data-composition-id="lernio-opening-v2"',
     'data-width="1920"',
     'data-height="1080"',
     'class="scene clip"',
     'data-track-index="0"',
-    "window.__timelines['lernio-opening-v2']",
-    'gsap.timeline({ paused: true',
   ]
-  for (const marker of required) {
+  for (const marker of sharedMarkers) {
     if (!text.includes(marker)) failures.push(`${display}: missing required HyperFrames marker ${marker}.`)
   }
   if (/repeat\s*:\s*-1/.test(text)) failures.push(`${display}: infinite repeats are not deterministic.`)
   if (/Math\.random\(|Date\.now\(/.test(text)) failures.push(`${display}: contains non-deterministic runtime values.`)
   const scenes = [...text.matchAll(/class="scene clip"[^>]*data-start="([\d.]+)"[^>]*data-duration="([\d.]+)"[^>]*data-track-index="(\d+)"/g)]
   if (scenes.length < 3) failures.push(`${display}: expected at least three timed scenes.`)
+}
+
+if (existsSync(compositionSource)) {
+  const text = source(compositionSource)
+  for (const marker of ["window.__timelines['lernio-opening-v2']", 'gsap.timeline({ paused: true']) {
+    if (!text.includes(marker)) failures.push(`motion/hyperframes/lernio-opening.html: missing editable HyperFrames source marker ${marker}.`)
+  }
+}
+
+if (existsSync(compositionRuntime)) {
+  const text = source(compositionRuntime)
+  if (/https?:\/\//.test(text)) {
+    failures.push('public/hyperframes/lernio-opening/index.html: runtime must be self-contained and make no external requests.')
+  }
+  if (!text.includes("type: 'lernio-hyperframes-complete'")) {
+    failures.push('public/hyperframes/lernio-opening/index.html: runtime must notify the app when playback completes.')
+  }
 }
 
 const uniqueFailures = [...new Set(failures)]
