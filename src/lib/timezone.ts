@@ -25,3 +25,29 @@ export function getLocalDayStartInKolkata(date: Date = new Date()): Date {
   const dateString = `${year}-${month}-${day}T00:00:00+05:30`;
   return new Date(dateString);
 }
+
+/**
+ * Get today's date in YYYY-MM-DD format using the user's local timezone.
+ * This fixes the bug where `new Date().toISOString().slice(0, 10)` returns
+ * the UTC date, which can be off by a day for users in timezones ahead of UTC
+ * (like Asia/Kolkata, UTC+5:30).
+ *
+ * For example, at 2024-01-15 01:00 IST (2024-01-14 19:30 UTC):
+ * - toISOString().slice(0,10) → "2024-01-14" (wrong — yesterday in IST)
+ * - localDateString() → "2024-01-15" (correct — today in IST)
+ */
+export function localDateString(date: Date = new Date()): string {
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
+/**
+ * Format a date string (YYYY-MM-DD) into a human-readable date in the user's
+ * local timezone. Uses en-IN locale by default.
+ */
+export function formatLocalDate(dateStr: string, locale: string = 'en-IN'): string {
+  const date = new Date(dateStr + 'T00:00:00')
+  return date.toLocaleDateString(locale, { weekday: 'long', day: 'numeric', month: 'long' })
+}

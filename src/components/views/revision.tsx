@@ -19,6 +19,34 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { FlashcardPlayer } from '@/components/ui/flashcard-player'
 
+interface RevisionScheduleItem {
+  id: string
+  topicId: string
+  state: string
+  nextDueDate: string | Date
+  easeFactor: number
+  interval: number
+  repetitions: number
+  lapses: number
+  topic: {
+    id: string
+    title: string
+    description?: string | null
+    unit?: {
+      number: number
+      subject?: {
+        name: string
+        code: string
+        mascotKey?: string | null
+      } | null
+    } | null
+  }
+  sourceLesson?: {
+    title: string
+    canonicalUrl?: string
+  } | null
+}
+
 const STATE_COLORS: Record<string, string> = {
   new: 'bg-gray-500/10 text-gray-600',
   learning: 'bg-violet-500/10 text-violet-600',
@@ -29,8 +57,8 @@ const STATE_COLORS: Record<string, string> = {
 }
 
 export function RevisionView() {
-  const [data, setData] = useState<{ dueToday: any[]; overdue: any[]; upcoming: any[]; all: any[] } | null>(null)
-  const [session, setSession] = useState<{ items: any[]; idx: number; phase: 'study' | 'rate' } | null>(null)
+  const [data, setData] = useState<{ dueToday: RevisionScheduleItem[]; overdue: RevisionScheduleItem[]; upcoming: RevisionScheduleItem[]; all: RevisionScheduleItem[] } | null>(null)
+  const [session, setSession] = useState<{ items: RevisionScheduleItem[]; idx: number; phase: 'study' | 'rate' } | null>(null)
   const [showFront, setShowFront] = useState(true)
   const [mode, setMode] = useState<'classic' | 'flashcards'>('classic')
   const { pushMascotToast } = useAppStore()
@@ -40,7 +68,7 @@ export function RevisionView() {
   }
   useEffect(() => { load() }, [])
 
-  const startSession = (items: any[]) => {
+  const startSession = (items: RevisionScheduleItem[]) => {
     if (items.length === 0) return
     setSession({ items, idx: 0, phase: 'study' })
     setShowFront(true)
@@ -86,7 +114,7 @@ export function RevisionView() {
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center gap-3 mb-4">
-              <Mascot mascot={(subject?.mascotKey as any) || 'leo'} state="explaining" size={48} />
+              <Mascot mascot={(subject?.mascotKey || 'leo') as 'leo'} state="explaining" size={48} />
               <div>
                 <p className="text-xs text-muted-foreground">{subject?.name} · Unit {topic?.unit?.number}</p>
                 <p className="font-medium">{topic?.title}</p>
@@ -294,7 +322,7 @@ export function RevisionView() {
   )
 }
 
-function RevisionItem({ item }: { item: any }) {
+function RevisionItem({ item }: { item: RevisionScheduleItem }) {
   const [snoozed, setSnoozed] = useState(false)
   const topic = item.topic
   const subject = topic?.unit?.subject
