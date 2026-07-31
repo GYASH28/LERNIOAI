@@ -3,12 +3,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { BookOpen, BrainCircuit, PenTool, RotateCcw, SkipForward } from 'lucide-react'
 import { LernioLogoTile } from '@/components/brand/lernio-logo'
-
-export const HYPERFRAMES_INTRO_STORAGE_KEY = 'lernio-hyperframes-intro-v1'
-
-const FULL_DURATION = 3400
-const COMPACT_DURATION = 2400
-const REDUCED_DURATION = 850
+import {
+  HYPERFRAMES_INTRO_STORAGE_KEY,
+  HYPERFRAMES_INTRO_TIMING,
+} from '@/lib/motion/hyperframes-intro'
 
 function safeSeen() {
   try {
@@ -32,7 +30,7 @@ function resolveDuration() {
     window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
     root.dataset.motion === 'reduced' ||
     root.dataset.motion === 'none'
-  if (reduced) return REDUCED_DURATION
+  if (reduced) return HYPERFRAMES_INTRO_TIMING.reduced
 
   const connection = (navigator as Navigator & {
     connection?: { saveData?: boolean; effectiveType?: string }
@@ -43,22 +41,32 @@ function resolveDuration() {
     connection?.effectiveType === '2g' ||
     connection?.effectiveType === 'slow-2g'
 
-  return constrained || window.innerWidth < 640 ? COMPACT_DURATION : FULL_DURATION
+  return constrained || window.innerWidth < 640
+    ? HYPERFRAMES_INTRO_TIMING.compact
+    : HYPERFRAMES_INTRO_TIMING.full
 }
 
 export function HyperframesIntro() {
   const [visible, setVisible] = useState(true)
   const [exiting, setExiting] = useState(false)
-  const [duration, setDuration] = useState(FULL_DURATION)
+  const [duration, setDuration] = useState(HYPERFRAMES_INTRO_TIMING.full)
   const timerRef = useRef<number | null>(null)
+  const exitTimerRef = useRef<number | null>(null)
 
   const complete = useCallback(() => {
     if (timerRef.current) window.clearTimeout(timerRef.current)
+    if (exitTimerRef.current) return
+
     markSeen()
-    document.documentElement.dataset.landingIntro = 'complete'
-    window.dispatchEvent(new CustomEvent('lernio:intro-complete'))
     setExiting(true)
-    window.setTimeout(() => setVisible(false), 420)
+    document.documentElement.dataset.landingIntro = 'handoff'
+
+    exitTimerRef.current = window.setTimeout(() => {
+      document.documentElement.dataset.landingIntro = 'complete'
+      window.dispatchEvent(new CustomEvent('lernio:intro-complete'))
+      setVisible(false)
+      exitTimerRef.current = null
+    }, 420)
   }, [])
 
   useEffect(() => {
@@ -74,12 +82,13 @@ export function HyperframesIntro() {
 
     return () => {
       if (timerRef.current) window.clearTimeout(timerRef.current)
+      if (exitTimerRef.current) window.clearTimeout(exitTimerRef.current)
     }
   }, [complete])
 
   if (!visible) return null
 
-  const speed = duration / FULL_DURATION
+  const speed = duration / HYPERFRAMES_INTRO_TIMING.full
 
   return (
     <div
@@ -166,7 +175,7 @@ export function HyperframesIntro() {
           display: none;
         }
         [data-hyperframes-intro][data-exiting='true'] {
-          animation: hfExit calc(420ms * var(--intro-speed)) cubic-bezier(.2,.8,.2,1) both;
+          animation: hfExit 420ms cubic-bezier(.2,.8,.2,1) both;
         }
         .hf-grid {
           opacity: .32;
