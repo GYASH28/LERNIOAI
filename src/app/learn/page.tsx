@@ -2,9 +2,9 @@ import { redirect } from 'next/navigation'
 import { getCurrentUser } from '@/lib/auth'
 import { db } from '@/lib/db'
 import {
-  LearningOSHomeClient,
+  LearningOSMobileFirstHome,
   type LearningOSSemesterSummary,
-} from '@/components/learning/learning-os-home-client'
+} from '@/components/learning/learning-os-mobile-first-home'
 import { getManifestSubjectsForSemester } from '@/lib/curriculum/manifest-data'
 import { getSubjectNotes } from '@/lib/curriculum/lesson-notes-loader'
 import { getLocalDateStringInKolkata } from '@/lib/timezone'
@@ -74,8 +74,8 @@ export default async function LearnPage() {
   }))
 
   return (
-    <div className="page-wipe mx-auto w-full max-w-7xl px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
-      <LearningOSHomeClient
+    <div className="page-wipe mx-auto w-full max-w-7xl px-3 py-3 sm:px-6 sm:py-6 lg:px-8">
+      <LearningOSMobileFirstHome
         userName={profile?.name || user.name}
         programme={programme}
         currentSemester={currentSemester}
