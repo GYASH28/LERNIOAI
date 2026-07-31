@@ -21,6 +21,15 @@ const CORE_WIDTHS = [320, 768, 1024, 1180, 1366] as const
 
 async function openStable(page: Page, route: string) {
   await page.goto(route, { waitUntil: 'domcontentloaded' })
+
+  // Protected routes intentionally redirect anonymous visitors. Wait for the
+  // final document before evaluating geometry, otherwise the execution
+  // context can disappear while the redirect is completing.
+  if (route === '/dashboard') {
+    await expect(page).toHaveURL(/\/sign-in\?callbackUrl=%2Fdashboard|\/sign-in\?callbackUrl=\/dashboard/)
+  }
+
+  await page.waitForLoadState('networkidle')
   await page.addStyleTag({
     content: `
       *, *::before, *::after {
