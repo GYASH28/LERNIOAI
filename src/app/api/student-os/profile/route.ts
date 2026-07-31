@@ -43,10 +43,15 @@ export async function PATCH(req: NextRequest) {
     const data: { dailyMins?: number; preferredLang?: string } = {}
 
     if (input.dailyMinutes !== undefined) {
-      if (!Number.isInteger(input.dailyMinutes) || Number(input.dailyMinutes) < 15 || Number(input.dailyMinutes) > 480) {
+      if (
+        typeof input.dailyMinutes !== 'number' ||
+        !Number.isInteger(input.dailyMinutes) ||
+        input.dailyMinutes < 15 ||
+        input.dailyMinutes > 480
+      ) {
         throw new ApiError('BAD_REQUEST', 'Daily study time must be between 15 and 480 minutes.', 400, false)
       }
-      data.dailyMins = Number(input.dailyMinutes)
+      data.dailyMins = input.dailyMinutes
     }
 
     if (input.language !== undefined) {
