@@ -128,42 +128,48 @@ function StatCard({ icon: Icon, label, value, color }: { icon: any; label: strin
 }
 
 async function RecentUsers() {
+  let users: Array<{ id: string; name: string | null; email: string; role: string; status: string; createdAt: Date }> = []
+  let loadError = false
   try {
-    const users = await db.user.findMany({
+    users = await db.user.findMany({
       orderBy: { createdAt: 'desc' },
       take: 5,
       select: { id: true, name: true, email: true, role: true, status: true, createdAt: true },
     })
-
-    if (users.length === 0) {
-      return <p className="text-sm text-muted-foreground py-4">No users registered yet.</p>
-    }
-
-    return (
-      <div className="space-y-2">
-        {users.map(u => (
-          <div key={u.id} className="flex items-center gap-3 rounded-lg border border-border bg-card p-3">
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
-              {(u.name || '?').charAt(0).toUpperCase()}
-            </span>
-            <div className="min-w-0 flex-1">
-              <p className="text-sm font-medium truncate">{u.name}</p>
-              <p className="text-xs text-muted-foreground truncate">{u.email}</p>
-            </div>
-            <span className={`text-xs font-bold rounded px-2 py-0.5 ${
-              u.role === 'admin' ? 'bg-red-500/10 text-red-500' :
-              u.role === 'teacher' ? 'bg-amber-500/10 text-amber-500' :
-              u.role === 'cr' ? 'bg-violet-500/10 text-violet-500' :
-              'bg-cyan-500/10 text-cyan-500'
-            }`}>{u.role}</span>
-            <span className="text-xs text-muted-foreground">
-              {u.createdAt.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}
-            </span>
-          </div>
-        ))}
-      </div>
-    )
   } catch {
+    loadError = true
+  }
+
+  if (loadError) {
     return <p className="text-sm text-muted-foreground py-4">Unable to load recent users.</p>
   }
+
+  if (users.length === 0) {
+    return <p className="text-sm text-muted-foreground py-4">No users registered yet.</p>
+  }
+
+  return (
+    <div className="space-y-2">
+      {users.map(u => (
+        <div key={u.id} className="flex items-center gap-3 rounded-lg border border-border bg-card p-3">
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
+            {(u.name || '?').charAt(0).toUpperCase()}
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="text-sm font-medium truncate">{u.name}</p>
+            <p className="text-xs text-muted-foreground truncate">{u.email}</p>
+          </div>
+          <span className={`text-xs font-bold rounded px-2 py-0.5 ${
+            u.role === 'admin' ? 'bg-red-500/10 text-red-500' :
+            u.role === 'teacher' ? 'bg-amber-500/10 text-amber-500' :
+            u.role === 'cr' ? 'bg-violet-500/10 text-violet-500' :
+            'bg-cyan-500/10 text-cyan-500'
+          }`}>{u.role}</span>
+          <span className="text-xs text-muted-foreground">
+            {u.createdAt.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}
+          </span>
+        </div>
+      ))}
+    </div>
+  )
 }
