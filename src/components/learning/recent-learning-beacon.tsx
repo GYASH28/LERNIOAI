@@ -1,6 +1,8 @@
 'use client'
 
 import { useEffect } from 'react'
+import { updateLocalStudentState } from '@/components/student-os/use-local-state'
+import { STUDENT_OS_STORAGE } from '@/lib/student-os/catalog'
 
 interface RecentLearningBeaconProps {
   href: string
@@ -8,12 +10,20 @@ interface RecentLearningBeaconProps {
   fallbackTitle: string
 }
 
+interface MissionState {
+  date: string
+  completed: string[]
+}
+
 const SAVE_INTERVAL_MS = 12_000
+const ENGAGEMENT_CHECK_MS = 5_000
+const MIN_ENGAGED_MS = 45_000
+const FORCE_ENGAGED_MS = 90_000
 
 /**
  * Records the exact lesson route and latest reading position without blocking
- * lesson rendering. The Learn home can then resume the real page instead of
- * linking its primary action back to itself.
+ * lesson rendering. It also completes the Learn mission only after meaningful
+ * engagement, preventing a quick accidental page open from counting as study.
  */
 export function RecentLearningBeacon({
   href,
@@ -22,6 +32,8 @@ export function RecentLearningBeacon({
 }: RecentLearningBeaconProps) {
   useEffect(() => {
     let lastSavedScroll = -1
+    let missionRecorded = false
+    const startedAt = performance.now()
 
     const save = (keepalive = false) => {
       const scrollPos = Math.max(0, Math.round(window.scrollY))
@@ -46,6 +58,24 @@ export function RecentLearningBeacon({
       })
     }
 
+    const recordEngagement = () => {
+      if (missionRecorded || document.visibilityState !== 'visible') return
+      const elapsed = performance.now() - startedAt
+      const documentHeight = Math.max(
+        document.documentElement.scrollHeight,
+        document.body.scrollHeight,
+      )
+      const scrollable = Math.max(1, documentHeight - window.innerHeight)
+      const progress = Math.min(1, Math.max(0, window.scrollY / scrollable))
+      const shortLesson = documentHeight <= window.innerHeight * 1.5
+      const meaningfullyRead = progress >= 0.25 || shortLesson
+
+      if ((elapsed >= MIN_ENGAGED_MS && meaningfullyRead) || elapsed >= FORCE_ENGAGED_MS) {
+        missionRecorded = true
+        markMissionComplete('continue-lesson')
+      }
+    }
+
     const resumePosition = readResumePosition()
     let initialSaveTimer = 0
     let restoreTimer = 0
@@ -60,10 +90,17 @@ export function RecentLearningBeacon({
       initialSaveTimer = window.setTimeout(() => save(), 0)
     }
 
-    const interval = window.setInterval(() => save(), SAVE_INTERVAL_MS)
-    const onPageHide = () => save(true)
+    const saveInterval = window.setInterval(() => save(), SAVE_INTERVAL_MS)
+    const engagementInterval = window.setInterval(recordEngagement, ENGAGEMENT_CHECK_MS)
+    const onPageHide = () => {
+      recordEngagement()
+      save(true)
+    }
     const onVisibilityChange = () => {
-      if (document.visibilityState === 'hidden') save(true)
+      if (document.visibilityState === 'hidden') {
+        recordEngagement()
+        save(true)
+      }
     }
 
     window.addEventListener('pagehide', onPageHide)
@@ -71,14 +108,31 @@ export function RecentLearningBeacon({
     return () => {
       window.clearTimeout(initialSaveTimer)
       window.clearTimeout(restoreTimer)
-      window.clearInterval(interval)
+      window.clearInterval(saveInterval)
+      window.clearInterval(engagementInterval)
       window.removeEventListener('pagehide', onPageHide)
       document.removeEventListener('visibilitychange', onVisibilityChange)
+      recordEngagement()
       save(true)
     }
   }, [fallbackTitle, href, resourceId])
 
   return null
+}
+
+function markMissionComplete(missionId: string) {
+  const today = localDateKey()
+  updateLocalStudentState<MissionState>(
+    STUDENT_OS_STORAGE.missions,
+    { date: today, completed: [] },
+    (current) => {
+      const completed = current.date === today ? current.completed : []
+      return {
+        date: today,
+        completed: completed.includes(missionId) ? completed : [...completed, missionId],
+      }
+    },
+  )
 }
 
 function readResumePosition() {
@@ -94,4 +148,11 @@ function removeResumeParameter() {
   url.searchParams.delete('resume')
   const cleanUrl = `${url.pathname}${url.search}${url.hash}`
   window.history.replaceState(window.history.state, '', cleanUrl)
+}
+
+function localDateKey(date = new Date()) {
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
 }
