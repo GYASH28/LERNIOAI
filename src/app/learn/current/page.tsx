@@ -1,8 +1,17 @@
 import { redirect } from 'next/navigation'
 import { getCurrentUser } from '@/lib/auth'
 import { db } from '@/lib/db'
-import { getManifestSubjectsForSemester } from '@/lib/curriculum/manifest-data'
-import { getSubjectNotes } from '@/lib/curriculum/lesson-notes-loader'
+import {
+  getManifestSubject,
+  getManifestSubjectsForSemester,
+  type ManifestSubject,
+} from '@/lib/curriculum/manifest-data'
+import { enhanceSubject } from '@/lib/curriculum/enhanced-manifest'
+import {
+  findLessonBySlug,
+  getSubjectNotes,
+  normalizeLessonSlug,
+} from '@/lib/curriculum/lesson-notes-loader'
 
 export const dynamic = 'force-dynamic'
 
@@ -22,45 +31,119 @@ export default async function ContinueLearningPage() {
     }).catch(() => null),
   ])
 
-  if (recentLesson?.href && isSafeLessonHref(recentLesson.href)) {
-    const resumePosition = Math.max(0, Math.round(recentLesson.scrollPos || 0))
+  const validatedRecentHref = recentLesson?.href
+    ? resolveExistingLessonHref(recentLesson.href)
+    : null
+
+  if (validatedRecentHref) {
+    const resumePosition = Math.max(0, Math.round(recentLesson?.scrollPos || 0))
     redirect(
       resumePosition > 0
-        ? `${recentLesson.href}?resume=${resumePosition}`
-        : recentLesson.href,
+        ? `${validatedRecentHref}?resume=${resumePosition}`
+        : validatedRecentHref,
     )
   }
 
   const programme = profile?.departmentCode === 'DCIOT' ? 'DCIOT' : 'DCOMP'
   const semester = normalizeSemester(profile?.semesterNumber)
-  const subjects = getManifestSubjectsForSemester(programme, semester)
+  const fallback = firstExistingLessonHref(programme, semester)
 
-  for (const subject of subjects) {
-    const code = programme === 'DCIOT' && subject.alternateCode ? subject.alternateCode : subject.code
-    const notes = getSubjectNotes(code) ?? getSubjectNotes(subject.code)
-    const firstLesson = notes?.units.flatMap((unit) => unit.lessons)[0]
-    if (firstLesson) {
-      redirect(`/learn/${programme}/semester/${semester}/subject/${code}/lesson/${firstLesson.slug}`)
+  if (fallback) redirect(fallback)
+  redirect(`/learn/${programme}/semester/${semester}`)
+}
+
+function resolveExistingLessonHref(value: string) {
+  const match = value.match(
+    /^\/learn\/([^/]+)\/semester\/([1-6])\/subject\/([^/]+)\/lesson\/([^/?#]+)$/,
+  )
+  if (!match) return null
+
+  const programme = normalizeProgramme(match[1])
+  const semester = normalizeSemester(Number(match[2]))
+  const requestedSubjectCode = decodeURIComponent(match[3])
+  const requestedLessonSlug = decodeURIComponent(match[4])
+  if (!programme) return null
+
+  const subject = getManifestSubject(programme, semester, requestedSubjectCode)
+  if (!subject) return null
+
+  return canonicalLessonHref(
+    programme,
+    semester,
+    subject,
+    requestedLessonSlug,
+  )
+}
+
+function firstExistingLessonHref(programme: 'DCOMP' | 'DCIOT', semester: number) {
+  for (const subject of getManifestSubjectsForSemester(programme, semester)) {
+    const routeCode = routeSubjectCode(programme, subject)
+    const notes = getSubjectNotes(routeCode) ?? getSubjectNotes(subject.code)
+    const firstDetailedLesson = notes?.units.flatMap((unit) => unit.lessons)[0]
+    if (firstDetailedLesson) {
+      return lessonHref(programme, semester, routeCode, firstDetailedLesson.slug)
+    }
+
+    const firstManifestLesson = enhanceSubject(subject).units
+      .flatMap((unit) => unit.lessons)[0]
+    if (firstManifestLesson) {
+      return lessonHref(programme, semester, routeCode, firstManifestLesson.slug)
     }
   }
 
-  const firstSubject = subjects[0]
-  if (firstSubject) {
-    const code = programme === 'DCIOT' && firstSubject.alternateCode
-      ? firstSubject.alternateCode
-      : firstSubject.code
-    redirect(`/learn/${programme}/semester/${semester}/subject/${code}`)
+  return null
+}
+
+function canonicalLessonHref(
+  programme: 'DCOMP' | 'DCIOT',
+  semester: number,
+  subject: ManifestSubject,
+  requestedSlug: string,
+) {
+  const routeCode = routeSubjectCode(programme, subject)
+  const noteCodes = [routeCode, subject.code, subject.alternateCode]
+    .filter((value): value is string => Boolean(value))
+
+  for (const code of noteCodes) {
+    const detailed = findLessonBySlug(code, requestedSlug)
+    if (detailed) {
+      return lessonHref(programme, semester, routeCode, detailed.lesson.slug)
+    }
   }
 
-  redirect(`/learn/${programme}/semester/${semester}`)
+  const normalizedRequested = normalizeLessonSlug(requestedSlug)
+  const manifestLesson = enhanceSubject(subject).units
+    .flatMap((unit) => unit.lessons)
+    .find((lesson) => normalizeLessonSlug(lesson.slug) === normalizedRequested)
+
+  return manifestLesson
+    ? lessonHref(programme, semester, routeCode, manifestLesson.slug)
+    : null
+}
+
+function routeSubjectCode(programme: 'DCOMP' | 'DCIOT', subject: ManifestSubject) {
+  return programme === 'DCIOT' && subject.alternateCode
+    ? subject.alternateCode
+    : subject.code
+}
+
+function lessonHref(
+  programme: 'DCOMP' | 'DCIOT',
+  semester: number,
+  subjectCode: string,
+  lessonSlug: string,
+) {
+  return `/learn/${programme}/semester/${semester}/subject/${encodeURIComponent(subjectCode)}/lesson/${encodeURIComponent(lessonSlug)}`
+}
+
+function normalizeProgramme(value: string): 'DCOMP' | 'DCIOT' | null {
+  const normalized = value.trim().toUpperCase()
+  if (normalized === 'DCOMP' || normalized === 'DCIOT') return normalized
+  return null
 }
 
 function normalizeSemester(value: number | null | undefined) {
   return Number.isInteger(value) && Number(value) >= 1 && Number(value) <= 6
     ? Number(value)
     : 3
-}
-
-function isSafeLessonHref(value: string) {
-  return /^\/learn\/[A-Za-z0-9_-]+\/semester\/[1-6]\/subject\/[A-Za-z0-9_-]+\/lesson\/[A-Za-z0-9_-]+$/.test(value)
 }
