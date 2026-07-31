@@ -1,8 +1,10 @@
 import { redirect } from 'next/navigation'
 import { Code2, Lightbulb, BookOpen } from 'lucide-react'
 import { getCurrentUser } from '@/lib/auth'
+import { getCurrentLearningContext } from '@/lib/learning/current-learning-context'
 import { CodePlayground } from '@/components/learning/code-playground'
 import { AuthenticatedPageShell } from '@/components/app/authenticated-page-shell'
+import { CurrentLearningContextCard } from '@/components/app/current-learning-context-card'
 
 export const dynamic = 'force-dynamic'
 
@@ -10,9 +12,11 @@ export default async function CodingPage() {
   const user = await getCurrentUser()
   if (!user) redirect('/sign-in?callbackUrl=/coding')
 
+  const context = await getCurrentLearningContext(user.id)
+
   return (
     <AuthenticatedPageShell current="coding" maxWidth="5xl">
-      <header className="mb-6">
+      <header className="mb-5">
         <div className="flex items-start gap-3">
           <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-green-500/10">
             <Code2 className="h-5 w-5 text-green-500" />
@@ -25,6 +29,10 @@ export default async function CodingPage() {
           </div>
         </div>
       </header>
+
+      <div className="mb-5">
+        <CurrentLearningContextCard context={context} compact />
+      </div>
 
       <CodePlayground language="c" />
 
