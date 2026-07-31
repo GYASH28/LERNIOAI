@@ -42,7 +42,7 @@ export const config = {
   matcher: [
     // Exclude from middleware:
     // - api/*             (API routes handle their own auth)
-    // - _next/static, _next/image, favicon.ico, brand/, etc. (static assets)
-    '/((?!api|_next/static|_next/image|favicon.ico|brand/|theme-no-flash.js|sw.js|robots.txt|sitemap.xml|manifest.webmanifest|lesson-notes).*)',
+    // - static public assets and the isolated HyperFrames composition
+    '/((?!api|_next/static|_next/image|favicon.ico|brand/|hyperframes/|theme-no-flash.js|sw.js|robots.txt|sitemap.xml|manifest.webmanifest|lesson-notes).*)',
   ],
 }
