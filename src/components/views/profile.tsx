@@ -605,8 +605,7 @@ export function ProfileView() {
                         <p className="text-xs font-medium mt-1">{department.headName}</p>
                         <a
                           href={department.officialUrl}
-                          target="_blank"
-                          rel="noreferrer"
+                          target="_blank" rel="noopener noreferrer"
                           className="mt-1 inline-flex items-center gap-1 text-meta text-primary hover:underline"
                         >
                           Official source <ExternalLink className="h-3 w-3" />

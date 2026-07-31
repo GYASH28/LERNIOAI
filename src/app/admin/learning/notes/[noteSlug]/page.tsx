@@ -56,7 +56,7 @@ export default async function AdminLessonNotePreviewPage({
               <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">{access.summary}</p>
             </div>
             <Button asChild>
-              <Link href={`/admin/learning/notes/${preview.slug}/print`} target="_blank">
+              <Link href={`/admin/learning/notes/${preview.slug}/print`} target="_blank" rel="noopener noreferrer">
                 <Printer className="h-4 w-4" />
                 Print HTML
               </Link>

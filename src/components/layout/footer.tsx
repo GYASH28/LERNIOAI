@@ -43,8 +43,7 @@ export function Footer() {
               </Link>
               <a
                 href="https://github.com/GYASH28/LERNIOAI"
-                target="_blank"
-                rel="noopener noreferrer"
+                target="_blank" rel="noopener noreferrer"
                 className="flex items-center gap-1 transition-colors hover:text-foreground"
               >
                 <Github className="h-3 w-3" />

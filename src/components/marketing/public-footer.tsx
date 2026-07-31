@@ -79,8 +79,7 @@ export function PublicFooter() {
             </p>
             <a
               href="https://github.com/GYASH28/LERNIOAI"
-              target="_blank"
-              rel="noopener noreferrer"
+              target="_blank" rel="noopener noreferrer"
               className="mt-4 inline-flex h-9 min-h-9 items-center gap-2 rounded-md border border-border bg-background px-3 text-sm font-medium text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <Github className="h-4 w-4" aria-hidden="true" />
