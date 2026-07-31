@@ -8,7 +8,7 @@ function directive(policy: string, name: string) {
 }
 
 describe('buildContentSecurityPolicy', () => {
-  it('allows nonced app scripts, YouTube embeds and configured storage without broad https sources', () => {
+  it('allows nonced app scripts, same-origin compositions, YouTube embeds and configured storage without broad https sources', () => {
     const policy = buildContentSecurityPolicy({
       nonce: 'abc123',
       nodeEnv: 'production',
@@ -17,12 +17,13 @@ describe('buildContentSecurityPolicy', () => {
 
     expect(directive(policy, 'script-src')).toBe("script-src 'self' 'nonce-abc123' https://www.youtube.com")
     expect(directive(policy, 'frame-src')).toBe(
-      'frame-src https://www.youtube-nocookie.com https://www.youtube.com https://cdn.lernio.example',
+      "frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com https://cdn.lernio.example",
     )
     expect(directive(policy, 'img-src')).toBe("img-src 'self' data: blob: https://i.ytimg.com https://cdn.lernio.example")
     expect(directive(policy, 'connect-src')).toBe("connect-src 'self' https://cdn.lernio.example")
     expect(directive(policy, 'connect-src')).not.toMatch(/\shttps:(\s|$)/)
     expect(directive(policy, 'img-src')).not.toMatch(/\shttps:(\s|$)/)
+    expect(directive(policy, 'frame-src')).not.toMatch(/\shttps:(\s|$)/)
     expect(policy).toContain('upgrade-insecure-requests')
   })
 
