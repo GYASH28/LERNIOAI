@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
+import { localDateString, formatLocalDate } from '@/lib/timezone'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
@@ -74,7 +75,7 @@ export function PlannerView() {
   }
   useEffect(() => { load() }, [])
 
-  const today = new Date().toISOString().slice(0, 10)
+  const today = localDateString()
   const todayTasks = tasks.filter(t => !t.scheduledDate || t.scheduledDate === today)
   const completedToday = todayTasks.filter(t => t.completed).length
   const todayMins = todayTasks.reduce((sum, t) => sum + (t.durationMins || 0), 0)
@@ -157,7 +158,7 @@ export function PlannerView() {
           <h2 className="text-lg font-bold">
             <span className="text-gradient">Study Planner</span>
           </h2>
-          <p className="text-sm text-muted-foreground">{new Date().toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long' })}</p>
+          <p className="text-sm text-muted-foreground">{formatLocalDate(localDateString())}</p>
         </div>
         {daysToExam !== null && (
           <div className="text-center px-4 py-2 rounded-xl bg-rose-500/10 border border-rose-500/20">
@@ -265,7 +266,7 @@ export function PlannerView() {
         <TabsContent value="week">
           <div className="grid grid-cols-1 sm:grid-cols-7 gap-2">
             {weekDays.map((day) => {
-              const dateStr = day.toISOString().slice(0, 10)
+              const dateStr = localDateString(day)
               const dayTasks = tasks.filter((t) => t.scheduledDate === dateStr)
               const isToday = dateStr === today
               return (
@@ -359,12 +360,12 @@ function TaskItem({ task, onToggle, onDelete }: { task: PlannerTask; onToggle: (
   )
 }
 
-function AddTaskForm({ subjects, onSaved }: { subjects: any[]; onSaved: () => void }) {
+function AddTaskForm({ subjects, onSaved }: { subjects: Array<{ id: string; name: string; code: string }>; onSaved: () => void }) {
   const [title, setTitle] = useState('')
   const [type, setType] = useState('learn')
   const [subjectId, setSubjectId] = useState('')
   const [duration, setDuration] = useState(30)
-  const [date, setDate] = useState(new Date().toISOString().slice(0, 10))
+  const [date, setDate] = useState(localDateString())
   const [priority, setPriority] = useState(2)
 
   const save = async () => {

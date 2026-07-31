@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { PublicPageShell } from '@/components/marketing/public-page-shell'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
@@ -90,7 +91,7 @@ export default async function PrivacyPage() {
           <p>
             Questions about privacy? Email{' '}
             <a href="mailto:support@lernio.ai">support@lernio.ai</a> or visit{' '}
-            <a href="/support">the support page</a>.
+            <Link href="/support">the support page</Link>.
           </p>
         </div>
       </article>

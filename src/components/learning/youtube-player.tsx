@@ -176,8 +176,7 @@ export function YouTubePlayer({
           <h3 className="text-sm font-semibold text-foreground line-clamp-2">{title}</h3>
           <a
             href={url}
-            target="_blank"
-            rel="noopener noreferrer"
+            target="_blank" rel="noopener noreferrer"
             className="inline-flex shrink-0 items-center gap-1 text-xs text-muted-foreground hover:text-primary transition-colors"
             aria-label="Watch on YouTube (opens in new tab)"
           >

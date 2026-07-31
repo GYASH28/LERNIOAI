@@ -231,7 +231,7 @@ export function CrDashboardClient({ userRole, userId, classInfo, userClass }: Cr
           <p className="mt-2 text-xs text-muted-foreground">
             Message the admin directly for escalations, academic concerns, or scheduling issues.
           </p>
-          <p className="mt-3 text-xs text-muted-foreground">Coming soon — direct messaging with admin.</p>
+          <p className="mt-3 text-xs text-muted-foreground">Direct messaging with admin is not yet available. Use the Feedback page to reach the team.</p>
         </div>
       )}
     </div>

@@ -8,8 +8,6 @@ import { GlobalExperienceRuntime } from "@/components/app/global-experience-runt
 import { RouteLoadingBar } from "@/components/app/route-loading-bar";
 import { RegisterSW } from "@/components/app/register-sw";
 import { KeyboardShortcuts } from "@/components/app/keyboard-shortcuts";
-import { AnimatedBackground } from "@/components/ui/animated-background";
-import { CustomCursor } from "@/components/ui/custom-cursor";
 import { CommandPalette } from "@/components/ui/command-palette";
 
 // ──────────────────────────────────────────────────────────────────────────
@@ -158,8 +156,6 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
-        {/* Calming animated background */}
-        <AnimatedBackground />
         <ThemeProvider>
           <LernioMotionProvider>
             <RouteLoadingBar />
@@ -168,7 +164,6 @@ export default async function RootLayout({
             <CommandPalette />
             <KeyboardShortcuts />
             <RegisterSW />
-            <CustomCursor />
           </LernioMotionProvider>
         </ThemeProvider>
       </body>

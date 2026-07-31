@@ -19,6 +19,34 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { FlashcardPlayer } from '@/components/ui/flashcard-player'
 
+interface RevisionScheduleItem {
+  id: string
+  topicId: string
+  state: string
+  nextDueDate: string | Date
+  easeFactor: number
+  interval: number
+  repetitions: number
+  lapses: number
+  topic: {
+    id: string
+    title: string
+    description?: string | null
+    unit?: {
+      number: number
+      subject?: {
+        name: string
+        code: string
+        mascotKey?: string | null
+      } | null
+    } | null
+  }
+  sourceLesson?: {
+    title: string
+    canonicalUrl?: string
+  } | null
+}
+
 const STATE_COLORS: Record<string, string> = {
   new: 'bg-gray-500/10 text-gray-600',
   learning: 'bg-violet-500/10 text-violet-600',
@@ -29,8 +57,8 @@ const STATE_COLORS: Record<string, string> = {
 }
 
 export function RevisionView() {
-  const [data, setData] = useState<{ dueToday: any[]; overdue: any[]; upcoming: any[]; all: any[] } | null>(null)
-  const [session, setSession] = useState<{ items: any[]; idx: number; phase: 'study' | 'rate' } | null>(null)
+  const [data, setData] = useState<{ dueToday: RevisionScheduleItem[]; overdue: RevisionScheduleItem[]; upcoming: RevisionScheduleItem[]; all: RevisionScheduleItem[] } | null>(null)
+  const [session, setSession] = useState<{ items: RevisionScheduleItem[]; idx: number; phase: 'study' | 'rate' } | null>(null)
   const [showFront, setShowFront] = useState(true)
   const [mode, setMode] = useState<'classic' | 'flashcards'>('classic')
   const { pushMascotToast } = useAppStore()
@@ -40,7 +68,7 @@ export function RevisionView() {
   }
   useEffect(() => { load() }, [])
 
-  const startSession = (items: any[]) => {
+  const startSession = (items: RevisionScheduleItem[]) => {
     if (items.length === 0) return
     setSession({ items, idx: 0, phase: 'study' })
     setShowFront(true)
@@ -86,7 +114,7 @@ export function RevisionView() {
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center gap-3 mb-4">
-              <Mascot mascot={(subject?.mascotKey as any) || 'leo'} state="explaining" size={48} />
+              <Mascot mascot={(subject?.mascotKey || 'leo') as 'leo'} state="explaining" size={48} />
               <div>
                 <p className="text-xs text-muted-foreground">{subject?.name} · Unit {topic?.unit?.number}</p>
                 <p className="font-medium">{topic?.title}</p>
@@ -109,17 +137,26 @@ export function RevisionView() {
                     <Layers className="h-8 w-8 text-primary mb-2" />
                     <p className="text-sm text-muted-foreground mb-3">Flashcard · Front</p>
                     <p className="text-lg font-medium">{topic?.title}</p>
-                    <p className="text-xs text-muted-foreground mt-1">Click to reveal the answer</p>
+                    {showFront ? (
+                      <p className="text-xs text-muted-foreground mt-1">Click to reveal the answer</p>
+                    ) : null}
                   </div>
                   {!showFront ? (
                     <div className="mt-3 rounded-xl bg-muted/50 p-4 text-center">
                       <p className="text-sm">{topic?.description || `Review the key concepts of ${topic?.title}.`}</p>
                     </div>
                   ) : null}
-                  <Button onClick={() => { setShowFront(false); setSession({ ...session, phase: 'rate' }) }} className="w-full mt-3 gap-2">
-                    {showFront ? 'Reveal Answer' : 'Show Rating'}
-                    <ChevronRight className="h-4 w-4" />
-                  </Button>
+                  {showFront ? (
+                    <Button onClick={() => setShowFront(false)} className="w-full mt-3 gap-2">
+                      Reveal Answer
+                      <ChevronRight className="h-4 w-4" />
+                    </Button>
+                  ) : (
+                    <Button onClick={() => setSession({ ...session, phase: 'rate' })} className="w-full mt-3 gap-2">
+                      Show Rating
+                      <ChevronRight className="h-4 w-4" />
+                    </Button>
+                  )}
                 </motion.div>
               )}
 
@@ -285,17 +322,17 @@ export function RevisionView() {
   )
 }
 
-function RevisionItem({ item }: { item: any }) {
+function RevisionItem({ item }: { item: RevisionScheduleItem }) {
   const [snoozed, setSnoozed] = useState(false)
   const topic = item.topic
   const subject = topic?.unit?.subject
   const sourceLesson = item.sourceLesson
-  const snooze = async () => {
-    await fetch('/api/revision/due', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ scheduleId: item.id, quality: 2, topicId: item.topicId }),
-    })
+  const snooze = () => {
+    // Snooze is a client-side temporary dismissal — it does NOT call the
+    // revision API or send a quality rating. Sending quality=2 would
+    // lapse the SM-2 schedule and damage the ease factor, which is the
+    // wrong behavior for a snooze (the student hasn't reviewed the card,
+    // they just want to see it later).
     setSnoozed(true)
   }
   if (snoozed) return null

@@ -80,8 +80,7 @@ export default async function SupportPage() {
                 open an issue on{' '}
                 <a
                   href="https://github.com/GYASH28/LERNIOAI"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target="_blank" rel="noopener noreferrer"
                   className="font-medium text-foreground underline underline-offset-2 hover:text-primary"
                 >
                   GitHub

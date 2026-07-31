@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { User, Bell, Palette, Shield, Download, HelpCircle } from 'lucide-react'
 import { usePrefs } from '@/components/theme-provider'
 
@@ -77,7 +78,7 @@ export function SettingsTabs({ initialUser }: SettingsTabsProps) {
               <p className="mt-1 rounded-md border border-border bg-card px-3 py-2 text-sm">{initialUser.dailyMins} minutes</p>
             </div>
             <p className="text-xs text-muted-foreground">
-              To edit your profile, visit the <a href="/profile" className="text-primary hover:underline">Profile page</a>.
+              To edit your profile, visit the <Link href="/profile" className="text-primary hover:underline">Profile page</Link>.
             </p>
           </div>
         )}
@@ -183,14 +184,14 @@ export function SettingsTabs({ initialUser }: SettingsTabsProps) {
 
         {tab === 'help' && (
           <div className="space-y-3">
-            <a href="/help" className="block rounded-md border border-border bg-card p-4 hover:bg-accent transition-colors">
+            <Link href="/help" className="block rounded-md border border-border bg-card p-4 hover:bg-accent transition-colors">
               <h3 className="text-sm font-semibold">Help Center</h3>
               <p className="mt-1 text-xs text-muted-foreground">Browse articles and tutorials.</p>
-            </a>
-            <a href="/support" className="block rounded-md border border-border bg-card p-4 hover:bg-accent transition-colors">
+            </Link>
+            <Link href="/support" className="block rounded-md border border-border bg-card p-4 hover:bg-accent transition-colors">
               <h3 className="text-sm font-semibold">Contact Support</h3>
               <p className="mt-1 text-xs text-muted-foreground">Get help from the Lernio team.</p>
-            </a>
+            </Link>
           </div>
         )}
       </div>

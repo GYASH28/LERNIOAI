@@ -158,8 +158,7 @@ function ReviewQueueView({
                     <div className="font-medium">{item.title ?? item.subjectMappings[0]?.subjectName ?? item.candidateId}</div>
                     <a
                       href={item.canonicalUrl}
-                      target="_blank"
-                      rel="noreferrer"
+                      target="_blank" rel="noopener noreferrer"
                       className="break-all text-xs text-primary underline-offset-2 hover:underline"
                     >
                       {item.canonicalUrl}
@@ -242,8 +241,7 @@ function PromotionReadyPanel({
                       <div className="font-medium">{item.title ?? item.candidateId}</div>
                       <a
                         href={item.canonicalUrl}
-                        target="_blank"
-                        rel="noreferrer"
+                        target="_blank" rel="noopener noreferrer"
                         className="break-all text-xs text-primary underline-offset-2 hover:underline"
                       >
                         {item.canonicalUrl}

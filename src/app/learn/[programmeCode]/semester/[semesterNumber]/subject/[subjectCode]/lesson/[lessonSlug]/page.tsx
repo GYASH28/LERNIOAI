@@ -246,8 +246,7 @@ export default async function LessonStudioPage({
                 {studio.resources.primaryVideo.url ? (
                   <a
                     href={studio.resources.primaryVideo.url}
-                    target="_blank"
-                    rel="noreferrer"
+                    target="_blank" rel="noopener noreferrer"
                     className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-border px-3 text-sm font-medium hover:bg-muted"
                   >
                     <ExternalLink className="h-4 w-4" />
@@ -272,8 +271,7 @@ export default async function LessonStudioPage({
                   <a
                     key={video.lessonResourceId}
                     href={video.url ?? '#'}
-                    target="_blank"
-                    rel="noreferrer"
+                    target="_blank" rel="noopener noreferrer"
                     className="flex items-center gap-3 rounded-md border border-border bg-background p-3 hover:border-primary/40 hover:bg-accent/5 transition-colors"
                   >
                     {video.thumbnailUrl ? (
@@ -306,8 +304,7 @@ export default async function LessonStudioPage({
                   <a
                     key={resource.lessonResourceId}
                     href={resource.url ?? '#'}
-                    target="_blank"
-                    rel="noreferrer"
+                    target="_blank" rel="noopener noreferrer"
                     className="flex items-center gap-3 rounded-md border border-border bg-background p-3 hover:border-primary/40 hover:bg-accent/5 transition-colors"
                   >
                     <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded bg-primary/10">
@@ -396,8 +393,7 @@ export default async function LessonStudioPage({
                       {document.htmlHref ? (
                         <a
                           href={document.htmlHref}
-                          target="_blank"
-                          rel="noreferrer"
+                          target="_blank" rel="noopener noreferrer"
                           className="inline-flex items-center gap-2 text-sm font-medium text-primary"
                         >
                           <ExternalLink className="h-4 w-4" />
@@ -423,9 +419,9 @@ export default async function LessonStudioPage({
             ) : !getSubjectNotes(studio.subject.code) ? (
               <div className="rounded-lg border border-dashed border-border bg-background/50 p-4 text-center">
                 <FileText className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-                <p className="text-sm font-medium">Detailed notes coming soon</p>
+                <p className="text-sm font-medium">Download the PDF summary</p>
                 <p className="text-xs text-muted-foreground mt-1">
-                  We&apos;re writing comprehensive study notes for this subject. Check back soon!
+                  Comprehensive study notes are available as a downloadable PDF for this subject. for this subject.
                 </p>
                 {/* PDF fallback — link to the subject's PDF if it exists */}
                 {(() => {

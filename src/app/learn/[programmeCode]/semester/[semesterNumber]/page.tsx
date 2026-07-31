@@ -250,8 +250,7 @@ function ManifestSemesterView({
           <div className="grid gap-3 sm:grid-cols-2">
             <a
               href="https://cwit.mespune.org/wp-content/uploads/2021/07/COMPUTER-MPECS-23-CURRICULUM.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+              target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-3 rounded-lg border border-border bg-card p-4 transition-colors hover:bg-accent/5"
             >
               <FileText className="h-5 w-5 text-primary shrink-0" />
@@ -262,8 +261,7 @@ function ManifestSemesterView({
             </a>
             <a
               href="https://cwit.mespune.org/wp-content/uploads/2023/07/IOTR23_ALL_Curriculam-FINALV.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+              target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-3 rounded-lg border border-border bg-card p-4 transition-colors hover:bg-accent/5"
             >
               <FileText className="h-5 w-5 text-primary shrink-0" />
