@@ -18,12 +18,17 @@ export default async function ContinueLearningPage() {
     db.recentlyViewed.findFirst({
       where: { userId: user.id, resourceType: 'lesson' },
       orderBy: { viewedAt: 'desc' },
-      select: { href: true },
+      select: { href: true, scrollPos: true },
     }).catch(() => null),
   ])
 
   if (recentLesson?.href && isSafeLessonHref(recentLesson.href)) {
-    redirect(recentLesson.href)
+    const resumePosition = Math.max(0, Math.round(recentLesson.scrollPos || 0))
+    redirect(
+      resumePosition > 0
+        ? `${recentLesson.href}?resume=${resumePosition}`
+        : recentLesson.href,
+    )
   }
 
   const programme = profile?.departmentCode === 'DCIOT' ? 'DCIOT' : 'DCOMP'
