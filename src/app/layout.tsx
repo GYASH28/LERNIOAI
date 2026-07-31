@@ -11,6 +11,7 @@ import { KeyboardShortcuts } from "@/components/app/keyboard-shortcuts";
 import { AnimatedBackground } from "@/components/ui/animated-background";
 import { CustomCursor } from "@/components/ui/custom-cursor";
 import { CommandPalette } from "@/components/ui/command-palette";
+import { StudentOSLauncher } from "@/components/student-os/student-os-launcher";
 
 // ──────────────────────────────────────────────────────────────────────────
 // WHITE-SCREEN FLASH FIX
@@ -164,6 +165,7 @@ export default async function RootLayout({
           <LernioMotionProvider>
             <RouteLoadingBar />
             {children}
+            <StudentOSLauncher />
             <GlobalExperienceRuntime />
             <CommandPalette />
             <KeyboardShortcuts />
