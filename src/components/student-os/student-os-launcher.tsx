@@ -1,9 +1,11 @@
 'use client'
 
 /**
- * Student OS is now the /learn experience itself.
- * Keep this no-op export temporarily so the root layout remains compatible
- * while avoiding a duplicated floating learning launcher.
+ * Compatibility export for the root layout.
+ *
+ * The former floating Student OS launcher intentionally renders nothing:
+ * Student OS capabilities now live directly inside /learn, preventing a
+ * second competing learning home from appearing over the main application.
  */
 export function StudentOSLauncher() {
   return null
