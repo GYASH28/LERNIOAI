@@ -21,7 +21,7 @@ const DEFAULT_EMOJIS: Record<string, { emoji: string; title: string; desc: strin
   'no-practice': { emoji: '✏️', title: 'Ready to practice?', desc: 'Start a practice session to improve.' },
   'no-exams': { emoji: '🕐', title: 'No exams scheduled yet', desc: 'Check back later for exam dates.' },
   'no-leaderboard': { emoji: '🏆', title: 'Be the first to earn XP!', desc: 'Start learning to climb the ranks.' },
-  'no-materials': { emoji: '📚', title: 'Materials coming soon', desc: 'Notes and resources will appear here.' },
+  'no-materials': { emoji: '📚', title: 'No materials found', desc: 'Try a different search or browse all subjects.' },
   'no-coding': { emoji: '🤖', title: 'Write your first line of code!', desc: 'Pick a language and start coding.' },
   'no-labs': { emoji: '🧪', title: 'Pick an experiment to start', desc: 'Interactive simulations await.' },
   'no-revision': { emoji: '🧠', title: 'Create flashcards to revise', desc: 'Your revision cards will appear here.' },

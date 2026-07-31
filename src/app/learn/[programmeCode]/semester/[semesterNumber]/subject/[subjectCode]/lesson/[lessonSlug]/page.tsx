@@ -423,9 +423,9 @@ export default async function LessonStudioPage({
             ) : !getSubjectNotes(studio.subject.code) ? (
               <div className="rounded-lg border border-dashed border-border bg-background/50 p-4 text-center">
                 <FileText className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-                <p className="text-sm font-medium">Detailed notes coming soon</p>
+                <p className="text-sm font-medium">Download the PDF summary</p>
                 <p className="text-xs text-muted-foreground mt-1">
-                  We&apos;re writing comprehensive study notes for this subject. Check back soon!
+                  Comprehensive study notes are available as a downloadable PDF for this subject. for this subject.
                 </p>
                 {/* PDF fallback — link to the subject's PDF if it exists */}
                 {(() => {
