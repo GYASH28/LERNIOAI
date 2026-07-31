@@ -1,4 +1,4 @@
-export const HYPERFRAMES_INTRO_STORAGE_KEY = 'lernio-hyperframes-intro-v1'
+export const HYPERFRAMES_INTRO_STORAGE_KEY = 'lernio-hyperframes-intro-v2'
 
 interface HyperframesIntroTiming {
   full: number
@@ -7,7 +7,7 @@ interface HyperframesIntroTiming {
 }
 
 export const HYPERFRAMES_INTRO_TIMING: HyperframesIntroTiming = {
-  full: 3400,
-  compact: 2400,
-  reduced: 850,
+  full: 3600,
+  compact: 2800,
+  reduced: 700,
 }
