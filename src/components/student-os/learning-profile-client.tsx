@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import {
   ArrowLeft,
   Check,
@@ -62,23 +62,25 @@ export function LearningProfileClient({
   dailyMinutes,
   preferredLanguage,
 }: LearningProfileClientProps) {
-  const fallback: StudentLearningProfile = {
+  const fallback = useMemo<StudentLearningProfile>(() => ({
     ...DEFAULT_STUDENT_PROFILE,
     programme,
     semester,
     dailyMinutes,
     weeklyGoalMinutes: dailyMinutes * 5,
     language: languageFromDatabase(preferredLanguage),
-  }
+  }), [dailyMinutes, preferredLanguage, programme, semester])
+
   const [savedProfile, setSavedProfile, hydrated] = useLocalState(STUDENT_OS_STORAGE.profile, fallback)
   const [draft, setDraft] = useState<StudentLearningProfile>(fallback)
   const [draftLoaded, setDraftLoaded] = useState(false)
   const [saving, setSaving] = useState(false)
 
-  if (hydrated && !draftLoaded) {
+  useEffect(() => {
+    if (!hydrated || draftLoaded) return
     setDraft(savedProfile)
     setDraftLoaded(true)
-  }
+  }, [draftLoaded, hydrated, savedProfile])
 
   const update = <K extends keyof StudentLearningProfile>(key: K, value: StudentLearningProfile[K]) => {
     setDraft((current) => ({ ...current, [key]: value }))
@@ -127,7 +129,7 @@ export function LearningProfileClient({
             </div>
             <h1 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">Teach me the way I actually study.</h1>
             <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground sm:text-base">
-              These choices control recommendations, mission size, mascot guidance and media preferences. They do not unlock fake content or change official curriculum records.
+              These choices control recommendations, mission size, mascot guidance and media preferences. They do not change official curriculum records.
             </p>
             <Link href="/student-os" className="mt-5 inline-flex items-center gap-2 rounded-xl border border-border bg-background/70 px-4 py-2.5 text-sm font-semibold hover:bg-accent">
               <ArrowLeft className="h-4 w-4" /> Back to Learning Universe
@@ -160,55 +162,23 @@ export function LearningProfileClient({
               {[1, 2, 3, 4, 5, 6].map((value) => <option key={value} value={value}>Semester {value}</option>)}
             </select>
           </label>
-          <p className="mt-3 text-xs leading-5 text-muted-foreground">Official department and semester changes should still be made from your main profile when required.</p>
+          <p className="mt-3 text-xs leading-5 text-muted-foreground">Official department and semester changes should still be made from your main profile.</p>
         </ProfileCard>
 
         <ProfileCard icon={Clock3} eyebrow="Available time" title="Study load">
-          <label className="block">
-            <div className="flex items-center justify-between text-sm">
-              <span className="font-semibold">Daily target</span>
-              <span className="font-bold text-primary">{draft.dailyMinutes} minutes</span>
-            </div>
-            <input
-              type="range"
-              min={15}
-              max={240}
-              step={15}
-              value={draft.dailyMinutes}
-              onChange={(event) => update('dailyMinutes', Number(event.target.value))}
-              className="mt-3 w-full accent-primary"
-            />
-          </label>
-          <label className="mt-6 block">
-            <div className="flex items-center justify-between text-sm">
-              <span className="font-semibold">Weekly focused goal</span>
-              <span className="font-bold text-primary">{draft.weeklyGoalMinutes} minutes</span>
-            </div>
-            <input
-              type="range"
-              min={60}
-              max={1200}
-              step={30}
-              value={draft.weeklyGoalMinutes}
-              onChange={(event) => update('weeklyGoalMinutes', Number(event.target.value))}
-              className="mt-3 w-full accent-primary"
-            />
-          </label>
+          <RangeControl label="Daily target" value={draft.dailyMinutes} min={15} max={240} step={15} suffix="minutes" onChange={(value) => update('dailyMinutes', value)} />
+          <div className="mt-6">
+            <RangeControl label="Weekly focused goal" value={draft.weeklyGoalMinutes} min={60} max={1200} step={30} suffix="minutes" onChange={(value) => update('weeklyGoalMinutes', value)} />
+          </div>
           <div className="mt-5 rounded-2xl bg-muted/50 p-4 text-sm leading-6">
-            Lernio will keep daily missions near <strong>{draft.dailyMinutes} minutes</strong> and avoid filling every minute with work.
+            Lernio will keep daily missions near <strong>{draft.dailyMinutes} minutes</strong> and preserve buffer time.
           </div>
         </ProfileCard>
 
         <ProfileCard icon={Languages} eyebrow="Explanation style" title="Language">
           <div className="space-y-3">
             {languageOptions.map((option) => (
-              <ChoiceButton
-                key={option.value}
-                selected={draft.language === option.value}
-                title={option.label}
-                description={option.description}
-                onClick={() => update('language', option.value)}
-              />
+              <ChoiceButton key={option.value} selected={draft.language === option.value} title={option.label} description={option.description} onClick={() => update('language', option.value)} />
             ))}
           </div>
         </ProfileCard>
@@ -216,13 +186,7 @@ export function LearningProfileClient({
         <ProfileCard icon={Gauge} eyebrow="Learning behaviour" title="Preferred starting point">
           <div className="grid gap-3 sm:grid-cols-2">
             {styleOptions.map((option) => (
-              <ChoiceButton
-                key={option.value}
-                selected={draft.learningStyle === option.value}
-                title={option.label}
-                description={option.description}
-                onClick={() => update('learningStyle', option.value)}
-              />
+              <ChoiceButton key={option.value} selected={draft.learningStyle === option.value} title={option.label} description={option.description} onClick={() => update('learningStyle', option.value)} />
             ))}
           </div>
         </ProfileCard>
@@ -263,33 +227,15 @@ export function LearningProfileClient({
       </ProfileCard>
 
       <section className="grid gap-5 md:grid-cols-3">
-        <ToggleCard
-          icon={WifiOff}
-          title="Low-data mode"
-          description="Prefer text and shorter media where available."
-          enabled={draft.lowBandwidth}
-          onChange={(value) => update('lowBandwidth', value)}
-        />
-        <ToggleCard
-          icon={Volume2}
-          title="Mascot sounds"
-          description="Allow subtle success and reminder sounds."
-          enabled={draft.soundEnabled}
-          onChange={(value) => update('soundEnabled', value)}
-        />
-        <ToggleCard
-          icon={Sparkles}
-          title="Reduced motion"
-          description="Reduce mascot and decorative animation."
-          enabled={draft.reducedMotion}
-          onChange={(value) => update('reducedMotion', value)}
-        />
+        <ToggleCard icon={WifiOff} title="Low-data mode" description="Prefer text and shorter media where available." enabled={draft.lowBandwidth} onChange={(value) => update('lowBandwidth', value)} />
+        <ToggleCard icon={Volume2} title="Mascot sounds" description="Allow subtle success and reminder sounds." enabled={draft.soundEnabled} onChange={(value) => update('soundEnabled', value)} />
+        <ToggleCard icon={Sparkles} title="Reduced motion" description="Reduce mascot and decorative animation." enabled={draft.reducedMotion} onChange={(value) => update('reducedMotion', value)} />
       </section>
 
       <div className="sticky bottom-4 z-20 flex flex-col gap-3 rounded-2xl border border-border bg-background/90 p-3 shadow-xl backdrop-blur sm:flex-row sm:items-center sm:justify-between">
         <div className="px-2">
           <p className="text-sm font-semibold">Your plan is transparent and editable.</p>
-          <p className="text-xs text-muted-foreground">Daily time and language sync to your account; additional experience preferences are stored on this device.</p>
+          <p className="text-xs text-muted-foreground">Daily time and language sync to your account; experience preferences stay on this device.</p>
         </div>
         <button type="button" onClick={() => void save()} disabled={saving} className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60">
           <Save className="h-4 w-4" /> {saving ? 'Saving…' : 'Save learning profile'}
@@ -299,7 +245,7 @@ export function LearningProfileClient({
   )
 }
 
-function ProfileCard({ icon: Icon, eyebrow, title, children }: { icon: typeof Target; eyebrow: string; title: string; children: React.ReactNode }) {
+function ProfileCard({ icon: Icon, eyebrow, title, children }: { icon: typeof Target; eyebrow: string; title: string; children: ReactNode }) {
   return (
     <section className="rounded-3xl border border-border bg-card p-5 sm:p-6">
       <div className="mb-5 flex items-center gap-3">
@@ -316,20 +262,25 @@ function ProfileCard({ icon: Icon, eyebrow, title, children }: { icon: typeof Ta
 
 function ChoiceButton({ selected, title, description, onClick }: { selected: boolean; title: string; description: string; onClick: () => void }) {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={cn(
-        'relative w-full rounded-2xl border p-4 text-left transition-colors',
-        selected ? 'border-primary bg-primary/10' : 'border-border bg-background hover:border-primary/30',
-      )}
-    >
+    <button type="button" onClick={onClick} className={cn('relative w-full rounded-2xl border p-4 text-left transition-colors', selected ? 'border-primary bg-primary/10' : 'border-border bg-background hover:border-primary/30')}>
       <div className="flex items-start justify-between gap-3">
         <p className="font-semibold">{title}</p>
         {selected && <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground"><Check className="h-3 w-3" /></span>}
       </div>
       <p className="mt-1 text-xs leading-5 text-muted-foreground">{description}</p>
     </button>
+  )
+}
+
+function RangeControl({ label, value, min, max, step, suffix, onChange }: { label: string; value: number; min: number; max: number; step: number; suffix: string; onChange: (value: number) => void }) {
+  return (
+    <label className="block">
+      <div className="flex items-center justify-between text-sm">
+        <span className="font-semibold">{label}</span>
+        <span className="font-bold text-primary">{value} {suffix}</span>
+      </div>
+      <input type="range" min={min} max={max} step={step} value={value} onChange={(event) => onChange(Number(event.target.value))} className="mt-3 w-full accent-primary" />
+    </label>
   )
 }
 
