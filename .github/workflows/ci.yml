@@ -48,6 +48,7 @@ jobs:
       - run: npm run db:migrate:deploy
       - run: npm run curriculum:validate
       - run: npm run learning-os:validate
+      - run: npm run pages:audit
       - run: npm run lint
       - run: npm run typecheck
       - run: npm run test
