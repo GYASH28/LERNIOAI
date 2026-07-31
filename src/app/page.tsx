@@ -40,7 +40,7 @@ const softwareApplicationLd = {
   publisher: { '@type': 'Organization', name: 'Lernio AI' },
 }
 
-const introBootstrap = `(function(){try{var root=document.documentElement;var seen=sessionStorage.getItem(${JSON.stringify(HYPERFRAMES_INTRO_STORAGE_KEY)})==='complete';var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches||root.dataset.motion==='none';root.dataset.landingIntro=(seen||reduced)?'complete':'pending';}catch(e){document.documentElement.dataset.landingIntro='pending';}})();`
+const introBootstrap = `(function(){try{var root=document.documentElement;var seen=sessionStorage.getItem(${JSON.stringify(HYPERFRAMES_INTRO_STORAGE_KEY)})==='complete';var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches||root.dataset.motion==='none';root.dataset.landingIntro=(seen||reduced)?'complete':'pending';window.setTimeout(function(){if(root.dataset.landingIntro!=='complete'){root.dataset.landingIntro='complete';}},5200);}catch(e){document.documentElement.dataset.landingIntro='complete';}})();`
 
 export default async function LandingPage() {
   const authUser = await getCurrentUser().catch(() => null)
