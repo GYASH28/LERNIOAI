@@ -89,13 +89,23 @@ export function HyperframesIntro() {
   if (!visible) return null
 
   const speed = duration / HYPERFRAMES_INTRO_TIMING.full
+  const timingStyle = {
+    '--intro-duration': `${duration}ms`,
+    '--ring-one-duration': `${Math.max(600, Math.round(1600 * speed))}ms`,
+    '--ring-two-duration': `${Math.max(560, Math.round(1500 * speed))}ms`,
+    '--ring-three-duration': `${Math.max(520, Math.round(1300 * speed))}ms`,
+    '--core-duration': `${Math.max(460, Math.round(1100 * speed))}ms`,
+    '--card-duration': `${Math.max(420, Math.round(820 * speed))}ms`,
+    '--lockup-duration': `${Math.max(420, Math.round(820 * speed))}ms`,
+    '--lockup-delay': `${Math.round(2450 * speed)}ms`,
+  } as React.CSSProperties
 
   return (
     <div
       data-hyperframes-intro
       data-exiting={exiting ? 'true' : 'false'}
       className="fixed inset-0 z-[120] overflow-hidden bg-[#050713] text-white"
-      style={{ '--intro-speed': speed } as React.CSSProperties}
+      style={timingStyle}
       role="dialog"
       aria-label="Lernio opening sequence"
       aria-modal="true"
@@ -136,10 +146,10 @@ export function HyperframesIntro() {
                 <h2 className="mt-3 text-3xl font-black tracking-tight sm:text-5xl">Learn → practise → revise → understand</h2>
               </div>
               <div className="mx-auto mt-10 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
-                <MotionCard icon={BookOpen} label="Learn" helper="One clear lesson" delay="0ms" />
-                <MotionCard icon={PenTool} label="Practise" helper="Find the gap" delay="90ms" />
-                <MotionCard icon={RotateCcw} label="Revise" helper="Recall on time" delay="180ms" />
-                <MotionCard icon={BrainCircuit} label="Ask LEO" helper="Explain differently" delay="270ms" />
+                <MotionCard icon={BookOpen} label="Learn" helper="One clear lesson" delayMs={Math.round(1180 * speed)} />
+                <MotionCard icon={PenTool} label="Practise" helper="Find the gap" delayMs={Math.round(1270 * speed)} />
+                <MotionCard icon={RotateCcw} label="Revise" helper="Recall on time" delayMs={Math.round(1360 * speed)} />
+                <MotionCard icon={BrainCircuit} label="Ask LEO" helper="Explain differently" delayMs={Math.round(1450 * speed)} />
               </div>
             </div>
           </section>
@@ -184,24 +194,24 @@ export function HyperframesIntro() {
             linear-gradient(90deg, rgba(103,232,249,.07) 1px, transparent 1px);
           background-size: 54px 54px;
           mask-image: radial-gradient(circle at center, black, transparent 78%);
-          animation: hfGrid calc(3400ms * var(--intro-speed)) linear both;
+          animation: hfGrid var(--intro-duration) linear both;
         }
         .hf-orb { position:absolute; border-radius:999px; filter:blur(75px); opacity:.36; }
-        .hf-orb-a { width:38vw; height:38vw; left:-12vw; top:-14vw; background:#06b6d4; animation:hfOrbA calc(3400ms * var(--intro-speed)) ease-in-out both; }
-        .hf-orb-b { width:42vw; height:42vw; right:-14vw; bottom:-18vw; background:#8b5cf6; animation:hfOrbB calc(3400ms * var(--intro-speed)) ease-in-out both; }
-        .hf-beam { position:absolute; inset:-20% 47%; width:7%; transform:rotate(20deg); background:linear-gradient(180deg,transparent,rgba(255,255,255,.13),transparent); filter:blur(12px); animation:hfBeam calc(3400ms * var(--intro-speed)) cubic-bezier(.2,.8,.2,1) both; }
+        .hf-orb-a { width:38vw; height:38vw; left:-12vw; top:-14vw; background:#06b6d4; animation:hfOrbA var(--intro-duration) ease-in-out both; }
+        .hf-orb-b { width:42vw; height:42vw; right:-14vw; bottom:-18vw; background:#8b5cf6; animation:hfOrbB var(--intro-duration) ease-in-out both; }
+        .hf-beam { position:absolute; inset:-20% 47%; width:7%; transform:rotate(20deg); background:linear-gradient(180deg,transparent,rgba(255,255,255,.13),transparent); filter:blur(12px); animation:hfBeam var(--intro-duration) cubic-bezier(.2,.8,.2,1) both; }
         .hf-scene { opacity:0; }
-        .hf-scene-signal { animation:hfSignal calc(3400ms * var(--intro-speed)) cubic-bezier(.2,.8,.2,1) both; }
-        .hf-scene-system { animation:hfSystem calc(3400ms * var(--intro-speed)) cubic-bezier(.2,.8,.2,1) both; }
-        .hf-scene-wordmark { animation:hfWordmark calc(3400ms * var(--intro-speed)) cubic-bezier(.2,.8,.2,1) both; }
+        .hf-scene-signal { animation:hfSignal var(--intro-duration) cubic-bezier(.2,.8,.2,1) both; }
+        .hf-scene-system { animation:hfSystem var(--intro-duration) cubic-bezier(.2,.8,.2,1) both; }
+        .hf-scene-wordmark { animation:hfWordmark var(--intro-duration) cubic-bezier(.2,.8,.2,1) both; }
         .hf-ring { position:absolute; inset:0; margin:auto; border-radius:999px; border:1px solid rgba(103,232,249,.36); }
-        .hf-ring-one { width:100%; height:100%; animation:hfRingOne calc(1600ms * var(--intro-speed)) ease-out infinite; }
-        .hf-ring-two { width:76%; height:76%; animation:hfRingTwo calc(1500ms * var(--intro-speed)) ease-out infinite; }
-        .hf-ring-three { width:52%; height:52%; border-color:rgba(196,181,253,.55); animation:hfRingThree calc(1300ms * var(--intro-speed)) ease-out infinite; }
-        .hf-core { animation:hfCore calc(1100ms * var(--intro-speed)) cubic-bezier(.2,.8,.2,1) both; }
-        .hf-motion-card { animation:hfCard calc(820ms * var(--intro-speed)) cubic-bezier(.2,.8,.2,1) both; animation-delay:calc((1180ms + var(--card-delay)) * var(--intro-speed)); }
-        .hf-logo-lockup { animation:hfLockup calc(820ms * var(--intro-speed)) cubic-bezier(.2,.8,.2,1) both; animation-delay:calc(2450ms * var(--intro-speed)); }
-        .hf-progress { transform-origin:left; animation:hfProgress calc(3400ms * var(--intro-speed)) linear both; }
+        .hf-ring-one { width:100%; height:100%; animation:hfRingOne var(--ring-one-duration) ease-out infinite; }
+        .hf-ring-two { width:76%; height:76%; animation:hfRingTwo var(--ring-two-duration) ease-out infinite; }
+        .hf-ring-three { width:52%; height:52%; border-color:rgba(196,181,253,.55); animation:hfRingThree var(--ring-three-duration) ease-out infinite; }
+        .hf-core { animation:hfCore var(--core-duration) cubic-bezier(.2,.8,.2,1) both; }
+        .hf-motion-card { animation:hfCard var(--card-duration) cubic-bezier(.2,.8,.2,1) both; }
+        .hf-logo-lockup { animation:hfLockup var(--lockup-duration) cubic-bezier(.2,.8,.2,1) both; animation-delay:var(--lockup-delay); }
+        .hf-progress { transform-origin:left; animation:hfProgress var(--intro-duration) linear both; }
         @keyframes hfSignal { 0%{opacity:0;transform:scale(.94)} 8%{opacity:1;transform:scale(1)} 31%{opacity:1;transform:scale(1)} 41%{opacity:0;transform:scale(1.04)} 100%{opacity:0} }
         @keyframes hfSystem { 0%,30%{opacity:0;transform:translateY(18px)} 42%{opacity:1;transform:translateY(0)} 69%{opacity:1;transform:translateY(0)} 78%{opacity:0;transform:translateY(-12px)} 100%{opacity:0} }
         @keyframes hfWordmark { 0%,68%{opacity:0;transform:scale(.97)} 80%{opacity:1;transform:scale(1)} 94%{opacity:1;transform:scale(1)} 100%{opacity:0;transform:scale(1.015)} }
@@ -231,17 +241,17 @@ function MotionCard({
   icon: Icon,
   label,
   helper,
-  delay,
+  delayMs,
 }: {
   icon: typeof BookOpen
   label: string
   helper: string
-  delay: string
+  delayMs: number
 }) {
   return (
     <div
       className="hf-motion-card rounded-2xl border border-white/12 bg-white/[0.07] p-4 text-left shadow-xl shadow-black/20 backdrop-blur-xl sm:p-5"
-      style={{ '--card-delay': delay } as React.CSSProperties}
+      style={{ animationDelay: `${delayMs}ms` }}
     >
       <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-cyan-200"><Icon className="h-5 w-5" /></span>
       <p className="mt-4 font-black">{label}</p>
