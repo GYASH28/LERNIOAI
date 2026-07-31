@@ -16,7 +16,7 @@ export interface LessonVideoSelection {
   embedUrl: string
   thumbnailUrl: string
   score: number
-  mappingReason: 'reviewed_catalog' | 'title_match' | 'concept_match' | 'ordered_subject_fallback'
+  mappingReason: 'title_match' | 'concept_match' | 'ordered_subject_fallback'
 }
 
 const STOP_WORDS = new Set([
@@ -106,7 +106,13 @@ export function buildManifestLessonVideoAssignments(
       sourcePdf: mapping.sourcePdf,
       sourcePage: mapping.sourcePage,
     }
-    assignments.set(lesson.slug, toSelection(lesson, resource, mapping.videoId, mapping.confidence * 100, 'reviewed_catalog'))
+    assignments.set(lesson.slug, toSelection(
+      lesson,
+      resource,
+      mapping.videoId,
+      mapping.confidence * 100,
+      'title_match',
+    ))
     usedVideoIds.add(mapping.videoId)
   }
 
