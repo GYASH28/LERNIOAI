@@ -101,9 +101,6 @@ export function useLocalState<T>(key: string, fallback: T) {
 
         const remote = payload.data ?? null
         const localMeta = readMeta(key)
-        const localUpdatedAt = localMeta ? Date.parse(localMeta.updatedAt) : 0
-        const remoteUpdatedAt = remote ? Date.parse(remote.updatedAt) : 0
-
         remoteReadyRef.current = true
 
         if (!remote) {
@@ -115,12 +112,13 @@ export function useLocalState<T>(key: string, fallback: T) {
           return
         }
 
-        const localChangedAfterRemote =
-          localFoundRef.current &&
-          Boolean(localMeta?.dirty) &&
-          localUpdatedAt >= remoteUpdatedAt
+        // A local dirty flag represents a real unsynchronised edit and wins even
+        // when the device clock is behind the server clock. This avoids losing
+        // notebook or progress changes because of clock skew.
+        const hasUnsynchronisedLocalEdit =
+          localFoundRef.current && Boolean(localMeta?.dirty)
 
-        if (localChangedAfterRemote) {
+        if (hasUnsynchronisedLocalEdit) {
           dirtyRef.current = true
           setSyncRevision((current) => current + 1)
           return
