@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { headers } from 'next/headers'
 import { getCurrentUser } from '@/lib/auth'
 import { HyperframesIntro } from '@/components/marketing/hyperframes-intro'
 import { LandingMotionController } from '@/components/marketing/landing-motion-controller'
@@ -40,18 +41,23 @@ const softwareApplicationLd = {
   publisher: { '@type': 'Organization', name: 'Lernio AI' },
 }
 
-const introBootstrap = `(function(){try{var root=document.documentElement;var seen=sessionStorage.getItem(${JSON.stringify(HYPERFRAMES_INTRO_STORAGE_KEY)})==='complete';var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches||root.dataset.motion==='none';root.dataset.landingIntro=(seen||reduced)?'complete':'pending';window.setTimeout(function(){if(root.dataset.landingIntro!=='complete'){root.dataset.landingIntro='complete';}},5200);}catch(e){document.documentElement.dataset.landingIntro='complete';}})();`
+const introBootstrap = `(function(){try{var root=document.documentElement;var seen=sessionStorage.getItem(${JSON.stringify(HYPERFRAMES_INTRO_STORAGE_KEY)})==='complete';var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches||root.dataset.motion==='reduced'||root.dataset.motion==='none';root.dataset.landingIntro=(seen||reduced)?'complete':'pending';window.setTimeout(function(){if(root.dataset.landingIntro!=='complete'){root.dataset.landingIntro='complete';}},5200);}catch(e){document.documentElement.dataset.landingIntro='complete';}})();`
 
 export default async function LandingPage() {
-  const authUser = await getCurrentUser().catch(() => null)
+  const [authUser, requestHeaders] = await Promise.all([
+    getCurrentUser().catch(() => null),
+    headers(),
+  ])
   const isAuthenticated = Boolean(authUser)
+  const nonce = requestHeaders.get('x-nonce') ?? undefined
 
   return (
     <>
-      <script dangerouslySetInnerHTML={{ __html: introBootstrap }} />
+      <script nonce={nonce} dangerouslySetInnerHTML={{ __html: introBootstrap }} />
       <HyperframesIntro />
       <div data-landing-content className="flex min-h-screen flex-col bg-background text-foreground">
         <script
+          nonce={nonce}
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationLd) }}
         />
