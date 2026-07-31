@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from 'react'
 import { BookMarked, Gamepad2, Orbit, Settings2, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-const PUBLIC_PREFIXES = ['/', '/sign-in', '/sign-up', '/forgot-password', '/reset-password', '/verify-email', '/privacy', '/terms']
+const PUBLIC_PREFIXES = ['/sign-in', '/sign-up', '/forgot-password', '/reset-password', '/verify-email', '/privacy', '/terms']
 
 const links = [
   { href: '/student-os', label: 'Learning Universe', icon: Orbit },
@@ -16,8 +16,7 @@ const links = [
 ]
 
 function isPublicRoute(pathname: string) {
-  if (pathname === '/') return true
-  return PUBLIC_PREFIXES.slice(1).some((prefix) => pathname.startsWith(prefix))
+  return pathname === '/' || PUBLIC_PREFIXES.some((prefix) => pathname.startsWith(prefix))
 }
 
 export function StudentOSLauncher() {
@@ -40,7 +39,7 @@ export function StudentOSLauncher() {
   if (isPublicRoute(pathname)) return null
 
   return (
-    <div ref={containerRef} className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] left-[max(1rem,env(safe-area-inset-left))] z-40">
+    <div ref={containerRef} className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] left-[max(1rem,env(safe-area-inset-left))] z-40 hidden md:block">
       {open && (
         <div className="mb-2 w-64 rounded-2xl border border-border bg-background/95 p-2 shadow-2xl backdrop-blur">
           <div className="flex items-center justify-between px-2 pb-2 pt-1">
@@ -83,7 +82,7 @@ export function StudentOSLauncher() {
         aria-label="Open Student OS learning tools"
       >
         <Orbit className="h-4 w-4" />
-        <span className="hidden sm:inline">Student OS</span>
+        <span>Student OS</span>
       </button>
     </div>
   )
