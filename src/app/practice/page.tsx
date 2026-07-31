@@ -3,7 +3,9 @@ import { getCurrentUser } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { getManifestSubjectsForSemester } from '@/lib/curriculum/manifest-data'
 import { getSubjectNotes } from '@/lib/curriculum/lesson-notes-loader'
+import { getCurrentLearningContext } from '@/lib/learning/current-learning-context'
 import { AuthenticatedPageShell } from '@/components/app/authenticated-page-shell'
+import { CurrentLearningContextCard } from '@/components/app/current-learning-context-card'
 import { PracticeClient } from './practice-client'
 
 export const dynamic = 'force-dynamic'
@@ -19,7 +21,13 @@ export default async function PracticePage() {
 
   const programmeCode = profile?.departmentCode === 'DCIOT' ? 'DCIOT' : 'DCOMP'
   const semesterNumber = normalizeSemester(profile?.semesterNumber)
-  const subjects = getManifestSubjectsForSemester(programmeCode, semesterNumber)
+  const [subjects, context] = await Promise.all([
+    Promise.resolve(getManifestSubjectsForSemester(programmeCode, semesterNumber)),
+    getCurrentLearningContext(user.id, {
+      programme: programmeCode,
+      semester: semesterNumber,
+    }),
+  ])
   const subjectsWithQuizCount = subjects.map((subject) => {
     const notes = getSubjectNotes(subject.code)
     const quizCount = notes
@@ -50,6 +58,9 @@ export default async function PracticePage() {
           Use a focused quiz to expose the next concept you should repair—not just to collect a score.
         </p>
       </header>
+      <div className="mt-5">
+        <CurrentLearningContextCard context={context} />
+      </div>
       <div className="mt-6">
         <PracticeClient subjects={subjectsWithQuizCount} />
       </div>
