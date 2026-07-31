@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { getCurrentUser } from '@/lib/auth'
-import { HyperframesIntro, HYPERFRAMES_INTRO_STORAGE_KEY } from '@/components/marketing/hyperframes-intro'
+import { HyperframesIntro } from '@/components/marketing/hyperframes-intro'
 import { LandingMotionController } from '@/components/marketing/landing-motion-controller'
 import { PublicHeader } from '@/components/marketing/public-header'
 import { Hero } from '@/components/marketing/hero'
@@ -16,6 +16,7 @@ import { TrustSection } from '@/components/marketing/trust-section'
 import { FAQ } from '@/components/marketing/faq'
 import { FinalCTA } from '@/components/marketing/final-cta'
 import { PublicFooter } from '@/components/marketing/public-footer'
+import { HYPERFRAMES_INTRO_STORAGE_KEY } from '@/lib/motion/hyperframes-intro'
 
 const SITE_URL = process.env.NEXTAUTH_URL?.replace(/\/$/, '') || 'https://lernioai.vercel.app'
 
