@@ -634,7 +634,7 @@ export function PracticeView() {
                 <p className="text-xs text-muted-foreground">Accuracy</p>
               </div>
               <div className="rounded-lg bg-muted/50 p-3">
-                <p className="text-2xl font-bold text-amber-500">+{xpEarned}</p>
+                <p className="text-2xl font-bold text-amber-700 dark:text-amber-300">+{xpEarned}</p>
                 <p className="text-xs text-muted-foreground">XP Earned</p>
               </div>
             </div>

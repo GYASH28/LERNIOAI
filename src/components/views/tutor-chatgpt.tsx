@@ -667,7 +667,7 @@ export function TutorChatGPTWorkspace({ initialSubjects = [], userName = 'Learne
 
           <div className="hidden min-w-48 sm:block">
             <Select value={subjectId || 'all'} onValueChange={changeSubject} disabled={busy}>
-              <SelectTrigger className="h-9 rounded-xl bg-background text-xs">
+              <SelectTrigger className="h-9 rounded-xl bg-background text-xs" aria-label="Choose tutor subject">
                 <SelectValue placeholder="Choose subject" />
               </SelectTrigger>
               <SelectContent>
@@ -814,7 +814,7 @@ export function TutorChatGPTWorkspace({ initialSubjects = [], userName = 'Learne
 
                   <div className="w-40 sm:w-48">
                     <Select value={mode} onValueChange={(value) => setMode(value as TutorMode)} disabled={busy}>
-                      <SelectTrigger className="h-8 border-0 bg-transparent px-2 text-xs shadow-none focus:ring-0">
+                      <SelectTrigger className="h-8 border-0 bg-transparent px-2 text-xs shadow-none focus:ring-0" aria-label="Choose tutor response mode">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>

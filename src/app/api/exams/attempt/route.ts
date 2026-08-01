@@ -11,6 +11,12 @@ import {
   scopedQuestionWhere,
   subjectIdsForLearningScope,
 } from '@/features/learning/server/get-student-learning-scope'
+import {
+  getLessonEventContext,
+  getSubjectEventContext,
+  learningSourceRoute,
+  recordLearningEvent,
+} from '@/lib/learning-events'
 
 /**
  * POST /api/exams/attempt
@@ -184,6 +190,23 @@ export async function POST(req: NextRequest) {
         }),
       },
       select: { id: true, startedAt: true },
+    })
+
+    const eventContext = lesson
+      ? await getLessonEventContext(lesson.id)
+      : await getSubjectEventContext(paperSubjectId, body.unitNumbers?.length === 1 ? body.unitNumbers[0] : null)
+    await recordLearningEvent({
+      userId: user.id,
+      type: 'quiz_started',
+      idempotencyKey: `quiz_started:${attempt.id}`,
+      sourceRoute: learningSourceRoute(req, '/practice'),
+      ...eventContext,
+      payload: {
+        attemptId: attempt.id,
+        mode: storedMode,
+        questionCount: safeDTOs.length,
+        durationMins,
+      },
     })
 
     return okResponse({

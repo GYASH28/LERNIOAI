@@ -15,6 +15,12 @@ import {
   topicIdsForLearningScope,
   type StudentLearningScope,
 } from '@/features/learning/server/get-student-learning-scope'
+import {
+  getLessonEventContext,
+  getSubjectEventContext,
+  learningSourceRoute,
+  recordLearningEvent,
+} from '@/lib/learning-events'
 
 /**
  * GET /api/planner/task
@@ -196,6 +202,28 @@ export async function PATCH(req: NextRequest) {
       where: { id: user.id },
       select: { xp: true },
     })
+
+    if (nowCompleted && !wasCompleted) {
+      const eventContext = task.lessonId
+        ? await getLessonEventContext(task.lessonId)
+        : task.subjectId
+          ? await getSubjectEventContext(task.subjectId)
+          : {}
+      await recordLearningEvent({
+        userId: user.id,
+        type: 'planner_task_completed',
+        idempotencyKey: `planner_task_completed:${taskId}`,
+        sourceRoute: learningSourceRoute(req, '/planner'),
+        ...eventContext,
+        payload: {
+          taskId,
+          taskType: task.type,
+          durationMins: task.durationMins,
+          scheduledDate: task.scheduledDate,
+          xpGain,
+        },
+      })
+    }
 
     return okResponse({ ...task, xpGain, totalXp: finalUser?.xp ?? 0 })
   })

@@ -144,6 +144,7 @@ export function StreakFreezeWidget({ variant = 'full', onUsed }: Props) {
       return (
         <div
           className="freeze-chip h-8 w-16 rounded-lg skeleton-premium"
+          role="status"
           aria-label="Loading streak freeze status"
         />
       )
@@ -154,6 +155,7 @@ export function StreakFreezeWidget({ variant = 'full', onUsed }: Props) {
       return (
         <div
           className="freeze-chip h-8 px-2.5 rounded-lg flex items-center gap-1 text-[11px] text-muted-foreground"
+          role="status"
           aria-label="Streak freeze status unavailable"
         >
           <Snowflake className="h-3.5 w-3.5" />

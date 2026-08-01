@@ -18,6 +18,12 @@ import {
   scopedLessonWhere,
   subjectIdsForLearningScope,
 } from '@/features/learning/server/get-student-learning-scope'
+import {
+  getLessonEventContext,
+  getSubjectEventContext,
+  learningSourceRoute,
+  recordLearningEvent,
+} from '@/lib/learning-events'
 
 export const runtime = 'nodejs'
 export const maxDuration = 60
@@ -327,6 +333,26 @@ Answer the student's latest message now.`
       amount: 5,
       idempotencyKey: `tutor_message:${sessionId}:${clientMessageId}`,
       sourceId: saved.id,
+    })
+
+    const eventContext = lessonId
+      ? await getLessonEventContext(lessonId)
+      : session.subjectId
+        ? await getSubjectEventContext(session.subjectId, session.unitNumber)
+        : {}
+    await recordLearningEvent({
+      userId: user.id,
+      type: 'tutor_help_requested',
+      idempotencyKey: `tutor_help_requested:${sessionId}:${clientMessageId}`,
+      sourceRoute: learningSourceRoute(req, '/tutor'),
+      ...eventContext,
+      payload: {
+        sessionId,
+        clientMessageId,
+        mode,
+        groundingStatus: saved.groundingStatus,
+        citationCount: providerResponse.citations.length,
+      },
     })
 
     return okResponse({

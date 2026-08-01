@@ -158,6 +158,7 @@ export function MaterialsList({
           <label className="relative block">
             <Filter className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <select
+              aria-label="Filter materials by semester"
               value={semester ?? ''}
               onChange={(event) => setSemester(event.target.value ? Number(event.target.value) : null)}
               className="min-h-11 w-full appearance-none rounded-xl border border-border bg-background pl-10 pr-3 text-sm font-semibold outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/15"

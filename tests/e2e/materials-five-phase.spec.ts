@@ -1,12 +1,13 @@
-import { expect, test, type BrowserContext, type Page, type WorkerInfo } from '@playwright/test'
-import { hash } from 'bcryptjs'
-import { encode } from 'next-auth/jwt'
-import { db } from '../../src/lib/db'
-import { normalizeRole } from '../../src/lib/roles'
+import { expect, test, type Page, type WorkerInfo } from '@playwright/test'
+import {
+  addE2eSession,
+  removeE2eUser,
+  upsertE2eUser,
+  type E2eUser,
+} from './helpers/auth'
 
 const lessonUrl = '/materials/lesson/R23CP1701/logarithms-and-progressions'
-const e2ePassword = 'Lernio-e2e-only-2026'
-let e2eEmail = ''
+let e2eUser: E2eUser | null = null
 
 // The first lesson render compiles several rich note sections in development.
 // Keep the assertions strict while allowing cold CI and mobile projects enough
@@ -14,66 +15,16 @@ let e2eEmail = ''
 test.describe.configure({ timeout: 90_000 })
 
 test.beforeAll(async ({}, workerInfo: WorkerInfo) => {
-  // Local demo runs do not need a database-backed login. CI deliberately runs
-  // with demo mode disabled, so create a disposable real user there.
-  if (!process.env.DATABASE_URL) return
-  e2eEmail = `materials-${workerInfo.project.name.replace(/[^a-z0-9]/gi, '-')}@e2e.lernio.local`
-  await db.user.upsert({
-    where: { email: e2eEmail },
-    create: {
-      email: e2eEmail,
-      emailVerified: new Date(),
-      name: 'Materials E2E Student',
-      passwordHash: await hash(e2ePassword, 4),
-      role: 'student',
-      status: 'active',
-      provider: 'password',
-      profileComplete: true,
-      onboarded: true,
-    },
-    update: {
-      passwordHash: await hash(e2ePassword, 4),
-      status: 'active',
-      profileComplete: true,
-    },
-  })
+  e2eUser = await upsertE2eUser(workerInfo, 'materials')
 })
 
 test.afterAll(async () => {
-  if (e2eEmail) await db.user.deleteMany({ where: { email: e2eEmail } })
+  await removeE2eUser(e2eUser)
 })
 
 test.beforeEach(async ({ context }) => {
-  if (!e2eEmail) return
-  const user = await db.user.findUniqueOrThrow({ where: { email: e2eEmail } })
-  const token = await encode({
-    secret: process.env.NEXTAUTH_SECRET || 'ci-secret-replace-in-production',
-    maxAge: 60 * 60,
-    token: {
-      id: user.id,
-      sub: user.id,
-      email: user.email,
-      name: user.name,
-      role: normalizeRole(user.role),
-      status: user.status,
-      profileComplete: user.profileComplete,
-      authorityVersion: user.authorityVersion,
-      authIssuedAt: Date.now(),
-      sessionRevoked: false,
-    },
-  })
-  await addSessionCookie(context, token)
+  await addE2eSession(context, e2eUser)
 })
-
-async function addSessionCookie(context: BrowserContext, token: string) {
-  await context.addCookies([{
-    name: 'next-auth.session-token',
-    value: token,
-    url: 'http://127.0.0.1:3000',
-    httpOnly: true,
-    sameSite: 'Lax',
-  }])
-}
 
 async function openProtectedLesson(page: Page, url: string) {
   await page.goto(url)

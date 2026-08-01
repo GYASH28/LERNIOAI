@@ -69,9 +69,12 @@ function loadManifests(): Manifest[] {
   if (cachedManifests) return cachedManifests
   try {
     const files = readdirSync(MANIFEST_DIR).filter((f) => f.endsWith('.json'))
-    cachedManifests = files.map((f) => {
+    cachedManifests = files.flatMap((f) => {
       const raw = readFileSync(join(MANIFEST_DIR, f), 'utf-8')
-      const parsed = JSON.parse(raw) as Manifest
+      const parsed = JSON.parse(raw) as unknown
+      // The curriculum root also contains derived official-course artifacts.
+      // Only semester manifests belong in this legacy fallback loader.
+      if (!isManifest(parsed)) return []
       // Normalise: the JSON manifests use `officialSubjectCode` but our
       // ManifestSubject interface expects `code`. Map it so downstream
       // lookups (getSubjectNotes(subject.code) etc.) actually work.
@@ -84,12 +87,28 @@ function loadManifests(): Manifest[] {
           if (subj.alternateCode === undefined) subj.alternateCode = null
         }
       }
-      return parsed
+      return [parsed]
     })
     return cachedManifests
   } catch {
     return []
   }
+}
+
+function isManifest(value: unknown): value is Manifest {
+  if (!value || typeof value !== 'object') return false
+  const candidate = value as Partial<Manifest>
+  return (
+    typeof candidate.institutionCode === 'string' &&
+    typeof candidate.schemeCode === 'string' &&
+    Array.isArray(candidate.semesters) &&
+    candidate.semesters.every((semester) =>
+      semester &&
+      typeof semester === 'object' &&
+      typeof semester.number === 'number' &&
+      Array.isArray(semester.subjects),
+    )
+  )
 }
 
 // ─── Public API ─────────────────────────────────────────────────────────────

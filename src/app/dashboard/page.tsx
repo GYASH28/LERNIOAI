@@ -145,11 +145,11 @@ export default async function DashboardPage() {
             <div className="flex items-start gap-3">
               <AlertTriangle className="h-5 w-5 text-amber-500 shrink-0 mt-0.5" />
               <div className="min-w-0 flex-1">
-                <p className="text-sm font-semibold text-amber-600">Complete your profile</p>
-                <p className="text-xs text-muted-foreground mt-0.5">
+                <p className="text-sm font-semibold text-amber-800 dark:text-amber-300">Complete your profile</p>
+                <p className="mt-0.5 text-xs text-foreground/75">
                   Set your department, semester, and division to join a class, see classmates, and track attendance.
                 </p>
-                <Link href="/profile" className="mt-2 inline-block rounded-md bg-amber-500 px-3 py-1.5 text-xs font-semibold text-white hover:bg-amber-600">
+                <Link href="/profile" className="mt-2 inline-block rounded-md bg-amber-800 px-3 py-1.5 text-xs font-semibold text-white hover:bg-amber-900 dark:bg-amber-300 dark:text-amber-950 dark:hover:bg-amber-200">
                   Set up now →
                 </Link>
               </div>

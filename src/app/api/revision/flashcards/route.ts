@@ -1,6 +1,7 @@
 import { db } from '@/lib/db'
 import { requireUser, withApi, okResponse, ApiError } from '@/lib/auth'
 import { awardXp } from '@/lib/xp'
+import { learningSourceRoute, recordLearningEvents } from '@/lib/learning-events'
 import { evaluateAchievements } from '@/lib/achievements'
 import { z } from 'zod'
 import {
@@ -173,7 +174,29 @@ export async function POST(req: Request) {
     // Load the schedule (ownership enforced by userId).
     const schedule = await db.revisionSchedule.findFirst({
       where: { id: scheduleId, userId: user.id, topic: scopedTopicWhere(scope) },
-      include: { topic: { select: { title: true } } },
+      include: {
+        topic: {
+          select: {
+            title: true,
+            unit: {
+              select: {
+                number: true,
+                subject: {
+                  select: {
+                    id: true,
+                    semester: {
+                      select: {
+                        number: true,
+                        scheme: { select: { programme: { select: { code: true } } } },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
     })
     if (!schedule) {
       throw new ApiError('NOT_FOUND', 'Schedule not found.', 404, false)
@@ -240,6 +263,38 @@ export async function POST(req: Request) {
       userId: user.id,
       trigger: 'revision',
     })
+
+    const eventContext = {
+      programmeCode: schedule.topic.unit.subject.semester.scheme.programme?.code ?? null,
+      semesterNumber: schedule.topic.unit.subject.semester.number,
+      subjectId: schedule.topic.unit.subject.id,
+      unitNumber: schedule.topic.unit.number,
+    }
+    const sourceRoute = learningSourceRoute(req, '/revision')
+    await recordLearningEvents([
+      {
+        userId: user.id,
+        type: 'flashcard_reviewed',
+        idempotencyKey: `flashcard_reviewed:${attempt.id}`,
+        sourceRoute,
+        ...eventContext,
+        payload: { scheduleId, topicId: schedule.topicId, quality, correct: q >= 3 },
+      },
+      {
+        userId: user.id,
+        type: 'revision_session_completed',
+        idempotencyKey: `revision_session_completed:${attempt.id}`,
+        sourceRoute,
+        ...eventContext,
+        payload: {
+          scheduleId,
+          topicId: schedule.topicId,
+          quality,
+          nextState: updated.state,
+          nextDueDate: updated.nextDueDate.toISOString(),
+        },
+      },
+    ])
 
     return okResponse({
       recorded: true,

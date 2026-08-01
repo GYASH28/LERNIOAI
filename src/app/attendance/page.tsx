@@ -57,7 +57,7 @@ export default async function AttendancePage() {
         {/* Profile completion prompt */}
         {(!dbUser.departmentCode || !dbUser.semesterNumber || !dbUser.division) && (
           <div className="mt-4 rounded-lg border border-amber-500/40 bg-amber-500/10 p-3 text-sm">
-            <p className="font-semibold text-amber-600">Complete your profile</p>
+            <p className="font-semibold text-amber-800 dark:text-amber-300">Complete your profile</p>
             <p className="text-xs text-muted-foreground mt-0.5">
               You need to set your department, semester, and division to use attendance.
             </p>

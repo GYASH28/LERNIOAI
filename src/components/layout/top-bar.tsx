@@ -122,7 +122,7 @@ export function TopBar() {
       <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
         <div className="flex h-14 items-center gap-3 px-3 sm:px-4">
           {/* Logo + collapse */}
-          <Link href="/dashboard" className="flex shrink-0 items-center gap-2">
+          <Link href="/dashboard" className="flex shrink-0 items-center gap-2" aria-label="Lernio AI dashboard">
             <LernioLogoTile className="h-7 w-7" />
             <span className="hidden text-sm font-bold sm:inline">Lernio AI</span>
           </Link>
@@ -231,7 +231,7 @@ export function TopBar() {
                 <Flame className="h-3.5 w-3.5" />
                 {streak}
               </div>
-              <div className="flex items-center gap-1 rounded-md bg-amber-500/10 px-2 py-1 text-xs font-medium text-amber-600">
+              <div className="flex items-center gap-1 rounded-md bg-amber-500/10 px-2 py-1 text-xs font-medium text-amber-800 dark:text-amber-300">
                 <Zap className="h-3.5 w-3.5" />
                 {xp} XP
               </div>
@@ -287,7 +287,7 @@ export function TopBar() {
                   <span className="rounded bg-orange-500/10 px-1.5 py-0.5 text-[10px] font-medium text-orange-600">
                     🔥 {streak} day streak
                   </span>
-                  <span className="rounded bg-amber-500/10 px-1.5 py-0.5 text-[10px] font-medium text-amber-600">
+                  <span className="rounded bg-amber-500/10 px-1.5 py-0.5 text-[10px] font-medium text-amber-800 dark:text-amber-300">
                     ⚡ {xp} XP
                   </span>
                 </div>
