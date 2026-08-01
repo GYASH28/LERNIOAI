@@ -55,6 +55,7 @@
     "resources:youtube:review-queue": "tsx scripts/build-youtube-candidate-review-queue.ts",
     "resources:youtube:lesson-catalog": "tsx scripts/build-lesson-video-catalog.ts",
     "resources:youtube:reconcile": "tsx scripts/reconcile-pending-video-mappings.ts",
+    "resources:youtube:gap-queue": "tsx scripts/build-missing-lesson-video-research-queue.ts",
     "resources:youtube:promote": "tsx scripts/promote-youtube-candidate-mappings.ts",
     "resources:link-health": "tsx scripts/check-resource-link-health.ts",
     "notes:validate": "tsx scripts/validate-lesson-note-documents.ts",

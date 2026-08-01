@@ -55,6 +55,8 @@ The regression test rejects missing content and contamination from tutorial-titl
 
 The reconciliation report at `content/resources/lesson-video-mappings/cwit-r23-pending-video-reconciliation.json` now replaces legacy-note slugs with the official programme, semester, unit, lesson slug/title, matching terms, score, source provenance and a reviewer checklist. It permits one candidate per official lesson and one video per subject lesson assignment; it does not change the student-visible approved catalogue.
 
+Every remaining uncovered official lesson is now represented in `content/resources/youtube-candidates/cwit-r23-missing-lesson-video-research-queue.json`. The protected `/admin/resources/youtube-candidates` page shows this queue with the exact CWIT scope and source pages, permitted-language policy, recommended popular channels, and a focused YouTube search link. It is a research handoff only: finding a result does not publish it.
+
 | Programme | Semester | Reconciled pending candidates |
 | --- | ---: | ---: |
 | DCIOT | 1 | 13 |

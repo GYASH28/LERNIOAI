@@ -7,7 +7,7 @@ import { redirect } from 'next/navigation'
 import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import type { LucideIcon } from 'lucide-react'
-import { AlertTriangle, CheckCircle2, FileJson2, Link2, Rocket, ShieldCheck, Video } from 'lucide-react'
+import { AlertTriangle, CheckCircle2, ExternalLink, FileJson2, Link2, Rocket, Search, ShieldCheck, Video } from 'lucide-react'
 import type {
   CandidateMappingStatus,
   YouTubeCandidateReviewItem,
@@ -44,6 +44,13 @@ const reviewQueuePath = join(
   'youtube-candidates',
   'cwit-r23-youtube-candidate-review-queue.json',
 )
+const missingResearchQueuePath = join(
+  process.cwd(),
+  'content',
+  'resources',
+  'youtube-candidates',
+  'cwit-r23-missing-lesson-video-research-queue.json',
+)
 
 async function validateCandidatePromotion(formData: FormData) {
   'use server'
@@ -58,6 +65,7 @@ async function writeCandidatePromotion(formData: FormData) {
 export default async function AdminYouTubeCandidatesPage({ searchParams }: { searchParams?: SearchParams }) {
   const access = await requireLearningOpsPreviewAccess()
   const queue = filterReviewQueueForScope(loadReviewQueue(), access.reportScope)
+  const researchQueue = filterResearchQueueForScope(loadMissingResearchQueue(), access.reportScope)
   const hasReadyMappings =
     queue?.items.some((item) =>
       item.subjectMappings.some((mapping) => mapping.mappingStatus === 'ready_for_lesson_mapping_review'),
@@ -83,7 +91,7 @@ export default async function AdminYouTubeCandidatesPage({ searchParams }: { sea
         </section>
 
         {flash ? <PromotionFlashAlert flash={flash} /> : null}
-        {queue ? <ReviewQueueView queue={queue} lessonOptions={lessonOptions} /> : <MissingQueue />}
+        {queue ? <ReviewQueueView queue={queue} lessonOptions={lessonOptions} researchQueue={researchQueue} /> : <MissingQueue />}
       </div>
     </CampusmateAdminShell>
   )
@@ -92,9 +100,11 @@ export default async function AdminYouTubeCandidatesPage({ searchParams }: { sea
 function ReviewQueueView({
   queue,
   lessonOptions,
+  researchQueue,
 }: {
   queue: YouTubeCandidateReviewQueue
   lessonOptions: readonly LessonMappingOption[]
+  researchQueue: MissingLessonVideoResearchQueue | null
 }) {
   const visibleItems = queue.items.slice(0, 80)
   const readyMappings = promotionReadyMappings(queue)
@@ -133,6 +143,8 @@ function ReviewQueueView({
       </section>
 
       {queue.learningCoverage ? <LearningCoveragePanel coverage={queue.learningCoverage} /> : null}
+
+      {researchQueue ? <MissingLessonResearchPanel queue={researchQueue} /> : null}
 
       <PromotionReadyPanel readyMappings={readyMappings} lessonOptions={lessonOptions} />
 
@@ -382,6 +394,74 @@ function PromotionForm({
   )
 }
 
+function MissingLessonResearchPanel({ queue }: { queue: MissingLessonVideoResearchQueue }) {
+  const visibleItems = queue.items.slice(0, 36)
+  return (
+    <Card surface="panel">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <Search className="h-5 w-5 text-primary" />
+          Exact lesson research queue
+        </CardTitle>
+        <CardDescription>
+          {queue.totals.lessonsNeedingResearch} official units do not yet have a suitable direct-video candidate.
+          These links open a focused YouTube search; they do not publish a resource or replace academic review.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Official unit</TableHead>
+              <TableHead>Scope</TableHead>
+              <TableHead>Preferred channels</TableHead>
+              <TableHead>Research</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {visibleItems.map((item) => (
+              <TableRow key={item.id}>
+                <TableCell className="min-w-60 whitespace-normal">
+                  <div className="font-medium">{item.subjectCode} · Unit {item.unitNumber}</div>
+                  <div className="text-xs text-muted-foreground">{item.lessonTitle}</div>
+                  <div className="mt-1 text-xs text-muted-foreground">{item.programmeCode} Sem {item.semesterNumber}</div>
+                </TableCell>
+                <TableCell className="max-w-md whitespace-normal text-xs leading-5 text-muted-foreground">
+                  {shortScope(item.officialScope)}
+                </TableCell>
+                <TableCell className="max-w-52 whitespace-normal text-xs text-muted-foreground">
+                  {item.preferredChannels.join(', ')}
+                </TableCell>
+                <TableCell className="whitespace-normal">
+                  <a
+                    href={item.youtubeSearchUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-sm font-medium text-primary underline-offset-2 hover:underline"
+                  >
+                    Search YouTube <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+                  <a
+                    href={item.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 block text-xs text-muted-foreground underline-offset-2 hover:underline"
+                  >
+                    Official CWIT source, p. {item.sourcePages.join(', ') || '—'}
+                  </a>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        {queue.items.length > visibleItems.length ? (
+          <p className="mt-4 text-xs text-muted-foreground">Showing {visibleItems.length} of {queue.items.length} research rows. The JSON queue contains every remaining official unit.</p>
+        ) : null}
+      </CardContent>
+    </Card>
+  )
+}
+
 function LearningCoveragePanel({
   coverage,
 }: {
@@ -563,6 +643,56 @@ function promotionDecisionFromForm(formData: FormData) {
 function loadReviewQueue(): YouTubeCandidateReviewQueue | null {
   if (!existsSync(reviewQueuePath)) return null
   return JSON.parse(readFileSync(reviewQueuePath, 'utf8')) as YouTubeCandidateReviewQueue
+}
+
+type MissingLessonVideoResearchQueue = {
+  totals: { officialLessons: number; lessonsWithPendingCandidate: number; lessonsNeedingResearch: number }
+  items: MissingLessonVideoResearchItem[]
+}
+
+type MissingLessonVideoResearchItem = {
+  id: string
+  programmeCode: string
+  semesterNumber: number
+  subjectCode: string
+  unitNumber: number
+  lessonTitle: string
+  officialScope: string
+  sourceUrl: string
+  sourcePages: number[]
+  preferredChannels: string[]
+  youtubeSearchUrl: string
+}
+
+function loadMissingResearchQueue(): MissingLessonVideoResearchQueue | null {
+  if (!existsSync(missingResearchQueuePath)) return null
+  return JSON.parse(readFileSync(missingResearchQueuePath, 'utf8')) as MissingLessonVideoResearchQueue
+}
+
+function filterResearchQueueForScope(
+  queue: MissingLessonVideoResearchQueue | null,
+  scope: LearningOpsReportScope,
+): MissingLessonVideoResearchQueue | null {
+  if (!queue || scope.all) return queue
+  const items = queue.items.filter((item) => matchesLearningOpsReportScope(scope, {
+    departmentCode: item.programmeCode.replace(/^D/, ''),
+    programmeCode: item.programmeCode,
+    subjectCode: item.subjectCode,
+  }))
+  return {
+    ...queue,
+    totals: {
+      officialLessons: queue.totals.officialLessons,
+      lessonsWithPendingCandidate: queue.totals.lessonsWithPendingCandidate,
+      lessonsNeedingResearch: items.length,
+    },
+    items,
+  }
+}
+
+function shortScope(scope: string) {
+  const normalized = scope.replace(/\s+/g, ' ').trim()
+  return normalized.length > 260 ? `${normalized.slice(0, 257)}…` : normalized
 }
 
 function filterReviewQueueForScope(
