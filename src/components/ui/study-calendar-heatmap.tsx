@@ -403,7 +403,12 @@ export function StudyCalendarHeatmap({ className }: { className?: string }) {
         )}
 
         {/* ── Heatmap grid (horizontal scroll on small screens) ─────────── */}
-        <div className="overflow-x-auto pb-1 -mx-1 px-1">
+        <div
+          className="overflow-x-auto pb-1 -mx-1 px-1"
+          role="region"
+          aria-label={`Scrollable study activity heatmap for ${data.year}`}
+          tabIndex={0}
+        >
           <div
             className="inline-grid"
             style={{
@@ -484,8 +489,9 @@ export function StudyCalendarHeatmap({ className }: { className?: string }) {
               {LEVEL_LEGEND.map((l) => (
                 <Tooltip key={l.level}>
                   <TooltipTrigger asChild>
-                    <div
-                      className={cn('rounded-[2px] cursor-help', LEVEL_BG[l.level])}
+                    <button
+                      type="button"
+                      className={cn('rounded-[2px] cursor-help border-0 p-0', LEVEL_BG[l.level])}
                       style={{ width: '11px', height: '11px' }}
                       aria-label={`Level ${l.level}: ${l.label}`}
                     />

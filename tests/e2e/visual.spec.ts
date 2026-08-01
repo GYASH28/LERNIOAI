@@ -36,23 +36,7 @@ test('all palettes apply distinct visual token signatures', async ({ page }, tes
   const signatures: PaletteSignature[] = []
 
   for (const palette of palettes) {
-    const signature = await page.evaluate((nextPalette): PaletteSignature => {
-      const root = document.documentElement
-      root.setAttribute('data-palette', nextPalette)
-      root.setAttribute('data-appearance', 'light')
-      root.setAttribute('data-motion', 'reduced')
-      root.classList.remove('dark')
-
-      const styles = window.getComputedStyle(root)
-      return {
-        palette: root.getAttribute('data-palette') || '',
-        brand: styles.getPropertyValue('--brand').trim(),
-        canvas: styles.getPropertyValue('--canvas').trim(),
-        surface: styles.getPropertyValue('--surface-1').trim(),
-        text: styles.getPropertyValue('--text-default').trim(),
-        border: styles.getPropertyValue('--border-default').trim(),
-      }
-    }, palette)
+    const signature = await readPaletteSignature(page, palette)
 
     expect(signature.palette).toBe(palette)
     expect(signature.brand).not.toBe('')
@@ -79,3 +63,34 @@ test('all palettes apply distinct visual token signatures', async ({ page }, tes
     `Every palette should resolve to a distinct token set: ${JSON.stringify(signatures, null, 2)}`,
   ).toBe(palettes.length)
 })
+
+async function readPaletteSignature(page: import('@playwright/test').Page, palette: string): Promise<PaletteSignature> {
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    try {
+      return await page.evaluate((nextPalette): PaletteSignature => {
+        const root = document.documentElement
+        root.setAttribute('data-palette', nextPalette)
+        root.setAttribute('data-appearance', 'light')
+        root.setAttribute('data-motion', 'reduced')
+        root.classList.remove('dark')
+
+        const styles = window.getComputedStyle(root)
+        return {
+          palette: root.getAttribute('data-palette') || '',
+          brand: styles.getPropertyValue('--brand').trim(),
+          canvas: styles.getPropertyValue('--canvas').trim(),
+          surface: styles.getPropertyValue('--surface-1').trim(),
+          text: styles.getPropertyValue('--text-default').trim(),
+          border: styles.getPropertyValue('--border-default').trim(),
+        }
+      }, palette)
+    } catch (error) {
+      if (!(error instanceof Error) || !/Execution context was destroyed/.test(error.message) || attempt === 1) {
+        throw error
+      }
+      await page.waitForLoadState('domcontentloaded')
+    }
+  }
+
+  throw new Error('Palette signature could not be read.')
+}
