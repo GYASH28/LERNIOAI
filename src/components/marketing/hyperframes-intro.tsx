@@ -6,6 +6,7 @@ import {
   HYPERFRAMES_INTRO_STORAGE_KEY,
   HYPERFRAMES_INTRO_TIMING,
 } from '@/lib/motion/hyperframes-intro'
+import styles from './hyperframes-intro.module.css'
 
 function hasSeenIntro() {
   try {
@@ -32,9 +33,15 @@ function shouldReduceMotion() {
   )
 }
 
+const SYSTEM_CARDS = [
+  ['01', 'Learn', 'Structured lessons and complete notes'],
+  ['02', 'Watch', 'One reviewed video for the exact lesson'],
+  ['03', 'Practise', 'Mistakes become the next useful task'],
+  ['04', 'Ask LEO', 'Explain the same concept differently'],
+] as const
+
 export function HyperframesIntro() {
   const [visible, setVisible] = useState(false)
-  const [loaded, setLoaded] = useState(false)
   const [exiting, setExiting] = useState(false)
   const [reduced, setReduced] = useState(false)
   const completeTimer = useRef<number | null>(null)
@@ -53,7 +60,7 @@ export function HyperframesIntro() {
       window.dispatchEvent(new CustomEvent('lernio:intro-complete'))
       setVisible(false)
       exitTimer.current = null
-    }, 360)
+    }, 320)
   }, [])
 
   useEffect(() => {
@@ -71,16 +78,9 @@ export function HyperframesIntro() {
       ? HYPERFRAMES_INTRO_TIMING.reduced
       : HYPERFRAMES_INTRO_TIMING.full
 
-    completeTimer.current = window.setTimeout(complete, duration + 900)
-
-    const onMessage = (event: MessageEvent) => {
-      if (event.origin !== window.location.origin) return
-      if (event.data?.type === 'lernio-hyperframes-complete') complete()
-    }
-    window.addEventListener('message', onMessage)
+    completeTimer.current = window.setTimeout(complete, duration + 240)
 
     return () => {
-      window.removeEventListener('message', onMessage)
       if (completeTimer.current) window.clearTimeout(completeTimer.current)
       if (exitTimer.current) window.clearTimeout(exitTimer.current)
     }
@@ -92,38 +92,72 @@ export function HyperframesIntro() {
     <div
       data-hyperframes-intro
       data-exiting={exiting ? 'true' : 'false'}
-      className="fixed inset-0 z-[120] overflow-hidden bg-[#04050d] text-white transition duration-300 data-[exiting=true]:-translate-y-2 data-[exiting=true]:opacity-0"
+      className={`${styles.overlay} ${exiting ? styles.exiting : ''} ${
+        reduced ? styles.reduced : ''
+      }`}
       role="dialog"
       aria-label="Lernio opening sequence"
       aria-modal="true"
     >
-      <iframe
-        src={`/hyperframes/lernio-opening/index.html${reduced ? '?reduced=1' : ''}`}
-        title="Lernio HyperFrames opening composition"
-        className="absolute inset-0 h-full w-full border-0"
-        sandbox="allow-scripts allow-same-origin"
-        referrerPolicy="no-referrer"
-        onLoad={() => setLoaded(true)}
-        tabIndex={-1}
-        aria-hidden="true"
-      />
+      <div className={styles.stage} aria-hidden="true">
+        <div className={styles.grid} />
+        <div className={styles.beam} />
 
-      {!loaded && (
-        <div className="absolute inset-0 grid place-items-center bg-[#04050d] text-center">
+        <section className={`${styles.scene} ${styles.signalScene}`}>
           <div>
-            <div className="mx-auto h-12 w-12 animate-pulse rounded-2xl bg-gradient-to-br from-cyan-400 via-violet-500 to-fuchsia-400 shadow-2xl shadow-violet-500/40" />
-            <p className="mt-4 text-xs font-black uppercase tracking-[0.28em] text-cyan-200/80">
-              Starting Lernio
+            <p className={styles.eyebrow}>Your learning system is coming online</p>
+            <div className={styles.signalCore}>
+              <div className={`${styles.ring} ${styles.ringOuter}`} />
+              <div className={`${styles.ring} ${styles.ringMiddle}`} />
+              <div className={`${styles.ring} ${styles.ringInner}`} />
+              <div className={`${styles.pulseDot} ${styles.pulseOne}`} />
+              <div className={`${styles.pulseDot} ${styles.pulseTwo}`} />
+              <div className={styles.brandTile}>L</div>
+            </div>
+          </div>
+        </section>
+
+        <section className={`${styles.scene} ${styles.systemScene}`}>
+          <div className={styles.systemWrap}>
+            <p className={styles.eyebrow}>One connected academic workspace</p>
+            <h2 className={styles.systemTitle}>Learn. Practise. Revise. Understand.</h2>
+            <div className={styles.cards}>
+              {SYSTEM_CARDS.map(([number, title, description]) => (
+                <article key={number} className={styles.card}>
+                  <div className={styles.cardNumber}>{number}</div>
+                  <strong>{title}</strong>
+                  <span>{description}</span>
+                </article>
+              ))}
+            </div>
+            <div className={styles.flowLine} />
+          </div>
+        </section>
+
+        <section className={`${styles.scene} ${styles.identityScene}`}>
+          <div className={styles.identityWrap}>
+            <div className={styles.identityLogo}>L</div>
+            <h2 className={styles.wordmark}>LERNIO</h2>
+            <p className={styles.sub}>Learning OS</p>
+            <p className={styles.tagline}>
+              One place to learn, practise, revise, and understand what comes next.
             </p>
           </div>
-        </div>
-      )}
+        </section>
 
-      <button
-        type="button"
-        onClick={complete}
-        className="absolute right-4 top-4 z-20 inline-flex min-h-11 items-center gap-2 rounded-full border border-white/15 bg-black/35 px-4 text-xs font-bold text-white/90 backdrop-blur-md transition hover:bg-black/55 sm:right-6 sm:top-6"
-      >
+        <div className={styles.progressShell}>
+          <div className={styles.progressTrack}>
+            <div className={styles.progressFill} />
+          </div>
+          <div className={styles.progressLabels}>
+            <span>Signal</span>
+            <span>System</span>
+            <span>Lernio</span>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" onClick={complete} className={styles.skip}>
         Skip intro <SkipForward className="h-4 w-4" />
       </button>
     </div>
