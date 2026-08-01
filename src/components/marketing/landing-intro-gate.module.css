@@ -1,0 +1,28 @@
+.content {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 320ms ease;
+}
+
+:global(html[data-landing-intro='pending']) .content,
+:global(html[data-landing-intro='playing']) .content {
+  opacity: 0;
+  visibility: hidden;
+}
+
+:global(html[data-landing-intro='handoff']) .content {
+  opacity: 0;
+  visibility: visible;
+}
+
+:global(html[data-landing-intro='pending']) body,
+:global(html[data-landing-intro='playing']) body,
+:global(html[data-landing-intro='handoff']) body {
+  background: #04050d;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content {
+    transition: none;
+  }
+}
