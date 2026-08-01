@@ -75,8 +75,9 @@ export default async function AdminYouTubeCandidatesPage({ searchParams }: { sea
           </div>
           <h2 className="mt-2 text-3xl font-black tracking-tight sm:text-4xl">YouTube Candidate Review</h2>
           <p className="mt-3 max-w-3xl text-sm leading-6 text-muted-foreground">
-            Inspect curated PDF lecture links before they become Resource or LessonResource rows. Draft rows stay
-            blocked until metadata, syllabus fit, lesson mapping and reviewer approval are complete.
+            Inspect direct video candidates matched to official CWIT R23 lesson units before they become Resource or
+            LessonResource rows. Draft rows stay blocked until metadata, syllabus fit, lesson mapping and reviewer
+            approval are complete.
           </p>
           <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">{access.summary}</p>
         </section>
@@ -131,6 +132,8 @@ function ReviewQueueView({
         />
       </section>
 
+      {queue.learningCoverage ? <LearningCoveragePanel coverage={queue.learningCoverage} /> : null}
+
       <PromotionReadyPanel readyMappings={readyMappings} lessonOptions={lessonOptions} />
 
       <Card surface="panel">
@@ -164,7 +167,8 @@ function ReviewQueueView({
                       {item.canonicalUrl}
                     </a>
                     <div className="mt-1 text-xs text-muted-foreground">
-                      {item.sourceEvidence.sourceId}, page {item.sourceEvidence.sourcePage ?? 'unknown'}
+                      {item.officialLesson ? `Unit ${item.officialLesson.unitNumber}: ${item.officialLesson.title}. ` : ''}
+                      {item.sourceEvidence.sourceId}, page {item.sourceEvidence.sourcePage ?? 'research'}
                     </div>
                   </TableCell>
                   <TableCell>
@@ -173,7 +177,7 @@ function ReviewQueueView({
                   <TableCell className="whitespace-normal">
                     <div>{item.metadataStatus}</div>
                     <div className="text-xs text-muted-foreground">
-                      {item.channel ?? item.availabilityStatus}
+                      {item.channel ?? item.availabilityStatus} {item.language ? ` / ${item.language}` : ''}
                     </div>
                   </TableCell>
                   <TableCell className="min-w-64 whitespace-normal">
@@ -345,7 +349,11 @@ function PromotionForm({
           <Input name="endSeconds" type="number" min={0} placeholder="Seconds" />
         </Field>
         <Field label="Language">
-          <Input name="language" defaultValue="en" minLength={2} maxLength={16} />
+          <select name="language" className="h-9 w-full rounded-md border border-input bg-background px-3 text-sm" defaultValue={item.language ?? 'en'}>
+            <option value="en">English</option>
+            <option value="hi">Hindi</option>
+            <option value="hinglish">Hinglish</option>
+          </select>
         </Field>
       </div>
 
@@ -371,6 +379,25 @@ function PromotionForm({
         </Button>
       </div>
     </form>
+  )
+}
+
+function LearningCoveragePanel({
+  coverage,
+}: {
+  coverage: NonNullable<YouTubeCandidateReviewQueue['learningCoverage']>
+}) {
+  return (
+    <Alert>
+      <Video className="h-4 w-4" />
+      <AlertTitle>Official lesson-video coverage</AlertTitle>
+      <AlertDescription>
+        {coverage.lessonCandidatesReadyForReview} direct-video candidates are ready for academic review across{' '}
+        {coverage.officialLessons} official lesson units. {coverage.lessonsWithoutCandidate} units still need a
+        suitable candidate, and {coverage.unmatchedResearchCandidates} researched videos remain unassigned. Nothing
+        in this queue is visible to students until a reviewer promotes it.
+      </AlertDescription>
+    </Alert>
   )
 }
 

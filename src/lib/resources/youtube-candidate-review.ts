@@ -115,6 +115,14 @@ export interface YouTubeCandidateReviewItem {
   embeddable: boolean | null
   metadataStatus: string
   availabilityStatus: string
+  language?: 'en' | 'hi' | 'hinglish'
+  officialLesson?: {
+    slug: string
+    title: string
+    unitNumber: number
+    matchedTerms: string[]
+    reconciliationScore: number
+  }
   sourceEvidence: {
     sourceId: string
     sourcePdf: string | null
@@ -135,6 +143,12 @@ export interface YouTubeCandidateReviewQueue {
   sourceCandidateManifest: string | null
   curriculumManifestCount: number
   safetyNote: string
+  learningCoverage?: {
+    officialLessons: number
+    lessonCandidatesReadyForReview: number
+    lessonsWithoutCandidate: number
+    unmatchedResearchCandidates: number
+  }
   totals: {
     candidates: number
     videos: number

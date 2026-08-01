@@ -12,8 +12,8 @@ const ARTICLES: Record<string, { title: string; content: string[] }> = {
     title: 'How to use the Learn section',
     content: [
       'The Learn section is the heart of Lernio AI. It shows your exact curriculum for your programme (Computer Engineering or Computer Engineering & IoT) and semester.',
-      'To start learning: 1) Click "Learn" in the sidebar. 2) You\'ll see your current semester with all applicable subjects. 3) Click any subject to see curated YouTube lecture playlists. 4) Click "Open Lesson" to access the full lesson studio with video player, notes, and study tools.',
-      'Each subject has a primary lecture playlist (closest match to your CWIT R23 syllabus) and alternate playlists for different explanations. Watch the primary playlist first, then use alternates if a topic is unclear.',
+      'To start learning: 1) Click "Learn" in the sidebar. 2) You\'ll see your current semester with all applicable subjects. 3) Open a subject to see its official CWIT R23 units, notes, revision prompts and practice. 4) Click "Open Lesson" to access the full lesson studio.',
+      'A lesson shows a direct video only after it has been reviewed for that exact official unit. If no reviewed video is available yet, use the official scope, notes and practice tools, or ask LEO for help.',
       'For programming subjects (C, C++, Python, Java, Web Design), don\'t just watch — type out every code example yourself. For practical subjects (Linux, Workshop, Electronics), repeat each step on your own machine.',
     ],
   },

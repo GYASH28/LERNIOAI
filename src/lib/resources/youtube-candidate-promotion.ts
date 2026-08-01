@@ -43,6 +43,7 @@ const QueueReviewItemSchema = z.object({
   embeddable: z.boolean().nullable(),
   metadataStatus: z.string().min(1),
   availabilityStatus: z.string().min(1),
+  language: z.enum(['en', 'hi', 'hinglish']).default('en'),
   sourceEvidence: z.object({
     sourceId: z.string().min(1),
     sourcePdf: z.string().nullable(),
@@ -72,7 +73,7 @@ export const PromoteYouTubeCandidateMappingSchema = z.object({
   coveragePercentage: z.number().int().min(1).max(100).nullable().optional(),
   sourceEvidence: z.string().trim().max(2000).nullable().optional(),
   title: z.string().trim().min(1).max(240).nullable().optional(),
-  language: z.string().trim().min(2).max(16).default('en'),
+  language: z.enum(['en', 'hi', 'hinglish']).default('en'),
 })
 
 export const PromoteYouTubeCandidateMappingsSchema = z.object({

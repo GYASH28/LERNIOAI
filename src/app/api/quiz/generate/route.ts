@@ -100,7 +100,7 @@ function generateQuestionPool(subjectName: string, coverageFocus: string, subjec
       question: `In ${subjectName}, what does "${topic}" refer to?`,
       options: shuffle([`A key concept in ${subjectName} related to ${topic}`, ...distractors]),
       answer: -1, // will be set after shuffle
-      explanation: `"${topic}" is a fundamental topic in ${subjectName}. It is part of the CWIT R23 curriculum and covers essential knowledge for this subject. Review the lesson notes and YouTube lectures for a complete understanding.`,
+      explanation: `"${topic}" is a fundamental topic in ${subjectName}. It is part of the CWIT R23 curriculum and covers essential knowledge for this subject. Review the lesson notes, attempt a small example, and use a reviewed lesson video when one is available.`,
     })
     // Fix the answer index
     const last = questions[questions.length - 1]!
@@ -129,7 +129,7 @@ function generateQuestionPool(subjectName: string, coverageFocus: string, subjec
         'Writing a device driver',
       ]),
       answer: -1,
-      explanation: `"${topic}" is applied when solving problems related to this topic in ${subjectName}. The YouTube lectures and lesson notes provide worked examples.`,
+      explanation: `"${topic}" is applied when solving problems related to this topic in ${subjectName}. The lesson notes and practice activities provide a starting point; use a reviewed lesson video when one is available.`,
     })
     const last = questions[questions.length - 1]!
     last.answer = last.options.indexOf(`Solving a problem related to ${topic} as covered in the ${subjectName} syllabus`)
@@ -173,7 +173,7 @@ function generateQuestionPool(subjectName: string, coverageFocus: string, subjec
       'Only watch videos without practicing',
     ],
     answer: 0,
-    explanation: `The coverage focus areas are the most important topics for your exam. Study these topics using the curated YouTube lectures and lesson notes, then practice with quizzes.`,
+    explanation: `The coverage focus areas are the most important topics for your exam. Study them with the official lesson notes, a reviewed lesson video when available, and then practice with quizzes.`,
   })
 
   return questions
