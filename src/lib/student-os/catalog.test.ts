@@ -33,4 +33,12 @@ describe('daily mission builder', () => {
     expect(missions.length).toBeGreaterThan(0)
     expect(missions[0]?.href).toBeTruthy()
   })
+
+  it('never sends a learning mission back to the Learn home page', () => {
+    const learningMissions = buildDailyMissions(120, 'complete')
+      .filter((mission) => mission.category === 'learn' || mission.category === 'video')
+
+    expect(learningMissions.length).toBeGreaterThan(0)
+    expect(learningMissions.every((mission) => mission.href === '/learn/current')).toBe(true)
+  })
 })

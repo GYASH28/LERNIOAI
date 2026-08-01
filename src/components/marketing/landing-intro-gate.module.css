@@ -1,0 +1,24 @@
+.content {
+  min-height: 100dvh;
+  background: #04050d;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 320ms ease;
+}
+
+:global(html[data-landing-intro='pending']) .content,
+:global(html[data-landing-intro='playing']) .content {
+  opacity: 0;
+  visibility: hidden;
+}
+
+:global(html[data-landing-intro='handoff']) .content {
+  opacity: 0;
+  visibility: visible;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content {
+    transition: none;
+  }
+}

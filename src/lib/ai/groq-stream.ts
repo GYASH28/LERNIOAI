@@ -27,6 +27,12 @@ export function getGroqRuntimeStatus() {
   }
 }
 
+/**
+ * Streams from the preferred model and safely falls back to the alternate
+ * model only when the first attempt failed before emitting any answer text.
+ * This avoids duplicated/stitched answers while recovering from model-level
+ * rate limits, temporary provider failures and unavailable model IDs.
+ */
 export async function* streamGroqChat(input: {
   systemPrompt: string
   messages: TutorMessage[]
@@ -44,11 +50,54 @@ export async function* streamGroqChat(input: {
     )
   }
 
-  const model =
-    input.profile === 'quality'
-      ? process.env.GROQ_MODEL?.trim() || DEFAULT_QUALITY_MODEL
-      : process.env.GROQ_FAST_MODEL?.trim() || DEFAULT_FAST_MODEL
+  const qualityModel = process.env.GROQ_MODEL?.trim() || DEFAULT_QUALITY_MODEL
+  const fastModel = process.env.GROQ_FAST_MODEL?.trim() || DEFAULT_FAST_MODEL
+  const preferred = input.profile === 'quality' ? qualityModel : fastModel
+  const alternate = input.profile === 'quality' ? fastModel : qualityModel
+  const models = Array.from(new Set([preferred, alternate].filter(Boolean)))
+  let lastError: unknown = null
 
+  for (let index = 0; index < models.length; index += 1) {
+    const model = models[index]
+    let emitted = false
+
+    try {
+      for await (const token of streamModel({ ...input, apiKey, model })) {
+        emitted = true
+        yield token
+      }
+      return
+    } catch (error) {
+      lastError = error
+      const providerError = error instanceof GroqStreamError ? error : null
+      const mayFallback =
+        index < models.length - 1
+        && !emitted
+        && !input.signal?.aborted
+        && Boolean(providerError?.retryable || providerError?.code.startsWith('GROQ_HTTP_404'))
+
+      if (!mayFallback) throw error
+      console.warn('[leo:model-fallback]', {
+        failedModel: model,
+        fallbackModel: models[index + 1],
+        code: providerError?.code,
+      })
+    }
+  }
+
+  throw lastError instanceof Error
+    ? lastError
+    : new GroqStreamError('AI_UNAVAILABLE', 502, true, 'LEO could not complete this request. Please retry.')
+}
+
+async function* streamModel(input: {
+  systemPrompt: string
+  messages: TutorMessage[]
+  maxTokens: number
+  signal?: AbortSignal
+  apiKey: string
+  model: string
+}): AsyncGenerator<string> {
   const timeoutMs = readPositiveInt(process.env.GROQ_TIMEOUT_MS, 35_000, 8_000, 55_000)
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort('timeout'), timeoutMs)
@@ -59,11 +108,11 @@ export async function* streamGroqChat(input: {
     const response = await fetch(API_URL, {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${input.apiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model,
+        model: input.model,
         messages: [
           { role: 'system', content: input.systemPrompt },
           ...normaliseMessages(input.messages),
@@ -79,7 +128,10 @@ export async function* streamGroqChat(input: {
 
     if (!response.ok) {
       const detail = (await response.text().catch(() => '')).slice(0, 400)
-      const retryable = response.status === 408 || response.status === 409 || response.status === 429 || response.status >= 500
+      const retryable = response.status === 408
+        || response.status === 409
+        || response.status === 429
+        || response.status >= 500
       throw new GroqStreamError(
         `GROQ_HTTP_${response.status}`,
         response.status,
@@ -117,7 +169,7 @@ export async function* streamGroqChat(input: {
           const token = event.choices?.[0]?.delta?.content
           if (token) yield token
         } catch {
-          // Ignore malformed provider keep-alive/event fragments; valid deltas continue.
+          // Ignore malformed keep-alive/event fragments; valid deltas continue.
         }
       }
     }

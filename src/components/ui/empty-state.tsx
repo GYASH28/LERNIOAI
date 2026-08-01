@@ -1,6 +1,10 @@
 'use client'
 
+import Link from 'next/link'
 import type { ReactNode } from 'react'
+import { ArrowRight } from 'lucide-react'
+import { LearningIllustration, type LearningIllustrationVariant } from '@/components/engagement/learning-illustration'
+import { studyCoachLine } from '@/lib/engagement-copy'
 
 interface EmptyStateProps {
   icon?: ReactNode
@@ -9,25 +13,27 @@ interface EmptyStateProps {
   description?: string
   action?: { label: string; href?: string; onClick?: () => void }
   className?: string
+  illustration?: LearningIllustrationVariant
+  showCoachLine?: boolean
 }
 
-const DEFAULT_EMOJIS: Record<string, { emoji: string; title: string; desc: string }> = {
-  'no-streak': { emoji: '🦉', title: 'Start learning to wake your streak!', desc: 'Study today to begin your streak.' },
-  'no-announcements': { emoji: '📢', title: 'No announcements yet', desc: 'CR, post the first one!' },
-  'no-classmates': { emoji: '👋', title: 'Waiting for classmates to join...', desc: 'Share your class code with friends.' },
-  'no-attendance': { emoji: '📋', title: 'No attendance taken yet', desc: 'Take attendance to see records here.' },
-  'no-notifications': { emoji: '☕', title: "You're all caught up!", desc: 'No new notifications right now.' },
-  'no-analytics': { emoji: '🔍', title: 'Start studying to see insights', desc: 'Your analytics will appear here.' },
-  'no-practice': { emoji: '✏️', title: 'Ready to practice?', desc: 'Start a practice session to improve.' },
-  'no-exams': { emoji: '🕐', title: 'No exams scheduled yet', desc: 'Check back later for exam dates.' },
-  'no-leaderboard': { emoji: '🏆', title: 'Be the first to earn XP!', desc: 'Start learning to climb the ranks.' },
-  'no-materials': { emoji: '📚', title: 'No materials found', desc: 'Try a different search or browse all subjects.' },
-  'no-coding': { emoji: '🤖', title: 'Write your first line of code!', desc: 'Pick a language and start coding.' },
-  'no-labs': { emoji: '🧪', title: 'Pick an experiment to start', desc: 'Interactive simulations await.' },
-  'no-revision': { emoji: '🧠', title: 'Create flashcards to revise', desc: 'Your revision cards will appear here.' },
-  'no-planner': { emoji: '📅', title: 'Plan your study schedule', desc: 'Add tasks to get started.' },
-  'no-polls': { emoji: '📊', title: 'No polls yet', desc: 'Create one to get your class voting.' },
-  'no-messages': { emoji: '💬', title: 'No messages yet', desc: 'Start a conversation!' },
+const DEFAULT_EMOJIS = {
+  'no-streak': { emoji: '🦉', title: 'Start learning to wake your streak!', desc: 'Study today to begin your streak.', illustration: 'journey' as const },
+  'no-announcements': { emoji: '📢', title: 'No announcements yet', desc: 'Important class updates will appear here.', illustration: 'empty' as const },
+  'no-classmates': { emoji: '👋', title: 'Waiting for classmates to join', desc: 'Share your class code with friends.', illustration: 'empty' as const },
+  'no-attendance': { emoji: '📋', title: 'No attendance taken yet', desc: 'Attendance records will appear after the first session.', illustration: 'planner' as const },
+  'no-notifications': { emoji: '☕', title: "You're all caught up", desc: 'There is nothing new requiring your attention.', illustration: 'celebration' as const },
+  'no-analytics': { emoji: '🔍', title: 'Study a little to unlock useful insights', desc: 'Analytics become meaningful after real learning activity.', illustration: 'journey' as const },
+  'no-practice': { emoji: '✏️', title: 'Ready for your first practice set?', desc: 'Start with a short session and use mistakes as your revision list.', illustration: 'practice' as const },
+  'no-exams': { emoji: '🕐', title: 'No exams scheduled yet', desc: 'Your exam plan will appear when dates are available.', illustration: 'planner' as const },
+  'no-leaderboard': { emoji: '🏆', title: 'The leaderboard is waiting for its first result', desc: 'Earn XP through completed learning work.', illustration: 'celebration' as const },
+  'no-materials': { emoji: '📚', title: 'No matching materials', desc: 'Try another lesson, subject code or search term.', illustration: 'empty' as const },
+  'no-coding': { emoji: '🤖', title: 'Your Coding Lab is ready', desc: 'Choose a language or open a coding lesson to begin.', illustration: 'coding' as const },
+  'no-labs': { emoji: '🧪', title: 'Choose an experiment to start', desc: 'Interactive simulations appear here when available.', illustration: 'practice' as const },
+  'no-revision': { emoji: '🧠', title: 'Nothing is due for revision', desc: 'Complete lessons or create flashcards to build your recall queue.', illustration: 'revision' as const },
+  'no-planner': { emoji: '📅', title: 'Your week has no study blocks yet', desc: 'Add a small realistic task instead of planning the entire universe.', illustration: 'planner' as const },
+  'no-polls': { emoji: '📊', title: 'No polls yet', desc: 'Class polls will appear here when someone creates one.', illustration: 'empty' as const },
+  'no-messages': { emoji: '💬', title: 'No messages yet', desc: 'Start a useful conversation when you have something to discuss.', illustration: 'tutor' as const },
 }
 
 export function EmptyState({
@@ -37,46 +43,47 @@ export function EmptyState({
   description,
   action,
   className = '',
+  illustration = 'empty',
+  showCoachLine = true,
 }: EmptyStateProps) {
   const displayEmoji = emoji || '✨'
   const displayTitle = title || 'Nothing here yet'
   const displayDesc = description || ''
+  const coach = studyCoachLine(displayTitle.length)
 
   return (
-    <div className={`flex flex-col items-center justify-center py-12 px-4 text-center ${className}`}>
-      {/* Large emoji with bounce-in animation */}
-      <div
-        className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-muted/50 text-4xl"
-        style={{ animation: 'countUp 0.5s ease-out' }}
-      >
-        {icon || <span>{displayEmoji}</span>}
+    <div className={`mx-auto flex max-w-2xl flex-col items-center justify-center px-4 py-10 text-center ${className}`}>
+      <div className="relative w-full max-w-[300px]">
+        <LearningIllustration variant={illustration} animated className="w-full" />
+        {icon || emoji ? (
+          <div className="absolute bottom-5 right-6 flex h-12 w-12 items-center justify-center rounded-2xl border border-border bg-background text-2xl shadow-sm">
+            {icon || <span>{displayEmoji}</span>}
+          </div>
+        ) : null}
       </div>
 
-      {/* Title */}
-      <h3 className="text-base font-bold text-foreground">{displayTitle}</h3>
+      <h3 className="mt-1 text-xl font-black tracking-tight text-foreground">{displayTitle}</h3>
+      {displayDesc && <p className="mt-2 max-w-md text-sm leading-6 text-muted-foreground">{displayDesc}</p>}
 
-      {/* Description */}
-      {displayDesc && (
-        <p className="mt-1.5 max-w-xs text-sm text-muted-foreground">{displayDesc}</p>
+      {showCoachLine && (
+        <p className="mt-4 max-w-md rounded-xl bg-muted/60 px-3 py-2 text-xs font-semibold leading-5 text-foreground/75">
+          {coach.joke || coach.message}
+        </p>
       )}
 
-      {/* Action button */}
-      {action && (
-        <button
-          onClick={action.onClick}
-          className="mt-4 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-transform hover:scale-105 active:scale-95"
-        >
-          {action.label}
+      {action?.href ? (
+        <Link href={action.href} className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-xl bg-primary px-4 text-sm font-black text-primary-foreground transition hover:-translate-y-0.5">
+          {action.label}<ArrowRight className="h-4 w-4" />
+        </Link>
+      ) : action ? (
+        <button onClick={action.onClick} className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-xl bg-primary px-4 text-sm font-black text-primary-foreground transition hover:-translate-y-0.5 active:translate-y-0">
+          {action.label}<ArrowRight className="h-4 w-4" />
         </button>
-      )}
+      ) : null}
     </div>
   )
 }
 
-/**
- * Pre-configured empty states for common scenarios.
- * Usage: <EmptyStatePreset type="no-announcements" />
- */
 export function EmptyStatePreset({
   type,
   action,
@@ -85,5 +92,13 @@ export function EmptyStatePreset({
   action?: { label: string; href?: string; onClick?: () => void }
 }) {
   const config = DEFAULT_EMOJIS[type]
-  return <EmptyState emoji={config.emoji} title={config.title} description={config.desc} action={action} />
+  return (
+    <EmptyState
+      emoji={config.emoji}
+      title={config.title}
+      description={config.desc}
+      action={action}
+      illustration={config.illustration}
+    />
+  )
 }

@@ -1,0 +1,10 @@
+@media (max-width: 639px) {
+  nav[aria-label='Lesson actions'] {
+    bottom: calc(6.25rem + env(safe-area-inset-bottom)) !important;
+    z-index: 60;
+  }
+
+  nav[aria-label='Lesson actions'] + div[aria-hidden='true'] {
+    height: 10rem;
+  }
+}

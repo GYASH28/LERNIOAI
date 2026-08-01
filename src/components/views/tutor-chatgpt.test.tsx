@@ -1,12 +1,11 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { TutorView } from './tutor-v3'
-import { useAppStore } from '@/store/app-store'
+import { TutorChatGPTWorkspace } from './tutor-chatgpt'
 import { encodeTutorStreamEvent } from '@/lib/ai/stream-protocol'
 
-vi.mock('@/components/mascots/mascot', () => ({
-  Mascot: ({ mascot }: { mascot: string }) => <div data-testid={`mascot-${mascot}`} />,
+vi.mock('next/navigation', () => ({
+  useSearchParams: () => new URLSearchParams(),
 }))
 
 vi.mock('@/hooks/use-tts-player', () => ({
@@ -56,10 +55,10 @@ function streamResponse() {
   )
 }
 
-describe('TutorView send flow', () => {
+describe('TutorChatGPTWorkspace', () => {
   beforeEach(() => {
-    useAppStore.setState({ subjects: [] })
     Element.prototype.scrollIntoView = vi.fn()
+    window.localStorage.clear()
 
     vi.stubGlobal(
       'fetch',
@@ -97,16 +96,16 @@ describe('TutorView send flow', () => {
   afterEach(() => {
     vi.unstubAllGlobals()
     vi.clearAllMocks()
-    useAppStore.setState({ subjects: [] })
+    window.localStorage.clear()
   })
 
-  it('creates the first session and sends when the Send button is clicked', async () => {
+  it('creates the first session and streams an answer from the composer', async () => {
     const user = userEvent.setup()
-    render(<TutorView />)
+    render(<TutorChatGPTWorkspace userName="Yash" initialSubjects={[]} />)
 
-    const composer = await screen.findByPlaceholderText(/Ask LEO in Explain Simply/i)
+    const composer = await screen.findByPlaceholderText('Message LEO')
     await user.type(composer, 'Plan my work for today')
-    await user.click(screen.getByRole('button', { name: 'Send message to LEO' }))
+    await user.click(screen.getByRole('button', { name: 'Send message' }))
 
     expect((await screen.findAllByText('Plan my work for today')).length).toBeGreaterThan(0)
     expect(await screen.findByText('Here is your plan for today.')).toBeInTheDocument()
@@ -120,7 +119,7 @@ describe('TutorView send flow', () => {
     )
   })
 
-  it('shows a visible error instead of appearing dead when session creation fails', async () => {
+  it('keeps the draft and shows a visible error when session creation fails', async () => {
     const mockedFetch = vi.mocked(fetch)
     mockedFetch.mockImplementation(async (input: RequestInfo | URL, init?: RequestInit) => {
       const url = String(input)
@@ -140,11 +139,11 @@ describe('TutorView send flow', () => {
     })
 
     const user = userEvent.setup()
-    render(<TutorView />)
+    render(<TutorChatGPTWorkspace initialSubjects={[]} />)
 
-    const composer = await screen.findByPlaceholderText(/Ask LEO in Explain Simply/i)
+    const composer = await screen.findByPlaceholderText('Message LEO')
     await user.type(composer, 'Explain arrays')
-    await user.click(screen.getByRole('button', { name: 'Send message to LEO' }))
+    await user.click(screen.getByRole('button', { name: 'Send message' }))
 
     expect(await screen.findByRole('alert')).toHaveTextContent('Database is temporarily unavailable.')
     expect(composer).toHaveValue('Explain arrays')
