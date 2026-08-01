@@ -1,0 +1,77 @@
+name: Secure dependency refresh
+
+on:
+  push:
+    branches:
+      - fix/learning-os-experience-redesign
+    paths:
+      - .github/workflows/security-dependency-refresh.yml
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: postgresql://lernio:lernio_password@localhost:5432/lernio?schema=public
+      DIRECT_URL: postgresql://lernio:lernio_password@localhost:5432/lernio?schema=public
+      NEXTAUTH_URL: http://localhost:3000
+      NEXTAUTH_SECRET: dependency-refresh-ci-secret
+      LERNIO_DEMO_MODE: "false"
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: lernio
+          POSTGRES_PASSWORD: lernio_password
+          POSTGRES_DB: lernio
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U lernio -d lernio"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/learning-os-experience-redesign
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Regenerate the lockfile with patched production dependencies
+        run: |
+          npm install --save-exact next@16.2.12 next-auth@4.24.15 sharp@0.35.3
+          npm install --save-dev --save-exact eslint-config-next@16.2.12
+          npm pkg set overrides.postcss=8.5.18 overrides.sharp=0.35.3
+          npm install --package-lock-only
+      - name: Verify clean installation
+        run: npm ci
+      - name: Verify production dependency audit
+        run: npm run audit:production
+      - name: Verify Prisma and migrations
+        run: |
+          npm run db:generate
+          npm run check:migrations
+          npm run db:migrate:deploy
+      - name: Verify curriculum and page contracts
+        run: |
+          npm run curriculum:validate
+          npm run learning-os:validate
+          npm run pages:audit
+      - name: Verify application
+        run: |
+          npm run lint
+          npm run typecheck
+          npm run test
+          npm run build
+      - name: Commit regenerated dependency manifests
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json
+          git diff --cached --quiet && exit 0
+          git commit -m "fix: upgrade vulnerable production dependencies"
+          git push origin HEAD:fix/learning-os-experience-redesign
