@@ -160,6 +160,25 @@ describe('promoteYouTubeCandidateMappings', () => {
     expect(db.resource.create).not.toHaveBeenCalled()
     expect(db.lessonResource.create).not.toHaveBeenCalled()
   })
+
+  it('keeps the reviewed candidate language when an API caller does not override it', async () => {
+    const db = promotionDbMock()
+    const queue = JSON.parse(JSON.stringify(queueFixture())) as { items: Array<Record<string, unknown>> }
+    queue.items[0]!.language = 'hi'
+
+    await promoteYouTubeCandidateMappings({
+      reviewQueue: queue,
+      decisions: {
+        decisions: [{ candidateId: 'ytcand_ready', subjectCode: 'R23CP1401', lessonId: 'lesson_1', decision: 'draft' }],
+      },
+      actorUserId: 'reviewer_1',
+      db,
+    })
+
+    expect(db.resource.create).toHaveBeenCalledWith(expect.objectContaining({
+      data: expect.objectContaining({ language: 'hi' }),
+    }))
+  })
 })
 
 function promotionDbMock(): YouTubeCandidatePromotionDb {
