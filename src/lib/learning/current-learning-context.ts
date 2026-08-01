@@ -6,12 +6,8 @@ import {
   getManifestSubjectsForSemester,
   type ManifestSubject,
 } from '@/lib/curriculum/manifest-data'
-import { enhanceSubject } from '@/lib/curriculum/enhanced-manifest'
-import {
-  findLessonBySlug,
-  getSubjectNotes,
-  normalizeLessonSlug,
-} from '@/lib/curriculum/lesson-notes-loader'
+import { normalizeLessonSlug } from '@/lib/curriculum/lesson-notes-loader'
+import { buildVideoLearningCatalog } from '@/lib/curriculum/video-learning-catalog'
 
 export interface CurrentLearningContext {
   programme: 'DCOMP' | 'DCIOT'
@@ -41,6 +37,10 @@ interface CanonicalLesson {
   href: string
 }
 
+/**
+ * Resolves the next playable Learn item. Learn lessons are video lessons, so
+ * written-only topics are deliberately excluded and remain in Materials.
+ */
 export async function getCurrentLearningContext(
   userId: string,
   fallback?: LearningContextFallback,
@@ -62,18 +62,14 @@ export async function getCurrentLearningContext(
   const programme = fallback?.programme
     ?? (profile?.departmentCode === 'DCIOT' ? 'DCIOT' : 'DCOMP')
   const semester = normalizeSemester(fallback?.semester ?? profile?.semesterNumber)
-
-  const recent = recentLesson?.href
-    ? resolveExistingLesson(recentLesson.href)
-    : null
+  const recent = recentLesson?.href ? resolveExistingLesson(recentLesson.href) : null
 
   if (recent) {
-    const scrollPos = normalizeScrollPosition(recentLesson?.scrollPos)
     return {
       ...recent,
-      lessonTitle: recent.lessonTitle || recentLesson?.title || 'Continue lesson',
-      scrollPos,
-      resumeHref: addResumePosition(recent.href, scrollPos),
+      lessonTitle: recent.lessonTitle || recentLesson?.title || 'Continue video lesson',
+      scrollPos: 0,
+      resumeHref: recent.href,
       source: 'recent',
     }
   }
@@ -105,12 +101,7 @@ export function resolveExistingLesson(value: string): CanonicalLesson | null {
   const subject = getManifestSubject(programme, semester, requestedSubjectCode)
   if (!subject) return null
 
-  return canonicalLesson(
-    programme,
-    semester,
-    subject,
-    requestedLessonSlug,
-  )
+  return canonicalVideoLesson(programme, semester, subject, requestedLessonSlug)
 }
 
 export function firstExistingLesson(
@@ -118,78 +109,47 @@ export function firstExistingLesson(
   semester: number,
 ): CanonicalLesson | null {
   for (const subject of getManifestSubjectsForSemester(programme, semester)) {
-    const routeCode = routeSubjectCode(programme, subject)
-    const notes = getSubjectNotes(routeCode) ?? getSubjectNotes(subject.code)
-    const firstDetailedLesson = notes?.units.flatMap((unit) => unit.lessons)[0]
-    if (firstDetailedLesson) {
-      return {
-        programme,
-        semester,
-        subjectCode: routeCode,
-        subjectName: subject.name,
-        lessonSlug: firstDetailedLesson.slug,
-        lessonTitle: firstDetailedLesson.title,
-        href: lessonHref(programme, semester, routeCode, firstDetailedLesson.slug),
-      }
-    }
+    const catalog = buildVideoLearningCatalog(programme, subject)
+    const first = catalog.videoLessons[0]
+    if (!first) continue
 
-    const firstManifestLesson = enhanceSubject(subject).units
-      .flatMap((unit) => unit.lessons)[0]
-    if (firstManifestLesson) {
-      return {
-        programme,
-        semester,
-        subjectCode: routeCode,
-        subjectName: subject.name,
-        lessonSlug: firstManifestLesson.slug,
-        lessonTitle: firstManifestLesson.title,
-        href: lessonHref(programme, semester, routeCode, firstManifestLesson.slug),
-      }
+    const routeCode = routeSubjectCode(programme, subject)
+    return {
+      programme,
+      semester,
+      subjectCode: routeCode,
+      subjectName: subject.name,
+      lessonSlug: first.slug,
+      lessonTitle: first.title,
+      href: lessonHref(programme, semester, routeCode, first.slug),
     }
   }
 
   return null
 }
 
-function canonicalLesson(
+function canonicalVideoLesson(
   programme: 'DCOMP' | 'DCIOT',
   semester: number,
   subject: ManifestSubject,
   requestedSlug: string,
 ): CanonicalLesson | null {
-  const routeCode = routeSubjectCode(programme, subject)
-  const noteCodes = [routeCode, subject.code, subject.alternateCode]
-    .filter((value): value is string => Boolean(value))
-
-  for (const code of noteCodes) {
-    const detailed = findLessonBySlug(code, requestedSlug)
-    if (detailed) {
-      return {
-        programme,
-        semester,
-        subjectCode: routeCode,
-        subjectName: subject.name,
-        lessonSlug: detailed.lesson.slug,
-        lessonTitle: detailed.lesson.title,
-        href: lessonHref(programme, semester, routeCode, detailed.lesson.slug),
-      }
-    }
-  }
-
+  const catalog = buildVideoLearningCatalog(programme, subject)
   const normalizedRequested = normalizeLessonSlug(requestedSlug)
-  const manifestLesson = enhanceSubject(subject).units
-    .flatMap((unit) => unit.lessons)
-    .find((lesson) => normalizeLessonSlug(lesson.slug) === normalizedRequested)
+  const lesson = catalog.videoLessons.find((item) =>
+    item.slug === requestedSlug || normalizeLessonSlug(item.slug) === normalizedRequested,
+  )
+  if (!lesson) return null
 
-  if (!manifestLesson) return null
+  const routeCode = routeSubjectCode(programme, subject)
   return {
     programme,
     semester,
     subjectCode: routeCode,
     subjectName: subject.name,
-    lessonSlug: manifestLesson.slug,
-    lessonTitle: manifestLesson.title,
-    href: lessonHref(programme, semester, routeCode, manifestLesson.slug),
+    lessonSlug: lesson.slug,
+    lessonTitle: lesson.title,
+    href: lessonHref(programme, semester, routeCode, lesson.slug),
   }
 }
 
@@ -208,10 +168,6 @@ function lessonHref(
   return `/learn/${programme}/semester/${semester}/subject/${encodeURIComponent(subjectCode)}/lesson/${encodeURIComponent(lessonSlug)}`
 }
 
-function addResumePosition(href: string, scrollPos: number) {
-  return scrollPos > 0 ? `${href}?resume=${scrollPos}` : href
-}
-
 function normalizeProgramme(value: string): 'DCOMP' | 'DCIOT' | null {
   const normalized = value.trim().toUpperCase()
   if (normalized === 'DCOMP' || normalized === 'DCIOT') return normalized
@@ -224,14 +180,11 @@ function normalizeSemester(value: number | null | undefined) {
     : 3
 }
 
-function normalizeScrollPosition(value: number | null | undefined) {
-  if (!Number.isFinite(value) || Number(value) <= 0) return 0
-  return Math.min(10_000_000, Math.round(Number(value)))
-}
-
 function safePathname(value: string) {
   try {
-    return value.startsWith('/') ? new URL(value, 'https://lernio.local').pathname : new URL(value).pathname
+    return value.startsWith('/')
+      ? new URL(value, 'https://lernio.local').pathname
+      : new URL(value).pathname
   } catch {
     return ''
   }
