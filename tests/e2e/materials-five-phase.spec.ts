@@ -1,6 +1,8 @@
-import { expect, test, type Page, type WorkerInfo } from '@playwright/test'
+import { expect, test, type BrowserContext, type Page, type WorkerInfo } from '@playwright/test'
 import { hash } from 'bcryptjs'
+import { encode } from 'next-auth/jwt'
 import { db } from '../../src/lib/db'
+import { normalizeRole } from '../../src/lib/roles'
 
 const lessonUrl = '/materials/lesson/R23CP1701/logarithms-and-progressions'
 const e2ePassword = 'Lernio-e2e-only-2026'
@@ -41,17 +43,43 @@ test.afterAll(async () => {
   if (e2eEmail) await db.user.deleteMany({ where: { email: e2eEmail } })
 })
 
+test.beforeEach(async ({ context }) => {
+  if (!e2eEmail) return
+  const user = await db.user.findUniqueOrThrow({ where: { email: e2eEmail } })
+  const token = await encode({
+    secret: process.env.NEXTAUTH_SECRET || 'ci-secret-replace-in-production',
+    maxAge: 60 * 60,
+    token: {
+      id: user.id,
+      sub: user.id,
+      email: user.email,
+      name: user.name,
+      role: normalizeRole(user.role),
+      status: user.status,
+      profileComplete: user.profileComplete,
+      authorityVersion: user.authorityVersion,
+      authIssuedAt: Date.now(),
+      sessionRevoked: false,
+    },
+  })
+  await addSessionCookie(context, token)
+})
+
+async function addSessionCookie(context: BrowserContext, token: string) {
+  await context.addCookies([{
+    name: 'next-auth.session-token',
+    value: token,
+    url: 'http://127.0.0.1:3000',
+    httpOnly: true,
+    sameSite: 'Lax',
+  }])
+}
+
 async function openProtectedLesson(page: Page, url: string) {
   await page.goto(url)
-  if (!new URL(page.url()).pathname.startsWith('/sign-in')) return
-  if (!e2eEmail) {
-    throw new Error('Protected Materials E2E checks require DATABASE_URL or a demo-mode web server.')
+  if (new URL(page.url()).pathname.startsWith('/sign-in')) {
+    throw new Error('The protected Materials route rejected the signed E2E student session.')
   }
-
-  await page.getByLabel('Email').fill(e2eEmail)
-  await page.getByLabel('Password').fill(e2ePassword)
-  await page.getByRole('button', { name: 'Sign in', exact: true }).click()
-  await expect(page).not.toHaveURL(/\/sign-in(?:\?|$)/, { timeout: 15_000 })
 }
 
 test('Materials exposes five distinct lesson phases from one canonical note', async ({ page }) => {
