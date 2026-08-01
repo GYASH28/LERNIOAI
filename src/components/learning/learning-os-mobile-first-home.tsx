@@ -9,7 +9,6 @@ import {
   CalendarCheck,
   Check,
   Clock3,
-  Code2,
   Flame,
   LibraryBig,
   Pause,
@@ -18,7 +17,6 @@ import {
   RotateCcw,
   Search,
   Settings2,
-  Sparkles,
   Target,
   TimerReset,
   Video,
@@ -31,6 +29,7 @@ import {
   STUDENT_OS_STORAGE,
   buildDailyMissions,
   getAdaptivePath,
+  type StudentLearningMode,
   type StudentLearningProfile,
 } from '@/lib/student-os/catalog'
 import { cn } from '@/lib/utils'
@@ -77,21 +76,32 @@ interface FocusState {
   totalMinutes: number
 }
 
+const VALID_LEARNING_MODES = new Set<StudentLearningMode>([
+  'complete',
+  'fast-track',
+  'exam-crash',
+  'weak-topic',
+  'weekend-catch-up',
+  'revision-only',
+  'coding-practice',
+  'low-bandwidth',
+])
+
 const missionIcons: Record<string, ComponentType<{ className?: string }>> = {
   learn: Video,
   video: Video,
   practice: PenTool,
   revision: RotateCcw,
-  coding: Code2,
+  coding: BrainCircuit,
   reflection: LibraryBig,
 }
 
 const connectedTools = [
-  { href: '/practice', label: 'Practice', helper: 'Turn watched lessons into active recall.', icon: PenTool },
-  { href: '/revision', label: 'Revision', helper: 'Review due concepts using spaced repetition.', icon: RotateCcw },
-  { href: '/tutor', label: 'Ask LEO', helper: 'Continue with the current subject and lesson context.', icon: BrainCircuit },
   { href: '/materials', label: 'Materials', helper: 'Read the complete written notes separately.', icon: BookOpen },
-  { href: '/notebook', label: 'Notebook', helper: 'Save mistakes, doubts, formulas and summaries.', icon: LibraryBig },
+  { href: '/tutor', label: 'Ask LEO', helper: 'Continue with subject and lesson context attached.', icon: BrainCircuit },
+  { href: '/practice', label: 'Practice', helper: 'Turn watched lessons into active recall.', icon: PenTool },
+  { href: '/revision', label: 'Revision', helper: 'Review due concepts with spaced repetition.', icon: RotateCcw },
+  { href: '/notebook', label: 'Notebook', helper: 'Save mistakes, formulas and doubts.', icon: LibraryBig },
   { href: '/planner', label: 'Planner', helper: 'Schedule realistic video and practice blocks.', icon: CalendarCheck },
 ] as const
 
@@ -106,42 +116,26 @@ function firstName(value: string) {
   return value.trim().split(/\s+/)[0] || 'Learner'
 }
 
-function minutesLabel(minutes: number) {
-  if (minutes < 60) return `${minutes} min`
-  const hours = Math.floor(minutes / 60)
-  const rest = minutes % 60
-  return rest ? `${hours}h ${rest}m` : `${hours}h`
-}
-
-function clampNumber(value: unknown, fallback: number, min: number, max: number) {
+function clamp(value: unknown, fallback: number, min: number, max: number) {
   return typeof value === 'number' && Number.isFinite(value)
     ? Math.min(max, Math.max(min, value))
     : fallback
 }
 
-function normaliseProfile(
-  value: StudentLearningProfile,
-  fallback: StudentLearningProfile,
-): StudentLearningProfile {
-  const learningMode = ['balanced', 'exam_focused', 'concept_mastery', 'practical_builder'].includes(value?.learningMode)
-    ? value.learningMode
-    : fallback.learningMode
-  const mascot = ['leo', 'byte', 'coda', 'pico', 'nova'].includes(value?.mascot)
-    ? value.mascot
-    : fallback.mascot
+function sanitizeProfile(value: StudentLearningProfile, fallback: StudentLearningProfile) {
   return {
     ...fallback,
     ...value,
     programme: value?.programme === 'DCIOT' ? 'DCIOT' : fallback.programme,
-    semester: Math.round(clampNumber(value?.semester, fallback.semester, 1, 6)),
-    dailyMinutes: Math.round(clampNumber(value?.dailyMinutes, fallback.dailyMinutes, 10, 600)),
-    weeklyGoalMinutes: Math.round(clampNumber(value?.weeklyGoalMinutes, fallback.weeklyGoalMinutes, 30, 3600)),
-    learningMode,
-    mascot,
-  }
+    semester: Math.round(clamp(value?.semester, fallback.semester, 1, 6)),
+    dailyMinutes: Math.round(clamp(value?.dailyMinutes, fallback.dailyMinutes, 10, 600)),
+    weeklyGoalMinutes: Math.round(clamp(value?.weeklyGoalMinutes, fallback.weeklyGoalMinutes, 30, 3600)),
+    learningMode: VALID_LEARNING_MODES.has(value?.learningMode) ? value.learningMode : fallback.learningMode,
+    completed: undefined,
+  } as StudentLearningProfile
 }
 
-function normaliseMissionState(value: MissionState, today: string): MissionState {
+function sanitizeMissions(value: MissionState, today: string): MissionState {
   return {
     date: typeof value?.date === 'string' ? value.date : today,
     completed: Array.isArray(value?.completed)
@@ -150,11 +144,18 @@ function normaliseMissionState(value: MissionState, today: string): MissionState
   }
 }
 
-function normaliseFocusState(value: FocusState): FocusState {
+function sanitizeFocus(value: FocusState): FocusState {
   return {
-    completedSessions: Math.round(clampNumber(value?.completedSessions, 0, 0, 100000)),
-    totalMinutes: Math.round(clampNumber(value?.totalMinutes, 0, 0, 10000000)),
+    completedSessions: Math.round(clamp(value?.completedSessions, 0, 0, 100000)),
+    totalMinutes: Math.round(clamp(value?.totalMinutes, 0, 0, 10000000)),
   }
+}
+
+function minutesLabel(minutes: number) {
+  if (minutes < 60) return `${minutes} min`
+  const hours = Math.floor(minutes / 60)
+  const remainder = minutes % 60
+  return remainder ? `${hours}h ${remainder}m` : `${hours}h`
 }
 
 export function LearningOSMobileFirstHome({
@@ -169,18 +170,15 @@ export function LearningOSMobileFirstHome({
   semesters,
 }: LearningOSHomeProps) {
   const today = localDateKey()
-  const fallbackProfile: StudentLearningProfile = {
+  const fallbackProfile = useMemo<StudentLearningProfile>(() => ({
     ...DEFAULT_STUDENT_PROFILE,
     programme,
     semester: currentSemester,
     dailyMinutes,
     weeklyGoalMinutes: dailyMinutes * 5,
-  }
+  }), [currentSemester, dailyMinutes, programme])
 
-  const [storedProfile, setStoredProfile, profileReady] = useLocalState(
-    STUDENT_OS_STORAGE.profile,
-    fallbackProfile,
-  )
+  const [storedProfile, , profileReady] = useLocalState(STUDENT_OS_STORAGE.profile, fallbackProfile)
   const [storedMissions, setStoredMissions] = useLocalState<MissionState>(
     STUDENT_OS_STORAGE.missions,
     { date: today, completed: [] },
@@ -191,14 +189,14 @@ export function LearningOSMobileFirstHome({
   )
 
   const profile = useMemo(
-    () => normaliseProfile(storedProfile, fallbackProfile),
+    () => sanitizeProfile(storedProfile, fallbackProfile),
     [fallbackProfile, storedProfile],
   )
   const missionState = useMemo(
-    () => normaliseMissionState(storedMissions, today),
+    () => sanitizeMissions(storedMissions, today),
     [storedMissions, today],
   )
-  const focusStats = useMemo(() => normaliseFocusState(storedFocus), [storedFocus])
+  const focusStats = useMemo(() => sanitizeFocus(storedFocus), [storedFocus])
 
   const [semester, setSemester] = useState(currentSemester)
   const [query, setQuery] = useState('')
@@ -211,17 +209,11 @@ export function LearningOSMobileFirstHome({
   }, [missionState.date, setStoredMissions, today])
 
   useEffect(() => {
-    if (!profileReady) return
-    const normalised = normaliseProfile(storedProfile, fallbackProfile)
-    if (JSON.stringify(normalised) !== JSON.stringify(storedProfile)) setStoredProfile(normalised)
-  }, [fallbackProfile, profileReady, setStoredProfile, storedProfile])
-
-  useEffect(() => {
     if (!focusRunning) return
     if (secondsLeft <= 0) {
       setFocusRunning(false)
       setStoredFocus((current) => {
-        const safe = normaliseFocusState(current)
+        const safe = sanitizeFocus(current)
         return {
           completedSessions: safe.completedSessions + 1,
           totalMinutes: safe.totalMinutes + focusMinutes,
@@ -230,7 +222,10 @@ export function LearningOSMobileFirstHome({
       toast.success('Focus block finished. Take a short break.')
       return
     }
-    const timer = window.setTimeout(() => setSecondsLeft((current) => Math.max(0, current - 1)), 1000)
+    const timer = window.setTimeout(
+      () => setSecondsLeft((current) => Math.max(0, current - 1)),
+      1000,
+    )
     return () => window.clearTimeout(timer)
   }, [focusMinutes, focusRunning, secondsLeft, setStoredFocus])
 
@@ -241,7 +236,9 @@ export function LearningOSMobileFirstHome({
   const completedIds = missionState.date === today ? missionState.completed : []
   const completedCount = missions.filter((mission) => completedIds.includes(mission.id)).length
   const missionProgress = missions.length ? Math.round((completedCount / missions.length) * 100) : 0
-  const activeSemester = semesters.find((item) => item.number === semester) ?? semesters[0] ?? { number: semester, subjects: [] }
+  const activeSemester = semesters.find((item) => item.number === semester)
+    ?? semesters[0]
+    ?? { number: semester, subjects: [] }
   const normalizedQuery = query.trim().toLowerCase()
   const visibleSubjects = activeSemester.subjects.filter((subject) => {
     if (!normalizedQuery) return true
@@ -252,9 +249,9 @@ export function LearningOSMobileFirstHome({
   })
   const nextVideo = activeSemester.subjects.find((subject) => subject.firstVideoHref)
   const activePath = getAdaptivePath(profile.learningMode)
-  const timerLabel = `${String(Math.floor(secondsLeft / 60)).padStart(2, '0')}:${String(secondsLeft % 60).padStart(2, '0')}`
   const mappedVideoLessons = activeSemester.subjects.reduce((sum, subject) => sum + subject.videoLessonCount, 0)
   const pendingVideos = activeSemester.subjects.reduce((sum, subject) => sum + subject.pendingVideoCount, 0)
+  const timerLabel = `${String(Math.floor(secondsLeft / 60)).padStart(2, '0')}:${String(secondsLeft % 60).padStart(2, '0')}`
 
   const toggleMission = (missionId: string) => {
     const completed = completedIds.includes(missionId)
@@ -292,10 +289,10 @@ export function LearningOSMobileFirstHome({
               {programme} · Semester {currentSemester} · Video learning
             </p>
             <h1 className="mt-2 text-2xl font-black tracking-[-0.035em] sm:text-4xl">
-              {firstName(userName)}, learn by watching, then practise it.
+              {firstName(userName)}, watch the lesson—then prove you understood it.
             </h1>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground sm:text-base">
-              Learn contains lesson-specific videos. Complete written notes live in Materials, so the two experiences no longer overwrite or imitate each other.
+              Learn contains lesson-specific videos. Complete written notes stay in Materials, so neither section overwrites or imitates the other.
             </p>
 
             <div className="mt-5 grid gap-2 sm:flex sm:flex-wrap">
@@ -303,18 +300,12 @@ export function LearningOSMobileFirstHome({
                 href={nextVideo?.firstVideoHref || `/learn/${programme}/semester/${currentSemester}`}
                 className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-primary px-5 text-sm font-black text-primary-foreground shadow-sm"
               >
-                <Play className="h-4 w-4" /> {nextVideo ? 'Watch next video lesson' : 'Open current semester'}
+                <Play className="h-4 w-4" /> {nextVideo ? 'Watch a video lesson' : 'Open current semester'}
               </Link>
-              <Link
-                href="/materials"
-                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border bg-background/80 px-4 text-sm font-bold hover:bg-accent"
-              >
+              <Link href="/materials" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border bg-background/80 px-4 text-sm font-bold hover:bg-accent">
                 <BookOpen className="h-4 w-4" /> Read detailed notes
               </Link>
-              <Link
-                href="/learning-profile"
-                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border bg-background/80 px-4 text-sm font-bold hover:bg-accent"
-              >
+              <Link href="/learning-profile" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border bg-background/80 px-4 text-sm font-bold hover:bg-accent">
                 <Settings2 className="h-4 w-4" /> Personalise route
               </Link>
             </div>
@@ -342,7 +333,7 @@ export function LearningOSMobileFirstHome({
             </div>
             {pendingVideos > 0 ? (
               <p className="mt-3 text-xs leading-5 text-muted-foreground">
-                Missing videos are shown honestly. Lernio will not duplicate a random playlist just to fill the count.
+                Missing videos remain clearly marked. Lernio will not duplicate a random playlist just to fill the count.
               </p>
             ) : null}
           </div>
@@ -354,7 +345,7 @@ export function LearningOSMobileFirstHome({
           <div>
             <p className="text-xs font-black uppercase tracking-[0.14em] text-primary">Video lessons</p>
             <h2 className="mt-1 text-xl font-black">Choose a subject, then watch in order</h2>
-            <p className="mt-1 text-sm text-muted-foreground">The lesson count below means mapped, playable videos—not written notes.</p>
+            <p className="mt-1 text-sm text-muted-foreground">The lesson count means playable mapped videos—not written note topics.</p>
           </div>
           <label className="relative block w-full sm:max-w-sm">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -399,7 +390,7 @@ export function LearningOSMobileFirstHome({
               <p className="mt-3 line-clamp-3 text-xs leading-5 text-muted-foreground">{subject.coverageFocus}</p>
 
               <div className="mt-4 grid grid-cols-3 gap-2 text-center">
-                <MiniPanel label="Video lessons" value={subject.videoLessonCount} />
+                <MiniPanel label="Videos" value={subject.videoLessonCount} />
                 <MiniPanel label="Pending" value={subject.pendingVideoCount} />
                 <MiniPanel label="Note topics" value={subject.noteTopicCount} />
               </div>
@@ -494,9 +485,9 @@ export function LearningOSMobileFirstHome({
       </section>
 
       <section>
-        <div className="mb-3 flex items-end justify-between gap-3">
-          <div><p className="text-xs font-black uppercase tracking-[0.14em] text-primary">Connected learning</p><h2 className="mt-1 text-xl font-black">Continue the same lesson everywhere</h2></div>
-          <Sparkles className="h-5 w-5 text-primary" />
+        <div className="mb-3">
+          <p className="text-xs font-black uppercase tracking-[0.14em] text-primary">Connected learning</p>
+          <h2 className="mt-1 text-xl font-black">Continue the same lesson everywhere</h2>
         </div>
         <div className="grid grid-cols-2 gap-2 lg:grid-cols-3">
           {connectedTools.map((tool) => (
