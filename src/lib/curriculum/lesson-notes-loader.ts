@@ -3,7 +3,7 @@
  * Returns structured notes with units, lessons, and quiz questions.
  */
 import 'server-only'
-import { readFileSync, readdirSync, existsSync } from 'node:fs'
+import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
 
 const NOTES_DIR = join(process.cwd(), 'content', 'lesson-notes')
@@ -99,7 +99,6 @@ export interface Lesson {
   commonMistakes: string[]
   examTips: string[]
   practiceQuestions: PracticeQuestion[]
-  // V3 optional fields (may not exist in all JSON files)
   objectives?: string[]
   prerequisites?: string[]
   theory?: string
@@ -145,40 +144,37 @@ function loadAllNotes(): Map<string, SubjectNotes> {
 
   if (!existsSync(NOTES_DIR)) return cache
 
-  const files = readdirSync(NOTES_DIR).filter((f) => f.endsWith('.json'))
+  const files = readdirSync(NOTES_DIR).filter((file) => file.endsWith('.json'))
   for (const file of files) {
     try {
       const raw = readFileSync(join(NOTES_DIR, file), 'utf-8')
       const notes = JSON.parse(raw) as SubjectNotes
-      // Index by subject code (both COMP and CIOT variants)
       cache.set(notes.subjectCode, notes)
+      cache.set(notes.subjectCode.trim().toUpperCase(), notes)
     } catch {
-      // skip corrupt files
+      // Corrupt or incomplete content must not break every lesson page.
     }
   }
 
   return cache
 }
 
-/**
- * Get lesson notes for a subject by its code.
- * Tries the exact code, then the alternate code.
- */
 export function getSubjectNotes(subjectCode: string): SubjectNotes | null {
   const notes = loadAllNotes()
-  return notes.get(subjectCode) ?? null
+  return notes.get(subjectCode) ?? notes.get(subjectCode.trim().toUpperCase()) ?? null
 }
 
-/**
- * Get all subjects that have lesson notes available.
- */
 export function getAvailableNotesSubjects(): { code: string; name: string }[] {
-  const notes = loadAllNotes()
-  return Array.from(notes.values()).map((n) => ({ code: n.subjectCode, name: n.subjectName }))
+  const unique = new Map<string, SubjectNotes>()
+  for (const notes of loadAllNotes().values()) unique.set(notes.subjectCode, notes)
+  return Array.from(unique.values()).map((notes) => ({ code: notes.subjectCode, name: notes.subjectName }))
 }
 
 /**
- * Find a specific lesson by slug within a subject's notes.
+ * Strict lesson lookup. We intentionally do not use substring matching because
+ * it can route multiple lesson slugs to the same notes and video workspace.
+ * A normalised-equality fallback supports legacy punctuation/case differences
+ * without accepting unrelated or partial slugs.
  */
 export function findLessonBySlug(
   subjectCode: string,
@@ -186,42 +182,51 @@ export function findLessonBySlug(
 ): { lesson: Lesson; unit: Unit; subject: SubjectNotes } | null {
   const subject = getSubjectNotes(subjectCode)
   if (!subject) return null
-  for (const unit of subject.units) {
-    for (const lesson of unit.lessons) {
-      if (
-        lesson.slug === lessonSlug ||
-        lesson.slug.includes(lessonSlug) ||
-        lessonSlug.includes(lesson.slug)
-      ) {
-        return { lesson, unit, subject }
-      }
-    }
-  }
-  return null
+
+  const exact = findLesson(subject, (slug) => slug === lessonSlug)
+  if (exact) return exact
+
+  const normalizedRequested = normalizeLessonSlug(lessonSlug)
+  return findLesson(subject, (slug) => normalizeLessonSlug(slug) === normalizedRequested)
 }
 
-/**
- * Get the previous and next lessons for navigation.
- */
 export function getAdjacentLessons(
   subjectCode: string,
   lessonSlug: string,
 ): { prev: Lesson | null; next: Lesson | null } {
   const subject = getSubjectNotes(subjectCode)
   if (!subject) return { prev: null, next: null }
-  const all: Lesson[] = []
-  for (const unit of subject.units) {
-    all.push(...unit.lessons)
+
+  const all = subject.units.flatMap((unit) => unit.lessons)
+  let index = all.findIndex((lesson) => lesson.slug === lessonSlug)
+  if (index === -1) {
+    const normalizedRequested = normalizeLessonSlug(lessonSlug)
+    index = all.findIndex((lesson) => normalizeLessonSlug(lesson.slug) === normalizedRequested)
   }
-  const idx = all.findIndex(
-    (l) =>
-      l.slug === lessonSlug ||
-      l.slug.includes(lessonSlug) ||
-      lessonSlug.includes(l.slug),
-  )
-  if (idx === -1) return { prev: null, next: null }
+  if (index === -1) return { prev: null, next: null }
+
   return {
-    prev: idx > 0 ? all[idx - 1] : null,
-    next: idx < all.length - 1 ? all[idx + 1] : null,
+    prev: index > 0 ? all[index - 1] : null,
+    next: index < all.length - 1 ? all[index + 1] : null,
   }
+}
+
+export function normalizeLessonSlug(value: string): string {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
+function findLesson(
+  subject: SubjectNotes,
+  predicate: (slug: string) => boolean,
+): { lesson: Lesson; unit: Unit; subject: SubjectNotes } | null {
+  for (const unit of subject.units) {
+    for (const lesson of unit.lessons) {
+      if (predicate(lesson.slug)) return { lesson, unit, subject }
+    }
+  }
+  return null
 }

@@ -9,6 +9,9 @@ import { RouteLoadingBar } from "@/components/app/route-loading-bar";
 import { RegisterSW } from "@/components/app/register-sw";
 import { KeyboardShortcuts } from "@/components/app/keyboard-shortcuts";
 import { CommandPalette } from "@/components/ui/command-palette";
+import { StudentOSLauncher } from "@/components/student-os/student-os-launcher";
+import { StudentMobileDock } from "@/components/student-os/student-mobile-dock";
+import { SelectionLearningTools } from "@/components/student-os/selection-learning-tools";
 
 // ──────────────────────────────────────────────────────────────────────────
 // WHITE-SCREEN FLASH FIX
@@ -160,6 +163,9 @@ export default async function RootLayout({
           <LernioMotionProvider>
             <RouteLoadingBar />
             {children}
+            <StudentOSLauncher />
+            <StudentMobileDock />
+            <SelectionLearningTools />
             <GlobalExperienceRuntime />
             <CommandPalette />
             <KeyboardShortcuts />
