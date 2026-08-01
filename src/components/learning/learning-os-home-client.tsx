@@ -1,20 +1,17 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import {
   ArrowRight,
   BookOpen,
   BrainCircuit,
   CalendarCheck,
   Check,
-  CheckCircle2,
   ChevronRight,
   Clock3,
   Code2,
-  FileText,
   Flame,
-  Gamepad2,
   LibraryBig,
   Pause,
   PenTool,
@@ -160,33 +157,32 @@ export function LearningOSHomeClient({
   const [profile, setProfile, profileReady] = useLocalState(STUDENT_OS_STORAGE.profile, fallbackProfile)
   const [missionState, setMissionState] = useLocalState<MissionState>(STUDENT_OS_STORAGE.missions, { date: today, completed: [] })
   const [focusStats, setFocusStats] = useLocalState<FocusState>(STUDENT_OS_STORAGE.focus, { completedSessions: 0, totalMinutes: 0 })
-  const [semester, setSemester] = useState(currentSemester)
+  const [semesterOverride, setSemesterOverride] = useState<number | null>(null)
   const [query, setQuery] = useState('')
-  const [selectedPath, setSelectedPath] = useState<StudentLearningMode>(profile.learningMode)
   const [focusMinutes, setFocusMinutes] = useState(25)
   const [secondsLeft, setSecondsLeft] = useState(25 * 60)
   const [focusRunning, setFocusRunning] = useState(false)
-
-  useEffect(() => setSelectedPath(profile.learningMode), [profile.learningMode])
-  useEffect(() => setSemester(currentSemester), [currentSemester])
-  useEffect(() => {
-    if (missionState.date !== today) setMissionState({ date: today, completed: [] })
-  }, [missionState.date, setMissionState, today])
+  const secondsLeftRef = useRef(25 * 60)
+  const semester = semesterOverride ?? currentSemester
+  const selectedPath = profile.learningMode
 
   useEffect(() => {
     if (!focusRunning) return
-    if (secondsLeft <= 0) {
+    const timer = window.setInterval(() => {
+      const next = Math.max(0, secondsLeftRef.current - 1)
+      secondsLeftRef.current = next
+      setSecondsLeft(next)
+      if (next > 0) return
+      window.clearInterval(timer)
       setFocusRunning(false)
       setFocusStats((current) => ({
         completedSessions: current.completedSessions + 1,
         totalMinutes: current.totalMinutes + focusMinutes,
       }))
       toast.success('Focus block finished. Take a short break before the next step.')
-      return
-    }
-    const timer = window.setInterval(() => setSecondsLeft((current) => current - 1), 1000)
+    }, 1000)
     return () => window.clearInterval(timer)
-  }, [focusMinutes, focusRunning, secondsLeft, setFocusStats])
+  }, [focusMinutes, focusRunning, setFocusStats])
 
   const selectedSemester = semesters.find((item) => item.number === semester) ?? semesters[0]
   const normalizedQuery = query.trim().toLowerCase()
@@ -207,8 +203,6 @@ export function LearningOSHomeClient({
   )
   const completedIds = missionState.date === today ? missionState.completed : []
   const completedMissions = missions.filter((mission) => completedIds.includes(mission.id))
-  const completedMinutes = completedMissions.reduce((sum, mission) => sum + mission.minutes, 0)
-  const plannedMinutes = missions.reduce((sum, mission) => sum + mission.minutes, 0)
   const missionProgress = missions.length ? Math.round((completedMissions.length / missions.length) * 100) : 0
   const nextMission = missions.find((mission) => !completedIds.includes(mission.id)) ?? missions[0]
   const activePath = getAdaptivePath(selectedPath)
@@ -230,7 +224,6 @@ export function LearningOSHomeClient({
   }
 
   const choosePath = (mode: StudentLearningMode) => {
-    setSelectedPath(mode)
     setProfile((current) => ({ ...current, learningMode: mode }))
     setMissionState({ date: today, completed: [] })
     toast.success(`${getAdaptivePath(mode).title} is now your study path.`)
@@ -239,6 +232,7 @@ export function LearningOSHomeClient({
   const setTimerLength = (minutes: number) => {
     setFocusRunning(false)
     setFocusMinutes(minutes)
+    secondsLeftRef.current = minutes * 60
     setSecondsLeft(minutes * 60)
   }
 
@@ -389,7 +383,7 @@ export function LearningOSHomeClient({
               <button type="button" onClick={() => setFocusRunning((current) => !current)} className="inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-xl bg-primary px-4 text-sm font-black text-primary-foreground">
                 {focusRunning ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}{focusRunning ? 'Pause' : 'Start focus'}
               </button>
-              <button type="button" onClick={() => { setFocusRunning(false); setSecondsLeft(focusMinutes * 60) }} className="flex h-12 w-12 items-center justify-center rounded-xl border border-border hover:bg-accent" aria-label="Reset focus timer"><RotateCcw className="h-4 w-4" /></button>
+              <button type="button" onClick={() => { setFocusRunning(false); secondsLeftRef.current = focusMinutes * 60; setSecondsLeft(focusMinutes * 60) }} className="flex h-12 w-12 items-center justify-center rounded-xl border border-border hover:bg-accent" aria-label="Reset focus timer"><RotateCcw className="h-4 w-4" /></button>
             </div>
             <div className="mt-4 grid grid-cols-2 gap-2 text-center">
               <div className="rounded-xl bg-muted/45 p-3"><p className="font-black">{focusStats.completedSessions}</p><p className="text-[11px] text-muted-foreground">completed blocks</p></div>
@@ -423,7 +417,7 @@ export function LearningOSHomeClient({
 
         <div className="mt-5 grid grid-cols-3 gap-2 sm:grid-cols-6">
           {semesters.map((item) => (
-            <button key={item.number} type="button" onClick={() => setSemester(item.number)} className={cn('min-h-16 rounded-xl border px-2 py-2 text-center transition', semester === item.number ? 'border-primary bg-primary text-primary-foreground shadow-sm' : 'border-border bg-background hover:border-primary/40 hover:bg-accent')}>
+            <button key={item.number} type="button" onClick={() => setSemesterOverride(item.number)} className={cn('min-h-16 rounded-xl border px-2 py-2 text-center transition', semester === item.number ? 'border-primary bg-primary text-primary-foreground shadow-sm' : 'border-border bg-background hover:border-primary/40 hover:bg-accent')}>
               <span className="block text-[10px] font-black uppercase tracking-wide opacity-70">Semester</span>
               <span className="text-2xl font-black">{item.number}</span>
               <span className="block text-[10px] opacity-70">{item.subjects.length} subjects</span>
