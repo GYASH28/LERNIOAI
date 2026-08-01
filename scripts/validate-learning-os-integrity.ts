@@ -34,6 +34,15 @@ interface ManifestRecord {
   subjects?: unknown
 }
 
+interface OfficialCourseContentRecord {
+  subjects?: Array<{
+    subjectCode?: unknown
+    subjectName?: unknown
+    units?: Array<{ curriculumContent?: unknown; learningOutcomes?: unknown }>
+    courseOutcomes?: unknown
+  }>
+}
+
 interface VideoMappingRecord {
   subjectCode?: unknown
   lessonSlug?: unknown
@@ -63,19 +72,29 @@ const videoCatalogPath = join(
   'lesson-video-mappings',
   'cwit-r23-direct-video-mappings.json',
 )
+const officialCourseContentPath = join(
+  root,
+  'content',
+  'curriculum',
+  'cwit-r23',
+  'official-course-content.json',
+)
 
 const errors: string[] = []
 const warnings: string[] = []
+const notices: string[] = []
 const notesSubjects = new Map<string, string>()
 const lessonIndex = new Map<string, LessonIndexEntry>()
 const lessonKeys = new Set<string>()
 const manifestSubjects = new Map<string, string>()
+const officialSourceSubjects = new Set<string>()
 const programmeSemesters = new Map<string, Set<number>>()
 let lessonCount = 0
 let approvedVideoCount = 0
 
 validateNotes()
 validateManifests()
+validateOfficialCourseContent()
 validateVideoCatalog()
 validateCoverage()
 
@@ -87,6 +106,11 @@ console.warn(
 if (warnings.length > 0) {
   console.warn(`[learning-os] ${warnings.length} warning(s):`)
   for (const warning of warnings) console.warn(`- ${warning}`)
+}
+
+if (notices.length > 0) {
+  console.warn(`[learning-os] ${notices.length} note(s):`)
+  for (const notice of notices) console.warn(`- ${notice}`)
 }
 
 if (errors.length > 0) {
@@ -342,10 +366,73 @@ function validateVideoCatalog() {
   }
 }
 
+function validateOfficialCourseContent() {
+  if (!existsSync(officialCourseContentPath)) {
+    errors.push('Official CWIT course-content extraction is missing.')
+    return
+  }
+
+  const label = relative(root, officialCourseContentPath).replaceAll('\\', '/')
+  const payload = readJson<OfficialCourseContentRecord>(officialCourseContentPath, label)
+  if (!payload || !Array.isArray(payload.subjects)) {
+    errors.push(`${label}.subjects must be an array.`)
+    return
+  }
+
+  const subjectsWithUnitTables = new Set(
+    payload.subjects
+      .filter((subject) => Array.isArray(subject.units) && subject.units.length > 0)
+      .map((subject) => normalizeCourseName(typeof subject.subjectName === 'string' ? subject.subjectName : '')),
+  )
+
+  for (const [index, subject] of payload.subjects.entries()) {
+    const subjectPath = `${label}.subjects[${index}]`
+    const subjectCode = requiredString(subject.subjectCode, `${subjectPath}.subjectCode`)
+    if (!subjectCode) continue
+    const normalizedCode = normalizeSubjectCode(subjectCode)
+    officialSourceSubjects.add(normalizedCode)
+    if (!Array.isArray(subject.units) || subject.units.length === 0) {
+      const courseOutcomes = Array.isArray(subject.courseOutcomes)
+        ? subject.courseOutcomes.filter((outcome) =>
+          typeof outcome === 'object' && outcome !== null && typeof (outcome as { text?: unknown }).text === 'string' && Boolean((outcome as { text: string }).text.trim()),
+        ).length
+        : 0
+      if (courseOutcomes > 0) {
+        notices.push(`${subjectCode} has no official unit table; runtime exposes its ${courseOutcomes} official course-level outcome(s) without inventing units.`)
+      } else if (subjectsWithUnitTables.has(normalizeCourseName(typeof subject.subjectName === 'string' ? subject.subjectName : ''))) {
+        notices.push(`${subjectCode} uses a matching CWIT shared-course unit table from the companion programme; runtime labels that evidence explicitly.`)
+      } else {
+        warnings.push(`${subjectCode} has no official unit or course-outcome table; runtime shows an explicit source-availability state instead of invented notes.`)
+      }
+      continue
+    }
+    for (const [unitIndex, unit] of subject.units.entries()) {
+      const unitPath = `${subjectPath}.units[${unitIndex}]`
+      const scope = typeof unit.curriculumContent === 'string' ? unit.curriculumContent.trim() : ''
+      const outcomes = Array.isArray(unit.learningOutcomes)
+        ? unit.learningOutcomes.filter((outcome) => typeof outcome === 'string' && outcome.trim()).length
+        : 0
+      if (!scope) errors.push(`${unitPath}.curriculumContent is empty.`)
+      if (outcomes === 0) errors.push(`${unitPath}.learningOutcomes has no official outcome.`)
+    }
+  }
+}
+
+function normalizeCourseName(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/\b(and|its|it)\b/g, '')
+    .replace(/[^a-z0-9]+/g, '')
+}
+
 function validateCoverage() {
   for (const [subjectCode, manifestFile] of manifestSubjects.entries()) {
     if (!notesSubjects.has(subjectCode)) {
-      warnings.push(`${subjectCode} is declared in ${manifestFile} but has no detailed lesson-notes document.`)
+      if (officialSourceSubjects.has(subjectCode)) {
+        notices.push(`${subjectCode} uses the verified official-course runtime notes rather than a legacy JSON pack.`)
+      } else {
+        warnings.push(`${subjectCode} is declared in ${manifestFile} but has no detailed lesson-notes document or official source-backed fallback.`)
+      }
     }
   }
 

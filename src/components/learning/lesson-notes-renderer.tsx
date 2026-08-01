@@ -323,7 +323,8 @@ export function LessonNotesRenderer({ notes }: { notes: SubjectNotes }) {
 
 function buildLessonHref(notes: SubjectNotes, lesson: Lesson): string | null {
   if (!notes?.subjectCode) return null
-  return `/learn/DCOMP/semester/${notes.semester}/subject/${notes.subjectCode}/lesson/${lesson.slug}`
+  const programmeCode = notes.programmeCode ?? (/^R23CI/i.test(notes.subjectCode) ? 'DCIOT' : 'DCOMP')
+  return `/learn/${programmeCode}/semester/${notes.semester}/subject/${notes.subjectCode}/lesson/${lesson.slug}`
 }
 
 /**

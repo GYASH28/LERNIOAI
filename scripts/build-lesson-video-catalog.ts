@@ -279,9 +279,10 @@ function loadNotes() {
   if (existsSync(officialCourseContentPath)) {
     try {
       const official = JSON.parse(readFileSync(officialCourseContentPath, 'utf-8')) as {
-        subjects?: Array<{
+      subjects?: Array<{
           subjectCode: string
           subjectName?: string
+          courseOutcomes?: Array<{ text?: string }>
           units: Array<{
             order: number
             title: string
@@ -290,13 +291,16 @@ function loadNotes() {
           }>
         }>
       }
-      for (const subject of official.subjects ?? []) {
+      const officialSubjects = official.subjects ?? []
+      for (const subject of officialSubjects) {
         const code = subject.subjectCode.trim().toUpperCase()
-        if (notesByCode.has(code)) continue
-        notesByCode.set(code, {
-          subjectCode: code,
-          subjectName: subject.subjectName,
-          units: subject.units.map((unit) => ({
+        const evidenceSubject = subject.units.length > 0
+          ? subject
+          : officialSubjects.find((candidate) =>
+            candidate.units.length > 0 && normalizeCourseName(candidate.subjectName ?? '') === normalizeCourseName(subject.subjectName ?? ''),
+          ) ?? subject
+        const lessons = evidenceSubject.units.length > 0
+          ? evidenceSubject.units.map((unit) => ({
             lessons: [{
               slug: `unit-${unit.order}-${slugify(unit.title) || 'official-curriculum-unit'}`,
               title: unit.title,
@@ -304,7 +308,12 @@ function loadNotes() {
               keyConcepts: curriculumLines(unit.curriculumContent ?? ''),
               objectives: unit.learningOutcomes ?? [],
             }],
-          })),
+          }))
+          : courseOutcomeLesson(subject.courseOutcomes ?? [])
+        notesByCode.set(code, {
+          subjectCode: code,
+          subjectName: subject.subjectName,
+          units: lessons,
         })
       }
     } catch (error) {
@@ -312,6 +321,28 @@ function loadNotes() {
     }
   }
   return notesByCode
+}
+
+function courseOutcomeLesson(courseOutcomes: Array<{ text?: string }>): LessonNotes['units'] {
+  const objectives = courseOutcomes
+    .map((outcome) => outcome.text?.replace(/\s+/g, ' ').trim())
+    .filter((outcome): outcome is string => Boolean(outcome))
+  return objectives.length > 0
+    ? [{ lessons: [{
+      slug: 'official-course-level-outcomes',
+      title: 'Official course-level outcomes',
+      overview: objectives.join(' '),
+      keyConcepts: objectives,
+      objectives,
+    }] }]
+    : []
+}
+
+function normalizeCourseName(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/\b(and|its|it)\b/g, '')
+    .replace(/[^a-z0-9]+/g, '')
 }
 
 async function fetchPlaylistVideos(playlistId: string): Promise<PlaylistVideo[]> {

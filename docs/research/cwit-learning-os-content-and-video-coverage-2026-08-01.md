@@ -6,13 +6,20 @@ Research date: 2026-08-01
 
 - Official curriculum coverage: **86 subjects, 403 units, 12 programme-semester partitions**.
 - Official unit scope available in Materials: **403/403 units**.
-- Rich reviewed lesson-note documents: **44 subjects / 241 detailed lessons**.
-- Subjects still using the official-scope fallback instead of a rich reviewed pack: **42**.
-- Direct lesson-video research queue: **300 pending mappings across 433 detailed/fallback lesson identities (69.3% candidate coverage)**.
-- Lessons with no suitable pending candidate yet: **133**.
+- Student-facing official curriculum note layer: **86/86 subjects resolve in Learn and Materials**.
+- Detailed official source layer: **83 subjects** have an official unit table or official course-level outcomes. Five CI subjects transparently use the matching CWIT CP shared-course table; one seminar subject has official course-level outcomes without a unit table.
+- Three project/placement subjects (**R23CI5602, R23CP5401, R23CP5402**) have no unit or outcome table in the supplied official extraction. Lernio presents an explicit source-availability state for them rather than inventing study notes or videos.
+- Original direct-video research pool: **300 pending candidates** from CWIT lecture-guide evidence and targeted allowed-channel research.
+- Reconciled official-unit review queue: **229 pending direct-video candidates across 428 official lesson identities (53.5% candidate coverage)**.
+- Candidates deliberately left unassigned after strict official-unit reconciliation: **71**. They are not shown to students and require a reviewer to find a more exact lesson fit.
+- Official lessons without a reconciled pending candidate: **199**.
 - Reviewer-approved direct videos visible to students: **0**.
 
 The candidate number is intentionally not presented as completed Learn coverage. A candidate is hidden until a named academic reviewer checks the exact CWIT outcome, spoken language, duration, player restrictions, embeddability, classroom suitability and availability.
+
+## Note-source policy now enforced in Learn
+
+The official CWIT R23 extraction is now the student-facing source of truth, including for the older Computer Engineering note packs. This removes generic or differently-structured legacy note content from the learning path. Every detailed official unit presents the extracted scope, learning outcomes, teaching hours, theory marks, mapped course outcome, source-page evidence, an outcome-linked self-check and an exam/revision checklist. Legacy JSON packs remain in the repository only for migration/audit history and are no longer allowed to broaden the official curriculum.
 
 ## Official sources
 
@@ -45,6 +52,23 @@ The regression test rejects missing content and contamination from tutorial-titl
 5. Score title and official-scope overlap.
 6. Allow only one candidate video per lesson and no duplicate video within a subject.
 7. Write the result as `pending_review`; never auto-approve it.
+
+The reconciliation report at `content/resources/lesson-video-mappings/cwit-r23-pending-video-reconciliation.json` now replaces legacy-note slugs with the official programme, semester, unit, lesson slug/title, matching terms, score, source provenance and a reviewer checklist. It permits one candidate per official lesson and one video per subject lesson assignment; it does not change the student-visible approved catalogue.
+
+| Programme | Semester | Reconciled pending candidates |
+| --- | ---: | ---: |
+| DCIOT | 1 | 10 |
+| DCIOT | 2 | 20 |
+| DCIOT | 3 | 31 |
+| DCIOT | 4 | 33 |
+| DCIOT | 5 | 38 |
+| DCIOT | 6 | 7 |
+| DCOMP | 1 | 9 |
+| DCOMP | 2 | 11 |
+| DCOMP | 3 | 19 |
+| DCOMP | 4 | 13 |
+| DCOMP | 5 | 20 |
+| DCOMP | 6 | 18 |
 
 Channels represented in the current queue include Gate Smashers, CodeWithHarry, Neso Academy, Jenny's Lectures CS IT, Ekeeda, Kharat Academy, Simplilearn, 5 Minutes Engineering, Education 4u, Easy Engineering Classes and freeCodeCamp.org.
 
