@@ -144,4 +144,49 @@ describe('CWIT R23 coverage report', () => {
     expect(ciot?.semesters[2].notes.join('\n')).toContain('explicit blocker')
     expect(report.totals.manifestsPresent).toBe(1)
   })
+
+  it('uses the reconciled lesson review queue instead of a stale metadata snapshot', () => {
+    const report = buildCwitR23CoverageReport({
+      generatedAt: '2026-08-01T00:00:00.000Z',
+      manifests: [{
+        programmeCode: 'DCOMP',
+        departmentCode: 'COMP',
+        schemeCode: 'R23',
+        semesterNumber: 1,
+        verificationStatus: 'structure_verified',
+        subjects: [{
+          officialSubjectCode: 'R23CP1401',
+          verificationStatus: 'structure_verified',
+          units: [{ lessons: [{ title: 'Official unit' }] }],
+          outcomes: [],
+        }],
+      }],
+      youtubeMetadata: {
+        candidates: [{
+          officialSubjectCodes: ['R23CP1401'],
+          programmeCodes: ['DCOMP'],
+          publicationStatus: 'draft',
+          metadata: { metadataStatus: 'found' },
+        }],
+      },
+      youtubeReviewQueue: {
+        items: [{
+          officialSubjectCodes: ['R23CP1401'],
+          programmeCodes: ['DCOMP'],
+          publicationStatus: 'draft',
+          metadataStatus: 'pending_reviewer_verification',
+          availabilityStatus: 'unchecked',
+        }],
+      },
+    })
+
+    const semester = report.programmes.find((programme) => programme.programme === 'DCOMP')?.semesters[0]
+    expect(semester).toMatchObject({
+      youtubeCandidates: 1,
+      youtubeMetadataFound: 0,
+      youtubePlaylistsRequireReview: 0,
+      pendingResourceVerification: 1,
+    })
+    expect(report.sourceNote).toContain('current draft lesson-video review queue')
+  })
 })

@@ -134,6 +134,8 @@ interface RawYouTubeCandidate {
     metadataStatus?: unknown
     availabilityStatus?: unknown
   } | unknown
+  metadataStatus?: unknown
+  availabilityStatus?: unknown
 }
 
 interface RawLinkHealthReport {
@@ -211,7 +213,13 @@ export function buildCwitR23CoverageReport(input: {
   generatedAt: string
 }): CurriculumCoverageReport {
   const manifests = input.manifests.filter(isRecord) as RawManifest[]
-  const youtubeCandidates = candidatesFromMetadata(input.youtubeMetadata)
+  const reviewQueueCandidates = candidatesFromReviewQueue(input.youtubeReviewQueue)
+  // The review queue is the current source of truth once its unit-level
+  // reconciliation exists. Fall back to the older metadata snapshot only for
+  // historical reports that predate the queue.
+  const youtubeCandidates = reviewQueueCandidates.length > 0
+    ? reviewQueueCandidates
+    : candidatesFromMetadata(input.youtubeMetadata)
   const youtubeReviewQueueTotals = reviewQueueTotals(input.youtubeReviewQueue)
   const officialTimetableEvidenceTotals = timetableEvidenceTotals(input.officialTimetableEvidence)
   const officialCourseCatalogTotals = courseCatalogTotals(input.officialCourseCatalog)
@@ -240,8 +248,8 @@ export function buildCwitR23CoverageReport(input: {
     generatedAt: input.generatedAt,
     schemeCode: 'R23',
     sourceNote: input.databaseCoverage
-      ? 'Coverage is calculated from local curriculum manifests, draft video-review candidates, and an attached database-backed publication snapshot. Review candidates are not student-visible resources.'
-      : 'Coverage is calculated from local curriculum manifests and draft video-review candidates. Candidate counts do not mean that a lesson has a published video. Run coverage:learning with --with-db to attach database-backed published lesson/resource counts when PostgreSQL is reachable.',
+      ? 'Coverage is calculated from local curriculum manifests, the current draft lesson-video review queue, and an attached database-backed publication snapshot. Review candidates are not student-visible resources.'
+      : 'Coverage is calculated from local curriculum manifests and the current draft lesson-video review queue. Candidate counts do not mean that a lesson has a published video. Run coverage:learning with --with-db to attach database-backed published lesson/resource counts when PostgreSQL is reachable.',
     totals: {
       ...programmes.flatMap((programme) => programme.semesters).reduce(addSemesterToTotals, emptyTotals()),
       ...youtubeReviewQueueTotals,
@@ -317,7 +325,7 @@ function buildSemesterCoverage(input: {
         !COMPLETE_CURRICULUM_STATUSES.has(stringValue(subject.verificationStatus) ?? ''),
       ).length
   const pendingResourceVerification = matchingCandidates.filter((candidate) =>
-    stringValue(candidate.publicationStatus) !== 'published',
+    publicationStatusFor(candidate) !== 'published',
   ).length
 
   return {
@@ -341,10 +349,10 @@ function buildSemesterCoverage(input: {
     pendingResourceVerification,
     youtubeCandidates: matchingCandidates.length,
     youtubeMetadataFound: matchingCandidates.filter((candidate) =>
-      stringValue(metadataFor(candidate).metadataStatus) === 'found',
+      metadataStatusFor(candidate) === 'found',
     ).length,
     youtubePlaylistsRequireReview: matchingCandidates.filter((candidate) =>
-      stringValue(metadataFor(candidate).availabilityStatus) === 'playlist_requires_youtube_data_api_or_manual_review',
+      availabilityStatusFor(candidate) === 'playlist_requires_youtube_data_api_or_manual_review',
     ).length,
     linkHealthChecked: matchingLinkHealth.length,
     linkHealthHealthy: matchingLinkHealth.filter((resource) => stringValue(resource.status) === 'healthy').length,
@@ -510,6 +518,12 @@ function candidatesFromMetadata(raw: unknown): RawYouTubeCandidate[] {
   return arrayValue((raw as RawYouTubeMetadata).candidates).filter(isRecord) as RawYouTubeCandidate[]
 }
 
+function candidatesFromReviewQueue(raw: unknown): RawYouTubeCandidate[] {
+  if (!isRecord(raw)) return []
+  return arrayValue((raw as Record<string, unknown>).items)
+    .filter(isRecord) as RawYouTubeCandidate[]
+}
+
 function resourcesFromLinkHealthReport(raw: unknown): RawLinkHealthResource[] {
   if (!isRecord(raw)) return []
   return arrayValue((raw as RawLinkHealthReport).resources).filter(isRecord) as RawLinkHealthResource[]
@@ -605,6 +619,18 @@ function unitReviewTotals(raw: unknown): Pick<
 
 function metadataFor(candidate: RawYouTubeCandidate): Record<string, unknown> {
   return isRecord(candidate.metadata) ? candidate.metadata : {}
+}
+
+function publicationStatusFor(candidate: RawYouTubeCandidate): string | undefined {
+  return stringValue(candidate.publicationStatus) ?? undefined
+}
+
+function metadataStatusFor(candidate: RawYouTubeCandidate): string | undefined {
+  return stringValue(candidate.metadataStatus) ?? stringValue(metadataFor(candidate).metadataStatus) ?? undefined
+}
+
+function availabilityStatusFor(candidate: RawYouTubeCandidate): string | undefined {
+  return stringValue(candidate.availabilityStatus) ?? stringValue(metadataFor(candidate).availabilityStatus) ?? undefined
 }
 
 function arrayValue(value: unknown): unknown[] {
