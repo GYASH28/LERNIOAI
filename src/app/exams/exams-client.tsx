@@ -1,11 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { FileText, Clock, PlayCircle, CheckCircle2, XCircle, RotateCw, Award, Timer, ArrowLeft, Home, BookOpen } from 'lucide-react'
 
 interface SubjectInfo { code: string; name: string; credits: number; quizCount: number; coverageFocus: string }
+interface ExamQuestion { question: string; options: string[]; answer: number; explanation?: string }
 
 type Preset = 'quick' | 'short' | 'medium' | 'long' | 'full' | 'marathon'
 
@@ -21,7 +21,7 @@ const PRESETS: { key: Preset; label: string; count: number; timeMin: number; ico
 export function ExamsClient({ subjects }: { subjects: SubjectInfo[] }) {
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null)
   const [preset, setPreset] = useState<Preset>('medium')
-  const [questions, setQuestions] = useState<any[]>([])
+  const [questions, setQuestions] = useState<ExamQuestion[]>([])
   const [currentQ, setCurrentQ] = useState(0)
   const [answers, setAnswers] = useState<Record<number, number>>({})
   const [showResults, setShowResults] = useState(false)
@@ -30,19 +30,24 @@ export function ExamsClient({ subjects }: { subjects: SubjectInfo[] }) {
   const [error, setError] = useState('')
   const [timeLeft, setTimeLeft] = useState(0)
   const [examStarted, setExamStarted] = useState(false)
+  const timeLeftRef = useRef(0)
 
   const currentPreset = PRESETS.find(p => p.key === preset)!
 
   // Timer
   useEffect(() => {
     if (!examStarted || showResults) return
-    if (timeLeft <= 0) {
+    const timer = window.setInterval(() => {
+      const next = Math.max(0, timeLeftRef.current - 1)
+      timeLeftRef.current = next
+      setTimeLeft(next)
+      if (next > 0) return
+      window.clearInterval(timer)
       setShowResults(true)
-      return
-    }
-    const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000)
-    return () => clearTimeout(timer)
-  }, [examStarted, timeLeft, showResults])
+      setExamStarted(false)
+    }, 1000)
+    return () => window.clearInterval(timer)
+  }, [examStarted, showResults])
 
   const formatTime = (s: number) => {
     const m = Math.floor(s / 60)
@@ -56,12 +61,13 @@ export function ExamsClient({ subjects }: { subjects: SubjectInfo[] }) {
       const subject = subjects.find(s => s.code === subjectCode)
       const res = await fetch(`/api/quiz/generate?subject=${subjectCode}&preset=${preset}&name=${encodeURIComponent(subject?.name ?? subjectCode)}&coverage=${encodeURIComponent(subject?.coverageFocus ?? '')}`)
       const data = await res.json()
-      const qs = data?.data?.questions ?? data?.questions ?? []
+      const qs = (data?.data?.questions ?? data?.questions ?? []) as ExamQuestion[]
       if (!res.ok || qs.length === 0) { setError(data?.error ?? 'Failed to load.'); setLoading(false); setLoadingCode(null); return }
       setQuestions(qs)
       setSelectedSubject(subjectCode)
       setCurrentQ(0); setAnswers({}); setShowResults(false)
-      setTimeLeft(currentPreset.timeMin * 60)
+      timeLeftRef.current = currentPreset.timeMin * 60
+      setTimeLeft(timeLeftRef.current)
       setExamStarted(true)
     } catch { setError('Failed to load.') }
     setLoading(false); setLoadingCode(null)
@@ -72,7 +78,7 @@ export function ExamsClient({ subjects }: { subjects: SubjectInfo[] }) {
   }
 
   const finishExam = () => { setShowResults(true); setExamStarted(false) }
-  const reset = () => { setSelectedSubject(null); setQuestions([]); setAnswers({}); setShowResults(false); setCurrentQ(0); setExamStarted(false); setTimeLeft(0); setError('') }
+  const reset = () => { setSelectedSubject(null); setQuestions([]); setAnswers({}); setShowResults(false); setCurrentQ(0); setExamStarted(false); timeLeftRef.current = 0; setTimeLeft(0); setError('') }
 
   const score = questions.reduce((s, q, i) => s + (answers[i] === q.answer ? 1 : 0), 0)
   const percentage = questions.length > 0 ? Math.round((score / questions.length) * 100) : 0

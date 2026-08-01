@@ -69,12 +69,15 @@ export function MaterialsList({
   const [lastOpened, setLastOpened] = useState<LastOpenedMaterial | null>(null)
 
   useEffect(() => {
-    try {
-      const raw = window.localStorage.getItem('lernio:materials:last-opened')
-      if (raw) setLastOpened(JSON.parse(raw) as LastOpenedMaterial)
-    } catch {
-      // A blocked or corrupt localStorage entry must never break Materials.
-    }
+    const restoreLastOpened = window.setTimeout(() => {
+      try {
+        const raw = window.localStorage.getItem('lernio:materials:last-opened')
+        if (raw) setLastOpened(JSON.parse(raw) as LastOpenedMaterial)
+      } catch {
+        // A blocked or corrupt localStorage entry must never break Materials.
+      }
+    }, 0)
+    return () => window.clearTimeout(restoreLastOpened)
   }, [])
 
   const filteredSubjects = useMemo(() => {

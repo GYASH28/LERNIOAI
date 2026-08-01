@@ -38,7 +38,14 @@ import {
   BarChart3,
   type LucideIcon,
 } from 'lucide-react'
-import type { Lesson, SubjectNotes } from '@/lib/curriculum/lesson-notes-loader'
+import type {
+  Flashcard,
+  Lesson,
+  MarkedQuestion,
+  Mnemonic,
+  PracticeQuestion,
+  SubjectNotes,
+} from '@/lib/curriculum/lesson-notes-loader'
 import { MarkdownRenderer } from './markdown-renderer'
 import { CodeBlock } from './code-block'
 import { DiagramRenderer } from './diagram-renderer'
@@ -426,10 +433,6 @@ export interface PresentationDeckProps {
 export function PresentationDeck({
   lesson,
   subject,
-  prevHref,
-  nextHref,
-  prevTitle,
-  nextTitle,
 }: PresentationDeckProps) {
   const slides = useMemo(() => generateSlides(lesson, subject), [lesson, subject])
   const [current, setCurrent] = useState(0)
@@ -535,7 +538,10 @@ export function PresentationDeck({
   // Bookmark
   useEffect(() => {
     const key = `lernio:materials:bookmark:${subject.subjectCode}:${lesson.slug}`
-    setBookmarked(typeof window !== 'undefined' && localStorage.getItem(key) === '1')
+    const restoreBookmark = window.setTimeout(() => {
+      setBookmarked(localStorage.getItem(key) === '1')
+    }, 0)
+    return () => window.clearTimeout(restoreBookmark)
   }, [subject.subjectCode, lesson.slug])
 
   const toggleBookmark = () => {
@@ -975,7 +981,7 @@ function VivaSlide({ slide }: { slide: Slide }) {
   return (
     <div className="slide-content slide-scrollable">
       <SlideHeader icon={slide.icon} title={slide.title} />
-      <MarkedQuestionList questions={slide.content as any[]} />
+      <MarkedQuestionList questions={slide.content as MarkedQuestion[]} />
     </div>
   )
 }
@@ -984,13 +990,13 @@ function InterviewSlide({ slide }: { slide: Slide }) {
   return (
     <div className="slide-content slide-scrollable">
       <SlideHeader icon={slide.icon} title={slide.title} />
-      <MarkedQuestionList questions={slide.content as any[]} />
+      <MarkedQuestionList questions={slide.content as MarkedQuestion[]} />
     </div>
   )
 }
 
 function ExamSlide({ slide }: { slide: Slide }) {
-  const questions = slide.content as any[]
+  const questions = slide.content as MarkedQuestion[]
   return (
     <div className="slide-content slide-scrollable">
       <SlideHeader icon={slide.icon} title={slide.title} />
@@ -1060,7 +1066,7 @@ function MnemonicsSlide({ slide }: { slide: Slide }) {
   return (
     <div className="slide-content slide-scrollable">
       <SlideHeader icon={slide.icon} title={slide.title} />
-      <MnemonicList items={slide.content as any[]} />
+      <MnemonicList items={slide.content as Mnemonic[]} />
     </div>
   )
 }
@@ -1069,7 +1075,7 @@ function QuizSlide({ slide }: { slide: Slide }) {
   return (
     <div className="slide-content slide-scrollable">
       <SlideHeader icon={slide.icon} title={slide.title} />
-      <PracticeQuiz questions={slide.content as any[]} />
+      <PracticeQuiz questions={slide.content as PracticeQuestion[]} />
     </div>
   )
 }
@@ -1078,7 +1084,7 @@ function FlashcardsSlide({ slide }: { slide: Slide }) {
   return (
     <div className="slide-content slide-scrollable">
       <SlideHeader icon={slide.icon} title={slide.title} />
-      <MiniFlashcardGrid cards={slide.content as any[]} />
+      <MiniFlashcardGrid cards={slide.content as Flashcard[]} />
     </div>
   )
 }
