@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { render, screen, waitFor } from '@testing-library/react'
+import { act, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { updateLocalStudentState, useLocalState } from './use-local-state'
 
@@ -42,7 +42,9 @@ describe('useLocalState', () => {
     render(<Harness />)
     await waitFor(() => expect(screen.getByTestId('hydrated')).toHaveTextContent('true'))
 
-    updateLocalStudentState(stateKey, { count: 0 }, () => ({ count: 9 }))
+    act(() => {
+      updateLocalStudentState(stateKey, { count: 0 }, () => ({ count: 9 }))
+    })
 
     await waitFor(() => expect(screen.getByTestId('count')).toHaveTextContent('9'))
   })

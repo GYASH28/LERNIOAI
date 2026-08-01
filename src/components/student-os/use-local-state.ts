@@ -92,8 +92,6 @@ export function useLocalState<T>(key: string, fallback: T) {
   }, [hydrated, key, value])
 
   useEffect(() => {
-    if (!hydrated) return
-
     const onLocalStateChange = (event: Event) => {
       const detail = (event as CustomEvent<LocalStateChangeDetail<T>>).detail
       if (!detail || detail.key !== key) return
@@ -124,7 +122,7 @@ export function useLocalState<T>(key: string, fallback: T) {
       window.removeEventListener(LOCAL_STATE_CHANGE_EVENT, onLocalStateChange)
       window.removeEventListener('storage', onStorage)
     }
-  }, [hydrated, key])
+  }, [key])
 
   useEffect(() => {
     if (!hydrated) return
