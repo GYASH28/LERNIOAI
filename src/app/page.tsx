@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { headers } from 'next/headers'
 import { getCurrentUser } from '@/lib/auth'
 import { HyperframesIntro } from '@/components/marketing/hyperframes-intro'
+import introGateStyles from '@/components/marketing/landing-intro-gate.module.css'
 import { LandingMotionController } from '@/components/marketing/landing-motion-controller'
 import { PublicHeader } from '@/components/marketing/public-header'
 import { Hero } from '@/components/marketing/hero'
@@ -55,7 +56,10 @@ export default async function LandingPage() {
     <>
       <script nonce={nonce} dangerouslySetInnerHTML={{ __html: introBootstrap }} />
       <HyperframesIntro />
-      <div data-landing-content className="flex min-h-screen flex-col bg-background text-foreground">
+      <div
+        data-landing-content
+        className={`${introGateStyles.content} flex min-h-screen flex-col bg-background text-foreground`}
+      >
         <script
           nonce={nonce}
           type="application/ld+json"
