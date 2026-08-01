@@ -59,7 +59,6 @@ export const STUDENT_OS_STORAGE = {
   profile: 'lernio.student-os.profile.v1',
   missions: 'lernio.student-os.missions.v1',
   focus: 'lernio.student-os.focus.v1',
-  gameProgress: 'lernio.student-os.games.v1',
   notebook: 'lernio.student-os.notebook.v1',
 } as const
 

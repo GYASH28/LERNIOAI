@@ -39,3 +39,17 @@ test('Materials keeps the five-phase controls usable on a 390px screen', async (
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)
   expect(overflow).toBeLessThanOrEqual(1)
 })
+
+test('Materials serves exact official CWIT scope without inventing unsupported phases', async ({ page }) => {
+  await page.goto('/materials/lesson/R23CI2607/unit-1-introduction-to-database-system')
+
+  await expect(page.getByRole('heading', { name: 'Introduction To Database System', level: 1 })).toBeVisible()
+  await expect(page.getByText(/Official CWIT R23 curriculum/).first()).toBeVisible()
+
+  const learningPath = page.getByRole('navigation', { name: 'Five learning phases' })
+  await expect(learningPath.getByRole('button', { name: /Learn/ })).toBeEnabled()
+  await expect(learningPath.getByRole('button', { name: /Simplify/ })).toBeDisabled()
+  await expect(learningPath.getByRole('button', { name: /Visualise/ })).toBeDisabled()
+  await expect(learningPath.getByRole('button', { name: /Practise/ })).toBeDisabled()
+  await expect(learningPath.getByRole('button', { name: /Revise/ })).toBeEnabled()
+})

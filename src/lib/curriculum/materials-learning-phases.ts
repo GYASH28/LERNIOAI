@@ -18,7 +18,7 @@ export const MATERIALS_PHASES: readonly MaterialsLearningPhase[] = [
     eyebrow: 'Build the foundation',
     description: 'Start with the outcome, prerequisites, core explanation and essential ideas.',
     completionPrompt: 'I understand the main idea',
-    sectionIds: ['overview', 'objectives', 'prerequisites', 'theory', 'concepts'],
+    sectionIds: ['overview', 'objectives', 'prerequisites', 'theory', 'concepts', 'callouts'],
   },
   {
     id: 'simplify',
@@ -26,7 +26,7 @@ export const MATERIALS_PHASES: readonly MaterialsLearningPhase[] = [
     eyebrow: 'Make it click',
     description: 'Use analogies, guided examples and common mistakes to remove the difficult parts.',
     completionPrompt: 'The idea makes sense now',
-    sectionIds: ['analogies', 'worked', 'callouts', 'mistakes'],
+    sectionIds: ['analogies', 'worked', 'mistakes'],
   },
   {
     id: 'visualise',

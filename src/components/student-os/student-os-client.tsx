@@ -14,7 +14,7 @@ import {
   Clock3,
   Code2,
   Flame,
-  Gamepad2,
+  GraduationCap,
   LibraryBig,
   Pause,
   PenTool,
@@ -92,7 +92,7 @@ const QUICK_ACTIONS: Array<{ href: string; label: string; description: string; i
   { href: '/tutor', label: 'Ask LEO', description: 'Explain anything', icon: WandSparkles },
   { href: '/practice', label: 'Practice', description: 'Adaptive questions', icon: Target },
   { href: '/revision', label: 'Revision', description: 'Due flashcards', icon: RotateCcw },
-  { href: '/games', label: 'Game Lab', description: 'Curriculum mini-games', icon: Gamepad2 },
+  { href: '/exams', label: 'Exams', description: 'Mock assessments', icon: GraduationCap },
   { href: '/notebook', label: 'Notebook', description: 'Save useful knowledge', icon: LibraryBig },
   { href: '/coding', label: 'Coding Lab', description: 'Predict, run, debug', icon: Code2 },
   { href: '/planner', label: 'Planner', description: 'Build a realistic plan', icon: CalendarCheck },
@@ -251,9 +251,8 @@ export function StudentOSClient({ userName, programme, semester, dailyMinutes, x
         <div className="grid grid-cols-2 gap-3 md:grid-cols-4">{QUICK_ACTIONS.map((action) => <Link key={action.href} href={action.href} className="group rounded-2xl border border-border bg-card p-4 hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-sm"><span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary"><action.icon className="h-5 w-5" /></span><p className="mt-3 font-bold">{action.label}</p><p className="mt-1 text-xs text-muted-foreground">{action.description}</p><span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-primary opacity-0 group-hover:opacity-100">Open <ArrowRight className="h-3 w-3" /></span></Link>)}</div>
       </section>
 
-      <section className="grid gap-4 lg:grid-cols-3">
-        <div className="rounded-2xl border border-border bg-card p-5 lg:col-span-2"><div className="flex items-center gap-3"><span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary"><Trophy className="h-5 w-5" /></span><div><h2 className="font-bold">Weekly focused-learning goal</h2><p className="text-xs text-muted-foreground">Based on completed focus sessions, not decorative clicks.</p></div></div><div className="mt-4 flex items-center gap-4"><div className="h-3 flex-1 overflow-hidden rounded-full bg-muted"><div className="h-full rounded-full bg-primary" style={{ width: `${Math.min(100, Math.round((focusStats.totalMinutes / Math.max(1, profile.weeklyGoalMinutes)) * 100))}%` }} /></div><span className="text-sm font-semibold tabular-nums">{focusStats.totalMinutes}/{profile.weeklyGoalMinutes} min</span></div></div>
-        <Link href="/games" className="group rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 to-background p-5"><Gamepad2 className="h-6 w-6 text-primary" /><h2 className="mt-3 font-bold">Curriculum Game Lab</h2><p className="mt-1 text-xs leading-5 text-muted-foreground">Train binary, networks, code order and concept recall.</p><span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary">Play now <ArrowRight className="h-4 w-4 group-hover:translate-x-1" /></span></Link>
+      <section>
+        <div className="rounded-2xl border border-border bg-card p-5"><div className="flex items-center gap-3"><span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary"><Trophy className="h-5 w-5" /></span><div><h2 className="font-bold">Weekly focused-learning goal</h2><p className="text-xs text-muted-foreground">Based on completed focus sessions, not decorative clicks.</p></div></div><div className="mt-4 flex items-center gap-4"><div className="h-3 flex-1 overflow-hidden rounded-full bg-muted"><div className="h-full rounded-full bg-primary" style={{ width: `${Math.min(100, Math.round((focusStats.totalMinutes / Math.max(1, profile.weeklyGoalMinutes)) * 100))}%` }} /></div><span className="text-sm font-semibold tabular-nums">{focusStats.totalMinutes}/{profile.weeklyGoalMinutes} min</span></div></div>
       </section>
     </div>
   )

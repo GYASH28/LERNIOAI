@@ -9,7 +9,6 @@ import {
   Code2,
   ExternalLink,
   FileText,
-  Gamepad2,
   LibraryBig,
   ListChecks,
   MessageCircle,
@@ -58,10 +57,6 @@ export function DbLessonStudio({ studio, lessonSlug }: DbLessonStudioProps) {
   const codingHref = `/coding?${new URLSearchParams({
     subject: studio.subject.code,
     lessonId: studio.lesson.id,
-  }).toString()}`
-  const gamesHref = `/games?${new URLSearchParams({
-    subject: studio.subject.code,
-    lesson: studio.lesson.title,
   }).toString()}`
   const primaryProgress = studio.resources.primaryVideo
     ? studio.videoProgress.find((item) => item.resourceId === studio.resources.primaryVideo?.id)
@@ -203,7 +198,6 @@ export function DbLessonStudio({ studio, lessonSlug }: DbLessonStudioProps) {
           <ToolCard icon={ListChecks} title="Practice" description="Answer questions connected to this lesson and review mistakes." href={practiceHref} label="Start practice" />
           <ToolCard icon={LibraryBig} title="Notebook" description="Save concepts, formulas and mistakes from this lesson." href={notebookHref} label="Open notebook" />
           <ToolCard icon={Code2} title="Apply" description="Open Coding Lab with lesson context where implementation is relevant." href={codingHref} label="Open Coding Lab" />
-          <ToolCard icon={Gamepad2} title="Challenge" description="Reinforce the concept through a curriculum game." href={gamesHref} label="Open Game Lab" />
 
           {(studio.resources.alternateVideos.length > 0 || studio.resources.supporting.length > 0 || studio.resources.notes.length > 0) && (
             <section className="rounded-3xl border border-border bg-card p-5">

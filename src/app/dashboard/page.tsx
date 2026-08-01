@@ -6,7 +6,7 @@ import { TopBar } from '@/components/layout/top-bar'
 import { Footer } from '@/components/layout/footer'
 import {
   BookOpen, PlayCircle, Target, Flame, Zap, TrendingUp, ArrowRight,
-  Calendar, Award, Crown, Mail, Clock, Users, GraduationCap,
+  Calendar, Award, Mail, Clock, Users, GraduationCap,
   ClipboardList, ChevronRight, AlertTriangle, Database, RotateCw,
   BarChart3,
   Code2,
@@ -280,7 +280,6 @@ export default async function DashboardPage() {
               { href: '/coding', icon: Code2, label: 'Coding Lab', color: 'bg-indigo-500/10 text-indigo-500' },
               { href: '/labs', icon: Database, label: 'Labs', color: 'bg-purple-500/10 text-purple-500' },
               { href: '/analytics', icon: BarChart3, label: 'Analytics', color: 'bg-pink-500/10 text-pink-500' },
-              { href: '/leaderboard', icon: Crown, label: 'Leaderboard', color: 'bg-yellow-500/10 text-yellow-500' },
             ].map((item) => {
               const Icon = item.icon
               return (

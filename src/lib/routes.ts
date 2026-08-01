@@ -9,7 +9,7 @@
 import {
   LayoutDashboard, BookOpen, Bot, PenTool, Layers, GraduationCap,
   Code2, FlaskConical, CalendarCheck, BarChart3, User, FileText,
-  Trophy, Users, Bell, Settings, HelpCircle, MessageSquare,
+  Users, Bell, Settings, HelpCircle, MessageSquare,
   type LucideIcon,
 } from 'lucide-react'
 
@@ -40,7 +40,7 @@ export const ROUTES: RouteEntry[] = [
   { path: '/tutor', label: 'LEO', icon: Bot, view: 'tutor', mobilePrimary: true, inCommandPalette: true, description: 'Ask the AI tutor anything' },
 
   // Study group
-  { path: '/materials', label: 'Materials', icon: FileText, view: 'materials', group: 'study', inCommandPalette: true, description: 'Download notes and PDFs' },
+  { path: '/materials', label: 'Materials', icon: FileText, view: 'materials', group: 'study', inCommandPalette: true, description: 'Learn in five phases from source-backed notes' },
   { path: '/revision', label: 'Revision', icon: Layers, view: 'revision', group: 'study', inCommandPalette: true, description: 'Spaced-repetition flashcards' },
   { path: '/exams', label: 'Exams', icon: GraduationCap, view: 'exams', group: 'study', inCommandPalette: true, description: 'Mock exams and tests' },
   { path: '/labs', label: 'Labs', icon: FlaskConical, view: 'labs', group: 'study', inCommandPalette: true, description: 'Interactive lab simulations' },
@@ -53,7 +53,6 @@ export const ROUTES: RouteEntry[] = [
 
   // Connect group
   { path: '/community', label: 'Community', icon: Users, group: 'connect', inCommandPalette: true, description: 'Class community and polls' },
-  { path: '/leaderboard', label: 'Leaderboard', icon: Trophy, group: 'connect', inCommandPalette: true, description: 'See top students' },
 
   // Account group
   { path: '/profile', label: 'Profile', icon: User, view: 'profile', group: 'account', inCommandPalette: true, description: 'Your profile and achievements' },

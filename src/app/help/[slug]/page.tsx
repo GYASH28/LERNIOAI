@@ -96,14 +96,14 @@ const ARTICLES: Record<string, { title: string; content: string[] }> = {
     content: [
       'XP (Experience Points) are awarded for: completing lessons (10 XP), answering practice questions (5 XP each), asking LEO questions (5 XP), and maintaining your streak (bonus daily).',
       'Streaks count consecutive days where you complete at least one learning activity. Miss a day and your streak resets to 0.',
-      'Level up every 200 XP. Higher levels unlock cosmetic badges and appearance in the leaderboard.',
+      'Level up every 200 XP. Levels are a lightweight record of consistency; use Analytics for decisions about what to study next.',
     ],
   },
   achievements: {
     title: 'Achievements',
     content: [
       'Achievements are badges you unlock by reaching milestones: first lesson, 7-day streak, 1000 XP, completing a full unit, etc.',
-      'Visit the Achievements page to see your progress. Some achievements are hidden until you unlock them.',
+      'Visit your Profile to see milestone progress. Some milestones stay hidden until you unlock them.',
       'Achievements are cosmetic — they don\'t affect your readiness score, but they\'re a fun way to stay motivated.',
     ],
   },

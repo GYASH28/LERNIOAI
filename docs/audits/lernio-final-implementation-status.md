@@ -1,72 +1,103 @@
 # Lernio final implementation status
 
-Last updated: 1 August 2026
-
+Updated: 2026-08-01
 Branch: `codex/final-experience-upgrade`
+Release state: **BLOCKED - academic video review, broader product debt, deployment and real-device QA remain**
 
-Base: `origin/fix/learning-os-experience-redesign`
+## Phase 0 - Repository and branch safety
 
-## Outcome
+### Implemented
 
-This pass restores Materials as a five-phase learning experience without undoing the video-first Learn redesign. It also fixes two audit/configuration failures that were hiding real quality problems.
+- Fetched GitHub and documented the divergent `main`, repair, expansion and experience-redesign histories.
+- Kept work on the dedicated implementation branch. No merge, force-push or deployment was performed.
 
-## Completed in this pass
+### Evidence
 
-### Materials and notes
+- `docs/audits/github-repo-state-audit-2026-08-01.md`
 
-- Restored five purposeful phases: **Learn, Simplify, Visualise, Practise, Revise**.
-- Each phase renders a different, canonical subset of the lesson-note document. The tabs are not duplicate views.
-- A phase is disabled when that lesson has no matching content; the UI does not invent availability.
-- Added an explicit next-phase action and retained presentation mode as an optional tool.
-- Preserved strict lesson identity and adjacent-lesson navigation.
-- Fixed the shared `materials-lesson` CSS-name collision that compressed the reader into a narrow desktop column and created large blank mobile regions.
-- Changed the mobile phase selector to a swipeable single row and verified no page-level horizontal overflow at 390px.
-- Added validation for both supported notes formats: the existing subject packs and the new lesson-level generated artifacts.
-- All 44 current subject-note documents now pass structural validation. Empty or unusable lesson packs still fail.
+### Remaining blockers
 
-### Platform reliability
+- The owner must choose and authorize the final stacked-branch integration path.
 
-- Fixed the App Router page audit on Windows. It previously reported success after discovering **zero** pages; it now discovers and checks **57** pages.
-- Removed obsolete Next.js configuration that suppressed TypeScript build failures.
-- Removed unsupported Next.js 16 ESLint configuration and the redundant static-asset cache header.
+## Phase 1 - Learn and video integrity
 
-### YouTube implementation boundary
+### Root causes fixed
 
-- Kept Learn video-first and Materials independently useful.
-- Preserved the research rule that a playlist is not a lesson video.
-- Did not invent video IDs, language, timestamps, embeddability, or reviewer approval.
-- Unmapped lessons must remain honest pending states until exact direct videos have been reviewed.
+- Removed the ordered subject-video fallback that could attach an unrelated valid video to a lesson.
+- Restricted student-facing catalogue loading to named-reviewer `approved` rows; automatic/pending decisions remain hidden.
+- Changed the catalogue builder to create `pending_review` candidates only.
+- Added public playlist expansion for CWIT lecture-guide playlists when no YouTube Data API key is available.
+- Added exact curriculum lesson identities from the official course-content artifact and a popular-channel/language research filter.
+- Produced 300 direct lesson-video candidates for named review across 433 detailed/fallback lesson identities; 0 rows were auto-approved or published.
 
-## Verification
+### Tests
 
-| Check | Result |
-|---|---|
-| TypeScript | Passed |
-| ESLint | Passed with 0 errors; 412 pre-existing warnings remain |
-| Page contract audit | Passed; 57 pages discovered |
-| Notes validation | Passed; 44 documents |
-| Focused unit/contract tests | Passed; 10/10 |
-| Full Vitest suite | Passed; 62 files and 231 tests, with 1 file/2 tests skipped |
-| Curriculum manifests | Passed; 12 manifests |
-| Learning OS integrity | Passed; 241 lessons, 86 subjects, 44 note subjects; 43 coverage warnings |
-| Materials desktop Playwright | Passed; 2/2 |
-| Materials mobile Playwright (390px) | Passed; 2/2 |
-| Production build | Passed with the supported webpack builder; compiled, typechecked and generated 71 static pages |
+- Resolver tests prove an unmatched lesson receives no assignment.
+- Focused curriculum/video/material tests: 14 passed.
 
-## Honest remaining gates
+### Remaining blockers
 
-The phrase “every bug” cannot be certified from one local pass. The following remain release gates rather than being silently described as complete:
+- Candidate mappings are research evidence, not approved Learn coverage.
+- A named academic reviewer must verify exact topic fit, spoken language, duration, embeddability, restrictions and availability.
+- `YOUTUBE_DATA_API_KEY` is still needed for authoritative metadata/health checks.
 
-1. Run the full test suite and repeat the production build in CI with the normal database/auth environment.
-2. Triage the repository's 412 non-blocking lint warnings, prioritising React state/effect and ref warnings on student-facing pages.
-3. Complete human academic review of direct, embeddable English/Hindi/Hinglish YouTube videos for canonical lessons. No row should be promoted by automation without a named reviewer.
-4. Fill the 42 curriculum subjects currently missing detailed notes (41 CIOT subjects and `R23CP1407`) before claiming full Materials coverage.
-5. Perform authenticated browser QA for dashboard, planner, timetable, practice, notebook, LEO, career, profile, settings, admin and notifications using a real database.
+## Phase 2 - CWIT curriculum and Materials
 
-## Recommended next implementation order
+### Implemented
 
-1. Make CI production build deterministic and address any build-only failure.
-2. Resolve high-risk React warnings in shared navigation, tutor and planner flows.
-3. Produce and review the canonical YouTube mapping queue semester by semester; the current approved direct-video count is zero.
-4. Run authenticated cross-page journeys and fix only evidence-backed defects.
-5. Publish a measured report of approved, pending and blocked video coverage.
+- Downloaded and parsed the two official CWIT R23 curriculum PDFs for Computer Engineering and Computer Engineering & IoT.
+- Built `official-course-content.json` covering 86 subjects, 403 units and all 12 programme-semester partitions.
+- Extracted official topic scope, outcomes, course outcomes, marks/hours where present, source pages and source URLs.
+- Excluded tutorial, reference, author, publisher and assessment-table contamination.
+- Added official fallback notes to Materials for subjects without a richer reviewed note pack.
+- Preserved richer reviewed note packs as the first choice.
+- Restored the five-phase Materials reader; curriculum-only packs expose only phases supported by real content instead of filling tabs with invented material.
+
+### Tests
+
+- Coverage regression test requires 86 subjects, 403 extracted units, 12 partitions and official CWIT source URLs.
+- Loader tests cover official fallback, reviewed-pack precedence, discovery and exact slug matching.
+
+### Remaining blockers
+
+- Official scope packs are complete curriculum coverage, but they are not a substitute for academically reviewed textbook-style explanations, worked examples, diagrams and question banks for every unit.
+
+## Phase 3 - Page-value audit and consolidation
+
+### Implemented
+
+- Audited all current student and staff route families by input, output, persistence and overlap.
+- Removed `/games`, `/leaderboard` and `/achievements` as standalone destinations.
+- Added permanent redirects to `/practice`, `/analytics` and `/profile`.
+- Removed obsolete navigation, dashboard, lesson-tool and mobile-dock links.
+- Updated help and engagement copy while preserving achievement evaluation as a lightweight milestone signal.
+
+### Evidence
+
+- `docs/audits/lernio-page-value-audit.md`
+
+### Remaining blockers
+
+- Navigation definitions still need consolidation into one registry.
+- Planner and Revision still have browser-only state that should move to account persistence.
+- The broader Tutor, persistence, accessibility and connected-learning work in the owner prompt is not complete in this change set.
+
+## Validation run
+
+| Command | Result |
+| --- | --- |
+| `npx vitest run ...lesson-notes-loader... materials-learning-phases... lesson-video-resolver... official-course-content...` | Pass: 4 files, 14 tests |
+| `npx tsc --noEmit` | Pass: 0 errors |
+| `npm run lint` | Pass with 0 errors and 411 pre-existing warnings; one new unused-variable warning was then removed |
+| `npm run pages:audit` | Pass: 54 pages across 222 App Router files |
+| `npm run curriculum:validate` | Pass: 12 manifests |
+| `npm run learning-os:validate` | Pass with honest warnings for 42 subjects lacking rich reviewed note documents and 0 approved videos |
+| `npm run notes:validate` | Pass: 44 rich note documents |
+| `npx playwright test tests/e2e/materials-five-phase.spec.ts --project=chromium` | Pass: desktop, 390px, and official-fallback checks |
+| Redirect Playwright check | Pass: Games to Practice, Leaderboard to Analytics, Achievements to Profile |
+| `npm run build` | Pass: production build, TypeScript and 71 static pages |
+| `npm test` | Pass: 64 files passed, 1 skipped; 237 tests passed, 2 skipped |
+
+## Release recommendation
+
+**BLOCKED.** The implemented content foundation and page consolidation are ready for code review, but Lernio is not ready to deploy as “all videos complete” until every direct candidate has human academic approval. The much broader Tutor, sync, mobile-device, accessibility and deployment requirements in the remaining-implementation prompt also remain separate release gates.

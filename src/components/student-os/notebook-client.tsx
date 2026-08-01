@@ -64,7 +64,7 @@ const starterEntries: NotebookEntry[] = [
     subject: 'Digital Fundamentals',
     lesson: 'Number Systems',
     tags: ['binary', 'mistake'],
-    sourceHref: '/games',
+    sourceHref: '/practice',
     pinned: false,
     createdAt: new Date(0).toISOString(),
     updatedAt: new Date(0).toISOString(),
@@ -432,7 +432,7 @@ function EntryComposer({
           <Field label="Subject" value={subject} onChange={setSubject} placeholder="Data Structures" />
           <Field label="Lesson" value={lesson} onChange={setLesson} placeholder="Linked Lists" />
           <Field label="Tags" value={tags} onChange={setTags} placeholder="exam, pointer, mistake" />
-          <Field label="Source route" value={sourceHref} onChange={setSourceHref} placeholder="/learn/... or /games" />
+          <Field label="Source route" value={sourceHref} onChange={setSourceHref} placeholder="/learn/... or /practice" />
         </div>
 
         <div className="mt-6 flex justify-end gap-2">

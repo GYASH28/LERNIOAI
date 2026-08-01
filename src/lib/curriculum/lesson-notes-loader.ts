@@ -7,8 +7,16 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
 
 const NOTES_DIR = join(process.cwd(), 'content', 'lesson-notes')
+const OFFICIAL_COURSE_CONTENT_PATH = join(
+  process.cwd(),
+  'content',
+  'curriculum',
+  'cwit-r23',
+  'official-course-content.json',
+)
 
 let cache: Map<string, SubjectNotes> | null = null
+let officialCache: Map<string, SubjectNotes> | null = null
 
 export interface PracticeQuestion {
   question: string
@@ -161,13 +169,151 @@ function loadAllNotes(): Map<string, SubjectNotes> {
 
 export function getSubjectNotes(subjectCode: string): SubjectNotes | null {
   const notes = loadAllNotes()
-  return notes.get(subjectCode) ?? notes.get(subjectCode.trim().toUpperCase()) ?? null
+  const normalized = subjectCode.trim().toUpperCase()
+  return notes.get(subjectCode)
+    ?? notes.get(normalized)
+    ?? loadOfficialCourseNotes().get(normalized)
+    ?? null
 }
 
 export function getAvailableNotesSubjects(): { code: string; name: string }[] {
   const unique = new Map<string, SubjectNotes>()
   for (const notes of loadAllNotes().values()) unique.set(notes.subjectCode, notes)
+  for (const notes of loadOfficialCourseNotes().values()) {
+    if (!unique.has(notes.subjectCode)) unique.set(notes.subjectCode, notes)
+  }
   return Array.from(unique.values()).map((notes) => ({ code: notes.subjectCode, name: notes.subjectName }))
+}
+
+interface OfficialCourseContentFile {
+  subjects: OfficialCourseSubject[]
+}
+
+export interface OfficialCourseSubject {
+  subjectCode: string
+  subjectName: string
+  semesterNumber: number
+  credits?: number
+  sourceUrl: string
+  courseOutcomes?: Array<{ code?: string; text?: string }>
+  units: Array<{
+    order: number
+    title: string
+    curriculumContent: string
+    learningOutcomes?: string[]
+    teachingHours?: string | null
+    theoryMarks?: string | null
+    mappedCourseOutcome?: string | null
+    sourcePages?: number[]
+    extractionStatus: string
+  }>
+}
+
+function loadOfficialCourseNotes(): Map<string, SubjectNotes> {
+  if (officialCache) return officialCache
+  officialCache = new Map()
+  if (!existsSync(OFFICIAL_COURSE_CONTENT_PATH)) return officialCache
+
+  try {
+    const payload = JSON.parse(readFileSync(OFFICIAL_COURSE_CONTENT_PATH, 'utf8')) as OfficialCourseContentFile
+    for (const subject of payload.subjects ?? []) {
+      const notes = buildOfficialSubjectNotes(subject)
+      officialCache.set(notes.subjectCode.trim().toUpperCase(), notes)
+    }
+  } catch {
+    // A broken extraction must not hide the richer reviewed notes that load above.
+  }
+  return officialCache
+}
+
+export function buildOfficialSubjectNotes(subject: OfficialCourseSubject): SubjectNotes {
+  const courseOutcomes = (subject.courseOutcomes ?? [])
+    .map((outcome) => outcome.text?.trim())
+    .filter((value): value is string => Boolean(value))
+
+  return {
+    subjectCode: subject.subjectCode,
+    subjectName: subject.subjectName,
+    semester: subject.semesterNumber,
+    credits: subject.credits ?? 0,
+    units: subject.units.map((unit) => {
+      const keyConcepts = curriculumConcepts(unit.curriculumContent, unit.title)
+      const objectives = (unit.learningOutcomes ?? []).length > 0
+        ? unit.learningOutcomes ?? []
+        : courseOutcomes
+      const sourceLabel = `Official CWIT R23 curriculum${unit.sourcePages?.length ? `, pages ${unit.sourcePages.join(', ')}` : ''}`
+      const scope = unit.curriculumContent.trim()
+
+      return {
+        number: unit.order,
+        title: unit.title,
+        weightage: numericValue(unit.theoryMarks),
+        lessons: [{
+          slug: officialLessonSlug(unit.order, unit.title),
+          title: unit.title,
+          durationMin: 30,
+          difficulty: 'curriculum',
+          overview: scope
+            ? `Official CWIT R23 scope for ${unit.title} in ${subject.subjectName}.`
+            : `${unit.title} is listed in the official CWIT R23 curriculum; detailed topic extraction is awaiting review.`,
+          keyConcepts,
+          formulas: [],
+          tables: [],
+          diagrams: [],
+          codeExamples: [],
+          commonMistakes: [],
+          examTips: [],
+          practiceQuestions: [],
+          objectives,
+          prerequisites: [],
+          theory: scope || undefined,
+          revisionSummary: keyConcepts.length > 0
+            ? `Official revision checklist:\n${keyConcepts.map((concept) => `- ${concept}`).join('\n')}`
+            : undefined,
+          cheatSheet: keyConcepts,
+          callouts: [{
+            type: unit.extractionStatus === 'content_extracted' ? 'source' : 'warning',
+            title: unit.extractionStatus === 'content_extracted' ? 'Curriculum source' : 'Content review pending',
+            content: unit.extractionStatus === 'content_extracted'
+              ? `${sourceLabel}. Scope is reproduced from the official topics and learning-outcomes table. Source: ${subject.sourceUrl}`
+              : `${sourceLabel}. Lernio is not generating substitute theory for this unit until the official table is reviewed. Source: ${subject.sourceUrl}`,
+          }],
+        }],
+      }
+    }),
+    revisionNotes: `This fallback is generated only from official CWIT R23 unit topics and learning outcomes. Source: ${subject.sourceUrl}`,
+  }
+}
+
+function officialLessonSlug(order: number, title: string) {
+  const normalized = normalizeLessonSlug(title) || 'official-curriculum-unit'
+  return `unit-${order}-${normalized}`
+}
+
+function curriculumConcepts(content: string, unitTitle: string): string[] {
+  if (!content.trim()) return []
+  const normalizedTitle = normalizeLessonSlug(unitTitle)
+  const seen = new Set<string>()
+  return content
+    .split(/\n+|(?=\b\d+\.\d+\s+)/)
+    .map((value) => value
+      .replace(/^\s*(?:Unit\s*(?:No\.)?\s*)?(?:VI|IV|III|II|I|V|\d+)\s*[-:.]?\s*/i, '')
+      .replace(/^\s*\d+\.\d+\s*/, '')
+      .trim())
+    .filter((value) => value.length >= 3)
+    .filter((value) => normalizeLessonSlug(value) !== normalizedTitle)
+    .filter((value) => {
+      const key = value.toLowerCase()
+      if (seen.has(key)) return false
+      seen.add(key)
+      return true
+    })
+    .slice(0, 24)
+}
+
+function numericValue(value: string | null | undefined) {
+  const parsed = Number.parseInt(value ?? '', 10)
+  return Number.isFinite(parsed) ? parsed : 0
 }
 
 /**

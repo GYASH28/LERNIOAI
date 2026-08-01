@@ -65,6 +65,13 @@ const nextConfig: NextConfig = {
       '@radix-ui/react-tooltip',
     ],
   },
+  async redirects() {
+    return [
+      { source: '/games', destination: '/practice', permanent: true },
+      { source: '/leaderboard', destination: '/analytics', permanent: true },
+      { source: '/achievements', destination: '/profile', permanent: true },
+    ]
+  },
   async headers() {
     const securityHeaders = [
       { key: 'X-Frame-Options', value: 'DENY' },

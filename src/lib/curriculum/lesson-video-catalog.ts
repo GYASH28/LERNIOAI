@@ -42,7 +42,7 @@ export function getReviewedLessonVideoMappings(subjectCodes: string[]): Reviewed
   const codeSet = new Set(subjectCodes.map((code) => code.trim().toUpperCase()).filter(Boolean))
   return loadCatalog().filter((mapping) =>
     codeSet.has(mapping.subjectCode.trim().toUpperCase()) &&
-    (mapping.reviewStatus === 'approved' || mapping.reviewStatus === 'approved_auto'),
+    mapping.reviewStatus === 'approved',
   )
 }
 
