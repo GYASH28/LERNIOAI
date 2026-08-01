@@ -6,7 +6,10 @@ import {
   type E2eUser,
 } from './helpers/auth'
 
-const lessonUrl = '/materials/lesson/R23CP1701/logarithms-and-progressions'
+// This is an official CWIT R23 unit route. Do not use a legacy detailed-pack
+// slug here: the Materials reader deliberately resolves its student-facing
+// lessons from the official unit table.
+const lessonUrl = '/materials/lesson/R23CP1701/unit-1-algebra'
 let e2eUser: E2eUser | null = null
 
 // The first lesson render compiles several rich note sections in development.
@@ -33,33 +36,35 @@ async function openProtectedLesson(page: Page, url: string) {
   }
 }
 
-test('Materials exposes five distinct lesson phases from one canonical note', async ({ page }) => {
+test('Materials exposes five useful phases from an official CWIT lesson', async ({ page }) => {
   await openProtectedLesson(page, lessonUrl)
 
   const learningPath = page.getByRole('navigation', { name: 'Five learning phases' })
   await expect(learningPath).toBeVisible()
   await expect(learningPath.getByRole('button')).toHaveCount(5)
+  await expect(page.getByRole('heading', { name: 'Algebra', exact: true })).toBeVisible()
+  await expect(page.getByText(/Official CWIT R23 curriculum/).first()).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Learn', exact: true })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Theory' })).toBeVisible()
 
   await learningPath.getByRole('button', { name: /Simplify/ }).click()
   await expect(page.getByRole('heading', { name: 'Simplify', exact: true })).toBeVisible()
-  await expect(page.getByRole('heading', { name: 'Analogies' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Common Mistakes' })).toBeVisible()
 
   await learningPath.getByRole('button', { name: /Visualise/ }).click()
   await expect(page.getByRole('heading', { name: 'Visualise', exact: true })).toBeVisible()
-  await expect(page.getByRole('heading', { name: /Flowcharts|Diagrams|Tables/ }).first()).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Tables' })).toBeVisible()
 
   await learningPath.getByRole('button', { name: /Practise/ }).click()
   await expect(page.getByRole('heading', { name: 'Practise', exact: true })).toBeVisible()
-  await expect(page.getByRole('heading', { name: /Quiz|Viva Q|Exam Q/ }).first()).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Quiz' })).toBeVisible()
 
   await learningPath.getByRole('button', { name: /Revise/ }).click()
   await expect(page.getByRole('heading', { name: 'Revise', exact: true })).toBeVisible()
   await expect(page.getByRole('heading', { name: /Summary|Formulas|Flashcards/ }).first()).toBeVisible()
 })
 
-test('Materials keeps the five-phase controls usable on a 390px screen', async ({ page }) => {
+test('Materials keeps the official five-phase controls usable on a 390px screen', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 })
   await openProtectedLesson(page, lessonUrl)
 
@@ -71,7 +76,7 @@ test('Materials keeps the five-phase controls usable on a 390px screen', async (
   expect(overflow).toBeLessThanOrEqual(1)
 })
 
-test('Materials serves exact official CWIT scope without inventing unsupported phases', async ({ page }) => {
+test('Materials gives every phase a purpose while keeping the official CWIT scope visible', async ({ page }) => {
   await openProtectedLesson(page, '/materials/lesson/R23CI2607/unit-1-introduction-to-database-system')
 
   await expect(page.getByRole('heading', { name: 'Introduction To Database System', level: 1 })).toBeVisible()
@@ -79,8 +84,12 @@ test('Materials serves exact official CWIT scope without inventing unsupported p
 
   const learningPath = page.getByRole('navigation', { name: 'Five learning phases' })
   await expect(learningPath.getByRole('button', { name: /Learn/ })).toBeEnabled()
-  await expect(learningPath.getByRole('button', { name: /Simplify/ })).toBeDisabled()
-  await expect(learningPath.getByRole('button', { name: /Visualise/ })).toBeDisabled()
-  await expect(learningPath.getByRole('button', { name: /Practise/ })).toBeDisabled()
+  await expect(learningPath.getByRole('button', { name: /Simplify/ })).toBeEnabled()
+  await expect(learningPath.getByRole('button', { name: /Visualise/ })).toBeEnabled()
+  await expect(learningPath.getByRole('button', { name: /Practise/ })).toBeEnabled()
   await expect(learningPath.getByRole('button', { name: /Revise/ })).toBeEnabled()
+
+  await learningPath.getByRole('button', { name: /Visualise/ }).click()
+  await expect(page.getByText('Official CWIT curriculum alignment')).toBeVisible()
+  await expect(page.getByText('CO1').first()).toBeVisible()
 })
