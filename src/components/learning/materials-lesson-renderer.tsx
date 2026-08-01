@@ -93,6 +93,8 @@ const SECTIONS: SectionDef[] = [
 export interface MaterialsLessonRendererProps {
   lesson: Lesson
   subject: SubjectNotes
+  sectionIds?: readonly string[]
+  showFooterNavigation?: boolean
   prevHref?: string | null
   nextHref?: string | null
   prevTitle?: string | null
@@ -102,6 +104,8 @@ export interface MaterialsLessonRendererProps {
 export function MaterialsLessonRenderer({
   lesson,
   subject,
+  sectionIds,
+  showFooterNavigation = true,
   prevHref,
   nextHref,
   prevTitle,
@@ -118,8 +122,10 @@ export function MaterialsLessonRenderer({
   const mainRef = useRef<HTMLElement>(null)
 
   const visibleSections = useMemo(
-    () => SECTIONS.filter((s) => s.has(lesson)),
-    [lesson],
+    () => SECTIONS.filter((section) => (
+      (!sectionIds || sectionIds.includes(section.id)) && section.has(lesson)
+    )),
+    [lesson, sectionIds],
   )
 
   // Track scroll progress + active section
@@ -158,7 +164,7 @@ export function MaterialsLessonRenderer({
   const handlePrint = () => window.print()
 
   return (
-    <article className="materials-lesson" ref={mainRef}>
+    <article className="materials-reader" ref={mainRef}>
       {/* Reading progress bar */}
       <div className="reading-progress no-print" aria-hidden>
         <div
@@ -242,6 +248,7 @@ export function MaterialsLessonRenderer({
       </div>
 
       {/* Footer nav */}
+      {showFooterNavigation ? (
       <nav className="mt-10 flex items-stretch gap-3 border-t border-border pt-6 no-print">
         {prevHref ? (
           <Link
@@ -272,6 +279,7 @@ export function MaterialsLessonRenderer({
           <div className="flex-1" />
         )}
       </nav>
+      ) : null}
     </article>
   )
 }

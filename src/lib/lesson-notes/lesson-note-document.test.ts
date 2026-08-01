@@ -1,5 +1,13 @@
 import { describe, expect, it } from 'vitest'
-import { LessonNoteDocumentSchema, renderLessonNoteHtml, type LessonNoteDocument } from './lesson-note-document'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
+import {
+  LegacySubjectNotesSchema,
+  LessonNoteContentSchema,
+  LessonNoteDocumentSchema,
+  renderLessonNoteHtml,
+  type LessonNoteDocument,
+} from './lesson-note-document'
 
 const validDocument: LessonNoteDocument = {
   documentType: 'lesson_notes',
@@ -66,6 +74,28 @@ describe('LessonNoteDocumentSchema', () => {
     })
 
     expect(result.success).toBe(false)
+  })
+})
+
+describe('LessonNoteContentSchema', () => {
+  it('accepts the supported subject-level curriculum notes format', () => {
+    const fixture = JSON.parse(readFileSync(
+      join(process.cwd(), 'content', 'lesson-notes', 'R23CP1401-programming-in-c.json'),
+      'utf8',
+    ))
+
+    expect(LegacySubjectNotesSchema.safeParse(fixture).success).toBe(true)
+    expect(LessonNoteContentSchema.safeParse(fixture).success).toBe(true)
+  })
+
+  it('rejects subject files without usable lesson content', () => {
+    expect(LegacySubjectNotesSchema.safeParse({
+      subjectCode: 'R23CP0000',
+      subjectName: 'Broken subject',
+      semester: 1,
+      credits: 1,
+      units: [{ number: 1, title: 'Unit 1', weightage: 10, lessons: [] }],
+    }).success).toBe(false)
   })
 })
 

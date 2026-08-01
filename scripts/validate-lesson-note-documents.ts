@@ -1,6 +1,6 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { LessonNoteDocumentSchema } from '../src/lib/lesson-notes/lesson-note-document'
+import { LessonNoteContentSchema } from '../src/lib/lesson-notes/lesson-note-document'
 
 const defaultRoot = join('content', 'lesson-notes')
 
@@ -14,7 +14,7 @@ function main() {
 
   let failed = 0
   for (const file of files) {
-    const parsed = LessonNoteDocumentSchema.safeParse(JSON.parse(readFileSync(file, 'utf8')))
+    const parsed = LessonNoteContentSchema.safeParse(JSON.parse(readFileSync(file, 'utf8')))
     if (!parsed.success) {
       failed += 1
       console.error(`[lesson-notes] invalid ${file}`)

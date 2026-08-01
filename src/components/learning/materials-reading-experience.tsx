@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, useSyncExternalStore } from 'react'
 import Link from 'next/link'
 import {
   ArrowLeft,
@@ -9,13 +9,25 @@ import {
   BrainCircuit,
   CheckCircle2,
   ChevronRight,
+  Eye,
   ListChecks,
   Menu,
+  PenTool,
+  RotateCcw,
   Search,
+  Presentation,
+  Sparkles,
   X,
 } from 'lucide-react'
 import type { Lesson, SubjectNotes } from '@/lib/curriculum/lesson-notes-loader'
 import { PresentationDeck } from '@/components/learning/presentation-deck'
+import { MaterialsLessonRenderer } from '@/components/learning/materials-lesson-renderer'
+import {
+  MATERIALS_PHASES,
+  getAvailableMaterialsPhases,
+  getMaterialsPhase,
+  type MaterialsPhaseId,
+} from '@/lib/curriculum/materials-learning-phases'
 
 interface LessonMapItem {
   slug: string
@@ -23,6 +35,38 @@ interface LessonMapItem {
   unitNumber: number
   unitTitle: string
   durationMin: number
+}
+
+const PHASE_ICONS = {
+  learn: BookOpen,
+  simplify: Sparkles,
+  visualise: Eye,
+  practise: PenTool,
+  revise: RotateCcw,
+} satisfies Record<MaterialsPhaseId, typeof BookOpen>
+
+const MATERIALS_PHASE_STORAGE_KEY = 'lernio:materials:phase'
+const MATERIALS_PHASE_CHANGE_EVENT = 'lernio:materials:phase-change'
+
+function subscribeToMaterialsPhase(onStoreChange: () => void) {
+  window.addEventListener('storage', onStoreChange)
+  window.addEventListener(MATERIALS_PHASE_CHANGE_EVENT, onStoreChange)
+  return () => {
+    window.removeEventListener('storage', onStoreChange)
+    window.removeEventListener(MATERIALS_PHASE_CHANGE_EVENT, onStoreChange)
+  }
+}
+
+function getMaterialsPhaseSnapshot(): MaterialsPhaseId {
+  try {
+    return getMaterialsPhase(window.localStorage.getItem(MATERIALS_PHASE_STORAGE_KEY)).id
+  } catch {
+    return 'learn'
+  }
+}
+
+function getServerMaterialsPhaseSnapshot(): MaterialsPhaseId {
+  return 'learn'
 }
 
 interface MaterialsReadingExperienceProps {
@@ -46,6 +90,16 @@ export function MaterialsReadingExperience({
 }: MaterialsReadingExperienceProps) {
   const [mapOpen, setMapOpen] = useState(false)
   const [lessonQuery, setLessonQuery] = useState('')
+  const availablePhases = useMemo(() => getAvailableMaterialsPhases(lesson), [lesson])
+  const storedPhaseId = useSyncExternalStore(
+    subscribeToMaterialsPhase,
+    getMaterialsPhaseSnapshot,
+    getServerMaterialsPhaseSnapshot,
+  )
+  const activePhaseId = availablePhases.includes(storedPhaseId)
+    ? storedPhaseId
+    : availablePhases[0] ?? 'learn'
+  const [displayMode, setDisplayMode] = useState<'phases' | 'slides'>('phases')
 
   useEffect(() => {
     try {
@@ -81,6 +135,25 @@ export function MaterialsReadingExperience({
         )
       : lessons
   }, [lessonQuery, lessons])
+
+  const activePhase = availablePhases.includes(activePhaseId)
+    ? getMaterialsPhase(activePhaseId)
+    : getMaterialsPhase(availablePhases[0])
+  const activePhaseIndex = MATERIALS_PHASES.findIndex((phase) => phase.id === activePhase.id)
+  const nextAvailablePhase = MATERIALS_PHASES
+    .slice(activePhaseIndex + 1)
+    .find((phase) => availablePhases.includes(phase.id))
+
+  const selectPhase = (phaseId: MaterialsPhaseId) => {
+    if (!availablePhases.includes(phaseId)) return
+    setDisplayMode('phases')
+    try {
+      window.localStorage.setItem(MATERIALS_PHASE_STORAGE_KEY, phaseId)
+    } catch {
+      // The learning path remains usable when storage is unavailable.
+    }
+    window.dispatchEvent(new Event(MATERIALS_PHASE_CHANGE_EVENT))
+  }
 
   const tutorHref = `/tutor?${new URLSearchParams({
     subject: subject.subjectCode,
@@ -133,14 +206,115 @@ export function MaterialsReadingExperience({
             </div>
           </div>
 
-          <PresentationDeck
-            lesson={lesson}
-            subject={subject}
-            prevHref={prevHref}
-            nextHref={nextHref}
-            prevTitle={prevTitle}
-            nextTitle={nextTitle}
-          />
+          <section className="overflow-hidden rounded-[1.75rem] border border-border/80 bg-card shadow-xl shadow-primary/5">
+            <div className="border-b border-border/75 bg-gradient-to-br from-primary/10 via-card to-card px-3 pb-3 pt-4 sm:px-5 sm:pb-4 sm:pt-5">
+              <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+                <div className="max-w-2xl">
+                  <p className="text-xs font-black uppercase tracking-[0.16em] text-primary">Five-phase learning path</p>
+                  <h2 className="mt-1 text-xl font-black tracking-tight sm:text-2xl">Study with a purpose, not a wall of notes</h2>
+                  <p className="mt-1 text-sm leading-6 text-muted-foreground">Each phase uses a different part of this lesson. Move in order, or jump to what you need right now.</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setDisplayMode((current) => current === 'slides' ? 'phases' : 'slides')}
+                  aria-pressed={displayMode === 'slides'}
+                  className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border px-4 text-sm font-black transition active:scale-[0.98] ${
+                    displayMode === 'slides'
+                      ? 'border-primary bg-primary text-primary-foreground'
+                      : 'border-border bg-background hover:border-primary/35 hover:bg-accent'
+                  }`}
+                >
+                  <Presentation className="h-4 w-4" />
+                  {displayMode === 'slides' ? 'Return to phases' : 'Presentation mode'}
+                </button>
+              </div>
+
+              <nav className="mt-4 flex snap-x gap-2 overflow-x-auto pb-1 sm:grid sm:grid-cols-5 sm:overflow-visible sm:pb-0" aria-label="Five learning phases">
+                {MATERIALS_PHASES.map((phase, index) => {
+                  const available = availablePhases.includes(phase.id)
+                  const active = displayMode === 'phases' && activePhase.id === phase.id
+                  const PhaseIcon = PHASE_ICONS[phase.id]
+                  return (
+                    <button
+                      key={phase.id}
+                      type="button"
+                      disabled={!available}
+                      onClick={() => selectPhase(phase.id)}
+                      aria-current={active ? 'step' : undefined}
+                      className={`group min-h-[4.6rem] min-w-[8.75rem] snap-start rounded-xl border px-3 py-2.5 text-left transition active:scale-[0.98] sm:min-w-0 ${
+                        active
+                          ? 'border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/15'
+                          : available
+                            ? 'border-border/80 bg-background/85 hover:-translate-y-0.5 hover:border-primary/30 hover:bg-accent/60'
+                            : 'cursor-not-allowed border-border/45 bg-muted/35 text-muted-foreground opacity-55'
+                      }`}
+                    >
+                      <span className="flex items-center justify-between gap-2">
+                        <span className={`grid h-7 w-7 place-items-center rounded-lg ${active ? 'bg-white/15' : 'bg-primary/10 text-primary'}`}>
+                          <PhaseIcon className="h-3.5 w-3.5" />
+                        </span>
+                        <span className="text-[10px] font-black tabular-nums opacity-70">0{index + 1}</span>
+                      </span>
+                      <span className="mt-1.5 block text-sm font-black">{phase.label}</span>
+                      <span className="mt-0.5 block truncate text-[10px] font-semibold opacity-70">{available ? phase.eyebrow : 'Content pending'}</span>
+                    </button>
+                  )
+                })}
+              </nav>
+            </div>
+
+            {displayMode === 'slides' ? (
+              <div className="p-2 sm:p-4">
+                <PresentationDeck
+                  lesson={lesson}
+                  subject={subject}
+                  prevHref={prevHref}
+                  nextHref={nextHref}
+                  prevTitle={prevTitle}
+                  nextTitle={nextTitle}
+                />
+              </div>
+            ) : (
+              <div className="p-3 sm:p-5 lg:p-7">
+                <header className="mb-6 grid gap-3 border-b border-border/70 pb-5 sm:grid-cols-[auto_1fr] sm:items-start">
+                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-primary/10 text-primary">
+                    {(() => {
+                      const ActiveIcon = PHASE_ICONS[activePhase.id]
+                      return <ActiveIcon className="h-5 w-5" />
+                    })()}
+                  </div>
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-[0.16em] text-primary">Phase {activePhaseIndex + 1} · {activePhase.eyebrow}</p>
+                    <h3 className="mt-1 text-2xl font-black tracking-tight">{activePhase.label}</h3>
+                    <p className="mt-1 max-w-2xl text-sm leading-6 text-muted-foreground">{activePhase.description}</p>
+                  </div>
+                </header>
+
+                <MaterialsLessonRenderer
+                  lesson={lesson}
+                  subject={subject}
+                  sectionIds={activePhase.sectionIds}
+                  showFooterNavigation={false}
+                />
+
+                {nextAvailablePhase ? (
+                  <div className="mt-8 flex flex-col gap-3 rounded-2xl bg-muted/55 p-4 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                      <p className="text-xs font-black uppercase tracking-[0.13em] text-muted-foreground">Next phase</p>
+                      <p className="mt-1 font-black">{nextAvailablePhase.label}: {nextAvailablePhase.eyebrow}</p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => selectPhase(nextAvailablePhase.id)}
+                      className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-primary px-4 text-sm font-black text-primary-foreground transition hover:brightness-105 active:scale-[0.98]"
+                    >
+                      Continue to {nextAvailablePhase.label} <ArrowRight className="h-4 w-4" />
+                    </button>
+                  </div>
+                ) : null}
+              </div>
+            )}
+          </section>
 
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
             {prevHref ? (
