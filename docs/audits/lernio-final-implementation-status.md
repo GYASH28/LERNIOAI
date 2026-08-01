@@ -162,7 +162,7 @@ Release state: **CONDITIONALLY READY FOR PREVIEW - academic video/note review an
 - All 17 priority accessibility tests pass on desktop Chromium.
 - All 17 priority accessibility tests pass on mobile Chrome/Pixel 7.
 - Production build passes all 71 generated page routes.
-- Commit: `ae14b42`.
+- Commits: `ae14b42`, `d564121`, and `b30d6a3`.
 
 ## Validation run
 
@@ -180,7 +180,16 @@ Release state: **CONDITIONALLY READY FOR PREVIEW - academic video/note review an
 | `npm run build` | Pass: production build, TypeScript and 71 generated pages |
 | `npm test` | Pass: 71 files passed, 1 skipped; 256 tests passed, 2 skipped |
 | Route-wide WCAG 2.2 A/AA audit | Pass: 17 desktop and 17 Pixel 7 tests across public and protected routes |
+| GitHub CI run `30705842198` | Pass: database migration, curriculum and page audits, lint, type check, 256 unit tests, production build, 176 Playwright tests, and dependency audit |
+| Vercel live smoke checks | Pass: `/` and `/api/health` return HTTP 200 on both public domains |
+
+## Deployment evidence
+
+- Verified release commit: `b30d6a3` on `codex/final-experience-upgrade`.
+- GitHub CI: https://github.com/GYASH28/LERNIOAI/actions/runs/30705842198.
+- Primary deployment: https://lernioai.vercel.app (`dpl_8ByFhK3BPN9A1bAb6F6wyRnfgoqa`, Ready).
+- Secondary deployment: https://lernioai-sigma.vercel.app (`dpl_GgRJkSbcwLmqnMMpKUh3ehCNfcUJ`, Ready).
 
 ## Release recommendation
 
-**PREVIEW READY, NOT HONESTLY “ALL CONTENT COMPLETE”.** The application code, connected evidence loop, normalized sync transition, Tutor scope protection, desktop/mobile accessibility checks and production build are ready for CI and preview deployment. Lernio must not claim full lesson-video or rich-note completion until a named academic reviewer approves the 300 pending direct video candidates and reviews the 42 official-scope note fallbacks. Owner authorization is still required for final merge/production promotion.
+**DEPLOYED AND VERIFIED, NOT HONESTLY “ALL CONTENT COMPLETE”.** The application code, connected evidence loop, normalized sync transition, Tutor scope protection, desktop/mobile accessibility checks and production build are live on both public Vercel addresses. Lernio must not claim full lesson-video or rich-note completion until a named academic reviewer approves the 300 pending direct video candidates and reviews the 42 official-scope note fallbacks. Owner authorization is still required to merge the draft pull request into its target branch.
