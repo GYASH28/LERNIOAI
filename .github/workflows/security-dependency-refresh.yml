@@ -1,9 +1,9 @@
 name: Secure dependency refresh
 
 on:
-  push:
+  pull_request:
     branches:
-      - fix/learning-os-experience-redesign
+      - feat/student-learning-os-expansion
     paths:
       - .github/workflows/security-dependency-refresh.yml
 
