@@ -41,6 +41,9 @@ export interface CoverageTotals {
   youtubeReviewQueueBlockedMissingManifestSubject: number
   youtubeReviewQueueBlockedUnplacedOfficialSubject: number
   youtubeReviewQueueBlockedMissingLessonStructure: number
+  youtubeReviewQueueOfficialLessons: number
+  youtubeReviewQueueLessonsWithoutCandidate: number
+  youtubeReviewQueueUnmatchedResearchCandidates: number
   linkHealthChecked: number
   linkHealthHealthy: number
   linkHealthUnknown: number
@@ -152,6 +155,11 @@ interface RawYouTubeReviewQueue {
     blockedUnplacedOfficialSubject?: unknown
     blockedMissingLessonStructure?: unknown
   } | unknown
+  learningCoverage?: {
+    officialLessons?: unknown
+    lessonsWithoutCandidate?: unknown
+    unmatchedResearchCandidates?: unknown
+  } | unknown
 }
 
 interface RawOfficialTimetableEvidence {
@@ -232,8 +240,8 @@ export function buildCwitR23CoverageReport(input: {
     generatedAt: input.generatedAt,
     schemeCode: 'R23',
     sourceNote: input.databaseCoverage
-      ? 'Coverage is calculated from local curriculum manifests, draft YouTube metadata, and an attached database-backed publication snapshot.'
-      : 'Coverage is calculated from local curriculum manifests and draft YouTube metadata. Run coverage:learning with --with-db to attach database-backed published lesson/resource counts when PostgreSQL is reachable.',
+      ? 'Coverage is calculated from local curriculum manifests, draft video-review candidates, and an attached database-backed publication snapshot. Review candidates are not student-visible resources.'
+      : 'Coverage is calculated from local curriculum manifests and draft video-review candidates. Candidate counts do not mean that a lesson has a published video. Run coverage:learning with --with-db to attach database-backed published lesson/resource counts when PostgreSQL is reachable.',
     totals: {
       ...programmes.flatMap((programme) => programme.semesters).reduce(addSemesterToTotals, emptyTotals()),
       ...youtubeReviewQueueTotals,
@@ -405,6 +413,9 @@ function addSemesterToTotals(totals: CoverageTotals, semester: SemesterCoverage)
     youtubeReviewQueueBlockedMissingManifestSubject: totals.youtubeReviewQueueBlockedMissingManifestSubject,
     youtubeReviewQueueBlockedUnplacedOfficialSubject: totals.youtubeReviewQueueBlockedUnplacedOfficialSubject,
     youtubeReviewQueueBlockedMissingLessonStructure: totals.youtubeReviewQueueBlockedMissingLessonStructure,
+    youtubeReviewQueueOfficialLessons: totals.youtubeReviewQueueOfficialLessons,
+    youtubeReviewQueueLessonsWithoutCandidate: totals.youtubeReviewQueueLessonsWithoutCandidate,
+    youtubeReviewQueueUnmatchedResearchCandidates: totals.youtubeReviewQueueUnmatchedResearchCandidates,
     linkHealthChecked: totals.linkHealthChecked + semester.linkHealthChecked,
     linkHealthHealthy: totals.linkHealthHealthy + semester.linkHealthHealthy,
     linkHealthUnknown: totals.linkHealthUnknown + semester.linkHealthUnknown,
@@ -449,6 +460,9 @@ function emptyTotals(): CoverageTotals {
     youtubeReviewQueueBlockedMissingManifestSubject: 0,
     youtubeReviewQueueBlockedUnplacedOfficialSubject: 0,
     youtubeReviewQueueBlockedMissingLessonStructure: 0,
+    youtubeReviewQueueOfficialLessons: 0,
+    youtubeReviewQueueLessonsWithoutCandidate: 0,
+    youtubeReviewQueueUnmatchedResearchCandidates: 0,
     linkHealthChecked: 0,
     linkHealthHealthy: 0,
     linkHealthUnknown: 0,
@@ -509,9 +523,15 @@ function reviewQueueTotals(raw: unknown): Pick<
   | 'youtubeReviewQueueBlockedMissingManifestSubject'
   | 'youtubeReviewQueueBlockedUnplacedOfficialSubject'
   | 'youtubeReviewQueueBlockedMissingLessonStructure'
+  | 'youtubeReviewQueueOfficialLessons'
+  | 'youtubeReviewQueueLessonsWithoutCandidate'
+  | 'youtubeReviewQueueUnmatchedResearchCandidates'
 > {
   const totals = isRecord(raw) && isRecord((raw as RawYouTubeReviewQueue).totals)
     ? (raw as RawYouTubeReviewQueue).totals as Record<string, unknown>
+    : {}
+  const coverage = isRecord(raw) && isRecord((raw as RawYouTubeReviewQueue).learningCoverage)
+    ? (raw as RawYouTubeReviewQueue).learningCoverage as Record<string, unknown>
     : {}
   return {
     youtubeReviewQueueCandidates: positiveInteger(totals.candidates),
@@ -520,6 +540,9 @@ function reviewQueueTotals(raw: unknown): Pick<
     youtubeReviewQueueBlockedMissingManifestSubject: positiveInteger(totals.blockedMissingManifestSubject),
     youtubeReviewQueueBlockedUnplacedOfficialSubject: positiveInteger(totals.blockedUnplacedOfficialSubject),
     youtubeReviewQueueBlockedMissingLessonStructure: positiveInteger(totals.blockedMissingLessonStructure),
+    youtubeReviewQueueOfficialLessons: positiveInteger(coverage.officialLessons),
+    youtubeReviewQueueLessonsWithoutCandidate: positiveInteger(coverage.lessonsWithoutCandidate),
+    youtubeReviewQueueUnmatchedResearchCandidates: positiveInteger(coverage.unmatchedResearchCandidates),
   }
 }
 
