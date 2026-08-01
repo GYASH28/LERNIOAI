@@ -9,10 +9,10 @@ Research date: 2026-08-01
 - Student-facing official curriculum note layer: **86/86 subjects resolve in Learn and Materials**.
 - Detailed official source layer: **83 subjects** have an official unit table or official course-level outcomes. Five CI subjects transparently use the matching CWIT CP shared-course table; one seminar subject has official course-level outcomes without a unit table.
 - Three project/placement subjects (**R23CI5602, R23CP5401, R23CP5402**) have no unit or outcome table in the supplied official extraction. Lernio presents an explicit source-availability state for them rather than inventing study notes or videos.
-- Original direct-video research pool: **300 pending candidates** from CWIT lecture-guide evidence and targeted allowed-channel research.
-- Reconciled official-unit review queue: **229 pending direct-video candidates across 428 official lesson identities (53.5% candidate coverage)**.
-- Candidates deliberately left unassigned after strict official-unit reconciliation: **71**. They are not shown to students and require a reviewer to find a more exact lesson fit.
-- Official lessons without a reconciled pending candidate: **199**.
+- Current direct-video research pool: **293 pending candidates** from CWIT lecture-guide evidence and targeted allowed-channel research.
+- Reconciled official-unit review queue: **287 pending direct-video candidates across 428 official lesson identities (67.1% candidate coverage)**.
+- Candidates deliberately left unassigned after strict official-unit reconciliation: **6**. They are not shown to students and require a reviewer to find a more exact lesson fit.
+- Official lessons without a reconciled pending candidate: **141**.
 - Reviewer-approved direct videos visible to students: **0**.
 
 The candidate number is intentionally not presented as completed Learn coverage. A candidate is hidden until a named academic reviewer checks the exact CWIT outcome, spoken language, duration, player restrictions, embeddability, classroom suitability and availability.
@@ -57,20 +57,20 @@ The reconciliation report at `content/resources/lesson-video-mappings/cwit-r23-p
 
 | Programme | Semester | Reconciled pending candidates |
 | --- | ---: | ---: |
-| DCIOT | 1 | 10 |
-| DCIOT | 2 | 20 |
-| DCIOT | 3 | 31 |
+| DCIOT | 1 | 13 |
+| DCIOT | 2 | 21 |
+| DCIOT | 3 | 33 |
 | DCIOT | 4 | 33 |
 | DCIOT | 5 | 38 |
-| DCIOT | 6 | 7 |
-| DCOMP | 1 | 9 |
-| DCOMP | 2 | 11 |
-| DCOMP | 3 | 19 |
-| DCOMP | 4 | 13 |
-| DCOMP | 5 | 20 |
-| DCOMP | 6 | 18 |
+| DCIOT | 6 | 8 |
+| DCOMP | 1 | 11 |
+| DCOMP | 2 | 21 |
+| DCOMP | 3 | 34 |
+| DCOMP | 4 | 19 |
+| DCOMP | 5 | 30 |
+| DCOMP | 6 | 26 |
 
-Channels represented in the current queue include Gate Smashers, CodeWithHarry, Neso Academy, Jenny's Lectures CS IT, Ekeeda, Kharat Academy, Simplilearn, 5 Minutes Engineering, Education 4u, Easy Engineering Classes and freeCodeCamp.org.
+The regenerated queue contains **209 English** and **78 Hindi** candidates (no other language is admitted). Channels represented include Gate Smashers, CodeWithHarry, Neso Academy, Jenny's Lectures CS IT, Ekeeda, Kharat Academy, Simplilearn, 5 Minutes Engineering, Education 4u, Easy Engineering Classes and freeCodeCamp.org.
 
 ## Why all videos are not published
 
