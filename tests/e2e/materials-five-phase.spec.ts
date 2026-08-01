@@ -1,9 +1,61 @@
-import { expect, test } from '@playwright/test'
+import { expect, test, type Page, type WorkerInfo } from '@playwright/test'
+import { hash } from 'bcryptjs'
+import { db } from '../../src/lib/db'
 
 const lessonUrl = '/materials/lesson/R23CP1701/logarithms-and-progressions'
+const e2ePassword = 'Lernio-e2e-only-2026'
+let e2eEmail = ''
+
+// The first lesson render compiles several rich note sections in development.
+// Keep the assertions strict while allowing cold CI and mobile projects enough
+// time to exercise all five phases in one test.
+test.describe.configure({ timeout: 90_000 })
+
+test.beforeAll(async ({}, workerInfo: WorkerInfo) => {
+  // Local demo runs do not need a database-backed login. CI deliberately runs
+  // with demo mode disabled, so create a disposable real user there.
+  if (!process.env.DATABASE_URL) return
+  e2eEmail = `materials-${workerInfo.project.name.replace(/[^a-z0-9]/gi, '-')}@e2e.lernio.local`
+  await db.user.upsert({
+    where: { email: e2eEmail },
+    create: {
+      email: e2eEmail,
+      emailVerified: new Date(),
+      name: 'Materials E2E Student',
+      passwordHash: await hash(e2ePassword, 4),
+      role: 'student',
+      status: 'active',
+      provider: 'password',
+      profileComplete: true,
+      onboarded: true,
+    },
+    update: {
+      passwordHash: await hash(e2ePassword, 4),
+      status: 'active',
+      profileComplete: true,
+    },
+  })
+})
+
+test.afterAll(async () => {
+  if (e2eEmail) await db.user.deleteMany({ where: { email: e2eEmail } })
+})
+
+async function openProtectedLesson(page: Page, url: string) {
+  await page.goto(url)
+  if (!new URL(page.url()).pathname.startsWith('/sign-in')) return
+  if (!e2eEmail) {
+    throw new Error('Protected Materials E2E checks require DATABASE_URL or a demo-mode web server.')
+  }
+
+  await page.getByLabel('Email').fill(e2eEmail)
+  await page.getByLabel('Password').fill(e2ePassword)
+  await page.getByRole('button', { name: 'Sign in', exact: true }).click()
+  await expect(page).not.toHaveURL(/\/sign-in(?:\?|$)/, { timeout: 15_000 })
+}
 
 test('Materials exposes five distinct lesson phases from one canonical note', async ({ page }) => {
-  await page.goto(lessonUrl)
+  await openProtectedLesson(page, lessonUrl)
 
   const learningPath = page.getByRole('navigation', { name: 'Five learning phases' })
   await expect(learningPath).toBeVisible()
@@ -30,7 +82,7 @@ test('Materials exposes five distinct lesson phases from one canonical note', as
 
 test('Materials keeps the five-phase controls usable on a 390px screen', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 })
-  await page.goto(lessonUrl)
+  await openProtectedLesson(page, lessonUrl)
 
   const learningPath = page.getByRole('navigation', { name: 'Five learning phases' })
   await expect(learningPath).toBeVisible()
@@ -41,7 +93,7 @@ test('Materials keeps the five-phase controls usable on a 390px screen', async (
 })
 
 test('Materials serves exact official CWIT scope without inventing unsupported phases', async ({ page }) => {
-  await page.goto('/materials/lesson/R23CI2607/unit-1-introduction-to-database-system')
+  await openProtectedLesson(page, '/materials/lesson/R23CI2607/unit-1-introduction-to-database-system')
 
   await expect(page.getByRole('heading', { name: 'Introduction To Database System', level: 1 })).toBeVisible()
   await expect(page.getByText(/Official CWIT R23 curriculum/).first()).toBeVisible()
