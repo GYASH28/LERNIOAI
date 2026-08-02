@@ -18,6 +18,25 @@ test('manifest and sitemap stay public', async ({ request }) => {
   expect(sitemap.status()).toBeLessThan(400)
 })
 
+test('signed-out protected navigation does not poll private APIs', async ({ page }) => {
+  const unauthorizedPrivateRequests: string[] = []
+
+  page.on('response', (response) => {
+    if (
+      response.status() === 401 &&
+      /\/api\/(achievements\/new|notifications)(?:\?|$)/.test(response.url())
+    ) {
+      unauthorizedPrivateRequests.push(response.url())
+    }
+  })
+
+  await page.goto('/learn')
+  await expect(page).toHaveURL(/\/sign-in\?callbackUrl=(?:%2F|\/)learn/i)
+  await page.waitForTimeout(500)
+
+  expect(unauthorizedPrivateRequests).toEqual([])
+})
+
 test('obsolete gamification destinations consolidate into useful study pages', async ({ request }) => {
   const redirects = [
     ['/games', '/practice'],

@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { Bell, CheckCheck } from 'lucide-react'
 import Link from 'next/link'
+import { useAppStore } from '@/store/app-store'
 
 interface Notification {
   id: string
@@ -15,12 +16,14 @@ interface Notification {
 }
 
 export function NotificationBell() {
+  const userId = useAppStore((state) => state.user?.id)
   const [open, setOpen] = useState(false)
   const [notifications, setNotifications] = useState<Notification[]>([])
   const [unreadCount, setUnreadCount] = useState(0)
   const [loading, setLoading] = useState(true)
 
   const fetchNotifications = useCallback(async () => {
+    if (!userId) return
     setLoading(true)
     try {
       const res = await fetch('/api/notifications?limit=10')
@@ -33,14 +36,22 @@ export function NotificationBell() {
     } finally {
       setLoading(false)
     }
-  }, [])
+  }, [userId])
 
   useEffect(() => {
-    fetchNotifications()
+    if (!userId) return
+    const initialFetch = window.setTimeout(() => {
+      void fetchNotifications()
+    }, 0)
     // Poll every 60 seconds
-    const interval = setInterval(fetchNotifications, 60_000)
-    return () => clearInterval(interval)
-  }, [fetchNotifications])
+    const interval = window.setInterval(fetchNotifications, 60_000)
+    return () => {
+      window.clearTimeout(initialFetch)
+      window.clearInterval(interval)
+    }
+  }, [fetchNotifications, userId])
+
+  if (!userId) return null
 
   const markAllRead = async () => {
     try {
