@@ -69,6 +69,18 @@ function getServerMaterialsPhaseSnapshot(): MaterialsPhaseId {
   return 'learn'
 }
 
+function subscribeToHydration() {
+  return () => {}
+}
+
+function getClientHydrationSnapshot() {
+  return true
+}
+
+function getServerHydrationSnapshot() {
+  return false
+}
+
 interface MaterialsReadingExperienceProps {
   lesson: Lesson
   subject: SubjectNotes
@@ -90,6 +102,11 @@ export function MaterialsReadingExperience({
 }: MaterialsReadingExperienceProps) {
   const [mapOpen, setMapOpen] = useState(false)
   const [lessonQuery, setLessonQuery] = useState('')
+  const hydrated = useSyncExternalStore(
+    subscribeToHydration,
+    getClientHydrationSnapshot,
+    getServerHydrationSnapshot,
+  )
   const availablePhases = useMemo(() => getAvailableMaterialsPhases(lesson), [lesson])
   const storedPhaseId = useSyncExternalStore(
     subscribeToMaterialsPhase,
@@ -229,7 +246,11 @@ export function MaterialsReadingExperience({
                 </button>
               </div>
 
-              <nav className="mt-4 flex snap-x gap-2 overflow-x-auto pb-1 sm:grid sm:grid-cols-5 sm:overflow-visible sm:pb-0" aria-label="Five learning phases">
+              <nav
+                className="mt-4 flex snap-x gap-2 overflow-x-auto pb-1 sm:grid sm:grid-cols-5 sm:overflow-visible sm:pb-0"
+                aria-label="Five learning phases"
+                data-ready={hydrated ? 'true' : 'false'}
+              >
                 {MATERIALS_PHASES.map((phase, index) => {
                   const available = availablePhases.includes(phase.id)
                   const active = displayMode === 'phases' && activePhase.id === phase.id
@@ -238,7 +259,7 @@ export function MaterialsReadingExperience({
                     <button
                       key={phase.id}
                       type="button"
-                      disabled={!available}
+                      disabled={!available || !hydrated}
                       onClick={() => selectPhase(phase.id)}
                       aria-current={active ? 'step' : undefined}
                       className={`group min-h-[4.6rem] min-w-[8.75rem] snap-start rounded-xl border px-3 py-2.5 text-left transition active:scale-[0.98] sm:min-w-0 ${

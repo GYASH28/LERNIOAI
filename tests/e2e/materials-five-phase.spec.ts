@@ -41,6 +41,7 @@ test('Materials exposes five useful phases from an official CWIT lesson', async 
 
   const learningPath = page.getByRole('navigation', { name: 'Five learning phases' })
   await expect(learningPath).toBeVisible()
+  await expect(learningPath).toHaveAttribute('data-ready', 'true')
   await expect(learningPath.getByRole('button')).toHaveCount(5)
   await expect(page.getByRole('heading', { name: 'Algebra', exact: true, level: 1 })).toBeVisible()
   await expect(page.getByText(/Official CWIT R23 curriculum/).first()).toBeVisible()
