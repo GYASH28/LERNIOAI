@@ -1,5 +1,3 @@
-// import 'server-only'
-
 import net from 'node:net'
 
 interface CachedProbe {
@@ -12,11 +10,14 @@ let cachedProbe: CachedProbe | null = null
 export async function canAttemptDatabase(): Promise<boolean> {
   const databaseUrl = process.env.DATABASE_URL
   if (!databaseUrl || !/^postgres(?:ql)?:\/\//i.test(databaseUrl)) return true
+  if (process.env.DATABASE_TCP_PROBE_DISABLED === 'true') return true
 
   const now = Date.now()
-  const cacheMs = readPositiveInt(process.env.DATABASE_REACHABILITY_CACHE_MS, 2_000)
-  if (cachedProbe && now - cachedProbe.checkedAt < cacheMs) {
-    return cachedProbe.reachable
+  if (cachedProbe) {
+    const cacheMs = cachedProbe.reachable
+      ? readPositiveInt(process.env.DATABASE_REACHABILITY_CACHE_MS, 5_000)
+      : readPositiveInt(process.env.DATABASE_FAILURE_CACHE_MS, 1_000)
+    if (now - cachedProbe.checkedAt < cacheMs) return cachedProbe.reachable
   }
 
   const reachable = await probeTcp(databaseUrl)
@@ -36,7 +37,10 @@ function probeTcp(databaseUrl: string): Promise<boolean> {
   const port = Number(parsed.port || 5432)
   if (!host || !Number.isFinite(port)) return Promise.resolve(true)
 
-  const timeoutMs = readPositiveInt(process.env.DATABASE_TCP_PROBE_TIMEOUT_MS, 350)
+  const timeoutMs = readPositiveInt(
+    process.env.DATABASE_TCP_PROBE_TIMEOUT_MS,
+    1_500,
+  )
 
   return new Promise((resolve) => {
     const socket = net.createConnection({ host, port })
