@@ -1,4 +1,4 @@
-import { expect, test, type WorkerInfo } from '@playwright/test'
+import { expect, test, type Page, type WorkerInfo } from '@playwright/test'
 import axe from 'axe-core'
 import {
   addE2eSession,
@@ -53,28 +53,50 @@ for (const route of [...PUBLIC_ROUTES, ...STUDENT_ROUTES]) {
       await expect(page).not.toHaveURL(/\/sign-in(?:\?|$)/)
     }
 
-    await page.addScriptTag({ content: axe.source })
-    const violations = await page.evaluate(async () => {
-      const axeRunner = (window as unknown as {
-        axe: {
-          run: (context: Document, options: unknown) => Promise<{ violations: AxeViolation[] }>
-        }
-      }).axe
-      const results = await axeRunner.run(document, {
-        runOnly: {
-          type: 'tag',
-          values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22a', 'wcag22aa'],
-        },
-        resultTypes: ['violations'],
-      })
-      return results.violations
-    })
+    await page.waitForLoadState('networkidle')
+    const violations = await scanStableDocument(page)
 
     const blocking = violations.filter((violation) =>
       violation.impact === 'critical' || violation.impact === 'serious',
     )
     expect(blocking, formatViolations(route, blocking)).toEqual([])
   })
+}
+
+async function scanStableDocument(page: Page): Promise<AxeViolation[]> {
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    try {
+      await page.addScriptTag({ content: axe.source })
+      return await page.evaluate(async () => {
+        const axeRunner = (window as unknown as {
+          axe: {
+            run: (context: Document, options: unknown) => Promise<{ violations: AxeViolation[] }>
+          }
+        }).axe
+        const results = await axeRunner.run(document, {
+          runOnly: {
+            type: 'tag',
+            values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22a', 'wcag22aa'],
+          },
+          resultTypes: ['violations'],
+        })
+        return results.violations
+      })
+    } catch (error) {
+      if (
+        !(error instanceof Error) ||
+        !/Execution context was destroyed/.test(error.message) ||
+        attempt === 1
+      ) {
+        throw error
+      }
+      await page.waitForLoadState('domcontentloaded')
+      await page.waitForLoadState('networkidle')
+      await expect(page.locator('body')).toBeVisible()
+    }
+  }
+
+  throw new Error('The page did not reach a stable document for accessibility scanning.')
 }
 
 test('student navigation exposes a keyboard-visible skip link and main landmark', async ({ page }) => {
