@@ -1,8 +1,9 @@
 import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
 
 const buildScript = readFileSync(
-  new URL('./vercel-build.mjs', import.meta.url),
+  resolve(process.cwd(), 'scripts/vercel-build.mjs'),
   'utf8',
 )
 
