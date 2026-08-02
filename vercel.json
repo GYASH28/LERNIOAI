@@ -3,5 +3,6 @@
   "framework": "nextjs",
   "buildCommand": "npm run vercel-build",
   "installCommand": "npm ci",
-  "outputDirectory": ".next"
+  "outputDirectory": ".next",
+  "ignoreCommand": "node -e \"const productionUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL || ''; process.exit(!productionUrl || productionUrl === 'lernioai.vercel.app' ? 1 : 0)\""
 }
