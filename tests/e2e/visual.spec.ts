@@ -67,13 +67,23 @@ test('all palettes apply distinct visual token signatures', async ({ page }, tes
 async function readPaletteSignature(page: import('@playwright/test').Page, palette: string): Promise<PaletteSignature> {
   for (let attempt = 0; attempt < 2; attempt += 1) {
     try {
-      return await page.evaluate((nextPalette): PaletteSignature => {
+      await page.evaluate((nextPalette) => {
         const root = document.documentElement
         root.setAttribute('data-palette', nextPalette)
         root.setAttribute('data-appearance', 'light')
         root.setAttribute('data-motion', 'reduced')
         root.classList.remove('dark')
+      }, palette)
 
+      await page.waitForFunction(() => {
+        const styles = window.getComputedStyle(document.documentElement)
+        return ['--brand', '--canvas', '--surface-1', '--text-default', '--border-default'].every(
+          (token) => styles.getPropertyValue(token).trim() !== '',
+        )
+      })
+
+      return await page.evaluate((): PaletteSignature => {
+        const root = document.documentElement
         const styles = window.getComputedStyle(root)
         return {
           palette: root.getAttribute('data-palette') || '',
@@ -83,7 +93,7 @@ async function readPaletteSignature(page: import('@playwright/test').Page, palet
           text: styles.getPropertyValue('--text-default').trim(),
           border: styles.getPropertyValue('--border-default').trim(),
         }
-      }, palette)
+      })
     } catch (error) {
       if (!(error instanceof Error) || !/Execution context was destroyed/.test(error.message) || attempt === 1) {
         throw error
