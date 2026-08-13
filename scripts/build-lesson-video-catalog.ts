@@ -12,11 +12,16 @@ interface CandidateManifest {
     role: string
     officialSubjectCodes: string[]
     programmeCodes: string[]
+    metadata?: {
+      title?: string | null
+      channel?: string | null
+    }
   }>
 }
 
 interface LessonNotes {
   subjectCode: string
+  subjectName?: string
   units: Array<{
     lessons: Array<{
       slug: string
@@ -33,7 +38,7 @@ interface PlaylistVideo {
   title: string
   description: string
   channel: string
-  playlistId: string
+  playlistId: string | null
   playlistIndex: number
 }
 
@@ -48,7 +53,7 @@ interface Mapping {
   playlistId: string | null
   playlistIndex: number | null
   confidence: number
-  reviewStatus: 'approved_auto' | 'pending_review'
+  reviewStatus: 'pending_review'
   sourcePdf: string
   sourcePage: number
 }
@@ -57,9 +62,9 @@ const root = process.cwd()
 const apiKey = process.env.YOUTUBE_DATA_API_KEY?.trim()
 const candidatesPath = join(root, 'content', 'resources', 'youtube-candidates', 'cwit-r23-youtube-candidates.json')
 const notesDir = join(root, 'content', 'lesson-notes')
+const officialCourseContentPath = join(root, 'content', 'curriculum', 'cwit-r23', 'official-course-content.json')
 const outputPath = join(root, 'content', 'resources', 'lesson-video-mappings', 'cwit-r23-direct-video-mappings.json')
 const dryRun = process.argv.includes('--dry-run')
-const allowAutoApproval = !process.argv.includes('--review-all')
 
 const STOP_WORDS = new Set([
   'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'in', 'into',
@@ -69,17 +74,16 @@ const STOP_WORDS = new Set([
 ])
 
 async function main() {
-  if (!apiKey) throw new Error('YOUTUBE_DATA_API_KEY is required to expand playlist resources into direct videos.')
   if (!existsSync(candidatesPath)) throw new Error(`Missing candidate manifest: ${relative(root, candidatesPath)}`)
 
   const candidateManifest = JSON.parse(readFileSync(candidatesPath, 'utf-8')) as CandidateManifest
   const notesByCode = loadNotes()
-  const playlistCandidates = candidateManifest.candidates.filter(
-    (candidate) => candidate.resourceKind === 'playlist' && candidate.playlistId && candidate.officialSubjectCodes.length > 0,
+  const resourceCandidates = candidateManifest.candidates.filter(
+    (candidate) => candidate.officialSubjectCodes.length > 0,
   )
-
   const playlistCache = new Map<string, PlaylistVideo[]>()
   const mappings: Mapping[] = []
+  const researchErrors: Array<{ playlistId: string; message: string }> = []
   const coverage: Array<{
     subjectCode: string
     lessons: number
@@ -89,7 +93,7 @@ async function main() {
     missingLessonNotes: boolean
   }> = []
 
-  const subjectCodes = [...new Set(playlistCandidates.flatMap((candidate) => candidate.officialSubjectCodes))].sort()
+  const subjectCodes = [...notesByCode.keys()].sort()
   for (const subjectCode of subjectCodes) {
     const notes = notesByCode.get(subjectCode.toUpperCase())
     if (!notes) {
@@ -98,14 +102,39 @@ async function main() {
     }
 
     const lessons = notes.units.flatMap((unit) => unit.lessons)
-    const candidates = playlistCandidates.filter((candidate) => candidate.officialSubjectCodes.includes(subjectCode))
+    const candidates = resourceCandidates.filter((candidate) => candidate.officialSubjectCodes.includes(subjectCode))
     const videos: Array<PlaylistVideo & { sourcePdf: string; sourcePage: number; role: string }> = []
 
     for (const candidate of candidates) {
+      if (candidate.resourceKind === 'video' && candidate.videoId && candidate.metadata?.title && candidate.metadata.channel) {
+        if (isAllowedChannel(candidate.metadata.channel) && !/\bmarathi\b|मराठी/i.test(candidate.metadata.title)) {
+          videos.push({
+            videoId: candidate.videoId,
+            title: candidate.metadata.title,
+            description: candidate.metadata.title,
+            channel: candidate.metadata.channel,
+            playlistId: null,
+            playlistIndex: 0,
+            sourcePdf: candidate.sourcePdf ?? 'CWIT YouTube Lecture Guide',
+            sourcePage: candidate.sourcePage ?? 0,
+            role: candidate.role,
+          })
+        }
+        continue
+      }
+      if (!candidate.playlistId) continue
       const playlistId = candidate.playlistId as string
       let playlistVideos = playlistCache.get(playlistId)
       if (!playlistVideos) {
-        playlistVideos = await fetchPlaylistVideos(playlistId)
+        try {
+          playlistVideos = await fetchPlaylistVideos(playlistId)
+        } catch (error) {
+          researchErrors.push({
+            playlistId,
+            message: error instanceof Error ? error.message : String(error),
+          })
+          playlistVideos = []
+        }
         playlistCache.set(playlistId, playlistVideos)
       }
       for (const video of playlistVideos) {
@@ -148,7 +177,7 @@ async function main() {
         playlistId: pair.video.playlistId,
         playlistIndex: pair.video.playlistIndex,
         confidence,
-        reviewStatus: allowAutoApproval && confidence >= 0.82 && pair.titleOverlap > 0 ? 'approved_auto' : 'pending_review',
+        reviewStatus: 'pending_review',
         sourcePdf: pair.video.sourcePdf,
         sourcePage: pair.video.sourcePage,
       })
@@ -156,12 +185,56 @@ async function main() {
       usedVideos.add(pair.video.videoId)
     }
 
+    const missingLessons = lessons.filter((lesson) => !usedLessons.has(lesson.slug))
+    const searchResearch = await Promise.all(missingLessons.map(async (lesson) => {
+      try {
+        return {
+          lesson,
+          searchResults: await fetchPublicSearchVideos(
+            `${notes.subjectName ?? subjectCode} ${lesson.title} diploma tutorial Hindi English`,
+          ),
+        }
+      } catch (error) {
+        researchErrors.push({
+          playlistId: `search:${subjectCode}:${lesson.slug}`,
+          message: error instanceof Error ? error.message : String(error),
+        })
+        return { lesson, searchResults: [] as PlaylistVideo[] }
+      }
+    }))
+
+    for (const { lesson, searchResults } of searchResearch) {
+        const best = searchResults
+          .filter((video) => !usedVideos.has(video.videoId))
+          .map((video) => ({ video, ...scoreMatch(lesson, video) }))
+          .filter((result) => result.score >= 4)
+          .sort((left, right) => right.score - left.score || right.titleOverlap - left.titleOverlap)[0]
+        if (!best) continue
+        mappings.push({
+          subjectCode,
+          lessonSlug: lesson.slug,
+          videoId: best.video.videoId,
+          title: best.video.title,
+          channel: best.video.channel,
+          language: inferLanguage(best.video.title),
+          description: best.video.description,
+          playlistId: null,
+          playlistIndex: null,
+          confidence: confidenceForScore(best.score, best.titleOverlap),
+          reviewStatus: 'pending_review',
+          sourcePdf: 'Lesson-specific YouTube public search against official CWIT scope',
+          sourcePage: 0,
+        })
+        usedLessons.add(lesson.slug)
+        usedVideos.add(best.video.videoId)
+    }
+
     const subjectMappings = mappings.filter((mapping) => mapping.subjectCode === subjectCode)
     coverage.push({
       subjectCode,
       lessons: lessons.length,
       mapped: subjectMappings.length,
-      approvedAuto: subjectMappings.filter((mapping) => mapping.reviewStatus === 'approved_auto').length,
+      approvedAuto: 0,
       pendingReview: subjectMappings.filter((mapping) => mapping.reviewStatus === 'pending_review').length,
       missingLessonNotes: false,
     })
@@ -174,9 +247,10 @@ async function main() {
     policy: {
       playlistPlayersAllowed: false,
       duplicateVideoWithinSubjectAllowed: false,
-      autoApprovalThreshold: allowAutoApproval ? 0.82 : null,
-      note: 'Pending mappings remain invisible to students until reviewed. Approved-auto mappings require strong title overlap and confidence.',
+      autoApprovalThreshold: null,
+      note: 'Pending mappings remain invisible to students until a named academic reviewer approves them.',
     },
+    researchErrors,
     coverage,
     mappings: mappings.sort((left, right) =>
       left.subjectCode.localeCompare(right.subjectCode) || left.lessonSlug.localeCompare(right.lessonSlug),
@@ -202,10 +276,77 @@ function loadNotes() {
       console.warn(`[lesson-video-catalog] skipped invalid notes file ${file}`, error)
     }
   }
+  if (existsSync(officialCourseContentPath)) {
+    try {
+      const official = JSON.parse(readFileSync(officialCourseContentPath, 'utf-8')) as {
+      subjects?: Array<{
+          subjectCode: string
+          subjectName?: string
+          courseOutcomes?: Array<{ text?: string }>
+          units: Array<{
+            order: number
+            title: string
+            curriculumContent?: string
+            learningOutcomes?: string[]
+          }>
+        }>
+      }
+      const officialSubjects = official.subjects ?? []
+      for (const subject of officialSubjects) {
+        const code = subject.subjectCode.trim().toUpperCase()
+        const evidenceSubject = subject.units.length > 0
+          ? subject
+          : officialSubjects.find((candidate) =>
+            candidate.units.length > 0 && normalizeCourseName(candidate.subjectName ?? '') === normalizeCourseName(subject.subjectName ?? ''),
+          ) ?? subject
+        const lessons = evidenceSubject.units.length > 0
+          ? evidenceSubject.units.map((unit) => ({
+            lessons: [{
+              slug: `unit-${unit.order}-${slugify(unit.title) || 'official-curriculum-unit'}`,
+              title: unit.title,
+              overview: unit.curriculumContent ?? '',
+              keyConcepts: curriculumLines(unit.curriculumContent ?? ''),
+              objectives: unit.learningOutcomes ?? [],
+            }],
+          }))
+          : courseOutcomeLesson(subject.courseOutcomes ?? [])
+        notesByCode.set(code, {
+          subjectCode: code,
+          subjectName: subject.subjectName,
+          units: lessons,
+        })
+      }
+    } catch (error) {
+      console.warn('[lesson-video-catalog] skipped invalid official course content', error)
+    }
+  }
   return notesByCode
 }
 
+function courseOutcomeLesson(courseOutcomes: Array<{ text?: string }>): LessonNotes['units'] {
+  const objectives = courseOutcomes
+    .map((outcome) => outcome.text?.replace(/\s+/g, ' ').trim())
+    .filter((outcome): outcome is string => Boolean(outcome))
+  return objectives.length > 0
+    ? [{ lessons: [{
+      slug: 'official-course-level-outcomes',
+      title: 'Official course-level outcomes',
+      overview: objectives.join(' '),
+      keyConcepts: objectives,
+      objectives,
+    }] }]
+    : []
+}
+
+function normalizeCourseName(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/\b(and|its|it)\b/g, '')
+    .replace(/[^a-z0-9]+/g, '')
+}
+
 async function fetchPlaylistVideos(playlistId: string): Promise<PlaylistVideo[]> {
+  if (!apiKey) return fetchPublicPlaylistVideos(playlistId)
   const videos: PlaylistVideo[] = []
   let pageToken: string | undefined
   do {
@@ -246,6 +387,182 @@ async function fetchPlaylistVideos(playlistId: string): Promise<PlaylistVideo[]>
     pageToken = payload.nextPageToken
   } while (pageToken)
   return videos
+}
+
+async function fetchPublicPlaylistVideos(playlistId: string): Promise<PlaylistVideo[]> {
+  const response = await fetch(`https://www.youtube.com/playlist?list=${encodeURIComponent(playlistId)}`, {
+    headers: { 'user-agent': 'Mozilla/5.0 (compatible; LernioCurriculumResearch/1.0)' },
+    signal: AbortSignal.timeout(20_000),
+  })
+  if (!response.ok) throw new Error(`YouTube playlist page failed for ${playlistId}: ${response.status}`)
+  const html = await response.text()
+  return videosFromYoutubeHtml(html, playlistId)
+}
+
+async function fetchPublicSearchVideos(query: string): Promise<PlaylistVideo[]> {
+  const url = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`
+  let lastError: unknown
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    try {
+      const response = await fetch(url, {
+        headers: { 'user-agent': 'Mozilla/5.0 (compatible; LernioCurriculumResearch/1.0)' },
+        signal: AbortSignal.timeout(15_000),
+      })
+      if (!response.ok) throw new Error(`YouTube search failed: ${response.status}`)
+      return videosFromYoutubeHtml(await response.text(), null)
+    } catch (error) {
+      lastError = error
+      if (attempt < 2) await new Promise((resolve) => setTimeout(resolve, 400 * (attempt + 1)))
+    }
+  }
+  throw lastError instanceof Error ? lastError : new Error('YouTube search failed')
+}
+
+function videosFromYoutubeHtml(html: string, playlistId: string | null): PlaylistVideo[] {
+  const marker = 'var ytInitialData = '
+  const start = html.indexOf(marker)
+  if (start < 0) throw new Error('YouTube initial data missing')
+  const jsonStart = start + marker.length
+  const jsonEnd = html.indexOf(';</script>', jsonStart)
+  if (jsonEnd < 0) throw new Error('YouTube initial data terminator missing')
+  const initialData = JSON.parse(html.slice(jsonStart, jsonEnd)) as unknown
+  const lockups: Record<string, unknown>[] = []
+  const videoRenderers: Record<string, unknown>[] = []
+  collectLockups(initialData, lockups)
+  collectVideoRenderers(initialData, videoRenderers)
+
+  const lockupVideos = lockups.flatMap((lockup, index) => {
+    if (lockup.contentType !== 'LOCKUP_CONTENT_TYPE_VIDEO' || typeof lockup.contentId !== 'string') return []
+    const metadata = objectAt(lockup, 'metadata', 'lockupMetadataViewModel')
+    const title = stringAt(metadata, 'title', 'content')
+    if (!title) return []
+    const avatar = objectAt(metadata, 'image', 'decoratedAvatarViewModel')
+    const channelLabel = stringAt(avatar, 'a11yLabel')
+    const channel = channelLabel?.replace(/^Go to channel\s+/i, '').trim() || 'YouTube'
+    if (!isAllowedChannel(channel) || /\bmarathi\b|मराठी/i.test(title)) return []
+    const watchEndpoint = objectAt(lockup, 'rendererContext', 'commandContext', 'onTap', 'innertubeCommand', 'watchEndpoint')
+    const playlistIndex = numberAt(watchEndpoint, 'index') ?? index
+    return [{
+      videoId: lockup.contentId,
+      title,
+      description: title,
+      channel,
+      playlistId,
+      playlistIndex,
+    }]
+  })
+  const rendererVideos = videoRenderers.flatMap((renderer, index) => {
+    if (typeof renderer.videoId !== 'string') return []
+    const title = stringAt(renderer, 'title', 'runs', '0', 'text')
+    const channel = stringAt(renderer, 'longBylineText', 'runs', '0', 'text') ?? 'YouTube'
+    if (!title || !isAllowedChannel(channel) || /\bmarathi\b|मराठी/i.test(title)) return []
+    return [{
+      videoId: renderer.videoId,
+      title,
+      description: title,
+      channel,
+      playlistId,
+      playlistIndex: index,
+    }]
+  })
+  return [...lockupVideos, ...rendererVideos]
+}
+
+function collectLockups(value: unknown, output: Record<string, unknown>[]) {
+  if (Array.isArray(value)) {
+    for (const item of value) collectLockups(item, output)
+    return
+  }
+  if (!value || typeof value !== 'object') return
+  const record = value as Record<string, unknown>
+  if (record.lockupViewModel && typeof record.lockupViewModel === 'object') {
+    output.push(record.lockupViewModel as Record<string, unknown>)
+  }
+  for (const nested of Object.values(record)) collectLockups(nested, output)
+}
+
+function collectVideoRenderers(value: unknown, output: Record<string, unknown>[]) {
+  if (Array.isArray(value)) {
+    for (const item of value) collectVideoRenderers(item, output)
+    return
+  }
+  if (!value || typeof value !== 'object') return
+  const record = value as Record<string, unknown>
+  if (record.videoRenderer && typeof record.videoRenderer === 'object') {
+    output.push(record.videoRenderer as Record<string, unknown>)
+  }
+  for (const nested of Object.values(record)) collectVideoRenderers(nested, output)
+}
+
+function objectAt(value: unknown, ...path: string[]): Record<string, unknown> {
+  let current: unknown = value
+  for (const key of path) {
+    if (!current || typeof current !== 'object' || Array.isArray(current)) return {}
+    current = (current as Record<string, unknown>)[key]
+  }
+  return current && typeof current === 'object' && !Array.isArray(current)
+    ? current as Record<string, unknown>
+    : {}
+}
+
+function stringAt(value: unknown, ...path: string[]) {
+  let current: unknown = value
+  for (const key of path) {
+    if (Array.isArray(current)) {
+      const index = Number.parseInt(key, 10)
+      if (!Number.isInteger(index)) return null
+      current = current[index]
+    } else {
+      if (!current || typeof current !== 'object') return null
+      current = (current as Record<string, unknown>)[key]
+    }
+  }
+  return typeof current === 'string' ? current : null
+}
+
+function numberAt(value: unknown, ...path: string[]) {
+  let current: unknown = value
+  for (const key of path) {
+    if (!current || typeof current !== 'object' || Array.isArray(current)) return null
+    current = (current as Record<string, unknown>)[key]
+  }
+  return typeof current === 'number' ? current : null
+}
+
+const ALLOWED_CHANNEL_PATTERNS = [
+  /gate smashers/i,
+  /neso academy/i,
+  /knowledge gate/i,
+  /jenny.?s lectures/i,
+  /codewithharry/i,
+  /apna college/i,
+  /wscube tech/i,
+  /last moment tuitions/i,
+  /ekeeda/i,
+  /gajendra purohit/i,
+  /all about electronics/i,
+  /khan academy/i,
+  /freecodecamp/i,
+  /programming with mosh/i,
+  /ibm technology/i,
+  /simplilearn/i,
+  /kharat academy/i,
+  /easy engineering classes/i,
+  /5 minutes engineering/i,
+  /education 4u/i,
+  /sundeep saradhi/i,
+]
+
+function isAllowedChannel(channel: string) {
+  return ALLOWED_CHANNEL_PATTERNS.some((pattern) => pattern.test(channel))
+}
+
+function slugify(value: string) {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
+}
+
+function curriculumLines(value: string) {
+  return value.split(/\n+|(?=\b\d+\.\d+\s+)/).map((line) => line.trim()).filter(Boolean).slice(0, 24)
 }
 
 function scoreMatch(

@@ -42,7 +42,7 @@ const HELP_CATEGORIES: { title: string; icon: LucideIcon; articles: { title: str
     articles: [
       { title: 'Understanding readiness', href: '/help/readiness', description: 'How we calculate your exam readiness score.' },
       { title: 'XP and streaks', href: '/help/xp', description: 'How to earn XP and maintain your streak.' },
-      { title: 'Achievements', href: '/help/achievements', description: 'Unlock badges by completing milestones.' },
+      { title: 'Milestones in your profile', href: '/help/achievements', description: 'See meaningful study milestones without leaving your profile.' },
     ],
   },
 ]

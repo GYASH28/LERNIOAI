@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "generatedAt": "2026-08-13T07:15:53.953Z",
+  "status": "research_required",
+  "policy": {
+    "publication": "Research rows are not student-visible. A named reviewer must verify and promote a direct video before it appears in a lesson.",
+    "allowedLanguages": [
+      "en",
+      "hi",
+      "hinglish"
+    ]
+  },
+  "totals": {
+    "officialLessons": 428,
+    "lessonsWithPendingCandidate": 428,
+    "lessonsNeedingResearch": 0
+  },
+  "items": []
+}

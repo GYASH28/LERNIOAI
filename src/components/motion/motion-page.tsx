@@ -27,7 +27,6 @@ export function MotionPageView({
     )
   }
 
-  const enter = signature.pageEnter
   const exit = signature.pageExit
 
   return (
@@ -35,12 +34,9 @@ export function MotionPageView({
       data-testid="motion-page"
       data-view={viewKey}
       data-motion={policy.level}
-      initial={{
-        opacity: 0,
-        x: enter.x ?? 0,
-        y: enter.y ?? enter.distance,
-        scale: enter.scale ?? 1,
-      }}
+      /* Do not fade initial content: it temporarily lowers text contrast,
+         including loading announcements, below WCAG thresholds. */
+      initial={false}
       animate={{ opacity: 1, x: 0, y: 0, scale: 1 }}
       exit={{
         opacity: 0,
@@ -48,7 +44,7 @@ export function MotionPageView({
         y: exit.y ?? -exit.distance,
       }}
       transition={{
-        duration: enter.duration * policy.durationScale,
+        duration: signature.pageEnter.duration * policy.durationScale,
       }}
     >
       {children}

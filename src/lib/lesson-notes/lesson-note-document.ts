@@ -1,5 +1,49 @@
 import { z } from 'zod'
 
+const LegacyMarkedQuestionSchema = z.object({
+  marks: z.number().nonnegative(),
+  question: z.string().trim().min(1),
+  modelAnswer: z.string().trim().min(1).optional(),
+  tips: z.array(z.string().trim().min(1)).optional(),
+})
+
+const LegacyLessonSchema = z.object({
+  slug: z.string().trim().min(1),
+  title: z.string().trim().min(1),
+  durationMin: z.number().int().positive(),
+  difficulty: z.string().trim().min(1),
+  overview: z.string().trim().min(1),
+  keyConcepts: z.array(z.string().trim().min(1)),
+  formulas: z.array(z.string().trim().min(1)),
+  tables: z.array(z.unknown()).optional(),
+  codeExamples: z.array(z.unknown()).optional(),
+  commonMistakes: z.array(z.string().trim().min(1)),
+  examTips: z.array(z.string().trim().min(1)),
+  practiceQuestions: z.array(z.unknown()),
+}).passthrough()
+
+/**
+ * Existing curriculum content is stored one subject per file. It remains a
+ * supported input format while the newer generated artifacts use the
+ * lesson-level schema below.
+ */
+export const LegacySubjectNotesSchema = z.object({
+  subjectCode: z.string().trim().min(1),
+  subjectName: z.string().trim().min(1),
+  semester: z.number().int().min(1).max(8),
+  credits: z.number().nonnegative(),
+  units: z.array(z.object({
+    number: z.number().int().positive(),
+    title: z.string().trim().min(1),
+    weightage: z.number().nonnegative(),
+    lessons: z.array(LegacyLessonSchema).min(1),
+  })).min(1),
+  revisionNotes: z.string().optional(),
+  interviewBank: z.array(LegacyMarkedQuestionSchema).optional(),
+  vivaBank: z.array(LegacyMarkedQuestionSchema).optional(),
+  pyqBank: z.array(LegacyMarkedQuestionSchema).optional(),
+}).passthrough()
+
 export const LessonNoteSourceSchema = z.object({
   id: z.string().trim().min(1),
   label: z.string().trim().min(1),
@@ -73,6 +117,11 @@ export const LessonNoteDocumentSchema = z
       }
     }
   })
+
+export const LessonNoteContentSchema = z.union([
+  LessonNoteDocumentSchema,
+  LegacySubjectNotesSchema,
+])
 
 export type LessonNoteDocument = z.infer<typeof LessonNoteDocumentSchema>
 

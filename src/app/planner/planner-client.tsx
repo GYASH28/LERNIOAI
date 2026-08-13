@@ -127,7 +127,7 @@ export function PlannerClient({ subjects }: { subjects: SubjectInfo[] }) {
             <TrendingUp className="h-4 w-4 text-amber-500" />
             <span className="text-xs font-semibold text-muted-foreground">Progress</span>
           </div>
-          <p className="text-2xl font-bold text-amber-500">{completionRate}%</p>
+          <p className="text-2xl font-bold text-amber-700 dark:text-amber-300">{completionRate}%</p>
         </div>
       </div>
 

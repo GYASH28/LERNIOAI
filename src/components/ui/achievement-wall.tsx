@@ -671,7 +671,7 @@ export function AchievementWall({ variant = 'compact', className }: AchievementW
               {pct}% complete
             </Badge>
           </div>
-          <Progress value={pct} className="h-1.5" />
+          <Progress value={pct} aria-label="Achievements completed" className="h-1.5" />
         </div>
 
         {/* Category filter pills */}

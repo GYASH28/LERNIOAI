@@ -12,8 +12,8 @@ const ARTICLES: Record<string, { title: string; content: string[] }> = {
     title: 'How to use the Learn section',
     content: [
       'The Learn section is the heart of Lernio AI. It shows your exact curriculum for your programme (Computer Engineering or Computer Engineering & IoT) and semester.',
-      'To start learning: 1) Click "Learn" in the sidebar. 2) You\'ll see your current semester with all applicable subjects. 3) Click any subject to see curated YouTube lecture playlists. 4) Click "Open Lesson" to access the full lesson studio with video player, notes, and study tools.',
-      'Each subject has a primary lecture playlist (closest match to your CWIT R23 syllabus) and alternate playlists for different explanations. Watch the primary playlist first, then use alternates if a topic is unclear.',
+      'To start learning: 1) Click "Learn" in the sidebar. 2) You\'ll see your current semester with all applicable subjects. 3) Open a subject to see its official CWIT R23 units, notes, revision prompts and practice. 4) Click "Open Lesson" to access the full lesson studio.',
+      'A lesson shows a direct video only after it has been reviewed for that exact official unit. If no reviewed video is available yet, use the official scope, notes and practice tools, or ask LEO for help.',
       'For programming subjects (C, C++, Python, Java, Web Design), don\'t just watch — type out every code example yourself. For practical subjects (Linux, Workshop, Electronics), repeat each step on your own machine.',
     ],
   },
@@ -96,14 +96,14 @@ const ARTICLES: Record<string, { title: string; content: string[] }> = {
     content: [
       'XP (Experience Points) are awarded for: completing lessons (10 XP), answering practice questions (5 XP each), asking LEO questions (5 XP), and maintaining your streak (bonus daily).',
       'Streaks count consecutive days where you complete at least one learning activity. Miss a day and your streak resets to 0.',
-      'Level up every 200 XP. Higher levels unlock cosmetic badges and appearance in the leaderboard.',
+      'Level up every 200 XP. Levels are a lightweight record of consistency; use Analytics for decisions about what to study next.',
     ],
   },
   achievements: {
     title: 'Achievements',
     content: [
       'Achievements are badges you unlock by reaching milestones: first lesson, 7-day streak, 1000 XP, completing a full unit, etc.',
-      'Visit the Achievements page to see your progress. Some achievements are hidden until you unlock them.',
+      'Visit your Profile to see milestone progress. Some milestones stay hidden until you unlock them.',
       'Achievements are cosmetic — they don\'t affect your readiness score, but they\'re a fun way to stay motivated.',
     ],
   },

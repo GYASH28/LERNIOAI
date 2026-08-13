@@ -144,6 +144,7 @@ export function StreakFreezeWidget({ variant = 'full', onUsed }: Props) {
       return (
         <div
           className="freeze-chip h-8 w-16 rounded-lg skeleton-premium"
+          role="status"
           aria-label="Loading streak freeze status"
         />
       )
@@ -154,6 +155,7 @@ export function StreakFreezeWidget({ variant = 'full', onUsed }: Props) {
       return (
         <div
           className="freeze-chip h-8 px-2.5 rounded-lg flex items-center gap-1 text-[11px] text-muted-foreground"
+          role="status"
           aria-label="Streak freeze status unavailable"
         >
           <Snowflake className="h-3.5 w-3.5" />
@@ -301,7 +303,7 @@ export function StreakFreezeWidget({ variant = 'full', onUsed }: Props) {
                     ? 'bg-cyan-500/10 border-cyan-500/30 text-cyan-500 dark:text-cyan-300'
                     : 'bg-muted/40 border-border text-muted-foreground/40',
                 )}
-                aria-label={earned ? 'Freeze earned' : 'Empty freeze slot'}
+                aria-hidden="true"
               >
                 <Snowflake className="h-4 w-4" />
               </motion.span>
@@ -317,7 +319,7 @@ export function StreakFreezeWidget({ variant = 'full', onUsed }: Props) {
         />
 
         {/* Footer: last-used date */}
-        <p className="text-[10px] text-muted-foreground/80 pt-1 border-t border-border/60">
+        <p className="border-t border-border/60 pt-1 text-[10px] text-muted-foreground">
           {lastUsedLabel
             ? `Last used: ${lastUsedLabel}`
             : 'Never used'}

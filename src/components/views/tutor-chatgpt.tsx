@@ -24,7 +24,6 @@ import {
   Menu,
   MessageSquarePlus,
   Paperclip,
-  RefreshCcw,
   Search,
   Send,
   Sparkles,
@@ -186,14 +185,23 @@ export function TutorChatGPTWorkspace({ initialSubjects = [], userName = 'Learne
   const queryUnit = searchParams.get('unit')?.trim() || searchParams.get('unitTitle')?.trim() || ''
   const queryUnitNumber = Number.parseInt(searchParams.get('unitNumber') || '', 10)
   const queryPrompt = searchParams.get('prompt')?.trim() || ''
+  const querySubjectId = initialSubjects.find((subject) => {
+    const candidates = [subject.id, subject.code, subject.name].map((value) => value.toLowerCase())
+    return candidates.includes(querySubject.toLowerCase())
+  })?.id || ''
+  const routeDraft = queryPrompt
+    ? queryPrompt.slice(0, MAX_DRAFT_LENGTH)
+    : queryLesson
+      ? `Help me understand ${queryLesson}. `
+      : ''
 
   const [subjects] = useState(initialSubjects)
   const [sessions, setSessions] = useState<TutorSession[]>([])
   const [sessionId, setSessionId] = useState('')
   const [messages, setMessages] = useState<TutorMessage[]>([])
   const [mode, setMode] = useState<TutorMode>('explain_simple')
-  const [subjectId, setSubjectId] = useState('')
-  const [draft, setDraft] = useState('')
+  const [subjectId, setSubjectId] = useState(querySubjectId)
+  const [draft, setDraft] = useState(routeDraft)
   const [attachments, setAttachments] = useState<TextAttachment[]>([])
   const [phase, setPhase] = useState<Phase>('loading_sessions')
   const [status, setStatus] = useState<AiStatus>('checking')
@@ -202,14 +210,14 @@ export function TutorChatGPTWorkspace({ initialSubjects = [], userName = 'Learne
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [sessionSearch, setSessionSearch] = useState('')
   const [contextOpen, setContextOpen] = useState(false)
+  const [lastPrompt, setLastPrompt] = useState('')
 
   const abortRef = useRef<AbortController | null>(null)
   const sendingRef = useRef(false)
   const composerRef = useRef<HTMLTextAreaElement | null>(null)
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const bottomRef = useRef<HTMLDivElement | null>(null)
-  const lastPromptRef = useRef('')
-  const didApplyQueryRef = useRef(false)
+  const draftRestoredRef = useRef(Boolean(routeDraft))
   const { playing, loading: voiceLoading, error: voiceError, play, stop: stopVoice } = useTtsPlayer()
 
   const busy = phase === 'creating_session' || phase === 'connecting' || phase === 'streaming'
@@ -236,15 +244,22 @@ export function TutorChatGPTWorkspace({ initialSubjects = [], userName = 'Learne
   const firstName = userName.trim().split(/\s+/)[0] || 'Learner'
 
   useEffect(() => {
-    try {
-      const stored = window.localStorage.getItem(DRAFT_STORAGE_KEY)
-      if (stored) setDraft(stored.slice(0, MAX_DRAFT_LENGTH))
-    } catch {
-      // Draft persistence is optional.
-    }
-  }, [])
+    if (routeDraft) return
+    const restoreDraft = window.setTimeout(() => {
+      let stored = ''
+      try {
+        stored = window.localStorage.getItem(DRAFT_STORAGE_KEY) || ''
+      } catch {
+        // Draft persistence is optional.
+      }
+      draftRestoredRef.current = true
+      if (stored) setDraft((current) => current || stored.slice(0, MAX_DRAFT_LENGTH))
+    }, 0)
+    return () => window.clearTimeout(restoreDraft)
+  }, [routeDraft])
 
   useEffect(() => {
+    if (!draftRestoredRef.current) return
     try {
       if (draft) window.localStorage.setItem(DRAFT_STORAGE_KEY, draft)
       else window.localStorage.removeItem(DRAFT_STORAGE_KEY)
@@ -252,18 +267,6 @@ export function TutorChatGPTWorkspace({ initialSubjects = [], userName = 'Learne
       // Keep the in-memory draft when storage is unavailable.
     }
   }, [draft])
-
-  useEffect(() => {
-    if (didApplyQueryRef.current) return
-    const matchedSubject = subjects.find((subject) => {
-      const candidates = [subject.id, subject.code, subject.name].map((value) => value.toLowerCase())
-      return candidates.includes(querySubject.toLowerCase())
-    })
-    if (matchedSubject) setSubjectId(matchedSubject.id)
-    if (queryPrompt) setDraft(queryPrompt.slice(0, MAX_DRAFT_LENGTH))
-    else if (queryLesson) setDraft(`Help me understand ${queryLesson}. `)
-    didApplyQueryRef.current = true
-  }, [queryLesson, queryPrompt, querySubject, subjects])
 
   useEffect(() => {
     let cancelled = false
@@ -447,7 +450,7 @@ export function TutorChatGPTWorkspace({ initialSubjects = [], userName = 'Learne
         mode: activeMode,
       }
       streamMessageId = createId('assistant-stream')
-      lastPromptRef.current = clean
+      setLastPrompt(clean)
       setDraft('')
       setAttachments([])
       setMessages((current) => [
@@ -664,7 +667,7 @@ export function TutorChatGPTWorkspace({ initialSubjects = [], userName = 'Learne
 
           <div className="hidden min-w-48 sm:block">
             <Select value={subjectId || 'all'} onValueChange={changeSubject} disabled={busy}>
-              <SelectTrigger className="h-9 rounded-xl bg-background text-xs">
+              <SelectTrigger className="h-9 rounded-xl bg-background text-xs" aria-label="Choose tutor subject">
                 <SelectValue placeholder="Choose subject" />
               </SelectTrigger>
               <SelectContent>
@@ -757,8 +760,8 @@ export function TutorChatGPTWorkspace({ initialSubjects = [], userName = 'Learne
               <div className="mb-2 flex items-start gap-2 rounded-xl border border-amber-500/30 bg-amber-500/8 px-3 py-2 text-xs leading-5" role="alert">
                 <AlertCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-amber-600" />
                 <span className="min-w-0 flex-1">{error}</span>
-                {lastPromptRef.current && !busy ? (
-                  <button type="button" className="font-bold text-primary" onClick={() => void send(lastPromptRef.current)}>Retry</button>
+                {lastPrompt && !busy ? (
+                  <button type="button" className="font-bold text-primary" onClick={() => void send(lastPrompt)}>Retry</button>
                 ) : null}
                 <button type="button" onClick={() => setError('')} aria-label="Dismiss message"><X className="h-3.5 w-3.5" /></button>
               </div>
@@ -811,7 +814,7 @@ export function TutorChatGPTWorkspace({ initialSubjects = [], userName = 'Learne
 
                   <div className="w-40 sm:w-48">
                     <Select value={mode} onValueChange={(value) => setMode(value as TutorMode)} disabled={busy}>
-                      <SelectTrigger className="h-8 border-0 bg-transparent px-2 text-xs shadow-none focus:ring-0">
+                      <SelectTrigger className="h-8 border-0 bg-transparent px-2 text-xs shadow-none focus:ring-0" aria-label="Choose tutor response mode">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>

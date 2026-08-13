@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import {
   BookmarkPlus,
@@ -108,8 +109,11 @@ export function YouTubePlayer({
   isPlaylist,
 }: YouTubePlayerProps) {
   const iframeRef = useRef<HTMLIFrameElement>(null)
+  const memoryRef = useRef<VideoMemory>(DEFAULT_MEMORY)
+  const currentTimeRef = useRef(0)
+  const durationRef = useRef(0)
   const [playing, setPlaying] = useState(false)
-  const [thumbnail, setThumbnail] = useState<string | null>(null)
+  const [playlistThumbnail, setPlaylistThumbnail] = useState<string | null>(null)
   const [thumbLoaded, setThumbLoaded] = useState(false)
   const [thumbError, setThumbError] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
@@ -125,16 +129,22 @@ export function YouTubePlayer({
   const playlistId = extractPlaylistId(url)
   const resourceId = videoId || playlistId || url
   const memoryKey = useMemo(() => `lernio.video-memory.v1:${resourceId}`, [resourceId])
+  const thumbnail = videoId ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg` : playlistThumbnail
 
   useEffect(() => {
-    const stored = readMemory(memoryKey)
-    setMemory(stored)
-    setStartAt(stored.resumeSeconds)
-    setLowData(readLowDataPreference())
-    setMemoryLoaded(true)
+    const restoreMemory = window.setTimeout(() => {
+      const stored = readMemory(memoryKey)
+      memoryRef.current = stored
+      setMemory(stored)
+      setStartAt(stored.resumeSeconds)
+      setLowData(readLowDataPreference())
+      setMemoryLoaded(true)
+    }, 0)
+    return () => window.clearTimeout(restoreMemory)
   }, [memoryKey])
 
   const persistMemory = useCallback((next: VideoMemory) => {
+    memoryRef.current = next
     setMemory(next)
     try {
       window.localStorage.setItem(memoryKey, JSON.stringify(next))
@@ -144,39 +154,39 @@ export function YouTubePlayer({
   }, [memoryKey])
 
   useEffect(() => {
-    if (videoId) {
-      setThumbnail(`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`)
-      return
-    }
+    if (videoId) return
 
     if (playlistId) {
       const cacheKey = `yt_thumb_${playlistId}`
-      try {
-        const cached = localStorage.getItem(cacheKey)
-        if (cached) {
-          setThumbnail(cached)
-          return
-        }
-      } catch {
-        // Continue to the proxied thumbnail request.
-      }
-
-      fetch(`/api/youtube-thumbnail?url=${encodeURIComponent(url)}`)
-        .then((response) => response.json())
-        .then((data: { thumbnail?: string }) => {
-          if (!data.thumbnail) return
-          setThumbnail(data.thumbnail)
-          try {
-            localStorage.setItem(cacheKey, data.thumbnail)
-          } catch {
-            // Ignore unavailable thumbnail cache.
+      const restoreThumbnail = window.setTimeout(() => {
+        try {
+          const cached = localStorage.getItem(cacheKey)
+          if (cached) {
+            setPlaylistThumbnail(cached)
+            return
           }
-        })
-        .catch(() => setThumbError(true))
-      return
+        } catch {
+          // Continue to the proxied thumbnail request.
+        }
+
+        fetch(`/api/youtube-thumbnail?url=${encodeURIComponent(url)}`)
+          .then((response) => response.json())
+          .then((data: { thumbnail?: string }) => {
+            if (!data.thumbnail) return
+            setPlaylistThumbnail(data.thumbnail)
+            try {
+              localStorage.setItem(cacheKey, data.thumbnail)
+            } catch {
+              // Ignore unavailable thumbnail cache.
+            }
+          })
+          .catch(() => setThumbError(true))
+      }, 0)
+      return () => window.clearTimeout(restoreThumbnail)
     }
 
-    setThumbError(true)
+    const markMissingThumbnail = window.setTimeout(() => setThumbError(true), 0)
+    return () => window.clearTimeout(markMissingThumbnail)
   }, [playlistId, url, videoId])
 
   const buildEmbedUrl = useCallback(() => {
@@ -219,28 +229,31 @@ export function YouTubePlayer({
       if (!payload || typeof payload !== 'object') return
       const data = payload as { event?: string; info?: { currentTime?: number; duration?: number } }
       if (data.event !== 'infoDelivery' || !data.info) return
-      if (typeof data.info.currentTime === 'number') setCurrentTime(data.info.currentTime)
-      if (typeof data.info.duration === 'number') setDuration(data.info.duration)
+      if (typeof data.info.currentTime === 'number') {
+        currentTimeRef.current = data.info.currentTime
+        setCurrentTime(data.info.currentTime)
+      }
+      if (typeof data.info.duration === 'number') {
+        durationRef.current = data.info.duration
+        setDuration(data.info.duration)
+      }
     }
 
     window.addEventListener('message', receive)
     const polling = window.setInterval(() => {
       sendCommand('getCurrentTime')
       sendCommand('getDuration')
+      if (!memoryLoaded || currentTimeRef.current < 5) return
+      const closeToEnd = durationRef.current > 0 && durationRef.current - currentTimeRef.current < 12
+      const resumeSeconds = closeToEnd ? 0 : Math.floor(currentTimeRef.current)
+      if (Math.abs(resumeSeconds - memoryRef.current.resumeSeconds) < 5) return
+      persistMemory({ ...memoryRef.current, resumeSeconds })
     }, 1500)
     return () => {
       window.removeEventListener('message', receive)
       window.clearInterval(polling)
     }
-  }, [playing, sendCommand])
-
-  useEffect(() => {
-    if (!playing || !memoryLoaded || currentTime < 5) return
-    const closeToEnd = duration > 0 && duration - currentTime < 12
-    const resumeSeconds = closeToEnd ? 0 : Math.floor(currentTime)
-    if (Math.abs(resumeSeconds - memory.resumeSeconds) < 5) return
-    persistMemory({ ...memory, resumeSeconds })
-  }, [currentTime, duration, memory, memoryLoaded, persistMemory, playing])
+  }, [memoryLoaded, persistMemory, playing, sendCommand])
 
   const handlePlayerLoad = () => {
     iframeRef.current?.contentWindow?.postMessage(JSON.stringify({ event: 'listening', id: 'lernio-player' }), '*')
@@ -276,6 +289,7 @@ export function YouTubePlayer({
   const jumpTo = (seconds: number) => {
     setPlaying(true)
     setStartAt(seconds)
+    currentTimeRef.current = seconds
     setCurrentTime(seconds)
     setPlayerKey((value) => value + 1)
   }
@@ -306,10 +320,13 @@ export function YouTubePlayer({
             aria-label={`${resumeAvailable ? `Resume at ${formatTime(memory.resumeSeconds)}` : 'Play'}: ${title}`}
           >
             {thumbnail && !thumbError ? (
-              <img
+              <Image
                 src={thumbnail}
                 alt={title}
-                className="absolute inset-0 h-full w-full object-cover"
+                fill
+                sizes="(max-width: 768px) 100vw, 900px"
+                unoptimized
+                className="object-cover"
                 onLoad={() => setThumbLoaded(true)}
                 onError={() => {
                   setThumbError(true)

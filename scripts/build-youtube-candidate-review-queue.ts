@@ -1,19 +1,14 @@
-import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join, relative } from 'node:path'
-import { buildYouTubeCandidateReviewQueue } from '../src/lib/resources/youtube-candidate-review'
+import {
+  buildOfficialLessonVideoReviewQueue,
+  type OfficialLessonVideoReconciliation,
+} from '../src/lib/resources/official-lesson-video-review'
 
 const root = process.cwd()
-const defaultInput = join(root, 'content', 'resources', 'youtube-candidates', 'cwit-r23-youtube-candidates.metadata.json')
+const defaultInput = join(root, 'content', 'resources', 'lesson-video-mappings', 'cwit-r23-pending-video-reconciliation.json')
 const defaultOutput = join(root, 'content', 'resources', 'youtube-candidates', 'cwit-r23-youtube-candidate-review-queue.json')
-const defaultCurriculumRoot = join(root, 'content', 'curriculum', 'cwit-r23')
-const defaultOfficialCourseCatalog = join(
-  root,
-  'content',
-  'curriculum',
-  'cwit-r23',
-  'extraction-reports',
-  'official-course-catalog.json',
-)
+const defaultOfficialCourseContent = join(root, 'content', 'curriculum', 'cwit-r23', 'official-course-content.json')
 
 try {
   main()
@@ -25,46 +20,21 @@ try {
 function main() {
   const inputPath = argValue('--input') ?? defaultInput
   const outputPath = argValue('--output') ?? defaultOutput
-  const curriculumRoot = argValue('--curriculum-root') ?? defaultCurriculumRoot
-  const officialCourseCatalogPath = argValue('--official-course-catalog') ?? defaultOfficialCourseCatalog
-
-  const manifestFiles = findManifestFiles(curriculumRoot)
-  const candidateManifest = JSON.parse(readFileSync(inputPath, 'utf8')) as unknown
-  const curriculumManifests = manifestFiles.map((file) => JSON.parse(readFileSync(file, 'utf8')) as unknown)
-  const curriculumManifestPaths = manifestFiles.map((file) => relative(root, file).replaceAll('\\', '/'))
-  const officialCourseCatalog = existsSync(officialCourseCatalogPath)
-    ? JSON.parse(readFileSync(officialCourseCatalogPath, 'utf8')) as unknown
-    : undefined
-
-  const queue = buildYouTubeCandidateReviewQueue({
-    candidateManifest,
-    curriculumManifests,
-    officialCourseCatalog,
-    candidateManifestPath: relative(root, inputPath).replaceAll('\\', '/'),
-    curriculumManifestPaths,
+  const officialCourseContentPath = argValue('--official-course-content') ?? defaultOfficialCourseContent
+  const reconciliation = JSON.parse(readFileSync(inputPath, 'utf8')) as OfficialLessonVideoReconciliation
+  const officialCourseContent = JSON.parse(readFileSync(officialCourseContentPath, 'utf8')) as { subjects?: unknown[] }
+  const queue = buildOfficialLessonVideoReviewQueue({
+    reconciliation,
+    officialSubjects: (officialCourseContent.subjects ?? []) as never[],
   })
 
   mkdirSync(dirname(outputPath), { recursive: true })
   writeFileSync(outputPath, `${JSON.stringify(queue, null, 2)}\n`)
   console.warn(
     `[youtube-review-queue] wrote ${queue.items.length} candidate(s), ` +
-      `${queue.totals.subjectMappings} subject mapping(s), ` +
-      `${queue.totals.blockedUnplacedOfficialSubject} unplaced official subject mapping(s), ` +
-      `${queue.totals.blockedMissingLessonStructure} blocked for lesson structure to ${relative(root, outputPath)}`,
+      `${queue.learningCoverage?.lessonCandidatesReadyForReview ?? queue.totals.subjectMappings} lesson-specific review candidate(s), ` +
+      `${queue.learningCoverage?.lessonsWithoutCandidate ?? 0} official lesson(s) without a candidate to ${relative(root, outputPath)}`,
   )
-}
-
-function findManifestFiles(dir: string): string[] {
-  const out: string[] = []
-  for (const entry of readdirSync(dir)) {
-    const fullPath = join(dir, entry)
-    if (statSync(fullPath).isDirectory()) {
-      out.push(...findManifestFiles(fullPath))
-    } else if (/semester-\d+\.json$/.test(entry)) {
-      out.push(fullPath)
-    }
-  }
-  return out.sort()
 }
 
 function argValue(name: string): string | null {

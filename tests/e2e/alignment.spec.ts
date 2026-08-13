@@ -38,8 +38,31 @@ async function openStable(page: Page, route: string) {
   await expect(page.locator('body')).toBeVisible()
 }
 
+async function evaluateInStableDocument<T>(
+  page: Page,
+  operation: () => Promise<T>,
+): Promise<T> {
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    try {
+      return await operation()
+    } catch (error) {
+      if (
+        !(error instanceof Error) ||
+        !/Execution context was destroyed/.test(error.message) ||
+        attempt === 1
+      ) {
+        throw error
+      }
+      await page.waitForLoadState('domcontentloaded')
+      await expect(page.locator('body')).toBeVisible()
+    }
+  }
+
+  throw new Error('The page did not reach a stable document.')
+}
+
 async function expectNoHorizontalOverflow(page: Page) {
-  const report = await page.evaluate(() => {
+  const report = await evaluateInStableDocument(page, () => page.evaluate(() => {
     const tolerance = 2
     const root = document.documentElement
     const viewportWidth = root.clientWidth
@@ -85,7 +108,7 @@ async function expectNoHorizontalOverflow(page: Page) {
       clientWidth: root.clientWidth,
       offenders,
     }
-  })
+  }))
 
   expect(report, JSON.stringify(report, null, 2)).toMatchObject({
     scrollWidth: expect.any(Number),
@@ -98,7 +121,7 @@ async function expectNoHorizontalOverflow(page: Page) {
 }
 
 async function expectNoClippedInteractiveControls(page: Page) {
-  const clipped = await page.evaluate(() => {
+  const clipped = await evaluateInStableDocument(page, () => page.evaluate(() => {
     const viewportWidth = document.documentElement.clientWidth
     const selector =
       'a, button, input, select, textarea, summary, [role="button"], [role="tab"], [tabindex]:not([tabindex="-1"])'
@@ -144,13 +167,13 @@ async function expectNoClippedInteractiveControls(page: Page) {
       })
       .filter(Boolean)
       .slice(0, 8)
-  })
+  }))
 
   expect(clipped, `Clipped controls: ${JSON.stringify(clipped, null, 2)}`).toEqual([])
 }
 
 async function expectHeaderControlsDoNotOverlap(page: Page) {
-  const overlaps = await page.evaluate(() => {
+  const overlaps = await evaluateInStableDocument(page, () => page.evaluate(() => {
     const header = document.querySelector('header')
     if (!header) return []
     const controls = Array.from(header.querySelectorAll('a, button')).filter((element) => {
@@ -178,7 +201,7 @@ async function expectHeaderControlsDoNotOverlap(page: Page) {
       }
     }
     return pairs
-  })
+  }))
 
   expect(overlaps, `Header overlaps: ${JSON.stringify(overlaps, null, 2)}`).toEqual([])
 }

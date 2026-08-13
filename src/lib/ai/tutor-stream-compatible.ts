@@ -16,7 +16,7 @@ import {
   type Citation,
   type TutorMessage as ProviderMessage,
 } from '@/lib/ai/provider'
-import { GroqStreamError, streamGroqChat } from '@/lib/ai/groq-stream'
+import { AiRouterError, streamTutorChat } from '@/lib/ai/stream-router'
 import {
   buildTutorSystemPrompt,
   createTutorSessionTitle,
@@ -26,6 +26,18 @@ import {
 import { encodeTutorStreamEvent, type TutorStreamEvent } from '@/lib/ai/stream-protocol'
 import { DEMO_TUTOR_SESSIONS, isDemoMode } from '@/lib/demo-fixtures'
 import type { TutorMessage, TutorSession } from '@/lib/types'
+import {
+  getSubjectEventContext,
+  learningSourceRoute,
+  recordLearningEvent,
+} from '@/lib/learning-events'
+import {
+  findScopedTopic,
+  findScopedUnit,
+  getStudentLearningScope,
+  isSubjectIdInLearningScope,
+  subjectIdsForLearningScope,
+} from '@/features/learning/server/get-student-learning-scope'
 
 interface ChatBody {
   sessionId: string
@@ -87,6 +99,25 @@ export async function handleTutorStream(req: NextRequest) {
 
     if (!session || (!demo && session.userId !== user.id)) {
       throw new ApiError('NOT_FOUND', 'Tutor session not found.', 404, false)
+    }
+    const learningScope = demo ? null : await getStudentLearningScope(user.id)
+    if (!demo && session.subjectId && !isSubjectIdInLearningScope(learningScope, session.subjectId)) {
+      throw new ApiError('NOT_FOUND', 'Tutor session not found.', 404, false)
+    }
+    if (!demo && session.subjectId && session.unitNumber) {
+      const unit = await findScopedUnit(learningScope!, {
+        subjectId: session.subjectId,
+        unitNumber: session.unitNumber,
+      })
+      if (!unit) throw new ApiError('NOT_FOUND', 'Tutor session not found.', 404, false)
+    }
+    if (!demo && session.topicId) {
+      const topic = await findScopedTopic(learningScope!, {
+        topicId: session.topicId,
+        subjectId: session.subjectId,
+        unitNumber: session.unitNumber,
+      })
+      if (!topic) throw new ApiError('NOT_FOUND', 'Tutor session not found.', 404, false)
     }
 
     let idempotencySupported = !demo
@@ -195,6 +226,7 @@ export async function handleTutorStream(req: NextRequest) {
         subjectName: session.subjectId ? undefined : body.subjectName,
         unitTitle: session.unitNumber ? undefined : body.unitTitle,
         topicTitle: session.topicId ? undefined : body.topicTitle,
+        allowedSubjectIds: subjectIdsForLearningScope(learningScope),
       })
     } catch (error) {
       console.error('[tutor/stream] course retrieval unavailable; continuing with general knowledge', error)
@@ -233,6 +265,10 @@ export async function handleTutorStream(req: NextRequest) {
     const modelProfile = tutorModelProfile(mode)
     const requestId = crypto.randomUUID()
     const startedAt = Date.now()
+    const eventContext = session.subjectId
+      ? await getSubjectEventContext(session.subjectId, session.unitNumber)
+      : {}
+    const sourceRoute = learningSourceRoute(req, '/tutor')
 
     const stream = new ReadableStream<Uint8Array>({
       async start(controller) {
@@ -247,7 +283,7 @@ export async function handleTutorStream(req: NextRequest) {
         push({ type: 'meta', requestId, modelProfile, startedAt })
 
         try {
-          for await (const token of streamGroqChat({
+          for await (const token of streamTutorChat({
             systemPrompt,
             messages: [...history, { role: 'user', content: cleanMessage }],
             maxTokens: tutorMaxTokens(mode),
@@ -261,7 +297,7 @@ export async function handleTutorStream(req: NextRequest) {
 
           const finalContent = content.trim()
           if (!finalContent) {
-            throw new GroqStreamError(
+            throw new AiRouterError(
               'EMPTY_AI_RESPONSE',
               502,
               true,
@@ -343,6 +379,22 @@ export async function handleTutorStream(req: NextRequest) {
               sourceId: saved.id,
             }).catch((error) => {
               console.error('[tutor/stream] XP award failed after successful response', error)
+            })
+            await recordLearningEvent({
+              userId: user.id,
+              type: 'tutor_help_requested',
+              idempotencyKey: `tutor_help_requested:${body.sessionId}:${body.clientMessageId}`,
+              sourceRoute,
+              ...eventContext,
+              payload: {
+                sessionId: body.sessionId,
+                clientMessageId: body.clientMessageId,
+                mode,
+                groundingStatus: grounded.groundingStatus,
+                citationCount: grounded.citations.length,
+              },
+            }).catch((error) => {
+              console.error('[tutor/stream] learning event persistence failed', error)
             })
           }
 
@@ -542,7 +594,7 @@ function normaliseStreamError(
   error: unknown,
   requestId: string,
 ): Extract<TutorStreamEvent, { type: 'error' }> {
-  if (error instanceof GroqStreamError) {
+  if (error instanceof AiRouterError) {
     return {
       type: 'error',
       code: error.code,

@@ -2,42 +2,51 @@ import { NextRequest } from 'next/server'
 import { ApiError, okResponse, requireUser, withApi } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { STUDENT_OS_STORAGE } from '@/lib/student-os/catalog'
+import {
+  assertStudentStatePayloadSize,
+  mergeStateValue,
+  parseEnvelope,
+  type StoredStateEnvelope,
+} from '@/lib/student-os/state-sync'
 
 const RESOURCE_TYPE = 'student_os_state'
-const MAX_PAYLOAD_BYTES = 256_000
-const MAX_NOTEBOOK_ENTRIES = 500
 const ALLOWED_KEYS = new Set<string>(Object.values(STUDENT_OS_STORAGE))
-
-interface StoredStateEnvelope {
-  version: 1
-  updatedAt: string
-  value: unknown
-}
-
-interface NotebookLikeEntry {
-  id: string
-  updatedAt?: string
-  createdAt?: string
-  [key: string]: unknown
-}
+let reportedSchemaFallback = false
 
 export async function GET(req: NextRequest) {
   return withApi(async () => {
     const user = await requireUser()
     const key = requireStateKey(req.nextUrl.searchParams.get('key'))
-    const record = await db.bookmark.findUnique({
-      where: {
-        userId_resourceType_resourceId: {
-          userId: user.id,
-          resourceType: RESOURCE_TYPE,
-          resourceId: key,
-        },
-      },
-      select: { label: true },
-    })
 
-    if (!record?.label) return okResponse(null)
-    return okResponse(parseEnvelope(record.label))
+    try {
+      const normalized = await db.studentStateRecord.findUnique({
+        where: { userId_key: { userId: user.id, key } },
+        select: { valueJson: true, deletedAt: true },
+      })
+      if (normalized) {
+        if (normalized.deletedAt || !normalized.valueJson) return okResponse(null)
+        return okResponse(parseEnvelope(normalized.valueJson))
+      }
+
+      const legacyEnvelope = await readLegacyEnvelope(user.id, key)
+      if (!legacyEnvelope) return okResponse(null)
+
+      await db.studentStateRecord.upsert({
+        where: { userId_key: { userId: user.id, key } },
+        update: {},
+        create: {
+          userId: user.id,
+          key,
+          valueJson: JSON.stringify(legacyEnvelope),
+          migratedFromLegacyAt: new Date(),
+        },
+      })
+      return okResponse(legacyEnvelope)
+    } catch (error) {
+      if (!isStudentStateSchemaMismatch(error)) throw error
+      reportSchemaFallback()
+      return okResponse(await readLegacyEnvelope(user.id, key))
+    }
   })
 }
 
@@ -50,48 +59,14 @@ export async function PUT(req: NextRequest) {
       throw new ApiError('BAD_REQUEST', 'A state value is required.', 400, false)
     }
 
-    const envelope = await db.$transaction(async (tx) => {
-      const existing = await tx.bookmark.findUnique({
-        where: {
-          userId_resourceType_resourceId: {
-            userId: user.id,
-            resourceType: RESOURCE_TYPE,
-            resourceId: key,
-          },
-        },
-        select: { label: true },
-      })
-      const remoteValue = existing?.label ? parseEnvelope(existing.label).value : undefined
-      const mergedValue = mergeStateValue(key, remoteValue, body.value)
-      const nextEnvelope: StoredStateEnvelope = {
-        version: 1,
-        updatedAt: new Date().toISOString(),
-        value: mergedValue,
-      }
-      const serialized = JSON.stringify(nextEnvelope)
-      assertPayloadSize(serialized)
-
-      await tx.bookmark.upsert({
-        where: {
-          userId_resourceType_resourceId: {
-            userId: user.id,
-            resourceType: RESOURCE_TYPE,
-            resourceId: key,
-          },
-        },
-        update: { label: serialized },
-        create: {
-          userId: user.id,
-          resourceType: RESOURCE_TYPE,
-          resourceId: key,
-          label: serialized,
-        },
-      })
-
-      return nextEnvelope
-    })
-
-    return okResponse(envelope)
+    try {
+      const envelope = await writeNormalizedState(user.id, key, body.value)
+      return okResponse(envelope)
+    } catch (error) {
+      if (!isStudentStateSchemaMismatch(error)) throw error
+      reportSchemaFallback()
+      return okResponse(await writeLegacyState(user.id, key, body.value))
+    }
   })
 }
 
@@ -99,15 +74,210 @@ export async function DELETE(req: NextRequest) {
   return withApi(async () => {
     const user = await requireUser()
     const key = requireStateKey(req.nextUrl.searchParams.get('key'))
-    await db.bookmark.deleteMany({
+
+    try {
+      await db.$transaction(async (tx) => {
+        await tx.studentStateRecord.upsert({
+          where: { userId_key: { userId: user.id, key } },
+          update: {
+            valueJson: null,
+            version: { increment: 1 },
+            deletedAt: new Date(),
+          },
+          create: {
+            userId: user.id,
+            key,
+            valueJson: null,
+            deletedAt: new Date(),
+          },
+        })
+        await tx.bookmark.deleteMany({
+          where: {
+            userId: user.id,
+            resourceType: RESOURCE_TYPE,
+            resourceId: key,
+          },
+        })
+      })
+    } catch (error) {
+      if (!isStudentStateSchemaMismatch(error)) throw error
+      reportSchemaFallback()
+      await deleteLegacyState(user.id, key)
+    }
+
+    return okResponse({ key, deleted: true })
+  })
+}
+
+async function writeNormalizedState(
+  userId: string,
+  key: string,
+  value: unknown,
+): Promise<StoredStateEnvelope> {
+  return db.$transaction(async (tx) => {
+    const normalized = await tx.studentStateRecord.findUnique({
+      where: { userId_key: { userId, key } },
+      select: { valueJson: true, deletedAt: true },
+    })
+    const existing = normalized
+      ? null
+      : await tx.bookmark.findUnique({
+          where: {
+            userId_resourceType_resourceId: {
+              userId,
+              resourceType: RESOURCE_TYPE,
+              resourceId: key,
+            },
+          },
+          select: { label: true },
+        })
+    const storedEnvelope = normalized?.deletedAt
+      ? null
+      : normalized?.valueJson ?? existing?.label ?? null
+    const nextEnvelope = createMergedEnvelope(key, storedEnvelope, value)
+    const serialized = JSON.stringify(nextEnvelope)
+    assertStudentStatePayloadSize(key, serialized)
+
+    await tx.studentStateRecord.upsert({
+      where: { userId_key: { userId, key } },
+      update: {
+        valueJson: serialized,
+        version: { increment: 1 },
+        deletedAt: null,
+        migratedFromLegacyAt: normalized ? undefined : new Date(),
+      },
+      create: {
+        userId,
+        key,
+        valueJson: serialized,
+        version: 1,
+        migratedFromLegacyAt: existing ? new Date() : null,
+      },
+    })
+
+    // Temporary dual-write keeps older deployed clients compatible while the
+    // normalized migration is observed in production.
+    await tx.bookmark.upsert({
       where: {
-        userId: user.id,
+        userId_resourceType_resourceId: {
+          userId,
+          resourceType: RESOURCE_TYPE,
+          resourceId: key,
+        },
+      },
+      update: { label: serialized },
+      create: {
+        userId,
+        resourceType: RESOURCE_TYPE,
+        resourceId: key,
+        label: serialized,
+      },
+    })
+
+    return nextEnvelope
+  })
+}
+
+async function readLegacyEnvelope(
+  userId: string,
+  key: string,
+): Promise<StoredStateEnvelope | null> {
+  const record = await db.bookmark.findUnique({
+    where: {
+      userId_resourceType_resourceId: {
+        userId,
         resourceType: RESOURCE_TYPE,
         resourceId: key,
       },
-    })
-    return okResponse({ key, deleted: true })
+    },
+    select: { label: true },
   })
+  return record?.label ? parseEnvelope(record.label) : null
+}
+
+async function writeLegacyState(
+  userId: string,
+  key: string,
+  value: unknown,
+): Promise<StoredStateEnvelope> {
+  const existing = await db.bookmark.findUnique({
+    where: {
+      userId_resourceType_resourceId: {
+        userId,
+        resourceType: RESOURCE_TYPE,
+        resourceId: key,
+      },
+    },
+    select: { label: true },
+  })
+  const nextEnvelope = createMergedEnvelope(key, existing?.label ?? null, value)
+  const serialized = JSON.stringify(nextEnvelope)
+  assertStudentStatePayloadSize(key, serialized)
+
+  await db.bookmark.upsert({
+    where: {
+      userId_resourceType_resourceId: {
+        userId,
+        resourceType: RESOURCE_TYPE,
+        resourceId: key,
+      },
+    },
+    update: { label: serialized },
+    create: {
+      userId,
+      resourceType: RESOURCE_TYPE,
+      resourceId: key,
+      label: serialized,
+    },
+  })
+  return nextEnvelope
+}
+
+async function deleteLegacyState(userId: string, key: string) {
+  await db.bookmark.deleteMany({
+    where: { userId, resourceType: RESOURCE_TYPE, resourceId: key },
+  })
+}
+
+function createMergedEnvelope(
+  key: string,
+  storedEnvelope: string | null,
+  localValue: unknown,
+): StoredStateEnvelope {
+  const remoteValue = storedEnvelope
+    ? parseEnvelope(storedEnvelope).value
+    : undefined
+  return {
+    version: 1,
+    updatedAt: new Date().toISOString(),
+    value: mergeStateValue(key, remoteValue, localValue),
+  }
+}
+
+function isStudentStateSchemaMismatch(error: unknown): boolean {
+  if (!error || typeof error !== 'object') return false
+  const candidate = error as {
+    code?: unknown
+    message?: unknown
+    meta?: { table?: unknown; column?: unknown }
+  }
+  if (candidate.code !== 'P2021' && candidate.code !== 'P2022') return false
+  const details = [
+    candidate.message,
+    candidate.meta?.table,
+    candidate.meta?.column,
+  ]
+    .filter((value): value is string => typeof value === 'string')
+    .join(' ')
+  return details.includes('StudentStateRecord')
+}
+
+function reportSchemaFallback() {
+  if (reportedSchemaFallback) return
+  reportedSchemaFallback = true
+  console.warn(
+    '[student-os] StudentStateRecord schema is unavailable; using the legacy account-state fallback until migrations are applied.',
+  )
 }
 
 async function readBody(req: NextRequest): Promise<Record<string, unknown>> {
@@ -128,129 +298,4 @@ function requireStateKey(value: unknown): string {
     throw new ApiError('BAD_REQUEST', 'Unsupported Student OS state key.', 400, false)
   }
   return value
-}
-
-function mergeStateValue(key: string, remote: unknown, incoming: unknown): unknown {
-  if (remote === undefined) return incoming
-
-  if (key === STUDENT_OS_STORAGE.notebook) {
-    return mergeNotebook(remote, incoming)
-  }
-  if (key === STUDENT_OS_STORAGE.missions) {
-    return mergeMissionState(remote, incoming)
-  }
-  if (key === STUDENT_OS_STORAGE.focus) {
-    return mergeMonotonicCounters(remote, incoming, ['completedSessions', 'totalMinutes'])
-  }
-  if (isRecord(remote) && isRecord(incoming)) {
-    return { ...remote, ...incoming }
-  }
-  return incoming
-}
-
-function mergeNotebook(remote: unknown, incoming: unknown) {
-  const remoteEntries = Array.isArray(remote) ? remote.filter(isNotebookEntry) : []
-  const incomingEntries = Array.isArray(incoming) ? incoming.filter(isNotebookEntry) : []
-  const byId = new Map<string, NotebookLikeEntry>()
-
-  for (const entry of [...remoteEntries, ...incomingEntries]) {
-    const existing = byId.get(entry.id)
-    if (!existing || entryTimestamp(entry) >= entryTimestamp(existing)) {
-      byId.set(entry.id, entry)
-    }
-  }
-
-  return [...byId.values()]
-    .sort((a, b) => entryTimestamp(b) - entryTimestamp(a))
-    .slice(0, MAX_NOTEBOOK_ENTRIES)
-}
-
-function mergeMissionState(remote: unknown, incoming: unknown) {
-  if (!isRecord(remote)) return incoming
-  if (!isRecord(incoming)) return remote
-  const remoteDate = typeof remote.date === 'string' ? remote.date : ''
-  const incomingDate = typeof incoming.date === 'string' ? incoming.date : ''
-
-  if (remoteDate !== incomingDate) {
-    return incomingDate >= remoteDate ? incoming : remote
-  }
-
-  const completed = new Set<string>([
-    ...stringArray(remote.completed),
-    ...stringArray(incoming.completed),
-  ])
-  return {
-    ...remote,
-    ...incoming,
-    date: incomingDate || remoteDate,
-    completed: [...completed],
-  }
-}
-
-function mergeMonotonicCounters(remote: unknown, incoming: unknown, fields: string[]) {
-  if (!isRecord(remote)) return incoming
-  if (!isRecord(incoming)) return remote
-  const merged: Record<string, unknown> = { ...remote, ...incoming }
-  for (const field of fields) {
-    const remoteValue = finiteNumber(remote[field])
-    const incomingValue = finiteNumber(incoming[field])
-    merged[field] = Math.max(remoteValue, incomingValue)
-  }
-  return merged
-}
-
-function parseEnvelope(value: string): StoredStateEnvelope {
-  try {
-    const parsed = JSON.parse(value) as Partial<StoredStateEnvelope>
-    if (
-      parsed.version !== 1 ||
-      typeof parsed.updatedAt !== 'string' ||
-      Number.isNaN(Date.parse(parsed.updatedAt)) ||
-      !Object.prototype.hasOwnProperty.call(parsed, 'value')
-    ) {
-      throw new Error('Invalid state envelope')
-    }
-    return parsed as StoredStateEnvelope
-  } catch {
-    throw new ApiError(
-      'STATE_CORRUPTED',
-      'Your synced Lernio state could not be read. Your device copy is still available.',
-      409,
-      false,
-    )
-  }
-}
-
-function assertPayloadSize(serialized: string) {
-  if (Buffer.byteLength(serialized, 'utf8') <= MAX_PAYLOAD_BYTES) return
-  throw new ApiError(
-    'PAYLOAD_TOO_LARGE',
-    'This Lernio state is too large to sync. Export or remove older entries and try again.',
-    413,
-    false,
-  )
-}
-
-function isNotebookEntry(value: unknown): value is NotebookLikeEntry {
-  return isRecord(value) && typeof value.id === 'string' && value.id.length > 0
-}
-
-function entryTimestamp(entry: NotebookLikeEntry) {
-  const value = entry.updatedAt ?? entry.createdAt
-  const timestamp = typeof value === 'string' ? Date.parse(value) : 0
-  return Number.isFinite(timestamp) ? timestamp : 0
-}
-
-function stringArray(value: unknown) {
-  return Array.isArray(value)
-    ? value.filter((item): item is string => typeof item === 'string')
-    : []
-}
-
-function finiteNumber(value: unknown) {
-  return typeof value === 'number' && Number.isFinite(value) ? value : 0
-}
-
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === 'object' && value !== null && !Array.isArray(value)
 }

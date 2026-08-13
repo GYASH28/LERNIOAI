@@ -83,7 +83,7 @@ describe('lesson video resolver', () => {
     expect(new Set([...assignments.values()].map((item) => item.videoId)).size).toBe(assignments.size)
   })
 
-  it('uses remaining direct videos in curriculum order without duplication', () => {
+  it('does not assign unrelated direct videos merely because their order matches', () => {
     const assignments = buildManifestLessonVideoAssignments(
       subject([
         resource('Lecture one', 'https://www.youtube.com/watch?v=ddddddddddd'),
@@ -92,7 +92,6 @@ describe('lesson video resolver', () => {
       [lesson('alpha', 'Alpha'), lesson('beta', 'Beta')],
     )
 
-    expect(assignments.get('alpha')?.videoId).toBe('ddddddddddd')
-    expect(assignments.get('beta')?.videoId).toBe('eeeeeeeeeee')
+    expect(assignments.size).toBe(0)
   })
 })

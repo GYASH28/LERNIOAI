@@ -204,7 +204,7 @@ export function RevisionView() {
         </div>
         <div className="hidden sm:block">
           <div className="text-right">
-            <p className="text-2xl font-bold text-amber-500 tabular-nums leading-none">{Math.round((mastered / Math.max(total, 1)) * 100)}%</p>
+            <p className="text-2xl font-bold text-amber-700 dark:text-amber-300 tabular-nums leading-none">{Math.round((mastered / Math.max(total, 1)) * 100)}%</p>
             <p className="text-meta text-muted-foreground">mastered</p>
           </div>
         </div>

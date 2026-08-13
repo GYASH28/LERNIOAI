@@ -43,6 +43,7 @@ const QueueReviewItemSchema = z.object({
   embeddable: z.boolean().nullable(),
   metadataStatus: z.string().min(1),
   availabilityStatus: z.string().min(1),
+  language: z.enum(['en', 'hi', 'hinglish']).default('en'),
   sourceEvidence: z.object({
     sourceId: z.string().min(1),
     sourcePdf: z.string().nullable(),
@@ -72,7 +73,7 @@ export const PromoteYouTubeCandidateMappingSchema = z.object({
   coveragePercentage: z.number().int().min(1).max(100).nullable().optional(),
   sourceEvidence: z.string().trim().max(2000).nullable().optional(),
   title: z.string().trim().min(1).max(240).nullable().optional(),
-  language: z.string().trim().min(2).max(16).default('en'),
+  language: z.enum(['en', 'hi', 'hinglish']).optional(),
 })
 
 export const PromoteYouTubeCandidateMappingsSchema = z.object({
@@ -351,6 +352,7 @@ async function upsertCandidateResource(
     input.decision.title ??
     input.item.title ??
     `${input.mapping.subjectName ?? input.mapping.subjectCode} YouTube ${input.item.resourceKind}`
+  const language = input.decision.language ?? input.item.language
   const qualityRubricJson = JSON.stringify({
     youtubeCandidateId: input.item.candidateId,
     sourceEvidence: input.item.sourceEvidence,
@@ -374,7 +376,7 @@ async function upsertCandidateResource(
     moderationStatus: 'clear',
     reviewedById: approved ? input.actorUserId : null,
     reviewedAt: approved ? new Date() : null,
-    language: input.decision.language,
+    language,
     qualityRubricJson,
   }
   const updateData: Prisma.ResourceUpdateInput = {
@@ -384,7 +386,7 @@ async function upsertCandidateResource(
     canonicalUrl: input.item.canonicalUrl,
     externalId: input.item.externalId,
     thumbnailUrl: input.item.thumbnailUrl,
-    language: input.decision.language,
+    language,
     qualityRubricJson,
     ...(approved
       ? {

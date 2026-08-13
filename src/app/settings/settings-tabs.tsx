@@ -78,7 +78,14 @@ export function SettingsTabs({ initialUser }: SettingsTabsProps) {
               <p className="mt-1 rounded-md border border-border bg-card px-3 py-2 text-sm">{initialUser.dailyMins} minutes</p>
             </div>
             <p className="text-xs text-muted-foreground">
-              To edit your profile, visit the <Link href="/profile" className="text-primary hover:underline">Profile page</Link>.
+              To edit your profile, visit the{' '}
+              <Link
+                href="/profile"
+                className="font-semibold text-violet-800 underline underline-offset-2 dark:text-violet-300"
+              >
+                Profile page
+              </Link>
+              .
             </p>
           </div>
         )}

@@ -8,7 +8,6 @@ import {
   Clock3,
   Code2,
   FileText,
-  Gamepad2,
   GraduationCap,
   LibraryBig,
   ListChecks,
@@ -244,7 +243,6 @@ export function ManifestLessonStudio({
           <ToolCard icon={LibraryBig} title="Notebook" description="Save formulas, questions, highlights and mistakes." href={notebookHref} label="Open notebook" />
           <ToolCard icon={FileText} title="Detailed Materials" description="Read the complete digital textbook version of this lesson." href={materialsHref} label="Open Materials" />
           <ToolCard icon={Code2} title="Apply" description="Use Coding Lab for implementation-oriented lessons." href={`/coding?subject=${encodeURIComponent(resolvedSubjectCode)}&lesson=${encodeURIComponent(resolved.lesson.title)}`} label="Open Coding Lab" />
-          <ToolCard icon={Gamepad2} title="Challenge" description="Reinforce the topic with a curriculum-connected mini-game." href={`/games?subject=${encodeURIComponent(resolvedSubjectCode)}&lesson=${encodeURIComponent(resolved.lesson.title)}`} label="Open Game Lab" />
           <section className="rounded-3xl border border-border bg-card p-5"><p className="text-xs font-black uppercase tracking-[0.15em] text-primary">Source transparency</p><p className="mt-3 text-xs leading-5 text-muted-foreground">Video candidates originate from the curriculum resource manifest. Playlists are excluded from lesson players, and direct videos are assigned at most once per subject journey.</p>{video && <p className="mt-2 text-xs leading-5 text-muted-foreground">Source: {video.resource.sourcePdf} · page {video.resource.sourcePage}</p>}</section>
         </aside>
       </div>

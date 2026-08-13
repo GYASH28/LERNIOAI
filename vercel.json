@@ -3,5 +3,6 @@
   "framework": "nextjs",
   "buildCommand": "npm run vercel-build",
   "installCommand": "npm ci",
-  "outputDirectory": ".next"
+  "outputDirectory": ".next",
+  "ignoreCommand": "node -e \"const productionUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL || ''; const primaryProjectUrls = new Set(['lernioai.vercel.app', 'lernioai-sigma.vercel.app']); process.exit(!productionUrl || primaryProjectUrls.has(productionUrl) ? 1 : 0)\""
 }

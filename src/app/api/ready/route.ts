@@ -1,20 +1,26 @@
 import { NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import { canAttemptDatabase } from '@/lib/db-health'
-import { isDatabaseUnavailableError } from '@/lib/api-error-policy'
 import { isProductionRuntime } from '@/lib/auth-policy'
 import { getCurrentUser } from '@/lib/auth'
 
 /**
  * Readiness probe.
  *
- * Verifies that the process can actually serve real traffic by checking database.
- * Does not leak internal provider configurations to public, unauthenticated clients.
+ * Verifies both database connectivity and the critical schema used by the
+ * learning-state APIs. Public callers receive a minimal response; an admin or
+ * bearer-token caller receives the detailed provider report.
  */
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
 
 type ProviderState = 'configured' | 'unconfigured'
+type SchemaState = 'ok' | 'out_of_date' | 'unknown'
+
+interface CriticalSchemaRow {
+  student_state_record: string | null
+  learning_event: string | null
+}
 
 function providerState(value: string | undefined): ProviderState {
   return value && value.trim().length > 0 ? 'configured' : 'unconfigured'
@@ -28,75 +34,104 @@ function emailProviderState(): ProviderState {
   )
 }
 
+async function checkCriticalSchema(): Promise<SchemaState> {
+  const rows = await db.$queryRaw<CriticalSchemaRow[]>`
+    SELECT
+      to_regclass('public."StudentStateRecord"')::text AS student_state_record,
+      to_regclass('public."LearningEvent"')::text AS learning_event
+  `
+  const row = rows[0]
+  return row?.student_state_record && row.learning_event ? 'ok' : 'out_of_date'
+}
+
 export async function GET(req: Request) {
   let database: 'ok' | 'unavailable' = 'ok'
+  let schema: SchemaState = 'unknown'
 
   try {
     if (!(await canAttemptDatabase())) {
       database = 'unavailable'
     } else {
-      await db.user.findUnique({ where: { id: '__lernio_ready_probe__' }, select: { id: true } })
+      await db.user.findUnique({
+        where: { id: '__lernio_ready_probe__' },
+        select: { id: true },
+      })
+      schema = await checkCriticalSchema()
     }
-  } catch (err) {
+  } catch {
     database = 'unavailable'
   }
 
   const auth: ProviderState = providerState(process.env.NEXTAUTH_SECRET)
-  const ai: ProviderState = providerState(process.env.GROQ_API_KEY)
+  const groq: ProviderState = providerState(process.env.GROQ_API_KEY)
+  const gemini: ProviderState = providerState(process.env.GEMINI_API_KEY)
+  const ai: ProviderState =
+    groq === 'configured' || gemini === 'configured'
+      ? 'configured'
+      : 'unconfigured'
   const email = emailProviderState()
   const production = isProductionRuntime({
     nodeEnv: process.env.NODE_ENV,
     vercelEnv: process.env.VERCEL_ENV,
   })
   const productionAuthBroken = production && auth === 'unconfigured'
-  const productionDemoBroken = production && process.env.LERNIO_DEMO_MODE === 'true'
+  const productionDemoBroken =
+    production && process.env.LERNIO_DEMO_MODE === 'true'
+  const schemaBroken = schema === 'out_of_date'
 
-  const overall =
-    database === 'unavailable' || productionAuthBroken || productionDemoBroken
-      ? 'unavailable'
-      : 'ready'
+  const unavailable =
+    database === 'unavailable' ||
+    schemaBroken ||
+    productionAuthBroken ||
+    productionDemoBroken
 
-  // Check auth to see if we should show the detailed report
   let showDetailed = false
   const authHeader = req.headers.get('authorization')
-  if (authHeader && process.env.READINESS_TOKEN && authHeader === `Bearer ${process.env.READINESS_TOKEN}`) {
+  if (
+    authHeader &&
+    process.env.READINESS_TOKEN &&
+    authHeader === `Bearer ${process.env.READINESS_TOKEN}`
+  ) {
     showDetailed = true
   } else {
     try {
       const user = await getCurrentUser()
-      if (user?.role === 'admin') {
-        showDetailed = true
-      }
+      showDetailed = user?.role === 'admin'
     } catch {
-      // Ignore auth errors
+      showDetailed = false
     }
   }
 
   if (showDetailed) {
-    const detailedOverall =
-      database === 'unavailable' || productionAuthBroken || productionDemoBroken
-        ? 'unavailable'
-        : auth === 'unconfigured' || ai === 'unconfigured' || email === 'unconfigured'
-          ? 'degraded'
-          : 'ready'
+    const detailedOverall = unavailable
+      ? 'unavailable'
+      : auth === 'unconfigured' ||
+          ai === 'unconfigured' ||
+          email === 'unconfigured'
+        ? 'degraded'
+        : 'ready'
 
-    return NextResponse.json({
-      status: detailedOverall,
-      service: 'lernio-ai',
-      time: new Date().toISOString(),
-      checks: {
-        database,
-        auth,
-        ai,
-        email,
+    return NextResponse.json(
+      {
+        status: detailedOverall,
+        service: 'lernio-ai',
+        time: new Date().toISOString(),
+        checks: {
+          database,
+          schema,
+          auth,
+          ai,
+          groq,
+          gemini,
+          email,
+        },
       },
-    }, {
-      status: detailedOverall === 'unavailable' ? 503 : 200,
-    })
+      { status: detailedOverall === 'unavailable' ? 503 : 200 },
+    )
   }
 
   return NextResponse.json(
-    { ok: overall === 'ready' },
-    { status: overall === 'unavailable' ? 503 : 200 }
+    { ok: !unavailable },
+    { status: unavailable ? 503 : 200 },
   )
 }

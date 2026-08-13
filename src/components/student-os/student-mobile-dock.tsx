@@ -10,7 +10,7 @@ import {
   Code2,
   FileText,
   FlaskConical,
-  Gamepad2,
+  GraduationCap,
   Home,
   LibraryBig,
   MoreHorizontal,
@@ -35,7 +35,7 @@ const primaryItems: Array<{ href?: string; label: string; icon: LucideIcon; acti
 const moreItems = [
   { href: '/materials', label: 'Detailed Notes', description: 'Lesson-wise digital textbooks', icon: FileText },
   { href: '/revision', label: 'Revision', description: 'Due flashcards and active recall', icon: RotateCcw },
-  { href: '/games', label: 'Game Lab', description: 'Curriculum-connected mini-games', icon: Gamepad2 },
+  { href: '/exams', label: 'Exams', description: 'Curriculum-scoped mock assessments', icon: GraduationCap },
   { href: '/notebook', label: 'Notebook', description: 'Notes, mistakes and formulas', icon: LibraryBig },
   { href: '/coding', label: 'Coding Lab', description: 'Predict, run and debug', icon: Code2 },
   { href: '/labs', label: 'Interactive Labs', description: 'Simulations and practical activities', icon: FlaskConical },

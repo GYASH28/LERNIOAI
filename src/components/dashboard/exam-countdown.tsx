@@ -28,7 +28,7 @@ export function ExamCountdown({ examDate }: { examDate: string | null }) {
           <h3 className="text-sm font-semibold">Exam Countdown</h3>
         </div>
         <p className="mt-2 text-xs text-muted-foreground">
-          Set your exam date in <Link href="/settings" className="text-primary hover:underline">Settings</Link> to see a countdown and study plan.
+          Set your exam date in <Link href="/settings" className="font-semibold text-violet-800 underline underline-offset-2 dark:text-violet-300">Settings</Link> to see a countdown and study plan.
         </p>
       </div>
     )

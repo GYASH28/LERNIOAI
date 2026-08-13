@@ -10,6 +10,12 @@ import {
   isSubjectIdInLearningScope,
   scopedQuestionWhere,
 } from '@/features/learning/server/get-student-learning-scope'
+import {
+  getLessonEventContext,
+  getSubjectEventContext,
+  learningSourceRoute,
+  recordLearningEvents,
+} from '@/lib/learning-events'
 
 /**
  * POST /api/exams/attempt/[id]/submit
@@ -35,6 +41,10 @@ interface StoredQuestionSet {
   durationMins: number
   paperId: string | null
   paperTitle: string | null
+  lessonScope?: {
+    lessonId?: string | null
+    unitNumber?: number | null
+  } | null
 }
 
 interface ScoredReviewItem {
@@ -161,6 +171,14 @@ export async function POST(
     const negativeMarks = lostMarks
     const totalQuestions = orderedQuestions.length
     const durationMs = body.durationMs ?? 0
+    const priorAttemptCounts = await db.questionAttempt.groupBy({
+      by: ['questionId'],
+      where: { userId: user.id, questionId: { in: questionIds } },
+      _count: { _all: true },
+    })
+    const attemptNumberByQuestion = new Map(
+      priorAttemptCounts.map((item) => [item.questionId, item._count._all + 1]),
+    )
 
     // Atomic: flip status -> 'locked' + persist scored review payload +
     // score/correctCount/etc. We go straight to 'locked' (skipping the
@@ -182,7 +200,89 @@ export async function POST(
           answersJson: JSON.stringify(reviewItems),
         },
       })
+      await tx.questionAttempt.createMany({
+        data: reviewItems.map((item) => ({
+          userId: user.id,
+          questionId: item.questionId,
+          lessonId: attempt.lessonId,
+          userAnswer: item.answer,
+          isCorrect: item.isCorrect,
+          timeTakenMs: 0,
+          hintUsed: false,
+          confidence: 0,
+          attemptNumber: attemptNumberByQuestion.get(item.questionId) ?? 1,
+          context: attempt.mode,
+        })),
+      })
     })
+
+    const sourceRoute = learningSourceRoute(req, attempt.mode === 'mock_exam' ? '/exams' : '/practice')
+    const eventContext = attempt.lessonId
+      ? await getLessonEventContext(attempt.lessonId)
+      : attempt.subjectId
+        ? await getSubjectEventContext(attempt.subjectId, qblob.lessonScope?.unitNumber)
+        : {}
+    await recordLearningEvents([
+      ...reviewItems
+        .filter((item) => item.answer !== null)
+        .flatMap((item) => {
+          const question = questionMap.get(item.questionId)
+          const questionContext = {
+            ...eventContext,
+            subjectId: question?.subjectId ?? eventContext.subjectId,
+            unitNumber: question?.unitNumber ?? eventContext.unitNumber,
+            lessonId: attempt.lessonId,
+          }
+          const answered = {
+            userId: user.id,
+            type: 'quiz_answered' as const,
+            idempotencyKey: `quiz_answered:${attempt.id}:${item.questionId}`,
+            sourceRoute,
+            ...questionContext,
+            payload: {
+              attemptId: attempt.id,
+              questionId: item.questionId,
+              selectedAnswer: item.answer,
+              correct: item.isCorrect,
+            },
+          }
+          if (item.isCorrect) return [answered]
+          return [
+            answered,
+            {
+              userId: user.id,
+              type: 'question_incorrect' as const,
+              idempotencyKey: `question_incorrect:${attempt.id}:${item.questionId}`,
+              sourceRoute,
+              ...questionContext,
+              payload: {
+                attemptId: attempt.id,
+                questionId: item.questionId,
+                selectedAnswer: item.answer,
+                correctAnswer: item.correctAnswer,
+                explanation: item.explanation,
+                topicId: question?.topicId ?? null,
+              },
+            },
+          ]
+        }),
+      {
+        userId: user.id,
+        type: 'quiz_completed',
+        idempotencyKey: `quiz_completed:${attempt.id}`,
+        sourceRoute,
+        ...eventContext,
+        payload: {
+          attemptId: attempt.id,
+          mode: attempt.mode,
+          score: finalScore,
+          maxScore,
+          correctCount,
+          totalQuestions,
+          durationMs,
+        },
+      },
+    ])
 
     // ----------------------------------------------------------------
     // 4. Idempotent XP award + achievement evaluation (outside the

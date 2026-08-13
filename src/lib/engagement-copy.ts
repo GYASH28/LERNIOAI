@@ -62,13 +62,6 @@ const ROUTE_LINES: Array<{ match: (pathname: string) => boolean; lines: Engageme
     ],
   },
   {
-    match: (pathname) => pathname.startsWith('/games'),
-    lines: [
-      { title: 'Entering Game Lab', message: 'The game still answers to the curriculum, even when it looks fun.', joke: 'Educational game detected. Fun permission granted.' },
-      { title: 'Loading a challenge', message: 'Scores matter less than the explanation after each move.', joke: 'Boss battle: you versus the concept you skipped last week.' },
-    ],
-  },
-  {
     match: (pathname) => pathname.startsWith('/notebook'),
     lines: [
       { title: 'Opening your learning memory', message: 'Notes, formulas, questions and mistakes are being kept in one place.', joke: 'The notebook remembers what “I’ll remember this” usually forgets.' },

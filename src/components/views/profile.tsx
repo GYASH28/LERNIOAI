@@ -229,17 +229,17 @@ export function ProfileView() {
             <CardHeader><CardTitle className="text-sm">Academic Profile</CardTitle></CardHeader>
             <CardContent className="space-y-3">
               <div>
-                <Label className="text-xs">Full Name</Label>
-                <Input value={name} onChange={(e) => setName(e.target.value)} className="mt-1" />
+                <Label htmlFor="profile-full-name" className="text-xs">Full Name</Label>
+                <Input id="profile-full-name" value={name} onChange={(e) => setName(e.target.value)} className="mt-1" />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <Label className="text-xs">Institution</Label>
-                  <Input value="Cusrow Wadia Institute of Technology (CWIT)" disabled className="mt-1 bg-muted/50" />
+                  <Label htmlFor="profile-institution" className="text-xs">Institution</Label>
+                  <Input id="profile-institution" value="Cusrow Wadia Institute of Technology (CWIT)" disabled className="mt-1 bg-muted/50" />
                 </div>
                 <div>
-                  <Label className="text-xs">Semester</Label>
-                  <Input value="Semester 3" disabled className="mt-1 bg-muted/50" />
+                  <Label htmlFor="profile-semester" className="text-xs">Semester</Label>
+                  <Input id="profile-semester" value="Semester 3" disabled className="mt-1 bg-muted/50" />
                 </div>
               </div>
               <div>
@@ -252,12 +252,12 @@ export function ProfileView() {
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <Label className="text-xs">Exam Date</Label>
-                  <Input type="date" value={examDate} onChange={(e) => setExamDate(e.target.value)} className="mt-1" />
+                  <Label htmlFor="profile-exam-date" className="text-xs">Exam Date</Label>
+                  <Input id="profile-exam-date" type="date" value={examDate} onChange={(e) => setExamDate(e.target.value)} className="mt-1" />
                 </div>
                 <div>
-                  <Label className="text-xs">Daily Study Time: {dailyMins} min</Label>
-                  <Slider value={[dailyMins]} onValueChange={([v]) => setDailyMins(v)} min={30} max={480} step={30} className="mt-3" />
+                  <Label id="profile-daily-study-label" className="text-xs">Daily Study Time: {dailyMins} min</Label>
+                  <Slider aria-labelledby="profile-daily-study-label" value={[dailyMins]} onValueChange={([v]) => setDailyMins(v)} min={30} max={480} step={30} className="mt-3" />
                 </div>
               </div>
               <Button onClick={save} disabled={saving} className="w-full">{saving ? 'Saving...' : 'Save Profile'}</Button>

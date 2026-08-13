@@ -10,6 +10,11 @@ import {
   hasResolvedLearningScope,
   scopedLessonWhere,
 } from '@/features/learning/server/get-student-learning-scope'
+import {
+  getLessonEventContext,
+  learningSourceRoute,
+  recordLearningEvent,
+} from '@/lib/learning-events'
 
 const VIDEO_RESOURCE_ROLES = ['primary_video', 'alternate_video', 'lab_demo'] as const
 
@@ -111,6 +116,52 @@ export async function POST(req: NextRequest) {
       },
     })
 
-    return okResponse(record)
+    const sourceRoute = learningSourceRoute(req, '/learn')
+    const eventContext = await getLessonEventContext(body.lessonId)
+    const eventPayload = {
+      resourceId: body.resourceId,
+      playerState: body.playerState ?? 'unknown',
+      lastSecond: record.lastSecond,
+      watchedSeconds: record.watchedSeconds,
+      watchPercent: record.watchPercent,
+      creditedDeltaSeconds: credit.creditedDeltaSeconds,
+      creditRejectedReason: credit.creditRejectedReason,
+    }
+
+    if (!existing) {
+      await recordLearningEvent({
+        userId: user.id,
+        type: 'video_started',
+        idempotencyKey: `video_started:${body.lessonId}:${body.resourceId}`,
+        sourceRoute,
+        ...eventContext,
+        payload: eventPayload,
+      })
+    }
+    if (credit.creditedDeltaSeconds > 0) {
+      const progressBucket = Math.floor(record.watchedSeconds / 10) * 10
+      await recordLearningEvent({
+        userId: user.id,
+        type: 'video_progressed',
+        idempotencyKey: body.clientEventId
+          ? `video_progressed:${body.clientEventId}`
+          : `video_progressed:${body.lessonId}:${body.resourceId}:${progressBucket}`,
+        sourceRoute,
+        ...eventContext,
+        payload: eventPayload,
+      })
+    }
+    if (record.completedAt && !existing?.completedAt) {
+      await recordLearningEvent({
+        userId: user.id,
+        type: 'video_completed',
+        idempotencyKey: `video_completed:${body.lessonId}:${body.resourceId}`,
+        sourceRoute,
+        ...eventContext,
+        payload: eventPayload,
+      })
+    }
+
+    return okResponse({ ...record, creditedDeltaSeconds: credit.creditedDeltaSeconds })
   })
 }

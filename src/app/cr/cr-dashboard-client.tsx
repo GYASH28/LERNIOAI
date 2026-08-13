@@ -154,10 +154,6 @@ export function CrDashboardClient({ userRole, userId, classInfo, userClass }: Cr
                 <BarChart3 className="h-5 w-5 text-primary" />
                 <span className="text-xs font-medium sm:text-sm">Analytics</span>
               </Link>
-              <Link href="/leaderboard" className="flex flex-col items-center gap-1.5 rounded-lg border border-border bg-card p-3 text-center transition-colors hover:border-primary/40 hover:bg-accent/5 sm:p-4">
-                <Crown className="h-5 w-5 text-amber-500" />
-                <span className="text-xs font-medium sm:text-sm">Leaderboard</span>
-              </Link>
               <Link href="/profile" className="flex flex-col items-center gap-1.5 rounded-lg border border-border bg-card p-3 text-center transition-colors hover:border-primary/40 hover:bg-accent/5 sm:p-4">
                 <Users className="h-5 w-5 text-primary" />
                 <span className="text-xs font-medium sm:text-sm">Profile</span>

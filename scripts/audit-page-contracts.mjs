@@ -45,7 +45,7 @@ function routeRegex(route) {
 }
 
 const files = walk(appRoot)
-const pages = files.filter((file) => /\/page\.(tsx|ts|jsx|js)$/.test(file))
+const pages = files.filter((file) => /(^|\/)page\.(tsx|ts|jsx|js)$/.test(repoPath(file)))
 const routes = pages.map((file) => ({ file, path: routeFromPage(file) }))
 const routeMatchers = routes.map((route) => ({ ...route, regex: routeRegex(route.path) }))
 

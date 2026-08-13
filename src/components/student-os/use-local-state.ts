@@ -50,35 +50,36 @@ export function useLocalState<T>(key: string, fallback: T) {
   const dirtyRef = useRef(false)
   const remoteReadyRef = useRef(false)
 
-  valueRef.current = value
-
   useEffect(() => {
-    remoteReadyRef.current = false
-    localFoundRef.current = false
-    dirtyRef.current = false
+    const hydrateLocalState = window.setTimeout(() => {
+      remoteReadyRef.current = false
+      localFoundRef.current = false
+      dirtyRef.current = false
 
-    try {
-      const stored = window.localStorage.getItem(key)
-      if (stored !== null) {
-        const parsed = JSON.parse(stored) as T
-        valueRef.current = parsed
-        setValueState(parsed)
-        localFoundRef.current = true
+      try {
+        const stored = window.localStorage.getItem(key)
+        if (stored !== null) {
+          const parsed = JSON.parse(stored) as T
+          valueRef.current = parsed
+          setValueState(parsed)
+          localFoundRef.current = true
 
-        const existingMeta = readMeta(key)
-        if (existingMeta) {
-          dirtyRef.current = existingMeta.dirty
-        } else {
-          const migrationMeta = { updatedAt: new Date().toISOString(), dirty: true }
-          writeMeta(key, migrationMeta)
-          dirtyRef.current = true
+          const existingMeta = readMeta(key)
+          if (existingMeta) {
+            dirtyRef.current = existingMeta.dirty
+          } else {
+            const migrationMeta = { updatedAt: new Date().toISOString(), dirty: true }
+            writeMeta(key, migrationMeta)
+            dirtyRef.current = true
+          }
         }
+      } catch {
+        // Keep the safe fallback if local storage is unavailable or malformed.
+      } finally {
+        setHydrated(true)
       }
-    } catch {
-      // Keep the safe fallback if local storage is unavailable or malformed.
-    } finally {
-      setHydrated(true)
-    }
+    }, 0)
+    return () => window.clearTimeout(hydrateLocalState)
   }, [key])
 
   useEffect(() => {
@@ -91,8 +92,6 @@ export function useLocalState<T>(key: string, fallback: T) {
   }, [hydrated, key, value])
 
   useEffect(() => {
-    if (!hydrated) return
-
     const onLocalStateChange = (event: Event) => {
       const detail = (event as CustomEvent<LocalStateChangeDetail<T>>).detail
       if (!detail || detail.key !== key) return
@@ -123,7 +122,7 @@ export function useLocalState<T>(key: string, fallback: T) {
       window.removeEventListener(LOCAL_STATE_CHANGE_EVENT, onLocalStateChange)
       window.removeEventListener('storage', onStorage)
     }
-  }, [hydrated, key])
+  }, [key])
 
   useEffect(() => {
     if (!hydrated) return
@@ -234,7 +233,13 @@ export function useLocalState<T>(key: string, fallback: T) {
     dirtyRef.current = true
     localFoundRef.current = true
     writeMeta(key, { updatedAt, dirty: true })
-    setValueState(nextValue)
+    setValueState((current) => {
+      const resolved = typeof nextValue === 'function'
+        ? (nextValue as (previous: T) => T)(current)
+        : nextValue
+      valueRef.current = resolved
+      return resolved
+    })
     setSyncRevision((current) => current + 1)
   }, [key])
 

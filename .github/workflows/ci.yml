@@ -33,7 +33,7 @@ jobs:
     env:
       DATABASE_URL: postgresql://lernio:lernio_password@localhost:5432/lernio?schema=public
       DIRECT_URL: postgresql://lernio:lernio_password@localhost:5432/lernio?schema=public
-      NEXTAUTH_URL: http://localhost:3000
+      NEXTAUTH_URL: http://127.0.0.1:3000
       NEXTAUTH_SECRET: ci-secret-replace-in-production
       LERNIO_DEMO_MODE: "false"
     steps:

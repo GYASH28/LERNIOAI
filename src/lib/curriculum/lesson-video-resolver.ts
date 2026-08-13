@@ -16,7 +16,7 @@ export interface LessonVideoSelection {
   embedUrl: string
   thumbnailUrl: string
   score: number
-  mappingReason: 'title_match' | 'concept_match' | 'ordered_subject_fallback'
+  mappingReason: 'title_match' | 'concept_match'
 }
 
 const STOP_WORDS = new Set([
@@ -146,23 +146,6 @@ export function buildManifestLessonVideoAssignments(
       pair.title > 0 ? 'title_match' : 'concept_match',
     ))
     usedVideoIds.add(pair.candidate.videoId)
-  }
-
-  const stillUnassigned = lessons.filter((lesson) => !assignments.has(lesson.slug))
-  const unusedVideos = directVideos.filter((candidate) => !usedVideoIds.has(candidate.videoId))
-  const fallbackCount = Math.min(stillUnassigned.length, unusedVideos.length)
-
-  for (let index = 0; index < fallbackCount; index += 1) {
-    const lesson = stillUnassigned[index]
-    const candidate = unusedVideos[index]
-    assignments.set(lesson.slug, toSelection(
-      lesson,
-      candidate.resource,
-      candidate.videoId,
-      0,
-      'ordered_subject_fallback',
-    ))
-    usedVideoIds.add(candidate.videoId)
   }
 
   return assignments

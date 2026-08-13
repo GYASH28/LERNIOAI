@@ -52,6 +52,7 @@ import {
   Clock,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useAppStore } from '@/store/app-store'
 
 /* ------------------------------------------------------------------ */
 /* Types                                                               */
@@ -274,6 +275,7 @@ const PUBLIC_TOASTER_EXCLUDED_PATHS = new Set([
 export function AchievementUnlockToaster() {
   const pathname = usePathname()
   const reduced = useReducedMotion()
+  const userId = useAppStore((state) => state.user?.id)
   // Keep the latest `reduced` value in a ref so the polling effect never
   // needs to re-subscribe when the preference changes.
   const reducedRef = useRef(reduced)
@@ -298,7 +300,7 @@ export function AchievementUnlockToaster() {
   }, [reduced])
 
   useEffect(() => {
-    if (PUBLIC_TOASTER_EXCLUDED_PATHS.has(pathname)) return
+    if (!userId || PUBLIC_TOASTER_EXCLUDED_PATHS.has(pathname)) return
 
     let cancelled = false
     let interval: ReturnType<typeof setInterval> | null = null
@@ -405,7 +407,7 @@ export function AchievementUnlockToaster() {
       shownTimers.forEach((t) => clearTimeout(t))
       shownTimers.clear()
     }
-  }, [pathname])
+  }, [pathname, userId])
 
   // The component renders nothing visible — it is just a polling listener.
   return null

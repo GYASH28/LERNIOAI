@@ -11,6 +11,11 @@ import {
   scopedLessonWhere,
 } from '@/features/learning/server/get-student-learning-scope'
 import { getLessonCompletionPolicyState } from '@/features/learning/server/lesson-completion-policy'
+import {
+  getLessonEventContext,
+  learningSourceRoute,
+  recordLearningEvent,
+} from '@/lib/learning-events'
 
 /**
  * GET /api/progress/lesson
@@ -123,6 +128,30 @@ export async function POST(req: NextRequest) {
       where: { id: user.id },
       select: { xp: true },
     })
+
+    const sourceRoute = learningSourceRoute(req, '/learn')
+    const eventContext = await getLessonEventContext(body.lessonId)
+    if (!existing && sourceRoute.startsWith('/materials')) {
+      await recordLearningEvent({
+        userId: user.id,
+        type: 'material_opened',
+        idempotencyKey: `material_opened:${body.lessonId}:${mode}`,
+        sourceRoute,
+        ...eventContext,
+        payload: { mode },
+      })
+    }
+    if (nowCompleted && !existing?.completedAt) {
+      const materialMode = sourceRoute.startsWith('/materials') || mode !== 'learn'
+      await recordLearningEvent({
+        userId: user.id,
+        type: materialMode ? 'material_section_completed' : 'lesson_completed',
+        idempotencyKey: `${materialMode ? 'material_section_completed' : 'lesson_completed'}:${body.lessonId}:${mode}`,
+        sourceRoute,
+        ...eventContext,
+        payload: { mode, progress: newProgress, xpGain },
+      })
+    }
 
     return okResponse({ ...record, xpGain, totalXp: finalUser?.xp ?? 0 })
   })

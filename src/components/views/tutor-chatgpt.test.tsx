@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { TutorChatGPTWorkspace } from './tutor-chatgpt'
 import { encodeTutorStreamEvent } from '@/lib/ai/stream-protocol'
@@ -117,6 +117,16 @@ describe('TutorChatGPTWorkspace', () => {
       '/api/tutor/chat/stream',
       expect.objectContaining({ method: 'POST' }),
     )
+  })
+
+  it('restores an unfinished draft without overwriting it during hydration', async () => {
+    window.localStorage.setItem('lernio:leo:draft-v2', 'Explain database normalization')
+
+    render(<TutorChatGPTWorkspace initialSubjects={[]} />)
+
+    await waitFor(() => {
+      expect(screen.getByPlaceholderText('Message LEO')).toHaveValue('Explain database normalization')
+    })
   })
 
   it('keeps the draft and shows a visible error when session creation fails', async () => {
