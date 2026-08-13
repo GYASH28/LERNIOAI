@@ -1,4 +1,4 @@
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join, relative } from 'node:path'
 
 type PendingMapping = {
@@ -15,6 +15,21 @@ type PendingMapping = {
   reviewStatus: string
   sourcePdf: string
   sourcePage: number
+  oembedStatus?: string
+  oembedVerifiedAt?: string
+  embeddabilityStatus?: string
+  languageVerificationStatus?: string
+  selectionRationale?: string
+  curationStatus?: string
+}
+
+type ResearchedGapMapping = PendingMapping & {
+  programmeCode: string
+  semesterNumber: number
+  unitNumber: number
+  lessonTitle: string
+  matchedTerms: string[]
+  reviewerChecklist: string[]
 }
 
 type OfficialUnit = {
@@ -47,6 +62,7 @@ type OfficialLesson = {
 const root = process.cwd()
 const inputPath = join(root, 'content', 'resources', 'lesson-video-mappings', 'cwit-r23-direct-video-mappings.json')
 const officialPath = join(root, 'content', 'curriculum', 'cwit-r23', 'official-course-content.json')
+const researchedGapPath = join(root, 'content', 'resources', 'lesson-video-mappings', 'cwit-r23-researched-gap-video-mappings.json')
 const outputPath = join(root, 'content', 'resources', 'lesson-video-mappings', 'cwit-r23-pending-video-reconciliation.json')
 
 const STOP_WORDS = new Set([
@@ -72,6 +88,9 @@ function main() {
     .filter((mapping) => mapping.reviewStatus === 'pending_review')
     .filter((mapping) => /^[\w-]{11}$/.test(mapping.videoId))
     .filter((mapping) => ['en', 'hi', 'hinglish'].includes(mapping.language.toLowerCase()))
+  const researchedGaps = existsSync(researchedGapPath)
+    ? (JSON.parse(readFileSync(researchedGapPath, 'utf8')) as { mappings?: ResearchedGapMapping[] }).mappings ?? []
+    : []
 
   const assignedBySubject = new Map<string, Set<string>>()
   const usedVideoBySubject = new Map<string, Set<string>>()
@@ -133,6 +152,46 @@ function main() {
     usedVideoBySubject.set(subjectCode, usedVideos)
   }
 
+  for (const mapping of researchedGaps) {
+    const subjectCode = mapping.subjectCode.trim().toUpperCase()
+    const exactLesson = (lessonsBySubject.get(subjectCode) ?? []).find((lesson) =>
+      lesson.programmeCode.toUpperCase() === mapping.programmeCode.trim().toUpperCase() &&
+      lesson.lessonSlug === mapping.lessonSlug,
+    )
+    if (!exactLesson || !/^[\w-]{11}$/.test(mapping.videoId) || !['en', 'hi', 'hinglish'].includes(mapping.language.toLowerCase())) {
+      unmatched.push({
+        ...mapping,
+        reason: exactLesson
+          ? 'Researched gap candidate failed video ID or language validation.'
+          : 'Researched gap candidate no longer matches an exact official lesson.',
+        bestScore: 0,
+      })
+      continue
+    }
+    const exactKey = `${exactLesson.programmeCode}:${subjectCode}:${exactLesson.lessonSlug}`
+    if (reconciled.some((candidate) =>
+      `${candidate.officialProgrammeCode}:${candidate.subjectCode}:${candidate.officialLessonSlug}` === exactKey,
+    )) continue
+
+    reconciled.push({
+      ...mapping,
+      officialProgrammeCode: exactLesson.programmeCode,
+      officialSemesterNumber: exactLesson.semesterNumber,
+      officialUnitNumber: exactLesson.unitNumber,
+      officialLessonSlug: exactLesson.lessonSlug,
+      officialLessonTitle: exactLesson.lessonTitle,
+      matchedTerms: mapping.matchedTerms ?? [],
+      reconciliationScore: Math.max(7, Math.round(mapping.confidence * 100)),
+      reconciliationStatus: 'pending_academic_review',
+      reviewChecklist: mapping.reviewerChecklist ?? [
+        'Watch the selected video and verify that it teaches the official unit outcome—not only a related topic.',
+        'Confirm spoken language is English, Hindi, or Hinglish and the depth matches diploma learners.',
+        'Confirm public embeddability, availability, captions/restrictions, and useful start/end timestamps.',
+        'Record a named academic reviewer, rationale, and decision before promotion.',
+      ],
+    })
+  }
+
   const coverage = [...lessonsBySubject.entries()]
     .map(([subjectCode, subjectLessons]) => ({
       subjectCode,
@@ -146,6 +205,7 @@ function main() {
     version: 1,
     generatedAt: new Date().toISOString(),
     source: relative(root, inputPath).replaceAll('\\', '/'),
+    researchedGapSource: existsSync(researchedGapPath) ? relative(root, researchedGapPath).replaceAll('\\', '/') : null,
     officialCurriculumSource: relative(root, officialPath).replaceAll('\\', '/'),
     policy: {
       publication: 'No row in this file is student-visible or approved.',
@@ -154,7 +214,7 @@ function main() {
       oneCandidateVideoPerSubject: true,
     },
     summary: {
-      inputPendingCandidates: pending.length,
+      inputPendingCandidates: pending.length + researchedGaps.length,
       reconciledPendingCandidates: reconciled.length,
       unmatchedCandidates: unmatched.length,
       officialLessons: lessons.length,

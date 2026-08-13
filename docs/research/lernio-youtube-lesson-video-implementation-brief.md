@@ -2,6 +2,8 @@
 
 Audited 1 August 2026. Repository: https://github.com/GYASH28/LERNIOAI (main).
 
+Implementation refresh, 13 August 2026: research-candidate coverage is now **428/428 official lesson identities** across DCOMP and DCIOT semesters 1-6. All 428 direct IDs pass YouTube oEmbed identity lookup and remain draft-only in the protected review queue; named academic review is still required before any row becomes student-visible. See `docs/research/cwit-r23-complete-lesson-video-catalog.md` for the complete catalogue.
+
 ## Decision
 
 Do not attach playlists to lessons. Lernio's active Learn direction defines a lesson as a playable, lesson-specific direct video. A lesson is covered only when it has one reviewed, embeddable direct video with a canonical lesson identity.

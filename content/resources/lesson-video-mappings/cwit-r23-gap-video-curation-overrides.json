@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "updatedAt": "2026-08-13T00:00:00.000Z",
+  "purpose": "Human-curated corrections for automated CWIT lesson video research. The research script verifies every override through YouTube oEmbed before replacing a candidate.",
+  "overrides": [
+    { "subjectCodes": ["R23CI1702", "R23CP1702"], "unitNumber": 5, "videoId": "QPt_CHcjDMU", "reason": "Popular Hindi/Hinglish presentation-skills lesson with practical opening, structure and delivery guidance." },
+    { "subjectCodes": ["R23CI1702", "R23CP1702"], "unitNumber": 6, "videoId": "savwVzZh5go", "reason": "Popular Hindi/Hinglish public-speaking lesson focused on confidence and delivery." },
+    { "subjectCodes": ["R23CI6602", "R23CP6402"], "unitNumber": 2, "videoId": "WJ-UaAaumNA", "reason": "Gate Smashers introduction covers operating-system purpose and functions more directly than a file-system-only clip." },
+    { "subjectCodes": ["R23CI6602", "R23CP6402"], "unitNumber": 3, "videoId": "5jAgNWO-e_g", "reason": "WsCube Tech Hindi MS Word course covers the full official word-processing unit instead of one toolbar feature." },
+    { "subjectCodes": ["R23CI6602", "R23CP6402"], "unitNumber": 4, "videoId": "OX-iyb-21tk", "reason": "Popular complete Hindi Excel course covers sheets, formatting, formulas and charts." },
+    { "subjectCodes": ["R23CI6602", "R23CP6402"], "unitNumber": 5, "videoId": "oRz108pc_eE", "reason": "Popular complete Hindi PowerPoint course covers presentation creation, formatting and media." },
+    { "subjectCodes": ["R23CI6602", "R23CP6402"], "unitNumber": 6, "videoId": "HjcUKOPG7SI", "reason": "Direct Hindi MS-DOS course matches the command-focused core of the official unit." },
+    { "subjectCodes": ["R23CI1301", "R23CP1301"], "unitNumber": 1, "videoId": "Y_0S2N3cv4k", "reason": "Popular Hindi Basic Electrical Engineering AC-circuits lesson provides broader unit-level depth." },
+    { "subjectCodes": ["R23CI1301", "R23CP1301"], "unitNumber": 4, "videoId": "5ZgE83B5zaE", "reason": "Direct Hindi one-shot on the official unit title, Zener diode and LED." },
+    { "subjectCodes": ["R23CI1301", "R23CP1301"], "unitNumber": 6, "videoId": "CzafQ5GWz4s", "reason": "Popular Hindi transducers lesson covers classification and important active/passive examples." },
+    { "subjectCodes": ["R23CI4601", "R23CP4401"], "unitNumber": 3, "videoId": "zJ1DIgLN6yU", "reason": "Popular Hindi environmental lesson covers causes, impact and protection actions." },
+    { "subjectCodes": ["R23CI4601", "R23CP4401"], "unitNumber": 4, "videoId": "yNQf5YFL2Ns", "reason": "Popular Hindi emotional-intelligence lesson is appropriate for diploma students and self-management outcomes." },
+    { "subjectCodes": ["R23CI1602", "R23CP1402"], "unitNumber": 6, "videoId": "aVCz8pEJwTk", "reason": "Hindi/Hinglish color-correction lesson from GFXMentor directly matches editing outcomes." },
+    { "subjectCodes": ["R23CI4602", "R23CP4402"], "unitNumber": 6, "videoId": "Sl0cZpD6xKk", "reason": "Official Election Commission of India model-polling lesson is stronger electoral-literacy evidence than commentary clips." },
+    { "subjectCodes": ["R23CI6405", "R23CP6405"], "unitNumber": 4, "videoId": "THqXlkAESCs", "reason": "Popular Hindi marketing-mix lesson covers the official services 7Ps scope." },
+    { "subjectCodes": ["R23CI1605", "R23CP1407"], "unitNumber": 3, "videoId": "acUl1HJzipE", "reason": "Popular engineering-focused guide directly covers seminar preparation, documentation and presentation." },
+    { "subjectCodes": ["R23CI2609"], "unitNumber": 6, "videoId": "3qLd9XJ_40E", "reason": "Popular Hindi IIoT overview is a better primary foundation for the official IIoT architecture unit." },
+    { "subjectCodes": ["R23CP3401"], "unitNumber": 1, "videoId": "0I5ypJqq9vc", "reason": "Direct MSBTE diploma lesson explicitly covers the official Internet Architecture and Network Layer unit." },
+    { "subjectCodes": ["R23CP3402"], "unitNumber": 1, "videoId": "YRnjGeQbsHQ", "reason": "Popular Hindi DBMS one-shot provides unit-level architecture, concurrency, query processing and optimization context." },
+    { "subjectCodes": ["R23CP3406"], "unitNumber": 2, "videoId": "_6A2ZwKAEcY", "reason": "R-specific conditional logic and loops lesson replaces an incorrect Python recommendation." },
+    { "subjectCodes": ["R23CP3406"], "unitNumber": 3, "videoId": "k0zLwDAQ6Uw", "reason": "R-specific lesson covers vectors, lists, data frames, matrices and arrays in one video." },
+    { "subjectCodes": ["R23CP3406"], "unitNumber": 6, "videoId": "g4JF_Ew8qEc", "reason": "Direct R/lubridate date-time lesson replaces a Matplotlib-only recommendation." }
+  ]
+}

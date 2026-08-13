@@ -22,6 +22,12 @@ type DirectVideoCandidate = {
   reconciliationScore: number
   reconciliationStatus: 'pending_academic_review'
   reviewChecklist: string[]
+  oembedStatus?: string
+  oembedVerifiedAt?: string
+  embeddabilityStatus?: string
+  languageVerificationStatus?: string
+  selectionRationale?: string
+  curationStatus?: string
 }
 
 type OfficialSubject = {
@@ -89,8 +95,8 @@ export function buildOfficialLessonVideoReviewQueue(
         channel: candidate.channel.trim() || null,
         thumbnailUrl: `https://i.ytimg.com/vi/${candidate.videoId}/hqdefault.jpg`,
         embeddable: null,
-        metadataStatus: 'pending_reviewer_verification',
-        availabilityStatus: 'unchecked',
+        metadataStatus: candidate.oembedStatus === 'found' ? 'found' : 'pending_reviewer_verification',
+        availabilityStatus: candidate.oembedStatus === 'found' ? 'oembed_found_pending_player_check' : 'unchecked',
         language,
         officialLesson: {
           slug: candidate.officialLessonSlug,
@@ -164,7 +170,7 @@ export function buildOfficialLessonVideoReviewQueue(
       blockedMissingManifestSubject: 0,
       blockedUnplacedOfficialSubject: 0,
       blockedMissingLessonStructure: 0,
-      oembedFound: 0,
+      oembedFound: items.filter((item) => item.metadataStatus === 'found').length,
       playlistRequiresManualOrApiReview: 0,
       embeddableCandidates: 0,
       draftOnly: items.length,
