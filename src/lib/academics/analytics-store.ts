@@ -10,6 +10,7 @@ export interface AcademicOverview {
 }
 
 export interface MasteryRow {
+  classLevel: '11' | '12'
   subjectSlug: string
   chapterSlug: string
   topicSlug: string | null
@@ -71,7 +72,7 @@ export async function getAcademicOverview(userId: string): Promise<AcademicOverv
 export async function getMasteryRows(userId: string): Promise<MasteryRow[]> {
   try {
     return await db.$queryRaw<MasteryRow[]>`
-      SELECT "subjectSlug", "chapterSlug", NULLIF("topicSlug", '') AS "topicSlug", "attempts",
+      SELECT "classLevel", "subjectSlug", "chapterSlug", NULLIF("topicSlug", '') AS "topicSlug", "attempts",
              "accuracy", "masteryScore", "averageTimeSeconds", "lastPractisedAt"
       FROM "AcademicMasteryRecord"
       WHERE "userId" = ${userId}
