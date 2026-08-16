@@ -8,6 +8,7 @@ export interface MistakeRow {
   occurrenceCount: number
   lastAttemptAt: Date
   nextReviewAt: Date | null
+  classLevel: '11' | '12'
   subjectSlug: string
   chapterSlug: string
   topicSlug: string | null
@@ -36,7 +37,8 @@ export async function getMistakes(userId: string, limit = 50): Promise<MistakeRo
   try {
     return await db.$queryRaw<MistakeRow[]>`
       SELECT m."id", m."questionId", m."category", m."occurrenceCount", m."lastAttemptAt", m."nextReviewAt",
-             q."subjectSlug", q."chapterSlug", q."topicSlug", q."prompt", q."sourceType", q."sourceLabel", q."sourceYear"
+             q."classLevel", q."subjectSlug", q."chapterSlug", q."topicSlug", q."prompt",
+             q."sourceType", q."sourceLabel", q."sourceYear"
       FROM "AcademicMistake" m
       JOIN "AcademicQuestion" q ON q."id" = m."questionId"
       WHERE m."userId" = ${userId} AND m."resolvedAt" IS NULL
