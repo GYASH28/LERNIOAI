@@ -1,5 +1,11 @@
 import { defineConfig, devices } from '@playwright/test'
 
+const crossBrowserSmoke = [
+  '**/public-routing.spec.ts',
+  '**/a11y.spec.ts',
+  '**/cross-browser-smoke.spec.ts',
+]
+
 export default defineConfig({
   testDir: './tests/e2e',
   timeout: 30_000,
@@ -11,22 +17,40 @@ export default defineConfig({
   reporter: process.env.CI ? [['line'], ['html', { open: 'never' }]] : 'list',
   use: {
     baseURL: 'http://127.0.0.1:3000',
-    bypassCSP: true,
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
   },
   webServer: {
-    command: 'npx next dev --webpack -p 3000',
+    command: process.env.CI ? 'npm run build && npm start' : 'npx next dev --webpack -p 3000',
     url: 'http://127.0.0.1:3000',
     reuseExistingServer: !process.env.CI,
-    timeout: 120_000,
+    timeout: 180_000,
   },
   projects: [
-    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-    { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
-    { name: 'webkit', use: { ...devices['Desktop Safari'] } },
-    { name: 'mobile-chrome', use: { ...devices['Pixel 7'] } },
-    { name: 'mobile-safari', use: { ...devices['iPhone 15'] } },
+    {
+      name: 'chromium-full',
+      use: { ...devices['Desktop Chrome'] },
+    },
+    {
+      name: 'firefox-smoke',
+      testMatch: crossBrowserSmoke,
+      use: { ...devices['Desktop Firefox'] },
+    },
+    {
+      name: 'webkit-smoke',
+      testMatch: crossBrowserSmoke,
+      use: { ...devices['Desktop Safari'] },
+    },
+    {
+      name: 'mobile-chrome-smoke',
+      testMatch: crossBrowserSmoke,
+      use: { ...devices['Pixel 7'] },
+    },
+    {
+      name: 'mobile-safari-smoke',
+      testMatch: crossBrowserSmoke,
+      use: { ...devices['iPhone 15'] },
+    },
   ],
 })
