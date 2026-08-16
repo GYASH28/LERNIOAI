@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server'
+import { NextResponse } from 'next/navigation'
 import { getCurrentUser } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { saveAcademicProfile } from '@/lib/academics/profile-store'
@@ -16,6 +16,7 @@ import {
 } from '@/lib/academics/types'
 
 const allowedStudyGoals = new Set([30, 60, 120, 180, 240])
+const supportedStreams = new Set<Stream>(['PCM', 'PCB', 'PCMB'])
 
 function stringArray(value: unknown): string[] {
   return Array.isArray(value) ? value.filter((item): item is string => typeof item === 'string') : []
@@ -47,6 +48,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Choose a valid board, class and stream.' }, { status: 400 })
   }
 
+  if (!supportedStreams.has(stream)) {
+    return NextResponse.json(
+      { error: 'Lernio currently supports the PCM, PCB and PCMB science streams.' },
+      { status: 400 },
+    )
+  }
+
   if (!targetExams.length || targetExams.some((exam) => !TARGET_EXAMS.includes(exam))) {
     return NextResponse.json({ error: 'Choose at least one valid preparation goal.' }, { status: 400 })
   }
@@ -56,7 +64,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'JEE preparation is available for PCM/PCMB profiles.' }, { status: 400 })
   }
 
-  if (!Number.isInteger(targetYear) || targetYear < 2026 || targetYear > 2032) {
+  const currentYear = new Date().getFullYear()
+  if (!Number.isInteger(targetYear) || targetYear < currentYear || targetYear > currentYear + 6) {
     return NextResponse.json({ error: 'Choose a valid target exam year.' }, { status: 400 })
   }
 
