@@ -1,11 +1,11 @@
-import { afterAll, beforeAll, expect, test } from '@playwright/test'
+import { expect, test } from '@playwright/test'
 import { hash } from 'bcryptjs'
 import { db } from '../../src/lib/db'
 
 const EMAIL = 'e2e.student@tests.lernio.local'
 const PASSWORD = 'E2e-Strong-Password-2026!'
 
-beforeAll(async () => {
+test.beforeAll(async () => {
   await db.user.deleteMany({ where: { email: EMAIL } })
   await db.user.create({
     data: {
@@ -22,7 +22,7 @@ beforeAll(async () => {
   })
 })
 
-afterAll(async () => {
+test.afterAll(async () => {
   await db.user.deleteMany({ where: { email: EMAIL } })
 })
 
