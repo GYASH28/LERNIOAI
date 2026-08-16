@@ -9,7 +9,8 @@ async function openStable(page: Page, route: string) {
     sessionStorage.setItem('lernio-cinematic-intro-v4', 'complete')
     document.documentElement.dataset.motion = 'none'
   })
-  await page.goto(route, { waitUntil: 'networkidle' })
+  await page.goto(route, { waitUntil: 'domcontentloaded' })
+  await page.waitForLoadState('networkidle', { timeout: 5_000 }).catch(() => undefined)
   await page.addStyleTag({ content: '*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}' })
   await expect(page.locator('body')).toBeVisible()
 }
