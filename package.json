@@ -20,6 +20,7 @@
     "test:e2e": "playwright test",
     "test:a11y": "playwright test tests/e2e/a11y.spec.ts",
     "test:visual": "playwright test tests/e2e/visual.spec.ts",
+    "test:stress": "node scripts/stress-http.mjs",
     "test:motion": "vitest run src/lib/motion src/components/motion tests/motion",
     "analyze": "next build --profile",
     "check:migrations": "node scripts/check-migration-encoding.mjs",
