@@ -1,6 +1,7 @@
 import { z } from 'zod'
 import { registerCampusUser } from '@/lib/campus-registration'
 import { ApiError, okResponse, withApi } from '@/lib/auth'
+import { db } from '@/lib/db'
 import { checkRateLimit } from '@/lib/rate-limit'
 import { toPublicUserDTO } from '@/lib/user-dto'
 import { assertRequestBodySize, passwordPolicySchema } from '@/lib/schemas'
@@ -70,7 +71,12 @@ export async function POST(request: Request) {
     }
 
     try {
-      const user = await registerCampusUser(parsed.data)
+      const created = await registerCampusUser(parsed.data)
+      const user = await db.user.update({
+        where: { id: created.id },
+        data: { status: 'pending_verification' },
+      })
+
       return okResponse({
         user: toPublicUserDTO(user),
         verificationRequired: true,
