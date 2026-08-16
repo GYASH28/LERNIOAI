@@ -1,51 +1,26 @@
 import { z } from 'zod'
-import { campusSignUpSchema, registerCampusUser } from '@/lib/campus-registration'
+import { registerCampusUser } from '@/lib/campus-registration'
 import { ApiError, okResponse, withApi } from '@/lib/auth'
-import { CAMPUS_DIVISIONS, CAMPUS_SEMESTERS, CWIT_PROGRAMMES } from '@/lib/campus-auth'
 import { db } from '@/lib/db'
 import { checkRateLimit } from '@/lib/rate-limit'
 import { toPublicUserDTO } from '@/lib/user-dto'
-import { assertRequestBodySize } from '@/lib/schemas'
-import { TARGET_CWIT_DEPARTMENT_CODES, TARGET_CWIT_PROGRAMME_CODES } from '@/lib/cwit-departments'
+import { assertRequestBodySize, passwordPolicySchema } from '@/lib/schemas'
+
+const accountSignUpSchema = z.object({
+  name: z.string().trim().min(2, 'Enter your full name.').max(120),
+  email: z.string().trim().email('Enter a valid email address.'),
+  password: passwordPolicySchema,
+  inviteCode: z.string().trim().max(120).optional(),
+})
 
 export async function GET() {
-  return withApi(async () => {
-    const programmes = await db.programme.findMany({
-      where: {
-        status: 'active',
-        archivedAt: null,
-        code: { in: [...TARGET_CWIT_PROGRAMME_CODES] },
-        department: {
-          status: 'active',
-          archivedAt: null,
-          code: { in: [...TARGET_CWIT_DEPARTMENT_CODES] },
-        },
-      },
-      orderBy: [
-        { department: { code: 'asc' } },
-        { code: 'asc' },
-      ],
-      take: 300,
-      select: {
-        code: true,
-        name: true,
-        department: { select: { code: true, name: true } },
-      },
-    })
-
-    const liveProgrammes = programmes.map((programme) => ({
-      departmentCode: programme.department.code,
-      departmentName: programme.department.name,
-      programmeCode: programme.code,
-      programmeName: programme.name,
-    }))
-
-    return okResponse({
-      programmes: liveProgrammes.length ? liveProgrammes : CWIT_PROGRAMMES,
-      semesters: CAMPUS_SEMESTERS,
-      divisions: CAMPUS_DIVISIONS,
-    })
-  })
+  return withApi(async () => okResponse({
+    boards: ['CBSE'],
+    classLevels: ['11', '12', 'DROPPER'],
+    streams: ['PCM', 'PCB', 'PCMB'],
+    preparationGoals: ['BOARDS', 'JEE_MAIN', 'JEE_ADVANCED'],
+    verificationRequired: true,
+  }))
 }
 
 export async function POST(request: Request) {
@@ -57,7 +32,7 @@ export async function POST(request: Request) {
       throw new ApiError('INVALID_REQUEST', 'Enter the required signup details.', 400, false)
     }
 
-    const parsed = campusSignUpSchema.safeParse(body)
+    const parsed = accountSignUpSchema.safeParse(body)
     if (!parsed.success) {
       throw new ApiError(
         'VALIDATION_ERROR',
@@ -96,10 +71,16 @@ export async function POST(request: Request) {
     }
 
     try {
-      const user = await registerCampusUser(parsed.data)
+      const created = await registerCampusUser(parsed.data)
+      const user = await db.user.update({
+        where: { id: created.id },
+        data: { status: 'pending_verification' },
+      })
+
       return okResponse({
         user: toPublicUserDTO(user),
         verificationRequired: true,
+        next: '/onboarding',
       })
     } catch (error) {
       if (error instanceof ApiError) throw error

@@ -12,7 +12,7 @@ export async function POST(req: Request) {
     const authUser = await getCurrentUser()
     const email = authUser
       ? authUser.email.trim().toLowerCase()
-      : (await parseBody(req, verifyEmailRequestSchema)).email
+      : (await parseBody(req, verifyEmailRequestSchema)).email.trim().toLowerCase()
 
     const limiter = await checkRateLimit({
       action: 'verify_email_request',
@@ -31,15 +31,21 @@ export async function POST(req: Request) {
 
     const user = await db.user.findUnique({
       where: { email },
-      select: { id: true, emailVerified: true },
+      select: { id: true, emailVerified: true, status: true, provider: true },
     })
 
+    // Keep the response enumeration-safe. Only pending password accounts receive
+    // a token; disabled accounts remain disabled and cannot self-reactivate.
     if (!user) {
       return okResponse({ sent: true })
     }
 
     if (user.emailVerified) {
       return okResponse({ sent: false, message: 'Email is already verified.' })
+    }
+
+    if (user.provider !== 'password' || user.status !== 'pending_verification') {
+      return okResponse({ sent: true })
     }
 
     const token = crypto.randomBytes(32).toString('hex')

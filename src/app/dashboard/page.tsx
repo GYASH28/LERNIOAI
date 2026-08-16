@@ -1,360 +1,200 @@
+import Link from 'next/link'
 import { redirect } from 'next/navigation'
+import {
+  ArrowRight,
+  BarChart3,
+  BookOpen,
+  Brain,
+  CalendarDays,
+  Clock3,
+  Flame,
+  GraduationCap,
+  RotateCw,
+  Sparkles,
+  Target,
+  Trophy,
+} from 'lucide-react'
 import { getCurrentUser } from '@/lib/auth'
 import { db } from '@/lib/db'
-import Link from 'next/link'
+import { getAcademicProfile } from '@/lib/academics/profile-store'
+import { getCurriculumSubjects } from '@/lib/academics/curriculum'
+import { isJeeProfile } from '@/lib/academics/types'
 import { TopBar } from '@/components/layout/top-bar'
 import { Footer } from '@/components/layout/footer'
-import {
-  BookOpen, PlayCircle, Target, Flame, Zap, TrendingUp, ArrowRight,
-  Calendar, Award, Crown, Mail, Clock, Users, GraduationCap,
-  ClipboardList, ChevronRight, AlertTriangle, Database, RotateCw,
-  BarChart3,
-  Code2,
-} from 'lucide-react'
-import { getManifestSubjectsForSemester } from '@/lib/curriculum/manifest-data'
-import { ContinueLearningCard } from '@/components/dashboard/continue-learning-card'
-import { StreakHeatmap } from '@/components/dashboard/streak-heatmap'
-import { ExamCountdown } from '@/components/dashboard/exam-countdown'
-import { ProgressRing } from '@/components/learning/progress-ring'
-import { ClassAvatar } from '@/components/class/class-avatar'
 
 export const dynamic = 'force-dynamic'
+
+const subjectLabel: Record<string, string> = {
+  physics: 'Physics',
+  chemistry: 'Chemistry',
+  mathematics: 'Mathematics',
+  biology: 'Biology',
+  english: 'English',
+  'computer-science': 'Computer Science',
+  'physical-education': 'Physical Education',
+}
 
 export default async function DashboardPage() {
   const user = await getCurrentUser()
   if (!user) redirect('/sign-in?callbackUrl=/dashboard')
-
-  // Redirect admins to admin dashboard, CRs to CR dashboard
   if (user.role === 'admin') redirect('/admin')
-  if (user.role === 'cr') redirect('/cr')
 
-  // Fetch user's XP, streak, class info, and recent activity
-  let xp = 0
-  let streak = 0
-  let level = 1
-  let userSemester: number | null = null
-  let userDept: string | null = null
-  let userDivision: string | null = null
-  let dailyMins = 120
-  let examDate: string | null = null
-  let recentlyViewed: { title: string; href: string; viewedAt: Date }[] = []
-  let classInfo: {
-    id: string; alias: string | null; avatarEmoji: string | null; avatarColor: string | null;
-    departmentCode: string; semesterNumber: number; division: string; room: string | null;
-    cr: { id: string; name: string; email: string; rollNumber: string | null } | null;
-    _count: { members: number };
-  } | null = null
-  let todaySlots: Array<{ id: string; subjectName: string | null; startTime: string; endTime: string; room: string | null; isBreak: boolean }> = []
-  let attendancePct: number | null = null
+  const profile = await getAcademicProfile(user.id)
+  if (!profile) redirect('/onboarding')
 
-  try {
-    const dbUser = await db.user.findUnique({
-      where: { id: user.id },
-      select: { xp: true, streak: true, level: true, semesterNumber: true, departmentCode: true, division: true, dailyMins: true, examDate: true },
-    })
-    if (dbUser) {
-      xp = dbUser.xp
-      streak = dbUser.streak
-      level = dbUser.level
-      userSemester = dbUser.semesterNumber
-      userDept = dbUser.departmentCode
-      userDivision = dbUser.division
-      if (dbUser.dailyMins) dailyMins = dbUser.dailyMins
-      if (dbUser.examDate) examDate = dbUser.examDate
-    }
+  const student = await db.user.findUnique({
+    where: { id: user.id },
+    select: { streak: true, xp: true, dailyMins: true },
+  }).catch(() => null)
 
-    recentlyViewed = await db.recentlyViewed.findMany({
-      where: { userId: user.id },
-      orderBy: { viewedAt: 'desc' },
-      take: 3,
-      select: { title: true, href: true, viewedAt: true },
-    }).catch(() => [])
+  const recentlyViewed = await db.recentlyViewed.findMany({
+    where: { userId: user.id },
+    orderBy: { viewedAt: 'desc' },
+    take: 3,
+    select: { title: true, href: true },
+  }).catch(() => [])
 
-    // Fetch the user's class + today's timetable + attendance
-    if (userDept && userSemester && userDivision) {
-      const cls = await db.class.findUnique({
-        where: {
-          departmentCode_semesterNumber_division: {
-            departmentCode: userDept, semesterNumber: userSemester, division: userDivision,
-          },
-        },
-        include: {
-          cr: { select: { id: true, name: true, email: true, rollNumber: true } },
-          _count: { select: { members: true } },
-        },
-      }).catch(() => null)
-      if (cls) {
-        classInfo = cls
-        const today = new Date().getDay()
-        todaySlots = await db.classTimetable.findMany({
-          where: { classId: cls.id, dayOfWeek: today, isActive: true },
-          orderBy: { periodIndex: 'asc' },
-          select: { id: true, subjectName: true, startTime: true, endTime: true, room: true, isBreak: true },
-        }).catch(() => [])
-
-        // Attendance percentage (last 90 days)
-        const since = new Date(Date.now() - 90 * 24 * 60 * 60 * 1000)
-        const sessions = await db.attendanceSession.findMany({
-          where: { departmentCode: userDept, semesterNumber: userSemester, division: userDivision, date: { gte: since } },
-          select: { id: true },
-        }).catch(() => [])
-        if (sessions.length > 0) {
-          const records = await db.attendanceRecord.findMany({
-            where: { sessionId: { in: sessions.map(s => s.id) }, userId: user.id },
-            select: { status: true },
-          }).catch(() => [])
-          const total = records.length
-          const present = records.filter(r => r.status === 'present' || r.status === 'late').length
-          attendancePct = total > 0 ? Math.round((present / total) * 100) : null
-        }
-      }
-    }
-  } catch {
-    // DB unavailable — use defaults
-  }
-
-  const programmeCode = userDept === 'DCIOT' ? 'DCIOT' : 'DCOMP'
-  const semesterNumber = userSemester || 3
-  const subjects = getManifestSubjectsForSemester(programmeCode, semesterNumber)
-  const totalResources = subjects.reduce((sum, s) => sum + s.resources.length, 0)
-  const alias = classInfo?.alias?.trim()
-  const needsClassSetup = !userDept || !userSemester || !userDivision
-
-  // Time-based greeting
   const hour = new Date().getHours()
-  const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : hour < 21 ? 'Good evening' : 'Burning the midnight oil'
+  const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : hour < 21 ? 'Good evening' : 'Still studying'
   const firstName = user.name.split(' ')[0]
-
-  // Time-based hero gradient
-  const heroGradient = hour < 12
-    ? 'from-orange-500/10 via-yellow-500/5 to-transparent'
-    : hour < 17
-    ? 'from-blue-500/10 via-cyan-500/5 to-transparent'
-    : hour < 21
-    ? 'from-purple-500/10 via-orange-500/5 to-transparent'
-    : 'from-indigo-500/10 via-blue-900/5 to-transparent'
+  const jeeEnabled = isJeeProfile(profile)
+  const classLevels: ('11' | '12')[] = profile.classLevel === 'DROPPER' ? ['11', '12'] : [profile.classLevel]
+  const curriculum = classLevels.flatMap((classLevel) => getCurriculumSubjects(classLevel, profile.subjects))
+  const weakSubjects = profile.weakSubjects.filter((subject) => profile.subjects.includes(subject))
+  const suggestedSubject = weakSubjects[0] ?? profile.subjects[0]
+  const suggestedName = suggestedSubject ? subjectLabel[suggestedSubject] ?? suggestedSubject : null
+  const dailyMins = profile.dailyStudyGoal || student?.dailyMins || 120
 
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground">
       <TopBar />
-      <main className="flex-1 page-wipe">
-      <div className="mx-auto max-w-6xl px-5 py-6 sm:px-6 lg:px-8">
-        {/* ─── Profile completion prompt ─── */}
-        {needsClassSetup && (
-          <section className="mb-5 rounded-xl border border-amber-500/40 bg-amber-500/10 p-4">
-            <div className="flex items-start gap-3">
-              <AlertTriangle className="h-5 w-5 text-amber-500 shrink-0 mt-0.5" />
-              <div className="min-w-0 flex-1">
-                <p className="text-sm font-semibold text-amber-600">Complete your profile</p>
-                <p className="text-xs text-muted-foreground mt-0.5">
-                  Set your department, semester, and division to join a class, see classmates, and track attendance.
-                </p>
-                <Link href="/profile" className="mt-2 inline-block rounded-md bg-amber-500 px-3 py-1.5 text-xs font-semibold text-white hover:bg-amber-600">
-                  Set up now →
-                </Link>
+      <main className="mx-auto w-full max-w-6xl px-5 py-7 sm:px-6 lg:px-8">
+        <section className="overflow-hidden rounded-3xl border border-border bg-card p-6 sm:p-8">
+          <div className="flex flex-col gap-7 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-2xl">
+              <div className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+                <span>{profile.board}</span><span className="text-muted-foreground">•</span>
+                <span>{profile.classLevel === 'DROPPER' ? 'JEE Dropper' : `Class ${profile.classLevel}`}</span>
+                <span className="text-muted-foreground">•</span><span>{profile.stream}</span>
               </div>
+              <h1 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">{greeting}, {firstName}.</h1>
+              <p className="mt-2 text-lg text-muted-foreground">Know what to study next.</p>
             </div>
-          </section>
-        )}
-
-        {/* ─── Dynamic Hero with Time-Based Greeting ─── */}
-        <section className={`rounded-xl border border-primary/20 bg-gradient-to-br ${heroGradient} p-5 sm:p-6`}>
-          <div className="flex flex-wrap items-start justify-between gap-4">
-            <div className="min-w-0">
-              <p className="text-xs font-semibold uppercase tracking-wide text-primary">
-                {programmeCode} / R23 / Semester {semesterNumber}
-                {userDivision && ` · Division ${userDivision}`}
-              </p>
-              <h1 className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">
-                {greeting}, <span className="gradient-text">{firstName}</span> 👋
-              </h1>
-              <p className="mt-1 text-sm text-muted-foreground">
-                You have {subjects.length} subjects with {totalResources} curated lectures · ~{Math.round(totalResources * 15 / 60)}h of content
-              </p>
-            </div>
-            {/* Stats with flame flicker */}
             <div className="flex gap-3">
-              <div className="rounded-lg border border-border bg-background/80 px-4 py-2 text-center backdrop-blur">
-                <Flame className={`mx-auto h-5 w-5 text-orange-500 ${streak > 0 ? 'flame-flicker' : ''}`} />
-                <p className="mt-1 text-xl font-bold count-up">{streak}</p>
-                <p className="text-[10px] text-muted-foreground">Day streak</p>
+              <div className="min-w-24 rounded-2xl border border-border bg-background/60 p-3 text-center">
+                <Flame className="mx-auto h-5 w-5 text-orange-500" />
+                <p className="mt-1 text-xl font-bold">{student?.streak ?? 0}</p>
+                <p className="text-[11px] text-muted-foreground">day streak</p>
               </div>
-              <div className="rounded-lg border border-border bg-background/80 px-4 py-2 text-center backdrop-blur">
-                <Zap className="mx-auto h-5 w-5 text-amber-500" />
-                <p className="mt-1 text-xl font-bold count-up">{xp}</p>
-                <p className="text-[10px] text-muted-foreground">XP · L{level}</p>
+              <div className="min-w-24 rounded-2xl border border-border bg-background/60 p-3 text-center">
+                <Clock3 className="mx-auto h-5 w-5 text-primary" />
+                <p className="mt-1 text-xl font-bold">{dailyMins}</p>
+                <p className="text-[11px] text-muted-foreground">min target</p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ─── My Class + Attendance strip ─── */}
-        {classInfo && (
-          <section className="mt-5 grid gap-3 sm:grid-cols-2">
-            <Link
-              href="/class"
-              className="quest-card block rounded-xl border border-amber-500/30 bg-gradient-to-br from-amber-500/5 to-transparent p-4"
-            >
-              <div className="flex items-center gap-3">
-                <ClassAvatar
-                  emoji={classInfo.avatarEmoji || undefined}
-                  color={classInfo.avatarColor || undefined}
-                  division={classInfo.division}
-                  semesterNumber={classInfo.semesterNumber}
-                  size="md"
-                />
-                <div className="min-w-0 flex-1">
-                  <p className="text-[10px] font-bold uppercase tracking-wide text-amber-500">Your Class</p>
-                  <h2 className="truncate text-base font-bold">{alias || `Division ${classInfo.division}`}</h2>
-                  <p className="text-xs text-muted-foreground">
-                    {classInfo._count.members} students
-                    {classInfo.cr && ` · CR: ${classInfo.cr.name}`}
-                  </p>
-                </div>
-                <ChevronRight className="h-5 w-5 text-muted-foreground shrink-0" />
+        <div className="mt-6 grid gap-5 lg:grid-cols-[1.35fr_.65fr]">
+          <section className="rounded-3xl border border-border bg-card p-5 sm:p-6">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">Today’s plan</p>
+                <h2 className="mt-1 text-2xl font-bold">What should I study today?</h2>
               </div>
-              {todaySlots.length > 0 && (
-                <div className="mt-3 flex flex-wrap items-center gap-1.5 border-t border-amber-500/20 pt-2">
-                  <Clock className="h-3 w-3 text-muted-foreground" />
-                  {todaySlots.slice(0, 3).map((s) => (
-                    <span key={s.id} className="inline-flex items-center gap-1 rounded-full bg-background/60 px-2 py-0.5 text-[10px]">
-                      <span className="font-mono text-muted-foreground">{s.startTime}</span>
-                      <span className="font-medium">{s.isBreak ? 'Break' : (s.subjectName || '—')}</span>
-                    </span>
-                  ))}
-                </div>
-              )}
-            </Link>
+              <Sparkles className="h-5 w-5 text-primary" />
+            </div>
 
-            <Link
-              href="/attendance"
-              className="quest-card block rounded-xl border border-border bg-card p-4"
-            >
-              <div className="flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                  <ClipboardList className="h-6 w-6 text-primary" />
+            {suggestedName ? (
+              <div className="mt-5 rounded-2xl border border-primary/20 bg-primary/5 p-5">
+                <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  {weakSubjects.length ? 'Based on a subject you marked as difficult' : 'Start your first study session'}
+                </p>
+                <div className="mt-2 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <h3 className="text-xl font-bold">{suggestedName}</h3>
+                    <p className="mt-1 text-sm text-muted-foreground">Choose a chapter, learn the concept, then practise it.</p>
+                  </div>
+                  <Link href="/learn" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground">
+                    Start studying <ArrowRight className="h-4 w-4" />
+                  </Link>
                 </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-[10px] font-bold uppercase tracking-wide text-primary">Attendance</p>
-                  <h2 className="truncate text-base font-bold">
-                    {attendancePct !== null ? `${attendancePct}%` : 'View records'}
-                  </h2>
-                  <p className="text-xs text-muted-foreground">
-                    {attendancePct !== null
-                      ? attendancePct >= 75 ? '✅ Good standing' : '⚠️ Below 75% — at risk'
-                      : 'No sessions yet'}
-                  </p>
-                </div>
-                <ChevronRight className="h-5 w-5 text-muted-foreground shrink-0" />
               </div>
-            </Link>
+            ) : (
+              <div className="mt-5 rounded-2xl border border-dashed border-border p-5 text-sm text-muted-foreground">Add subjects in Academic Settings to build your study workspace.</div>
+            )}
+
+            <div className="mt-4 grid gap-3 sm:grid-cols-3">
+              <Link href="/practice" className="rounded-2xl border border-border p-4 transition hover:bg-accent/50">
+                <Target className="h-5 w-5 text-primary" /><p className="mt-3 font-semibold">Practice</p><p className="mt-1 text-xs text-muted-foreground">Topic, chapter or mixed questions</p>
+              </Link>
+              <Link href="/revision" className="rounded-2xl border border-border p-4 transition hover:bg-accent/50">
+                <RotateCw className="h-5 w-5 text-primary" /><p className="mt-3 font-semibold">Revision</p><p className="mt-1 text-xs text-muted-foreground">Review what is actually due</p>
+              </Link>
+              <Link href="/tutor" className="rounded-2xl border border-border p-4 transition hover:bg-accent/50">
+                <Brain className="h-5 w-5 text-primary" /><p className="mt-3 font-semibold">Ask AI Tutor</p><p className="mt-1 text-xs text-muted-foreground">Explain, hint, solve or quiz</p>
+              </Link>
+            </div>
           </section>
-        )}
 
-        {/* ─── Continue Where You Left Off ─── */}
-        <section className="mt-5">
-          <ContinueLearningCard />
-        </section>
-
-        {/* ─── Streak Heatmap + Exam Countdown ─── */}
-        <section className="mt-5 grid gap-4 lg:grid-cols-2">
-          <StreakHeatmap />
-          <ExamCountdown examDate={examDate} />
-        </section>
-
-        {/* ─── Quick Actions as Game Menu ─── */}
-        <section className="mt-5">
-          <div className="mb-3 flex items-center justify-between">
-            <h2 className="text-lg font-semibold">Quick Actions</h2>
-          </div>
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
-            {[
-              { href: '/learn', icon: BookOpen, label: 'Learn', color: 'bg-blue-500/10 text-blue-500' },
-              { href: '/class', icon: Users, label: 'My Class', color: 'bg-amber-500/10 text-amber-500' },
-              { href: '/attendance', icon: ClipboardList, label: 'Attendance', color: 'bg-emerald-500/10 text-emerald-600' },
-              { href: '/practice', icon: Target, label: 'Practice', color: 'bg-violet-500/10 text-violet-500' },
-              { href: '/tutor', icon: PlayCircle, label: 'Ask LEO', color: 'bg-cyan-500/10 text-cyan-500' },
-              { href: '/materials', icon: BookOpen, label: 'Materials', color: 'bg-rose-500/10 text-rose-500' },
-              { href: '/exams', icon: GraduationCap, label: 'Exams', color: 'bg-orange-500/10 text-orange-500' },
-              { href: '/revision', icon: RotateCw, label: 'Revision', color: 'bg-teal-500/10 text-teal-500' },
-              { href: '/coding', icon: Code2, label: 'Coding Lab', color: 'bg-indigo-500/10 text-indigo-500' },
-              { href: '/labs', icon: Database, label: 'Labs', color: 'bg-purple-500/10 text-purple-500' },
-              { href: '/analytics', icon: BarChart3, label: 'Analytics', color: 'bg-pink-500/10 text-pink-500' },
-              { href: '/leaderboard', icon: Crown, label: 'Leaderboard', color: 'bg-yellow-500/10 text-yellow-500' },
-            ].map((item) => {
-              const Icon = item.icon
-              return (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  prefetch={true}
-                  className="quest-card flex flex-col items-center gap-1.5 rounded-xl border border-border bg-card p-3 text-center sm:p-4"
-                >
-                  <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${item.color} subject-badge`}>
-                    <Icon className="h-5 w-5" />
+          <aside className="space-y-5">
+            <section className="rounded-3xl border border-border bg-card p-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">Preparation</p>
+              <div className="mt-4 space-y-3">
+                {profile.targetExams.map((exam) => (
+                  <div key={exam} className="flex items-center justify-between rounded-xl bg-muted/50 px-3 py-2.5">
+                    <span className="text-sm font-medium">{exam === 'BOARDS' ? 'Boards' : exam === 'JEE_MAIN' ? 'JEE Main' : 'JEE Advanced'}</span>
+                    <span className="text-xs text-muted-foreground">{profile.targetYear}</span>
                   </div>
-                  <span className="text-xs font-medium sm:text-sm">{item.label}</span>
+                ))}
+              </div>
+              <p className="mt-3 text-xs text-muted-foreground">Exam dates are configurable; Lernio does not hardcode countdowns before a date is set.</p>
+            </section>
+
+            {jeeEnabled && (
+              <section className="rounded-3xl border border-border bg-card p-5">
+                <div className="flex items-center gap-2"><GraduationCap className="h-5 w-5 text-primary" /><h2 className="font-semibold">JEE workspace</h2></div>
+                <div className="mt-4 grid grid-cols-2 gap-2 text-sm">
+                  <Link href="/practice?mode=pyq" className="rounded-xl border border-border p-3 hover:bg-accent">PYQ practice</Link>
+                  <Link href="/exams?mode=jee" className="rounded-xl border border-border p-3 hover:bg-accent">Mock tests</Link>
+                </div>
+              </section>
+            )}
+          </aside>
+        </div>
+
+        <section className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <Link href="/learn" className="group rounded-2xl border border-border bg-card p-5 hover:border-primary/40">
+            <BookOpen className="h-5 w-5 text-primary" /><h2 className="mt-4 font-semibold">Learn</h2><p className="mt-1 text-sm text-muted-foreground">{curriculum.length} curriculum subjects ready</p>
+          </Link>
+          <Link href="/planner" className="group rounded-2xl border border-border bg-card p-5 hover:border-primary/40">
+            <CalendarDays className="h-5 w-5 text-primary" /><h2 className="mt-4 font-semibold">Planner</h2><p className="mt-1 text-sm text-muted-foreground">Turn goals into connected study tasks</p>
+          </Link>
+          <Link href="/analytics" className="group rounded-2xl border border-border bg-card p-5 hover:border-primary/40">
+            <BarChart3 className="h-5 w-5 text-primary" /><h2 className="mt-4 font-semibold">Analytics</h2><p className="mt-1 text-sm text-muted-foreground">Understand performance without fake precision</p>
+          </Link>
+          <Link href="/achievements" className="group rounded-2xl border border-border bg-card p-5 hover:border-primary/40">
+            <Trophy className="h-5 w-5 text-primary" /><h2 className="mt-4 font-semibold">Consistency</h2><p className="mt-1 text-sm text-muted-foreground">{student?.xp ?? 0} XP earned from real activity</p>
+          </Link>
+        </section>
+
+        <section className="mt-6 rounded-3xl border border-border bg-card p-5 sm:p-6">
+          <div className="flex items-center justify-between gap-3">
+            <div><p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">Continue</p><h2 className="mt-1 text-xl font-bold">Recent learning</h2></div>
+            <Link href="/learn" className="text-sm font-medium text-primary">Open Learn</Link>
+          </div>
+          {recentlyViewed.length ? (
+            <div className="mt-4 grid gap-3 sm:grid-cols-3">
+              {recentlyViewed.map((item) => (
+                <Link key={`${item.href}-${item.title}`} href={item.href} className="rounded-xl border border-border p-4 hover:bg-accent/50">
+                  <p className="line-clamp-2 text-sm font-medium">{item.title}</p>
                 </Link>
-              )
-            })}
-          </div>
-        </section>
-
-        {/* ─── My Subjects as Quest Cards ─── */}
-        <section className="mt-5">
-          <div className="mb-3 flex items-center justify-between">
-            <h2 className="text-lg font-semibold">My Subjects</h2>
-            <Link href="/learn" className="text-xs text-muted-foreground hover:text-primary">View all →</Link>
-          </div>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {subjects.slice(0, 6).map((subject) => {
-              const subjectCode = subject.code
-              const subjectHref = `/learn/${programmeCode}/semester/${semesterNumber}/subject/${subjectCode}`
-              const progress = Math.min(subject.resources.length * 10, 100)
-              const estimatedMins = subject.resources.length * 15
-              return (
-                <Link
-                  key={subjectCode}
-                  href={subjectHref}
-                  prefetch={true}
-                  className="quest-card group rounded-xl border border-border bg-card p-4"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-semibold uppercase text-muted-foreground">{subjectCode}</span>
-                    <div className="flex items-center gap-1">
-                      <span className="text-[10px] font-bold text-muted-foreground">{progress}%</span>
-                      <ProgressRing value={progress} size={36} label="" />
-                    </div>
-                  </div>
-                  <h3 className="mt-1 truncate text-sm font-semibold">{subject.name}</h3>
-                  <div className="mt-2 flex items-center gap-3 text-xs text-muted-foreground">
-                    <span className="flex items-center gap-1"><PlayCircle className="h-3 w-3" />{subject.resources.length} videos</span>
-                    <span className="flex items-center gap-1">💎 {subject.credits}</span>
-                    {estimatedMins > 0 && (
-                      <span className="flex items-center gap-1"><Clock className="h-3 w-3" />~{Math.round(estimatedMins / 60)}h {estimatedMins % 60}m</span>
-                    )}
-                  </div>
-                </Link>
-              )
-            })}
-          </div>
-        </section>
-
-        {/* ─── Today's Goal ─── */}
-        <section className="mt-5">
-          <div className="quest-card rounded-xl border border-border bg-card p-5">
-            <div className="flex items-center gap-2">
-              <Target className="h-5 w-5 text-primary" />
-              <h3 className="text-sm font-semibold">Today&apos;s Goal</h3>
+              ))}
             </div>
-            <p className="mt-3 text-3xl font-bold count-up">{dailyMins} min</p>
-            <p className="text-xs text-muted-foreground">Study {dailyMins} minutes today to maintain your streak</p>
-            <div className="mt-3 h-2 overflow-hidden rounded-full bg-muted">
-              <div className="h-full bg-gradient-to-r from-primary to-violet-500 transition-all duration-500" style={{ width: '0%' }} />
-            </div>
-          </div>
+          ) : (
+            <div className="mt-4 rounded-xl border border-dashed border-border p-5 text-sm text-muted-foreground">Your recent topics will appear here after you start learning.</div>
+          )}
         </section>
-      </div>
       </main>
       <Footer />
     </div>

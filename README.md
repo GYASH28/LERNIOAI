@@ -1,263 +1,261 @@
 # Lernio AI
 
-**An adaptive, AI-powered learning platform for diploma engineering students at CWIT Pune.**
+**An AI-powered Learning OS for Class 11, Class 12 and JEE preparation.**
 
-Built with Next.js 16, React 19, TypeScript, Tailwind CSS 4, shadcn/ui, Prisma 6, PostgreSQL, and Groq-backed AI services.
+Lernio brings learning, question practice, revision, tests, study planning, tutoring and academic analytics into one connected student workspace.
 
-Live at **[lernioai.vercel.app](https://lernioai.vercel.app)**
+> Product principle: **Know what to study next.**
 
----
+## Overview
 
-## What is Lernio AI?
+Lernio is not designed as an online coaching storefront. It is a personal study system that organizes the student's academic life around a simple loop:
 
-Lernio AI is a complete academic intelligence system that covers the entire student learning journey — from interactive video lessons and AI-powered tutoring to spaced-repetition revision, community Q&A, and exam preparation. It knows each student's programme, semester, subjects, and curriculum, and personalises the experience accordingly.
+**Learn → Practice → Analyze → Revise → Test → Improve**
 
-### Key Features
+The initial curriculum layer is CBSE / NCERT for Classes 11 and 12. The academic architecture separates board, class, stream, subjects and target exams so additional boards and exams can be introduced without rebuilding the product around a new hardcoded hierarchy.
 
-| Feature | Description |
-|---|---|
-| **Learn** | Curriculum-mapped video lectures with chapters, resume-where-you-left-off, alternate explanations, lesson notes, and a Quick Revision Hub for each subject |
-| **Materials** | Premium presentation-style interactive textbook — each lesson opens as a slide deck with theory, code examples, diagrams, quizzes, flashcards, and AI tools |
-| **AI Tutor (LEO)** | Groq-powered AI tutor with 15+ modes: explain, simplify, Hinglish, Marathi, ELI10, exam answers, viva practice, flashcard generation, and more |
-| **Practice & Exams** | AI-generated quizzes with instant feedback, per-subject question banks, and exam-mode timed tests |
-| **Revision** | SM-2 spaced-repetition flashcard system with 3D flip cards, due scheduling, and progress tracking |
-| **Community** | Subject-scoped Q&A discussions with LEO auto-answer, best-answer marking, milestone feed, and study groups |
-| **Coding Lab** | In-browser code execution for C, C++, Java, Python, and JavaScript |
-| **Interactive Labs** | Hands-on simulation labs for algorithms and data structures |
-| **Planner** | AI-powered study planner that auto-generates weekly schedules based on subjects and weak topics |
-| **Analytics** | Readiness score, XP/streak tracking, subject-wise performance breakdown, and study heatmap |
-| **Class & Attendance** | Class timetable, CR-managed attendance, announcements, and classmate directory |
-| **Leaderboard** | Institution-wide XP rankings with streak badges |
-| **Gamification** | XP, levels, streaks, achievements, and daily study goals |
+### Student profiles
 
-### AI-Powered Features
+- Class 11
+- Class 12
+- JEE Dropper
+- Boards-focused
+- JEE Main
+- JEE Main + Advanced
+- Boards + JEE
+- PCM / PCB / PCMB with architecture for Commerce and Humanities
 
-- **LEO AI Tutor** — context-aware tutoring that knows your subject, unit, and lesson
-- **AI Notes Toolbar** — 12 actions per lesson: Explain, Simplify, Hinglish, Marathi, ELI10, Examples, Coding Exercise, Quiz, Flashcards, Summary, Ask AI
-- **AI Quiz Generation** — generates MCQs from any subject's curriculum
-- **AI Study Planner** — auto-creates a personalised weekly study plan
-- **AI Content Moderation** — pre-publish spam/harassment check on community posts (fail-open)
-- **LEO Auto-Answer** — automatically provides a starting-point answer on every community discussion question
+JEE features are profile-aware and shown only where they are relevant.
 
----
+## Core Features
+
+### Personalized onboarding
+
+Students choose class, preparation goal, stream, board, daily study target and weak subjects. Lernio creates an academic profile instead of relying on institution, department or semester fields.
+
+### Learn
+
+Curriculum navigation follows:
+
+`Board → Class → Subject → Chapter → Topic → Learning resources`
+
+Class 11/12 subject and chapter routes are separate from the retired diploma curriculum routes. Learning content is verification-first: unavailable notes, topics, videos or resources are not replaced with fabricated content.
+
+### Practice engine
+
+The academic practice system supports a dedicated question model with metadata for:
+
+- class, subject, chapter, topic and concept
+- difficulty and exam type
+- question type, marks and negative marks
+- source type and source year
+- solution, explanation and hint
+
+Question attempts are recorded server-side. Incorrect answers feed the Mistake Notebook and topic mastery system.
+
+### PYQ integrity
+
+Question sources are explicit:
+
+- `ORIGINAL`
+- `PYQ`
+- `AI_GENERATED`
+- `IMPORTED`
+
+JEE PYQ mode only returns published records explicitly stored as `PYQ`. An AI-generated JEE-style question is never presented as an official previous-year question.
+
+### Revision OS
+
+The new academic revision layer includes:
+
+- Revision Queue
+- Mistake Notebook
+- Formula Vault architecture
+- repeated-mistake tracking
+- due-date scheduling
+- mastery-linked revision data
+
+### Study Planner
+
+Study plans are generated from the student's academic profile, weak subjects, published curriculum and daily time target. Tasks link directly into Learn, Practice or Revision instead of being generic todo strings.
+
+Available plan intensities:
+
+- Lighter
+- Balanced
+- Intensive
+
+### Analytics
+
+Analytics use real stored activity. The current academic overview can report:
+
+- questions attempted
+- accuracy
+- average solve time
+- open mistakes
+- revision due
+- chapter/topic mastery records
+
+When evidence does not exist, Lernio shows an empty state rather than invented percentages.
+
+### AI Tutor
+
+The existing streaming conversation and session infrastructure is being preserved while diploma subject scope is retired. The tutor page now requires the new academic profile and no longer injects diploma subjects into the student-facing tutor UI.
+
+### Tests
+
+The test area is organized around:
+
+- chapter and subject checkpoints
+- custom test entry
+- Boards mode
+- guarded JEE mode
+
+JEE mock patterns are intended to be versioned/configuration-driven rather than permanently hardcoded to one year's examination rules.
+
+### Resource Library
+
+Resources are organized around the Class 11/12 curriculum. The previous R23 six-semester PDF catalogue is not exposed in the new student Resource Library.
+
+## Academic Data Architecture
+
+The transformation introduces an academic data layer independent of the historical diploma hierarchy.
+
+Key entities include:
+
+- `StudentAcademicProfile`
+- `AcademicQuestion`
+- `AcademicQuestionAttempt`
+- `AcademicMistake`
+- `AcademicMasteryRecord`
+- `AcademicRevisionItem`
+- `AcademicExam`
+- `AcademicStudyPlan`
+- `AcademicStudyTask`
+
+The existing authentication, security, theme and generic user infrastructure is preserved while student academic workflows migrate to the new layer.
+
+## Curriculum
+
+Initial structured curriculum metadata lives under the academic domain code and currently covers the primary CBSE Class 11/12 PCM chapter structure.
+
+Rules for curriculum/content data:
+
+- do not copy copyrighted textbook passages
+- write original educational explanations
+- do not invent YouTube IDs or resource URLs
+- do not ship placeholder lessons as real content
+- keep exam/source metadata honest
+- gracefully hide unavailable content
+
+The architecture is designed to expand to additional subjects, boards and exams without reintroducing college-semester assumptions.
 
 ## Tech Stack
 
 | Layer | Technology |
 |---|---|
-| Framework | Next.js 16 (App Router, Turbopack) |
+| Framework | Next.js 16 App Router |
 | Language | TypeScript 5 |
-| UI | React 19, Tailwind CSS 4, shadcn/ui (Radix UI) |
-| Database | PostgreSQL 14+ via Prisma ORM 6 |
-| AI | Groq (Llama 3.3 70B / Llama 3.1 8B) |
-| Auth | NextAuth.js v4 (credentials + Google OAuth) |
-| Hosting | Vercel |
-| Fonts | Geist Sans + Geist Mono |
-| Animations | Framer Motion 12, CSS keyframes |
-| Code Highlighting | highlight.js |
-| Diagrams | Native HTML/CSS (no Mermaid — eliminates syntax errors) |
-| Markdown | react-markdown + remark-gfm + rehype-raw |
+| UI | React 19, Tailwind CSS 4, Radix/shadcn primitives |
+| Database | PostgreSQL + Prisma 6 |
+| Authentication | NextAuth.js v4 |
+| AI | Provider-backed streaming tutor infrastructure |
+| Charts | Recharts |
+| Motion | Framer Motion + CSS |
+| Testing | Vitest + Playwright + Axe |
+| Deployment | Vercel |
 
----
+## Student Routes
 
-## Project Structure
+Primary product navigation:
 
-```
-src/
-├── app/                        # Next.js App Router pages
-│   ├── (public)/               # Landing, sign-in, sign-up, privacy, terms
-│   ├── dashboard/              # Student dashboard
-│   ├── learn/                  # Curriculum browser + lesson studio
-│   ├── materials/              # Digital textbook (presentation-style slides)
-│   ├── community/              # Discussions, feed, study groups
-│   ├── moderator/              # Content moderation queue
-│   ├── practice/               # AI-generated quizzes
-│   ├── exams/                  # Timed exam-mode tests
-│   ├── revision/               # Spaced-repetition flashcards
-│   ├── tutor/                  # LEO AI tutor
-│   ├── coding/                 # In-browser code playground
-│   ├── labs/                   # Interactive simulation labs
-│   ├── planner/                # AI study planner
-│   ├── analytics/              # Performance analytics
-│   ├── class/                  # Class directory + timetable
-│   ├── attendance/             # Attendance tracking
-│   ├── leaderboard/            # XP rankings
-│   ├── settings/               # Preferences
-│   ├── admin/                  # Admin panel (users, curriculum, resources)
-│   ├── coordinator/            # Coordinator dashboard
-│   ├── teacher-dashboard/      # Teacher overview
-│   └── api/                    # API routes (80+ endpoints)
-├── components/
-│   ├── learning/               # Lesson players, notes renderers, flashcards
-│   ├── marketing/              # Landing page hero (3D book), sections
-│   ├── layout/                 # TopBar, Footer, navigation
-│   ├── dashboard/              # Dashboard widgets
-│   └── ui/                     # shadcn/ui primitives
-├── lib/
-│   ├── ai/                     # Groq provider, streaming, tutor runtime
-│   ├── auth/                   # NextAuth config, role system
-│   ├── curriculum/             # Manifest loader, lesson notes, coverage
-│   └── resources/              # YouTube pipeline, resource governance
-├── styles/                     # CSS design system (tokens, themes, motion)
-└── content/
-    └── lesson-notes/           # 44 subjects × 241 lessons (V3 interactive notes)
-```
+- `/dashboard`
+- `/learn`
+- `/practice`
+- `/exams`
+- `/tutor`
+- `/revision`
+- `/planner`
+- `/analytics`
+- `/materials`
+- `/profile`
+- `/settings`
 
----
+Legacy student routes such as attendance, college class, diploma coding lab and diploma labs are retired from the new product experience.
 
-## Quick Start
+## Development
 
-### Prerequisites
+### Requirements
 
-- **Node.js** 24.x
-- **PostgreSQL** 14+ (or use Docker: `docker compose -f docker-compose.dev.yml up -d`)
-- **Groq API Key** (for AI features — [get one free](https://console.groq.com))
+- Node.js 24.x
+- PostgreSQL
+- npm
 
-### Installation
+### Setup
 
 ```bash
-# Clone
 git clone https://github.com/GYASH28/LERNIOAI.git
 cd LERNIOAI
-
-# Install dependencies
 npm install
-
-# Set up environment
 cp .env.example .env
-# Edit .env — set DATABASE_URL, NEXTAUTH_SECRET, GROQ_API_KEY at minimum
-
-# Generate Prisma client
-npx prisma generate
-
-# Run database migrations
-npx prisma migrate deploy
-# Or for development: npx prisma db push
-
-# (Optional) Seed curriculum data
-npm run db:departments
-npm run curriculum:import
-
-# Start dev server
+npm run db:generate
+npm run db:migrate:deploy
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
+### Important environment variables
 
-### Environment Variables
-
-| Variable | Required | Description |
-|---|---|---|
-| `DATABASE_URL` | ✅ | PostgreSQL connection string |
-| `NEXTAUTH_SECRET` | ✅ | Random string (min 16 chars) |
-| `NEXTAUTH_URL` | ✅ in prod | Your deployment URL |
-| `GROQ_API_KEY` | Recommended | Enables AI tutor, quiz generation, planner |
-| `GROQ_MODEL` | Optional | Default: `llama-3.3-70b-versatile` |
-| `GROQ_FAST_MODEL` | Optional | Default: `llama-3.1-8b-instant` |
-| `GOOGLE_CLIENT_ID` | Optional | Google OAuth sign-in |
-| `GOOGLE_CLIENT_SECRET` | Optional | Google OAuth sign-in |
-| `LERNIO_ADMIN_EMAIL` | Optional | Bootstrap admin account |
-| `LERNIO_ADMIN_PASSWORD` | Optional | Bootstrap admin password |
-| `LERNIO_DEMO_MODE` | Optional | Set to `true` for demo (never in production) |
-
----
-
-## Content
-
-Lernio AI includes comprehensive interactive notes for **44 subjects across 6 semesters** (241 lessons total), each with:
-
-- Overview, objectives, prerequisites
-- Detailed theory (markdown)
-- Key concepts, real-life analogies
-- Flowcharts and mind maps (native HTML/CSS)
-- Comparison tables
-- Syntax-highlighted code examples (C, C++, Java, Python, SQL)
-- Complexity analysis
-- Worked examples
-- Common mistakes, callouts, exam tips
-- Viva questions, interview questions, exam questions (2/5/10/15-mark)
-- Revision summary, cheat sheet, mnemonics
-- Interactive practice quiz
-- 3D flashcards
-- AI summaries
-- AI toolbar (12 actions)
-
----
-
-## Roles & Access
-
-| Role | Access |
+| Variable | Purpose |
 |---|---|
-| **Student** | Dashboard, Learn, Materials, Practice, Exams, Revision, Tutor, Coding, Labs, Planner, Analytics, Community, Leaderboard |
-| **CR (Class Representative)** | Student access + Take attendance, post announcements, manage class |
-| **Teacher** | Student access + Teacher dashboard with student progress overview |
-| **Coordinator** | Student access + Coordinator dashboard with class management shortcuts |
-| **Moderator** | Student access + Community content moderation queue |
-| **Admin** | Full access including admin panel (users, curriculum, resources, settings) |
+| `DATABASE_URL` | PostgreSQL connection |
+| `DIRECT_URL` | Direct PostgreSQL connection where required |
+| `NEXTAUTH_URL` | Application URL |
+| `NEXTAUTH_SECRET` | Authentication signing secret |
+| `GROQ_API_KEY` | AI provider key when Groq-backed features are enabled |
+| `GOOGLE_CLIENT_ID` | Optional Google OAuth |
+| `GOOGLE_CLIENT_SECRET` | Optional Google OAuth |
 
----
+Never commit secrets to Git.
 
-## Scripts
+## Quality Gates
 
-| Command | Description |
-|---|---|
-| `npm run dev` | Start dev server (port 3000) |
-| `npm run build` | Production build |
-| `npm run start` | Start production server |
-| `npm run lint` | Run ESLint |
-| `npm run typecheck` | Run TypeScript compiler check |
-| `npm run test` | Run Vitest unit tests |
-| `npm run test:e2e` | Run Playwright E2E tests |
-| `npm run db:push` | Push schema changes to database |
-| `npm run db:migrate` | Create and apply migration |
-| `npm run curriculum:import` | Import CWIT R23 curriculum manifests |
-| `npm run notes:generate-pdfs` | Generate PDF study notes for all subjects |
+The repository CI is expected to run:
 
----
+```text
+npm ci
+npm run db:generate
+npm run check:migrations
+npm run db:migrate:deploy
+npm run lint
+npm run typecheck
+npm run test
+npm run build
+npm run test:e2e
+npm audit --audit-level=high
+```
+
+A transformation PR should not be merged simply because the UI looks correct. Migration validation, linting, type checking, tests, production build and E2E checks must pass.
+
+## Security and Privacy
+
+The transformation must preserve existing security controls including authentication, server authorization, validation, secure session handling and secret management. Student academic activity, tutor conversations and analytics are private user data and must not be exposed publicly.
+
+## Product Quality Rules
+
+- No fake analytics.
+- No fake videos.
+- No fake PYQs.
+- No dead primary buttons.
+- No hidden fallback to diploma semester data in the new student experience.
+- No unsupported claims about exam probabilities.
+- No hardcoded future exam dates.
+- Empty states are preferable to deceptive demo content.
+- Integration and student outcomes matter more than the number of cards on a page.
 
 ## Deployment
 
-Lernio AI is deployed on **Vercel** with automatic deploys from `main`.
-
-```bash
-# Vercel build script (runs automatically)
-npm run vercel-build
-```
-
-The build script:
-1. Generates Prisma client
-2. Runs database migrations (if `DATABASE_URL` is set)
-3. Seeds curriculum data (first deploy only — skips if already seeded)
-4. Upserts admin user
-5. Builds Next.js
-
----
-
-## Design System
-
-Lernio AI uses a custom design system built on semantic tokens:
-
-- **6 color palettes** (Aurora default, Nexus, Paper, Ocean, Forest, Sakura)
-- **Light + dark mode** with system detection
-- **8px spacing grid**
-- **Custom typography scale** (display, h1-h3, body, meta)
-- **Motion tokens** (fast 120ms, standard 200ms, slow 320ms)
-- **Custom scrollbar + focus rings**
-- **Glassmorphism** on floating elements
-- **3D CSS transforms** (hero book, flashcard flips)
-
----
+Production deployment is handled through Vercel after changes reach the deployment branch. A successful Git push is not considered a successful deployment: the deployed application must be checked separately after CI and Vercel complete.
 
 ## License
 
-This project is proprietary. All rights reserved.
-
----
-
-## Acknowledgments
-
-- **CWIT Pune** — Curriculum framework (R23 scheme)
-- **Groq** — AI inference (Llama 3.3 70B, Llama 3.1 8B)
-- **Vercel** — Hosting and deployment
-- **shadcn/ui** — UI component primitives
-- **Jenny's Lectures** — YouTube lecture curation
+Proprietary. All rights reserved.

@@ -2,21 +2,10 @@
 
 import Link from 'next/link'
 import type { ReactNode } from 'react'
-import { ArrowLeft, BookOpenCheck, Building2, GraduationCap, ShieldCheck } from 'lucide-react'
+import { ArrowLeft, BookOpenCheck, GraduationCap, ShieldCheck, Target } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { LernioBrandLockup, LernioLogoTile } from '@/components/brand/lernio-logo'
 
-/**
- * Shared auth surface classes.
- *
- * These use the global semantic tokens (var(--border), var(--background),
- * var(--primary), var(--ring), var(--muted-foreground) etc.) so the auth
- * pages share one brand system with the marketing site and the
- * authenticated app — instead of the old hardcoded green/gold palette.
- *
- * Exported class strings (not components) so the existing sign-in / sign-up
- * / reset-password / forgot-password pages keep working unchanged.
- */
 export const authInputClass =
   'h-11 rounded-lg border border-input bg-background px-3 text-sm text-foreground shadow-none outline-none transition placeholder:text-muted-foreground hover:border-strong focus-visible:border-primary focus-visible:ring-4 focus-visible:ring-primary/15'
 
@@ -30,9 +19,9 @@ export const authSecondaryButtonClass =
   'min-h-11 rounded-lg border border-input bg-background px-4 text-sm font-semibold text-foreground shadow-none transition hover:bg-muted focus-visible:ring-primary/15'
 
 const authHighlights = [
-  [BookOpenCheck, 'Structured subject workspace'],
-  [Building2, 'Department and semester profiles'],
-  [ShieldCheck, 'Credentials, Google, and invite roles'],
+  [BookOpenCheck, 'Class 11 & 12 subject workspace'],
+  [Target, 'Boards + JEE preparation'],
+  [ShieldCheck, 'Secure student accounts and invited roles'],
 ] as const
 
 export function GoogleMark() {
@@ -58,25 +47,17 @@ export function GoogleMark() {
   )
 }
 
-function BrandMark() {
-  return <LernioLogoTile size="md" />
-}
-
-function BrandLockup() {
-  return <LernioBrandLockup href="/" size="md" />
-}
-
 function WorkspacePreview() {
   const rows = [
-    ['Readiness', '74%', 'exam signal'],
-    ['Revision', '12', 'cards due'],
-    ['Focus', '86m', 'today'],
+    ['Physics', 'Mechanics', 'Continue chapter'],
+    ['Mathematics', 'Calculus', '12 questions due'],
+    ['Chemistry', 'Physical chemistry', 'Revision ready'],
   ] as const
 
   return (
     <div className="mt-auto w-full max-w-md">
       <div
-        className="rounded-lg border p-4 shadow-sm"
+        className="rounded-xl border p-4 shadow-sm"
         style={{
           backgroundColor: 'rgb(30 41 59)',
           borderColor: 'rgb(51 65 85)',
@@ -85,57 +66,30 @@ function WorkspacePreview() {
       >
         <div className="mb-4 flex items-center justify-between">
           <div>
-            <p
-              className="text-xs font-semibold uppercase tracking-[0.14em]"
-              style={{ color: 'rgb(148 163 184)' }}
-            >
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">
               Today
             </p>
-            <p className="mt-1 text-lg font-bold" style={{ color: 'rgb(248 250 252)' }}>
-              Student command center
-            </p>
+            <p className="mt-1 text-lg font-bold text-slate-50">Your learning workspace</p>
           </div>
-          <span
-            className="grid h-10 w-10 place-items-center rounded-lg ring-1"
-            style={{
-              backgroundColor: 'rgba(6, 182, 212, 0.1)',
-              color: 'rgb(6, 182, 212)',
-              borderColor: 'rgb(51 65 85)',
-            }}
-          >
+          <span className="grid h-10 w-10 place-items-center rounded-lg bg-cyan-500/10 text-cyan-400 ring-1 ring-slate-700">
             <GraduationCap className="h-5 w-5" />
           </span>
         </div>
         <div className="grid gap-2">
-          {rows.map(([label, value, hint]) => (
+          {rows.map(([subject, chapter, status]) => (
             <div
-              key={label}
-              className="grid grid-cols-[1fr_auto] items-center gap-3 rounded-lg border px-3 py-2"
-              style={{
-                backgroundColor: 'rgba(51, 65, 85, 0.4)',
-                borderColor: 'rgb(51 65 85)',
-              }}
+              key={subject}
+              className="grid grid-cols-[1fr_auto] items-center gap-3 rounded-lg border border-slate-700 bg-slate-700/40 px-3 py-2"
             >
               <div>
-                <p className="text-sm font-semibold" style={{ color: 'rgb(248 250 252)' }}>
-                  {label}
-                </p>
-                <p className="text-xs" style={{ color: 'rgb(148 163 184)' }}>
-                  {hint}
-                </p>
+                <p className="text-sm font-semibold text-slate-50">{subject}</p>
+                <p className="text-xs text-slate-400">{chapter}</p>
               </div>
-              <p
-                className="font-mono text-lg font-bold tabular-nums"
-                style={{ color: 'rgb(248 250 252)' }}
-              >
-                {value}
-              </p>
+              <p className="text-right text-xs font-semibold text-slate-300">{status}</p>
             </div>
           ))}
         </div>
-        <p className="mt-3 text-xs" style={{ color: 'rgb(148 163 184)' }}>
-          Demo preview — not your account
-        </p>
+        <p className="mt-3 text-xs text-slate-400">Preview only — your account data stays private.</p>
       </div>
     </div>
   )
@@ -161,7 +115,6 @@ export function AuthShell({
   return (
     <main className="min-h-dvh bg-background text-foreground">
       <div className="grid min-h-dvh xl:grid-cols-[minmax(0,0.92fr)_minmax(380px,560px)]">
-        {/* Left brand panel — uses semantic tokens, no hardcoded green/gold */}
         <aside className="relative hidden overflow-hidden border-r border-border bg-muted/40 p-6 xl:flex xl:flex-col 2xl:p-8">
           <div
             aria-hidden="true"
@@ -180,24 +133,23 @@ export function AuthShell({
               backgroundSize: '44px 44px',
             }}
           />
+
           <div className="relative z-10 flex items-center gap-3">
-            <BrandMark />
+            <LernioLogoTile size="md" />
             <div>
-              <p className="text-lg font-extrabold leading-none text-foreground">
-                Lernio
-              </p>
+              <p className="text-lg font-extrabold leading-none text-foreground">Lernio</p>
               <p className="mt-1 text-xs font-semibold text-muted-foreground">
-                Diploma learning OS
+                Class 11 • Class 12 • JEE
               </p>
             </div>
           </div>
 
           <div className="relative z-10 my-10 max-w-xl 2xl:my-14">
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-primary">
-              CWIT ready
+              CBSE + JEE ready
             </p>
             <h2 className="mt-4 text-3xl font-extrabold leading-[1.08] tracking-tight text-foreground 2xl:text-5xl">
-              One account for study, revision, exams, and role access.
+              Learn, practise, revise, and prepare from one focused workspace.
             </h2>
             <div className="mt-6 grid gap-3 text-sm text-muted-foreground 2xl:mt-8">
               {authHighlights.map(([Icon, text]) => (
@@ -214,10 +166,9 @@ export function AuthShell({
           <WorkspacePreview />
         </aside>
 
-        {/* Right form panel */}
         <section className="flex min-h-dvh flex-col px-5 py-6 sm:px-6 lg:px-10">
-          <div className="flex items-center justify-between">
-            <BrandLockup />
+          <div className="flex items-center justify-between gap-3">
+            <LernioBrandLockup href="/" size="md" />
             <Link
               href={backHref}
               className="inline-flex min-h-10 shrink-0 items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-muted-foreground transition hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -234,9 +185,7 @@ export function AuthShell({
                 <h1 className="mt-2 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
                   {title}
                 </h1>
-                <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                  {description}
-                </p>
+                <p className="mt-3 text-sm leading-6 text-muted-foreground">{description}</p>
               </div>
               <div className="rounded-lg border border-border bg-card p-5 shadow-sm sm:p-6">
                 {children}

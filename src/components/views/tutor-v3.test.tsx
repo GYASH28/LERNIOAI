@@ -104,9 +104,9 @@ describe('TutorView send flow', () => {
     const user = userEvent.setup()
     render(<TutorView />)
 
-    const composer = await screen.findByPlaceholderText(/Ask LEO in Explain Simply/i)
+    const composer = await screen.findByPlaceholderText(/Ask LEO.*Explain Simply/i)
     await user.type(composer, 'Plan my work for today')
-    await user.click(screen.getByRole('button', { name: 'Send message to LEO' }))
+    await user.click(screen.getByRole('button', { name: /^Send$/i }))
 
     expect((await screen.findAllByText('Plan my work for today')).length).toBeGreaterThan(0)
     expect(await screen.findByText('Here is your plan for today.')).toBeInTheDocument()
@@ -142,9 +142,9 @@ describe('TutorView send flow', () => {
     const user = userEvent.setup()
     render(<TutorView />)
 
-    const composer = await screen.findByPlaceholderText(/Ask LEO in Explain Simply/i)
+    const composer = await screen.findByPlaceholderText(/Ask LEO.*Explain Simply/i)
     await user.type(composer, 'Explain arrays')
-    await user.click(screen.getByRole('button', { name: 'Send message to LEO' }))
+    await user.click(screen.getByRole('button', { name: /^Send$/i }))
 
     expect(await screen.findByRole('alert')).toHaveTextContent('Database is temporarily unavailable.')
     expect(composer).toHaveValue('Explain arrays')

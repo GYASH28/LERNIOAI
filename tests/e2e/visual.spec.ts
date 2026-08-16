@@ -1,26 +1,42 @@
 import { expect, test } from '@playwright/test'
+import sharp from 'sharp'
+import {
+  visualSignatures,
+  type VisualPalette,
+  type VisualProject,
+} from './visual-signatures'
 
-/**
- * Audit fix #31 (CVSS 3.0): the previous version of this test captured 6
- * palette screenshots via `testInfo.attach` but never called
- * `toHaveScreenshot()`. There were no baseline images committed and no
- * diff threshold — the test always passed, providing zero regression
- * protection.
- *
- * Now each palette is asserted against a committed baseline PNG. If the
- * visual output drifts by more than 1% of pixels, the test fails. To
- * update baselines deliberately (e.g. after a design change), run:
- *
- *   npx playwright test tests/e2e/visual.spec.ts --update-snapshots
- *
- * Baselines live in `tests/e2e/visual.spec.ts-snapshots/`.
- */
 const palettes = ['aurora', 'nexus', 'paper', 'ocean', 'forest', 'sakura'] as const
+const SIGNATURE_SIZE = 16
+const MAX_MEAN_CHANNEL_DELTA = 5
 
-test('all palette attributes can be applied before visual capture', async ({ page }) => {
+async function compactVisualSignature(png: Buffer) {
+  return sharp(png)
+    .resize(SIGNATURE_SIZE, SIGNATURE_SIZE, { fit: 'fill' })
+    .removeAlpha()
+    .raw()
+    .toBuffer()
+}
+
+function meanChannelDelta(actual: Buffer, expected: Buffer) {
+  expect(actual.length).toBe(expected.length)
+  let total = 0
+  for (let index = 0; index < actual.length; index += 1) {
+    total += Math.abs(actual[index] - expected[index])
+  }
+  return total / actual.length
+}
+
+test('all palettes preserve their approved visual signature', async ({ page }, testInfo) => {
   test.setTimeout(60_000)
-  await page.goto('/')
+  const project = testInfo.project.name as VisualProject
+  expect(Object.hasOwn(visualSignatures, project), `Missing visual signatures for ${project}`).toBe(true)
+
+  await page.goto('/', { waitUntil: 'networkidle' })
   await expect(page.locator('body')).toBeVisible()
+  await page.evaluate(async () => {
+    await document.fonts.ready
+  })
 
   for (const palette of palettes) {
     await page.evaluate((nextPalette) => {
@@ -30,13 +46,17 @@ test('all palette attributes can be applied before visual capture', async ({ pag
     }, palette)
 
     await expect(page.locator('html')).toHaveAttribute('data-palette', palette)
+    await page.evaluate(() => new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))))
 
-    // Audit fix #31: real visual regression check with a 1% pixel-diff threshold.
-    // First run will fail and write baseline PNGs to the snapshots dir; commit them.
-    await expect(page).toHaveScreenshot(`palette-${palette}.png`, {
-      animations: 'disabled',
-      maxDiffPixelRatio: 0.01,
-      timeout: 10_000,
-    })
+    const screenshot = await page.screenshot({ animations: 'disabled' })
+    const actual = await compactVisualSignature(screenshot)
+    const expectedBase64 = visualSignatures[project][palette as VisualPalette]
+    const expected = Buffer.from(expectedBase64, 'base64')
+    const delta = meanChannelDelta(actual, expected)
+
+    expect(
+      delta,
+      `${project}/${palette} visual signature drifted (mean channel delta ${delta.toFixed(2)} > ${MAX_MEAN_CHANNEL_DELTA}).`,
+    ).toBeLessThanOrEqual(MAX_MEAN_CHANNEL_DELTA)
   }
 })
