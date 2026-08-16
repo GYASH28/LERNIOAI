@@ -22,10 +22,18 @@ export default async function TutorPage({ searchParams }: { searchParams: Promis
   const requestedChapter = typeof params.chapter === 'string' ? params.chapter : null
   const requestedTopic = typeof params.topic === 'string' ? params.topic.replaceAll('-', ' ') : null
 
-  const classAllowed = requestedClass && (profile.classLevel === 'DROPPER' || profile.classLevel === requestedClass)
-  const subjectAllowed = requestedSubject && profile.subjects.includes(requestedSubject as SubjectSlug)
-  const subject = classAllowed && subjectAllowed ? getCurriculumSubject(requestedClass, requestedSubject) : null
-  const chapter = subject && requestedChapter ? getCurriculumChapter(requestedClass, requestedSubject, requestedChapter) : null
+  const academicClass: '11' | '12' | null = requestedClass && (profile.classLevel === 'DROPPER' || profile.classLevel === requestedClass)
+    ? requestedClass
+    : null
+  const academicSubjectSlug = requestedSubject && profile.subjects.includes(requestedSubject as SubjectSlug)
+    ? requestedSubject
+    : null
+  const subject = academicClass && academicSubjectSlug
+    ? getCurriculumSubject(academicClass, academicSubjectSlug)
+    : null
+  const chapter = academicClass && academicSubjectSlug && subject && requestedChapter
+    ? getCurriculumChapter(academicClass, academicSubjectSlug, requestedChapter)
+    : null
 
   const profileLabel = `${profile.board} · ${profile.classLevel === 'DROPPER' ? 'JEE Dropper' : `Class ${profile.classLevel}`} · ${profile.stream}`
   const examLabel = profile.targetExams.map((exam) => exam === 'BOARDS' ? 'Boards' : exam === 'JEE_MAIN' ? 'JEE Main' : 'JEE Advanced').join(' + ')
