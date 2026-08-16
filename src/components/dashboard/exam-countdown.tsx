@@ -1,8 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Calendar, Clock, AlertCircle } from 'lucide-react'
+import { AlertCircle, Calendar } from 'lucide-react'
 
 /**
  * Exam countdown widget.
@@ -10,15 +9,9 @@ import { Calendar, Clock, AlertCircle } from 'lucide-react'
  * Auto-generates a study plan 30 days before the exam.
  */
 export function ExamCountdown({ examDate }: { examDate: string | null }) {
-  const [daysLeft, setDaysLeft] = useState<number | null>(null)
-
-  useEffect(() => {
-    if (!examDate) return
-    const exam = new Date(examDate)
-    const now = new Date()
-    const diff = Math.ceil((exam.getTime() - now.getTime()) / (1000 * 60 * 60 * 24))
-    setDaysLeft(diff)
-  }, [examDate])
+  const daysLeft = examDate
+    ? Math.ceil((new Date(examDate).getTime() - Date.now()) / (1000 * 60 * 60 * 24))
+    : null
 
   if (!examDate || daysLeft === null) {
     return (
