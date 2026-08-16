@@ -1,6 +1,6 @@
 {
   "name": "lernio-ai",
-  "version": "0.3.0",
+  "version": "0.2.0",
   "private": true,
   "engines": {
     "node": "24.x"
@@ -89,7 +89,7 @@
     "react-resizable-panels": "^3.0.3",
     "recharts": "^2.15.4",
     "rehype-highlight": "^7.0.2",
-    "rehype-raw": "^7.0.2",
+    "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.1",
     "server-only": "^0.0.1",
     "sharp": "^0.34.3",
