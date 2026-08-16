@@ -14,9 +14,12 @@ const PUBLIC_A11Y_PATHS = [
 
 for (const path of PUBLIC_A11Y_PATHS) {
   test(`${path} has no serious or critical WCAG A/AA violations`, async ({ page }) => {
+    // Inject axe before navigation through Playwright's init-script channel.
+    // Unlike an inline <script>, this does not weaken or bypass Lernio's
+    // production nonce CSP just to make the test harness work.
+    await page.addInitScript({ content: axe.source })
     await page.goto(path, { waitUntil: 'domcontentloaded' })
     await expect(page.locator('body')).toBeVisible()
-    await page.addScriptTag({ content: axe.source })
 
     const results = await page.evaluate(async () => {
       const axeRunner = (window as unknown as {
