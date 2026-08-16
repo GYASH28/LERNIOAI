@@ -1,5 +1,4 @@
 import type { NextConfig } from "next";
-import { buildContentSecurityPolicy } from "./src/lib/security/content-security-policy";
 
 if (
   process.env.LERNIO_DEMO_MODE === 'true' &&
@@ -10,26 +9,10 @@ if (
 
 const isProduction = process.env.NODE_ENV === 'production'
 
-function contentSecurityPolicy() {
-  return buildContentSecurityPolicy({
-    allowUnsafeInlineScript: false,
-    nodeEnv: process.env.NODE_ENV,
-    storagePublicBaseUrl: process.env.STORAGE_PUBLIC_BASE_URL,
-  })
-}
-
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   allowedDevOrigins: ['127.0.0.1'],
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  // eslint key is not in the NextConfig type for Next.js 16 but is still
-  // respected at runtime by Vercel. Cast to bypass the type error.
-  ...(({ eslint: { ignoreDuringBuilds: true } }) as Partial<NextConfig>),
   experimental: {
-    // Audit fix #24 (CVSS 2.5): expanded from 4 libs to cover all heavy barrel-import
-    // packages. Each omitted lib was adding 3-8 KB to chunks that use only one symbol.
     optimizePackageImports: [
       'lucide-react',
       'framer-motion',
@@ -76,7 +59,6 @@ const nextConfig: NextConfig = {
       { key: 'X-Frame-Options', value: 'DENY' },
       { key: 'X-Content-Type-Options', value: 'nosniff' },
       { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
-      { key: 'Content-Security-Policy', value: contentSecurityPolicy() },
       {
         key: 'Permissions-Policy',
         value: 'camera=(), microphone=(self), geolocation=(), payment=(), usb=()',
@@ -96,15 +78,6 @@ const nextConfig: NextConfig = {
           {
             key: 'X-Robots-Tag',
             value: 'noindex, nofollow',
-          },
-        ],
-      },
-      {
-        source: '/_next/static/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
           },
         ],
       },

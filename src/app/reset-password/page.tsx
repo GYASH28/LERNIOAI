@@ -21,6 +21,9 @@ function getErrorMessage(payload: unknown, fallback: string): string {
   return fallback
 }
 
+const authErrorClass =
+  'rounded-lg border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm font-semibold text-[oklch(0.46_0.2_25)] dark:text-destructive'
+
 function Rule({ passed, children }: { passed: boolean; children: React.ReactNode }) {
   return (
     <li className="flex items-center gap-2">
@@ -107,7 +110,7 @@ function ResetPasswordForm() {
     >
       {!token ? (
         <div className="space-y-4">
-          <p className="rounded-lg border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm font-semibold text-destructive">
+          <p className={authErrorClass}>
             This reset link is invalid or missing a token. Request a new link to continue.
           </p>
           <Button asChild className={`w-full ${authPrimaryButtonClass}`}>
@@ -175,17 +178,13 @@ function ResetPasswordForm() {
                 <Rule passed={hasLength}>At least 8 characters</Rule>
                 <Rule passed={hasLetter}>Contains a letter</Rule>
                 <Rule passed={hasNumber}>Contains a number</Rule>
-                <Rule passed={hasLongPassphrase}>Or use a 16+ character passphrase</Rule>
+                <Rule passed={hasLongPassphrase}>Or use a 12+ character passphrase</Rule>
                 <Rule passed={isMatch}>Passwords match</Rule>
               </ul>
             </div>
           ) : null}
 
-          {error ? (
-            <p className="rounded-lg border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm font-semibold text-destructive">
-              {error}
-            </p>
-          ) : null}
+          {error ? <p className={authErrorClass}>{error}</p> : null}
 
           {statusMessage ? (
             <p className="rounded-lg border border-primary/30 bg-primary/10 px-3 py-2 text-sm font-semibold text-primary">

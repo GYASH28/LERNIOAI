@@ -29,7 +29,9 @@ export function resolveLandingIntroMode(signals: LandingIntroSignals): LandingIn
 }
 
 export function introDurationMs(mode: Exclude<LandingIntroMode, 'skip'>, viewportWidth: number) {
-  if (mode === 'reduced') return 900
-  if (mode === 'compact') return viewportWidth < 640 ? 2200 : 2600
-  return viewportWidth < 640 ? 5200 : 7200
+  // Keep the signature moment, but never make a student wait seven seconds
+  // before reaching the actual product. Reduced motion remains intentionally brief.
+  if (mode === 'reduced') return 650
+  if (mode === 'compact') return viewportWidth < 640 ? 1500 : 1800
+  return viewportWidth < 640 ? 3200 : 4200
 }

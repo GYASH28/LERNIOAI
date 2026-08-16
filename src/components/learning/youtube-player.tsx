@@ -12,17 +12,17 @@ interface YouTubePlayerProps {
   isPlaylist?: boolean
 }
 
-/**
- * Extract playlist ID from a YouTube URL.
- */
+interface PlaylistThumbnailState {
+  playlistId: string
+  url: string | null
+  error: boolean
+}
+
 function extractPlaylistId(url: string): string | null {
   const match = url.match(/[?&]list=([\w-]+)/)
   return match ? match[1] : null
 }
 
-/**
- * Extract video ID from a YouTube URL.
- */
 function extractVideoId(url: string): string | null {
   const watchMatch = url.match(/[?&]v=([\w-]{11})/)
   if (watchMatch) return watchMatch[1]
@@ -33,10 +33,8 @@ function extractVideoId(url: string): string | null {
 
 /**
  * YouTube video/playlist embed player with thumbnails.
- *
- * For single videos: uses i.ytimg.com thumbnail (instant, no API needed).
- * For playlists: fetches thumbnail via our server-side API route
- * (/api/youtube-thumbnail) which proxies YouTube's oEmbed API (avoids CORS).
+ * Single-video thumbnails are derived directly. Playlist thumbnails load through
+ * our server proxy and are keyed so a late response cannot overwrite a new URL.
  */
 export function YouTubePlayer({
   url,
@@ -47,50 +45,75 @@ export function YouTubePlayer({
   isPlaylist,
 }: YouTubePlayerProps) {
   const [playing, setPlaying] = useState(false)
-  const [thumbnail, setThumbnail] = useState<string | null>(null)
-  const [thumbLoaded, setThumbLoaded] = useState(false)
-  const [thumbError, setThumbError] = useState(false)
+  const [playlistThumbnail, setPlaylistThumbnail] = useState<PlaylistThumbnailState>({
+    playlistId: '',
+    url: null,
+    error: false,
+  })
+  const [loadedThumbnail, setLoadedThumbnail] = useState<string | null>(null)
+  const [failedThumbnail, setFailedThumbnail] = useState<string | null>(null)
 
   const videoId = extractVideoId(url)
   const playlistId = extractPlaylistId(url)
+  const directThumbnail = videoId ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg` : null
+  const activePlaylistThumbnail =
+    playlistId && playlistThumbnail.playlistId === playlistId ? playlistThumbnail : null
+  const thumbnail = directThumbnail ?? activePlaylistThumbnail?.url ?? null
+  const thumbError =
+    (!videoId && !playlistId) ||
+    Boolean(activePlaylistThumbnail?.error) ||
+    Boolean(thumbnail && failedThumbnail === thumbnail)
+  const thumbLoaded = Boolean(thumbnail && loadedThumbnail === thumbnail)
 
   useEffect(() => {
-    // For single videos, use i.ytimg.com directly (instant, no fetch)
-    if (videoId) {
-      setThumbnail(`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`)
-      return
-    }
+    if (!playlistId || videoId) return
 
-    // For playlists, fetch via our server-side API (avoids CORS)
-    if (playlistId) {
-      // Check localStorage cache
-      const cacheKey = `yt_thumb_${playlistId}`
+    const currentPlaylistId = playlistId
+    let cancelled = false
+    const cacheKey = `yt_thumb_${currentPlaylistId}`
+
+    async function loadPlaylistThumbnail() {
+      // Yield once so updates occur in the asynchronous load path rather than
+      // synchronously inside the effect body.
+      await Promise.resolve()
+
       try {
         const cached = localStorage.getItem(cacheKey)
         if (cached) {
-          setThumbnail(cached)
+          if (!cancelled) {
+            setPlaylistThumbnail({ playlistId: currentPlaylistId, url: cached, error: false })
+          }
           return
         }
-      } catch {}
+      } catch {
+        // Cache access can fail in privacy modes; network loading still works.
+      }
 
-      // Fetch from our API route
-      fetch(`/api/youtube-thumbnail?url=${encodeURIComponent(url)}`)
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.thumbnail) {
-            setThumbnail(data.thumbnail)
-            try {
-              localStorage.setItem(cacheKey, data.thumbnail)
-            } catch {}
-          }
-        })
-        .catch(() => {
-          setThumbError(true)
-        })
-      return
+      try {
+        const response = await fetch(`/api/youtube-thumbnail?url=${encodeURIComponent(url)}`)
+        if (!response.ok) throw new Error(`Thumbnail request failed: ${response.status}`)
+        const data = await response.json() as { thumbnail?: string }
+        if (!data.thumbnail) throw new Error('Thumbnail response did not include a URL')
+
+        if (!cancelled) {
+          setPlaylistThumbnail({ playlistId: currentPlaylistId, url: data.thumbnail, error: false })
+        }
+        try {
+          localStorage.setItem(cacheKey, data.thumbnail)
+        } catch {
+          // The thumbnail still works even if caching is unavailable.
+        }
+      } catch {
+        if (!cancelled) {
+          setPlaylistThumbnail({ playlistId: currentPlaylistId, url: null, error: true })
+        }
+      }
     }
 
-    setThumbError(true)
+    void loadPlaylistThumbnail()
+    return () => {
+      cancelled = true
+    }
   }, [url, videoId, playlistId])
 
   const buildEmbedUrl = useCallback(() => {
@@ -105,7 +128,6 @@ export function YouTubePlayer({
 
   return (
     <div className="overflow-hidden rounded-lg border border-border bg-card">
-      {/* Video / Embed area */}
       <div className="relative aspect-video w-full bg-black">
         {playing ? (
           <iframe
@@ -122,45 +144,42 @@ export function YouTubePlayer({
             className="absolute inset-0 flex h-full w-full items-center justify-center transition-all"
             aria-label={`Play: ${title}`}
           >
-            {/* Thumbnail */}
             {thumbnail && !thumbError ? (
               <img
+                key={thumbnail}
                 src={thumbnail}
                 alt={title}
                 className="absolute inset-0 h-full w-full object-cover"
-                onLoad={() => setThumbLoaded(true)}
+                onLoad={() => setLoadedThumbnail(thumbnail)}
                 onError={() => {
-                  setThumbError(true)
-                  setThumbLoaded(true)
+                  setFailedThumbnail(thumbnail)
+                  if (playlistId) {
+                    setPlaylistThumbnail({ playlistId, url: null, error: true })
+                  }
                 }}
               />
             ) : null}
 
-            {/* Loading state (no thumbnail yet, no error) */}
             {!thumbnail && !thumbError && (
               <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-zinc-800 to-zinc-900">
                 <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
               </div>
             )}
 
-            {/* Fallback (thumbnail failed) */}
             {thumbError && (
               <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-red-900/30 to-red-700/20">
                 <Youtube className="h-12 w-12 text-red-600/80" aria-hidden="true" />
               </div>
             )}
 
-            {/* Dark overlay for better play button visibility */}
             {thumbLoaded && !thumbError && (
               <div className="absolute inset-0 bg-black/30" />
             )}
 
-            {/* Play button */}
             <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full bg-red-600 shadow-2xl transition-transform hover:scale-110 sm:h-16 sm:w-16">
               <Play className="h-6 w-6 fill-white text-white sm:h-7 sm:w-7" aria-hidden="true" />
             </span>
 
-            {/* Playlist badge */}
             {isPlaylist && (
               <span className="absolute top-2 left-2 z-10 rounded bg-black/80 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
                 Playlist
@@ -170,7 +189,6 @@ export function YouTubePlayer({
         )}
       </div>
 
-      {/* Metadata */}
       <div className="space-y-2 p-3 sm:p-4">
         <div className="flex items-start justify-between gap-3">
           <h3 className="text-sm font-semibold text-foreground line-clamp-2">{title}</h3>
