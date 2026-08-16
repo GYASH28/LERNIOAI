@@ -99,8 +99,8 @@
     "input-otp": "^1.4.2",
     "jsonwebtoken": "^9.0.3",
     "lucide-react": "^0.525.0",
-    "next": "^16.1.1",
-    "next-auth": "^4.24.14",
+    "next": "16.3.1",
+    "next-auth": "4.24.15",
     "pdf-lib": "^1.17.1",
     "prisma": "^6.11.1",
     "react": "^19.0.0",
@@ -114,7 +114,7 @@
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.1",
     "server-only": "^0.0.1",
-    "sharp": "^0.34.3",
+    "sharp": "0.35.3",
     "sonner": "^2.0.6",
     "tailwind-merge": "^3.3.1",
     "tailwindcss-animate": "^1.0.7",
@@ -147,7 +147,7 @@
   },
   "overrides": {
     "cookie": "0.7.2",
-    "postcss": "8.5.10",
+    "postcss": "8.5.26",
     "uuid": "11.1.1"
   }
 }
