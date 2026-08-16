@@ -19,8 +19,6 @@ import { PublicFooter } from '@/components/marketing/public-footer'
 
 const SITE_URL = process.env.NEXTAUTH_URL?.replace(/\/$/, '') || 'https://lernioai.vercel.app'
 
-// Landing page — force-dynamic is safer for client components (CinematicIntro
-// uses sessionStorage/window). The page is fast enough without static caching.
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
@@ -51,9 +49,8 @@ const softwareApplicationLd = {
 }
 
 export default async function LandingPage() {
-  // Check if user is authenticated to show personalized CTA
   const authUser = await getCurrentUser().catch(() => null)
-  const isAuthenticated = !!authUser
+  const isAuthenticated = Boolean(authUser)
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
@@ -62,11 +59,18 @@ export default async function LandingPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationLd) }}
       />
 
+      <a
+        href="#main-content"
+        className="sr-only fixed left-4 top-4 z-[120] rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-lg focus:not-sr-only focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+      >
+        Skip to main content
+      </a>
+
       <CinematicIntro />
       <LandingMotionController />
       <PublicHeader isAuthenticated={isAuthenticated} />
 
-      <main className="flex-1">
+      <main id="main-content" className="flex-1" tabIndex={-1}>
         <Hero isAuthenticated={isAuthenticated} />
         <AcademicIntelligenceOS />
         <LearningPath />
