@@ -16,16 +16,18 @@ export default defineConfig({
   retries: process.env.CI ? 1 : 0,
   reporter: process.env.CI ? [['line'], ['html', { open: 'never' }]] : 'list',
   use: {
-    // Use localhost rather than 127.0.0.1 so standards-compliant browsers can
-    // exercise production __Secure-* auth cookies in their localhost exception.
-    baseURL: 'http://localhost:3000',
+    baseURL: process.env.CI ? 'https://localhost:3443' : 'http://localhost:3000',
+    ignoreHTTPSErrors: Boolean(process.env.CI),
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
   },
   webServer: {
-    command: process.env.CI ? 'npm run build && npm start' : 'npx next dev --webpack -p 3000',
-    url: 'http://localhost:3000',
+    command: process.env.CI
+      ? 'npm run build && node scripts/start-ci-https.mjs'
+      : 'npx next dev --webpack -p 3000',
+    url: process.env.CI ? 'https://localhost:3443' : 'http://localhost:3000',
+    ignoreHTTPSErrors: Boolean(process.env.CI),
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
   },
