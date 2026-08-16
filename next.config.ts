@@ -21,15 +21,7 @@ function contentSecurityPolicy() {
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   allowedDevOrigins: ['127.0.0.1'],
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  // eslint key is not in the NextConfig type for Next.js 16 but is still
-  // respected at runtime by Vercel. Cast to bypass the type error.
-  ...(({ eslint: { ignoreDuringBuilds: true } }) as Partial<NextConfig>),
   experimental: {
-    // Audit fix #24 (CVSS 2.5): expanded from 4 libs to cover all heavy barrel-import
-    // packages. Each omitted lib was adding 3-8 KB to chunks that use only one symbol.
     optimizePackageImports: [
       'lucide-react',
       'framer-motion',
@@ -96,15 +88,6 @@ const nextConfig: NextConfig = {
           {
             key: 'X-Robots-Tag',
             value: 'noindex, nofollow',
-          },
-        ],
-      },
-      {
-        source: '/_next/static/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
           },
         ],
       },
