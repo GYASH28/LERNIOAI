@@ -4,9 +4,13 @@ const publicPaths = ['/', '/sign-in', '/sign-up', '/forgot-password', '/privacy'
 
 for (const path of publicPaths) {
   test(`${path} stays public`, async ({ page }) => {
-    const response = await page.goto(path)
-    expect(response?.status()).toBeLessThan(400)
-    await expect(page).not.toHaveURL(/\/sign-in\?callbackUrl=/)
+    const response = await page.goto(path, { waitUntil: 'domcontentloaded' })
+    expect(response, `${path} should return a document response`).not.toBeNull()
+    expect(response!.status()).toBeLessThan(400)
+
+    const finalUrl = new URL(response!.url())
+    expect(finalUrl.pathname, `${path} must not be redirected behind authentication`).toBe(path)
+    expect(finalUrl.pathname).not.toBe('/sign-in')
   })
 }
 
