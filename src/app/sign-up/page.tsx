@@ -8,22 +8,16 @@ import {
   AuthShell,
   authInputClass,
   authPrimaryButtonClass,
-  authSelectClass,
 } from '@/components/auth/auth-shell'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { CAMPUS_DIVISIONS, CAMPUS_SEMESTERS, CWIT_PROGRAMMES } from '@/lib/campus-auth'
 
 const initialForm = {
   name: '',
   email: '',
   password: '',
   confirmPassword: '',
-  rollNumber: '',
-  departmentCode: '',
-  semesterNumber: '',
-  division: '',
   inviteCode: '',
 }
 
@@ -44,37 +38,14 @@ function Field({
   )
 }
 
-function ToggleSection({
-  open,
-  onClick,
-  children,
-}: {
-  open: boolean
-  onClick: () => void
-  children: ReactNode
-}) {
-  return (
-    <button
-      type="button"
-      className="inline-flex items-center gap-2 rounded-lg border border-border bg-muted/30 px-3 py-2 text-sm font-bold text-primary transition hover:border-primary/40 hover:bg-muted"
-      onClick={onClick}
-      aria-expanded={open}
-    >
-      {children}
-      <ChevronDown className={`h-4 w-4 transition ${open ? 'rotate-180' : ''}`} />
-    </button>
-  )
-}
-
 export default function SignUpPage() {
   const [form, setForm] = useState(initialForm)
-  const [showAcademic] = useState(true) // Always visible — academic details are mandatory
   const [showInvite, setShowInvite] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [statusMessage, setStatusMessage] = useState('')
   const [error, setError] = useState('')
 
-  function handleChange(event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
+  function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setForm((current) => ({ ...current, [event.target.name]: event.target.value }))
   }
 
@@ -82,11 +53,6 @@ export default function SignUpPage() {
     if (!form.name.trim()) return 'Enter your full name.'
     if (!form.email.trim()) return 'Enter your email address.'
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) return 'Enter a valid email address.'
-    if (!form.departmentCode) return 'Select your department / programme.'
-    if (!form.semesterNumber) return 'Select your current semester.'
-    if (!form.division || form.division === 'NOT_SURE') return 'Select your division (A, B, or C).'
-    if (!form.rollNumber.trim()) return 'Enter your 6-digit roll number.'
-    if (!/^\d{6}$/.test(form.rollNumber.trim())) return 'Roll number must be exactly 6 digits (e.g. 255044).'
     if (form.password.length < 8) return 'Password must be at least 8 characters.'
     if (form.password !== form.confirmPassword) return 'Passwords do not match.'
     return ''
@@ -102,7 +68,7 @@ export default function SignUpPage() {
 
     setSubmitting(true)
     setError('')
-    setStatusMessage('Creating your profile...')
+    setStatusMessage('Creating your account...')
 
     try {
       const response = await fetch('/api/auth/register', {
@@ -112,10 +78,6 @@ export default function SignUpPage() {
           name: form.name.trim(),
           email: form.email.trim(),
           password: form.password,
-          rollNumber: form.rollNumber.trim(),
-          departmentCode: form.departmentCode || undefined,
-          semesterNumber: form.semesterNumber ? Number(form.semesterNumber) : undefined,
-          division: form.division,
           inviteCode: showInvite ? form.inviteCode.trim() : '',
         }),
       })
@@ -124,10 +86,9 @@ export default function SignUpPage() {
         throw new Error(json.error?.message || 'Could not create this account.')
       }
 
-      // Auto sign-in after registration
       setStatusMessage('Signing you in...')
       const { signIn } = await import('next-auth/react')
-      const callbackUrl = new URL('/dashboard', window.location.origin).toString()
+      const callbackUrl = new URL('/onboarding', window.location.origin).toString()
       const result = await signIn('credentials', {
         email: form.email.trim(),
         password: form.password,
@@ -136,7 +97,7 @@ export default function SignUpPage() {
       })
 
       if (result?.error) {
-        setError('Account created! Please sign in on the sign-in page.')
+        setError('Account created. Please sign in to continue your academic setup.')
         setStatusMessage('')
         setSubmitting(false)
         return
@@ -153,12 +114,12 @@ export default function SignUpPage() {
 
   return (
     <AuthShell
-      eyebrow="Create profile"
-      title="Start with a student account"
-      description="Students can sign up directly. CR, teacher, coordinator, reviewer, moderator, and admin access need an invite code."
+      eyebrow="Create account"
+      title="Start your Lernio workspace"
+      description="Create your account first. Next, Lernio will ask for your class, stream, board/JEE goal, daily target and weak subjects."
       backHref="/"
       backLabel="Intro"
-      className="max-w-2xl"
+      className="max-w-xl"
     >
       <form onSubmit={submit} className="grid gap-4 sm:grid-cols-2">
         <Field label="Full name" className="sm:col-span-2">
@@ -200,28 +161,42 @@ export default function SignUpPage() {
             className={authInputClass}
             required
           />
-          {form.password.length > 0 && (
+          {form.password.length > 0 ? (
             <div className="mt-1.5 flex items-center gap-2">
               <div className="flex h-1.5 flex-1 overflow-hidden rounded-full bg-muted">
                 <div
                   className={`h-full transition-all duration-300 ${
-                    form.password.length < 4 ? 'w-1/4 bg-red-500' :
-                    form.password.length < 8 ? 'w-1/2 bg-amber-500' :
-                    form.password.length < 12 ? 'w-3/4 bg-blue-500' :
-                    'w-full bg-emerald-500'
+                    form.password.length < 4
+                      ? 'w-1/4 bg-red-500'
+                      : form.password.length < 8
+                        ? 'w-1/2 bg-amber-500'
+                        : form.password.length < 12
+                          ? 'w-3/4 bg-blue-500'
+                          : 'w-full bg-emerald-500'
                   }`}
                 />
               </div>
-              <span className={`text-[10px] font-medium ${
-                form.password.length < 4 ? 'text-red-500' :
-                form.password.length < 8 ? 'text-amber-500' :
-                form.password.length < 12 ? 'text-blue-500' :
-                'text-emerald-500'
-              }`}>
-                {form.password.length < 4 ? 'Weak' : form.password.length < 8 ? 'Fair' : form.password.length < 12 ? 'Good' : 'Strong'}
+              <span
+                className={`text-[10px] font-medium ${
+                  form.password.length < 4
+                    ? 'text-red-500'
+                    : form.password.length < 8
+                      ? 'text-amber-500'
+                      : form.password.length < 12
+                        ? 'text-blue-500'
+                        : 'text-emerald-500'
+                }`}
+              >
+                {form.password.length < 4
+                  ? 'Weak'
+                  : form.password.length < 8
+                    ? 'Fair'
+                    : form.password.length < 12
+                      ? 'Good'
+                      : 'Strong'}
               </span>
             </div>
-          )}
+          ) : null}
         </Field>
 
         <Field label="Confirm password">
@@ -237,65 +212,27 @@ export default function SignUpPage() {
           />
         </Field>
 
-        <div className="flex flex-wrap gap-2 sm:col-span-2">
-          <ToggleSection open={showInvite} onClick={() => setShowInvite((value) => !value)}>
-            {showInvite ? 'Hide invite code' : 'Have an invite code'}
-          </ToggleSection>
+        <div className="sm:col-span-2">
+          <button
+            type="button"
+            className="inline-flex items-center gap-2 rounded-lg border border-border bg-muted/30 px-3 py-2 text-sm font-bold text-primary transition hover:border-primary/40 hover:bg-muted"
+            onClick={() => setShowInvite((value) => !value)}
+            aria-expanded={showInvite}
+          >
+            {showInvite ? 'Hide invite code' : 'Have a staff invite code?'}
+            <ChevronDown className={`h-4 w-4 transition ${showInvite ? 'rotate-180' : ''}`} />
+          </button>
         </div>
-
-        {/* Academic details — always visible, mandatory */}
-        <div className="grid gap-4 rounded-lg border border-border bg-muted/20 p-4 sm:col-span-2 sm:grid-cols-2">
-            <Field label="Roll number *">
-              <Input
-                name="rollNumber"
-                value={form.rollNumber}
-                onChange={handleChange}
-                placeholder="e.g. 255044 (6 digits)"
-                inputMode="numeric"
-                pattern="[0-9]{6}"
-                maxLength={6}
-                className={authInputClass}
-                required
-              />
-              <p className="mt-1 text-[10px] text-muted-foreground">Enter your official 6-digit roll number.</p>
-            </Field>
-            <Field label="Department / programme *">
-              <select name="departmentCode" value={form.departmentCode} onChange={handleChange} className={authSelectClass} required>
-                <option value="">Select department</option>
-                {CWIT_PROGRAMMES.map((programme) => (
-                  <option key={programme.programmeCode} value={programme.departmentCode}>
-                    {programme.programmeName}
-                  </option>
-                ))}
-              </select>
-            </Field>
-            <Field label="Semester *">
-              <select name="semesterNumber" value={form.semesterNumber} onChange={handleChange} className={authSelectClass} required>
-                <option value="">Select semester</option>
-                {CAMPUS_SEMESTERS.map((semester) => (
-                  <option key={semester} value={semester}>
-                    Semester {semester}
-                  </option>
-                ))}
-              </select>
-            </Field>
-            <Field label="Division *">
-              <select name="division" value={form.division} onChange={handleChange} className={authSelectClass} required>
-                <option value="">Select division</option>
-                <option value="A">Division A</option>
-                <option value="B">Division B</option>
-                <option value="C">Division C</option>
-              </select>
-            </Field>
-          </div>
 
         {showInvite ? (
           <Field label="Invite code" className="sm:col-span-2">
             <Input
               name="inviteCode"
               value={form.inviteCode}
-              onChange={(event) => setForm((current) => ({ ...current, inviteCode: event.target.value.toUpperCase() }))}
-              placeholder="LM-TEA-123456"
+              onChange={(event) =>
+                setForm((current) => ({ ...current, inviteCode: event.target.value.toUpperCase() }))
+              }
+              placeholder="LERNIO-ROLE-XXXXXX"
               className={authInputClass}
             />
           </Field>
@@ -315,7 +252,7 @@ export default function SignUpPage() {
 
         <Button type="submit" className={`w-full sm:col-span-2 ${authPrimaryButtonClass}`} disabled={submitting}>
           <UserPlus className="h-4 w-4" />
-          {submitting ? 'Creating profile...' : 'Create profile'}
+          {submitting ? 'Creating account...' : 'Create account'}
         </Button>
       </form>
 
