@@ -5,7 +5,17 @@ import { useRouter } from 'next/navigation'
 import { Check, Loader2, Save } from 'lucide-react'
 import { defaultSubjectsForStream, type ClassLevel, type Stream, type SubjectSlug, type TargetExam } from '@/lib/academics/types'
 
-const labels: Record<SubjectSlug, string> = { physics: 'Physics', chemistry: 'Chemistry', mathematics: 'Mathematics', biology: 'Biology', english: 'English', 'computer-science': 'Computer Science', 'physical-education': 'Physical Education' }
+const labels: Record<SubjectSlug, string> = {
+  physics: 'Physics',
+  chemistry: 'Chemistry',
+  mathematics: 'Mathematics',
+  biology: 'Biology',
+  english: 'English',
+  'computer-science': 'Computer Science',
+  'physical-education': 'Physical Education',
+}
+
+const supportedStreams = ['PCM', 'PCB', 'PCMB'] as const satisfies readonly Stream[]
 
 type Props = {
   profile: {
@@ -21,9 +31,16 @@ type Props = {
 
 export function AcademicSettingsForm({ profile }: Props) {
   const router = useRouter()
+  const safeInitialStream: Stream = supportedStreams.includes(profile.stream as (typeof supportedStreams)[number])
+    ? profile.stream
+    : 'PCM'
   const [classLevel, setClassLevel] = useState(profile.classLevel)
-  const [stream, setStream] = useState(profile.stream)
-  const [targetExams, setTargetExams] = useState<TargetExam[]>(profile.targetExams)
+  const [stream, setStream] = useState<Stream>(safeInitialStream)
+  const [targetExams, setTargetExams] = useState<TargetExam[]>(
+    safeInitialStream === 'PCB'
+      ? profile.targetExams.filter((exam) => exam === 'BOARDS').length ? ['BOARDS'] : ['BOARDS']
+      : profile.targetExams,
+  )
   const [targetYear, setTargetYear] = useState(profile.targetYear)
   const [dailyStudyGoal, setDailyStudyGoal] = useState(profile.dailyStudyGoal)
   const [weakSubjects, setWeakSubjects] = useState<SubjectSlug[]>(profile.weakSubjects)
@@ -55,7 +72,16 @@ export function AcademicSettingsForm({ profile }: Props) {
       const response = await fetch('/api/onboarding', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ board: 'CBSE', classLevel, stream, targetExams, targetYear, dailyStudyGoal, weakSubjects: weakSubjects.filter((subject) => subjects.includes(subject)), preferredLearningStyle: 'balanced' }),
+        body: JSON.stringify({
+          board: 'CBSE',
+          classLevel,
+          stream,
+          targetExams,
+          targetYear,
+          dailyStudyGoal,
+          weakSubjects: weakSubjects.filter((subject) => subjects.includes(subject)),
+          preferredLearningStyle: 'balanced',
+        }),
       })
       const data = await response.json()
       if (!response.ok) throw new Error(data.error || 'Could not update your academic profile.')
@@ -72,14 +98,100 @@ export function AcademicSettingsForm({ profile }: Props) {
 
   return (
     <div className="space-y-6 rounded-3xl border border-border bg-card p-5 sm:p-6">
-      <section><label className="text-sm font-semibold">Class</label><div className="mt-2 grid grid-cols-3 gap-2">{(['11','12','DROPPER'] as ClassLevel[]).map((value) => <button key={value} type="button" className={choice(classLevel === value)} onClick={() => setClassLevel(value)}>{value === 'DROPPER' ? 'Dropper' : `Class ${value}`}</button>)}</div></section>
-      <section><label className="text-sm font-semibold">Stream</label><div className="mt-2 grid gap-2 sm:grid-cols-3">{(['PCM','PCB','PCMB','COMMERCE','HUMANITIES'] as Stream[]).map((value) => <button key={value} type="button" className={choice(stream === value)} onClick={() => { setStream(value); setWeakSubjects([]); if (value !== 'PCM' && value !== 'PCMB') setTargetExams((current) => current.filter((exam) => exam === 'BOARDS').length ? ['BOARDS'] : ['BOARDS']) }}>{value === 'HUMANITIES' ? 'Humanities' : value === 'COMMERCE' ? 'Commerce' : value}</button>)}</div></section>
-      <section><label className="text-sm font-semibold">Preparation goals</label><div className="mt-2 grid gap-2 sm:grid-cols-3">{([['BOARDS','Boards'],['JEE_MAIN','JEE Main'],['JEE_ADVANCED','JEE Advanced']] as [TargetExam,string][]).map(([value,label]) => <button key={value} type="button" disabled={!isPcm && value !== 'BOARDS'} className={`${choice(targetExams.includes(value))} disabled:cursor-not-allowed disabled:opacity-40`} onClick={() => toggleExam(value)}>{label}</button>)}</div>{!isPcm && <p className="mt-2 text-xs text-muted-foreground">JEE tools are intentionally unavailable outside PCM/PCMB profiles.</p>}</section>
-      <section className="grid gap-4 sm:grid-cols-2"><div><label htmlFor="target-year" className="text-sm font-semibold">Target year</label><input id="target-year" type="number" min={2026} max={2032} value={targetYear} onChange={(event) => setTargetYear(Number(event.target.value))} className="mt-2 w-full rounded-xl border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-primary" /></div><div><label htmlFor="daily-goal" className="text-sm font-semibold">Daily study goal</label><select id="daily-goal" value={dailyStudyGoal} onChange={(event) => setDailyStudyGoal(Number(event.target.value))} className="mt-2 w-full rounded-xl border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-primary"><option value={30}>30 min</option><option value={60}>1 hour</option><option value={120}>2 hours</option><option value={180}>3 hours</option><option value={240}>4+ hours</option></select></div></section>
-      <section><label className="text-sm font-semibold">Subjects that need more attention</label><div className="mt-2 grid gap-2 sm:grid-cols-2">{subjects.map((subject) => { const active = weakSubjects.includes(subject); return <button key={subject} type="button" className={`${choice(active)} flex items-center justify-between text-left`} onClick={() => setWeakSubjects((current) => active ? current.filter((item) => item !== subject) : [...current, subject])}><span>{labels[subject]}</span>{active && <Check className="h-4 w-4" />}</button> })}</div></section>
-      {error && <p className="rounded-xl border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">{error}</p>}
-      {saved && <p className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3 text-sm text-emerald-700 dark:text-emerald-300">Academic profile updated. Your account and existing activity were preserved.</p>}
-      <button type="button" disabled={saving || targetExams.length === 0} onClick={save} className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground disabled:opacity-50">{saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />} Save academic profile</button>
+      <section>
+        <label className="text-sm font-semibold">Class</label>
+        <div className="mt-2 grid grid-cols-3 gap-2">
+          {(['11', '12', 'DROPPER'] as ClassLevel[]).map((value) => (
+            <button key={value} type="button" className={choice(classLevel === value)} onClick={() => setClassLevel(value)}>
+              {value === 'DROPPER' ? 'Dropper' : `Class ${value}`}
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <label className="text-sm font-semibold">Science stream</label>
+        <div className="mt-2 grid gap-2 sm:grid-cols-3">
+          {supportedStreams.map((value) => (
+            <button
+              key={value}
+              type="button"
+              className={choice(stream === value)}
+              onClick={() => {
+                setStream(value)
+                setWeakSubjects([])
+                if (value === 'PCB') setTargetExams(['BOARDS'])
+              }}
+            >
+              {value}
+            </button>
+          ))}
+        </div>
+        <p className="mt-2 text-xs leading-5 text-muted-foreground">
+          Only streams with complete Lernio curriculum coverage are selectable. Existing legacy profiles are preserved but must choose a supported stream before saving.
+        </p>
+      </section>
+
+      <section>
+        <label className="text-sm font-semibold">Preparation goals</label>
+        <div className="mt-2 grid gap-2 sm:grid-cols-3">
+          {([['BOARDS', 'Boards'], ['JEE_MAIN', 'JEE Main'], ['JEE_ADVANCED', 'JEE Advanced']] as [TargetExam, string][]).map(([value, label]) => (
+            <button
+              key={value}
+              type="button"
+              disabled={!isPcm && value !== 'BOARDS'}
+              className={`${choice(targetExams.includes(value))} disabled:cursor-not-allowed disabled:opacity-40`}
+              onClick={() => toggleExam(value)}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+        {!isPcm ? <p className="mt-2 text-xs text-muted-foreground">JEE tools are intentionally unavailable outside PCM/PCMB profiles.</p> : null}
+      </section>
+
+      <section className="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label htmlFor="target-year" className="text-sm font-semibold">Target year</label>
+          <input id="target-year" type="number" min={2026} max={2032} value={targetYear} onChange={(event) => setTargetYear(Number(event.target.value))} className="mt-2 w-full rounded-xl border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-primary" />
+        </div>
+        <div>
+          <label htmlFor="daily-goal" className="text-sm font-semibold">Daily study goal</label>
+          <select id="daily-goal" value={dailyStudyGoal} onChange={(event) => setDailyStudyGoal(Number(event.target.value))} className="mt-2 w-full rounded-xl border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-primary">
+            <option value={30}>30 min</option>
+            <option value={60}>1 hour</option>
+            <option value={120}>2 hours</option>
+            <option value={180}>3 hours</option>
+            <option value={240}>4+ hours</option>
+          </select>
+        </div>
+      </section>
+
+      <section>
+        <label className="text-sm font-semibold">Subjects that need more attention</label>
+        <div className="mt-2 grid gap-2 sm:grid-cols-2">
+          {subjects.map((subject) => {
+            const active = weakSubjects.includes(subject)
+            return (
+              <button
+                key={subject}
+                type="button"
+                className={`${choice(active)} flex items-center justify-between text-left`}
+                onClick={() => setWeakSubjects((current) => active ? current.filter((item) => item !== subject) : [...current, subject])}
+              >
+                <span>{labels[subject]}</span>
+                {active ? <Check className="h-4 w-4" /> : null}
+              </button>
+            )
+          })}
+        </div>
+      </section>
+
+      {error ? <p className="rounded-xl border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">{error}</p> : null}
+      {saved ? <p className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3 text-sm text-emerald-700 dark:text-emerald-300">Academic profile updated. Your account and existing activity were preserved.</p> : null}
+      <button type="button" disabled={saving || targetExams.length === 0} onClick={save} className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground disabled:opacity-50">
+        {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />} Save academic profile
+      </button>
     </div>
   )
 }
