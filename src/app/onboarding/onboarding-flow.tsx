@@ -14,6 +14,12 @@ const studyGoals = [
   { value: 240, label: '4+ hours' },
 ]
 
+const supportedStreams = [
+  ['PCM', 'Science · PCM'],
+  ['PCB', 'Science · PCB'],
+  ['PCMB', 'Science · PCMB'],
+] as const satisfies readonly (readonly [Stream, string])[]
+
 const subjectNames: Record<SubjectSlug, string> = {
   physics: 'Physics',
   chemistry: 'Chemistry',
@@ -22,6 +28,13 @@ const subjectNames: Record<SubjectSlug, string> = {
   english: 'English',
   'computer-science': 'Computer Science',
   'physical-education': 'Physical Education',
+}
+
+function defaultTargetYear(classLevel: ClassLevel) {
+  const now = new Date()
+  const academicSessionStarted = now.getMonth() >= 4
+  if (classLevel === '11') return now.getFullYear() + (academicSessionStarted ? 2 : 1)
+  return now.getFullYear() + (academicSessionStarted ? 1 : 0)
 }
 
 function Choice({ active, title, description, onClick }: { active: boolean; title: string; description?: string; onClick: () => void }) {
@@ -34,10 +47,10 @@ function Choice({ active, title, description, onClick }: { active: boolean; titl
       <div className="flex items-center justify-between gap-3">
         <div>
           <p className="font-semibold">{title}</p>
-          {description && <p className="mt-1 text-sm text-muted-foreground">{description}</p>}
+          {description ? <p className="mt-1 text-sm text-muted-foreground">{description}</p> : null}
         </div>
         <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border ${active ? 'border-primary bg-primary text-primary-foreground' : 'border-border'}`}>
-          {active && <Check className="h-3.5 w-3.5" />}
+          {active ? <Check className="h-3.5 w-3.5" /> : null}
         </span>
       </div>
     </button>
@@ -57,7 +70,7 @@ export function OnboardingFlow({ firstName }: { firstName: string }) {
   const [error, setError] = useState('')
 
   const subjects = useMemo(() => defaultSubjectsForStream(stream), [stream])
-  const targetYear = classLevel === '11' ? 2028 : 2027
+  const targetYear = defaultTargetYear(classLevel)
   const isPcm = stream === 'PCM' || stream === 'PCMB'
 
   const setPreparation = (mode: 'BOARDS' | 'JEE_MAIN' | 'JEE_ADVANCED' | 'BOARDS_JEE') => {
@@ -98,7 +111,7 @@ export function OnboardingFlow({ firstName }: { firstName: string }) {
       if (!response.ok) throw new Error(data.error || 'Unable to save your workspace.')
 
       setBuilding(true)
-      setTimeout(() => router.replace('/dashboard'), 1300)
+      window.setTimeout(() => router.replace('/dashboard'), 900)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unable to save your workspace.')
       setSaving(false)
@@ -116,7 +129,7 @@ export function OnboardingFlow({ firstName }: { firstName: string }) {
           <div className="mx-auto mt-7 max-w-sm space-y-3 text-left text-sm">
             {['Setting up your subjects', 'Creating your study roadmap', 'Preparing your revision system', 'Personalizing practice'].map((label, index) => (
               <div key={label} className="flex items-center gap-3 rounded-xl border border-border bg-card px-4 py-3">
-                <Check className={`h-4 w-4 ${index < 3 ? 'text-emerald-500' : 'text-primary animate-pulse'}`} />
+                <Check className={`h-4 w-4 ${index < 3 ? 'text-emerald-500' : 'animate-pulse text-primary'}`} />
                 <span>{label}</span>
               </div>
             ))}
@@ -138,14 +151,8 @@ export function OnboardingFlow({ firstName }: { firstName: string }) {
       <Choice active={preparationMode === 'JEE_ADVANCED'} title="JEE Main + Advanced" onClick={() => setPreparation('JEE_ADVANCED')} />
       <Choice active={preparationMode === 'BOARDS_JEE'} title="Boards + JEE" description="Keep both tracks connected in one study plan." onClick={() => setPreparation('BOARDS_JEE')} />
     </div>,
-    <div key="stream" className="grid gap-3 sm:grid-cols-2">
-      {([
-        ['PCM', 'Science · PCM'],
-        ['PCB', 'Science · PCB'],
-        ['PCMB', 'Science · PCMB'],
-        ['COMMERCE', 'Commerce'],
-        ['HUMANITIES', 'Humanities / Arts'],
-      ] as const).map(([value, label]) => (
+    <div key="stream" className="grid gap-3 sm:grid-cols-3">
+      {supportedStreams.map(([value, label]) => (
         <Choice
           key={value}
           active={stream === value}
@@ -153,11 +160,18 @@ export function OnboardingFlow({ firstName }: { firstName: string }) {
           onClick={() => {
             setStream(value)
             setWeakSubjects([])
-            if (value !== 'PCM' && value !== 'PCMB' && targetExams.some((exam) => exam.startsWith('JEE'))) setTargetExams(['BOARDS'])
+            if (value === 'PCB' && targetExams.some((exam) => exam === 'JEE_MAIN' || exam === 'JEE_ADVANCED')) {
+              setTargetExams(['BOARDS'])
+            }
           }}
         />
       ))}
-      {!isPcm && targetExams.some((exam) => exam.startsWith('JEE')) && <p className="text-sm text-amber-600 sm:col-span-2">JEE tools are only shown for PCM/PCMB profiles.</p>}
+      <p className="text-xs leading-5 text-muted-foreground sm:col-span-3">
+        Lernio currently ships a verified CBSE science workspace. Commerce and Humanities will only be exposed after their curriculum and learning loops are complete.
+      </p>
+      {!isPcm && targetExams.some((exam) => exam === 'JEE_MAIN' || exam === 'JEE_ADVANCED') ? (
+        <p className="text-sm text-amber-600 sm:col-span-3">JEE tools are only shown for PCM/PCMB profiles.</p>
+      ) : null}
     </div>,
     <div key="time" className="grid grid-cols-2 gap-3 sm:grid-cols-3">
       {studyGoals.map((goal) => (
@@ -180,7 +194,7 @@ export function OnboardingFlow({ firstName }: { firstName: string }) {
   const headings = [
     ['What’s your current class?', `Hey ${firstName}. Let’s shape Lernio around where you are right now.`],
     ['What are you preparing for?', 'Lernio will adapt practice, tests and revision to your goal.'],
-    ['Choose your stream', 'You’ll only see subjects and exam tools that are relevant to you.'],
+    ['Choose your science stream', 'You’ll only see subjects and exam tools that are relevant to you.'],
     ['How much do you usually study each day?', 'This keeps your plan ambitious without becoming unrealistic.'],
     ['What feels difficult right now?', 'Optional — Lernio can give these subjects a little more attention.'],
   ]
@@ -206,8 +220,8 @@ export function OnboardingFlow({ firstName }: { firstName: string }) {
             <p className="mt-2 max-w-xl text-muted-foreground">{headings[step][1]}</p>
           </div>
           {steps[step]}
-          {step === 2 && <p className="mt-4 text-xs text-muted-foreground">Initial curriculum: CBSE / NCERT. The curriculum layer is designed to support more boards later.</p>}
-          {error && <p className="mt-5 rounded-xl border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">{error}</p>}
+          {step === 2 ? <p className="mt-4 text-xs text-muted-foreground">Initial curriculum: CBSE / NCERT. The curriculum layer is designed to support more boards later.</p> : null}
+          {error ? <p className="mt-5 rounded-xl border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">{error}</p> : null}
         </section>
 
         <footer className="flex items-center justify-between border-t border-border pt-5">
