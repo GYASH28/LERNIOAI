@@ -5,12 +5,11 @@ export default function manifest(): MetadataRoute.Manifest {
     name: 'Lernio AI',
     short_name: 'Lernio',
     description:
-      'An adaptive learning workspace for diploma engineering students. Learn, practise, revise and prepare for exams.',
-    start_url: '/',
+      'Adaptive learning OS for CBSE Class 11, Class 12, board exams and JEE preparation.',
+    start_url: '/dashboard',
     display: 'standalone',
     background_color: '#ffffff',
     theme_color: '#5b3df5',
-    // Make sure the app feels native on mobile — full screen, no selection UI
     orientation: 'portrait-primary',
     icons: [
       {
