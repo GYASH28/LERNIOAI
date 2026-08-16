@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/navigation'
+import { NextResponse } from 'next/server'
 import { getCurrentUser } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { saveAcademicProfile } from '@/lib/academics/profile-store'
