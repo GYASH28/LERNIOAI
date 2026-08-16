@@ -4,6 +4,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { LernioBrandLockup } from '@/components/brand/lernio-logo'
+import { usePrefs } from '@/components/theme-provider'
 import {
   Sheet,
   SheetContent,
@@ -12,7 +13,7 @@ import {
   SheetTrigger,
   SheetClose,
 } from '@/components/ui/sheet'
-import { Menu, ArrowRight } from 'lucide-react'
+import { Menu, ArrowRight, Moon, Sun } from 'lucide-react'
 
 interface NavItem {
   label: string
@@ -34,14 +35,39 @@ const TABLET_NAV_ITEMS = NAV_ITEMS.filter((item) =>
   ['Product', 'Academic OS', 'AI Tutor'].includes(item.label),
 )
 
+function PublicThemeToggle() {
+  const { setPref } = usePrefs()
+
+  const toggleTheme = () => {
+    const currentlyDark = document.documentElement.classList.contains('dark')
+    setPref({ appearance: currentlyDark ? 'light' : 'dark' })
+  }
+
+  return (
+    <Button
+      type="button"
+      variant="ghost"
+      size="icon"
+      className="h-10 w-10 shrink-0"
+      onClick={toggleTheme}
+      aria-label="Toggle light and dark mode"
+      title="Toggle light and dark mode"
+    >
+      <Moon className="h-4 w-4 dark:hidden" aria-hidden="true" />
+      <Sun className="hidden h-4 w-4 dark:block" aria-hidden="true" />
+    </Button>
+  )
+}
+
 export function PublicHeader({ isAuthenticated = false }: { isAuthenticated?: boolean }) {
   const [mobileOpen, setMobileOpen] = React.useState(false)
 
   React.useEffect(() => {
     if (typeof document === 'undefined') return
-    document.body.style.overflow = mobileOpen ? 'hidden' : ''
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = mobileOpen ? 'hidden' : previousOverflow
     return () => {
-      document.body.style.overflow = ''
+      document.body.style.overflow = previousOverflow
     }
   }, [mobileOpen])
 
@@ -50,7 +76,7 @@ export function PublicHeader({ isAuthenticated = false }: { isAuthenticated?: bo
 
   return (
     <header
-      className="sticky top-0 z-40 w-full border-b border-border bg-background/80 backdrop-blur-md"
+      className="sticky top-0 z-40 w-full border-b border-border/80 bg-background/85 shadow-[0_1px_0_hsl(var(--border)/0.15)] backdrop-blur-xl supports-[backdrop-filter]:bg-background/72"
       role="banner"
     >
       <div className="marketing-container grid h-16 grid-cols-[minmax(0,auto)_1fr_auto] items-center gap-3">
@@ -86,18 +112,14 @@ export function PublicHeader({ isAuthenticated = false }: { isAuthenticated?: bo
           ))}
         </nav>
 
-        <div className="hidden items-center justify-end gap-2 lg:flex">
+        <div className="hidden items-center justify-end gap-1 lg:flex">
+          <PublicThemeToggle />
           {!isAuthenticated ? (
-            <Button
-              variant="ghost"
-              size="sm"
-              asChild
-              className="h-10 min-h-10"
-            >
+            <Button variant="ghost" size="sm" asChild className="h-10 min-h-10">
               <Link href="/sign-in">Sign in</Link>
             </Button>
           ) : null}
-          <Button size="sm" asChild className="h-10 min-h-10 gap-1.5">
+          <Button size="sm" asChild className="h-10 min-h-10 gap-1.5 shadow-sm">
             <Link href={primaryHref}>
               {primaryLabel}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -105,8 +127,9 @@ export function PublicHeader({ isAuthenticated = false }: { isAuthenticated?: bo
           </Button>
         </div>
 
-        <div className="flex items-center justify-end gap-2 lg:hidden">
-          <Button size="sm" asChild className="h-10 min-h-10 gap-1.5 px-3">
+        <div className="flex items-center justify-end gap-1 lg:hidden">
+          <PublicThemeToggle />
+          <Button size="sm" asChild className="h-10 min-h-10 gap-1.5 px-3 shadow-sm">
             <Link href={primaryHref}>
               {isAuthenticated ? 'Dashboard' : 'Start'}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -133,10 +156,7 @@ export function PublicHeader({ isAuthenticated = false }: { isAuthenticated?: bo
                   <LernioBrandLockup href="/" size="sm" />
                 </SheetTitle>
               </SheetHeader>
-              <nav
-                className="flex flex-col gap-1 p-4"
-                aria-label="Mobile navigation"
-              >
+              <nav className="flex flex-col gap-1 p-4" aria-label="Mobile navigation">
                 {NAV_ITEMS.map((item) => (
                   <SheetClose asChild key={item.href}>
                     <Link
