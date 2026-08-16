@@ -1,17 +1,17 @@
 module.exports = {
   ci: {
     collect: {
-      startServerCommand: 'npm start',
-      startServerReadyPattern: 'Ready in',
+      startServerCommand: 'node scripts/start-ci-https.mjs',
+      startServerReadyPattern: 'Lernio CI HTTPS ready',
       startServerReadyTimeout: 120000,
       url: [
-        'http://localhost:3000/',
-        'http://localhost:3000/sign-in',
-        'http://localhost:3000/sign-up',
+        'https://localhost:3443/',
+        'https://localhost:3443/sign-in',
+        'https://localhost:3443/sign-up',
       ],
       numberOfRuns: 2,
       settings: {
-        chromeFlags: '--no-sandbox --headless=new',
+        chromeFlags: '--no-sandbox --headless=new --ignore-certificate-errors',
       },
     },
     assert: {
