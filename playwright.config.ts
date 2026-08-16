@@ -16,14 +16,16 @@ export default defineConfig({
   retries: process.env.CI ? 1 : 0,
   reporter: process.env.CI ? [['line'], ['html', { open: 'never' }]] : 'list',
   use: {
-    baseURL: 'http://127.0.0.1:3000',
+    // Use localhost rather than 127.0.0.1 so standards-compliant browsers can
+    // exercise production __Secure-* auth cookies in their localhost exception.
+    baseURL: 'http://localhost:3000',
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
   },
   webServer: {
     command: process.env.CI ? 'npm run build && npm start' : 'npx next dev --webpack -p 3000',
-    url: 'http://127.0.0.1:3000',
+    url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
   },
