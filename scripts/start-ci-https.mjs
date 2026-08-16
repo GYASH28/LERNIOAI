@@ -11,73 +11,52 @@ const keyPath = join(certDir, 'localhost-key.pem')
 const certPath = join(certDir, 'localhost-cert.pem')
 
 mkdirSync(certDir, { recursive: true })
-
 if (!existsSync(keyPath) || !existsSync(certPath)) {
-  const generated = spawnSync(
-    'openssl',
-    [
-      'req', '-x509', '-newkey', 'rsa:2048', '-sha256', '-nodes',
-      '-keyout', keyPath,
-      '-out', certPath,
-      '-days', '1',
-      '-subj', '/CN=localhost',
-      '-addext', 'subjectAltName=DNS:localhost,IP:127.0.0.1',
-    ],
-    { stdio: 'inherit' },
-  )
-  if (generated.status !== 0) {
-    throw new Error('Unable to generate the CI localhost certificate.')
-  }
+  const generated = spawnSync('openssl', [
+    'req', '-x509', '-newkey', 'rsa:2048', '-sha256', '-nodes',
+    '-keyout', keyPath, '-out', certPath, '-days', '1',
+    '-subj', '/CN=localhost', '-addext', 'subjectAltName=DNS:localhost,IP:127.0.0.1',
+  ], { stdio: 'inherit' })
+  if (generated.status !== 0) throw new Error('Unable to generate the CI localhost certificate.')
 }
 
 const next = spawn('npm', ['start'], {
   stdio: 'inherit',
-  env: {
-    ...process.env,
-    PORT: String(targetPort),
-    HOSTNAME: '127.0.0.1',
-    NEXTAUTH_URL: `https://localhost:${httpsPort}`,
-  },
+  env: { ...process.env, PORT: String(targetPort), HOSTNAME: '127.0.0.1', NEXTAUTH_URL: `https://localhost:${httpsPort}` },
 })
 
-const server = createServer(
-  {
-    key: readFileSync(keyPath),
-    cert: readFileSync(certPath),
-  },
-  (clientReq, clientRes) => {
-    const headers = {
-      ...clientReq.headers,
-      host: `localhost:${httpsPort}`,
-      'x-forwarded-host': `localhost:${httpsPort}`,
-      'x-forwarded-proto': 'https',
-    }
+const server = createServer({ key: readFileSync(keyPath), cert: readFileSync(certPath) }, (clientReq, clientRes) => {
+  const upstream = httpRequest({
+    hostname: '127.0.0.1', port: targetPort, path: clientReq.url, method: clientReq.method,
+    headers: { ...clientReq.headers, host: `localhost:${httpsPort}`, 'x-forwarded-host': `localhost:${httpsPort}`, 'x-forwarded-proto': 'https' },
+  }, (upstreamRes) => {
+    clientRes.writeHead(upstreamRes.statusCode ?? 502, upstreamRes.headers)
+    upstreamRes.pipe(clientRes)
+  })
+  upstream.on('error', (error) => {
+    if (!clientRes.headersSent) clientRes.writeHead(502, { 'content-type': 'text/plain' })
+    clientRes.end(`Lernio CI upstream unavailable: ${error.message}`)
+  })
+  clientReq.pipe(upstream)
+})
 
-    const upstream = httpRequest(
-      {
-        hostname: '127.0.0.1',
-        port: targetPort,
-        path: clientReq.url,
-        method: clientReq.method,
-        headers,
-      },
-      (upstreamRes) => {
-        clientRes.writeHead(upstreamRes.statusCode ?? 502, upstreamRes.headers)
-        upstreamRes.pipe(clientRes)
-      },
-    )
-
-    upstream.on('error', (error) => {
-      if (!clientRes.headersSent) clientRes.writeHead(502, { 'content-type': 'text/plain' })
-      clientRes.end(`Lernio CI upstream unavailable: ${error.message}`)
+async function waitForNext() {
+  const deadline = Date.now() + 90_000
+  while (Date.now() < deadline) {
+    const ready = await new Promise((resolve) => {
+      const req = httpRequest({ hostname: '127.0.0.1', port: targetPort, path: '/sign-in', method: 'GET' }, (res) => {
+        res.resume()
+        resolve((res.statusCode ?? 500) < 500)
+      })
+      req.on('error', () => resolve(false))
+      req.setTimeout(1500, () => { req.destroy(); resolve(false) })
+      req.end()
     })
-    clientReq.pipe(upstream)
-  },
-)
-
-server.listen(httpsPort, '127.0.0.1', () => {
-  console.log(`Lernio CI HTTPS ready on https://localhost:${httpsPort}`)
-})
+    if (ready) return
+    await new Promise((resolve) => setTimeout(resolve, 250))
+  }
+  throw new Error('Next production server did not become ready in time.')
+}
 
 let closing = false
 function close(exitCode = 0) {
@@ -93,8 +72,11 @@ function close(exitCode = 0) {
   }, 3000).unref()
 }
 
-next.on('exit', (code) => {
-  if (!closing) close(code ?? 1)
-})
+next.on('exit', (code) => { if (!closing) close(code ?? 1) })
 process.on('SIGINT', () => close(0))
 process.on('SIGTERM', () => close(0))
+
+await waitForNext()
+server.listen(httpsPort, '127.0.0.1', () => {
+  console.log(`Lernio CI HTTPS ready on https://localhost:${httpsPort}`)
+})
