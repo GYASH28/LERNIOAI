@@ -1,5 +1,4 @@
 import type { NextConfig } from "next";
-import { buildContentSecurityPolicy } from "./src/lib/security/content-security-policy";
 
 if (
   process.env.LERNIO_DEMO_MODE === 'true' &&
@@ -9,14 +8,6 @@ if (
 }
 
 const isProduction = process.env.NODE_ENV === 'production'
-
-function contentSecurityPolicy() {
-  return buildContentSecurityPolicy({
-    allowUnsafeInlineScript: false,
-    nodeEnv: process.env.NODE_ENV,
-    storagePublicBaseUrl: process.env.STORAGE_PUBLIC_BASE_URL,
-  })
-}
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -68,7 +59,6 @@ const nextConfig: NextConfig = {
       { key: 'X-Frame-Options', value: 'DENY' },
       { key: 'X-Content-Type-Options', value: 'nosniff' },
       { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
-      { key: 'Content-Security-Policy', value: contentSecurityPolicy() },
       {
         key: 'Permissions-Policy',
         value: 'camera=(), microphone=(self), geolocation=(), payment=(), usb=()',
