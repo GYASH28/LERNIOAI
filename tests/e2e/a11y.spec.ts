@@ -11,9 +11,14 @@ for (const path of PUBLIC_A11Y_PATHS) {
       sessionStorage.setItem(introKey, 'complete')
       document.documentElement.dataset.motion = 'none'
     }, { introKey: 'lernio-cinematic-intro-v4' })
-    await page.addInitScript({ content: axe.source })
     await page.goto(path, { waitUntil: 'networkidle' })
     await expect(page.locator('body')).toBeVisible()
+
+    // Execute axe through Playwright's evaluation channel instead of injecting an
+    // inline <script>. This keeps Lernio's nonce-based production CSP enabled in
+    // every browser while still allowing the test runner to audit the rendered DOM.
+    await page.evaluate(axe.source)
+    await expect.poll(async () => page.evaluate(() => Boolean((window as unknown as { axe?: unknown }).axe))).toBe(true)
 
     const results = await page.evaluate(async () => {
       const axeRunner = (window as unknown as { axe: { run: (context: Document, options: unknown) => Promise<{ violations: Array<{ impact: string | null; id: string; help: string; nodes: Array<{ target: string[]; failureSummary?: string }> }> }> } }).axe
