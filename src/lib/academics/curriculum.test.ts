@@ -24,6 +24,26 @@ describe('Lernio academic curriculum', () => {
     const subjects = getCurriculumSubjects('12', ['physics', 'chemistry'])
     expect(subjects.map((subject) => subject.slug)).toEqual(['physics', 'chemistry'])
   })
+
+  it('covers every default science-stream subject in both classes', () => {
+    for (const classLevel of ['11', '12'] as const) {
+      for (const stream of ['PCM', 'PCB', 'PCMB'] as const) {
+        const expected = defaultSubjectsForStream(stream)
+        const available = getCurriculumSubjects(classLevel, expected).map((subject) => subject.slug)
+        expect(new Set(available)).toEqual(new Set(expected))
+      }
+    }
+  })
+
+  it('keeps Biology and English board-only rather than inventing JEE coverage', () => {
+    const biology = getCurriculumSubject('12', 'biology')
+    const english = getCurriculumSubject('12', 'english')
+
+    expect(biology?.chapters.length).toBeGreaterThan(0)
+    expect(english?.chapters.length).toBeGreaterThan(0)
+    expect(biology?.chapters.every((chapter) => chapter.examTags.length === 1 && chapter.examTags[0] === 'BOARDS')).toBe(true)
+    expect(english?.chapters.every((chapter) => chapter.examTags.length === 1 && chapter.examTags[0] === 'BOARDS')).toBe(true)
+  })
 })
 
 describe('academic profile rules', () => {
