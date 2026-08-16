@@ -1,8 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import type { FormEvent } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { LockKeyhole, LogIn, Mail } from 'lucide-react'
 import {
   AuthShell,
@@ -35,23 +36,15 @@ function routeNotice(verified: string | null, error: string | null) {
   }
 }
 
-export default function SignInPage() {
+function SignInForm() {
+  const searchParams = useSearchParams()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [statusMessage, setStatusMessage] = useState('')
   const [submitting, setSubmitting] = useState(false)
-  const [notice, setNotice] = useState<{ status: string | null; error: string | null }>({ status: null, error: null })
 
-  // Read URL params on mount (not useSearchParams to avoid Suspense)
-  useState(() => {
-    try {
-      const params = new URLSearchParams(window.location.search)
-      const verified = params.get('verified')
-      const routeError = params.get('error')
-      setNotice(routeNotice(verified, routeError))
-    } catch {}
-  })
+  const notice = routeNotice(searchParams.get('verified'), searchParams.get('error'))
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -60,8 +53,7 @@ export default function SignInPage() {
     setStatusMessage('Checking your account...')
 
     try {
-      const params = new URLSearchParams(window.location.search)
-      const callbackPath = params.get('callbackUrl') || '/dashboard'
+      const callbackPath = searchParams.get('callbackUrl') || '/dashboard'
       const callbackUrl = new URL(callbackPath, window.location.origin).toString()
 
       const { signIn } = await import('next-auth/react')
@@ -84,7 +76,6 @@ export default function SignInPage() {
         ? new URL(result.url, window.location.origin).toString()
         : callbackUrl
 
-      // Check user role and redirect accordingly
       try {
         const userResponse = await fetch('/api/user', { cache: 'no-store' })
         const userPayload = await userResponse.json().catch(() => null)
@@ -99,7 +90,9 @@ export default function SignInPage() {
             return
           }
         }
-      } catch {}
+      } catch {
+        // Role lookup is an optimization only; the authenticated callback URL remains safe.
+      }
 
       window.location.href = destination
     } catch {
@@ -191,5 +184,13 @@ export default function SignInPage() {
         </Link>
       </p>
     </AuthShell>
+  )
+}
+
+export default function SignInPage() {
+  return (
+    <Suspense>
+      <SignInForm />
+    </Suspense>
   )
 }
