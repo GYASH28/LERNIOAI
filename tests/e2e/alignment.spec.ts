@@ -5,7 +5,7 @@ const HOME_WIDTHS = [
   1440, 1536, 1920,
 ] as const
 
-const CORE_ROUTES = [
+const PUBLIC_CORE_ROUTES = [
   '/',
   '/sign-in',
   '/sign-up',
@@ -14,13 +14,11 @@ const CORE_ROUTES = [
   '/privacy',
   '/terms',
   '/support',
-  '/dashboard',
 ] as const
 
 const CORE_WIDTHS = [320, 768, 1024, 1180, 1366] as const
 
-async function openStable(page: Page, route: string) {
-  await page.goto(route, { waitUntil: 'domcontentloaded' })
+async function freezeMotion(page: Page) {
   await page.addStyleTag({
     content: `
       *, *::before, *::after {
@@ -31,7 +29,23 @@ async function openStable(page: Page, route: string) {
       }
     `,
   })
+}
+
+async function openStable(page: Page, route: string) {
+  await page.goto(route, { waitUntil: 'domcontentloaded' })
   await expect(page.locator('body')).toBeVisible()
+  await freezeMotion(page)
+}
+
+async function openProtectedRoute(page: Page, route: string) {
+  await page.goto(route, { waitUntil: 'domcontentloaded' })
+  await page.waitForURL((url) => url.pathname === '/sign-in' || url.pathname === route, {
+    timeout: 10_000,
+  })
+  if (new URL(page.url()).pathname === '/sign-in') {
+    await expect(page.getByRole('heading', { name: 'Sign in to Lernio' })).toBeVisible()
+  }
+  await freezeMotion(page)
 }
 
 async function expectNoHorizontalOverflow(page: Page) {
@@ -190,7 +204,7 @@ test.describe('responsive alignment guardrails', () => {
     })
   }
 
-  for (const route of CORE_ROUTES) {
+  for (const route of PUBLIC_CORE_ROUTES) {
     for (const width of CORE_WIDTHS) {
       test(`${route} has aligned controls at ${width}px`, async ({ page }) => {
         await page.setViewportSize({ width, height: 900 })
@@ -199,6 +213,15 @@ test.describe('responsive alignment guardrails', () => {
         await expectNoClippedInteractiveControls(page)
       })
     }
+  }
+
+  for (const width of CORE_WIDTHS) {
+    test(`/dashboard redirect remains aligned at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 })
+      await openProtectedRoute(page, '/dashboard')
+      await expectNoHorizontalOverflow(page)
+      await expectNoClippedInteractiveControls(page)
+    })
   }
 
   test('home remains aligned with reduced motion and high contrast', async ({ page }) => {
