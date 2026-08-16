@@ -23,10 +23,14 @@ jobs:
         with:
           node-version: 24
           cache: npm
-      - run: npm install next@16.3.1 next-auth@4.24.15 sharp@0.35.3 --save-exact
-      - run: npm audit fix
-      - name: Show remaining audit findings
-        run: npm audit --audit-level=high || true
+      - name: Pin patched dependency versions
+        run: |
+          npm pkg set overrides.postcss=8.5.26
+          npm install next@16.3.1 next-auth@4.24.15 sharp@0.35.3 --save-exact
+      - name: Refresh transitive security fixes
+        run: npm audit fix || true
+      - name: Require zero high or critical dependency findings
+        run: npm audit --audit-level=high
       - name: Commit repaired dependency graph
         run: |
           git config user.name "github-actions[bot]"
