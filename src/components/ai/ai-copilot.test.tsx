@@ -66,10 +66,6 @@ describe('AiCopilot', () => {
     })
     writeTextMock.mockClear()
     vi.stubGlobal('fetch', vi.fn(async () => streamResponse()))
-    Object.defineProperty(navigator, 'clipboard', {
-      configurable: true,
-      value: { writeText: writeTextMock },
-    })
   })
 
   afterEach(() => {
@@ -79,6 +75,13 @@ describe('AiCopilot', () => {
 
   it('opens, runs a contextual action, streams text, copies, expands, and closes', async () => {
     const user = userEvent.setup()
+    // user-event installs its own clipboard shim during setup, so replace it
+    // afterwards with the assertion spy used by this test.
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: { writeText: writeTextMock },
+    })
+
     render(<AiCopilot />)
 
     await user.click(screen.getByRole('button', { name: 'Open LEO copilot' }))
