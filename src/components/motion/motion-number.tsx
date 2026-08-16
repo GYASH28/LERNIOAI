@@ -10,7 +10,6 @@ export function MotionNumber({ value }: { value: number }) {
 
   useEffect(() => {
     if (policy.level !== 'full') {
-      setDisplay(value)
       previous.current = value
       return
     }
@@ -32,5 +31,5 @@ export function MotionNumber({ value }: { value: number }) {
     return () => cancelAnimationFrame(frame)
   }, [value, policy.durationScale, policy.level])
 
-  return <span className="tabular-nums">{display}</span>
+  return <span className="tabular-nums">{policy.level === 'full' ? display : value}</span>
 }
