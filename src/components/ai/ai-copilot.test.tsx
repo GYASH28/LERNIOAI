@@ -5,8 +5,6 @@ import { AiCopilot } from './ai-copilot'
 import { useAppStore } from '@/store/app-store'
 import { encodeTutorStreamEvent } from '@/lib/ai/stream-protocol'
 
-const writeTextMock = vi.fn(async () => undefined)
-
 function streamResponse() {
   const encoder = new TextEncoder()
   const events = [
@@ -64,21 +62,20 @@ describe('AiCopilot', () => {
       currentMode: 'learn',
       continueLearning: null,
     })
-    writeTextMock.mockClear()
     vi.stubGlobal('fetch', vi.fn(async () => streamResponse()))
-    Object.defineProperty(navigator, 'clipboard', {
-      configurable: true,
-      value: { writeText: writeTextMock },
-    })
   })
 
   afterEach(() => {
+    vi.restoreAllMocks()
     vi.unstubAllGlobals()
     useAppStore.setState({ user: null, view: 'dashboard' })
   })
 
   it('opens, runs a contextual action, streams text, copies, expands, and closes', async () => {
+    // userEvent installs a realistic clipboard stub. Spy on that installed API instead of
+    // replacing navigator.clipboard before setup(), which userEvent itself overwrites.
     const user = userEvent.setup()
+    const clipboardWrite = vi.spyOn(navigator.clipboard, 'writeText')
     render(<AiCopilot />)
 
     await user.click(screen.getByRole('button', { name: 'Open LEO copilot' }))
@@ -90,7 +87,7 @@ describe('AiCopilot', () => {
     expect(screen.getByText(/First response in 0.1s/)).toBeInTheDocument()
 
     await user.click(screen.getByRole('button', { name: 'Copy' }))
-    expect(writeTextMock).toHaveBeenCalledWith(
+    expect(clipboardWrite).toHaveBeenCalledWith(
       'Study arrays for 20 minutes. Finish with active recall.',
     )
     expect(await screen.findByText('Copied')).toBeInTheDocument()

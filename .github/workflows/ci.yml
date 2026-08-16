@@ -13,9 +13,35 @@ concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  NEXTAUTH_URL: http://localhost:3000
+  NEXTAUTH_SECRET: ci-secret-replace-in-production
+  LERNIO_DEMO_MODE: "false"
+  CI: "true"
+
 jobs:
-  verify:
+  quality:
+    name: Static quality
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run db:generate
+      - run: npm run check:migrations
+      - run: npm run curriculum:validate
+      - run: npm run notes:validate
+      - run: npm run lint -- --max-warnings=395
+      - run: npm run typecheck
+
+  unit:
+    name: Unit and integration tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
     services:
       postgres:
         image: postgres:16
@@ -33,9 +59,6 @@ jobs:
     env:
       DATABASE_URL: postgresql://lernio:lernio_password@localhost:5432/lernio?schema=public
       DIRECT_URL: postgresql://lernio:lernio_password@localhost:5432/lernio?schema=public
-      NEXTAUTH_URL: http://localhost:3000
-      NEXTAUTH_SECRET: ci-secret-replace-in-production
-      LERNIO_DEMO_MODE: "false"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -46,11 +69,73 @@ jobs:
       - run: npm run db:generate
       - run: npm run check:migrations
       - run: npm run db:migrate:deploy
-      - run: npm run lint
-      - run: npm run typecheck
       - run: npm run test
+
+  build:
+    name: Production build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: lernio
+          POSTGRES_PASSWORD: lernio_password
+          POSTGRES_DB: lernio
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U lernio -d lernio"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      DATABASE_URL: postgresql://lernio:lernio_password@localhost:5432/lernio?schema=public
+      DIRECT_URL: postgresql://lernio:lernio_password@localhost:5432/lernio?schema=public
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run db:generate
+      - run: npm run check:migrations
+      - run: npm run db:migrate:deploy
       - run: npm run build
-      - run: npx playwright install --with-deps chromium
+
+  e2e:
+    name: Browser E2E
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: lernio
+          POSTGRES_PASSWORD: lernio_password
+          POSTGRES_DB: lernio
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U lernio -d lernio"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      DATABASE_URL: postgresql://lernio:lernio_password@localhost:5432/lernio?schema=public
+      DIRECT_URL: postgresql://lernio:lernio_password@localhost:5432/lernio?schema=public
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run db:generate
+      - run: npm run check:migrations
+      - run: npm run db:migrate:deploy
+      - run: npx playwright install --with-deps chromium firefox webkit
       - run: npm run test:e2e
       - uses: actions/upload-artifact@v4
         if: failure()
@@ -60,4 +145,16 @@ jobs:
             test-results/
             playwright-report/
           if-no-files-found: ignore
+
+  security:
+    name: Dependency security audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
       - run: npm audit --audit-level=high
