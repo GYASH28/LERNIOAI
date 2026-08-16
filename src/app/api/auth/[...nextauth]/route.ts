@@ -4,6 +4,16 @@ import { authOptions } from '@/lib/auth'
 // Credentials are the only enabled provider. The legacy OAuth createUser event
 // still exists in the compatibility auth module for old migrations, but must
 // never execute in the transformed Class 11/12/JEE runtime.
-const handler = NextAuth({ ...authOptions, events: undefined })
+const handler = NextAuth({
+  ...authOptions,
+  events: undefined,
+  callbacks: {
+    ...authOptions.callbacks,
+    async signIn({ user }) {
+      const status = (user as { status?: string }).status
+      return status !== 'disabled' && status !== 'pending_verification'
+    },
+  },
+})
 
 export { handler as GET, handler as POST }
