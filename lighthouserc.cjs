@@ -5,9 +5,9 @@ module.exports = {
       startServerReadyPattern: 'Ready in',
       startServerReadyTimeout: 120000,
       url: [
-        'http://127.0.0.1:3000/',
-        'http://127.0.0.1:3000/sign-in',
-        'http://127.0.0.1:3000/sign-up',
+        'http://localhost:3000/',
+        'http://localhost:3000/sign-in',
+        'http://localhost:3000/sign-up',
       ],
       numberOfRuns: 2,
       settings: {
