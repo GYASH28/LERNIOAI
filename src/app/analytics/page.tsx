@@ -55,9 +55,9 @@ export default async function AnalyticsPage() {
                 {mastery.slice(0, 12).map((row) => {
                   const score = row.masteryScore === null ? null : Math.round(row.masteryScore)
                   return (
-                    <div key={`${row.subjectSlug}-${row.chapterSlug}-${row.topicSlug ?? ''}`}>
+                    <div key={`${row.classLevel}-${row.subjectSlug}-${row.chapterSlug}-${row.topicSlug ?? ''}`}>
                       <div className="mb-2 flex items-center justify-between gap-4 text-sm">
-                        <div className="min-w-0"><p className="truncate font-medium">{row.chapterSlug.replaceAll('-', ' ')}</p><p className="text-xs text-muted-foreground">{subjectNames[row.subjectSlug] ?? row.subjectSlug} · {row.attempts} attempts</p></div>
+                        <div className="min-w-0"><p className="truncate font-medium">{row.chapterSlug.replaceAll('-', ' ')}</p><p className="text-xs text-muted-foreground">Class {row.classLevel} · {subjectNames[row.subjectSlug] ?? row.subjectSlug} · {row.attempts} attempts</p></div>
                         <span className="shrink-0 font-semibold">{score === null ? 'Not enough data' : `${score}%`}</span>
                       </div>
                       <div className="h-2 overflow-hidden rounded-full bg-muted"><div className="h-full rounded-full bg-primary" style={{ width: `${score ?? 0}%` }} /></div>
@@ -75,8 +75,8 @@ export default async function AnalyticsPage() {
             {weak.length ? (
               <div className="mt-5 space-y-3">
                 {weak.map((row, index) => (
-                  <Link key={`${row.subjectSlug}-${row.chapterSlug}-${index}`} href={`/practice/session?class=${profile.classLevel === 'DROPPER' ? '12' : profile.classLevel}&subject=${row.subjectSlug}&chapter=${row.chapterSlug}`} className="block rounded-xl border border-border p-4 hover:bg-accent/40">
-                    <div className="flex items-start justify-between gap-3"><div><p className="text-sm font-semibold capitalize">{row.chapterSlug.replaceAll('-', ' ')}</p><p className="mt-1 text-xs text-muted-foreground">{subjectNames[row.subjectSlug] ?? row.subjectSlug}</p></div><span className="text-sm font-bold">{row.masteryScore === null ? '—' : `${Math.round(row.masteryScore)}%`}</span></div>
+                  <Link key={`${row.classLevel}-${row.subjectSlug}-${row.chapterSlug}-${index}`} href={`/practice/session?class=${row.classLevel}&subject=${row.subjectSlug}&chapter=${row.chapterSlug}`} className="block rounded-xl border border-border p-4 hover:bg-accent/40">
+                    <div className="flex items-start justify-between gap-3"><div><p className="text-sm font-semibold capitalize">{row.chapterSlug.replaceAll('-', ' ')}</p><p className="mt-1 text-xs text-muted-foreground">Class {row.classLevel} · {subjectNames[row.subjectSlug] ?? row.subjectSlug}</p></div><span className="text-sm font-bold">{row.masteryScore === null ? '—' : `${Math.round(row.masteryScore)}%`}</span></div>
                   </Link>
                 ))}
               </div>
