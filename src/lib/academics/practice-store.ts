@@ -38,64 +38,50 @@ export async function getPracticeQuestions(input: {
   subjectSlug: string
   chapterSlug?: string
   examType?: string
+  sourceType?: 'PYQ' | 'ORIGINAL' | 'AI_GENERATED' | 'IMPORTED'
   limit?: number
 }): Promise<PracticeQuestion[]> {
   const limit = Math.max(1, Math.min(input.limit ?? 15, 50))
+  const select = `
+    SELECT "id", "board", "classLevel", "subjectSlug", "chapterSlug", "topicSlug", "concept",
+           "difficulty", "examType", "questionType", "prompt", "options", "marks",
+           "negativeMarks"::DOUBLE PRECISION AS "negativeMarks", "estimatedTimeSeconds",
+           "sourceType", "sourceLabel", "sourceYear"
+    FROM "AcademicQuestion"
+  `
+
   try {
+    if (input.chapterSlug && input.examType && input.sourceType) {
+      return await db.$queryRawUnsafe<PracticeQuestion[]>(`${select}
+        WHERE "isPublished" = TRUE AND "classLevel" = $1 AND "subjectSlug" = $2
+          AND "chapterSlug" = $3 AND "examType" = $4 AND "sourceType" = $5
+        ORDER BY RANDOM() LIMIT $6`, input.classLevel, input.subjectSlug, input.chapterSlug, input.examType, input.sourceType, limit)
+    }
+    if (input.examType && input.sourceType) {
+      return await db.$queryRawUnsafe<PracticeQuestion[]>(`${select}
+        WHERE "isPublished" = TRUE AND "classLevel" = $1 AND "subjectSlug" = $2
+          AND "examType" = $3 AND "sourceType" = $4
+        ORDER BY RANDOM() LIMIT $5`, input.classLevel, input.subjectSlug, input.examType, input.sourceType, limit)
+    }
     if (input.chapterSlug && input.examType) {
-      return await db.$queryRaw<PracticeQuestion[]>`
-        SELECT "id", "board", "classLevel", "subjectSlug", "chapterSlug", "topicSlug", "concept",
-               "difficulty", "examType", "questionType", "prompt", "options", "marks", "negativeMarks",
-               "estimatedTimeSeconds", "sourceType", "sourceLabel", "sourceYear"
-        FROM "AcademicQuestion"
-        WHERE "isPublished" = TRUE
-          AND "classLevel" = ${input.classLevel}
-          AND "subjectSlug" = ${input.subjectSlug}
-          AND "chapterSlug" = ${input.chapterSlug}
-          AND "examType" = ${input.examType}
-        ORDER BY RANDOM()
-        LIMIT ${limit}
-      `
+      return await db.$queryRawUnsafe<PracticeQuestion[]>(`${select}
+        WHERE "isPublished" = TRUE AND "classLevel" = $1 AND "subjectSlug" = $2
+          AND "chapterSlug" = $3 AND "examType" = $4
+        ORDER BY RANDOM() LIMIT $5`, input.classLevel, input.subjectSlug, input.chapterSlug, input.examType, limit)
     }
     if (input.chapterSlug) {
-      return await db.$queryRaw<PracticeQuestion[]>`
-        SELECT "id", "board", "classLevel", "subjectSlug", "chapterSlug", "topicSlug", "concept",
-               "difficulty", "examType", "questionType", "prompt", "options", "marks", "negativeMarks",
-               "estimatedTimeSeconds", "sourceType", "sourceLabel", "sourceYear"
-        FROM "AcademicQuestion"
-        WHERE "isPublished" = TRUE
-          AND "classLevel" = ${input.classLevel}
-          AND "subjectSlug" = ${input.subjectSlug}
-          AND "chapterSlug" = ${input.chapterSlug}
-        ORDER BY RANDOM()
-        LIMIT ${limit}
-      `
+      return await db.$queryRawUnsafe<PracticeQuestion[]>(`${select}
+        WHERE "isPublished" = TRUE AND "classLevel" = $1 AND "subjectSlug" = $2 AND "chapterSlug" = $3
+        ORDER BY RANDOM() LIMIT $4`, input.classLevel, input.subjectSlug, input.chapterSlug, limit)
     }
     if (input.examType) {
-      return await db.$queryRaw<PracticeQuestion[]>`
-        SELECT "id", "board", "classLevel", "subjectSlug", "chapterSlug", "topicSlug", "concept",
-               "difficulty", "examType", "questionType", "prompt", "options", "marks", "negativeMarks",
-               "estimatedTimeSeconds", "sourceType", "sourceLabel", "sourceYear"
-        FROM "AcademicQuestion"
-        WHERE "isPublished" = TRUE
-          AND "classLevel" = ${input.classLevel}
-          AND "subjectSlug" = ${input.subjectSlug}
-          AND "examType" = ${input.examType}
-        ORDER BY RANDOM()
-        LIMIT ${limit}
-      `
+      return await db.$queryRawUnsafe<PracticeQuestion[]>(`${select}
+        WHERE "isPublished" = TRUE AND "classLevel" = $1 AND "subjectSlug" = $2 AND "examType" = $3
+        ORDER BY RANDOM() LIMIT $4`, input.classLevel, input.subjectSlug, input.examType, limit)
     }
-    return await db.$queryRaw<PracticeQuestion[]>`
-      SELECT "id", "board", "classLevel", "subjectSlug", "chapterSlug", "topicSlug", "concept",
-             "difficulty", "examType", "questionType", "prompt", "options", "marks", "negativeMarks",
-             "estimatedTimeSeconds", "sourceType", "sourceLabel", "sourceYear"
-      FROM "AcademicQuestion"
-      WHERE "isPublished" = TRUE
-        AND "classLevel" = ${input.classLevel}
-        AND "subjectSlug" = ${input.subjectSlug}
-      ORDER BY RANDOM()
-      LIMIT ${limit}
-    `
+    return await db.$queryRawUnsafe<PracticeQuestion[]>(`${select}
+      WHERE "isPublished" = TRUE AND "classLevel" = $1 AND "subjectSlug" = $2
+      ORDER BY RANDOM() LIMIT $3`, input.classLevel, input.subjectSlug, limit)
   } catch {
     return []
   }
