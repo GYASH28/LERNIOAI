@@ -33,7 +33,10 @@ describe('resolveLandingIntroMode', () => {
 
 describe('introDurationMs', () => {
   it('keeps reduced motion brief and shortens full motion on mobile', () => {
-    expect(introDurationMs('reduced', 1440)).toBe(900)
-    expect(introDurationMs('full', 390)).toBeLessThan(introDurationMs('full', 1440))
+    expect(introDurationMs('reduced', 1440)).toBe(650)
+    expect(introDurationMs('compact', 390)).toBe(1500)
+    expect(introDurationMs('compact', 1440)).toBe(1800)
+    expect(introDurationMs('full', 390)).toBe(3200)
+    expect(introDurationMs('full', 1440)).toBe(4200)
   })
 })
