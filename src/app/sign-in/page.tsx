@@ -84,7 +84,6 @@ export default function SignInPage() {
         ? new URL(result.url, window.location.origin).toString()
         : callbackUrl
 
-      // Check user role and redirect accordingly
       try {
         const userResponse = await fetch('/api/user', { cache: 'no-store' })
         const userPayload = await userResponse.json().catch(() => null)
@@ -116,7 +115,7 @@ export default function SignInPage() {
     <AuthShell
       eyebrow="Welcome back"
       title="Sign in to Lernio"
-      description="Use your student profile or invited campus role."
+      description="Use your Lernio student account or an invited staff role."
       backHref="/"
       backLabel="Intro"
     >
