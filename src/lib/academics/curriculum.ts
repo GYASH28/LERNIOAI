@@ -1,6 +1,11 @@
 import type { AcademicChapter, AcademicSubject, SubjectSlug } from './types'
 
-const chapter = (slug: string, name: string, order: number, examTags: AcademicChapter['examTags'] = ['BOARDS', 'JEE_MAIN', 'JEE_ADVANCED']): AcademicChapter => ({
+const chapter = (
+  slug: string,
+  name: string,
+  order: number,
+  examTags: AcademicChapter['examTags'] = ['BOARDS', 'JEE_MAIN', 'JEE_ADVANCED'],
+): AcademicChapter => ({
   id: slug,
   slug,
   name,
@@ -9,9 +14,18 @@ const chapter = (slug: string, name: string, order: number, examTags: AcademicCh
   examTags,
 })
 
+const boardChapter = (slug: string, name: string, order: number) =>
+  chapter(slug, name, order, ['BOARDS'])
+
 const subjects: AcademicSubject[] = [
   {
-    id: 'cbse-11-physics', slug: 'physics', name: 'Physics', shortName: 'Physics', classLevel: '11', board: 'CBSE', streamTags: ['PCM', 'PCB', 'PCMB'],
+    id: 'cbse-11-physics',
+    slug: 'physics',
+    name: 'Physics',
+    shortName: 'Physics',
+    classLevel: '11',
+    board: 'CBSE',
+    streamTags: ['PCM', 'PCB', 'PCMB'],
     chapters: [
       chapter('units-and-measurements', 'Units and Measurements', 1),
       chapter('motion-in-a-straight-line', 'Motion in a Straight Line', 2),
@@ -30,7 +44,13 @@ const subjects: AcademicSubject[] = [
     ],
   },
   {
-    id: 'cbse-11-chemistry', slug: 'chemistry', name: 'Chemistry', shortName: 'Chemistry', classLevel: '11', board: 'CBSE', streamTags: ['PCM', 'PCB', 'PCMB'],
+    id: 'cbse-11-chemistry',
+    slug: 'chemistry',
+    name: 'Chemistry',
+    shortName: 'Chemistry',
+    classLevel: '11',
+    board: 'CBSE',
+    streamTags: ['PCM', 'PCB', 'PCMB'],
     chapters: [
       chapter('some-basic-concepts-of-chemistry', 'Some Basic Concepts of Chemistry', 1),
       chapter('structure-of-atom', 'Structure of Atom', 2),
@@ -44,7 +64,13 @@ const subjects: AcademicSubject[] = [
     ],
   },
   {
-    id: 'cbse-11-mathematics', slug: 'mathematics', name: 'Mathematics', shortName: 'Maths', classLevel: '11', board: 'CBSE', streamTags: ['PCM', 'PCMB'],
+    id: 'cbse-11-mathematics',
+    slug: 'mathematics',
+    name: 'Mathematics',
+    shortName: 'Maths',
+    classLevel: '11',
+    board: 'CBSE',
+    streamTags: ['PCM', 'PCMB'],
     chapters: [
       chapter('sets', 'Sets', 1),
       chapter('relations-and-functions', 'Relations and Functions', 2),
@@ -63,7 +89,59 @@ const subjects: AcademicSubject[] = [
     ],
   },
   {
-    id: 'cbse-12-physics', slug: 'physics', name: 'Physics', shortName: 'Physics', classLevel: '12', board: 'CBSE', streamTags: ['PCM', 'PCB', 'PCMB'],
+    id: 'cbse-11-biology',
+    slug: 'biology',
+    name: 'Biology',
+    shortName: 'Biology',
+    classLevel: '11',
+    board: 'CBSE',
+    streamTags: ['PCB', 'PCMB'],
+    chapters: [
+      boardChapter('the-living-world', 'The Living World', 1),
+      boardChapter('biological-classification', 'Biological Classification', 2),
+      boardChapter('plant-kingdom', 'Plant Kingdom', 3),
+      boardChapter('animal-kingdom', 'Animal Kingdom', 4),
+      boardChapter('morphology-of-flowering-plants', 'Morphology of Flowering Plants', 5),
+      boardChapter('anatomy-of-flowering-plants', 'Anatomy of Flowering Plants', 6),
+      boardChapter('structural-organisation-in-animals', 'Structural Organisation in Animals', 7),
+      boardChapter('cell-the-unit-of-life', 'Cell: The Unit of Life', 8),
+      boardChapter('biomolecules-11', 'Biomolecules', 9),
+      boardChapter('cell-cycle-and-cell-division', 'Cell Cycle and Cell Division', 10),
+      boardChapter('photosynthesis-in-higher-plants', 'Photosynthesis in Higher Plants', 11),
+      boardChapter('respiration-in-plants', 'Respiration in Plants', 12),
+      boardChapter('plant-growth-and-development', 'Plant Growth and Development', 13),
+      boardChapter('breathing-and-exchange-of-gases', 'Breathing and Exchange of Gases', 14),
+      boardChapter('body-fluids-and-circulation', 'Body Fluids and Circulation', 15),
+      boardChapter('excretory-products-and-elimination', 'Excretory Products and their Elimination', 16),
+      boardChapter('locomotion-and-movement', 'Locomotion and Movement', 17),
+      boardChapter('neural-control-and-coordination', 'Neural Control and Coordination', 18),
+      boardChapter('chemical-coordination-and-integration', 'Chemical Coordination and Integration', 19),
+    ],
+  },
+  {
+    id: 'cbse-11-english',
+    slug: 'english',
+    name: 'English Core',
+    shortName: 'English',
+    classLevel: '11',
+    board: 'CBSE',
+    streamTags: ['PCM', 'PCB', 'PCMB'],
+    chapters: [
+      boardChapter('reading-skills-11', 'Reading Skills', 1),
+      boardChapter('grammar-and-creative-writing-11', 'Grammar and Creative Writing Skills', 2),
+      boardChapter('hornbill-prose', 'Hornbill · Prose', 3),
+      boardChapter('hornbill-poetry', 'Hornbill · Poetry', 4),
+      boardChapter('snapshots-supplementary-reader', 'Snapshots · Supplementary Reader', 5),
+    ],
+  },
+  {
+    id: 'cbse-12-physics',
+    slug: 'physics',
+    name: 'Physics',
+    shortName: 'Physics',
+    classLevel: '12',
+    board: 'CBSE',
+    streamTags: ['PCM', 'PCB', 'PCMB'],
     chapters: [
       chapter('electric-charges-and-fields', 'Electric Charges and Fields', 1),
       chapter('electrostatic-potential-and-capacitance', 'Electrostatic Potential and Capacitance', 2),
@@ -82,7 +160,13 @@ const subjects: AcademicSubject[] = [
     ],
   },
   {
-    id: 'cbse-12-chemistry', slug: 'chemistry', name: 'Chemistry', shortName: 'Chemistry', classLevel: '12', board: 'CBSE', streamTags: ['PCM', 'PCB', 'PCMB'],
+    id: 'cbse-12-chemistry',
+    slug: 'chemistry',
+    name: 'Chemistry',
+    shortName: 'Chemistry',
+    classLevel: '12',
+    board: 'CBSE',
+    streamTags: ['PCM', 'PCB', 'PCMB'],
     chapters: [
       chapter('solutions', 'Solutions', 1),
       chapter('electrochemistry', 'Electrochemistry', 2),
@@ -97,7 +181,13 @@ const subjects: AcademicSubject[] = [
     ],
   },
   {
-    id: 'cbse-12-mathematics', slug: 'mathematics', name: 'Mathematics', shortName: 'Maths', classLevel: '12', board: 'CBSE', streamTags: ['PCM', 'PCMB'],
+    id: 'cbse-12-mathematics',
+    slug: 'mathematics',
+    name: 'Mathematics',
+    shortName: 'Maths',
+    classLevel: '12',
+    board: 'CBSE',
+    streamTags: ['PCM', 'PCMB'],
     chapters: [
       chapter('relations-and-functions-12', 'Relations and Functions', 1),
       chapter('inverse-trigonometric-functions', 'Inverse Trigonometric Functions', 2),
@@ -114,11 +204,51 @@ const subjects: AcademicSubject[] = [
       chapter('probability-12', 'Probability', 13),
     ],
   },
+  {
+    id: 'cbse-12-biology',
+    slug: 'biology',
+    name: 'Biology',
+    shortName: 'Biology',
+    classLevel: '12',
+    board: 'CBSE',
+    streamTags: ['PCB', 'PCMB'],
+    chapters: [
+      boardChapter('sexual-reproduction-in-flowering-plants', 'Sexual Reproduction in Flowering Plants', 1),
+      boardChapter('human-reproduction', 'Human Reproduction', 2),
+      boardChapter('reproductive-health', 'Reproductive Health', 3),
+      boardChapter('principles-of-inheritance-and-variation', 'Principles of Inheritance and Variation', 4),
+      boardChapter('molecular-basis-of-inheritance', 'Molecular Basis of Inheritance', 5),
+      boardChapter('evolution', 'Evolution', 6),
+      boardChapter('human-health-and-disease', 'Human Health and Disease', 7),
+      boardChapter('microbes-in-human-welfare', 'Microbes in Human Welfare', 8),
+      boardChapter('biotechnology-principles-and-processes', 'Biotechnology: Principles and Processes', 9),
+      boardChapter('biotechnology-and-its-applications', 'Biotechnology and its Applications', 10),
+      boardChapter('organisms-and-populations', 'Organisms and Populations', 11),
+      boardChapter('ecosystem', 'Ecosystem', 12),
+      boardChapter('biodiversity-and-conservation', 'Biodiversity and Conservation', 13),
+    ],
+  },
+  {
+    id: 'cbse-12-english',
+    slug: 'english',
+    name: 'English Core',
+    shortName: 'English',
+    classLevel: '12',
+    board: 'CBSE',
+    streamTags: ['PCM', 'PCB', 'PCMB'],
+    chapters: [
+      boardChapter('reading-skills-12', 'Reading Skills', 1),
+      boardChapter('creative-writing-skills-12', 'Creative Writing Skills', 2),
+      boardChapter('flamingo-prose', 'Flamingo · Prose', 3),
+      boardChapter('flamingo-poetry', 'Flamingo · Poetry', 4),
+      boardChapter('vistas-supplementary-reader', 'Vistas · Supplementary Reader', 5),
+    ],
+  },
 ]
 
 export function getCurriculumSubjects(classLevel: '11' | '12', subjectSlugs?: SubjectSlug[]) {
-  return subjects.filter((subject) =>
-    subject.classLevel === classLevel && (!subjectSlugs || subjectSlugs.includes(subject.slug)),
+  return subjects.filter(
+    (subject) => subject.classLevel === classLevel && (!subjectSlugs || subjectSlugs.includes(subject.slug)),
   )
 }
 
@@ -126,7 +256,11 @@ export function getCurriculumSubject(classLevel: '11' | '12', subjectSlug: strin
   return subjects.find((subject) => subject.classLevel === classLevel && subject.slug === subjectSlug) ?? null
 }
 
-export function getCurriculumChapter(classLevel: '11' | '12', subjectSlug: string, chapterSlug: string) {
+export function getCurriculumChapter(
+  classLevel: '11' | '12',
+  subjectSlug: string,
+  chapterSlug: string,
+) {
   const subject = getCurriculumSubject(classLevel, subjectSlug)
   if (!subject) return null
   return subject.chapters.find((item) => item.slug === chapterSlug) ?? null
@@ -135,5 +269,6 @@ export function getCurriculumChapter(classLevel: '11' | '12', subjectSlug: strin
 export const curriculumMetadata = {
   board: 'CBSE' as const,
   academicYear: '2026-27',
-  sourcePolicy: 'Structured curriculum metadata only; learning explanations must be original and resources must be verified before publishing.',
+  sourcePolicy:
+    'Structured curriculum metadata follows the current CBSE Senior Secondary subject catalogue; learning explanations must be original and resources must be verified before publishing.',
 }
