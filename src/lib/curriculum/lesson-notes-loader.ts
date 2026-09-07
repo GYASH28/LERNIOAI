@@ -20,6 +20,10 @@ const NOTE_CODE_ALIASES: Record<string, string> = {
   R23CP5401: 'R23CP1407',
 }
 
+const NOTE_SUBJECT_SLUG_ALIASES: Record<string, string[]> = {
+  R23CP1407: ['seminar-capstone-initiation-and-internship-support'],
+}
+
 const PLACEHOLDER_PATTERNS = [
   /^Option [A-D]$/i,
   /refer to the theory section above/i,
@@ -225,6 +229,13 @@ function isPlaceholderText(value: string): boolean {
   return PLACEHOLDER_PATTERNS.some((pattern) => pattern.test(text))
 }
 
+function toSlug(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
 /** Get lesson notes for a subject, resolving known legacy curriculum aliases. */
 export function getSubjectNotes(subjectCode: string): SubjectNotes | null {
   const notes = loadAllNotes()
@@ -241,7 +252,14 @@ export function getAvailableNotesSubjects(): { code: string; name: string }[] {
     .map(([, note]) => ({ code: note.subjectCode, name: note.subjectName }))
 }
 
-/** Find a specific lesson by slug within a subject's notes. */
+/**
+ * Find a specific lesson by slug within a subject's notes.
+ *
+ * Early Lernio subject pages linked their main "Start Lesson" CTA to a slug
+ * derived from the subject name rather than a real lesson slug. Once rich note
+ * packs were added, those old links still opened the fallback summary. Treat a
+ * known subject-level slug as an intentional request for lesson one.
+ */
 export function findLessonBySlug(
   subjectCode: string,
   lessonSlug: string,
@@ -260,6 +278,19 @@ export function findLessonBySlug(
       }
     }
   }
+
+  const normalizedCode = subject.subjectCode.toUpperCase()
+  const subjectLevelSlugs = new Set([
+    toSlug(subject.subjectName),
+    ...(NOTE_SUBJECT_SLUG_ALIASES[normalizedCode] ?? []),
+  ])
+
+  if (subjectLevelSlugs.has(toSlug(lessonSlug))) {
+    const unit = subject.units.find((candidate) => candidate.lessons.length > 0)
+    const lesson = unit?.lessons[0]
+    if (unit && lesson) return { lesson, unit, subject }
+  }
+
   return null
 }
 
