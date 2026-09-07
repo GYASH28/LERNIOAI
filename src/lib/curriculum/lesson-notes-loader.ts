@@ -233,10 +233,12 @@ export function getSubjectNotes(subjectCode: string): SubjectNotes | null {
   return notes.get(canonical) ?? notes.get(normalized) ?? null
 }
 
-/** Get all canonical subjects that have rich lesson notes available. */
+/** Get canonical subjects that have rich lesson notes available. */
 export function getAvailableNotesSubjects(): { code: string; name: string }[] {
   const notes = loadAllNotes()
-  return Array.from(notes.values()).map((note) => ({ code: note.subjectCode, name: note.subjectName }))
+  return Array.from(notes.entries())
+    .filter(([code]) => !NOTE_CODE_ALIASES[code])
+    .map(([, note]) => ({ code: note.subjectCode, name: note.subjectName }))
 }
 
 /** Find a specific lesson by slug within a subject's notes. */
