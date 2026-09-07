@@ -1,4 +1,5 @@
 import '@/styles/notes-reader-v4.css'
+import '@/styles/notes-reader-shell.css'
 
 import { InteractiveNotesRenderer } from '@/components/learning/interactive-notes-renderer'
 import {
