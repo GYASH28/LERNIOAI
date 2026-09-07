@@ -1,0 +1,428 @@
+/* Lernio Notes Reader V4
+ * Route-scoped overrides for the lesson experience.
+ * The previous reader used a 3-column grid inside another 3-column lesson grid,
+ * leaving the actual notes with very little reading width. This version keeps
+ * the content first, turns the TOC into a compact sticky rail, and preserves
+ * touch-friendly behaviour on phones.
+ */
+
+.lesson-notes-v4 {
+  --notes-reading-width: 54rem;
+  --notes-radius: 1rem;
+  --notes-sticky-top: calc(var(--topbar-height, 3.5rem) + 0.5rem);
+}
+
+/* Give the rich reader one strong content column regardless of the outer lesson
+   layout. This prevents the old 220px + content + 200px grid from being nested
+   inside the lesson studio's already narrow center column. */
+.lesson-notes-v4 .premium-reader {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  width: 100%;
+  min-width: 0;
+}
+
+.lesson-notes-v4 .premium-reader__main {
+  width: 100%;
+  max-width: var(--notes-reading-width);
+  min-width: 0;
+  margin: 0 auto;
+  padding: 1.25rem clamp(0.25rem, 2vw, 1.25rem) 2rem;
+}
+
+/* The TOC becomes a horizontal, glanceable sticky navigation strip instead of
+   stealing 220px from every paragraph. */
+.lesson-notes-v4 .premium-reader__left {
+  position: sticky;
+  top: var(--notes-sticky-top);
+  z-index: 18;
+  width: 100%;
+  max-width: 100%;
+  max-height: none;
+  overflow: visible;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid color-mix(in oklch, var(--border-subtle) 82%, transparent);
+  border-radius: 0.85rem;
+  background: color-mix(in oklch, var(--surface-1) 88%, transparent);
+  box-shadow: 0 10px 30px color-mix(in oklch, black 8%, transparent);
+  backdrop-filter: blur(18px) saturate(130%);
+  -webkit-backdrop-filter: blur(18px) saturate(130%);
+}
+
+.lesson-notes-v4 .premium-reader__left > div:first-child {
+  display: none;
+}
+
+.lesson-notes-v4 .toc-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.25rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  scroll-snap-type: x proximity;
+}
+
+.lesson-notes-v4 .toc-list::-webkit-scrollbar {
+  display: none;
+}
+
+.lesson-notes-v4 .toc-list__item {
+  flex: 0 0 auto;
+  min-height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid transparent;
+  border-left: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  scroll-snap-align: start;
+}
+
+.lesson-notes-v4 .toc-list__item:hover {
+  border-color: var(--border-subtle);
+  background: var(--surface-2);
+}
+
+.lesson-notes-v4 .toc-list__item[data-active="true"] {
+  border-color: color-mix(in oklch, var(--brand) 24%, transparent);
+  border-left-color: color-mix(in oklch, var(--brand) 24%, transparent);
+  background: color-mix(in oklch, var(--brand) 12%, var(--surface-1));
+  color: var(--brand);
+  box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--brand) 5%, transparent);
+}
+
+.lesson-notes-v4 .premium-reader__left > .mt-4 {
+  display: none;
+}
+
+/* The old right rail duplicated destinations that already exist in the lesson
+   sidebar. Hide it so attention stays on the notes. */
+.lesson-notes-v4 .premium-reader__right {
+  display: none !important;
+}
+
+/* Progress is thin but visible and sits below the app chrome. */
+.lesson-notes-v4 .reading-progress {
+  top: var(--topbar-height, 3.5rem);
+  height: 3px;
+  z-index: 45;
+}
+
+.lesson-notes-v4 .reading-progress__bar {
+  box-shadow: 0 0 12px color-mix(in oklch, var(--brand) 35%, transparent);
+}
+
+/* Lesson identity gets a calmer reader-header treatment. */
+.lesson-notes-v4 .premium-reader__main > header {
+  position: relative;
+  margin: 0 0 1.25rem;
+  padding: 1.25rem;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--notes-radius);
+  background:
+    radial-gradient(circle at 100% 0%, color-mix(in oklch, var(--brand) 12%, transparent), transparent 35%),
+    linear-gradient(180deg, color-mix(in oklch, var(--surface-2) 72%, transparent), var(--surface-1));
+}
+
+.lesson-notes-v4 .premium-reader__main > header::after {
+  content: '';
+  position: absolute;
+  inset: auto 1.25rem 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, color-mix(in oklch, var(--brand) 35%, transparent), transparent);
+}
+
+.lesson-notes-v4 .premium-reader__main > header h1 {
+  max-width: 24ch;
+  font-size: clamp(1.55rem, 3vw, 2.2rem);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+/* Search looks like a real reader command surface rather than a plain form. */
+.lesson-notes-v4 .premium-reader__main input[type="text"] {
+  min-height: 2.65rem;
+  border-radius: 0.8rem;
+  border-color: color-mix(in oklch, var(--border-subtle) 86%, transparent);
+  background: color-mix(in oklch, var(--surface-1) 92%, transparent);
+  box-shadow: 0 1px 0 color-mix(in oklch, white 4%, transparent);
+}
+
+.lesson-notes-v4 .premium-reader__main input[type="text"]:focus {
+  border-color: color-mix(in oklch, var(--brand) 48%, var(--border-subtle));
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--brand) 10%, transparent);
+}
+
+/* Make AI study actions feel integrated rather than like a floating pill cloud. */
+.lesson-notes-v4 .ai-toolbar {
+  margin: 0 0 1.25rem;
+  padding: 0.55rem;
+  border-radius: 0.9rem;
+  background: color-mix(in oklch, var(--surface-2) 72%, transparent);
+  box-shadow: none;
+}
+
+.lesson-notes-v4 .ai-toolbar__btn {
+  min-height: 2.1rem;
+  padding-inline: 0.7rem;
+  border-radius: 0.65rem;
+}
+
+/* Content sections read like a modern textbook: clear separation, generous
+   rhythm, and no tiny-card-within-tiny-card look. */
+.lesson-notes-v4 .notes-section {
+  margin: 0;
+  padding: 1.6rem 0;
+  border-bottom: 1px solid color-mix(in oklch, var(--border-subtle) 72%, transparent);
+  scroll-margin-top: calc(var(--topbar-height, 3.5rem) + 5rem);
+}
+
+.lesson-notes-v4 .notes-section__heading {
+  gap: 0.65rem;
+  margin-bottom: 0.9rem;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  letter-spacing: -0.018em;
+}
+
+.lesson-notes-v4 .notes-section__heading svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  padding: 0.15rem;
+  box-sizing: content-box;
+  border-radius: 0.42rem;
+  background: color-mix(in oklch, var(--brand) 10%, transparent);
+}
+
+.lesson-notes-v4 .notes-prose {
+  max-width: 76ch;
+  font-size: 1rem;
+  line-height: 1.78;
+  text-wrap: pretty;
+}
+
+.lesson-notes-v4 .notes-prose p {
+  margin-block: 0.9rem;
+}
+
+.lesson-notes-v4 .notes-prose h2 {
+  margin-top: 2rem;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.lesson-notes-v4 .notes-prose h3 {
+  margin-top: 1.5rem;
+  font-size: 1.05rem;
+}
+
+.lesson-notes-v4 .notes-prose li {
+  margin-block: 0.5rem;
+}
+
+/* Key concepts become readable study tiles but avoid the dashboard-card look. */
+.lesson-notes-v4 #section-concepts > div {
+  grid-template-columns: 1fr;
+  gap: 0.55rem;
+}
+
+.lesson-notes-v4 #section-concepts > div > div {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.65rem;
+  align-items: start;
+  padding: 0.8rem 0.9rem;
+  border-radius: 0.75rem;
+  background: color-mix(in oklch, #f59e0b 4%, var(--surface-1));
+}
+
+.lesson-notes-v4 #section-concepts > div > div svg {
+  margin-top: 0.1rem;
+  margin-bottom: 0;
+}
+
+/* Tables retain structure and horizontal scrolling without forcing every table
+   in the app into white-space: nowrap. */
+.lesson-notes-v4 .notes-section table {
+  display: table;
+  width: 100%;
+  min-width: 34rem;
+  white-space: normal;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.lesson-notes-v4 .notes-section thead th {
+  position: sticky;
+  top: 0;
+  background: color-mix(in oklch, var(--brand) 8%, var(--surface-2));
+}
+
+.lesson-notes-v4 .notes-section th,
+.lesson-notes-v4 .notes-section td {
+  padding: 0.7rem 0.8rem;
+  line-height: 1.5;
+}
+
+/* Worked examples get stronger problem/solution hierarchy. */
+.lesson-notes-v4 #section-worked > div > div {
+  border-radius: 0.9rem;
+  border-color: color-mix(in oklch, var(--brand) 16%, var(--border-subtle));
+  background: linear-gradient(180deg, color-mix(in oklch, var(--brand) 3%, var(--surface-1)), var(--surface-1));
+}
+
+.lesson-notes-v4 #section-worked pre {
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  font-family: var(--font-geist-sans, ui-sans-serif, system-ui, sans-serif);
+  font-size: 0.87rem;
+  line-height: 1.65;
+}
+
+/* Callouts are easier to scan and no longer visually shout over the theory. */
+.lesson-notes-v4 .callout {
+  margin-block: 0.7rem;
+  padding: 0.85rem 0.95rem;
+  border-radius: 0.8rem;
+}
+
+/* Exam/viva cards should look like study prompts, not generic dashboard cards. */
+.lesson-notes-v4 .marked-question {
+  margin-block: 0.55rem;
+  padding: 0.9rem 1rem;
+  border-radius: 0.85rem;
+  background: color-mix(in oklch, var(--surface-2) 48%, var(--surface-1));
+}
+
+/* Navigation at the bottom has a larger, clearer tap target. */
+.lesson-notes-v4 .premium-reader__main > nav {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+}
+
+.lesson-notes-v4 .premium-reader__main > nav a {
+  min-height: 2.75rem;
+  border-radius: 0.75rem;
+  padding-inline: 0.9rem;
+}
+
+/* Improve the surrounding lesson page without changing its component API. */
+.lesson-notes-v4 main > section:first-of-type + section,
+.lesson-notes-v4 main > div > div {
+  min-width: 0;
+}
+
+.lesson-notes-v4 section:has(> div > h2:last-child) {
+  min-width: 0;
+}
+
+/* The existing lesson studio wraps interactive notes in another bordered card.
+   Make that wrapper visually disappear so the reader does not feel like a card
+   inside a card inside a card. */
+.lesson-notes-v4 section:has(.premium-reader) {
+  overflow: visible;
+  border-color: color-mix(in oklch, var(--border-subtle) 62%, transparent) !important;
+  background: color-mix(in oklch, var(--surface-1) 45%, transparent) !important;
+  padding: clamp(0.7rem, 1.5vw, 1rem) !important;
+}
+
+/* Mobile: the TOC remains usable as a horizontal strip and the content gets the
+   full screen width. This deliberately overrides the older rule that hid it. */
+@media (max-width: 768px) {
+  .lesson-notes-v4 .premium-reader__left {
+    display: block;
+    top: calc(var(--topbar-height, 3rem) + 0.25rem);
+    margin-inline: -0.1rem;
+    padding: 0.45rem 0.5rem;
+    border-radius: 0.7rem;
+  }
+
+  .lesson-notes-v4 .premium-reader__main {
+    max-width: 100%;
+    padding: 0.9rem 0 1.5rem;
+  }
+
+  .lesson-notes-v4 .premium-reader__main > header {
+    padding: 1rem;
+    border-radius: 0.8rem;
+  }
+
+  .lesson-notes-v4 .toc-list__item {
+    min-width: auto;
+    min-height: 2rem !important;
+    padding: 0.38rem 0.62rem;
+  }
+
+  .lesson-notes-v4 .notes-section {
+    padding-block: 1.3rem;
+    scroll-margin-top: calc(var(--topbar-height, 3rem) + 4.5rem);
+  }
+
+  .lesson-notes-v4 .notes-prose {
+    font-size: 0.95rem;
+    line-height: 1.72;
+  }
+
+  .lesson-notes-v4 .notes-section table {
+    min-width: 30rem;
+  }
+
+  .lesson-notes-v4 .ai-toolbar {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .lesson-notes-v4 .ai-toolbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .lesson-notes-v4 .ai-toolbar__btn {
+    flex: 0 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .lesson-notes-v4 .premium-reader__main > header h1 {
+    font-size: 1.45rem !important;
+  }
+
+  .lesson-notes-v4 .notes-section__heading {
+    font-size: 1.05rem !important;
+  }
+
+  .lesson-notes-v4 .marked-question,
+  .lesson-notes-v4 .callout,
+  .lesson-notes-v4 #section-worked > div > div {
+    padding: 0.8rem;
+  }
+}
+
+/* Print: remove navigation chrome and give the study content a textbook width. */
+@media print {
+  .lesson-notes-v4 .premium-reader__left,
+  .lesson-notes-v4 .premium-reader__right,
+  .lesson-notes-v4 .reading-progress,
+  .lesson-notes-v4 .ai-toolbar,
+  .lesson-notes-v4 input[type="text"] {
+    display: none !important;
+  }
+
+  .lesson-notes-v4 .premium-reader__main {
+    max-width: none;
+    padding: 0;
+  }
+
+  .lesson-notes-v4 .notes-section {
+    break-inside: avoid-page;
+    border-color: #ddd;
+  }
+}
