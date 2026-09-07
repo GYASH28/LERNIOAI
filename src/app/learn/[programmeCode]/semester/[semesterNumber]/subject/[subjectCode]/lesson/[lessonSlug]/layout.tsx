@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react'
+
 import '@/styles/notes-reader-v4.css'
 import '@/styles/notes-reader-shell.css'
 
@@ -8,7 +10,7 @@ import {
 } from '@/lib/curriculum/lesson-notes-loader'
 
 type LessonReaderLayoutProps = Readonly<{
-  children: React.ReactNode
+  children: ReactNode
   params: Promise<{
     programmeCode: string
     semesterNumber: string
