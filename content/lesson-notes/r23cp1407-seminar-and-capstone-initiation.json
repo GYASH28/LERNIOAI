@@ -1,0 +1,512 @@
+{
+  "subjectCode": "R23CP1407",
+  "subjectName": "Seminar And Capstone Initiation",
+  "semester": 5,
+  "credits": 1,
+  "units": [
+    {
+      "number": 1,
+      "title": "Seminar Topic Selection and Literature Survey",
+      "weightage": 15,
+      "lessons": [
+        {
+          "slug": "choosing-a-seminar-topic",
+          "title": "Choosing a Strong Seminar Topic",
+          "durationMin": 30,
+          "difficulty": "easy",
+          "overview": "A good seminar starts with a topic that is relevant, narrow enough to study properly, supported by trustworthy information, and suitable for the student's strengths. In CWIT R23, the seminar should preferably connect to emerging engineering or technology trends, industry expectations, programme outcomes, or a meaningful interdisciplinary application. This lesson turns topic selection into a simple decision process instead of guesswork.",
+          "objectives": [
+            "Explain what makes a seminar topic relevant and feasible",
+            "Convert a broad interest into a focused seminar title",
+            "Compare candidate topics using clear selection criteria",
+            "Prepare a short topic proposal for faculty-mentor approval"
+          ],
+          "prerequisites": [
+            "Basic awareness of current computer engineering areas",
+            "Ability to search for introductory information online or in books",
+            "A rough idea of personal interests and strengths"
+          ],
+          "keyConcepts": [
+            "Relevance: the topic should connect to computer engineering, industry needs, programme outcomes, or a useful interdisciplinary problem",
+            "Scope: the topic must be small enough to explain meaningfully in the available seminar time",
+            "Evidence availability: reliable books, papers, standards, documentation, and expert sources should exist",
+            "Student fit: a topic is stronger when it matches the student's interest, background, and ability to answer questions",
+            "Novelty: the seminar need not invent a technology, but it should present a current, useful, or thoughtful angle",
+            "Mentor validation: the final topic should be discussed and approved with the faculty mentor before deep preparation"
+          ],
+          "formulas": [
+            "Topic score = Relevance + Feasibility + Evidence quality + Student fit + Presentation potential",
+            "A focused topic = broad area + specific technology/problem + clear context"
+          ],
+          "tables": [
+            {
+              "title": "Broad idea to focused seminar topic",
+              "headers": ["Too broad", "Better focused topic", "Why it is better"],
+              "rows": [
+                ["Artificial Intelligence", "Retrieval-Augmented Generation for College Knowledge Assistants", "Names one technique and one application context"],
+                ["Cyber Security", "Passkeys as an Alternative to Password Authentication", "Creates a clear comparison and discussion scope"],
+                ["Cloud Computing", "Serverless Computing for Small Web Applications", "Limits the discussion to one cloud model and use case"],
+                ["IoT", "Low-Cost IoT Air-Quality Monitoring for Classrooms", "Connects technology to a concrete problem"]
+              ],
+              "note": "A focused title makes research, slide design, and Q&A much easier."
+            }
+          ],
+          "diagrams": [],
+          "codeExamples": [],
+          "analogies": [
+            {
+              "scenario": "Choosing a seminar topic is like choosing a camera frame",
+              "mapping": "The whole landscape is too much to show clearly. A strong topic zooms in on one useful subject so the audience can actually understand the details."
+            }
+          ],
+          "flowcharts": [
+            {
+              "type": "mermaid",
+              "title": "Seminar topic selection flow",
+              "content": "flowchart TD\n    A[List 3-5 areas you care about] --> B[Find current problems or technologies]\n    B --> C{Enough trustworthy sources?}\n    C -->|No| B\n    C -->|Yes| D[Narrow the scope]\n    D --> E[Check relevance and feasibility]\n    E --> F[Prepare 3-line topic proposal]\n    F --> G[Discuss with faculty mentor]\n    G --> H[Finalize title]"
+            }
+          ],
+          "mindMaps": [
+            {
+              "type": "mermaid",
+              "title": "What makes a strong topic",
+              "content": "mindmap\n  root((Strong Seminar Topic))\n    Relevant\n      Programme\n      Industry\n      Emerging trend\n    Feasible\n      Time\n      Sources\n      Complexity\n    Focused\n      Specific technology\n      Specific context\n    Student fit\n      Interest\n      Background\n      Confidence"
+            }
+          ],
+          "workedExamples": [
+            {
+              "title": "Narrowing a broad AI topic",
+              "problem": "A student wants to present a seminar on 'AI'. The title is too broad. Convert it into a focused seminar topic.",
+              "solution": "Start with the broad area AI. Pick one current technique: retrieval-augmented generation (RAG). Pick one understandable application: a college knowledge assistant. The focused title becomes 'Retrieval-Augmented Generation for College Knowledge Assistants'. The seminar can now cover the problem, RAG architecture, retrieval step, generation step, benefits, limitations, and a small use-case diagram.",
+              "explanation": "The improved title is specific enough to research deeply but broad enough to support a complete seminar."
+            }
+          ],
+          "commonMistakes": [
+            "Selecting a title only because it sounds futuristic without understanding the basic technology",
+            "Choosing an extremely broad area such as AI, cloud, blockchain, or cybersecurity as the complete title",
+            "Finalizing a topic before checking whether reliable information is available",
+            "Copying a classmate's topic instead of selecting something that matches personal strengths",
+            "Using a product name as the entire seminar without a technical question or learning goal"
+          ],
+          "examTips": [
+            "When asked about topic selection, mention relevance, feasibility, source availability, student aptitude, and mentor approval",
+            "Use one example that shows how a broad area is narrowed into a focused title",
+            "For viva, be ready to explain why your selected topic matters now and who benefits from it"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which seminar title is the most focused?",
+              "options": ["Cloud Computing", "Artificial Intelligence", "Serverless Computing for Small Web Applications", "Computer Networks"],
+              "answer": 2,
+              "explanation": "It identifies a specific technology and a specific application context, making the scope manageable."
+            },
+            {
+              "question": "What should be checked before a seminar topic is finalized?",
+              "options": ["Only whether the title is short", "Relevance, feasibility, trustworthy sources, and mentor approval", "Only whether a YouTube video exists", "Whether another student has already made slides"],
+              "answer": 1,
+              "explanation": "A good topic must be relevant, feasible, researchable, suitable for the student, and discussed with the mentor."
+            }
+          ],
+          "vivaQuestions": [
+            {"marks": 2, "question": "What is meant by scope of a seminar topic?", "modelAnswer": "Scope defines the boundaries of what the seminar will and will not cover. A manageable scope keeps the topic focused enough to explain properly within the available time."},
+            {"marks": 5, "question": "Explain the criteria used to select a seminar topic.", "modelAnswer": "A topic should be relevant to the programme or industry, technically meaningful, supported by authentic sources, feasible within the available time, matched to the student's aptitude, narrow enough for depth, and finalized with mentor guidance."}
+          ],
+          "examQuestions": [
+            {"marks": 5, "question": "Describe the process of selecting and finalizing a seminar topic.", "modelAnswer": "List areas of interest, identify current technologies/problems, shortlist topics, check source availability and feasibility, narrow the scope, prepare a short proposal, discuss it with the faculty mentor, and then finalize the title.", "tips": ["Write the answer as a sequence", "Include relevance and feasibility"]}
+          ],
+          "revisionSummary": "A strong seminar topic is relevant, focused, feasible, researchable, and suited to the student. Start broad, identify a specific technology or problem, add a clear context, verify reliable sources, check time and complexity, and finalize the title with the faculty mentor.",
+          "cheatSheet": [
+            "Good topic = relevant + focused + feasible + researchable",
+            "Broad area -> specific technology/problem -> context -> final title",
+            "Check sources before finalizing",
+            "Mentor approval comes before full preparation"
+          ],
+          "mnemonics": [
+            {"phrase": "RFSM", "expansion": "Relevant - Focused - Sources - Mentor", "meaning": "Four quick checks before finalizing a seminar topic"}
+          ],
+          "callouts": [
+            {"type": "tip", "title": "Fast topic test", "content": "If you cannot explain in two sentences what the seminar will teach and what it will not cover, the topic is probably still too broad."}
+          ],
+          "flashcards": [
+            {"front": "What is seminar-topic scope?", "back": "The boundary that defines what the seminar covers and deliberately leaves out."},
+            {"front": "Why is evidence availability important?", "back": "The seminar must be based on authentic, realistic, and relevant information rather than unsupported claims."},
+            {"front": "Who should approve the final seminar title?", "back": "The faculty mentor, after discussion with the student."}
+          ],
+          "aiSummaries": [
+            {"style": "eli5", "content": "Do not choose 'everything about AI'. Choose one useful piece of AI, decide where it is used, check that you can find good information, and make sure your mentor agrees with the scope."}
+          ],
+          "recommendedNextLessons": ["literature-survey-and-source-evaluation"]
+        },
+        {
+          "slug": "literature-survey-and-source-evaluation",
+          "title": "Literature Survey, Information Search and Source Evaluation",
+          "durationMin": 40,
+          "difficulty": "medium",
+          "overview": "A literature survey is the structured process of collecting, checking, comparing, and organizing existing knowledge about the seminar topic. The goal is not to collect the maximum number of links; it is to build a trustworthy understanding from authentic and relevant sources. This lesson explains how to search effectively, judge source quality, keep useful notes, avoid plagiarism, and turn scattered information into evidence for a seminar.",
+          "objectives": [
+            "Plan an efficient literature search using keywords and sub-questions",
+            "Distinguish strong technical sources from weak or promotional sources",
+            "Organize research notes with source details and key findings",
+            "Paraphrase information responsibly and avoid plagiarism"
+          ],
+          "prerequisites": ["A finalized or shortlisted seminar topic", "Basic web-search skills"],
+          "keyConcepts": [
+            "Search question: break the seminar into smaller questions such as what, why, how, applications, benefits, limitations, and future scope",
+            "Primary technical sources: standards, official documentation, research papers, technical reports, and authoritative organizations",
+            "Secondary sources: textbooks, reputable tutorials, review papers, and high-quality educational material",
+            "Source evaluation: check author/organization, date, evidence, technical depth, references, and possible bias",
+            "Research log: record source title, URL/reference, date, useful point, and where it may be used in the seminar",
+            "Synthesis: combine ideas from multiple sources instead of copying one source's structure"
+          ],
+          "formulas": ["Source confidence increases when important claims are supported by multiple independent, credible references"],
+          "tables": [
+            {
+              "title": "Quick source-quality guide",
+              "headers": ["Source", "Typical value", "How to use it"],
+              "rows": [
+                ["Official documentation / standard", "Very high for definitions and specifications", "Use for exact technical facts"],
+                ["Research or review paper", "High for methods, evidence, and current research", "Use for deeper claims and comparisons"],
+                ["Textbook / university material", "High for fundamentals", "Use to explain core concepts clearly"],
+                ["Reputable technical tutorial", "Medium to high for practical explanation", "Cross-check important claims"],
+                ["Company marketing page", "Useful but potentially biased", "Use for product details, not neutral comparisons"],
+                ["Anonymous post / random short", "Low without evidence", "Do not rely on it for important claims"]
+              ]
+            }
+          ],
+          "diagrams": [],
+          "codeExamples": [],
+          "analogies": [
+            {"scenario": "Literature survey as detective work", "mapping": "A detective does not trust the first story. You gather evidence from several reliable sources, compare details, record where each fact came from, and build the most defensible explanation."}
+          ],
+          "flowcharts": [
+            {"type": "mermaid", "title": "Literature survey workflow", "content": "flowchart LR\n    A[Define sub-questions] --> B[Create search keywords]\n    B --> C[Collect candidate sources]\n    C --> D[Check authority, date and evidence]\n    D --> E[Extract useful findings]\n    E --> F[Record source in research log]\n    F --> G[Compare sources]\n    G --> H[Synthesize seminar content]"}
+          ],
+          "mindMaps": [],
+          "workedExamples": [
+            {
+              "title": "Researching passkeys",
+              "problem": "You are preparing a seminar on passkeys. How should you build the literature survey?",
+              "solution": "Create sub-questions: What is a passkey? How does WebAuthn work? Why are passkeys phishing-resistant? What are deployment limitations? Search official FIDO Alliance and browser/platform documentation for definitions and protocol behaviour, then use reputable security articles or papers for comparisons and adoption issues. Record every useful claim with its source. Finally, combine the material into your own explanation instead of copying a single article.",
+              "explanation": "The method separates fundamentals, mechanism, benefits, and limitations, while matching each claim to an appropriate source type."
+            }
+          ],
+          "commonMistakes": [
+            "Using only the first search result",
+            "Treating a promotional company page as an unbiased comparison",
+            "Saving links without recording which claim came from which source",
+            "Copy-pasting paragraphs into slides or reports",
+            "Using old information for fast-changing technologies without checking publication dates"
+          ],
+          "examTips": [
+            "Define literature survey as collection, evaluation, organization, and synthesis of existing information",
+            "Mention authenticity, relevance, cross-checking, citation, and plagiarism prevention"
+          ],
+          "practiceQuestions": [
+            {"question": "Which source is usually best for an exact protocol specification?", "options": ["Anonymous forum comment", "Official standard or documentation", "Promotional social-media post", "Unreferenced blog"], "answer": 1, "explanation": "Official standards and documentation are authoritative for exact protocol definitions and specifications."},
+            {"question": "What is synthesis in a literature survey?", "options": ["Copying one article", "Collecting as many links as possible", "Combining and comparing evidence from multiple sources into your own structured understanding", "Removing all citations"], "answer": 2, "explanation": "Synthesis integrates multiple sources to form a coherent explanation rather than reproducing one source."}
+          ],
+          "vivaQuestions": [
+            {"marks": 2, "question": "What is a literature survey?", "modelAnswer": "It is a systematic search, evaluation, organization, and synthesis of existing information related to a topic."},
+            {"marks": 5, "question": "How do you judge whether a technical source is reliable?", "modelAnswer": "Check who published it, the author's expertise, publication date, references or evidence, technical detail, consistency with other credible sources, and whether the source has commercial or other bias."}
+          ],
+          "examQuestions": [
+            {"marks": 5, "question": "Explain the steps in conducting a literature survey for a technical seminar.", "modelAnswer": "Define sub-questions, generate keywords, collect candidate sources, evaluate source authority and freshness, extract relevant findings, record citations, compare claims, and synthesize the final understanding in original wording."}
+          ],
+          "revisionSummary": "Break the topic into questions, search with deliberate keywords, prefer authoritative sources, evaluate author/date/evidence/bias, keep a research log, cross-check important claims, and synthesize the final explanation in your own words with proper references.",
+          "cheatSheet": ["Question -> keywords -> sources -> evaluate -> notes -> compare -> synthesize", "Authority + freshness + evidence + relevance = stronger source", "Record citations while researching, not at the end"],
+          "mnemonics": [{"phrase": "A-D-E-R", "expansion": "Authority - Date - Evidence - Relevance", "meaning": "Quick checklist for evaluating a source"}],
+          "callouts": [{"type": "warning", "title": "Wikipedia is a starting point, not the finish line", "content": "It can help you learn vocabulary and discover references, but important technical claims should be verified using stronger primary or authoritative sources."}],
+          "flashcards": [
+            {"front": "What is a primary technical source?", "back": "A source close to the original specification, research, or data, such as a standard, official documentation, or research paper."},
+            {"front": "What should a research log contain?", "back": "Source details, the useful claim/finding, and where that evidence will be used."}
+          ],
+          "aiSummaries": [{"style": "exam", "content": "Literature survey means searching, validating, recording, comparing, and synthesizing existing knowledge. Strong seminars use authentic sources and trace important claims back to evidence."}],
+          "recommendedNextLessons": ["organizing-seminar-content"]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Seminar Preparation and Report Writing",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "organizing-seminar-content",
+          "title": "Organizing Seminar Content into a Clear Technical Story",
+          "durationMin": 35,
+          "difficulty": "medium",
+          "overview": "Good research can still become a bad seminar if the content has no logical flow. A technical seminar should guide the audience from context to understanding: introduce the problem, explain the core idea, show how it works, present evidence or examples, discuss strengths and limitations, and end with a useful conclusion. This lesson teaches a reusable structure that works for most engineering topics.",
+          "objectives": ["Build a logical seminar outline", "Separate essential content from optional detail", "Use diagrams and examples to reduce cognitive load", "Write transitions that connect one section to the next"],
+          "prerequisites": ["A finalized topic", "A basic literature survey and research notes"],
+          "keyConcepts": [
+            "Audience-first structure: explain prerequisite concepts before advanced details",
+            "Problem-first opening: show why the topic matters before describing technology",
+            "Progressive detail: move from simple mental model to architecture or mechanism",
+            "Evidence and examples: support claims with data, demonstrations, diagrams, or credible references",
+            "Limitations: technical maturity includes explaining where a solution does not work well",
+            "Conclusion: answer the original problem and leave the audience with 3-5 memorable takeaways"
+          ],
+          "formulas": ["Seminar flow = Context -> Problem -> Core idea -> Working -> Evidence/Example -> Benefits & Limitations -> Future scope -> Conclusion"],
+          "tables": [
+            {"title": "Suggested seminar story", "headers": ["Part", "Question it answers"], "rows": [["Context", "What area are we discussing?"], ["Problem", "Why do we need this technology or method?"], ["Core idea", "What is the main concept in simple words?"], ["Working", "How does it actually operate?"], ["Evidence / example", "What proves or demonstrates the idea?"], ["Benefits and limitations", "Where is it useful and where does it struggle?"], ["Conclusion", "What should the audience remember?"]]}
+          ],
+          "diagrams": [],
+          "codeExamples": [],
+          "analogies": [{"scenario": "Seminar as a guided tour", "mapping": "Do not drop the audience in the middle of the building. Start at the entrance, explain the map, visit important rooms in a sensible order, and end by reminding them what they saw."}],
+          "flowcharts": [{"type": "mermaid", "title": "Technical story flow", "content": "flowchart LR\n    A[Why it matters] --> B[What problem exists]\n    B --> C[Core concept]\n    C --> D[How it works]\n    D --> E[Example or evidence]\n    E --> F[Benefits]\n    F --> G[Limitations]\n    G --> H[Future / conclusion]"}],
+          "mindMaps": [],
+          "workedExamples": [{"title": "Outline for an edge-computing seminar", "problem": "Create a logical outline for 'Edge Computing for Industrial IoT'.", "solution": "1) Explain industrial IoT and why latency matters. 2) Define cloud-only processing and its limits. 3) Introduce edge computing. 4) Show device-edge-cloud architecture. 5) Walk through a predictive-maintenance example. 6) Compare latency, bandwidth, privacy, and management trade-offs. 7) Discuss security and hardware limitations. 8) Summarize where edge computing is the right choice.", "explanation": "The outline starts with the problem, introduces the solution only after the need is clear, then uses a concrete example and balanced trade-off discussion."}],
+          "commonMistakes": ["Starting with dense definitions before explaining why the topic matters", "Putting every research detail into the presentation", "Using screenshots of paragraphs instead of visual explanations", "Listing only advantages and ignoring limitations", "Ending abruptly without a conclusion"],
+          "examTips": ["Remember the sequence context-problem-concept-working-example-evaluation-conclusion", "Mention audience level and logical sequencing when explaining seminar preparation"],
+          "practiceQuestions": [{"question": "Which section should usually come before a detailed architecture diagram?", "options": ["A simple explanation of the problem and core idea", "References", "Thank-you slide", "Random benchmark table"], "answer": 0, "explanation": "The audience needs context and a mental model before a dense architecture diagram becomes meaningful."}],
+          "vivaQuestions": [{"marks": 5, "question": "How would you organize the content of a technical seminar?", "modelAnswer": "Begin with context and the problem, introduce the core concept, explain the working mechanism, support it with examples or evidence, discuss applications, benefits and limitations, then present future scope and a concise conclusion."}],
+          "examQuestions": [{"marks": 5, "question": "Explain the importance of logical content organization in a technical seminar.", "modelAnswer": "Logical organization reduces confusion, establishes prerequisites before advanced ideas, keeps the audience engaged, helps evidence support the correct claims, improves time control, and makes the conclusion easier to remember."}],
+          "revisionSummary": "Build the seminar as a technical story. Explain why the topic matters, define the problem, introduce the concept, show how it works, prove it with an example or evidence, discuss benefits and limitations, and finish with clear takeaways.",
+          "cheatSheet": ["Why -> What -> How -> Proof -> Trade-offs -> So what", "One section should answer one audience question", "Keep detail that supports the main story; move extra detail to backup slides"],
+          "mnemonics": [{"phrase": "P-W-E-T-C", "expansion": "Problem - Working - Evidence - Trade-offs - Conclusion", "meaning": "Compact seminar-story sequence"}],
+          "callouts": [{"type": "tip", "title": "Use the one-sentence test", "content": "For every slide or section, write one sentence saying what the audience should learn from it. If you cannot, the section is probably unfocused."}],
+          "flashcards": [{"front": "Why explain the problem before the solution?", "back": "It gives the audience a reason to care and a frame for understanding why the solution's features matter."}],
+          "aiSummaries": [{"style": "eli5", "content": "Tell the seminar like a story: here is the problem, here is the idea, here is how it works, here is proof, here is where it helps, here is where it does not, and here is what to remember."}],
+          "recommendedNextLessons": ["seminar-report-writing"]
+        },
+        {
+          "slug": "seminar-report-writing",
+          "title": "Seminar Report Writing, Referencing and Documentation",
+          "durationMin": 35,
+          "difficulty": "medium",
+          "overview": "The seminar report is the permanent technical record behind the presentation. It should be readable without the speaker, use a consistent structure, distinguish the student's explanation from sourced material, and make every figure, table, quotation, and important claim traceable. This lesson provides a practical report structure and a quality checklist.",
+          "objectives": ["Prepare a well-structured seminar report", "Write concise technical paragraphs in original wording", "Use figures, tables, captions, and references correctly", "Perform a final documentation quality check"],
+          "prerequisites": ["Completed literature survey", "Seminar outline"],
+          "keyConcepts": ["Front matter: title page, certificate/declaration if required, acknowledgement, abstract, contents", "Main body: introduction, background, core technology/method, applications or case study, advantages, limitations, future scope, conclusion", "References: every borrowed idea, figure, dataset, and important external claim should be traceable", "Captions: figures and tables need meaningful labels and should be discussed in the text", "Consistency: headings, numbering, fonts, terminology, and citation style should not change randomly", "Revision: technical correctness, language, formatting, citation, and plagiarism checks are separate passes"],
+          "formulas": ["Abstract = problem/context + what the seminar covers + key insight + conclusion, written briefly"],
+          "tables": [{"title": "Report-quality checklist", "headers": ["Check", "Question"], "rows": [["Structure", "Can a reader follow the report without the presentation?"], ["Technical accuracy", "Are definitions, diagrams, and claims correct?"], ["Evidence", "Are important claims referenced?"], ["Original writing", "Is the explanation paraphrased and synthesized rather than copied?"], ["Figures", "Does every figure have a caption/source and get explained?"], ["Consistency", "Are headings, fonts, numbering, and terms uniform?"], ["Language", "Are sentences concise, grammatical, and unambiguous?"]] }],
+          "diagrams": [], "codeExamples": [],
+          "analogies": [{"scenario": "Report as source code, presentation as the running app", "mapping": "The presentation shows the experience quickly, but the report contains the full structure, details, evidence, and references needed to understand how the work is built."}],
+          "flowcharts": [{"type": "mermaid", "title": "Report revision passes", "content": "flowchart LR\n A[Draft content] --> B[Technical accuracy]\n B --> C[Structure and flow]\n C --> D[Citations and figures]\n D --> E[Language and formatting]\n E --> F[Final PDF / print check]"}],
+          "mindMaps": [],
+          "workedExamples": [{"title": "Improving a copied-looking paragraph", "problem": "A draft paragraph repeats wording from a source and has no citation. How should it be fixed?", "solution": "Read the original source, close it, explain the concept in your own technical words, compare the claim with another credible reference if it is important, add the citation at the point where the external idea is used, and include the full reference in the bibliography. If exact wording is genuinely necessary, use a short quotation according to the required citation style.", "explanation": "Paraphrasing means rebuilding the explanation from understanding, not merely replacing a few words."}],
+          "commonMistakes": ["Copying internet text into the report", "Adding references only as a list at the end without connecting them to claims", "Using figures with no caption or source", "Writing an abstract as a long introduction", "Changing terminology for the same concept across chapters", "Submitting without checking page breaks and figure readability in the final PDF"],
+          "examTips": ["If asked for report structure, write front matter, main body, conclusion, and references", "Mention plagiarism prevention and source acknowledgement"],
+          "practiceQuestions": [{"question": "What is the main purpose of a figure caption?", "options": ["Decoration", "To identify and briefly explain what the figure represents", "To replace all discussion in the text", "To increase page count"], "answer": 1, "explanation": "A caption identifies the figure and helps the reader understand its purpose; the report text should still discuss the figure where relevant."}],
+          "vivaQuestions": [{"marks": 2, "question": "What is an abstract?", "modelAnswer": "A brief, self-contained summary of the seminar's context, coverage, key idea or findings, and conclusion."}, {"marks": 5, "question": "How can plagiarism be avoided in a seminar report?", "modelAnswer": "Understand sources before writing, synthesize and paraphrase in original wording, cite borrowed ideas and data, quote exact words only when necessary, reference figures and tables, and keep a complete bibliography."}],
+          "examQuestions": [{"marks": 5, "question": "Write a suitable structure for a technical seminar report.", "modelAnswer": "Title/front matter, abstract, table of contents, introduction, background/literature, core technical chapters, applications or case study, advantages and limitations, future scope, conclusion, and references, with appendices where required."}],
+          "revisionSummary": "A seminar report must stand on its own. Use a clear structure, concise original writing, traceable references, labelled figures/tables, consistent formatting, and separate revision passes for technical accuracy, flow, citations, language, and final layout.",
+          "cheatSheet": ["Write from understanding, then cite", "Every important borrowed claim must be traceable", "Every figure: number + caption + source if external + discussion", "Check the final exported PDF, not only the editor"],
+          "mnemonics": [{"phrase": "S-A-F-E", "expansion": "Structure - Accuracy - Figures - Evidence", "meaning": "Four essentials of a reliable seminar report"}],
+          "callouts": [{"type": "exam-tip", "title": "Documentation earns marks quietly", "content": "A technically good seminar can still lose assessment marks through poor references, unreadable figures, inconsistent formatting, or an incomplete report."}],
+          "flashcards": [{"front": "Paraphrasing vs copying?", "back": "Paraphrasing rebuilds an idea in your own structure and wording from understanding, while still citing the source; copying reproduces the source wording."}],
+          "aiSummaries": [{"style": "exam", "content": "A good seminar report is structured, technically accurate, original in wording, properly referenced, visually readable, and independently understandable without the oral presentation."}],
+          "recommendedNextLessons": ["slide-design-and-technical-presentation"]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Presentation, Discussion and Assessment",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "slide-design-and-technical-presentation",
+          "title": "Slide Design and Effective Technical Presentation",
+          "durationMin": 40,
+          "difficulty": "medium",
+          "overview": "A seminar presentation is not the report placed on slides. Slides are visual support for the speaker. Effective technical presentation requires a clear message, readable visuals, controlled pacing, deliberate explanation of diagrams, and enough rehearsal that the speaker can focus on the audience instead of reading text. The official seminar guidance emphasizes appropriate presentation tools, communication, preparation quality, and time management.",
+          "objectives": ["Design readable slides around one message at a time", "Explain technical diagrams without reading paragraphs", "Use pacing, voice, and body language effectively", "Rehearse a seminar to fit the allotted time"],
+          "prerequisites": ["Final seminar outline", "Core diagrams/data/examples prepared"],
+          "keyConcepts": ["One-slide-one-message: every slide should have a clear purpose", "Visual hierarchy: the title and key visual should show what matters first", "Readability: large text, strong contrast, limited clutter, and consistent styles", "Speaker-slide separation: slides cue and support; the speaker provides the explanation", "Signposting: tell the audience where you are and why the next section follows", "Rehearsal: measure actual timing, difficult transitions, and likely questions"],
+          "formulas": ["Available speaking time = total slot - opening - Q&A reserve - transition buffer", "Slides are a support surface, not a teleprompter"],
+          "tables": [{"title": "Weak vs strong slide choices", "headers": ["Weak", "Stronger"], "rows": [["Full paragraph", "Short claim + diagram or 3-5 supporting points"], ["Tiny architecture screenshot", "Redrawn simplified architecture with labels"], ["Generic title: 'Advantages'", "Message title: 'Edge processing cuts cloud round trips'"], ["Five different font styles", "One consistent type system"], ["Reading every bullet", "Explain the idea while the slide provides visual anchors"]]}],
+          "diagrams": [], "codeExamples": [],
+          "analogies": [{"scenario": "Slides as road signs", "mapping": "Road signs show the direction and important information quickly; they do not contain the entire travel guide. Your explanation is the journey."}],
+          "flowcharts": [{"type": "mermaid", "title": "Presentation preparation loop", "content": "flowchart LR\n A[Build slide] --> B[Explain aloud]\n B --> C[Time it]\n C --> D{Clear and within time?}\n D -->|No| E[Simplify / reorder]\n E --> A\n D -->|Yes| F[Rehearse full seminar]\n F --> G[Prepare Q&A backup]"}],
+          "mindMaps": [],
+          "workedExamples": [{"title": "Turning a dense slide into a useful slide", "problem": "A slide contains a 180-word paragraph describing an IoT architecture. Redesign it.", "solution": "Replace the paragraph with a simple Device -> Gateway -> Cloud diagram. Give each block a one-line role. Use a message title such as 'The gateway filters sensor data before cloud upload'. Move implementation details into speaker notes or a later slide. During the talk, trace the data path from left to right and explain why the gateway exists.", "explanation": "The audience can now see the system while listening, instead of trying to read and listen simultaneously."}],
+          "commonMistakes": ["Reading slides word-for-word", "Using tiny screenshots or code that cannot be read from the back", "Adding animations to every object", "Speaking too fast because rehearsal was skipped", "Turning toward the screen for the whole presentation", "Using unexplained acronyms"],
+          "examTips": ["Mention content clarity, visual design, communication, time management, rehearsal, and audience interaction", "If asked about presentation tools, focus on purposeful use rather than software names only"],
+          "practiceQuestions": [{"question": "What is the best role of a seminar slide?", "options": ["To contain the complete report", "To visually support the speaker's message", "To remove the need for rehearsal", "To show as much text as possible"], "answer": 1, "explanation": "Slides should make the spoken explanation easier to understand, not duplicate the complete report."}],
+          "vivaQuestions": [{"marks": 5, "question": "State the characteristics of an effective technical presentation.", "modelAnswer": "It has a clear structure, readable and purposeful visuals, technically accurate content, confident speech, good pacing and time control, audience engagement, proper explanation of diagrams, and prepared responses for likely questions."}],
+          "examQuestions": [{"marks": 5, "question": "Explain guidelines for preparing and delivering technical seminar slides.", "modelAnswer": "Use one clear message per slide, readable text and contrast, meaningful diagrams and charts, consistent styling, minimal clutter, source labels where needed, logical sequence, speaker-led explanation, rehearsal, and time reserved for Q&A."}],
+          "revisionSummary": "Slides should make technical ideas easier to see. Use one message per slide, strong visual hierarchy, readable diagrams, consistent design, and little unnecessary text. Rehearse aloud, measure timing, explain rather than read, and reserve time for questions.",
+          "cheatSheet": ["One slide = one message", "Show structure visually", "Explain; don't read", "Rehearse with a clock", "Keep backup slides for deep questions"],
+          "mnemonics": [{"phrase": "CLEAR", "expansion": "Concise - Legible - Explained - Audience-first - Rehearsed", "meaning": "Five traits of effective seminar slides and delivery"}],
+          "callouts": [{"type": "tip", "title": "Rehearse the explanation, not only the slides", "content": "A deck can look finished while the talk is still weak. Practice the exact transitions, diagram explanations, opening, conclusion, and difficult technical terms aloud."}],
+          "flashcards": [{"front": "What is one-slide-one-message?", "back": "Each slide should make one main point clear rather than combining several unrelated ideas."}],
+          "aiSummaries": [{"style": "eli5", "content": "Your slides are the pictures and signposts. You are the explanation. Make the pictures easy to see, know the story, practice with a timer, and talk to the audience instead of reading the screen."}],
+          "recommendedNextLessons": ["qa-discussion-and-time-management"]
+        },
+        {
+          "slug": "qa-discussion-and-time-management",
+          "title": "Q&A, Discussion, Critical Thinking and Time Management",
+          "durationMin": 30,
+          "difficulty": "medium",
+          "overview": "Question-and-answer time is part of the seminar, not an interruption after it. It tests whether the presenter actually understands the topic, can distinguish fact from assumption, and can engage in technical discussion. The CWIT outcomes explicitly include critical thinking, discussion, interaction, knowledge sharing, presentation skills, Q&A handling, and time management.",
+          "objectives": ["Prepare for likely technical questions", "Answer clearly even when the exact answer is unknown", "Use questions to demonstrate critical thinking", "Control presentation and Q&A time"],
+          "prerequisites": ["A rehearsed seminar presentation", "Understanding of sources, limitations, and key technical terms"],
+          "keyConcepts": ["Listen-first: understand the full question before answering", "Direct-first: give the short answer first, then explanation", "Evidence boundary: distinguish what your sources show from what you infer", "Honest uncertainty: say when you do not know rather than inventing a fact", "Discussion: compare alternatives, trade-offs, assumptions, and limitations", "Time budget: protect the conclusion and Q&A instead of allowing early slides to consume the entire slot"],
+          "formulas": ["Answer pattern = Direct answer -> Reason/evidence -> Example or limitation", "Time budget should reserve a fixed Q&A block before rehearsing slide timings"],
+          "tables": [{"title": "Handling common question types", "headers": ["Question type", "Good response"], "rows": [["Definition", "Give a precise definition and one example"], ["Why?", "State the reason, mechanism, or evidence"], ["Compare", "Name the criteria, then compare both options"], ["Limitation", "Acknowledge it and explain the impact or mitigation"], ["Unknown detail", "State that you do not want to guess, explain what you do know, and indicate how you would verify it"]]}],
+          "diagrams": [], "codeExamples": [],
+          "analogies": [{"scenario": "Q&A as a technical code review", "mapping": "Questions are not attacks; they probe assumptions, edge cases, and design choices. A strong response explains the reasoning and admits uncertainty when evidence is missing."}],
+          "flowcharts": [{"type": "mermaid", "title": "Answering a difficult question", "content": "flowchart TD\n A[Listen fully] --> B[Restate if needed]\n B --> C{Know the answer?}\n C -->|Yes| D[Direct answer]\n D --> E[Reason / evidence]\n E --> F[Example or limitation]\n C -->|Partly| G[State known boundary]\n G --> H[Do not guess]\n H --> I[Explain how to verify]"}],
+          "mindMaps": [],
+          "workedExamples": [{"title": "Handling an unknown benchmark question", "problem": "An examiner asks for the exact latest latency number of a system, but you did not research that benchmark.", "solution": "Do not invent a number. Say: 'I do not have a verified exact latency figure for that benchmark, so I do not want to guess. The reason I described the system as lower-latency is that processing occurs closer to the data source and avoids some cloud round trips. To answer the exact number, I would compare measurements from the same hardware, workload, and network conditions.'", "explanation": "The response protects factual accuracy while still demonstrating understanding of the mechanism and evaluation method."}],
+          "commonMistakes": ["Interrupting the question", "Giving a five-minute answer to a simple question", "Bluffing when unsure", "Becoming defensive when someone points out a limitation", "Repeating the entire presentation instead of answering the exact point", "Using all seminar time before reaching the conclusion"],
+          "examTips": ["For Q&A questions, mention listening, concise answer, evidence, honesty, and discussion", "For time management, mention rehearsal and reserving Q&A/conclusion time"],
+          "practiceQuestions": [{"question": "What is the best response when you genuinely do not know an exact technical fact?", "options": ["Invent a likely value", "Change the topic", "State that you do not have a verified answer, explain what is known, and say how it could be verified", "Argue with the examiner"], "answer": 2, "explanation": "Technical credibility is stronger when uncertainty is handled honestly and methodically."}],
+          "vivaQuestions": [{"marks": 5, "question": "How should a presenter handle questions during a seminar?", "modelAnswer": "Listen fully, clarify the question if necessary, answer the exact point first, support it with reasoning or evidence, acknowledge limitations, avoid guessing, stay respectful, and keep the response concise enough to allow discussion."}],
+          "examQuestions": [{"marks": 5, "question": "Explain the importance of discussion and Q&A in a seminar.", "modelAnswer": "Q&A verifies understanding beyond memorized slides, develops critical thinking, exposes assumptions and limitations, encourages knowledge sharing, improves communication, and gives the presenter a chance to compare alternatives and defend conclusions using evidence."}],
+          "revisionSummary": "Listen, answer the exact point, support it with reason or evidence, acknowledge trade-offs, and never bluff. Reserve Q&A time during planning and rehearse the entire seminar with a clock so the conclusion is never sacrificed.",
+          "cheatSheet": ["Listen -> direct answer -> reason -> example/limit", "Unknown is better than invented", "Reserve Q&A before timing individual slides", "Treat criticism as a technical issue, not a personal attack"],
+          "mnemonics": [{"phrase": "LARE", "expansion": "Listen - Answer - Reason - Evidence", "meaning": "Simple pattern for seminar Q&A"}],
+          "callouts": [{"type": "concept", "title": "Confidence is not pretending certainty", "content": "A technically confident presenter can say 'I do not have enough evidence to claim that' and then explain how the claim should be tested."}],
+          "flashcards": [{"front": "Best structure for a technical answer?", "back": "Direct answer first, then reason/evidence, then an example, trade-off, or limitation if useful."}],
+          "aiSummaries": [{"style": "exam", "content": "Q&A assesses real understanding. Listen carefully, respond directly, justify with evidence, admit uncertainty, compare trade-offs, and manage time so discussion remains possible."}],
+          "recommendedNextLessons": ["problem-identification-and-problem-statement"]
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Capstone Problem Discovery and Project Definition",
+      "weightage": 25,
+      "lessons": [
+        {
+          "slug": "problem-identification-and-problem-statement",
+          "title": "Identifying a Real Problem and Writing the Problem Statement",
+          "durationMin": 40,
+          "difficulty": "medium",
+          "overview": "Capstone initiation begins with a problem, not with a technology stack. The official guidelines ask students to form small project batches, demonstrate an attitude of inquiry, identify programme-related problem statements, investigate causes, collect relevant information, and consider possible solutions. A strong problem statement describes an observable gap for a specific user or context without prematurely locking the team into one solution.",
+          "objectives": ["Discover problems through observation, interviews, and existing evidence", "Separate symptoms from root causes", "Write a specific and measurable problem statement", "Validate that a problem is worth solving before choosing a solution"],
+          "prerequisites": ["Basic understanding of project work", "Ability to talk to potential users or stakeholders"],
+          "keyConcepts": ["Problem discovery: observe workflows, repeated friction, errors, delays, costs, safety issues, or unmet needs", "Stakeholder: a person or group affected by the problem or project outcome", "Symptom vs cause: a visible issue may be produced by a deeper process or system failure", "Problem statement: describes who faces what problem, in what context, with what impact", "Evidence: interviews, observations, records, survey data, existing studies, or measurable examples", "Solution neutrality: define the problem before deciding that the answer must be an app, AI model, IoT device, or website"],
+          "formulas": ["Problem statement = stakeholder + current situation + specific difficulty + impact + evidence/context", "Strong problem evidence combines observation + stakeholder input + measurable indicators where possible"],
+          "tables": [{"title": "Weak and strong project starts", "headers": ["Weak start", "Stronger problem framing"], "rows": [["We will make an AI attendance app", "Faculty lose time reconciling attendance across multiple records, causing delayed corrections and inconsistent reports"], ["We want to build an IoT project", "Small classrooms lack continuous visibility into temperature and air-quality conditions during occupied hours"], ["We will create an e-commerce website", "A local seller cannot keep customers informed about live stock and spends repeated time answering availability messages"]]}],
+          "diagrams": [], "codeExamples": [],
+          "analogies": [{"scenario": "Problem statement as medical diagnosis", "mapping": "A doctor does not prescribe a random medicine because the patient says 'I feel bad'. They identify symptoms, investigate causes, gather evidence, and only then choose treatment. Projects should work the same way."}],
+          "flowcharts": [{"type": "mermaid", "title": "Problem discovery flow", "content": "flowchart TD\n A[Observe a context] --> B[Talk to stakeholders]\n B --> C[Collect examples/data]\n C --> D[Separate symptoms from causes]\n D --> E[Write problem statement]\n E --> F{Problem important and evidence-backed?}\n F -->|No| A\n F -->|Yes| G[Explore solution options]"}],
+          "mindMaps": [{"type": "mermaid", "title": "Problem evidence", "content": "mindmap\n root((Problem))\n   Who\n     Users\n     Stakeholders\n   What\n     Pain point\n     Failure\n   Where/When\n     Context\n     Frequency\n   Why\n     Root causes\n   Impact\n     Time\n     Cost\n     Accuracy\n     Safety\n   Evidence\n     Interviews\n     Observation\n     Data"}],
+          "workedExamples": [{"title": "From solution idea to problem statement", "problem": "A team says: 'Our project is an AI chatbot for the college.' Rewrite this as a problem-first statement.", "solution": "Interview students and staff first. Suppose evidence shows students repeatedly search across scattered notices, PDFs, and webpages and often cannot find current academic procedures. A stronger problem statement is: 'Students need to search multiple disconnected college information sources for routine academic procedures, which increases search time and leads to outdated or inconsistent answers. The project will investigate a unified, verifiable way to retrieve current information.'", "explanation": "The revised statement explains the user, current difficulty, impact, and evidence context without assuming that an AI chatbot is the only possible solution."}],
+          "commonMistakes": ["Starting with a favourite technology and inventing a problem around it", "Writing a problem statement so broad that success cannot be measured", "Assuming the team's own experience represents every user", "Confusing a symptom with the root cause", "Claiming a problem is serious without observations, interviews, or other evidence"],
+          "examTips": ["A problem statement should be specific, evidence-based, user/context focused, and initially solution-neutral", "Mention observation, survey/interview, root-cause study, and impact"],
+          "practiceQuestions": [{"question": "Which statement is the strongest project problem statement?", "options": ["We will build a mobile app", "AI is the future", "Students spend repeated time searching disconnected sources for current academic procedures, leading to delays and inconsistent information", "We like React and Python"], "answer": 2, "explanation": "It names the affected users, current difficulty, and impact without prematurely selecting a technology."}],
+          "vivaQuestions": [{"marks": 2, "question": "What is a stakeholder?", "modelAnswer": "A person, group, or organization affected by the problem, project process, or project outcome."}, {"marks": 5, "question": "How can a team validate a project problem before implementation?", "modelAnswer": "Observe the real context, interview or survey stakeholders, collect examples or data, identify causes, measure the impact where possible, compare findings across sources, and confirm that the problem is frequent or important enough to justify a project."}],
+          "examQuestions": [{"marks": 5, "question": "Explain how a capstone problem statement should be identified and formulated.", "modelAnswer": "Observe real workflows or needs, collect information from stakeholders and other sources, distinguish symptoms from causes, define the affected user and context, describe the specific difficulty and impact, support it with evidence, and phrase the problem without locking into one solution too early."}],
+          "revisionSummary": "Projects start with evidence-backed problems. Observe, interview, collect data, find causes, define stakeholders and impact, and write a specific problem statement before choosing technologies or implementation details.",
+          "cheatSheet": ["Problem before product", "Who + difficulty + context + impact + evidence", "Validate with real stakeholders", "Do not confuse symptoms with causes"],
+          "mnemonics": [{"phrase": "W-C-I-E", "expansion": "Who - Context - Impact - Evidence", "meaning": "Core ingredients of a useful problem statement"}],
+          "callouts": [{"type": "warning", "title": "Do not force AI into the problem", "content": "If the problem can be solved more reliably with a simpler workflow, database, form, or rule-based system, that may be the better engineering decision. Technology choice comes after problem understanding."}],
+          "flashcards": [{"front": "Symptom vs root cause?", "back": "A symptom is the visible effect; a root cause is an underlying reason that produces the effect."}, {"front": "Why should a problem statement be solution-neutral initially?", "back": "It keeps the team open to comparing multiple approaches instead of defending a preselected technology."}],
+          "aiSummaries": [{"style": "eli5", "content": "Do not start with 'we want to build an app'. First find a real person with a real repeated problem, prove the problem exists, understand why it happens, and only then decide what to build."}],
+          "recommendedNextLessons": ["objectives-scope-and-requirements"]
+        },
+        {
+          "slug": "objectives-scope-and-requirements",
+          "title": "Project Objectives, Scope, Requirements and Expected Outcomes",
+          "durationMin": 40,
+          "difficulty": "medium",
+          "overview": "Once the problem is validated, the team needs a project definition that is precise enough to plan. Objectives state what the project intends to achieve, scope sets boundaries, requirements describe what the solution must do and how well it must perform, and expected outcomes define what success should look like. These elements prevent the capstone from expanding into an endless wish list.",
+          "objectives": ["Write measurable project objectives", "Define in-scope and out-of-scope boundaries", "Separate functional and non-functional requirements", "Describe expected outcomes and success indicators"],
+          "prerequisites": ["A validated problem statement", "Basic stakeholder understanding"],
+          "keyConcepts": ["Objective: a specific result the project aims to achieve", "Scope: the boundary of features, users, platforms, environments, and work included in the project", "Functional requirement: behaviour or capability the system must provide", "Non-functional requirement: quality constraint such as performance, security, reliability, accessibility, or usability", "Constraint: fixed limitation such as budget, hardware, time, policy, or available data", "Expected outcome: observable result that shows whether the project addressed the problem"],
+          "formulas": ["SMART objective = Specific + Measurable + Achievable + Relevant + Time-bound", "Scope control = explicit in-scope list + explicit out-of-scope list + change decision process"],
+          "tables": [{"title": "Requirement examples", "headers": ["Type", "Example"], "rows": [["Functional", "The system shall let a student search approved academic notices by keyword"], ["Functional", "An administrator shall be able to publish and retire a notice"], ["Non-functional", "Search results should be returned within two seconds for the expected dataset"], ["Non-functional", "Only authorized staff may publish official notices"], ["Constraint", "The prototype must run on the hardware already available to the team"]]}],
+          "diagrams": [], "codeExamples": [],
+          "analogies": [{"scenario": "Scope as the fence around a playground", "mapping": "The fence does not say what every child must do; it defines the safe area where the project work belongs. Anything outside the fence needs a deliberate decision before it is added."}],
+          "flowcharts": [{"type": "mermaid", "title": "From problem to project definition", "content": "flowchart LR\n A[Validated problem] --> B[Objectives]\n B --> C[Scope boundaries]\n C --> D[Functional requirements]\n D --> E[Non-functional requirements]\n E --> F[Constraints]\n F --> G[Expected outcomes / success measures]"}],
+          "mindMaps": [],
+          "workedExamples": [{"title": "Defining scope for a college-information project", "problem": "Turn the problem 'students struggle to find current academic procedures' into objectives and scope.", "solution": "Objective: reduce the time required to locate approved procedure information by providing searchable, source-linked content. In scope: selected academic procedures, keyword search, source links, staff publishing workflow, mobile-responsive access. Out of scope for the first capstone: answering personal fee-account questions, replacing the official ERP, multilingual voice support, and automatic decisions on student eligibility. Expected outcome: users can find the correct approved procedure and source in a short, measurable task test.", "explanation": "The definition is testable and prevents attractive but unrelated features from expanding the project."}],
+          "commonMistakes": ["Using vague objectives such as 'make the system better'", "Calling every idea a requirement", "Never writing what is out of scope", "Ignoring security, reliability, usability, or performance requirements", "Defining expected outcomes as 'project completed' rather than user or system results"],
+          "examTips": ["Clearly distinguish objective, scope, requirement, constraint, and expected outcome", "Give one functional and one non-functional requirement example"],
+          "practiceQuestions": [{"question": "Which is a non-functional requirement?", "options": ["The user can reset a password", "The admin can publish a notice", "Search results should load within two seconds under the expected workload", "The user can upload a PDF"], "answer": 2, "explanation": "It specifies a performance quality rather than a user-visible function."}],
+          "vivaQuestions": [{"marks": 2, "question": "What is project scope?", "modelAnswer": "The defined boundary of what work, users, features, platforms, and outcomes are included or excluded from the project."}, {"marks": 5, "question": "Differentiate functional and non-functional requirements.", "modelAnswer": "Functional requirements describe what the system does, such as search or login. Non-functional requirements describe qualities or constraints on how the system operates, such as speed, security, reliability, accessibility, and usability."}],
+          "examQuestions": [{"marks": 5, "question": "Explain how objectives, scope, requirements, and expected outcomes help in capstone initiation.", "modelAnswer": "Objectives define desired results, scope prevents uncontrolled expansion, requirements make needed functions and qualities explicit, constraints expose fixed limits, and expected outcomes define how success will be recognized and later evaluated."}],
+          "revisionSummary": "Translate the validated problem into SMART objectives, clear in/out scope, functional and non-functional requirements, constraints, and measurable expected outcomes. This turns an idea into a project that can actually be planned and evaluated.",
+          "cheatSheet": ["Objective = result", "Scope = boundary", "Functional = what it does", "Non-functional = how well/under what constraints", "Outcome = evidence of success"],
+          "mnemonics": [{"phrase": "OSRE", "expansion": "Objectives - Scope - Requirements - Expected outcomes", "meaning": "Core project-definition sequence"}],
+          "callouts": [{"type": "tip", "title": "Write out-of-scope items early", "content": "Saying what the first version will not do is one of the fastest ways to protect a student project from feature creep."}],
+          "flashcards": [{"front": "Functional requirement?", "back": "A statement of a behaviour or capability the system must provide."}, {"front": "Non-functional requirement?", "back": "A quality or constraint on the system, such as performance, security, reliability, usability, or accessibility."}],
+          "aiSummaries": [{"style": "exam", "content": "A project definition connects the problem to measurable objectives, explicit boundaries, required functions and qualities, real constraints, and observable outcomes."}],
+          "recommendedNextLessons": ["solution-options-and-feasibility-study"]
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Feasibility, Planning and Capstone Initiation",
+      "weightage": 20,
+      "lessons": [
+        {
+          "slug": "solution-options-and-feasibility-study",
+          "title": "Solution Alternatives and Feasibility Study",
+          "durationMin": 40,
+          "difficulty": "medium",
+          "overview": "The first idea is rarely the only possible solution. The official project-initiation guidance asks students to identify possible solutions and assess their feasibility, including financial implications. A feasibility study compares alternatives before major implementation begins so the team can select an approach that fits technical capability, time, cost, users, resources, and operational reality.",
+          "objectives": ["Generate multiple solution approaches", "Evaluate technical, economic, operational, schedule, and legal/ethical feasibility", "Compare alternatives using explicit criteria", "Document the reason for selecting a solution"],
+          "prerequisites": ["Problem statement", "Objectives and requirements"],
+          "keyConcepts": ["Technical feasibility: can the team build and operate the solution with available technology, skills, hardware, data, and infrastructure?", "Economic feasibility: are development and operating costs reasonable compared with expected value?", "Operational feasibility: will real users and workflows accept and support the solution?", "Schedule feasibility: can a meaningful version be completed and tested within the academic timeline?", "Legal/ethical feasibility: are privacy, licensing, consent, safety, accessibility, and data-use obligations addressed?", "Alternative comparison: use the same criteria for every candidate instead of defending a favourite idea"],
+          "formulas": ["Weighted option score = Σ(criteria weight × option rating)", "Total cost of ownership = build cost + hardware/services + maintenance/operation + training/migration costs"],
+          "tables": [{"title": "Feasibility dimensions", "headers": ["Dimension", "Question"], "rows": [["Technical", "Can we build, integrate, test, and run it?"], ["Economic", "Can we afford it and justify the cost?"], ["Operational", "Will users and existing processes support it?"], ["Schedule", "Can a useful version be completed in the available time?"], ["Legal / ethical", "Are privacy, consent, licensing, security, and safety requirements acceptable?"]]}],
+          "diagrams": [], "codeExamples": [],
+          "analogies": [{"scenario": "Feasibility as checking a route before a trip", "mapping": "A route may look shortest on a map but still fail because the road is closed, the vehicle cannot handle it, it costs too much, or it takes longer than expected. Project alternatives need the same reality check."}],
+          "flowcharts": [{"type": "mermaid", "title": "Feasibility decision", "content": "flowchart TD\n A[Generate alternatives] --> B[Define criteria and weights]\n B --> C[Technical check]\n C --> D[Cost check]\n D --> E[Operational / user check]\n E --> F[Schedule check]\n F --> G[Legal / ethical check]\n G --> H[Compare evidence]\n H --> I[Select and justify approach]"}],
+          "mindMaps": [],
+          "workedExamples": [{"title": "Local vs cloud-heavy prototype", "problem": "A student team must choose between a cloud AI service and a lightweight local search system for a college-information prototype. Compare feasibility.", "solution": "Define criteria: accuracy, recurring cost, internet dependency, privacy, implementation time, and available skills. The cloud AI option may provide flexible language understanding but introduces API cost, network dependency, privacy review, and model-output verification. The local search option may be less conversational but cheaper, more deterministic, and easier to run offline. Score both options using agreed weights, test critical assumptions with small prototypes, then select the approach whose trade-offs best match the project objectives and constraints.", "explanation": "Feasibility is not about choosing the most advanced technology; it is about choosing the approach that best satisfies the real project conditions."}],
+          "commonMistakes": ["Comparing options using different criteria", "Ignoring recurring cloud or service costs", "Assuming technical feasibility because a tutorial exists", "Ignoring user workflow and maintenance", "Choosing a complex solution mainly because it looks impressive", "Skipping a small proof-of-concept for the riskiest assumption"],
+          "examTips": ["Remember technical, economic, operational, schedule, and legal/ethical feasibility", "Include financial implications because the official project guidance explicitly calls for them"],
+          "practiceQuestions": [{"question": "Which statement best describes feasibility?", "options": ["Whether an idea sounds innovative", "Whether a proposed approach can realistically satisfy the project conditions and constraints", "Whether the team can make a logo", "Whether one tutorial uses the same technology"], "answer": 1, "explanation": "Feasibility checks whether the solution is realistic across technical, cost, operational, schedule, and other constraints."}],
+          "vivaQuestions": [{"marks": 5, "question": "Explain the major dimensions of a feasibility study.", "modelAnswer": "Technical feasibility checks technology, skills, hardware, data and integration; economic feasibility checks costs and value; operational feasibility checks users and workflow; schedule feasibility checks completion time; legal/ethical feasibility checks privacy, consent, licensing, security, safety, and related obligations."}],
+          "examQuestions": [{"marks": 5, "question": "How should a capstone team compare alternative solutions?", "modelAnswer": "Define common evaluation criteria based on objectives and constraints, weight important criteria if useful, collect evidence or prototypes for uncertain assumptions, evaluate every option consistently, compare costs and risks, and document why the selected solution offers the best trade-off."}],
+          "revisionSummary": "Generate alternatives before committing. Compare each using the same technical, economic, operational, schedule, and legal/ethical criteria. Test risky assumptions early and choose the solution that best fits project goals and constraints, not the one with the most fashionable technology.",
+          "cheatSheet": ["TEOSL = Technical, Economic, Operational, Schedule, Legal/ethical", "Same criteria for every option", "Prototype the riskiest assumption first", "Best feasible option != most advanced option"],
+          "mnemonics": [{"phrase": "TEOSL", "expansion": "Technical - Economic - Operational - Schedule - Legal/ethical", "meaning": "Five feasibility checks"}],
+          "callouts": [{"type": "concept", "title": "Feasibility is evidence, not optimism", "content": "Replace 'we think it will work' with small experiments, cost estimates, resource checks, user feedback, and explicit assumptions."}],
+          "flashcards": [{"front": "Technical feasibility?", "back": "Whether the solution can realistically be built, integrated, tested, and operated with available technology, skills, hardware, data, and infrastructure."}, {"front": "Economic feasibility?", "back": "Whether expected development and operating costs are affordable and justified by the project's value."}],
+          "aiSummaries": [{"style": "eli5", "content": "Before building, list a few possible solutions and check: can we make it, can we afford it, will people use it, can we finish it, and is it safe/legal/ethical? Then choose with evidence."}],
+          "recommendedNextLessons": ["project-action-plan-and-risk-preparation"]
+        },
+        {
+          "slug": "project-action-plan-and-risk-preparation",
+          "title": "Project Action Plan, Milestones, Risks and Initiation Deliverables",
+          "durationMin": 45,
+          "difficulty": "medium",
+          "overview": "Capstone initiation ends with a plan that another person can inspect. The team should know what it will build, in what sequence, who is responsible, what evidence will show progress, what resources are needed, what can go wrong, and how success will be demonstrated. The official guidance asks students to prepare drawings/designs and a detailed plan for successful execution after collecting relevant information and assessing solution feasibility.",
+          "objectives": ["Break project scope into milestones and tasks", "Assign ownership without creating isolated work", "Prepare a simple resource and schedule plan", "Identify major risks and define mitigations", "List the deliverables required before implementation begins"],
+          "prerequisites": ["Selected feasible solution", "Defined scope and requirements"],
+          "keyConcepts": ["Milestone: a meaningful checkpoint with an observable result, not just a date", "Task: a specific piece of work that contributes to a milestone", "Dependency: work that must be completed before another task can start", "Deliverable: an artifact such as problem statement, requirements, architecture, prototype, test evidence, report, or presentation", "Risk: an uncertain event that can harm project objectives", "Mitigation: an action that reduces the probability or impact of a risk", "Definition of done: an explicit condition that prevents vague 'almost finished' status"],
+          "formulas": ["Risk exposure ≈ probability × impact", "Milestone quality = clear outcome + owner + due point + evidence/definition of done"],
+          "tables": [{"title": "Example initiation plan", "headers": ["Milestone", "Evidence of completion", "Typical dependency"], "rows": [["Problem validated", "Interview/observation notes + final problem statement", "Stakeholder access"], ["Requirements agreed", "Prioritized requirement list + scope boundaries", "Problem validation"], ["Architecture selected", "Architecture diagram + decision rationale", "Feasibility study"], ["Core prototype", "Working critical path / proof of concept", "Architecture and setup"], ["Test-ready build", "Defined acceptance tests + integrated features", "Core implementation"], ["Final demonstration", "Test evidence + report + presentation + reproducible setup", "All previous milestones"]]}],
+          "diagrams": [], "codeExamples": [],
+          "analogies": [{"scenario": "Action plan as a map with checkpoints", "mapping": "A destination alone is not a travel plan. Milestones are checkpoints, dependencies are roads that must be taken in order, risks are possible closures, and evidence tells you that you actually reached each checkpoint."}],
+          "flowcharts": [{"type": "mermaid", "title": "Capstone initiation deliverables", "content": "flowchart LR\n A[Problem evidence] --> B[Problem statement]\n B --> C[Objectives + scope]\n C --> D[Requirements]\n D --> E[Solution alternatives]\n E --> F[Feasibility decision]\n F --> G[Architecture / initial design]\n G --> H[Milestones + responsibilities]\n H --> I[Risk register]\n I --> J[Implementation-ready proposal]"}],
+          "mindMaps": [{"type": "mermaid", "title": "Project plan", "content": "mindmap\n root((Project Plan))\n  Scope\n  Milestones\n   Tasks\n   Dependencies\n   Definition of done\n  People\n   Owners\n   Collaboration\n  Resources\n   Hardware\n   Software\n   Data\n  Risks\n   Probability\n   Impact\n   Mitigation\n  Evidence\n   Tests\n   Reports\n   Demo"}],
+          "workedExamples": [{"title": "Turning 'build the app' into milestones", "problem": "A team's project plan contains one task: 'Build the app - 8 weeks'. Improve it.", "solution": "Replace the vague task with outcome-based milestones: Week 1 problem validation and requirements; Week 2 architecture and risky proof-of-concept; Weeks 3-4 core data/authentication workflow; Week 5 primary user flow; Week 6 integration and error handling; Week 7 acceptance testing and fixes; Week 8 report, reproducible setup, final demo, and backup. Add an owner and definition of done to each milestone, identify dependencies, and track risks such as unavailable data or API limits.", "explanation": "Small observable milestones reveal delays early and make teamwork easier to coordinate."}],
+          "commonMistakes": ["Using one giant task for the entire project", "Treating dates as milestones without defining an outcome", "Assigning modules to people with no integration plan", "Leaving testing and documentation until the last week", "Writing risks without mitigation actions", "Making the final demo depend on a fragile internet/API service without a fallback"],
+          "examTips": ["Define milestone, dependency, deliverable, risk, and mitigation", "When writing a plan, connect tasks to evidence or a definition of done"],
+          "practiceQuestions": [{"question": "Which is the best milestone?", "options": ["Work on backend", "Do coding", "Authentication flow integrated and passes the defined login/logout tests", "Make project better"], "answer": 2, "explanation": "It describes an observable outcome with evidence of completion."}, {"question": "If a risk has high probability and high impact, what should the team usually do?", "options": ["Ignore it", "Prioritize mitigation or redesign early", "Document it only after the project fails", "Hide it from the mentor"], "answer": 1, "explanation": "High-exposure risks deserve early mitigation, proof-of-concept work, fallback planning, or design changes."}],
+          "vivaQuestions": [{"marks": 2, "question": "What is a project milestone?", "modelAnswer": "A meaningful checkpoint that represents a completed project outcome or deliverable and can be verified with evidence."}, {"marks": 5, "question": "How should project risks be handled during initiation?", "modelAnswer": "Identify risks early, describe causes and consequences, estimate probability and impact, prioritize high-exposure risks, assign an owner, define mitigation or contingency actions, and review the risk as the project changes."}],
+          "examQuestions": [{"marks": 10, "question": "Prepare a detailed outline of the activities and deliverables required during capstone project initiation.", "modelAnswer": "Start with stakeholder/problem evidence and a validated problem statement. Define objectives, scope, functional and non-functional requirements, and expected outcomes. Generate alternative solutions and perform technical, economic, operational, schedule, and legal/ethical feasibility checks. Select and justify an approach, prepare initial architecture/drawings, identify resources, create milestones/tasks/dependencies and ownership, prepare a risk register and mitigations, define testing/success evidence, and compile the implementation-ready proposal/report.", "tips": ["Use a flow or numbered sequence", "Mention evidence and feasibility, not only scheduling"]}],
+          "revisionSummary": "An implementation-ready capstone has a validated problem, explicit objectives/scope/requirements, a justified feasible solution, initial design, milestones and dependencies, owners, resources, risk mitigations, definitions of done, and a clear list of evidence/deliverables for the next phase.",
+          "cheatSheet": ["Milestone = outcome, not activity", "Risk exposure ≈ probability × impact", "Every major task needs an owner and definition of done", "Prototype risky dependencies early", "Plan testing, documentation, and demo from the beginning"],
+          "mnemonics": [{"phrase": "MORDE", "expansion": "Milestones - Owners - Risks - Dependencies - Evidence", "meaning": "Five things every practical project plan should make visible"}],
+          "callouts": [{"type": "exam-tip", "title": "A plan should reveal failure early", "content": "If the first meaningful integration or test happens in the final week, the schedule is hiding risk rather than managing it."}],
+          "flashcards": [{"front": "Milestone vs task?", "back": "A task is work to perform; a milestone is a meaningful checkpoint or outcome that can be verified."}, {"front": "What is mitigation?", "back": "An action designed to reduce the probability or impact of a project risk."}, {"front": "Definition of done?", "back": "The explicit evidence or conditions that must be true before work is considered complete."}],
+          "aiSummaries": [{"style": "exam", "content": "Capstone initiation converts a problem into an executable plan: validate the need, define scope and requirements, compare feasible solutions, choose and justify an approach, design the first architecture, plan milestones and resources, manage risks, and define evidence of completion."}],
+          "recommendedNextLessons": []
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "Seminar: select a relevant and feasible topic, perform an authentic literature survey, organize the material into a logical technical story, prepare a properly referenced report, design readable slides, rehearse, manage time, and handle Q&A with evidence and honesty. Capstone initiation: discover and validate a real problem, define objectives/scope/requirements, compare solution alternatives through feasibility study, select and justify an approach, prepare initial designs, create milestones and responsibilities, identify risks and mitigations, and finish with an implementation-ready plan.",
+  "vivaBank": [
+    {"marks": 2, "question": "State four criteria for selecting a seminar topic.", "modelAnswer": "Relevance, focused scope, feasibility, availability of authentic sources, student aptitude/interest, and mentor approval; any four with explanation are suitable."},
+    {"marks": 5, "question": "Differentiate seminar preparation and capstone initiation.", "modelAnswer": "Seminar preparation focuses on selecting and researching a technical topic, synthesizing knowledge, documenting it, presenting it, and discussing it. Capstone initiation focuses on identifying and validating a real problem, defining project objectives and requirements, studying alternative solutions and feasibility, and preparing an executable implementation plan."},
+    {"marks": 5, "question": "Why is feasibility study important before capstone implementation?", "modelAnswer": "It prevents the team from committing resources to an approach that may fail because of technical limitations, excessive cost, poor user fit, insufficient time, unavailable data/hardware, or legal/ethical constraints."}
+  ],
+  "interviewBank": [
+    {"marks": 5, "question": "Tell me how you would decide whether a student project idea is worth building.", "modelAnswer": "I would start from the user problem, collect evidence that it is real, define measurable outcomes, identify constraints, compare multiple solutions, test the riskiest assumption with a small prototype, and choose the simplest feasible architecture that satisfies the important requirements."}
+  ],
+  "pyqBank": [
+    {"marks": 5, "question": "Explain the steps involved in seminar topic selection and preparation.", "modelAnswer": "Identify relevant areas, shortlist focused topics, verify source availability and feasibility, obtain mentor approval, conduct literature survey, synthesize the content, prepare report and slides, rehearse, present within time, and handle Q&A."},
+    {"marks": 10, "question": "Explain the complete capstone initiation process from problem identification to action plan.", "modelAnswer": "Observe and collect stakeholder evidence; formulate a specific problem statement; define objectives, scope, requirements and outcomes; generate alternatives; conduct feasibility checks; select and justify an approach; prepare initial design/architecture; identify resources; plan milestones, tasks and dependencies; assign ownership; prepare a risk register and mitigations; define testing/evidence; and compile the implementation-ready proposal."}
+  ]
+}
