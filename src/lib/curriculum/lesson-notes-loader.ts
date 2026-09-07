@@ -1,12 +1,39 @@
 /**
- * Loads lesson notes from JSON files in content/lesson-notes/.
- * Returns structured notes with units, lessons, and quiz questions.
+ * Loads rich lesson notes from JSON files in content/lesson-notes/.
+ *
+ * A note pack is intentionally treated as student-facing content rather than a
+ * blind JSON dump: known legacy aliases are resolved to the best canonical
+ * pack and obvious generator placeholders are removed before rendering.
  */
 import 'server-only'
 import { readFileSync, readdirSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
 
 const NOTES_DIR = join(process.cwd(), 'content', 'lesson-notes')
+
+/**
+ * Legacy curriculum codes that were used by the early YouTube-guide manifest.
+ * Prefer the current official CWIT R23 code when a stronger canonical pack is
+ * available, while keeping old deep-links working.
+ */
+const NOTE_CODE_ALIASES: Record<string, string> = {
+  R23CP5401: 'R23CP1407',
+}
+
+const PLACEHOLDER_PATTERNS = [
+  /^Option [A-D]$/i,
+  /refer to the theory section above/i,
+  /this is a sample answer outline/i,
+  /core formula:\s*depends on specific topic/i,
+  /relationship:\s*connects to/i,
+  /result:\s*output depends on input parameters/i,
+  /a core concept in /i,
+  /which is most important when answering exam questions/i,
+  /used in engineering practice/i,
+  /only theoretical/i,
+  /not used anywhere/i,
+  /only in research/i,
+]
 
 let cache: Map<string, SubjectNotes> | null = null
 
@@ -25,7 +52,7 @@ export interface CodeExample {
 }
 
 export interface DataTable {
-  title: string
+  title?: string
   headers: string[]
   rows: string[][]
   note?: string
@@ -99,7 +126,6 @@ export interface Lesson {
   commonMistakes: string[]
   examTips: string[]
   practiceQuestions: PracticeQuestion[]
-  // V3 optional fields (may not exist in all JSON files)
   objectives?: string[]
   prerequisites?: string[]
   theory?: string
@@ -145,47 +171,82 @@ function loadAllNotes(): Map<string, SubjectNotes> {
 
   if (!existsSync(NOTES_DIR)) return cache
 
-  const files = readdirSync(NOTES_DIR).filter((f) => f.endsWith('.json'))
+  const files = readdirSync(NOTES_DIR).filter((file) => file.endsWith('.json'))
   for (const file of files) {
     try {
       const raw = readFileSync(join(NOTES_DIR, file), 'utf-8')
-      const notes = JSON.parse(raw) as SubjectNotes
-      // Index by subject code (both COMP and CIOT variants)
-      cache.set(notes.subjectCode, notes)
+      const notes = sanitizeSubjectNotes(JSON.parse(raw) as SubjectNotes)
+      cache.set(notes.subjectCode.toUpperCase(), notes)
     } catch {
-      // skip corrupt files
+      // A corrupt pack must not make the entire learning area unavailable.
+      // Content validation should catch the source file during authoring.
     }
   }
 
   return cache
 }
 
-/**
- * Get lesson notes for a subject by its code.
- * Tries the exact code, then the alternate code.
- */
+function sanitizeSubjectNotes(subject: SubjectNotes): SubjectNotes {
+  return {
+    ...subject,
+    subjectCode: subject.subjectCode.toUpperCase(),
+    units: subject.units.map((unit) => ({
+      ...unit,
+      lessons: unit.lessons.map(sanitizeLesson),
+    })),
+  }
+}
+
+function sanitizeLesson(lesson: Lesson): Lesson {
+  const practiceQuestions = (lesson.practiceQuestions ?? []).filter((question) => {
+    if (isPlaceholderText(question.question) || isPlaceholderText(question.explanation)) return false
+    if (question.options.length < 2) return false
+    if (question.options.some(isPlaceholderText)) return false
+    return Number.isInteger(question.answer) && question.answer >= 0 && question.answer < question.options.length
+  })
+
+  const workedExamples = lesson.workedExamples?.filter((example) => {
+    return !isPlaceholderText(example.problem) && !isPlaceholderText(example.solution) && !isPlaceholderText(example.explanation ?? '')
+  })
+
+  const formulas = (lesson.formulas ?? []).filter((formula) => !isPlaceholderText(formula))
+
+  return {
+    ...lesson,
+    formulas,
+    practiceQuestions,
+    ...(workedExamples ? { workedExamples } : {}),
+  }
+}
+
+function isPlaceholderText(value: string): boolean {
+  const text = value.trim()
+  if (!text) return false
+  return PLACEHOLDER_PATTERNS.some((pattern) => pattern.test(text))
+}
+
+/** Get lesson notes for a subject, resolving known legacy curriculum aliases. */
 export function getSubjectNotes(subjectCode: string): SubjectNotes | null {
   const notes = loadAllNotes()
-  return notes.get(subjectCode) ?? null
+  const normalized = subjectCode.toUpperCase()
+  const canonical = NOTE_CODE_ALIASES[normalized] ?? normalized
+  return notes.get(canonical) ?? notes.get(normalized) ?? null
 }
 
-/**
- * Get all subjects that have lesson notes available.
- */
+/** Get all canonical subjects that have rich lesson notes available. */
 export function getAvailableNotesSubjects(): { code: string; name: string }[] {
   const notes = loadAllNotes()
-  return Array.from(notes.values()).map((n) => ({ code: n.subjectCode, name: n.subjectName }))
+  return Array.from(notes.values()).map((note) => ({ code: note.subjectCode, name: note.subjectName }))
 }
 
-/**
- * Find a specific lesson by slug within a subject's notes.
- */
+/** Find a specific lesson by slug within a subject's notes. */
 export function findLessonBySlug(
   subjectCode: string,
   lessonSlug: string,
 ): { lesson: Lesson; unit: Unit; subject: SubjectNotes } | null {
   const subject = getSubjectNotes(subjectCode)
   if (!subject) return null
+
   for (const unit of subject.units) {
     for (const lesson of unit.lessons) {
       if (
@@ -200,28 +261,25 @@ export function findLessonBySlug(
   return null
 }
 
-/**
- * Get the previous and next lessons for navigation.
- */
+/** Get the previous and next lessons for reader navigation. */
 export function getAdjacentLessons(
   subjectCode: string,
   lessonSlug: string,
 ): { prev: Lesson | null; next: Lesson | null } {
   const subject = getSubjectNotes(subjectCode)
   if (!subject) return { prev: null, next: null }
-  const all: Lesson[] = []
-  for (const unit of subject.units) {
-    all.push(...unit.lessons)
-  }
-  const idx = all.findIndex(
-    (l) =>
-      l.slug === lessonSlug ||
-      l.slug.includes(lessonSlug) ||
-      lessonSlug.includes(l.slug),
+
+  const all = subject.units.flatMap((unit) => unit.lessons)
+  const index = all.findIndex(
+    (lesson) =>
+      lesson.slug === lessonSlug ||
+      lesson.slug.includes(lessonSlug) ||
+      lessonSlug.includes(lesson.slug),
   )
-  if (idx === -1) return { prev: null, next: null }
+
+  if (index === -1) return { prev: null, next: null }
   return {
-    prev: idx > 0 ? all[idx - 1] : null,
-    next: idx < all.length - 1 ? all[idx + 1] : null,
+    prev: index > 0 ? all[index - 1] : null,
+    next: index < all.length - 1 ? all[index + 1] : null,
   }
 }
