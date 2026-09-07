@@ -1,0 +1,106 @@
+/* Full-width lesson notes shell — complements notes-reader-v4.css. */
+
+/* When the route layout can resolve a rich note lesson, suppress only the old
+   embedded reader card. The direct-child :has selector avoids hiding the
+   surrounding video/curriculum studio that also contains that reader deeper
+   in its tree. */
+.lesson-notes-v4--full-reader > main section:has(> .premium-reader) {
+  display: none !important;
+}
+
+.lesson-notes-v4__full-reader {
+  position: relative;
+  min-width: 0;
+}
+
+.lesson-notes-v4__reader-intro {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin: 1rem auto 0.9rem;
+  max-width: 76rem;
+  padding: 1.2rem 1.3rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  background:
+    radial-gradient(circle at 0% 0%, color-mix(in oklch, var(--brand) 13%, transparent), transparent 42%),
+    linear-gradient(135deg, color-mix(in oklch, var(--surface-2) 72%, transparent), var(--surface-1));
+  box-shadow: 0 14px 40px color-mix(in oklch, black 5%, transparent);
+}
+
+.lesson-notes-v4__reader-intro h2 {
+  margin: 0.15rem 0 0.4rem;
+  max-width: 24ch;
+  font-size: clamp(1.25rem, 2.4vw, 1.8rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--text-strong);
+}
+
+.lesson-notes-v4__reader-intro p:not(.lesson-notes-v4__eyebrow) {
+  max-width: 68ch;
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.lesson-notes-v4__eyebrow {
+  margin: 0;
+  font-size: 0.67rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+
+.lesson-notes-v4__reader-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.4rem;
+  flex: 0 0 auto;
+}
+
+.lesson-notes-v4__reader-meta span {
+  display: inline-flex;
+  min-height: 1.8rem;
+  align-items: center;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--surface-1) 82%, transparent);
+  font-size: 0.67rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* The promoted reader now has enough width for its navigation and textbook
+   content without colliding with the lesson studio above it. */
+.lesson-notes-v4__full-reader > .premium-reader {
+  max-width: 76rem;
+  margin: 0 auto;
+}
+
+@media (max-width: 720px) {
+  .lesson-notes-v4__reader-intro {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin-top: 0.5rem;
+    padding: 1rem;
+  }
+
+  .lesson-notes-v4__reader-meta {
+    justify-content: flex-start;
+  }
+}
+
+@media print {
+  .lesson-notes-v4__reader-intro {
+    box-shadow: none;
+    border-color: #ddd;
+  }
+}

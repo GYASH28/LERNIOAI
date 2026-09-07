@@ -35,6 +35,7 @@ export interface ManifestResource {
 export interface ManifestSubject {
   code: string
   alternateCode: string | null
+  legacyCodes?: string[]
   name: string
   category: string
   priority: string
@@ -63,6 +64,31 @@ export interface Manifest {
 
 const MANIFEST_DIR = join(process.cwd(), 'content', 'curriculum', 'cwit-r23')
 
+/**
+ * The original top-level Semester 3-6 manifest was extracted from a curated
+ * YouTube guide before the official CWIT curriculum extraction was added under
+ * `content/curriculum/cwit-r23/comp/`. Keep its useful resource links, but
+ * correct subject identity where the official extraction is now definitive.
+ */
+const OFFICIAL_SUBJECT_CORRECTIONS: Record<
+  string,
+  Pick<ManifestSubject, 'code' | 'name' | 'category' | 'credits' | 'description' | 'coverageFocus'> & {
+    legacyCodes: string[]
+  }
+> = {
+  R23CP5401: {
+    code: 'R23CP1407',
+    name: 'Seminar And Capstone Initiation',
+    category: 'AEC',
+    credits: 1,
+    description:
+      'Seminar topic selection, authentic literature survey, technical presentation and Q&A, followed by real-world problem identification, feasibility study and capstone project initiation.',
+    coverageFocus:
+      'Topic selection, literature survey, seminar report and presentation, critical discussion, problem statement, project objectives and scope, feasibility, action planning and capstone initiation.',
+    legacyCodes: ['R23CP5401'],
+  },
+}
+
 let cachedManifests: Manifest[] | null = null
 
 function loadManifests(): Manifest[] {
@@ -82,6 +108,13 @@ function loadManifests(): Manifest[] {
           }
           // Ensure alternateCode is null (not undefined) for type safety.
           if (subj.alternateCode === undefined) subj.alternateCode = null
+
+          const correction = OFFICIAL_SUBJECT_CORRECTIONS[subj.code]
+          if (correction) {
+            // Keep alternateCode/resources/priority/programmeRestriction from
+            // the resource manifest while replacing stale official metadata.
+            Object.assign(subj, correction)
+          }
         }
       }
       return parsed
@@ -121,6 +154,7 @@ export function getManifestSubject(
       (s) =>
         s.code === subjectCode ||
         s.alternateCode === subjectCode ||
+        s.legacyCodes?.includes(subjectCode) ||
         (programmeCode === 'DCIOT' && s.alternateCode === subjectCode),
     ) ?? null
   )
