@@ -19,7 +19,12 @@ import { db } from '@/lib/db'
 import crypto from 'crypto'
 import { sendVerificationEmail } from '@/lib/email'
 import { isDatabaseUnavailableError } from '@/lib/api-error-policy'
-import { assertSafeRuntimeConfig, resolveAuthMode } from '@/lib/auth-policy'
+import {
+  assertSafeRuntimeConfig,
+  resolveAuthMode,
+  resolveRuntimeAuthUrl,
+  safeAuthRedirect,
+} from '@/lib/auth-policy'
 import { DEMO_AUTH_USER } from '@/lib/demo-fixtures'
 import { checkRateLimit } from '@/lib/rate-limit'
 import { canUseCapability, resolveAuthorityContext, type AuthorityContext, type AuthorityScope } from '@/lib/authority'
@@ -42,6 +47,21 @@ assertSafeRuntimeConfig({
   nodeEnv: process.env.NODE_ENV,
   vercelEnv: process.env.VERCEL_ENV,
 })
+
+const runtimeAuthUrl = resolveRuntimeAuthUrl({
+  configuredUrl: process.env.NEXTAUTH_URL,
+  appUrl: process.env.LERNIO_APP_URL,
+  vercelEnv: process.env.VERCEL_ENV,
+  vercelUrl: process.env.VERCEL_URL,
+  vercelProjectProductionUrl: process.env.VERCEL_PROJECT_PRODUCTION_URL,
+})
+
+// NextAuth v4 derives absolute callback URLs from NEXTAUTH_URL. Repair known
+// stale production/preview values before the handler is created so auth cookies
+// remain on the host the student is actually using.
+if (runtimeAuthUrl && runtimeAuthUrl !== process.env.NEXTAUTH_URL) {
+  process.env.NEXTAUTH_URL = runtimeAuthUrl
+}
 
 const DEMO_PASSWORD = process.env.LERNIO_DEMO_PASSWORD?.trim() || null
 const MAX_LOGIN_ATTEMPTS = 8
@@ -223,22 +243,46 @@ export const authOptions: NextAuthOptions = {
   providers,
   callbacks: {
     async redirect({ url, baseUrl }) {
-      if (url.startsWith('/') && !url.startsWith('//')) return `${baseUrl}${url}`
-      try {
-        const parsed = new URL(url)
-        if (parsed.origin === baseUrl) return url
-      } catch {
-        return `${baseUrl}/dashboard`
-      }
-      return `${baseUrl}/dashboard`
-    },
-    async signIn({ user }) {
-      if (!user.email) return true
-      const existing = await db.user.findUnique({
-        where: { email: user.email },
-        select: { status: true },
+      const canonicalUrl =
+        resolveRuntimeAuthUrl({
+          configuredUrl: process.env.NEXTAUTH_URL,
+          appUrl: process.env.LERNIO_APP_URL,
+          vercelEnv: process.env.VERCEL_ENV,
+          vercelUrl: process.env.VERCEL_URL,
+          vercelProjectProductionUrl: process.env.VERCEL_PROJECT_PRODUCTION_URL,
+        }) ?? baseUrl
+
+      return safeAuthRedirect({
+        url,
+        baseUrl,
+        canonicalUrl,
+        additionalOrigins: [
+          process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null,
+          process.env.VERCEL_PROJECT_PRODUCTION_URL
+            ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+            : null,
+        ],
       })
-      return existing?.status !== 'disabled'
+    },
+    async signIn({ user, account }) {
+      const candidate = user as AuthUser
+      if (candidate.status === 'disabled') return false
+
+      // Credentials were already verified against the database in authorize().
+      // Avoid a second database read here: it can turn a successful password
+      // check into a failed login during a transient connection hiccup.
+      if (account?.provider === 'credentials') return true
+
+      if (!user.email) return true
+      try {
+        const existing = await db.user.findUnique({
+          where: { email: user.email },
+          select: { status: true },
+        })
+        return existing?.status !== 'disabled'
+      } catch {
+        return false
+      }
     },
     async jwt({ token, user }) {
       if (user) {
