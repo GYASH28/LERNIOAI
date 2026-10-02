@@ -230,7 +230,7 @@ export function PracticeView() {
       const data = await res.json()
       if (!data.ok) {
         toast.error(data.error?.message || 'Could not submit answer.')
-        setSubmitting(false)
+        setSelectedAnswer(null)
         return
       }
       const fb = data.data as ProgressPostResponse
@@ -266,57 +266,116 @@ export function PracticeView() {
 
       setShowExplanation(true)
     } catch {
+      setSelectedAnswer(null)
       toast.error('Network error — please try again.')
     } finally {
       setSubmitting(false)
     }
   }
 
-  const nextQuestion = async () => {
-    if (currentIdx + 1 >= questions.length) {
-      // Adaptive: optionally fetch more questions on demand; for now end the run.
-      setPhase('results')
-      const correctCount = Object.values(answers).filter((a) => a.correct).length
-      if (correctCount > 0) {
-        pushMascotToast({
-          mascot: 'leo',
-          state: 'achievement',
-          message: `Run complete! ${correctCount} correct — keep going to level up.`,
-        })
-      }
-      return
+  const finishRun = () => {
+    setPhase('results')
+    const correctCount = Object.values(answers).filter((answer) => answer.correct).length
+    if (correctCount > 0) {
+      pushMascotToast({
+        mascot: 'leo',
+        state: 'achievement',
+        message: `Run complete! ${correctCount} correct — keep going to level up.`,
+      })
     }
+  }
 
-    // Adaptive: fetch the next question at the adjusted difficulty, avoiding
-    // recently-seen IDs to prevent repeats.
-    if (mode === 'adaptive') {
-      try {
-        const params: Record<string, string> = {
-          subjectId,
-          difficulty: adaptiveDifficulty,
-        }
-        if (unitNumber !== 'all') params.unitNumber = unitNumber
-        if (topicId !== 'all') params.topicId = topicId
-        const candidates = await fetchQuestions(params)
-        const fresh = candidates.filter((q) => !seenIdsRef.current.has(q.id))
-        const next = fresh[0] ?? candidates[0]
-        if (next) {
-          seenIdsRef.current.add(next.id)
-          setQuestions((prev) => [...prev, next])
-        }
-      } catch {
-        // fall through — use whatever is in `questions` already
-      }
-    }
-
-    setCurrentIdx((i) => i + 1)
+  const resetQuestionState = () => {
     setShowHint(false)
+    setHintText('')
+    setHintLoading(false)
     setShowExplanation(false)
     setSelectedAnswer(null)
     setServerFeedback(null)
-    setLoadingNext(false)
     setConfidence(3)
     setQuestionStart(Date.now())
+  }
+
+  const revealHint = async () => {
+    if (!currentQuestion || showHint || hintLoading || selectedAnswer) return
+    setHintLoading(true)
+    try {
+      const res = await fetch(`/api/questions/${encodeURIComponent(currentQuestion.id)}/hint`, {
+        cache: 'no-store',
+      })
+      const data = await res.json().catch(() => null)
+      if (!res.ok || !data?.ok) {
+        toast.error(data?.error?.message || 'Could not load the hint.')
+        return
+      }
+
+      const hint = String(data.data?.hint || '').trim()
+      if (!hint) {
+        toast.info('No hint is available for this question yet.')
+        return
+      }
+
+      setHintText(hint)
+      setShowHint(true)
+    } catch {
+      toast.error('Could not load the hint. Please try again.')
+    } finally {
+      setHintLoading(false)
+    }
+  }
+
+  const nextQuestion = async () => {
+    if (loadingNext) return
+
+    if (mode !== 'adaptive') {
+      if (currentIdx + 1 >= questions.length) {
+        finishRun()
+        return
+      }
+      setCurrentIdx((index) => index + 1)
+      resetQuestionState()
+      return
+    }
+
+    if (currentIdx + 1 >= count) {
+      finishRun()
+      return
+    }
+
+    setLoadingNext(true)
+    try {
+      const baseParams: Record<string, string> = { subjectId }
+      if (unitNumber !== 'all') baseParams.unitNumber = unitNumber
+      if (topicId !== 'all') baseParams.topicId = topicId
+
+      const candidates = await fetchQuestions({
+        ...baseParams,
+        difficulty: adaptiveDifficulty,
+      })
+      let next = candidates.find((question) => !seenIdsRef.current.has(question.id))
+
+      // If the target difficulty is exhausted, broaden within the same
+      // subject/unit/topic before ending. Never repeat a seen question.
+      if (!next) {
+        const fallbackCandidates = await fetchQuestions(baseParams)
+        next = fallbackCandidates.find((question) => !seenIdsRef.current.has(question.id))
+      }
+
+      if (!next) {
+        toast.info('You reached the end of the available unseen questions for these filters.')
+        finishRun()
+        return
+      }
+
+      seenIdsRef.current.add(next.id)
+      setQuestions((previous) => [...previous, next])
+      setCurrentIdx((index) => index + 1)
+      resetQuestionState()
+    } catch {
+      toast.error('Could not load the next adaptive question. Please try again.')
+    } finally {
+      setLoadingNext(false)
+    }
   }
 
   // -------------------------------------------------------------------------
