@@ -65,10 +65,19 @@ export async function sendTransactionalEmail(payload: EmailPayload): Promise<voi
   const from = process.env.EMAIL_FROM?.trim()
 
   if (!apiKey || !from) {
-    // Email provider not configured — log and continue.
-    // Don't throw — this would block registration and password resets.
-    // Email verification is optional; users can login without it.
-    console.warn(`[email] Provider not configured — skipping: ${payload.subject} for ${payload.to}`)
+    const production =
+      process.env.NODE_ENV === 'production' || process.env.VERCEL_ENV === 'production'
+
+    if (production) {
+      // Password reset and verification requests must never report success when
+      // production cannot actually deliver the email. Registration explicitly
+      // catches verification-email failures, so account creation still works.
+      throw new Error('EMAIL_PROVIDER_NOT_CONFIGURED')
+    }
+
+    console.warn(
+      `[email:dev] Provider not configured — skipping: ${payload.subject} for ${payload.to}`,
+    )
     return
   }
 
