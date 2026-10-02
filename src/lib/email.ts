@@ -1,7 +1,19 @@
 import 'server-only'
+import { resolveRuntimeAuthUrl } from '@/lib/auth-policy'
 
 const resendApiUrl = 'https://api.resend.com/emails'
-const baseUrl = (process.env.NEXTAUTH_URL || 'http://localhost:3000').replace(/\/+$/, '')
+
+function authBaseUrl(): string {
+  return (
+    resolveRuntimeAuthUrl({
+      configuredUrl: process.env.NEXTAUTH_URL,
+      appUrl: process.env.LERNIO_APP_URL,
+      vercelEnv: process.env.VERCEL_ENV,
+      vercelUrl: process.env.VERCEL_URL,
+      vercelProjectProductionUrl: process.env.VERCEL_PROJECT_PRODUCTION_URL,
+    }) ?? 'http://localhost:3000'
+  ).replace(/\/+$/, '')
+}
 
 interface EmailPayload {
   to: string
@@ -11,11 +23,11 @@ interface EmailPayload {
 }
 
 export function buildVerificationUrl(token: string): string {
-  return `${baseUrl}/api/auth/verify-email/confirm?token=${encodeURIComponent(token)}`
+  return `${authBaseUrl()}/api/auth/verify-email/confirm?token=${encodeURIComponent(token)}`
 }
 
 export function buildPasswordResetUrl(token: string): string {
-  return `${baseUrl}/reset-password?token=${encodeURIComponent(token)}`
+  return `${authBaseUrl()}/reset-password?token=${encodeURIComponent(token)}`
 }
 
 export async function sendVerificationEmail(email: string, token: string): Promise<void> {
@@ -53,10 +65,19 @@ export async function sendTransactionalEmail(payload: EmailPayload): Promise<voi
   const from = process.env.EMAIL_FROM?.trim()
 
   if (!apiKey || !from) {
-    // Email provider not configured — log and continue.
-    // Don't throw — this would block registration and password resets.
-    // Email verification is optional; users can login without it.
-    console.warn(`[email] Provider not configured — skipping: ${payload.subject} for ${payload.to}`)
+    const production =
+      process.env.NODE_ENV === 'production' || process.env.VERCEL_ENV === 'production'
+
+    if (production) {
+      // Password reset and verification requests must never report success when
+      // production cannot actually deliver the email. Registration explicitly
+      // catches verification-email failures, so account creation still works.
+      throw new Error('EMAIL_PROVIDER_NOT_CONFIGURED')
+    }
+
+    console.warn(
+      `[email:dev] Provider not configured — skipping: ${payload.subject} for ${payload.to}`,
+    )
     return
   }
 

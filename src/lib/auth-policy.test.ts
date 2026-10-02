@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest'
-import { assertSafeRuntimeConfig, resolveAuthMode, safeCallbackPath } from './auth-policy'
+import {
+  assertSafeRuntimeConfig,
+  resolveAuthMode,
+  resolveRuntimeAuthUrl,
+  safeAuthRedirect,
+  safeCallbackPath,
+} from './auth-policy'
 
 describe('resolveAuthMode', () => {
   it('uses demo mode only when explicitly enabled', () => {
@@ -25,6 +31,92 @@ describe('safeCallbackPath', () => {
   it('rejects protocol-relative and external callback URLs', () => {
     expect(safeCallbackPath('//evil.example')).toBe('/dashboard')
     expect(safeCallbackPath('https://evil.example/phish')).toBe('/dashboard')
+  })
+
+  it('accepts an absolute callback only when it matches the active browser origin', () => {
+    expect(
+      safeCallbackPath(
+        'https://lernioai.vercel.app/learn?subject=R23CP2402',
+        '/dashboard',
+        'https://lernioai.vercel.app',
+      ),
+    ).toBe('/learn?subject=R23CP2402')
+    expect(
+      safeCallbackPath(
+        'https://lernio-ai.vercel.app/dashboard',
+        '/dashboard',
+        'https://lernioai.vercel.app',
+      ),
+    ).toBe('/dashboard')
+  })
+})
+
+describe('production auth origin handling', () => {
+  it('repairs the obsolete Lernio production hostname', () => {
+    expect(
+      resolveRuntimeAuthUrl({
+        configuredUrl: 'https://lernio-ai.vercel.app',
+        vercelEnv: 'production',
+      }),
+    ).toBe('https://lernioai.vercel.app')
+  })
+
+  it('uses the active Vercel preview host instead of a production callback host', () => {
+    expect(
+      resolveRuntimeAuthUrl({
+        configuredUrl: 'https://lernio-ai.vercel.app',
+        vercelEnv: 'preview',
+        vercelUrl: 'lernio-git-fix-auth-example.vercel.app',
+      }),
+    ).toBe('https://lernio-git-fix-auth-example.vercel.app')
+  })
+
+  it('keeps an explicitly configured app origin', () => {
+    expect(
+      resolveRuntimeAuthUrl({
+        configuredUrl: 'https://lernio-ai.vercel.app',
+        appUrl: 'https://learn.example.com',
+        vercelEnv: 'production',
+      }),
+    ).toBe('https://learn.example.com')
+  })
+
+  it('redirects relative callbacks to the canonical host when baseUrl is stale', () => {
+    expect(
+      safeAuthRedirect({
+        url: '/dashboard',
+        baseUrl: 'https://lernio-ai.vercel.app',
+        canonicalUrl: 'https://lernioai.vercel.app',
+      }),
+    ).toBe('https://lernioai.vercel.app/dashboard')
+  })
+
+  it('rewrites an absolute redirect that still points at the obsolete base host', () => {
+    expect(
+      safeAuthRedirect({
+        url: 'https://lernio-ai.vercel.app/dashboard',
+        baseUrl: 'https://lernio-ai.vercel.app',
+        canonicalUrl: 'https://lernioai.vercel.app',
+      }),
+    ).toBe('https://lernioai.vercel.app/dashboard')
+  })
+
+  it('allows the current canonical host but rejects external redirects', () => {
+    expect(
+      safeAuthRedirect({
+        url: 'https://lernioai.vercel.app/learn',
+        baseUrl: 'https://lernio-ai.vercel.app',
+        canonicalUrl: 'https://lernioai.vercel.app',
+      }),
+    ).toBe('https://lernioai.vercel.app/learn')
+
+    expect(
+      safeAuthRedirect({
+        url: 'https://evil.example/phish',
+        baseUrl: 'https://lernio-ai.vercel.app',
+        canonicalUrl: 'https://lernioai.vercel.app',
+      }),
+    ).toBe('https://lernioai.vercel.app/dashboard')
   })
 })
 

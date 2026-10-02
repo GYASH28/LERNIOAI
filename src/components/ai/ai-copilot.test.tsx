@@ -66,10 +66,6 @@ describe('AiCopilot', () => {
     })
     writeTextMock.mockClear()
     vi.stubGlobal('fetch', vi.fn(async () => streamResponse()))
-    Object.defineProperty(navigator, 'clipboard', {
-      configurable: true,
-      value: { writeText: writeTextMock },
-    })
   })
 
   afterEach(() => {
@@ -79,6 +75,12 @@ describe('AiCopilot', () => {
 
   it('opens, runs a contextual action, streams text, copies, expands, and closes', async () => {
     const user = userEvent.setup()
+    // userEvent.setup() installs its own clipboard stub. Override it afterwards
+    // so the assertion observes the same writeText call the component makes.
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: { writeText: writeTextMock },
+    })
     render(<AiCopilot />)
 
     await user.click(screen.getByRole('button', { name: 'Open LEO copilot' }))
