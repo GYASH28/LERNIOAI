@@ -66,20 +66,32 @@ function httpOrigin(value: string | null | undefined): string | null {
   }
 }
 
+function vercelHostOrigin(value: string | null | undefined): string | null {
+  if (!value) return null
+  return httpOrigin(value.includes('://') ? value : `https://${value}`)
+}
+
 export function resolveRuntimeAuthUrl(input: {
   configuredUrl?: string
   appUrl?: string
   vercelEnv?: string
+  vercelUrl?: string
+  vercelProjectProductionUrl?: string
 }): string | null {
   const explicitAppOrigin = httpOrigin(input.appUrl)
   if (explicitAppOrigin) return explicitAppOrigin
 
   const configuredOrigin = httpOrigin(input.configuredUrl)
+
+  if (input.vercelEnv === 'preview') {
+    return vercelHostOrigin(input.vercelUrl) ?? configuredOrigin
+  }
+
   if (
     input.vercelEnv === 'production' &&
     (!configuredOrigin || STALE_LERNIO_AUTH_ORIGINS.has(configuredOrigin))
   ) {
-    return LERNIO_PRODUCTION_ORIGIN
+    return vercelHostOrigin(input.vercelProjectProductionUrl) ?? LERNIO_PRODUCTION_ORIGIN
   }
 
   return configuredOrigin
