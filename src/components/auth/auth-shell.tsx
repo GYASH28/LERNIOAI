@@ -32,7 +32,7 @@ export const authSecondaryButtonClass =
 const authHighlights = [
   [BookOpenCheck, 'Structured subject workspace'],
   [Building2, 'Department and semester profiles'],
-  [ShieldCheck, 'Credentials, Google, and invite roles'],
+  [ShieldCheck, 'Secure credentials, sessions, and role access'],
 ] as const
 
 export function GoogleMark() {
