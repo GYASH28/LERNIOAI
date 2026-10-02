@@ -112,12 +112,12 @@ export function safeAuthRedirect(input: {
   const canonicalOrigin = httpOrigin(input.canonicalUrl) ?? baseOrigin
   const fallbackOrigin = canonicalOrigin ?? LERNIO_PRODUCTION_ORIGIN
   const trustedOrigins = new Set<string>()
+  if (canonicalOrigin) trustedOrigins.add(canonicalOrigin)
+  if (baseOrigin && (!canonicalOrigin || baseOrigin === canonicalOrigin)) {
+    trustedOrigins.add(baseOrigin)
+  }
 
-  for (const candidate of [
-    input.baseUrl,
-    input.canonicalUrl,
-    ...(input.additionalOrigins ?? []),
-  ]) {
+  for (const candidate of input.additionalOrigins ?? []) {
     const origin = httpOrigin(candidate)
     if (origin) trustedOrigins.add(origin)
   }
