@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { FormEvent } from 'react'
 import { LockKeyhole, LogIn, Mail } from 'lucide-react'
 import {
@@ -12,6 +12,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { safeCallbackPath } from '@/lib/auth-policy'
 
 function routeNotice(verified: string | null, error: string | null) {
   if (verified === 'true') {
@@ -43,15 +44,15 @@ export default function SignInPage() {
   const [submitting, setSubmitting] = useState(false)
   const [notice, setNotice] = useState<{ status: string | null; error: string | null }>({ status: null, error: null })
 
-  // Read URL params on mount (not useSearchParams to avoid Suspense)
-  useState(() => {
+  // Read URL params after mount (not useSearchParams to avoid Suspense).
+  useEffect(() => {
     try {
       const params = new URLSearchParams(window.location.search)
       const verified = params.get('verified')
       const routeError = params.get('error')
       setNotice(routeNotice(verified, routeError))
     } catch {}
-  })
+  }, [])
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -61,7 +62,11 @@ export default function SignInPage() {
 
     try {
       const params = new URLSearchParams(window.location.search)
-      const callbackPath = params.get('callbackUrl') || '/dashboard'
+      const callbackPath = safeCallbackPath(
+        params.get('callbackUrl'),
+        '/dashboard',
+        window.location.origin,
+      )
       const callbackUrl = new URL(callbackPath, window.location.origin).toString()
 
       const { signIn } = await import('next-auth/react')
@@ -72,40 +77,36 @@ export default function SignInPage() {
         callbackUrl,
       })
 
-      setSubmitting(false)
-      setStatusMessage('')
-
-      if (result?.error) {
+      if (result?.error || result?.ok === false) {
         setError('Invalid email or password.')
         return
       }
 
-      const destination = result?.url
-        ? new URL(result.url, window.location.origin).toString()
-        : callbackUrl
+      // Do not trust result.url here. NextAuth builds that absolute URL from
+      // NEXTAUTH_URL, and a stale deployment hostname previously sent students
+      // to a dead Vercel domain after a successful password check.
+      const userResponse = await fetch('/api/user', {
+        cache: 'no-store',
+        credentials: 'same-origin',
+      })
+      const userPayload = await userResponse.json().catch(() => null)
+      if (!userResponse.ok || !userPayload?.ok || !userPayload.data) {
+        setError('Your password was accepted, but Lernio could not establish the session. Please try again.')
+        return
+      }
 
-      // Check user role and redirect accordingly
-      try {
-        const userResponse = await fetch('/api/user', { cache: 'no-store' })
-        const userPayload = await userResponse.json().catch(() => null)
-        if (userPayload?.ok && userPayload.data?.role) {
-          const role = userPayload.data.role
-          const roleRedirects: Record<string, string> = {
-            admin: '/admin',
-            cr: '/cr',
-          }
-          if (roleRedirects[role]) {
-            window.location.href = roleRedirects[role]
-            return
-          }
-        }
-      } catch {}
+      const role = String(userPayload.data.role || 'student')
+      const roleRedirects: Record<string, string> = {
+        admin: '/admin',
+        cr: '/cr',
+      }
 
-      window.location.href = destination
+      window.location.assign(roleRedirects[role] || callbackPath)
     } catch {
+      setError('Sign in failed. Please try again.')
+    } finally {
       setSubmitting(false)
       setStatusMessage('')
-      setError('Sign in failed. Please try again.')
     }
   }
 
