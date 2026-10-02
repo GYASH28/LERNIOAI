@@ -32,6 +32,23 @@ describe('safeCallbackPath', () => {
     expect(safeCallbackPath('//evil.example')).toBe('/dashboard')
     expect(safeCallbackPath('https://evil.example/phish')).toBe('/dashboard')
   })
+
+  it('accepts an absolute callback only when it matches the active browser origin', () => {
+    expect(
+      safeCallbackPath(
+        'https://lernioai.vercel.app/learn?subject=R23CP2402',
+        '/dashboard',
+        'https://lernioai.vercel.app',
+      ),
+    ).toBe('/learn?subject=R23CP2402')
+    expect(
+      safeCallbackPath(
+        'https://lernio-ai.vercel.app/dashboard',
+        '/dashboard',
+        'https://lernioai.vercel.app',
+      ),
+    ).toBe('/dashboard')
+  })
 })
 
 describe('production auth origin handling', () => {
@@ -68,6 +85,16 @@ describe('production auth origin handling', () => {
     expect(
       safeAuthRedirect({
         url: '/dashboard',
+        baseUrl: 'https://lernio-ai.vercel.app',
+        canonicalUrl: 'https://lernioai.vercel.app',
+      }),
+    ).toBe('https://lernioai.vercel.app/dashboard')
+  })
+
+  it('rewrites an absolute redirect that still points at the obsolete base host', () => {
+    expect(
+      safeAuthRedirect({
+        url: 'https://lernio-ai.vercel.app/dashboard',
         baseUrl: 'https://lernio-ai.vercel.app',
         canonicalUrl: 'https://lernioai.vercel.app',
       }),
