@@ -44,6 +44,16 @@ describe('production auth origin handling', () => {
     ).toBe('https://lernioai.vercel.app')
   })
 
+  it('uses the active Vercel preview host instead of a production callback host', () => {
+    expect(
+      resolveRuntimeAuthUrl({
+        configuredUrl: 'https://lernio-ai.vercel.app',
+        vercelEnv: 'preview',
+        vercelUrl: 'lernio-git-fix-auth-example.vercel.app',
+      }),
+    ).toBe('https://lernio-git-fix-auth-example.vercel.app')
+  })
+
   it('keeps an explicitly configured app origin', () => {
     expect(
       resolveRuntimeAuthUrl({
