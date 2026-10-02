@@ -523,14 +523,15 @@ export function PracticeView() {
     const opts = currentQuestion.options ?? []
     // The verdict is whatever the SERVER returned — never a client-side comparison.
     const isCorrect = serverFeedback?.isCorrect ?? false
-    const progress = ((currentIdx + 1) / questions.length) * 100
+    const targetCount = mode === 'adaptive' ? count : questions.length
+    const progress = Math.min(100, ((currentIdx + 1) / Math.max(1, targetCount)) * 100)
     const transition = pref.lowPower ? { duration: 0 } : { duration: 0.2 }
 
     return (
       <div className="space-y-4 max-w-3xl mx-auto">
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-2">
-            <Badge variant="secondary">Question {currentIdx + 1} of {questions.length}</Badge>
+            <Badge variant="secondary">Question {currentIdx + 1} of {targetCount}</Badge>
             {mode === 'adaptive' && <Badge className="bg-primary text-primary-foreground capitalize">{adaptiveDifficulty}</Badge>}
             <Badge variant="outline" className="capitalize">{currentQuestion.difficulty}</Badge>
           </div>
@@ -541,6 +542,51 @@ export function PracticeView() {
         <Card>
           <CardContent className="p-5">
             <p className="text-base font-medium leading-relaxed mb-4">{currentQuestion.question}</p>
+
+            {!selectedAnswer && (
+              <div className="mb-4 space-y-3 rounded-lg border bg-muted/20 p-3">
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between gap-3">
+                    <Label className="text-xs flex items-center gap-1.5">
+                      <Target className="h-3.5 w-3.5" /> How confident are you?
+                    </Label>
+                    <span className="text-xs font-medium">{CONFIDENCE_LABELS[confidence - 1]}</span>
+                  </div>
+                  <Slider
+                    value={[confidence]}
+                    onValueChange={([value]) => setConfidence(value)}
+                    min={1}
+                    max={5}
+                    step={1}
+                    aria-label="Answer confidence"
+                  />
+                  <p className="text-meta text-muted-foreground">
+                    Set this before answering so Lernio can use it when planning revision.
+                  </p>
+                </div>
+
+                <div className="flex items-start gap-2">
+                  {!showHint ? (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => void revealHint()}
+                      disabled={hintLoading}
+                      className="gap-1.5"
+                    >
+                      <Lightbulb className="h-3.5 w-3.5" />
+                      {hintLoading ? 'Loading hint…' : 'Show Hint'}
+                    </Button>
+                  ) : (
+                    <div className="flex flex-1 items-start gap-2 rounded-lg bg-amber-500/10 p-3 text-sm">
+                      <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
+                      <p className="text-amber-700 dark:text-amber-300">{hintText}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
             <div className="space-y-2">
               {opts.map((opt: string, i: number) => {
                 const isSelected = selectedAnswer === String(i)
@@ -576,47 +622,6 @@ export function PracticeView() {
               })}
             </div>
 
-            {/* Confidence slider — shown AFTER selecting, BEFORE submitting feedback.
-                The value is sent to the server in the POST body. */}
-            {selectedAnswer && !showExplanation && (
-              <div className="mt-4 rounded-lg border bg-muted/30 p-3 space-y-2">
-                <div className="flex items-center justify-between">
-                  <Label className="text-xs flex items-center gap-1.5">
-                    <Target className="h-3.5 w-3.5" /> Confidence
-                  </Label>
-                  <span className="text-xs font-medium">{CONFIDENCE_LABELS[confidence - 1]}</span>
-                </div>
-                <Slider
-                  value={[confidence]}
-                  onValueChange={([v]) => setConfidence(v)}
-                  min={1}
-                  max={5}
-                  step={1}
-                />
-                <p className="text-meta text-muted-foreground">
-                  This is recorded with your attempt — it helps the platform schedule your revisions.
-                </p>
-              </div>
-            )}
-
-            {/* Hint — surfaced from the server's POST response (only after submit). */}
-            {!showExplanation && (
-              <div className="mt-4 flex items-center gap-2">
-                {!showHint ? (
-                  <Button variant="outline" size="sm" onClick={() => setShowHint(true)} className="gap-1.5">
-                    <Lightbulb className="h-3.5 w-3.5" /> Show Hint
-                  </Button>
-                ) : (
-                  <div className="flex items-start gap-2 rounded-lg bg-amber-500/10 p-3 text-sm flex-1">
-                    <Lightbulb className="h-4 w-4 text-amber-500 shrink-0 mt-0.5" />
-                    <p className="text-amber-700 dark:text-amber-300">
-                      Hints from the question bank are revealed after submit. For now, focus on the key concepts in the question.
-                    </p>
-                  </div>
-                )}
-              </div>
-            )}
-
             {/* Explanation — only shown after the server has scored the answer. */}
             <AnimatePresence>
               {showExplanation && serverFeedback && (
@@ -649,8 +654,12 @@ export function PracticeView() {
                       </p>
                     )}
                   </div>
-                  <Button onClick={nextQuestion} disabled={submitting} className="w-full gap-2">
-                    {currentIdx + 1 >= questions.length ? 'See Results' : 'Next Question'}
+                  <Button onClick={() => void nextQuestion()} disabled={submitting || loadingNext} className="w-full gap-2">
+                    {loadingNext
+                      ? 'Loading next question…'
+                      : currentIdx + 1 >= targetCount
+                        ? 'See Results'
+                        : 'Next Question'}
                     <ChevronRight className="h-4 w-4" />
                   </Button>
                 </motion.div>
