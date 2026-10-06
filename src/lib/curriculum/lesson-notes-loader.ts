@@ -161,8 +161,7 @@ function loadAllNotes(): Map<string, SubjectNotes> {
 }
 
 /**
- * Get lesson notes for a subject by its code.
- * Tries the exact code, then the alternate code.
+ * Get lesson notes for a subject by its exact curriculum code.
  */
 export function getSubjectNotes(subjectCode: string): SubjectNotes | null {
   const notes = loadAllNotes()
@@ -178,6 +177,16 @@ export function getAvailableNotesSubjects(): { code: string; name: string }[] {
 }
 
 /**
+ * Full detailed-note catalog for server-rendered materials pages.
+ * A shallow copy keeps callers from mutating the cached map values.
+ */
+export function getAvailableSubjectNotes(): SubjectNotes[] {
+  return Array.from(loadAllNotes().values())
+    .slice()
+    .sort((a, b) => a.semester - b.semester || a.subjectCode.localeCompare(b.subjectCode))
+}
+
+/**
  * Find a specific lesson by slug within a subject's notes.
  */
 export function findLessonBySlug(
@@ -188,11 +197,7 @@ export function findLessonBySlug(
   if (!subject) return null
   for (const unit of subject.units) {
     for (const lesson of unit.lessons) {
-      if (
-        lesson.slug === lessonSlug ||
-        lesson.slug.includes(lessonSlug) ||
-        lessonSlug.includes(lesson.slug)
-      ) {
+      if (lesson.slug === lessonSlug) {
         return { lesson, unit, subject }
       }
     }
@@ -213,12 +218,7 @@ export function getAdjacentLessons(
   for (const unit of subject.units) {
     all.push(...unit.lessons)
   }
-  const idx = all.findIndex(
-    (l) =>
-      l.slug === lessonSlug ||
-      l.slug.includes(lessonSlug) ||
-      lessonSlug.includes(l.slug),
-  )
+  const idx = all.findIndex((l) => l.slug === lessonSlug)
   if (idx === -1) return { prev: null, next: null }
   return {
     prev: idx > 0 ? all[idx - 1] : null,
