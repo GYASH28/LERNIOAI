@@ -19,8 +19,17 @@ const palettes = ['aurora', 'nexus', 'paper', 'ocean', 'forest', 'sakura'] as co
 
 test('all palette attributes can be applied before visual capture', async ({ page }) => {
   test.setTimeout(60_000)
-  await page.goto('/')
+
+  // The cinematic intro intentionally animates the whole viewport. Persist the
+  // "seen" flag before app code runs so visual diffs compare the stable landing
+  // page rather than arbitrary intro frames.
+  await page.addInitScript(() => {
+    window.sessionStorage.setItem('lernio-cinematic-intro-v4', 'complete')
+  })
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+  await page.goto('/', { waitUntil: 'networkidle' })
   await expect(page.locator('body')).toBeVisible()
+  await expect(page.getByRole('button', { name: /replay intro/i })).toBeVisible()
 
   for (const palette of palettes) {
     await page.evaluate((nextPalette) => {
