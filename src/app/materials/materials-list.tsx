@@ -200,8 +200,8 @@ export function MaterialsList({ pdfs }: { pdfs: MaterialSubject[] }) {
               <Award className="h-5 w-5" />
             </div>
             <div className="min-w-0 flex-1">
-              <p className="materials-download__title">Take Practice Quiz</p>
-              <p className="materials-download__hint">AI-generated questions for this subject</p>
+              <p className="materials-download__title">Open Practice & Exams</p>
+              <p className="materials-download__hint">Use Lernio's question bank and mock-exam tools</p>
             </div>
             <ChevronRight className="h-4 w-4 text-muted-foreground shrink-0" />
           </Link>
