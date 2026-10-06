@@ -5,7 +5,7 @@ import { getCurrentUser } from '@/lib/auth'
 import { TopBar } from '@/components/layout/top-bar'
 import { Footer } from '@/components/layout/footer'
 import { getSubjectNotes, findLessonBySlug, getAdjacentLessons } from '@/lib/curriculum/lesson-notes-loader'
-import { PresentationDeck } from '@/components/learning/presentation-deck'
+import { LessonNotesView } from '@/components/learning/lesson-notes-view'
 
 export const dynamic = 'force-dynamic'
 
@@ -80,7 +80,7 @@ export default async function MaterialsLessonPage({
 
         {/* Presentation Deck */}
         <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
-          <PresentationDeck
+          <LessonNotesView
             lesson={lesson}
             subject={subjectNotes}
             prevHref={prev ? `/materials/lesson/${subjectCode}/${prev.slug}` : null}
