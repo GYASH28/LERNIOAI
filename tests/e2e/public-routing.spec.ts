@@ -10,6 +10,12 @@ for (const path of publicPaths) {
   })
 }
 
+test('dashboard stays protected and redirects cleanly to sign in', async ({ page }) => {
+  await page.goto('/dashboard')
+  await expect(page).toHaveURL(/\/sign-in\?callbackUrl=/)
+  await expect(page.getByRole('heading', { name: /welcome back/i })).toBeVisible()
+})
+
 test('manifest and sitemap stay public', async ({ request }) => {
   const manifest = await request.get('/manifest.webmanifest')
   expect(manifest.status()).toBeLessThan(400)
