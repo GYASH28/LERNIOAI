@@ -1,0 +1,1328 @@
+{
+  "subjectCode": "R23CI2603",
+  "subjectName": "Digital Techniques & Microcontroller",
+  "semester": 3,
+  "credits": 4,
+  "units": [
+    {
+      "number": 1,
+      "title": "Logic Gates and Logic Families",
+      "weightage": 15,
+      "lessons": [
+        {
+          "slug": "logic-gates-boolean-algebra-and-logic-families",
+          "title": "Logic Gates, Boolean Algebra and Logic Families",
+          "durationMin": 45,
+          "difficulty": "easy",
+          "overview": "Digital systems represent information with two stable logic levels, 0 and 1. This unit builds the base for every later circuit: truth tables, basic and universal gates, Boolean laws, De Morgan’s theorems, and the practical differences between TTL and CMOS logic families.",
+          "objectives": [
+            "Identify AND, OR, NOT, NAND, NOR, XOR and XNOR gates from symbols and truth tables",
+            "Simplify small Boolean expressions using Boolean laws and De Morgan’s theorems",
+            "Explain why NAND and NOR are called universal gates",
+            "Compare TTL and CMOS using supply, power, speed, noise margin and fan-out"
+          ],
+          "prerequisites": [
+            "Binary numbers",
+            "Basic voltage and current concepts"
+          ],
+          "keyConcepts": [
+            "AND gives 1 only when every input is 1; OR gives 1 when at least one input is 1; NOT complements a bit.",
+            "NAND = NOT(AND) and NOR = NOT(OR). Either gate alone can implement any Boolean function.",
+            "XOR is 1 when inputs are different; XNOR is 1 when inputs are equal.",
+            "Boolean identities such as A+0=A, A·1=A, A+A=A and A·A=A reduce circuit complexity.",
+            "De Morgan: (A·B)' = A' + B' and (A+B)' = A'·B'.",
+            "TTL uses bipolar transistors; CMOS uses complementary MOSFETs and generally offers lower static power."
+          ],
+          "formulas": [
+            "AND: Y = A·B",
+            "OR: Y = A + B",
+            "NOT: Y = A'",
+            "XOR: Y = A'B + AB'",
+            "De Morgan: (A·B)' = A' + B'; (A+B)' = A'·B'"
+          ],
+          "tables": [
+            {
+              "title": "Two-input gate truth table",
+              "headers": [
+                "A",
+                "B",
+                "AND",
+                "OR",
+                "NAND",
+                "NOR",
+                "XOR",
+                "XNOR"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "1",
+                  "1",
+                  "0",
+                  "1"
+                ],
+                [
+                  "0",
+                  "1",
+                  "0",
+                  "1",
+                  "1",
+                  "0",
+                  "1",
+                  "0"
+                ],
+                [
+                  "1",
+                  "0",
+                  "0",
+                  "1",
+                  "1",
+                  "0",
+                  "1",
+                  "0"
+                ],
+                [
+                  "1",
+                  "1",
+                  "1",
+                  "1",
+                  "0",
+                  "0",
+                  "0",
+                  "1"
+                ]
+              ]
+            },
+            {
+              "title": "TTL vs CMOS",
+              "headers": [
+                "Parameter",
+                "TTL",
+                "CMOS"
+              ],
+              "rows": [
+                [
+                  "Technology",
+                  "Bipolar junction transistors",
+                  "Complementary MOSFETs"
+                ],
+                [
+                  "Static power",
+                  "Higher",
+                  "Very low"
+                ],
+                [
+                  "Input impedance",
+                  "Lower",
+                  "Very high"
+                ],
+                [
+                  "Noise immunity",
+                  "Moderate",
+                  "Generally high"
+                ],
+                [
+                  "Typical use",
+                  "Legacy/high-current digital logic",
+                  "Modern low-power digital systems"
+                ]
+              ]
+            }
+          ],
+          "diagrams": [
+            {
+              "type": "ascii",
+              "title": "Universal-gate idea",
+              "content": "NAND only:\nNOT A = A NAND A\nAND = (A NAND B) NAND (A NAND B)\nOR  = (A NAND A) NAND (B NAND B)\n\nNOR only:\nNOT A = A NOR A\nOR  = (A NOR B) NOR (A NOR B)\nAND = (A NOR A) NOR (B NOR B)"
+            }
+          ],
+          "codeExamples": [],
+          "theory": "## Digital logic\nA digital circuit works with discrete voltage ranges interpreted as **logic 0** and **logic 1**. A gate is a small circuit that implements one Boolean operation. More complex blocks—adders, counters, registers and processors—are made by connecting gates.\n\n## Boolean algebra\nBoolean algebra uses variables that can be only 0 or 1. The most useful simplification laws are identity, null, idempotent, complement, absorption, distributive and De Morgan’s laws. Simplification matters because fewer gates normally mean lower cost, less delay and less power.\n\n## Universal gates\nNAND and NOR are universal because NOT, AND and OR can each be built using only NANDs or only NORs. In exams, show the algebra **and** the small gate construction.\n\n## Logic families\nA logic family defines the internal electronic technology and electrical compatibility of gates. Important parameters are propagation delay, power dissipation, fan-in, fan-out, noise margin and supply voltage. Never compare families using only one parameter; speed and power are often a trade-off.",
+          "commonMistakes": [
+            "Treating XOR as OR; XOR becomes 0 for input 1,1.",
+            "Forgetting the bar over the entire expression when applying De Morgan’s theorem.",
+            "Calling NAND/NOR universal without showing how NOT, AND or OR can be formed.",
+            "Mixing ideal truth-table logic with real electrical parameters such as noise margin and fan-out."
+          ],
+          "examTips": [
+            "Write the Boolean expression next to every truth table.",
+            "For De Morgan questions, complement every term and swap AND ↔ OR.",
+            "For TTL vs CMOS, use a comparison table with at least four parameters.",
+            "If asked for a universal-gate realization, draw each NAND/NOR stage clearly."
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which gate is 1 only when two inputs are different?",
+              "options": [
+                "AND",
+                "XOR",
+                "NOR",
+                "XNOR"
+              ],
+              "answer": 1,
+              "explanation": "XOR implements inequality for two inputs."
+            },
+            {
+              "question": "Using De Morgan’s theorem, (A+B)' equals:",
+              "options": [
+                "A'+B'",
+                "A'·B'",
+                "A·B",
+                "A+B"
+              ],
+              "answer": 1,
+              "explanation": "Complement of OR becomes AND of the complemented inputs."
+            },
+            {
+              "question": "Why is NAND called universal?",
+              "options": [
+                "It is always faster",
+                "It uses no power",
+                "All basic Boolean functions can be built from NAND alone",
+                "It has one input"
+              ],
+              "answer": 2,
+              "explanation": "NOT, AND and OR can all be synthesized using only NAND gates."
+            }
+          ],
+          "workedExamples": [
+            {
+              "title": "Simplify a Boolean expression",
+              "problem": "Simplify Y = A + A·B.",
+              "solution": "Use absorption law: A + A·B = A.",
+              "explanation": "When A=1 the output is already 1; when A=0 both terms are 0, so B cannot change the result."
+            }
+          ],
+          "revisionSummary": "Know every basic gate truth table, the two De Morgan identities, the reason NAND/NOR are universal, and the meaning of propagation delay, power dissipation, noise margin and fan-out.",
+          "cheatSheet": [
+            "XOR: different → 1",
+            "XNOR: same → 1",
+            "NAND/NOR are universal",
+            "De Morgan swaps AND and OR while complementing each variable",
+            "CMOS: very high input impedance and low static power"
+          ],
+          "flashcards": [
+            {
+              "front": "What is fan-out?",
+              "back": "Maximum number of standard logic inputs that one output can drive reliably."
+            },
+            {
+              "front": "State De Morgan for an AND expression.",
+              "back": "(A·B)' = A' + B'."
+            },
+            {
+              "front": "What does XNOR detect?",
+              "back": "Equality: it outputs 1 when the inputs are the same."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Why are NAND and NOR universal gates?",
+              "modelAnswer": "Because NOT, AND and OR—and therefore any Boolean function—can be implemented using only NAND gates or only NOR gates."
+            },
+            {
+              "marks": 2,
+              "question": "Define propagation delay.",
+              "modelAnswer": "The time between an input logic transition and the corresponding valid output transition."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Combinational Logic Circuits",
+      "weightage": 18,
+      "lessons": [
+        {
+          "slug": "combinational-circuits-adders-mux-encoders-decoders",
+          "title": "Adders, Subtractors, Multiplexers, Encoders and Decoders",
+          "durationMin": 50,
+          "difficulty": "medium",
+          "overview": "A combinational circuit has no memory: its output depends only on the present input combination. This unit covers arithmetic circuits and the data-routing/code-conversion blocks most often used in digital systems.",
+          "objectives": [
+            "Design half and full adders/subtractors",
+            "Explain MUX and DEMUX operation",
+            "Differentiate encoder and decoder",
+            "Use a comparator to determine equality or magnitude"
+          ],
+          "prerequisites": [
+            "Logic gates",
+            "Boolean expressions",
+            "Truth tables"
+          ],
+          "keyConcepts": [
+            "Half adder adds A and B: Sum=A⊕B, Carry=A·B.",
+            "Full adder adds A, B and Cin and can be built from two half adders plus an OR gate.",
+            "Multiplexer selects one of many data inputs using select lines; 2^n inputs require n select lines.",
+            "Demultiplexer routes one input to one of many outputs.",
+            "Decoder converts an n-bit code to up to 2^n active outputs; encoder performs the reverse function.",
+            "Magnitude comparator produces A>B, A=B and A<B outputs."
+          ],
+          "formulas": [
+            "Half adder: S=A⊕B, C=A·B",
+            "Full adder: S=A⊕B⊕Cin",
+            "Full-adder carry: Cout=AB + BCin + ACin",
+            "4:1 MUX: Y=I0S1'S0' + I1S1'S0 + I2S1S0' + I3S1S0"
+          ],
+          "tables": [
+            {
+              "title": "Full adder truth table",
+              "headers": [
+                "A",
+                "B",
+                "Cin",
+                "Sum",
+                "Cout"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                [
+                  "0",
+                  "0",
+                  "1",
+                  "1",
+                  "0"
+                ],
+                [
+                  "0",
+                  "1",
+                  "0",
+                  "1",
+                  "0"
+                ],
+                [
+                  "0",
+                  "1",
+                  "1",
+                  "0",
+                  "1"
+                ],
+                [
+                  "1",
+                  "0",
+                  "0",
+                  "1",
+                  "0"
+                ],
+                [
+                  "1",
+                  "0",
+                  "1",
+                  "0",
+                  "1"
+                ],
+                [
+                  "1",
+                  "1",
+                  "0",
+                  "0",
+                  "1"
+                ],
+                [
+                  "1",
+                  "1",
+                  "1",
+                  "1",
+                  "1"
+                ]
+              ]
+            },
+            {
+              "title": "Common combinational blocks",
+              "headers": [
+                "Block",
+                "Purpose",
+                "Typical control"
+              ],
+              "rows": [
+                [
+                  "MUX",
+                  "Many inputs → one output",
+                  "Select lines"
+                ],
+                [
+                  "DEMUX",
+                  "One input → many outputs",
+                  "Select lines"
+                ],
+                [
+                  "Decoder",
+                  "Binary code → one-of-many output",
+                  "Enable + code inputs"
+                ],
+                [
+                  "Encoder",
+                  "One-of-many input → binary code",
+                  "Often priority logic"
+                ],
+                [
+                  "Comparator",
+                  "Compare binary values",
+                  "A and B bit groups"
+                ]
+              ]
+            }
+          ],
+          "diagrams": [
+            {
+              "type": "ascii",
+              "title": "Full adder using two half adders",
+              "content": "A ──┐\n    ├─[HA1]─ S1 ─┐\nB ──┘             ├─[HA2]── SUM\nCin ──────────────┘\n      C1 ─┐\n          ├─[OR]──── COUT\n      C2 ─┘"
+            },
+            {
+              "type": "ascii",
+              "title": "4:1 multiplexer",
+              "content": "I0 ─┐\nI1 ─┤\nI2 ─┤  4:1 MUX ── Y\nI3 ─┘\n     S1 S0\nS1S0=00→I0, 01→I1, 10→I2, 11→I3"
+            }
+          ],
+          "codeExamples": [],
+          "theory": "## Combinational logic\nThere is no feedback memory element in an ideal combinational circuit. A systematic design method is: define inputs/outputs → create truth table → derive Boolean expressions → simplify → draw circuit → verify.\n\n## Arithmetic blocks\nA half adder cannot accept a carry from a previous stage, so multi-bit addition requires **full adders**. Cascading full adders creates a ripple-carry adder; the carry propagation creates delay.\n\n## Data selection\nA multiplexer is a digitally controlled switch. It is useful not only for routing data but also for implementing Boolean functions by wiring data inputs to 0, 1 or variables.\n\n## Code conversion\nDecoders are used for memory/device selection and display driving. Encoders reduce one-of-many inputs to a compact binary code; a priority encoder resolves the case where multiple inputs are active.",
+          "commonMistakes": [
+            "Using half adder where Cin is required",
+            "Reversing encoder and decoder direction",
+            "Forgetting that 8:1 MUX needs 3 select lines",
+            "Writing MUX minterms with the wrong complemented select variable"
+          ],
+          "examTips": [
+            "Memorize half/full-adder expressions",
+            "For a 4:1 MUX, write selection table before Boolean equation",
+            "Draw clean block symbols with select and enable pins",
+            "State whether decoder outputs are active-high or active-low when relevant"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "How many select lines does an 8:1 MUX require?",
+              "options": [
+                "2",
+                "3",
+                "4",
+                "8"
+              ],
+              "answer": 1,
+              "explanation": "2^3=8, so three select bits identify one of eight inputs."
+            },
+            {
+              "question": "The full-adder Sum output is:",
+              "options": [
+                "A+B+Cin",
+                "A⊕B⊕Cin",
+                "AB+Cin",
+                "A·B·Cin"
+              ],
+              "answer": 1,
+              "explanation": "Sum is odd parity of A, B and Cin."
+            },
+            {
+              "question": "A decoder generally converts:",
+              "options": [
+                "One input to one output",
+                "n-bit code to up to 2^n outputs",
+                "Analog to digital",
+                "Many data inputs to one output"
+              ],
+              "answer": 1,
+              "explanation": "An n-to-2^n decoder activates the output represented by its binary input."
+            }
+          ],
+          "workedExamples": [
+            {
+              "title": "Choose a MUX size",
+              "problem": "You must select one of 16 sensor-status bits. How many select lines are needed?",
+              "solution": "n=log2(16)=4 select lines; use a 16:1 multiplexer.",
+              "explanation": "Four binary bits can represent 16 input indices."
+            }
+          ],
+          "revisionSummary": "Combinational outputs depend only on current inputs. Master the full-adder equations and the direction/purpose of MUX, DEMUX, encoder, decoder and comparator.",
+          "cheatSheet": [
+            "2^n MUX inputs ↔ n select lines",
+            "HA: S=A⊕B, C=AB",
+            "FA: S=A⊕B⊕Cin",
+            "MUX selects; DEMUX distributes",
+            "Decoder expands code; encoder compresses code"
+          ],
+          "flashcards": [
+            {
+              "front": "4:1 MUX select-line count?",
+              "back": "2 select lines."
+            },
+            {
+              "front": "Half-adder carry equation?",
+              "back": "C=A·B."
+            },
+            {
+              "front": "Encoder vs decoder?",
+              "back": "Encoder converts active input to code; decoder converts code to one-of-many outputs."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "What is the main limitation of a half adder?",
+              "modelAnswer": "It has no carry-in input, so it cannot directly add a bit plus a carry from a lower stage."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Sequential Logic Circuits",
+      "weightage": 18,
+      "lessons": [
+        {
+          "slug": "flip-flops-counters-and-registers",
+          "title": "Flip-Flops, Counters and Registers",
+          "durationMin": 55,
+          "difficulty": "medium",
+          "overview": "Sequential circuits contain memory, so their outputs depend on present inputs and previous state. Flip-flops store one bit; counters move through a state sequence; registers store or shift groups of bits.",
+          "objectives": [
+            "Differentiate latch and flip-flop",
+            "Explain SR, JK, D and T flip-flops",
+            "Compare synchronous and asynchronous counters",
+            "Describe SISO, SIPO, PISO and PIPO registers"
+          ],
+          "prerequisites": [
+            "Combinational logic",
+            "Clock waveform basics"
+          ],
+          "keyConcepts": [
+            "A latch is level-sensitive; a flip-flop is normally edge-triggered.",
+            "SR stores/reset-set state but has a forbidden/invalid combination in the basic form.",
+            "JK removes the SR invalid case; J=K=1 toggles.",
+            "D flip-flop transfers D to Q on the active clock edge and is widely used in registers.",
+            "T flip-flop toggles when T=1 and is useful for counters.",
+            "Ripple counters clock each stage from the previous stage; synchronous counters share a common clock.",
+            "Shift registers move bits serially and/or expose them in parallel."
+          ],
+          "formulas": [
+            "n flip-flops can represent up to 2^n states",
+            "For a divide-by-2 toggle stage: fout = fclk/2",
+            "n-bit ripple counter maximum count = 2^n - 1"
+          ],
+          "tables": [
+            {
+              "title": "Flip-flop action summary",
+              "headers": [
+                "Type",
+                "Inputs",
+                "Important action"
+              ],
+              "rows": [
+                [
+                  "SR",
+                  "S,R",
+                  "Set, reset, hold; avoid invalid basic-SR state"
+                ],
+                [
+                  "JK",
+                  "J,K",
+                  "J=K=1 toggles"
+                ],
+                [
+                  "D",
+                  "D",
+                  "Q(next)=D"
+                ],
+                [
+                  "T",
+                  "T",
+                  "T=1 toggles, T=0 holds"
+                ]
+              ]
+            },
+            {
+              "title": "Shift-register types",
+              "headers": [
+                "Type",
+                "Input",
+                "Output",
+                "Typical use"
+              ],
+              "rows": [
+                [
+                  "SISO",
+                  "Serial",
+                  "Serial",
+                  "Delay/bit shifting"
+                ],
+                [
+                  "SIPO",
+                  "Serial",
+                  "Parallel",
+                  "Serial receiver/expansion"
+                ],
+                [
+                  "PISO",
+                  "Parallel",
+                  "Serial",
+                  "Parallel-to-serial conversion"
+                ],
+                [
+                  "PIPO",
+                  "Parallel",
+                  "Parallel",
+                  "Temporary word storage"
+                ]
+              ]
+            }
+          ],
+          "diagrams": [
+            {
+              "type": "ascii",
+              "title": "4-bit ripple counter",
+              "content": "CLK → [FF0] → [FF1] → [FF2] → [FF3]\n       Q0      Q1      Q2      Q3\nEach stage toggles from the previous stage, so delays accumulate."
+            },
+            {
+              "type": "ascii",
+              "title": "4-bit SIPO register",
+              "content": "Serial In → [DFF]→[DFF]→[DFF]→[DFF]\n              Q0     Q1     Q2     Q3\n                 common clock"
+            }
+          ],
+          "codeExamples": [],
+          "theory": "## Memory and clocking\nThe key difference from combinational logic is **state**. A clock coordinates when state changes. Setup and hold requirements ensure the input is stable around the active clock edge.\n\n## Flip-flops\nThe D flip-flop is easiest to reason about: on the active edge, the next Q becomes D. JK and T flip-flops are convenient for toggling/state-machine counters.\n\n## Counters\nIn an asynchronous/ripple counter, the first flip-flop is clocked externally and later stages are clocked by earlier outputs. It is simple but propagation delays accumulate. A synchronous counter drives all flip-flops from one clock and uses combinational next-state logic, so it is faster and more predictable.\n\n## Registers\nRegisters are groups of flip-flops. Shift registers perform serial/parallel conversion, delay sequences and temporary storage.",
+          "commonMistakes": [
+            "Calling a ripple counter synchronous",
+            "Forgetting JK toggle when J=K=1",
+            "Confusing SIPO with PISO",
+            "Ignoring propagation delay in asynchronous counters"
+          ],
+          "examTips": [
+            "Draw clock connection clearly when comparing sync vs async counters",
+            "Use a state/count table for counter questions",
+            "For shift registers, expand SISO/SIPO/PISO/PIPO before explaining",
+            "Mention race-around in level-triggered JK and its remedies when asked"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which flip-flop has Q(next)=D?",
+              "options": [
+                "SR",
+                "JK",
+                "D",
+                "T"
+              ],
+              "answer": 2,
+              "explanation": "The D flip-flop captures the D input on its active clock edge."
+            },
+            {
+              "question": "In a JK flip-flop, J=K=1 causes:",
+              "options": [
+                "Reset",
+                "Set",
+                "Toggle",
+                "Invalid state"
+              ],
+              "answer": 2,
+              "explanation": "JK removes the SR invalid case by defining 1,1 as toggle."
+            },
+            {
+              "question": "Which counter clocks all stages together?",
+              "options": [
+                "Ripple",
+                "Asynchronous",
+                "Synchronous",
+                "Ring only"
+              ],
+              "answer": 2,
+              "explanation": "A synchronous counter applies the same clock to all flip-flops."
+            }
+          ],
+          "workedExamples": [
+            {
+              "title": "Counter capacity",
+              "problem": "How many flip-flops are required for a mod-10 counter?",
+              "solution": "Find n such that 2^n ≥ 10. 2^3=8 is insufficient, 2^4=16, so n=4.",
+              "explanation": "Unused states are handled by reset/next-state logic."
+            }
+          ],
+          "revisionSummary": "Sequential logic remembers state. D stores data, JK/T are good for toggle behavior, synchronous counters are faster than ripple counters, and shift registers perform serial/parallel conversion.",
+          "cheatSheet": [
+            "D: Qnext=D",
+            "JK 11→toggle",
+            "T=1→toggle",
+            "n FFs → up to 2^n states",
+            "Synchronous: common clock",
+            "SIPO = serial in, parallel out"
+          ],
+          "flashcards": [
+            {
+              "front": "Main drawback of ripple counter?",
+              "back": "Propagation delay accumulates from stage to stage."
+            },
+            {
+              "front": "What is SIPO?",
+              "back": "Serial-In Parallel-Out shift register."
+            },
+            {
+              "front": "JK input for toggle?",
+              "back": "J=1 and K=1."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Differentiate synchronous and asynchronous counters.",
+              "modelAnswer": "A synchronous counter clocks all flip-flops from one common clock; an asynchronous/ripple counter clocks later stages from previous outputs, causing cumulative propagation delay."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "The 8051 Microcontroller",
+      "weightage": 17,
+      "lessons": [
+        {
+          "slug": "8051-architecture-memory-and-ports",
+          "title": "8051 Architecture, Memory and I/O Ports",
+          "durationMin": 55,
+          "difficulty": "medium",
+          "overview": "The classic 8051 is an 8-bit microcontroller that combines a CPU, internal RAM, I/O ports, timers, serial interface and interrupt control on one chip. Understanding its block diagram and special-function registers is essential before assembly programming or interfacing.",
+          "objectives": [
+            "Identify major 8051 blocks",
+            "Explain CPU registers and PSW flags",
+            "Describe internal data-memory organization",
+            "Explain the four 8-bit I/O ports and alternate functions"
+          ],
+          "prerequisites": [
+            "Binary/hex numbers",
+            "Registers and buses"
+          ],
+          "keyConcepts": [
+            "8051 has an 8-bit ALU and accumulator A; B assists multiply/divide.",
+            "DPTR is a 16-bit data pointer formed by DPH and DPL; PC is the 16-bit program counter.",
+            "SP is the stack pointer; PSW contains status flags and register-bank selection bits.",
+            "Internal lower RAM includes register banks, a bit-addressable area and general-purpose RAM.",
+            "Special Function Registers (SFRs) control ports, timers, serial communication, interrupts and CPU state.",
+            "P0–P3 are four 8-bit ports; some pins have alternate bus, serial, interrupt and timer functions."
+          ],
+          "formulas": [
+            "Four 8-bit ports = 32 I/O lines",
+            "16-bit address range can represent 2^16 = 65536 addresses"
+          ],
+          "tables": [
+            {
+              "title": "Important 8051 registers",
+              "headers": [
+                "Register",
+                "Width",
+                "Purpose"
+              ],
+              "rows": [
+                [
+                  "A",
+                  "8-bit",
+                  "Accumulator / ALU operand"
+                ],
+                [
+                  "B",
+                  "8-bit",
+                  "Multiply/divide and general data"
+                ],
+                [
+                  "DPTR",
+                  "16-bit",
+                  "External/code data pointer"
+                ],
+                [
+                  "PC",
+                  "16-bit",
+                  "Address of next instruction"
+                ],
+                [
+                  "SP",
+                  "8-bit",
+                  "Top of internal stack"
+                ],
+                [
+                  "PSW",
+                  "8-bit",
+                  "Flags and register-bank selection"
+                ]
+              ]
+            },
+            {
+              "title": "Port alternate roles",
+              "headers": [
+                "Port",
+                "Typical role"
+              ],
+              "rows": [
+                [
+                  "P0",
+                  "General I/O or multiplexed low address/data bus"
+                ],
+                [
+                  "P1",
+                  "General-purpose I/O"
+                ],
+                [
+                  "P2",
+                  "General I/O or high address bus"
+                ],
+                [
+                  "P3",
+                  "I/O plus RxD, TxD, INT0/1, T0/1, RD, WR alternate functions"
+                ]
+              ]
+            }
+          ],
+          "diagrams": [
+            {
+              "type": "ascii",
+              "title": "Simplified 8051 block diagram",
+              "content": "+------------------- 8051 -------------------+\n| CPU/ALU  A B PSW  PC DPTR SP              |\n|     |            internal bus              |\n| ROM/Code   RAM/SFR   Timers   Serial UART  |\n| Interrupt Control            Oscillator    |\n| P0       P1       P2       P3              |\n+--------------------------------------------+"
+            }
+          ],
+          "codeExamples": [
+            {
+              "language": "asm8051",
+              "title": "Write alternating values to Port 1",
+              "code": "MOV P1,#55H\n; P1 = 01010101b\nMOV P1,#0AAH\n; P1 = 10101010b",
+              "explanation": "Direct SFR addressing writes an 8-bit immediate pattern to the Port 1 latch."
+            }
+          ],
+          "theory": "## Microprocessor vs microcontroller\nA microcontroller integrates the CPU and common peripherals needed for embedded control. The 8051’s on-chip ports, timers, serial interface and interrupt logic make it suitable for small control systems.\n\n## CPU registers\nThe accumulator is central to arithmetic/logical instructions. The **PSW** holds Carry, Auxiliary Carry, Overflow, Parity and register-bank control bits. **DPTR** is important when accessing tables or external memory.\n\n## Memory organization\nThe classic architecture separates program/code space conceptually from data space. Lower internal RAM supports register banks and bit-addressable storage; SFR addresses map control registers. Always distinguish an ordinary RAM byte from an SFR at a named address.\n\n## Ports\nPorts are not interchangeable in every hardware design because some pins carry alternate functions. P0 also differs electrically in the classic device when used as general I/O and may need external pull-ups.",
+          "commonMistakes": [
+            "Calling DPTR an 8-bit register",
+            "Confusing PC with DPTR",
+            "Forgetting that P3 pins have alternate peripheral functions",
+            "Treating SFR area as ordinary general-purpose RAM"
+          ],
+          "examTips": [
+            "Draw the architecture as labelled blocks, not just a list",
+            "Mention A, B, PSW, PC, DPTR and SP when asked for CPU organization",
+            "For port questions, write P3 alternate functions",
+            "Use hexadecimal notation consistently"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which 8051 register is 16-bit and commonly points to data/table addresses?",
+              "options": [
+                "A",
+                "B",
+                "DPTR",
+                "PSW"
+              ],
+              "answer": 2,
+              "explanation": "DPTR consists of DPH and DPL and is a 16-bit pointer."
+            },
+            {
+              "question": "Which register contains CPU flags?",
+              "options": [
+                "PSW",
+                "SP",
+                "P1",
+                "TMOD"
+              ],
+              "answer": 0,
+              "explanation": "The Program Status Word contains carry, auxiliary carry, overflow, parity and bank-select bits."
+            },
+            {
+              "question": "How many basic I/O port bits are provided by four 8-bit ports?",
+              "options": [
+                "8",
+                "16",
+                "24",
+                "32"
+              ],
+              "answer": 3,
+              "explanation": "4 × 8 = 32 I/O lines before considering alternate functions."
+            }
+          ],
+          "workedExamples": [
+            {
+              "title": "Identify a register",
+              "problem": "A program must point to a 16-bit table address before MOVC/MOVX-style access. Which register is normally used?",
+              "solution": "Use DPTR (DPH:DPL).",
+              "explanation": "DPTR is the processor’s dedicated 16-bit data pointer."
+            }
+          ],
+          "revisionSummary": "Memorize the 8051 block diagram, A/B/PSW/PC/DPTR/SP roles, RAM/SFR distinction, four ports and the alternate functions of Port 3.",
+          "cheatSheet": [
+            "A=accumulator",
+            "B=multiply/divide helper",
+            "DPTR=16-bit data pointer",
+            "PC=next instruction",
+            "SP=stack pointer",
+            "PSW=flags/bank select",
+            "P3 carries many alternate functions"
+          ],
+          "flashcards": [
+            {
+              "front": "DPTR width?",
+              "back": "16 bits (DPH + DPL)."
+            },
+            {
+              "front": "What does PSW store?",
+              "back": "Status flags and register-bank selection bits."
+            },
+            {
+              "front": "How many 8-bit I/O ports?",
+              "back": "Four: P0, P1, P2 and P3."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "What is an SFR?",
+              "modelAnswer": "A Special Function Register is a memory-mapped control/status register used for CPU state or peripherals such as ports, timers, serial interface and interrupts."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "8051 Instruction Set & Programming",
+      "weightage": 17,
+      "lessons": [
+        {
+          "slug": "8051-addressing-modes-instructions-and-programming",
+          "title": "8051 Addressing Modes, Instructions and Assembly Programs",
+          "durationMin": 60,
+          "difficulty": "hard",
+          "overview": "Programming the 8051 requires two skills: choosing the correct addressing mode and selecting instructions from data-transfer, arithmetic, logical, bit and branch groups. Small assembly programs become much easier when data flow is planned first.",
+          "objectives": [
+            "Recognize common addressing modes",
+            "Classify 8051 instructions by purpose",
+            "Write small loops, arithmetic and port-control programs",
+            "Use flags and conditional branches correctly"
+          ],
+          "prerequisites": [
+            "8051 registers",
+            "Hexadecimal arithmetic",
+            "Basic assembly idea"
+          ],
+          "keyConcepts": [
+            "Immediate addressing embeds a constant in the instruction, e.g. MOV A,#25H.",
+            "Register addressing uses R0–R7; direct addressing names an internal RAM/SFR address.",
+            "Register-indirect addressing uses @R0/@R1 for internal data, while DPTR supports broader pointer use.",
+            "Data-transfer instructions move bytes/bits without necessarily changing arithmetic flags.",
+            "Arithmetic includes ADD/ADDC, SUBB, INC/DEC, MUL AB and DIV AB.",
+            "Logical/bit instructions include ANL, ORL, XRL, CLR, CPL, SETB and rotates.",
+            "Branch/control uses SJMP/LJMP, conditional jumps, DJNZ, CJNE, CALL and RET."
+          ],
+          "formulas": [
+            "ADDC includes the carry flag: A ← A + operand + C",
+            "SUBB includes borrow through Carry: A ← A - operand - C"
+          ],
+          "tables": [
+            {
+              "title": "Addressing-mode examples",
+              "headers": [
+                "Mode",
+                "Example",
+                "Meaning"
+              ],
+              "rows": [
+                [
+                  "Immediate",
+                  "MOV A,#55H",
+                  "Load constant 55H"
+                ],
+                [
+                  "Register",
+                  "MOV A,R2",
+                  "Copy R2 to A"
+                ],
+                [
+                  "Direct",
+                  "MOV A,30H",
+                  "Read direct internal address 30H"
+                ],
+                [
+                  "Register indirect",
+                  "MOV A,@R0",
+                  "R0 contains the data address"
+                ],
+                [
+                  "Indexed/code lookup",
+                  "MOVC A,@A+DPTR",
+                  "Read code byte at DPTR+A"
+                ]
+              ]
+            },
+            {
+              "title": "Instruction groups",
+              "headers": [
+                "Group",
+                "Examples"
+              ],
+              "rows": [
+                [
+                  "Transfer",
+                  "MOV, MOVX, MOVC, PUSH, POP, XCH"
+                ],
+                [
+                  "Arithmetic",
+                  "ADD, ADDC, SUBB, INC, DEC, MUL, DIV"
+                ],
+                [
+                  "Logical",
+                  "ANL, ORL, XRL, CLR, CPL, RL/RR"
+                ],
+                [
+                  "Branch",
+                  "SJMP, LJMP, JZ/JNZ, DJNZ, CJNE, CALL, RET"
+                ],
+                [
+                  "Bit",
+                  "SETB, CLR bit, CPL bit, JB/JNB"
+                ]
+              ]
+            }
+          ],
+          "diagrams": [
+            {
+              "type": "ascii",
+              "title": "Assembly-program workflow",
+              "content": "Define I/O/data → choose registers/addresses → initialize → loop/body → test flags/counters → branch → repeat/finish"
+            }
+          ],
+          "codeExamples": [
+            {
+              "language": "asm8051",
+              "title": "Add ten bytes conceptually",
+              "code": "MOV R0,#30H     ; source start\nMOV R2,#0AH     ; count = 10\nCLR A\nLOOP: ADD A,@R0\n      INC R0\n      DJNZ R2,LOOP\nMOV 40H,A       ; store low-byte sum",
+              "explanation": "R0 points to internal RAM, R2 is the loop counter, and DJNZ combines decrement with branch. A accumulates the low-byte result."
+            },
+            {
+              "language": "asm8051",
+              "title": "Toggle all Port 1 bits",
+              "code": "MOV P1,#00H\nAGAIN: CPL P1\n       ACALL DELAY\n       SJMP AGAIN",
+              "explanation": "CPL complements the port latch. A practical DELAY subroutine determines visible toggle rate."
+            }
+          ],
+          "theory": "## Addressing modes\nAddressing mode answers: **where does the operand come from?** Immediate is a constant, register uses Rn, direct identifies an address/SFR, indirect obtains an address through a register, and indexed addressing is useful for code-memory tables.\n\n## Instruction selection\nWrite the desired state change in plain language first. For example, ‘decrement count and repeat while non-zero’ maps naturally to **DJNZ**. ‘Compare two bytes and jump if not equal’ maps to **CJNE**.\n\n## Flags\nCarry matters for multi-byte arithmetic. ADDC propagates carry from a lower byte; SUBB incorporates borrow. Overflow is a signed-arithmetic signal and must not be confused with Carry.\n\n## Program structure\nEmbedded assembly usually has an initialization section followed by an infinite control loop and optional subroutines/interrupt service routines. Preserve registers when a subroutine/ISR could destroy values the caller still needs.",
+          "commonMistakes": [
+            "Omitting # for an immediate constant",
+            "Confusing direct address 30H with immediate #30H",
+            "Using ADD when multi-byte addition needs ADDC on higher bytes",
+            "Creating a loop without initializing its counter"
+          ],
+          "examTips": [
+            "State the addressing mode beside example instructions",
+            "Comment assembly lines so the examiner can follow data flow",
+            "For multi-byte arithmetic, explicitly show carry handling",
+            "Dry-run loops in a small register/memory table"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "MOV A,#30H uses which addressing mode?",
+              "options": [
+                "Direct",
+                "Immediate",
+                "Register indirect",
+                "Indexed"
+              ],
+              "answer": 1,
+              "explanation": "# marks a literal immediate constant."
+            },
+            {
+              "question": "Which instruction is convenient for a counted loop?",
+              "options": [
+                "NOP",
+                "DJNZ",
+                "MUL",
+                "XCH"
+              ],
+              "answer": 1,
+              "explanation": "DJNZ decrements an operand and jumps while it remains non-zero."
+            },
+            {
+              "question": "Which instruction adds an operand plus the Carry flag?",
+              "options": [
+                "ADD",
+                "ADDC",
+                "SUBB",
+                "INC"
+              ],
+              "answer": 1,
+              "explanation": "ADDC is used to propagate carry in multi-byte addition."
+            }
+          ],
+          "workedExamples": [
+            {
+              "title": "16-bit addition strategy",
+              "problem": "Add low and high bytes of two 16-bit values.",
+              "solution": "Clear C; ADD the low bytes and store result; load a high byte and use ADDC with the other high byte; store high result.",
+              "explanation": "The Carry from low-byte addition must enter the high-byte calculation."
+            }
+          ],
+          "revisionSummary": "Learn addressing modes by syntax, then memorize instruction families. # means immediate, @ means indirect, DJNZ is ideal for loops, and ADDC/SUBB are essential when Carry/borrow must propagate.",
+          "cheatSheet": [
+            "#data = immediate",
+            "Rn = register",
+            "direct = address/SFR",
+            "@R0/@R1 = indirect",
+            "DJNZ = decrement & jump",
+            "ADDC uses Carry",
+            "CJNE compares and jumps if not equal"
+          ],
+          "flashcards": [
+            {
+              "front": "Meaning of # in 8051 assembly?",
+              "back": "Immediate constant."
+            },
+            {
+              "front": "What does DJNZ do?",
+              "back": "Decrements its operand and jumps if the result is not zero."
+            },
+            {
+              "front": "Why use ADDC on high bytes?",
+              "back": "To include Carry produced by the lower-byte addition."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Differentiate MOV A,30H and MOV A,#30H.",
+              "modelAnswer": "MOV A,30H loads A from direct address 30H. MOV A,#30H loads the literal value 30H."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "title": "8051 Interrupts & Interfacing",
+      "weightage": 15,
+      "lessons": [
+        {
+          "slug": "8051-interrupts-timers-and-device-interfacing",
+          "title": "8051 Interrupts, Timers and Peripheral Interfacing",
+          "durationMin": 60,
+          "difficulty": "hard",
+          "overview": "Interrupts let the 8051 respond to events without continuously polling. Interfacing connects the controller to real devices such as LEDs, switches, displays and converters. Good designs combine correct SFR configuration with safe electrical connections.",
+          "objectives": [
+            "Explain interrupt sources and vectors",
+            "Describe interrupt enable/priority concepts",
+            "Use timers for delays/counting",
+            "Explain typical LED, switch, display and ADC/DAC interfacing"
+          ],
+          "prerequisites": [
+            "8051 architecture",
+            "Assembly programming",
+            "Basic electronics"
+          ],
+          "keyConcepts": [
+            "Classic 8051 interrupt sources include external INT0, Timer0, external INT1, Timer1 and the serial port.",
+            "An interrupt vector is the fixed code address to which the CPU branches when an accepted interrupt occurs.",
+            "IE enables global/individual interrupts; IP controls basic priority selection.",
+            "Timers can count internal machine-cycle ticks or external events depending on configuration.",
+            "Interfacing requires correct voltage/current levels; a GPIO pin must not directly drive loads beyond its rating.",
+            "Switches often need pull resistors and debouncing; displays may need current-limiting resistors or driver ICs."
+          ],
+          "formulas": [
+            "Timer overflow interval = counts × timer tick period",
+            "For an n-bit timer, full-range counts = 2^n"
+          ],
+          "tables": [
+            {
+              "title": "Classic 8051 interrupt order/vectors",
+              "headers": [
+                "Source",
+                "Common vector"
+              ],
+              "rows": [
+                [
+                  "External INT0",
+                  "0003H"
+                ],
+                [
+                  "Timer0",
+                  "000BH"
+                ],
+                [
+                  "External INT1",
+                  "0013H"
+                ],
+                [
+                  "Timer1",
+                  "001BH"
+                ],
+                [
+                  "Serial",
+                  "0023H"
+                ]
+              ]
+            },
+            {
+              "title": "Interfacing checklist",
+              "headers": [
+                "Device",
+                "Key consideration"
+              ],
+              "rows": [
+                [
+                  "LED",
+                  "Current-limiting resistor / drive capability"
+                ],
+                [
+                  "Push button",
+                  "Pull-up/down + debounce"
+                ],
+                [
+                  "7-segment",
+                  "Segment current + common-anode/cathode logic"
+                ],
+                [
+                  "LCD",
+                  "Control/data timing and initialization"
+                ],
+                [
+                  "ADC",
+                  "Reference/range + conversion timing"
+                ],
+                [
+                  "Relay/motor",
+                  "Transistor/driver and flyback protection"
+                ]
+              ]
+            }
+          ],
+          "diagrams": [
+            {
+              "type": "ascii",
+              "title": "Interrupt flow",
+              "content": "Main program → event occurs → finish current instruction → save return address → jump to vector/ISR → service event → RETI → resume main program"
+            },
+            {
+              "type": "ascii",
+              "title": "Safe high-current load interface",
+              "content": "8051 pin → resistor → transistor/driver → relay/load\n                              ↑\n                       flyback diode for coils\nNever drive a relay coil directly from a GPIO pin."
+            }
+          ],
+          "codeExamples": [
+            {
+              "language": "asm8051",
+              "title": "External interrupt structure (concept)",
+              "code": "ORG 0000H\nLJMP START\nORG 0003H       ; INT0 vector\nLJMP INT0_ISR\n\nSTART:\n  SETB EA       ; global enable\n  SETB EX0      ; enable INT0\nMAIN: SJMP MAIN\n\nINT0_ISR:\n  CPL P1.0      ; example action\n  RETI",
+              "explanation": "The vector jumps to a dedicated ISR. RETI returns from interrupt and signals completion to the interrupt system."
+            }
+          ],
+          "theory": "## Why interrupts\nPolling repeatedly asks a device whether an event occurred, consuming CPU time. Interrupts allow normal code to run until hardware requests attention. The CPU completes the current instruction, saves the return location, branches to the vector and runs an **ISR**.\n\n## ISR rules\nKeep an ISR short. Save/restore registers if the ISR modifies values used by the main program. Clear/acknowledge the event when required, and return with **RETI**, not ordinary RET.\n\n## Timers\nTimer configuration selects operating mode and whether the source is the internal clock path or an external pin. To create a delay, calculate required counts, preload the timer if necessary, start it, then detect overflow by polling or interrupt.\n\n## Hardware interfacing\nDigital logic correctness is not enough: check current, voltage, pull-ups, grounding and protection. Inductive loads need a driver and flyback diode. Mechanical switches bounce and may require hardware or software debounce.",
+          "commonMistakes": [
+            "Using RET instead of RETI at the end of an ISR",
+            "Enabling an individual interrupt but forgetting global EA",
+            "Driving relay/motor loads directly from a port pin",
+            "Ignoring switch bounce",
+            "Using timer reload values without checking clock/tick assumptions"
+          ],
+          "examTips": [
+            "Draw interrupt flow plus vector table",
+            "Mention EA when explaining interrupt enable",
+            "For timer numericals, state the assumed oscillator/timer tick before calculating",
+            "In interfacing diagrams include driver/current-limiting components, not only signal wires"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which instruction should normally end an 8051 interrupt service routine?",
+              "options": [
+                "RET",
+                "RETI",
+                "SJMP",
+                "NOP"
+              ],
+              "answer": 1,
+              "explanation": "RETI returns and informs the interrupt controller that interrupt servicing is complete."
+            },
+            {
+              "question": "Which bit/function enables interrupts globally?",
+              "options": [
+                "EA",
+                "TR0",
+                "RI",
+                "CY"
+              ],
+              "answer": 0,
+              "explanation": "EA is the global interrupt enable control."
+            },
+            {
+              "question": "Why should a relay coil not be driven directly from a GPIO pin?",
+              "options": [
+                "It stores no data",
+                "It may require excessive current and generates inductive kickback",
+                "It has no clock",
+                "It is digital"
+              ],
+              "answer": 1,
+              "explanation": "A transistor/driver and flyback protection are normally required."
+            }
+          ],
+          "workedExamples": [
+            {
+              "title": "Timer-delay planning",
+              "problem": "A timer tick is 1 µs and a delay of 10 ms is needed. How many counts are required?",
+              "solution": "10 ms / 1 µs = 10,000 counts.",
+              "explanation": "Then choose a timer mode and preload value compatible with its count range."
+            }
+          ],
+          "revisionSummary": "Interrupts replace constant polling for important events. Know the five classic sources/vectors, EA/IE/IP concepts, RETI, timer-count logic, and safe electrical interfacing practices.",
+          "cheatSheet": [
+            "INT0 0003H",
+            "T0 000BH",
+            "INT1 0013H",
+            "T1 001BH",
+            "Serial 0023H",
+            "ISR ends with RETI",
+            "EA = global enable",
+            "Loads may need drivers/protection"
+          ],
+          "flashcards": [
+            {
+              "front": "INT0 vector?",
+              "back": "0003H."
+            },
+            {
+              "front": "ISR return instruction?",
+              "back": "RETI."
+            },
+            {
+              "front": "Why debounce a switch?",
+              "back": "Mechanical contacts can create multiple rapid transitions for one press."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Polling vs interrupt?",
+              "modelAnswer": "Polling repeatedly checks status in software; an interrupt asynchronously requests CPU service only when an event occurs, allowing useful work between events."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "Digital Techniques & Microcontroller: begin with gates/Boolean algebra, then combinational blocks, sequential memory, 8051 architecture, assembly addressing/instructions, and finally interrupts/interfacing. The exam-friendly sequence is truth table → equation → circuit for digital logic, and block/register → instruction → program flow for 8051.",
+  "vivaBank": [
+    {
+      "marks": 2,
+      "question": "Why is a NAND gate universal?",
+      "modelAnswer": "Any Boolean function can be constructed using only NAND gates because NAND can implement NOT, AND and OR."
+    },
+    {
+      "marks": 2,
+      "question": "Why is a synchronous counter faster than a ripple counter?",
+      "modelAnswer": "All flip-flops receive the same clock, so clock-to-clock ripple propagation through each stage is avoided."
+    },
+    {
+      "marks": 2,
+      "question": "What is DPTR?",
+      "modelAnswer": "A 16-bit Data Pointer register (DPH:DPL) used for table/external data addressing."
+    }
+  ]
+}
