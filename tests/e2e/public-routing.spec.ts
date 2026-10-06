@@ -13,7 +13,7 @@ for (const path of publicPaths) {
 test('dashboard stays protected and redirects cleanly to sign in', async ({ page }) => {
   await page.goto('/dashboard')
   await expect(page).toHaveURL(/\/sign-in\?callbackUrl=/)
-  await expect(page.getByRole('heading', { name: /welcome back/i })).toBeVisible()
+  await expect(page.getByRole('heading', { name: /sign in to lernio/i })).toBeVisible()
 })
 
 test('manifest and sitemap stay public', async ({ request }) => {
