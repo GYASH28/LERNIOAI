@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { getCurrentUser } from '@/lib/auth'
+import { resolveRuntimeAuthUrl } from '@/lib/auth-policy'
 import { CinematicIntro } from '@/components/marketing/cinematic-intro'
 import { LandingMotionController } from '@/components/marketing/landing-motion-controller'
 import { PublicHeader } from '@/components/marketing/public-header'
@@ -17,7 +18,14 @@ import { FAQ } from '@/components/marketing/faq'
 import { FinalCTA } from '@/components/marketing/final-cta'
 import { PublicFooter } from '@/components/marketing/public-footer'
 
-const SITE_URL = process.env.NEXTAUTH_URL?.replace(/\/$/, '') || 'https://lernioai.vercel.app'
+const SITE_URL =
+  resolveRuntimeAuthUrl({
+    configuredUrl: process.env.NEXTAUTH_URL,
+    appUrl: process.env.LERNIO_APP_URL,
+    vercelEnv: process.env.VERCEL_ENV,
+    vercelUrl: process.env.VERCEL_URL,
+    vercelProjectProductionUrl: process.env.VERCEL_PROJECT_PRODUCTION_URL,
+  }) ?? 'https://lernioai.vercel.app'
 
 // Landing page — force-dynamic is safer for client components (CinematicIntro
 // uses sessionStorage/window). The page is fast enough without static caching.
