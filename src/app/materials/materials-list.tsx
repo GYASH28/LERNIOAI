@@ -14,17 +14,24 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 
-interface PdfResource {
+export interface MaterialLessonLink {
+  slug: string
+  title: string
+  unitNumber: number
+  unitTitle: string
+}
+
+export interface MaterialSubject {
   code: string
   name: string
   semester: number
   credits: number
   category: string
-  url: string
-  hasDetailedNotes: boolean
+  url: string | null
+  lessons: MaterialLessonLink[]
 }
 
-export function MaterialsList({ pdfs }: { pdfs: PdfResource[] }) {
+export function MaterialsList({ pdfs }: { pdfs: MaterialSubject[] }) {
   const [search, setSearch] = useState('')
   const [semesterFilter, setSemesterFilter] = useState<number | null>(null)
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null)
@@ -42,7 +49,7 @@ export function MaterialsList({ pdfs }: { pdfs: PdfResource[] }) {
   }, [pdfs, search, semesterFilter])
 
   const bySemester = useMemo(() => {
-    const groups: Record<number, PdfResource[]> = {}
+    const groups: Record<number, MaterialSubject[]> = {}
     filtered.forEach(p => {
       if (!groups[p.semester]) groups[p.semester] = []
       groups[p.semester].push(p)
@@ -67,8 +74,8 @@ export function MaterialsList({ pdfs }: { pdfs: PdfResource[] }) {
       )
     }
 
-    const topics = generateTopics(subject.name, subject.code)
-    const lessonCount = topics.length
+    const lessonCount = subject.lessons.length
+    const hasDetailedNotes = lessonCount > 0
 
     return (
       <div className="materials-detail">
@@ -105,7 +112,7 @@ export function MaterialsList({ pdfs }: { pdfs: PdfResource[] }) {
                   <BookOpen className="h-3 w-3" />
                   {lessonCount} lessons
                 </span>
-                {subject.hasDetailedNotes && (
+                {hasDetailedNotes && (
                   <span className="materials-detail__meta-item" style={{ background: 'color-mix(in oklch, #10b981 15%, transparent)', color: '#059669', border: 'none' }}>
                     <Sparkles className="h-3 w-3" />
                     Detailed notes
@@ -116,51 +123,72 @@ export function MaterialsList({ pdfs }: { pdfs: PdfResource[] }) {
           </div>
         </div>
 
-        {/* Lessons & Topics — each is a clickable link */}
+        {/* Detailed lesson notes — only render routes that actually exist. */}
         <div className="materials-section">
           <div className="materials-section__header">
             <div className="materials-section__icon">
               <BookOpen className="h-4 w-4" />
             </div>
-            <h3 className="materials-section__title">Lessons &amp; Topics — Click to Open Interactive Notes</h3>
+            <h3 className="materials-section__title">
+              {hasDetailedNotes ? 'Interactive Notes' : 'Study Resource'}
+            </h3>
           </div>
           <div className="materials-section__body">
-            {topics.map((topic, i) => {
-              const slug = topic.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80)
-              const lessonHref = `/materials/lesson/${subject.code}/${slug}`
-              return (
+            {hasDetailedNotes ? (
+              subject.lessons.map((lesson, index) => (
                 <Link
-                  key={i}
-                  href={lessonHref}
+                  key={lesson.slug}
+                  href={`/materials/lesson/${subject.code}/${lesson.slug}`}
                   className="materials-lesson"
                 >
-                  <span className="materials-lesson__number">{i + 1}</span>
+                  <span className="materials-lesson__number">{index + 1}</span>
                   <div className="materials-lesson__info">
-                    <p className="materials-lesson__title">{topic}</p>
+                    <p className="materials-lesson__title">{lesson.title}</p>
                     <p className="materials-lesson__hint">
-                      Lesson {i + 1} · Click to open the interactive textbook page
+                      Unit {lesson.unitNumber}: {lesson.unitTitle} · Open detailed notes
                     </p>
                   </div>
                   <ChevronRight className="h-4 w-4 text-muted-foreground shrink-0" />
                 </Link>
-              )
-            })}
+              ))
+            ) : (
+              <div className="rounded-xl border border-dashed border-border bg-muted/30 p-5">
+                <p className="text-sm font-semibold text-foreground">PDF study guide available</p>
+                <p className="mt-1 text-sm leading-6 text-muted-foreground">
+                  This resource does not have a structured interactive lesson deck yet, so Lernio
+                  will not send you to a broken lesson route. Use the verified PDF below.
+                </p>
+              </div>
+            )}
           </div>
         </div>
 
         {/* Quick actions grid */}
         <div className="grid gap-3 sm:grid-cols-2">
-          {/* Download PDF */}
-          <a href={subject.url} className="materials-download">
-            <div className="materials-download__icon">
-              <FileText className="h-5 w-5" />
+          {/* Download PDF when a real PDF exists. */}
+          {subject.url ? (
+            <a href={subject.url} className="materials-download" download>
+              <div className="materials-download__icon">
+                <FileText className="h-5 w-5" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="materials-download__title">Complete Study Notes (PDF)</p>
+                <p className="materials-download__hint">Download the subject study guide</p>
+              </div>
+              <Download className="h-4 w-4 text-muted-foreground shrink-0" />
+            </a>
+          ) : (
+            <div className="materials-download" aria-label="Interactive notes available">
+              <div className="materials-download__icon">
+                <BookOpen className="h-5 w-5" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="materials-download__title">Interactive notes available</p>
+                <p className="materials-download__hint">Use the detailed lessons above</p>
+              </div>
+              <Sparkles className="h-4 w-4 text-primary shrink-0" />
             </div>
-            <div className="min-w-0 flex-1">
-              <p className="materials-download__title">Complete Study Notes (PDF)</p>
-              <p className="materials-download__hint">All topics in one document · Download</p>
-            </div>
-            <Download className="h-4 w-4 text-muted-foreground shrink-0" />
-          </a>
+          )}
 
           {/* Practice Quiz */}
           <Link
@@ -252,7 +280,7 @@ export function MaterialsList({ pdfs }: { pdfs: PdfResource[] }) {
                       <span>{pdf.code}</span>
                       <span>·</span>
                       <span>{pdf.credits} credits</span>
-                      {pdf.hasDetailedNotes && (
+                      {pdf.lessons.length > 0 && (
                         <span className="subject-card__badge">Detailed</span>
                       )}
                     </div>
@@ -266,125 +294,4 @@ export function MaterialsList({ pdfs }: { pdfs: PdfResource[] }) {
       )}
     </div>
   )
-}
-
-/**
- * Generate topic list from subject name.
- * Each subject gets a lesson-level structure for the materials page.
- */
-function generateTopics(subjectName: string, _subjectCode: string): string[] {
-  const TOPIC_MAP: Record<string, string[]> = {
-    'Data Structures': [
-      'Introduction to Data Structures',
-      'Arrays and Dynamic Arrays',
-      'Linked Lists (Singly, Doubly, Circular)',
-      'Stacks and Applications',
-      'Queues and Priority Queues',
-      'Trees — Binary Trees',
-      'Binary Search Trees (BST)',
-      'AVL Trees and Rotations',
-      'Heaps and Heap Sort',
-      'Hash Tables and Collision Resolution',
-      'Graphs — Representation',
-      'Depth-First Search (DFS)',
-      'Breadth-First Search (BFS)',
-      'Sorting Algorithms',
-      'Searching Algorithms',
-      'Dynamic Programming Basics',
-      'Time and Space Complexity Analysis',
-    ],
-    'Object Oriented Programming with C++': [
-      'Introduction to OOP Concepts',
-      'C++ Basics and Syntax',
-      'Classes and Objects',
-      'Constructors and Destructors',
-      'Encapsulation and Access Specifiers',
-      'Inheritance — Single, Multiple, Multilevel',
-      'Polymorphism — Function Overloading',
-      'Operator Overloading',
-      'Virtual Functions and Runtime Polymorphism',
-      'Templates — Function and Class Templates',
-      'Exception Handling',
-      'STL — Containers, Iterators, Algorithms',
-      'File Handling in C++',
-      'Memory Management — new and delete',
-      'Namespaces and Scope Resolution',
-    ],
-    'Programming in C': [
-      'Introduction to C Programming',
-      'Data Types, Variables, and Constants',
-      'Operators and Expressions',
-      'Input and Output Functions',
-      'Control Structures — if, switch, loops',
-      'Arrays — One and Two Dimensional',
-      'Strings and String Functions',
-      'Functions and Recursion',
-      'Pointers — Basics and Arithmetic',
-      'Pointers and Arrays',
-      'Dynamic Memory Allocation',
-      'Structures and Unions',
-      'File Handling in C',
-      'Preprocessor Directives',
-      'Command Line Arguments',
-    ],
-    'Database Management System': [
-      'Introduction to DBMS',
-      'Database Models and Architecture',
-      'Entity-Relationship Model',
-      'Relational Model and Constraints',
-      'Normalization — 1NF, 2NF, 3NF, BCNF',
-      'SQL — DDL, DML, DCL Commands',
-      'SQL Queries and Joins',
-      'Transactions and ACID Properties',
-      'Concurrency Control and Locking',
-      'Indexing and Hashing',
-      'Database Security',
-      'NoSQL Databases Overview',
-    ],
-    'Operating System': [
-      'Introduction to Operating Systems',
-      'Process Management and Scheduling',
-      'Threads and Multithreading',
-      'CPU Scheduling Algorithms',
-      'Process Synchronization',
-      'Inter-Process Communication (IPC)',
-      'Deadlocks — Prevention and Avoidance',
-      'Memory Management',
-      'Paging and Segmentation',
-      'Virtual Memory and Page Replacement',
-      'File System Management',
-      'Disk Scheduling Algorithms',
-      'Linux Commands and Shell Scripting',
-    ],
-    'Computer Networks': [
-      'Introduction to Computer Networks',
-      'OSI Model — 7 Layers',
-      'TCP/IP Model',
-      'Physical Layer — Transmission Media',
-      'Data Link Layer — Framing, Error Detection',
-      'MAC Layer — Multiple Access Protocols',
-      'Network Layer — IP Addressing, Subnetting',
-      'Routing Algorithms',
-      'Transport Layer — TCP and UDP',
-      'Session and Presentation Layers',
-      'Application Layer — HTTP, DNS, SMTP, FTP',
-      'Network Security — Firewalls, VPN',
-    ],
-  }
-
-  if (TOPIC_MAP[subjectName]) return TOPIC_MAP[subjectName]
-
-  // Generic topics for unknown subjects
-  return [
-    'Introduction and Overview',
-    'Fundamental Concepts',
-    'Key Terminology',
-    'Core Principles',
-    'Practical Applications',
-    'Common Algorithms/Methods',
-    'Advanced Topics',
-    'Problem-Solving Techniques',
-    'Exam Important Points',
-    'Summary and Key Takeaways',
-  ]
 }
