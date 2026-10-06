@@ -10,6 +10,45 @@ const NOTES_DIR = join(process.cwd(), 'content', 'lesson-notes')
 
 let cache: Map<string, SubjectNotes> | null = null
 
+const SUBJECT_NOTE_ALIASES: Record<
+  string,
+  { sourceCode: string; subjectName: string; semester: number; credits: number }
+> = {
+  // CIoT Semester 3 subjects whose verified unit structure matches the
+  // corresponding Computer Engineering R23 subject. Keep this explicit so
+  // curriculum differences never get hidden behind fuzzy code matching.
+  R23CI2602: {
+    sourceCode: 'R23CP2402',
+    subjectName: 'Data Structures',
+    semester: 3,
+    credits: 4,
+  },
+  R23CI6604: {
+    sourceCode: 'R23CP6404',
+    subjectName: 'Object Oriented Programming With C++',
+    semester: 3,
+    credits: 3,
+  },
+  R23CI2605: {
+    sourceCode: 'R23CP2405',
+    subjectName: 'User Interface Programming',
+    semester: 3,
+    credits: 2,
+  },
+  R23CI1602: {
+    sourceCode: 'R23CP1402',
+    subjectName: 'Animation Techniques',
+    semester: 3,
+    credits: 4,
+  },
+  R23CI4602: {
+    sourceCode: 'R23CP4402',
+    subjectName: 'Indian Constitution',
+    semester: 3,
+    credits: 1,
+  },
+}
+
 export interface PracticeQuestion {
   question: string
   options: string[]
@@ -165,15 +204,31 @@ function loadAllNotes(): Map<string, SubjectNotes> {
  */
 export function getSubjectNotes(subjectCode: string): SubjectNotes | null {
   const notes = loadAllNotes()
-  return notes.get(subjectCode) ?? null
+  const direct = notes.get(subjectCode)
+  if (direct) return direct
+
+  const alias = SUBJECT_NOTE_ALIASES[subjectCode]
+  if (!alias) return null
+  const source = notes.get(alias.sourceCode)
+  if (!source) return null
+
+  return {
+    ...source,
+    subjectCode,
+    subjectName: alias.subjectName,
+    semester: alias.semester,
+    credits: alias.credits,
+  }
 }
 
 /**
  * Get all subjects that have lesson notes available.
  */
 export function getAvailableNotesSubjects(): { code: string; name: string }[] {
-  const notes = loadAllNotes()
-  return Array.from(notes.values()).map((n) => ({ code: n.subjectCode, name: n.subjectName }))
+  return getAvailableSubjectNotes().map((notes) => ({
+    code: notes.subjectCode,
+    name: notes.subjectName,
+  }))
 }
 
 /**
@@ -181,9 +236,25 @@ export function getAvailableNotesSubjects(): { code: string; name: string }[] {
  * A shallow copy keeps callers from mutating the cached map values.
  */
 export function getAvailableSubjectNotes(): SubjectNotes[] {
-  return Array.from(loadAllNotes().values())
-    .slice()
-    .sort((a, b) => a.semester - b.semester || a.subjectCode.localeCompare(b.subjectCode))
+  const notes = loadAllNotes()
+  const available = Array.from(notes.values())
+
+  for (const [subjectCode, alias] of Object.entries(SUBJECT_NOTE_ALIASES)) {
+    if (notes.has(subjectCode)) continue
+    const source = notes.get(alias.sourceCode)
+    if (!source) continue
+    available.push({
+      ...source,
+      subjectCode,
+      subjectName: alias.subjectName,
+      semester: alias.semester,
+      credits: alias.credits,
+    })
+  }
+
+  return available.sort(
+    (a, b) => a.semester - b.semester || a.subjectCode.localeCompare(b.subjectCode),
+  )
 }
 
 /**
