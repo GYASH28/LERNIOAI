@@ -134,7 +134,7 @@ const totals = {
   underdeveloped: subjects.reduce((sum, row) => sum + row.underdeveloped, 0),
   templated: subjects.reduce((sum, row) => sum + row.templated, 0),
   approvedDirectVideoRecords: reviewedVideos,
-  editorReviewedSubjects: subjects.filter((s) => EDITORIALLY_REWRITTEN_SUBJECTS.has(s.code)).length,
+  rewrittenSubjects: subjects.filter((s) => EDITORIALLY_REWRITTEN_SUBJECTS.has(s.code)).length,
 }
 console.log('\nLernio Notes & Materials Quality Audit')
 console.log('=====================================')
