@@ -254,7 +254,7 @@ export function MaterialsLessonRenderer({
         </div>
       )}
 
-      {/* AI Toolbar */
+      {/* AI Toolbar */}
       <AINotesToolbar
         subjectName={subject.subjectName}
         lessonTitle={lesson.title}
