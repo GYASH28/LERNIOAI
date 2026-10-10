@@ -64,7 +64,7 @@ export interface ThemePreferences {
 }
 
 export const DEFAULT_THEME_PREFS: ThemePreferences = {
-  appearance: 'system',
+  appearance: 'light',
   palette: 'aurora',
   contrast: 'normal',
   density: 'comfortable',
@@ -77,7 +77,7 @@ export const DEFAULT_THEME_PREFS: ThemePreferences = {
   soundEnabled: false,
   hideMascotsInExams: true,
   // Derived aliases — kept in sync by the ThemeProvider.
-  theme: 'system',
+  theme: 'light',
   reducedMotion: false,
 }
 
