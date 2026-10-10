@@ -1,0 +1,1007 @@
+{
+  "subjectCode": "R23CI2604",
+  "subjectName": "Internet of Things and Applications (IoTA)",
+  "semester": 3,
+  "credits": 3,
+  "units": [
+    {
+      "number": 1,
+      "title": "Introduction to IoT",
+      "weightage": 14,
+      "lessons": [
+        {
+          "slug": "iot-fundamentals-architecture-and-data-flow",
+          "title": "IoT Fundamentals, Architecture and Data Flow",
+          "durationMin": 40,
+          "difficulty": "easy",
+          "overview": "The Internet of Things (IoT) connects physical devices that sense, compute and exchange data so useful actions can be taken. A useful IoT solution is not just a sensor or an app: it is the complete path from a real-world event to measurement, communication, processing, and a decision.",
+          "objectives": [
+            "Explain: Thing/device: a physical object with sensing, control or communication capability.",
+            "Explain: Sensor measures a physical quantity such as temperature, light or moisture; actuator changes the physical environment, such as opening a valve.",
+            "Explain: Device → network/gateway → processing/storage → dashboard/automation is a common end-to-end flow.",
+            "Explain: An edge device processes data near the sensor; cloud services collect data for remote access and larger-scale analytics."
+          ],
+          "prerequisites": [
+            "Understanding of the prior unit and basic computer/electronics concepts"
+          ],
+          "keyConcepts": [
+            "Thing/device: a physical object with sensing, control or communication capability.",
+            "Sensor measures a physical quantity such as temperature, light or moisture; actuator changes the physical environment, such as opening a valve.",
+            "Device → network/gateway → processing/storage → dashboard/automation is a common end-to-end flow.",
+            "An edge device processes data near the sensor; cloud services collect data for remote access and larger-scale analytics.",
+            "Publish/subscribe decouples senders and receivers; request/response is an alternative communication pattern.",
+            "IoT design must consider power, connectivity, security, reliability, latency and maintenance from the beginning."
+          ],
+          "formulas": [
+            "Measurement-to-action loop: sense → validate → transmit → decide → act → confirm"
+          ],
+          "tables": [
+            {
+              "title": "Core IoT building blocks",
+              "headers": [
+                "Block",
+                "Example",
+                "Purpose"
+              ],
+              "rows": [
+                [
+                  "Sensor",
+                  "Temperature probe",
+                  "Read a physical variable"
+                ],
+                [
+                  "Controller",
+                  "ESP32/Raspberry Pi",
+                  "Process readings and run logic"
+                ],
+                [
+                  "Connectivity",
+                  "Wi-Fi/LoRa/BLE",
+                  "Carry data"
+                ],
+                [
+                  "Gateway",
+                  "Home router/edge gateway",
+                  "Bridge networks"
+                ],
+                [
+                  "Platform",
+                  "MQTT broker/database",
+                  "Route/store information"
+                ],
+                [
+                  "Application",
+                  "Dashboard/alert",
+                  "Present results and trigger decisions"
+                ]
+              ]
+            }
+          ],
+          "diagrams": [
+            {
+              "type": "ascii",
+              "title": "IoT Fundamentals, Architecture and Data Flow — labelled system diagram",
+              "content": "Physical process → Sensor → Controller → Network / Gateway\n                                  ↓\n                             Edge decision\nCloud / database ← Network → Dashboard → Alert / Actuator"
+            }
+          ],
+          "codeExamples": [],
+          "commonMistakes": [
+            "Assuming internet connectivity is always guaranteed",
+            "Calling a sensor alone a complete IoT solution",
+            "Sending raw sensitive data to a public endpoint without authentication"
+          ],
+          "examTips": [
+            "Draw all functional layers in the exam",
+            "Use a complete real-world example",
+            "State what happens when Wi-Fi or power fails"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which part changes the real world after a control decision?",
+              "options": [
+                "Sensor",
+                "Actuator",
+                "Database",
+                "Dashboard"
+              ],
+              "answer": 1,
+              "explanation": "An actuator performs a physical action."
+            },
+            {
+              "question": "Edge computing primarily means:",
+              "options": [
+                "Sending all data to cloud",
+                "Processing near the data source",
+                "Only storing data",
+                "Using no sensors"
+              ],
+              "answer": 1,
+              "explanation": "Edge computation happens near the device/data source."
+            }
+          ],
+          "theory": "## What makes a system IoT?\nAn ordinary electronic sensor is not automatically an IoT system. A typical IoT system has a physical process, a device reading a sensor, a communication path and a software service/application that makes measurements useful. Remote access and automatic decisions are common, but not every application requires a public cloud.\n\n## Functional layers\n**Perception/device layer** collects physical values. **Network layer** transports information using wired or wireless methods. **Processing/platform layer** validates, stores and analyses it. **Application layer** displays information and controls actions. Security and device management apply across every layer.\n\n## Example: water tank monitor\nAn ultrasonic level sensor measures the tank. A microcontroller converts the reading into a percentage and sends it over Wi-Fi. A dashboard shows the current level, while a rule issues an alert below a threshold. If an automated pump is added, a relay driver/contactor—never a GPIO pin directly—switches the pump. Add manual override and a safety cut-off.\n\n## Edge versus cloud\nEdge processing reduces communication and latency; cloud processing helps with aggregation, backups and reporting. A robust device should behave safely if the internet connection fails.",
+          "workedExamples": [
+            {
+              "title": "Apply this concept",
+              "problem": "Explain a practical system using introduction to iot.",
+              "solution": "The Internet of Things (IoT) connects physical devices that sense, compute and exchange data so useful actions can be taken. A useful IoT solution is not just a sensor or an app: it is the complete path from a real-world event to measurement, communication, processing, and a decision.",
+              "explanation": "A strong answer links the component, purpose, data flow, and a real design limitation."
+            }
+          ],
+          "revisionSummary": "IoT Fundamentals, Architecture and Data Flow: The Internet of Things (IoT) connects physical devices that sense, compute and exchange data so useful actions can be taken. A useful IoT solution is not just a sensor or an app: it is the complete path from a real-world event to measurement, communication, processing, and a decision. Review the comparison table and diagram, then explain each part in your own words.",
+          "cheatSheet": [
+            "Thing/device: a physical object with sensing, control or communication capability.",
+            "Sensor measures a physical quantity such as temperature, light or moisture; actuator changes the physical environment, such as opening a valve.",
+            "Device → network/gateway → processing/storage → dashboard/automation is a common end-to-end flow.",
+            "An edge device processes data near the sensor; cloud services collect data for remote access and larger-scale analytics.",
+            "Publish/subscribe decouples senders and receivers; request/response is an alternative communication pattern."
+          ],
+          "flashcards": [
+            {
+              "front": "Sensor versus actuator?",
+              "back": "Sensor measures; actuator acts."
+            },
+            {
+              "front": "What is an IoT gateway?",
+              "back": "A bridge that forwards/translates traffic between device networks and other services."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Sensor versus actuator?",
+              "modelAnswer": "Sensor measures; actuator acts."
+            },
+            {
+              "marks": 2,
+              "question": "What is an IoT gateway?",
+              "modelAnswer": "A bridge that forwards/translates traffic between device networks and other services."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "IoT Smart Devices & Hardware",
+      "weightage": 17,
+      "lessons": [
+        {
+          "slug": "sensors-actuators-controllers-and-safe-wiring",
+          "title": "Sensors, Actuators, Controllers and Safe Wiring",
+          "durationMin": 45,
+          "difficulty": "medium",
+          "overview": "Hardware makes an IoT idea real. Learn how sensors differ from actuators, when to choose a microcontroller or a single-board computer, and how power levels, analog signals and driver circuits affect a reliable prototype.",
+          "objectives": [
+            "Explain: Digital sensors provide already encoded data or discrete states; analog sensors produce a continuous voltage/current related to a physical quantity.",
+            "Explain: An ADC converts an analog signal into a digital representation; many microcontrollers include ADC channels, while traditional Raspberry Pi GPIO lacks built-in general-purpose analog input.",
+            "Explain: Microcontrollers such as Arduino/ESP32 run small dedicated firmware; Raspberry Pi is a Linux single-board computer suited to multitasking, networking and local services.",
+            "Explain: A transistor/MOSFET driver or relay module is needed for loads exceeding GPIO voltage/current limits."
+          ],
+          "prerequisites": [
+            "Understanding of the prior unit and basic computer/electronics concepts"
+          ],
+          "keyConcepts": [
+            "Digital sensors provide already encoded data or discrete states; analog sensors produce a continuous voltage/current related to a physical quantity.",
+            "An ADC converts an analog signal into a digital representation; many microcontrollers include ADC channels, while traditional Raspberry Pi GPIO lacks built-in general-purpose analog input.",
+            "Microcontrollers such as Arduino/ESP32 run small dedicated firmware; Raspberry Pi is a Linux single-board computer suited to multitasking, networking and local services.",
+            "A transistor/MOSFET driver or relay module is needed for loads exceeding GPIO voltage/current limits.",
+            "Power budgeting includes idle and peak current consumption, regulator efficiency and battery life.",
+            "I2C shares clock/data among addressed devices; SPI normally uses clock/data plus chip-select; UART is asynchronous point-to-point serial."
+          ],
+          "formulas": [
+            "ADC levels for an N-bit converter = 2^N",
+            "Approx. ADC step size ≈ Vref / 2^N",
+            "Power (W) = Voltage (V) × Current (A)"
+          ],
+          "tables": [
+            {
+              "title": "Microcontroller vs Raspberry Pi",
+              "headers": [
+                "Feature",
+                "Microcontroller (Arduino/ESP32)",
+                "Raspberry Pi"
+              ],
+              "rows": [
+                [
+                  "Operating model",
+                  "Firmware/bare-metal or RTOS",
+                  "Linux OS"
+                ],
+                [
+                  "Boot",
+                  "Typically fast",
+                  "OS boot"
+                ],
+                [
+                  "Power",
+                  "Usually lower",
+                  "Usually higher"
+                ],
+                [
+                  "Analog input",
+                  "Often built-in (model dependent)",
+                  "External ADC often required"
+                ],
+                [
+                  "Best fit",
+                  "Small control/low-power sensing",
+                  "Networking, camera, local processing"
+                ]
+              ]
+            }
+          ],
+          "diagrams": [
+            {
+              "type": "ascii",
+              "title": "Sensors, Actuators, Controllers and Safe Wiring — labelled system diagram",
+              "content": "Analog sensor → [Signal conditioning] → [ADC] → Controller\n                                                   | → Network\nDigital sensor ─────────────────────────────────────┘\nController GPIO → driver transistor → load (motor/relay)\n                              ↑ add protection for coils"
+            }
+          ],
+          "codeExamples": [],
+          "commonMistakes": [
+            "Connecting a 5 V output to a 3.3 V-only GPIO",
+            "Driving a motor directly from a GPIO pin",
+            "Forgetting common ground in compatible low-voltage circuits",
+            "Assuming all Raspberry Pi models include analog input"
+          ],
+          "examTips": [
+            "Label voltage levels and grounds in circuits",
+            "Discuss both functional blocks and safe driver stage",
+            "Mention calibration and fault checks"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which component is generally needed to read an analog voltage on a Raspberry Pi GPIO?",
+              "options": [
+                "DAC",
+                "External ADC",
+                "Relay",
+                "Wi-Fi router"
+              ],
+              "answer": 1,
+              "explanation": "Raspberry Pi GPIO does not provide ordinary analog conversion."
+            },
+            {
+              "question": "Which choice usually fits a simple low-power battery sensor node?",
+              "options": [
+                "Raspberry Pi desktop",
+                "Microcontroller",
+                "Monitor",
+                "Printer"
+              ],
+              "answer": 1,
+              "explanation": "Microcontrollers can sleep efficiently between small tasks."
+            }
+          ],
+          "theory": "## How to choose a controller\nUse a low-power microcontroller for simple real-time sampling/control, especially on a battery. Use a Raspberry Pi when you need Linux applications, camera processing, a local web service or more demanding computation. The best choice depends on power, boot time, performance and I/O requirements—not brand popularity.\n\n## Sensor chain\nA temperature, light or moisture measurement becomes useful after reading the sensor correctly, applying calibration if necessary, handling errors/out-of-range readings and adding units/timestamps. Analog sensors require conversion, either on the controller or an external ADC.\n\n## Electrical safety\nGPIO pins are logic signals, not power outlets. Share a reference ground when compatible, level-shift mismatched voltages, use resistors with LEDs, and use a transistor/driver plus flyback diode for inductive DC loads. For mains voltage, use a properly rated isolated module and qualified supervision; do not wire mains directly on a breadboard.\n\n## Reliability\nAdd sensor fault detection (disconnected/implausible values), watchdog/restart strategy, secure enclosures and a safe output state after power loss.",
+          "workedExamples": [
+            {
+              "title": "Apply this concept",
+              "problem": "Explain a practical system using iot smart devices & hardware.",
+              "solution": "Hardware makes an IoT idea real. Learn how sensors differ from actuators, when to choose a microcontroller or a single-board computer, and how power levels, analog signals and driver circuits affect a reliable prototype.",
+              "explanation": "A strong answer links the component, purpose, data flow, and a real design limitation."
+            }
+          ],
+          "revisionSummary": "Sensors, Actuators, Controllers and Safe Wiring: Hardware makes an IoT idea real. Learn how sensors differ from actuators, when to choose a microcontroller or a single-board computer, and how power levels, analog signals and driver circuits affect a reliable prototype. Review the comparison table and diagram, then explain each part in your own words.",
+          "cheatSheet": [
+            "Digital sensors provide already encoded data or discrete states; analog sensors produce a continuous voltage/current related to a physical quantity.",
+            "An ADC converts an analog signal into a digital representation; many microcontrollers include ADC channels, while traditional Raspberry Pi GPIO lacks built-in general-purpose analog input.",
+            "Microcontrollers such as Arduino/ESP32 run small dedicated firmware; Raspberry Pi is a Linux single-board computer suited to multitasking, networking and local services.",
+            "A transistor/MOSFET driver or relay module is needed for loads exceeding GPIO voltage/current limits.",
+            "Power budgeting includes idle and peak current consumption, regulator efficiency and battery life."
+          ],
+          "flashcards": [
+            {
+              "front": "What does an ADC do?",
+              "back": "Converts an analog voltage into a digital number."
+            },
+            {
+              "front": "Why use a driver transistor?",
+              "back": "To switch a load that requires more current/voltage than the GPIO can safely supply."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "What does an ADC do?",
+              "modelAnswer": "Converts an analog voltage into a digital number."
+            },
+            {
+              "marks": 2,
+              "question": "Why use a driver transistor?",
+              "modelAnswer": "To switch a load that requires more current/voltage than the GPIO can safely supply."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Raspberry Pi Architecture & Pin Diagram",
+      "weightage": 19,
+      "lessons": [
+        {
+          "slug": "raspberry-pi-hardware-gpio-and-pinout",
+          "title": "Raspberry Pi Architecture, GPIO and Pinout",
+          "durationMin": 50,
+          "difficulty": "medium",
+          "overview": "Raspberry Pi is a family of small Linux computers. It combines a processor, RAM, storage interfaces, USB/display/network hardware and programmable GPIO. The 40-pin header provides general I/O, power, ground and alternate interfaces, but it is important to distinguish physical pin numbers from GPIO numbering.",
+          "objectives": [
+            "Explain: SoC (System on a Chip) contains the processor and integrated controllers; memory and connectors vary between Pi models.",
+            "Explain: A standard 40-pin header includes 3.3 V and 5 V power pins, multiple ground pins, and 3.3 V-logic GPIO signals.",
+            "Explain: Physical pin number is the location on the header; BCM GPIO number names the SoC signal. They are not interchangeable.",
+            "Explain: I2C typically uses GPIO2 (SDA, physical pin 3) and GPIO3 (SCL, physical pin 5) on 40-pin Pis."
+          ],
+          "prerequisites": [
+            "Understanding of the prior unit and basic computer/electronics concepts"
+          ],
+          "keyConcepts": [
+            "SoC (System on a Chip) contains the processor and integrated controllers; memory and connectors vary between Pi models.",
+            "A standard 40-pin header includes 3.3 V and 5 V power pins, multiple ground pins, and 3.3 V-logic GPIO signals.",
+            "Physical pin number is the location on the header; BCM GPIO number names the SoC signal. They are not interchangeable.",
+            "I2C typically uses GPIO2 (SDA, physical pin 3) and GPIO3 (SCL, physical pin 5) on 40-pin Pis.",
+            "SPI0 commonly uses GPIO10 MOSI, GPIO9 MISO, GPIO11 SCLK and GPIO8 CE0.",
+            "GPIO14 TXD and GPIO15 RXD commonly provide a UART interface; alternate functions can differ by OS/model configuration."
+          ],
+          "formulas": [
+            "Logic-high voltage ≈ 3.3 V for standard Pi GPIO (not 5 V tolerant)"
+          ],
+          "tables": [
+            {
+              "title": "Useful Raspberry Pi header pins (typical 40-pin header)",
+              "headers": [
+                "Physical pin",
+                "Function",
+                "Remark"
+              ],
+              "rows": [
+                [
+                  "1",
+                  "3.3 V",
+                  "Power supply output"
+                ],
+                [
+                  "2",
+                  "5 V",
+                  "Power supply rail (not GPIO logic!)"
+                ],
+                [
+                  "3",
+                  "GPIO2 / I2C SDA",
+                  "I2C data"
+                ],
+                [
+                  "5",
+                  "GPIO3 / I2C SCL",
+                  "I2C clock"
+                ],
+                [
+                  "6",
+                  "GND",
+                  "Ground"
+                ],
+                [
+                  "8",
+                  "GPIO14 / TXD",
+                  "UART transmit"
+                ],
+                [
+                  "10",
+                  "GPIO15 / RXD",
+                  "UART receive"
+                ],
+                [
+                  "11",
+                  "GPIO17",
+                  "General digital I/O"
+                ],
+                [
+                  "19",
+                  "GPIO10 / SPI MOSI",
+                  "SPI master out"
+                ],
+                [
+                  "21",
+                  "GPIO9 / SPI MISO",
+                  "SPI master in"
+                ],
+                [
+                  "23",
+                  "GPIO11 / SPI SCLK",
+                  "SPI clock"
+                ]
+              ]
+            }
+          ],
+          "diagrams": [
+            {
+              "type": "ascii",
+              "title": "Raspberry Pi Architecture, GPIO and Pinout — labelled system diagram",
+              "content": "40-pin header (excerpt, physical positions)\n 3.3 V  [ 1] [ 2]  5 V\n GPIO2  [ 3] [ 4]  5 V\n GPIO3  [ 5] [ 6]  GND\n GPIO4  [ 7] [ 8]  GPIO14 / TXD\n GND    [ 9] [10]  GPIO15 / RXD\n GPIO17 [11] [12]  GPIO18\n (Verify exact pinout for your board revision.)"
+            }
+          ],
+          "codeExamples": [],
+          "commonMistakes": [
+            "Confusing physical pin 11 with GPIO11",
+            "Treating 5 V power pins as safe 5 V GPIO pins",
+            "Assuming GPIO analog reads work without an external ADC",
+            "Using older GPIO libraries without checking current OS/Pi compatibility"
+          ],
+          "examTips": [
+            "Draw the pin-header excerpt with physical numbers",
+            "Mention SoC + RAM + storage + I/O + networking",
+            "Compare SBC and microcontroller in a short table"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Which statement about Raspberry Pi GPIO is correct?",
+              "options": [
+                "GPIO safely accepts any 5 V signal",
+                "GPIO uses 3.3 V logic",
+                "GPIO is analog-only",
+                "All pin numbers are BCM numbers"
+              ],
+              "answer": 1,
+              "explanation": "Standard Pi GPIO is 3.3 V logic."
+            },
+            {
+              "question": "Physical pin 11 corresponds to which GPIO on the usual 40-pin header?",
+              "options": [
+                "GPIO11",
+                "GPIO17",
+                "GPIO3",
+                "GPIO1"
+              ],
+              "answer": 1,
+              "explanation": "Physical pin 11 maps to BCM GPIO17."
+            }
+          ],
+          "theory": "## Identify the parts\nOn a common Raspberry Pi board, identify the SoC, RAM, microSD boot/storage slot (model dependent), USB ports, display interface, network connector/radio, power input and GPIO header. Raspberry Pi 4 and Raspberry Pi 5 have different processors and board controllers; do not assume their performance, connectors or software interfaces are identical.\n\n## Header numbering\n**Physical pin numbering** counts positions on the 40-pin connector; **BCM numbering** names GPIO lines. For example, physical pin 11 corresponds to BCM GPIO17 on the usual 40-pin layout. Most modern Python examples use BCM chip line names.\n\n## Voltage rules\nThe GPIO input/output logic is **3.3 V** and is generally **not 5 V tolerant**. The fact that the header has 5 V supply pins does *not* mean a GPIO input can safely receive 5 V. Protect inputs using a compatible sensor or proper level shifter.\n\n## Hardware interfaces\nGPIO supports digital input/output, while I2C/SPI/UART are ways to communicate with smart sensors/modules. Model-specific pin muxing and permissions must be configured and tested. Turn power off before changing wiring.",
+          "workedExamples": [
+            {
+              "title": "Apply this concept",
+              "problem": "Explain a practical system using raspberry pi architecture & pin diagram.",
+              "solution": "Raspberry Pi is a family of small Linux computers. It combines a processor, RAM, storage interfaces, USB/display/network hardware and programmable GPIO. The 40-pin header provides general I/O, power, ground and alternate interfaces, but it is important to distinguish physical pin numbers from GPIO numbering.",
+              "explanation": "A strong answer links the component, purpose, data flow, and a real design limitation."
+            }
+          ],
+          "revisionSummary": "Raspberry Pi Architecture, GPIO and Pinout: Raspberry Pi is a family of small Linux computers. It combines a processor, RAM, storage interfaces, USB/display/network hardware and programmable GPIO. The 40-pin header provides general I/O, power, ground and alternate interfaces, but it is important to distinguish physical pin numbers from GPIO numbering. Review the comparison table and diagram, then explain each part in your own words.",
+          "cheatSheet": [
+            "SoC (System on a Chip) contains the processor and integrated controllers; memory and connectors vary between Pi models.",
+            "A standard 40-pin header includes 3.3 V and 5 V power pins, multiple ground pins, and 3.3 V-logic GPIO signals.",
+            "Physical pin number is the location on the header; BCM GPIO number names the SoC signal. They are not interchangeable.",
+            "I2C typically uses GPIO2 (SDA, physical pin 3) and GPIO3 (SCL, physical pin 5) on 40-pin Pis.",
+            "SPI0 commonly uses GPIO10 MOSI, GPIO9 MISO, GPIO11 SCLK and GPIO8 CE0."
+          ],
+          "flashcards": [
+            {
+              "front": "BCM vs physical numbering?",
+              "back": "BCM names controller GPIO lines; physical counts header positions."
+            },
+            {
+              "front": "Can Pi GPIO directly accept 5 V?",
+              "back": "No. Use a safe compatible signal or level shifter."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "BCM vs physical numbering?",
+              "modelAnswer": "BCM names controller GPIO lines; physical counts header positions."
+            },
+            {
+              "marks": 2,
+              "question": "Can Pi GPIO directly accept 5 V?",
+              "modelAnswer": "No. Use a safe compatible signal or level shifter."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Raspberry Pi Programming with Python",
+      "weightage": 17,
+      "lessons": [
+        {
+          "slug": "raspberry-pi-python-gpio-and-sensor-programming",
+          "title": "Raspberry Pi Python: GPIO, Sensors and Automation",
+          "durationMin": 55,
+          "difficulty": "medium",
+          "overview": "Python makes GPIO and network automation accessible. Practice the entire loop: set up pin modes, read inputs, debounce/validate, control outputs and clean up on exit. Libraries depend on your Raspberry Pi OS and hardware generation, so check compatibility rather than copying old examples blindly.",
+          "objectives": [
+            "Explain: gpiozero provides high-level device classes such as LED, Button and common sensor abstractions.",
+            "Explain: A pin used as an output must be configured correctly and wired to a safe current-limited circuit.",
+            "Explain: Polling checks inputs repeatedly; callbacks/event handlers respond when input events occur.",
+            "Explain: Debouncing filters repeated transitions from mechanical contacts."
+          ],
+          "prerequisites": [
+            "Understanding of the prior unit and basic computer/electronics concepts"
+          ],
+          "keyConcepts": [
+            "gpiozero provides high-level device classes such as LED, Button and common sensor abstractions.",
+            "A pin used as an output must be configured correctly and wired to a safe current-limited circuit.",
+            "Polling checks inputs repeatedly; callbacks/event handlers respond when input events occur.",
+            "Debouncing filters repeated transitions from mechanical contacts.",
+            "try/finally and context managers are helpful for resetting outputs on program exit.",
+            "Logs with timestamps and sensor units help troubleshoot an IoT setup."
+          ],
+          "formulas": [
+            "Sampling period (s) = 1 / sampling rate (Hz)"
+          ],
+          "tables": [
+            {
+              "title": "Python control concepts",
+              "headers": [
+                "Concept",
+                "Meaning",
+                "Use"
+              ],
+              "rows": [
+                [
+                  "GPIO input",
+                  "Read a pin",
+                  "Button/sensor trigger"
+                ],
+                [
+                  "GPIO output",
+                  "Set a pin level",
+                  "LED/driver control"
+                ],
+                [
+                  "Polling",
+                  "Check state in a loop",
+                  "Simple periodic reads"
+                ],
+                [
+                  "Callback",
+                  "Run when event occurs",
+                  "Responsive button handling"
+                ],
+                [
+                  "Exception handling",
+                  "Catch I/O failures",
+                  "Recover/exit safely"
+                ],
+                [
+                  "Logging",
+                  "Record events/errors",
+                  "Diagnostics"
+                ]
+              ]
+            }
+          ],
+          "diagrams": [
+            {
+              "type": "ascii",
+              "title": "Raspberry Pi Python: GPIO, Sensors and Automation — labelled system diagram",
+              "content": "Start → Configure pins → Read sensor / wait for event\n   ↓                          ↓\nSet safe defaults       Validate measurement\n   ↓                          ↓\nOn event → Decide output → Control actuator/log → Repeat\n                        ↓\n               On exit: safe cleanup"
+            }
+          ],
+          "codeExamples": [
+            {
+              "language": "python",
+              "title": "Button controls an LED (gpiozero)",
+              "code": "from gpiozero import LED, Button\nfrom signal import pause\n\nled = LED(17)         # BCM GPIO17, with resistor\nbutton = Button(27)   # BCM GPIO27\n\nbutton.when_pressed = led.on\nbutton.when_released = led.off\n\ntry:\n    pause()\nfinally:\n    led.off()",
+              "explanation": "GPIO17 drives a current-limited LED through a resistor and GPIO27 reads a correctly wired button. `pause()` keeps event handlers active; `finally` forces the LED off on exit. Always verify pin mapping and wiring before running."
+            }
+          ],
+          "commonMistakes": [
+            "Using a direct motor/relay coil connection instead of a driver",
+            "Running a loop with no pause and wasting CPU",
+            "Forgetting exception handling for disconnected sensors",
+            "Hardcoding passwords/tokens in public scripts"
+          ],
+          "examTips": [
+            "Explain each imported module and every pin number",
+            "Use `finally` to demonstrate safe exit",
+            "State which pins are inputs and outputs and the exact circuit assumptions"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "Why is a resistor needed with a GPIO-driven LED?",
+              "options": [
+                "For Wi-Fi",
+                "To limit LED current",
+                "To store code",
+                "To create analog input"
+              ],
+              "answer": 1,
+              "explanation": "An LED needs a current-limiting resistor."
+            },
+            {
+              "question": "What does an event callback improve?",
+              "options": [
+                "It changes supply voltage",
+                "It reacts to input transitions without busy polling",
+                "It replaces the operating system",
+                "It stops all errors"
+              ],
+              "answer": 1,
+              "explanation": "Callbacks handle events when they occur."
+            }
+          ],
+          "theory": "## Basic setup\nInstall a supported Raspberry Pi OS, enable required hardware interfaces and confirm your Python environment has a GPIO library compatible with your Pi model and OS. `gpiozero` offers simple device abstractions; its backend may need configuration on different devices.\n\n## Blink and button\nConnect an LED through an appropriate resistor to a GPIO and ground. A button can be connected using the library's internal pull-up assumptions or a documented external circuit. In `gpiozero`, an LED object provides `on()`/`off()` and a Button object provides `is_pressed` or callback handlers.\n\n## Read–validate–act\nFor sensors, convert the raw measurement to a meaningful unit, test plausible ranges, handle timeouts, then send/store results. Do not trust one noisy measurement to control an important actuator. Add hysteresis or multiple-sample confirmation.\n\n## Network requests\nIf sending data with an HTTP library, use TLS, a sensible timeout and a stored token—never embed a production secret into a public source file. Queue or retry data when offline but cap retries/backlog.",
+          "workedExamples": [
+            {
+              "title": "Apply this concept",
+              "problem": "Explain a practical system using raspberry pi programming with python.",
+              "solution": "Python makes GPIO and network automation accessible. Practice the entire loop: set up pin modes, read inputs, debounce/validate, control outputs and clean up on exit. Libraries depend on your Raspberry Pi OS and hardware generation, so check compatibility rather than copying old examples blindly.",
+              "explanation": "A strong answer links the component, purpose, data flow, and a real design limitation."
+            }
+          ],
+          "revisionSummary": "Raspberry Pi Python: GPIO, Sensors and Automation: Python makes GPIO and network automation accessible. Practice the entire loop: set up pin modes, read inputs, debounce/validate, control outputs and clean up on exit. Libraries depend on your Raspberry Pi OS and hardware generation, so check compatibility rather than copying old examples blindly. Review the comparison table and diagram, then explain each part in your own words.",
+          "cheatSheet": [
+            "gpiozero provides high-level device classes such as LED, Button and common sensor abstractions.",
+            "A pin used as an output must be configured correctly and wired to a safe current-limited circuit.",
+            "Polling checks inputs repeatedly; callbacks/event handlers respond when input events occur.",
+            "Debouncing filters repeated transitions from mechanical contacts.",
+            "try/finally and context managers are helpful for resetting outputs on program exit."
+          ],
+          "flashcards": [
+            {
+              "front": "Why `try/finally` for outputs?",
+              "back": "To return hardware to a safe state even when the program exits with an error."
+            },
+            {
+              "front": "What is debounce?",
+              "back": "Filtering rapid contact transitions from one physical button press."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "Why `try/finally` for outputs?",
+              "modelAnswer": "To return hardware to a safe state even when the program exits with an error."
+            },
+            {
+              "marks": 2,
+              "question": "What is debounce?",
+              "modelAnswer": "Filtering rapid contact transitions from one physical button press."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Communication Protocols under IoT",
+      "weightage": 17,
+      "lessons": [
+        {
+          "slug": "iot-communication-mqtt-http-i2c-spi-and-wireless",
+          "title": "IoT Communication: MQTT, HTTP, I2C, SPI and Wireless",
+          "durationMin": 55,
+          "difficulty": "medium",
+          "overview": "IoT systems use different protocols for short on-board connections and remote networks. Pick protocols by traffic pattern, power consumption, range, bandwidth, latency and reliability—not by simply selecting the newest technology.",
+          "objectives": [
+            "Explain: MQTT is a lightweight publish/subscribe messaging protocol with topics, publishers, subscribers and a broker.",
+            "Explain: HTTP is request/response and is convenient for dashboards, REST APIs and occasional device uploads.",
+            "Explain: CoAP is a compact REST-like protocol often run over UDP in constrained-device networks.",
+            "Explain: I2C is a clocked two-wire bus (SDA/SCL) with addressed devices and pull-up requirements."
+          ],
+          "prerequisites": [
+            "Understanding of the prior unit and basic computer/electronics concepts"
+          ],
+          "keyConcepts": [
+            "MQTT is a lightweight publish/subscribe messaging protocol with topics, publishers, subscribers and a broker.",
+            "HTTP is request/response and is convenient for dashboards, REST APIs and occasional device uploads.",
+            "CoAP is a compact REST-like protocol often run over UDP in constrained-device networks.",
+            "I2C is a clocked two-wire bus (SDA/SCL) with addressed devices and pull-up requirements.",
+            "SPI commonly uses SCLK, MOSI, MISO and chip-select wires; suitable for faster peripheral exchanges.",
+            "UART uses asynchronous TX/RX (and shared ground) with matching baud settings.",
+            "Wi-Fi favors local high-bandwidth networking; BLE suits short-range low-energy links; LoRa/LoRaWAN enables long-range low-bitrate links."
+          ],
+          "formulas": [
+            "I2C: SDA = data, SCL = clock",
+            "SPI: MOSI, MISO, SCLK, CS",
+            "UART: TX ↔ RX with agreed baud rate"
+          ],
+          "tables": [
+            {
+              "title": "Protocol comparison",
+              "headers": [
+                "Protocol",
+                "Pattern",
+                "Useful for"
+              ],
+              "rows": [
+                [
+                  "MQTT",
+                  "Publish/subscribe via broker",
+                  "Telemetry/events"
+                ],
+                [
+                  "HTTP/HTTPS",
+                  "Request/response",
+                  "Web APIs, uploads"
+                ],
+                [
+                  "CoAP",
+                  "Compact REST-like",
+                  "Constrained device networks"
+                ],
+                [
+                  "I2C",
+                  "Two-wire synchronous bus",
+                  "Local addressed sensors"
+                ],
+                [
+                  "SPI",
+                  "Clocked serial with chip select",
+                  "Fast local peripherals"
+                ],
+                [
+                  "UART",
+                  "Asynchronous serial",
+                  "Controller-to-module serial"
+                ]
+              ]
+            }
+          ],
+          "diagrams": [
+            {
+              "type": "ascii",
+              "title": "IoT Communication: MQTT, HTTP, I2C, SPI and Wireless — labelled system diagram",
+              "content": "Device A ─ publish 'lab/temperature' ─→ MQTT Broker\n                                           | topic match\nDashboard ←──── subscribed reading ────────┘\n\nLocal buses: sensor ─I2C/SPI/UART→ controller ─Wi-Fi→ network"
+            }
+          ],
+          "codeExamples": [],
+          "commonMistakes": [
+            "Confusing MQTT broker with MQTT topic",
+            "Assuming QoS always prevents application-level duplicate action",
+            "Mixing wireless technology (Wi-Fi) with app messaging (MQTT)",
+            "Connecting UART TX to TX instead of TX to RX"
+          ],
+          "examTips": [
+            "Use a topology diagram for MQTT",
+            "Compare 3 or more protocols with examples",
+            "Always mention TLS/ACL/authentication for remote messages"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "MQTT is mainly:",
+              "options": [
+                "Publish/subscribe via a broker",
+                "A display connector",
+                "A file system",
+                "An ADC"
+              ],
+              "answer": 0,
+              "explanation": "MQTT has publishers, topics, subscribers and a broker."
+            },
+            {
+              "question": "Which bus typically uses SDA and SCL?",
+              "options": [
+                "SPI",
+                "UART",
+                "I2C",
+                "USB"
+              ],
+              "answer": 2,
+              "explanation": "I2C uses shared data and clock lines."
+            }
+          ],
+          "theory": "## Separate local buses from internet protocols\n**I2C, SPI and UART** commonly connect a controller to sensors/displays/modems over short distances. **MQTT, HTTP and CoAP** move application messages between networked endpoints. **Wi-Fi, BLE and LoRa** are wireless link technologies. These layers can coexist in one system.\n\n## MQTT example\nA soil sensor node publishes a reading to topic `farm/plot1/moisture`. A dashboard subscribes to that topic through a broker and receives readings. Topics are structured strings; they are not encryption or authorization. Use transport encryption, topic ACLs, identity and authentication.\n\n## MQTT delivery levels\nQoS 0 is at-most-once, QoS 1 is at-least-once (duplicates possible) and QoS 2 is exactly-once within MQTT delivery semantics (more overhead). A device application still needs to make commands idempotent as appropriate.\n\n## Protocol selection\nUse I2C for several addressed sensors on a board, SPI for suitable fast peripherals, UART for serial modules, MQTT for frequent asynchronous telemetry, and HTTP for request/response APIs. Consider network failure/reconnect behavior before deployment.",
+          "workedExamples": [
+            {
+              "title": "Apply this concept",
+              "problem": "Explain a practical system using communication protocols under iot.",
+              "solution": "IoT systems use different protocols for short on-board connections and remote networks. Pick protocols by traffic pattern, power consumption, range, bandwidth, latency and reliability—not by simply selecting the newest technology.",
+              "explanation": "A strong answer links the component, purpose, data flow, and a real design limitation."
+            }
+          ],
+          "revisionSummary": "IoT Communication: MQTT, HTTP, I2C, SPI and Wireless: IoT systems use different protocols for short on-board connections and remote networks. Pick protocols by traffic pattern, power consumption, range, bandwidth, latency and reliability—not by simply selecting the newest technology. Review the comparison table and diagram, then explain each part in your own words.",
+          "cheatSheet": [
+            "MQTT is a lightweight publish/subscribe messaging protocol with topics, publishers, subscribers and a broker.",
+            "HTTP is request/response and is convenient for dashboards, REST APIs and occasional device uploads.",
+            "CoAP is a compact REST-like protocol often run over UDP in constrained-device networks.",
+            "I2C is a clocked two-wire bus (SDA/SCL) with addressed devices and pull-up requirements.",
+            "SPI commonly uses SCLK, MOSI, MISO and chip-select wires; suitable for faster peripheral exchanges."
+          ],
+          "flashcards": [
+            {
+              "front": "MQTT QoS 1 meaning?",
+              "back": "At-least-once delivery, so duplicates are possible."
+            },
+            {
+              "front": "Difference between SPI and I2C?",
+              "back": "SPI uses explicit clock/data/chip select lines; I2C uses addressed shared SDA/SCL lines."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "MQTT QoS 1 meaning?",
+              "modelAnswer": "At-least-once delivery, so duplicates are possible."
+            },
+            {
+              "marks": 2,
+              "question": "Difference between SPI and I2C?",
+              "modelAnswer": "SPI uses explicit clock/data/chip select lines; I2C uses addressed shared SDA/SCL lines."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "title": "IoT Applications & Case Studies",
+      "weightage": 16,
+      "lessons": [
+        {
+          "slug": "iot-case-studies-security-and-system-design",
+          "title": "IoT Case Studies, Security and End-to-End Design",
+          "durationMin": 50,
+          "difficulty": "medium",
+          "overview": "A useful IoT case study connects a measurable real-world problem to hardware, communication, analysis and a safe action. Smart agriculture, homes, healthcare monitoring, factories and smart cities all use similar patterns but have different safety, privacy and reliability needs.",
+          "objectives": [
+            "Explain: Smart irrigation: soil-moisture sensing, sensor validation, controller decision, valve/pump driver and dashboard logs.",
+            "Explain: Industrial condition monitoring: temperature/vibration readings, time-series patterns and maintenance alerts.",
+            "Explain: Smart home: presence/lighting/climate control with local fallback and user override.",
+            "Explain: Healthcare monitoring requires stricter privacy, validation and clinical oversight; hobby prototypes must not be treated as medical devices."
+          ],
+          "prerequisites": [
+            "Understanding of the prior unit and basic computer/electronics concepts"
+          ],
+          "keyConcepts": [
+            "Smart irrigation: soil-moisture sensing, sensor validation, controller decision, valve/pump driver and dashboard logs.",
+            "Industrial condition monitoring: temperature/vibration readings, time-series patterns and maintenance alerts.",
+            "Smart home: presence/lighting/climate control with local fallback and user override.",
+            "Healthcare monitoring requires stricter privacy, validation and clinical oversight; hobby prototypes must not be treated as medical devices.",
+            "Threats include default passwords, exposed brokers, insecure firmware updates and stored personal data leaks.",
+            "Secure-by-design includes strong identity, least privilege, encrypted transport, OTA update verification and logging.",
+            "Reliability requires offline behavior, watchdogs, safe actuator defaults and sensor-failure detection."
+          ],
+          "formulas": [
+            "Decision rule example: irrigate only if moisture < threshold AND tankOK AND safetyTimerOK"
+          ],
+          "tables": [
+            {
+              "title": "IoT use cases and design priorities",
+              "headers": [
+                "Application",
+                "Measured input",
+                "Typical action",
+                "Special concern"
+              ],
+              "rows": [
+                [
+                  "Agriculture",
+                  "Moisture, level",
+                  "Irrigate",
+                  "Dry-run and water safety"
+                ],
+                [
+                  "Factory",
+                  "Temperature, vibration",
+                  "Maintenance alert",
+                  "False alarms and downtime"
+                ],
+                [
+                  "Home",
+                  "Motion, room temperature",
+                  "Light/HVAC",
+                  "Privacy and manual control"
+                ],
+                [
+                  "Transport",
+                  "Position, speed",
+                  "Fleet alert",
+                  "Data protection and coverage"
+                ],
+                [
+                  "Energy",
+                  "Meter readings",
+                  "Usage optimization",
+                  "Accuracy and access control"
+                ]
+              ]
+            }
+          ],
+          "diagrams": [
+            {
+              "type": "ascii",
+              "title": "IoT Case Studies, Security and End-to-End Design — labelled system diagram",
+              "content": "[Soil sensor] ─→ [Controller] ─→ [Wi-Fi/MQTT] ─→ [Dashboard]\n                      ↓ verify conditions\n              [Pump/valve driver] ─→ Water\n                      ↑\n           [Low-water cutoff + manual override]"
+            }
+          ],
+          "codeExamples": [],
+          "commonMistakes": [
+            "Leaving devices on default passwords",
+            "Equating a low sensor value with certainty without calibration",
+            "Ignoring offline failure mode or manual override",
+            "Treating a hobby health sensor as a medical diagnosis"
+          ],
+          "examTips": [
+            "Always add a clear data-flow diagram",
+            "Mention calibration, access control and offline fail-safe",
+            "State benefits and limits (cost, network, power, maintenance)"
+          ],
+          "practiceQuestions": [
+            {
+              "question": "A safe automated irrigation system should prevent:",
+              "options": [
+                "Dashboard access",
+                "Pump dry running",
+                "Local overrides",
+                "Sensor calibration"
+              ],
+              "answer": 1,
+              "explanation": "Dry-run safeguards protect equipment."
+            },
+            {
+              "question": "Which practice is most secure?",
+              "options": [
+                "One password for all devices",
+                "Unprotected public MQTT broker",
+                "Per-device credentials and encrypted communication",
+                "Never update firmware"
+              ],
+              "answer": 2,
+              "explanation": "Authentication, least privilege and encryption are core protections."
+            }
+          ],
+          "theory": "## Case study 1: smart irrigation\nProblem: a farm wastes water due to fixed schedules. A soil-moisture sensor sends calibrated readings to a controller; the controller checks both dryness and whether the tank has water. A driver controls the pump/valve. Telemetry is published to a dashboard for history and alerts. Add minimum run/rest times, manual override and fault shutdown. The rule must not activate a dry-running pump.\n\n## Case study 2: machine-health monitoring\nAttach appropriate vibration and temperature sensors to machines, record readings with timestamps, and compare with a normal baseline. Send alerts for sustained anomalies rather than individual noise spikes. Treat an alert as diagnostic evidence, not automatic proof that a machine will fail.\n\n## Case study 3: room monitoring\nMeasure occupancy and temperature, adjust lighting or ventilation, and retain a local wall switch override. Minimize storing identifying location data and protect management endpoints.\n\n## Security checklist\nUse unique credentials per device, restrict network access, encrypt traffic, rotate credentials safely, validate cloud commands, and sign firmware updates. For real actuators, enforce a **local hardware/software safety envelope** so a malicious or incorrect network command cannot bypass physical limits.\n\n## How to present an exam case study\nWrite problem → objectives → block diagram → hardware → software/protocol → working steps → benefits → limitations/safety. This answers more marks than naming devices alone.",
+          "workedExamples": [
+            {
+              "title": "Apply this concept",
+              "problem": "Explain a practical system using iot applications & case studies.",
+              "solution": "A useful IoT case study connects a measurable real-world problem to hardware, communication, analysis and a safe action. Smart agriculture, homes, healthcare monitoring, factories and smart cities all use similar patterns but have different safety, privacy and reliability needs.",
+              "explanation": "A strong answer links the component, purpose, data flow, and a real design limitation."
+            }
+          ],
+          "revisionSummary": "IoT Case Studies, Security and End-to-End Design: A useful IoT case study connects a measurable real-world problem to hardware, communication, analysis and a safe action. Smart agriculture, homes, healthcare monitoring, factories and smart cities all use similar patterns but have different safety, privacy and reliability needs. Review the comparison table and diagram, then explain each part in your own words.",
+          "cheatSheet": [
+            "Smart irrigation: soil-moisture sensing, sensor validation, controller decision, valve/pump driver and dashboard logs.",
+            "Industrial condition monitoring: temperature/vibration readings, time-series patterns and maintenance alerts.",
+            "Smart home: presence/lighting/climate control with local fallback and user override.",
+            "Healthcare monitoring requires stricter privacy, validation and clinical oversight; hobby prototypes must not be treated as medical devices.",
+            "Threats include default passwords, exposed brokers, insecure firmware updates and stored personal data leaks."
+          ],
+          "flashcards": [
+            {
+              "front": "How to structure an IoT case-study answer?",
+              "back": "Problem → components → diagram → flow → benefits → limitations/safety."
+            },
+            {
+              "front": "What is safe offline behavior?",
+              "back": "Predefined local operation when connectivity fails, without creating hazards."
+            }
+          ],
+          "vivaQuestions": [
+            {
+              "marks": 2,
+              "question": "How to structure an IoT case-study answer?",
+              "modelAnswer": "Problem → components → diagram → flow → benefits → limitations/safety."
+            },
+            {
+              "marks": 2,
+              "question": "What is safe offline behavior?",
+              "modelAnswer": "Predefined local operation when connectivity fails, without creating hazards."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "revisionNotes": "IoTA Semester 3 revision path: architecture → sensor/controller safety → Raspberry Pi GPIO and interfaces → Python hardware programming → MQTT/HTTP/local serial protocols → secure real-world IoT case studies. Draw labelled blocks, explain direction of data, state safe electrical connections and include offline/security considerations.",
+  "vivaBank": [
+    {
+      "marks": 2,
+      "question": "Difference between IoT and a standalone embedded system?",
+      "modelAnswer": "An IoT system connects physical devices for exchanging data/remote coordination, whereas an embedded system can work completely standalone."
+    },
+    {
+      "marks": 2,
+      "question": "Why does Raspberry Pi often need an external ADC?",
+      "modelAnswer": "Its usual GPIO header does not provide direct general-purpose analog-to-digital inputs."
+    },
+    {
+      "marks": 2,
+      "question": "What is MQTT?",
+      "modelAnswer": "A lightweight broker-based publish/subscribe messaging protocol used for asynchronous telemetry and commands."
+    }
+  ]
+}

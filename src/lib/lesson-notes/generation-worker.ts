@@ -3,6 +3,7 @@ import 'server-only'
 import { createHash, randomUUID } from 'node:crypto'
 import type { Prisma } from '@prisma/client'
 import { db } from '@/lib/db'
+import { resolveRuntimeAuthUrl } from '@/lib/auth-policy'
 import { studentLessonResourceWhere } from '@/lib/resources/student-publication-policy'
 import { lessonRouteSlug } from '@/features/learning/utils/lesson-slugs'
 import {
@@ -886,8 +887,15 @@ function lessonNoteHtmlObjectKey(document: LessonNoteDocument): string {
 }
 
 function absoluteAppUrl(path: string): string {
-  const vercelUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null
-  const base = process.env.NEXTAUTH_URL?.trim() || vercelUrl || 'http://localhost:3000'
+  const base =
+    resolveRuntimeAuthUrl({
+      configuredUrl: process.env.NEXTAUTH_URL,
+      appUrl: process.env.LERNIO_APP_URL,
+      vercelEnv: process.env.VERCEL_ENV,
+      vercelUrl: process.env.VERCEL_URL,
+      vercelProjectProductionUrl: process.env.VERCEL_PROJECT_PRODUCTION_URL,
+    }) ?? 'http://localhost:3000'
+
   return new URL(path, base).toString()
 }
 

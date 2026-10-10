@@ -1,25 +1,21 @@
 import { redirect } from 'next/navigation'
 import { getCurrentUser } from '@/lib/auth'
 import Link from 'next/link'
-import { BookOpen, Download, ArrowLeft, FileText, Star } from 'lucide-react'
-import { MaterialsList } from './materials-list'
+import { BookOpen, ArrowLeft } from 'lucide-react'
+import { MaterialsList, type MaterialSubject } from './materials-list'
+import { getAvailableSubjectNotes } from '@/lib/curriculum/lesson-notes-loader'
 import { TopBar } from '@/components/layout/top-bar'
 import { Footer } from '@/components/layout/footer'
 
 export const dynamic = 'force-dynamic'
 
-const PY_PAPERS = [
-  { code: 'R23CP2402', name: 'Data Structures — Question Papers', url: '/lesson-notes/r23cp2402-data-structures.pdf', type: 'Previous Year Papers' },
-  { code: 'R23CP6404', name: 'OOP with C++ — Question Papers', url: '/lesson-notes/r23cp6404-object-oriented-programming-with-c.pdf', type: 'Previous Year Papers' },
-  { code: 'R23CP1401', name: 'Programming in C — Question Papers', url: '/lesson-notes/r23cp1401-programming-in-c.pdf', type: 'Previous Year Papers' },
-  { code: 'R23CP2407', name: 'DBMS — Question Papers', url: '/lesson-notes/r23cp2407-database-management-system.pdf', type: 'Previous Year Papers' },
-  { code: 'R23CP2406', name: 'Operating System — Question Papers', url: '/lesson-notes/r23cp2406-operating-system.pdf', type: 'Previous Year Papers' },
-  { code: 'R23CP2408', name: 'Computer Networks — Question Papers', url: '/lesson-notes/r23cp2408-computer-networks.pdf', type: 'Previous Year Papers' },
-]
-
 export default async function MaterialsPage() {
   const user = await getCurrentUser()
   if (!user) redirect('/sign-in?callbackUrl=/materials')
+
+  const materials = buildMaterialsCatalog()
+  const detailedCount = materials.filter((subject) => subject.lessons.length > 0).length
+  const pdfCount = materials.filter((subject) => Boolean(subject.url)).length
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
@@ -28,34 +24,63 @@ export default async function MaterialsPage() {
       <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:px-8">
         <Link href="/dashboard" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-3"><ArrowLeft className="h-4 w-4" />Dashboard</Link>
         <h1 className="text-2xl font-bold">Materials</h1>
-        <p className="mt-1 text-sm text-muted-foreground">Study notes, question papers, and resources for all subjects.</p>
-
-        {/* Previous Year Papers Section */}
-        <section className="mt-8">
-          <div className="mb-3 flex items-center gap-2"><Star className="h-5 w-5 text-amber-500" /><h2 className="text-lg font-semibold">Previous Year Question Papers</h2></div>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {PY_PAPERS.map(p => (
-              <a key={p.code} href={p.url} download className="group rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary/40 hover:bg-accent/5">
-                <div className="flex items-start justify-between gap-2">
-                  <div className="min-w-0 flex-1"><p className="text-[10px] font-semibold uppercase text-muted-foreground">{p.code}</p><h3 className="mt-1 text-sm font-medium leading-tight">{p.name}</h3></div>
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-amber-500/10"><FileText className="h-4 w-4 text-amber-600" /></div>
-                </div>
-                <div className="mt-3 flex items-center gap-1.5 text-xs text-primary font-semibold"><Download className="h-3 w-3" />Download PDF</div>
-              </a>
-            ))}
-          </div>
-        </section>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Detailed interactive lessons and downloadable study guides, built from the notes that
+          actually exist in Lernio.
+        </p>
 
         {/* Study Notes Section */}
         <section className="mt-8">
           <div className="mb-3 flex items-center gap-2"><BookOpen className="h-5 w-5 text-primary" /><h2 className="text-lg font-semibold">Study Notes (All Subjects)</h2></div>
-          <p className="mb-4 text-xs text-muted-foreground">48 PDF study notes covering all 6 semesters. Includes study guides, YouTube resources, and practice questions.</p>
-          <MaterialsList pdfs={ALL_PDFS} />
+          <p className="mb-4 text-xs text-muted-foreground">
+            {materials.length} subjects · {detailedCount} with detailed interactive notes · {pdfCount} with downloadable PDFs.
+          </p>
+          <MaterialsList pdfs={materials} />
         </section>
       </div>
     </main>
       <Footer />
     </div>
+  )
+}
+
+function buildMaterialsCatalog(): MaterialSubject[] {
+  const catalog = new Map<string, MaterialSubject>()
+
+  for (const resource of ALL_PDFS) {
+    catalog.set(resource.code, {
+      code: resource.code,
+      name: resource.name,
+      semester: resource.semester,
+      credits: resource.credits,
+      category: resource.category,
+      url: resource.url,
+      lessons: [],
+    })
+  }
+
+  for (const notes of getAvailableSubjectNotes()) {
+    const existing = catalog.get(notes.subjectCode)
+    catalog.set(notes.subjectCode, {
+      code: notes.subjectCode,
+      name: notes.subjectName,
+      semester: notes.semester,
+      credits: notes.credits,
+      category: existing?.category ?? 'theory',
+      url: existing?.url ?? null,
+      lessons: notes.units.flatMap((unit) =>
+        unit.lessons.map((lesson) => ({
+          slug: lesson.slug,
+          title: lesson.title,
+          unitNumber: unit.number,
+          unitTitle: unit.title,
+        })),
+      ),
+    })
+  }
+
+  return Array.from(catalog.values()).sort(
+    (a, b) => a.semester - b.semester || a.code.localeCompare(b.code),
   )
 }
 
