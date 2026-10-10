@@ -38,6 +38,19 @@ describe('confirmBrowserSession', () => {
     await expect(confirmBrowserSession('student@example.com')).resolves.toBeNull()
   })
 
+  it('rejects a revoked session even if the email and ID match', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ user: {
+        id: 'student-1',
+        email: 'student@example.com',
+        status: 'revoked',
+        sessionRevoked: true,
+      } }),
+    }))
+    await expect(confirmBrowserSession('student@example.com')).resolves.toBeNull()
+  })
+
   it('retries once after a transient session endpoint failure', async () => {
     const fetchMock = vi.fn()
       .mockRejectedValueOnce(new Error('network unavailable'))
