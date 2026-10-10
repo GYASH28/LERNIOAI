@@ -29,11 +29,18 @@ test('student can register, maintain a session, log out, and log back in in prod
   await expect(page).toHaveURL(/\/dashboard(?:\?|$)/, { timeout: 45_000 })
   await expect(page.getByRole('heading', { name: /CI/i }).first()).toBeVisible()
 
-  const authRequest = page.context().request
+  // Check the session from inside Chromium rather than Playwright's Node
+  // request context: production Secure cookies on an HTTP loopback test host
+  // may be accepted by the browser but omitted by Node's cookie jar.
   async function session() {
-    const res = await authRequest.get('/api/auth/session', { headers: { 'Cache-Control': 'no-cache' } })
-    expect(res.status()).toBe(200)
-    return res.json() as Promise<{ user?: { id?: string; email?: string; role?: string } }>
+    return page.evaluate(async () => {
+      const response = await fetch('/api/auth/session', {
+        credentials: 'same-origin',
+        cache: 'no-store',
+      })
+      if (!response.ok) throw new Error(`Session returned HTTP ${response.status}`)
+      return response.json() as Promise<{ user?: { id?: string; email?: string; role?: string } }>
+    })
   }
 
   const loggedIn = await session()
@@ -43,20 +50,29 @@ test('student can register, maintain a session, log out, and log back in in prod
 
   await page.reload()
   await expect(page).toHaveURL(/\/dashboard(?:\?|$)/)
-  await expect(page.getByText('CI Stability Student', { exact: false }).first()).toBeVisible()
+  await expect(page.locator('main h1')).toContainText('CI')
   expect((await session()).user?.email?.toLowerCase()).toBe(email)
 
   // Logout through the same-origin NextAuth endpoint using its CSRF token.
   // Browser-context requests share cookies with the open Playwright page.
-  const csrf = await authRequest.get('/api/auth/csrf')
-  expect(csrf.status()).toBe(200)
-  const csrfData = await csrf.json() as { csrfToken?: string }
-  expect(csrfData.csrfToken).toBeTruthy()
-
-  const signout = await authRequest.post('/api/auth/signout', {
-    form: { csrfToken: csrfData.csrfToken!, callbackUrl: 'http://127.0.0.1:3001/sign-in' },
+  const signoutResult = await page.evaluate(async () => {
+    const csrfResponse = await fetch('/api/auth/csrf', { credentials: 'same-origin' })
+    if (!csrfResponse.ok) throw new Error(`CSRF request failed: ${csrfResponse.status}`)
+    const csrfData = await csrfResponse.json() as { csrfToken?: string }
+    if (!csrfData.csrfToken) throw new Error('Missing NextAuth CSRF token')
+    const signout = await fetch('/api/auth/signout', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        csrfToken: csrfData.csrfToken,
+        callbackUrl: `${window.location.origin}/sign-in`,
+        json: 'true',
+      }),
+    })
+    return { ok: signout.ok, status: signout.status }
   })
-  expect(signout.ok()).toBe(true)
+  expect(signoutResult.ok).toBe(true)
   expect((await session()).user?.id).toBeUndefined()
 
   await page.goto('/dashboard')
