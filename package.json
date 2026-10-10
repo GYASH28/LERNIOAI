@@ -55,7 +55,8 @@
     "notes:render-pdf": "tsx scripts/render-lesson-note-pdfs.ts",
     "notes:generate:work": "tsx scripts/process-content-generation-jobs.ts",
     "curriculum:import-with-resources": "tsx scripts/import-cwit-curriculum-with-resources.ts",
-    "notes:generate-pdfs": "python3 scripts/generate_notes_pdfs.py"
+    "notes:generate-pdfs": "python3 scripts/generate_notes_pdfs.py",
+    "notes:audit": "node scripts/audit-materials-content.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
