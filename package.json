@@ -114,7 +114,7 @@
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.1",
     "server-only": "^0.0.1",
-    "sharp": "^0.34.3",
+    "sharp": "^0.35.5",
     "sonner": "^2.0.6",
     "tailwind-merge": "^3.3.1",
     "tailwindcss-animate": "^1.0.7",
@@ -147,6 +147,7 @@
   },
   "overrides": {
     "cookie": "0.7.2",
-    "uuid": "11.1.1"
+    "uuid": "11.1.1",
+    "deepmerge-ts": "^8.0.0"
   }
 }
