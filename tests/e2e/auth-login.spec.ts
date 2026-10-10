@@ -56,5 +56,15 @@ test('new student registration and credential sign-in keep an authenticated sess
   const providersJson = await providers.json()
   const credentials = providersJson.credentials
   expect(credentials).toBeTruthy()
-  expect(new URL(credentials.callbackUrl).origin).toBe(currentUrl.origin)
+  const callbackOrigin = new URL(credentials.callbackUrl)
+  // Playwright's web server uses 127.0.0.1 while NEXTAUTH_URL in CI uses
+  // localhost. They are equivalent loopback origins for this local-only test.
+  const localHosts = new Set(['localhost', '127.0.0.1'])
+  if (localHosts.has(currentUrl.hostname)) {
+    expect(localHosts.has(callbackOrigin.hostname)).toBe(true)
+    expect(callbackOrigin.port).toBe(currentUrl.port)
+  } else {
+    // Production/preview callbacks must never switch to an obsolete hostname.
+    expect(callbackOrigin.origin).toBe(currentUrl.origin)
+  }
 })
