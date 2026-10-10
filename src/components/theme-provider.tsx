@@ -136,7 +136,7 @@ function mergePrefs(
   const merged: ThemePreferences = { ...DEFAULT_THEME_PREFS, ...(partial ?? {}) }
   // Re-validate enum fields so a corrupt blob can't put the UI
   // into an undefined state.
-  if (!isValidAppearance(merged.appearance)) merged.appearance = 'system'
+  if (!isValidAppearance(merged.appearance)) merged.appearance = 'light'
   if (!isValidPalette(merged.palette)) merged.palette = 'aurora'
   if (!isValidContrast(merged.contrast)) merged.contrast = 'normal'
   if (!isValidDensity(merged.density)) merged.density = 'comfortable'
