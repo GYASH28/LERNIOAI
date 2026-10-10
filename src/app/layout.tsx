@@ -26,7 +26,7 @@ import { CommandPalette } from "@/components/ui/command-palette";
 // synchronously with ZERO network round-trip. This is the standard
 // pattern used by next-themes and every theme library.
 // ──────────────────────────────────────────────────────────────────────────
-const themeNoFlashScript = `(function(){try{var p=null;var m=document.cookie.match(/(?:^|;\\s*)lernio-theme=([^;]+)/);if(m){p=JSON.parse(decodeURIComponent(m[1]));}if(!p&&window.localStorage){var s=localStorage.getItem('lernio-theme-prefs');if(s){p=JSON.parse(s);}}if(!p&&window.localStorage){var lg=localStorage.getItem('lernio-prefs');if(lg){var lp=JSON.parse(lg);p={};if(lp.theme==='light'||lp.theme==='dark'||lp.theme==='system'){p.appearance=lp.theme;}if(typeof lp.reducedMotion==='boolean'){p.motion=lp.reducedMotion?'reduced':'full';}if(typeof lp.lowPower==='boolean'){p.lowPower=lp.lowPower;}}}p=p||{};var app=p.appearance||'system';var pal=p.palette||'aurora';var con=p.contrast||'normal';var den=p.density||'comfortable';var sur=p.surfaceStyle||'soft';var sti=p.subjectTint||'subtle';var mot=p.motion||'full';var lpw=!!p.lowPower;var osRed=window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(osRed&&mot!=='none'){mot='reduced';}var dark=app==='dark'||(app==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches);var r=document.documentElement;r.classList.toggle('dark',dark);r.classList.toggle('reduce-motion',mot!=='full');r.setAttribute('data-appearance',app);r.setAttribute('data-palette',pal);r.setAttribute('data-contrast',con);r.setAttribute('data-density',den);r.setAttribute('data-surface',sur);r.setAttribute('data-subject-tint',sti);r.setAttribute('data-motion',mot);r.setAttribute('data-low-power',String(lpw));}catch(e){}})();`;
+const themeNoFlashScript = `(function(){try{var p=null;var m=document.cookie.match(/(?:^|;\\s*)lernio-theme=([^;]+)/);if(m){p=JSON.parse(decodeURIComponent(m[1]));}if(!p&&window.localStorage){var s=localStorage.getItem('lernio-theme-prefs');if(s){p=JSON.parse(s);}}if(!p&&window.localStorage){var lg=localStorage.getItem('lernio-prefs');if(lg){var lp=JSON.parse(lg);p={};if(lp.theme==='light'||lp.theme==='dark'||lp.theme==='system'){p.appearance=lp.theme;}if(typeof lp.reducedMotion==='boolean'){p.motion=lp.reducedMotion?'reduced':'full';}if(typeof lp.lowPower==='boolean'){p.lowPower=lp.lowPower;}}}p=p||{};var app=p.appearance||'light';var pal=p.palette||'aurora';var con=p.contrast||'normal';var den=p.density||'comfortable';var sur=p.surfaceStyle||'soft';var sti=p.subjectTint||'subtle';var mot=p.motion||'full';var lpw=!!p.lowPower;var osRed=window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(osRed&&mot!=='none'){mot='reduced';}var dark=app==='dark'||(app==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches);var r=document.documentElement;r.classList.toggle('dark',dark);r.classList.toggle('reduce-motion',mot!=='full');r.setAttribute('data-appearance',app);r.setAttribute('data-palette',pal);r.setAttribute('data-contrast',con);r.setAttribute('data-density',den);r.setAttribute('data-surface',sur);r.setAttribute('data-subject-tint',sti);r.setAttribute('data-motion',mot);r.setAttribute('data-low-power',String(lpw));}catch(e){}})();`;
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -113,10 +113,7 @@ export const viewport: Viewport = {
   maximumScale: 5,
   userScalable: true,
   viewportFit: "cover",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
-  ],
+  themeColor: "#ffffff",
 };
 
 export default async function RootLayout({
@@ -136,7 +133,7 @@ export default async function RootLayout({
       lang="en"
       suppressHydrationWarning
       data-palette="aurora"
-      data-appearance="system"
+      data-appearance="light"
       data-contrast="normal"
       data-density="comfortable"
       data-surface="soft"

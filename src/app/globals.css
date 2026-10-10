@@ -454,8 +454,8 @@ html {
 
 /* --- Scroll reveal (used with IntersectionObserver) --- */
 .scroll-reveal {
-  opacity: 0;
-  transform: translateY(16px);
+  opacity: 1;
+  transform: none;
   transition: opacity 0.4s ease, transform 0.4s ease;
   will-change: opacity, transform;
 }
@@ -592,8 +592,8 @@ html {
 
 /* --- Stagger reveal for grids --- */
 .stagger-item {
-  opacity: 0;
-  transform: translateY(12px);
+  opacity: 1;
+  transform: none;
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 .stagger-item.revealed {

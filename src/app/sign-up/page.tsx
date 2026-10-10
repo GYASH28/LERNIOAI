@@ -10,6 +10,7 @@ import {
   authPrimaryButtonClass,
   authSelectClass,
 } from '@/components/auth/auth-shell'
+import { confirmBrowserSession } from '@/lib/auth-browser-session'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -144,18 +145,14 @@ export default function SignUpPage() {
       // Confirm the cookie on the current host instead of following result.url.
       // A stale NEXTAUTH_URL used to redirect successful registrations to a
       // different Vercel hostname where the new session cookie did not exist.
-      const userResponse = await fetch('/api/user', {
-        cache: 'no-store',
-        credentials: 'same-origin',
-      })
-      const userPayload = await userResponse.json().catch(() => null)
-      if (!userResponse.ok || !userPayload?.ok || !userPayload.data) {
-        setError('Account created, but the session could not be confirmed. Please sign in once more.')
+      const verifiedSession = await confirmBrowserSession(form.email)
+      if (!verifiedSession) {
+        setError('Account created, but the browser session could not be confirmed. You can sign in using your new account.')
         setStatusMessage('')
         return
       }
 
-      const role = String(userPayload.data.role || 'student')
+      const role = verifiedSession.role
       const roleRedirects: Record<string, string> = {
         admin: '/admin',
         cr: '/cr',
