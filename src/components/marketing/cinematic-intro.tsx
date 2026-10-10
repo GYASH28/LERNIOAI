@@ -296,6 +296,11 @@ function drawFrame(
 }
 
 function safeHasSeen() {
+  // sessionStorage resets in each tab; that made regular visitors repeatedly
+  // sit behind a full-screen dark canvas. Prefer durable, optional storage.
+  try {
+    if (window.localStorage.getItem(LANDING_INTRO_STORAGE_KEY) === 'complete') return true
+  } catch { /* private browsing may disable localStorage */ }
   try {
     return window.sessionStorage.getItem(LANDING_INTRO_STORAGE_KEY) === 'complete'
   } catch {
@@ -305,10 +310,11 @@ function safeHasSeen() {
 
 function safeMarkSeen() {
   try {
+    window.localStorage.setItem(LANDING_INTRO_STORAGE_KEY, 'complete')
+  } catch { /* storage is optional */ }
+  try {
     window.sessionStorage.setItem(LANDING_INTRO_STORAGE_KEY, 'complete')
-  } catch {
-    // Storage is optional. The experience still completes safely.
-  }
+  } catch { /* storage is optional */ }
 }
 
 export function CinematicIntro() {
