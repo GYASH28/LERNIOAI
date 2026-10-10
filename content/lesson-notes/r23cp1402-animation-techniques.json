@@ -28,7 +28,10 @@
           "formulas": [
             "Core formula: depends on specific topic within Principles of Animation",
             "Relationship: connects to Animation Basics",
-            "Result: output depends on input parameters"
+            "Result: output depends on input parameters",
+            "Time (seconds) = frames ÷ frames per second",
+            "12 frames at 24fps = 0.5s",
+            "30 frames at 30fps = 1s"
           ],
           "tables": [
             {
@@ -132,7 +135,7 @@
             "Familiarity with fundamental concepts",
             "Study of previous unit material"
           ],
-          "theory": "## Introduction\n\nPrinciples of Animation is a key topic in Animation Techniques, covered under Animation Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Principles of Animation: Core concept in Animation Techniques\n- Definition: The formal definition and scope of principles of animation\n- Key principles: Fundamental rules and properties\n- Working: How principles of animation operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Principles of Animation`\n- `Relationship: connects to Animation Basics`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Principles of Animation — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Animation Techniques |\n| Importance | Essential for understanding Animation Basics |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nPrinciples of Animation is a key topic in Animation Techniques, covered under Animation Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "theory": "## Introduction\n\nPrinciples of Animation is a key topic in Animation Techniques, covered under Animation Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Principles of Animation: Core concept in Animation Techniques\n- Definition: The formal definition and scope of principles of animation\n- Key principles: Fundamental rules and properties\n- Working: How principles of animation operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Principles of Animation`\n- `Relationship: connects to Animation Basics`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Principles of Animation — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Animation Techniques |\n| Importance | Essential for understanding Animation Basics |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nPrinciples of Animation is a key topic in Animation Techniques, covered under Animation Basics. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n---\n\n## Studio practice: Principles of Animation\n\n## Animation is controlled change over time\nAnimation works when a viewer perceives successive frames as continuous movement. Good animation communicates a clear intention: what changed, why, how long it took and where the viewer should look. Draw a *key pose* for the most important state, add an in-between pose and check whether the sequence reads clearly without dialogue.\n\n### Important animation principles\n**Squash and stretch** suggests weight and flexibility while often preserving perceived volume. **Anticipation** prepares an audience for a movement (a character bends before jumping). **Staging** makes the main action unambiguous. **Slow in/slow out** means objects spend more frames near the beginning/end of a movement, unlike constant linear motion. **Arcs** make organic movement feel natural. **Follow-through and overlapping action** allow connected parts to settle at different times.\n\n### Timing versus spacing\nTiming means how many frames an action takes. Spacing means how far the object travels between frames. With the same duration, closely clustered poses near the end create deceleration; evenly spaced poses create constant speed. At 24 frames per second, a motion spanning 12 frames takes half a second; at 30fps, the same 12 frames take 0.4 seconds. State the playback frame rate when comparing frame counts.\n\n### A bouncing ball\nDraw a ball above the ground, mid-air, touching the floor (squashed) and rising again (stretched slightly). Keep the path on an arc and add more drawings near the peak, fewer during fast falling. For a heavy ball use less squash; for rubber use more. Do not randomly increase squash independently of motion direction.",
           "analogies": [
             {
               "scenario": "Concept like building blocks",
@@ -169,6 +172,12 @@
               "problem": "Explain Principles of Animation with reference to the key concepts.",
               "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
               "explanation": "Use these tips to structure your answer."
+            },
+            {
+              "title": "Plan a one-second bounce",
+              "problem": "Create a 24fps ball bounce and show weight clearly.",
+              "solution": "Frame 1: high pose; 6: descending; 10: just above ground; 12: contact with squash; 14: rising; 20: slower near peak; 24: hold or transition. Keep a consistent arc and add easing by varying spacing.",
+              "explanation": "The number of frames controls duration, while inter-frame distance explains speed and acceleration."
             }
           ],
           "vivaQuestions": [
@@ -356,6 +365,13 @@
           "recommendedNextLessons": [
             "2d-animation-tools",
             "3d-modeling-basics"
+          ],
+          "diagrams": [
+            {
+              "type": "ascii",
+              "title": "Process diagram",
+              "content": "Frame 1:        O        (fall begins)\nFrame 5:          O      (faster)\nFrame 8:            O    (near floor)\nFrame 9:          (====) (squash at impact)\nFrame 11:           ()   (rebound)\nFrame 15:       O        (slowing near peak)"
+            }
           ]
         }
       ]
@@ -488,7 +504,7 @@
             "Familiarity with fundamental concepts",
             "Study of previous unit material"
           ],
-          "theory": "## Introduction\n\n2D Animation Tools is a key topic in Animation Techniques, covered under 2D Animation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- 2D Animation Tools: Core concept in Animation Techniques\n- Definition: The formal definition and scope of 2d animation tools\n- Key principles: Fundamental rules and properties\n- Working: How 2d animation tools operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within 2D Animation Tools`\n- `Relationship: connects to 2D Animation`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### 2D Animation Tools — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Animation Techniques |\n| Importance | Essential for understanding 2D Animation |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\n2D Animation Tools is a key topic in Animation Techniques, covered under 2D Animation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "theory": "## Introduction\n\n2D Animation Tools is a key topic in Animation Techniques, covered under 2D Animation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- 2D Animation Tools: Core concept in Animation Techniques\n- Definition: The formal definition and scope of 2d animation tools\n- Key principles: Fundamental rules and properties\n- Working: How 2d animation tools operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within 2D Animation Tools`\n- `Relationship: connects to 2D Animation`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### 2D Animation Tools — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Animation Techniques |\n| Importance | Essential for understanding 2D Animation |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\n2D Animation Tools is a key topic in Animation Techniques, covered under 2D Animation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n---\n\n## Studio practice: 2D Animation Tools\n\n## A practical 2D production pipeline\nBegin with a short storyboard showing the camera framing and key actions. Create an animatic (timed rough storyboard with temporary sound) before spending time on polished artwork. Next draw key poses, extremes and breakdown poses. Add in-betweens, clean line art, colour, effects and sound. Finally export and verify playback.\n\n### Timeline, layers and keyframes\nA timeline arranges frames or keyframes in time. Layers separate background, character, effects and audio, making edits easier. Onion-skinning temporarily shows earlier and later drawings with reduced opacity so you can keep spacing and volumes consistent.\n\n### Frame-by-frame versus tweening\nFrame-by-frame animation offers fine expressive control because each pose is drawn. Tweening/interpolation creates in-between positions, opacity changes or transforms from keyframes and works well for simple vector/UI motion. A combination is often most efficient. Interpolation does not remove the need for good key poses and easing curves.\n\n### Common mistakes\nIf the character flickers, check shape consistency and registration between frames. If movement feels robotic, revise timing and spacing instead of adding more drawings at uniform intervals. If export stutters, verify project frame rate, export frame rate and that the animation's duration has not been trimmed.\n\n### File and export choices\nPreserve an editable project file with separate layers. Export PNG sequences when transparency or post-production flexibility is important. Use MP4/H.264 for a common delivery format when transparency is not required; GIF is limited in colours and is less suitable for large high-quality scenes.",
           "analogies": [
             {
               "scenario": "Concept like building blocks",
@@ -525,6 +541,12 @@
               "problem": "Explain 2D Animation Tools with reference to the key concepts.",
               "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
               "explanation": "Use these tips to structure your answer."
+            },
+            {
+              "title": "Animate a hand wave",
+              "problem": "Prepare an 8-pose character hand wave without jitter.",
+              "solution": "Separate torso, upper arm, forearm and hand into editable layers. Draw neutral, raised, left extreme, right extreme and recovery keys; add in-betweens with onion skin; stagger wrist motion a few frames after the arm. Export at consistent FPS.",
+              "explanation": "A small number of controlled keys with correct overlapping action feels more convincing than many random drawings."
             }
           ],
           "vivaQuestions": [
@@ -712,6 +734,13 @@
           "recommendedNextLessons": [
             "3d-modeling-basics",
             "css-and-svg-animation"
+          ],
+          "diagrams": [
+            {
+              "type": "ascii",
+              "title": "Process diagram",
+              "content": "Storyboard → Animatic → Key poses → Breakdown poses\n   → In-betweens → Cleanup + colour → Audio → Export + QA"
+            }
           ]
         }
       ]
@@ -844,7 +873,7 @@
             "Familiarity with fundamental concepts",
             "Study of previous unit material"
           ],
-          "theory": "## Introduction\n\n3D Modeling Basics is a key topic in Animation Techniques, covered under 3D Animation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- 3D Modeling Basics: Core concept in Animation Techniques\n- Definition: The formal definition and scope of 3d modeling basics\n- Key principles: Fundamental rules and properties\n- Working: How 3d modeling basics operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within 3D Modeling Basics`\n- `Relationship: connects to 3D Animation`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### 3D Modeling Basics — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Animation Techniques |\n| Importance | Essential for understanding 3D Animation |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\n3D Modeling Basics is a key topic in Animation Techniques, covered under 3D Animation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "theory": "## Introduction\n\n3D Modeling Basics is a key topic in Animation Techniques, covered under 3D Animation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- 3D Modeling Basics: Core concept in Animation Techniques\n- Definition: The formal definition and scope of 3d modeling basics\n- Key principles: Fundamental rules and properties\n- Working: How 3d modeling basics operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within 3D Modeling Basics`\n- `Relationship: connects to 3D Animation`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### 3D Modeling Basics — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Animation Techniques |\n| Importance | Essential for understanding 3D Animation |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\n3D Modeling Basics is a key topic in Animation Techniques, covered under 3D Animation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n---\n\n## Studio practice: 3D Modeling Basics\n\n## Build a 3D object from geometry\nA polygon mesh contains vertices (points), edges (connections) and faces (surfaces). Start with simple primitives—cube, cylinder, sphere—and use operations such as extrusion, inset, loop cuts and beveling to develop form. Keep geometry appropriate to the task: highly detailed meshes require more memory and processing.\n\n### Object transformations\nTranslation changes position, rotation changes orientation and scaling changes size. The common coordinate axes are X, Y and Z. Local transformations operate relative to an object's orientation; global transformations use world axes. Before rigging or exporting, understand whether a tool expects local or world coordinates and whether transforms need to be applied.\n\n### Materials, lighting and camera\nGeometry alone does not produce a readable final image. Materials describe surface response (colour, roughness, metallic appearance). Lights determine highlights and shadows. Camera position, focal length and composition determine what the viewer notices. A simple three-point lighting setup uses a key light, fill and rim/back light to separate form from the background.\n\n### Animation and rigging\nA rig contains bones/controllers that move mesh parts without manually editing each vertex. Keyframes store pose or transformation values at chosen times, and interpolation creates positions between them. Deformation depends on skinning weights; bad weights produce collapsing elbows or stretching faces.\n\n### Export and optimisation\nCheck polygon count, texture resolution, file sizes and draw calls before putting 3D on a website. Bake details into normal maps when possible. Preview the model on the target device rather than assuming a workstation render will run smoothly on a phone.",
           "analogies": [
             {
               "scenario": "Concept like building blocks",
@@ -881,6 +910,12 @@
               "problem": "Explain 3D Modeling Basics with reference to the key concepts.",
               "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
               "explanation": "Use these tips to structure your answer."
+            },
+            {
+              "title": "Model and animate a simple robot arm",
+              "problem": "Create a lightweight 3D robot arm with an elbow bend.",
+              "solution": "Build upper/lower arm from cylinders, position the elbow pivot, create a two-bone hierarchy and attach mesh parts to correct bones. Keyframe the shoulder at frame 1 and the elbow at frame 24, then adjust easing. Preview wireframe and render.",
+              "explanation": "Correct pivot placement and object hierarchy matter more than polygon detail in a basic mechanical animation."
             }
           ],
           "vivaQuestions": [
@@ -1068,6 +1103,13 @@
           "recommendedNextLessons": [
             "css-and-svg-animation",
             "motion-graphics"
+          ],
+          "diagrams": [
+            {
+              "type": "ascii",
+              "title": "Process diagram",
+              "content": "Vertices (points) → Edges (lines) → Faces (surfaces)\n                ↓ Mesh\nModel → UV/material → Lighting → Camera → Render\n             ↓\n     Rig → Key poses → Animation"
+            }
           ]
         }
       ]
@@ -1200,7 +1242,7 @@
             "Familiarity with fundamental concepts",
             "Study of previous unit material"
           ],
-          "theory": "## Introduction\n\nCSS and SVG Animation is a key topic in Animation Techniques, covered under Web Animation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- CSS and SVG Animation: Core concept in Animation Techniques\n- Definition: The formal definition and scope of css and svg animation\n- Key principles: Fundamental rules and properties\n- Working: How css and svg animation operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within CSS and SVG Animation`\n- `Relationship: connects to Web Animation`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### CSS and SVG Animation — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Animation Techniques |\n| Importance | Essential for understanding Web Animation |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nCSS and SVG Animation is a key topic in Animation Techniques, covered under Web Animation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "theory": "## Introduction\n\nCSS and SVG Animation is a key topic in Animation Techniques, covered under Web Animation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- CSS and SVG Animation: Core concept in Animation Techniques\n- Definition: The formal definition and scope of css and svg animation\n- Key principles: Fundamental rules and properties\n- Working: How css and svg animation operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within CSS and SVG Animation`\n- `Relationship: connects to Web Animation`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### CSS and SVG Animation — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Animation Techniques |\n| Importance | Essential for understanding Web Animation |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nCSS and SVG Animation is a key topic in Animation Techniques, covered under Web Animation. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n---\n\n## Studio practice: CSS and SVG Animation\n\n## CSS motion and SVG vector graphics\nA CSS transition interpolates a property when a class, pseudo-class or attribute changes. Use transitions for simple interactions such as hover, focus and expanding a card. Use `@keyframes` when the motion requires multiple stages, looping or choreography.\n\n### Transform and performance\nAnimate `transform: translate/scale/rotate` and `opacity` when practical. Animating `width`, `height`, `top` and `left` can force layout recalculation. Browser rendering includes style, layout, paint and compositing; unnecessary repeated layout/paint work makes scrolling feel janky.\n\n### SVG essentials\nSVG draws vector shapes such as `<circle>`, `<rect>`, `<line>` and `<path>` inside a coordinate system controlled by `viewBox`. SVG scales without typical raster blur. Stroke-dasharray and stroke-dashoffset can create a path-drawing effect, while CSS transform can move icons or shapes.\n\n### Reduced motion and accessibility\nDecorative animation should be optional for users requesting reduced motion. Provide a `prefers-reduced-motion: reduce` rule that disables transforms or long-running animation while keeping the result readable. Respect users with attention or vestibular sensitivities; avoid excessive parallax, flashing or endless bouncing.\n\n### Practical debugging\nWhen a shape jumps, inspect transform-origin and SVG viewBox. When the CSS animation does not start, check selector specificity, property names, animation-duration and whether an element is hidden. A slide-in element should not become keyboard-inaccessible while visually off screen.",
           "analogies": [
             {
               "scenario": "Concept like building blocks",
@@ -1237,6 +1279,12 @@
               "problem": "Explain CSS and SVG Animation with reference to the key concepts.",
               "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
               "explanation": "Use these tips to structure your answer."
+            },
+            {
+              "title": "Fix a jerky sliding navigation panel",
+              "problem": "A side drawer animates its CSS left property and drops frames on mid-range phones.",
+              "solution": "Position the drawer outside the viewport with transform:translateX(100%); on open, change to translateX(0). Animate transform and make controls focusable only when the drawer is open.",
+              "explanation": "Transform animations usually avoid expensive layout work, and focus management prevents hidden controls from confusing keyboard users."
             }
           ],
           "vivaQuestions": [
@@ -1423,6 +1471,14 @@
           ],
           "recommendedNextLessons": [
             "motion-graphics"
+          ],
+          "codeExamples": [
+            {
+              "language": "html",
+              "title": "Accessible SVG loading pulse",
+              "code": "<svg viewBox=\"0 0 120 40\" role=\"img\" aria-label=\"Loading\">\n  <circle class=\"pulse\" cx=\"20\" cy=\"20\" r=\"8\"/>\n  <circle class=\"pulse\" cx=\"60\" cy=\"20\" r=\"8\" style=\"animation-delay:.15s\"/>\n  <circle class=\"pulse\" cx=\"100\" cy=\"20\" r=\"8\" style=\"animation-delay:.3s\"/>\n</svg>\n<style>\n.pulse { fill: #6366f1; transform-box: fill-box; transform-origin: center;\n         animation: pulse 900ms ease-in-out infinite alternate; }\n@keyframes pulse { from { opacity:.4; transform:scale(.65) }\n                  to { opacity:1; transform:scale(1) } }\n@media (prefers-reduced-motion: reduce) {\n  .pulse { animation: none; opacity: 1; }\n}\n</style>",
+              "explanation": "Three circles pulse in sequence. Reduced-motion users see stable circles instead of repeated motion."
+            }
           ]
         }
       ]
@@ -1555,7 +1611,7 @@
             "Familiarity with fundamental concepts",
             "Study of previous unit material"
           ],
-          "theory": "## Introduction\n\nMotion Graphics is a key topic in Animation Techniques, covered under Advanced Techniques. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Motion Graphics: Core concept in Animation Techniques\n- Definition: The formal definition and scope of motion graphics\n- Key principles: Fundamental rules and properties\n- Working: How motion graphics operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Motion Graphics`\n- `Relationship: connects to Advanced Techniques`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Motion Graphics — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Animation Techniques |\n| Importance | Essential for understanding Advanced Techniques |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nMotion Graphics is a key topic in Animation Techniques, covered under Advanced Techniques. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "theory": "## Introduction\n\nMotion Graphics is a key topic in Animation Techniques, covered under Advanced Techniques. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Motion Graphics: Core concept in Animation Techniques\n- Definition: The formal definition and scope of motion graphics\n- Key principles: Fundamental rules and properties\n- Working: How motion graphics operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Motion Graphics`\n- `Relationship: connects to Advanced Techniques`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Motion Graphics — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in Animation Techniques |\n| Importance | Essential for understanding Advanced Techniques |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nMotion Graphics is a key topic in Animation Techniques, covered under Advanced Techniques. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n---\n\n## Studio practice: Motion Graphics\n\n## Design motion graphics for communication\nMotion graphics combine typography, shapes, colour, footage and movement to communicate a message. Start from a script and storyboard. Decide the visual hierarchy: which phrase, number or image should be noticed first, and which should appear next. Motion should guide attention rather than compete with content.\n\n### Composition and pacing\nA title animation benefits from three phases: anticipation, entrance and readable hold. Avoid continuous movement when viewers need time to read technical terms. Use consistent spacing, margins, alignment and colour contrast across scenes. Motion curves make accelerations feel intentional: ease-out often suits a new element arriving, and ease-in suits a departing element.\n\n### Keyframes and interpolation\nAnimate position, scale, rotation and opacity with keyframes, then refine timing with an easing graph. Motion blur may improve realism but can reduce text sharpness. For typography, avoid moving small text too quickly or animating many lines at once.\n\n### Layer hierarchy and effects\nA composition may include background, text, icons, masks, transition mattes and audio. Masks reveal/hide content without deleting it. A precomposition groups related layers into a reusable sequence. Keep layers named so edits and handoff remain manageable.\n\n### Rendering and delivery\nChoose output resolution, aspect ratio, FPS and codec based on where the video will be used. For a 1920×1080 social/product clip, H.264 MP4 is a common compatible delivery format; preserve an editable master separately. Check sound levels, trim errors, frame continuity, safe margins and playback on a real phone.\n\n### Accessibility\nProvide captions for voice-over and give key text enough on-screen time. Avoid flashing rapidly or relying on colours alone for explanation.",
           "analogies": [
             {
               "scenario": "Concept like building blocks",
@@ -1592,6 +1648,12 @@
               "problem": "Explain Motion Graphics with reference to the key concepts.",
               "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
               "explanation": "Use these tips to structure your answer."
+            },
+            {
+              "title": "Create a 10-second app feature intro",
+              "problem": "Introduce Lernio's Notes, Quizzes and Revision features within 10 seconds.",
+              "solution": "0–2s: product name and one clear promise. 2–5s: notes interface enters with subtle easing. 5–8s: quiz/revision states transition one at a time. 8–10s: show a stable CTA. Add captions, consistent spacing and reduced motion for any web reimplementation.",
+              "explanation": "The viewer sees a clear story, not random motion. Each scene is readable before transitioning."
             }
           ],
           "vivaQuestions": [
@@ -1776,7 +1838,14 @@
               "content": "Motion Graphics is a key topic in Animation Techniques, covered under Advanced Techniques. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Motion Graphics: Core concept in Animation Techniques, Definition: The formal definition and scope of motion graphics, Key principles: Fundamental rules and properties."
             }
           ],
-          "recommendedNextLessons": []
+          "recommendedNextLessons": [],
+          "diagrams": [
+            {
+              "type": "ascii",
+              "title": "Process diagram",
+              "content": "Goal + script → Storyboard → Composition layout\n        ↓\nKeyframes + easing → Typography / masks / sound\n        ↓\nPreview → Readability check → Render → Mobile QA"
+            }
+          ]
         }
       ]
     }
