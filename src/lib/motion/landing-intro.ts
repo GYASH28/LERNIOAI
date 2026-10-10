@@ -30,6 +30,6 @@ export function resolveLandingIntroMode(signals: LandingIntroSignals): LandingIn
 
 export function introDurationMs(mode: Exclude<LandingIntroMode, 'skip'>, viewportWidth: number) {
   if (mode === 'reduced') return 900
-  if (mode === 'compact') return viewportWidth < 640 ? 2200 : 2600
-  return viewportWidth < 640 ? 5200 : 7200
+  if (mode === 'compact') return viewportWidth < 640 ? 1400 : 1600
+  return viewportWidth < 640 ? 2200 : 2800
 }
