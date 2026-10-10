@@ -60,4 +60,11 @@ jobs:
             test-results/
             playwright-report/
           if-no-files-found: ignore
-      - run: npm audit --audit-level=high
+      # Block releases on runtime dependencies, including transitive packages.
+      # npm audit also reports a currently unpatched dev-only 'braces' chain
+      # through eslint-config-next; surface it below rather than masking it.
+      - name: Audit production dependencies (blocking)
+        run: npm audit --omit=dev --audit-level=high
+      - name: Report development dependency advisories
+        run: |
+          npm audit --audit-level=high || echo "::warning::Full dependency audit has unresolved development-tool advisories. Review the report above."
