@@ -8,7 +8,7 @@ export default defineConfig({
   },
   use: {
     baseURL: 'http://127.0.0.1:3000',
-    bypassCSP: true,
+    bypassCSP: false,
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
   },
