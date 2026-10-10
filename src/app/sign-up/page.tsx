@@ -11,6 +11,7 @@ import {
   authSelectClass,
 } from '@/components/auth/auth-shell'
 import { confirmBrowserSession } from '@/lib/auth-browser-session'
+import { credentialSignInError } from '@/lib/auth-feedback'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -136,8 +137,9 @@ export default function SignUpPage() {
         callbackUrl,
       })
 
-      if (result?.error || result?.ok === false) {
-        setError('Account created! Please sign in on the sign-in page.')
+      const autoSignInFailure = credentialSignInError(result)
+      if (autoSignInFailure) {
+        setError(`Account created. ${autoSignInFailure} You can sign in again from the sign-in page.`)
         setStatusMessage('')
         return
       }
