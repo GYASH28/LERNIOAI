@@ -10,6 +10,7 @@ import {
   authPrimaryButtonClass,
 } from '@/components/auth/auth-shell'
 import { confirmBrowserSession } from '@/lib/auth-browser-session'
+import { credentialSignInError, signInRouteError } from '@/lib/auth-feedback'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -31,9 +32,7 @@ function routeNotice(verified: string | null, error: string | null) {
   if (!error) return { status: null, error: null }
   return {
     status: null,
-    error: error === 'CredentialsSignin'
-      ? 'Invalid email or password.'
-      : 'Your session could not be verified. Please sign in again.',
+    error: signInRouteError(error),
   }
 }
 
@@ -78,8 +77,9 @@ export default function SignInPage() {
         callbackUrl,
       })
 
-      if (result?.error || result?.ok === false) {
-        setError('Invalid email or password.')
+      const signInFailure = credentialSignInError(result)
+      if (signInFailure) {
+        setError(signInFailure)
         return
       }
 
