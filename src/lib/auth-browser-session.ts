@@ -1,3 +1,5 @@
+import { isActiveSessionIdentity } from '@/lib/auth-session-validity'
+
 /**
  * Verify the authentication cookie on the CURRENT browser origin.
  * /api/user loads the whole Prisma profile and can return a transient 5xx
@@ -24,13 +26,7 @@ export async function confirmBrowserSession(
           user?: { id?: unknown; email?: unknown; role?: unknown }
         }
         const user = payload?.user
-        if (
-          typeof user?.id === 'string' &&
-          user.id.length > 0 &&
-          user.id !== 'undefined' &&
-          typeof user.email === 'string' &&
-          user.email.trim().toLowerCase() === normalizedEmail
-        ) {
+        if (isActiveSessionIdentity(user) && user.email.trim().toLowerCase() === normalizedEmail) {
           return {
             id: user.id,
             email: user.email,

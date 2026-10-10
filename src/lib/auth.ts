@@ -26,6 +26,7 @@ import {
   safeAuthRedirect,
 } from '@/lib/auth-policy'
 import { DEMO_AUTH_USER } from '@/lib/demo-fixtures'
+import { isActiveSessionIdentity } from '@/lib/auth-session-validity'
 import { checkRateLimit } from '@/lib/rate-limit'
 import { canUseCapability, resolveAuthorityContext, type AuthorityContext, type AuthorityScope } from '@/lib/authority'
 import { normalizeRole, type Role, type PermissionInput } from '@/lib/roles'
@@ -498,9 +499,8 @@ async function resolveUserFromSession(): Promise<AuthUser | null> {
   try {
     const session = await getServerSession(authOptions)
 
-    if (session?.user?.email && (session.user as any).id) {
-      const u = session.user as any
-      if (u.sessionRevoked) return null
+    if (isActiveSessionIdentity(session?.user)) {
+      const u = session.user
       return {
         id: String(u.id),
         email: String(u.email),

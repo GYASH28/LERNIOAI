@@ -50,6 +50,17 @@ import { NotificationBell } from '@/components/navbar/notification-bell'
 // registry is in src/lib/routes.ts (ROUTES array). These local arrays exist
 // because they use ViewKey (a union type) which the canonical registry
 // cannot enforce at runtime. Future refactoring should unify these.
+async function signOutOnCurrentHost() {
+  try {
+    // NextAuth's default redirect can use a stale Vercel hostname.
+    // Revoke this host's cookie first, then navigate locally.
+    await signOut({ redirect: false, callbackUrl: '/sign-in' })
+    window.location.assign('/sign-in')
+  } catch {
+    window.alert('We could not sign you out. Check your connection and try again.')
+  }
+}
+
 const NAV_ITEMS: { key: ViewKey; label: string; icon: typeof BookOpen }[] = [
   { key: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { key: 'learn', label: 'Learn', icon: BookOpen },
@@ -364,7 +375,7 @@ export function TopBar() {
               </button>
               {user && (
                 <button
-                  onClick={() => signOut({ callbackUrl: '/sign-in' })}
+                  onClick={() => { void signOutOnCurrentHost() }}
                   className="flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground"
                 >
                   <LogOut className="h-4 w-4" />
@@ -444,7 +455,7 @@ function UserMenu({ user, isDark, setPref }: { user: { name: string; email: stri
 
             {/* Logout */}
             <button
-              onClick={() => signOut({ callbackUrl: '/sign-in' })}
+              onClick={() => { void signOutOnCurrentHost() }}
               className="flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-sm text-red-600 hover:bg-red-500/10 transition-colors"
             >
               <LogOut className="h-4 w-4" />
