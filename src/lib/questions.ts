@@ -1,7 +1,7 @@
 /**
  * Safe question DTOs — strip correct answers before sending to the browser.
  *
- * Practice DTO: includes hint but NOT correctAnswer/explanation.
+ * Practice DTO: excludes hint, correctAnswer, and explanation.
  * Exam DTO:     includes NOTHING about the answer.
  * Review DTO:   full record, only returned AFTER a valid scored submission.
  */
@@ -47,7 +47,7 @@ function parseOptions(optionsJson: string | null): string[] | null {
   }
 }
 
-/** Practice: student may see hint later but never the answer upfront. */
+/** Practice: answer-side fields stay server-only; hints use the scoped hint endpoint. */
 export function toPracticeDTO(q: Question): PracticeQuestionDTO {
   return {
     id: q.id,

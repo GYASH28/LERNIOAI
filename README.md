@@ -50,7 +50,7 @@ Lernio AI is a complete academic intelligence system that covers the entire stud
 | UI | React 19, Tailwind CSS 4, shadcn/ui (Radix UI) |
 | Database | PostgreSQL 14+ via Prisma ORM 6 |
 | AI | Groq (Llama 3.3 70B / Llama 3.1 8B) |
-| Auth | NextAuth.js v4 (credentials + Google OAuth) |
+| Auth | NextAuth.js v4 (email/password credentials) |
 | Hosting | Vercel |
 | Fonts | Geist Sans + Geist Mono |
 | Animations | Framer Motion 12, CSS keyframes |
@@ -150,7 +150,8 @@ Open [http://localhost:3000](http://localhost:3000)
 |---|---|---|
 | `DATABASE_URL` | ✅ | PostgreSQL connection string |
 | `NEXTAUTH_SECRET` | ✅ | Random string (min 16 chars) |
-| `NEXTAUTH_URL` | ✅ in prod | Your deployment URL |
+| `NEXTAUTH_URL` | ✅ in prod | Your deployment URL; production must point at the live Lernio host |
+| `LERNIO_APP_URL` | Optional | Explicit canonical auth origin when a custom domain is used |
 | `GROQ_API_KEY` | Recommended | Enables AI tutor, quiz generation, planner |
 | `GROQ_MODEL` | Optional | Default: `llama-3.3-70b-versatile` |
 | `GROQ_FAST_MODEL` | Optional | Default: `llama-3.1-8b-instant` |

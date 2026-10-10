@@ -27,5 +27,22 @@ export default function manifest(): MetadataRoute.Manifest {
       },
     ],
     categories: ['education', 'productivity'],
+    shortcuts: [
+      {
+        name: 'Learn',
+        url: '/learn',
+        icons: [{ src: '/brand/lernio-logo-symbol.png', sizes: '96x96' }],
+      },
+      {
+        name: 'Dashboard',
+        url: '/dashboard',
+        icons: [{ src: '/brand/lernio-logo-symbol.png', sizes: '96x96' }],
+      },
+      {
+        name: 'AI Tutor',
+        url: '/tutor',
+        icons: [{ src: '/brand/lernio-logo-symbol.png', sizes: '96x96' }],
+      },
+    ],
   }
 }

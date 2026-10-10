@@ -14,7 +14,6 @@ const CORE_ROUTES = [
   '/privacy',
   '/terms',
   '/support',
-  '/dashboard',
 ] as const
 
 const CORE_WIDTHS = [320, 768, 1024, 1180, 1366] as const
