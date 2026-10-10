@@ -52,6 +52,8 @@ jobs:
       - run: npm run test
       - run: npm run build
       - run: npx playwright install --with-deps chromium
+      # Catch issues that occur only under real production CSP and React hydration.
+      - run: npm run test:production
       - run: npm run test:e2e
       - uses: actions/upload-artifact@v4
         if: failure()
