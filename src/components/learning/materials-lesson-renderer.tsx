@@ -110,17 +110,41 @@ export function MaterialsLessonRenderer({
   const [activeSection, setActiveSection] = useState('overview')
   const [progress, setProgress] = useState(0)
   const [search, setSearch] = useState('')
-  const [bookmarked, setBookmarked] = useState(() => {
-    if (typeof window === 'undefined') return false
-    const key = `lernio:materials:bookmark:${subject.subjectCode}:${lesson.slug}`
-    return localStorage.getItem(key) === '1'
-  })
+  const [bookmarked, setBookmarked] = useState(false)
   const mainRef = useRef<HTMLElement>(null)
 
-  const visibleSections = useMemo(
-    () => SECTIONS.filter((s) => s.has(lesson)),
-    [lesson],
-  )
+  useEffect(() => {
+    try {
+      setBookmarked(localStorage.getItem(`lernio:materials:bookmark:${subject.subjectCode}:${lesson.slug}`) === '1')
+    } catch {
+      // The reader remains usable when browser storage is blocked.
+    }
+  }, [subject.subjectCode, lesson.slug])
+
+  const visibleSections = useMemo(() => {
+    const value = search.trim().toLocaleLowerCase()
+    return SECTIONS.filter((section) => {
+      if (!section.has(lesson)) return false
+      if (!value) return true
+      // Filter only sections containing the phrase, not the entire lesson.
+      const searchable: Record<string, unknown> = {
+        overview: lesson.overview, objectives: lesson.objectives,
+        prerequisites: lesson.prerequisites, theory: lesson.theory,
+        concepts: lesson.keyConcepts, analogies: lesson.analogies,
+        flowcharts: lesson.flowcharts, mindmaps: lesson.mindMaps,
+        tables: lesson.tables, diagrams: lesson.diagrams,
+        code: lesson.codeExamples, complexity: lesson.complexity,
+        worked: lesson.workedExamples, mistakes: lesson.commonMistakes,
+        callouts: lesson.callouts, viva: lesson.vivaQuestions,
+        interview: lesson.interviewQuestions, exam: lesson.examQuestions,
+        formulas: lesson.formulas, summary: lesson.revisionSummary,
+        cheatsheet: lesson.cheatSheet, mnemonics: lesson.mnemonics,
+        quiz: lesson.practiceQuestions, flashcards: lesson.flashcards,
+        'ai-summaries': lesson.aiSummaries,
+      }
+      return JSON.stringify(searchable[section.id] ?? '').toLocaleLowerCase().includes(value)
+    })
+  }, [lesson, search])
 
   // Track scroll progress + active section
   useEffect(() => {
@@ -129,7 +153,7 @@ export function MaterialsLessonRenderer({
       const el = mainRef.current
       const totalHeight = el.scrollHeight - window.innerHeight + el.offsetTop
       const scrolled = window.scrollY - el.offsetTop
-      const pct = Math.max(0, Math.min(100, (scrolled / totalHeight) * 100))
+      const pct = Math.max(0, Math.min(100, (scrolled / Math.max(1, totalHeight)) * 100))
       setProgress(pct)
 
       for (const sec of visibleSections) {
@@ -151,8 +175,12 @@ export function MaterialsLessonRenderer({
     const key = `lernio:materials:bookmark:${subject.subjectCode}:${lesson.slug}`
     const next = !bookmarked
     setBookmarked(next)
-    if (next) localStorage.setItem(key, '1')
-    else localStorage.removeItem(key)
+    try {
+      if (next) localStorage.setItem(key, '1')
+      else localStorage.removeItem(key)
+    } catch {
+      // Saving is optional when localStorage is unavailable.
+    }
   }
 
   const handlePrint = () => window.print()
@@ -211,6 +239,20 @@ export function MaterialsLessonRenderer({
           <Printer className="h-3.5 w-3.5" /> PDF
         </button>
       </div>
+
+      {search.trim() && (
+        <div className="mb-4 flex items-center justify-between gap-3 rounded-lg border border-primary/20 bg-primary/5 px-4 py-3 text-xs" role="status">
+          <span>
+            <strong>{visibleSections.length}</strong> matching section{visibleSections.length === 1 ? '' : 's'} for “{search.trim()}”
+          </span>
+          <button type="button" className="font-semibold text-primary hover:underline" onClick={() => setSearch('')}>Clear search</button>
+        </div>
+      )}
+      {visibleSections.length === 0 && search.trim() && (
+        <div className="mb-4 rounded-xl border border-dashed border-border p-6 text-center text-sm text-muted-foreground">
+          No section contains this phrase. Try searching for a key term, formula or concept.
+        </div>
+      )}
 
       {/* AI Toolbar */}
       <AINotesToolbar

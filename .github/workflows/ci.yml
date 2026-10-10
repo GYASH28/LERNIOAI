@@ -47,6 +47,7 @@ jobs:
       - run: npm run check:migrations
       - run: npm run db:migrate:deploy
       - run: npm run lint
+      - run: npm run notes:audit
       - run: npm run typecheck
       - run: npm run test
       - run: npm run build

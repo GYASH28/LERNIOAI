@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import { getCurrentUser } from '@/lib/auth'
 import Link from 'next/link'
-import { BookOpen, ArrowLeft } from 'lucide-react'
+import { BookOpen, ArrowLeft, FileText, Layers, SearchCheck } from 'lucide-react'
 import { MaterialsList, type MaterialSubject } from './materials-list'
 import { getAvailableSubjectNotes } from '@/lib/curriculum/lesson-notes-loader'
 import { TopBar } from '@/components/layout/top-bar'
@@ -21,20 +21,55 @@ export default async function MaterialsPage() {
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <TopBar />
       <main className="flex-1 page-wipe bg-background text-foreground">
-      <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:px-8">
-        <Link href="/dashboard" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-3"><ArrowLeft className="h-4 w-4" />Dashboard</Link>
-        <h1 className="text-2xl font-bold">Materials</h1>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Detailed interactive lessons and downloadable study guides, built from the notes that
-          actually exist in Lernio.
-        </p>
+      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-10">
+        <Link href="/dashboard" className="mb-5 inline-flex min-h-9 items-center gap-2 text-sm font-medium text-muted-foreground transition hover:text-foreground">
+          <ArrowLeft className="h-4 w-4" /> Back to dashboard
+        </Link>
 
-        {/* Study Notes Section */}
-        <section className="mt-8">
-          <div className="mb-3 flex items-center gap-2"><BookOpen className="h-5 w-5 text-primary" /><h2 className="text-lg font-semibold">Study Notes (All Subjects)</h2></div>
-          <p className="mb-4 text-xs text-muted-foreground">
-            {materials.length} subjects · {detailedCount} with detailed interactive notes · {pdfCount} with downloadable PDFs.
-          </p>
+        <header className="relative overflow-hidden rounded-3xl border border-border/75 bg-gradient-to-br from-primary/10 via-card to-card p-5 sm:p-8 lg:p-10">
+          <div className="relative z-10 max-w-3xl">
+            <p className="mb-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[.18em] text-primary">
+              <BookOpen className="h-4 w-4" /> Lernio study library
+            </p>
+            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">Learn it. Understand it. Remember it.</h1>
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base">
+              All available semester resources in one place. Open a subject for
+              structured unit lessons, switch between in-depth reading and exam
+              revision, or download the original study guide.
+            </p>
+            <p className="mt-3 text-xs leading-5 text-muted-foreground">
+              Video search results are external suggestions until a lesson-specific lecture is academically reviewed.
+            </p>
+          </div>
+          <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />
+        </header>
+
+        <div className="mt-5 grid gap-3 sm:grid-cols-3">
+          <div className="flex items-center gap-3 rounded-2xl border border-border/75 bg-card p-4 sm:p-5">
+            <span className="rounded-xl bg-primary/10 p-3 text-primary"><Layers className="h-5 w-5" /></span>
+            <div><p className="text-2xl font-bold tabular-nums">{materials.length}</p><p className="text-xs text-muted-foreground">Subjects in the catalog</p></div>
+          </div>
+          <div className="flex items-center gap-3 rounded-2xl border border-border/75 bg-card p-4 sm:p-5">
+            <span className="rounded-xl bg-emerald-500/10 p-3 text-emerald-600"><BookOpen className="h-5 w-5" /></span>
+            <div><p className="text-2xl font-bold tabular-nums">{detailedCount}</p><p className="text-xs text-muted-foreground">Interactive note subjects</p></div>
+          </div>
+          <div className="flex items-center gap-3 rounded-2xl border border-border/75 bg-card p-4 sm:p-5">
+            <span className="rounded-xl bg-amber-500/10 p-3 text-amber-600"><FileText className="h-5 w-5" /></span>
+            <div><p className="text-2xl font-bold tabular-nums">{pdfCount}</p><p className="text-xs text-muted-foreground">Downloadable subject guides</p></div>
+          </div>
+        </div>
+
+        <section className="mt-9" aria-labelledby="materials-browse-heading">
+          <div className="mb-5 flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <h2 id="materials-browse-heading" className="flex items-center gap-2 text-xl font-bold sm:text-2xl">
+                <SearchCheck className="h-5 w-5 text-primary" /> Browse study resources
+              </h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Search by subject, filter by semester and explore lessons grouped into units.
+              </p>
+            </div>
+          </div>
           <MaterialsList pdfs={materials} />
         </section>
       </div>

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import {
   FileText,
   Download,
@@ -11,6 +11,8 @@ import {
   Award,
   Layers,
   Sparkles,
+  ExternalLink,
+  Film,
 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -35,6 +37,26 @@ export function MaterialsList({ pdfs }: { pdfs: MaterialSubject[] }) {
   const [search, setSearch] = useState('')
   const [semesterFilter, setSemesterFilter] = useState<number | null>(null)
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null)
+  const [resourceFilter, setResourceFilter] = useState<'all' | 'notes' | 'pdf'>('all')
+
+  useEffect(() => {
+    const sync = () => {
+      const code = new URLSearchParams(window.location.search).get('subject')
+      setSelectedSubject(code && pdfs.some(p => p.code === code) ? code : null)
+    }
+    sync()
+    window.addEventListener('popstate', sync)
+    return () => window.removeEventListener('popstate', sync)
+  }, [pdfs])
+
+  function selectSubject(code: string | null) {
+    setSelectedSubject(code)
+    const url = new URL(window.location.href)
+    if (code) url.searchParams.set('subject', code)
+    else url.searchParams.delete('subject')
+    window.history.pushState(null, '', url.pathname + url.search + url.hash)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
   const filtered = useMemo(() => {
     let result = pdfs
@@ -45,8 +67,10 @@ export function MaterialsList({ pdfs }: { pdfs: MaterialSubject[] }) {
     if (semesterFilter !== null) {
       result = result.filter(p => p.semester === semesterFilter)
     }
+    if (resourceFilter === 'notes') result = result.filter(p => p.lessons.length > 0)
+    if (resourceFilter === 'pdf') result = result.filter(p => Boolean(p.url))
     return result
-  }, [pdfs, search, semesterFilter])
+  }, [pdfs, search, semesterFilter, resourceFilter])
 
   const bySemester = useMemo(() => {
     const groups: Record<number, MaterialSubject[]> = {}
@@ -64,7 +88,7 @@ export function MaterialsList({ pdfs }: { pdfs: MaterialSubject[] }) {
       return (
         <div className="space-y-4">
           <button
-            onClick={() => setSelectedSubject(null)}
+            onClick={() => selectSubject(null)}
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
           >
             <ArrowLeft className="h-4 w-4" /> Back to all subjects
@@ -76,12 +100,19 @@ export function MaterialsList({ pdfs }: { pdfs: MaterialSubject[] }) {
 
     const lessonCount = subject.lessons.length
     const hasDetailedNotes = lessonCount > 0
+    const byUnit = subject.lessons.reduce<Record<number, { title: string; lessons: MaterialLessonLink[] }>>(
+      (groups, entry) => {
+        if (!groups[entry.unitNumber]) groups[entry.unitNumber] = { title: entry.unitTitle, lessons: [] }
+        groups[entry.unitNumber].lessons.push(entry)
+        return groups
+      }, {},
+    )
 
     return (
       <div className="materials-detail">
         {/* Back link */}
         <button
-          onClick={() => setSelectedSubject(null)}
+          onClick={() => selectSubject(null)}
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           <ArrowLeft className="h-4 w-4" /> Back to all subjects
@@ -115,7 +146,7 @@ export function MaterialsList({ pdfs }: { pdfs: MaterialSubject[] }) {
                 {hasDetailedNotes && (
                   <span className="materials-detail__meta-item" style={{ background: 'color-mix(in oklch, #10b981 15%, transparent)', color: '#059669', border: 'none' }}>
                     <Sparkles className="h-3 w-3" />
-                    Detailed notes
+                    Interactive lessons
                   </span>
                 )}
               </div>
@@ -130,26 +161,33 @@ export function MaterialsList({ pdfs }: { pdfs: MaterialSubject[] }) {
               <BookOpen className="h-4 w-4" />
             </div>
             <h3 className="materials-section__title">
-              {hasDetailedNotes ? 'Interactive Notes' : 'Study Resource'}
+              {hasDetailedNotes ? 'Lessons by unit' : 'Study Resource'}
             </h3>
           </div>
           <div className="materials-section__body">
             {hasDetailedNotes ? (
-              subject.lessons.map((lesson, index) => (
-                <Link
-                  key={lesson.slug}
-                  href={`/materials/lesson/${subject.code}/${lesson.slug}`}
-                  className="materials-lesson"
-                >
-                  <span className="materials-lesson__number">{index + 1}</span>
-                  <div className="materials-lesson__info">
-                    <p className="materials-lesson__title">{lesson.title}</p>
-                    <p className="materials-lesson__hint">
-                      Unit {lesson.unitNumber}: {lesson.unitTitle} · Open detailed notes
-                    </p>
+              Object.entries(byUnit).map(([number, group]) => (
+                <section key={number} className="space-y-2 rounded-xl border border-border/75 bg-card p-3 sm:p-4">
+                  <div className="flex items-start gap-3 px-2 pb-2">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-sm font-bold text-primary">{number}</span>
+                    <div>
+                      <h4 className="font-semibold leading-6">{group.title}</h4>
+                      <p className="text-xs text-muted-foreground">{group.lessons.length} lessons · Notes, revision and videos</p>
+                    </div>
                   </div>
-                  <ChevronRight className="h-4 w-4 text-muted-foreground shrink-0" />
-                </Link>
+                  {group.lessons.map((lesson, index) => (
+                    <Link key={lesson.slug}
+                      href={`/materials/lesson/${subject.code}/${lesson.slug}`}
+                      className="materials-lesson rounded-lg border border-transparent transition hover:border-primary/20 hover:bg-primary/5">
+                      <span className="materials-lesson__number">{index + 1}</span>
+                      <div className="materials-lesson__info">
+                        <p className="materials-lesson__title">{lesson.title}</p>
+                        <p className="materials-lesson__hint">Read · Slides · Revision · Video discovery</p>
+                      </div>
+                      <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />
+                    </Link>
+                  ))}
+                </section>
               ))
             ) : (
               <div className="rounded-xl border border-dashed border-border bg-muted/30 p-5">
@@ -167,16 +205,21 @@ export function MaterialsList({ pdfs }: { pdfs: MaterialSubject[] }) {
         <div className="grid gap-3 sm:grid-cols-2">
           {/* Download PDF when a real PDF exists. */}
           {subject.url ? (
-            <a href={subject.url} className="materials-download" download>
-              <div className="materials-download__icon">
-                <FileText className="h-5 w-5" />
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="materials-download__title">Complete Study Notes (PDF)</p>
-                <p className="materials-download__hint">Download the subject study guide</p>
-              </div>
-              <Download className="h-4 w-4 text-muted-foreground shrink-0" />
-            </a>
+            <div className="flex min-w-0 flex-col gap-2 rounded-xl border border-border bg-card p-3">
+              <a href={subject.url} target="_blank" rel="noopener noreferrer"
+                className="materials-download border-none p-2 transition-colors hover:bg-muted/40">
+                <div className="materials-download__icon"><FileText className="h-5 w-5" /></div>
+                <div className="min-w-0 flex-1">
+                  <p className="materials-download__title">Read study guide</p>
+                  <p className="materials-download__hint">Open full PDF in your browser</p>
+                </div>
+                <ExternalLink className="h-4 w-4 shrink-0 text-muted-foreground" />
+              </a>
+              <a href={subject.url} download
+                className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-border bg-muted/30 px-3 text-xs font-semibold transition hover:border-primary/40">
+                <Download className="h-4 w-4" /> Download PDF
+              </a>
+            </div>
           ) : (
             <div className="materials-download" aria-label="Interactive notes available">
               <div className="materials-download__icon">
@@ -206,6 +249,22 @@ export function MaterialsList({ pdfs }: { pdfs: MaterialSubject[] }) {
             <ChevronRight className="h-4 w-4 text-muted-foreground shrink-0" />
           </Link>
         </div>
+
+        <a
+          href={`https://www.youtube.com/results?search_query=${encodeURIComponent(subject.name + ' diploma lecture tutorial Hindi English')}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 flex min-h-14 items-center gap-3 rounded-xl border border-border bg-card px-4 py-3 transition hover:border-primary/40 hover:bg-primary/5"
+        >
+          <span className="rounded-lg bg-primary/10 p-2 text-primary"><Film className="h-5 w-5" /></span>
+          <span className="flex-1">
+            <span className="block text-sm font-semibold">Find subject video lessons</span>
+            <span className="block text-xs text-muted-foreground">
+              Search YouTube · External results are not yet reviewed by Lernio
+            </span>
+          </span>
+          <ExternalLink className="h-4 w-4 text-muted-foreground" />
+        </a>
 
         {/* Subject page link removed — Materials is now independent from Learn */}
       </div>
@@ -237,8 +296,26 @@ export function MaterialsList({ pdfs }: { pdfs: MaterialSubject[] }) {
         </select>
       </div>
 
+      <div className="flex flex-wrap gap-2" role="group" aria-label="Resource type">
+        {([
+          ['all', 'All resources'],
+          ['notes', 'Interactive lessons'],
+          ['pdf', 'PDF guides'],
+        ] as const).map(([value, label]) => (
+          <button key={value} type="button" aria-pressed={resourceFilter === value}
+            onClick={() => setResourceFilter(value)}
+            className={`min-h-10 rounded-full border px-4 text-xs font-semibold transition-colors ${
+              resourceFilter === value
+                ? 'border-primary bg-primary text-primary-foreground'
+                : 'border-border bg-card hover:border-primary/40 hover:bg-muted'
+            }`}>
+            {label}
+          </button>
+        ))}
+      </div>
+
       {/* Result count */}
-      <p className="text-xs text-muted-foreground">
+      <p aria-live="polite" className="text-xs text-muted-foreground">
         Showing <span className="font-semibold text-foreground">{filtered.length}</span> of {pdfs.length} subjects
       </p>
 
@@ -263,12 +340,12 @@ export function MaterialsList({ pdfs }: { pdfs: MaterialSubject[] }) {
               </h3>
               <span className="text-xs text-muted-foreground">· {subjects.length} subjects</span>
             </div>
-            <div className="grid gap-2 sm:grid-cols-2">
+            <div className="grid gap-3 sm:grid-cols-2">
               {subjects.map((pdf) => (
                 <button
                   key={pdf.code}
-                  onClick={() => setSelectedSubject(pdf.code)}
-                  className="subject-card"
+                  onClick={() => selectSubject(pdf.code)}
+                  className="subject-card min-h-[110px] rounded-2xl border border-border/80 bg-card p-4 text-left transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md sm:p-5"
                   type="button"
                 >
                   <div className="subject-card__icon">
@@ -281,7 +358,7 @@ export function MaterialsList({ pdfs }: { pdfs: MaterialSubject[] }) {
                       <span>·</span>
                       <span>{pdf.credits} credits</span>
                       {pdf.lessons.length > 0 && (
-                        <span className="subject-card__badge">Detailed</span>
+                        <span className="subject-card__badge">{pdf.lessons.length} lessons</span>
                       )}
                     </div>
                   </div>
