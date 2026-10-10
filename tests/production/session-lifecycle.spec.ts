@@ -50,7 +50,7 @@ test('student can register, maintain a session, log out, and log back in in prod
 
   await page.reload()
   await expect(page).toHaveURL(/\/dashboard(?:\?|$)/)
-  await expect(page.locator('main h1')).toContainText('CI')
+  await expect(page.locator('main h1').first()).toContainText('CI')
   expect((await session()).user?.email?.toLowerCase()).toBe(email)
 
   // Logout through the same-origin NextAuth endpoint using its CSRF token.
@@ -83,5 +83,9 @@ test('student can register, maintain a session, log out, and log back in in prod
   await page.getByLabel('Password').fill(password)
   await page.getByRole('button', { name: /^Sign in$/ }).click()
   await expect(page).toHaveURL(/\/dashboard(?:\?|$)/, { timeout: 30_000 })
-  expect((await session()).user?.email?.toLowerCase()).toBe(email)
+  await expect(page.locator('main h1').first()).toContainText('CI', { timeout: 20_000 })
+  await expect.poll(async () => (await session()).user?.email?.toLowerCase(), {
+    timeout: 15_000,
+    message: 'Returning login must establish a persistent same-origin session',
+  }).toBe(email)
 })
