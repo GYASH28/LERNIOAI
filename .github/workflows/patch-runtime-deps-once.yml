@@ -1,0 +1,49 @@
+name: One-time production dependency security update
+
+on:
+  push:
+    branches:
+      - fix/app-completion-critical-flows
+    paths:
+      - .github/workflows/patch-runtime-deps-once.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.repository == 'GYASH28/LERNIOAI'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Select patched runtime versions
+        run: |
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const filename = 'package.json';
+          const pkg = JSON.parse(fs.readFileSync(filename, 'utf8'));
+          pkg.dependencies.sharp = '^0.35.5';
+          pkg.overrides = { ...pkg.overrides, 'deepmerge-ts': '^8.0.0' };
+          fs.writeFileSync(filename, JSON.stringify(pkg, null, 2) + '\n');
+          NODE
+      - name: Resolve exact transitive versions
+        run: |
+          npm install --package-lock-only --ignore-scripts --no-audit
+      - name: Report production dependency vulnerabilities
+        run: npm audit --omit=dev --audit-level=high || true
+      - name: Save production dependency remediation
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm -f .github/workflows/patch-runtime-deps-once.yml
+          git add package.json package-lock.json .github/workflows/patch-runtime-deps-once.yml
+          if ! git diff --cached --quiet; then
+            git commit -m "fix(deps): update sharp and deepmerge-ts to patched versions"
+            git push origin HEAD:fix/app-completion-critical-flows
+          fi
