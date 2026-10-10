@@ -90,6 +90,24 @@ for (const file of files) {
   })
 }
 
+// These subjects have had their previously generic lessons explicitly rewritten.
+// Raise their quality bar as a CI regression gate. Other subjects remain visible
+// as editorial backlog rather than being incorrectly labelled complete.
+const EDITORIALLY_REWRITTEN_SUBJECTS = new Set([
+  'R23CP2405', // User Interface Programming
+  'R23CP1402', // Animation Techniques
+  'R23CP4402', // Indian Constitution
+])
+
+for (const subject of subjects) {
+  if (!EDITORIALLY_REWRITTEN_SUBJECTS.has(subject.code)) continue
+  if (subject.lessons === 0 || subject.expanded !== subject.lessons || subject.templated > 0) {
+    problems.push(
+      `Editorial regression in ${subject.name}: ${subject.expanded}/${subject.lessons} expanded; ${subject.templated} template-like`,
+    )
+  }
+}
+
 let reviewedVideos = 0
 if (fs.existsSync(reviewedDir)) {
   for (const file of fs.readdirSync(reviewedDir).filter((name) => name.endsWith('.json'))) {
@@ -116,6 +134,7 @@ const totals = {
   underdeveloped: subjects.reduce((sum, row) => sum + row.underdeveloped, 0),
   templated: subjects.reduce((sum, row) => sum + row.templated, 0),
   approvedDirectVideoRecords: reviewedVideos,
+  rewrittenSubjects: subjects.filter((s) => EDITORIALLY_REWRITTEN_SUBJECTS.has(s.code)).length,
 }
 console.log('\nLernio Notes & Materials Quality Audit')
 console.log('=====================================')
