@@ -23,7 +23,8 @@ describe('confirmBrowserSession', () => {
       email: ' STUDENT@example.com ',
       role: 'student',
     })
-    expect(fetchMock).toHaveBeenCalledExactlyOnceWith('/api/auth/session', {
+    expect(fetchMock).toHaveBeenCalledTimes(1)
+    expect(fetchMock).toHaveBeenCalledWith('/api/auth/session', {
       credentials: 'same-origin',
       cache: 'no-store',
     })
