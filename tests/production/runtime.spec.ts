@@ -49,3 +49,15 @@ test('production landing is navigable without a dark intro takeover or stale ser
   ))
   expect(scopes).toEqual([])
 })
+
+
+test('production exposes safe release metadata with no caching', async ({ request }) => {
+  const response = await request.get('/api/release')
+  expect(response.status()).toBe(200)
+  expect(response.headers()['cache-control']).toContain('no-store')
+  const payload = await response.json()
+  expect(payload.app).toBe('lernio')
+  expect(payload.revision === null || /^[a-f0-9]{40}$/.test(payload.revision)).toBe(true)
+  expect(['local', 'preview', 'production']).toContain(payload.stage)
+  expect(Object.keys(payload).sort()).toEqual(['app', 'revision', 'stage'])
+})

@@ -28,6 +28,7 @@ import {
 import { DEMO_AUTH_USER } from '@/lib/demo-fixtures'
 import { isActiveSessionIdentity } from '@/lib/auth-session-validity'
 import { checkRateLimit } from '@/lib/rate-limit'
+import { AUTH_SERVICE_UNAVAILABLE } from '@/lib/auth-feedback'
 import { canUseCapability, resolveAuthorityContext, type AuthorityContext, type AuthorityScope } from '@/lib/authority'
 import { normalizeRole, type Role, type PermissionInput } from '@/lib/roles'
 
@@ -138,9 +139,11 @@ const providers: NextAuthOptions['providers'] = [
           select: selectFields,
         })
       } catch {
-        // DB unreachable — sign-in cannot proceed. Return null so next-auth
-        // shows the generic "CredentialsSignin" error to the user.
-        return null
+        // A temporary database failure is not evidence of an incorrect
+        // password. Let NextAuth report a service error instead of an
+        // incorrect-credentials error that can trigger repeated retries.
+        console.error('[auth] credential lookup unavailable')
+        throw new Error(AUTH_SERVICE_UNAVAILABLE)
       }
 
       if (!user?.passwordHash || user.status === 'disabled') {
