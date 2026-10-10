@@ -19,7 +19,10 @@ export default defineConfig({
     reuseExistingServer: false,
     timeout: 90_000,
     env: {
-      NEXTAUTH_URL: 'http://127.0.0.1:3001',
+      // Simulate a stale host supplied by deployment configuration. The app
+      // must use the explicit canonical origin, not this obsolete value.
+      NEXTAUTH_URL: 'http://127.0.0.1:3999',
+      LERNIO_APP_URL: 'http://127.0.0.1:3001',
       LERNIO_DEMO_MODE: 'false',
     },
   },
