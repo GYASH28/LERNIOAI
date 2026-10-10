@@ -22,42 +22,8 @@
             "Federal structure allocates law-making authority between Union and states under constitutional rules.",
             "Article 368 provides amendment procedures, limited by the Supreme Court's basic structure doctrine."
           ],
-          "formulas": [
-            "Core formula: depends on specific topic within Constitution: Meaning and Importance",
-            "Relationship: connects to Introduction to Constitution",
-            "Result: output depends on input parameters"
-          ],
-          "tables": [
-            {
-              "title": "Constitution: Meaning and Importance — Key Aspects",
-              "headers": [
-                "Aspect",
-                "Description"
-              ],
-              "rows": [
-                [
-                  "Definition",
-                  "Fundamental concept in Indian Constitution"
-                ],
-                [
-                  "Importance",
-                  "Essential for understanding Introduction to Constitution"
-                ],
-                [
-                  "Application",
-                  "Used in real-world engineering scenarios"
-                ],
-                [
-                  "Exam Weight",
-                  "Frequently asked in diploma examinations"
-                ],
-                [
-                  "Difficulty",
-                  "Medium — requires conceptual understanding"
-                ]
-              ]
-            }
-          ],
+          "formulas": [],
+          "tables": [],
           "commonMistakes": [
             "Calling the Preamble a full list of enforceable rights without referring to the relevant Articles.",
             "Assuming Parliament can abolish any constitutional principle merely by following Article 368.",
@@ -100,35 +66,13 @@
             "Describe: Federal structure allocates law-making authority between Union and states under constitutional rules."
           ],
           "prerequisites": [
-            "Basic understanding of the subject prerequisites",
-            "Familiarity with fundamental concepts",
-            "Study of previous unit material"
+            "Basic understanding of Indian democratic institutions",
+            "Ability to distinguish Parliament, government and courts"
           ],
           "theory": "## What you will learn\nThe Constitution establishes India's government, distributes legal powers and protects constitutional guarantees. This lesson introduces the Preamble, parliamentary democracy, federalism, judicial review and the limits on constitutional amendments.\n\n## Constitutional concepts in practice\n\n## Read the Constitution as a rulebook for government\nThe Constitution is the highest legal framework for the Indian republic. It creates institutions, distributes powers and places limits on their use. The Preamble introduces guiding ideals: **justice, liberty, equality and fraternity**, within a sovereign, socialist, secular, democratic republic. The Preamble is valuable for understanding constitutional purpose, but a specific legal question usually also requires looking at the relevant Articles and judicial decisions.\n\n### Core features and why they matter\nIndia uses a parliamentary form of government: the Council of Ministers headed by the Prime Minister is responsible to the Lok Sabha. It uses a federal structure with a strong Union, and a written Constitution with both rigid and flexible amendment procedures. Judicial review allows courts to examine the constitutional validity of government actions.\n\n### How constitutional change works\nArticle 368 provides a major procedure for constitutional amendment. Different kinds of changes have different procedures; some require special parliamentary majorities and, for specified federal matters, ratification by states. The Supreme Court's **basic structure doctrine** limits Parliament's amendment power: Parliament may amend provisions but cannot destroy core constitutional features.\n\n### Student example\nSuppose a university announces an admission rule that treats eligible applicants differently without a lawful justification. The question is not merely whether the rule seems unfair; it is which legal/constitutional norm applies, which institution made the rule, and what remedy is available. Learn to distinguish a policy disagreement from a constitutional violation.\n\n## Constitutional facts to remember\n- The Constitution is India's supreme legal framework, defining institutions and limiting their powers.\n- The Preamble expresses justice, liberty, equality and fraternity and describes India's republican democratic character.\n- Parliamentary government makes the Council of Ministers collectively responsible to the Lok Sabha.\n- Federal structure allocates law-making authority between Union and states under constitutional rules.\n- Article 368 provides amendment procedures, limited by the Supreme Court's basic structure doctrine.\n\n## Short-answer practice\n1. State why a written constitution limits government authority.\n2. Draw a simple Union–state–judiciary relationship with the Preamble above.\n\n## Mistakes to avoid\n- Calling the Preamble a full list of enforceable rights without referring to the relevant Articles.\n- Assuming Parliament can abolish any constitutional principle merely by following Article 368.\n- Confusing a parliamentary republic with a directly elected executive president.\n- Describing federalism as total independence of Union and state institutions.",
-          "analogies": [
-            {
-              "scenario": "Concept like building blocks",
-              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
-            }
-          ],
-          "flowcharts": [
-            {
-              "type": "mermaid",
-              "title": "Constitution: Meaning and Importance — Process Flow",
-              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
-            }
-          ],
-          "mindMaps": [
-            {
-              "type": "mermaid",
-              "title": "Constitution: Meaning and Importance — Concept Map",
-              "content": "mindmap\n  root((Constitution: Meaning and Impo))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
-            }
-          ],
-          "complexity": {
-            "time": "O(1) to O(n) depending on operation",
-            "space": "O(1) to O(n) depending on data"
-          },
+          "analogies": [],
+          "flowcharts": [],
+          "mindMaps": [],
           "workedExamples": [
             {
               "title": "Explain constitutional supremacy",
@@ -140,82 +84,31 @@
           "vivaQuestions": [
             {
               "marks": 2,
-              "question": "Define Constitution.",
-              "modelAnswer": "Meaning and Importance: Core concept in Indian Constitution"
+              "question": "What is judicial review?",
+              "modelAnswer": "A court's power to assess the constitutional legality of laws and government actions."
             },
             {
               "marks": 2,
-              "question": "Define Definition.",
-              "modelAnswer": "The formal definition and scope of constitution: meaning and importance"
-            },
-            {
-              "marks": 2,
-              "question": "Define Key principles.",
-              "modelAnswer": "Fundamental rules and properties"
-            },
-            {
-              "marks": 2,
-              "question": "Define the main concept from this lesson.",
-              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
-            },
-            {
-              "marks": 2,
-              "question": "What is the practical importance of this topic?",
-              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+              "question": "What does Article 368 concern?",
+              "modelAnswer": "The main constitutional amendment procedure."
             }
           ],
-          "interviewQuestions": [
-            {
-              "marks": 5,
-              "question": "Explain: Core formula: depends on specific topic within Constitution: Meaning and Importance",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 10,
-              "question": "Explain the key concepts from this lesson with examples.",
-              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
-            },
-            {
-              "marks": 5,
-              "question": "What are the practical applications of this topic?",
-              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
-            }
-          ],
+          "interviewQuestions": [],
           "examQuestions": [
             {
               "marks": 2,
-              "question": "Define Constitution.",
-              "modelAnswer": "See key concepts section."
+              "question": "What is judicial review?",
+              "modelAnswer": "A court's power to assess the constitutional legality of laws and government actions."
             },
             {
               "marks": 2,
-              "question": "Define Definition.",
-              "modelAnswer": "See key concepts section."
+              "question": "What does Article 368 concern?",
+              "modelAnswer": "The main constitutional amendment procedure."
             },
             {
               "marks": 5,
-              "question": "Explain: Core formula: depends on specific topic within Constitution: Meaning and Importance",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 5,
-              "question": "Explain: Relationship: connects to Introduction to Constitution",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 10,
-              "question": "Explain Constitution: Meaning and Importance in detail with a diagram.",
-              "modelAnswer": "Constitution: Meaning and Importance is a key topic in Indian Constitution, covered under Introduction to Constitution. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "marks": 15,
-              "question": "Discuss Constitution: Meaning and Importance with examples, advantages, and applications.",
-              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
-              "tips": [
-                "Draw a diagram",
-                "Use examples",
-                "Mention real-world use case"
-              ]
+              "question": "A government order conflicts with a fundamental constitutional guarantee. Which one has higher authority?",
+              "modelAnswer": "The Constitution is supreme. A court may review the order; an inconsistent law or executive action can be set aside within the court's jurisdiction. The rule of law means public authorities are governed by legal limits, not merely by their own preference."
             }
           ],
           "revisionSummary": "The Constitution is India's supreme legal framework, defining institutions and limiting their powers. The Preamble expresses justice, liberty, equality and fraternity and describes India's republican democratic character. Parliamentary government makes the Council of Ministers collectively responsible to the Lok Sabha. Federal structure allocates law-making authority between Union and states under constitutional rules. Article 368 provides amendment procedures, limited by the Supreme Court's basic structure doctrine.",
@@ -223,38 +116,23 @@
             "State why a written constitution limits government authority.",
             "Draw a simple Union–state–judiciary relationship with the Preamble above."
           ],
-          "mnemonics": [
-            {
-              "phrase": "DRY",
-              "expansion": "Don't Repeat Yourself",
-              "meaning": "Avoid duplication in both code and study notes."
-            }
-          ],
+          "mnemonics": [],
           "callouts": [
             {
               "type": "exam-tip",
-              "content": "Always start with a clear definition"
+              "content": "Mention the Preamble's four key ideals and briefly explain each."
             },
             {
               "type": "exam-tip",
-              "content": "Draw a labelled diagram where applicable"
+              "content": "Use one practical example of constitutional limitation on state power."
             },
             {
               "type": "warning",
-              "content": "Not understanding the basic definition of Constitution: Meaning and Importance"
+              "content": "Calling the Preamble a full list of enforceable rights without referring to the relevant Articles."
             },
             {
               "type": "warning",
-              "content": "Confusing related concepts with each other"
-            },
-            {
-              "type": "info",
-              "title": "Why this matters",
-              "content": "Constitution: Meaning and Importance is a key topic in Indian Constitution, covered under Introduction to Constitution. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "type": "definition",
-              "content": "Constitution: Meaning and Importance: Core concept in Indian Constitution"
+              "content": "Assuming Parliament can abolish any constitutional principle merely by following Article 368."
             }
           ],
           "flashcards": [
@@ -267,16 +145,7 @@
               "back": "The main constitutional amendment procedure."
             }
           ],
-          "aiSummaries": [
-            {
-              "style": "short",
-              "content": "Constitution: Meaning and Importance is a key topic in Indian Constitution, covered under Introduction to Constitution. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "style": "detailed",
-              "content": "Constitution: Meaning and Importance is a key topic in Indian Constitution, covered under Introduction to Constitution. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Constitution: Meaning and Importance: Core concept in Indian Constitution, Definition: The formal definition and scope of constitution: meaning and importa, Key principles: Fundamental rules and properties."
-            }
-          ],
+          "aiSummaries": [],
           "recommendedNextLessons": [
             "fundamental-rights-and-duties",
             "president-and-parliament"
@@ -302,41 +171,8 @@
             "Part IV Directive Principles guide governance but are not directly enforceable in the same manner as Part III rights.",
             "Article 51A lists Fundamental Duties, including respect for constitutional ideals and development of scientific temper."
           ],
-          "formulas": [
-            "Core formula: depends on specific topic within Fundamental Rights and Duties",
-            "Relationship: connects to Fundamental Rights",
-            "Result: output depends on input parameters"
-          ],
+          "formulas": [],
           "tables": [
-            {
-              "title": "Fundamental Rights and Duties — Key Aspects",
-              "headers": [
-                "Aspect",
-                "Description"
-              ],
-              "rows": [
-                [
-                  "Definition",
-                  "Fundamental concept in Indian Constitution"
-                ],
-                [
-                  "Importance",
-                  "Essential for understanding Fundamental Rights"
-                ],
-                [
-                  "Application",
-                  "Used in real-world engineering scenarios"
-                ],
-                [
-                  "Exam Weight",
-                  "Frequently asked in diploma examinations"
-                ],
-                [
-                  "Difficulty",
-                  "Medium — requires conceptual understanding"
-                ]
-              ]
-            },
             {
               "title": "Writs at a glance",
               "headers": [
@@ -409,35 +245,13 @@
             "Describe: Part IV Directive Principles guide governance but are not directly enforceable in the same manner as Part III rights."
           ],
           "prerequisites": [
-            "Basic understanding of the subject prerequisites",
-            "Familiarity with fundamental concepts",
-            "Study of previous unit material"
+            "Basic understanding of Indian democratic institutions",
+            "Ability to distinguish Parliament, government and courts"
           ],
           "theory": "## What you will learn\nPart III guarantees fundamental rights; Part IV contains Directive Principles of State Policy; Article 51A sets out citizens' fundamental duties. Learn the differences in enforceability and the role of constitutional remedies.\n\n## Constitutional concepts in practice\n\n## Rights protect individuals; duties guide citizens\nPart III of the Constitution contains fundamental rights. Important categories include equality (Articles 14–18), freedoms (including Article 19 and life/personal liberty under Article 21), protection against exploitation, freedom of religion, cultural/educational rights and constitutional remedies under Article 32. Rights are not identical: some belong to citizens specifically, while others protect all persons. Some rights allow reasonable restrictions subject to constitutional conditions.\n\n### Constitutional remedies\nA right matters only when enforceable. Article 32 provides a route to approach the Supreme Court for enforcement of fundamental rights; High Courts have broader writ jurisdiction under Article 226. Learn the usual five writs—**habeas corpus, mandamus, prohibition, certiorari and quo warranto**—with a one-line purpose for each.\n\n### Directive Principles and duties\nDirective Principles (Part IV) guide state policy and are not directly enforceable by courts in the same way as fundamental rights. Fundamental Duties appear under Article 51A and include respect for constitutional ideals, protection of public property and development of scientific temper. They are civic obligations but are not a substitute for fundamental rights.\n\n### Example: public discussion\nFreedom of expression is fundamental but not unlimited: Article 19(2) permits specified reasonable restrictions. In an exam, don't answer 'absolute freedom' or 'no freedom'. Explain the right, applicable constitutional limits and the balance involved.\n\n## Constitutional facts to remember\n- Articles 14–18 contain equality protections; Article 19 addresses specific citizen freedoms subject to constitutionally permitted restrictions.\n- Article 21 protects life and personal liberty under constitutional law.\n- Article 32 enables Supreme Court enforcement of fundamental rights; Article 226 gives High Courts a broader writ jurisdiction.\n- Part IV Directive Principles guide governance but are not directly enforceable in the same manner as Part III rights.\n- Article 51A lists Fundamental Duties, including respect for constitutional ideals and development of scientific temper.\n\n## Short-answer practice\n1. Match the five common writs with their purpose.\n2. Explain why DPSPs and Fundamental Rights have different enforceability.\n\n## Mistakes to avoid\n- Saying that all fundamental rights are unrestricted or apply identically to citizens and non-citizens.\n- Confusing Directive Principles with directly enforceable Part III guarantees.\n- Treating Fundamental Duties as replacements for legal rights.\n- Mixing up habeas corpus (unlawful detention) with mandamus (public duty).",
-          "analogies": [
-            {
-              "scenario": "Concept like building blocks",
-              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
-            }
-          ],
-          "flowcharts": [
-            {
-              "type": "mermaid",
-              "title": "Fundamental Rights and Duties — Process Flow",
-              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
-            }
-          ],
-          "mindMaps": [
-            {
-              "type": "mermaid",
-              "title": "Fundamental Rights and Duties — Concept Map",
-              "content": "mindmap\n  root((Fundamental Rights and Duties))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
-            }
-          ],
-          "complexity": {
-            "time": "O(1) to O(n) depending on operation",
-            "space": "O(1) to O(n) depending on data"
-          },
+          "analogies": [],
+          "flowcharts": [],
+          "mindMaps": [],
           "workedExamples": [
             {
               "title": "Choose a writ",
@@ -449,82 +263,31 @@
           "vivaQuestions": [
             {
               "marks": 2,
-              "question": "Define Fundamental Rights and Duties.",
-              "modelAnswer": "Core concept in Indian Constitution"
+              "question": "Article 32?",
+              "modelAnswer": "Constitutional remedies before the Supreme Court for enforcement of fundamental rights."
             },
             {
               "marks": 2,
-              "question": "Define Definition.",
-              "modelAnswer": "The formal definition and scope of fundamental rights and duties"
-            },
-            {
-              "marks": 2,
-              "question": "Define Key principles.",
-              "modelAnswer": "Fundamental rules and properties"
-            },
-            {
-              "marks": 2,
-              "question": "Define the main concept from this lesson.",
-              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
-            },
-            {
-              "marks": 2,
-              "question": "What is the practical importance of this topic?",
-              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+              "question": "Article 51A?",
+              "modelAnswer": "Fundamental Duties of citizens."
             }
           ],
-          "interviewQuestions": [
-            {
-              "marks": 5,
-              "question": "Explain: Core formula: depends on specific topic within Fundamental Rights and Duties",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 10,
-              "question": "Explain the key concepts from this lesson with examples.",
-              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
-            },
-            {
-              "marks": 5,
-              "question": "What are the practical applications of this topic?",
-              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
-            }
-          ],
+          "interviewQuestions": [],
           "examQuestions": [
             {
               "marks": 2,
-              "question": "Define Fundamental Rights and Duties.",
-              "modelAnswer": "See key concepts section."
+              "question": "Article 32?",
+              "modelAnswer": "Constitutional remedies before the Supreme Court for enforcement of fundamental rights."
             },
             {
               "marks": 2,
-              "question": "Define Definition.",
-              "modelAnswer": "See key concepts section."
+              "question": "Article 51A?",
+              "modelAnswer": "Fundamental Duties of citizens."
             },
             {
               "marks": 5,
-              "question": "Explain: Core formula: depends on specific topic within Fundamental Rights and Duties",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 5,
-              "question": "Explain: Relationship: connects to Fundamental Rights",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 10,
-              "question": "Explain Fundamental Rights and Duties in detail with a diagram.",
-              "modelAnswer": "Fundamental Rights and Duties is a key topic in Indian Constitution, covered under Fundamental Rights. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "marks": 15,
-              "question": "Discuss Fundamental Rights and Duties with examples, advantages, and applications.",
-              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
-              "tips": [
-                "Draw a diagram",
-                "Use examples",
-                "Mention real-world use case"
-              ]
+              "question": "A person has been detained without lawful authority and their family seeks immediate judicial review.",
+              "modelAnswer": "A petition for habeas corpus may be appropriate, asking the court to require the detainee to be produced and the detention justified. Habeas corpus protects against unlawful detention. Courts decide the facts and legality."
             }
           ],
           "revisionSummary": "Articles 14–18 contain equality protections; Article 19 addresses specific citizen freedoms subject to constitutionally permitted restrictions. Article 21 protects life and personal liberty under constitutional law. Article 32 enables Supreme Court enforcement of fundamental rights; Article 226 gives High Courts a broader writ jurisdiction. Part IV Directive Principles guide governance but are not directly enforceable in the same manner as Part III rights. Article 51A lists Fundamental Duties, including respect for constitutional ideals and development of scientific temper.",
@@ -532,38 +295,23 @@
             "Match the five common writs with their purpose.",
             "Explain why DPSPs and Fundamental Rights have different enforceability."
           ],
-          "mnemonics": [
-            {
-              "phrase": "DRY",
-              "expansion": "Don't Repeat Yourself",
-              "meaning": "Avoid duplication in both code and study notes."
-            }
-          ],
+          "mnemonics": [],
           "callouts": [
             {
               "type": "exam-tip",
-              "content": "Always start with a clear definition"
+              "content": "Differentiate Rights, DPSP and Duties in a 3-column table."
             },
             {
               "type": "exam-tip",
-              "content": "Draw a labelled diagram where applicable"
+              "content": "Give the purpose of each of the five writs."
             },
             {
               "type": "warning",
-              "content": "Not understanding the basic definition of Fundamental Rights and Duties"
+              "content": "Saying that all fundamental rights are unrestricted or apply identically to citizens and non-citizens."
             },
             {
               "type": "warning",
-              "content": "Confusing related concepts with each other"
-            },
-            {
-              "type": "info",
-              "title": "Why this matters",
-              "content": "Fundamental Rights and Duties is a key topic in Indian Constitution, covered under Fundamental Rights. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "type": "definition",
-              "content": "Fundamental Rights and Duties: Core concept in Indian Constitution"
+              "content": "Confusing Directive Principles with directly enforceable Part III guarantees."
             }
           ],
           "flashcards": [
@@ -576,16 +324,7 @@
               "back": "Fundamental Duties of citizens."
             }
           ],
-          "aiSummaries": [
-            {
-              "style": "short",
-              "content": "Fundamental Rights and Duties is a key topic in Indian Constitution, covered under Fundamental Rights. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "style": "detailed",
-              "content": "Fundamental Rights and Duties is a key topic in Indian Constitution, covered under Fundamental Rights. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Fundamental Rights and Duties: Core concept in Indian Constitution, Definition: The formal definition and scope of fundamental rights and duties, Key principles: Fundamental rules and properties."
-            }
-          ],
+          "aiSummaries": [],
           "recommendedNextLessons": [
             "president-and-parliament",
             "governor-and-state-legislature"
@@ -611,42 +350,8 @@
             "An ordinary Bill normally needs passage through both Houses according to applicable procedures and presidential assent.",
             "Budget scrutiny, questions and committees help Parliament supervise the executive."
           ],
-          "formulas": [
-            "Core formula: depends on specific topic within President and Parliament",
-            "Relationship: connects to Union Government",
-            "Result: output depends on input parameters"
-          ],
-          "tables": [
-            {
-              "title": "President and Parliament — Key Aspects",
-              "headers": [
-                "Aspect",
-                "Description"
-              ],
-              "rows": [
-                [
-                  "Definition",
-                  "Fundamental concept in Indian Constitution"
-                ],
-                [
-                  "Importance",
-                  "Essential for understanding Union Government"
-                ],
-                [
-                  "Application",
-                  "Used in real-world engineering scenarios"
-                ],
-                [
-                  "Exam Weight",
-                  "Frequently asked in diploma examinations"
-                ],
-                [
-                  "Difficulty",
-                  "Medium — requires conceptual understanding"
-                ]
-              ]
-            }
-          ],
+          "formulas": [],
+          "tables": [],
           "commonMistakes": [
             "Saying Rajya Sabha is dissolved with every Lok Sabha election.",
             "Claiming the President unilaterally runs the entire executive without the Council of Ministers.",
@@ -689,35 +394,13 @@
             "Describe: An ordinary Bill normally needs passage through both Houses according to applicable procedures and presidential assent."
           ],
           "prerequisites": [
-            "Basic understanding of the subject prerequisites",
-            "Familiarity with fundamental concepts",
-            "Study of previous unit material"
+            "Basic understanding of Indian democratic institutions",
+            "Ability to distinguish Parliament, government and courts"
           ],
           "theory": "## What you will learn\nThe President is the constitutional head of the Union; the Prime Minister and Council of Ministers run most daily executive functions. Parliament makes laws and holds the political executive accountable.\n\n## Constitutional concepts in practice\n\n## Distinguish formal head of state from the political executive\nThe President is the constitutional head of the Union. The Prime Minister and Council of Ministers exercise most day-to-day executive power under the parliamentary system. The President normally acts on ministerial advice subject to the constitutional rules; do not confuse formal power vested in an office with routine independent policy-making.\n\n### Parliament's structure and work\nParliament comprises the President, Lok Sabha and Rajya Sabha. Lok Sabha members are directly elected; Rajya Sabha is a continuing chamber whose membership changes by rotation. Parliament makes Union laws, debates public matters, authorises expenditure and holds the executive accountable. A government must retain the confidence of the Lok Sabha.\n\n### How an ordinary Bill becomes a law\nA Bill is introduced and considered through the parliamentary process. It must be agreed by both Houses according to applicable rules and then receive presidential assent to become an Act. **Money Bills follow special constitutional procedures**, particularly regarding the Lok Sabha and the Rajya Sabha's role, so do not describe every Bill in exactly the same way.\n\n### Parliamentary accountability\nQuestions, debates, committees, budget scrutiny and motions can require ministers to explain actions. The legislature's ability to question the executive is central to responsible government. For exam answers, compare President, Prime Minister, Lok Sabha and Rajya Sabha in a clear role table.\n\n## Constitutional facts to remember\n- The President is the constitutional head of state and ordinarily acts according to the constitutional system of ministerial advice.\n- The Prime Minister leads the Council of Ministers, which is collectively responsible to the Lok Sabha.\n- Parliament consists of the President, Lok Sabha and Rajya Sabha, with differing functions and modes of membership.\n- An ordinary Bill normally needs passage through both Houses according to applicable procedures and presidential assent.\n- Budget scrutiny, questions and committees help Parliament supervise the executive.\n\n## Short-answer practice\n1. Draw the passage of an ordinary Bill ending in presidential assent.\n2. State two ways Parliament can question the executive.\n\n## Mistakes to avoid\n- Saying Rajya Sabha is dissolved with every Lok Sabha election.\n- Claiming the President unilaterally runs the entire executive without the Council of Ministers.\n- Treating Money Bills and ordinary Bills as having identical passage procedures.\n- Forgetting the President is a constituent of Parliament even though not a member of either House.",
-          "analogies": [
-            {
-              "scenario": "Concept like building blocks",
-              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
-            }
-          ],
-          "flowcharts": [
-            {
-              "type": "mermaid",
-              "title": "President and Parliament — Process Flow",
-              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
-            }
-          ],
-          "mindMaps": [
-            {
-              "type": "mermaid",
-              "title": "President and Parliament — Concept Map",
-              "content": "mindmap\n  root((President and Parliament))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
-            }
-          ],
-          "complexity": {
-            "time": "O(1) to O(n) depending on operation",
-            "space": "O(1) to O(n) depending on data"
-          },
+          "analogies": [],
+          "flowcharts": [],
+          "mindMaps": [],
           "workedExamples": [
             {
               "title": "Ordinary Bill flow",
@@ -729,82 +412,31 @@
           "vivaQuestions": [
             {
               "marks": 2,
-              "question": "Define President and Parliament.",
-              "modelAnswer": "Core concept in Indian Constitution"
+              "question": "Who leads the Union Council of Ministers?",
+              "modelAnswer": "The Prime Minister."
             },
             {
               "marks": 2,
-              "question": "Define Definition.",
-              "modelAnswer": "The formal definition and scope of president and parliament"
-            },
-            {
-              "marks": 2,
-              "question": "Define Key principles.",
-              "modelAnswer": "Fundamental rules and properties"
-            },
-            {
-              "marks": 2,
-              "question": "Define the main concept from this lesson.",
-              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
-            },
-            {
-              "marks": 2,
-              "question": "What is the practical importance of this topic?",
-              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+              "question": "Who are the constituents of Parliament?",
+              "modelAnswer": "The President, Lok Sabha and Rajya Sabha."
             }
           ],
-          "interviewQuestions": [
-            {
-              "marks": 5,
-              "question": "Explain: Core formula: depends on specific topic within President and Parliament",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 10,
-              "question": "Explain the key concepts from this lesson with examples.",
-              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
-            },
-            {
-              "marks": 5,
-              "question": "What are the practical applications of this topic?",
-              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
-            }
-          ],
+          "interviewQuestions": [],
           "examQuestions": [
             {
               "marks": 2,
-              "question": "Define President and Parliament.",
-              "modelAnswer": "See key concepts section."
+              "question": "Who leads the Union Council of Ministers?",
+              "modelAnswer": "The Prime Minister."
             },
             {
               "marks": 2,
-              "question": "Define Definition.",
-              "modelAnswer": "See key concepts section."
+              "question": "Who are the constituents of Parliament?",
+              "modelAnswer": "The President, Lok Sabha and Rajya Sabha."
             },
             {
               "marks": 5,
-              "question": "Explain: Core formula: depends on specific topic within President and Parliament",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 5,
-              "question": "Explain: Relationship: connects to Union Government",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 10,
-              "question": "Explain President and Parliament in detail with a diagram.",
-              "modelAnswer": "President and Parliament is a key topic in Indian Constitution, covered under Union Government. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "marks": 15,
-              "question": "Discuss President and Parliament with examples, advantages, and applications.",
-              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
-              "tips": [
-                "Draw a diagram",
-                "Use examples",
-                "Mention real-world use case"
-              ]
+              "question": "Explain the broad passage of an ordinary Bill into law.",
+              "modelAnswer": "Introduction in a House → stages of debate/committee consideration → passage by that House → consideration and passage by the other House → presidential assent → Act. Details can vary; the key point is bicameral legislative approval and assent, unlike special Money Bill procedures."
             }
           ],
           "revisionSummary": "The President is the constitutional head of state and ordinarily acts according to the constitutional system of ministerial advice. The Prime Minister leads the Council of Ministers, which is collectively responsible to the Lok Sabha. Parliament consists of the President, Lok Sabha and Rajya Sabha, with differing functions and modes of membership. An ordinary Bill normally needs passage through both Houses according to applicable procedures and presidential assent. Budget scrutiny, questions and committees help Parliament supervise the executive.",
@@ -812,38 +444,23 @@
             "Draw the passage of an ordinary Bill ending in presidential assent.",
             "State two ways Parliament can question the executive."
           ],
-          "mnemonics": [
-            {
-              "phrase": "DRY",
-              "expansion": "Don't Repeat Yourself",
-              "meaning": "Avoid duplication in both code and study notes."
-            }
-          ],
+          "mnemonics": [],
           "callouts": [
             {
               "type": "exam-tip",
-              "content": "Always start with a clear definition"
+              "content": "Draw a three-part Parliament structure and identify direct/indirect election."
             },
             {
               "type": "exam-tip",
-              "content": "Draw a labelled diagram where applicable"
+              "content": "Explain ordinary law-making in an arrow diagram."
             },
             {
               "type": "warning",
-              "content": "Not understanding the basic definition of President and Parliament"
+              "content": "Saying Rajya Sabha is dissolved with every Lok Sabha election."
             },
             {
               "type": "warning",
-              "content": "Confusing related concepts with each other"
-            },
-            {
-              "type": "info",
-              "title": "Why this matters",
-              "content": "President and Parliament is a key topic in Indian Constitution, covered under Union Government. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "type": "definition",
-              "content": "President and Parliament: Core concept in Indian Constitution"
+              "content": "Claiming the President unilaterally runs the entire executive without the Council of Ministers."
             }
           ],
           "flashcards": [
@@ -856,16 +473,7 @@
               "back": "The President, Lok Sabha and Rajya Sabha."
             }
           ],
-          "aiSummaries": [
-            {
-              "style": "short",
-              "content": "President and Parliament is a key topic in Indian Constitution, covered under Union Government. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "style": "detailed",
-              "content": "President and Parliament is a key topic in Indian Constitution, covered under Union Government. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: President and Parliament: Core concept in Indian Constitution, Definition: The formal definition and scope of president and parliament, Key principles: Fundamental rules and properties."
-            }
-          ],
+          "aiSummaries": [],
           "recommendedNextLessons": [
             "governor-and-state-legislature",
             "supreme-court-and-high-courts"
@@ -898,42 +506,8 @@
             "State laws must follow the applicable Constitution-based distribution of legislative powers.",
             "The Seventh Schedule outlines Union, State and Concurrent Lists and helps explain Union–state competence."
           ],
-          "formulas": [
-            "Core formula: depends on specific topic within Governor and State Legislature",
-            "Relationship: connects to State Government",
-            "Result: output depends on input parameters"
-          ],
-          "tables": [
-            {
-              "title": "Governor and State Legislature — Key Aspects",
-              "headers": [
-                "Aspect",
-                "Description"
-              ],
-              "rows": [
-                [
-                  "Definition",
-                  "Fundamental concept in Indian Constitution"
-                ],
-                [
-                  "Importance",
-                  "Essential for understanding State Government"
-                ],
-                [
-                  "Application",
-                  "Used in real-world engineering scenarios"
-                ],
-                [
-                  "Exam Weight",
-                  "Frequently asked in diploma examinations"
-                ],
-                [
-                  "Difficulty",
-                  "Medium — requires conceptual understanding"
-                ]
-              ]
-            }
-          ],
+          "formulas": [],
+          "tables": [],
           "commonMistakes": [
             "Claiming that every state legislature has both an Assembly and a Council.",
             "Treating a Governor and an elected Chief Minister as holding identical political roles.",
@@ -976,35 +550,13 @@
             "Describe: State laws must follow the applicable Constitution-based distribution of legislative powers."
           ],
           "prerequisites": [
-            "Basic understanding of the subject prerequisites",
-            "Familiarity with fundamental concepts",
-            "Study of previous unit material"
+            "Basic understanding of Indian democratic institutions",
+            "Ability to distinguish Parliament, government and courts"
           ],
           "theory": "## What you will learn\nA state normally follows the parliamentary pattern: the Governor is constitutional head and the Chief Minister/Council of Ministers form the day-to-day executive. The Legislature may be unicameral or bicameral.\n\n## Constitutional concepts in practice\n\n## State executive and legislature\nAt state level, the Governor is the constitutional head, while the Chief Minister and Council of Ministers normally conduct day-to-day governance and are accountable to the legislative assembly. The state executive arrangement broadly resembles the Union's parliamentary model, but their constitutional positions and responsibilities should not be treated as identical.\n\n### Legislative Assembly and Council\nA State Legislative Assembly (Vidhan Sabha) is elected directly. Some states have a Legislative Council (Vidhan Parishad), an upper chamber with a special composition and limited powers compared with the Assembly. Not all states have a Legislative Council. In a bicameral state, the legislature includes both Houses and the Governor.\n\n### State law-making and finances\nState legislatures make laws within their constitutional fields, subject to Union-State legislative arrangements and other constitutional limits. Money Bills and budget decisions receive special treatment. A state government's political survival depends on the confidence of its Legislative Assembly.\n\n### Union–State distribution\nThe Seventh Schedule sets out Union, State and Concurrent legislative lists, but constitutional rules for legislative competence and conflicts also matter. Use a real example: local public health, education and criminal law involve different kinds of powers and coordination. Avoid the incorrect claim that all subjects are exclusively controlled by one level of government.\n\n### Exam structure\nWhen comparing President and Governor or Parliament and State Legislature, use headings: method of appointment/election, main role, responsible Council of Ministers, law-making role and relevant constitutional limits.\n\n## Constitutional facts to remember\n- The Governor holds the constitutional office of head of a state; the Chief Minister leads the state's Council of Ministers.\n- A State Legislative Assembly is directly elected and is essential to responsible state government.\n- Only certain states have a Legislative Council; a unicameral state has only the Assembly.\n- State laws must follow the applicable Constitution-based distribution of legislative powers.\n- The Seventh Schedule outlines Union, State and Concurrent Lists and helps explain Union–state competence.\n\n## Short-answer practice\n1. Make a comparison between Assembly and Council.\n2. Show how a state Bill becomes law under applicable constitutional rules.\n\n## Mistakes to avoid\n- Claiming that every state legislature has both an Assembly and a Council.\n- Treating a Governor and an elected Chief Minister as holding identical political roles.\n- Assuming the State List completely excludes constitutionally authorised Union legislation.\n- Confusing the Legislative Council of a state with Rajya Sabha.",
-          "analogies": [
-            {
-              "scenario": "Concept like building blocks",
-              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
-            }
-          ],
-          "flowcharts": [
-            {
-              "type": "mermaid",
-              "title": "Governor and State Legislature — Process Flow",
-              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
-            }
-          ],
-          "mindMaps": [
-            {
-              "type": "mermaid",
-              "title": "Governor and State Legislature — Concept Map",
-              "content": "mindmap\n  root((Governor and State Legislature))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
-            }
-          ],
-          "complexity": {
-            "time": "O(1) to O(n) depending on operation",
-            "space": "O(1) to O(n) depending on data"
-          },
+          "analogies": [],
+          "flowcharts": [],
+          "mindMaps": [],
           "workedExamples": [
             {
               "title": "State legislature structure",
@@ -1016,82 +568,31 @@
           "vivaQuestions": [
             {
               "marks": 2,
-              "question": "Define Governor and State Legislature.",
-              "modelAnswer": "Core concept in Indian Constitution"
+              "question": "Unicameral state?",
+              "modelAnswer": "A state with only a Legislative Assembly."
             },
             {
               "marks": 2,
-              "question": "Define Definition.",
-              "modelAnswer": "The formal definition and scope of governor and state legislature"
-            },
-            {
-              "marks": 2,
-              "question": "Define Key principles.",
-              "modelAnswer": "Fundamental rules and properties"
-            },
-            {
-              "marks": 2,
-              "question": "Define the main concept from this lesson.",
-              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
-            },
-            {
-              "marks": 2,
-              "question": "What is the practical importance of this topic?",
-              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+              "question": "Chief Minister's role?",
+              "modelAnswer": "Leads the elected state's Council of Ministers."
             }
           ],
-          "interviewQuestions": [
-            {
-              "marks": 5,
-              "question": "Explain: Core formula: depends on specific topic within Governor and State Legislature",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 10,
-              "question": "Explain the key concepts from this lesson with examples.",
-              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
-            },
-            {
-              "marks": 5,
-              "question": "What are the practical applications of this topic?",
-              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
-            }
-          ],
+          "interviewQuestions": [],
           "examQuestions": [
             {
               "marks": 2,
-              "question": "Define Governor and State Legislature.",
-              "modelAnswer": "See key concepts section."
+              "question": "Unicameral state?",
+              "modelAnswer": "A state with only a Legislative Assembly."
             },
             {
               "marks": 2,
-              "question": "Define Definition.",
-              "modelAnswer": "See key concepts section."
+              "question": "Chief Minister's role?",
+              "modelAnswer": "Leads the elected state's Council of Ministers."
             },
             {
               "marks": 5,
-              "question": "Explain: Core formula: depends on specific topic within Governor and State Legislature",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 5,
-              "question": "Explain: Relationship: connects to State Government",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 10,
-              "question": "Explain Governor and State Legislature in detail with a diagram.",
-              "modelAnswer": "Governor and State Legislature is a key topic in Indian Constitution, covered under State Government. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "marks": 15,
-              "question": "Discuss Governor and State Legislature with examples, advantages, and applications.",
-              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
-              "tips": [
-                "Draw a diagram",
-                "Use examples",
-                "Mention real-world use case"
-              ]
+              "question": "Does every Indian state have two legislative Houses?",
+              "modelAnswer": "No. Every state has a Legislative Assembly, but only certain states also have a Legislative Council. A bicameral state has two Houses, while a unicameral state has only the Assembly."
             }
           ],
           "revisionSummary": "The Governor holds the constitutional office of head of a state; the Chief Minister leads the state's Council of Ministers. A State Legislative Assembly is directly elected and is essential to responsible state government. Only certain states have a Legislative Council; a unicameral state has only the Assembly. State laws must follow the applicable Constitution-based distribution of legislative powers. The Seventh Schedule outlines Union, State and Concurrent Lists and helps explain Union–state competence.",
@@ -1099,38 +600,23 @@
             "Make a comparison between Assembly and Council.",
             "Show how a state Bill becomes law under applicable constitutional rules."
           ],
-          "mnemonics": [
-            {
-              "phrase": "DRY",
-              "expansion": "Don't Repeat Yourself",
-              "meaning": "Avoid duplication in both code and study notes."
-            }
-          ],
+          "mnemonics": [],
           "callouts": [
             {
               "type": "exam-tip",
-              "content": "Always start with a clear definition"
+              "content": "State the difference between unicameral and bicameral legislatures."
             },
             {
               "type": "exam-tip",
-              "content": "Draw a labelled diagram where applicable"
+              "content": "Draw Governor → Chief Minister/Council and Assembly accountability."
             },
             {
               "type": "warning",
-              "content": "Not understanding the basic definition of Governor and State Legislature"
+              "content": "Claiming that every state legislature has both an Assembly and a Council."
             },
             {
               "type": "warning",
-              "content": "Confusing related concepts with each other"
-            },
-            {
-              "type": "info",
-              "title": "Why this matters",
-              "content": "Governor and State Legislature is a key topic in Indian Constitution, covered under State Government. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "type": "definition",
-              "content": "Governor and State Legislature: Core concept in Indian Constitution"
+              "content": "Treating a Governor and an elected Chief Minister as holding identical political roles."
             }
           ],
           "flashcards": [
@@ -1143,16 +629,7 @@
               "back": "Leads the elected state's Council of Ministers."
             }
           ],
-          "aiSummaries": [
-            {
-              "style": "short",
-              "content": "Governor and State Legislature is a key topic in Indian Constitution, covered under State Government. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "style": "detailed",
-              "content": "Governor and State Legislature is a key topic in Indian Constitution, covered under State Government. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Governor and State Legislature: Core concept in Indian Constitution, Definition: The formal definition and scope of governor and state legislature, Key principles: Fundamental rules and properties."
-            }
-          ],
+          "aiSummaries": [],
           "recommendedNextLessons": [
             "supreme-court-and-high-courts"
           ]
@@ -1177,42 +654,8 @@
             "Article 226 authorizes High Court writs for fundamental-right enforcement and other legal purposes.",
             "Judicial review examines constitutionality and legality; Public Interest Litigation has procedural boundaries."
           ],
-          "formulas": [
-            "Core formula: depends on specific topic within Supreme Court and High Courts",
-            "Relationship: connects to Judiciary",
-            "Result: output depends on input parameters"
-          ],
-          "tables": [
-            {
-              "title": "Supreme Court and High Courts — Key Aspects",
-              "headers": [
-                "Aspect",
-                "Description"
-              ],
-              "rows": [
-                [
-                  "Definition",
-                  "Fundamental concept in Indian Constitution"
-                ],
-                [
-                  "Importance",
-                  "Essential for understanding Judiciary"
-                ],
-                [
-                  "Application",
-                  "Used in real-world engineering scenarios"
-                ],
-                [
-                  "Exam Weight",
-                  "Frequently asked in diploma examinations"
-                ],
-                [
-                  "Difficulty",
-                  "Medium — requires conceptual understanding"
-                ]
-              ]
-            }
-          ],
+          "formulas": [],
+          "tables": [],
           "commonMistakes": [
             "Claiming the Supreme Court and High Courts have identical territorial and subject-matter jurisdiction.",
             "Confusing a writ petition with an ordinary appeal.",
@@ -1255,35 +698,13 @@
             "Describe: Article 226 authorizes High Court writs for fundamental-right enforcement and other legal purposes."
           ],
           "prerequisites": [
-            "Basic understanding of the subject prerequisites",
-            "Familiarity with fundamental concepts",
-            "Study of previous unit material"
+            "Basic understanding of Indian democratic institutions",
+            "Ability to distinguish Parliament, government and courts"
           ],
           "theory": "## What you will learn\nIndia's independent judiciary interprets laws, resolves disputes and enforces constitutional limits. Compare the Supreme Court and High Courts through original, appellate and writ jurisdiction.\n\n## Constitutional concepts in practice\n\n## Why an independent judiciary matters\nCourts resolve disputes and interpret laws, including the Constitution. Judicial independence helps ensure that constitutional limits apply to government actions. The Supreme Court is the apex court in the Indian judicial system; High Courts are the highest courts for their respective states/territories within their jurisdiction.\n\n### Key kinds of jurisdiction\n**Original jurisdiction** concerns a matter heard directly in a court. **Appellate jurisdiction** concerns review of decisions from lower courts. **Writ jurisdiction** provides constitutional remedies. The Supreme Court's role includes constitutional interpretation and specified disputes involving governments; High Courts supervise and review a wide range of legal and administrative actions in their territories.\n\n### Judicial review\nIf a law violates a fundamental constitutional rule, a court with jurisdiction can examine it and grant appropriate relief. This does not mean courts ordinarily replace the executive in every policy decision; their central task is to apply legal standards to a case.\n\n### PIL and access to justice\nPublic Interest Litigation can help raise certain public-rights issues where affected persons may face barriers to approaching courts. It has procedural boundaries and is not a licence to litigate any political disagreement without legal basis.\n\n### Clear exam comparison\nExplain Supreme Court vs High Court using position, geographic/jurisdictional scope, original/appellate/writ powers and supervisory roles. When using Article numbers, remember Article 32 (Supreme Court remedy) and Article 226 (High Court writ power).\n\n## Constitutional facts to remember\n- The Supreme Court is India's apex court, while High Courts operate with territorial jurisdiction for states and specified union territories.\n- Original jurisdiction involves hearing a matter directly; appellate jurisdiction involves reviewing a lower court's decision.\n- Article 32 concerns Supreme Court remedies for enforcement of fundamental rights.\n- Article 226 authorizes High Court writs for fundamental-right enforcement and other legal purposes.\n- Judicial review examines constitutionality and legality; Public Interest Litigation has procedural boundaries.\n\n## Short-answer practice\n1. List the five writs and one use for each.\n2. Make a Supreme Court vs High Court comparison table.\n\n## Mistakes to avoid\n- Claiming the Supreme Court and High Courts have identical territorial and subject-matter jurisdiction.\n- Confusing a writ petition with an ordinary appeal.\n- Assuming courts can rewrite any executive policy merely because someone dislikes it.\n- Treating Public Interest Litigation as a substitute for legal grounds.",
-          "analogies": [
-            {
-              "scenario": "Concept like building blocks",
-              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
-            }
-          ],
-          "flowcharts": [
-            {
-              "type": "mermaid",
-              "title": "Supreme Court and High Courts — Process Flow",
-              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
-            }
-          ],
-          "mindMaps": [
-            {
-              "type": "mermaid",
-              "title": "Supreme Court and High Courts — Concept Map",
-              "content": "mindmap\n  root((Supreme Court and High Courts))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
-            }
-          ],
-          "complexity": {
-            "time": "O(1) to O(n) depending on operation",
-            "space": "O(1) to O(n) depending on data"
-          },
+          "analogies": [],
+          "flowcharts": [],
+          "mindMaps": [],
           "workedExamples": [
             {
               "title": "Where should a citizen seek a writ?",
@@ -1295,82 +716,31 @@
           "vivaQuestions": [
             {
               "marks": 2,
-              "question": "Define Supreme Court and High Courts.",
-              "modelAnswer": "Core concept in Indian Constitution"
+              "question": "Original vs appellate?",
+              "modelAnswer": "Original hears directly; appellate reviews an earlier decision."
             },
             {
               "marks": 2,
-              "question": "Define Definition.",
-              "modelAnswer": "The formal definition and scope of supreme court and high courts"
-            },
-            {
-              "marks": 2,
-              "question": "Define Key principles.",
-              "modelAnswer": "Fundamental rules and properties"
-            },
-            {
-              "marks": 2,
-              "question": "Define the main concept from this lesson.",
-              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
-            },
-            {
-              "marks": 2,
-              "question": "What is the practical importance of this topic?",
-              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+              "question": "Article 226 compared with 32?",
+              "modelAnswer": "High Court writ power is broader in subject matter; Article 32 concerns enforcement of fundamental rights in Supreme Court."
             }
           ],
-          "interviewQuestions": [
-            {
-              "marks": 5,
-              "question": "Explain: Core formula: depends on specific topic within Supreme Court and High Courts",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 10,
-              "question": "Explain the key concepts from this lesson with examples.",
-              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
-            },
-            {
-              "marks": 5,
-              "question": "What are the practical applications of this topic?",
-              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
-            }
-          ],
+          "interviewQuestions": [],
           "examQuestions": [
             {
               "marks": 2,
-              "question": "Define Supreme Court and High Courts.",
-              "modelAnswer": "See key concepts section."
+              "question": "Original vs appellate?",
+              "modelAnswer": "Original hears directly; appellate reviews an earlier decision."
             },
             {
               "marks": 2,
-              "question": "Define Definition.",
-              "modelAnswer": "See key concepts section."
+              "question": "Article 226 compared with 32?",
+              "modelAnswer": "High Court writ power is broader in subject matter; Article 32 concerns enforcement of fundamental rights in Supreme Court."
             },
             {
               "marks": 5,
-              "question": "Explain: Core formula: depends on specific topic within Supreme Court and High Courts",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 5,
-              "question": "Explain: Relationship: connects to Judiciary",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 10,
-              "question": "Explain Supreme Court and High Courts in detail with a diagram.",
-              "modelAnswer": "Supreme Court and High Courts is a key topic in Indian Constitution, covered under Judiciary. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "marks": 15,
-              "question": "Discuss Supreme Court and High Courts with examples, advantages, and applications.",
-              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
-              "tips": [
-                "Draw a diagram",
-                "Use examples",
-                "Mention real-world use case"
-              ]
+              "question": "A person's rights are affected by an administrative action of a state authority.",
+              "modelAnswer": "Depending on the facts and the right involved, a High Court petition under Article 226 may be available; Article 32 can be used for enforcement of fundamental rights before the Supreme Court. The High Court's writ jurisdiction is generally broader in subject matter, while Article 32 directly concerns fundamental-right enforcement."
             }
           ],
           "revisionSummary": "The Supreme Court is India's apex court, while High Courts operate with territorial jurisdiction for states and specified union territories. Original jurisdiction involves hearing a matter directly; appellate jurisdiction involves reviewing a lower court's decision. Article 32 concerns Supreme Court remedies for enforcement of fundamental rights. Article 226 authorizes High Court writs for fundamental-right enforcement and other legal purposes. Judicial review examines constitutionality and legality; Public Interest Litigation has procedural boundaries.",
@@ -1378,38 +748,23 @@
             "List the five writs and one use for each.",
             "Make a Supreme Court vs High Court comparison table."
           ],
-          "mnemonics": [
-            {
-              "phrase": "DRY",
-              "expansion": "Don't Repeat Yourself",
-              "meaning": "Avoid duplication in both code and study notes."
-            }
-          ],
+          "mnemonics": [],
           "callouts": [
             {
               "type": "exam-tip",
-              "content": "Always start with a clear definition"
+              "content": "Compare Supreme Court and High Court roles in a short table."
             },
             {
               "type": "exam-tip",
-              "content": "Draw a labelled diagram where applicable"
+              "content": "Give one example each of original, appellate and writ jurisdiction."
             },
             {
               "type": "warning",
-              "content": "Not understanding the basic definition of Supreme Court and High Courts"
+              "content": "Claiming the Supreme Court and High Courts have identical territorial and subject-matter jurisdiction."
             },
             {
               "type": "warning",
-              "content": "Confusing related concepts with each other"
-            },
-            {
-              "type": "info",
-              "title": "Why this matters",
-              "content": "Supreme Court and High Courts is a key topic in Indian Constitution, covered under Judiciary. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "type": "definition",
-              "content": "Supreme Court and High Courts: Core concept in Indian Constitution"
+              "content": "Confusing a writ petition with an ordinary appeal."
             }
           ],
           "flashcards": [
@@ -1422,16 +777,7 @@
               "back": "High Court writ power is broader in subject matter; Article 32 concerns enforcement of fundamental rights in Supreme Court."
             }
           ],
-          "aiSummaries": [
-            {
-              "style": "short",
-              "content": "Supreme Court and High Courts is a key topic in Indian Constitution, covered under Judiciary. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "style": "detailed",
-              "content": "Supreme Court and High Courts is a key topic in Indian Constitution, covered under Judiciary. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Supreme Court and High Courts: Core concept in Indian Constitution, Definition: The formal definition and scope of supreme court and high courts, Key principles: Fundamental rules and properties."
-            }
-          ],
+          "aiSummaries": [],
           "recommendedNextLessons": []
         }
       ]
