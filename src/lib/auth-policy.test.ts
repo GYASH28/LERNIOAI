@@ -61,6 +61,20 @@ describe('production auth origin handling', () => {
     ).toBe('https://lernioai.vercel.app')
   })
 
+  it('does not trust the stale generated Vercel project production URL', () => {
+    expect(resolveRuntimeAuthUrl({
+      configuredUrl: 'https://lernio-ai.vercel.app',
+      vercelProjectProductionUrl: 'lernio-ai.vercel.app',
+      vercelEnv: 'production',
+    })).toBe('https://lernioai.vercel.app')
+
+    expect(resolveRuntimeAuthUrl({
+      configuredUrl: 'https://lernio-ai-gyash28s-projects.vercel.app',
+      vercelProjectProductionUrl: 'lernio-ai.vercel.app',
+      vercelEnv: 'production',
+    })).toBe('https://lernioai.vercel.app')
+  })
+
   it('uses the active Vercel preview host instead of a production callback host', () => {
     expect(
       resolveRuntimeAuthUrl({

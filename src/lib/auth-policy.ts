@@ -58,7 +58,6 @@ export function safeCallbackPath(
 }
 
 const LERNIO_PRODUCTION_ORIGIN = 'https://lernioai.vercel.app'
-const STALE_LERNIO_AUTH_ORIGINS = new Set(['https://lernio-ai.vercel.app'])
 
 function httpOrigin(value: string | null | undefined): string | null {
   if (!value) return null
@@ -92,11 +91,12 @@ export function resolveRuntimeAuthUrl(input: {
     return vercelHostOrigin(input.vercelUrl) ?? configuredOrigin
   }
 
-  if (
-    input.vercelEnv === 'production' &&
-    (!configuredOrigin || STALE_LERNIO_AUTH_ORIGINS.has(configuredOrigin))
-  ) {
-    return vercelHostOrigin(input.vercelProjectProductionUrl) ?? LERNIO_PRODUCTION_ORIGIN
+  if (input.vercelEnv === 'production') {
+    // The Vercel project production URL is a generated/legacy hostname and
+    // is NOT necessarily the domain students visit. Never derive production
+    // credential callback URLs from it or from a stale NEXTAUTH_URL.
+    // LERNIO_APP_URL above remains the explicit override for a future domain.
+    return LERNIO_PRODUCTION_ORIGIN
   }
 
   return configuredOrigin

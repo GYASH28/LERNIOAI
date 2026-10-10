@@ -61,3 +61,13 @@ test('production exposes safe release metadata with no caching', async ({ reques
   expect(['local', 'preview', 'production']).toContain(payload.stage)
   expect(Object.keys(payload).sort()).toEqual(['app', 'revision', 'stage'])
 })
+
+test('NextAuth providers publish current canonical sign-in/callback URLs even with a stale NEXTAUTH_URL', async ({ request }) => {
+  const response = await request.get('/api/auth/providers')
+  expect(response.status()).toBe(200)
+  const providers = await response.json()
+  expect(providers.credentials).toBeTruthy()
+  expect(providers.credentials.signinUrl).toBe('http://127.0.0.1:3001/api/auth/signin/credentials')
+  expect(providers.credentials.callbackUrl).toBe('http://127.0.0.1:3001/api/auth/callback/credentials')
+  expect(Object.keys(providers)).toEqual(['credentials'])
+})
