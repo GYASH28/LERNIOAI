@@ -13,7 +13,7 @@ test('the sign-in page is visible, interactive and does not automatically reload
   await expect(page.getByLabel('Email')).toBeEditable()
   await expect(page.getByLabel('Password')).toBeEditable()
   // Defaults are intentionally light-first even on a device in dark mode.
-  await expect(page.locator('html')).not.toHaveClass(/\\bdark\\b/)
+  await expect(page.locator('html')).not.toHaveClass(/dark/)
 
   const firstNavigationCount = navigations.length
   await page.waitForTimeout(700)
@@ -43,9 +43,9 @@ test('saved explicit dark appearance remains respected on refresh', async ({ pag
     localStorage.setItem('lernio-theme-prefs', JSON.stringify({ appearance: 'dark', palette: 'aurora' }))
   })
   await page.goto('/sign-in')
-  await expect(page.locator('html')).toHaveClass(/\\bdark\\b/)
+  await expect(page.locator('html')).toHaveClass(/dark/)
   await expect(page.getByRole('heading', { name: 'Sign in to Lernio' })).toBeVisible()
   await page.reload()
-  await expect(page.locator('html')).toHaveClass(/\\bdark\\b/)
+  await expect(page.locator('html')).toHaveClass(/dark/)
   await expect(page.getByRole('heading', { name: 'Sign in to Lernio' })).toBeVisible()
 })
