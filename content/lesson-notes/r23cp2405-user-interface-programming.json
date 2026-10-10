@@ -22,42 +22,8 @@
             "Accessibility requires visible input labels, keyboard operability, perceivable feedback and sufficient readable contrast.",
             "Usability testing observes whether real students can complete a task, rather than asking only whether the page looks attractive."
           ],
-          "formulas": [
-            "Core formula: depends on specific topic within UI/UX Fundamentals",
-            "Relationship: connects to UI Design Principles",
-            "Result: output depends on input parameters"
-          ],
-          "tables": [
-            {
-              "title": "UI/UX Fundamentals — Key Aspects",
-              "headers": [
-                "Aspect",
-                "Description"
-              ],
-              "rows": [
-                [
-                  "Definition",
-                  "Fundamental concept in User Interface Programming"
-                ],
-                [
-                  "Importance",
-                  "Essential for understanding UI Design Principles"
-                ],
-                [
-                  "Application",
-                  "Used in real-world engineering scenarios"
-                ],
-                [
-                  "Exam Weight",
-                  "Frequently asked in diploma examinations"
-                ],
-                [
-                  "Difficulty",
-                  "Medium — requires conceptual understanding"
-                ]
-              ]
-            }
-          ],
+          "formulas": [],
+          "tables": [],
           "commonMistakes": [
             "Relying on placeholder text instead of persistent input labels.",
             "Making decoration more prominent than the main action.",
@@ -100,35 +66,13 @@
             "Explain and apply: Accessibility requires visible input labels, keyboard operability, perceivable feedback and sufficient readable contrast."
           ],
           "prerequisites": [
-            "Basic understanding of the subject prerequisites",
-            "Familiarity with fundamental concepts",
-            "Study of previous unit material"
+            "Ability to navigate a browser and understand a basic web page",
+            "Basic familiarity with HTML elements and user interactions"
           ],
           "theory": "## Learning goal\nUser interface (UI) describes the controls and content a person sees; user experience (UX) includes how easily they achieve a goal, recover from errors and feel confident using the product. This lesson uses a student sign-in and notes search as practical examples.\n\n## Practical deep dive: UI/UX Fundamentals\n\n## Build a usable screen from the user's goal\nStart with the task, not the colours. For a student login screen, the goal is to enter credentials, understand errors and reach the dashboard with as little confusion as possible. A useful sequence is **research → information architecture → wireframe → prototype → usability test → iteration**.\n\n### Information architecture and hierarchy\nGroup related controls into sections, put the main action where the eyes naturally go, and avoid making secondary actions look stronger than the primary button. Visual hierarchy is built using size, spacing, alignment, type weight and contrast. Repetition creates predictability: once students learn how a subject card works, every subject card should behave the same way.\n\n### Accessibility is functionality\nUse real labels for text inputs; a placeholder disappears when the student types and must not replace a label. Make keyboard focus clearly visible. Use sufficient text contrast; the commonly used WCAG AA contrast guideline for ordinary text is **4.5:1**, with exceptions for large text. Provide visible error feedback in words (not only red borders). Make every action reachable using Tab, Enter and Space where appropriate. Touch targets need enough space to avoid accidental taps.\n\n### Responsive design\nDesign for narrow phones first, then grow. One column is easier to scan at 360–390px widths, while a wider display can show a lesson outline beside the reading article. Do not hard-code a desktop-only width or allow tables to push the whole screen horizontally.\n\n### How to evaluate a design\nGive a student a concrete task such as “find the notes for your third-semester subject.” Observe hesitation, misclicks and time spent finding the resource. Change the UI based on those observations instead of guessing what “looks good.” Distinguish *UI* (the visible controls) from *UX* (the entire interaction, including loading, errors and recovery).\n\n## Concepts to remember\n- UI is the visible layer—fields, buttons, typography and layout. UX includes task success, clarity, loading, errors and recovery.\n- A user flow connects an entry point, decision and success state. Draw the shortest reliable path before styling the screen.\n- Information hierarchy uses placement, spacing, contrast and visual weight to distinguish primary and secondary actions.\n- Accessibility requires visible input labels, keyboard operability, perceivable feedback and sufficient readable contrast.\n- Usability testing observes whether real students can complete a task, rather than asking only whether the page looks attractive.\n\n## Classroom exercise\n1. Sketch a 360px login flow and mark the primary action.\n2. Test Tab order and error recovery before visual polish.\n\n## Common errors to avoid\n- Relying on placeholder text instead of persistent input labels.\n- Making decoration more prominent than the main action.\n- Using only colour to show a form error.\n- Testing the homepage but not the loading, empty and error states.",
-          "analogies": [
-            {
-              "scenario": "Concept like building blocks",
-              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
-            }
-          ],
-          "flowcharts": [
-            {
-              "type": "mermaid",
-              "title": "UI/UX Fundamentals — Process Flow",
-              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
-            }
-          ],
-          "mindMaps": [
-            {
-              "type": "mermaid",
-              "title": "UI/UX Fundamentals — Concept Map",
-              "content": "mindmap\n  root((UI/UX Fundamentals))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
-            }
-          ],
-          "complexity": {
-            "time": "O(1) to O(n) depending on operation",
-            "space": "O(1) to O(n) depending on data"
-          },
+          "analogies": [],
+          "flowcharts": [],
+          "mindMaps": [],
           "workedExamples": [
             {
               "title": "Wireframe a student login",
@@ -140,82 +84,31 @@
           "vivaQuestions": [
             {
               "marks": 2,
-              "question": "Define UI/UX Fundamentals.",
-              "modelAnswer": "Core concept in User Interface Programming"
+              "question": "UI vs UX?",
+              "modelAnswer": "UI is what people interact with; UX is how effectively the entire journey works."
             },
             {
               "marks": 2,
-              "question": "Define Definition.",
-              "modelAnswer": "The formal definition and scope of ui/ux fundamentals"
-            },
-            {
-              "marks": 2,
-              "question": "Define Key principles.",
-              "modelAnswer": "Fundamental rules and properties"
-            },
-            {
-              "marks": 2,
-              "question": "Define the main concept from this lesson.",
-              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
-            },
-            {
-              "marks": 2,
-              "question": "What is the practical importance of this topic?",
-              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+              "question": "Why visible labels?",
+              "modelAnswer": "They remain understandable after input is entered and support accessible form identification."
             }
           ],
-          "interviewQuestions": [
-            {
-              "marks": 5,
-              "question": "Explain: Core formula: depends on specific topic within UI/UX Fundamentals",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 10,
-              "question": "Explain the key concepts from this lesson with examples.",
-              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
-            },
-            {
-              "marks": 5,
-              "question": "What are the practical applications of this topic?",
-              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
-            }
-          ],
+          "interviewQuestions": [],
           "examQuestions": [
             {
               "marks": 2,
-              "question": "Define UI/UX Fundamentals.",
-              "modelAnswer": "See key concepts section."
+              "question": "UI vs UX?",
+              "modelAnswer": "UI is what people interact with; UX is how effectively the entire journey works."
             },
             {
               "marks": 2,
-              "question": "Define Definition.",
-              "modelAnswer": "See key concepts section."
+              "question": "Why visible labels?",
+              "modelAnswer": "They remain understandable after input is entered and support accessible form identification."
             },
             {
               "marks": 5,
-              "question": "Explain: Core formula: depends on specific topic within UI/UX Fundamentals",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 5,
-              "question": "Explain: Relationship: connects to UI Design Principles",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 10,
-              "question": "Explain UI/UX Fundamentals in detail with a diagram.",
-              "modelAnswer": "UI/UX Fundamentals is a key topic in User Interface Programming, covered under UI Design Principles. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "marks": 15,
-              "question": "Discuss UI/UX Fundamentals with examples, advantages, and applications.",
-              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
-              "tips": [
-                "Draw a diagram",
-                "Use examples",
-                "Mention real-world use case"
-              ]
+              "question": "Design the minimal screen for students who may be on a 360px phone and have forgotten their password.",
+              "modelAnswer": "Header: Lernio logo + 'Sign in'. Fields: labeled email and password with a show/hide control. Primary: full-width Sign in button. Secondary: Forgot password link and Create account link. Errors appear beneath the relevant field. On success, navigate to the dashboard without changing domains. Every control directly supports the task. Keyboard access, clear failures and predictable navigation are more valuable than decorative effects."
             }
           ],
           "revisionSummary": "UI is the visible layer—fields, buttons, typography and layout. UX includes task success, clarity, loading, errors and recovery. A user flow connects an entry point, decision and success state. Draw the shortest reliable path before styling the screen. Information hierarchy uses placement, spacing, contrast and visual weight to distinguish primary and secondary actions. Accessibility requires visible input labels, keyboard operability, perceivable feedback and sufficient readable contrast. Usability testing observes whether real students can complete a task, rather than asking only whether the page looks attractive.",
@@ -223,38 +116,23 @@
             "Sketch a 360px login flow and mark the primary action.",
             "Test Tab order and error recovery before visual polish."
           ],
-          "mnemonics": [
-            {
-              "phrase": "DRY",
-              "expansion": "Don't Repeat Yourself",
-              "meaning": "Avoid duplication in both code and study notes."
-            }
-          ],
+          "mnemonics": [],
           "callouts": [
             {
               "type": "exam-tip",
-              "content": "Always start with a clear definition"
+              "content": "For 5 marks, define UI and UX separately and illustrate the complete task flow."
             },
             {
               "type": "exam-tip",
-              "content": "Draw a labelled diagram where applicable"
+              "content": "Show a simple wireframe with field labels and a recovery link."
             },
             {
               "type": "warning",
-              "content": "Not understanding the basic definition of UI/UX Fundamentals"
+              "content": "Relying on placeholder text instead of persistent input labels."
             },
             {
               "type": "warning",
-              "content": "Confusing related concepts with each other"
-            },
-            {
-              "type": "info",
-              "title": "Why this matters",
-              "content": "UI/UX Fundamentals is a key topic in User Interface Programming, covered under UI Design Principles. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "type": "definition",
-              "content": "UI/UX Fundamentals: Core concept in User Interface Programming"
+              "content": "Making decoration more prominent than the main action."
             }
           ],
           "flashcards": [
@@ -267,16 +145,7 @@
               "back": "They remain understandable after input is entered and support accessible form identification."
             }
           ],
-          "aiSummaries": [
-            {
-              "style": "short",
-              "content": "UI/UX Fundamentals is a key topic in User Interface Programming, covered under UI Design Principles. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "style": "detailed",
-              "content": "UI/UX Fundamentals is a key topic in User Interface Programming, covered under UI Design Principles. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: UI/UX Fundamentals: Core concept in User Interface Programming, Definition: The formal definition and scope of ui/ux fundamentals, Key principles: Fundamental rules and properties."
-            }
-          ],
+          "aiSummaries": [],
           "recommendedNextLessons": [
             "advanced-html5",
             "advanced-css3-and-animations"
@@ -309,42 +178,8 @@
             "Built-in browser constraints such as required and minlength improve feedback, but secure server validation remains essential.",
             "Use responsive media, meaningful image alt text and a correctly declared language and viewport."
           ],
-          "formulas": [
-            "Core formula: depends on specific topic within Advanced HTML5",
-            "Relationship: connects to HTML5",
-            "Result: output depends on input parameters"
-          ],
-          "tables": [
-            {
-              "title": "Advanced HTML5 — Key Aspects",
-              "headers": [
-                "Aspect",
-                "Description"
-              ],
-              "rows": [
-                [
-                  "Definition",
-                  "Fundamental concept in User Interface Programming"
-                ],
-                [
-                  "Importance",
-                  "Essential for understanding HTML5"
-                ],
-                [
-                  "Application",
-                  "Used in real-world engineering scenarios"
-                ],
-                [
-                  "Exam Weight",
-                  "Frequently asked in diploma examinations"
-                ],
-                [
-                  "Difficulty",
-                  "Medium — requires conceptual understanding"
-                ]
-              ]
-            }
-          ],
+          "formulas": [],
+          "tables": [],
           "commonMistakes": [
             "Using <div onClick> instead of a keyboard-friendly button.",
             "Treating client-side required attributes as a security boundary.",
@@ -387,35 +222,13 @@
             "Explain and apply: Built-in browser constraints such as required and minlength improve feedback, but secure server validation remains essential."
           ],
           "prerequisites": [
-            "Basic understanding of the subject prerequisites",
-            "Familiarity with fundamental concepts",
-            "Study of previous unit material"
+            "Ability to navigate a browser and understand a basic web page",
+            "Basic familiarity with HTML elements and user interactions"
           ],
           "theory": "## Learning goal\nHTML5 provides the semantic structure of a web page. Learn to mark up headings, sections, links, forms and media so browsers and assistive technologies understand both content and user actions.\n\n## Practical deep dive: Advanced HTML5\n\n## Semantic HTML is the foundation of UI\nHTML defines the meaning and order of content. Use a real `<nav>` for navigation, `<main>` for the page's primary content and `<section>` for groups with meaningful headings. A `<button>` performs an action; an `<a>` navigates somewhere. Replacing both with click handlers on `<div>` elements removes expected keyboard and assistive-technology behaviour.\n\n### Forms and validation\nEvery input needs an accessible name, normally a visible `<label for=\"...\">`. Use the correct `type` (`email`, `number`, `password`) and `autocomplete` values so browsers help students. HTML constraints such as `required`, `minlength` and `pattern` give immediate browser-side guidance. **Server-side validation is still mandatory**, because malicious requests can bypass the browser.\n\n### Responsive media and document structure\nStart each page with `<!doctype html>`, declare `lang`, set a useful page `<title>` and include the viewport meta tag. Prefer responsive images with `max-width:100%` or `srcset`/ `sizes`. Give informative images appropriate alt text; use empty alt for purely decorative images.\n\n### Accessible error messaging\nAssociate an error message with its field using `aria-describedby`, and use `aria-invalid=\"true\"` when input is wrong. Show what the student should do next. For submit status changes, use a suitable status/live region without trapping keyboard focus.\n\n### Mistakes to avoid\nDo not nest a link inside a button, duplicate element IDs or jump directly from an `<h1>` to an `<h4>` just for the font size. Avoid `<br>` tags to fake spacing—use CSS. This separation helps both browsers and humans.\n\n## Concepts to remember\n- Semantic tags such as main, nav, article, header and section describe meaning, not only visual appearance.\n- Use anchor elements for navigation and button elements for actions; native semantics provide expected keyboard behaviour.\n- Each form input should have a unique id, a real label, a name and an appropriate type or autocomplete value.\n- Built-in browser constraints such as required and minlength improve feedback, but secure server validation remains essential.\n- Use responsive media, meaningful image alt text and a correctly declared language and viewport.\n\n## Classroom exercise\n1. Confirm every form field has a visible programmatic label.\n2. Ensure one h1 then logically nested headings; no duplicate ids.\n\n## Common errors to avoid\n- Using <div onClick> instead of a keyboard-friendly button.\n- Treating client-side required attributes as a security boundary.\n- Placing the same id on multiple inputs.\n- Using heading tags merely to enlarge text and breaking heading hierarchy.",
-          "analogies": [
-            {
-              "scenario": "Concept like building blocks",
-              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
-            }
-          ],
-          "flowcharts": [
-            {
-              "type": "mermaid",
-              "title": "Advanced HTML5 — Process Flow",
-              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
-            }
-          ],
-          "mindMaps": [
-            {
-              "type": "mermaid",
-              "title": "Advanced HTML5 — Concept Map",
-              "content": "mindmap\n  root((Advanced HTML5))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
-            }
-          ],
-          "complexity": {
-            "time": "O(1) to O(n) depending on operation",
-            "space": "O(1) to O(n) depending on data"
-          },
+          "analogies": [],
+          "flowcharts": [],
+          "mindMaps": [],
           "workedExamples": [
             {
               "title": "Improve a broken signup form",
@@ -427,82 +240,31 @@
           "vivaQuestions": [
             {
               "marks": 2,
-              "question": "Define Advanced HTML5.",
-              "modelAnswer": "Core concept in User Interface Programming"
+              "question": "What does for/id connect?",
+              "modelAnswer": "A visible label to its input, making the field accessible."
             },
             {
               "marks": 2,
-              "question": "Define Definition.",
-              "modelAnswer": "The formal definition and scope of advanced html5"
-            },
-            {
-              "marks": 2,
-              "question": "Define Key principles.",
-              "modelAnswer": "Fundamental rules and properties"
-            },
-            {
-              "marks": 2,
-              "question": "Define the main concept from this lesson.",
-              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
-            },
-            {
-              "marks": 2,
-              "question": "What is the practical importance of this topic?",
-              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+              "question": "Why semantic HTML?",
+              "modelAnswer": "It communicates purpose to browsers, screen readers and developers."
             }
           ],
-          "interviewQuestions": [
-            {
-              "marks": 5,
-              "question": "Explain: Core formula: depends on specific topic within Advanced HTML5",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 10,
-              "question": "Explain the key concepts from this lesson with examples.",
-              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
-            },
-            {
-              "marks": 5,
-              "question": "What are the practical applications of this topic?",
-              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
-            }
-          ],
+          "interviewQuestions": [],
           "examQuestions": [
             {
               "marks": 2,
-              "question": "Define Advanced HTML5.",
-              "modelAnswer": "See key concepts section."
+              "question": "What does for/id connect?",
+              "modelAnswer": "A visible label to its input, making the field accessible."
             },
             {
               "marks": 2,
-              "question": "Define Definition.",
-              "modelAnswer": "See key concepts section."
+              "question": "Why semantic HTML?",
+              "modelAnswer": "It communicates purpose to browsers, screen readers and developers."
             },
             {
               "marks": 5,
-              "question": "Explain: Core formula: depends on specific topic within Advanced HTML5",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 5,
-              "question": "Explain: Relationship: connects to HTML5",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 10,
-              "question": "Explain Advanced HTML5 in detail with a diagram.",
-              "modelAnswer": "Advanced HTML5 is a key topic in User Interface Programming, covered under HTML5. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "marks": 15,
-              "question": "Discuss Advanced HTML5 with examples, advantages, and applications.",
-              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
-              "tips": [
-                "Draw a diagram",
-                "Use examples",
-                "Mention real-world use case"
-              ]
+              "question": "A form uses placeholder-only fields and a clickable div labelled Submit. What should change?",
+              "modelAnswer": "Add visible labels and unique IDs; use <button type='submit'>; add name/type/autocomplete and required constraints; show clear input errors; validate again on the server. Native semantic elements give keyboard and screen-reader behaviour without extra JavaScript."
             }
           ],
           "revisionSummary": "Semantic tags such as main, nav, article, header and section describe meaning, not only visual appearance. Use anchor elements for navigation and button elements for actions; native semantics provide expected keyboard behaviour. Each form input should have a unique id, a real label, a name and an appropriate type or autocomplete value. Built-in browser constraints such as required and minlength improve feedback, but secure server validation remains essential. Use responsive media, meaningful image alt text and a correctly declared language and viewport.",
@@ -510,38 +272,23 @@
             "Confirm every form field has a visible programmatic label.",
             "Ensure one h1 then logically nested headings; no duplicate ids."
           ],
-          "mnemonics": [
-            {
-              "phrase": "DRY",
-              "expansion": "Don't Repeat Yourself",
-              "meaning": "Avoid duplication in both code and study notes."
-            }
-          ],
+          "mnemonics": [],
           "callouts": [
             {
               "type": "exam-tip",
-              "content": "Always start with a clear definition"
+              "content": "Write one complete semantic form with label, input, required and submit button."
             },
             {
               "type": "exam-tip",
-              "content": "Draw a labelled diagram where applicable"
+              "content": "Explain the difference between a button and a link."
             },
             {
               "type": "warning",
-              "content": "Not understanding the basic definition of Advanced HTML5"
+              "content": "Using <div onClick> instead of a keyboard-friendly button."
             },
             {
               "type": "warning",
-              "content": "Confusing related concepts with each other"
-            },
-            {
-              "type": "info",
-              "title": "Why this matters",
-              "content": "Advanced HTML5 is a key topic in User Interface Programming, covered under HTML5. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "type": "definition",
-              "content": "Advanced HTML5: Core concept in User Interface Programming"
+              "content": "Treating client-side required attributes as a security boundary."
             }
           ],
           "flashcards": [
@@ -554,16 +301,7 @@
               "back": "It communicates purpose to browsers, screen readers and developers."
             }
           ],
-          "aiSummaries": [
-            {
-              "style": "short",
-              "content": "Advanced HTML5 is a key topic in User Interface Programming, covered under HTML5. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "style": "detailed",
-              "content": "Advanced HTML5 is a key topic in User Interface Programming, covered under HTML5. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Advanced HTML5: Core concept in User Interface Programming, Definition: The formal definition and scope of advanced html5, Key principles: Fundamental rules and properties."
-            }
-          ],
+          "aiSummaries": [],
           "recommendedNextLessons": [
             "advanced-css3-and-animations",
             "javascript-and-events"
@@ -597,42 +335,8 @@
             "Transform and opacity animations commonly avoid layout recalculation; animating width/left may trigger expensive work.",
             "prefers-reduced-motion allows decorative animation to be reduced without removing important state information."
           ],
-          "formulas": [
-            "Core formula: depends on specific topic within Advanced CSS3 and Animations",
-            "Relationship: connects to CSS3",
-            "Result: output depends on input parameters"
-          ],
-          "tables": [
-            {
-              "title": "Advanced CSS3 and Animations — Key Aspects",
-              "headers": [
-                "Aspect",
-                "Description"
-              ],
-              "rows": [
-                [
-                  "Definition",
-                  "Fundamental concept in User Interface Programming"
-                ],
-                [
-                  "Importance",
-                  "Essential for understanding CSS3"
-                ],
-                [
-                  "Application",
-                  "Used in real-world engineering scenarios"
-                ],
-                [
-                  "Exam Weight",
-                  "Frequently asked in diploma examinations"
-                ],
-                [
-                  "Difficulty",
-                  "Medium — requires conceptual understanding"
-                ]
-              ]
-            }
-          ],
+          "formulas": [],
+          "tables": [],
           "commonMistakes": [
             "Fixing every overflow by hiding the entire page’s horizontal scroll.",
             "Animating left/top instead of transforms for simple movement.",
@@ -675,35 +379,13 @@
             "Explain and apply: Transform and opacity animations commonly avoid layout recalculation; animating width/left may trigger expensive work."
           ],
           "prerequisites": [
-            "Basic understanding of the subject prerequisites",
-            "Familiarity with fundamental concepts",
-            "Study of previous unit material"
+            "Ability to navigate a browser and understand a basic web page",
+            "Basic familiarity with HTML elements and user interactions"
           ],
           "theory": "## Learning goal\nCSS is responsible for responsive layout and visual transitions. This lesson compares Flexbox and Grid, explains media queries and shows how to animate without causing mobile overflow or unnecessary rendering work.\n\n## Practical deep dive: Advanced CSS3 and Animations\n\n## Make layouts resilient\nUse Flexbox to arrange items primarily along one axis (for example, icon + text + chevron in a subject card). Use CSS Grid to construct two-dimensional page layouts (for example, a 250px outline and a flexible article). Keep content columns fluid with `minmax(0, 1fr)` and cap long reading lines with `max-width`.\n\n### Mobile-first breakpoints\nStart with one column and introduce a sidebar when there is enough space. Test content at 320px, 360px, 390px, tablet and desktop widths—not only the browser's default desktop width. A responsive page needs flexible images, wrapping text, scrollable tables and tap-friendly controls.\n\n### Animation: when and why\n`transition` animates a property when a state changes (hover, focus, expanded). `@keyframes` describes a multi-step sequence. For smoothness, prefer transforms and opacity over layout-affecting properties such as `top`, `left`, `width` or large box shadows. Animations must not interfere with reading or block interaction.\n\n### Respect reduced-motion preferences\nA user may request minimal animation at OS level. The CSS media query `prefers-reduced-motion: reduce` can remove decorative movement while preserving important state feedback. Never rely on motion alone to communicate whether an action succeeded.\n\n### Layout debugging\nWhen a mobile page scrolls sideways, inspect fixed widths, long code blocks, wide tables and `min-width:auto` grid children. A correct fix addresses the overflowing element; blindly setting `overflow-x:hidden` can hide controls instead of repairing the layout.\n\n## Concepts to remember\n- Flexbox excels at one-dimensional arrangements; Grid controls two-dimensional rows and columns.\n- Mobile-first CSS styles narrow screens by default, then adds wider layouts through min-width media queries.\n- A flexible grid child often needs min-width: 0 to prevent long content from pushing the whole layout sideways.\n- Transform and opacity animations commonly avoid layout recalculation; animating width/left may trigger expensive work.\n- prefers-reduced-motion allows decorative animation to be reduced without removing important state information.\n\n## Classroom exercise\n1. Test narrow screens for overflow at 320, 360 and 390px.\n2. Animate transform/opacity and supply a reduced-motion alternative.\n\n## Common errors to avoid\n- Fixing every overflow by hiding the entire page’s horizontal scroll.\n- Animating left/top instead of transforms for simple movement.\n- Hard-coding 900px content widths inside a 360px viewport.\n- Forgetting reduced-motion and keyboard-focus styling.",
-          "analogies": [
-            {
-              "scenario": "Concept like building blocks",
-              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
-            }
-          ],
-          "flowcharts": [
-            {
-              "type": "mermaid",
-              "title": "Advanced CSS3 and Animations — Process Flow",
-              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
-            }
-          ],
-          "mindMaps": [
-            {
-              "type": "mermaid",
-              "title": "Advanced CSS3 and Animations — Concept Map",
-              "content": "mindmap\n  root((Advanced CSS3 and Animations))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
-            }
-          ],
-          "complexity": {
-            "time": "O(1) to O(n) depending on operation",
-            "space": "O(1) to O(n) depending on data"
-          },
+          "analogies": [],
+          "flowcharts": [],
+          "mindMaps": [],
           "workedExamples": [
             {
               "title": "Fix horizontal scrolling on a 360px screen",
@@ -715,82 +397,31 @@
           "vivaQuestions": [
             {
               "marks": 2,
-              "question": "Define Advanced CSS3 and Animations.",
-              "modelAnswer": "Core concept in User Interface Programming"
+              "question": "Flexbox vs Grid?",
+              "modelAnswer": "Flexbox is mostly one-dimensional; Grid manages rows and columns."
             },
             {
               "marks": 2,
-              "question": "Define Definition.",
-              "modelAnswer": "The formal definition and scope of advanced css3 and animations"
-            },
-            {
-              "marks": 2,
-              "question": "Define Key principles.",
-              "modelAnswer": "Fundamental rules and properties"
-            },
-            {
-              "marks": 2,
-              "question": "Define the main concept from this lesson.",
-              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
-            },
-            {
-              "marks": 2,
-              "question": "What is the practical importance of this topic?",
-              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+              "question": "Why prefers-reduced-motion?",
+              "modelAnswer": "It respects users who need fewer decorative animations."
             }
           ],
-          "interviewQuestions": [
-            {
-              "marks": 5,
-              "question": "Explain: Core formula: depends on specific topic within Advanced CSS3 and Animations",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 10,
-              "question": "Explain the key concepts from this lesson with examples.",
-              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
-            },
-            {
-              "marks": 5,
-              "question": "What are the practical applications of this topic?",
-              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
-            }
-          ],
+          "interviewQuestions": [],
           "examQuestions": [
             {
               "marks": 2,
-              "question": "Define Advanced CSS3 and Animations.",
-              "modelAnswer": "See key concepts section."
+              "question": "Flexbox vs Grid?",
+              "modelAnswer": "Flexbox is mostly one-dimensional; Grid manages rows and columns."
             },
             {
               "marks": 2,
-              "question": "Define Definition.",
-              "modelAnswer": "See key concepts section."
+              "question": "Why prefers-reduced-motion?",
+              "modelAnswer": "It respects users who need fewer decorative animations."
             },
             {
               "marks": 5,
-              "question": "Explain: Core formula: depends on specific topic within Advanced CSS3 and Animations",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 5,
-              "question": "Explain: Relationship: connects to CSS3",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 10,
-              "question": "Explain Advanced CSS3 and Animations in detail with a diagram.",
-              "modelAnswer": "Advanced CSS3 and Animations is a key topic in User Interface Programming, covered under CSS3. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "marks": 15,
-              "question": "Discuss Advanced CSS3 and Animations with examples, advantages, and applications.",
-              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
-              "tips": [
-                "Draw a diagram",
-                "Use examples",
-                "Mention real-world use case"
-              ]
+              "question": "A notes page has a 900px-wide comparison table that makes the full website scroll horizontally.",
+              "modelAnswer": "Wrap only the table in a max-width:100%; overflow-x:auto container. Keep the main grid child min-width:0 and let the table itself scroll independently. This preserves every table column without making the entire page unusable."
             }
           ],
           "revisionSummary": "Flexbox excels at one-dimensional arrangements; Grid controls two-dimensional rows and columns. Mobile-first CSS styles narrow screens by default, then adds wider layouts through min-width media queries. A flexible grid child often needs min-width: 0 to prevent long content from pushing the whole layout sideways. Transform and opacity animations commonly avoid layout recalculation; animating width/left may trigger expensive work. prefers-reduced-motion allows decorative animation to be reduced without removing important state information.",
@@ -798,38 +429,23 @@
             "Test narrow screens for overflow at 320, 360 and 390px.",
             "Animate transform/opacity and supply a reduced-motion alternative."
           ],
-          "mnemonics": [
-            {
-              "phrase": "DRY",
-              "expansion": "Don't Repeat Yourself",
-              "meaning": "Avoid duplication in both code and study notes."
-            }
-          ],
+          "mnemonics": [],
           "callouts": [
             {
               "type": "exam-tip",
-              "content": "Always start with a clear definition"
+              "content": "For responsive-design questions, give a mobile-first CSS example and explain the breakpoint."
             },
             {
               "type": "exam-tip",
-              "content": "Draw a labelled diagram where applicable"
+              "content": "For animation performance, distinguish layout, paint and compositing."
             },
             {
               "type": "warning",
-              "content": "Not understanding the basic definition of Advanced CSS3 and Animations"
+              "content": "Fixing every overflow by hiding the entire page’s horizontal scroll."
             },
             {
               "type": "warning",
-              "content": "Confusing related concepts with each other"
-            },
-            {
-              "type": "info",
-              "title": "Why this matters",
-              "content": "Advanced CSS3 and Animations is a key topic in User Interface Programming, covered under CSS3. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "type": "definition",
-              "content": "Advanced CSS3 and Animations: Core concept in User Interface Programming"
+              "content": "Animating left/top instead of transforms for simple movement."
             }
           ],
           "flashcards": [
@@ -842,16 +458,7 @@
               "back": "It respects users who need fewer decorative animations."
             }
           ],
-          "aiSummaries": [
-            {
-              "style": "short",
-              "content": "Advanced CSS3 and Animations is a key topic in User Interface Programming, covered under CSS3. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "style": "detailed",
-              "content": "Advanced CSS3 and Animations is a key topic in User Interface Programming, covered under CSS3. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Advanced CSS3 and Animations: Core concept in User Interface Programming, Definition: The formal definition and scope of advanced css3 and animations, Key principles: Fundamental rules and properties."
-            }
-          ],
+          "aiSummaries": [],
           "recommendedNextLessons": [
             "javascript-and-events",
             "bootstrap-and-tailwind"
@@ -885,42 +492,8 @@
             "A Promise represents asynchronous work. await makes fetch flows readable but code must handle non-OK responses and network failures.",
             "Debouncing reduces repeated work while typing; disabled/loading states prevent accidental duplicate submissions."
           ],
-          "formulas": [
-            "Core formula: depends on specific topic within JavaScript and Events",
-            "Relationship: connects to JavaScript",
-            "Result: output depends on input parameters"
-          ],
-          "tables": [
-            {
-              "title": "JavaScript and Events — Key Aspects",
-              "headers": [
-                "Aspect",
-                "Description"
-              ],
-              "rows": [
-                [
-                  "Definition",
-                  "Fundamental concept in User Interface Programming"
-                ],
-                [
-                  "Importance",
-                  "Essential for understanding JavaScript"
-                ],
-                [
-                  "Application",
-                  "Used in real-world engineering scenarios"
-                ],
-                [
-                  "Exam Weight",
-                  "Frequently asked in diploma examinations"
-                ],
-                [
-                  "Difficulty",
-                  "Medium — requires conceptual understanding"
-                ]
-              ]
-            }
-          ],
+          "formulas": [],
+          "tables": [],
           "commonMistakes": [
             "Attaching a handler to an element before checking that it exists.",
             "Assuming fetch resolves with success when HTTP status is 400 or 500.",
@@ -963,35 +536,13 @@
             "Explain and apply: A Promise represents asynchronous work. await makes fetch flows readable but code must handle non-OK responses and network failures."
           ],
           "prerequisites": [
-            "Basic understanding of the subject prerequisites",
-            "Familiarity with fundamental concepts",
-            "Study of previous unit material"
+            "Ability to navigate a browser and understand a basic web page",
+            "Basic familiarity with HTML elements and user interactions"
           ],
           "theory": "## Learning goal\nJavaScript adds behaviour to HTML controls. You will learn how DOM events, form submission, event delegation and asynchronous network requests work together in a responsive student-facing interface.\n\n## Practical deep dive: JavaScript and Events\n\n## Events connect a UI to behaviour\nThe DOM (Document Object Model) represents HTML as programmable nodes. JavaScript reads and updates those nodes in response to events. Common events include `click`, `input`, `change`, `submit` and `keydown`. Use `addEventListener` to attach handlers and avoid putting executable strings in HTML attributes.\n\n### Correct form handling\nA form's `submit` event runs for both a click and Enter. `event.preventDefault()` stops normal navigation when JavaScript is handling submission. Read values, validate, show error feedback and only then submit. Avoid accepting client-side validation as proof that data is safe; validate again in the API.\n\n### Bubbling and delegation\nMany events bubble from a child to its parent. For a dynamic lesson list, one handler on the parent can inspect which lesson button was activated instead of attaching dozens of handlers. `event.target.closest('button[data-lesson]')` is useful; always check for null.\n\n### Asynchronous API calls\n`fetch` returns a Promise. Use `async/await`, check `response.ok`, handle malformed/network failures and show a loading state to prevent accidental duplicate submissions. Prefer relative API URLs when browser and server share an origin to avoid cookie problems.\n\n### Keyboard and accessibility\nNative buttons already support keyboard activation. If a custom control is unavoidable, support keyboard events and correct roles, but first ask whether a semantic `<button>` can solve the problem more reliably.\n\n## Concepts to remember\n- DOM nodes represent page elements; addEventListener attaches code to a user or browser event.\n- The submit event covers both a button click and Enter; preventDefault stops native navigation when JavaScript handles the flow.\n- Event bubbling enables delegation, where a parent handles actions from its dynamic child elements.\n- A Promise represents asynchronous work. await makes fetch flows readable but code must handle non-OK responses and network failures.\n- Debouncing reduces repeated work while typing; disabled/loading states prevent accidental duplicate submissions.\n\n## Classroom exercise\n1. Trigger the submit handler with Enter as well as click.\n2. Test slow network, server error and double-click behaviour.\n\n## Common errors to avoid\n- Attaching a handler to an element before checking that it exists.\n- Assuming fetch resolves with success when HTTP status is 400 or 500.\n- Forgetting to reset loading state in finally.\n- Using click-only divs for interactive buttons.",
-          "analogies": [
-            {
-              "scenario": "Concept like building blocks",
-              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
-            }
-          ],
-          "flowcharts": [
-            {
-              "type": "mermaid",
-              "title": "JavaScript and Events — Process Flow",
-              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
-            }
-          ],
-          "mindMaps": [
-            {
-              "type": "mermaid",
-              "title": "JavaScript and Events — Concept Map",
-              "content": "mindmap\n  root((JavaScript and Events))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
-            }
-          ],
-          "complexity": {
-            "time": "O(1) to O(n) depending on operation",
-            "space": "O(1) to O(n) depending on data"
-          },
+          "analogies": [],
+          "flowcharts": [],
+          "mindMaps": [],
           "workedExamples": [
             {
               "title": "Prevent duplicate form submissions",
@@ -1003,82 +554,31 @@
           "vivaQuestions": [
             {
               "marks": 2,
-              "question": "Define JavaScript and Events.",
-              "modelAnswer": "Core concept in User Interface Programming"
+              "question": "What is event delegation?",
+              "modelAnswer": "Using a parent listener to handle events from matching child controls."
             },
             {
               "marks": 2,
-              "question": "Define Definition.",
-              "modelAnswer": "The formal definition and scope of javascript and events"
-            },
-            {
-              "marks": 2,
-              "question": "Define Key principles.",
-              "modelAnswer": "Fundamental rules and properties"
-            },
-            {
-              "marks": 2,
-              "question": "Define the main concept from this lesson.",
-              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
-            },
-            {
-              "marks": 2,
-              "question": "What is the practical importance of this topic?",
-              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+              "question": "Why use finally in async UI code?",
+              "modelAnswer": "To restore controls and remove loading state on either success or failure."
             }
           ],
-          "interviewQuestions": [
-            {
-              "marks": 5,
-              "question": "Explain: Core formula: depends on specific topic within JavaScript and Events",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 10,
-              "question": "Explain the key concepts from this lesson with examples.",
-              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
-            },
-            {
-              "marks": 5,
-              "question": "What are the practical applications of this topic?",
-              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
-            }
-          ],
+          "interviewQuestions": [],
           "examQuestions": [
             {
               "marks": 2,
-              "question": "Define JavaScript and Events.",
-              "modelAnswer": "See key concepts section."
+              "question": "What is event delegation?",
+              "modelAnswer": "Using a parent listener to handle events from matching child controls."
             },
             {
               "marks": 2,
-              "question": "Define Definition.",
-              "modelAnswer": "See key concepts section."
+              "question": "Why use finally in async UI code?",
+              "modelAnswer": "To restore controls and remove loading state on either success or failure."
             },
             {
               "marks": 5,
-              "question": "Explain: Core formula: depends on specific topic within JavaScript and Events",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 5,
-              "question": "Explain: Relationship: connects to JavaScript",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 10,
-              "question": "Explain JavaScript and Events in detail with a diagram.",
-              "modelAnswer": "JavaScript and Events is a key topic in User Interface Programming, covered under JavaScript. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "marks": 15,
-              "question": "Discuss JavaScript and Events with examples, advantages, and applications.",
-              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
-              "tips": [
-                "Draw a diagram",
-                "Use examples",
-                "Mention real-world use case"
-              ]
+              "question": "A user clicks Create twice on a slow connection and sees two requests.",
+              "modelAnswer": "Set a submitting flag and disable the submit button while awaiting the API. Reset the flag in finally. On success show the next step; on failure show an actionable error. A loading indicator without disabling the action does not fully prevent accidental duplicate requests."
             }
           ],
           "revisionSummary": "DOM nodes represent page elements; addEventListener attaches code to a user or browser event. The submit event covers both a button click and Enter; preventDefault stops native navigation when JavaScript handles the flow. Event bubbling enables delegation, where a parent handles actions from its dynamic child elements. A Promise represents asynchronous work. await makes fetch flows readable but code must handle non-OK responses and network failures. Debouncing reduces repeated work while typing; disabled/loading states prevent accidental duplicate submissions.",
@@ -1086,38 +586,23 @@
             "Trigger the submit handler with Enter as well as click.",
             "Test slow network, server error and double-click behaviour."
           ],
-          "mnemonics": [
-            {
-              "phrase": "DRY",
-              "expansion": "Don't Repeat Yourself",
-              "meaning": "Avoid duplication in both code and study notes."
-            }
-          ],
+          "mnemonics": [],
           "callouts": [
             {
               "type": "exam-tip",
-              "content": "Always start with a clear definition"
+              "content": "Use a simple DOM event example with addEventListener."
             },
             {
               "type": "exam-tip",
-              "content": "Draw a labelled diagram where applicable"
+              "content": "Show loading, success and failure states when describing fetch."
             },
             {
               "type": "warning",
-              "content": "Not understanding the basic definition of JavaScript and Events"
+              "content": "Attaching a handler to an element before checking that it exists."
             },
             {
               "type": "warning",
-              "content": "Confusing related concepts with each other"
-            },
-            {
-              "type": "info",
-              "title": "Why this matters",
-              "content": "JavaScript and Events is a key topic in User Interface Programming, covered under JavaScript. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "type": "definition",
-              "content": "JavaScript and Events: Core concept in User Interface Programming"
+              "content": "Assuming fetch resolves with success when HTTP status is 400 or 500."
             }
           ],
           "flashcards": [
@@ -1130,16 +615,7 @@
               "back": "To restore controls and remove loading state on either success or failure."
             }
           ],
-          "aiSummaries": [
-            {
-              "style": "short",
-              "content": "JavaScript and Events is a key topic in User Interface Programming, covered under JavaScript. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "style": "detailed",
-              "content": "JavaScript and Events is a key topic in User Interface Programming, covered under JavaScript. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: JavaScript and Events: Core concept in User Interface Programming, Definition: The formal definition and scope of javascript and events, Key principles: Fundamental rules and properties."
-            }
-          ],
+          "aiSummaries": [],
           "recommendedNextLessons": [
             "bootstrap-and-tailwind"
           ],
@@ -1172,42 +648,8 @@
             "Responsive utility classes can change a layout from one column on phones to two columns on wider screens.",
             "Mixing multiple CSS frameworks without a plan can cause conflicting resets, extra bundle size and hard-to-debug overrides."
           ],
-          "formulas": [
-            "Core formula: depends on specific topic within Bootstrap and Tailwind",
-            "Relationship: connects to UI Frameworks",
-            "Result: output depends on input parameters"
-          ],
-          "tables": [
-            {
-              "title": "Bootstrap and Tailwind — Key Aspects",
-              "headers": [
-                "Aspect",
-                "Description"
-              ],
-              "rows": [
-                [
-                  "Definition",
-                  "Fundamental concept in User Interface Programming"
-                ],
-                [
-                  "Importance",
-                  "Essential for understanding UI Frameworks"
-                ],
-                [
-                  "Application",
-                  "Used in real-world engineering scenarios"
-                ],
-                [
-                  "Exam Weight",
-                  "Frequently asked in diploma examinations"
-                ],
-                [
-                  "Difficulty",
-                  "Medium — requires conceptual understanding"
-                ]
-              ]
-            }
-          ],
+          "formulas": [],
+          "tables": [],
           "commonMistakes": [
             "Mixing Bootstrap and Tailwind classes without controlling CSS specificity.",
             "Copying the same card markup repeatedly instead of making a reusable component.",
@@ -1250,35 +692,13 @@
             "Explain and apply: Responsive utility classes can change a layout from one column on phones to two columns on wider screens."
           ],
           "prerequisites": [
-            "Basic understanding of the subject prerequisites",
-            "Familiarity with fundamental concepts",
-            "Study of previous unit material"
+            "Ability to navigate a browser and understand a basic web page",
+            "Basic familiarity with HTML elements and user interactions"
           ],
           "theory": "## Learning goal\nBootstrap provides predefined grid/components, while Tailwind provides low-level utility classes for composing a custom design system. This lesson shows when to use each approach and how to avoid inconsistent production interfaces.\n\n## Practical deep dive: Bootstrap and Tailwind\n\n## Utility classes and component libraries\nBootstrap offers a predefined grid, components and behaviour conventions. Tailwind supplies composable utility classes, leaving the team to design and assemble components. Neither makes an interface usable automatically: labels, responsive layout, errors and accessibility still need deliberate thought.\n\n### Bootstrap layout\nA responsive container and row/column system can place two cards side by side at the medium breakpoint and stack them on a smaller phone. Always check required JavaScript for interactive Bootstrap components and avoid mixing conflicting versions.\n\n### Tailwind layout\nClasses such as `grid`, `grid-cols-1`, `md:grid-cols-2` and `gap-4` build responsive layouts in markup. Use design tokens or shared components for repeated colours, spacing and type styles so the product feels consistent.\n\n### Which to choose?\nUse Bootstrap when fast conventional components with little custom branding are enough. Use Tailwind when a distinct design system and flexible component architecture matter. A project should normally have **one primary system** to avoid conflicting resets, duplicated CSS and unpredictable specificity.\n\n### Production checks\nTest both light/dark themes if supported, narrow viewports, loading/error states and keyboard flows. Reuse a card component rather than copying a dozen slightly different class lists. Remove unused styles through the build pipeline.\n\n## Concepts to remember\n- Bootstrap supplies conventional components and breakpoint-driven grid classes with consistent default styling.\n- Tailwind composes utilities for spacing, typography, colour and responsive layouts directly in markup.\n- A design system centralizes repeated tokens and components so screens share consistent hierarchy and controls.\n- Responsive utility classes can change a layout from one column on phones to two columns on wider screens.\n- Mixing multiple CSS frameworks without a plan can cause conflicting resets, extra bundle size and hard-to-debug overrides.\n\n## Classroom exercise\n1. Use reusable card components and central spacing/colour tokens.\n2. Verify mobile, light/dark, loading/error and keyboard states.\n\n## Common errors to avoid\n- Mixing Bootstrap and Tailwind classes without controlling CSS specificity.\n- Copying the same card markup repeatedly instead of making a reusable component.\n- Treating a framework as a replacement for proper labels and errors.\n- Ignoring keyboard/focus/mobile testing because the component looked correct on desktop.",
-          "analogies": [
-            {
-              "scenario": "Concept like building blocks",
-              "mapping": "Each concept builds on the previous one. Start with the foundation (definition), add walls (principles), and roof (applications)."
-            }
-          ],
-          "flowcharts": [
-            {
-              "type": "mermaid",
-              "title": "Bootstrap and Tailwind — Process Flow",
-              "content": "flowchart TD\n    A[Start] --> B[Input]\n    B --> C[Process]\n    C --> D[Output]\n    D --> E[End]"
-            }
-          ],
-          "mindMaps": [
-            {
-              "type": "mermaid",
-              "title": "Bootstrap and Tailwind — Concept Map",
-              "content": "mindmap\n  root((Bootstrap and Tailwind))\n    Definition\n      Meaning\n      Purpose\n    Key Points\n      Principle 1\n      Principle 2\n    Applications\n      Real-world use\n    Exam Tips\n      Important areas"
-            }
-          ],
-          "complexity": {
-            "time": "O(1) to O(n) depending on operation",
-            "space": "O(1) to O(n) depending on data"
-          },
+          "analogies": [],
+          "flowcharts": [],
+          "mindMaps": [],
           "workedExamples": [
             {
               "title": "Pick the UI framework",
@@ -1290,82 +710,31 @@
           "vivaQuestions": [
             {
               "marks": 2,
-              "question": "Define Bootstrap and Tailwind.",
-              "modelAnswer": "Core concept in User Interface Programming"
+              "question": "Bootstrap's main strength?",
+              "modelAnswer": "Predefined components and layout conventions for rapid conventional interfaces."
             },
             {
               "marks": 2,
-              "question": "Define Definition.",
-              "modelAnswer": "The formal definition and scope of bootstrap and tailwind"
-            },
-            {
-              "marks": 2,
-              "question": "Define Key principles.",
-              "modelAnswer": "Fundamental rules and properties"
-            },
-            {
-              "marks": 2,
-              "question": "Define the main concept from this lesson.",
-              "modelAnswer": "The main concept is the fundamental definition covered in the overview section."
-            },
-            {
-              "marks": 2,
-              "question": "What is the practical importance of this topic?",
-              "modelAnswer": "This topic is important because it forms the foundation for advanced concepts and has direct real-world applications."
+              "question": "Tailwind's main strength?",
+              "modelAnswer": "Flexible utility classes for building custom visual systems."
             }
           ],
-          "interviewQuestions": [
-            {
-              "marks": 5,
-              "question": "Explain: Core formula: depends on specific topic within Bootstrap and Tailwind",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 10,
-              "question": "Explain the key concepts from this lesson with examples.",
-              "modelAnswer": "Cover: definition, working principle, real-world example, advantages, and limitations. Structure your answer clearly with headings."
-            },
-            {
-              "marks": 5,
-              "question": "What are the practical applications of this topic?",
-              "modelAnswer": "List 3-4 real-world applications with brief explanations of how the concept is used in each."
-            }
-          ],
+          "interviewQuestions": [],
           "examQuestions": [
             {
               "marks": 2,
-              "question": "Define Bootstrap and Tailwind.",
-              "modelAnswer": "See key concepts section."
+              "question": "Bootstrap's main strength?",
+              "modelAnswer": "Predefined components and layout conventions for rapid conventional interfaces."
             },
             {
               "marks": 2,
-              "question": "Define Definition.",
-              "modelAnswer": "See key concepts section."
+              "question": "Tailwind's main strength?",
+              "modelAnswer": "Flexible utility classes for building custom visual systems."
             },
             {
               "marks": 5,
-              "question": "Explain: Core formula: depends on specific topic within Bootstrap and Tailwind",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 5,
-              "question": "Explain: Relationship: connects to UI Frameworks",
-              "modelAnswer": "Define each term, give an example, and state when it is used."
-            },
-            {
-              "marks": 10,
-              "question": "Explain Bootstrap and Tailwind in detail with a diagram.",
-              "modelAnswer": "Bootstrap and Tailwind is a key topic in User Interface Programming, covered under UI Frameworks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "marks": 15,
-              "question": "Discuss Bootstrap and Tailwind with examples, advantages, and applications.",
-              "modelAnswer": "Cover: definition, working, example, advantages, limitations, and real-world application.",
-              "tips": [
-                "Draw a diagram",
-                "Use examples",
-                "Mention real-world use case"
-              ]
+              "question": "A student dashboard needs highly branded study cards, colour modes and custom layouts.",
+              "modelAnswer": "Choose one design system, for example Tailwind plus reusable accessible components, and encode spacing, colours and card behaviour centrally. This avoids styling conflicts and makes future improvements consistent across Notes, Quizzes and Analytics."
             }
           ],
           "revisionSummary": "Bootstrap supplies conventional components and breakpoint-driven grid classes with consistent default styling. Tailwind composes utilities for spacing, typography, colour and responsive layouts directly in markup. A design system centralizes repeated tokens and components so screens share consistent hierarchy and controls. Responsive utility classes can change a layout from one column on phones to two columns on wider screens. Mixing multiple CSS frameworks without a plan can cause conflicting resets, extra bundle size and hard-to-debug overrides.",
@@ -1373,38 +742,23 @@
             "Use reusable card components and central spacing/colour tokens.",
             "Verify mobile, light/dark, loading/error and keyboard states."
           ],
-          "mnemonics": [
-            {
-              "phrase": "DRY",
-              "expansion": "Don't Repeat Yourself",
-              "meaning": "Avoid duplication in both code and study notes."
-            }
-          ],
+          "mnemonics": [],
           "callouts": [
             {
               "type": "exam-tip",
-              "content": "Always start with a clear definition"
+              "content": "Compare Bootstrap and Tailwind using development style, customization and default components."
             },
             {
               "type": "exam-tip",
-              "content": "Draw a labelled diagram where applicable"
+              "content": "Write a responsive card example and explain the md breakpoint."
             },
             {
               "type": "warning",
-              "content": "Not understanding the basic definition of Bootstrap and Tailwind"
+              "content": "Mixing Bootstrap and Tailwind classes without controlling CSS specificity."
             },
             {
               "type": "warning",
-              "content": "Confusing related concepts with each other"
-            },
-            {
-              "type": "info",
-              "title": "Why this matters",
-              "content": "Bootstrap and Tailwind is a key topic in User Interface Programming, covered under UI Frameworks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "type": "definition",
-              "content": "Bootstrap and Tailwind: Core concept in User Interface Programming"
+              "content": "Copying the same card markup repeatedly instead of making a reusable component."
             }
           ],
           "flashcards": [
@@ -1417,16 +771,7 @@
               "back": "Flexible utility classes for building custom visual systems."
             }
           ],
-          "aiSummaries": [
-            {
-              "style": "short",
-              "content": "Bootstrap and Tailwind is a key topic in User Interface Programming, covered under UI Frameworks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students."
-            },
-            {
-              "style": "detailed",
-              "content": "Bootstrap and Tailwind is a key topic in User Interface Programming, covered under UI Frameworks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Bootstrap and Tailwind: Core concept in User Interface Programming, Definition: The formal definition and scope of bootstrap and tailwind, Key principles: Fundamental rules and properties."
-            }
-          ],
+          "aiSummaries": [],
           "recommendedNextLessons": [],
           "codeExamples": [
             {
