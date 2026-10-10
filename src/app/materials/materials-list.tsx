@@ -11,6 +11,8 @@ import {
   Award,
   Layers,
   Sparkles,
+  ExternalLink,
+  Film,
 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -203,16 +205,21 @@ export function MaterialsList({ pdfs }: { pdfs: MaterialSubject[] }) {
         <div className="grid gap-3 sm:grid-cols-2">
           {/* Download PDF when a real PDF exists. */}
           {subject.url ? (
-            <a href={subject.url} className="materials-download" download>
-              <div className="materials-download__icon">
-                <FileText className="h-5 w-5" />
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="materials-download__title">Complete Study Notes (PDF)</p>
-                <p className="materials-download__hint">Download the subject study guide</p>
-              </div>
-              <Download className="h-4 w-4 text-muted-foreground shrink-0" />
-            </a>
+            <div className="flex min-w-0 flex-col gap-2 rounded-xl border border-border bg-card p-3">
+              <a href={subject.url} target="_blank" rel="noopener noreferrer"
+                className="materials-download border-none p-2 transition-colors hover:bg-muted/40">
+                <div className="materials-download__icon"><FileText className="h-5 w-5" /></div>
+                <div className="min-w-0 flex-1">
+                  <p className="materials-download__title">Read study guide</p>
+                  <p className="materials-download__hint">Open full PDF in your browser</p>
+                </div>
+                <ExternalLink className="h-4 w-4 shrink-0 text-muted-foreground" />
+              </a>
+              <a href={subject.url} download
+                className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-border bg-muted/30 px-3 text-xs font-semibold transition hover:border-primary/40">
+                <Download className="h-4 w-4" /> Download PDF
+              </a>
+            </div>
           ) : (
             <div className="materials-download" aria-label="Interactive notes available">
               <div className="materials-download__icon">
@@ -242,6 +249,22 @@ export function MaterialsList({ pdfs }: { pdfs: MaterialSubject[] }) {
             <ChevronRight className="h-4 w-4 text-muted-foreground shrink-0" />
           </Link>
         </div>
+
+        <a
+          href={`https://www.youtube.com/results?search_query=${encodeURIComponent(subject.name + ' diploma lecture tutorial Hindi English')}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 flex min-h-14 items-center gap-3 rounded-xl border border-border bg-card px-4 py-3 transition hover:border-primary/40 hover:bg-primary/5"
+        >
+          <span className="rounded-lg bg-primary/10 p-2 text-primary"><Film className="h-5 w-5" /></span>
+          <span className="flex-1">
+            <span className="block text-sm font-semibold">Find subject video lessons</span>
+            <span className="block text-xs text-muted-foreground">
+              Search YouTube · External results are not yet reviewed by Lernio
+            </span>
+          </span>
+          <ExternalLink className="h-4 w-4 text-muted-foreground" />
+        </a>
 
         {/* Subject page link removed — Materials is now independent from Learn */}
       </div>
