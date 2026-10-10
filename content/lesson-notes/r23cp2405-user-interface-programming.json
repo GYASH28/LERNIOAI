@@ -132,7 +132,7 @@
             "Familiarity with fundamental concepts",
             "Study of previous unit material"
           ],
-          "theory": "## Introduction\n\nUI/UX Fundamentals is a key topic in User Interface Programming, covered under UI Design Principles. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- UI/UX Fundamentals: Core concept in User Interface Programming\n- Definition: The formal definition and scope of ui/ux fundamentals\n- Key principles: Fundamental rules and properties\n- Working: How ui/ux fundamentals operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within UI/UX Fundamentals`\n- `Relationship: connects to UI Design Principles`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### UI/UX Fundamentals — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in User Interface Programming |\n| Importance | Essential for understanding UI Design Principles |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nUI/UX Fundamentals is a key topic in User Interface Programming, covered under UI Design Principles. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "theory": "## Introduction\n\nUI/UX Fundamentals is a key topic in User Interface Programming, covered under UI Design Principles. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- UI/UX Fundamentals: Core concept in User Interface Programming\n- Definition: The formal definition and scope of ui/ux fundamentals\n- Key principles: Fundamental rules and properties\n- Working: How ui/ux fundamentals operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within UI/UX Fundamentals`\n- `Relationship: connects to UI Design Principles`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### UI/UX Fundamentals — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in User Interface Programming |\n| Importance | Essential for understanding UI Design Principles |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nUI/UX Fundamentals is a key topic in User Interface Programming, covered under UI Design Principles. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n---\n\n## Practical deep dive: UI/UX Fundamentals\n\n## Build a usable screen from the user's goal\nStart with the task, not the colours. For a student login screen, the goal is to enter credentials, understand errors and reach the dashboard with as little confusion as possible. A useful sequence is **research → information architecture → wireframe → prototype → usability test → iteration**.\n\n### Information architecture and hierarchy\nGroup related controls into sections, put the main action where the eyes naturally go, and avoid making secondary actions look stronger than the primary button. Visual hierarchy is built using size, spacing, alignment, type weight and contrast. Repetition creates predictability: once students learn how a subject card works, every subject card should behave the same way.\n\n### Accessibility is functionality\nUse real labels for text inputs; a placeholder disappears when the student types and must not replace a label. Make keyboard focus clearly visible. Use sufficient text contrast; the commonly used WCAG AA contrast guideline for ordinary text is **4.5:1**, with exceptions for large text. Provide visible error feedback in words (not only red borders). Make every action reachable using Tab, Enter and Space where appropriate. Touch targets need enough space to avoid accidental taps.\n\n### Responsive design\nDesign for narrow phones first, then grow. One column is easier to scan at 360–390px widths, while a wider display can show a lesson outline beside the reading article. Do not hard-code a desktop-only width or allow tables to push the whole screen horizontally.\n\n### How to evaluate a design\nGive a student a concrete task such as “find the notes for your third-semester subject.” Observe hesitation, misclicks and time spent finding the resource. Change the UI based on those observations instead of guessing what “looks good.” Distinguish *UI* (the visible controls) from *UX* (the entire interaction, including loading, errors and recovery).",
           "analogies": [
             {
               "scenario": "Concept like building blocks",
@@ -169,6 +169,12 @@
               "problem": "Explain UI/UX Fundamentals with reference to the key concepts.",
               "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
               "explanation": "Use these tips to structure your answer."
+            },
+            {
+              "title": "Wireframe a student login",
+              "problem": "Design the minimal screen for students who may be on a 360px phone and have forgotten their password.",
+              "solution": "Header: Lernio logo + 'Sign in'. Fields: labeled email and password with a show/hide control. Primary: full-width Sign in button. Secondary: Forgot password link and Create account link. Errors appear beneath the relevant field. On success, navigate to the dashboard without changing domains.",
+              "explanation": "Every control directly supports the task. Keyboard access, clear failures and predictable navigation are more valuable than decorative effects."
             }
           ],
           "vivaQuestions": [
@@ -356,6 +362,13 @@
           "recommendedNextLessons": [
             "advanced-html5",
             "advanced-css3-and-animations"
+          ],
+          "diagrams": [
+            {
+              "type": "ascii",
+              "title": "Notebook-friendly concept flow",
+              "content": "STUDENT TASK: Sign in\n      ↓\n[Email label + input]\n[Password label + input + show]\n[Forgot password]\n[Sign in — primary action]\n      ↓\n[Loading] → [Success: Dashboard]\n             ↘ [Error: explain + recover]"
+            }
           ]
         }
       ]
@@ -488,7 +501,7 @@
             "Familiarity with fundamental concepts",
             "Study of previous unit material"
           ],
-          "theory": "## Introduction\n\nAdvanced HTML5 is a key topic in User Interface Programming, covered under HTML5. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Advanced HTML5: Core concept in User Interface Programming\n- Definition: The formal definition and scope of advanced html5\n- Key principles: Fundamental rules and properties\n- Working: How advanced html5 operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Advanced HTML5`\n- `Relationship: connects to HTML5`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Advanced HTML5 — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in User Interface Programming |\n| Importance | Essential for understanding HTML5 |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nAdvanced HTML5 is a key topic in User Interface Programming, covered under HTML5. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "theory": "## Introduction\n\nAdvanced HTML5 is a key topic in User Interface Programming, covered under HTML5. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Advanced HTML5: Core concept in User Interface Programming\n- Definition: The formal definition and scope of advanced html5\n- Key principles: Fundamental rules and properties\n- Working: How advanced html5 operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Advanced HTML5`\n- `Relationship: connects to HTML5`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Advanced HTML5 — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in User Interface Programming |\n| Importance | Essential for understanding HTML5 |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nAdvanced HTML5 is a key topic in User Interface Programming, covered under HTML5. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n---\n\n## Practical deep dive: Advanced HTML5\n\n## Semantic HTML is the foundation of UI\nHTML defines the meaning and order of content. Use a real `<nav>` for navigation, `<main>` for the page's primary content and `<section>` for groups with meaningful headings. A `<button>` performs an action; an `<a>` navigates somewhere. Replacing both with click handlers on `<div>` elements removes expected keyboard and assistive-technology behaviour.\n\n### Forms and validation\nEvery input needs an accessible name, normally a visible `<label for=\"...\">`. Use the correct `type` (`email`, `number`, `password`) and `autocomplete` values so browsers help students. HTML constraints such as `required`, `minlength` and `pattern` give immediate browser-side guidance. **Server-side validation is still mandatory**, because malicious requests can bypass the browser.\n\n### Responsive media and document structure\nStart each page with `<!doctype html>`, declare `lang`, set a useful page `<title>` and include the viewport meta tag. Prefer responsive images with `max-width:100%` or `srcset`/ `sizes`. Give informative images appropriate alt text; use empty alt for purely decorative images.\n\n### Accessible error messaging\nAssociate an error message with its field using `aria-describedby`, and use `aria-invalid=\"true\"` when input is wrong. Show what the student should do next. For submit status changes, use a suitable status/live region without trapping keyboard focus.\n\n### Mistakes to avoid\nDo not nest a link inside a button, duplicate element IDs or jump directly from an `<h1>` to an `<h4>` just for the font size. Avoid `<br>` tags to fake spacing—use CSS. This separation helps both browsers and humans.",
           "analogies": [
             {
               "scenario": "Concept like building blocks",
@@ -525,6 +538,12 @@
               "problem": "Explain Advanced HTML5 with reference to the key concepts.",
               "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
               "explanation": "Use these tips to structure your answer."
+            },
+            {
+              "title": "Improve a broken signup form",
+              "problem": "A form uses placeholder-only fields and a clickable div labelled Submit. What should change?",
+              "solution": "Add visible labels and unique IDs; use <button type='submit'>; add name/type/autocomplete and required constraints; show clear input errors; validate again on the server.",
+              "explanation": "Native semantic elements give keyboard and screen-reader behaviour without extra JavaScript."
             }
           ],
           "vivaQuestions": [
@@ -712,6 +731,14 @@
           "recommendedNextLessons": [
             "advanced-css3-and-animations",
             "javascript-and-events"
+          ],
+          "codeExamples": [
+            {
+              "language": "html",
+              "title": "Accessible student signup form",
+              "code": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Student registration</title>\n</head>\n<body>\n  <main>\n    <h1>Create your student account</h1>\n    <form action=\"/register\" method=\"post\">\n      <label for=\"student-email\">Email address</label>\n      <input id=\"student-email\" name=\"email\" type=\"email\"\n        autocomplete=\"email\" required>\n      <label for=\"student-password\">Password</label>\n      <input id=\"student-password\" name=\"password\" type=\"password\"\n        minlength=\"8\" autocomplete=\"new-password\" required>\n      <button type=\"submit\">Create account</button>\n    </form>\n  </main>\n</body>\n</html>",
+              "explanation": "The browser understands labels, input types and basic constraints. The server must still validate requests and hash the password securely."
+            }
           ]
         }
       ]
@@ -844,7 +871,7 @@
             "Familiarity with fundamental concepts",
             "Study of previous unit material"
           ],
-          "theory": "## Introduction\n\nAdvanced CSS3 and Animations is a key topic in User Interface Programming, covered under CSS3. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Advanced CSS3 and Animations: Core concept in User Interface Programming\n- Definition: The formal definition and scope of advanced css3 and animations\n- Key principles: Fundamental rules and properties\n- Working: How advanced css3 and animations operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Advanced CSS3 and Animations`\n- `Relationship: connects to CSS3`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Advanced CSS3 and Animations — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in User Interface Programming |\n| Importance | Essential for understanding CSS3 |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nAdvanced CSS3 and Animations is a key topic in User Interface Programming, covered under CSS3. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "theory": "## Introduction\n\nAdvanced CSS3 and Animations is a key topic in User Interface Programming, covered under CSS3. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Advanced CSS3 and Animations: Core concept in User Interface Programming\n- Definition: The formal definition and scope of advanced css3 and animations\n- Key principles: Fundamental rules and properties\n- Working: How advanced css3 and animations operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Advanced CSS3 and Animations`\n- `Relationship: connects to CSS3`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Advanced CSS3 and Animations — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in User Interface Programming |\n| Importance | Essential for understanding CSS3 |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nAdvanced CSS3 and Animations is a key topic in User Interface Programming, covered under CSS3. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n---\n\n## Practical deep dive: Advanced CSS3 and Animations\n\n## Make layouts resilient\nUse Flexbox to arrange items primarily along one axis (for example, icon + text + chevron in a subject card). Use CSS Grid to construct two-dimensional page layouts (for example, a 250px outline and a flexible article). Keep content columns fluid with `minmax(0, 1fr)` and cap long reading lines with `max-width`.\n\n### Mobile-first breakpoints\nStart with one column and introduce a sidebar when there is enough space. Test content at 320px, 360px, 390px, tablet and desktop widths—not only the browser's default desktop width. A responsive page needs flexible images, wrapping text, scrollable tables and tap-friendly controls.\n\n### Animation: when and why\n`transition` animates a property when a state changes (hover, focus, expanded). `@keyframes` describes a multi-step sequence. For smoothness, prefer transforms and opacity over layout-affecting properties such as `top`, `left`, `width` or large box shadows. Animations must not interfere with reading or block interaction.\n\n### Respect reduced-motion preferences\nA user may request minimal animation at OS level. The CSS media query `prefers-reduced-motion: reduce` can remove decorative movement while preserving important state feedback. Never rely on motion alone to communicate whether an action succeeded.\n\n### Layout debugging\nWhen a mobile page scrolls sideways, inspect fixed widths, long code blocks, wide tables and `min-width:auto` grid children. A correct fix addresses the overflowing element; blindly setting `overflow-x:hidden` can hide controls instead of repairing the layout.",
           "analogies": [
             {
               "scenario": "Concept like building blocks",
@@ -881,6 +908,12 @@
               "problem": "Explain Advanced CSS3 and Animations with reference to the key concepts.",
               "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
               "explanation": "Use these tips to structure your answer."
+            },
+            {
+              "title": "Fix horizontal scrolling on a 360px screen",
+              "problem": "A notes page has a 900px-wide comparison table that makes the full website scroll horizontally.",
+              "solution": "Wrap only the table in a max-width:100%; overflow-x:auto container. Keep the main grid child min-width:0 and let the table itself scroll independently.",
+              "explanation": "This preserves every table column without making the entire page unusable."
             }
           ],
           "vivaQuestions": [
@@ -1068,6 +1101,14 @@
           "recommendedNextLessons": [
             "javascript-and-events",
             "bootstrap-and-tailwind"
+          ],
+          "codeExamples": [
+            {
+              "language": "css",
+              "title": "Responsive notes layout and accessible animation",
+              "code": ".study-layout { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }\n.study-article { min-width: 0; max-width: 72ch; margin: auto; }\n.lesson-table { max-width: 100%; overflow-x: auto; }\n.study-card { transition: transform .2s ease, border-color .2s ease; }\n.study-card:hover { transform: translateY(-2px); }\n@media (min-width: 1024px) {\n  .study-layout { grid-template-columns: 250px minmax(0, 1fr); }\n}\n@media (prefers-reduced-motion: reduce) {\n  .study-card { transition: none; }\n  .study-card:hover { transform: none; }\n}",
+              "explanation": "A single mobile column becomes an outline + reading area at desktop width. The table scrolls inside its own container and reduced-motion users avoid decorative translation."
+            }
           ]
         }
       ]
@@ -1200,7 +1241,7 @@
             "Familiarity with fundamental concepts",
             "Study of previous unit material"
           ],
-          "theory": "## Introduction\n\nJavaScript and Events is a key topic in User Interface Programming, covered under JavaScript. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- JavaScript and Events: Core concept in User Interface Programming\n- Definition: The formal definition and scope of javascript and events\n- Key principles: Fundamental rules and properties\n- Working: How javascript and events operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within JavaScript and Events`\n- `Relationship: connects to JavaScript`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### JavaScript and Events — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in User Interface Programming |\n| Importance | Essential for understanding JavaScript |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nJavaScript and Events is a key topic in User Interface Programming, covered under JavaScript. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "theory": "## Introduction\n\nJavaScript and Events is a key topic in User Interface Programming, covered under JavaScript. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- JavaScript and Events: Core concept in User Interface Programming\n- Definition: The formal definition and scope of javascript and events\n- Key principles: Fundamental rules and properties\n- Working: How javascript and events operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within JavaScript and Events`\n- `Relationship: connects to JavaScript`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### JavaScript and Events — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in User Interface Programming |\n| Importance | Essential for understanding JavaScript |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nJavaScript and Events is a key topic in User Interface Programming, covered under JavaScript. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n---\n\n## Practical deep dive: JavaScript and Events\n\n## Events connect a UI to behaviour\nThe DOM (Document Object Model) represents HTML as programmable nodes. JavaScript reads and updates those nodes in response to events. Common events include `click`, `input`, `change`, `submit` and `keydown`. Use `addEventListener` to attach handlers and avoid putting executable strings in HTML attributes.\n\n### Correct form handling\nA form's `submit` event runs for both a click and Enter. `event.preventDefault()` stops normal navigation when JavaScript is handling submission. Read values, validate, show error feedback and only then submit. Avoid accepting client-side validation as proof that data is safe; validate again in the API.\n\n### Bubbling and delegation\nMany events bubble from a child to its parent. For a dynamic lesson list, one handler on the parent can inspect which lesson button was activated instead of attaching dozens of handlers. `event.target.closest('button[data-lesson]')` is useful; always check for null.\n\n### Asynchronous API calls\n`fetch` returns a Promise. Use `async/await`, check `response.ok`, handle malformed/network failures and show a loading state to prevent accidental duplicate submissions. Prefer relative API URLs when browser and server share an origin to avoid cookie problems.\n\n### Keyboard and accessibility\nNative buttons already support keyboard activation. If a custom control is unavoidable, support keyboard events and correct roles, but first ask whether a semantic `<button>` can solve the problem more reliably.",
           "analogies": [
             {
               "scenario": "Concept like building blocks",
@@ -1237,6 +1278,12 @@
               "problem": "Explain JavaScript and Events with reference to the key concepts.",
               "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
               "explanation": "Use these tips to structure your answer."
+            },
+            {
+              "title": "Prevent duplicate form submissions",
+              "problem": "A user clicks Create twice on a slow connection and sees two requests.",
+              "solution": "Set a submitting flag and disable the submit button while awaiting the API. Reset the flag in finally. On success show the next step; on failure show an actionable error.",
+              "explanation": "A loading indicator without disabling the action does not fully prevent accidental duplicate requests."
             }
           ],
           "vivaQuestions": [
@@ -1423,6 +1470,14 @@
           ],
           "recommendedNextLessons": [
             "bootstrap-and-tailwind"
+          ],
+          "codeExamples": [
+            {
+              "language": "javascript",
+              "title": "Accessible live lesson filter",
+              "code": "const input = document.querySelector('#lesson-search');\nconst list = document.querySelector('#lesson-list');\nconst count = document.querySelector('#results-count');\n\ninput.addEventListener('input', () => {\n  const term = input.value.trim().toLowerCase();\n  let visible = 0;\n  for (const lesson of list.querySelectorAll('[data-lesson-title]')) {\n    const matches = lesson.dataset.lessonTitle.toLowerCase().includes(term);\n    lesson.hidden = !matches;\n    if (matches) visible++;\n  }\n  count.textContent = visible + ' lessons found';\n});",
+              "explanation": "The filter updates as the user types. Using the hidden property removes nonmatching items from visual and keyboard navigation, and the count provides readable feedback."
+            }
           ]
         }
       ]
@@ -1555,7 +1610,7 @@
             "Familiarity with fundamental concepts",
             "Study of previous unit material"
           ],
-          "theory": "## Introduction\n\nBootstrap and Tailwind is a key topic in User Interface Programming, covered under UI Frameworks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Bootstrap and Tailwind: Core concept in User Interface Programming\n- Definition: The formal definition and scope of bootstrap and tailwind\n- Key principles: Fundamental rules and properties\n- Working: How bootstrap and tailwind operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Bootstrap and Tailwind`\n- `Relationship: connects to UI Frameworks`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Bootstrap and Tailwind — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in User Interface Programming |\n| Importance | Essential for understanding UI Frameworks |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nBootstrap and Tailwind is a key topic in User Interface Programming, covered under UI Frameworks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.",
+          "theory": "## Introduction\n\nBootstrap and Tailwind is a key topic in User Interface Programming, covered under UI Frameworks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n## Key Concepts\n\n- Bootstrap and Tailwind: Core concept in User Interface Programming\n- Definition: The formal definition and scope of bootstrap and tailwind\n- Key principles: Fundamental rules and properties\n- Working: How bootstrap and tailwind operates in practice\n- Applications: Real-world uses in engineering and technology\n- Advantages: Benefits of using this approach\n- Limitations: Constraints and drawbacks\n- Exam relevance: Important for university examinations\n\n## Important Formulas\n\n- `Core formula: depends on specific topic within Bootstrap and Tailwind`\n- `Relationship: connects to UI Frameworks`\n- `Result: output depends on input parameters`\n\n## Comparison Tables\n\n### Bootstrap and Tailwind — Key Aspects\n\n| Aspect | Description |\n| --- | --- |\n| Definition | Fundamental concept in User Interface Programming |\n| Importance | Essential for understanding UI Frameworks |\n| Application | Used in real-world engineering scenarios |\n| Exam Weight | Frequently asked in diploma examinations |\n| Difficulty | Medium — requires conceptual understanding |\n\n\n## Summary\n\nBootstrap and Tailwind is a key topic in User Interface Programming, covered under UI Frameworks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\n---\n\n## Practical deep dive: Bootstrap and Tailwind\n\n## Utility classes and component libraries\nBootstrap offers a predefined grid, components and behaviour conventions. Tailwind supplies composable utility classes, leaving the team to design and assemble components. Neither makes an interface usable automatically: labels, responsive layout, errors and accessibility still need deliberate thought.\n\n### Bootstrap layout\nA responsive container and row/column system can place two cards side by side at the medium breakpoint and stack them on a smaller phone. Always check required JavaScript for interactive Bootstrap components and avoid mixing conflicting versions.\n\n### Tailwind layout\nClasses such as `grid`, `grid-cols-1`, `md:grid-cols-2` and `gap-4` build responsive layouts in markup. Use design tokens or shared components for repeated colours, spacing and type styles so the product feels consistent.\n\n### Which to choose?\nUse Bootstrap when fast conventional components with little custom branding are enough. Use Tailwind when a distinct design system and flexible component architecture matter. A project should normally have **one primary system** to avoid conflicting resets, duplicated CSS and unpredictable specificity.\n\n### Production checks\nTest both light/dark themes if supported, narrow viewports, loading/error states and keyboard flows. Reuse a card component rather than copying a dozen slightly different class lists. Remove unused styles through the build pipeline.",
           "analogies": [
             {
               "scenario": "Concept like building blocks",
@@ -1592,6 +1647,12 @@
               "problem": "Explain Bootstrap and Tailwind with reference to the key concepts.",
               "solution": "Always start with a clear definition → Draw a labelled diagram where applicable → Give at least one real-world example",
               "explanation": "Use these tips to structure your answer."
+            },
+            {
+              "title": "Pick the UI framework",
+              "problem": "A student dashboard needs highly branded study cards, colour modes and custom layouts.",
+              "solution": "Choose one design system, for example Tailwind plus reusable accessible components, and encode spacing, colours and card behaviour centrally.",
+              "explanation": "This avoids styling conflicts and makes future improvements consistent across Notes, Quizzes and Analytics."
             }
           ],
           "vivaQuestions": [
@@ -1776,7 +1837,15 @@
               "content": "Bootstrap and Tailwind is a key topic in User Interface Programming, covered under UI Frameworks. This lesson provides a comprehensive understanding of the fundamental concepts, principles, and practical applications relevant to diploma engineering students.\n\nKey concepts: Bootstrap and Tailwind: Core concept in User Interface Programming, Definition: The formal definition and scope of bootstrap and tailwind, Key principles: Fundamental rules and properties."
             }
           ],
-          "recommendedNextLessons": []
+          "recommendedNextLessons": [],
+          "codeExamples": [
+            {
+              "language": "html",
+              "title": "Tailwind responsive subject cards",
+              "code": "<section class=\"grid grid-cols-1 gap-4 md:grid-cols-2\">\n  <a class=\"rounded-xl border p-5 transition hover:shadow-md\"\n     href=\"/materials/lesson/topic-a\">\n    <h2 class=\"text-lg font-semibold\">Topic A</h2>\n    <p class=\"mt-2 text-sm\">Read notes and practise</p>\n  </a>\n  <a class=\"rounded-xl border p-5 transition hover:shadow-md\"\n     href=\"/materials/lesson/topic-b\">\n    <h2 class=\"text-lg font-semibold\">Topic B</h2>\n    <p class=\"mt-2 text-sm\">Revision summary</p>\n  </a>\n</section>",
+              "explanation": "The cards form one column on mobile and two on medium+ widths. Reusable semantic links navigate to details, while styling remains configurable."
+            }
+          ]
         }
       ]
     }
