@@ -9,6 +9,7 @@ import {
   authInputClass,
   authPrimaryButtonClass,
 } from '@/components/auth/auth-shell'
+import { confirmBrowserSession } from '@/lib/auth-browser-session'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -85,17 +86,13 @@ export default function SignInPage() {
       // Do not trust result.url here. NextAuth builds that absolute URL from
       // NEXTAUTH_URL, and a stale deployment hostname previously sent students
       // to a dead Vercel domain after a successful password check.
-      const userResponse = await fetch('/api/user', {
-        cache: 'no-store',
-        credentials: 'same-origin',
-      })
-      const userPayload = await userResponse.json().catch(() => null)
-      if (!userResponse.ok || !userPayload?.ok || !userPayload.data) {
-        setError('Your password was accepted, but Lernio could not establish the session. Please try again.')
+      const verifiedSession = await confirmBrowserSession(email)
+      if (!verifiedSession) {
+        setError('The session could not be confirmed on this browser. Check your connection and try again.')
         return
       }
 
-      const role = String(userPayload.data.role || 'student')
+      const role = verifiedSession.role
       const roleRedirects: Record<string, string> = {
         admin: '/admin',
         cr: '/cr',
