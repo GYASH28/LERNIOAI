@@ -146,69 +146,17 @@ const providers: NextAuthOptions['providers'] = [
         throw new Error(AUTH_SERVICE_UNAVAILABLE)
       }
 
+      // Login is read-only. Never create, reactivate, promote or reset an
+      // administrator in response to a failed credential attempt.
       if (!user?.passwordHash || user.status === 'disabled') {
-        // Admin auto-fix: if this is the admin email, create/reset password
-        const adminEmail = process.env.LERNIO_ADMIN_EMAIL?.trim().toLowerCase()
-        const adminPassword = process.env.LERNIO_ADMIN_PASSWORD
-        if (adminEmail && adminPassword && email === adminEmail) {
-          try {
-            const newHash = await hash(adminPassword, 12)
-            await db.user.upsert({
-              where: { email },
-              update: { passwordHash: newHash, role: 'admin', status: 'active', profileComplete: true, name: 'Lernio Admin' },
-              create: {
-                email,
-                name: 'Lernio Admin',
-                role: 'admin',
-                status: 'active',
-                provider: 'password',
-                profileComplete: true,
-                emailVerified: new Date(),
-                preferredLang: 'en',
-                dailyMins: 120,
-                xp: 0, level: 1, streak: 0,
-                passwordHash: newHash,
-              },
-            })
-            user = await db.user.findUnique({
-              where: { email },
-              select: selectFields,
-            })
-          } catch {}
-        }
-        if (!user?.passwordHash || user.status === 'disabled') {
-          await checkRateLimit({ action: 'credential_login_fail', identifier: email, limit: MAX_LOGIN_ATTEMPTS, windowMs: LOGIN_WINDOW_MS }).catch(() => {})
-          return null
-        }
+        await checkRateLimit({ action: 'credential_login_fail', identifier: email, limit: MAX_LOGIN_ATTEMPTS, windowMs: LOGIN_WINDOW_MS }).catch(() => {})
+        return null
       }
 
       const valid = await compare(password, user.passwordHash)
       if (!valid) {
-        // Admin password reset: if password doesn't match and this is admin email
-        const adminEmail = process.env.LERNIO_ADMIN_EMAIL?.trim().toLowerCase()
-        const adminPassword = process.env.LERNIO_ADMIN_PASSWORD
-        if (adminEmail && adminPassword && email === adminEmail) {
-          try {
-            const newHash = await hash(adminPassword, 12)
-            await db.user.update({ where: { email }, data: { passwordHash: newHash, role: 'admin', status: 'active' } })
-            const newValid = await compare(password, newHash)
-            if (newValid) {
-              user = await db.user.findUnique({
-                where: { email },
-                select: selectFields,
-              })
-            } else {
-              await checkRateLimit({ action: 'credential_login_fail', identifier: email, limit: MAX_LOGIN_ATTEMPTS, windowMs: LOGIN_WINDOW_MS }).catch(() => {})
-              return null
-            }
-          } catch {
-            await checkRateLimit({ action: 'credential_login_fail', identifier: email, limit: MAX_LOGIN_ATTEMPTS, windowMs: LOGIN_WINDOW_MS }).catch(() => {})
-            return null
-          }
-        } else {
-          await checkRateLimit({ action: 'credential_login_fail', identifier: email, limit: MAX_LOGIN_ATTEMPTS, windowMs: LOGIN_WINDOW_MS }).catch(() => {})
-          return null
-        }
+        await checkRateLimit({ action: 'credential_login_fail', identifier: email, limit: MAX_LOGIN_ATTEMPTS, windowMs: LOGIN_WINDOW_MS }).catch(() => {})
+        return null
       }
 
       await db.rateLimitBucket.delete({ where: { key: failKey } }).catch(() => {})
