@@ -28,6 +28,7 @@ import {
 import { DEMO_AUTH_USER } from '@/lib/demo-fixtures'
 import { isActiveSessionIdentity } from '@/lib/auth-session-validity'
 import { checkRateLimit } from '@/lib/rate-limit'
+import { rateLimitKey } from '@/lib/rate-limit-key'
 import { AUTH_SERVICE_UNAVAILABLE } from '@/lib/auth-feedback'
 import { canUseCapability, resolveAuthorityContext, type AuthorityContext, type AuthorityScope } from '@/lib/authority'
 import { normalizeRole, type Role, type PermissionInput } from '@/lib/roles'
@@ -87,7 +88,7 @@ const providers: NextAuthOptions['providers'] = [
       const password = credentials?.password
       if (!email || !password || password.length > 256) return null
 
-      const failKey = `credential_login_fail:${email}`
+      const failKey = rateLimitKey('credential_login_fail', email)
       let existingFail: Awaited<ReturnType<typeof db.rateLimitBucket.findUnique>> = null
       try {
         existingFail = await db.rateLimitBucket.findUnique({
