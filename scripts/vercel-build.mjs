@@ -1,120 +1,82 @@
 /**
- * Vercel build script.
+ * Safe Vercel release build.
  *
- * Runs:
- *   1. `prisma generate` — generates the Prisma Client (always needed)
- *   2. `prisma migrate deploy` — applies pending migrations (idempotent, fast)
- *   3. Seed check — if DB already has departments, skip all seeds (FAST)
- *   4. Seed scripts — only run on first deploy or if DB is empty
- *   5. `next build --webpack` — the actual Next.js build
+ * Build should compile the application, not silently alter production data.
+ * Production schema changes are applied only through tracked Prisma migrations.
+ * Preview builds never write to the production database.
  *
- * To skip ALL DB setup, set LERNIO_SKIP_DB_SETUP=true.
+ * Bootstrap actions are explicit opt-ins:
+ *   LERNIO_BOOTSTRAP_SEEDS=true         initial curriculum import on production
+ *   LERNIO_UPSERT_ADMIN_ON_DEPLOY=true  administrator bootstrap on production
  */
 import { spawnSync } from 'node:child_process'
 
-if (
-  process.env.LERNIO_DEMO_MODE === 'true' &&
-  process.env.VERCEL_ENV === 'production'
-) {
-  console.error('[vercel-build] Refusing production build with LERNIO_DEMO_MODE=true.')
-  process.exit(1)
+const production = process.env.VERCEL_ENV === 'production'
+
+if (process.env.LERNIO_DEMO_MODE === 'true' && production) {
+  throw new Error('LERNIO_DEMO_MODE must never be enabled for production.')
 }
 
-function runCommand(cmd, args, { required = true } = {}) {
-  console.log(`[vercel-build] Running: ${cmd} ${args.join(' ')}`)
-  const result = spawnSync(cmd, args, {
+function run(command, args, { capture = false } = {}) {
+  console.log(`[vercel-build] ${command} ${args.join(' ')}`)
+  const result = spawnSync(command, args, {
     cwd: process.cwd(),
     env: process.env,
-    stdio: 'inherit',
-    shell: true,
+    stdio: capture ? ['ignore', 'pipe', 'inherit'] : 'inherit',
+    encoding: 'utf8',
+    shell: process.platform === 'win32',
   })
-
-  if (result.error) {
-    if (required) throw result.error
-    console.warn(`[vercel-build] Warning: ${cmd} ${args.join(' ')} failed but is optional.`)
-    return false
+  if (result.error || result.status !== 0) {
+    throw result.error ?? new Error(`${command} ${args.join(' ')} failed (exit ${result.status ?? 'unknown'})`)
   }
-  if (result.status !== 0) {
-    if (required) process.exit(result.status ?? 1)
-    console.warn(`[vercel-build] Warning: ${cmd} ${args.join(' ')} exited with ${result.status} but is optional.`)
-    return false
-  }
-  return true
+  return capture ? (result.stdout || '').trim() : ''
 }
 
-function runCommandCapture(cmd, args) {
-  const result = spawnSync(cmd, args, {
-    cwd: process.cwd(),
-    env: process.env,
-    stdio: 'pipe',
-    shell: true,
-    encoding: 'utf-8',
-  })
-  return result.stdout?.trim() || ''
-}
+run('npx', ['prisma', 'generate'])
 
-// ─── Step 1: Prisma Client ────────────────────────────────────────────────
-console.log('[vercel-build] Generating Prisma Client...')
-runCommand('npx', ['prisma', 'generate'])
-
-// ─── Step 2: DB migrations + seeds (skippable) ───────────────────────────
-const skipDbSetup = process.env.LERNIO_SKIP_DB_SETUP === 'true'
-const hasDatabaseUrl = Boolean(process.env.DATABASE_URL)
-
-if (skipDbSetup) {
-  console.log('[vercel-build] LERNIO_SKIP_DB_SETUP=true — skipping DB migrations and seeds.')
-} else if (!hasDatabaseUrl) {
-  console.warn('[vercel-build] DATABASE_URL not set — skipping DB migrations and seeds.')
-} else {
-  console.log('[vercel-build] Running Prisma migrations + db push (ensures all tables exist)...')
-  runCommand('npx', ['prisma', 'migrate', 'deploy'], { required: false })
-  // Also run db push to create any new tables that don't have migrations
-  runCommand('npx', ['prisma', 'db', 'push', '--accept-data-loss'], { required: false })
-
-  // ─── FAST CHECK: is the DB already seeded? ────────────────────────────
-  // On first deploy this runs all seeds (~5 min). On every subsequent
-  // deploy it runs ONE count query (~100ms) and skips everything.
-  console.log('[vercel-build] Checking if DB is already seeded...')
-  const seededCheck = runCommandCapture('npx', ['tsx', 'scripts/db-seeded-check.ts'])
-  console.log(`[vercel-build] Seed check result: ${seededCheck}`)
-
-  let alreadySeeded = false
-  try {
-    const parsed = JSON.parse(seededCheck)
-    alreadySeeded = Boolean(parsed.seeded)
-  } catch {
-    // If the check fails, assume not seeded and run all seeds
+if (production) {
+  if (!process.env.DATABASE_URL) {
+    throw new Error('DATABASE_URL is required for a Lernio production build.')
   }
 
-  if (alreadySeeded) {
-    console.log('[vercel-build] DB already seeded — skipping curriculum seeds. ✅')
-    // Always run admin upsert — ensures admin role is correct
-    const adminEmail = process.env.LERNIO_ADMIN_EMAIL
-    const adminPass = process.env.LERNIO_ADMIN_PASSWORD
-    console.log(`[vercel-build] Admin email configured: ${adminEmail ? 'YES (' + adminEmail + ')' : 'NO'}`)
-    console.log(`[vercel-build] Admin password configured: ${adminPass ? 'YES (' + adminPass.length + ' chars)' : 'NO'}`)
-    console.log('[vercel-build] Ensuring admin user has correct role...')
-    runCommand('npx', ['tsx', 'scripts/upsert-admin.ts'], { required: false })
+  // Migration failures must block deployment. Never use 'db push' here and
+  // especially never enable '--accept-data-loss' in CI or Vercel builds.
+  run('npx', ['prisma', 'migrate', 'deploy'])
+
+  if (process.env.LERNIO_BOOTSTRAP_SEEDS === 'true') {
+    const raw = run('npx', ['tsx', 'scripts/db-seeded-check.ts'], { capture: true })
+    let state
+    try {
+      state = JSON.parse(raw)
+    } catch {
+      throw new Error('Seed status could not be verified; refusing database writes.')
+    }
+    if (state.reason === 'query_failed' || typeof state.seeded !== 'boolean') {
+      throw new Error('Seed status query failed; refusing database writes.')
+    }
+    if (!state.seeded) {
+      for (const args of [
+        ['tsx', 'scripts/upsert-cwit-departments.ts'],
+        ['tsx', 'scripts/import-cwit-source-registry.ts'],
+        ['tsx', 'scripts/import-curriculum-manifests.ts', '--write'],
+        ['tsx', 'scripts/publish-curriculum.ts'],
+      ]) {
+        run('npx', args)
+      }
+    } else {
+      console.log('[vercel-build] Curriculum already seeded.')
+    }
   } else {
-    console.log('[vercel-build] DB not seeded — running seed scripts (this may take a few minutes)...')
-
-    console.log('[vercel-build] Seeding CWIT departments (upsert)...')
-    runCommand('npx', ['tsx', 'scripts/upsert-cwit-departments.ts'], { required: false })
-
-    console.log('[vercel-build] Seeding CWIT sources (upsert)...')
-    runCommand('npx', ['tsx', 'scripts/import-cwit-source-registry.ts'], { required: false })
-
-    console.log('[vercel-build] Importing curriculum manifests (upsert)...')
-    runCommand('npx', ['tsx', 'scripts/import-curriculum-manifests.ts', '--write'], { required: false })
-
-    console.log('[vercel-build] Publishing curriculum...')
-    runCommand('npx', ['tsx', 'scripts/publish-curriculum.ts'], { required: false })
-
-    console.log('[vercel-build] Setting up default admin user (upsert)...')
-    runCommand('npx', ['tsx', 'scripts/upsert-admin.ts'], { required: false })
+    console.log('[vercel-build] Skipping automatic curriculum seeding.')
   }
+
+  if (process.env.LERNIO_UPSERT_ADMIN_ON_DEPLOY === 'true') {
+    run('npx', ['tsx', 'scripts/upsert-admin.ts'])
+  } else {
+    console.log('[vercel-build] Skipping automatic administrator changes.')
+  }
+} else {
+  console.log('[vercel-build] Non-production build: no database migrations, seeds or admin writes.')
 }
 
-// ─── Step 3: Next.js build ────────────────────────────────────────────────
-console.log('[vercel-build] Building Next.js...')
-runCommand('npx', ['next', 'build'])
+run('npx', ['next', 'build'])

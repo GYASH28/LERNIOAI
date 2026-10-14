@@ -15,7 +15,13 @@ export async function confirmBrowserSession(
   expectedEmail: string,
 ): Promise<ConfirmedBrowserSession | null> {
   const normalizedEmail = expectedEmail.trim().toLowerCase()
-  for (let attempt = 0; attempt < 2; attempt += 1) {
+  // Cold serverless starts and cookie propagation can outlast 200ms.
+  // A successful sign-in must not be reported as a failure prematurely.
+  const retryDelaysMs = [0, 150, 350, 700, 1000] as const
+  for (const delay of retryDelaysMs) {
+    if (delay) {
+      await new Promise<void>((resolve) => setTimeout(resolve, delay))
+    }
     try {
       const response = await fetch('/api/auth/session', {
         credentials: 'same-origin',
@@ -37,9 +43,6 @@ export async function confirmBrowserSession(
     } catch {
       // A brief network error immediately after the login response can be
       // transient; retry once rather than presenting a false password error.
-    }
-    if (attempt === 0) {
-      await new Promise<void>((resolve) => setTimeout(resolve, 200))
     }
   }
   return null

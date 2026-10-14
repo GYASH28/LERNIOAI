@@ -70,4 +70,20 @@ describe('confirmBrowserSession', () => {
     }))
     await expect(confirmBrowserSession('student@example.com')).resolves.toBeNull()
   })
+
+  it('survives two cold-start failures before the session becomes available', async () => {
+    vi.useFakeTimers()
+    const fetchMock = vi.fn()
+      .mockRejectedValueOnce(new Error('cold start'))
+      .mockResolvedValueOnce({ ok: false })
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ user: { id: 'student-1', email: 'student@example.com', role: 'student' } }),
+      })
+    vi.stubGlobal('fetch', fetchMock)
+    const pending = confirmBrowserSession('student@example.com')
+    await vi.runAllTimersAsync()
+    await expect(pending).resolves.toMatchObject({ id: 'student-1' })
+    expect(fetchMock).toHaveBeenCalledTimes(3)
+  })
 })
