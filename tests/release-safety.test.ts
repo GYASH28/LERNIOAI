@@ -24,5 +24,6 @@ describe('production release safety', () => {
     expect(adminScript).toContain("process.env.LERNIO_ROTATE_ADMIN_PASSWORD === 'true'")
     expect(auth).not.toContain("Admin password reset:")
     expect(auth).not.toContain("Admin auto-fix:")
+    expect(auth).toContain("rateLimitKey('credential_login_fail', email)")
   })
 })
