@@ -91,8 +91,9 @@ async function main() {
       status: 'active',
       provider: 'password',
       profileComplete: true,
-      emailVerified: new Date(),
-      passwordHash,
+      // Existing accounts keep their password unless an intentional, one-off
+      // rotation is requested. Deploying code must not invalidate logins.
+      ...(process.env.LERNIO_ROTATE_ADMIN_PASSWORD === 'true' ? { passwordHash } : {}),
     },
     create: {
       email,
