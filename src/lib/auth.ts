@@ -14,7 +14,7 @@ import type { NextAuthOptions } from 'next-auth'
 import { getServerSession } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
-import { compare, hash } from 'bcryptjs'
+import { compare } from 'bcryptjs'
 import { db } from '@/lib/db'
 import crypto from 'crypto'
 import { sendVerificationEmail } from '@/lib/email'
@@ -161,9 +161,7 @@ const providers: NextAuthOptions['providers'] = [
 
       await db.rateLimitBucket.delete({ where: { key: failKey } }).catch(() => {})
 
-      // After all the admin-auto-fix branches above, user is guaranteed non-null
-      // here (any path that left user null already returned). The non-null assertion
-      // is safe because every failure path returned early.
+      // Keep a defensive guard even though the failed-login paths returned.
       if (!user) {
         return null
       }
